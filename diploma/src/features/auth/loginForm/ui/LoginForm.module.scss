@@ -1,0 +1,58 @@
+.headerLogin {
+  margin-bottom: 10px;
+  h1 {
+    all: unset;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 150%;
+    color: #000000;
+  }
+}
+form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  .inputsLogin {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+  }
+  .additional {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .rememberMe {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 5px;
+      span {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 18px;
+        color: rgba(0, 0, 0, 0.6);
+      }
+    }
+    .forgotPassword {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 18px;
+      text-decoration-line: underline;
+      color: rgba(0, 0, 0, 0.6);
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .buttonBlock {
+    margin-bottom: 15px;
+  }
+}

@@ -1,9 +1,9 @@
 import { rootRoute } from "./__root";
 import { createRoute } from "@tanstack/react-router";
-import App from "../../App";
+import { AuthWidgetForm } from "../../widgets/auth";
 
 export const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: App,
+  component: () => <AuthWidgetForm />,
 });

@@ -1,0 +1,141 @@
+$font-family: "Inter", sans-serif;
+$font-size-base: 18px;
+$font-weight-base: 500;
+$line-height: 150%;
+$border-radius: 10px;
+$border-color: #ccc;
+$error-color: red;
+$label-color: rgba(0, 0, 0, 0.6);
+$focus-border-color: rgba(0, 0, 0, 0.6);
+
+@mixin font-base($size: $font-size-base, $weight: $font-weight-base) {
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $line-height;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .inputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .input {
+      flex: 1;
+      padding-right: 40px;
+    }
+
+    .eyeButton {
+      position: absolute;
+      right: 10px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      height: 100%;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+    }
+    .emailIcon {
+      position: absolute;
+      left: 10px;
+      color: $label-color;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+
+      img {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    .input.email {
+      padding-left: 50px;
+    }
+
+    .divider {
+      position: absolute;
+      left: 44px;
+      top: 9px;
+      bottom: 8px;
+      width: 1px;
+      background-color: rgba(0, 0, 0, 0.6);
+      transform: scaleX(0.5);
+      transform-origin: center;
+    }
+
+    .label.email {
+      left: 45px;
+    }
+  }
+
+  .input {
+    @include font-base();
+    background: rgba(217, 217, 217, 0.5);
+    height: 49px;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 8px;
+    color: #000;
+    transition: border 0.2s ease, background-color 0.2s ease;
+  }
+
+  .label {
+    @include font-base();
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 4px;
+    pointer-events: none;
+    transition: 0.2s all;
+    color: $label-color;
+  }
+
+  &.focused {
+    .label {
+      @include font-base(9px, 700);
+      top: 0;
+      left: 12px;
+      background: white;
+    }
+
+    .label.email {
+      left: 12px;
+      top: 0;
+      @include font-base(9px, 700);
+      background: white;
+    }
+
+    .input {
+      border: 2px solid $focus-border-color;
+      background-color: white;
+    }
+  }
+
+  &.error {
+    .input {
+      border-color: $error-color;
+    }
+
+    .errorMessage {
+      color: $error-color;
+      font-size: 12px;
+      margin-top: 4px;
+      @include font-base(9px, 700);
+    }
+  }
+}
