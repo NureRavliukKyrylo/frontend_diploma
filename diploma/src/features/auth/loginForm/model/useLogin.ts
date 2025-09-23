@@ -23,10 +23,10 @@ export const useLogin = () => {
     },
   });
 
-  const { email, password, rememberMe } = useAuthFormStore();
+  const { loginEmail, password, rememberMe } = useAuthFormStore();
 
   const formik = useFormik({
-    initialValues: { email, password, rememberMe },
+    initialValues: { loginEmail, password, rememberMe },
     validationSchema: loginSchema,
     onSubmit: (values) => {
       mutation.mutate(values);

@@ -1,20 +1,10 @@
-$font-family: "Inter", sans-serif;
-$font-size-base: 18px;
-$font-weight-base: 500;
-$line-height: 150%;
+@use "./../../../shared/styles/variables/fontVariables" as *;
+
 $border-radius: 10px;
 $border-color: #ccc;
 $error-color: red;
 $label-color: rgba(0, 0, 0, 0.6);
 $focus-border-color: rgba(0, 0, 0, 0.6);
-
-@mixin font-base($size: $font-size-base, $weight: $font-weight-base) {
-  font-family: $font-family;
-  font-style: normal;
-  font-weight: $weight;
-  font-size: $size;
-  line-height: $line-height;
-}
 
 .inputWrapper {
   position: relative;
@@ -129,13 +119,6 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
   &.error {
     .input {
       border-color: $error-color;
-    }
-
-    .errorMessage {
-      color: $error-color;
-      font-size: 12px;
-      margin-top: 4px;
-      @include font-base(9px, 700);
     }
   }
 }

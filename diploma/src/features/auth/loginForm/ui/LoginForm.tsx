@@ -9,26 +9,26 @@ import { useAuthFormStore } from "../../../../entities/user";
 export const LoginForm = () => {
   const serverError = useErrorStore((state) => state.serverError);
   const { formik, isLoading } = useLogin();
-  const { setEmail, setPassword, setRememberMe } = useAuthFormStore();
+  const { setLoginEmail, setPassword, setRememberMe } = useAuthFormStore();
   return (
     <>
       <div className={styles.headerLogin}>
         <h1>Sign in to your account</h1>
       </div>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={styles.loginForm}>
         <div className={styles.inputsLogin}>
           <DefaultInput
             id="email"
-            name="email"
+            name="loginEmail"
             type="email"
             label="Email Address or username"
             onChange={(e) => {
               formik.handleChange(e);
-              setEmail(e.target.value);
+              setLoginEmail(e.target.value);
             }}
             onBlur={formik.handleBlur}
-            value={formik.values.email}
-            error={formik.submitCount > 0 ? formik.errors.email : ""}
+            value={formik.values.loginEmail}
+            error={formik.submitCount > 0 ? formik.errors.loginEmail : ""}
           />
           <DefaultInput
             id="password"
@@ -53,8 +53,9 @@ export const LoginForm = () => {
                 setRememberMe(e.target.checked);
               }}
               checked={formik.values.rememberMe}
-            />
-            <span>Remember me</span>
+            >
+              <span>Remember me</span>
+            </Checkbox>
           </div>
           <div className={styles.forgotPassword}>Forgot Password</div>
         </div>

@@ -80,21 +80,21 @@ export const DefaultInput: React.FC<DefaultInputProps> = ({
           onBlur={() => setIsFocused(false)}
           onChange={handleChange}
         />
-        {type === "password" && (isFocused || hasText) && (
+        {type === "password" && hasText && (
           <button
             type="button"
             className={styles.eyeButton}
             onClick={() => setShowPassword(!showPassword)}
           >
             {showPassword ? (
-              <Icon path={mdiEyeOff} size={1} color="black" />
+              <Icon path={mdiEyeOff} size={1} color="rgba(0,0,0,0.6)" />
             ) : (
-              <Icon path={mdiEye} size={1} color="black" />
+              <Icon path={mdiEye} size={1} color="rgba(0,0,0,0.6)" />
             )}
           </button>
         )}
       </div>
-      {error && <div className={styles.errorMessage}>{error}</div>}
+      {error && <div className="errorInput">{error}</div>}
     </div>
   );
 };

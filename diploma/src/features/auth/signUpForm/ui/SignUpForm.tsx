@@ -1,25 +1,28 @@
 import styles from "./SignUpForm.module.scss";
 import { DefaultInput } from "../../../../shared/inputs";
 import { Checkbox } from "../../../../shared/checkBox";
-import { useErrorStore } from "../../../../shared/stores";
 import { AuthButton } from "../../../../shared/buttons/auth";
-import { useState } from "react";
 import { DropdownMenu } from "../../../../shared/dropdowns";
+import { useRegistration } from "../model/useRegistration";
+import { useAuthFormStore } from "../../../../entities/user";
+import { roles, type Role } from "../../../../shared/constants";
 
 export const SignUpForm = () => {
-  const serverError = useErrorStore((state) => state.serverError);
-  const fakeRoles = [
-    { label: "Volunteer", value: "volunteer" },
-    { label: "Organizer", value: "organizer" },
-    { label: "Admin", value: "admin" },
-  ];
-  const [role, setRole] = useState(fakeRoles[0].value);
+  const { formik, isLoading } = useRegistration();
+  const {
+    role,
+    setRegisterEmail,
+    setFirstName,
+    setLastName,
+    setRole,
+    setAgreement,
+  } = useAuthFormStore();
   return (
     <>
       <div className={styles.headerSignUp}>
         <h1>Create an account</h1>
       </div>
-      <form>
+      <form onSubmit={formik.handleSubmit} className={styles.signUpForm}>
         <div className={styles.inputsSignUp}>
           <div className={styles.inputsFullName}>
             <DefaultInput
@@ -27,33 +30,66 @@ export const SignUpForm = () => {
               name="firstName"
               type="text"
               label="First name"
+              onChange={(e) => {
+                formik.handleChange(e);
+                setFirstName(e.target.value);
+              }}
+              onBlur={formik.handleBlur}
+              value={formik.values.firstName}
+              error={formik.submitCount > 0 ? formik.errors.firstName : ""}
             />
             <DefaultInput
               id="lastName"
               name="lastName"
               type="text"
               label="Last name"
+              onChange={(e) => {
+                formik.handleChange(e);
+                setLastName(e.target.value);
+              }}
+              onBlur={formik.handleBlur}
+              value={formik.values.lastName}
+              error={formik.submitCount > 0 ? formik.errors.lastName : ""}
             />
           </div>
           <DefaultInput
             id="email"
-            name="email"
+            name="registerEmail"
             type="email"
             label="Email Address"
+            onChange={(e) => {
+              formik.handleChange(e);
+              setRegisterEmail(e.target.value);
+            }}
+            onBlur={formik.handleBlur}
+            value={formik.values.registerEmail}
+            error={formik.submitCount > 0 ? formik.errors.registerEmail : ""}
           />
           <DropdownMenu
             value={role}
-            onChange={(val) => setRole(val)}
-            options={fakeRoles}
+            onChange={(val: string) => {
+              setRole(val as Role);
+              formik.setFieldValue("role", val);
+            }}
+            options={roles}
+            error={formik.submitCount > 0 ? formik.errors.role : ""}
           />
         </div>
         <div className={styles.agreement}>
-          <Checkbox name="agreement" />I agree to the {""}
-          <span>Terms of services and private policy </span>
+          <Checkbox
+            name="agreement"
+            checked={formik.values.agreement}
+            onChange={(e) => {
+              formik.handleChange(e);
+              setAgreement(e.target.checked);
+            }}
+            error={formik.submitCount > 0 ? formik.errors.agreement : ""}
+          >
+            I agree to the <span>Terms of services and privacy policy</span>
+          </Checkbox>
         </div>
         <div className={styles.buttonBlock}>
           <AuthButton label="Create an account" />
-          {serverError && <div className="errorMessage">{serverError}</div>}
         </div>
       </form>
     </>

@@ -1,7 +1,9 @@
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import styles from "../styles/AuthForm.module.scss";
 import { AuthToggle } from "../../../../features/auth";
 import { AppleIcon } from "../../../assets/auth";
+import { useAuthModeStore } from "../../../../entities/user";
+import { GoogleIcon } from "../../../assets/auth";
 
 interface AuthFormProps {
   signupForm: ReactNode;
@@ -9,12 +11,12 @@ interface AuthFormProps {
 }
 
 export function AuthForm({ signupForm, signinForm }: AuthFormProps) {
-  const [mode, setMode] = useState<"signup" | "signin">("signup");
+  const { mode } = useAuthModeStore();
   return (
     <>
       <div className={styles.authContainer}>
         <div className={styles.switchAuth}>
-          <AuthToggle mode={mode} onChange={setMode} />
+          <AuthToggle />
         </div>
         {mode === "signup" ? signupForm : signinForm}
         <div className={styles.apiAuth}>
@@ -23,9 +25,11 @@ export function AuthForm({ signupForm, signinForm }: AuthFormProps) {
           </div>
           <div className={styles.apiButtons}>
             <button className={styles.appleSign}>
-              <img src={AppleIcon} alt="Apple" className={styles.appleIcon} />
+              <img src={AppleIcon} alt="google" />
             </button>
-            <button className={styles.googleSign}></button>
+            <button className={styles.googleSign}>
+              <img src={GoogleIcon} alt="google" />
+            </button>
           </div>
         </div>
       </div>

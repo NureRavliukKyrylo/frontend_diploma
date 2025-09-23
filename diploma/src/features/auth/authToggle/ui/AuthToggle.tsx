@@ -1,18 +1,16 @@
+import { useAuthModeStore } from "../../../../entities/user";
 import styles from "./AuthToggle.module.scss";
 
-interface AuthToggleProps {
-  mode: "signup" | "signin";
-  onChange: (mode: "signup" | "signin") => void;
-}
+export function AuthToggle() {
+  const { mode, setMode } = useAuthModeStore();
 
-export function AuthToggle({ mode, onChange }: AuthToggleProps) {
   return (
     <div className={styles.toggleContainer}>
       <button
         className={`${styles.toggleButton} ${
           mode === "signup" ? styles.active : ""
         }`}
-        onClick={() => onChange("signup")}
+        onClick={() => setMode("signup")}
       >
         Sign up
       </button>
@@ -20,7 +18,7 @@ export function AuthToggle({ mode, onChange }: AuthToggleProps) {
         className={`${styles.toggleButton} ${
           mode === "signin" ? styles.active : ""
         }`}
-        onClick={() => onChange("signin")}
+        onClick={() => setMode("signin")}
       >
         Sign in
       </button>

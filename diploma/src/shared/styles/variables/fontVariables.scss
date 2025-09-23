@@ -1,0 +1,13 @@
+$error-color: red;
+$font-family: "Inter", sans-serif;
+$font-size-base: 18px;
+$font-weight-base: 500;
+$line-height: 150%;
+
+@mixin font-base($size: $font-size-base, $weight: $font-weight-base) {
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $line-height;
+}

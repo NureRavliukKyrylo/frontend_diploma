@@ -1,57 +1,55 @@
+@use "./../../../../shared/styles/variables/fontVariables.scss" as *;
+
 .headerLogin {
   margin-bottom: 10px;
+
   h1 {
     all: unset;
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 900;
-    font-size: 30px;
-    line-height: 150%;
+    @include font-base(30px, 900);
     color: #000000;
   }
 }
-form {
+
+.loginForm {
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
   gap: 15px;
+
   .inputsLogin {
     display: flex;
     flex-direction: column;
     gap: 17px;
   }
+
   .additional {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
+    flex-direction: row;
+
     .rememberMe {
       display: flex;
       justify-content: flex-start;
       align-items: center;
       gap: 5px;
+
       span {
-        font-family: "Inter";
-        font-style: normal;
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 18px;
+        @include font-base(15px, 500);
         color: rgba(0, 0, 0, 0.6);
       }
     }
+
     .forgotPassword {
-      font-family: "Inter";
-      font-style: normal;
-      font-weight: 500;
-      font-size: 15px;
-      line-height: 18px;
-      text-decoration-line: underline;
+      @include font-base(15px, 500);
       color: rgba(0, 0, 0, 0.6);
+      text-decoration-line: underline;
       cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
     }
   }
+
   .buttonBlock {
     margin-bottom: 15px;
   }

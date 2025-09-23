@@ -1,7 +1,7 @@
 import { apiClient } from "../../../../shared/api";
 
 export type LoginDto = {
-  email: string;
+  loginEmail: string;
   password: string;
   rememberMe: boolean;
 };

@@ -1,19 +1,24 @@
 import { create } from "zustand";
+import { type Role } from "../../../shared/constants";
 
 interface AuthFormState {
   firstName: string;
   lastName: string;
-  email: string;
+  loginEmail: string;
+  registerEmail: string;
   password: string;
-  role: string;
+  role: Role | null;
   rememberMe: boolean;
   showPassword: boolean;
+  agreement: boolean;
   setFirstName: (val: string) => void;
   setLastName: (val: string) => void;
-  setEmail: (val: string) => void;
+  setLoginEmail: (val: string) => void;
+  setRegisterEmail: (val: string) => void;
   setPassword: (val: string) => void;
-  setRole: (val: string) => void;
+  setRole: (val: Role) => void;
   setRememberMe: (val: boolean) => void;
+  setAgreement: (val: boolean) => void;
   setShowPassword: (val: boolean) => void;
   clearForm: () => void;
 }
@@ -21,23 +26,27 @@ interface AuthFormState {
 export const useAuthFormStore = create<AuthFormState>((set) => ({
   firstName: "",
   lastName: "",
-  email: "",
+  loginEmail: "",
+  registerEmail: "",
   password: "",
-  role: "volunteer",
+  role: null,
   rememberMe: false,
   showPassword: false,
+  agreement: false,
   setFirstName: (val) => set({ firstName: val }),
   setLastName: (val) => set({ lastName: val }),
-  setEmail: (val) => set({ email: val }),
+  setLoginEmail: (val) => set({ loginEmail: val }),
+  setRegisterEmail: (val) => set({ registerEmail: val }),
   setPassword: (val) => set({ password: val }),
   setRole: (val) => set({ role: val }),
   setRememberMe: (val) => set({ rememberMe: val }),
   setShowPassword: (val) => set({ showPassword: val }),
+  setAgreement: (val) => set({ agreement: val }),
   clearForm: () =>
     set({
       firstName: "",
       lastName: "",
-      email: "",
+      loginEmail: "",
       password: "",
       role: "volunteer",
       rememberMe: false,

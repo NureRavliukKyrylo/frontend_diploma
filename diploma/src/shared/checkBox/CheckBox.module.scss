@@ -1,3 +1,19 @@
+$error-color: red;
+$font-family: "Inter", sans-serif;
+
+.checkBoxContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: $font-family;
+}
+
+.checkBoxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .checkBox {
   all: unset;
   width: 23px;
@@ -33,4 +49,7 @@
     width: 18px;
     height: 18px;
   }
+}
+.checkBox.error {
+  border-color: $error-color;
 }
