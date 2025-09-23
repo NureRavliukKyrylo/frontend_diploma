@@ -29,7 +29,8 @@ export const SignUpForm = () => {
               id="firstName"
               name="firstName"
               type="text"
-              label="First name"
+              label="Enter first name"
+              activeLabel="First name"
               onChange={(e) => {
                 formik.handleChange(e);
                 setFirstName(e.target.value);
@@ -42,7 +43,8 @@ export const SignUpForm = () => {
               id="lastName"
               name="lastName"
               type="text"
-              label="Last name"
+              label="Enter last name"
+              activeLabel="Last name"
               onChange={(e) => {
                 formik.handleChange(e);
                 setLastName(e.target.value);
@@ -56,7 +58,8 @@ export const SignUpForm = () => {
             id="email"
             name="registerEmail"
             type="email"
-            label="Email Address"
+            label="Enter email address"
+            activeLabel="Email"
             onChange={(e) => {
               formik.handleChange(e);
               setRegisterEmail(e.target.value);
@@ -89,7 +92,7 @@ export const SignUpForm = () => {
           </Checkbox>
         </div>
         <div className={styles.buttonBlock}>
-          <AuthButton label="Create an account" />
+          <AuthButton label="Create an account" loading={isLoading} />
         </div>
       </form>
     </>

@@ -9,7 +9,6 @@ interface AuthFormState {
   password: string;
   role: Role | null;
   rememberMe: boolean;
-  showPassword: boolean;
   agreement: boolean;
   setFirstName: (val: string) => void;
   setLastName: (val: string) => void;
@@ -19,7 +18,6 @@ interface AuthFormState {
   setRole: (val: Role) => void;
   setRememberMe: (val: boolean) => void;
   setAgreement: (val: boolean) => void;
-  setShowPassword: (val: boolean) => void;
   clearForm: () => void;
 }
 
@@ -31,7 +29,6 @@ export const useAuthFormStore = create<AuthFormState>((set) => ({
   password: "",
   role: null,
   rememberMe: false,
-  showPassword: false,
   agreement: false,
   setFirstName: (val) => set({ firstName: val }),
   setLastName: (val) => set({ lastName: val }),
@@ -40,7 +37,6 @@ export const useAuthFormStore = create<AuthFormState>((set) => ({
   setPassword: (val) => set({ password: val }),
   setRole: (val) => set({ role: val }),
   setRememberMe: (val) => set({ rememberMe: val }),
-  setShowPassword: (val) => set({ showPassword: val }),
   setAgreement: (val) => set({ agreement: val }),
   clearForm: () =>
     set({

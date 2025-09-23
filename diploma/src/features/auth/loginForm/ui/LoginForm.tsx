@@ -21,7 +21,8 @@ export const LoginForm = () => {
             id="email"
             name="loginEmail"
             type="email"
-            label="Email Address or username"
+            label="Enter email adress"
+            activeLabel="Email"
             onChange={(e) => {
               formik.handleChange(e);
               setLoginEmail(e.target.value);
@@ -35,6 +36,7 @@ export const LoginForm = () => {
             name="password"
             type="password"
             label="Enter your password"
+            activeLabel="Password"
             onChange={(e) => {
               formik.handleChange(e);
               setPassword(e.target.value);
