@@ -21,6 +21,10 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
       flex: 1;
       padding-right: 40px;
     }
+    input[type="password"]::-ms-reveal,
+    input[type="password"]::-ms-clear {
+      display: none;
+    }
 
     .eyeButton {
       position: absolute;

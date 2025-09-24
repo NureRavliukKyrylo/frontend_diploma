@@ -99,8 +99,8 @@ export const DefaultInput: React.FC<DefaultInputProps> = ({
               </button>
             )}
           </div>
+          {error && <div className="errorInput">{error}</div>}
         </div>
-        {error && <div className="errorInput">{error}</div>}
       </div>
     </>
   );

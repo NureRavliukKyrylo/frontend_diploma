@@ -1,0 +1,104 @@
+.MuiStepIcon-root.Mui-active {
+  background: white !important;
+  border: 3px solid #000000 !important;
+  border-radius: 50% !important;
+  width: 70px !important;
+  height: 70px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  .MuiStepIcon-text {
+    font-family: "Inter", sans-serif !important;
+    font-size: 50px !important;
+    font-weight: 800 !important;
+    color: black !important;
+  }
+}
+
+.MuiStepIcon-root {
+  background: rgba(234, 234, 234, 0.8) !important;
+  border: 1px solid rgba(0, 0, 0, 0.6) !important;
+  border-radius: 50% !important;
+  width: 70px !important;
+  height: 70px !important;
+  display: flex !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  width: 50px !important;
+  height: 50px !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.MuiStepIcon-text {
+  font-family: "Inter", sans-serif !important;
+  font-size: 30px !important;
+  font-weight: 500 !important;
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.CustomStepIcon-completedIcon {
+  font-size: 30px !important;
+  color: rgba(0, 0, 0, 0.6) !important;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.MuiStepLabel-root {
+  padding: 0 !important;
+  align-items: center !important;
+  gap: 5px !important;
+}
+.MuiStep-root {
+  width: 100% !important;
+}
+
+.MuiStepLabel-iconContainer {
+  width: 80px !important;
+  display: flex !important;
+  justify-content: center !important;
+  padding-right: 0px !important;
+}
+
+.MuiStepConnector-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  margin-left: 0px !important;
+  min-height: 37px !important;
+  .MuiStepConnector-line {
+    min-height: 36px !important;
+    border-left: 1px solid rgba(0, 0, 0, 0.6);
+  }
+}
+
+.MuiStepContent-root {
+  padding: 0 !important;
+  margin: 0 !important;
+  border-left: 0px !important;
+  color: rgba(0, 0, 0, 0.7) !important;
+  font-family: "Inter" !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 18px !important;
+  line-height: 150% !important;
+}
+
+.MuiStepLabel-label.Mui-active {
+  font-family: "Inter", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 900 !important;
+  font-size: 30px !important;
+  line-height: 100% !important;
+  color: #000000 !important;
+}
+.MuiStepLabel-label,
+.MuiStepLabel-label.Mui-completed {
+  font-family: "Inter", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 900 !important;
+  font-size: 18px !important;
+  line-height: 150% !important;
+  color: rgba(0, 0, 0, 0.6) !important;
+}

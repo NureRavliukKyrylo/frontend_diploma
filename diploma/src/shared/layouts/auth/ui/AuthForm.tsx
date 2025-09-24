@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import styles from "../styles/AuthForm.module.scss";
-import { AuthToggle } from "../../../../features/auth";
+import { AuthToggle } from "../../../components/authToggle";
 import { AppleIcon } from "../../../assets/auth";
 import { useAuthModeStore } from "../../../../entities/user";
 import { GoogleIcon } from "../../../assets/auth";

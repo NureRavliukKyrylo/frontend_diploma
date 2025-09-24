@@ -1,4 +1,4 @@
-import { useAuthModeStore } from "../../../../entities/user";
+import { useAuthModeStore } from "../../../entities/user";
 import styles from "./AuthToggle.module.scss";
 
 export function AuthToggle() {
