@@ -1,5 +1,5 @@
-import { useStepperStore } from "../../../entities/user";
-import styles from "./StepperButtons.module.scss";
+import { useStepperStore } from "../../../../entities/user";
+import styles from "./../styles/StepperButtons.module.scss";
 
 export const SkipStepperButton = () => {
   const { nextStep } = useStepperStore();

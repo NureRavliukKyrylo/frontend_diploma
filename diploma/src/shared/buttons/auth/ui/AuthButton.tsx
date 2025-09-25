@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./AuthButton.module.scss";
+import styles from "./../styles/AuthButton.module.scss";
 
 interface AuthButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -19,7 +19,7 @@ export const AuthButton: React.FC<AuthButtonProps> = ({
       className={styles.buttonLogin}
       {...props}
     >
-      {loading ? "Sending..." : label}
+      <span>{loading ? "Sending..." : label}</span>
     </button>
   );
 };

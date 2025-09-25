@@ -13,7 +13,7 @@ export function AdditionalForm({
   children,
 }: AdditionalFormProps) {
   return (
-    <>
+    <div className={styles.additionalContainerWrapper}>
       <div className={styles.additionalContainer}>
         <div className={styles.headerAdditional}>
           <h1>{title}</h1>
@@ -21,6 +21,6 @@ export function AdditionalForm({
         </div>
         {children}
       </div>
-    </>
+    </div>
   );
 }

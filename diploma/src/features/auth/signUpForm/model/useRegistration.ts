@@ -5,11 +5,10 @@ import { useRouter } from "@tanstack/react-router";
 
 export const useRegistration = () => {
   const router = useRouter();
-  const { registerEmail, firstName, lastName, role, agreement } =
-    useAuthFormStore();
+  const { registerEmail, firstName, lastName, agreement } = useAuthFormStore();
 
   const formik = useFormik({
-    initialValues: { registerEmail, firstName, lastName, role, agreement },
+    initialValues: { registerEmail, firstName, lastName, agreement },
     validationSchema: registerSchema,
     onSubmit: (values) => {
       localStorage.setItem("authFormData", JSON.stringify(values));

@@ -2,21 +2,13 @@ import styles from "./SignUpForm.module.scss";
 import { DefaultInput } from "../../../../shared/inputs";
 import { Checkbox } from "../../../../shared/checkBox";
 import { AuthButton } from "../../../../shared/buttons/auth";
-import { DropdownMenu } from "../../../../shared/dropdowns";
 import { useRegistration } from "../model/useRegistration";
 import { useAuthFormStore } from "../../../../entities/user";
-import { roles, type Role } from "../../../../shared/constants";
 
 export const SignUpForm = () => {
   const { formik, isLoading } = useRegistration();
-  const {
-    role,
-    setRegisterEmail,
-    setFirstName,
-    setLastName,
-    setRole,
-    setAgreement,
-  } = useAuthFormStore();
+  const { setRegisterEmail, setFirstName, setLastName, setAgreement } =
+    useAuthFormStore();
   return (
     <>
       <div className={styles.headerSignUp}>
@@ -67,15 +59,6 @@ export const SignUpForm = () => {
             onBlur={formik.handleBlur}
             value={formik.values.registerEmail}
             error={formik.submitCount > 0 ? formik.errors.registerEmail : ""}
-          />
-          <DropdownMenu
-            value={role}
-            onChange={(val: string) => {
-              setRole(val as Role);
-              formik.setFieldValue("role", val);
-            }}
-            options={roles}
-            error={formik.submitCount > 0 ? formik.errors.role : ""}
           />
         </div>
         <div className={styles.agreement}>

@@ -1,0 +1,56 @@
+@use "../../../styles/variables/fontVariables.scss" as *;
+
+.fillingInfoFormWrapper {
+  h1 {
+    @include font-base(40px, 900);
+    color: #000000;
+    line-height: 100%;
+  }
+  p {
+    @include font-base(25px, 500);
+    color: rgba(0, 0, 0, 0.6);
+    line-height: 100%;
+  }
+  .fillingInfoFormContainer {
+    margin-top: 60px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 4px 70px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    width: 1190px;
+    height: 757px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    .headerTextFillForm {
+      h1 {
+        color: rgba(0, 0, 0, 0.8);
+        @include font-base(50px, 700);
+      }
+      p {
+        color: rgba(0, 0, 0, 0.6);
+        @include font-base(18px, 500);
+      }
+    }
+    .buttonsFillForm {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      .interactStepperButtons {
+        width: 25%;
+        display: flex;
+        gap: 20px;
+        > :first-child {
+          flex: 4;
+        }
+
+        > :last-child {
+          flex: 6;
+        }
+      }
+    }
+  }
+  .additionMessageFillForm {
+  }
+}

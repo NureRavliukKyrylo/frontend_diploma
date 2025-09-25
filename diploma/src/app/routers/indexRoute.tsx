@@ -1,9 +1,9 @@
 import { rootRoute } from "./__root";
 import { createRoute } from "@tanstack/react-router";
-import { StepperFormWidget } from "../../widgets/auth";
+import { FillingInfoFormPage } from "../../pages/auth";
 
 export const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: () => <StepperFormWidget />,
+  component: () => <FillingInfoFormPage />,
 });

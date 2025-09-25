@@ -1,12 +1,10 @@
 import { apiClient } from "../../../../shared/api";
-import type { Role } from "../../../../shared/constants";
 
 export type RegisterDto = {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
-  role: Role;
 };
 
 export const register = async (data: RegisterDto) => {
