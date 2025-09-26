@@ -1,12 +1,31 @@
 @use "./../../../../shared/styles/variables/fontVariables.scss" as *;
+@use "./../../../../shared/styles/mixins/adaptive.scss" as adaptive;
 
 .headerLogin {
   margin-bottom: 10px;
 
   h1 {
-    all: unset;
-    @include font-base(30px, 900);
+    @include font-base(1.875rem, 900);
     color: #000000;
+  }
+
+  @include adaptive.respond-to(laptop) {
+    h1 {
+      @include font-base(1.75rem, 900);
+    }
+  }
+
+  @include adaptive.respond-to(tablet) {
+    h1 {
+      @include font-base(1.625rem, 900);
+    }
+  }
+
+  @include adaptive.respond-to(mobile) {
+    h1 {
+      @include font-base(1.3rem, 800);
+      line-height: 120%;
+    }
   }
 }
 
@@ -47,10 +66,62 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      display: flex;
     }
   }
 
   .buttonBlock {
     margin-bottom: 15px;
+  }
+  @include adaptive.respond-to(mobile) {
+    gap: 12px;
+
+    .inputsLogin {
+      gap: 12px;
+    }
+
+    .additional {
+      gap: 10px;
+
+      .rememberMe span,
+      .forgotPassword {
+        @include font-base(11px, 500);
+        display: flex;
+      }
+    }
+
+    .buttonBlock {
+      margin-bottom: 10px;
+    }
+
+    .headerLogin h1 {
+      @include font-base(22px, 800);
+    }
+  }
+
+  @include adaptive.respond-to(tablet) {
+    gap: 14px;
+
+    .inputsLogin {
+      gap: 14px;
+    }
+
+    .additional {
+      .rememberMe span,
+      .forgotPassword {
+        @include font-base(14px, 500);
+        display: flex;
+      }
+    }
+
+    .headerLogin h1 {
+      @include font-base(26px, 900);
+    }
+  }
+
+  @include adaptive.respond-to(laptop) {
+    .headerLogin h1 {
+      @include font-base(28px, 900);
+    }
   }
 }

@@ -1,4 +1,12 @@
 .pageFillingFormWrapper {
   display: flex;
   flex-direction: row;
+
+  > :first-child {
+    flex: 6.9;
+  }
+
+  > :nth-child(2) {
+    flex: 3.1;
+  }
 }

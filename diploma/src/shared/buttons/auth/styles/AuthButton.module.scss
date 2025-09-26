@@ -1,4 +1,5 @@
 @use "./../../../styles/variables/fontVariables.scss" as *;
+@use "./../../../styles/mixins/adaptive.scss" as adaptive;
 
 .buttonLogin {
   position: relative;
@@ -47,5 +48,24 @@
   & > * {
     position: relative;
     z-index: 1;
+  }
+  @include adaptive.respond-to(mobile) {
+    min-height: 35px;
+    @include font-base(14px, 700);
+  }
+
+  @include adaptive.respond-to(tablet) {
+    min-height: 40px;
+    @include font-base(15px, 800);
+  }
+
+  @include adaptive.respond-to(laptop) {
+    min-height: 45px;
+    @include font-base(16px, 800);
+  }
+
+  @include adaptive.respond-to(desktop) {
+    min-height: 47px;
+    @include font-base(17px, 900);
   }
 }

@@ -1,4 +1,5 @@
 @use "./../../../../shared/styles/variables/fontVariables.scss" as *;
+@use "./../../../../shared/styles/mixins/adaptive.scss" as adaptive;
 
 .headerSignUp {
   margin-bottom: 10px;
@@ -7,6 +8,24 @@
     all: unset;
     @include font-base(30px, 900);
     color: #000000;
+  }
+
+  @include adaptive.respond-to(laptop) {
+    h1 {
+      @include font-base(28px, 900);
+    }
+  }
+
+  @include adaptive.respond-to(tablet) {
+    h1 {
+      @include font-base(26px, 900);
+    }
+  }
+
+  @include adaptive.respond-to(mobile) {
+    h1 {
+      @include font-base(22px, 800);
+    }
   }
 }
 
@@ -47,5 +66,64 @@
 
   .buttonBlock {
     margin-bottom: 15px;
+  }
+
+  @include adaptive.respond-to(mobile) {
+    gap: 12px;
+
+    .inputsSignUp {
+      gap: 12px;
+
+      .inputsFullName {
+        gap: 10px;
+      }
+    }
+
+    .agreement {
+      gap: 3px;
+      @include font-base(11px, 500);
+
+      span {
+        @include font-base(12px, 700);
+      }
+    }
+
+    .buttonBlock {
+      margin-bottom: 10px;
+    }
+
+    .headerSignUp h1 {
+      @include font-base(22px, 800);
+    }
+  }
+
+  @include adaptive.respond-to(tablet) {
+    gap: 14px;
+
+    .inputsSignUp {
+      gap: 14px;
+
+      .inputsFullName {
+        gap: 15px;
+      }
+    }
+
+    .agreement {
+      @include font-base(14px, 500);
+
+      span {
+        @include font-base(15px, 900);
+      }
+    }
+
+    .headerSignUp h1 {
+      @include font-base(26px, 900);
+    }
+  }
+
+  @include adaptive.respond-to(laptop) {
+    .headerSignUp h1 {
+      @include font-base(28px, 900);
+    }
   }
 }

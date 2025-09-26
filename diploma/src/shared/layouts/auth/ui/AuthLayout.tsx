@@ -14,21 +14,21 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
         <LanguageSwitcherButton />
         <LinkCommonButton
           to="/terms-and-conditions"
-          linkWidth="40px"
-          linkHeight="40px"
+          linkWidth="50px"
+          linkHeight="50px"
           imgSrc={TermsCondition}
           imgAlt="terms-conditions"
-          imgWidth="27px"
-          imgHeight="27px"
+          imgWidth="32px"
+          imgHeight="32px"
         />
         <LinkCommonButton
           to="/policy"
-          linkWidth="40px"
-          linkHeight="40px"
+          linkWidth="50px"
+          linkHeight="50px"
           imgSrc={Policy}
           imgAlt="policy"
-          imgWidth="27px"
-          imgHeight="27px"
+          imgWidth="32px"
+          imgHeight="32px"
         />
       </div>
       {children}

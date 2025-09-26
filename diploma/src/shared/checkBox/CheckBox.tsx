@@ -28,7 +28,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
           className={styles.checkBox}
           {...props}
         />
-        {children && <div className={styles.checkBoxText}>{children}</div>}
+        <div className={styles.checkBoxText}>{children}</div>
       </div>
       {error && <div className="errorInput">{error}</div>}
     </div>
