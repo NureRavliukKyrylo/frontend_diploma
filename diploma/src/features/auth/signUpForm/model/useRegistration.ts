@@ -1,14 +1,14 @@
 import { useFormik } from "formik";
-import { useAuthFormStore } from "../../../../entities/user";
+import { useAuthStore } from "../../../../entities/user";
 import { registerSchema } from "../libs/signUpSchema";
 import { useRouter } from "@tanstack/react-router";
 
 export const useRegistration = () => {
   const router = useRouter();
-  const { registerEmail, firstName, lastName, agreement } = useAuthFormStore();
+  const { signUpEmail, firstName, lastName, agreement } = useAuthStore();
 
   const formik = useFormik({
-    initialValues: { registerEmail, firstName, lastName, agreement },
+    initialValues: { signUpEmail, firstName, lastName, agreement },
     validationSchema: registerSchema,
     onSubmit: (values) => {
       localStorage.setItem("authFormData", JSON.stringify(values));

@@ -1,7 +1,7 @@
 import styles from "./PasswordForm.module.scss";
 import { useErrorStore } from "../../../../shared/stores";
 import { AuthButton } from "../../../../shared/buttons/auth";
-import { DefaultInput } from "../../../../shared/inputs";
+import { PasswordInput } from "../../../../shared/inputs";
 
 export const PasswordForm = () => {
   const serverError = useErrorStore((state) => state.serverError);
@@ -9,14 +9,14 @@ export const PasswordForm = () => {
     <>
       <form className={styles.passwordSetForm}>
         <div className={styles.inputsSetPassword}>
-          <DefaultInput
+          <PasswordInput
             id="password"
             name="password"
             type="password"
             label="Enter your password"
             activeLabel="Password"
           />
-          <DefaultInput
+          <PasswordInput
             id="repeatPassword"
             name="repeatPassword"
             type="password"

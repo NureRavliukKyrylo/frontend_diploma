@@ -1,8 +1,8 @@
-import { useStepperStore } from "../../../../entities/user";
+import { useAuthStore } from "../../../../entities/user";
 import styles from "./../styles/StepperButtons.module.scss";
 
 export const NextStepperButton = () => {
-  const { nextStep } = useStepperStore();
+  const { nextStep } = useAuthStore();
   return (
     <>
       <button className={styles.nextStepperButton} onClick={nextStep}>

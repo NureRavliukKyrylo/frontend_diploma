@@ -1,11 +1,11 @@
 import { StepperFormWidget } from "../../widgets/auth";
 import { FillingInfoForm } from "../../shared/layouts/auth";
 import styles from "./FillingInfoFormPage.module.scss";
-import { useStepperStore } from "../../entities/user";
+import { useAuthStore } from "../../entities/user";
 import { stepConstants } from "../../shared/constants";
 
 export function FillingInfoFormPage() {
-  const { activeStep } = useStepperStore();
+  const { activeStep } = useAuthStore();
 
   return (
     <div className={styles.pageFillingFormWrapper}>

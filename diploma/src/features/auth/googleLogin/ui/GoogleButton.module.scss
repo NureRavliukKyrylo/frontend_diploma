@@ -1,0 +1,16 @@
+.googleSign {
+  flex: 1;
+  background: #ffffff;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  text-align: center;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.googleSign img {
+  width: 40px;
+  height: 40px;
+  opacity: 0.6;
+}

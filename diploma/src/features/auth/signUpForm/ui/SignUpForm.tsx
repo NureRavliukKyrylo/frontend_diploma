@@ -1,14 +1,14 @@
 import styles from "./SignUpForm.module.scss";
-import { DefaultInput } from "../../../../shared/inputs";
+import { BaseInput, EmailInput } from "../../../../shared/inputs";
 import { Checkbox } from "../../../../shared/checkBox";
 import { AuthButton } from "../../../../shared/buttons/auth";
 import { useRegistration } from "../model/useRegistration";
-import { useAuthFormStore } from "../../../../entities/user";
+import { useAuthStore } from "../../../../entities/user";
 
 export const SignUpForm = () => {
   const { formik, isLoading } = useRegistration();
-  const { setRegisterEmail, setFirstName, setLastName, setAgreement } =
-    useAuthFormStore();
+  const { setSignUpEmail, setFirstName, setLastName, setAgreement } =
+    useAuthStore();
   return (
     <>
       <div className={styles.headerSignUp}>
@@ -17,7 +17,7 @@ export const SignUpForm = () => {
       <form onSubmit={formik.handleSubmit} className={styles.signUpForm}>
         <div className={styles.inputsSignUp}>
           <div className={styles.inputsFullName}>
-            <DefaultInput
+            <BaseInput
               id="firstName"
               name="firstName"
               type="text"
@@ -31,7 +31,7 @@ export const SignUpForm = () => {
               value={formik.values.firstName}
               error={formik.submitCount > 0 ? formik.errors.firstName : ""}
             />
-            <DefaultInput
+            <BaseInput
               id="lastName"
               name="lastName"
               type="text"
@@ -46,19 +46,19 @@ export const SignUpForm = () => {
               error={formik.submitCount > 0 ? formik.errors.lastName : ""}
             />
           </div>
-          <DefaultInput
-            id="email"
-            name="registerEmail"
+          <EmailInput
+            id="signUpEmail"
+            name="signUpEmail"
             type="email"
             label="Enter email address"
             activeLabel="Email"
             onChange={(e) => {
               formik.handleChange(e);
-              setRegisterEmail(e.target.value);
+              setSignUpEmail(e.target.value);
             }}
             onBlur={formik.handleBlur}
-            value={formik.values.registerEmail}
-            error={formik.submitCount > 0 ? formik.errors.registerEmail : ""}
+            value={formik.values.signUpEmail}
+            error={formik.submitCount > 0 ? formik.errors.signUpEmail : ""}
           />
         </div>
         <div className={styles.agreement}>

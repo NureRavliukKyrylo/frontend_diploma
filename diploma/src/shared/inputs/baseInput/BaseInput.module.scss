@@ -17,63 +17,6 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
     position: relative;
     display: flex;
     align-items: center;
-
-    .input {
-      flex: 1;
-      padding-right: 2.5rem;
-    }
-
-    input[type="password"]::-ms-reveal,
-    input[type="password"]::-ms-clear {
-      display: none;
-    }
-
-    .eyeButton {
-      position: absolute;
-      right: 0.625rem;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .emailIcon {
-      position: absolute;
-      left: 0.625rem;
-      color: $label-color;
-      pointer-events: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      img {
-        width: 1.75rem;
-        height: 1.75rem;
-      }
-    }
-
-    .input.email {
-      padding-left: 3.125rem;
-    }
-
-    .divider {
-      position: absolute;
-      left: 2.75rem;
-      top: 0.5rem;
-      bottom: 0.5rem;
-      width: 1px;
-      background-color: $label-color;
-      transform: scaleX(0.5);
-      transform-origin: center;
-    }
-
-    .label.email {
-      left: 2.8rem;
-    }
   }
 
   .input {
@@ -102,6 +45,11 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
     color: $label-color;
   }
 
+  .label.email,
+  .label.social {
+    left: 2.8rem;
+  }
+
   &.focused {
     .label {
       @include font-base(0.55rem, 700);
@@ -110,22 +58,30 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
       background: white;
     }
 
-    .label.email {
-      left: 0.75rem;
-      top: 0;
-      @include font-base(0.55rem, 700);
-      background: white;
-    }
-
     .input {
       border: 2px solid $focus-border-color;
       background-color: white;
+    }
+    .input.email {
+      padding-left: 2.9rem;
+    }
+    .input.social {
+      padding-right: 4rem;
+      padding-left: 2.9rem;
+    }
+    .input.password {
+      padding-right: 2.3rem;
     }
   }
 
   &.error {
     .input {
       border-color: $error-color;
+    }
+    .errorInput {
+      @include font-base(11px, 700);
+      color: $error-color;
+      margin-top: 0.25rem;
     }
   }
 }
@@ -139,16 +95,8 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
     .label {
       font-size: 0.75rem;
     }
-    .emailIcon svg {
-      width: 1.5rem;
-      height: 1.5rem;
-    }
-    .eyeButton {
-      font-size: 0.9rem;
-    }
   }
 }
-
 @include adaptive.respond-to(tablet) {
   .inputWrapper {
     .input {
@@ -158,13 +106,8 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
     .label {
       font-size: 0.85rem;
     }
-    .emailIcon svg {
-      width: 1.6rem;
-      height: 1.6rem;
-    }
   }
 }
-
 @include adaptive.respond-to(laptop) {
   .inputWrapper {
     .input {
@@ -174,16 +117,8 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
     .label {
       font-size: 0.9rem;
     }
-    .emailIcon svg {
-      width: 1.7rem;
-      height: 1.7rem;
-    }
-    .eyeButton {
-      font-size: 1rem;
-    }
   }
 }
-
 @include adaptive.respond-to(desktop) {
   .inputWrapper {
     .input {
@@ -192,13 +127,6 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
     }
     .label {
       font-size: 0.95rem;
-    }
-    .emailIcon svg {
-      width: 1.8rem;
-      height: 1.8rem;
-    }
-    .eyeButton {
-      font-size: 1.1rem;
     }
   }
 }

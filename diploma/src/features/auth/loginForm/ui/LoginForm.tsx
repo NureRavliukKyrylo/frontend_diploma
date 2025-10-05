@@ -1,15 +1,15 @@
 import styles from "./LoginForm.module.scss";
-import { DefaultInput } from "../../../../shared/inputs";
+import { EmailInput, PasswordInput } from "../../../../shared/inputs";
 import { Checkbox } from "../../../../shared/checkBox";
 import { useErrorStore } from "../../../../shared/stores";
 import { useLogin } from "../../../auth";
 import { AuthButton } from "../../../../shared/buttons/auth";
-import { useAuthFormStore } from "../../../../entities/user";
+import { useAuthStore } from "../../../../entities/user";
 
 export const LoginForm = () => {
   const serverError = useErrorStore((state) => state.serverError);
   const { formik, isLoading } = useLogin();
-  const { setLoginEmail, setPassword, setRememberMe } = useAuthFormStore();
+  const { setLoginEmail, setLoginPassword, setRememberMe } = useAuthStore();
   return (
     <>
       <div className={styles.headerLogin}>
@@ -17,8 +17,8 @@ export const LoginForm = () => {
       </div>
       <form onSubmit={formik.handleSubmit} className={styles.loginForm}>
         <div className={styles.inputsLogin}>
-          <DefaultInput
-            id="email"
+          <EmailInput
+            id="loginEmail"
             name="loginEmail"
             type="email"
             label="Enter email adress"
@@ -31,19 +31,19 @@ export const LoginForm = () => {
             value={formik.values.loginEmail}
             error={formik.submitCount > 0 ? formik.errors.loginEmail : ""}
           />
-          <DefaultInput
-            id="password"
-            name="password"
+          <PasswordInput
+            id="loginPassword"
+            name="loginPassword"
             type="password"
             label="Enter your password"
             activeLabel="Password"
             onChange={(e) => {
               formik.handleChange(e);
-              setPassword(e.target.value);
+              setLoginPassword(e.target.value);
             }}
             onBlur={formik.handleBlur}
-            value={formik.values.password}
-            error={formik.submitCount > 0 ? formik.errors.password : ""}
+            value={formik.values.loginPassword}
+            error={formik.submitCount > 0 ? formik.errors.loginPassword : ""}
           />
         </div>
         <div className={styles.additional}>

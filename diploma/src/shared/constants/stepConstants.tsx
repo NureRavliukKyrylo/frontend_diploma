@@ -1,4 +1,7 @@
 import type { ReactNode } from "react";
+import { AboutForm, ImageForm } from "../../features/auth";
+import { MapLocationPicker } from "../../features/map";
+import { ContactsForm } from "../../features/auth/multiStepFillForm/ui/ContactsForm";
 
 export interface StepItem {
   title: string;
@@ -17,7 +20,7 @@ export const steps: StepItem[] = [
     formTitle: "Upload your profile photo",
     formDescription:
       "Adding your photo is a required step. It helps others recognize you and builds trust within the platform",
-    content: <div>Step 1 form fields go here</div>,
+    content: <ImageForm />,
   },
   {
     title: "Location",
@@ -26,7 +29,7 @@ export const steps: StepItem[] = [
     formTitle: "Share your location",
     formDescription:
       "Adding your location is an essential part of our platform. It allows us to connect you with nearby volunteers and projects in your area",
-    content: <div>Step 2 more details go here</div>,
+    content: <MapLocationPicker />,
   },
   {
     title: "About you",
@@ -35,7 +38,7 @@ export const steps: StepItem[] = [
     formTitle: "Tell us more about you",
     formDescription:
       "Please add your date of birth and a short bio. This information makes your profile complete and helps others get to know you better",
-    content: <div>Step 3 final review here</div>,
+    content: <AboutForm />,
   },
   {
     title: "Contacts & social links",
@@ -44,6 +47,6 @@ export const steps: StepItem[] = [
     formTitle: "Connect your contacts",
     formDescription:
       "Add your phone and social profiles to stay connected. You’re in control — this info can be hidden from other users",
-    content: <div>Step 3 final review here</div>,
+    content: <ContactsForm />,
   },
 ];

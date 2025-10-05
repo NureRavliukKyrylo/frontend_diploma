@@ -1,45 +1,35 @@
 import { create } from "zustand";
-import { type Role } from "../../../shared/constants";
+import { persist, devtools } from "zustand/middleware";
+import {
+  createAuthModeSlice,
+  type AuthModeSlice,
+} from "./slices/auth/authModeState";
+import {
+  createStepperSlice,
+  type StepperSlice,
+} from "./slices/auth/authStepperForm";
+import { createLoginSlice, type LoginSlice } from "./slices/auth/loginSlice";
+import { createSignupSlice, type SignupSlice } from "./slices/auth/signUpSlice";
 
-interface AuthFormState {
-  firstName: string;
-  lastName: string;
-  loginEmail: string;
-  registerEmail: string;
-  password: string;
-  rememberMe: boolean;
-  agreement: boolean;
-  setFirstName: (val: string) => void;
-  setLastName: (val: string) => void;
-  setLoginEmail: (val: string) => void;
-  setRegisterEmail: (val: string) => void;
-  setPassword: (val: string) => void;
-  setRememberMe: (val: boolean) => void;
-  setAgreement: (val: boolean) => void;
-  clearForm: () => void;
-}
+type AuhtStore = AuthModeSlice & StepperSlice & LoginSlice & SignupSlice;
 
-export const useAuthFormStore = create<AuthFormState>((set) => ({
-  firstName: "",
-  lastName: "",
-  loginEmail: "",
-  registerEmail: "",
-  password: "",
-  rememberMe: false,
-  agreement: false,
-  setFirstName: (val) => set({ firstName: val }),
-  setLastName: (val) => set({ lastName: val }),
-  setLoginEmail: (val) => set({ loginEmail: val }),
-  setRegisterEmail: (val) => set({ registerEmail: val }),
-  setPassword: (val) => set({ password: val }),
-  setRememberMe: (val) => set({ rememberMe: val }),
-  setAgreement: (val) => set({ agreement: val }),
-  clearForm: () =>
-    set({
-      firstName: "",
-      lastName: "",
-      loginEmail: "",
-      password: "",
-      rememberMe: false,
-    }),
-}));
+export const useAuthStore = create<AuhtStore>()(
+  devtools(
+    persist(
+      (...a) => ({
+        ...createAuthModeSlice(...a),
+        ...createStepperSlice(...a),
+        ...createLoginSlice(...a),
+        ...createSignupSlice(...a),
+      }),
+      {
+        name: "auth-store",
+        partialize: (state) => ({
+          mode: state.mode,
+          activeStep: state.activeStep,
+        }),
+      }
+    ),
+    { name: "AuthStore" }
+  )
+);

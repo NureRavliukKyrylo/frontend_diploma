@@ -1,10 +1,11 @@
 import { type ReactNode } from "react";
 import styles from "../styles/AuthForm.module.scss";
-import { AuthToggle } from "../../../components/authToggle";
+import { AuthToggle } from "../../../components";
 import { AppleIcon } from "../../../assets/auth";
-import { useAuthModeStore } from "../../../../entities/user";
+import { useAuthStore } from "../../../../entities/user";
 import { GoogleIcon } from "../../../assets/auth";
 import { AnimatePresence, motion } from "framer-motion";
+import { GoogleButton } from "../../../../features/auth";
 
 interface AuthFormProps {
   signupForm: ReactNode;
@@ -12,7 +13,7 @@ interface AuthFormProps {
 }
 
 export function AuthForm({ signupForm, signinForm }: AuthFormProps) {
-  const { mode } = useAuthModeStore();
+  const { mode } = useAuthStore();
   return (
     <div className={styles.wrapperAuthContainer}>
       <div className={styles.authContainer}>
@@ -50,9 +51,7 @@ export function AuthForm({ signupForm, signinForm }: AuthFormProps) {
             <button className={styles.appleSign}>
               <img src={AppleIcon} alt="google" />
             </button>
-            <button className={styles.googleSign}>
-              <img src={GoogleIcon} alt="google" />
-            </button>
+            <GoogleButton />
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
-import { useAuthModeStore } from "../../../entities/user";
+import { useAuthStore } from "../../../entities/user";
 import styles from "./AuthToggle.module.scss";
 
 export function AuthToggle() {
-  const { mode, setMode } = useAuthModeStore();
+  const { mode, setMode } = useAuthStore();
 
   return (
     <div className={styles.toggleContainer}>

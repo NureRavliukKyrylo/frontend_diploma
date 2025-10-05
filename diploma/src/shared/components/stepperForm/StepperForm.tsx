@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import Check from "@mui/icons-material/Check";
 import "./StepperStyles.scss";
-import { useStepperStore } from "../../../entities/user";
+import { useAuthStore } from "../../../entities/user";
 import { stepConstants } from "../../constants";
 
 function CustomStepIcon(props: StepIconProps) {
@@ -29,7 +29,7 @@ function CustomStepIcon(props: StepIconProps) {
 }
 
 export function StepperForm() {
-  const { activeStep } = useStepperStore();
+  const { activeStep } = useAuthStore();
 
   return (
     <div>

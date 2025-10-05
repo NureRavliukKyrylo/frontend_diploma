@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { login, type LoginDto } from "../api/loginApi";
 import { loginSchema } from "../libs/loginSchema";
 import { useErrorStore } from "../../../../shared/stores";
-import { useAuthFormStore } from "../../../../entities/user";
+import { useAuthStore } from "../../../../entities/user";
 
 export const useLogin = () => {
   const setServerError = useErrorStore((state) => state.setServerError);
@@ -23,10 +23,10 @@ export const useLogin = () => {
     },
   });
 
-  const { loginEmail, password, rememberMe } = useAuthFormStore();
+  const { loginEmail, loginPassword, rememberMe } = useAuthStore();
 
   const formik = useFormik({
-    initialValues: { loginEmail, password, rememberMe },
+    initialValues: { loginEmail, loginPassword, rememberMe },
     validationSchema: loginSchema,
     onSubmit: (values) => {
       mutation.mutate(values);
