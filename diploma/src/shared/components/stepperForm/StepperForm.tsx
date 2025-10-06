@@ -6,42 +6,95 @@ import {
   type StepIconProps,
 } from "@mui/material";
 import Check from "@mui/icons-material/Check";
+import { motion, AnimatePresence } from "framer-motion";
 import "./StepperStyles.scss";
 import { useAuthStore } from "../../../entities/user";
 import { stepConstants } from "../../constants";
 
 function CustomStepIcon(props: StepIconProps) {
   const { active, completed, icon } = props;
+  const showCheck = completed && !active;
 
   return (
-    <div
-      className={`MuiStepIcon-root ${completed ? "Mui-completed" : ""} ${
+    <motion.div
+      className={`MuiStepIcon-root ${showCheck ? "Mui-completed" : ""} ${
         active ? "Mui-active" : ""
       }`}
+      initial={{ scale: 0.8, opacity: 0 }}
+      animate={{
+        scale: active ? 1.2 : 1,
+        opacity: 1,
+      }}
+      transition={{ type: "spring", stiffness: 600, damping: 10 }}
     >
-      {completed ? (
-        <Check className="CustomStepIcon-completedIcon" />
-      ) : (
-        <span className="MuiStepIcon-text">{icon}</span>
-      )}
-    </div>
+      <AnimatePresence mode="popLayout">
+        {showCheck ? (
+          <motion.div
+            key="check"
+            initial={{ scale: 0, rotate: -90 }}
+            animate={{ scale: 1, rotate: 0 }}
+            exit={{ scale: 0 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <Check className="CustomStepIcon-completedIcon" />
+          </motion.div>
+        ) : (
+          <motion.span
+            key="icon"
+            className="MuiStepIcon-text"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {icon}
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }
 
 export function StepperForm() {
-  const { activeStep } = useAuthStore();
+  const { activeStep, isStepSkipped, isStepCompleted } = useAuthStore();
 
   return (
     <div>
       <Stepper activeStep={activeStep} orientation="vertical">
-        {stepConstants.steps.map((step, index) => (
-          <Step key={index}>
-            <StepLabel StepIconComponent={CustomStepIcon}>
-              {step.title}
-              <StepContent>{step.description}</StepContent>
-            </StepLabel>
-          </Step>
-        ))}
+        {stepConstants.steps.map((step, index) => {
+          const skipped = isStepSkipped(index);
+          const completed = isStepCompleted(index);
+          const isActive = activeStep === index;
+
+          return (
+            <Step key={index} completed={completed && !skipped && !isActive}>
+              <StepLabel StepIconComponent={CustomStepIcon}>
+                <motion.div
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{
+                    opacity: isActive ? 1 : 0.6,
+                    x: isActive ? 0 : -5,
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {step.title}
+                </motion.div>
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      key="content"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <StepContent>{step.description}</StepContent>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </StepLabel>
+            </Step>
+          );
+        })}
       </Stepper>
     </div>
   );

@@ -31,6 +31,8 @@ $font-family: "Inter", sans-serif;
   position: relative;
   box-sizing: border-box;
   cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    opacity 0.2s ease;
 
   &:checked::after {
     content: "";
@@ -38,6 +40,7 @@ $font-family: "Inter", sans-serif;
     inset: 15%;
     background-color: black;
     border-radius: 20%;
+    animation: fadeIn 0.3s forwards;
 
     @media (max-width: 768px) {
       inset: 13%;
@@ -58,6 +61,21 @@ $font-family: "Inter", sans-serif;
     height: 18px;
   }
 }
+.checkBox.error {
+  border-color: $error-color;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .checkBox.error {
   border-color: $error-color;
 }

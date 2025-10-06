@@ -6,6 +6,7 @@ interface BaseInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   activeLabel?: string;
   error?: string;
   originalType?: string;
+  children?: React.ReactNode;
 }
 
 export const BaseInput: React.FC<BaseInputProps> = ({
@@ -17,11 +18,23 @@ export const BaseInput: React.FC<BaseInputProps> = ({
   value,
   defaultValue,
   onChange,
+  onFocus,
+  onBlur,
   children,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [hasText, setHasText] = useState(!!value || !!defaultValue);
+
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    setIsFocused(true);
+    onFocus?.(e);
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    setIsFocused(false);
+    onBlur?.(e);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHasText(!!e.target.value);
@@ -54,8 +67,8 @@ export const BaseInput: React.FC<BaseInputProps> = ({
           type={type}
           value={value}
           defaultValue={defaultValue}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           onChange={handleChange}
           {...props}
         />

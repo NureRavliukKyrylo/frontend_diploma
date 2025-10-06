@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./../styles/AuthButton.module.scss";
+import { BaseButtonWrapper } from "../../base";
 
 interface AuthButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -10,16 +11,10 @@ interface AuthButtonProps
 export const AuthButton: React.FC<AuthButtonProps> = ({
   loading = false,
   label = "Sign in",
-  ...props
 }) => {
   return (
-    <button
-      type="submit"
-      disabled={loading || props.disabled}
-      className={styles.buttonLogin}
-      {...props}
-    >
-      <span>{loading ? "Sending..." : label}</span>
-    </button>
+    <BaseButtonWrapper loading={loading} className={styles.buttonLogin}>
+      {label}
+    </BaseButtonWrapper>
   );
 };

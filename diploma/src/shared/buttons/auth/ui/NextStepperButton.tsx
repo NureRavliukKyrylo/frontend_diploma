@@ -6,7 +6,7 @@ export const NextStepperButton = () => {
   return (
     <>
       <button className={styles.nextStepperButton} onClick={nextStep}>
-        Skip
+        Next
       </button>
     </>
   );

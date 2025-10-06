@@ -27,7 +27,6 @@ export const LoginForm = () => {
               formik.handleChange(e);
               setLoginEmail(e.target.value);
             }}
-            onBlur={formik.handleBlur}
             value={formik.values.loginEmail}
             error={formik.submitCount > 0 ? formik.errors.loginEmail : ""}
           />
@@ -41,7 +40,6 @@ export const LoginForm = () => {
               formik.handleChange(e);
               setLoginPassword(e.target.value);
             }}
-            onBlur={formik.handleBlur}
             value={formik.values.loginPassword}
             error={formik.submitCount > 0 ? formik.errors.loginPassword : ""}
           />

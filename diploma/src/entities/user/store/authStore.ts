@@ -3,11 +3,11 @@ import { persist, devtools } from "zustand/middleware";
 import {
   createAuthModeSlice,
   type AuthModeSlice,
-} from "./slices/auth/authModeState";
+} from "./slices/auth/authModeSlice";
 import {
   createStepperSlice,
   type StepperSlice,
-} from "./slices/auth/authStepperForm";
+} from "./slices/auth/stepperSlice";
 import { createLoginSlice, type LoginSlice } from "./slices/auth/loginSlice";
 import { createSignupSlice, type SignupSlice } from "./slices/auth/signUpSlice";
 
@@ -27,7 +27,15 @@ export const useAuthStore = create<AuhtStore>()(
         partialize: (state) => ({
           mode: state.mode,
           activeStep: state.activeStep,
+          skipped: Array.from(state.skipped),
+          completed: Array.from(state.completed),
         }),
+        onRehydrateStorage: () => (state) => {
+          if (state) {
+            state.skipped = new Set(state.skipped ?? []);
+            state.completed = new Set(state.completed ?? []);
+          }
+        },
       }
     ),
     { name: "AuthStore" }

@@ -1,0 +1,19 @@
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+
+  &.loading {
+    pointer-events: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+}

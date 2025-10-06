@@ -1,0 +1,22 @@
+@mixin button-hover-effect(
+  $hover-bg-color: #555,
+  $hover-text-color: #fff,
+  $duration: 0.3s,
+  $hover-scale: 1.05
+) {
+  transition: background-color $duration ease, color $duration ease,
+    transform $duration ease, box-shadow $duration ease;
+
+  &:hover {
+    background-color: $hover-bg-color;
+    color: $hover-text-color;
+    transform: translateY(-1px) scale($hover-scale);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+  }
+
+  &:active {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}

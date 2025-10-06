@@ -1,3 +1,5 @@
+@use "../../../../shared/styles/animations/buttonBaseAnimation.scss" as *;
+
 .googleSign {
   flex: 1;
   background: #ffffff;
@@ -7,6 +9,7 @@
   padding: 5px;
   display: flex;
   justify-content: center;
+  @include button-hover-effect(#fff, 0.25s);
 }
 
 .googleSign img {

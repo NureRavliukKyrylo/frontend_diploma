@@ -4,6 +4,7 @@ import { login, type LoginDto } from "../api/loginApi";
 import { loginSchema } from "../libs/loginSchema";
 import { useErrorStore } from "../../../../shared/stores";
 import { useAuthStore } from "../../../../entities/user";
+import { addToast } from "@heroui/react";
 
 export const useLogin = () => {
   const setServerError = useErrorStore((state) => state.setServerError);
@@ -20,6 +21,11 @@ export const useLogin = () => {
         error?.response?.data?.error ||
         "Invalid login credentials. Please try again.";
       setServerError(errorMessage);
+      addToast({
+        title: "Login Failed",
+        description: errorMessage,
+        color: "danger",
+      });
     },
   });
 

@@ -27,7 +27,6 @@ export const SignUpForm = () => {
                 formik.handleChange(e);
                 setFirstName(e.target.value);
               }}
-              onBlur={formik.handleBlur}
               value={formik.values.firstName}
               error={formik.submitCount > 0 ? formik.errors.firstName : ""}
             />
@@ -41,7 +40,6 @@ export const SignUpForm = () => {
                 formik.handleChange(e);
                 setLastName(e.target.value);
               }}
-              onBlur={formik.handleBlur}
               value={formik.values.lastName}
               error={formik.submitCount > 0 ? formik.errors.lastName : ""}
             />
@@ -56,7 +54,6 @@ export const SignUpForm = () => {
               formik.handleChange(e);
               setSignUpEmail(e.target.value);
             }}
-            onBlur={formik.handleBlur}
             value={formik.values.signUpEmail}
             error={formik.submitCount > 0 ? formik.errors.signUpEmail : ""}
           />

@@ -1,3 +1,5 @@
+@use "../../../styles/animations/buttonBaseAnimation.scss" as *;
+
 .wrapper {
   position: relative;
   display: inline-block;
@@ -17,6 +19,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  @include button-hover-effect(#fff, 0.25s);
   img {
     opacity: 0.6;
     width: 80%;
