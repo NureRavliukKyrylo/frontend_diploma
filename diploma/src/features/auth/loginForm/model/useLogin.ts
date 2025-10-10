@@ -5,15 +5,18 @@ import { loginSchema } from "../libs/loginSchema";
 import { useErrorStore } from "../../../../shared/stores";
 import { useAuthStore } from "../../../../entities/user";
 import { addToast } from "@heroui/react";
+import { useRouter } from "@tanstack/react-router";
 
 export const useLogin = () => {
   const setServerError = useErrorStore((state) => state.setServerError);
+  const router = useRouter();
 
   const mutation = useMutation({
     mutationFn: (data: LoginDto) => login(data),
     onSuccess: (data) => {
       setServerError(null);
       console.log("Login success:", data);
+      router.navigate({ to: "/" });
     },
     onError: (error: any) => {
       console.error("Login error:", error);
@@ -32,7 +35,7 @@ export const useLogin = () => {
   const { loginEmail, loginPassword, rememberMe } = useAuthStore();
 
   const formik = useFormik({
-    initialValues: { loginEmail, loginPassword, rememberMe },
+    initialValues: { email: loginEmail, password: loginPassword, rememberMe },
     validationSchema: loginSchema,
     onSubmit: (values) => {
       mutation.mutate(values);

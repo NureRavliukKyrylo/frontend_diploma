@@ -1,10 +1,5 @@
 import type { ReactNode } from "react";
 import styles from "../styles/FillingInfoForm.module.scss";
-import {
-  PreviousStepperButton,
-  SkipStepperButton,
-} from "../../../buttons/auth";
-import { NextStepperButton } from "../../../buttons/auth";
 import { InfoSign } from "../../../assets/common";
 
 interface FillingInfoFormProps {
@@ -30,14 +25,8 @@ export function FillingInfoForm({
             <h1>{formTitle}</h1>
             <p>{formDescription}</p>
           </div>
+
           {children}
-          <div className={styles.buttonsFillForm}>
-            <div className={styles.interactStepperButtons}>
-              <PreviousStepperButton />
-              <NextStepperButton />
-              <SkipStepperButton />
-            </div>
-          </div>
         </div>
         <div className={styles.additionMessageFillForm}>
           <div className={styles.messageImgBlock}>

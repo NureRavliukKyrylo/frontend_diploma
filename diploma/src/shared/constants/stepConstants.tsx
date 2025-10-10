@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { AboutForm, ImageForm } from "../../features/auth";
-import { MapLocationPicker } from "../../features/map";
+import { UserLocationPicker } from "../../features/auth";
 import { ContactsForm } from "../../features/auth/multiStepFillForm/ui/ContactsForm";
 
 export interface StepItem {
@@ -29,7 +29,7 @@ export const steps: StepItem[] = [
     formTitle: "Share your location",
     formDescription:
       "Adding your location is an essential part of our platform. It allows us to connect you with nearby volunteers and projects in your area",
-    content: <MapLocationPicker />,
+    content: <UserLocationPicker />,
   },
   {
     title: "About you",

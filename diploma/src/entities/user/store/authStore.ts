@@ -10,8 +10,16 @@ import {
 } from "./slices/auth/stepperSlice";
 import { createLoginSlice, type LoginSlice } from "./slices/auth/loginSlice";
 import { createSignupSlice, type SignupSlice } from "./slices/auth/signUpSlice";
+import {
+  createUserFillingSlice,
+  type UserFillingSlice,
+} from "./slices/auth/fillingFormSlice";
 
-type AuhtStore = AuthModeSlice & StepperSlice & LoginSlice & SignupSlice;
+type AuhtStore = AuthModeSlice &
+  StepperSlice &
+  LoginSlice &
+  SignupSlice &
+  UserFillingSlice;
 
 export const useAuthStore = create<AuhtStore>()(
   devtools(
@@ -21,6 +29,7 @@ export const useAuthStore = create<AuhtStore>()(
         ...createStepperSlice(...a),
         ...createLoginSlice(...a),
         ...createSignupSlice(...a),
+        ...createUserFillingSlice(...a),
       }),
       {
         name: "auth-store",
@@ -29,6 +38,7 @@ export const useAuthStore = create<AuhtStore>()(
           activeStep: state.activeStep,
           skipped: Array.from(state.skipped),
           completed: Array.from(state.completed),
+          avatarUrl: state.profile.avatarUrl,
         }),
         onRehydrateStorage: () => (state) => {
           if (state) {

@@ -1,20 +1,20 @@
-import { useRef, useState } from "react";
+import { useImageForm } from "../model/useImageForm";
+import { useAuthStore } from "../../../../entities/user";
 import styles from "./ImageForm.module.scss";
+import { useRef } from "react";
+import {
+  NextStepperButton,
+  PreviousStepperButton,
+  SkipStepperButton,
+} from "../../../../shared/buttons/auth";
 
 export const ImageForm = () => {
+  const { formik, handleFileChange } = useImageForm();
+  const avatarUrl = useAuthStore((s) => s.profile.avatarUrl);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [preview, setPreview] = useState<string | null>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.currentTarget.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => setPreview(reader.result as string);
-      reader.readAsDataURL(file);
-    }
-  };
   return (
-    <div className={styles.imageWrapper}>
+    <form onSubmit={formik.handleSubmit} className={styles.imageWrapper}>
       <div
         className={styles.imageContainer}
         onClick={() => inputRef.current?.click()}
@@ -26,12 +26,22 @@ export const ImageForm = () => {
           onChange={handleFileChange}
           accept="image/*"
         />
-        {preview ? (
-          <img src={preview} alt="Preview" className={styles.imagePreview} />
+        {avatarUrl ? (
+          <img src={avatarUrl} alt="Preview" className={styles.imagePreview} />
         ) : (
           <div className={styles.imagePlus}></div>
         )}
       </div>
-    </div>
+      {formik.touched.avatar && formik.errors.avatar && (
+        <div className={styles.error}>{formik.errors.avatar}</div>
+      )}
+      <div className={styles.buttonsFillForm}>
+        <div className={styles.interactStepperButtons}>
+          <PreviousStepperButton />
+          <NextStepperButton />
+          <SkipStepperButton />
+        </div>
+      </div>
+    </form>
   );
 };

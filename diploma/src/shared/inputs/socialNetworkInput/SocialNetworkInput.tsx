@@ -9,14 +9,20 @@ interface SocialNetworksInputProps
   activeLabel?: string;
   error?: string;
   icon?: string;
+  switchName?: string;
+  switchValue?: boolean;
+  onSwitchChange?: (checked: boolean) => void;
 }
 
 export const SocialNetworksInput: React.FC<SocialNetworksInputProps> = ({
   icon,
+  error,
+  switchValue,
+  onSwitchChange,
   ...props
 }) => {
   return (
-    <BaseInput type="text" originalType="social" {...props}>
+    <BaseInput type="text" originalType="social" error={error} {...props}>
       {icon && (
         <span className={styles.iconWrapper}>
           <img src={icon} alt="iconSocial" />
@@ -27,13 +33,11 @@ export const SocialNetworksInput: React.FC<SocialNetworksInputProps> = ({
 
       <span className={styles.switchWrapper}>
         <Switch
-          defaultSelected
-          aria-label="Automatic updates"
+          isSelected={switchValue}
+          onValueChange={onSwitchChange}
+          aria-label="Visibility toggle"
           classNames={{
-            wrapper: `
-      bg-[rgba(44,44,44,0.6)]           
-      transition-all
-    `,
+            wrapper: "bg-[rgba(44,44,44,0.6)] transition-all",
           }}
         />
       </span>

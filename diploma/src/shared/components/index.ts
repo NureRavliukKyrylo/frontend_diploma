@@ -1,3 +1,4 @@
 export { AuthToggle } from "./authToggle/AuthToggle";
 export { StepperForm } from "./stepperForm/StepperForm";
-export { AlertComponent } from "./alert/AlertComponent";
+export { BaseMap } from "./map/BaseMap";
+export { MapLocationPicker } from "./map/MapLocationPicker";

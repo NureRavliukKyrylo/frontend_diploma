@@ -18,8 +18,8 @@ export const LoginForm = () => {
       <form onSubmit={formik.handleSubmit} className={styles.loginForm}>
         <div className={styles.inputsLogin}>
           <EmailInput
-            id="loginEmail"
-            name="loginEmail"
+            id="email"
+            name="email"
             type="email"
             label="Enter email adress"
             activeLabel="Email"
@@ -27,12 +27,12 @@ export const LoginForm = () => {
               formik.handleChange(e);
               setLoginEmail(e.target.value);
             }}
-            value={formik.values.loginEmail}
-            error={formik.submitCount > 0 ? formik.errors.loginEmail : ""}
+            value={formik.values.email}
+            error={formik.submitCount > 0 ? formik.errors.email : ""}
           />
           <PasswordInput
-            id="loginPassword"
-            name="loginPassword"
+            id="password"
+            name="password"
             type="password"
             label="Enter your password"
             activeLabel="Password"
@@ -40,8 +40,8 @@ export const LoginForm = () => {
               formik.handleChange(e);
               setLoginPassword(e.target.value);
             }}
-            value={formik.values.loginPassword}
-            error={formik.submitCount > 0 ? formik.errors.loginPassword : ""}
+            value={formik.values.password}
+            error={formik.submitCount > 0 ? formik.errors.password : ""}
           />
         </div>
         <div className={styles.additional}>
