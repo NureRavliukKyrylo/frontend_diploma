@@ -2,43 +2,48 @@
 $error-color: red;
 $textarea-padding: 20px;
 $charCount-height: 25px;
-
-.textareaWrapper {
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-
-  &.error {
-    .textarea {
-      border-color: $error-color;
-    }
-    .errorInput {
-      @include font-base(11px, 700);
-      color: $error-color;
-      margin-top: 0.25rem;
-    }
-  }
-
-  .textarea {
+.commonWrapperTextArea {
+  .textareaWrapper {
+    position: relative;
     width: 100%;
-    padding: $textarea-padding;
-    padding-bottom: calc(#{$textarea-padding} + #{$charCount-height});
-    @include font-base(15px, 700);
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    resize: none;
-    min-height: 120px;
-    box-sizing: border-box;
-    background: rgba(217, 217, 217, 0.5);
-    overflow: hidden;
-  }
+    height: 100%;
 
-  .charCount {
-    position: absolute;
-    bottom: 20px;
-    right: 12px;
-    @include font-base(15px, 700);
-    color: rgba(0, 0, 0, 0.6);
-    pointer-events: none;
+    &.error {
+      .textarea {
+        border-color: $error-color;
+      }
+    }
+
+    .textarea {
+      width: 100%;
+      padding: $textarea-padding;
+      padding-bottom: calc(#{$textarea-padding} + #{$charCount-height});
+      @include font-base(15px, 700);
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      resize: none;
+      box-sizing: border-box;
+      background: rgba(217, 217, 217, 0.5);
+      overflow: hidden;
+      height: 100%;
+      &:focus {
+        background: #ffffff;
+        outline: none;
+      }
+    }
+
+    .charCount {
+      position: absolute;
+      bottom: 20px;
+      right: 12px;
+      @include font-base(15px, 700);
+      color: rgba(0, 0, 0, 0.6);
+      pointer-events: none;
+    }
+  }
+  .errorInput {
+    @include font-base(11px, 700);
+    color: $error-color;
+    margin-top: 0.25rem;
   }
 }

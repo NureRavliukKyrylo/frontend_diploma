@@ -1,0 +1,43 @@
+.aboutWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px;
+  gap: 30px;
+  .inputsForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .buttonsFillForm {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+
+    > :first-child {
+      flex: 0 0 30%;
+    }
+
+    > :last-child {
+      flex: 0 0 30%;
+    }
+
+    .interactStepperButtons {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+      height: 100%;
+
+      > :first-child {
+        flex: 4;
+      }
+
+      > :last-child {
+        flex: 6;
+      }
+    }
+  }
+}

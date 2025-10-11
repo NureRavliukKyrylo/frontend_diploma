@@ -1,31 +1,41 @@
 import styles from "./GoogleButton.module.scss";
 import { GoogleIcon } from "../../../../shared/assets/auth";
-import { useGoogleLogin as useGoogleOAuth } from "@react-oauth/google";
-import { useGoogleLogin } from "../model/useGoogleLogin";
+import { GoogleLogin } from "@react-oauth/google";
+import { useGoogle } from "../model/useGoogleLogin";
+import { useRef } from "react";
 
 export const GoogleButton = () => {
-  const { loginWithGoogle, isLoading } = useGoogleLogin();
-
-  const signIn = useGoogleOAuth({
-    flow: "auth-code",
-    onSuccess: async (codeResponse) => {
-      console.log("Google auth code:", codeResponse.code);
-      loginWithGoogle(codeResponse.code);
-    },
-    onError: (err) => {
-      console.error("Google login error:", err);
-    },
-    scope: "openid profile email",
-  });
+  const { loginWithGoogle, isLoading } = useGoogle();
+  const googleLoginRef = useRef<HTMLDivElement | null>(null);
 
   return (
-    <button
-      className={styles.googleSign}
-      onClick={() => signIn()}
-      disabled={isLoading}
-    >
-      <img src={GoogleIcon} alt="google" />
-      <span></span>
-    </button>
+    <>
+      <button
+        className={styles.googleSign}
+        onClick={() => {
+          const googleButton =
+            googleLoginRef.current?.querySelector("div[role=button]");
+          if (googleButton) (googleButton as HTMLElement).click();
+        }}
+        disabled={isLoading}
+      >
+        <img src={GoogleIcon} alt="google" />
+        <span></span>
+      </button>
+
+      <div ref={googleLoginRef} className={styles.hiddenGoogleLogin}>
+        <GoogleLogin
+          onSuccess={(credentialResponse) => {
+            const credential = credentialResponse.credential;
+            if (credential) {
+              loginWithGoogle(credential);
+            } else {
+              console.error("No credential returned from Google login");
+            }
+          }}
+          onError={() => console.error("Google login failed")}
+        />
+      </div>
+    </>
   );
 };

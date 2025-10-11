@@ -6,6 +6,7 @@ interface TextAreaProps
   error?: string;
   maxLength?: number;
   placeHolder?: string;
+  minHeight?: number;
 }
 
 export const TextArea: React.FC<TextAreaProps> = ({
@@ -15,6 +16,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
   onChange,
   maxLength = 300,
   placeHolder = "Tell us a little about yourself.",
+  minHeight = 120,
   ...props
 }) => {
   const [textLength, setTextLength] = useState(
@@ -58,21 +60,30 @@ export const TextArea: React.FC<TextAreaProps> = ({
   }, []);
 
   return (
-    <div className={`${styles.textareaWrapper} ${error ? styles.error : ""}`}>
-      <textarea
-        ref={textareaRef}
-        className={styles.textarea}
-        value={value}
-        defaultValue={defaultValue}
-        onChange={handleChange}
-        maxLength={maxLength}
-        placeholder={placeHolder}
-        {...props}
-      />
-      <div className={styles.charCount}>
-        {textLength}/{maxLength}
+    <>
+      <div className={styles.commonWrapperTextArea}>
+        <div
+          className={`${styles.textareaWrapper} ${error ? styles.error : ""}`}
+        >
+          <textarea
+            ref={textareaRef}
+            className={styles.textarea}
+            value={value}
+            defaultValue={defaultValue}
+            onChange={handleChange}
+            maxLength={maxLength}
+            placeholder={placeHolder}
+            style={{
+              minHeight: `${minHeight}px`,
+            }}
+            {...props}
+          />
+          <div className={styles.charCount}>
+            {textLength}/{maxLength}
+          </div>
+        </div>
+        {error && <div className={styles.errorInput}>{error}</div>}
       </div>
-      {error && <div className={styles.errorInput}>{error}</div>}
-    </div>
+    </>
   );
 };

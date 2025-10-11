@@ -38,24 +38,6 @@
           @include font-base(18px, 500);
         }
       }
-      .buttonsFillForm {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        height: 60px;
-        .interactStepperButtons {
-          width: 25%;
-          display: flex;
-          gap: 20px;
-          > :first-child {
-            flex: 4;
-          }
-
-          > :last-child {
-            flex: 6;
-          }
-        }
-      }
     }
     .additionMessageFillForm {
       display: flex;

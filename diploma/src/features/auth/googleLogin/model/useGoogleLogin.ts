@@ -3,7 +3,7 @@ import { googleLogin, type GoogleLoginDto } from "../api/googleApi";
 import { useErrorStore } from "../../../../shared/stores";
 import { addToast } from "@heroui/react";
 
-export const useGoogleLogin = () => {
+export const useGoogle = () => {
   const setServerError = useErrorStore((state) => state.setServerError);
 
   const mutation = useMutation({

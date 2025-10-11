@@ -1,0 +1,58 @@
+@use "../../../../shared/styles/variables/fontVariables.scss" as *;
+
+$error-color: red;
+
+.mapLocationWrapper {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 20px;
+
+  &.errorBorder {
+    border-color: red;
+  }
+}
+
+.locationWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 30px;
+  gap: 30px;
+  .buttonsFillForm {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+
+    > :first-child {
+      flex: 0 0 30%;
+    }
+
+    > :last-child {
+      flex: 0 0 30%;
+    }
+
+    .interactStepperButtons {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+      height: 100%;
+
+      > :first-child {
+        flex: 4;
+      }
+
+      > :last-child {
+        flex: 6;
+      }
+    }
+  }
+}
+.errorLocation {
+  color: $error-color;
+  @include font-base(19px, 700);
+  display: flex;
+  justify-content: center;
+}

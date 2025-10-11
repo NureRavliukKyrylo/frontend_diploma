@@ -20,6 +20,7 @@ export const useAboutForm = () => {
       console.log("[DEBUG] Formik submit:", values);
       setBio(values.about);
       setDateOfBirth(values.dateOfBirth);
+      console.log("test", profile.dateOfBirth);
       nextStep();
     },
   });

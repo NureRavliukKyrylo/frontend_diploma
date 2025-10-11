@@ -16,6 +16,7 @@ export interface PrivacySettings {
 
 export interface Profile {
   avatarUrl: string;
+  avatarFile: File | null;
   bio: string;
   phone: string;
   dateOfBirth: string;
@@ -30,6 +31,7 @@ export interface UserFillingSlice {
 
   setEmail: (val: string) => void;
   setAvatarUrl: (val: string) => void;
+  setAvatarFile: (file: File | null) => void;
   setBio: (val: string) => void;
   setPhone: (val: string) => void;
   setDateOfBirth: (val: string) => void;
@@ -47,6 +49,7 @@ export const createUserFillingSlice: StateCreator<UserFillingSlice> = (
   email: "",
   profile: {
     avatarUrl: "",
+    avatarFile: null,
     bio: "",
     phone: "",
     dateOfBirth: "",
@@ -61,6 +64,8 @@ export const createUserFillingSlice: StateCreator<UserFillingSlice> = (
   setEmail: (val) => set({ email: val }),
   setAvatarUrl: (val) =>
     set((state) => ({ profile: { ...state.profile, avatarUrl: val } })),
+  setAvatarFile: (file) =>
+    set((state) => ({ profile: { ...state.profile, avatarFile: file } })),
   setBio: (val) =>
     set((state) => ({ profile: { ...state.profile, bio: val } })),
   setPhone: (val) =>
@@ -93,6 +98,7 @@ export const createUserFillingSlice: StateCreator<UserFillingSlice> = (
         dateOfBirth: "",
         telegram: "",
         coordinates: { longitude: 0, latitude: 0 },
+        avatarFile: null,
       },
       privacySettings: { fields: [] },
     }),
