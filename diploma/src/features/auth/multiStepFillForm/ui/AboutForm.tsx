@@ -2,13 +2,9 @@ import { DatePicker } from "@heroui/react";
 import { TextArea } from "../../../../shared/inputs";
 import { I18nProvider } from "@react-aria/i18n";
 import { useAboutForm } from "../model/useAboutForm";
-import {
-  NextStepperButton,
-  PreviousStepperButton,
-  SkipStepperButton,
-} from "../../../../shared/buttons/auth";
 import styles from "./AboutForm.module.scss";
 import { parseDate } from "@internationalized/date";
+import { useAuthStore } from "../../../../entities/user";
 
 export const AboutForm = () => {
   const formik = useAboutForm();
@@ -22,9 +18,14 @@ export const AboutForm = () => {
       return undefined;
     }
   };
-
+  const setBio = useAuthStore((state) => state.setBio);
+  const setDateOfBirth = useAuthStore((state) => state.setDateOfBirth);
   return (
-    <form onSubmit={formik.handleSubmit} className={styles.aboutWrapper}>
+    <form
+      id="about-filling-form"
+      onSubmit={formik.handleSubmit}
+      className={styles.aboutWrapper}
+    >
       <div className={styles.inputsForm}>
         <I18nProvider>
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
@@ -39,6 +40,7 @@ export const AboutForm = () => {
               onChange={(value) => {
                 const dateString = value ? value.toString() : "";
                 formik.setFieldValue("dateOfBirth", dateString);
+                setDateOfBirth(dateString);
               }}
               onBlur={() => formik.setFieldTouched("dateOfBirth", true)}
               errorMessage={
@@ -65,18 +67,14 @@ export const AboutForm = () => {
           id="about"
           name="about"
           value={formik.values.about}
-          onChange={(e) => formik.setFieldValue("about", e.target.value)}
+          onChange={(e) => {
+            formik.handleChange(e);
+            setBio(e.target.value);
+          }}
           onBlur={formik.handleBlur}
           error={formik.touched.about ? formik.errors.about : ""}
           minHeight={250}
         />
-      </div>
-      <div className={styles.buttonsFillForm}>
-        <PreviousStepperButton />
-        <div className={styles.interactStepperButtons}>
-          <SkipStepperButton />
-          <NextStepperButton />
-        </div>
       </div>
     </form>
   );

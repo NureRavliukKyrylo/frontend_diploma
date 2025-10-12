@@ -3,37 +3,59 @@ import { useAuthStore } from "../../../../entities/user";
 import { contactsSchema } from "../libs/contactsSchema";
 import { useSubmitFillingForm } from "./useSubmitFillingForm";
 import { useRouter } from "@tanstack/react-router";
+import { SocialPlatform } from "../../../../shared/enums";
+import { platformKeys } from "./constants/platformKeys";
 
 export const useContactsForm = () => {
-  const setTelegram = useAuthStore((state) => state.setTelegram);
-  const setPrivacyField = useAuthStore((state) => state.setPrivacyField);
-  const privacySettings = useAuthStore((state) => state.privacySettings);
-  const profile = useAuthStore((state) => state.profile);
+  const { setSocialLink, setPrivacyField, privacySettings, profile } =
+    useAuthStore();
   const { handleSubmit } = useSubmitFillingForm();
   const router = useRouter();
 
-  const instagramField = privacySettings.fields.find(
-    (f) => f.fieldName === "instagram"
+  const initialValues = Object.entries(platformKeys).reduce(
+    (acc, [platformValue, key]) => {
+      const platform = Number(platformValue) as SocialPlatform;
+      const link = profile?.socialLinks?.find((l) => l.platform === platform);
+
+      const fieldName = `Platform.${key[0].toUpperCase() + key.slice(1)}`;
+      const field = privacySettings?.fields?.find(
+        (f) => f.fieldName === fieldName
+      );
+
+      acc[key] = link?.url;
+      acc[`show${key[0].toUpperCase() + key.slice(1)}`] =
+        field?.visibility === 1 || false;
+
+      return acc;
+    },
+    {} as Record<string, any>
   );
 
   const formik = useFormik({
-    initialValues: {
-      instagram: profile.telegram || "",
-      showInstagram: instagramField ? instagramField.visibility === 1 : false,
-    },
+    initialValues,
     validationSchema: contactsSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
       console.log("[DEBUG] Submitting form:", values);
 
-      setTelegram(values.instagram);
+      Object.entries(platformKeys).forEach(([platformValue, key]) => {
+        const platform = Number(platformValue) as SocialPlatform;
+        const fieldName = `Platform.${key[0].toUpperCase() + key.slice(1)}`;
+        const showKey = `show${key[0].toUpperCase() + key.slice(1)}`;
+        const url = values[key];
 
-      setPrivacyField("instagram", {
-        fieldName: "instagram",
-        visibility: values.showInstagram ? 1 : 0,
+        if (url) {
+          setSocialLink(platform, url);
+        }
+
+        if (values[showKey]) {
+          setPrivacyField(fieldName, {
+            fieldName,
+            visibility: 1,
+          });
+        }
       });
-      console.log(profile.telegram);
-      console.log("sadasda", instagramField?.visibility);
+
       handleSubmit();
     },
   });

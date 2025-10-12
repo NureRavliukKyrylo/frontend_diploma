@@ -1,8 +1,14 @@
 import styles from "./../styles/StepperButtons.module.scss";
 
-export const NextStepperButton = () => {
+interface NextStepperButtonProps {
+  form?: string;
+}
+
+export const NextStepperButton: React.FC<NextStepperButtonProps> = ({
+  form,
+}) => {
   return (
-    <button type="submit" className={styles.nextStepperButton}>
+    <button type="submit" className={styles.nextStepperButton} form={form}>
       Save & Next
     </button>
   );

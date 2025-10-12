@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import type { Coordinates } from "../../../../entities/user/store/slices/auth/fillingFormSlice";
+import type { Coordinates } from "../../../../entities/user";
 
 export const locationSchema = Yup.object({
   coordinates: Yup.object<Coordinates>({

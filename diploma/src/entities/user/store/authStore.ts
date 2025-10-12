@@ -14,6 +14,7 @@ import {
   createUserFillingSlice,
   type UserFillingSlice,
 } from "./slices/auth/fillingFormSlice";
+import { base64ToFile } from "../libs/fileBase64Helpers";
 
 type AuhtStore = AuthModeSlice &
   StepperSlice &
@@ -38,12 +39,17 @@ export const useAuthStore = create<AuhtStore>()(
           activeStep: state.activeStep,
           skipped: Array.from(state.skipped),
           completed: Array.from(state.completed),
-          avatarUrl: state.profile.avatarUrl,
+          profile: state.profile,
+          privacySettings: state.privacySettings,
+          avatarUrl: state.avatarUrl,
         }),
         onRehydrateStorage: () => (state) => {
           if (state) {
             state.skipped = new Set(state.skipped ?? []);
             state.completed = new Set(state.completed ?? []);
+          }
+          if (state?.avatarUrl) {
+            state.avatarFile = base64ToFile(state.avatarUrl, "avatar.png");
           }
         },
       }

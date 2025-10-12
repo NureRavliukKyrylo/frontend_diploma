@@ -2,19 +2,19 @@ import { useImageForm } from "../model/useImageForm";
 import { useAuthStore } from "../../../../entities/user";
 import styles from "./ImageForm.module.scss";
 import { useRef } from "react";
-import {
-  NextStepperButton,
-  PreviousStepperButton,
-  SkipStepperButton,
-} from "../../../../shared/buttons/auth";
 
 export const ImageForm = () => {
   const { formik, handleFileChange } = useImageForm();
-  const avatarUrl = useAuthStore((s) => s.profile.avatarUrl);
+  const avatarFile = useAuthStore((s) => s.avatarFile);
   const inputRef = useRef<HTMLInputElement>(null);
+  const avatarSrc = avatarFile ? URL.createObjectURL(avatarFile) : null;
 
   return (
-    <form onSubmit={formik.handleSubmit} className={styles.imageWrapper}>
+    <form
+      id="image-filling-form"
+      onSubmit={formik.handleSubmit}
+      className={styles.imageWrapper}
+    >
       <div className={styles.imageWrapperBlock}>
         <div
           className={`${styles.imageContainer} ${
@@ -31,9 +31,10 @@ export const ImageForm = () => {
             onChange={handleFileChange}
             accept="image/*"
           />
-          {avatarUrl ? (
+
+          {avatarSrc ? (
             <img
-              src={avatarUrl}
+              src={avatarSrc}
               alt="Preview"
               className={styles.imagePreview}
             />
@@ -45,13 +46,6 @@ export const ImageForm = () => {
       {formik.touched.avatar && formik.errors.avatar && (
         <div className={styles.errorImage}>{formik.errors.avatar}</div>
       )}
-      <div className={styles.buttonsFillForm}>
-        <PreviousStepperButton />
-        <div className={styles.interactStepperButtons}>
-          <SkipStepperButton />
-          <NextStepperButton />
-        </div>
-      </div>
     </form>
   );
 };

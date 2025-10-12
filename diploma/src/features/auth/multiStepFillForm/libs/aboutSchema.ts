@@ -13,11 +13,22 @@ const maxDate = new Date(
 );
 
 export const aboutFormSchema = Yup.object({
-  about: Yup.string().required("About is required"),
+  about: Yup.string(),
   dateOfBirth: Yup.date()
     .nullable()
-    .required("Date of birth is required")
     .max(maxDate, "You must be at least 18 years old")
     .min(minDate, "Age cannot be more than 100 years")
     .typeError("Invalid date"),
+}).test({
+  name: "at-least-one-field",
+  message: "At least one field (About or Date of Birth) is required",
+  test: function (value) {
+    const { about, dateOfBirth } = value;
+    if (!about && !dateOfBirth) {
+      return this.createError({
+        path: "about",
+      });
+    }
+    return true;
+  },
 });

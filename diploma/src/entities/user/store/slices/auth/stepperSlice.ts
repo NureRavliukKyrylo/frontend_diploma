@@ -8,7 +8,6 @@ export interface StepperSlice {
   setActiveStep: (step: number) => void;
   nextStep: () => void;
   prevStep: () => void;
-  resetStep: () => void;
   skipStep: () => void;
   isStepSkipped: (step: number) => boolean;
   isStepCompleted: (step: number) => boolean;
@@ -38,13 +37,6 @@ export const createStepperSlice: StateCreator<StepperSlice> = (set, get) => ({
   },
 
   prevStep: () => set({ activeStep: Math.max(get().activeStep - 1, 0) }),
-
-  resetStep: () =>
-    set({
-      activeStep: 0,
-      skipped: new Set<number>(),
-      completed: new Set<number>(),
-    }),
 
   skipStep: () => {
     const { activeStep, skipped } = get();

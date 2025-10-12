@@ -2,10 +2,10 @@ import { useFormik } from "formik";
 import { useRef, useEffect } from "react";
 import { useAuthStore } from "../../../../entities/user";
 import { imageSchema } from "../libs/imageSchema";
+
 export const useImageForm = () => {
-  const setAvatarUrl = useAuthStore((s) => s.setAvatarUrl);
   const setAvatarFile = useAuthStore((s) => s.setAvatarFile);
-  const avatarFile = useAuthStore((s) => s.profile.avatarFile);
+  const avatarFile = useAuthStore((s) => s.avatarFile);
   const nextStep = useAuthStore((s) => s.nextStep);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -41,8 +41,6 @@ export const useImageForm = () => {
 
       const reader = new FileReader();
       reader.onloadend = () => {
-        const url = reader.result as string;
-        setAvatarUrl(url);
         setAvatarFile(file);
       };
       reader.readAsDataURL(file);

@@ -3,7 +3,6 @@ import styles from "../styles/AuthForm.module.scss";
 import { AuthToggle } from "../../../components";
 import { AppleIcon } from "../../../assets/auth";
 import { useAuthStore } from "../../../../entities/user";
-import { GoogleIcon } from "../../../assets/auth";
 import { AnimatePresence, motion } from "framer-motion";
 import { GoogleButton } from "../../../../features/auth";
 

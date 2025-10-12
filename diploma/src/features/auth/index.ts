@@ -7,3 +7,4 @@ export { VerificationForm } from "./verificationForm/ui/VerificationForm";
 export { PasswordForm } from "./passwordForm/ui/PasswordForm";
 export { AboutForm } from "./multiStepFillForm/ui/AboutForm";
 export { UserLocationPicker } from "./multiStepFillForm/ui/UserLocationPicker";
+export { ContactsForm } from "./multiStepFillForm/ui/ContactsForm";

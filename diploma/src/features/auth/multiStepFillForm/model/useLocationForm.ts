@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useFormik } from "formik";
 import { useAuthStore } from "../../../../entities/user";
-import type { Coordinates } from "../../../../entities/user/store/slices/auth/fillingFormSlice";
+import type { Coordinates } from "../../../../entities/user";
 import { locationSchema } from "../libs/locationSchema";
 
 export const useLocationForm = () => {
   const setCoordinates = useAuthStore((state) => state.setCoordinates);
   const nextStep = useAuthStore((state) => state.nextStep);
-  const storeCoordinates = useAuthStore((state) => state.profile.coordinates);
+  const storeCoordinates = useAuthStore((state) => state.profile?.coordinates);
 
   const formik = useFormik({
     initialValues: {
@@ -55,6 +55,7 @@ export const useLocationForm = () => {
 
   const handleLocationChange = (coords: Coordinates) => {
     formik.setFieldValue("coordinates", coords);
+    setCoordinates(coords);
   };
 
   return {

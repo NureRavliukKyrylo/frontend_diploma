@@ -1,41 +1,23 @@
 import { type StateCreator } from "zustand";
-
-export interface Coordinates {
-  longitude: number;
-  latitude: number;
-}
-
-export interface PrivacyField {
-  fieldName: string;
-  visibility: number;
-}
-
-export interface PrivacySettings {
-  fields: PrivacyField[];
-}
-
-export interface Profile {
-  avatarUrl: string;
-  avatarFile: File | null;
-  bio: string;
-  phone: string;
-  dateOfBirth: string;
-  telegram: string;
-  coordinates: Coordinates | null;
-}
+import { SocialPlatform } from "../../../../../shared/enums";
+import {
+  type Profile,
+  type PrivacySettings,
+  type Coordinates,
+  type PrivacyField,
+} from "../../../index.ts";
+import { fileToBase64 } from "../../../index.ts";
 
 export interface UserFillingSlice {
-  email: string;
-  profile: Profile;
-  privacySettings: PrivacySettings;
+  profile?: Profile;
+  privacySettings?: PrivacySettings;
+  avatarFile?: File | null;
+  avatarUrl?: string | null;
 
-  setEmail: (val: string) => void;
-  setAvatarUrl: (val: string) => void;
   setAvatarFile: (file: File | null) => void;
   setBio: (val: string) => void;
-  setPhone: (val: string) => void;
   setDateOfBirth: (val: string) => void;
-  setTelegram: (val: string) => void;
+  setSocialLink: (platform: SocialPlatform, url: string) => void;
   setCoordinates: (val: Coordinates | null) => void;
   setPrivacyField: (fieldName: string, field: PrivacyField) => void;
   clearProfile: () => void;
@@ -44,43 +26,45 @@ export interface UserFillingSlice {
 export const createUserFillingSlice: StateCreator<UserFillingSlice> = (
   set
 ) => ({
-  firstName: "",
-  lastName: "",
-  email: "",
-  profile: {
-    avatarUrl: "",
-    avatarFile: null,
-    bio: "",
-    phone: "",
-    dateOfBirth: "",
-    telegram: "",
-    coordinates: null,
+  setAvatarFile: (file: File | null) => {
+    if (!file) {
+      set({ avatarFile: null, avatarUrl: null });
+      return;
+    }
+    set({ avatarFile: file });
+    fileToBase64(file).then((base64) => {
+      set({ avatarUrl: base64 });
+    });
   },
-  privacySettings: {
-    userId: "",
-    fields: [],
-  },
-
-  setEmail: (val) => set({ email: val }),
-  setAvatarUrl: (val) =>
-    set((state) => ({ profile: { ...state.profile, avatarUrl: val } })),
-  setAvatarFile: (file) =>
-    set((state) => ({ profile: { ...state.profile, avatarFile: file } })),
   setBio: (val) =>
     set((state) => ({ profile: { ...state.profile, bio: val } })),
-  setPhone: (val) =>
-    set((state) => ({ profile: { ...state.profile, phone: val } })),
   setDateOfBirth: (val) =>
     set((state) => ({ profile: { ...state.profile, dateOfBirth: val } })),
-  setTelegram: (val) =>
-    set((state) => ({ profile: { ...state.profile, telegram: val } })),
+  setSocialLink: (platform, url) =>
+    set((state) => {
+      const existingLinks = state.profile?.socialLinks ?? [];
+      const updatedLinks = existingLinks.some((l) => l.platform === platform)
+        ? existingLinks.map((l) =>
+            l.platform === platform ? { ...l, url } : l
+          )
+        : [...existingLinks, { platform, url }];
+
+      return {
+        profile: {
+          ...state.profile,
+          socialLinks: updatedLinks,
+        },
+      };
+    }),
   setCoordinates: (val) =>
     set((state) => ({ profile: { ...state.profile, coordinates: val } })),
   setPrivacyField: (fieldName, field) =>
     set((state) => {
-      const fields = state.privacySettings.fields.filter(
-        (f) => f.fieldName !== fieldName
-      );
+      const fields =
+        state.privacySettings?.fields?.filter(
+          (f) => f.fieldName !== fieldName
+        ) ?? [];
+
       return {
         privacySettings: {
           ...state.privacySettings,
@@ -90,15 +74,12 @@ export const createUserFillingSlice: StateCreator<UserFillingSlice> = (
     }),
   clearProfile: () =>
     set({
-      email: "",
       profile: {
-        avatarUrl: "",
         bio: "",
         phone: "",
         dateOfBirth: "",
-        telegram: "",
+        socialLinks: [],
         coordinates: { longitude: 0, latitude: 0 },
-        avatarFile: null,
       },
       privacySettings: { fields: [] },
     }),

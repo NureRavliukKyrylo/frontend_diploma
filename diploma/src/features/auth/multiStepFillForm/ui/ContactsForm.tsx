@@ -1,53 +1,59 @@
 import { SocialNetworksInput } from "../../../../shared/inputs";
-import { InstagramIcon } from "../../../../shared/assets/common";
 import { useContactsForm } from "../model/useContactsForm";
-import {
-  NextStepperButton,
-  PreviousStepperButton,
-  SkipStepperButton,
-} from "../../../../shared/buttons/auth";
-import styles from "./ImageForm.module.scss";
 import { useAuthStore } from "../../../../entities/user";
+import styles from "./ContactsForm.module.scss";
+import { PLATFORM_CONFIG } from "./configs/sociallnputConfig";
 
 export const ContactsForm = () => {
   const formik = useContactsForm();
-  const setTelegram = useAuthStore((state) => state.setTelegram);
-  const setPrivacyField = useAuthStore((state) => state.setPrivacyField);
+  const { setSocialLink, setPrivacyField } = useAuthStore();
+
+  const buildFieldName = (key: string) =>
+    `Platform.${key.charAt(0).toUpperCase() + key.slice(1)}`;
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <SocialNetworksInput
-        name="instagram"
-        label="Enter your Instagram link"
-        activeLabel="Instagram link"
-        icon={InstagramIcon}
-        value={formik.values.instagram}
-        onChange={(e) => {
-          formik.handleChange(e);
-          setTelegram(e.target.value);
-        }}
-        switchName="showInstagram"
-        switchValue={formik.values.showInstagram}
-        onSwitchChange={(val) => {
-          formik.setFieldValue("showInstagram", val);
-          setPrivacyField("instagram", {
-            fieldName: "instagram",
-            visibility: val ? 1 : 0,
-          });
-        }}
-        error={
-          formik.touched.instagram && formik.errors.instagram
-            ? formik.errors.instagram
-            : ""
-        }
-      />
+    <form
+      id="contacts-filling-form"
+      className={styles.contactsWrapper}
+      onSubmit={formik.handleSubmit}
+    >
+      <div className={styles.inputsContactsForm}>
+        {PLATFORM_CONFIG.map(({ platform, key, label, activeLabel, icon }) => {
+          const fieldName = buildFieldName(key);
+          const switchName = `show${
+            key.charAt(0).toUpperCase() + key.slice(1)
+          }`;
 
-      <div className={styles.buttonsFillForm}>
-        <div className={styles.interactStepperButtons}>
-          <PreviousStepperButton />
-          <NextStepperButton />
-          <SkipStepperButton />
-        </div>
+          return (
+            <SocialNetworksInput
+              key={key}
+              name={key}
+              label={label}
+              activeLabel={activeLabel}
+              icon={icon}
+              value={formik.values[key]}
+              onChange={(e) => {
+                formik.handleChange(e);
+                setSocialLink(platform, e.target.value);
+              }}
+              switchName={switchName}
+              switchValue={formik.values[switchName]}
+              onSwitchChange={(val) => {
+                formik.setFieldValue(switchName, val);
+                setPrivacyField(fieldName, {
+                  fieldName,
+                  visibility: val ? 1 : 0,
+                });
+              }}
+              error={
+                formik.errors[key] &&
+                (formik.submitCount > 0 || formik.values[key] !== "")
+                  ? (formik.errors[key] as string)
+                  : ""
+              }
+            />
+          );
+        })}
       </div>
     </form>
   );

@@ -14,36 +14,6 @@ $error-color: red;
     justify-content: center;
     align-items: center;
   }
-  .buttonsFillForm {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px;
-
-    > :first-child {
-      flex: 0 0 30%;
-    }
-
-    > :last-child {
-      flex: 0 0 30%;
-    }
-
-    .interactStepperButtons {
-      display: flex;
-      gap: 20px;
-      width: 100%;
-      height: 100%;
-
-      > :first-child {
-        flex: 4;
-      }
-
-      > :last-child {
-        flex: 6;
-      }
-    }
-  }
 }
 .imageContainer {
   width: 50%;

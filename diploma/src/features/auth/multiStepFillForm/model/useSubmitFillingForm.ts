@@ -4,7 +4,7 @@ import { updateUser, type UpdateUserDto } from "../api/fiillingFormApi";
 import { addToast } from "@heroui/react";
 
 export const useSubmitFillingForm = () => {
-  const email = useAuthStore((state) => state.email);
+  const avatarFile = useAuthStore((state) => state.avatarFile);
   const profile = useAuthStore((state) => state.profile);
   const privacySettings = useAuthStore((state) => state.privacySettings);
 
@@ -28,22 +28,22 @@ export const useSubmitFillingForm = () => {
 
   const handleSubmit = () => {
     const payload: UpdateUserDto = {
-      email,
+      avatarFile: avatarFile ?? null,
       profile: {
-        bio: profile.bio,
-        phone: profile.phone,
-        dateOfBirth: profile.dateOfBirth,
-        telegram: profile.telegram,
-        coordinates: profile.coordinates,
+        bio: profile?.bio,
+        phone: profile?.phone,
+        dateOfBirth: profile?.dateOfBirth,
+        socialLinks: profile?.socialLinks,
+        coordinates: profile?.coordinates,
       },
       privacySettings: {
-        fields: privacySettings.fields,
+        fields: privacySettings?.fields,
       },
     };
 
     console.log("[DEBUG] Submitting payload:", payload);
     console.log("[DEBUG] Current auth state:", {
-      email,
+      avatarFile,
       profile,
       privacySettings,
     });

@@ -1,13 +1,13 @@
-.aboutWrapper {
+.contactsWrapper {
   width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   padding: 30px;
   gap: 30px;
-  .inputsForm {
+  .inputsContactsForm {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
   }
 }

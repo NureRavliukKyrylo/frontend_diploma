@@ -9,7 +9,7 @@ import Check from "@mui/icons-material/Check";
 import { motion, AnimatePresence } from "framer-motion";
 import "./StepperStyles.scss";
 import { useAuthStore } from "../../../entities/user";
-import { stepConstants } from "../../constants";
+import { stepConstants } from "../../../pages/auth";
 
 function CustomStepIcon(props: StepIconProps) {
   const { active, completed, icon } = props;
@@ -17,6 +17,7 @@ function CustomStepIcon(props: StepIconProps) {
 
   return (
     <motion.div
+      style={{ position: "relative" }}
       className={`MuiStepIcon-root ${showCheck ? "Mui-completed" : ""} ${
         active ? "Mui-active" : ""
       }`}
@@ -27,24 +28,26 @@ function CustomStepIcon(props: StepIconProps) {
       }}
       transition={{ type: "spring", stiffness: 600, damping: 10 }}
     >
-      <AnimatePresence mode="popLayout">
+      <AnimatePresence initial={false}>
         {showCheck ? (
           <motion.div
             key="check"
-            initial={{ scale: 0, rotate: -90 }}
-            animate={{ scale: 1, rotate: 0 }}
-            exit={{ scale: 0 }}
-            transition={{ type: "spring", stiffness: 300 }}
+            style={{ position: "absolute" }}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            transition={{ type: "spring", stiffness: 400, damping: 15 }}
           >
             <Check className="CustomStepIcon-completedIcon" />
           </motion.div>
         ) : (
           <motion.span
             key="icon"
+            style={{ position: "absolute" }}
             className="MuiStepIcon-text"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
           >
             {icon}
           </motion.span>
