@@ -1,13 +1,17 @@
 import { useImageForm } from "../model/useImageForm";
-import { useAuthStore } from "../../../../entities/user";
 import styles from "./ImageForm.module.scss";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 
 export const ImageForm = () => {
   const { formik, handleFileChange } = useImageForm();
-  const avatarFile = useAuthStore((s) => s.avatarFile);
   const inputRef = useRef<HTMLInputElement>(null);
-  const avatarSrc = avatarFile ? URL.createObjectURL(avatarFile) : null;
+
+  const avatarSrc = useMemo(() => {
+    if (formik.values.avatar instanceof File) {
+      return URL.createObjectURL(formik.values.avatar);
+    }
+    return null;
+  }, [formik.values.avatar]);
 
   return (
     <form

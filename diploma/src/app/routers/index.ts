@@ -5,6 +5,7 @@ import { authDefaultRoute } from "./auth/auth";
 import { indexRoute } from "./indexRoute";
 import { verificationRoute } from "./auth/verification";
 import { setPasswordRoute } from "./auth/setPassword";
+import { fillingInfoRoute } from "./multiStepForm";
 
 authRoute.addChildren({
   authDefaultRoute,
@@ -15,6 +16,7 @@ authRoute.addChildren({
 const routeTree = rootRoute.addChildren({
   authRoute,
   indexRoute,
+  fillingInfoRoute,
 });
 
 export const router = createRouter({ routeTree });

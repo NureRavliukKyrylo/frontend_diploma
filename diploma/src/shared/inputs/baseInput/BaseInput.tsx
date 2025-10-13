@@ -17,9 +17,6 @@ export const BaseInput: React.FC<BaseInputProps> = ({
   originalType,
   value,
   defaultValue,
-  onChange,
-  onFocus,
-  onBlur,
   children,
   ...props
 }) => {
@@ -28,17 +25,17 @@ export const BaseInput: React.FC<BaseInputProps> = ({
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     setIsFocused(true);
-    onFocus?.(e);
+    props.onFocus?.(e);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     setIsFocused(false);
-    onBlur?.(e);
+    props.onBlur?.(e);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHasText(!!e.target.value);
-    onChange?.(e);
+    props.onChange?.(e);
   };
 
   return (
@@ -67,10 +64,10 @@ export const BaseInput: React.FC<BaseInputProps> = ({
           type={type}
           value={value}
           defaultValue={defaultValue}
+          {...props}
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChange}
-          {...props}
         />
         {children}
       </div>

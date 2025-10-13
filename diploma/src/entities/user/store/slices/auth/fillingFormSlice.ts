@@ -16,10 +16,12 @@ export interface UserFillingSlice {
 
   setAvatarFile: (file: File | null) => void;
   setBio: (val: string) => void;
-  setDateOfBirth: (val: string) => void;
+  setDateOfBirth: (val: string | null) => void;
   setSocialLink: (platform: SocialPlatform, url: string) => void;
+  removeSocialLink: (platform: SocialPlatform) => void;
   setCoordinates: (val: Coordinates | null) => void;
   setPrivacyField: (fieldName: string, field: PrivacyField) => void;
+  removePrivacyField: (fieldName: string) => void;
   clearProfile: () => void;
 }
 
@@ -56,6 +58,16 @@ export const createUserFillingSlice: StateCreator<UserFillingSlice> = (
         },
       };
     }),
+  removeSocialLink: (platform) =>
+    set((state) => {
+      const existingLinks = state.profile?.socialLinks ?? [];
+      return {
+        profile: {
+          ...state.profile,
+          socialLinks: existingLinks.filter((l) => l.platform !== platform),
+        },
+      };
+    }),
   setCoordinates: (val) =>
     set((state) => ({ profile: { ...state.profile, coordinates: val } })),
   setPrivacyField: (fieldName, field) =>
@@ -69,6 +81,16 @@ export const createUserFillingSlice: StateCreator<UserFillingSlice> = (
         privacySettings: {
           ...state.privacySettings,
           fields: [...fields, field],
+        },
+      };
+    }),
+  removePrivacyField: (fieldName) =>
+    set((state) => {
+      const fields = state.privacySettings?.fields ?? [];
+      return {
+        privacySettings: {
+          ...state.privacySettings,
+          fields: fields.filter((f) => f.fieldName !== fieldName),
         },
       };
     }),

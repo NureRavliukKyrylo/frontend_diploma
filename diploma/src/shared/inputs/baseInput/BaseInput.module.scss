@@ -79,7 +79,7 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
       border-color: $error-color;
     }
     .errorInput {
-      @include font-base(11px, 700);
+      @include font-base(13px, 700);
       color: $error-color;
       margin-top: 0.25rem;
     }

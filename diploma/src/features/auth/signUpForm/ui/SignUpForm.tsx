@@ -1,6 +1,6 @@
 import styles from "./SignUpForm.module.scss";
 import { BaseInput, EmailInput } from "../../../../shared/inputs";
-import { Checkbox } from "../../../../shared/checkBox";
+import { Checkbox } from "../../../../shared/inputs";
 import { AuthButton } from "../../../../shared/buttons/auth";
 import { useRegistration } from "../model/useRegistration";
 import { useAuthStore } from "../../../../entities/user";

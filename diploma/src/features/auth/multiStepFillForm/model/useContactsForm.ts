@@ -2,29 +2,33 @@ import { useFormik } from "formik";
 import { useAuthStore } from "../../../../entities/user";
 import { contactsSchema } from "../libs/contactsSchema";
 import { useSubmitFillingForm } from "./useSubmitFillingForm";
-import { useRouter } from "@tanstack/react-router";
 import { SocialPlatform } from "../../../../shared/enums";
 import { platformKeys } from "./constants/platformKeys";
+import type { UpdateUserDto } from "../api/fiillingFormApi";
 
 export const useContactsForm = () => {
-  const { setSocialLink, setPrivacyField, privacySettings, profile } =
-    useAuthStore();
+  const {
+    setSocialLink,
+    removePrivacyField,
+    removeSocialLink,
+    setPrivacyField,
+    privacySettings,
+    profile,
+  } = useAuthStore();
   const { handleSubmit } = useSubmitFillingForm();
-  const router = useRouter();
 
   const initialValues = Object.entries(platformKeys).reduce(
     (acc, [platformValue, key]) => {
       const platform = Number(platformValue) as SocialPlatform;
       const link = profile?.socialLinks?.find((l) => l.platform === platform);
 
-      const fieldName = `Platform.${key[0].toUpperCase() + key.slice(1)}`;
+      const fieldName = `Profile.SocialLinks[Platform=${key}]`;
       const field = privacySettings?.fields?.find(
         (f) => f.fieldName === fieldName
       );
 
       acc[key] = link?.url;
-      acc[`show${key[0].toUpperCase() + key.slice(1)}`] =
-        field?.visibility === 1 || false;
+      acc[`show${key}`] = field?.visibility === 0 || false;
 
       return acc;
     },
@@ -40,23 +44,41 @@ export const useContactsForm = () => {
 
       Object.entries(platformKeys).forEach(([platformValue, key]) => {
         const platform = Number(platformValue) as SocialPlatform;
-        const fieldName = `Platform.${key[0].toUpperCase() + key.slice(1)}`;
-        const showKey = `show${key[0].toUpperCase() + key.slice(1)}`;
+        const fieldName = `Profile.SocialLinks[Platform=${key}]`;
+        const showKey = `show${key}`;
         const url = values[key];
 
         if (url) {
           setSocialLink(platform, url);
+        } else {
+          removeSocialLink(platform);
         }
 
         if (values[showKey]) {
-          setPrivacyField(fieldName, {
-            fieldName,
-            visibility: 1,
-          });
+          setPrivacyField(fieldName, { fieldName, visibility: 0 });
+        } else {
+          removePrivacyField(fieldName);
         }
       });
 
-      handleSubmit();
+      const { avatarFile, profile, privacySettings } = useAuthStore.getState();
+
+      const payload: UpdateUserDto = {
+        avatarFile: avatarFile ?? null,
+        profile: {
+          bio: profile?.bio,
+          phone: profile?.phone,
+          dateOfBirth: profile?.dateOfBirth,
+          socialLinks: profile?.socialLinks,
+          coordinates: profile?.coordinates,
+        },
+        privacySettings: {
+          fields: privacySettings?.fields,
+        },
+      };
+
+      console.log("[DEBUG] Final payload (fresh state):", payload);
+      handleSubmit(payload);
     },
   });
 

@@ -1,5 +1,5 @@
 @use "./shared/styles/variables/fontVariables.scss" as *;
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 $error-color: red;
 
 :root {
@@ -20,15 +20,12 @@ button {
   color: rgba(199, 19, 49, 0.993);
   font-size: 0.75rem;
   margin-top: 0.5rem;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 900;
-  font-size: 15px;
+  @include font-base(15px, 900);
   display: flex;
   justify-content: center;
 }
 
 .errorInput {
   color: $error-color;
-  @include font-base(11px, 700);
+  @include font-base(13px, 700);
 }

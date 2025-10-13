@@ -2,9 +2,11 @@ import { useMutation } from "@tanstack/react-query";
 import { googleLogin, type GoogleLoginDto } from "../api/googleApi";
 import { useErrorStore } from "../../../../shared/stores";
 import { addToast } from "@heroui/react";
+import { useRouter } from "@tanstack/react-router";
 
 export const useGoogle = () => {
   const setServerError = useErrorStore((state) => state.setServerError);
+  const router = useRouter();
 
   const mutation = useMutation({
     mutationFn: (data: GoogleLoginDto) => googleLogin(data),
@@ -16,6 +18,11 @@ export const useGoogle = () => {
         description: "Signed in with Google successfully.",
         color: "success",
       });
+      if (data.newUser) {
+        router.navigate({ to: "/filling-info-form" });
+      } else {
+        router.navigate({ to: "/home" });
+      }
     },
     onError: (error: any) => {
       console.error("Google login error:", error);

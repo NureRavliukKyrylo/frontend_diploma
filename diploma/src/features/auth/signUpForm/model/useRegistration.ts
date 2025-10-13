@@ -10,8 +10,7 @@ export const useRegistration = () => {
   const formik = useFormik({
     initialValues: { signUpEmail, firstName, lastName, agreement },
     validationSchema: registerSchema,
-    onSubmit: (values) => {
-      localStorage.setItem("authFormData", JSON.stringify(values));
+    onSubmit: () => {
       router.navigate({ to: "/auth/verification" });
     },
   });

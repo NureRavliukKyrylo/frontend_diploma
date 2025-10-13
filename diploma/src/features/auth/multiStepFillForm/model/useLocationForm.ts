@@ -55,7 +55,6 @@ export const useLocationForm = () => {
 
   const handleLocationChange = (coords: Coordinates) => {
     formik.setFieldValue("coordinates", coords);
-    setCoordinates(coords);
   };
 
   return {

@@ -1,3 +1,7 @@
+@use "./../../styles/variables/fontVariables.scss" as *;
+
+$font-family: "Exo 2", sans-serif !important;
+
 .MuiStepIcon-root.Mui-active {
   background: white !important;
   border: 3px solid #000000 !important;
@@ -8,7 +12,7 @@
   align-items: center !important;
   justify-content: center !important;
   .MuiStepIcon-text {
-    font-family: "Inter", sans-serif !important;
+    font-family: $font-family;
     font-size: 50px !important;
     font-weight: 800 !important;
     color: black !important;
@@ -31,7 +35,7 @@
 }
 
 .MuiStepIcon-text {
-  font-family: "Inter", sans-serif !important;
+  font-family: $font-family;
   font-size: 30px !important;
   font-weight: 500 !important;
   color: rgba(0, 0, 0, 0.6) !important;
@@ -78,7 +82,7 @@
   margin: 0 !important;
   border-left: 0px !important;
   color: rgba(0, 0, 0, 0.7) !important;
-  font-family: "Inter" !important;
+  font-family: $font-family;
   font-style: normal !important;
   font-weight: 500 !important;
   font-size: 18px !important;
@@ -86,7 +90,7 @@
 }
 
 .MuiStepLabel-label.Mui-active {
-  font-family: "Inter", sans-serif !important;
+  font-family: $font-family;
   font-style: normal !important;
   font-weight: 900 !important;
   font-size: 30px !important;
@@ -95,7 +99,7 @@
 }
 .MuiStepLabel-label,
 .MuiStepLabel-label.Mui-completed {
-  font-family: "Inter", sans-serif !important;
+  font-family: $font-family;
   font-style: normal !important;
   font-weight: 900 !important;
   font-size: 18px !important;

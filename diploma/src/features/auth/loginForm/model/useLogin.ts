@@ -16,7 +16,7 @@ export const useLogin = () => {
     onSuccess: (data) => {
       setServerError(null);
       console.log("Login success:", data);
-      router.navigate({ to: "/" });
+      router.navigate({ to: "/home" });
     },
     onError: (error: any) => {
       console.error("Login error:", error);

@@ -1,8 +1,8 @@
 export const SocialPlatform = {
-  Telegram: 0,
+  Telegram: 19,
   Instagram: 1,
-  Viber: 2,
-  WhatsApp: 3,
+  Viber: 21,
+  WhatsApp: 20,
 } as const;
 
 export type SocialPlatform =

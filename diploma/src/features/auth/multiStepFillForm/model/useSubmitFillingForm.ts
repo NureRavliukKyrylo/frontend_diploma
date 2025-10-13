@@ -1,12 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
-import { useAuthStore } from "../../../../entities/user";
 import { updateUser, type UpdateUserDto } from "../api/fiillingFormApi";
 import { addToast } from "@heroui/react";
+import { useRouter } from "@tanstack/react-router";
 
 export const useSubmitFillingForm = () => {
-  const avatarFile = useAuthStore((state) => state.avatarFile);
-  const profile = useAuthStore((state) => state.profile);
-  const privacySettings = useAuthStore((state) => state.privacySettings);
+  const router = useRouter();
 
   const mutation = useMutation({
     mutationFn: (data: UpdateUserDto) => updateUser(data),
@@ -14,9 +12,10 @@ export const useSubmitFillingForm = () => {
       console.log("[DEBUG] API success response:", data);
       addToast({
         title: "Success",
-        description: "Profile updated",
+        description: "The profile was filled out successfully",
         color: "success",
       });
+      router.navigate({ to: "/" });
     },
     onError: (error: any) => {
       console.error("[DEBUG] API error response:", error);
@@ -26,29 +25,25 @@ export const useSubmitFillingForm = () => {
     },
   });
 
-  const handleSubmit = () => {
-    const payload: UpdateUserDto = {
-      avatarFile: avatarFile ?? null,
-      profile: {
-        bio: profile?.bio,
-        phone: profile?.phone,
-        dateOfBirth: profile?.dateOfBirth,
-        socialLinks: profile?.socialLinks,
-        coordinates: profile?.coordinates,
-      },
-      privacySettings: {
-        fields: privacySettings?.fields,
-      },
-    };
+  const isPayloadEmpty = (obj: any): boolean => {
+    if (obj === null || obj === undefined) return true;
+    if (Array.isArray(obj)) {
+      return obj.every(isPayloadEmpty);
+    }
+    if (typeof obj === "object") {
+      return Object.values(obj).every(isPayloadEmpty);
+    }
+    return obj === "";
+  };
 
-    console.log("[DEBUG] Submitting payload:", payload);
-    console.log("[DEBUG] Current auth state:", {
-      avatarFile,
-      profile,
-      privacySettings,
-    });
+  const handleSubmit = (payload: UpdateUserDto) => {
+    console.log("[DEBUG] Final payload (fresh state):", payload);
 
-    mutation.mutate(payload);
+    if (isPayloadEmpty(payload)) {
+      router.navigate({ to: "/" });
+    } else {
+      mutation.mutate(payload);
+    }
   };
 
   return { handleSubmit, isLoading: mutation.isPending };

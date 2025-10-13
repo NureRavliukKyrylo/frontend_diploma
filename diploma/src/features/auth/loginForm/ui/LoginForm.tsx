@@ -1,6 +1,6 @@
 import styles from "./LoginForm.module.scss";
 import { EmailInput, PasswordInput } from "../../../../shared/inputs";
-import { Checkbox } from "../../../../shared/checkBox";
+import { Checkbox } from "../../../../shared/inputs";
 import { useErrorStore } from "../../../../shared/stores";
 import { useLogin } from "../../../auth";
 import { AuthButton } from "../../../../shared/buttons/auth";

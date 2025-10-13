@@ -20,9 +20,9 @@ export interface SocialLink {
 }
 
 export interface Profile {
-  bio?: string;
+  bio?: string | null;
   phone?: string;
-  dateOfBirth?: string;
+  dateOfBirth?: string | null;
   socialLinks?: SocialLink[];
   coordinates?: Coordinates | null;
 }
