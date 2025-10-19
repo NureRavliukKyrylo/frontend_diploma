@@ -1,9 +1,10 @@
 import { createRoute } from "@tanstack/react-router";
-import { authRoute } from "./index";
+import { authRoute } from "./authRoot";
 import { VerificationPage } from "../../../pages/auth";
+import { AuthRoutes } from "../../../shared/routes";
 
 export const verificationRoute = createRoute({
   getParentRoute: () => authRoute,
-  path: "verification",
+  path: AuthRoutes.verification,
   component: () => <VerificationPage />,
 });

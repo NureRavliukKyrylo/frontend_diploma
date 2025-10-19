@@ -14,7 +14,7 @@ import {
   createUserFillingSlice,
   type UserFillingSlice,
 } from "./slices/auth/fillingFormSlice";
-import { base64ToFile } from "../libs/fileBase64Helpers";
+import { base64ToFile } from "../../../shared/libs";
 
 type AuhtStore = AuthModeSlice &
   StepperSlice &

@@ -1,0 +1,33 @@
+@use "./../../../../styles/variables/fontVariables.scss" as *;
+@use "./../../../../styles/animations/buttonBaseAnimation.scss" as animation;
+
+.nextStepperButton {
+  background: white;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  @include font-base(20px, 800);
+  color: #000000;
+  height: 100%;
+  padding: 5px;
+  @include animation.button-hover-effect(#fff, 0.25s);
+}
+.skipStepperButton {
+  background: #f5f5f5;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  @include font-base(20px, 800);
+  color: #000000;
+  height: 100%;
+  padding: 5px;
+  @include animation.button-hover-effect(#f5f5f5, 0.25s);
+}
+.prevStepperButton {
+  background: #f5f5f5;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  @include font-base(20px, 800);
+  color: #000000;
+  height: 100%;
+  padding: 5px;
+  @include animation.button-hover-effect(#f5f5f5, 0.25s);
+}

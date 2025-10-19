@@ -1,10 +1,12 @@
 import { createRouter } from "@tanstack/react-router";
 import { rootRoute } from "./__root";
-import { authRoute } from "./auth";
-import { authDefaultRoute } from "./auth/auth";
+import {
+  authRoute,
+  authDefaultRoute,
+  verificationRoute,
+  setPasswordRoute,
+} from "./auth";
 import { indexRoute } from "./indexRoute";
-import { verificationRoute } from "./auth/verification";
-import { setPasswordRoute } from "./auth/setPassword";
 import { fillingInfoRoute } from "./multiStepForm";
 
 authRoute.addChildren({

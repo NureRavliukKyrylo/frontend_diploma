@@ -1,8 +1,8 @@
-import { TextArea } from "../../../../shared/inputs";
+import { TextArea } from "../../../../shared/ui/inputs";
 import { I18nProvider } from "@react-aria/i18n";
 import { useAboutForm } from "../model/useAboutForm";
 import styles from "./AboutForm.module.scss";
-import { DatePickerField } from "../../../../shared/datePicker";
+import { DatePickerInput } from "../../../../shared/ui/inputs";
 
 export const AboutForm = () => {
   const formik = useAboutForm();
@@ -16,7 +16,7 @@ export const AboutForm = () => {
       <div className={styles.inputsForm}>
         <I18nProvider>
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-            <DatePickerField
+            <DatePickerInput
               name="dateOfBirth"
               label="Date of Birthday"
               value={formik.values.dateOfBirth}

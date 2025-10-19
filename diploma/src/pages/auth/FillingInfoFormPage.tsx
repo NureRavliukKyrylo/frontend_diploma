@@ -1,6 +1,6 @@
 import { StepperFormWidget } from "../../widgets/auth";
-import { FillingInfoForm } from "../../shared/layouts/auth";
-import styles from "./FillingInfoFormPage.module.scss";
+import { FillingInfoForm } from "../../shared/ui/layouts";
+import styles from "./styles/FillingInfoFormPage.module.scss";
 import { useAuthStore } from "../../entities/user";
 import { stepConstants } from ".";
 

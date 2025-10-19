@@ -1,4 +1,4 @@
-import { AuthForm } from "../../shared/layouts/auth";
+import { AuthForm } from "../../shared/ui/layouts";
 import { LoginForm, SignUpForm } from "../../features/auth";
 
 export function AuthWidgetForm() {

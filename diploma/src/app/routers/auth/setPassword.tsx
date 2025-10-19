@@ -1,9 +1,10 @@
 import { createRoute } from "@tanstack/react-router";
-import { authRoute } from "./index";
+import { authRoute } from "./authRoot";
 import { SetPasswordPage } from "../../../pages/auth";
+import { AuthRoutes } from "../../../shared/routes";
 
 export const setPasswordRoute = createRoute({
   getParentRoute: () => authRoute,
-  path: "set-password",
+  path: AuthRoutes.setPassword,
   component: () => <SetPasswordPage />,
 });

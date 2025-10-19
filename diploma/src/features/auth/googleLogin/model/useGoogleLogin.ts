@@ -1,8 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { googleLogin, type GoogleLoginDto } from "../api/googleApi";
-import { useErrorStore } from "../../../../shared/stores";
+import { useErrorStore } from "../../../../shared/config";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
+import { MultiStepFormRoutes } from "../../../../shared/routes";
 
 export const useGoogle = () => {
   const setServerError = useErrorStore((state) => state.setServerError);
@@ -19,7 +20,7 @@ export const useGoogle = () => {
         color: "success",
       });
       if (data.newUser) {
-        router.navigate({ to: "/filling-info-form" });
+        router.navigate({ to: MultiStepFormRoutes.fillForm });
       } else {
         router.navigate({ to: "/home" });
       }

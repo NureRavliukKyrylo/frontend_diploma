@@ -1,1 +1,0 @@
-export { SocialPlatform } from "./platformType";

@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useAuthStore } from "../../../../entities/user";
 import { contactsSchema } from "../libs/contactsSchema";
 import { useSubmitFillingForm } from "./useSubmitFillingForm";
-import { SocialPlatform } from "../../../../shared/enums";
+import { SocialPlatform } from "../../../../shared/config";
 import { platformKeys } from "./constants/platformKeys";
 import type { UpdateUserDto } from "../api/fiillingFormApi";
 

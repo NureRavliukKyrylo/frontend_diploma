@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import { useAuthStore } from "../../../../entities/user";
 import { registerSchema } from "../libs/signUpSchema";
 import { useRouter } from "@tanstack/react-router";
+import { AuthRoutes } from "../../../../shared/routes";
 
 export const useRegistration = () => {
   const router = useRouter();
@@ -11,7 +12,7 @@ export const useRegistration = () => {
     initialValues: { signUpEmail, firstName, lastName, agreement },
     validationSchema: registerSchema,
     onSubmit: () => {
-      router.navigate({ to: "/auth/verification" });
+      router.navigate({ to: AuthRoutes.verification });
     },
   });
 

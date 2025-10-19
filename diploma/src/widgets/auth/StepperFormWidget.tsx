@@ -1,5 +1,5 @@
-import { StepperFormLayout } from "../../shared/layouts/auth";
-import { StepperForm } from "../../shared/components";
+import { StepperFormLayout } from "../../shared/ui/layouts";
+import { StepperForm } from "../../shared/ui";
 
 export function StepperFormWidget() {
   return (

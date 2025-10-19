@@ -1,9 +1,10 @@
 import { createRoute } from "@tanstack/react-router";
-import { authRoute } from "./index";
-import { AuthWidgetForm } from "../../../widgets/auth";
+import { authRoute } from "./authRoot";
+import { AuthPage } from "../../../pages/auth";
+import { AuthRoutes } from "../../../shared/routes";
 
 export const authDefaultRoute = createRoute({
   getParentRoute: () => authRoute,
-  path: "/",
-  component: () => <AuthWidgetForm />,
+  path: AuthRoutes.default,
+  component: () => <AuthPage />,
 });
