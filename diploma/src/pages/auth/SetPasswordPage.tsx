@@ -1,5 +1,5 @@
-import { PasswordForm } from "../../features/auth";
-import { AdditionalForm } from "../../shared/ui/layouts";
+import { PasswordForm } from "@features/auth";
+import { AdditionalForm } from "@shared/ui/layouts";
 
 export function SetPasswordPage() {
   return (

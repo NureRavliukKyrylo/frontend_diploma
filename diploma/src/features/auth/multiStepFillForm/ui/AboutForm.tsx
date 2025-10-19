@@ -1,8 +1,8 @@
-import { TextArea } from "../../../../shared/ui/inputs";
+import { TextArea } from "@shared/ui/inputs";
 import { I18nProvider } from "@react-aria/i18n";
 import { useAboutForm } from "../model/useAboutForm";
 import styles from "./AboutForm.module.scss";
-import { DatePickerInput } from "../../../../shared/ui/inputs";
+import { DatePickerInput } from "@shared/ui/inputs";
 
 export const AboutForm = () => {
   const formik = useAboutForm();

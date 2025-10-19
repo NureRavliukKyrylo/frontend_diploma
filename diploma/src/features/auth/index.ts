@@ -1,6 +1,5 @@
 export { ImageForm } from "./multiStepFillForm/ui/ImageForm";
 export { GoogleButton } from "./googleLogin/ui/GoogleButton";
-export { useLogin } from "./loginForm/model/useLogin";
 export { LoginForm } from "./loginForm/ui/LoginForm";
 export { SignUpForm } from "./signUpForm/ui/SignUpForm";
 export { VerificationForm } from "./verificationForm/ui/VerificationForm";

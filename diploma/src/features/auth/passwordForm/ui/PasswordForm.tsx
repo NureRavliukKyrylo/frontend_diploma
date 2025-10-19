@@ -1,7 +1,7 @@
 import styles from "./PasswordForm.module.scss";
-import { useErrorStore } from "../../../../shared/config";
-import { AuthButton } from "../../../../shared/ui/buttons";
-import { PasswordInput } from "../../../../shared/ui/inputs";
+import { useErrorStore } from "@shared/config";
+import { AuthButton } from "@shared/ui/buttons";
+import { PasswordInput } from "@shared/ui/inputs";
 
 export const PasswordForm = () => {
   const serverError = useErrorStore((state) => state.serverError);

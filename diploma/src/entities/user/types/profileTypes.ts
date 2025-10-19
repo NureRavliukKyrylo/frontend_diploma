@@ -1,4 +1,4 @@
-import { SocialPlatform } from "../../../shared/config";
+import { SocialPlatform } from "@shared/config";
 
 export interface Coordinates {
   longitude: number;

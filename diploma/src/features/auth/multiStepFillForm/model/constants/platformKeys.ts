@@ -1,4 +1,4 @@
-import { SocialPlatform } from "../../../../../shared/config";
+import { SocialPlatform } from "@shared/config";
 
 export const platformKeys: Record<SocialPlatform, string> = {
   [SocialPlatform.Telegram]: "Telegram",

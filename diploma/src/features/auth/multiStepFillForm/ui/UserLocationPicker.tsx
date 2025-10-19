@@ -1,5 +1,5 @@
 import styles from "./UserLocationPicker.module.scss";
-import { MapLocationPicker } from "../../../../shared/ui";
+import { MapLocationPicker } from "@shared/ui";
 import { useLocationForm } from "../model/useLocationForm";
 
 export const UserLocationPicker = () => {

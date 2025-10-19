@@ -1,12 +1,12 @@
 import { type StateCreator } from "zustand";
-import { SocialPlatform } from "../../../../../shared/config/index.ts";
+import { SocialPlatform } from "@shared/config/index.ts";
 import {
   type Profile,
   type PrivacySettings,
   type Coordinates,
   type PrivacyField,
 } from "../../../index.ts";
-import { fileToBase64 } from "../../../../../shared/libs/index.ts";
+import { fileToBase64 } from "@shared/libs/index.ts";
 
 export interface UserFillingSlice {
   profile?: Profile;

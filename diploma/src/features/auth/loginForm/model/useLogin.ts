@@ -2,8 +2,8 @@ import { useFormik } from "formik";
 import { useMutation } from "@tanstack/react-query";
 import { login, type LoginDto } from "../api/loginApi";
 import { loginSchema } from "../libs/loginSchema";
-import { useErrorStore } from "../../../../shared/config";
-import { useAuthStore } from "../../../../entities/user";
+import { useErrorStore } from "@shared/config";
+import { useAuthStore } from "@entities/user";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
 

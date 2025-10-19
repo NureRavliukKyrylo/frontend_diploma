@@ -1,10 +1,10 @@
 import styles from "./LoginForm.module.scss";
-import { EmailInput, PasswordInput } from "../../../../shared/ui/inputs";
-import { Checkbox } from "../../../../shared/ui/inputs";
-import { useErrorStore } from "../../../../shared/config";
-import { useLogin } from "../../../auth";
-import { AuthButton } from "../../../../shared/ui/buttons";
-import { useAuthStore } from "../../../../entities/user";
+import { EmailInput, PasswordInput } from "@shared/ui/inputs";
+import { Checkbox } from "@shared/ui/inputs";
+import { useErrorStore } from "@shared/config";
+import { useLogin } from "../model/useLogin";
+import { AuthButton } from "@shared/ui/buttons";
+import { useAuthStore } from "@entities/user";
 
 export const LoginForm = () => {
   const serverError = useErrorStore((state) => state.serverError);

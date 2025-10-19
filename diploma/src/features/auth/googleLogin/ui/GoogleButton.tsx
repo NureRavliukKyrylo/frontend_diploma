@@ -1,5 +1,5 @@
 import styles from "./GoogleButton.module.scss";
-import { GoogleIcon } from "../../../../shared/assets/auth";
+import { GoogleIcon } from "@shared/assets/auth";
 import { GoogleLogin } from "@react-oauth/google";
 import { useGoogle } from "../model/useGoogleLogin";
 import { useRef } from "react";

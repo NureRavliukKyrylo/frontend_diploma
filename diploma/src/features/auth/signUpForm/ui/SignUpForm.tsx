@@ -1,9 +1,9 @@
 import styles from "./SignUpForm.module.scss";
-import { BaseInput, EmailInput } from "../../../../shared/ui/inputs";
-import { Checkbox } from "../../../../shared/ui/inputs";
-import { AuthButton } from "../../../../shared/ui/buttons";
+import { BaseInput, EmailInput } from "@shared/ui/inputs";
+import { Checkbox } from "@shared/ui/inputs";
+import { AuthButton } from "@shared/ui/buttons";
 import { useRegistration } from "../model/useRegistration";
-import { useAuthStore } from "../../../../entities/user";
+import { useAuthStore } from "@entities/user";
 
 export const SignUpForm = () => {
   const { formik, isLoading } = useRegistration();

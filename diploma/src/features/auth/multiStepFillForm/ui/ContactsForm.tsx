@@ -1,4 +1,4 @@
-import { SocialNetworksInput } from "../../../../shared/ui/inputs";
+import { SocialNetworksInput } from "@shared/ui/inputs";
 import { useContactsForm } from "../model/useContactsForm";
 import styles from "./ContactsForm.module.scss";
 import { PLATFORM_CONFIG } from "./configs/sociallnputConfig";

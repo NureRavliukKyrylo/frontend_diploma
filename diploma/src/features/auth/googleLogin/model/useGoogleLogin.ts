@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { googleLogin, type GoogleLoginDto } from "../api/googleApi";
-import { useErrorStore } from "../../../../shared/config";
+import { useErrorStore } from "@shared/config";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
-import { MultiStepFormRoutes } from "../../../../shared/routes";
+import { MultiStepFormRoutes } from "@shared/routes";
 
 export const useGoogle = () => {
   const setServerError = useErrorStore((state) => state.setServerError);

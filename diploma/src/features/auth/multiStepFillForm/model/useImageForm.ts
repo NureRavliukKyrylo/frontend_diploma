@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { useRef } from "react";
-import { useAuthStore } from "../../../../entities/user";
+import { useAuthStore } from "@entities/user";
 import { imageSchema } from "../libs/imageSchema";
 
 export const useImageForm = () => {

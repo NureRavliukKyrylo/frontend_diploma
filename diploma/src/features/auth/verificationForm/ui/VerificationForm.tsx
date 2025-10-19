@@ -1,6 +1,6 @@
 import styles from "./VerificationForm.module.scss";
-import { useErrorStore } from "../../../../shared/config";
-import { AuthButton } from "../../../../shared/ui/buttons";
+import { useErrorStore } from "@shared/config";
+import { AuthButton } from "@shared/ui/buttons";
 import { InputOtp } from "@heroui/input-otp";
 import React from "react";
 

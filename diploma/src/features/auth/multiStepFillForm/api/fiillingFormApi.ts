@@ -1,5 +1,5 @@
-import { apiClient } from "../../../../shared/api";
-import { type Profile, type PrivacySettings } from "../../../../entities/user";
+import { apiClient } from "@shared/api";
+import { type Profile, type PrivacySettings } from "@entities/user";
 
 export type UpdateUserDto = {
   avatarFile: File | null;

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useFormik } from "formik";
 import { aboutFormSchema } from "../libs/aboutSchema";
-import { useAuthStore } from "../../../../entities/user";
+import { useAuthStore } from "@entities/user";
 
 export const useAboutForm = () => {
   const setBio = useAuthStore((state) => state.setBio);

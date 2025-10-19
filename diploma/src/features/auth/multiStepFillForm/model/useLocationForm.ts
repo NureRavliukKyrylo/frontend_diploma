@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useFormik } from "formik";
-import { useAuthStore } from "../../../../entities/user";
-import type { Coordinates } from "../../../../entities/user";
+import { useAuthStore } from "@entities/user";
+import type { Coordinates } from "@entities/user";
 import { locationSchema } from "../libs/locationSchema";
 
 export const useLocationForm = () => {
