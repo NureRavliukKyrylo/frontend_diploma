@@ -1,4 +1,4 @@
-import styles from "./UserLocationPicker.module.scss";
+import styles from "./styles/UserLocationPicker.module.scss";
 import { MapLocationPicker } from "@shared/ui";
 import { useLocationForm } from "../model/useLocationForm";
 

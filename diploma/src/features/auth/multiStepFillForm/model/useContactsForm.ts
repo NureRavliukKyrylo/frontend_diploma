@@ -15,6 +15,7 @@ export const useContactsForm = () => {
     privacySettings,
     profile,
   } = useAuthStore();
+
   const { handleSubmit } = useSubmitFillingForm();
 
   const initialValues = Object.entries(platformKeys).reduce(
@@ -64,7 +65,7 @@ export const useContactsForm = () => {
       const { avatarFile, profile, privacySettings } = useAuthStore.getState();
 
       const payload: UpdateUserDto = {
-        avatarFile: avatarFile ?? null,
+        avatarFile: avatarFile,
         profile: {
           bio: profile?.bio,
           phone: profile?.phone,

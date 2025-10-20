@@ -11,8 +11,8 @@ export const useAboutForm = () => {
 
   const formik = useFormik({
     initialValues: {
-      about: profile?.bio || "",
-      dateOfBirth: profile?.dateOfBirth || "",
+      about: profile?.bio,
+      dateOfBirth: profile?.dateOfBirth,
     },
     validationSchema: aboutFormSchema,
     enableReinitialize: true,

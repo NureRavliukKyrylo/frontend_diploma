@@ -1,14 +1,21 @@
 import styles from "./SignUpForm.module.scss";
-import { BaseInput, EmailInput } from "@shared/ui/inputs";
+import { BaseInput, EmailInput, PasswordInput } from "@shared/ui/inputs";
 import { Checkbox } from "@shared/ui/inputs";
 import { AuthButton } from "@shared/ui/buttons";
 import { useRegistration } from "../model/useRegistration";
 import { useAuthStore } from "@entities/user";
+import { useErrorStore } from "@shared/config";
 
 export const SignUpForm = () => {
   const { formik, isLoading } = useRegistration();
-  const { setSignUpEmail, setFirstName, setLastName, setAgreement } =
-    useAuthStore();
+  const {
+    setSignUpEmail,
+    setFirstName,
+    setLastName,
+    setAgreement,
+    setSignUpPassword,
+  } = useAuthStore();
+  const serverError = useErrorStore((state) => state.serverError);
   return (
     <>
       <div className={styles.headerSignUp}>
@@ -45,8 +52,8 @@ export const SignUpForm = () => {
             />
           </div>
           <EmailInput
-            id="signUpEmail"
-            name="signUpEmail"
+            id="email"
+            name="email"
             type="email"
             label="Enter email address"
             activeLabel="Email"
@@ -54,8 +61,20 @@ export const SignUpForm = () => {
               formik.handleChange(e);
               setSignUpEmail(e.target.value);
             }}
-            value={formik.values.signUpEmail}
-            error={formik.submitCount > 0 ? formik.errors.signUpEmail : ""}
+            value={formik.values.email}
+            error={formik.submitCount > 0 ? formik.errors.email : ""}
+          />
+          <PasswordInput
+            id="password"
+            name="password"
+            label="Enter password"
+            activeLabel="Password"
+            onChange={(e) => {
+              formik.handleChange(e);
+              setSignUpPassword(e.target.value);
+            }}
+            value={formik.values.password}
+            error={formik.submitCount > 0 ? formik.errors.password : ""}
           />
         </div>
         <div className={styles.agreement}>
@@ -73,6 +92,7 @@ export const SignUpForm = () => {
         </div>
         <div className={styles.buttonBlock}>
           <AuthButton label="Create an account" loading={isLoading} />
+          {serverError && <div className="errorMessage">{serverError}</div>}
         </div>
       </form>
     </>

@@ -11,26 +11,26 @@ import { fileToBase64 } from "@shared/libs/index.ts";
 export interface UserFillingSlice {
   profile?: Profile;
   privacySettings?: PrivacySettings;
-  avatarFile?: File | null;
-  avatarUrl?: string | null;
+  avatarFile?: File | undefined;
+  avatarUrl?: string | undefined;
 
-  setAvatarFile: (file: File | null) => void;
-  setBio: (val: string) => void;
-  setDateOfBirth: (val: string | null) => void;
+  setAvatarFile: (file: File | undefined) => void;
+  setBio: (val: string | undefined) => void;
+  setDateOfBirth: (val: string | undefined) => void;
   setSocialLink: (platform: SocialPlatform, url: string) => void;
   removeSocialLink: (platform: SocialPlatform) => void;
   setCoordinates: (val: Coordinates | null) => void;
   setPrivacyField: (fieldName: string, field: PrivacyField) => void;
   removePrivacyField: (fieldName: string) => void;
-  clearProfile: () => void;
+  clearFillingForm: () => void;
 }
 
 export const createUserFillingSlice: StateCreator<UserFillingSlice> = (
   set
 ) => ({
-  setAvatarFile: (file: File | null) => {
+  setAvatarFile: (file: File | undefined) => {
     if (!file) {
-      set({ avatarFile: null, avatarUrl: null });
+      set({ avatarFile: undefined, avatarUrl: undefined });
       return;
     }
     set({ avatarFile: file });
@@ -94,15 +94,16 @@ export const createUserFillingSlice: StateCreator<UserFillingSlice> = (
         },
       };
     }),
-  clearProfile: () =>
+  clearFillingForm: () =>
     set({
+      avatarFile: undefined,
+      avatarUrl: undefined,
       profile: {
-        bio: "",
-        phone: "",
-        dateOfBirth: "",
-        socialLinks: [],
-        coordinates: { longitude: 0, latitude: 0 },
+        bio: undefined,
+        dateOfBirth: undefined,
+        socialLinks: undefined,
+        coordinates: undefined,
       },
-      privacySettings: { fields: [] },
+      privacySettings: undefined,
     }),
 });

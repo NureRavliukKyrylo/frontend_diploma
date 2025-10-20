@@ -9,6 +9,8 @@ import { useRouter } from "@tanstack/react-router";
 
 export const useLogin = () => {
   const setServerError = useErrorStore((state) => state.setServerError);
+  const { loginEmail, loginPassword, rememberMe, clearLoginForm } =
+    useAuthStore();
   const router = useRouter();
 
   const mutation = useMutation({
@@ -16,13 +18,19 @@ export const useLogin = () => {
     onSuccess: (data) => {
       setServerError(null);
       console.log("Login success:", data);
+      addToast({
+        title: "Login Success",
+        description: "You have logined successfully",
+        color: "success",
+      });
+      clearLoginForm();
       router.navigate({ to: "/home" });
     },
     onError: (error: any) => {
       console.error("Login error:", error);
       const errorMessage =
         error?.response?.data?.error ||
-        "Invalid login credentials. Please try again.";
+        "Something went wrong. Please try again";
       setServerError(errorMessage);
       addToast({
         title: "Login Failed",
@@ -31,8 +39,6 @@ export const useLogin = () => {
       });
     },
   });
-
-  const { loginEmail, loginPassword, rememberMe } = useAuthStore();
 
   const formik = useFormik({
     initialValues: { email: loginEmail, password: loginPassword, rememberMe },

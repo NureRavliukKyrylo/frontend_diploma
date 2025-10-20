@@ -1,6 +1,6 @@
 @use "./shared/styles/variables/fontVariables.scss" as *;
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-$error-color: red;
+$error-color: rgba(199, 19, 49, 0.993);
 
 :root {
   font-family: $font-family;
@@ -17,7 +17,7 @@ button {
 }
 
 .errorMessage {
-  color: rgba(199, 19, 49, 0.993);
+  color: $error-color;
   font-size: 0.75rem;
   margin-top: 0.5rem;
   @include font-base(15px, 900);

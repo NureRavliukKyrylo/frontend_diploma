@@ -1,5 +1,5 @@
 import { useImageForm } from "../model/useImageForm";
-import styles from "./ImageForm.module.scss";
+import styles from "./styles/ImageForm.module.scss";
 import { useMemo, useRef } from "react";
 
 export const ImageForm = () => {

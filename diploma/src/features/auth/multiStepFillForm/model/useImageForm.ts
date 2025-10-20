@@ -11,7 +11,7 @@ export const useImageForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const formik = useFormik({
-    initialValues: { avatar: avatarFile || null },
+    initialValues: { avatar: avatarFile },
     validationSchema: imageSchema,
     enableReinitialize: true,
     validateOnChange: true,
@@ -24,7 +24,7 @@ export const useImageForm = () => {
   });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.currentTarget.files?.[0] || null;
+    const file = e.currentTarget.files?.[0];
     if (file) {
       formik.setFieldValue("avatar", file, true);
     }

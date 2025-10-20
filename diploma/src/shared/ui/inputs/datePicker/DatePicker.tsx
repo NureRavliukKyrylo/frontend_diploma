@@ -8,7 +8,7 @@ interface DatePickerInputProps {
   value?: string | null;
   error?: string;
   touched?: boolean;
-  onChange: (value: string) => void;
+  onChange: (value: string | undefined) => void;
   onBlur?: () => void;
   className?: string;
   showMonthAndYearPickers?: boolean;
@@ -45,7 +45,7 @@ export const DatePickerInput = ({
         value={parsedValue}
         isInvalid={isInvalid}
         showMonthAndYearPickers={showMonthAndYearPickers}
-        onChange={(val) => onChange(val ? val.toString() : "")}
+        onChange={(val) => onChange(val ? val.toString() : undefined)}
         onBlur={onBlur}
         errorMessage={touched ? error : ""}
         className={className || "w-full"}

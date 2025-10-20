@@ -2,9 +2,11 @@ import { useMutation } from "@tanstack/react-query";
 import { updateUser, type UpdateUserDto } from "../api/fiillingFormApi";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
+import { useAuthStore } from "@entities/user";
 
 export const useSubmitFillingForm = () => {
   const router = useRouter();
+  const { clearFillingForm } = useAuthStore();
 
   const mutation = useMutation({
     mutationFn: (data: UpdateUserDto) => updateUser(data),
@@ -15,6 +17,7 @@ export const useSubmitFillingForm = () => {
         description: "The profile was filled out successfully",
         color: "success",
       });
+      clearFillingForm();
       router.navigate({ to: "/" });
     },
     onError: (error: any) => {

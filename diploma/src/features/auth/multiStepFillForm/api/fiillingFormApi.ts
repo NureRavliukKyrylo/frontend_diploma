@@ -2,7 +2,7 @@ import { apiClient } from "@shared/api";
 import { type Profile, type PrivacySettings } from "@entities/user";
 
 export type UpdateUserDto = {
-  avatarFile: File | null;
+  avatarFile: File | undefined;
   profile?: Profile;
   privacySettings?: PrivacySettings;
 };

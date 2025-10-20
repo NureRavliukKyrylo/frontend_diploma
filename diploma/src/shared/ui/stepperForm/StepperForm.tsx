@@ -8,8 +8,8 @@ import {
 import Check from "@mui/icons-material/Check";
 import { motion, AnimatePresence } from "framer-motion";
 import "./StepperStyles.scss";
-import { useAuthStore } from "../../../entities/user";
-import { stepConstants } from "../../../pages/auth";
+import { useAuthStore } from "@entities/user";
+import { stepConstants } from "@pages/auth";
 
 function CustomStepIcon(props: StepIconProps) {
   const { active, completed, icon } = props;
