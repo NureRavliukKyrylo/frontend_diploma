@@ -61,44 +61,42 @@ export function StepperForm() {
   const { activeStep, isStepSkipped, isStepCompleted } = useAuthStore();
 
   return (
-    <div>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {stepConstants.steps.map((step, index) => {
-          const skipped = isStepSkipped(index);
-          const completed = isStepCompleted(index);
-          const isActive = activeStep === index;
+    <Stepper activeStep={activeStep} orientation="vertical">
+      {stepConstants.steps.map((step, index) => {
+        const skipped = isStepSkipped(index);
+        const completed = isStepCompleted(index);
+        const isActive = activeStep === index;
 
-          return (
-            <Step key={index} completed={completed && !skipped && !isActive}>
-              <StepLabel StepIconComponent={CustomStepIcon}>
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{
-                    opacity: isActive ? 1 : 0.6,
-                    x: isActive ? 0 : -5,
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {step.title}
-                </motion.div>
-                <AnimatePresence>
-                  {isActive && (
-                    <motion.div
-                      key="content"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <StepContent>{step.description}</StepContent>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </StepLabel>
-            </Step>
-          );
-        })}
-      </Stepper>
-    </div>
+        return (
+          <Step key={index} completed={completed && !skipped && !isActive}>
+            <StepLabel StepIconComponent={CustomStepIcon}>
+              <motion.div
+                initial={{ opacity: 0, x: -10 }}
+                animate={{
+                  opacity: isActive ? 1 : 0.6,
+                  x: isActive ? 0 : -5,
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                {step.title}
+              </motion.div>
+              <AnimatePresence>
+                {isActive && (
+                  <motion.div
+                    key="content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <StepContent>{step.description}</StepContent>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </StepLabel>
+          </Step>
+        );
+      })}
+    </Stepper>
   );
 }

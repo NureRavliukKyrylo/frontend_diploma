@@ -23,7 +23,7 @@ export const BaseButtonWrapper: React.FC<BaseButtonWrapperProps> = ({
       {...props}
     >
       {loading && (
-        <CircularProgress color="primary" className={styles.spinner} />
+        <CircularProgress color="secondary" className={styles.spinner} />
       )}
       <span className={styles.content}>
         {loading ? "Sending..." : children}

@@ -2,32 +2,39 @@
 @use "./../../../../styles/animations/buttonBaseAnimation.scss" as animation;
 
 .nextStepperButton {
-  background: white;
+  background: black;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  color: white;
+  border-radius: 50px;
   @include font-base(20px, 800);
-  color: #000000;
   height: 100%;
   padding: 5px;
-  @include animation.button-hover-effect(#fff, 0.25s);
+  @include animation.button-hover-effect(black, 0.25s);
 }
 .skipStepperButton {
-  background: #f5f5f5;
+  background: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-  @include font-base(20px, 800);
-  color: #000000;
+  border-radius: 50px;
+  @include font-base(23px, 800);
+  color: black;
   height: 100%;
   padding: 5px;
-  @include animation.button-hover-effect(#f5f5f5, 0.25s);
+  @include animation.button-hover-effect(#ffffff, 0.25s);
 }
 .prevStepperButton {
-  background: #f5f5f5;
+  background: white;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  border-radius: 50px;
   @include font-base(20px, 800);
   color: #000000;
   height: 100%;
-  padding: 5px;
-  @include animation.button-hover-effect(#f5f5f5, 0.25s);
+  padding: 10px;
+  @include animation.button-hover-effect(white, 0.25s);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .arrowIcon {
+    object-fit: contain;
+    opacity: 0.6;
+  }
 }

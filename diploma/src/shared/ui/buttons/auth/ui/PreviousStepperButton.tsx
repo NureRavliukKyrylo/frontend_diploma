@@ -1,5 +1,6 @@
 import { useAuthStore } from "../../../../../entities/user";
 import styles from "./../styles/StepperButtons.module.scss";
+import { Arrow } from "@shared/assets/common";
 
 export const PreviousStepperButton = () => {
   const { prevStep, activeStep } = useAuthStore();
@@ -13,7 +14,7 @@ export const PreviousStepperButton = () => {
         onClick={prevStep}
         disabled={isFirstStep}
       >
-        Back
+        <img src={Arrow} alt="Back" className={styles.arrowIcon} />
       </button>
     </>
   );

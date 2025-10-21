@@ -2,21 +2,21 @@ import React from "react";
 import { OtpType } from "@shared/config";
 import { VerificationForm } from "@features/verification";
 import { useVerification } from "@features/verification";
-import { verificationEmail } from "../api/verificationEmailApi";
+import { twoFactorVerification } from "../api/twoFactorVerificationApi";
 import { useResendCode } from "@features/verification";
 
-export const EmailVerificationForm: React.FC = () => {
-  const { resend } = useResendCode({ type: OtpType.EmailVerification });
+export const TwoFactorVerificationForm: React.FC = () => {
+  const { resend } = useResendCode({ type: OtpType.TwoFactor });
   const { formik, isLoading } = useVerification({
-    apiFn: verificationEmail,
+    apiFn: twoFactorVerification,
     successRedirect: "/home",
-    successMessage: "Email verified successfully",
-    errorMessage: "Email verification failed",
+    successMessage: "Two factor verified successfully",
+    errorMessage: "Two factor verification failed",
   });
 
   return (
     <VerificationForm
-      otpType={OtpType.EmailVerification}
+      otpType={OtpType.TwoFactor}
       formik={formik}
       isLoading={isLoading}
       onResend={resend}

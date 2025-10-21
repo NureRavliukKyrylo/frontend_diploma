@@ -6,6 +6,7 @@ import { useErrorStore } from "@shared/config";
 import { useAuthStore } from "@entities/user";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
+import { AuthRoutes } from "@shared/routes";
 
 export const useLogin = () => {
   const setServerError = useErrorStore((state) => state.setServerError);
@@ -24,6 +25,11 @@ export const useLogin = () => {
         color: "success",
       });
       clearLoginForm();
+      console.log(data.isTwoFactorEnabled);
+      if (data.requires2FA) {
+        router.navigate({ to: AuthRoutes.twoFactor });
+        return;
+      }
       router.navigate({ to: "/home" });
     },
     onError: (error: any) => {

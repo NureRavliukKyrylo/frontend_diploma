@@ -17,6 +17,7 @@ export function FillingInfoFormPage() {
         formId={stepConstants.steps[activeStep].formId}
         activeStep={activeStep}
         hideSkipButton={isStepCompleted(activeStep)}
+        hidePrevButton={activeStep === 0}
         totalSteps={stepConstants.steps.length}
       >
         {stepConstants.steps[activeStep].content}

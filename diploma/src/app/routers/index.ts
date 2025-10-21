@@ -3,10 +3,11 @@ import { rootRoute } from "./__root";
 import {
   authRoute,
   authDefaultRoute,
-  verificationRoute,
+  verificationEmailRoute,
   setPasswordRoute,
   forgotPasswordRoute,
   forgotPasswordVerificationRoute,
+  verificationTwoFactorRoute,
 } from "./auth";
 import { indexRoute } from "./indexRoute";
 import { fillingInfoRoute } from "./multiStepForm";
@@ -14,8 +15,9 @@ import { forgotPasswordDefaultRoute } from "./auth";
 
 authRoute.addChildren({
   authDefaultRoute,
-  verificationRoute,
+  verificationEmailRoute,
   forgotPasswordRoute,
+  verificationTwoFactorRoute,
 });
 
 forgotPasswordRoute.addChildren({

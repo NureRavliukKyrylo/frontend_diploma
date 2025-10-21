@@ -9,3 +9,4 @@ export { AboutForm } from "./multiStepFillForm/ui/AboutForm";
 export { UserLocationPicker } from "./multiStepFillForm/ui/UserLocationPicker";
 export { ContactsForm } from "./multiStepFillForm/ui/ContactsForm";
 export { ForgotPasswordForm } from "./forgotPasswordForm/ui/ForgotPasswordForm";
+export { TwoFactorVerificationForm } from "./verificationTwoFactor/ui/TwoFactorVerificationForm";

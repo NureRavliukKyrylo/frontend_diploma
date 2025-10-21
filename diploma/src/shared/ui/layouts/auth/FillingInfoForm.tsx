@@ -16,6 +16,7 @@ interface FillingInfoFormProps {
   children: ReactNode;
   activeStep: number;
   hideSkipButton?: boolean;
+  hidePrevButton?: boolean;
   totalSteps: number;
 }
 
@@ -27,6 +28,7 @@ export function FillingInfoForm({
   formId,
   activeStep,
   hideSkipButton,
+  hidePrevButton,
   totalSteps,
 }: FillingInfoFormProps) {
   const isLastStep = activeStep === totalSteps - 1;
@@ -55,7 +57,7 @@ export function FillingInfoForm({
             </motion.div>
           </AnimatePresence>
           <div className={styles.buttonsFillForm}>
-            <PreviousStepperButton />
+            {!hidePrevButton && <PreviousStepperButton />}
             <div className={styles.interactStepperButtons}>
               {!hideSkipButton && !isLastStep && <SkipStepperButton />}
               <NextStepperButton form={formId} />

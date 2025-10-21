@@ -15,21 +15,26 @@ export const StepperFormLayout: React.FC<StepFormLayoutProps> = ({
         <div className={styles.localizationStepperButtonWrapper}>
           <LanguageSwitcherButton />
         </div>
-        {children}
+        <div className={styles.stepperFormWrapper}>{children}</div>
+
         <div className={styles.troubleStepFormIssue}>
           <div className={styles.textTroubleStepFormIssue}>
             <div className={styles.lineDividerIssueBlock}>
               <div className={styles.lineDividerIssue}></div>
             </div>
             <div className={styles.textDetailIssue}>
-              <h1>Having trouble?</h1>
-              <p>
-                Feel free to contact us and we will always help you through the
-                process
-              </p>
+              <div className={styles.textInfoStepperForm}>
+                <h1>Having trouble?</h1>
+                <p>
+                  Feel free to contact us and we will always help you through
+                  the process
+                </p>
+              </div>
+              <div className={styles.contactsButtonStepperForm}>
+                <ContactsButton />
+              </div>
             </div>
           </div>
-          <ContactsButton />
         </div>
       </div>
     </div>
