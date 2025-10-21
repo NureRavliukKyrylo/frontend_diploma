@@ -5,9 +5,11 @@ import { useErrorStore } from "@shared/config";
 import { useLogin } from "../model/useLogin";
 import { AuthButton } from "@shared/ui/buttons";
 import { useAuthStore } from "@entities/user";
+import { AuthRoutes } from "@shared/routes";
+import { Link } from "@tanstack/react-router";
 
 export const LoginForm = () => {
-  const serverError = useErrorStore((state) => state.serverError);
+  const serverError = useErrorStore((state) => state.errors["loginError"]);
   const { formik, isLoading } = useLogin();
   const { setLoginEmail, setLoginPassword, setRememberMe } = useAuthStore();
   return (
@@ -57,7 +59,12 @@ export const LoginForm = () => {
               <span>Remember me</span>
             </Checkbox>
           </div>
-          <div className={styles.forgotPassword}>Forgot Password</div>
+          <Link
+            to={AuthRoutes.forgotPassword.root}
+            className={styles.forgotPassword}
+          >
+            Forgot Password
+          </Link>
         </div>
         <div className={styles.buttonBlock}>
           <AuthButton loading={isLoading} />

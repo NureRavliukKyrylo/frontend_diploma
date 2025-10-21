@@ -71,7 +71,7 @@ export const BaseInput: React.FC<BaseInputProps> = ({
         />
         {children}
       </div>
-      {error && <div className={styles.errorInput}>{error}</div>}
+      {error && <div className="errorInput">{error}</div>}
     </div>
   );
 };

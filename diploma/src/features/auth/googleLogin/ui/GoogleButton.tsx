@@ -7,7 +7,6 @@ import { useRef } from "react";
 export const GoogleButton = () => {
   const { loginWithGoogle, isLoading } = useGoogle();
   const googleLoginRef = useRef<HTMLDivElement | null>(null);
-
   return (
     <>
       <button

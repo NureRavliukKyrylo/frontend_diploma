@@ -24,7 +24,7 @@ export const useRegistration = () => {
   const mutation = useMutation({
     mutationFn: (data: RegisterDto) => register(data),
     onSuccess: (data) => {
-      setServerError(null);
+      setServerError("signUpError", null);
       console.log("Register success:", data);
       addToast({
         title: "Register Success",
@@ -40,7 +40,7 @@ export const useRegistration = () => {
       const errorMessage =
         error?.response?.data?.error ||
         "Something went wrong. Please try again";
-      setServerError(errorMessage);
+      setServerError("signUpError", errorMessage);
       addToast({
         title: "Register Failed",
         description: errorMessage,
@@ -50,6 +50,7 @@ export const useRegistration = () => {
   });
 
   const formik = useFormik({
+    enableReinitialize: false,
     initialValues: {
       email: signUpEmail,
       firstName,

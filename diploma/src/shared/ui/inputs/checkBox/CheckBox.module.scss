@@ -1,4 +1,3 @@
-$error-color: red;
 $font-family: "Exo 2";
 
 .checkBoxContainer {
@@ -23,7 +22,8 @@ $font-family: "Exo 2";
 }
 
 .checkBox {
-  all: unset;
+  appearance: none;
+  background: none;
   min-width: 23px;
   height: 23px;
   border: 1px solid rgba(0, 0, 0, 0.5);
@@ -61,9 +61,6 @@ $font-family: "Exo 2";
     height: 18px;
   }
 }
-.checkBox.error {
-  border-color: $error-color;
-}
 
 @keyframes fadeIn {
   from {
@@ -77,5 +74,5 @@ $font-family: "Exo 2";
 }
 
 .checkBox.error {
-  border-color: $error-color;
+  border-color: red;
 }

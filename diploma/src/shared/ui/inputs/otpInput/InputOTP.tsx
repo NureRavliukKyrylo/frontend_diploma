@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import styles from "./InputOTP.module.scss";
 import { InputOtp as BaseInputOtp } from "@heroui/input-otp";
 import { useAuthStore } from "@entities/user";
+import type { OtpType } from "@shared/config";
 
 type InputOtpProps = React.ComponentProps<typeof BaseInputOtp> & {
   error?: string | boolean;
-  otpType: "email" | "forgotPassword";
+  serverError?: string | null;
+  otpType: OtpType;
   onResend?: () => void;
 };
 
@@ -14,37 +16,30 @@ export const InputOtp: React.FC<InputOtpProps> = ({
   classNames,
   otpType,
   onResend,
+  serverError,
   ...props
 }) => {
-  const {
-    otpSeconds,
-    currentOtpType,
-    setOtpSeconds,
-    setCurrentOtpType,
-    resetOtpTimer,
-  } = useAuthStore();
+  const { otpTimers, resetOtpTimer, decrementOtpTimer } = useAuthStore();
 
-  const isActive = currentOtpType === otpType;
-  const canResend = isActive && otpSeconds === 0;
+  const seconds = otpTimers[otpType];
+  const canResend = seconds === 0;
 
   useEffect(() => {
-    if (!currentOtpType) {
-      setCurrentOtpType(otpType);
-    }
-  }, [currentOtpType, otpType, setCurrentOtpType]);
+    if (seconds === 0) return;
 
-  useEffect(() => {
-    if (!isActive || otpSeconds === 0) return;
-
-    const timer = setTimeout(() => setOtpSeconds(otpSeconds - 1), 1000);
+    const timer = setTimeout(() => decrementOtpTimer(otpType), 1000);
     return () => clearTimeout(timer);
-  }, [otpSeconds, isActive, setOtpSeconds]);
+  }, [seconds, otpType, decrementOtpTimer]);
 
   const handleResend = () => {
-    setCurrentOtpType(otpType);
-    resetOtpTimer();
+    if (!canResend) return;
+    if (!serverError) resetOtpTimer(otpType);
     onResend?.();
   };
+
+  const formattedTime = `${Math.floor(seconds / 60)}:${(seconds % 60)
+    .toString()
+    .padStart(2, "0")}`;
 
   return (
     <div className={styles.wrapperInputOTP}>
@@ -75,19 +70,14 @@ export const InputOtp: React.FC<InputOtpProps> = ({
       {error && <div className="errorInput">{error}</div>}
       <div className="mt-2 text-right">
         <button
+          type="button"
           onClick={handleResend}
-          disabled={!canResend && isActive}
-          className={`text-sm font-medium ${
-            canResend ? "text-blue-600 hover:underline" : "text-gray-400"
+          disabled={!canResend}
+          className={`${styles.resendButton} ${
+            canResend ? styles.active : styles.disabled
           }`}
         >
-          {canResend
-            ? "Resend Code"
-            : isActive
-            ? `Resend code in ${Math.floor(otpSeconds / 60)}:${(otpSeconds % 60)
-                .toString()
-                .padStart(2, "0")}`
-            : "Send OTP"}
+          {canResend ? "Resend Code" : `Resend code in ${formattedTime}`}
         </button>
       </div>
     </div>

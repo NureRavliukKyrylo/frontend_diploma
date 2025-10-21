@@ -13,21 +13,26 @@ import {
 } from "./slices/auth/fillingFormSlice";
 import { base64ToFile } from "../../../shared/libs";
 import {
-  createVerifyEmailSlice,
-  type VerifyEmailSlice,
-} from "./slices/auth/verifyEmailSlice";
-import {
   createOtpTimerSlice,
   type OtpTimerSlice,
 } from "@shared/config/stores/slices/otpTimerSlice";
+import {
+  createForgotPasswordSlice,
+  type ForgotPasswordSlice,
+} from "./slices/auth/forgotPasswordSlice";
+import {
+  createUserInfoSlice,
+  type UserInfoSlice,
+} from "./slices/auth/userInfoSlice";
 
 type AuhtStore = AuthModeSlice &
   StepperSlice &
   LoginSlice &
   SignupSlice &
   UserFillingSlice &
-  VerifyEmailSlice &
-  OtpTimerSlice;
+  OtpTimerSlice &
+  ForgotPasswordSlice &
+  UserInfoSlice;
 
 export const useAuthStore = create<AuhtStore>()(
   devtools(
@@ -38,8 +43,9 @@ export const useAuthStore = create<AuhtStore>()(
         ...createLoginSlice(...a),
         ...createSignupSlice(...a),
         ...createUserFillingSlice(...a),
-        ...createVerifyEmailSlice(...a),
         ...createOtpTimerSlice(...a),
+        ...createForgotPasswordSlice(...a),
+        ...createUserInfoSlice(...a),
       }),
       {
         name: "auth-store",
@@ -51,10 +57,9 @@ export const useAuthStore = create<AuhtStore>()(
           profile: state.profile,
           privacySettings: state.privacySettings,
           avatarUrl: state.avatarUrl,
-          code: state.code,
           userId: state.userId,
-          otpSeconds: state.otpSeconds,
-          currentOtpType: state.currentOtpType,
+          otpTimers: state.otpTimers,
+          emailForgotPassword: state.emailForgotPassword,
         }),
         onRehydrateStorage: () => (state) => {
           if (state) {

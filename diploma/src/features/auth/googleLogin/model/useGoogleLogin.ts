@@ -12,7 +12,7 @@ export const useGoogle = () => {
   const mutation = useMutation({
     mutationFn: (data: GoogleLoginDto) => googleLogin(data),
     onSuccess: (data) => {
-      setServerError(null);
+      setServerError("loginGoogleError", null);
       console.log("Google login success:", data);
       addToast({
         title: "Login Success",
@@ -30,7 +30,7 @@ export const useGoogle = () => {
       const errorMessage =
         error?.response?.data?.error ||
         "Google login failed. Please try again.";
-      setServerError(errorMessage);
+      setServerError("loginGoogleError", errorMessage);
       addToast({
         title: "Login Failed",
         description: errorMessage,

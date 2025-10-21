@@ -26,6 +26,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
           checked={checked}
           onChange={onChange}
           className={styles.checkBox}
+          autoComplete="off"
           {...props}
         />
         <div className={styles.checkBoxText}>{children}</div>

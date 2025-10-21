@@ -1,17 +1,37 @@
 import { type StateCreator } from "zustand";
+import { OtpType } from "@shared/config";
 
 export interface OtpTimerSlice {
-  otpSeconds: number;
-  currentOtpType: "email" | "forgotPassword" | null;
-  setOtpSeconds: (value: number) => void;
-  setCurrentOtpType: (type: "email" | "forgotPassword" | null) => void;
-  resetOtpTimer: () => void;
+  otpTimers: Record<OtpType, number>;
+  setOtpSeconds: (type: OtpType, value: number) => void;
+  resetOtpTimer: (type: OtpType) => void;
+  decrementOtpTimer: (type: OtpType) => void;
 }
 
+const OTP_INITIAL_SECONDS = 3 * 1;
+
 export const createOtpTimerSlice: StateCreator<OtpTimerSlice> = (set) => ({
-  otpSeconds: 3 * 60,
-  currentOtpType: null,
-  setOtpSeconds: (value) => set({ otpSeconds: value }),
-  setCurrentOtpType: (type) => set({ currentOtpType: type }),
-  resetOtpTimer: () => set({ otpSeconds: 3 * 60 }),
+  otpTimers: {
+    [OtpType.EmailVerification]: OTP_INITIAL_SECONDS,
+    [OtpType.TwoFactor]: OTP_INITIAL_SECONDS,
+    [OtpType.PasswordReset]: OTP_INITIAL_SECONDS,
+  },
+
+  setOtpSeconds: (type, value) =>
+    set((state) => ({
+      otpTimers: { ...state.otpTimers, [type]: value },
+    })),
+
+  resetOtpTimer: (type) =>
+    set((state) => ({
+      otpTimers: { ...state.otpTimers, [type]: OTP_INITIAL_SECONDS },
+    })),
+
+  decrementOtpTimer: (type) =>
+    set((state) => ({
+      otpTimers: {
+        ...state.otpTimers,
+        [type]: Math.max(0, state.otpTimers[type] - 1),
+      },
+    })),
 });

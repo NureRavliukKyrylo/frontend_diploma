@@ -16,7 +16,7 @@ export const useLogin = () => {
   const mutation = useMutation({
     mutationFn: (data: LoginDto) => login(data),
     onSuccess: (data) => {
-      setServerError(null);
+      setServerError("loginError", null);
       console.log("Login success:", data);
       addToast({
         title: "Login Success",
@@ -31,7 +31,7 @@ export const useLogin = () => {
       const errorMessage =
         error?.response?.data?.error ||
         "Something went wrong. Please try again";
-      setServerError(errorMessage);
+      setServerError("loginError", errorMessage);
       addToast({
         title: "Login Failed",
         description: errorMessage,

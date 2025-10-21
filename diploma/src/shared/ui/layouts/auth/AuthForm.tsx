@@ -5,6 +5,7 @@ import { AppleIcon } from "../../../assets/auth";
 import { useAuthStore } from "../../../../entities/user";
 import { AnimatePresence, motion } from "framer-motion";
 import { GoogleButton } from "../../../../features/auth";
+import { useErrorStore } from "@shared/config";
 
 interface AuthFormProps {
   signupForm: ReactNode;
@@ -13,6 +14,9 @@ interface AuthFormProps {
 
 export function AuthForm({ signupForm, signinForm }: AuthFormProps) {
   const { mode } = useAuthStore();
+  const serverError = useErrorStore(
+    (state) => state.errors["loginGoogleError"]
+  );
   return (
     <div className={styles.wrapperAuthContainer}>
       <div className={styles.authContainer}>
@@ -53,6 +57,7 @@ export function AuthForm({ signupForm, signinForm }: AuthFormProps) {
             <GoogleButton />
           </div>
         </div>
+        {serverError && <div className="errorMessage">{serverError}</div>}
       </div>
     </div>
   );

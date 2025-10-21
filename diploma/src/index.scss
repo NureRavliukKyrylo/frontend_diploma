@@ -1,6 +1,6 @@
 @use "./shared/styles/variables/fontVariables.scss" as *;
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-$error-color: rgba(199, 19, 49, 0.993);
+$error-color: red;
 
 :root {
   font-family: $font-family;

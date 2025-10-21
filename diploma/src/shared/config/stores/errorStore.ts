@@ -1,11 +1,21 @@
 import { create } from "zustand";
 
 interface ErrorStore {
-  serverError: string | null;
-  setServerError: (msg: string | null) => void;
+  errors: Record<string, string | null>;
+  setServerError: (key: string, msg: string | null) => void;
+  clearError: (key: string) => void;
+  clearAllErrors: () => void;
 }
 
 export const useErrorStore = create<ErrorStore>((set) => ({
-  serverError: null,
-  setServerError: (msg) => set({ serverError: msg }),
+  errors: {},
+  setServerError: (key, msg) =>
+    set((state) => ({
+      errors: { ...state.errors, [key]: msg },
+    })),
+  clearError: (key) =>
+    set((state) => ({
+      errors: { ...state.errors, [key]: null },
+    })),
+  clearAllErrors: () => set({ errors: {} }),
 }));

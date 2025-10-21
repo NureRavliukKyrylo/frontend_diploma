@@ -15,7 +15,7 @@ export const SignUpForm = () => {
     setAgreement,
     setSignUpPassword,
   } = useAuthStore();
-  const serverError = useErrorStore((state) => state.serverError);
+  const serverError = useErrorStore((state) => state.errors["signUpError"]);
   return (
     <>
       <div className={styles.headerSignUp}>
