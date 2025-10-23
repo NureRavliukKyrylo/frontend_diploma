@@ -1,7 +1,9 @@
-@use "../../../../styles/variables/fontVariables.scss" as *;
+@use "@shared/styles/variables/fontVariables.scss" as *;
+@use "@shared/styles/mixins/adaptive.scss" as breakpoints;
 
 .stepFormWrapper {
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25);
+
   .innerStepForm {
     position: sticky;
     top: 0;
@@ -9,8 +11,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding: 30px 0;
 
     .localizationStepperButtonWrapper {
       width: 100%;
@@ -18,49 +19,163 @@
       justify-content: flex-end;
       padding-right: 30px;
     }
+
     .stepperFormWrapper {
       padding: 50px;
+      padding-right: 10px;
     }
+
     .troubleStepFormIssue {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       gap: 20px;
+
       .textTroubleStepFormIssue {
         display: flex;
         flex-direction: column;
         gap: 20px;
+
         .lineDividerIssueBlock {
           display: flex;
           justify-content: center;
+
           .lineDividerIssue {
             border-top: 1px solid rgba(0, 0, 0, 0.2);
             width: 100%;
           }
         }
+
         .textDetailIssue {
-          padding-left: 50px;
-          padding-right: 20px;
           display: flex;
           flex-direction: column;
           gap: 20px;
+          padding-left: 50px;
+          padding-right: 20px;
+
           .textInfoStepperForm {
             display: flex;
             flex-direction: column;
             gap: 5px;
           }
+
           .contactsButtonStepperForm {
             display: flex;
             justify-content: flex-end;
+            width: 100%;
           }
+
           h1 {
             @include font-base(25px, 700);
-            color: #000000;
+            color: #000;
           }
+
           p {
             @include font-base(18px, 300);
-            color: #000000;
+            color: #000;
             line-height: 120%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include breakpoints.respond-to(custom, 1400px) {
+  .stepFormWrapper {
+    .innerStepForm {
+      padding: 25px 0;
+
+      .localizationStepperButtonWrapper {
+        padding-right: 10px;
+      }
+
+      .stepperFormWrapper {
+        padding: 40px;
+        padding-right: 20px;
+      }
+
+      .troubleStepFormIssue {
+        .textTroubleStepFormIssue {
+          .textDetailIssue {
+            padding-left: 40px;
+            padding-right: 18px;
+            h1 {
+              @include font-base(22px, 700);
+            }
+
+            p {
+              @include font-base(17px, 300);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include breakpoints.respond-to(custom, 1200px) {
+  .stepFormWrapper {
+    .innerStepForm {
+      padding: 20px 0;
+      height: auto;
+
+      .localizationStepperButtonWrapper {
+        padding-right: 10px;
+      }
+
+      .stepperFormWrapper {
+        padding: 30px;
+      }
+
+      .troubleStepFormIssue {
+        .textTroubleStepFormIssue {
+          .textDetailIssue {
+            align-items: flex-end;
+            padding-left: 30px;
+            padding-right: 15px;
+            h1 {
+              @include font-base(20px, 700);
+              text-align: right;
+            }
+
+            p {
+              @include font-base(16px, 300);
+              text-align: right;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include breakpoints.respond-to(mobile) {
+  .stepFormWrapper {
+    .innerStepForm {
+      padding: 15px 0;
+
+      .localizationStepperButtonWrapper {
+        padding-right: 10px;
+      }
+
+      .troubleStepFormIssue {
+        .textTroubleStepFormIssue {
+          .textDetailIssue {
+            padding-left: 15px;
+            padding-right: 20px;
+            .contactsButtonStepperForm {
+              width: 50%;
+            }
+            h1 {
+              @include font-base(18px, 700);
+              text-align: right;
+            }
+
+            p {
+              @include font-base(14px, 300);
+              text-align: right;
+            }
           }
         }
       }

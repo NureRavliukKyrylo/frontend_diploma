@@ -6,10 +6,12 @@ import { useErrorStore } from "@shared/config";
 import { AuthRoutes } from "@shared/routes";
 import { useFormik } from "formik";
 import { setPasswordSchema } from "../libs/setPasswordSchema";
+import { useAuthStore } from "@entities/user";
 
 export const useSetPassword = () => {
   const setServerError = useErrorStore((state) => state.setServerError);
   const router = useRouter();
+  const { userId, clearEmailForgotPassword } = useAuthStore();
 
   const mutation = useMutation({
     mutationFn: (data: setPasswordDto) => setPassword(data),
@@ -21,6 +23,7 @@ export const useSetPassword = () => {
         description: "Your password has been updated successfully",
         color: "success",
       });
+      clearEmailForgotPassword();
       router.navigate({ to: AuthRoutes.root });
     },
     onError: (error: any) => {
@@ -39,6 +42,7 @@ export const useSetPassword = () => {
 
   const formik = useFormik<setPasswordDto>({
     initialValues: {
+      userId,
       newPassword: "",
       confirmPassword: "",
     },

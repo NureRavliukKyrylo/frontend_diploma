@@ -3,7 +3,7 @@ import { API_URL } from "../config";
 
 export const apiClient = axios.create({
   baseURL: `${API_URL}/api/`,
-  timeout: 7000,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json",
   },

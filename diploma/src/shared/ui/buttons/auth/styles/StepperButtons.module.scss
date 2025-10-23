@@ -1,5 +1,6 @@
-@use "./../../../../styles/variables/fontVariables.scss" as *;
-@use "./../../../../styles/animations/buttonBaseAnimation.scss" as animation;
+@use "@shared/styles/variables/fontVariables.scss" as *;
+@use "@shared/styles/animations/buttonBaseAnimation.scss" as animation;
+@use "@shared/styles/mixins/adaptive.scss" as breakpoints;
 
 .nextStepperButton {
   background: black;
@@ -10,7 +11,23 @@
   height: 100%;
   padding: 5px;
   @include animation.button-hover-effect(black, 0.25s);
+
+  @include breakpoints.respond-to(laptop) {
+    @include font-base(18px, 800);
+  }
+
+  @include breakpoints.respond-to(tablet) {
+    @include font-base(16px, 800);
+    height: auto;
+    padding: 5px 15px;
+  }
+
+  @include breakpoints.respond-to(mobile) {
+    @include font-base(14px, 800);
+    padding: 5px 12px;
+  }
 }
+
 .skipStepperButton {
   background: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
@@ -20,7 +37,23 @@
   height: 100%;
   padding: 5px;
   @include animation.button-hover-effect(#ffffff, 0.25s);
+
+  @include breakpoints.respond-to(laptop) {
+    @include font-base(20px, 800);
+  }
+
+  @include breakpoints.respond-to(tablet) {
+    @include font-base(18px, 800);
+    height: auto;
+    padding: 5px 15px;
+  }
+
+  @include breakpoints.respond-to(mobile) {
+    @include font-base(16px, 800);
+    padding: 5px 12px;
+  }
 }
+
 .prevStepperButton {
   background: white;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
@@ -36,5 +69,21 @@
   .arrowIcon {
     object-fit: contain;
     opacity: 0.6;
+    width: 90%;
+  }
+
+  @include breakpoints.respond-to(laptop) {
+    @include font-base(18px, 800);
+    padding: 8px;
+  }
+
+  @include breakpoints.respond-to(tablet) {
+    @include font-base(16px, 800);
+    padding: 8px 12px;
+  }
+
+  @include breakpoints.respond-to(mobile) {
+    @include font-base(14px, 800);
+    padding: 6px 10px;
   }
 }

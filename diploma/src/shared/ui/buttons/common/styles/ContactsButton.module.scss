@@ -1,5 +1,6 @@
-@use "./../../../../styles/variables/fontVariables.scss" as *;
-@use "./../../../../styles/animations/emphasizeAnimation.scss" as animation;
+@use "@shared/styles/variables/fontVariables.scss" as *;
+@use "@shared/styles/animations/emphasizeAnimation.scss" as animation;
+@use "@shared/styles/mixins/adaptive.scss" as breakpoints;
 
 .contactsButton {
   background: rgba(0, 0, 0, 0.7);
@@ -14,4 +15,22 @@
   align-items: center;
   width: 35%;
   @include animation.button-glow-effect($glow-color: #273646);
+
+  @include breakpoints.respond-to(laptop) {
+    @include font-base(17px, 600);
+    width: 40%;
+    height: 35px;
+  }
+
+  @include breakpoints.respond-to(tablet) {
+    @include font-base(16px, 600);
+    width: 60%;
+    height: 35px;
+  }
+
+  @include breakpoints.respond-to(mobile) {
+    @include font-base(15px, 600);
+    width: 100%;
+    height: 34px;
+  }
 }

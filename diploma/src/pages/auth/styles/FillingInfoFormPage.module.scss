@@ -1,12 +1,57 @@
+@use "@shared/styles/mixins/adaptive.scss" as *;
+
+$max_width: 1400px;
 .pageFillingFormWrapper {
   display: flex;
   flex-direction: row;
 
   > :first-child {
-    flex: 6.9;
+    flex: 1 1 auto;
+    min-width: 300px;
   }
 
   > :nth-child(2) {
-    flex: 3.1;
+    flex: 0 0 530px;
+  }
+
+  @include respond-to(custom, $max_width) {
+    > :first-child {
+      flex: 1 1 auto;
+      min-width: 250px;
+    }
+
+    > :nth-child(2) {
+      flex: 0 0 400px;
+    }
+  }
+
+  @include respond-to(custom, 1200px) {
+    flex-direction: column;
+    width: 100%;
+    > :first-child {
+      order: 2;
+      flex: 1 1 auto;
+    }
+
+    > :nth-child(2) {
+      order: 1;
+      flex: 0 0 auto;
+    }
+  }
+
+  @include respond-to(mobile) {
+    flex-direction: column;
+
+    > :first-child {
+      order: 2;
+      flex: 1 1 auto;
+      width: 100%;
+    }
+
+    > :nth-child(2) {
+      order: 1;
+      flex: 0 0 auto;
+      width: 100%;
+    }
   }
 }

@@ -10,7 +10,7 @@ export const ForgotPasswordVerificationForm: React.FC = () => {
   const { resend } = useResendCode({ type: OtpType.PasswordReset });
   const { formik, isLoading } = useVerification({
     apiFn: verificationForgotPassword,
-    successRedirect: AuthRoutes.forgotPassword.setPassword,
+    successRedirect: `../${AuthRoutes.forgotPassword.setPassword}`,
     successMessage: "Email verified successfully",
     errorMessage: "Email verification failed",
   });

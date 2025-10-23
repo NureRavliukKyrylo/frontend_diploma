@@ -14,7 +14,8 @@ import { useAuthStore } from "@entities/user";
 export const useForgotPassword = () => {
   const router = useRouter();
   const { setServerError } = useErrorStore();
-  const { emailForgotPassword, setEmailForgotPassword } = useAuthStore();
+  const { emailForgotPassword, setEmailForgotPassword, setUserId } =
+    useAuthStore();
 
   const mutation = useMutation({
     mutationFn: (data: ForgotPasswordDto) => forgotPassword(data),
@@ -26,6 +27,7 @@ export const useForgotPassword = () => {
         color: "success",
       });
       setServerError("forgotPasswordError", null);
+      setUserId(data.userId);
       router.navigate({
         to: AuthRoutes.forgotPassword.verification,
       });

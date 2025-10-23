@@ -1,0 +1,39 @@
+@mixin button-shine(
+  $bg-color: #000000,
+  $shine-color: rgba(255, 255, 255, 0.3),
+  $duration: 1.6s
+) {
+  position: relative;
+  background-color: $bg-color;
+  color: #fff;
+  overflow: hidden;
+  border: 1px solid transparent;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0) 0%,
+      $shine-color 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
+    z-index: 0;
+    transition: right $duration ease-in-out;
+  }
+
+  &:hover::before {
+    right: 80%;
+  }
+
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
+}

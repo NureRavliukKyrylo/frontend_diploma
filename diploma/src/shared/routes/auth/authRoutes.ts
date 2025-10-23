@@ -1,5 +1,5 @@
 export const AuthRoutes = {
-  root: "auth",
+  root: "/auth",
   default: "/",
   twoFactor: "two-factor-verification",
   verification: "verification",

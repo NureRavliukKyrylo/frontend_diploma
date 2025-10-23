@@ -7,10 +7,6 @@ import {
 import { createStepperSlice, type StepperSlice } from "@shared/config";
 import { createLoginSlice, type LoginSlice } from "./slices/auth/loginSlice";
 import { createSignupSlice, type SignupSlice } from "./slices/auth/signUpSlice";
-import {
-  createUserFillingSlice,
-  type UserFillingSlice,
-} from "./slices/auth/fillingFormSlice";
 import { base64ToFile } from "../../../shared/libs";
 import {
   createOtpTimerSlice,
@@ -23,13 +19,17 @@ import {
 import {
   createUserInfoSlice,
   type UserInfoSlice,
-} from "./slices/auth/userInfoSlice";
+} from "./slices/profile/userInfoSlice";
+import {
+  type UserProfileSlice,
+  createUserProfileSlice,
+} from "./slices/profile/userProfileSlice";
 
 type AuhtStore = AuthModeSlice &
   StepperSlice &
   LoginSlice &
   SignupSlice &
-  UserFillingSlice &
+  UserProfileSlice &
   OtpTimerSlice &
   ForgotPasswordSlice &
   UserInfoSlice;
@@ -42,7 +42,7 @@ export const useAuthStore = create<AuhtStore>()(
         ...createStepperSlice(...a),
         ...createLoginSlice(...a),
         ...createSignupSlice(...a),
-        ...createUserFillingSlice(...a),
+        ...createUserProfileSlice(...a),
         ...createOtpTimerSlice(...a),
         ...createForgotPasswordSlice(...a),
         ...createUserInfoSlice(...a),
