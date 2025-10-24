@@ -1,10 +1,12 @@
-import { SocialPlatform } from "../../../../../shared/config";
+import { SocialPlatform } from "@shared/config";
 import {
   InstagramIcon,
   TelegramIcon,
   WhatsApp,
   ViberIcon,
-} from "../../../../../shared/assets/common";
+  TikTok,
+  LinkedIn,
+} from "@shared/assets/common";
 
 export const PLATFORM_CONFIG = [
   {
@@ -34,5 +36,19 @@ export const PLATFORM_CONFIG = [
     label: "Enter your What's App link",
     activeLabel: "What's App link",
     icon: WhatsApp,
+  },
+  {
+    platform: SocialPlatform.TikTok,
+    key: "TikTok",
+    label: "Enter your TikTok link",
+    activeLabel: "TikTok  link",
+    icon: TikTok,
+  },
+  {
+    platform: SocialPlatform.LinkedIn,
+    key: "LinkedIn",
+    label: "Enter your LinkedIn link",
+    activeLabel: "LinkedIn link",
+    icon: LinkedIn,
   },
 ] as const;

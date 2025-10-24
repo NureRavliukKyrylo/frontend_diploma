@@ -90,7 +90,7 @@
 
       .messageImgBlock {
         display: flex;
-        align-items: center;
+        align-items: stretch;
         gap: 5px;
 
         img {
@@ -110,6 +110,7 @@
 
   @include breakpoints.respond-to(custom, 1200px) {
     padding: 60px;
+    padding-top: 40px;
     min-height: auto;
     h1 {
       @include font-base(32px, 900);
@@ -118,41 +119,56 @@
     p {
       @include font-base(20px, 500);
     }
-    .fillingInfoFormWrapper {
-      min-height: auto;
-      .wrapperFillingInfoFormContainer {
-        .buttonsFillForm {
-          > :first-child {
-            height: 100%;
-          }
-        }
-        .fillingInfoFormContainer {
-          padding: 30px 20px;
-          margin-top: 40px;
-          .buttonsFillForm {
-            height: auto;
-            .interactStepperButtons {
-              max-width: 200px;
-              height: auto;
-            }
-          }
-        }
-      }
-
-      .additionMessageFillForm {
-        flex-direction: column;
-        gap: 5px;
-
-        .messageImgBlock {
-          align-items: center;
-
-          img {
-            width: 16px;
-            height: 16px;
+    .wrapperFillingInfoFormContainer {
+      .fillingInfoFormContainer {
+        padding: 30px 20px;
+        margin-top: 40px;
+        .headerTextFillForm {
+          h1 {
+            color: rgba(0, 0, 0, 0.8);
+            @include font-base(32px, 700);
           }
 
           p {
-            @include font-base(16px, 200);
+            color: rgba(0, 0, 0, 0.6);
+            @include font-base(15px, 500);
+          }
+        }
+        .fillingInfoFormWrapper {
+          min-height: auto;
+          .wrapperFillingInfoFormContainer {
+            .buttonsFillForm {
+              > :first-child {
+                height: 100%;
+              }
+            }
+            .fillingInfoFormContainer {
+              .buttonsFillForm {
+                height: auto;
+                .interactStepperButtons {
+                  max-width: 200px;
+                  height: auto;
+                }
+              }
+            }
+          }
+
+          .additionMessageFillForm {
+            flex-direction: column;
+            gap: 5px;
+
+            .messageImgBlock {
+              align-items: center;
+
+              img {
+                width: 16px;
+                height: 16px;
+              }
+
+              p {
+                @include font-base(16px, 200);
+              }
+            }
           }
         }
       }
@@ -164,6 +180,7 @@
 
     h1 {
       @include font-base(24px, 900);
+      line-height: 120%;
     }
 
     p {
@@ -172,9 +189,20 @@
 
     .wrapperFillingInfoFormContainer {
       .fillingInfoFormContainer {
-        padding: 20px 15px;
         margin-top: 30px;
+        .headerTextFillForm {
+          h1 {
+            color: rgba(0, 0, 0, 0.8);
+            @include font-base(28px, 700);
+            line-height: 100%;
+            margin-bottom: 5px;
+          }
 
+          p {
+            color: rgba(0, 0, 0, 0.6);
+            @include font-base(14px, 500);
+          }
+        }
         .buttonsFillForm {
           height: auto;
           gap: 10px;
@@ -186,6 +214,7 @@
             gap: 15px;
             max-width: 200px;
             height: auto;
+            align-items: flex-end;
             > :first-child,
             > :last-child {
               flex: 1;

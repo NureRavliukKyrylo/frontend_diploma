@@ -1,3 +1,4 @@
+@use "@shared/styles/mixins/adaptive.scss" as breakpoints;
 .aboutWrapper {
   width: 100%;
   display: flex;
@@ -9,5 +10,58 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    .datePickerWrapper {
+      width: 60%;
+    }
+  }
+}
+
+@include breakpoints.respond-to(custom, 1400px) {
+  .aboutWrapper {
+    gap: 25px;
+
+    .inputsForm {
+      gap: 18px;
+      .datePickerWrapper {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@include breakpoints.respond-to(custom, 1200px) {
+  .aboutWrapper {
+    gap: 20px;
+
+    .inputsForm {
+      gap: 15px;
+      .datePickerWrapper {
+        width: 60%;
+      }
+    }
+  }
+}
+
+@include breakpoints.respond-to(tablet) {
+  .aboutWrapper {
+    .inputsForm {
+      .datePickerWrapper {
+        width: 100%;
+      }
+    }
+  }
+}
+@include breakpoints.respond-to(mobile) {
+  .aboutWrapper {
+    padding-left: 0px;
+    padding-right: 0px;
+    gap: 15px;
+
+    .inputsForm {
+      gap: 12px;
+      .datePickerWrapper {
+        width: 100%;
+      }
+    }
   }
 }

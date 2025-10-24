@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
 import { useErrorStore } from "@shared/config";
-import { useAuthStore } from "@entities/user";
+import { useUserStore } from "@entities/user";
 import { verifyCodeSchema } from "../libs/verifyCodeSchema";
 
 interface VerificationConfig {
@@ -21,7 +21,7 @@ export const useVerification = ({
 }: VerificationConfig) => {
   const router = useRouter();
   const { setServerError } = useErrorStore();
-  const { userId } = useAuthStore();
+  const { userId } = useUserStore();
 
   const mutation = useMutation({
     mutationFn: apiFn,
@@ -46,13 +46,16 @@ export const useVerification = ({
 
   const formik = useFormik({
     initialValues: {
-      code: undefined,
+      code: "",
       userId,
     },
-    validationSchema: verifyCodeSchema,
-    onSubmit: (values) => mutation.mutate(values),
-  });
 
+    validationSchema: verifyCodeSchema,
+    onSubmit: (values) => {
+      mutation.mutate(values);
+    },
+  });
+  console.log("code", formik.errors);
   return {
     formik,
     handleSubmit: formik.handleSubmit,

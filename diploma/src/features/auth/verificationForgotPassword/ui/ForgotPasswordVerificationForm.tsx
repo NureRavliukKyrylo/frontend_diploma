@@ -7,7 +7,9 @@ import { useResendCode } from "@features/verification";
 import { AuthRoutes } from "@shared/routes";
 
 export const ForgotPasswordVerificationForm: React.FC = () => {
-  const { resend } = useResendCode({ type: OtpType.PasswordReset });
+  const { resend, isLoadingResend } = useResendCode({
+    type: OtpType.PasswordReset,
+  });
   const { formik, isLoading } = useVerification({
     apiFn: verificationForgotPassword,
     successRedirect: `../${AuthRoutes.forgotPassword.setPassword}`,
@@ -21,6 +23,7 @@ export const ForgotPasswordVerificationForm: React.FC = () => {
       formik={formik}
       isLoading={isLoading}
       onResend={resend}
+      isLoadingResend={isLoadingResend}
     />
   );
 };

@@ -1,15 +1,65 @@
+@use "@shared/styles/mixins/adaptive.scss" as breakpoints;
+
 .contactsWrapper {
   width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   padding: 30px;
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
   gap: 30px;
   .inputsContactsForm {
     display: flex;
     flex-direction: column;
+    gap: 20px;
+  }
+}
+@include breakpoints.respond-to(laptop) {
+  .contactsWrapper {
+    gap: 25px;
+
+    .inputsContactsForm {
+      gap: 12px;
+    }
+  }
+}
+
+@include breakpoints.respond-to(tablet) {
+  .contactsWrapper {
+    gap: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
+
+    .inputsContactsForm {
+      gap: 10px;
+
+      button {
+        align-self: center;
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  }
+}
+
+@include breakpoints.respond-to(mobile) {
+  .contactsWrapper {
     gap: 15px;
+    padding-left: 0px;
+    padding-right: 0px;
+    .inputsContactsForm {
+      gap: 10px;
+
+      textarea {
+        min-height: 100px;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        font-weight: 600;
+      }
+    }
   }
 }

@@ -1,9 +1,9 @@
 import { apiClient } from "../../../../shared/api";
 
 export type RegisterDto = {
-  firstName: string;
-  lastName: string;
-  email: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
   password: string;
 };
 

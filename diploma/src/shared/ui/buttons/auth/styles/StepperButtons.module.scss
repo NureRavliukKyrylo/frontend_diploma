@@ -13,17 +13,17 @@
   @include animation.button-hover-effect(black, 0.25s);
 
   @include breakpoints.respond-to(laptop) {
-    @include font-base(18px, 800);
+    @include font-base(20px, 800);
   }
 
   @include breakpoints.respond-to(tablet) {
-    @include font-base(16px, 800);
+    @include font-base(18px, 800);
     height: auto;
     padding: 5px 15px;
   }
 
   @include breakpoints.respond-to(mobile) {
-    @include font-base(14px, 800);
+    @include font-base(16px, 800);
     padding: 5px 12px;
   }
 }

@@ -7,16 +7,16 @@ const minDate = new Date(
   today.getDate()
 );
 const maxDate = new Date(
-  today.getFullYear() - 18,
+  today.getFullYear() - 14,
   today.getMonth(),
   today.getDate()
 );
 
 export const aboutFormSchema = Yup.object({
-  about: Yup.string(),
+  about: Yup.string().min(15, "Biography must contain at least 15 characters"),
   dateOfBirth: Yup.date()
     .nullable()
-    .max(maxDate, "You must be at least 18 years old")
+    .max(maxDate, "You must be at least 14 years old")
     .min(minDate, "Age cannot be more than 100 years")
     .typeError("Invalid date"),
 }).test({

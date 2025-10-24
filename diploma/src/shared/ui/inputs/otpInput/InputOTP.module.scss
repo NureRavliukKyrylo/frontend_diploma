@@ -1,24 +1,8 @@
+@use "@shared/styles/variables/fontVariables" as *;
+@use "@shared/styles/mixins/adaptive" as breakpoint;
+
 .wrapperInputOTP {
   display: flex;
   flex-direction: column;
   gap: 5px;
-}
-.resendButton {
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-
-  &.active {
-    color: #2563eb;
-    text-decoration: underline;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  &.disabled {
-    color: #9ca3af;
-    cursor: default;
-    text-decoration: none;
-  }
 }

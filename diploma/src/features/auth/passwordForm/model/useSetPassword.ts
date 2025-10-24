@@ -6,12 +6,13 @@ import { useErrorStore } from "@shared/config";
 import { AuthRoutes } from "@shared/routes";
 import { useFormik } from "formik";
 import { setPasswordSchema } from "../libs/setPasswordSchema";
-import { useAuthStore } from "@entities/user";
+import { useAuthStore, useUserStore } from "@entities/user";
 
 export const useSetPassword = () => {
   const setServerError = useErrorStore((state) => state.setServerError);
   const router = useRouter();
-  const { userId, clearEmailForgotPassword } = useAuthStore();
+  const { clearEmailForgotPassword } = useAuthStore();
+  const { userId } = useUserStore();
 
   const mutation = useMutation({
     mutationFn: (data: setPasswordDto) => setPassword(data),

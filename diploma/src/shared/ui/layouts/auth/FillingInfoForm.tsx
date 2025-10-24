@@ -7,6 +7,7 @@ import {
   SkipStepperButton,
 } from "../../../ui/buttons";
 import { motion, AnimatePresence } from "framer-motion";
+import { useUserStore } from "@entities/user";
 
 interface FillingInfoFormProps {
   message: string;
@@ -32,9 +33,12 @@ export function FillingInfoForm({
   totalSteps,
 }: FillingInfoFormProps) {
   const isLastStep = activeStep === totalSteps - 1;
+  const { firstName, lastName } = useUserStore();
   return (
     <div className={styles.fillingInfoFormWrapper}>
-      <h1>Welcome to ImpactFlow, User</h1>
+      <h1>
+        Welcome to ImpactFlow, {firstName} {lastName}
+      </h1>
       <p> Your local action, global change</p>
       <div className={styles.wrapperFillingInfoFormContainer}>
         <div className={styles.fillingInfoFormContainer}>

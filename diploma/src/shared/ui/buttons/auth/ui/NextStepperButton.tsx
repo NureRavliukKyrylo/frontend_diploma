@@ -1,3 +1,5 @@
+import { useAuthStore } from "@entities/user";
+import { BaseButtonWrapper } from "../../base";
 import styles from "./../styles/StepperButtons.module.scss";
 
 interface NextStepperButtonProps {
@@ -7,9 +9,15 @@ interface NextStepperButtonProps {
 export const NextStepperButton: React.FC<NextStepperButtonProps> = ({
   form,
 }) => {
+  const { isLoading } = useAuthStore();
+  console.log(isLoading);
   return (
-    <button type="submit" className={styles.nextStepperButton} form={form}>
+    <BaseButtonWrapper
+      loading={isLoading}
+      className={styles.nextStepperButton}
+      form={form}
+    >
       Save & Next
-    </button>
+    </BaseButtonWrapper>
   );
 };

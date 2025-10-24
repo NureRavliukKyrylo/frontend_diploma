@@ -6,10 +6,12 @@ import { useAuthStore } from "@entities/user";
 
 export const useSubmitFillingForm = () => {
   const router = useRouter();
-  const { clearFillingForm } = useAuthStore();
+  const { clearFillingForm, setLoading } = useAuthStore();
 
   const mutation = useMutation({
     mutationFn: (data: UpdateUserDto) => updateUser(data),
+    onMutate: () => setLoading(true),
+    onSettled: () => setLoading(false),
     onSuccess: (data) => {
       console.log("[DEBUG] API success response:", data);
       addToast({

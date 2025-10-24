@@ -10,10 +10,10 @@ export const SignUpForm = () => {
   const { formik, isLoading } = useRegistration();
   const {
     setSignUpEmail,
-    setFirstName,
-    setLastName,
-    setAgreement,
     setSignUpPassword,
+    setSignFirstName,
+    setSignLastName,
+    setAgreement,
   } = useAuthStore();
   const serverError = useErrorStore((state) => state.errors["signUpError"]);
   return (
@@ -32,7 +32,7 @@ export const SignUpForm = () => {
               activeLabel="First name"
               onChange={(e) => {
                 formik.handleChange(e);
-                setFirstName(e.target.value);
+                setSignFirstName(e.target.value);
               }}
               value={formik.values.firstName}
               error={formik.submitCount > 0 ? formik.errors.firstName : ""}
@@ -45,7 +45,7 @@ export const SignUpForm = () => {
               activeLabel="Last name"
               onChange={(e) => {
                 formik.handleChange(e);
-                setLastName(e.target.value);
+                setSignLastName(e.target.value);
               }}
               value={formik.values.lastName}
               error={formik.submitCount > 0 ? formik.errors.lastName : ""}

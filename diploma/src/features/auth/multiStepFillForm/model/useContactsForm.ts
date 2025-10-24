@@ -16,7 +16,7 @@ export const useContactsForm = () => {
     profile,
   } = useAuthStore();
 
-  const { handleSubmit } = useSubmitFillingForm();
+  const { handleSubmit, isLoading } = useSubmitFillingForm();
 
   const initialValues = Object.entries(platformKeys).reduce(
     (acc, [platformValue, key]) => {
@@ -83,5 +83,5 @@ export const useContactsForm = () => {
     },
   });
 
-  return formik;
+  return { formik, isLoading: isLoading };
 };

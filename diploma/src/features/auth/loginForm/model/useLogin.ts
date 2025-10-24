@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { login, type LoginDto } from "../api/loginApi";
 import { loginSchema } from "../libs/loginSchema";
 import { useErrorStore } from "@shared/config";
-import { useAuthStore } from "@entities/user";
+import { useAuthStore, useUserStore } from "@entities/user";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
@@ -12,6 +12,7 @@ export const useLogin = () => {
   const setServerError = useErrorStore((state) => state.setServerError);
   const { loginEmail, loginPassword, rememberMe, clearLoginForm } =
     useAuthStore();
+  const { setEmail } = useUserStore();
   const router = useRouter();
 
   const mutation = useMutation({
@@ -51,6 +52,7 @@ export const useLogin = () => {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       mutation.mutate(values);
+      setEmail(values.email);
     },
   });
 

@@ -9,14 +9,13 @@ import { useErrorStore } from "@shared/config";
 import { useRouter } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
 import { forgotPasswordSchema } from "../libs/forgotPasswordSchema";
-import { useAuthStore } from "@entities/user";
+import { useAuthStore, useUserStore } from "@entities/user";
 
 export const useForgotPassword = () => {
   const router = useRouter();
   const { setServerError } = useErrorStore();
-  const { emailForgotPassword, setEmailForgotPassword, setUserId } =
-    useAuthStore();
-
+  const { emailForgotPassword, setEmailForgotPassword } = useAuthStore();
+  const { setUserId } = useUserStore();
   const mutation = useMutation({
     mutationFn: (data: ForgotPasswordDto) => forgotPassword(data),
     onSuccess: (data) => {

@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { resendCode, type ResendCodeDto } from "../api/resendCodeApi";
-import { useAuthStore } from "@entities/user";
+import { useUserStore } from "@entities/user";
 import { addToast } from "@heroui/react";
 import { useErrorStore, type OtpType } from "@shared/config";
 
@@ -9,7 +9,7 @@ interface UseResendCodeProps {
 }
 
 export const useResendCode = ({ type }: UseResendCodeProps) => {
-  const { userId } = useAuthStore();
+  const { userId } = useUserStore();
   const { setServerError } = useErrorStore();
 
   const mutation = useMutation({
@@ -37,7 +37,7 @@ export const useResendCode = ({ type }: UseResendCodeProps) => {
   });
 
   return {
-    resend: () => mutation.mutate({ userId, type }),
+    resend: () => mutation.mutateAsync({ userId, type }),
     isLoadingResend: mutation.isPending,
     error: mutation.error,
   };

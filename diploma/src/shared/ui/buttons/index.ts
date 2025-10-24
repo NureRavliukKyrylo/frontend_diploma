@@ -5,3 +5,4 @@ export { PreviousStepperButton } from "./auth/ui/PreviousStepperButton";
 export { LinkCommonButton } from "./common/ui/LinkCommonButton";
 export { LanguageSwitcherButton } from "./common/ui/LanguageSwitcherButton";
 export { ContactsButton } from "./common/ui/ContactsButton";
+export { ResendButton } from "./resendButton/ResendButton";

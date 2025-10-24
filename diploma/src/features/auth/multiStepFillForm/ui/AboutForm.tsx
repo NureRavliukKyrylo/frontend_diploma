@@ -15,17 +15,15 @@ export const AboutForm = () => {
     >
       <div className={styles.inputsForm}>
         <I18nProvider>
-          <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+          <div className={styles.datePickerWrapper}>
             <DatePickerInput
               name="dateOfBirth"
               label="Date of Birthday"
               value={formik.values.dateOfBirth}
               error={formik.errors.dateOfBirth}
-              touched={formik.touched.dateOfBirth}
+              submit={formik.submitCount > 0}
               onChange={(value) => formik.setFieldValue("dateOfBirth", value)}
-              onBlur={() => formik.setFieldTouched("dateOfBirth", true)}
               showMonthAndYearPickers
-              className="w-full lg:w-[60%]"
             />
           </div>
         </I18nProvider>
@@ -37,7 +35,7 @@ export const AboutForm = () => {
             formik.handleChange(e);
           }}
           onBlur={formik.handleBlur}
-          error={formik.touched.about ? formik.errors.about : ""}
+          error={formik.submitCount > 0 ? formik.errors.about : ""}
           minHeight={250}
         />
       </div>

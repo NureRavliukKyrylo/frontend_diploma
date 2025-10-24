@@ -5,4 +5,6 @@ export const platformKeys: Record<SocialPlatform, string> = {
   [SocialPlatform.Instagram]: "Instagram",
   [SocialPlatform.Viber]: "Viber",
   [SocialPlatform.WhatsApp]: "WhatsApp",
+  [SocialPlatform.TikTok]: "TikTok",
+  [SocialPlatform.LinkedIn]: "LinkedIn",
 };

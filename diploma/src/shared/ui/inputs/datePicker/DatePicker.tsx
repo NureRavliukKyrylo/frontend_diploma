@@ -7,10 +7,8 @@ interface DatePickerInputProps {
   name: string;
   value?: string | null;
   error?: string;
-  touched?: boolean;
+  submit?: boolean;
   onChange: (value: string | undefined) => void;
-  onBlur?: () => void;
-  className?: string;
   showMonthAndYearPickers?: boolean;
 }
 
@@ -19,10 +17,8 @@ export const DatePickerInput = ({
   name,
   value,
   error,
-  touched,
+  submit,
   onChange,
-  onBlur,
-  className,
   showMonthAndYearPickers = false,
 }: DatePickerInputProps) => {
   const parsedValue = (() => {
@@ -35,27 +31,31 @@ export const DatePickerInput = ({
     }
   })();
 
-  const isInvalid = touched && Boolean(error);
+  const isInvalid = submit && Boolean(error);
 
   return (
-    <I18nProvider>
-      <DatePicker
-        name={name}
-        label={label}
-        value={parsedValue}
-        isInvalid={isInvalid}
-        showMonthAndYearPickers={showMonthAndYearPickers}
-        onChange={(val) => onChange(val ? val.toString() : undefined)}
-        onBlur={onBlur}
-        errorMessage={touched ? error : ""}
-        className={className || "w-full"}
-        classNames={{
-          inputWrapper: "bg-[rgba(217,217,217,0.5)] rounded-[10px]",
-          input: `${isInvalid ? "text-[#ff0000]" : "text-gray-800"}`,
-          selectorIcon: `${isInvalid ? "text-[#ff0000]" : "text-gray-600"}`,
-          errorMessage: "text-[#ff0000]",
-        }}
-      />
-    </I18nProvider>
+    <>
+      <I18nProvider>
+        <DatePicker
+          name={name}
+          label={label}
+          value={parsedValue}
+          isInvalid={isInvalid}
+          showMonthAndYearPickers={showMonthAndYearPickers}
+          onChange={(val) => onChange(val ? val.toString() : undefined)}
+          classNames={{
+            inputWrapper: " w-full bg-[rgba(217,217,217,0.5)] rounded-[10px]",
+            input: `${
+              isInvalid ? "text-[#ff0000]" : "text-gray-800"
+            } text-[15px]`,
+            selectorIcon: `${isInvalid ? "text-[#ff0000]" : "text-gray-600"}`,
+            errorMessage: "text-[#ff0000]",
+          }}
+        />
+      </I18nProvider>
+      {submit && error && (
+        <div className="errorInput text-[#ff0000] mt-1">{error}</div>
+      )}
+    </>
   );
 };

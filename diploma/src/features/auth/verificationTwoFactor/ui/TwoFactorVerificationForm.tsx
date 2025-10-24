@@ -6,7 +6,9 @@ import { twoFactorVerification } from "../api/twoFactorVerificationApi";
 import { useResendCode } from "@features/verification";
 
 export const TwoFactorVerificationForm: React.FC = () => {
-  const { resend } = useResendCode({ type: OtpType.TwoFactor });
+  const { resend, isLoadingResend } = useResendCode({
+    type: OtpType.TwoFactor,
+  });
   const { formik, isLoading } = useVerification({
     apiFn: twoFactorVerification,
     successRedirect: "/home",
@@ -20,6 +22,7 @@ export const TwoFactorVerificationForm: React.FC = () => {
       formik={formik}
       isLoading={isLoading}
       onResend={resend}
+      isLoadingResend={isLoadingResend}
     />
   );
 };

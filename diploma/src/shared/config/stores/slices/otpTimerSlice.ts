@@ -8,7 +8,7 @@ export interface OtpTimerSlice {
   decrementOtpTimer: (type: OtpType) => void;
 }
 
-const OTP_INITIAL_SECONDS = 3 * 1;
+const OTP_INITIAL_SECONDS = 3 * 3;
 
 export const createOtpTimerSlice: StateCreator<OtpTimerSlice> = (set) => ({
   otpTimers: {

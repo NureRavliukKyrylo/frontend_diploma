@@ -4,7 +4,7 @@ import styles from "./styles/ContactsForm.module.scss";
 import { PLATFORM_CONFIG } from "./configs/sociallnputConfig";
 
 export const ContactsForm = () => {
-  const formik = useContactsForm();
+  const { formik } = useContactsForm();
 
   return (
     <form

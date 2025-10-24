@@ -6,12 +6,20 @@ interface BaseButtonWrapperProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   children: React.ReactNode;
+  spinnerColor?:
+    | "secondary"
+    | "default"
+    | "primary"
+    | "success"
+    | "warning"
+    | "danger";
 }
 
 export const BaseButtonWrapper: React.FC<BaseButtonWrapperProps> = ({
   loading = false,
   children,
   className = "",
+  spinnerColor = "secondary",
   ...props
 }) => {
   return (
@@ -23,10 +31,17 @@ export const BaseButtonWrapper: React.FC<BaseButtonWrapperProps> = ({
       {...props}
     >
       {loading && (
-        <CircularProgress color="secondary" className={styles.spinner} />
+        <CircularProgress
+          color={spinnerColor}
+          className={styles.spinner}
+          classNames={{
+            base: "flex justify-center items-center",
+            svg: "w-5 h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8",
+          }}
+        />
       )}
       <span className={styles.content}>
-        {loading ? "Sending..." : children}
+        {loading ? "Loading..." : children}
       </span>
     </button>
   );

@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useAuthStore } from "../../../../entities/user";
+import { useAuthStore, useUserStore } from "../../../../entities/user";
 import { registerSchema } from "../libs/signUpSchema";
 import { useRouter } from "@tanstack/react-router";
 import { AuthRoutes } from "../../../../shared/routes";
@@ -12,13 +12,13 @@ export const useRegistration = () => {
   const router = useRouter();
   const {
     signUpEmail,
-    firstName,
-    lastName,
     signUpPassword,
+    signFirstName,
+    signLastName,
     agreement,
-    setUserId,
     clearSignupForm,
   } = useAuthStore();
+  const { setUserId, setFirstName, setLastName, setEmail } = useUserStore();
   const { setServerError } = useErrorStore();
 
   const mutation = useMutation({
@@ -53,8 +53,8 @@ export const useRegistration = () => {
     enableReinitialize: false,
     initialValues: {
       email: signUpEmail,
-      firstName,
-      lastName,
+      firstName: signFirstName,
+      lastName: signLastName,
       password: signUpPassword,
       agreement,
     },
@@ -62,6 +62,9 @@ export const useRegistration = () => {
     onSubmit: (values) => {
       const { agreement, ...dataToSend } = values;
       mutation.mutate(dataToSend);
+      setEmail(values.email);
+      setFirstName(values.firstName);
+      setLastName(values.lastName);
     },
   });
 

@@ -37,7 +37,8 @@ export const SocialNetworksInput: React.FC<SocialNetworksInputProps> = ({
           onValueChange={onSwitchChange}
           aria-label="Visibility toggle"
           classNames={{
-            wrapper: "bg-[rgba(44,44,44,0.6)] transition-all",
+            base: "scale-80 sm:scale-90 lg:scale-110",
+            wrapper: "bg-[rgba(44,44,44,0.6)]",
           }}
         />
       </span>

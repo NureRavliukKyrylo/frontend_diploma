@@ -13,7 +13,6 @@ export const BaseMap: React.FC<{
       <MapContainer
         center={center}
         zoom={zoom}
-        zoomControl={false}
         style={{
           height: "100%",
           borderRadius: "20px",

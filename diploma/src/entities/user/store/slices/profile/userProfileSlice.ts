@@ -13,7 +13,7 @@ export interface UserProfileSlice {
   privacySettings?: PrivacySettings;
   avatarFile?: File | undefined;
   avatarUrl?: string | undefined;
-
+  isLoading?: boolean;
   setAvatarFile: (file: File | undefined) => void;
   setBio: (val: string | undefined) => void;
   setDateOfBirth: (val: string | undefined) => void;
@@ -22,6 +22,7 @@ export interface UserProfileSlice {
   setCoordinates: (val: Coordinates | null) => void;
   setPrivacyField: (fieldName: string, field: PrivacyField) => void;
   removePrivacyField: (fieldName: string) => void;
+  setLoading: (loading: boolean) => void;
   clearFillingForm: () => void;
 }
 
@@ -94,8 +95,10 @@ export const createUserProfileSlice: StateCreator<UserProfileSlice> = (
         },
       };
     }),
+  setLoading: (loading) => set({ isLoading: loading }),
   clearFillingForm: () =>
     set({
+      isLoading: undefined,
       avatarFile: undefined,
       avatarUrl: undefined,
       profile: {

@@ -7,7 +7,7 @@ import {
 import { createStepperSlice, type StepperSlice } from "@shared/config";
 import { createLoginSlice, type LoginSlice } from "./slices/auth/loginSlice";
 import { createSignupSlice, type SignupSlice } from "./slices/auth/signUpSlice";
-import { base64ToFile } from "../../../shared/libs";
+import { base64ToFile } from "@shared/libs";
 import {
   createOtpTimerSlice,
   type OtpTimerSlice,
@@ -16,10 +16,6 @@ import {
   createForgotPasswordSlice,
   type ForgotPasswordSlice,
 } from "./slices/auth/forgotPasswordSlice";
-import {
-  createUserInfoSlice,
-  type UserInfoSlice,
-} from "./slices/profile/userInfoSlice";
 import {
   type UserProfileSlice,
   createUserProfileSlice,
@@ -31,8 +27,7 @@ type AuhtStore = AuthModeSlice &
   SignupSlice &
   UserProfileSlice &
   OtpTimerSlice &
-  ForgotPasswordSlice &
-  UserInfoSlice;
+  ForgotPasswordSlice;
 
 export const useAuthStore = create<AuhtStore>()(
   devtools(
@@ -45,7 +40,6 @@ export const useAuthStore = create<AuhtStore>()(
         ...createUserProfileSlice(...a),
         ...createOtpTimerSlice(...a),
         ...createForgotPasswordSlice(...a),
-        ...createUserInfoSlice(...a),
       }),
       {
         name: "auth-store",
@@ -57,7 +51,6 @@ export const useAuthStore = create<AuhtStore>()(
           profile: state.profile,
           privacySettings: state.privacySettings,
           avatarUrl: state.avatarUrl,
-          userId: state.userId,
           otpTimers: state.otpTimers,
           emailForgotPassword: state.emailForgotPassword,
         }),

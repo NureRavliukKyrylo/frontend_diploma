@@ -1,5 +1,5 @@
-@use "./../../../../shared/styles/variables/fontVariables.scss" as *;
-@use "./../../../../shared/styles/mixins/adaptive.scss" as adaptive;
+@use "@shared/styles/variables/fontVariables.scss" as *;
+@use "@shared/styles/mixins/adaptive.scss" as adaptive;
 
 .headerLogin {
   margin-bottom: 10px;

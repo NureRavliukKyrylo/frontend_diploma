@@ -1,3 +1,4 @@
+@use "@shared/styles/mixins/adaptive.scss" as *;
 $font-family: "Exo 2";
 
 .checkBoxContainer {
@@ -9,9 +10,8 @@ $font-family: "Exo 2";
 
 .checkBoxLabel {
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
   align-items: center;
+  gap: 8px;
 }
 
 .checkBoxText {
@@ -42,24 +42,26 @@ $font-family: "Exo 2";
     border-radius: 20%;
     animation: fadeIn 0.3s forwards;
 
-    @media (max-width: 768px) {
+    @include respond-to(tablet) {
       inset: 13%;
     }
-
-    @media (max-width: 480px) {
+    @include respond-to(mobile) {
       inset: 13%;
     }
   }
 
-  @media (max-width: 768px) {
+  @include respond-to(tablet) {
     min-width: 20px;
     height: 20px;
   }
-
-  @media (max-width: 480px) {
+  @include respond-to(mobile) {
     min-width: 18px;
     height: 18px;
   }
+}
+
+.checkBox.error {
+  border-color: red;
 }
 
 @keyframes fadeIn {
@@ -71,8 +73,4 @@ $font-family: "Exo 2";
     opacity: 1;
     transform: scale(1);
   }
-}
-
-.checkBox.error {
-  border-color: red;
 }

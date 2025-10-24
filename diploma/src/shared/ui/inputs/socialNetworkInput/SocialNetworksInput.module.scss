@@ -1,4 +1,5 @@
 @use "./../baseInput/BaseInput.module.scss" as *;
+@use "@shared/styles/mixins/adaptive.scss" as breakpoints;
 
 .iconWrapper {
   position: absolute;
@@ -33,4 +34,61 @@
   top: 50%;
   transform: translateY(-50%);
   pointer-events: all;
+}
+
+@include breakpoints.respond-to(laptop) {
+  .iconWrapper {
+    left: 0.5rem;
+
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  .socialDivider {
+    left: 2.5rem;
+  }
+
+  .switchWrapper {
+    right: 0.5rem;
+  }
+}
+
+@include breakpoints.respond-to(tablet) {
+  .iconWrapper {
+    left: 0.5rem;
+
+    img {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+  }
+
+  .socialDivider {
+    left: 2.25rem;
+  }
+
+  .switchWrapper {
+    right: 0.4rem;
+  }
+}
+
+@include breakpoints.respond-to(mobile) {
+  .iconWrapper {
+    left: 0.5rem;
+
+    img {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+
+  .socialDivider {
+    left: 2rem;
+  }
+
+  .switchWrapper {
+    right: 0.3rem;
+  }
 }
