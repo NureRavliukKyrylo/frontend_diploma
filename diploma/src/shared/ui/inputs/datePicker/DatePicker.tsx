@@ -53,9 +53,7 @@ export const DatePickerInput = ({
           }}
         />
       </I18nProvider>
-      {submit && error && (
-        <div className="errorInput text-[#ff0000] mt-1">{error}</div>
-      )}
+      {submit && error && <div className="errorInput">{error}</div>}
     </>
   );
 };

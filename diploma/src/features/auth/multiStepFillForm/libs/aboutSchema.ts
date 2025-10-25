@@ -21,7 +21,7 @@ export const aboutFormSchema = Yup.object({
     .typeError("Invalid date"),
 }).test({
   name: "at-least-one-field",
-  message: "At least one field (About or Date of Birth) is required",
+  message: "At least one field (Biography or Date of Birth) is required",
   test: function (value) {
     const { about, dateOfBirth } = value;
     if (!about && !dateOfBirth) {

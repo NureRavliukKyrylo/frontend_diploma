@@ -3,6 +3,7 @@ import { updateUser, type UpdateUserDto } from "../api/fiillingFormApi";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
 import { useAuthStore } from "@entities/user";
+import { isPayloadEmpty } from "@shared/libs";
 
 export const useSubmitFillingForm = () => {
   const router = useRouter();
@@ -29,17 +30,6 @@ export const useSubmitFillingForm = () => {
       addToast({ title: "Error", description: errorMessage, color: "danger" });
     },
   });
-
-  const isPayloadEmpty = (obj: any): boolean => {
-    if (obj === null || obj === undefined) return true;
-    if (Array.isArray(obj)) {
-      return obj.every(isPayloadEmpty);
-    }
-    if (typeof obj === "object") {
-      return Object.values(obj).every(isPayloadEmpty);
-    }
-    return obj === "";
-  };
 
   const handleSubmit = (payload: UpdateUserDto) => {
     console.log("[DEBUG] Final payload (fresh state):", payload);

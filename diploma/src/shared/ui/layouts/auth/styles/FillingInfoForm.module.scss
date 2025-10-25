@@ -41,6 +41,7 @@
         h1 {
           color: rgba(0, 0, 0, 0.8);
           @include font-base(50px, 700);
+          line-height: 130%;
         }
 
         p {

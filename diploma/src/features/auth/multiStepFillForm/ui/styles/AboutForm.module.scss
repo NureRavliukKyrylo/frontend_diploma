@@ -44,6 +44,8 @@
 
 @include breakpoints.respond-to(tablet) {
   .aboutWrapper {
+    padding-left: 0px;
+    padding-right: 0px;
     .inputsForm {
       .datePickerWrapper {
         width: 100%;
@@ -53,6 +55,8 @@
 }
 @include breakpoints.respond-to(mobile) {
   .aboutWrapper {
+    padding-left: 0px;
+    padding-right: 0px;
     padding-left: 0px;
     padding-right: 0px;
     gap: 15px;

@@ -70,12 +70,14 @@ export const useContactsForm = () => {
           bio: profile?.bio,
           phone: profile?.phone,
           dateOfBirth: profile?.dateOfBirth,
-          socialLinks: profile?.socialLinks,
           coordinates: profile?.coordinates,
+          ...(profile?.socialLinks?.length
+            ? { socialLinks: profile.socialLinks }
+            : {}),
         },
-        privacySettings: {
-          fields: privacySettings?.fields,
-        },
+        ...(privacySettings?.fields?.length
+          ? { privacySettings: { fields: privacySettings.fields } }
+          : {}),
       };
 
       console.log("[DEBUG] Final payload (fresh state):", payload);

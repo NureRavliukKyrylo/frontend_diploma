@@ -32,10 +32,7 @@ export const ContactsForm = () => {
                 formik.setFieldValue(switchName, val);
               }}
               error={
-                formik.errors[key] &&
-                (formik.submitCount > 0 || formik.values[key] !== "")
-                  ? (formik.errors[key] as string)
-                  : ""
+                formik.submitCount > 0 ? (formik.errors[key] as string) : ""
               }
             />
           );
