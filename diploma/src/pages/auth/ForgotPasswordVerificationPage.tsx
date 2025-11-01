@@ -6,7 +6,7 @@ export function ForgotPasswordVerificationPage() {
   const { emailForgotPassword } = useAuthStore();
   return (
     <AdditionalForm
-      title="Check your email"
+      title="Email Verification"
       description={`We’ve sent a 6-digit code to your email ${emailForgotPassword}. Please enter it below to continue`}
     >
       <ForgotPasswordVerificationForm />

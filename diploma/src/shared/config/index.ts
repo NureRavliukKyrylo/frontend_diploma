@@ -6,3 +6,5 @@ export {
   type StepperSlice,
 } from "./stores/slices/stepperSlice";
 export { OtpType } from "./enums/otpType";
+export { type SocialLink } from "./types/SocialLink";
+export type { NavLink } from "./types/NavLink";

@@ -44,7 +44,11 @@ export const BaseInput: React.FC<BaseInputProps> = ({
         isFocused || hasText ? styles.focused : ""
       } ${error ? styles.error : ""}`}
     >
-      <div className={styles.inputContainer}>
+      <div
+        className={`${styles.inputContainer}  ${
+          isFocused || hasText ? styles.focused : ""
+        } ${error ? styles.error : ""}`}
+      >
         {label && (
           <label
             className={`${styles.label} ${

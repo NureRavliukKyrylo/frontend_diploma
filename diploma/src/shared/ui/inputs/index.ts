@@ -6,3 +6,4 @@ export { PasswordInput } from "./passwordInput/PasswordInput";
 export { SocialNetworksInput } from "./socialNetworkInput/SocialNetworkInput";
 export { DatePickerInput } from "./datePicker/DatePicker";
 export { InputOtp } from "./otpInput/InputOTP";
+export { SearchBar } from "./searchBar/SearchBar";

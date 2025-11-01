@@ -1,5 +1,5 @@
-@use "../../../../styles/variables/fontVariables.scss" as *;
-@use "../../../../styles/mixins/adaptive.scss" as adaptive;
+@use "@shared/styles/variables/fontVariables.scss" as *;
+@use "@shared/styles/mixins/adaptive.scss" as adaptive;
 
 .additionalContainerWrapper {
   display: flex;
