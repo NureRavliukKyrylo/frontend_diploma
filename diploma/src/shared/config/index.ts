@@ -8,3 +8,6 @@ export {
 export { OtpType } from "./enums/otpType";
 export { type SocialLink } from "./types/SocialLink";
 export type { NavLink } from "./types/NavLink";
+export type { StepItem } from "./types/StepItem";
+export type { TabOption } from "./types/ToggleTabOption";
+export type { AuthMode } from "./types/modes/AuthMode";

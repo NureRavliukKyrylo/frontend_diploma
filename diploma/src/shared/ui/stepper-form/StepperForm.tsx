@@ -8,8 +8,7 @@ import {
 import Check from "@mui/icons-material/Check";
 import { motion, AnimatePresence } from "framer-motion";
 import "./StepperStyles.scss";
-import { useAuthStore } from "@entities/user";
-import { steps } from "@pages/multi-step-filling-info";
+import type { StepItem } from "@shared/config";
 
 function CustomStepIcon(props: StepIconProps) {
   const { active, completed, icon } = props;
@@ -57,12 +56,22 @@ function CustomStepIcon(props: StepIconProps) {
   );
 }
 
-export function StepperForm() {
-  const { activeStep, isStepSkipped, isStepCompleted } = useAuthStore();
+interface StepperFormProps {
+  steps?: StepItem[];
+  activeStep?: number;
+  isStepSkipped: (step: number) => boolean;
+  isStepCompleted: (step: number) => boolean;
+}
 
+export const StepperForm = ({
+  steps,
+  activeStep,
+  isStepSkipped,
+  isStepCompleted,
+}: StepperFormProps) => {
   return (
     <Stepper activeStep={activeStep} orientation="vertical">
-      {steps.map((step, index) => {
+      {steps?.map((step, index) => {
         const skipped = isStepSkipped(index);
         const completed = isStepCompleted(index);
         const isActive = activeStep === index;
@@ -99,4 +108,4 @@ export function StepperForm() {
       })}
     </Stepper>
   );
-}
+};

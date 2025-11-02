@@ -2,7 +2,7 @@ import { create } from "zustand";
 import {
   createUserInfoSlice,
   type UserInfoSlice,
-} from "./slices/profile/userInfoSlice";
+} from "../slices/userInfoSlice";
 import { persist } from "zustand/middleware";
 
 export const useUserStore = create<UserInfoSlice>()(

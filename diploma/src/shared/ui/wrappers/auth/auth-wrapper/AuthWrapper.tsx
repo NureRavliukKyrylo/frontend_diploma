@@ -1,62 +1,63 @@
 import { type ReactNode } from "react";
 import styles from "./AuthWrapper.module.scss";
-import { AuthToggle } from "../../..";
 import { AppleIcon } from "@shared/assets/icons/brands";
-import { useAuthStore } from "@entities/user";
 import { AnimatePresence, motion } from "framer-motion";
 import { GoogleButton } from "@features/auth";
-import { useErrorStore } from "@shared/config";
+import { useErrorStore, type TabOption } from "@shared/config";
+import { Toggle } from "@shared/ui";
 
-interface AuthWrapperProps {
-  signupForm: ReactNode;
-  signinForm: ReactNode;
+interface AuthWrapperProps<T extends string> {
+  tabs: TabOption<T>[];
+  activeValue: T;
+  onChange: (value: T) => void;
+  forms: Record<T, ReactNode>;
 }
 
-export function AuthWrapper({ signupForm, signinForm }: AuthWrapperProps) {
-  const { mode } = useAuthStore();
+export function AuthWrapper<T extends string>({
+  tabs,
+  activeValue,
+  onChange,
+  forms,
+}: AuthWrapperProps<T>) {
   const serverError = useErrorStore(
     (state) => state.errors["loginGoogleError"]
   );
+
   return (
     <div className={styles.wrapperAuthContainer}>
       <div className={styles.authContainer}>
         <div className={styles.switchAuth}>
-          <AuthToggle />
+          <Toggle<T>
+            tabs={tabs}
+            activeValue={activeValue}
+            onChange={onChange}
+          />
         </div>
+
         <AnimatePresence mode="wait">
-          {mode === "signup" ? (
-            <motion.div
-              key="signup"
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -30 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-            >
-              {signupForm}
-            </motion.div>
-          ) : (
-            <motion.div
-              key="signin"
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 30 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-            >
-              {signinForm}
-            </motion.div>
-          )}
+          <motion.div
+            key={activeValue}
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -30 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+          >
+            {forms[activeValue]}
+          </motion.div>
         </AnimatePresence>
+
         <div className={styles.apiAuth}>
           <div className={styles.line}>
             <span>OR SIGN UP WITH</span>
           </div>
           <div className={styles.apiButtons}>
             <button className={styles.appleSign}>
-              <img src={AppleIcon} alt="google" />
+              <img src={AppleIcon} alt="apple" />
             </button>
             <GoogleButton />
           </div>
         </div>
+
         {serverError && <div className="errorMessage">{serverError}</div>}
       </div>
     </div>

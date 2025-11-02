@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import {
   AboutForm,
   ImageForm,
@@ -6,15 +5,7 @@ import {
   ContactsForm,
 } from "@features/multi-step-filling-info";
 
-export interface StepItem {
-  title: string;
-  description: string;
-  message: string;
-  formTitle: string;
-  formDescription: string;
-  content: ReactNode;
-  formId: string;
-}
+import { type StepItem } from "@shared/config";
 
 export const steps: StepItem[] = [
   {

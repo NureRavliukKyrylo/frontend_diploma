@@ -5,7 +5,7 @@ import {
   type PrivacySettings,
   type Coordinates,
   type PrivacyField,
-} from "../../../index.ts";
+} from "../types/profileTypes";
 import { fileToBase64 } from "@shared/libs/index.ts";
 
 export interface UserProfileSlice {

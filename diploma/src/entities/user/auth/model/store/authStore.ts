@@ -3,10 +3,10 @@ import { persist, devtools } from "zustand/middleware";
 import {
   createAuthModeSlice,
   type AuthModeSlice,
-} from "./slices/auth/authModeSlice";
+} from "../slices/authModeSlice";
 import { createStepperSlice, type StepperSlice } from "@shared/config";
-import { createLoginSlice, type LoginSlice } from "./slices/auth/loginSlice";
-import { createSignupSlice, type SignupSlice } from "./slices/auth/signUpSlice";
+import { createLoginSlice, type LoginSlice } from "../slices/loginSlice";
+import { createSignupSlice, type SignupSlice } from "../slices/signUpSlice";
 import { base64ToFile } from "@shared/libs";
 import {
   createOtpTimerSlice,
@@ -15,11 +15,11 @@ import {
 import {
   createForgotPasswordSlice,
   type ForgotPasswordSlice,
-} from "./slices/auth/forgotPasswordSlice";
+} from "../slices/forgotPasswordSlice";
 import {
   type UserProfileSlice,
   createUserProfileSlice,
-} from "./slices/profile/userProfileSlice";
+} from "@entities/user/profile";
 
 type AuhtStore = AuthModeSlice &
   StepperSlice &

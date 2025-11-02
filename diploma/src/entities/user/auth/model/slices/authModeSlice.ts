@@ -1,8 +1,9 @@
 import { type StateCreator } from "zustand";
+import type { AuthMode } from "@entities/user/auth/model/types/AuthMode";
 
 export interface AuthModeSlice {
-  mode: "signup" | "signin";
-  setMode: (mode: "signup" | "signin") => void;
+  mode: AuthMode;
+  setMode: (mode: AuthMode) => void;
 }
 
 export const createAuthModeSlice: StateCreator<AuthModeSlice> = (set) => ({
