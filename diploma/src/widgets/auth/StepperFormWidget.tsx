@@ -1,10 +1,10 @@
-import { StepperFormLayout } from "@shared/ui/layouts";
+import { StepperWrapper } from "@shared/ui/wrappers";
 import { StepperForm } from "@shared/ui";
 
 export function StepperFormWidget() {
   return (
-    <StepperFormLayout>
+    <StepperWrapper>
       <StepperForm />
-    </StepperFormLayout>
+    </StepperWrapper>
   );
 }

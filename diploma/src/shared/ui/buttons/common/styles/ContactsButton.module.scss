@@ -1,6 +1,6 @@
-@use "@shared/styles/variables/fontVariables.scss" as *;
-@use "@shared/styles/animations/emphasizeAnimation.scss" as animation;
-@use "@shared/styles/mixins/adaptive.scss" as breakpoints;
+@use "@shared/assets/styles" as *;
+@use "@shared/assets/styles" as animation;
+@use "@shared/assets/styles" as breakpoints;
 
 .contactsButton {
   background: rgba(0, 0, 0, 0.7);

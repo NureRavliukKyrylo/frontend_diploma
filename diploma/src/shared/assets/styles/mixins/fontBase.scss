@@ -1,0 +1,13 @@
+@use "./../variables/" as *;
+
+@mixin font-base(
+  $size: $font-size-base,
+  $weight: $font-weight-base,
+  $family: $font-family
+) {
+  font-family: $family;
+  font-style: normal;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $line-height;
+}

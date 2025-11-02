@@ -1,12 +1,5 @@
-export { ForgotPasswordVerificationForm } from "./verificationForgotPassword/ui/ForgotPasswordVerificationForm";
-export { EmailVerificationForm } from "./verificationEmailForm/ui/EmailVerificationForm";
-export { ImageForm } from "./multiStepFillForm/ui/ImageForm";
-export { GoogleButton } from "./googleLogin/ui/GoogleButton";
-export { LoginForm } from "./loginForm/ui/LoginForm";
-export { SignUpForm } from "./signUpForm/ui/SignUpForm";
-export { PasswordForm } from "./passwordForm/ui/PasswordForm";
-export { AboutForm } from "./multiStepFillForm/ui/AboutForm";
-export { UserLocationPicker } from "./multiStepFillForm/ui/UserLocationPicker";
-export { ContactsForm } from "./multiStepFillForm/ui/ContactsForm";
-export { ForgotPasswordForm } from "./forgotPasswordForm/ui/ForgotPasswordForm";
-export { TwoFactorVerificationForm } from "./verificationTwoFactor/ui/TwoFactorVerificationForm";
+export { GoogleButton } from "./google-login/ui/GoogleButton";
+export { LoginForm } from "./login-form/ui/LoginForm";
+export { SignUpForm } from "./signup-form/ui/SignUpForm";
+export { PasswordForm } from "./password-form/ui/PasswordForm";
+export { ForgotPasswordForm } from "./forgot-password-form/ui/ForgotPasswordForm";

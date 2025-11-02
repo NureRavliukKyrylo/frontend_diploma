@@ -1,6 +1,6 @@
 import { useAuthStore } from "../../../../../entities/user";
 import styles from "./../styles/StepperButtons.module.scss";
-import { Arrow } from "@shared/assets/common";
+import { Arrow } from "@shared/assets/icons/actions";
 
 export const PreviousStepperButton = () => {
   const { prevStep, activeStep } = useAuthStore();

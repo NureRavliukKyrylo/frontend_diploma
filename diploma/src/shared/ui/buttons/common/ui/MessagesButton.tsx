@@ -1,6 +1,6 @@
 import React from "react";
 import { ButtonLayout } from "./ButtonLayout";
-import { MessageIcon } from "@shared/assets/common";
+import { MessageIcon } from "@shared/assets/icons/actions";
 import styles from "../styles/MessagesButton.module.scss";
 
 export const MessagesButton: React.FC = () => {

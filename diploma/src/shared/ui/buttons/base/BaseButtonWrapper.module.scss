@@ -1,5 +1,5 @@
-@use "@shared/styles/mixins/adaptive.scss" as adaptive;
-@use "@shared/styles/variables/fontVariables.scss" as *;
+@use "@shared/assets/styles" as adaptive;
+@use "@shared/assets/styles" as *;
 
 .buttonWrapper {
   display: flex;

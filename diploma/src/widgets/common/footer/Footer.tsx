@@ -7,7 +7,7 @@ import {
   companyLinks,
   rightLinks,
 } from "./config/navLinks";
-import { Copyright } from "@shared/assets/common";
+import { Copyright } from "@shared/assets/icons/documents";
 
 export function Footer() {
   return (

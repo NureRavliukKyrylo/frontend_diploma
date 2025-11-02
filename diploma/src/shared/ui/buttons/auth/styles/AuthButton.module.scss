@@ -1,6 +1,6 @@
-@use "@shared/styles/variables/fontVariables.scss" as *;
-@use "@shared/styles/mixins/adaptive.scss" as adaptive;
-@use "@shared/styles/animations/buttonShineAnimation.scss" as animation;
+@use "@shared/assets/styles" as *;
+@use "@shared/assets/styles" as adaptive;
+@use "@shared/assets/styles" as animation;
 
 .buttonLogin {
   position: relative;

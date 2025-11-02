@@ -1,6 +1,6 @@
-@use "@shared/styles/variables/fontVariables.scss" as *;
-@use "@shared/styles/animations/buttonBaseAnimation.scss" as animation;
-@use "@shared/styles/mixins/adaptive.scss" as breakpoints;
+@use "@shared/assets/styles" as *;
+@use "@shared/assets/styles" as animation;
+@use "@shared/assets/styles" as breakpoints;
 
 .nextStepperButton {
   background: black;

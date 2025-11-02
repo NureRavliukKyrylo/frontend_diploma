@@ -1,6 +1,6 @@
 import React from "react";
 import { ButtonLayout } from "./ButtonLayout";
-import { Bell } from "@shared/assets/common";
+import { Bell } from "@shared/assets/icons/actions";
 import styles from "../styles/ActiveProjectsButton.module.scss";
 
 export const ActiveProjectsButton: React.FC = () => {

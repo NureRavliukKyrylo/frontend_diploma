@@ -1,5 +1,5 @@
 import { createRoute } from "@tanstack/react-router";
-import { ForgotPasswordPage } from "@pages/auth/ForgotPasswordPage";
+import { ForgotPasswordPage } from "@pages/auth";
 import { forgotPasswordRoute } from "./forgotPasswordRoot";
 
 export const forgotPasswordDefaultRoute = createRoute({

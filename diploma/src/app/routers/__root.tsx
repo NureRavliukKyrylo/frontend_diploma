@@ -1,5 +1,5 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
-import { BaseLayout } from "../../shared/ui/layouts";
+import { BaseLayout } from "@app/layouts";
 import { useErrorStore } from "@shared/config";
 
 export const rootRoute = createRootRoute({

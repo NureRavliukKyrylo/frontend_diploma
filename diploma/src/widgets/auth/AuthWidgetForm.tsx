@@ -1,6 +1,6 @@
-import { AuthForm } from "@shared/ui/layouts";
+import { AuthWrapper } from "@shared/ui/wrappers";
 import { LoginForm, SignUpForm } from "@features/auth";
 
 export function AuthWidgetForm() {
-  return <AuthForm signupForm={<SignUpForm />} signinForm={<LoginForm />} />;
+  return <AuthWrapper signupForm={<SignUpForm />} signinForm={<LoginForm />} />;
 }

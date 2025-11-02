@@ -1,3 +1,3 @@
-export { useResendCode } from "./resendCode/model/useResendCode";
-export { useVerification } from "./verificationForm/model/useVerification";
-export { VerificationForm } from "./verificationForm/ui/VerificationForm";
+export { EmailVerificationForm } from "./verification-email-form/ui/EmailVerificationForm";
+export { ForgotPasswordVerificationForm } from "./verification-forgot-password/ui/ForgotPasswordVerificationForm";
+export { TwoFactorVerificationForm } from "./verification-two-factor/ui/TwoFactorVerificationForm";

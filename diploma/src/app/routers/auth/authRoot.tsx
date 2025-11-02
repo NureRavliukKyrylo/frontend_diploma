@@ -1,5 +1,5 @@
 import { createRoute, Outlet } from "@tanstack/react-router";
-import { AuthLayout } from "@shared/ui/layouts";
+import { AuthLayout } from "@app/layouts";
 import { rootRoute } from "../__root";
 import { AuthRoutes } from "@shared/routes";
 

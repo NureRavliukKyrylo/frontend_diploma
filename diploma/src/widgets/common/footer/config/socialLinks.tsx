@@ -4,7 +4,7 @@ import {
   GitHub,
   Twitter,
   InstagramIcon,
-} from "@shared/assets/common";
+} from "@shared/assets/icons/brands";
 
 export const socialLinks: SocialLink[] = [
   { logo: GitHub, href: "https://github.com/yourname" },

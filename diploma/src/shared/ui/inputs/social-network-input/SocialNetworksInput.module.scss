@@ -1,0 +1,94 @@
+@use "./../base-input/BaseInput.module.scss" as *;
+@use "@shared/assets/styles" as breakpoints;
+
+.iconWrapper {
+  position: absolute;
+  left: 0.625rem;
+  color: $label-color;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 1.75rem;
+    height: 1.75rem;
+    opacity: 0.6;
+  }
+}
+
+.socialDivider {
+  position: absolute;
+  left: 2.75rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 1px;
+  background-color: $label-color;
+  transform: scaleX(0.5);
+  transform-origin: center;
+}
+
+.switchWrapper {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: all;
+}
+
+@include breakpoints.respond-to(laptop) {
+  .iconWrapper {
+    left: 0.5rem;
+
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  .socialDivider {
+    left: 2.5rem;
+  }
+
+  .switchWrapper {
+    right: 0.5rem;
+  }
+}
+
+@include breakpoints.respond-to(tablet) {
+  .iconWrapper {
+    left: 0.5rem;
+
+    img {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+  }
+
+  .socialDivider {
+    left: 2.25rem;
+  }
+
+  .switchWrapper {
+    right: 0.4rem;
+  }
+}
+
+@include breakpoints.respond-to(mobile) {
+  .iconWrapper {
+    left: 0.5rem;
+
+    img {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+
+  .socialDivider {
+    left: 2rem;
+  }
+
+  .switchWrapper {
+    right: 0.3rem;
+  }
+}

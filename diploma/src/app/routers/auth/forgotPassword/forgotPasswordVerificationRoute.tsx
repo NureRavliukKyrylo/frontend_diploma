@@ -1,5 +1,5 @@
 import { createRoute } from "@tanstack/react-router";
-import { ForgotPasswordVerificationPage } from "@pages/auth/ForgotPasswordVerificationPage";
+import { ForgotPasswordVerificationPage } from "@pages/verification";
 import { AuthRoutes } from "@shared/routes";
 import { forgotPasswordRoute } from "./forgotPassword";
 

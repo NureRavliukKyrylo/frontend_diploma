@@ -1,5 +1,5 @@
-@use "@shared/styles/variables/fontVariables" as *;
-@use "@shared/styles/mixins/adaptive" as breakpoint;
+@use "@shared/assets/styles" as *;
+@use "@shared/assets/styles" as breakpoint;
 
 .wrapperResendCode {
   margin-bottom: 10px;

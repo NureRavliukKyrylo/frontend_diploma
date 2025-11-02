@@ -1,6 +1,6 @@
 import React from "react";
 import { ButtonLayout } from "./ButtonLayout";
-import { Bell } from "@shared/assets/common";
+import { Bell } from "@shared/assets/icons/actions";
 import styles from "../styles/NotificationButton.module.scss";
 
 export const NotificationButton: React.FC = () => {
