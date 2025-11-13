@@ -2,6 +2,8 @@
 $error-color: red;
 $textarea-padding: 20px;
 $charCount-height: 25px;
+$focus-border-color: rgba(0, 0, 0, 0.6);
+
 .commonWrapperTextArea {
   .textareaWrapper {
     position: relative;
@@ -18,7 +20,7 @@ $charCount-height: 25px;
       width: 100%;
       padding: $textarea-padding;
       padding-bottom: calc(#{$textarea-padding} + #{$charCount-height});
-      @include font-base(15px, 700);
+      @include font-base(20px, 700);
       border-radius: 10px;
       border: 1px solid #ccc;
       resize: none;
@@ -26,9 +28,14 @@ $charCount-height: 25px;
       background: rgba(217, 217, 217, 0.5);
       overflow: hidden;
       height: 100%;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease,
+        background-color 0.2s ease;
+
       &:focus {
         background: #ffffff;
         outline: none;
+        border: 2px solid $focus-border-color;
+        background-color: white;
       }
     }
 

@@ -7,3 +7,5 @@ export { SocialNetworksInput } from "./social-network-input/SocialNetworkInput";
 export { DatePickerInput } from "./date-picker/DatePicker";
 export { InputOtp } from "./otp-input/InputOTP";
 export { SearchBar } from "./search-bar/SearchBar";
+export { ProfileBaseInput } from "./profile-input/ProfileBaseInput";
+export { ProfilePasswordInput } from "./profile-password-input/ProfilePasswordInput";

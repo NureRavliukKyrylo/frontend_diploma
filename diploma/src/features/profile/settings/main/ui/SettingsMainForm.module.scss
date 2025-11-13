@@ -1,0 +1,44 @@
+@use "@shared/assets/styles" as *;
+
+.mainInfoProfileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  .publicProfile {
+    display: flex;
+    justify-content: space-between;
+    > :first-child {
+      flex: 0 0 45%;
+    }
+
+    > :nth-child(2) {
+      flex: 0 0 50%;
+    }
+    .publicProfileText {
+      display: flex;
+      flex-direction: column;
+      h1 {
+        color: rgba(0, 0, 0, 0.8);
+        @include font-base(30px, 700);
+        line-height: 100%;
+      }
+      p {
+        color: #767575;
+        @include font-base(20px, 500);
+      }
+    }
+    .formInfoPublicProfile {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .datePickerWrapper {
+        min-height: 50px;
+        border-radius: 20px;
+      }
+    }
+  }
+  .lineDividerProfileSettings {
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    width: 100%;
+  }
+}

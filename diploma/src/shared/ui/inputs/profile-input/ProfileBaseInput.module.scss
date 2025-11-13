@@ -1,0 +1,106 @@
+@use "@shared/assets/styles" as *;
+@use "@shared/assets/styles" as adaptive;
+
+$border-radius: 20px;
+$border-color: #ccc;
+$error-color: red;
+$focus-border-color: rgba(0, 0, 0, 0.6);
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .inputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+  }
+
+  .input {
+    @include font-base(30px, 600);
+    background: rgba(217, 217, 217, 0.5);
+    min-height: 50px;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 0.75rem 2px;
+    color: #000;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease,
+      background-color 0.2s ease;
+
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.5);
+      opacity: 1;
+    }
+
+    &.email {
+      padding-left: 2.9rem;
+    }
+
+    &.social {
+      padding-left: 2.9rem;
+      padding-right: 4rem;
+    }
+
+    &.password {
+      padding-right: 2.3rem;
+    }
+
+    &:focus {
+      border: 2px solid $focus-border-color;
+      background-color: white;
+    }
+  }
+
+  &.error {
+    .input {
+      border-color: $error-color;
+    }
+
+    .errorText {
+      @include font-base(13px, 700);
+      color: $error-color;
+      margin-top: 0.25rem;
+    }
+  }
+}
+
+@include adaptive.respond-to(mobile) {
+  .inputWrapper {
+    .input {
+      height: 2.5rem;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@include adaptive.respond-to(tablet) {
+  .inputWrapper {
+    .input {
+      height: 2.75rem;
+      font-size: 1rem;
+    }
+  }
+}
+
+@include adaptive.respond-to(laptop) {
+  .inputWrapper {
+    .input {
+      height: 3rem;
+      font-size: 1.025rem;
+    }
+  }
+}
+
+@include adaptive.respond-to(desktop) {
+  .inputWrapper {
+    .input {
+      height: 3.25rem;
+      font-size: 1.05rem;
+    }
+  }
+}

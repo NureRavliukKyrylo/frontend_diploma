@@ -44,10 +44,12 @@ export const DatePickerInput = ({
           showMonthAndYearPickers={showMonthAndYearPickers}
           onChange={(val) => onChange(val ? val.toString() : undefined)}
           classNames={{
-            inputWrapper: " w-full bg-[rgba(217,217,217,0.5)] rounded-[10px]",
+            base: "h-full rounded-[inherit] border border-[#ccc]",
+            inputWrapper:
+              " w-full h-full bg-[rgba(217,217,217,0.5)] rounded-[inherit]",
             input: `${
               isInvalid ? "text-[#ff0000]" : "text-gray-800"
-            } text-[15px]`,
+            } text-[18px]`,
             selectorIcon: `${isInvalid ? "text-[#ff0000]" : "text-gray-600"}`,
             errorMessage: "text-[#ff0000]",
           }}

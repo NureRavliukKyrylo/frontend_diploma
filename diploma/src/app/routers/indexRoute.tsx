@@ -1,13 +1,9 @@
-import { rootRoute } from "./__root";
 import { createRoute } from "@tanstack/react-router";
-import { Footer, Header } from "@widgets/common";
+import { indexLayoutRoute } from "./indexLayoutRoute";
+import { SettingsMainForm } from "@features/profile";
+
 export const indexRoute = createRoute({
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => indexLayoutRoute,
   path: "/",
-  component: () => (
-    <>
-      <Header />
-      <Footer />
-    </>
-  ),
+  component: () => <SettingsMainForm />,
 });
