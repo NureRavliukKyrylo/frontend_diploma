@@ -1,0 +1,10 @@
+.logoutButton {
+  border-radius: 50%;
+  background-color: black;
+  min-width: 60px;
+  .iconLogout {
+    width: 70%;
+    height: 70%;
+    filter: invert(1);
+  }
+}

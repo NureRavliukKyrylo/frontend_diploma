@@ -40,9 +40,8 @@ export const BaseButtonWrapper: React.FC<BaseButtonWrapperProps> = ({
           }}
         />
       )}
-      <span className={styles.content}>
-        {loading ? "Loading..." : children}
-      </span>
+
+      {loading ? "Loading..." : children}
     </button>
   );
 };

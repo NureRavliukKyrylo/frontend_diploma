@@ -1,10 +1,10 @@
 import styles from "./SignUpForm.module.scss";
 import { BaseInput, EmailInput, PasswordInput } from "@shared/ui/inputs";
 import { Checkbox } from "@shared/ui/inputs";
-import { AuthButton } from "@shared/ui/buttons";
 import { useRegistration } from "../model/useRegistration";
 import { useAuthStore } from "@entities/user";
 import { useErrorStore } from "@shared/config";
+import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 export const SignUpForm = () => {
   const { formik, isLoading } = useRegistration();
@@ -91,7 +91,12 @@ export const SignUpForm = () => {
           </Checkbox>
         </div>
         <div className={styles.buttonBlock}>
-          <AuthButton label="Create an account" loading={isLoading} />
+          <BaseButtonWrapper
+            loading={isLoading}
+            className={styles.signUpButton}
+          >
+            Create an account
+          </BaseButtonWrapper>
           {serverError && <div className="errorMessage">{serverError}</div>}
         </div>
       </form>

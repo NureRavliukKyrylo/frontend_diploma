@@ -1,12 +1,12 @@
 import styles from "./SettingsWrapper.module.scss";
 
 interface SettingsWrapperProps {
-  profileAvatar: string;
-  fullName: string;
-  email: string;
+  profileAvatar?: string;
+  fullName?: string;
+  email?: string;
   children?: React.ReactNode;
-  settingsTitle: string;
-  settingsDescription: string;
+  settingsTitle?: string;
+  settingsDescription?: string;
 }
 
 export const SettingsWrapper = ({

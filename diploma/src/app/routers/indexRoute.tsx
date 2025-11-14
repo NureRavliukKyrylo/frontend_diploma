@@ -1,9 +1,9 @@
 import { createRoute } from "@tanstack/react-router";
 import { indexLayoutRoute } from "./indexLayoutRoute";
-import { SettingsMainForm } from "@features/profile";
+import { ProfileSettingsWidget } from "@widgets/profile";
 
 export const indexRoute = createRoute({
   getParentRoute: () => indexLayoutRoute,
   path: "/",
-  component: () => <SettingsMainForm />,
+  component: () => <ProfileSettingsWidget />,
 });

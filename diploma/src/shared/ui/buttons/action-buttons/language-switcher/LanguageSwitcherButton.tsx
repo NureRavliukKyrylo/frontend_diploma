@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import styles from "./../styles/LanguageSwitcherButton.module.scss";
+import styles from "./LanguageSwitcherButton.module.scss";
 import { GreatBritain, UkraineLogo } from "@shared/assets/icons/flags";
 import { Globe } from "@shared/assets/icons/info";
 

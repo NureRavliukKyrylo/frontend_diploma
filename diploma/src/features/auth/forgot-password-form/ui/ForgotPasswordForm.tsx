@@ -1,9 +1,9 @@
 import styles from "./ForgotPassword.module.scss";
 import { useErrorStore } from "@shared/config";
-import { AuthButton } from "@shared/ui/buttons";
 import { EmailInput } from "@shared/ui/inputs";
 import { useForgotPassword } from "../model/useForgotPassword";
 import { useAuthStore } from "@entities/user";
+import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 export const ForgotPasswordForm = () => {
   const serverError = useErrorStore(
@@ -32,7 +32,12 @@ export const ForgotPasswordForm = () => {
           error={formik.submitCount > 0 ? formik.errors.email : ""}
         />
         <div className={styles.buttonForgotPasswordBlock}>
-          <AuthButton loading={isLoading} label="Send request" />
+          <BaseButtonWrapper
+            loading={isLoading}
+            className={styles.buttonSendRequest}
+          >
+            Send Request
+          </BaseButtonWrapper>
           {serverError && <div className="errorMessage">{serverError}</div>}
         </div>
       </form>

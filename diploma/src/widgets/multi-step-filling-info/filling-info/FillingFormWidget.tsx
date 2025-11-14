@@ -1,9 +1,11 @@
 import { FillingInfoWrapper } from "@shared/ui/wrappers";
 import { steps } from "./configs/stepContentConfig";
-import { useAuthStore } from "@entities/user";
+import { useAuthStore, useUserStore } from "@entities/user";
 
 export function FillingFormWidget() {
-  const { activeStep, isStepCompleted } = useAuthStore();
+  const { activeStep, prevStep, skipStep, isStepCompleted, isLoading } =
+    useAuthStore();
+  const { firstName, lastName } = useUserStore();
   return (
     <FillingInfoWrapper
       message={steps[activeStep].message}
@@ -12,8 +14,12 @@ export function FillingFormWidget() {
       formId={steps[activeStep].formId}
       activeStep={activeStep}
       hideSkipButton={isStepCompleted(activeStep)}
-      hidePrevButton={activeStep === 0}
       totalSteps={steps.length}
+      prevStep={prevStep}
+      skipStep={skipStep}
+      firstName={firstName}
+      lastName={lastName}
+      isLoading={isLoading}
     >
       {steps[activeStep].content}
     </FillingInfoWrapper>

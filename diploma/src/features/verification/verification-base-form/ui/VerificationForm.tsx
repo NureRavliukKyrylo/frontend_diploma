@@ -1,8 +1,9 @@
 import styles from "./VerificationForm.module.scss";
-import { AuthButton, ResendButton } from "@shared/ui/buttons";
+import { ResendButton } from "@shared/ui/buttons";
 import { InputOtp } from "@shared/ui/inputs";
 import { useErrorStore, OtpType } from "@shared/config";
 import { useAuthStore } from "@entities/user";
+import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 interface VerificationFormProps {
   otpType: OtpType;
@@ -53,7 +54,12 @@ export const VerificationForm = ({
         </div>
       </div>
       <div className={styles.buttonBlock}>
-        <AuthButton loading={isLoading} label="Confirm" />
+        <BaseButtonWrapper
+          loading={isLoading}
+          className={styles.confirmVerificationButton}
+        >
+          Confirm
+        </BaseButtonWrapper>
         {serverErrorVerification && (
           <div className="errorMessage">{serverErrorVerification}</div>
         )}

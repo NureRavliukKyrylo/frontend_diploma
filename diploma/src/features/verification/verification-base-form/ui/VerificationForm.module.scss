@@ -1,4 +1,6 @@
+@use "@shared/assets/styles" as *;
 @use "@shared/assets/styles" as adaptive;
+@use "@shared/assets/styles" as animation;
 
 .verificationForm {
   display: flex;
@@ -21,5 +23,52 @@
 @include adaptive.respond-to(mobile) {
   .verificationForm {
     gap: 15px;
+  }
+}
+
+.confirmVerificationButton {
+  position: relative;
+  overflow: hidden;
+  background: black;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  width: 100%;
+  min-height: 49px;
+  @include font-base(18px, 800);
+  @include animation.button-shine();
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
+  @include adaptive.respond-to(mobile) {
+    min-height: 35px;
+    @include font-base(14px, 700);
+  }
+
+  @include adaptive.respond-to(tablet) {
+    min-height: 40px;
+    @include font-base(15px, 800);
+  }
+
+  @include adaptive.respond-to(laptop) {
+    min-height: 45px;
+    @include font-base(16px, 800);
+  }
+
+  @include adaptive.respond-to(desktop) {
+    min-height: 47px;
+    @include font-base(17px, 900);
   }
 }

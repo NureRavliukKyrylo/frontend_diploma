@@ -1,13 +1,9 @@
 import type { ReactNode } from "react";
 import styles from "./FillingInfoWrapper.module.scss";
 import { InfoSign } from "@shared/assets/icons/info";
-import {
-  NextStepperButton,
-  PreviousStepperButton,
-  SkipStepperButton,
-} from "@shared/ui/buttons";
+import { BackButton } from "@shared/ui/buttons";
 import { motion, AnimatePresence } from "framer-motion";
-import { useUserStore } from "@entities/user";
+import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 interface FillingInfoWrapperProps {
   message: string;
@@ -17,8 +13,12 @@ interface FillingInfoWrapperProps {
   children: ReactNode;
   activeStep: number;
   hideSkipButton?: boolean;
-  hidePrevButton?: boolean;
   totalSteps: number;
+  firstName?: string;
+  lastName?: string;
+  isLoading?: boolean;
+  prevStep: () => void;
+  skipStep: () => void;
 }
 
 export function FillingInfoWrapper({
@@ -29,11 +29,14 @@ export function FillingInfoWrapper({
   formId,
   activeStep,
   hideSkipButton,
-  hidePrevButton,
   totalSteps,
+  firstName,
+  lastName,
+  isLoading,
+  prevStep,
+  skipStep,
 }: FillingInfoWrapperProps) {
   const isLastStep = activeStep === totalSteps - 1;
-  const { firstName, lastName } = useUserStore();
   return (
     <div className={styles.fillingInfoFormWrapper}>
       <h1>
@@ -61,10 +64,23 @@ export function FillingInfoWrapper({
             </motion.div>
           </AnimatePresence>
           <div className={styles.buttonsFillForm}>
-            {!hidePrevButton && <PreviousStepperButton />}
+            {activeStep !== 0 && <BackButton onBack={prevStep} />}
             <div className={styles.interactStepperButtons}>
-              {!hideSkipButton && !isLastStep && <SkipStepperButton />}
-              <NextStepperButton form={formId} />
+              {!hideSkipButton && !isLastStep && (
+                <BaseButtonWrapper
+                  className={styles.skipStepperButton}
+                  onClick={skipStep}
+                >
+                  Skip
+                </BaseButtonWrapper>
+              )}
+              <BaseButtonWrapper
+                loading={isLoading}
+                className={styles.nextStepperButton}
+                form={formId}
+              >
+                Save & Next
+              </BaseButtonWrapper>
             </div>
           </div>
         </div>
