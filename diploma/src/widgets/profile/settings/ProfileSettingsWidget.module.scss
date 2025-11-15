@@ -1,5 +1,8 @@
 .blockSettingsProfileForms {
   width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
   .blockActionsProfileSettings {
     display: flex;
     justify-content: space-between;

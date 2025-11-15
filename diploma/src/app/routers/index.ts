@@ -13,6 +13,8 @@ import { indexRoute } from "./indexRoute";
 import { fillingInfoRoute } from "./multiStepForm";
 import { forgotPasswordDefaultRoute } from "./auth";
 import { indexLayoutRoute } from "./indexLayoutRoute";
+import { profileRoute } from "./profile";
+import { profileSettingsRoute } from "./profile/settings";
 
 authRoute.addChildren({
   authDefaultRoute,
@@ -27,7 +29,11 @@ forgotPasswordRoute.addChildren({
   setPasswordRoute,
 });
 
-indexLayoutRoute.addChildren({ indexRoute });
+indexLayoutRoute.addChildren({ indexRoute, profileRoute });
+
+profileRoute.addChildren({
+  profileSettingsRoute,
+});
 
 const routeTree = rootRoute.addChildren({
   authRoute,

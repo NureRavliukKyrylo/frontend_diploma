@@ -25,4 +25,5 @@ export interface Profile {
   dateOfBirth?: string;
   socialLinks?: SocialLink[];
   coordinates?: Coordinates | null;
+  avatarUrl?: string;
 }

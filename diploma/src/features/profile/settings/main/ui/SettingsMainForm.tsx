@@ -1,21 +1,17 @@
 import styles from "./SettingsMainForm.module.scss";
 import { DatePickerInput, ProfileBaseInput, TextArea } from "@shared/ui/inputs";
-import { useAboutForm } from "@features/multi-step-filling-info/about-form/model/useAboutForm";
 import { UploadImage } from "@shared/ui";
 import { useMemo, useState } from "react";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { useSettingsMainForm } from "../model/useSettingsMainForm";
 
-export function SettingsMainForm({}) {
-  const formik = useAboutForm();
+export function SettingsMainForm() {
+  const { formik, isLoading } = useSettingsMainForm();
   const [avatar, setAvatar] = useState<File | null>(null);
-  const [about, setAbout] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null);
 
   const imageSrc = useMemo(() => {
-    if (avatar instanceof File) {
-      return URL.createObjectURL(avatar);
-    }
+    if (avatar instanceof File) return URL.createObjectURL(avatar);
     return null;
   }, [avatar]);
 
@@ -23,49 +19,61 @@ export function SettingsMainForm({}) {
     setAvatar(file);
     setError(file ? null : "Please select an image");
   };
+
   return (
-    <div className={styles.mainInfoProfileForm}>
+    <form onSubmit={formik.handleSubmit} className={styles.mainInfoProfileForm}>
       <div className={styles.publicProfile}>
         <div className={styles.publicProfileText}>
           <h1>Public profile</h1>
           <p>This information will be visible on your public profile</p>
         </div>
         <div className={styles.formInfoPublicProfile}>
-          <ProfileBaseInput />
+          <ProfileBaseInput
+            name="firstName"
+            value={formik.values.firstName}
+            onChange={formik.handleChange}
+            error={formik.submitCount > 0 ? formik.errors.firstName : ""}
+          />
+          <ProfileBaseInput
+            name="lastName"
+            value={formik.values.lastName}
+            onChange={formik.handleChange}
+            error={formik.submitCount > 0 ? formik.errors.lastName : ""}
+          />
           <div className={styles.datePickerWrapper}>
             <DatePickerInput
               name="dateOfBirth"
-              label=""
               value={formik.values.dateOfBirth}
-              error={formik.errors.dateOfBirth}
-              submit={formik.submitCount > 0}
               onChange={(value) => formik.setFieldValue("dateOfBirth", value)}
+              error={formik.submitCount > 0 ? formik.errors.dateOfBirth : ""}
               showMonthAndYearPickers
             />
           </div>
         </div>
       </div>
+
       <div className={styles.lineDividerProfileSettings}></div>
+
       <div className={styles.publicProfile}>
         <div className={styles.publicProfileText}>
           <h1>Bio description</h1>
-          <p>This will be your main story. Keep it very, very long </p>
+          <p>This will be your main story. Keep it very, very long</p>
         </div>
         <div className={styles.formInfoPublicProfile}>
           <TextArea
             id="about"
             name="about"
             value={formik.values.about}
-            onChange={(e) => {
-              formik.handleChange(e);
-            }}
+            onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             error={formik.submitCount > 0 ? formik.errors.about : ""}
             minHeight={220}
           />
         </div>
       </div>
+
       <div className={styles.lineDividerProfileSettings}></div>
+
       <div className={styles.publicProfile}>
         <div className={styles.publicProfileText}>
           <h1>Profile photo</h1>
@@ -82,12 +90,17 @@ export function SettingsMainForm({}) {
           />
         </div>
       </div>
+
       <div className={styles.lineDividerProfileSettings}></div>
+
       <div className={styles.blockButtons}>
-        <BaseButtonWrapper loading={false} className={styles.saveProfileButton}>
+        <BaseButtonWrapper
+          loading={isLoading}
+          className={styles.saveProfileButton}
+        >
           SAVE
         </BaseButtonWrapper>
       </div>
-    </div>
+    </form>
   );
 }

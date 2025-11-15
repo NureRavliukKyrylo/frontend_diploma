@@ -7,14 +7,15 @@ import {
 } from "./configs/profileSettingForms";
 import { profileSettingsTabs } from "./configs/profileSettingTabs";
 import { Toggle } from "@shared/ui";
-import { InstagramIcon } from "@shared/assets/icons/brands";
 import styles from "./ProfileSettingsWidget.module.scss";
 import { LogoutButton } from "@features/auth";
 import { BackButton } from "@shared/ui/buttons";
+import { useProfile } from "@entities/user/profile";
 
 export function ProfileSettingsWidget() {
   const [activeTab, setActiveTab] = useState<SettingsMode>("main");
   const { component, wrapperProps } = profileSettingsForms[activeTab];
+  const { data: profile } = useProfile();
 
   return (
     <div className={styles.blockSettingsProfileForms}>
@@ -39,9 +40,11 @@ export function ProfileSettingsWidget() {
           transition={{ duration: 0.25 }}
         >
           <SettingsWrapper
-            profileAvatar={InstagramIcon}
-            fullName={"Mykola Shestakov"}
-            email={"example@gmail.com"}
+            profileAvatar={profile?.profile?.avatarUrl}
+            fullName={
+              (profile?.firstName || "") + " " + (profile?.lastName || "")
+            }
+            email={profile?.email}
             settingsTitle={wrapperProps?.settingsTitle}
             settingsDescription={wrapperProps?.settingsDescription}
           >
