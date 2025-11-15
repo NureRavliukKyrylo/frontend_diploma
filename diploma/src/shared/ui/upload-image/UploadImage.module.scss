@@ -11,13 +11,12 @@
   border: 2px dashed #ccc;
   border-radius: 20px;
   width: 100%;
-  min-height: 190px;
+  height: 300px;
   cursor: pointer;
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: border-color 0.3s ease;
+  overflow: hidden;
 
   &:hover {
     border-color: #888;

@@ -1,5 +1,5 @@
 import { type StateCreator } from "zustand";
-import type { AuthMode } from "@entities/user/auth/model/types/AuthMode";
+import { type AuthMode } from "../types/authMode";
 
 export interface AuthModeSlice {
   mode: AuthMode;

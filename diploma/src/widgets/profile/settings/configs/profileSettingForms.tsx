@@ -2,15 +2,17 @@ import { LinksForm } from "@features/profile";
 import { PasswordForm } from "@features/auth";
 import { SettingsMainForm } from "@features/profile";
 import type { SettingsWrapper } from "@shared/ui/wrappers";
-
-export type SettingsMode = "main" | "links" | "password";
+import { type ProfileSettingsMode } from "@entities/user";
 
 export interface SettingsFormConfig {
   component: React.ReactNode;
   wrapperProps?: Partial<React.ComponentProps<typeof SettingsWrapper>>;
 }
 
-export const profileSettingsForms: Record<SettingsMode, SettingsFormConfig> = {
+export const profileSettingsForms: Record<
+  ProfileSettingsMode,
+  SettingsFormConfig
+> = {
   main: {
     component: <SettingsMainForm />,
     wrapperProps: {
