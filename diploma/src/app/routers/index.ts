@@ -13,7 +13,7 @@ import { indexRoute } from "./indexRoute";
 import { fillingInfoRoute } from "./multiStepForm";
 import { forgotPasswordDefaultRoute } from "./auth";
 import { indexLayoutRoute } from "./indexLayoutRoute";
-import { profileRoute } from "./profile";
+import { profileMainRoute, profileRootRoute } from "./profile";
 import { profileSettingsRoute } from "./profile/settings";
 
 authRoute.addChildren({
@@ -29,10 +29,11 @@ forgotPasswordRoute.addChildren({
   setPasswordRoute,
 });
 
-indexLayoutRoute.addChildren({ indexRoute, profileRoute });
+indexLayoutRoute.addChildren({ indexRoute, profileRootRoute });
 
-profileRoute.addChildren({
+profileRootRoute.addChildren({
   profileSettingsRoute,
+  profileMainRoute,
 });
 
 const routeTree = rootRoute.addChildren({

@@ -5,3 +5,5 @@ export { StepperForm } from "./stepper-form/StepperForm";
 export { SocialLinks } from "./social-links/SocialLinks";
 export { NavMenu } from "./nav-menu/NavMenu";
 export { UploadImage } from "./upload-image/UploadImage";
+export { ProgressBar } from "./progress-bar/ProgressBar";
+export { Carousel } from "./carousel/Carousel";

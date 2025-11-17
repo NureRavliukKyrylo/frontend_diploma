@@ -35,6 +35,7 @@
     "lucide-react": "^0.553.0",
     "mui": "^0.0.1",
     "pintura": "^0.3.10",
+    "popmotion": "^11.0.5",
     "radix-ui": "^1.4.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
