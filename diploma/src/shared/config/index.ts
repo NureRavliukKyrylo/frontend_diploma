@@ -1,12 +1,13 @@
+export { OtpType } from "./types/verification/otpType";
+
 export { useErrorStore } from "./stores/errorStore";
-export { SocialPlatform } from "./enums/platformType";
+export { SocialPlatform } from "./types/social-links/SocialPlatform";
 export { API_URL } from "./constants/apiConstants";
 export {
   createStepperSlice,
   type StepperSlice,
 } from "./stores/slices/stepperSlice";
-export { OtpType } from "./enums/otpType";
-export { type SocialLink } from "./types/SocialLink";
-export type { NavLink } from "./types/NavLink";
-export type { StepItem } from "./types/StepItem";
-export type { TabOption } from "./types/ToggleTabOption";
+export { type SocialLink } from "./types/social-links/SocialLink";
+export type { NavLink } from "./types/navigation-menu/NavLink";
+export type { StepItem } from "./types/stepper/StepItem";
+export type { TabOption } from "./types/toggle/ToggleTabOption";

@@ -47,31 +47,25 @@
   @include font-base(20px, 400);
 }
 .userActivityInfo {
-  display: flex;
-  justify-content: space-between;
-  > :first-child {
-    flex: 0 0 30%;
-  }
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 20px;
 
-  > :nth-child(2) {
-    flex: 0 0 67%;
-  }
   .projectsBlock {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 
     .projectsDetailInfoBlock {
       display: flex;
       flex-direction: column;
       gap: 20px;
-      width: 100%;
+
       .projectsUserProfile {
         background: #ffffff;
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
         border-radius: 15px;
-        padding-top: 40px;
-        padding-left: 5px;
-        padding-right: 10px;
+        padding: 40px 10px 20px 5px;
 
         .textInfoProjectsUserProfile {
           h1 {
@@ -91,38 +85,44 @@
         }
       }
     }
+
     .projectsSeeMore {
       box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
       border-radius: 15px;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%;
+
       .seeMoreProjectsButton {
         background: #ffffff;
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
         border-radius: 13px;
         @include font-base(20px, 900);
-        padding: 5px;
+        padding: 5px 10px;
       }
     }
   }
+
   .skillsBlock {
     background: #ffffff;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
     padding: 30px;
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
+    justify-content: space-between;
+    grid-column: 2 / 4;
+
     h1 {
       @include font-base(30px, 700);
       color: #000000;
     }
+
     .buttonSkillsBlock {
       width: 100%;
       display: flex;
       justify-content: flex-end;
+
       .seeMoreSkillsButton {
         background: #ffffff;
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);

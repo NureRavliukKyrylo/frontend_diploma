@@ -1,0 +1,10 @@
+@use "@shared/assets/styles" as *;
+
+.skillImageCard {
+  width: 80%;
+  border-radius: 50%;
+}
+
+.skillTitleCard {
+  @include font-base(15px, 500);
+}

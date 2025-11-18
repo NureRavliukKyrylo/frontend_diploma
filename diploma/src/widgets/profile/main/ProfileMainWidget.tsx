@@ -68,10 +68,8 @@ export function ProfileMainWidget() {
         </div>
       </div>
       <div className={styles.lineDividerBadges}>
-        <div className={styles.lineBadges}>
-          <div className={styles.textBadges}>
-            <h1>BADGES</h1>
-          </div>
+        <div className={styles.textBadges}>
+          <h1>BADGES</h1>
         </div>
       </div>
       <Carousel

@@ -10,3 +10,4 @@ export type { AuthMode } from "./auth/model/types/authMode";
 export { type ProfileSettingsMode } from "./profile/model/types/profileSettingsMode";
 export { useUserProfileStore } from "./profile/model/store/userProfileStore";
 export { type ProfileMode } from "./profile/model/types/profileMode";
+export { ProfileAvatar } from "./profile/ui/ProfileAvatar";

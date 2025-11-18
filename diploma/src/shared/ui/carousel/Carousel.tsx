@@ -49,14 +49,14 @@ export function Carousel<T>({
           className={styles.itemsRow}
           style={{ display: "flex", gap, overflow: "hidden" }}
         >
-          <AnimatePresence initial={false}>
+          <AnimatePresence initial={false} mode="popLayout">
             {visibleItems.map((item, i) => (
               <motion.div
                 key={getWrappedIndex(index + i)}
-                layout // ✨ Items smoothly reflow, no jump
-                initial={{ opacity: 0, x: 50 }} // only new items animate!
+                layout
+                initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }} // leaving item animates out
+                exit={{ opacity: 0, x: -50 }}
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
                 style={{
                   minWidth: itemWidth,
