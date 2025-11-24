@@ -74,7 +74,6 @@ export function ProfileMainWidget() {
       </div>
       <Carousel
         items={demoItems}
-        visibleCount={3}
         gap={20}
         renderItem={(item) => (
           <div

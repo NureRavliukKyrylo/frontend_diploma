@@ -5,6 +5,7 @@ import { ConfirmationModal } from "@shared/ui/modals/confirmation-modal/Confirma
 import styles from "./LogoutButton.module.scss";
 import { useErrorStore } from "@shared/config";
 import { Power } from "@shared/assets/icons/actions";
+import { LogOutImage } from "@shared/assets/images/actions";
 
 export const LogoutButton: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,13 +32,14 @@ export const LogoutButton: React.FC = () => {
 
       <ConfirmationModal
         isOpen={isModalOpen}
-        title="Confirm logout"
-        text="Are you sure you want to log out of the system?"
+        title="Are you logging out?"
+        text="Do you want to log out now? You’ll be able to sign in again whenever you need."
         confirmText="Logout"
         cancelText="Cancel"
         onConfirm={confirmLogout}
         onCancel={closeModal}
         isLoading={isLoading}
+        image={LogOutImage}
         error={serverError}
       />
     </>

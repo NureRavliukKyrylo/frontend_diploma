@@ -13,6 +13,7 @@ interface ConfirmationModalProps {
   cancelText?: string;
   isLoading?: boolean;
   error?: string | null;
+  image?: string;
 }
 
 export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
@@ -25,32 +26,42 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   cancelText = "No",
   isLoading = false,
   error,
+  image,
 }) => {
   return (
     <BaseModal isOpen={isOpen} onClose={onCancel} error={error}>
-      <div className={styles.modalConfirmationTitle}>
-        <h2>{title}</h2>
-      </div>
+      <div className={styles.modalConfirmationWrapper}>
+        {image && (
+          <img
+            className={styles.modalConfirmationImage}
+            src={image}
+            alt="modal image"
+          />
+        )}
+        <div className={styles.modalConfirmationTitle}>
+          <h2>{title}</h2>
+        </div>
 
-      <div className={styles.modalConfirmationText}>
-        <p>{text}</p>
-      </div>
+        <div className={styles.modalConfirmationDescription}>
+          <p>{text}</p>
+        </div>
 
-      <div className={styles.actionsConfirmationModal}>
-        <BaseButtonWrapper
-          className={styles.confirmButtonModal}
-          onClick={onConfirm}
-          loading={isLoading}
-        >
-          {confirmText}
-        </BaseButtonWrapper>
+        <div className={styles.actionsConfirmationModal}>
+          <BaseButtonWrapper
+            className={styles.confirmButtonModal}
+            onClick={onConfirm}
+            loading={isLoading}
+          >
+            {confirmText}
+          </BaseButtonWrapper>
 
-        <BaseButtonWrapper
-          className={styles.cancelButtonModal}
-          onClick={onCancel}
-        >
-          {cancelText}
-        </BaseButtonWrapper>
+          <BaseButtonWrapper
+            className={styles.cancelButtonModal}
+            onClick={onCancel}
+          >
+            {cancelText}
+          </BaseButtonWrapper>
+        </div>
       </div>
     </BaseModal>
   );

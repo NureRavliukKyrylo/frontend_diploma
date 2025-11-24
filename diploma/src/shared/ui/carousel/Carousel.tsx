@@ -5,28 +5,43 @@ import styles from "./Carousel.module.scss";
 interface CarouselProps<T> {
   items: T[];
   renderItem: (item: T) => React.ReactNode;
-  visibleCount?: number;
   gap?: number;
+  minItemWidth?: number;
 }
 
 export function Carousel<T>({
   items,
   renderItem,
-  visibleCount = 1,
   gap = 16,
+  minItemWidth = 200,
 }: CarouselProps<T>) {
   const [index, setIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [itemWidth, setItemWidth] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(1);
 
   useEffect(() => {
-    if (containerRef.current) {
-      const totalGap = gap * (visibleCount - 1);
-      setItemWidth(
-        (containerRef.current.offsetWidth - totalGap) / visibleCount
-      );
-    }
-  }, [visibleCount, gap]);
+    const updateDimensions = () => {
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+
+        // Визначаємо скільки елементів вміститься
+        let count = Math.floor((containerWidth + gap) / (minItemWidth + gap));
+        count = Math.max(1, Math.min(count, items.length));
+
+        // Розраховуємо точну ширину елемента
+        const totalGap = gap * (count - 1);
+        const calculatedWidth = (containerWidth - totalGap) / count;
+
+        setVisibleCount(count);
+        setItemWidth(calculatedWidth);
+      }
+    };
+
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, [gap, minItemWidth, items.length]);
 
   const getWrappedIndex = (i: number) =>
     ((i % items.length) + items.length) % items.length;
@@ -38,9 +53,17 @@ export function Carousel<T>({
     (_, i) => items[getWrappedIndex(index + i)]
   );
 
+  const canGoPrev = items.length > visibleCount;
+  const canGoNext = items.length > visibleCount;
+
   return (
     <div className={styles.sliderWrapper}>
-      <button onClick={() => paginate(-1)} className={styles.navBtn}>
+      <button
+        onClick={() => paginate(-1)}
+        disabled={!canGoPrev}
+        className={styles.navBtn}
+        style={{ opacity: canGoPrev ? 1 : 0.3 }}
+      >
         ⟨
       </button>
 
@@ -70,7 +93,12 @@ export function Carousel<T>({
         </div>
       </div>
 
-      <button onClick={() => paginate(1)} className={styles.navBtn}>
+      <button
+        onClick={() => paginate(1)}
+        disabled={!canGoNext}
+        className={styles.navBtn}
+        style={{ opacity: canGoNext ? 1 : 0.3 }}
+      >
         ⟩
       </button>
     </div>

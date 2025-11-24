@@ -6,3 +6,4 @@ export { default as Arrow } from "./arrow.png";
 export { default as Upload } from "./upload.png";
 export { default as Power } from "./power.png";
 export { default as Settings } from "./settings.png";
+export { default as Close } from "./close.png";
