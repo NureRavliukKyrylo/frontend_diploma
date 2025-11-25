@@ -9,3 +9,4 @@ export { MessagesButton } from "./common/ui/MessagesButton";
 export { ActiveProjectsButton } from "./common/ui/ActiveProjectsButton";
 export { ProfieAvatar } from "./common/ui/ProfileAvatar";
 export { BaseButtonWrapper } from "./base-buttons/base-wrapper/BaseButtonWrapper";
+export { ReadMoreButton } from "./action-buttons/read-more/ReadMoreButton";

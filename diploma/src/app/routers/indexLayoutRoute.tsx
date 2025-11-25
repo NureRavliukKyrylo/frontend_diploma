@@ -8,12 +8,12 @@ export const indexLayoutRoute = createRoute({
   getParentRoute: () => rootRoute,
   id: "index-layout",
   component: () => (
-    <>
+    <div className={styles.pageHeaderWrapper}>
       <Header />
       <main className={styles.layoutMain}>
         <Outlet />
       </main>
       <Footer />
-    </>
+    </div>
   ),
 });

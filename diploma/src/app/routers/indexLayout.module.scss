@@ -6,3 +6,8 @@
   padding: 5rem 0;
   box-sizing: border-box;
 }
+.pageHeaderWrapper {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}

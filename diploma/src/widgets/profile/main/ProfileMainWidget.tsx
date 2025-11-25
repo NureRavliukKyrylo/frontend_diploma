@@ -1,6 +1,6 @@
 import { ProgressBar, Carousel } from "@shared/ui";
 import styles from "./ProfileMainWidget.module.scss";
-import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { BaseButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 
 export function ProfileMainWidget() {
   const demoItems = [1, 2, 3, 4, 5, 6];
@@ -24,14 +24,19 @@ export function ProfileMainWidget() {
         </div>
       </div>
       <div className={styles.bioUser}>
-        <p>
-          I am an active and dedicated volunteer who truly enjoys helping others
-          and making a positive difference in the community. Over the years, I
-          have taken part in charity projects, social initiatives, and event
-          organization, which allowed me to develop strong teamwork,
-          communication, and problem-solving skills. I adapt quickly to new
-          challenges, stay motivated in dynamic environments,
-        </p>
+        <ReadMoreButton
+          collapsedHeight={120}
+          className={styles.readMoreMainProfile}
+        >
+          <p>
+            I am an active and dedicated volunteer who truly enjoys helping
+            others and making a positive difference in the community. Over the
+            years, I have taken part in charity projects, social initiatives,
+            and event organization, which allowed me to develop strong teamwork,
+            communication, and problem-solving skills. I adapt quickly to new
+            challenges, stay motivated in dynamic environments,
+          </p>
+        </ReadMoreButton>
       </div>
       <div className={styles.privateUserInfo}></div>
       <div className={styles.userActivityInfo}>

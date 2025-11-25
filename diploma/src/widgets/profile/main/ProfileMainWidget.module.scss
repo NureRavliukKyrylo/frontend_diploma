@@ -45,6 +45,11 @@
 .bioUser {
   color: #000000;
   @include font-base(20px, 400);
+  .readMoreMainProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
 }
 .userActivityInfo {
   display: grid;
