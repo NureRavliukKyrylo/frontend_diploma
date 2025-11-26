@@ -1,6 +1,6 @@
 import { createRoute } from "@tanstack/react-router";
 import { profileRoutes } from "@shared/routes";
-import { profileRootRoute } from "../profileRoot";
+import { profileRootRoute } from "../route";
 import { getProfile } from "@entities/user/profile/api/profileApi";
 import { queryClient } from "@shared/libs";
 import { SettingsProfilePage } from "@pages/profile";

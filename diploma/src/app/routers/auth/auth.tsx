@@ -1,5 +1,5 @@
 import { createRoute } from "@tanstack/react-router";
-import { authRoute } from "./authRoot";
+import { authRoute } from "./route";
 import { AuthPage } from "@pages/auth";
 import { AuthRoutes } from "@shared/routes";
 

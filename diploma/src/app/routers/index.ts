@@ -15,7 +15,7 @@ import { forgotPasswordDefaultRoute } from "./auth";
 import { indexLayoutRoute } from "./indexLayoutRoute";
 import { profileMainRoute, profileRootRoute } from "./profile";
 import { profileSettingsRoute } from "./profile/settings";
-import { projectsRootRoute } from "./projects/projectsRoot";
+import { projectsRootRoute } from "./projects/route";
 import { projectsMainRoute } from "./projects";
 
 authRoute.addChildren({
@@ -31,12 +31,6 @@ forgotPasswordRoute.addChildren({
   setPasswordRoute,
 });
 
-indexLayoutRoute.addChildren({
-  indexRoute,
-  profileRootRoute,
-  projectsRootRoute,
-});
-
 profileRootRoute.addChildren({
   profileSettingsRoute,
   profileMainRoute,
@@ -45,6 +39,13 @@ profileRootRoute.addChildren({
 projectsRootRoute.addChildren({
   projectsMainRoute,
 });
+
+indexLayoutRoute.addChildren({
+  indexRoute,
+  profileRootRoute,
+  projectsRootRoute,
+});
+
 const routeTree = rootRoute.addChildren({
   authRoute,
   indexLayoutRoute,

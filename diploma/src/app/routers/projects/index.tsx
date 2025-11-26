@@ -1,5 +1,5 @@
 import { createRoute } from "@tanstack/react-router";
-import { projectsRootRoute } from "./projectsRoot";
+import { projectsRootRoute } from "./route";
 import { ProjectsListWidget } from "@widgets/projects";
 import { Pagination } from "@shared/ui";
 import { useState } from "react";

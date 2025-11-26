@@ -1,3 +1,3 @@
-export { profileRootRoute } from "./profileRoot";
+export { profileRootRoute } from "./route";
 export { profileSettingsRoute } from "./settings";
-export { profileMainRoute } from "./main";
+export { profileMainRoute } from "./mainProfile";

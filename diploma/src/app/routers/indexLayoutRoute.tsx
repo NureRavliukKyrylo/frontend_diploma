@@ -1,19 +1,14 @@
 import { rootRoute } from "./__root";
 import { createRoute } from "@tanstack/react-router";
-import { Header, Footer } from "@widgets/common";
 import { Outlet } from "@tanstack/react-router";
-import styles from "./indexLayout.module.scss";
+import { IndexLayout } from "@app/layouts";
 
 export const indexLayoutRoute = createRoute({
   getParentRoute: () => rootRoute,
   id: "index-layout",
   component: () => (
-    <div className={styles.pageHeaderWrapper}>
-      <Header />
-      <main className={styles.layoutMain}>
-        <Outlet />
-      </main>
-      <Footer />
-    </div>
+    <IndexLayout>
+      <Outlet />
+    </IndexLayout>
   ),
 });
