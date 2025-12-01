@@ -17,6 +17,9 @@ import { profileMainRoute, profileRootRoute } from "./profile";
 import { profileSettingsRoute } from "./profile/settings";
 import { projectsRootRoute } from "./projects/route";
 import { projectsMainRoute } from "./projects";
+import { categoriesRootRoute } from "./categories/route";
+import { categoriesMainRoute } from "./categories";
+import { categoryDetailRoute } from "./categories/$name";
 
 authRoute.addChildren({
   authDefaultRoute,
@@ -40,10 +43,16 @@ projectsRootRoute.addChildren({
   projectsMainRoute,
 });
 
+categoriesRootRoute.addChildren({
+  categoriesMainRoute,
+  categoryDetailRoute,
+});
+
 indexLayoutRoute.addChildren({
   indexRoute,
   profileRootRoute,
   projectsRootRoute,
+  categoriesRootRoute,
 });
 
 const routeTree = rootRoute.addChildren({

@@ -1,35 +1,33 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Children } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Carousel.module.scss";
 
-interface CarouselProps<T> {
-  items: T[];
-  renderItem: (item: T) => React.ReactNode;
+interface CarouselProps {
+  children: React.ReactNode;
   gap?: number;
   minItemWidth?: number;
 }
 
-export function Carousel<T>({
-  items,
-  renderItem,
+export function Carousel({
+  children,
   gap = 16,
   minItemWidth = 200,
-}: CarouselProps<T>) {
+}: CarouselProps) {
   const [index, setIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [itemWidth, setItemWidth] = useState(0);
   const [visibleCount, setVisibleCount] = useState(1);
+
+  const items = Children.toArray(children);
 
   useEffect(() => {
     const updateDimensions = () => {
       if (containerRef.current) {
         const containerWidth = containerRef.current.offsetWidth;
 
-        // Визначаємо скільки елементів вміститься
         let count = Math.floor((containerWidth + gap) / (minItemWidth + gap));
         count = Math.max(1, Math.min(count, items.length));
 
-        // Розраховуємо точну ширину елемента
         const totalGap = gap * (count - 1);
         const calculatedWidth = (containerWidth - totalGap) / count;
 
@@ -75,7 +73,7 @@ export function Carousel<T>({
           <AnimatePresence initial={false} mode="popLayout">
             {visibleItems.map((item, i) => (
               <motion.div
-                key={getWrappedIndex(index + i)}
+                key={`${index + i}-${getWrappedIndex(index + i)}`}
                 layout
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -86,7 +84,7 @@ export function Carousel<T>({
                   maxWidth: itemWidth,
                 }}
               >
-                {renderItem(item)}
+                {item}
               </motion.div>
             ))}
           </AnimatePresence>

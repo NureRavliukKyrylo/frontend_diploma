@@ -1,1 +1,2 @@
-export { SkillCard } from "./ui/SkillCard";
+export { SkillCard } from "./ui/skill-card/SkillCard";
+export { SkillTab } from "./ui/skill-tab/SkillTab";

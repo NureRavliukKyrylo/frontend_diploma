@@ -1,0 +1,82 @@
+@use "@shared/assets/styles" as *;
+
+.categoryDetailBlock {
+  background: #ffffff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  padding: 50px;
+  display: flex;
+  gap: 50px;
+  .categoryDetailImage {
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 23px;
+    width: 300px;
+    height: 300px;
+  }
+  .categoryInformationSkills {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .categoryInformation {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      .titleCategory {
+        @include font-base(60px, 900);
+        line-height: 100%;
+        margin-bottom: 15px;
+      }
+      .descriptionProjectsBlock {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        > :first-child {
+          width: 55%;
+        }
+
+        > :last-child {
+          width: 40%;
+        }
+        p {
+          @include font-base(20px, 400);
+          line-height: 120%;
+        }
+        .readMoreCategoryBlock {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          margin-top: auto;
+          .readMoreCategoryButton {
+            @include font-base(15px, 700);
+            color: #8c0000;
+          }
+        }
+        .projectsBlock {
+          display: flex;
+          gap: 15px;
+          justify-content: center;
+          .projectInfo {
+            h1 {
+              @include font-base(25px, 700);
+            }
+            h2 {
+              @include font-base(15px, 500);
+              color: rgba(0, 0, 0, 0.6);
+            }
+          }
+          .lineDividerProject {
+            border-left: 1px solid rgba(0, 0, 0, 0.6);
+          }
+        }
+      }
+    }
+    .categorySkills {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .coreSkillsText {
+        @include font-base(25px, 700);
+      }
+    }
+  }
+}

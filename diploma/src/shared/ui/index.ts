@@ -9,3 +9,4 @@ export { ProgressBar } from "./progress-bar/ProgressBar";
 export { Carousel } from "./carousel/Carousel";
 export { SocialPlatforms } from "./social-links/blocks-list/SocialPlatforms";
 export { Pagination } from "./pagination/Pagination";
+export { RatingStars } from "./rating-stars/RatingStars";

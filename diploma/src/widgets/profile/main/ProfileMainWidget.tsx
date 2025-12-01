@@ -1,9 +1,9 @@
 import { ProgressBar, Carousel } from "@shared/ui";
 import styles from "./ProfileMainWidget.module.scss";
 import { BaseButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
+import { BadgesCarouselWidget } from "@widgets/badges";
 
 export function ProfileMainWidget() {
-  const demoItems = [1, 2, 3, 4, 5, 6];
   return (
     <>
       <div className={styles.levelRateInfo}>
@@ -77,26 +77,7 @@ export function ProfileMainWidget() {
           <h1>BADGES</h1>
         </div>
       </div>
-      <Carousel
-        items={demoItems}
-        gap={20}
-        renderItem={(item) => (
-          <div
-            style={{
-              height: "200px",
-              background: "#333",
-              color: "#fff",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              fontSize: "40px",
-              borderRadius: "10px",
-            }}
-          >
-            {item}
-          </div>
-        )}
-      />
+      <BadgesCarouselWidget />
     </>
   );
 }
