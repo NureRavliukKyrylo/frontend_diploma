@@ -1,6 +1,8 @@
 import { CategoryDetailWidget } from "@widgets/categories";
 import { useParams } from "@tanstack/react-router";
 import { categoryDetailRoute } from "@app/routers/categories/$name";
+import { FilterButton } from "@shared/ui/buttons";
+import { CategoryFiltersWidget } from "@widgets/common/filters";
 
 export function CategoryDetailPage() {
   const { categoryName } = useParams({ from: categoryDetailRoute.id });
@@ -28,14 +30,18 @@ export function CategoryDetailPage() {
   };
 
   return (
-    <CategoryDetailWidget
-      imageCategory={demoCategory.imageCategory}
-      titleCategory={demoCategory.titleCategory}
-      descriptionCategory={demoCategory.descriptionCategory}
-      allProjects={demoCategory.allProjects}
-      activeProjects={demoCategory.activeProjects}
-      completedProjects={demoCategory.completedProjects}
-      skills={demoCategory.skills}
-    />
+    <>
+      <CategoryDetailWidget
+        imageCategory={demoCategory.imageCategory}
+        titleCategory={demoCategory.titleCategory}
+        descriptionCategory={demoCategory.descriptionCategory}
+        allProjects={demoCategory.allProjects}
+        activeProjects={demoCategory.activeProjects}
+        completedProjects={demoCategory.completedProjects}
+        skills={demoCategory.skills}
+      />
+      <FilterButton />
+      <CategoryFiltersWidget />
+    </>
   );
 }
