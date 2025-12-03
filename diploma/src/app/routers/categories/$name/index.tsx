@@ -10,6 +10,8 @@ const categorySearchSchema = z.object({
   categories: z.array(z.string()).optional().catch([]),
   organizations: z.array(z.string()).optional().catch([]),
   distance: z.number().optional(),
+  search: z.string().optional(),
+  page: z.number().min(1).default(1),
 });
 
 export type CategorySearchParams = z.infer<typeof categorySearchSchema>;

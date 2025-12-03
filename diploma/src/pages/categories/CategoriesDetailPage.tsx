@@ -3,6 +3,9 @@ import { useParams } from "@tanstack/react-router";
 import { categoryDetailRoute } from "@app/routers/categories/$name";
 import { FilterButton } from "@shared/ui/buttons";
 import { CategoryFiltersWidget } from "@widgets/common/filters";
+import { SearchBar } from "@shared/ui/inputs";
+import { useProjectFilters } from "@features/filters/projects/model/useProjectFilters";
+import { useProjectFiltersCategoryStore } from "@entities/project/model/store/ProjectFiltersCategoryStore";
 
 export function CategoryDetailPage() {
   const { categoryName } = useParams({ from: categoryDetailRoute.id });
@@ -28,6 +31,8 @@ export function CategoryDetailPage() {
       { name: "Problem Solving" },
     ],
   };
+  const { filters } = useProjectFilters();
+  const setSearch = useProjectFiltersCategoryStore((s) => s.setSearch);
 
   return (
     <>
@@ -40,6 +45,7 @@ export function CategoryDetailPage() {
         completedProjects={demoCategory.completedProjects}
         skills={demoCategory.skills}
       />
+      <SearchBar value={filters.search ?? ""} onChange={(v) => setSearch(v)} />
       <FilterButton />
       <CategoryFiltersWidget />
     </>

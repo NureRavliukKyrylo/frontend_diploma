@@ -10,7 +10,19 @@ export const useProjectFilters = () => {
   const params = useParams({ from: categoryDetailRoute.id });
   const isInitialMount = useRef(true);
 
-  const filters = useProjectFiltersCategoryStore((state) => state.filters);
+  const startDate = useProjectFiltersCategoryStore((state) => state.startDate);
+  const dueDate = useProjectFiltersCategoryStore((state) => state.dueDate);
+  const rating = useProjectFiltersCategoryStore((state) => state.rating);
+  const categories = useProjectFiltersCategoryStore(
+    (state) => state.categories
+  );
+  const organizations = useProjectFiltersCategoryStore(
+    (state) => state.organizations
+  );
+  const distance = useProjectFiltersCategoryStore((state) => state.distance);
+  const search = useProjectFiltersCategoryStore((state) => state.search);
+  const page = useProjectFiltersCategoryStore((state) => state.page);
+
   const setFiltersFromUrl = useProjectFiltersCategoryStore(
     (state) => state.setFiltersFromUrl
   );
@@ -23,6 +35,8 @@ export const useProjectFilters = () => {
       categories: searchParams.categories || [],
       organizations: searchParams.organizations || [],
       distance: searchParams.distance,
+      search: searchParams.search,
+      page: searchParams.page,
     });
   }, [
     searchParams.startDate,
@@ -31,6 +45,8 @@ export const useProjectFilters = () => {
     searchParams.categories,
     searchParams.organizations,
     searchParams.distance,
+    searchParams.search,
+    searchParams.page,
     setFiltersFromUrl,
   ]);
 
@@ -42,20 +58,25 @@ export const useProjectFilters = () => {
 
     const newSearch: Partial<CategorySearchParams> = {};
 
-    if (filters.startDate) newSearch.startDate = filters.startDate;
-    if (filters.dueDate) newSearch.dueDate = filters.dueDate;
-    if (filters.rating !== undefined && filters.rating > 0) {
-      newSearch.rating = filters.rating;
+    if (startDate) newSearch.startDate = startDate;
+    if (dueDate) newSearch.dueDate = dueDate;
+
+    if (rating !== undefined && rating > 0) {
+      newSearch.rating = rating;
     }
-    if (filters.categories.length > 0) {
-      newSearch.categories = filters.categories;
+
+    if (categories.length > 0) {
+      newSearch.categories = categories;
     }
-    if (filters.organizations.length > 0) {
-      newSearch.organizations = filters.organizations;
+    if (organizations.length > 0) {
+      newSearch.organizations = organizations;
     }
-    if (filters.distance !== undefined) {
-      newSearch.distance = filters.distance;
+    if (distance !== undefined) {
+      newSearch.distance = distance;
     }
+
+    if (search) newSearch.search = search;
+    if (page && page > 1) newSearch.page = page;
 
     navigate({
       to: "/categories/$categoryName",
@@ -64,12 +85,14 @@ export const useProjectFilters = () => {
       replace: true,
     });
   }, [
-    filters.startDate,
-    filters.dueDate,
-    filters.rating,
-    filters.categories,
-    filters.organizations,
-    filters.distance,
+    startDate,
+    dueDate,
+    rating,
+    categories,
+    organizations,
+    distance,
+    search,
+    page,
     navigate,
   ]);
 
@@ -80,10 +103,19 @@ export const useProjectFilters = () => {
       search: {},
       replace: false,
     });
-  }, [navigate]);
+  }, [navigate, params.categoryName]);
 
   return {
-    filters,
+    filters: {
+      startDate,
+      dueDate,
+      rating,
+      categories,
+      organizations,
+      distance,
+      search,
+      page,
+    },
     resetFilters,
   };
 };

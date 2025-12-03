@@ -5,4 +5,6 @@ export interface ProjectFiltersCategory {
   categories: string[];
   organizations: string[];
   distance?: number;
+  search: string | undefined;
+  page: number;
 }
