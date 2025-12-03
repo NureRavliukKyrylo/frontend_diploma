@@ -29,7 +29,6 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    flex: 1;
     h1 {
       @include font-base(40px, 700);
       line-height: 120%;

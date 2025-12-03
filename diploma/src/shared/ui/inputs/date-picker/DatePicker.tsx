@@ -37,6 +37,7 @@ export const DatePickerInput = ({
     <>
       <I18nProvider>
         <DatePicker
+          aria-label="date-picker"
           name={name}
           label={label}
           value={parsedValue}

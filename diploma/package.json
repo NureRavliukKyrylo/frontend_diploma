@@ -44,6 +44,7 @@
     "sass": "^1.93.0",
     "tailwind-merge": "^3.4.0",
     "yup": "^1.7.1",
+    "zod": "^4.1.13",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
