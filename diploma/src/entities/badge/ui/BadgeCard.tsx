@@ -1,20 +1,21 @@
+import type { Badge } from "../model/types/Badge";
 import { TierColors } from "../model/types/TierColors";
-import type { Tier } from "../model/types/TierList";
 import styles from "./BadgeCard.module.scss";
 
 interface BadgeCardProps {
-  badgeImage: string;
-  tier: Tier;
+  badge: Badge;
 }
-
-export const BadgeCard = ({ badgeImage, tier }: BadgeCardProps) => {
+export const BadgeCard = ({ badge }: BadgeCardProps) => {
   return (
     <div
       className={styles.badgeImageBlock}
-      style={{ backgroundImage: `url(${badgeImage})` }}
+      style={{ backgroundImage: `url(${badge.image})` }}
     >
-      <div className={styles.badgeInfoTier} style={{ color: TierColors[tier] }}>
-        <h1>{tier}</h1>
+      <div
+        className={styles.badgeInfoTier}
+        style={{ color: TierColors[badge.tier] }}
+      >
+        <h1>{badge.tier}</h1>
       </div>
     </div>
   );
