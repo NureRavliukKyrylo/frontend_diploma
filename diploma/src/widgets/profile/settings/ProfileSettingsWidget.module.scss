@@ -7,6 +7,10 @@
     display: flex;
     justify-content: space-between;
     height: 60px;
+    .backAndToggleSection {
+      display: flex;
+      gap: 20px;
+    }
   }
   .toggleProfileSettingsButton {
     color: rgba(0, 0, 0, 0.8);

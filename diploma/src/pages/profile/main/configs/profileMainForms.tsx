@@ -1,9 +1,9 @@
 import { type ProfileMode } from "@entities/user";
-import { BadgesInventoryWidget } from "@widgets/badges";
+import { BadgesCarouselWidget, BadgesInventoryWidget } from "@widgets/badges";
 import { ProfileMainWidget } from "@widgets/profile";
 
 export const profileMainForms: Record<ProfileMode, React.ReactNode> = {
-  profile: <ProfileMainWidget />,
+  profile: <ProfileMainWidget badgesChildren={<BadgesCarouselWidget />} />,
   projects: <></>,
   archive: <></>,
   inventory: <BadgesInventoryWidget />,

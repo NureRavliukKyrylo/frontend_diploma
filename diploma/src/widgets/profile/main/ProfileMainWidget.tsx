@@ -1,9 +1,16 @@
-import { ProgressBar, Carousel } from "@shared/ui";
+import { ProgressBar } from "@shared/ui";
 import styles from "./ProfileMainWidget.module.scss";
 import { BaseButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
-import { BadgesCarouselWidget } from "@widgets/badges";
 
-export function ProfileMainWidget() {
+interface ProfileMainWidgetProps {
+  skillsChildren?: React.ReactNode;
+  badgesChildren?: React.ReactNode;
+  //TODO:level interface,rating mb, adding user info with Pick or smth change all mock data
+}
+export function ProfileMainWidget({
+  skillsChildren,
+  badgesChildren,
+}: ProfileMainWidgetProps) {
   return (
     <>
       <div className={styles.levelRateInfo}>
@@ -65,6 +72,7 @@ export function ProfileMainWidget() {
         </div>
         <div className={styles.skillsBlock}>
           <h1>SKILLS</h1>
+          {skillsChildren}
           <div className={styles.buttonSkillsBlock}>
             <BaseButtonWrapper className={styles.seeMoreSkillsButton}>
               See more
@@ -77,7 +85,7 @@ export function ProfileMainWidget() {
           <h1>BADGES</h1>
         </div>
       </div>
-      <BadgesCarouselWidget />
+      {badgesChildren}
     </>
   );
 }
