@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useAuthStore } from "@entities/user";
 import { contactsSchema } from "../libs/contactsSchema";
 import { useSubmitFillingForm } from "@features/multi-step-filling-info/submit-form";
-import { SocialPlatform } from "@shared/config";
+import { SocialPlatform } from "@shared/config/types";
 import { platformKeys } from "../configs/platformKeys";
 import type { UpdateUserDto } from "../../submit-form/api/fiillingFormApi";
 
@@ -21,11 +21,13 @@ export const useContactsForm = () => {
   const initialValues = Object.entries(platformKeys).reduce(
     (acc, [platformValue, key]) => {
       const platform = Number(platformValue) as SocialPlatform;
-      const link = profile?.socialLinks?.find((l) => l.platform === platform);
+      const link = profile?.socialLinks?.find(
+        (l: { platform: number }) => l.platform === platform,
+      );
 
       const fieldName = `Profile.SocialLinks[Platform=${key}]`;
       const field = privacySettings?.fields?.find(
-        (f) => f.fieldName === fieldName
+        (f: { fieldName: string }) => f.fieldName === fieldName,
       );
 
       acc[key] = link?.url;
@@ -33,7 +35,7 @@ export const useContactsForm = () => {
 
       return acc;
     },
-    {} as Record<string, any>
+    {} as Record<string, any>,
   );
 
   const formik = useFormik({
@@ -41,8 +43,6 @@ export const useContactsForm = () => {
     validationSchema: contactsSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
-      console.log("[DEBUG] Submitting form:", values);
-
       Object.entries(platformKeys).forEach(([platformValue, key]) => {
         const platform = Number(platformValue) as SocialPlatform;
         const fieldName = `Profile.SocialLinks[Platform=${key}]`;
@@ -80,7 +80,6 @@ export const useContactsForm = () => {
           : {}),
       };
 
-      console.log("[DEBUG] Final payload (fresh state):", payload);
       handleSubmit(payload);
     },
   });

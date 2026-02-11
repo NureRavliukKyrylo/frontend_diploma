@@ -1,7 +1,7 @@
 import { ProfileAvatar } from "@entities/user";
 import styles from "./SideBarWidget.module.scss";
 import { InstagramIcon } from "@shared/assets/icons/brands";
-import { SocialPlatform } from "@shared/config";
+import { SocialPlatform } from "@shared/config/types";
 import { SocialPlatforms } from "@shared/ui";
 
 export function SideBarWidget() {

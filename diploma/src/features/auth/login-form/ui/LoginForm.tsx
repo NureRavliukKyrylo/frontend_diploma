@@ -1,7 +1,7 @@
 import styles from "./LoginForm.module.scss";
 import { EmailInput, PasswordInput } from "@shared/ui/inputs";
 import { Checkbox } from "@shared/ui/inputs";
-import { useErrorStore } from "@shared/config";
+import { useErrorStore } from "@shared/config/stores";
 import { useLogin } from "../model/useLogin";
 import { useAuthStore } from "@entities/user";
 import { AuthRoutes } from "@shared/routes";

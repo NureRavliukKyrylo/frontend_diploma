@@ -5,7 +5,7 @@ import {
   ContactsForm,
 } from "@features/multi-step-filling-info";
 
-import { type StepItem } from "@shared/config";
+import { type StepItem } from "@shared/config/types";
 
 export const steps: StepItem[] = [
   {

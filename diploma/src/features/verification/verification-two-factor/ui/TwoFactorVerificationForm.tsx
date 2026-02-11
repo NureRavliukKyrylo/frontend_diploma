@@ -1,5 +1,5 @@
 import React from "react";
-import { OtpType } from "@shared/config";
+import { OtpType } from "@shared/config/types";
 import {
   VerificationForm,
   useVerification,
@@ -15,7 +15,6 @@ export const TwoFactorVerificationForm: React.FC = () => {
     apiFn: twoFactorVerification,
     successRedirect: "/home",
     successMessage: "Two factor verified successfully",
-    errorMessage: "Two factor verification failed",
   });
 
   return (

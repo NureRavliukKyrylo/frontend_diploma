@@ -1,4 +1,4 @@
-import { SocialPlatform } from "@shared/config";
+import { SocialPlatform } from "@shared/config/types";
 import { InstagramIcon, TikTok, LinkedIn } from "@shared/assets/icons/brands";
 import {
   TelegramIcon,

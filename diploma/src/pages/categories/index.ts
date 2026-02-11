@@ -1,2 +1,2 @@
-export { CategoriesPage } from "./CategoriesPage";
-export { CategoryDetailPage } from "./CategoriesDetailPage";
+export { CategoriesPage } from "./categories-list/CategoriesPage";
+export { CategoryDetailPage } from "./categories-detail/CategoriesDetailPage";

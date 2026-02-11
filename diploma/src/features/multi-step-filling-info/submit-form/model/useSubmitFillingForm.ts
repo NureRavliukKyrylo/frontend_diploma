@@ -3,7 +3,7 @@ import { updateUser, type UpdateUserDto } from "../api/fiillingFormApi";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
 import { useAuthStore } from "@entities/user";
-import { isPayloadEmpty } from "@shared/libs";
+import { getErrorMessage, isPayloadEmpty } from "@shared/libs";
 
 export const useSubmitFillingForm = () => {
   const router = useRouter();
@@ -13,8 +13,7 @@ export const useSubmitFillingForm = () => {
     mutationFn: (data: UpdateUserDto) => updateUser(data),
     onMutate: () => setLoading(true),
     onSettled: () => setLoading(false),
-    onSuccess: (data) => {
-      console.log("[DEBUG] API success response:", data);
+    onSuccess: () => {
       addToast({
         title: "Success",
         description: "The profile was filled out successfully",
@@ -23,17 +22,13 @@ export const useSubmitFillingForm = () => {
       clearFillingForm();
       router.navigate({ to: "/" });
     },
-    onError: (error: any) => {
-      console.error("[DEBUG] API error response:", error);
-      const errorMessage =
-        error?.response?.data?.error || "Failed to update profile";
+    onError: (error: unknown) => {
+      const errorMessage = getErrorMessage(error);
       addToast({ title: "Error", description: errorMessage, color: "danger" });
     },
   });
 
   const handleSubmit = (payload: UpdateUserDto) => {
-    console.log("[DEBUG] Final payload (fresh state):", payload);
-
     if (isPayloadEmpty(payload)) {
       router.navigate({ to: "/" });
     } else {

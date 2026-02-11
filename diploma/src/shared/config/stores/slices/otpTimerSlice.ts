@@ -1,5 +1,5 @@
 import { type StateCreator } from "zustand";
-import { OtpType } from "@shared/config";
+import { OtpType } from "@shared/config/types";
 
 export interface OtpTimerSlice {
   otpTimers: Record<OtpType, number>;

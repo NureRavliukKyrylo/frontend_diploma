@@ -4,7 +4,7 @@ import {
   createAuthModeSlice,
   type AuthModeSlice,
 } from "../slices/authModeSlice";
-import { createStepperSlice, type StepperSlice } from "@shared/config";
+import { createStepperSlice, type StepperSlice } from "@shared/config/stores";
 import { createLoginSlice, type LoginSlice } from "../slices/loginSlice";
 import { createSignupSlice, type SignupSlice } from "../slices/signUpSlice";
 import { base64ToFile } from "@shared/libs";
@@ -63,8 +63,8 @@ export const useAuthStore = create<AuhtStore>()(
             state.avatarFile = base64ToFile(state.avatarUrl, "avatar.png");
           }
         },
-      }
+      },
     ),
-    { name: "AuthStore" }
-  )
+    { name: "AuthStore" },
+  ),
 );

@@ -4,13 +4,7 @@ import {
   ViberIcon,
   WhatsApp,
 } from "@shared/assets/icons/communication";
-import { SocialPlatform } from "./types/social-links/SocialPlatform";
-
-export interface SocialPlatformConfig {
-  id: SocialPlatform;
-  name: string;
-  icon: string;
-}
+import { SocialPlatform, type SocialPlatformConfig } from "../types";
 
 export const SOCIAL_PLATFORMS_CONFIG: Record<
   SocialPlatform,

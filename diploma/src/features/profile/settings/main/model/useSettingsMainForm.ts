@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useProfile } from "@entities/user/profile";
 import { updateProfile, type UpdateProfileDto } from "../api/updateProfileApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useErrorStore } from "@shared/config";
+import { useErrorStore } from "@shared/config/stores";
 import { addToast } from "@heroui/react";
 
 export const useSettingsMainForm = () => {

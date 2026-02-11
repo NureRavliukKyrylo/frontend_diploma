@@ -1,12 +1,12 @@
 import { type StateCreator } from "zustand";
-import { SocialPlatform } from "@shared/config/index.ts";
+import { SocialPlatform } from "@shared/config/types";
 import {
   type Profile,
   type PrivacySettings,
   type Coordinates,
   type PrivacyField,
 } from "../types/profile";
-import { fileToBase64 } from "@shared/libs/index.ts";
+import { fileToBase64 } from "@shared/libs/";
 
 export interface UserProfileSlice {
   profile?: Profile;
@@ -27,7 +27,7 @@ export interface UserProfileSlice {
 }
 
 export const createUserProfileSlice: StateCreator<UserProfileSlice> = (
-  set
+  set,
 ) => ({
   setAvatarFile: (file: File | undefined) => {
     if (!file) {
@@ -48,7 +48,7 @@ export const createUserProfileSlice: StateCreator<UserProfileSlice> = (
       const existingLinks = state.profile?.socialLinks ?? [];
       const updatedLinks = existingLinks.some((l) => l.platform === platform)
         ? existingLinks.map((l) =>
-            l.platform === platform ? { ...l, url } : l
+            l.platform === platform ? { ...l, url } : l,
           )
         : [...existingLinks, { platform, url }];
 
@@ -75,7 +75,7 @@ export const createUserProfileSlice: StateCreator<UserProfileSlice> = (
     set((state) => {
       const fields =
         state.privacySettings?.fields?.filter(
-          (f) => f.fieldName !== fieldName
+          (f) => f.fieldName !== fieldName,
         ) ?? [];
 
       return {

@@ -1,5 +1,5 @@
 import React from "react";
-import { OtpType } from "@shared/config";
+import { OtpType } from "@shared/config/types";
 import {
   VerificationForm,
   useVerification,
@@ -16,7 +16,6 @@ export const ForgotPasswordVerificationForm: React.FC = () => {
     apiFn: verificationForgotPassword,
     successRedirect: `../${AuthRoutes.forgotPassword.setPassword}`,
     successMessage: "Email verified successfully",
-    errorMessage: "Email verification failed",
   });
 
   return (

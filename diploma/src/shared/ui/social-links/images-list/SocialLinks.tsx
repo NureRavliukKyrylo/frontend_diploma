@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import styles from "./SocialLinks.module.scss";
-import { type SocialLink } from "@shared/config";
+import { type SocialLink } from "@shared/config/types";
 
 interface SocialLinksProps {
   links: SocialLink[];

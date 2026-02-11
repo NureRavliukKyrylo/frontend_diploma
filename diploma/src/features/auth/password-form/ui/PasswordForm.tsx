@@ -1,12 +1,12 @@
 import styles from "./PasswordForm.module.scss";
-import { useErrorStore } from "@shared/config";
+import { useErrorStore } from "@shared/config/stores";
 import { PasswordInput } from "@shared/ui/inputs";
 import { useSetPassword } from "../model/useSetPassword";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 export const PasswordForm = () => {
   const serverError = useErrorStore(
-    (state) => state.errors["setPasswordError"]
+    (state) => state.errors["setPasswordError"],
   );
   const { formik, isLoading } = useSetPassword();
 

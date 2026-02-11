@@ -1,4 +1,4 @@
-import type { SocialPlatformLink } from "@shared/config/types/social-links/SocialPlatformLink";
+import type { SocialPlatformLink } from "@shared/config/types";
 import { SocialPlatformItem } from "./SocialPlatformItem";
 
 interface SocialPlatformsProps {

@@ -3,7 +3,8 @@ import styles from "./AuthWrapper.module.scss";
 import { AppleIcon } from "@shared/assets/icons/brands";
 import { AnimatePresence, motion } from "framer-motion";
 import { GoogleButton } from "@features/auth";
-import { useErrorStore, type TabOption } from "@shared/config";
+import { useErrorStore } from "@shared/config/stores";
+import type { TabOption } from "@shared/config/types";
 import { Toggle } from "@shared/ui";
 
 interface AuthWrapperProps<T extends string> {
@@ -20,7 +21,7 @@ export function AuthWrapper<T extends string>({
   forms,
 }: AuthWrapperProps<T>) {
   const serverError = useErrorStore(
-    (state) => state.errors["loginGoogleError"]
+    (state) => state.errors["loginGoogleError"],
   );
 
   return (

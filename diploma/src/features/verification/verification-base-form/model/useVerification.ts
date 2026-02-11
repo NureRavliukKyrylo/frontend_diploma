@@ -2,22 +2,21 @@ import { useMutation } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
-import { useErrorStore } from "@shared/config";
+import { useErrorStore } from "@shared/config/stores";
 import { useUserStore } from "@entities/user";
 import { verifyCodeSchema } from "../libs/verifyCodeSchema";
+import { getErrorMessage } from "@shared/libs";
 
 interface VerificationConfig {
   apiFn: (data: any) => Promise<any>;
   successRedirect?: string;
   successMessage?: string;
-  errorMessage?: string;
 }
 
 export const useVerification = ({
   apiFn,
   successRedirect,
   successMessage = "Code verified successfully",
-  errorMessage = "Verification failed",
 }: VerificationConfig) => {
   const router = useRouter();
   const { setServerError } = useErrorStore();
@@ -33,12 +32,12 @@ export const useVerification = ({
       });
       if (successRedirect) router.navigate({ to: successRedirect });
     },
-    onError: (error: any) => {
-      const errMsg = error?.response?.data?.error || errorMessage;
-      setServerError("otpVerification", errMsg);
+    onError: (error: unknown) => {
+      const errorMessage = getErrorMessage(error);
+      setServerError("otpVerification", errorMessage);
       addToast({
         title: "Verification Failed",
-        description: errMsg,
+        description: errorMessage,
         color: "danger",
       });
     },

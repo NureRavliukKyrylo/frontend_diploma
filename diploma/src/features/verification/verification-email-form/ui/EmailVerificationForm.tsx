@@ -1,5 +1,5 @@
 import React from "react";
-import { OtpType } from "@shared/config";
+import { OtpType } from "@shared/config/types";
 import {
   VerificationForm,
   useVerification,
@@ -16,7 +16,6 @@ export const EmailVerificationForm: React.FC = () => {
     apiFn: verificationEmail,
     successRedirect: MultiStepFormRoutes.fillForm,
     successMessage: "Email verified successfully",
-    errorMessage: "Email verification failed",
   });
 
   return (

@@ -3,7 +3,7 @@ import { BaseInput, EmailInput, PasswordInput } from "@shared/ui/inputs";
 import { Checkbox } from "@shared/ui/inputs";
 import { useRegistration } from "../model/useRegistration";
 import { useAuthStore } from "@entities/user";
-import { useErrorStore } from "@shared/config";
+import { useErrorStore } from "@shared/config/stores";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 export const SignUpForm = () => {

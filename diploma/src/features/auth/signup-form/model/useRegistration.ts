@@ -1,12 +1,13 @@
 import { useFormik } from "formik";
-import { useAuthStore, useUserStore } from "../../../../entities/user";
+import { useAuthStore, useUserStore } from "@entities/user";
 import { registerSchema } from "../libs/signUpSchema";
 import { useRouter } from "@tanstack/react-router";
-import { AuthRoutes } from "../../../../shared/routes";
+import { AuthRoutes } from "@shared/routes";
 import { useMutation } from "@tanstack/react-query";
 import { register, type RegisterDto } from "../api/signUpApi";
 import { addToast } from "@heroui/react";
-import { useErrorStore } from "@shared/config";
+import { useErrorStore } from "@shared/config/stores";
+import { getErrorMessage } from "@shared/libs";
 
 export const useRegistration = () => {
   const router = useRouter();
@@ -19,27 +20,25 @@ export const useRegistration = () => {
     clearSignupForm,
   } = useAuthStore();
   const { setUserId, setFirstName, setLastName, setEmail } = useUserStore();
-  const { setServerError } = useErrorStore();
+  const { setServerError, clearError } = useErrorStore();
 
   const mutation = useMutation({
     mutationFn: (data: RegisterDto) => register(data),
     onSuccess: (data) => {
-      setServerError("signUpError", null);
-      console.log("Register success:", data);
+      clearError("signUpError");
+
       addToast({
         title: "Register Success",
         description: "You have registered successfully",
         color: "success",
       });
+
       setUserId(data.userId);
       clearSignupForm();
       router.navigate({ to: AuthRoutes.verification });
     },
-    onError: (error: any) => {
-      console.error("Login error:", error);
-      const errorMessage =
-        error?.response?.data?.error ||
-        "Something went wrong. Please try again";
+    onError: (error: unknown) => {
+      const errorMessage = getErrorMessage(error);
       setServerError("signUpError", errorMessage);
       addToast({
         title: "Register Failed",

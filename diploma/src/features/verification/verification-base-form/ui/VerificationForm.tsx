@@ -1,8 +1,9 @@
 import styles from "./VerificationForm.module.scss";
 import { ResendButton } from "@shared/ui/buttons";
 import { InputOtp } from "@shared/ui/inputs";
-import { useErrorStore, OtpType } from "@shared/config";
+import { useErrorStore } from "@shared/config/stores";
 import { useAuthStore } from "@entities/user";
+import type { OtpType } from "@shared/config/types";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 interface VerificationFormProps {
@@ -22,10 +23,10 @@ export const VerificationForm = ({
 }: VerificationFormProps) => {
   const { otpTimers, resetOtpTimer, decrementOtpTimer } = useAuthStore();
   const serverErrorVerification = useErrorStore(
-    (state) => state.errors["otpVerification"]
+    (state) => state.errors["otpVerification"],
   );
   const serverErrorVerificationCode = useErrorStore(
-    (state) => state.errors["otpVerificationCode"]
+    (state) => state.errors["otpVerificationCode"],
   );
 
   return (

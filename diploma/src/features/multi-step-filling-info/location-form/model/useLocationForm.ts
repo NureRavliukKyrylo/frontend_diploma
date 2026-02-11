@@ -17,9 +17,7 @@ export const useLocationForm = () => {
     enableReinitialize: true,
     validateOnChange: true,
     onSubmit: (values) => {
-      console.log("[DEBUG] Formik onSubmit called with values:", values);
       setCoordinates(values.coordinates);
-      console.log("[DEBUG] Formik isValid at submit:", formik.isValid);
       nextStep();
     },
   });
@@ -47,7 +45,7 @@ export const useLocationForm = () => {
           },
           () => {
             console.log("Location access denied or unavailable");
-          }
+          },
         );
       }
     }

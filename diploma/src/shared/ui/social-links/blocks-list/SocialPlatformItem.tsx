@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { SOCIAL_PLATFORMS_CONFIG } from "@shared/config/SocialPlatforms";
+import { SOCIAL_PLATFORMS_CONFIG } from "@shared/config/constants";
 import type { SocialPlatform } from "@shared/config/types/social-links/SocialPlatform";
 import styles from "./SocialPlatforms.module.scss";
 

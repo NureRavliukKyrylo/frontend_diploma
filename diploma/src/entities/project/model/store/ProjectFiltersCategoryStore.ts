@@ -11,7 +11,6 @@ import type { ProjectFiltersCategory } from "../types/ProjectFiltersCategory";
 type ProjectFiltersCategoryStore = FilterSlice &
   SearchSlice &
   PaginationSlice & {
-    getAllFilters: () => ProjectFiltersCategory;
     setFiltersFromUrl: (filters: Partial<ProjectFiltersCategory>) => void;
     resetAll: () => void;
   };

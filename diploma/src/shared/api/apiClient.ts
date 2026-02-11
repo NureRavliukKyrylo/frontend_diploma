@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from "../config";
+import { API_URL } from "@shared/config/constants";
 
 export const apiClient = axios.create({
   baseURL: `${API_URL}/api/`,
@@ -24,7 +24,7 @@ apiClient.interceptors.response.use(
           {},
           {
             withCredentials: true,
-          }
+          },
         );
 
         return apiClient(originalRequest);
@@ -32,5 +32,5 @@ apiClient.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );

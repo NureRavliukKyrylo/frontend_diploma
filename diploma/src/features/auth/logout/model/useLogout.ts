@@ -1,9 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import { logout } from "../api/logoutApi";
-import { useErrorStore } from "@shared/config";
+import { useErrorStore } from "@shared/config/stores";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
+import { getErrorMessage } from "@shared/libs";
 
 export const useLogout = (onSuccessCallback?: () => void) => {
   const setServerError = useErrorStore((state) => state.setServerError);
@@ -11,10 +12,8 @@ export const useLogout = (onSuccessCallback?: () => void) => {
 
   const mutation = useMutation({
     mutationFn: logout,
-    onSuccess: (data) => {
+    onSuccess: () => {
       setServerError("logoutError", null);
-
-      console.log("Logout success:", data);
 
       addToast({
         title: "Logout Success",
@@ -25,11 +24,8 @@ export const useLogout = (onSuccessCallback?: () => void) => {
       onSuccessCallback?.();
       router.navigate({ to: AuthRoutes.root });
     },
-    onError: (error: any) => {
-      console.error("Logout error:", error);
-      const errorMessage =
-        error?.response?.data?.error ||
-        "Something went wrong. Please try again";
+    onError: (error: unknown) => {
+      const errorMessage = getErrorMessage(error);
       setServerError("logoutError", errorMessage);
       addToast({
         title: "Logout Failed",

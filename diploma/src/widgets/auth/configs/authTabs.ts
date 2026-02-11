@@ -1,4 +1,4 @@
-import type { TabOption } from "@shared/config";
+import type { TabOption } from "@shared/config/types";
 import type { AuthMode } from "@entities/user";
 
 export const authTabs: TabOption<AuthMode>[] = [

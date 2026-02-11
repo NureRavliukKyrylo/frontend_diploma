@@ -1,5 +1,5 @@
 import styles from "./ForgotPassword.module.scss";
-import { useErrorStore } from "@shared/config";
+import { useErrorStore } from "@shared/config/stores";
 import { EmailInput } from "@shared/ui/inputs";
 import { useForgotPassword } from "../model/useForgotPassword";
 import { useAuthStore } from "@entities/user";
@@ -7,7 +7,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 export const ForgotPasswordForm = () => {
   const serverError = useErrorStore(
-    (state) => state.errors["forgotPasswordError"]
+    (state) => state.errors["forgotPasswordError"],
   );
   const { setEmailForgotPassword } = useAuthStore();
 
