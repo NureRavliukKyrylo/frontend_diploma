@@ -5,7 +5,7 @@ import {
 } from "../api/forgotPasswordApi";
 import { useFormik } from "formik";
 import { addToast } from "@heroui/react";
-import { useErrorStore } from "@shared/config/stores";
+
 import { useRouter } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
 import { forgotPasswordSchema } from "../libs/forgotPasswordSchema";
@@ -14,7 +14,7 @@ import { getErrorMessage } from "@shared/libs";
 
 export const useForgotPassword = () => {
   const router = useRouter();
-  const { setServerError, clearError } = useErrorStore();
+
   const { emailForgotPassword, setEmailForgotPassword } = useAuthStore();
   const { setUserId } = useUserStore();
 
@@ -27,7 +27,7 @@ export const useForgotPassword = () => {
         color: "success",
       });
 
-      clearError("forgotPasswordError");
+
 
       setUserId(data.userId);
 
@@ -37,8 +37,6 @@ export const useForgotPassword = () => {
     },
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error);
-
-      setServerError("forgotPasswordError", errorMessage);
 
       addToast({
         title: "Reset Failed",
@@ -61,6 +59,6 @@ export const useForgotPassword = () => {
     formik,
     handleSubmit: formik.handleSubmit,
     isLoading: mutation.isPending,
-    error: mutation.error,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
   };
 };

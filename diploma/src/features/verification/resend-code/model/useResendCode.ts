@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { resendCode, type ResendCodeDto } from "../api/resendCodeApi";
 import { useUserStore } from "@entities/user";
 import { addToast } from "@heroui/react";
-import { useErrorStore } from "@shared/config/stores";
+
 import type { OtpType } from "@shared/config/types";
 import { getErrorMessage } from "@shared/libs";
 
@@ -12,7 +12,7 @@ interface UseResendCodeProps {
 
 export const useResendCode = ({ type }: UseResendCodeProps) => {
   const { userId } = useUserStore();
-  const { setServerError } = useErrorStore();
+
 
   const mutation = useMutation({
     mutationFn: (data: ResendCodeDto) => resendCode(data),
@@ -26,8 +26,6 @@ export const useResendCode = ({ type }: UseResendCodeProps) => {
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error);
 
-      setServerError("otpVerificationCode", errorMessage);
-
       addToast({
         title: "Resend Failed",
         description: errorMessage,
@@ -39,6 +37,6 @@ export const useResendCode = ({ type }: UseResendCodeProps) => {
   return {
     resend: () => mutation.mutateAsync({ userId, type }),
     isLoadingResend: mutation.isPending,
-    error: mutation.error,
+    resendErrorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
   };
 };

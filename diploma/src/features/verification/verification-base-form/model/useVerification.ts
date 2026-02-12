@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
-import { useErrorStore } from "@shared/config/stores";
+
 import { useUserStore } from "@entities/user";
 import { verifyCodeSchema } from "../libs/verifyCodeSchema";
 import { getErrorMessage } from "@shared/libs";
@@ -19,7 +19,7 @@ export const useVerification = ({
   successMessage = "Code verified successfully",
 }: VerificationConfig) => {
   const router = useRouter();
-  const { setServerError } = useErrorStore();
+
   const { userId } = useUserStore();
 
   const mutation = useMutation({
@@ -34,7 +34,6 @@ export const useVerification = ({
     },
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error);
-      setServerError("otpVerification", errorMessage);
       addToast({
         title: "Verification Failed",
         description: errorMessage,
@@ -59,6 +58,6 @@ export const useVerification = ({
     formik,
     handleSubmit: formik.handleSubmit,
     isLoading: mutation.isPending,
-    error: mutation.error,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
   };
 };

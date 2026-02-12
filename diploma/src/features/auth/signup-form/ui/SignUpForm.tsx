@@ -3,11 +3,11 @@ import { BaseInput, EmailInput, PasswordInput } from "@shared/ui/inputs";
 import { Checkbox } from "@shared/ui/inputs";
 import { useRegistration } from "../model/useRegistration";
 import { useAuthStore } from "@entities/user";
-import { useErrorStore } from "@shared/config/stores";
+
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 export const SignUpForm = () => {
-  const { formik, isLoading } = useRegistration();
+  const { formik, isLoading, errorMessage } = useRegistration();
   const {
     setSignUpEmail,
     setSignUpPassword,
@@ -15,7 +15,7 @@ export const SignUpForm = () => {
     setSignLastName,
     setAgreement,
   } = useAuthStore();
-  const serverError = useErrorStore((state) => state.errors["signUpError"]);
+
   return (
     <>
       <div className={styles.headerSignUp}>
@@ -97,7 +97,7 @@ export const SignUpForm = () => {
           >
             Create an account
           </BaseButtonWrapper>
-          {serverError && <div className="errorMessage">{serverError}</div>}
+          {errorMessage && <div className="errorMessage">{errorMessage}</div>}
         </div>
       </form>
     </>

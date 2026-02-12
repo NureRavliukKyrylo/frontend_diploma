@@ -3,7 +3,6 @@ import styles from "./AuthWrapper.module.scss";
 import { AppleIcon } from "@shared/assets/icons/brands";
 import { AnimatePresence, motion } from "framer-motion";
 import { GoogleButton } from "@features/auth";
-import { useErrorStore } from "@shared/config/stores";
 import type { TabOption } from "@shared/config/types";
 import { Toggle } from "@shared/ui";
 
@@ -20,10 +19,6 @@ export function AuthWrapper<T extends string>({
   onChange,
   forms,
 }: AuthWrapperProps<T>) {
-  const serverError = useErrorStore(
-    (state) => state.errors["loginGoogleError"],
-  );
-
   return (
     <div className={styles.wrapperAuthContainer}>
       <div className={styles.authContainer}>
@@ -58,9 +53,8 @@ export function AuthWrapper<T extends string>({
             <GoogleButton />
           </div>
         </div>
-
-        {serverError && <div className="errorMessage">{serverError}</div>}
       </div>
     </div>
   );
 }
+

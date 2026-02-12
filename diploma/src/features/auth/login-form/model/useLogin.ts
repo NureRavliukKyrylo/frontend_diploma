@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useMutation } from "@tanstack/react-query";
 import { login, type LoginDto } from "../api/loginApi";
 import { loginSchema } from "../libs/loginSchema";
-import { useErrorStore } from "@shared/config/stores";
+
 import { useAuthStore, useUserStore } from "@entities/user";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
@@ -10,7 +10,7 @@ import { AuthRoutes } from "@shared/routes";
 import { getErrorMessage } from "@shared/libs";
 
 export const useLogin = () => {
-  const { setServerError, clearError } = useErrorStore();
+
   const { loginEmail, loginPassword, rememberMe, clearLoginForm } =
     useAuthStore();
   const { setEmail } = useUserStore();
@@ -19,7 +19,6 @@ export const useLogin = () => {
   const mutation = useMutation({
     mutationFn: (data: LoginDto) => login(data),
     onSuccess: (data) => {
-      clearError("loginError");
 
       addToast({
         title: "Login Success",
@@ -37,8 +36,6 @@ export const useLogin = () => {
     },
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error);
-
-      setServerError("loginError", errorMessage);
 
       addToast({
         title: "Login Failed",
@@ -61,6 +58,6 @@ export const useLogin = () => {
     formik,
     handleSubmit: formik.handleSubmit,
     isLoading: mutation.isPending,
-    error: mutation.error,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
   };
 };

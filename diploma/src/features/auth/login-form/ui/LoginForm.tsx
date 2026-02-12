@@ -1,7 +1,7 @@
 import styles from "./LoginForm.module.scss";
 import { EmailInput, PasswordInput } from "@shared/ui/inputs";
 import { Checkbox } from "@shared/ui/inputs";
-import { useErrorStore } from "@shared/config/stores";
+
 import { useLogin } from "../model/useLogin";
 import { useAuthStore } from "@entities/user";
 import { AuthRoutes } from "@shared/routes";
@@ -9,8 +9,7 @@ import { Link } from "@tanstack/react-router";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 export const LoginForm = () => {
-  const serverError = useErrorStore((state) => state.errors["loginError"]);
-  const { formik, isLoading } = useLogin();
+  const { formik, isLoading, errorMessage } = useLogin();
   const { setLoginEmail, setLoginPassword, setRememberMe } = useAuthStore();
   return (
     <>
@@ -73,7 +72,7 @@ export const LoginForm = () => {
           >
             Sign in
           </BaseButtonWrapper>
-          {serverError && <div className="errorMessage">{serverError}</div>}
+          {errorMessage && <div className="errorMessage">{errorMessage}</div>}
         </div>
       </form>
     </>

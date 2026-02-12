@@ -2,13 +2,13 @@ import { useFormik } from "formik";
 import { useProfile } from "@entities/user/profile";
 import { updateProfile, type UpdateProfileDto } from "../api/updateProfileApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useErrorStore } from "@shared/config/stores";
 import { addToast } from "@heroui/react";
+import { getErrorMessage } from "@shared/libs";
 
 export const useSettingsMainForm = () => {
   const { data: profile } = useProfile();
   const queryClient = useQueryClient();
-  const setServerError = useErrorStore((state) => state.setServerError);
+
 
   const mutation = useMutation({
     mutationFn: (data: UpdateProfileDto) => updateProfile(data),
@@ -20,12 +20,8 @@ export const useSettingsMainForm = () => {
         color: "success",
       });
     },
-    onError: (error: any) => {
-      console.error("Update profile error:", error);
-      const errorMessage =
-        error?.response?.data?.error ||
-        "Something went wrong. Please try again";
-      setServerError("updateProfileError", errorMessage);
+    onError: (error: unknown) => {
+      const errorMessage = getErrorMessage(error);
       addToast({
         title: "Update Profile Failed",
         description: errorMessage,
@@ -56,5 +52,5 @@ export const useSettingsMainForm = () => {
     },
   });
 
-  return { formik, isLoading: mutation.isPending, error: mutation.error };
+  return { formik, isLoading: mutation.isPending, errorMessage: mutation.error ? getErrorMessage(mutation.error) : null };
 };

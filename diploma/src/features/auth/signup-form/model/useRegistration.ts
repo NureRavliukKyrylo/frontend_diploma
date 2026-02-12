@@ -6,7 +6,7 @@ import { AuthRoutes } from "@shared/routes";
 import { useMutation } from "@tanstack/react-query";
 import { register, type RegisterDto } from "../api/signUpApi";
 import { addToast } from "@heroui/react";
-import { useErrorStore } from "@shared/config/stores";
+
 import { getErrorMessage } from "@shared/libs";
 
 export const useRegistration = () => {
@@ -20,12 +20,11 @@ export const useRegistration = () => {
     clearSignupForm,
   } = useAuthStore();
   const { setUserId, setFirstName, setLastName, setEmail } = useUserStore();
-  const { setServerError, clearError } = useErrorStore();
+
 
   const mutation = useMutation({
     mutationFn: (data: RegisterDto) => register(data),
     onSuccess: (data) => {
-      clearError("signUpError");
 
       addToast({
         title: "Register Success",
@@ -39,7 +38,6 @@ export const useRegistration = () => {
     },
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error);
-      setServerError("signUpError", errorMessage);
       addToast({
         title: "Register Failed",
         description: errorMessage,
@@ -71,6 +69,6 @@ export const useRegistration = () => {
     formik,
     handleSubmit: formik.handleSubmit,
     isLoading: mutation.isPending,
-    error: mutation.error,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
   };
 };

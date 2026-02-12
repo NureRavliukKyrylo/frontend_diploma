@@ -1,7 +1,7 @@
 import styles from "./VerificationForm.module.scss";
 import { ResendButton } from "@shared/ui/buttons";
 import { InputOtp } from "@shared/ui/inputs";
-import { useErrorStore } from "@shared/config/stores";
+
 import { useAuthStore } from "@entities/user";
 import type { OtpType } from "@shared/config/types";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
@@ -12,6 +12,8 @@ interface VerificationFormProps {
   isLoading: boolean;
   isLoadingResend: boolean;
   onResend: () => void;
+  verificationError?: string | null;
+  resendError?: string | null;
 }
 
 export const VerificationForm = ({
@@ -20,14 +22,10 @@ export const VerificationForm = ({
   isLoading,
   isLoadingResend,
   onResend,
+  verificationError,
+  resendError,
 }: VerificationFormProps) => {
   const { otpTimers, resetOtpTimer, decrementOtpTimer } = useAuthStore();
-  const serverErrorVerification = useErrorStore(
-    (state) => state.errors["otpVerification"],
-  );
-  const serverErrorVerificationCode = useErrorStore(
-    (state) => state.errors["otpVerificationCode"],
-  );
 
   return (
     <form onSubmit={formik.handleSubmit} className={styles.verificationForm}>
@@ -40,7 +38,7 @@ export const VerificationForm = ({
             formik.setFieldValue("code", val);
           }}
           error={formik.submitCount > 0 ? formik.errors.code : undefined}
-          serverError={serverErrorVerificationCode}
+          serverError={resendError}
           isInvalid={!!formik.errors.code}
         />
         <div className={styles.resendButtonWrapperVerification}>
@@ -49,7 +47,7 @@ export const VerificationForm = ({
             onResend={onResend}
             resetTimer={() => resetOtpTimer(otpType)}
             decrementTimer={() => decrementOtpTimer(otpType)}
-            serverError={serverErrorVerificationCode}
+            serverError={resendError}
             isLoading={isLoadingResend}
           />
         </div>
@@ -61,8 +59,8 @@ export const VerificationForm = ({
         >
           Confirm
         </BaseButtonWrapper>
-        {serverErrorVerification && (
-          <div className="errorMessage">{serverErrorVerification}</div>
+        {verificationError && (
+          <div className="errorMessage">{verificationError}</div>
         )}
       </div>
     </form>

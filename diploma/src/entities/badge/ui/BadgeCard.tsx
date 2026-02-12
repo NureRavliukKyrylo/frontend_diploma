@@ -16,6 +16,7 @@ export const BadgeCard = ({ badge }: BadgeCardProps) => {
         style={{ color: TierColors[badge.tier] }}
       >
         <h1>{badge.tier}</h1>
+      
       </div>
     </div>
   );

@@ -1,14 +1,11 @@
 import styles from "./PasswordForm.module.scss";
-import { useErrorStore } from "@shared/config/stores";
+
 import { PasswordInput } from "@shared/ui/inputs";
 import { useSetPassword } from "../model/useSetPassword";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 export const PasswordForm = () => {
-  const serverError = useErrorStore(
-    (state) => state.errors["setPasswordError"],
-  );
-  const { formik, isLoading } = useSetPassword();
+  const { formik, isLoading, errorMessage } = useSetPassword();
 
   return (
     <>
@@ -46,7 +43,7 @@ export const PasswordForm = () => {
           >
             Confirm
           </BaseButtonWrapper>
-          {serverError && <div className="errorMessage">{serverError}</div>}
+          {errorMessage && <div className="errorMessage">{errorMessage}</div>}
         </div>
       </form>
     </>

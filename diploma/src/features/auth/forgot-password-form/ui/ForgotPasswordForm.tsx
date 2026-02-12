@@ -1,17 +1,12 @@
 import styles from "./ForgotPassword.module.scss";
-import { useErrorStore } from "@shared/config/stores";
+
 import { EmailInput } from "@shared/ui/inputs";
 import { useForgotPassword } from "../model/useForgotPassword";
-import { useAuthStore } from "@entities/user";
+
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 export const ForgotPasswordForm = () => {
-  const serverError = useErrorStore(
-    (state) => state.errors["forgotPasswordError"],
-  );
-  const { setEmailForgotPassword } = useAuthStore();
-
-  const { formik, isLoading } = useForgotPassword();
+  const { formik, isLoading, errorMessage } = useForgotPassword();
   return (
     <>
       <form
@@ -26,7 +21,6 @@ export const ForgotPasswordForm = () => {
           activeLabel="Email"
           onChange={(e) => {
             formik.handleChange(e);
-            setEmailForgotPassword(e.target.value);
           }}
           value={formik.values.email}
           error={formik.submitCount > 0 ? formik.errors.email : ""}
@@ -38,7 +32,7 @@ export const ForgotPasswordForm = () => {
           >
             Send Request
           </BaseButtonWrapper>
-          {serverError && <div className="errorMessage">{serverError}</div>}
+          {errorMessage && <div className="errorMessage">{errorMessage}</div>}
         </div>
       </form>
     </>

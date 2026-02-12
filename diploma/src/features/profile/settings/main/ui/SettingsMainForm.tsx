@@ -4,15 +4,13 @@ import { UploadImage } from "@shared/ui";
 import { useMemo, useState } from "react";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useSettingsMainForm } from "../model/useSettingsMainForm";
-import { useErrorStore } from "@shared/config/stores";
+
 
 export function SettingsMainForm() {
-  const { formik, isLoading } = useSettingsMainForm();
+  const { formik, isLoading, errorMessage } = useSettingsMainForm();
   const [avatar, setAvatar] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const serverError = useErrorStore(
-    (state) => state.errors["updateProfileError"],
-  );
+
   const imageSrc = useMemo(() => {
     if (avatar instanceof File) return URL.createObjectURL(avatar);
     return null;
@@ -104,7 +102,7 @@ export function SettingsMainForm() {
           SAVE
         </BaseButtonWrapper>
       </div>
-      {serverError && <div className="errorMessage">{serverError}</div>}
+      {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>
   );
 }

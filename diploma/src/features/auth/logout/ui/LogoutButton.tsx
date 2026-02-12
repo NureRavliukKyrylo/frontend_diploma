@@ -3,17 +3,17 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useLogout } from "../model/useLogout";
 import { ConfirmationModal } from "@shared/ui/modals/confirmation-modal/ConfirmationModal";
 import styles from "./LogoutButton.module.scss";
-import { useErrorStore } from "@shared/config/stores";
+
 import { Power } from "@shared/assets/icons/actions";
 import { LogOutImage } from "@shared/assets/images/actions";
 
 export const LogoutButton: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const serverError = useErrorStore((state) => state.errors["logoutError"]);
+
 
   const closeModal = () => setIsModalOpen(false);
 
-  const { handleLogout, isLoading } = useLogout(() => {
+  const { handleLogout, isLoading, errorMessage } = useLogout(() => {
     closeModal();
   });
 
@@ -40,7 +40,7 @@ export const LogoutButton: React.FC = () => {
         onCancel={closeModal}
         isLoading={isLoading}
         image={LogOutImage}
-        error={serverError}
+        error={errorMessage}
       />
     </>
   );
