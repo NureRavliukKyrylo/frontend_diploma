@@ -14,6 +14,7 @@ interface ConfirmationModalProps {
   isLoading?: boolean;
   error?: string | null;
   image?: string;
+  maxWidth?: string;
 }
 
 export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
@@ -27,9 +28,15 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   isLoading = false,
   error,
   image,
+  maxWidth = "650px",
 }) => {
   return (
-    <BaseModal isOpen={isOpen} onClose={onCancel} error={error}>
+    <BaseModal
+      isOpen={isOpen}
+      onClose={onCancel}
+      error={error}
+      maxWidth={maxWidth}
+    >
       <div className={styles.modalConfirmationWrapper}>
         {image && (
           <img

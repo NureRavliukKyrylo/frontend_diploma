@@ -1,15 +1,22 @@
 import styles from "./SettingsMainForm.module.scss";
-import { DatePickerInput, ProfileBaseInput, TextArea } from "@shared/ui/inputs";
+import {
+  DatePickerInput,
+  MapLocationInput,
+  ProfileBaseInput,
+  TextArea,
+} from "@shared/ui/inputs";
 import { UploadImage } from "@shared/ui";
 import { useMemo, useState } from "react";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useSettingsMainForm } from "../model/useSettingsMainForm";
-
+import { MapLocationModal } from "./MapLocationModal";
+import type { Coordinates } from "@entities/user";
 
 export function SettingsMainForm() {
   const { formik, isLoading, errorMessage } = useSettingsMainForm();
   const [avatar, setAvatar] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isMapOpen, setIsMapOpen] = useState<boolean>(false);
 
   const imageSrc = useMemo(() => {
     if (avatar instanceof File) return URL.createObjectURL(avatar);
@@ -21,6 +28,18 @@ export function SettingsMainForm() {
     setError(file ? null : "Please select an image");
   };
 
+  const handleCloseModal = () => {
+    setIsMapOpen(false);
+  };
+
+  const handleOpenModal = () => {
+    setIsMapOpen(true);
+  };
+
+  const coordinates: Coordinates = {
+    longitude: 51.9,
+    latitude: 55.9,
+  };
   return (
     <form onSubmit={formik.handleSubmit} className={styles.mainInfoProfileForm}>
       <div className={styles.publicProfile}>
@@ -29,18 +48,22 @@ export function SettingsMainForm() {
           <p>This information will be visible on your public profile</p>
         </div>
         <div className={styles.formInfoPublicProfile}>
-          <ProfileBaseInput
-            name="firstName"
-            value={formik.values.firstName}
-            onChange={formik.handleChange}
-            error={formik.submitCount > 0 ? formik.errors.firstName : ""}
-          />
-          <ProfileBaseInput
-            name="lastName"
-            value={formik.values.lastName}
-            onChange={formik.handleChange}
-            error={formik.submitCount > 0 ? formik.errors.lastName : ""}
-          />
+          <div className={styles.nameInputsWrapper}>
+            <ProfileBaseInput
+              name="firstName"
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              error={formik.submitCount > 0 ? formik.errors.firstName : ""}
+              placeholder="First Name"
+            />
+            <ProfileBaseInput
+              name="lastName"
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              error={formik.submitCount > 0 ? formik.errors.lastName : ""}
+              placeholder="Last Name"
+            />
+          </div>
           <div className={styles.datePickerWrapper}>
             <DatePickerInput
               name="dateOfBirth"
@@ -48,6 +71,22 @@ export function SettingsMainForm() {
               onChange={(value) => formik.setFieldValue("dateOfBirth", value)}
               error={formik.submitCount > 0 ? formik.errors.dateOfBirth : ""}
               showMonthAndYearPickers
+            />
+          </div>
+          <div className={styles.mapLocationWrapper}>
+            <MapLocationInput
+              label="Location"
+              handleMapOpen={handleOpenModal}
+            />
+            <MapLocationModal
+              isMapOpen={isMapOpen}
+              onClose={handleCloseModal}
+              coordinates={coordinates}
+              setCoordinates={(coords) => {
+                console.log("Selected coords:", coords);
+              }}
+              popUpText="nice"
+              maxWidth="1200px"
             />
           </div>
         </div>

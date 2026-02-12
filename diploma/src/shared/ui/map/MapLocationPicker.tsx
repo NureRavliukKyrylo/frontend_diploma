@@ -1,6 +1,7 @@
 import { Marker, Popup, useMapEvents } from "react-leaflet";
 import { BaseMap } from "./BaseMap";
-import { MapZoomAnimation } from "../../libs";
+import { MapZoomAnimation } from "@shared/libs";
+import { DEFAULT_MAP_COORDINATES } from "@shared/config/constants/map";
 
 export interface Coordinates {
   latitude: number;
@@ -9,7 +10,6 @@ export interface Coordinates {
 
 interface MapLocationPickerProps {
   coordinates: Coordinates | null;
-  defaultCoordinates: Coordinates | null;
   zoom?: number;
   onLocationChange: (coords: Coordinates) => void;
   popUpText: string;
@@ -32,8 +32,7 @@ const SyncMapEvents: React.FC<{
 
 export const MapLocationPicker: React.FC<MapLocationPickerProps> = ({
   coordinates,
-  defaultCoordinates,
-  zoom = 13,
+  zoom,
   onLocationChange,
   popUpText,
 }) => {
@@ -41,11 +40,10 @@ export const MapLocationPicker: React.FC<MapLocationPickerProps> = ({
     onLocationChange(coords);
   };
 
-  const position: [number, number] | null = coordinates
-    ? [coordinates.latitude, coordinates.longitude]
-    : defaultCoordinates
-    ? [defaultCoordinates.latitude, defaultCoordinates.longitude]
-    : [0, 0];
+  const position: [number, number] = [
+    DEFAULT_MAP_COORDINATES.latitude,
+    DEFAULT_MAP_COORDINATES.longitude,
+  ];
 
   return (
     <BaseMap center={position} zoom={zoom}>
@@ -55,7 +53,7 @@ export const MapLocationPicker: React.FC<MapLocationPickerProps> = ({
         </Marker>
       )}
       <SyncMapEvents setCoordinates={handleSetCoordinates} />
-      <MapZoomAnimation coordinates={coordinates} zoom={16} />
+      <MapZoomAnimation coordinates={coordinates} zoom={zoom} />
     </BaseMap>
   );
 };

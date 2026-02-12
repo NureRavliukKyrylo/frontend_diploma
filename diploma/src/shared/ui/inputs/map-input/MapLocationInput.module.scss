@@ -1,0 +1,49 @@
+@use "@shared/assets/styles" as *;
+
+$label-color: rgba(0, 0, 0, 0.6);
+
+.mapLocationWrapper {
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 15px;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 38px;
+  .leftMapContent {
+    display: flex;
+    gap: 8px;
+    .mapIcon {
+      left: 0.625rem;
+      color: $label-color;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    h1 {
+      @include font-base(18px, 700);
+      color: #323232;
+    }
+
+    .divider {
+      width: 1px;
+      background-color: $label-color;
+      transform: scaleX(0.5);
+      transform-origin: center;
+    }
+  }
+  .mapOpenButton {
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+}

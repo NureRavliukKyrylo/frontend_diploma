@@ -8,6 +8,7 @@ interface BaseModalProps {
   onClose: () => void;
   children: React.ReactNode;
   error?: string | null;
+  maxWidth?: string;
 }
 
 export const BaseModal: React.FC<BaseModalProps> = ({
@@ -15,6 +16,7 @@ export const BaseModal: React.FC<BaseModalProps> = ({
   onClose,
   children,
   error,
+  maxWidth = "700px",
 }) => {
   return (
     <AnimatePresence>
@@ -33,6 +35,7 @@ export const BaseModal: React.FC<BaseModalProps> = ({
             initial={{ scale: 0.8, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.8, opacity: 0, y: 20 }}
+            style={{ maxWidth }}
             transition={{
               type: "spring",
               stiffness: 300,
@@ -45,8 +48,7 @@ export const BaseModal: React.FC<BaseModalProps> = ({
               alt="Close Button"
               onClick={onClose}
             />
-            {children}
-
+            <div className={styles.childrenSection}>{children}</div>
             {error && <div className="errorMessage">{error}</div>}
           </motion.div>
         </motion.div>

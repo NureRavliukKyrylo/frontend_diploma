@@ -10,3 +10,4 @@ export { SearchBar } from "./search-bar/SearchBar";
 export { ProfileBaseInput } from "./profile-input/ProfileBaseInput";
 export { ProfilePasswordInput } from "./profile-password-input/ProfilePasswordInput";
 export { SocialInputProfile } from "./social-input-profile/SocialProfileInput";
+export { MapLocationInput } from "./map-input/MapLocationInput";

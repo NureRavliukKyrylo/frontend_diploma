@@ -4,11 +4,11 @@ import { updateProfile, type UpdateProfileDto } from "../api/updateProfileApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs";
+import { useState } from "react";
 
 export const useSettingsMainForm = () => {
   const { data: profile } = useProfile();
   const queryClient = useQueryClient();
-
 
   const mutation = useMutation({
     mutationFn: (data: UpdateProfileDto) => updateProfile(data),
@@ -52,5 +52,9 @@ export const useSettingsMainForm = () => {
     },
   });
 
-  return { formik, isLoading: mutation.isPending, errorMessage: mutation.error ? getErrorMessage(mutation.error) : null };
+  return {
+    formik,
+    isLoading: mutation.isPending,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+  };
 };

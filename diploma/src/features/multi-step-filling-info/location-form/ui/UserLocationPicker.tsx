@@ -20,7 +20,6 @@ export const UserLocationPicker = () => {
       >
         <MapLocationPicker
           coordinates={formik.values.coordinates}
-          defaultCoordinates={formik.values.coordinates}
           onLocationChange={handleLocationChange}
           popUpText="Your Location"
         />

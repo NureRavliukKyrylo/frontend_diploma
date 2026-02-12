@@ -6,6 +6,7 @@ interface ProfileBaseInputProps
   error?: string;
   originalType?: string;
   children?: React.ReactNode;
+  placeholder?: string;
 }
 
 export const ProfileBaseInput: React.FC<ProfileBaseInputProps> = ({
@@ -15,6 +16,7 @@ export const ProfileBaseInput: React.FC<ProfileBaseInputProps> = ({
   value,
   defaultValue,
   children,
+  placeholder,
   ...props
 }) => {
   return (
@@ -27,6 +29,7 @@ export const ProfileBaseInput: React.FC<ProfileBaseInputProps> = ({
           type={type}
           value={value}
           defaultValue={defaultValue}
+          placeholder={placeholder}
           {...props}
         />
         {children}

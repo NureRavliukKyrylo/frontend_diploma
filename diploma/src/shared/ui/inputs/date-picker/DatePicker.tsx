@@ -13,7 +13,7 @@ interface DatePickerInputProps {
 }
 
 export const DatePickerInput = ({
-  label = "Select date",
+  label = "",
   name,
   value,
   error,

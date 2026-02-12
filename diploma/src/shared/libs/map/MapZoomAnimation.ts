@@ -1,5 +1,9 @@
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
+import {
+  DEFAULT_MAP_COORDINATES,
+  DEFAULT_MAP_ZOOM,
+} from "@shared/config/constants";
 
 interface MapZoomAnimationProps {
   coordinates: { latitude: number; longitude: number } | null;
@@ -7,23 +11,27 @@ interface MapZoomAnimationProps {
 }
 export const MapZoomAnimation: React.FC<MapZoomAnimationProps> = ({
   coordinates,
-  zoom = 13,
+  zoom = DEFAULT_MAP_ZOOM,
 }) => {
   const map = useMap();
 
   useEffect(() => {
-    if (coordinates?.latitude && coordinates?.longitude) {
+    if (coordinates?.latitude != null && coordinates?.longitude != null) {
       map.flyTo([coordinates.latitude, coordinates.longitude], zoom, {
         animate: true,
         duration: 0.8,
       });
     } else {
-      map.flyTo([50.4501, 30.5234], zoom, {
-        animate: true,
-        duration: 0.8,
-      });
+      map.flyTo(
+        [DEFAULT_MAP_COORDINATES.latitude, DEFAULT_MAP_COORDINATES.longitude],
+        zoom,
+        {
+          animate: true,
+          duration: 0.8,
+        },
+      );
     }
-  }, [coordinates, map]);
+  }, [coordinates, map, zoom]);
 
   return null;
 };

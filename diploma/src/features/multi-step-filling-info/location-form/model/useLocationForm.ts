@@ -23,13 +23,6 @@ export const useLocationForm = () => {
   });
 
   useEffect(() => {
-    console.log("[DEBUG] Formik state changed:", {
-      values: formik.values,
-      errors: formik.errors,
-      touched: formik.touched,
-      isValid: formik.isValid,
-    });
-
     if (
       !formik.values.coordinates?.latitude ||
       !formik.values.coordinates?.longitude

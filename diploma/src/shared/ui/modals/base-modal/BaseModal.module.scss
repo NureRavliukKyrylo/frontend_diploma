@@ -12,6 +12,8 @@
 }
 
 .modalWrapper {
+  width: 90%;
+  max-height: 90vh;
   background: #fff;
   border-radius: 50px;
   overflow-y: auto;
@@ -25,5 +27,9 @@
     width: 34px;
     height: 34px;
     cursor: pointer;
+    margin-bottom: 10px;
+  }
+  .childrenSection {
+    margin-top: 20px;
   }
 }
