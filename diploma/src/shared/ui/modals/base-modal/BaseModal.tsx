@@ -9,6 +9,7 @@ interface BaseModalProps {
   children: React.ReactNode;
   error?: string | null;
   maxWidth?: string;
+  onAnimationComplete?: () => void;
 }
 
 export const BaseModal: React.FC<BaseModalProps> = ({
@@ -17,6 +18,7 @@ export const BaseModal: React.FC<BaseModalProps> = ({
   children,
   error,
   maxWidth = "700px",
+  onAnimationComplete,
 }) => {
   return (
     <AnimatePresence>
@@ -32,10 +34,11 @@ export const BaseModal: React.FC<BaseModalProps> = ({
           <motion.div
             className={styles.modalWrapper}
             onClick={(e) => e.stopPropagation()}
-            initial={{ scale: 0.8, opacity: 0, y: 20 }}
+            initial={{ scale: 1, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.8, opacity: 0, y: 20 }}
+            exit={{ scale: 1, opacity: 0, y: 20 }}
             style={{ maxWidth }}
+            onAnimationComplete={onAnimationComplete}
             transition={{
               type: "spring",
               stiffness: 300,

@@ -4,7 +4,7 @@ import { contactsSchema } from "../libs/contactsSchema";
 import { useSubmitFillingForm } from "@features/multi-step-filling-info/submit-form";
 import { SocialPlatform } from "@shared/config/types";
 import { platformKeys } from "../configs/platformKeys";
-import type { UpdateUserDto } from "../../submit-form/api/fiillingFormApi";
+import type { UpdateUserDto } from "../../submit-form";
 
 export const useContactsForm = () => {
   const {

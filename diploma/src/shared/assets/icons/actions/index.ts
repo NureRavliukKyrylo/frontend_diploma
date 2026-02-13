@@ -8,3 +8,7 @@ export { default as Power } from "./power.png";
 export { default as Settings } from "./settings.png";
 export { default as Close } from "./close.png";
 export { default as DownArrow } from "./down-arrow.png";
+export { default as ZoomIn } from "./zoom_in.png";
+export { default as ZoomOut } from "./zoom_out.png";
+export { default as Flip } from "./flip.png";
+export { default as Reset } from "./reset.png";

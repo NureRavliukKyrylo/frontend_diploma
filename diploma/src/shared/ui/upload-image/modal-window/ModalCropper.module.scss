@@ -1,0 +1,48 @@
+@use "@shared/assets/styles" as *;
+
+.wrapperModalCropper {
+  h1 {
+    @include font-base(40px, 900);
+    line-height: 120%;
+  }
+
+  h2 {
+    @include font-base(20px, 600);
+    color: #474747;
+  }
+
+  .imageActionsBlock {
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+    .cropContainer {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      height: 400px;
+      border-radius: 16px;
+      overflow: hidden;
+
+      isolation: isolate;
+    }
+
+    .actionCropButtons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      justify-content: flex-start;
+
+      .actionButton {
+        border: 1px solid #4a4848;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+        img {
+          width: 32px;
+        }
+      }
+    }
+  }
+}

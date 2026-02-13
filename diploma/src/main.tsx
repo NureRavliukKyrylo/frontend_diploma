@@ -17,5 +17,5 @@ createRoot(document.getElementById("root")!).render(
         </UIProvider>
       </ReactQueryProvider>
     </GoogleOAuthProvider>
-  </StrictMode>
+  </StrictMode>,
 );
