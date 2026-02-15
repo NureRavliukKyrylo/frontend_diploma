@@ -2,7 +2,7 @@ import styles from "./SettingsMainForm.module.scss";
 import {
   DatePickerInput,
   MapLocationInput,
-  ProfileBaseInput,
+  BaseInput,
   TextArea,
 } from "@shared/ui/inputs";
 import { UploadImage } from "@shared/ui";
@@ -49,19 +49,21 @@ export function SettingsMainForm() {
         </div>
         <div className={styles.formInfoPublicProfile}>
           <div className={styles.nameInputsWrapper}>
-            <ProfileBaseInput
+            <BaseInput
               name="firstName"
               value={formik.values.firstName}
               onChange={formik.handleChange}
               error={formik.submitCount > 0 ? formik.errors.firstName : ""}
               placeholder="First Name"
+              variant="profile"
             />
-            <ProfileBaseInput
+            <BaseInput
               name="lastName"
               value={formik.values.lastName}
               onChange={formik.handleChange}
               error={formik.submitCount > 0 ? formik.errors.lastName : ""}
               placeholder="Last Name"
+              variant="profile"
             />
           </div>
           <div className={styles.datePickerWrapper}>
@@ -108,6 +110,7 @@ export function SettingsMainForm() {
             onBlur={formik.handleBlur}
             error={formik.submitCount > 0 ? formik.errors.about : ""}
             minHeight={220}
+            variant="profile"
           />
         </div>
       </div>

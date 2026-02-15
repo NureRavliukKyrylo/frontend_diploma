@@ -26,7 +26,6 @@ export const ContactsForm = () => {
               onChange={(e) => {
                 formik.handleChange(e);
               }}
-              switchName={switchName}
               switchValue={formik.values[switchName]}
               onSwitchChange={(val) => {
                 formik.setFieldValue(switchName, val);

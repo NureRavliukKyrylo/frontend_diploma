@@ -1,8 +1,4 @@
-@use "./../base-input/BaseInput.module.scss" as *;
-
-.label.email {
-  left: 2.8rem !important;
-}
+$label-color: rgba(0, 0, 0, 0.6);
 
 .emailIcon {
   position: absolute;
@@ -19,11 +15,7 @@
   }
 }
 
-.input.email {
-  padding-left: 3.125rem;
-}
-
-.divider {
+.emailInputDivider {
   position: absolute;
   left: 2.75rem;
   top: 0.5rem;

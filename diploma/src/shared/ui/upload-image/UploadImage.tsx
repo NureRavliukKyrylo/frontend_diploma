@@ -30,6 +30,7 @@ export const UploadImage = ({ src, onChange, error }: UploadImageProps) => {
     setSelectedFile(file);
     setPreview(previewUrl);
     setIsModalCropOpen(true);
+    e.target.value = "";
   };
 
   const handleSave = () => {
@@ -59,35 +60,35 @@ export const UploadImage = ({ src, onChange, error }: UploadImageProps) => {
             accept="image/*"
             onChange={handleChange}
           />
-
-          {src ? (
-            <img src={src} alt="Preview" className={styles.previewImage} />
-          ) : (
-            <div className={styles.placeholder}>
+          <div className={styles.placeholder}>
+            {src ? (
+              <img src={src} alt="Preview" className={styles.previewImage} />
+            ) : (
               <div className={styles.wrapperImage}>
                 <img src={Upload} alt="upload icon" className={styles.icon} />
               </div>
-              <p>
-                <span>Click to upload</span> or drag and drop SVG, PNG, JPG, or
-                GIF (max. 800×400px)
-              </p>
-            </div>
-          )}
+            )}
+            <p>
+              <span>Click to upload</span> or drag and drop SVG, PNG, JPG, or
+              GIF (max. 800×400px)
+            </p>
+          </div>
         </div>
 
         {error && <div className="errorMessage">{error}</div>}
       </div>
-
-      <ModalCropper
-        src={preview}
-        isOpen={isModalCropOpen}
-        onClose={handleClose}
-        maxWidth="785px"
-        onSave={(file: File) => {
-          onChange(file);
-          setIsModalCropOpen(false);
-        }}
-      />
+      {preview && (
+        <ModalCropper
+          src={preview}
+          isOpen={isModalCropOpen}
+          onClose={handleClose}
+          maxWidth="785px"
+          onSave={(file: File) => {
+            onChange(file);
+            setIsModalCropOpen(false);
+          }}
+        />
+      )}
     </>
   );
 };

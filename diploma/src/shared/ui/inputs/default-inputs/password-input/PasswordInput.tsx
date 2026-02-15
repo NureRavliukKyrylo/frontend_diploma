@@ -1,29 +1,23 @@
 import React, { useState } from "react";
-import { ProfileBaseInput } from "../profile-input/ProfileBaseInput";
+import { BaseInput } from "../../base-input/BaseInput";
 import Icon from "@mdi/react";
 import { mdiEye, mdiEyeOff } from "@mdi/js";
 import { motion, AnimatePresence } from "framer-motion";
-import styles from "./ProfilePasswordInput.module.scss";
+import styles from "./PasswordInput.module.scss";
 
-interface ProfilePasswordInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+interface PasswordInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  activeLabel?: string;
   error?: string;
 }
 
-export const ProfilePasswordInput: React.FC<ProfilePasswordInputProps> = ({
-  error,
-  ...props
-}) => {
+export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
   const [showPassword, setShowPassword] = useState(false);
+
   const inputType = showPassword ? "text" : "password";
 
   return (
-    <ProfileBaseInput
-      {...props}
-      type={inputType}
-      originalType="password"
-      error={error}
-    >
+    <BaseInput {...props} type={inputType} variant="profile" mode="password">
       {props.value && props.value.toString().length > 0 && (
         <button
           type="button"
@@ -47,6 +41,6 @@ export const ProfilePasswordInput: React.FC<ProfilePasswordInputProps> = ({
           </AnimatePresence>
         </button>
       )}
-    </ProfileBaseInput>
+    </BaseInput>
   );
 };

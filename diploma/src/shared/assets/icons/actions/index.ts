@@ -12,3 +12,4 @@ export { default as ZoomIn } from "./zoom_in.png";
 export { default as ZoomOut } from "./zoom_out.png";
 export { default as Flip } from "./flip.png";
 export { default as Reset } from "./reset.png";
+export { default as Grid } from "./grid.png";

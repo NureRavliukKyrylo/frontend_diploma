@@ -1,42 +1,54 @@
+import {
+  InstagramIcon,
+  TikTok,
+  LinkedIn,
+  Twitter,
+} from "@shared/assets/icons/brands";
+import {
+  TelegramIcon,
+  WhatsApp,
+  ViberIcon,
+} from "@shared/assets/icons/communication";
+
 export const SOCIAL_PROFILE_CONFIG = [
   {
     key: "instagram",
-    prefix: "instagram.com/",
     placeholder: "nick.marlow",
+    icon: InstagramIcon,
   },
   {
     key: "twitter",
-    prefix: "x.com/",
     placeholder: "@nickmarlow_",
+    icon: Twitter,
   },
   {
     key: "facebook",
-    prefix: "facebook.com/",
     placeholder: "nick.marlow.profile",
+    icon: TelegramIcon,
   },
   {
     key: "viber",
-    prefix: "viber.com/",
     placeholder: "nickmarlow.chat",
+    icon: ViberIcon,
   },
   {
-    key: "amazon",
-    prefix: "amazon.com/stores/",
+    key: "What's App",
     placeholder: "nickmarlowdesigns",
+    icon: WhatsApp,
   },
   {
     key: "reddit",
-    prefix: "reddit.com/",
     placeholder: "u/nickmarlow",
+    icon: LinkedIn,
   },
   {
     key: "telegram",
-    prefix: "t.me/",
     placeholder: "nickmarlow",
+    icon: TelegramIcon,
   },
   {
-    key: "redditAlt",
-    prefix: "reddit.com/",
+    key: "tiktok",
     placeholder: "@itsmarlow",
+    icon: TikTok,
   },
 ] as const;

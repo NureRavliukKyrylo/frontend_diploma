@@ -30,7 +30,13 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
     box-sizing: border-box;
     padding: 0 0.5rem;
     color: #000;
-    transition: border 0.2s ease, background-color 0.2s ease;
+    transition:
+      border 0.2s ease,
+      background-color 0.2s ease;
+
+    &::placeholder {
+      @include font-base();
+    }
   }
 
   .label {
@@ -50,6 +56,17 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
     left: 2.8rem;
   }
 
+  &.profile {
+    .input {
+      border: 1px solid #000000;
+      border-radius: 15px;
+      height: 40px;
+    }
+
+    .input.social {
+      padding-left: 3rem;
+    }
+  }
   &.focused {
     .label {
       @include font-base(0.55rem, 700);

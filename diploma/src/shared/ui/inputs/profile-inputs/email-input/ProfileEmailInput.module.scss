@@ -1,0 +1,27 @@
+$label-color: rgba(0, 0, 0, 0.6);
+
+.profileEmailIcon {
+  position: absolute;
+  left: 0.625rem;
+  color: $label-color;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+.emailInputProfileDivider {
+  position: absolute;
+  left: 2.75rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 1px;
+  background-color: $label-color;
+  transform: scaleX(0.5);
+  transform-origin: center;
+}

@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./TextArea.module.scss";
 
-interface TextAreaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: string;
   maxLength?: number;
   placeHolder?: string;
   minHeight?: number;
+  variant?: "default" | "profile";
 }
 
 export const TextArea: React.FC<TextAreaProps> = ({
@@ -17,14 +17,15 @@ export const TextArea: React.FC<TextAreaProps> = ({
   maxLength = 300,
   placeHolder = "Tell us a little about yourself.",
   minHeight = 120,
+  variant = "default",
   ...props
 }) => {
   const [textLength, setTextLength] = useState(
     value
       ? value.toString().length
       : defaultValue
-      ? defaultValue.toString().length
-      : 0
+        ? defaultValue.toString().length
+        : 0,
   );
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -59,31 +60,31 @@ export const TextArea: React.FC<TextAreaProps> = ({
     };
   }, []);
 
+  const variantClass = variant !== "default" ? styles[variant] : "";
+
   return (
-    <>
-      <div className={styles.commonWrapperTextArea}>
-        <div
-          className={`${styles.textareaWrapper} ${error ? styles.error : ""}`}
-        >
-          <textarea
-            ref={textareaRef}
-            className={styles.textarea}
-            value={value}
-            defaultValue={defaultValue}
-            onChange={handleChange}
-            maxLength={maxLength}
-            placeholder={placeHolder}
-            style={{
-              minHeight: `${minHeight}px`,
-            }}
-            {...props}
-          />
-          <div className={styles.charCount}>
-            {textLength}/{maxLength}
-          </div>
+    <div className={`${styles.commonWrapperTextArea} ${variantClass}`}>
+      <div
+        className={`${styles.textareaWrapper} ${variantClass} ${error ? styles.error : ""}`}
+      >
+        <textarea
+          ref={textareaRef}
+          className={`${styles.textarea} ${variantClass}`}
+          value={value}
+          defaultValue={defaultValue}
+          onChange={handleChange}
+          maxLength={maxLength}
+          placeholder={placeHolder}
+          style={{
+            minHeight: `${minHeight}px`,
+          }}
+          {...props}
+        />
+        <div className={`${styles.charCount} ${variantClass}`}>
+          {textLength}/{maxLength}
         </div>
-        {error && <div className="errorInput">{error}</div>}
       </div>
-    </>
+      {error && <div className="errorInput">{error}</div>}
+    </div>
   );
 };

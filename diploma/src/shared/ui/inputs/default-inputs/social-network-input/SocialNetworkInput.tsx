@@ -1,15 +1,13 @@
 import React from "react";
-import { BaseInput } from "../base-input/BaseInput";
+import { BaseInput } from "../../base-input/BaseInput";
 import styles from "./SocialNetworksInput.module.scss";
 import { Switch } from "@heroui/react";
 
-interface SocialNetworksInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+interface SocialNetworksInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   activeLabel?: string;
   error?: string;
   icon?: string;
-  switchName?: string;
   switchValue?: boolean;
   onSwitchChange?: (checked: boolean) => void;
 }
@@ -22,7 +20,7 @@ export const SocialNetworksInput: React.FC<SocialNetworksInputProps> = ({
   ...props
 }) => {
   return (
-    <BaseInput type="text" originalType="social" error={error} {...props}>
+    <BaseInput type="text" mode="social" error={error} {...props}>
       {icon && (
         <span className={styles.iconWrapper}>
           <img src={icon} alt="iconSocial" />

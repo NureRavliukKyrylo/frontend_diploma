@@ -1,7 +1,7 @@
 import styles from "./LinksForm.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { SOCIAL_PROFILE_CONFIG } from "../config/socialProfileConfig";
-import { SocialInputProfile } from "@shared/ui/inputs";
+import { ProfileSocialNetworksInput } from "@shared/ui/inputs";
 
 export function LinksForm({}) {
   return (
@@ -15,16 +15,16 @@ export function LinksForm({}) {
           </p>
         </div>
         <div className={styles.formInfolinksProfile}>
-          {SOCIAL_PROFILE_CONFIG.map(({ key, prefix, placeholder }) => {
+          {SOCIAL_PROFILE_CONFIG.map(({ key, placeholder, icon }) => {
             const switchName = `show${
               key.charAt(0).toUpperCase() + key.slice(1)
             }`;
             return (
-              <SocialInputProfile
+              <ProfileSocialNetworksInput
                 key={key}
                 name={key}
-                prefix={prefix}
                 placeholder={placeholder}
+                icon={icon}
               />
             );
           })}

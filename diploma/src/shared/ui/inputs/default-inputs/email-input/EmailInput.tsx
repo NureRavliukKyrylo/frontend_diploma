@@ -1,5 +1,5 @@
 import React from "react";
-import { BaseInput } from "../base-input/BaseInput";
+import { BaseInput } from "../../base-input/BaseInput";
 import styles from "./EmailInput.module.scss";
 
 interface EmailInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -10,7 +10,7 @@ interface EmailInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export const EmailInput: React.FC<EmailInputProps> = (props) => {
   return (
-    <BaseInput type="email" originalType="email" {...props}>
+    <BaseInput type="email" variant="profile" mode="email" {...props}>
       <span className={styles.emailIcon}>
         <svg
           width="28"
@@ -29,7 +29,7 @@ export const EmailInput: React.FC<EmailInputProps> = (props) => {
           />
         </svg>
       </span>
-      <span className={styles.divider}></span>
+      <span className={styles.emailInputDivider}></span>
     </BaseInput>
   );
 };

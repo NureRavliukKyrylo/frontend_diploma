@@ -57,4 +57,3 @@ export function AuthWrapper<T extends string>({
     </div>
   );
 }
-

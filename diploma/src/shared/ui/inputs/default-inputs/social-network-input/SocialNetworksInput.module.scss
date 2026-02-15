@@ -1,5 +1,6 @@
-@use "./../base-input/BaseInput.module.scss" as *;
 @use "@shared/assets/styles" as breakpoints;
+
+$label-color: rgba(0, 0, 0, 0.6);
 
 .iconWrapper {
   position: absolute;

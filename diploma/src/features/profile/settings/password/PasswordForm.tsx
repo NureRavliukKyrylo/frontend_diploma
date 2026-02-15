@@ -1,8 +1,8 @@
-import styles from "./PasswordForm.module.scss";
+import styles from "./PasswordProfileForm.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { ProfilePasswordInput } from "@shared/ui/inputs";
 
-export function PasswordForm({}) {
+export function PasswordProfileForm({}) {
   return (
     <div className={styles.passwordInfoProfileForm}>
       <div className={styles.passwordProfile}>
@@ -14,9 +14,7 @@ export function PasswordForm({}) {
           </p>
         </div>
         <div className={styles.formInfoPasswordProfile}>
-          <ProfilePasswordInput />
-          <ProfilePasswordInput />
-          <ProfilePasswordInput />
+          <ProfilePasswordInput name="password" id="password" value={"some"} />
         </div>
       </div>
       <div className={styles.blockPasswordButtons}>

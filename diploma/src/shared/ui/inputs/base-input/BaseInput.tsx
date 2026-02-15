@@ -5,8 +5,10 @@ interface BaseInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   activeLabel?: string;
   error?: string;
-  originalType?: string;
+  variant?: "default" | "profile";
+  mode?: "default" | "email" | "password" | "social";
   children?: React.ReactNode;
+  inputClassName?: string;
 }
 
 export const BaseInput: React.FC<BaseInputProps> = ({
@@ -14,10 +16,12 @@ export const BaseInput: React.FC<BaseInputProps> = ({
   activeLabel,
   error,
   type,
-  originalType,
   value,
   defaultValue,
+  variant = "default",
+  mode = "default",
   children,
+  inputClassName,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -38,33 +42,25 @@ export const BaseInput: React.FC<BaseInputProps> = ({
     props.onChange?.(e);
   };
 
+  const isActive = isFocused || hasText;
+  const variantClass = variant !== "default" ? styles[variant] : "";
+
+  const modeClass = mode !== "default" ? styles[mode] : "";
+
   return (
     <div
-      className={`${styles.inputWrapper} ${
-        isFocused || hasText ? styles.focused : ""
+      className={`${styles.inputWrapper} ${variantClass} ${
+        isActive ? styles.focused : ""
       } ${error ? styles.error : ""}`}
     >
-      <div
-        className={`${styles.inputContainer}  ${
-          isFocused || hasText ? styles.focused : ""
-        } ${error ? styles.error : ""}`}
-      >
+      <div className={`${styles.inputContainer} ${variantClass}`}>
         {label && (
-          <label
-            className={`${styles.label} ${
-              originalType === "email" ? styles.email : ""
-            } ${originalType === "password" ? styles.passwordLabel : ""} ${
-              originalType === "social" ? styles.social : ""
-            }`}
-          >
-            {isFocused || hasText ? activeLabel : label}
+          <label className={`${styles.label} ${modeClass}`}>
+            {isActive ? activeLabel || label : label}
           </label>
         )}
-
         <input
-          className={`${styles.input} ${
-            originalType ? styles[originalType] : ""
-          }`}
+          className={`${styles.input} ${modeClass} ${inputClassName || ""}`}
           type={type}
           value={value}
           defaultValue={defaultValue}

@@ -1,15 +1,26 @@
 import { useState, useCallback } from "react";
 import { BaseModal } from "@shared/ui/modals";
 import { ActionCropButtons } from "../action-buttons/ActionCropButtons";
-import { CropImage } from "../crop-image/CropImage";
 import { getCroppedImage } from "@shared/libs";
 import Cropper, { type Area } from "react-easy-crop";
 import styles from "./ModalCropper.module.scss";
 import { BaseButtonWrapper } from "../../buttons";
-import { Flip, ZoomIn, ZoomOut, Reset } from "@shared/assets/icons/actions";
+import {
+  Flip,
+  ZoomIn,
+  ZoomOut,
+  Reset,
+  Grid,
+} from "@shared/assets/icons/actions";
+import {
+  ZOOM_STEP,
+  MAX_ZOOM,
+  MIN_ZOOM,
+  ROTATION_STEP,
+} from "@shared/config/constants";
 
 interface ModalCropperProps {
-  src: string | null;
+  src: string;
   isOpen: boolean;
   onClose: () => void;
   onSave: (file: File) => void;
@@ -26,7 +37,8 @@ export const ModalCropper = ({
   maxWidth,
 }: ModalCropperProps) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [zoom, setZoom] = useState(1);
+  const [zoom, setZoom] = useState(MIN_ZOOM);
+  const [grid, setGrid] = useState(false);
   const [rotation, setRotation] = useState(0);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
 
@@ -34,16 +46,18 @@ export const ModalCropper = ({
     setCroppedAreaPixels(croppedPixels);
   }, []);
 
-  const zoomIn = () => setZoom((prev) => Math.min(prev + 1, 3));
-  const zoomOut = () => setZoom((prev) => Math.max(prev - 1, 1));
+  const gridActive = () => setGrid((prev) => !prev);
+  const zoomIn = () => setZoom((prev) => Math.min(prev + ZOOM_STEP, MAX_ZOOM));
+  const zoomOut = () => setZoom((prev) => Math.max(prev - ZOOM_STEP, MIN_ZOOM));
   const rotate = () => {
-    setRotation((prev) => (prev + 90) % 360);
+    setRotation((prev) => (prev + ROTATION_STEP) % 360);
     setCrop({ x: 0, y: 0 });
   };
   const reset = () => {
     setCrop({ x: 0, y: 0 });
     setZoom(1);
     setRotation(0);
+    setGrid(false);
   };
 
   const handleSave = async () => {
@@ -55,12 +69,16 @@ export const ModalCropper = ({
     const file = new File([blob], "cropped-image.jpg", { type: "image/jpeg" });
     onSave(file);
     onClose();
+    reset();
   };
 
-  if (!src) return null;
+  const handleClose = () => {
+    onClose();
+    reset();
+  };
 
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose} maxWidth={maxWidth}>
+    <BaseModal isOpen={isOpen} onClose={handleClose} maxWidth={maxWidth}>
       <div className={styles.wrapperModalCropper}>
         <h1>Position and crop</h1>
         <h2>Edit the image's position before submitting it for review.</h2>
@@ -75,11 +93,11 @@ export const ModalCropper = ({
               onZoomChange={setZoom}
               aspect={aspect}
               onCropComplete={onCropComplete}
-              minZoom={1}
-              maxZoom={3}
+              minZoom={MIN_ZOOM}
+              maxZoom={MAX_ZOOM}
               rotation={rotation}
               objectFit="contain"
-              showGrid={true}
+              showGrid={grid}
             />
           </div>
           <div className={styles.actionCropButtons}>
@@ -89,10 +107,12 @@ export const ModalCropper = ({
               zoomIn={zoomIn}
               rotate={rotate}
               reset={reset}
+              grid={gridActive}
               zoomInImage={ZoomIn}
               zoomOutImage={ZoomOut}
               flipImage={Flip}
               resetImage={Reset}
+              gridImage={Grid}
             />
           </div>
         </div>

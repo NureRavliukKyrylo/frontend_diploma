@@ -15,7 +15,17 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
         border-color: $error-color;
       }
     }
-
+    &.profile {
+      .textarea {
+        border-radius: 20px;
+        font-size: 18px;
+        background: #f9f9f9;
+      }
+      .charCount {
+        color: #8c0000;
+        @include font-base(18px, 800);
+      }
+    }
     .textarea {
       width: 100%;
       padding: $textarea-padding;
@@ -28,7 +38,9 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
       background: rgba(217, 217, 217, 0.5);
       overflow: hidden;
       height: 100%;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease,
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
         background-color 0.2s ease;
 
       &:focus {

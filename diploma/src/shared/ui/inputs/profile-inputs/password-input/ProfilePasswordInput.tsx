@@ -1,28 +1,28 @@
 import React, { useState } from "react";
-import { BaseInput } from "../base-input/BaseInput";
 import Icon from "@mdi/react";
 import { mdiEye, mdiEyeOff } from "@mdi/js";
 import { motion, AnimatePresence } from "framer-motion";
-import styles from "./PasswordInput.module.scss";
+import styles from "./ProfilePasswordInput.module.scss";
+import { BaseInput } from "../../base-input/BaseInput";
 
-interface PasswordInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  activeLabel?: string;
+interface ProfilePasswordInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
-export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
+export const ProfilePasswordInput: React.FC<ProfilePasswordInputProps> = ({
+  error,
+  ...props
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const inputType = showPassword ? "text" : "password";
 
   return (
-    <BaseInput {...props} type={inputType} originalType="password">
+    <BaseInput {...props} type={inputType} variant="profile">
       {props.value && props.value.toString().length > 0 && (
         <button
           type="button"
-          className={styles.eyeButton}
+          className={styles.eyeProfileInputButton}
           onClick={() => setShowPassword(!showPassword)}
         >
           <AnimatePresence mode="popLayout">
