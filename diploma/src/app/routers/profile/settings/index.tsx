@@ -1,7 +1,7 @@
 import { createRoute } from "@tanstack/react-router";
 import { profileRoutes } from "@shared/routes";
 import { profileRootRoute } from "../route";
-import { getProfile } from "@entities/user/profile/api/profileApi";
+import { profileQuery } from "@entities/user/profile";
 import { queryClient } from "@shared/libs";
 import { SettingsProfilePage } from "@pages/profile";
 
@@ -9,11 +9,7 @@ export const profileSettingsRoute = createRoute({
   getParentRoute: () => profileRootRoute,
   path: profileRoutes.settings.root,
   loader: async () => {
-    await queryClient.prefetchQuery({
-      queryKey: ["profile"],
-      queryFn: getProfile,
-      staleTime: 5 * 60 * 1000,
-    });
+    await queryClient.prefetchQuery(profileQuery);
   },
   pendingComponent: () => <div>Loading profile...</div>,
   component: () => <SettingsProfilePage />,

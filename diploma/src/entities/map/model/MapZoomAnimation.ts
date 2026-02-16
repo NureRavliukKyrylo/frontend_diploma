@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useMap } from "react-leaflet";
 import {
   DEFAULT_MAP_COORDINATES,
-  DEFAULT_MAP_ZOOM,
+  DEFAULT_MAP_ZOOM_ANIMATION,
 } from "@shared/config/constants";
 
 interface MapZoomAnimationProps {
@@ -11,7 +11,7 @@ interface MapZoomAnimationProps {
 }
 export const MapZoomAnimation: React.FC<MapZoomAnimationProps> = ({
   coordinates,
-  zoom = DEFAULT_MAP_ZOOM,
+  zoom = DEFAULT_MAP_ZOOM_ANIMATION,
 }) => {
   const map = useMap();
 

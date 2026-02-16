@@ -1,9 +1,4 @@
-import { SocialPlatform } from "@shared/config/types";
-
-export interface Coordinates {
-  longitude: number;
-  latitude: number;
-}
+import { SocialPlatform, type Coordinates } from "@shared/config/types";
 
 export interface PrivacyField {
   fieldName: string;

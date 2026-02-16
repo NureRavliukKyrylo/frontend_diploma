@@ -1,6 +1,7 @@
 @use "@shared/assets/styles" as *;
 
 .wrapperModalCropper {
+  padding: 40px 50px;
   h1 {
     @include font-base(40px, 900);
     line-height: 120%;
@@ -12,7 +13,7 @@
   }
 
   .imageActionsBlock {
-    padding: 20px;
+    padding: 30px;
     display: flex;
     justify-content: flex-end;
     gap: 30px;
@@ -20,10 +21,9 @@
       position: relative;
       width: 100%;
       max-width: 520px;
-      height: 400px;
+      min-height: 500px;
       border-radius: 16px;
       overflow: hidden;
-
       isolation: isolate;
     }
 
@@ -43,6 +43,26 @@
           width: 32px;
         }
       }
+    }
+  }
+  .saveButtons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    & .saveButtonCropper,
+    & .cancelButtonCropper {
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+      border-radius: 30px;
+      @include font-base(28px, 800);
+      padding: 10px 0px;
+      width: 230px;
+    }
+    .saveButtonCropper {
+      background-color: black;
+      color: white;
+    }
+    .cancelButtonCropper {
+      background-color: white;
     }
   }
 }

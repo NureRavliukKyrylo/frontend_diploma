@@ -10,6 +10,7 @@ interface BaseModalProps {
   error?: string | null;
   maxWidth?: string;
   onAnimationComplete?: () => void;
+  showClosed?: boolean;
 }
 
 export const BaseModal: React.FC<BaseModalProps> = ({
@@ -19,6 +20,7 @@ export const BaseModal: React.FC<BaseModalProps> = ({
   error,
   maxWidth = "700px",
   onAnimationComplete,
+  showClosed = true,
 }) => {
   return (
     <AnimatePresence>
@@ -45,12 +47,16 @@ export const BaseModal: React.FC<BaseModalProps> = ({
               damping: 25,
             }}
           >
-            <img
-              className={styles.closeButton}
-              src={Close}
-              alt="Close Button"
-              onClick={onClose}
-            />
+            {showClosed && (
+              <div className={styles.closeButtonBlock}>
+                <img
+                  className={styles.closeButton}
+                  src={Close}
+                  alt="Close Button"
+                  onClick={onClose}
+                />
+              </div>
+            )}
             <div className={styles.childrenSection}>{children}</div>
             {error && <div className="errorMessage">{error}</div>}
           </motion.div>

@@ -6,27 +6,20 @@ import {
   TextArea,
 } from "@shared/ui/inputs";
 import { UploadImage } from "@shared/ui";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useSettingsMainForm } from "../model/useSettingsMainForm";
 import { MapLocationModal } from "./MapLocationModal";
-import type { Coordinates } from "@entities/user";
 
 export function SettingsMainForm() {
-  const { formik, isLoading, errorMessage } = useSettingsMainForm();
-  const [avatar, setAvatar] = useState<File | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    formik,
+    isLoading,
+    errorMessage,
+    handleFileChange,
+    handleLocationChange,
+  } = useSettingsMainForm();
   const [isMapOpen, setIsMapOpen] = useState<boolean>(false);
-
-  const imageSrc = useMemo(() => {
-    if (avatar instanceof File) return URL.createObjectURL(avatar);
-    return null;
-  }, [avatar]);
-
-  const handleFileChange = (file: File | null) => {
-    setAvatar(file);
-    setError(file ? null : "Please select an image");
-  };
 
   const handleCloseModal = () => {
     setIsMapOpen(false);
@@ -36,10 +29,6 @@ export function SettingsMainForm() {
     setIsMapOpen(true);
   };
 
-  const coordinates: Coordinates = {
-    longitude: 51.9,
-    latitude: 55.9,
-  };
   return (
     <form onSubmit={formik.handleSubmit} className={styles.mainInfoProfileForm}>
       <div className={styles.publicProfile}>
@@ -83,10 +72,8 @@ export function SettingsMainForm() {
             <MapLocationModal
               isMapOpen={isMapOpen}
               onClose={handleCloseModal}
-              coordinates={coordinates}
-              setCoordinates={(coords) => {
-                console.log("Selected coords:", coords);
-              }}
+              coordinates={formik.values.coordinates}
+              setCoordinates={handleLocationChange}
               popUpText="nice"
               maxWidth="1200px"
             />
@@ -127,9 +114,13 @@ export function SettingsMainForm() {
         </div>
         <div className={styles.formInfoPublicProfile}>
           <UploadImage
-            src={imageSrc}
+            src={formik.values.avatar}
             onChange={handleFileChange}
-            error={error}
+            error={
+              formik.touched.avatar && formik.errors.avatar
+                ? formik.errors.avatar
+                : null
+            }
           />
         </div>
       </div>

@@ -1,5 +1,4 @@
 import { LinksForm, PasswordProfileForm } from "@features/profile";
-import { PasswordForm } from "@features/auth";
 import { SettingsMainForm } from "@features/profile";
 import type { SettingsWrapper } from "@shared/ui/wrappers";
 import { type ProfileSettingsMode } from "@entities/user";

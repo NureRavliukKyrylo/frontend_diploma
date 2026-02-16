@@ -1,15 +1,14 @@
 import { ProfileAvatar } from "@entities/user";
 import styles from "./UserHeaderWidget.module.scss";
-import { InstagramIcon } from "@shared/assets/icons/brands";
 
 interface UserHeaderWidgetProps {
   image?: string;
   name?: string;
   email?: string;
-  phone?: number;
+  phone?: string;
   children?: React.ReactNode;
 }
-//remove partially later and replace with real data
+
 export const UserHeaderWidget = ({
   image,
   name,
@@ -21,14 +20,14 @@ export const UserHeaderWidget = ({
     <>
       <div className={styles.avatarBlockInfoSideBar}>
         <div className={styles.avatarBlock}>
-          <ProfileAvatar avatar={InstagramIcon} level={13} />
+          <ProfileAvatar avatar={image ?? "test"} level={13} />
         </div>
-        <h1>Shestakov Mykola</h1>
+        <h1>{name ?? "Unknown"}</h1>
         <div className={styles.wrapperInfoProfileUser}>
-          <h1>example@gmail.com</h1>
+          <h1>{email ?? "Unknown"}</h1>
         </div>
         <div className={styles.wrapperInfoProfileUser}>
-          <h1>+380 (095) 123 45 67</h1>
+          <h1>{phone ?? "Unknown"}</h1>
         </div>
         {children}
       </div>

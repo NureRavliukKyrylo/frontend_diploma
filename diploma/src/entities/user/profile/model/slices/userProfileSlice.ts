@@ -1,9 +1,8 @@
 import { type StateCreator } from "zustand";
-import { SocialPlatform } from "@shared/config/types";
+import { SocialPlatform, type Coordinates } from "@shared/config/types";
 import {
   type Profile,
   type PrivacySettings,
-  type Coordinates,
   type PrivacyField,
 } from "../types/profile";
 import { fileToBase64 } from "@shared/libs/";

@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { useFormik } from "formik";
 import { useAuthStore } from "@entities/user";
-import type { Coordinates } from "@entities/user";
 import { locationSchema } from "../libs/locationSchema";
+import type { Coordinates } from "@shared/config/types";
 
 export const useLocationForm = () => {
   const setCoordinates = useAuthStore((state) => state.setCoordinates);
@@ -21,28 +20,6 @@ export const useLocationForm = () => {
       nextStep();
     },
   });
-
-  useEffect(() => {
-    if (
-      !formik.values.coordinates?.latitude ||
-      !formik.values.coordinates?.longitude
-    ) {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const coords: Coordinates = {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-            };
-            formik.setFieldValue("coordinates", coords);
-          },
-          () => {
-            console.log("Location access denied or unavailable");
-          },
-        );
-      }
-    }
-  }, []);
 
   const handleLocationChange = (coords: Coordinates) => {
     formik.setFieldValue("coordinates", coords);

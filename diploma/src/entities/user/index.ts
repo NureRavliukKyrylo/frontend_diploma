@@ -3,7 +3,6 @@ export { useAuthStore } from "./auth/model/store/authStore";
 export {
   type Profile,
   type PrivacySettings,
-  type Coordinates,
   type PrivacyField,
 } from "./profile/model/types/profile";
 export type { AuthMode } from "./auth/model/types/authMode";

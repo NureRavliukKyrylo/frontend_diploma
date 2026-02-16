@@ -1,6 +1,4 @@
 export { Toggle } from "./toggle/Toggle";
-export { MapLocationPicker } from "./map/MapLocationPicker";
-export { BaseMap } from "./map/BaseMap";
 export { StepperForm } from "./stepper-form/StepperForm";
 export { SocialLinks } from "./social-links/images-list/SocialLinks";
 export { NavMenu } from "./nav-menu/NavMenu";

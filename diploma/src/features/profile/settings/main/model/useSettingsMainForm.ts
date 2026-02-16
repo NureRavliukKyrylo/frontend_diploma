@@ -4,10 +4,10 @@ import { updateProfile, type UpdateProfileDto } from "../api/updateProfileApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs";
-import { useState } from "react";
+import type { Coordinates } from "@shared/config/types";
 
 export const useSettingsMainForm = () => {
-  const { data: profile } = useProfile();
+  const { data: user } = useProfile();
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -30,24 +30,39 @@ export const useSettingsMainForm = () => {
     },
   });
 
-  const formattedDateOfBirth = profile?.profile?.dateOfBirth
-    ? new Date(profile.profile.dateOfBirth).toISOString().split("T")[0]
+  const handleLocationChange = (coords: Coordinates) => {
+    formik.setFieldValue("coordinates", coords);
+    console.log(formik.values.coordinates);
+  };
+
+  const handleFileChange = (file: File | null) => {
+    formik.setFieldValue("avatar", file);
+  };
+
+  const formattedDateOfBirth = user?.profile?.dateOfBirth
+    ? new Date(user.profile.dateOfBirth).toISOString().split("T")[0]
     : "";
 
   const formik = useFormik({
     initialValues: {
-      firstName: profile?.firstName ?? "",
-      lastName: profile?.lastName ?? "",
-      about: profile?.profile?.bio ?? "",
+      firstName: user?.firstName ?? "",
+      lastName: user?.lastName ?? "",
+      about: user?.profile?.bio ?? "",
       dateOfBirth: formattedDateOfBirth,
+      avatar: user?.profile?.avatarUrl,
+      coordinates: user?.profile?.coordinates ?? null,
     },
     enableReinitialize: true,
     onSubmit: (values) => {
       mutation.mutate({
         firstName: values.firstName,
         lastName: values.lastName,
-        bio: values.about,
-        dateOfBirth: values.dateOfBirth,
+        profile: {
+          bio: values.about,
+          dateOfBirth: values.dateOfBirth,
+          avatarUrl: values.avatar,
+          coordinates: values.coordinates,
+        },
       });
     },
   });
@@ -56,5 +71,7 @@ export const useSettingsMainForm = () => {
     formik,
     isLoading: mutation.isPending,
     errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    handleLocationChange,
+    handleFileChange,
   };
 };

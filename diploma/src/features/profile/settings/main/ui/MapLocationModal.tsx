@@ -1,7 +1,7 @@
-import { MapLocationPicker } from "@shared/ui";
+import { MapLocationPicker } from "@entities/map";
 import { BaseModal } from "@shared/ui/modals";
-import { type Coordinates } from "@entities/user";
 import styles from "./MapLocationModal.module.scss";
+import type { Coordinates } from "@shared/config/types";
 
 export interface MapLocationModal {
   isMapOpen: boolean;
@@ -27,6 +27,7 @@ export const MapLocationModal = ({
       onClose={onClose}
       error={error}
       maxWidth={maxWidth}
+      showClosed={false}
     >
       <div className={styles.mapModalWrapper}>
         <MapLocationPicker

@@ -78,9 +78,14 @@ export const ModalCropper = ({
   };
 
   return (
-    <BaseModal isOpen={isOpen} onClose={handleClose} maxWidth={maxWidth}>
+    <BaseModal
+      isOpen={isOpen}
+      onClose={handleClose}
+      maxWidth={maxWidth}
+      showClosed={false}
+    >
       <div className={styles.wrapperModalCropper}>
-        <h1>Position and crop</h1>
+        <h1>POSITION AND CROP</h1>
         <h2>Edit the image's position before submitting it for review.</h2>
 
         <div className={styles.imageActionsBlock}>
@@ -118,11 +123,19 @@ export const ModalCropper = ({
         </div>
 
         <div className={styles.saveButtons}>
-          <BaseButtonWrapper onClick={handleSave} type="button">
-            Save
-          </BaseButtonWrapper>
-          <BaseButtonWrapper onClick={onClose} type="button">
+          <BaseButtonWrapper
+            onClick={onClose}
+            className={styles.cancelButtonCropper}
+            type="button"
+          >
             Cancel
+          </BaseButtonWrapper>
+          <BaseButtonWrapper
+            className={styles.saveButtonCropper}
+            onClick={handleSave}
+            type="button"
+          >
+            Save
           </BaseButtonWrapper>
         </div>
       </div>

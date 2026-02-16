@@ -4,7 +4,7 @@ import { Upload } from "@shared/assets/icons/actions";
 import { ModalCropper } from "./modal-window/ModalCropper";
 
 interface UploadImageProps {
-  src?: string | null;
+  src?: string | File | null;
   onChange: (file: File | null) => void;
   error?: string | null;
 }
@@ -44,6 +44,13 @@ export const UploadImage = ({ src, onChange, error }: UploadImageProps) => {
     setPreview(null);
   };
 
+  const displaySrc = (() => {
+    if (src instanceof File) {
+      return URL.createObjectURL(src);
+    }
+    return src;
+  })();
+
   return (
     <>
       <div className={styles.uploadWrapper}>
@@ -61,8 +68,12 @@ export const UploadImage = ({ src, onChange, error }: UploadImageProps) => {
             onChange={handleChange}
           />
           <div className={styles.placeholder}>
-            {src ? (
-              <img src={src} alt="Preview" className={styles.previewImage} />
+            {displaySrc ? (
+              <img
+                src={displaySrc}
+                alt="Preview"
+                className={styles.previewImage}
+              />
             ) : (
               <div className={styles.wrapperImage}>
                 <img src={Upload} alt="upload icon" className={styles.icon} />
@@ -82,7 +93,7 @@ export const UploadImage = ({ src, onChange, error }: UploadImageProps) => {
           src={preview}
           isOpen={isModalCropOpen}
           onClose={handleClose}
-          maxWidth="785px"
+          maxWidth="820px"
           onSave={(file: File) => {
             onChange(file);
             setIsModalCropOpen(false);

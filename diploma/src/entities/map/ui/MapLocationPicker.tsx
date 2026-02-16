@@ -1,7 +1,7 @@
 import { Marker, Popup, useMapEvents } from "react-leaflet";
 import { BaseMap } from "./BaseMap";
-import { MapZoomAnimation } from "@shared/libs";
-import { DEFAULT_MAP_COORDINATES } from "@shared/config/constants/map";
+import { MapZoomAnimation } from "../model/MapZoomAnimation";
+import { useGeolocation } from "../model/useGeoLocation";
 
 export interface Coordinates {
   latitude: number;
@@ -36,17 +36,18 @@ export const MapLocationPicker: React.FC<MapLocationPickerProps> = ({
   onLocationChange,
   popUpText,
 }) => {
+  useGeolocation({ coordinates, onLocationChange });
+
   const handleSetCoordinates = (coords: Coordinates) => {
     onLocationChange(coords);
   };
 
-  const position: [number, number] = [
-    DEFAULT_MAP_COORDINATES.latitude,
-    DEFAULT_MAP_COORDINATES.longitude,
-  ];
-
   return (
-    <BaseMap center={position} zoom={zoom}>
+    <BaseMap
+      center={
+        coordinates ? [coordinates.latitude, coordinates.longitude] : undefined
+      }
+    >
       {coordinates && (
         <Marker position={[coordinates.latitude, coordinates.longitude]}>
           <Popup>{popUpText}</Popup>

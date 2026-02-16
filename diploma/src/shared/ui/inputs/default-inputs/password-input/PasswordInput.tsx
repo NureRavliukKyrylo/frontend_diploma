@@ -17,7 +17,7 @@ export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
   const inputType = showPassword ? "text" : "password";
 
   return (
-    <BaseInput {...props} type={inputType} variant="profile" mode="password">
+    <BaseInput {...props} type={inputType} mode="password">
       {props.value && props.value.toString().length > 0 && (
         <button
           type="button"
