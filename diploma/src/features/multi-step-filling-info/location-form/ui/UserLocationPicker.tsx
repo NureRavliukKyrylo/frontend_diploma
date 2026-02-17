@@ -1,5 +1,5 @@
 import styles from "./UserLocationPicker.module.scss";
-import { MapLocationPicker } from "@entities/map";
+import { MapLocationPicker } from "@features/map";
 import { useLocationForm } from "../../location-form/model/useLocationForm";
 
 export const UserLocationPicker = () => {

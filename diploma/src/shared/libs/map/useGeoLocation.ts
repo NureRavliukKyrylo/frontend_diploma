@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import type { Coordinates } from "@entities/user";
+import type { Coordinates } from "@shared/config/types";
 
 export const useGeolocation = ({
   coordinates,

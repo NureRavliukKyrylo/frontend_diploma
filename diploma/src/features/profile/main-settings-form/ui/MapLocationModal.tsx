@@ -1,4 +1,4 @@
-import { MapLocationPicker } from "@entities/map";
+import { MapLocationPicker } from "@features/map";
 import { BaseModal } from "@shared/ui/modals";
 import styles from "./MapLocationModal.module.scss";
 import type { Coordinates } from "@shared/config/types";

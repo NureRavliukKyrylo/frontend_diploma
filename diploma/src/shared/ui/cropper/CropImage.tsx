@@ -5,8 +5,8 @@ export interface CropImageProps {
   crop: { x: number; y: number };
   zoom: number;
   aspect: number;
-  setCrop: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
-  setZoom: React.Dispatch<React.SetStateAction<number>>;
+  onCropChange: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
+  onZoomChange: React.Dispatch<React.SetStateAction<number>>;
   onCropComplete: (_: Area, croppedPixels: Area) => void;
   minZoom: number;
   maxZoom: number;
@@ -27,8 +27,8 @@ export const CropImage = (props: CropImageProps) => {
         crop={props.crop}
         zoom={props.zoom}
         aspect={props.aspect}
-        onCropChange={props.setCrop}
-        onZoomChange={props.setZoom}
+        onCropChange={props.onCropChange}
+        onZoomChange={props.onZoomChange}
         onCropComplete={props.onCropComplete}
         minZoom={props.minZoom}
         maxZoom={props.maxZoom}

@@ -1,7 +1,8 @@
-import { Marker, Popup, useMapEvents } from "react-leaflet";
-import { BaseMap } from "./BaseMap";
-import { MapZoomAnimation } from "../model/MapZoomAnimation";
-import { useGeolocation } from "../model/useGeoLocation";
+import { Marker, Popup } from "react-leaflet";
+import { BaseMap } from "@shared/ui";
+import { MapZoomAnimation } from "@shared/libs/map/MapZoomAnimation";
+import { useGeolocation } from "@shared/libs/map/useGeoLocation";
+import { SyncMapEvents } from "../model/setCoordinatesEvent";
 
 export interface Coordinates {
   latitude: number;
@@ -14,21 +15,6 @@ interface MapLocationPickerProps {
   onLocationChange: (coords: Coordinates) => void;
   popUpText: string;
 }
-
-const SyncMapEvents: React.FC<{
-  setCoordinates: (coords: Coordinates) => void;
-}> = ({ setCoordinates }) => {
-  useMapEvents({
-    contextmenu(e) {
-      const coords: Coordinates = {
-        latitude: e.latlng.lat,
-        longitude: e.latlng.lng,
-      };
-      setCoordinates(coords);
-    },
-  });
-  return null;
-};
 
 export const MapLocationPicker: React.FC<MapLocationPickerProps> = ({
   coordinates,

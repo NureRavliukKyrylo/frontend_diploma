@@ -10,6 +10,13 @@ interface DatePickerInputProps {
   submit?: boolean;
   onChange: (value: string | undefined) => void;
   showMonthAndYearPickers?: boolean;
+  classNames?: {
+    base?: string;
+    inputWrapper?: string;
+    input?: string;
+    selectorIcon?: string;
+    errorMessage?: string;
+  };
 }
 
 export const DatePickerInput = ({
@@ -20,6 +27,7 @@ export const DatePickerInput = ({
   submit,
   onChange,
   showMonthAndYearPickers = false,
+  classNames: externalClassNames,
 }: DatePickerInputProps) => {
   const parsedValue = (() => {
     if (!value) return undefined;
@@ -45,14 +53,15 @@ export const DatePickerInput = ({
           showMonthAndYearPickers={showMonthAndYearPickers}
           onChange={(val) => onChange(val ? val.toString() : undefined)}
           classNames={{
-            base: "h-full rounded-[inherit] border border-[#ccc]",
-            inputWrapper:
-              " w-full h-full bg-[rgba(217,217,217,0.5)] rounded-[inherit]",
-            input: `${
-              isInvalid ? "text-[#ff0000]" : "text-gray-800"
-            } text-[18px]`,
-            selectorIcon: `${isInvalid ? "text-[#ff0000]" : "text-gray-600"}`,
-            errorMessage: "text-[#ff0000]",
+            base: `h-full rounded-[inherit] border border-[#ccc] ${externalClassNames?.base ?? ""}`,
+            inputWrapper: `w-full h-full rounded-[inherit] ${
+              parsedValue
+                ? "bg-white hover:bg-white"
+                : "bg-[rgba(217,217,217,0.5)]"
+            } ${externalClassNames?.inputWrapper ?? ""}`,
+            input: `${isInvalid ? "text-[#ff0000]" : "text-gray-800"} text-[18px] ${externalClassNames?.input ?? ""}`,
+            selectorIcon: `${isInvalid ? "text-[#ff0000]" : "text-gray-600"} ${externalClassNames?.selectorIcon ?? ""}`,
+            errorMessage: `text-[#ff0000] ${externalClassNames?.errorMessage ?? ""}`,
           }}
         />
       </I18nProvider>

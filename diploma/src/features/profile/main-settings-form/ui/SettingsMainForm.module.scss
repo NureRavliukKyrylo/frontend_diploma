@@ -2,11 +2,11 @@
 @use "@shared/assets/styles" as adaptive;
 @use "@shared/assets/styles" as animation;
 
-.passwordInfoProfileForm {
+.mainInfoProfileForm {
   display: flex;
   flex-direction: column;
   gap: 25px;
-  .passwordProfile {
+  .publicProfile {
     display: flex;
     justify-content: space-between;
     > :first-child {
@@ -16,7 +16,7 @@
     > :nth-child(2) {
       flex: 0 0 50%;
     }
-    .passwordProfileText {
+    .publicProfileText {
       display: flex;
       flex-direction: column;
       h1 {
@@ -27,20 +27,35 @@
       p {
         color: #767575;
         @include font-base(20px, 500);
+        line-height: 120%;
       }
     }
-    .formInfoPasswordProfile {
+    .formInfoPublicProfile {
       display: flex;
       flex-direction: column;
       gap: 20px;
+      .nameInputsWrapper {
+        display: flex;
+        gap: 10px;
+      }
+      .datePickerWrapper {
+        min-height: 38px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
-  .blockPasswordButtons {
+  .lineDividerProfileSettings {
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    width: 100%;
+  }
+  .blockButtons {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    .changePasswordButton {
+    .saveProfileButton {
       position: relative;
       overflow: hidden;
       background: black;

@@ -8,7 +8,7 @@ import {
 import Check from "@mui/icons-material/Check";
 import { motion, AnimatePresence } from "framer-motion";
 import "./StepperStyles.scss";
-import type { StepItem } from "@shared/config";
+import type { StepItem } from "@shared/config/types";
 
 function CustomStepIcon(props: StepIconProps) {
   const { active, completed, icon } = props;

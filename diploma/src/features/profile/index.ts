@@ -1,4 +1,4 @@
-export { SettingsMainForm } from "./settings/main/ui/SettingsMainForm";
-export { LinksForm } from "./settings/links/ui/LinksForm";
-export { PasswordProfileForm } from "./settings/password/PasswordForm";
-export { DeleteAccountButton } from "./settings/delete-account/ui/DeleteAccountButton";
+export { SettingsMainForm } from "./main-settings-form/ui/SettingsMainForm";
+export { LinksForm } from "./links-settings-form/ui/LinksForm";
+export { PasswordProfileForm } from "./security-settings-form/PasswordForm";
+export { DeleteAccountButton } from "./delete-account/ui/DeleteAccountButton";

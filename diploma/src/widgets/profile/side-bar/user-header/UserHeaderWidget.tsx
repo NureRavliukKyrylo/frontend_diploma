@@ -2,10 +2,10 @@ import { ProfileAvatar } from "@entities/user";
 import styles from "./UserHeaderWidget.module.scss";
 
 interface UserHeaderWidgetProps {
-  image?: string;
-  name?: string;
-  email?: string;
-  phone?: string;
+  image: string;
+  name: string;
+  email: string;
+  phone: string;
   children?: React.ReactNode;
 }
 

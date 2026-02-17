@@ -1,5 +1,5 @@
 import { apiClient } from "@shared/api";
-import type { OtpType } from "@shared/config";
+import type { OtpType } from "@shared/config/types";
 
 export interface ResendCodeDto {
   userId?: string;

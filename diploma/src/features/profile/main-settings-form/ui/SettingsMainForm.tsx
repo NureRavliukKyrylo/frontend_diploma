@@ -5,7 +5,7 @@ import {
   BaseInput,
   TextArea,
 } from "@shared/ui/inputs";
-import { UploadImage } from "@shared/ui";
+import { UploadImage } from "@features/profile/upload-image";
 import { useState } from "react";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useSettingsMainForm } from "../model/useSettingsMainForm";
@@ -28,6 +28,8 @@ export function SettingsMainForm() {
   const handleOpenModal = () => {
     setIsMapOpen(true);
   };
+
+  console.log(formik.touched.avatar ? formik.errors.avatar : null);
 
   return (
     <form onSubmit={formik.handleSubmit} className={styles.mainInfoProfileForm}>
@@ -60,8 +62,12 @@ export function SettingsMainForm() {
               name="dateOfBirth"
               value={formik.values.dateOfBirth}
               onChange={(value) => formik.setFieldValue("dateOfBirth", value)}
-              error={formik.submitCount > 0 ? formik.errors.dateOfBirth : ""}
+              error={formik.errors.dateOfBirth}
+              submit={formik.submitCount > 0}
               showMonthAndYearPickers
+              classNames={{
+                inputWrapper: "border-1 border-black",
+              }}
             />
           </div>
           <div className={styles.mapLocationWrapper}>
@@ -89,16 +95,18 @@ export function SettingsMainForm() {
           <p>This will be your main story. Keep it very, very long</p>
         </div>
         <div className={styles.formInfoPublicProfile}>
-          <TextArea
-            id="about"
-            name="about"
-            value={formik.values.about}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.submitCount > 0 ? formik.errors.about : ""}
-            minHeight={220}
-            variant="profile"
-          />
+          <div className={styles.textAreaProfileSettingsBlock}>
+            <TextArea
+              id="about"
+              name="about"
+              value={formik.values.about}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.submitCount > 0 ? formik.errors.about : ""}
+              minHeight={220}
+              variant="profile"
+            />
+          </div>
         </div>
       </div>
 
@@ -116,11 +124,7 @@ export function SettingsMainForm() {
           <UploadImage
             src={formik.values.avatar}
             onChange={handleFileChange}
-            error={
-              formik.touched.avatar && formik.errors.avatar
-                ? formik.errors.avatar
-                : null
-            }
+            error={formik.touched.avatar ? formik.errors.avatar : null}
           />
         </div>
       </div>
@@ -131,6 +135,7 @@ export function SettingsMainForm() {
         <BaseButtonWrapper
           loading={isLoading}
           className={styles.saveProfileButton}
+          type="submit"
         >
           SAVE
         </BaseButtonWrapper>

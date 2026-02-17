@@ -1,56 +1,29 @@
-import { useRef, useState } from "react";
 import styles from "./UploadImage.module.scss";
 import { Upload } from "@shared/assets/icons/actions";
-import { ModalCropper } from "./modal-window/ModalCropper";
+import { ModalCropper } from "../modal-window/ModalCropper";
+import { useUploadImage } from "../../model/useUploadImage";
 
 interface UploadImageProps {
   src?: string | File | null;
   onChange: (file: File | null) => void;
   error?: string | null;
+  inputName?: string;
 }
 
-export const UploadImage = ({ src, onChange, error }: UploadImageProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+export const UploadImage = ({ src, onChange }: UploadImageProps) => {
+  const {
+    inputRef,
+    isModalCropOpen,
+    preview,
+    displaySrc,
+    handleClick,
+    handleChange,
+    handleSave,
+    handleClose,
+    error,
+  } = useUploadImage({ src, onChange });
 
-  const [isModalCropOpen, setIsModalCropOpen] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
-
-  const handleClick = () => {
-    inputRef.current?.click();
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-
-    if (!file) return;
-
-    const previewUrl = URL.createObjectURL(file);
-
-    setSelectedFile(file);
-    setPreview(previewUrl);
-    setIsModalCropOpen(true);
-    e.target.value = "";
-  };
-
-  const handleSave = () => {
-    onChange(selectedFile);
-    setIsModalCropOpen(false);
-  };
-
-  const handleClose = () => {
-    setIsModalCropOpen(false);
-    setSelectedFile(null);
-    setPreview(null);
-  };
-
-  const displaySrc = (() => {
-    if (src instanceof File) {
-      return URL.createObjectURL(src);
-    }
-    return src;
-  })();
-
+  console.log(error);
   return (
     <>
       <div className={styles.uploadWrapper}>
@@ -94,10 +67,7 @@ export const UploadImage = ({ src, onChange, error }: UploadImageProps) => {
           isOpen={isModalCropOpen}
           onClose={handleClose}
           maxWidth="820px"
-          onSave={(file: File) => {
-            onChange(file);
-            setIsModalCropOpen(false);
-          }}
+          onSave={handleSave}
         />
       )}
     </>

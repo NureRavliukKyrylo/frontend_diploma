@@ -5,7 +5,7 @@
   flex-direction: column;
   gap: 20px;
   .avatarBlock {
-    height: 320px;
+    height: 100%;
   }
   h1 {
     @include font-base(50px, 900);

@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs";
 import type { Coordinates } from "@shared/config/types";
+import { settingsMainFormSchema } from "../libs/settingsMainFormSchema";
 
 export const useSettingsMainForm = () => {
   const { data: user } = useProfile();
@@ -30,20 +31,12 @@ export const useSettingsMainForm = () => {
     },
   });
 
-  const handleLocationChange = (coords: Coordinates) => {
-    formik.setFieldValue("coordinates", coords);
-    console.log(formik.values.coordinates);
-  };
-
-  const handleFileChange = (file: File | null) => {
-    formik.setFieldValue("avatar", file);
-  };
-
   const formattedDateOfBirth = user?.profile?.dateOfBirth
     ? new Date(user.profile.dateOfBirth).toISOString().split("T")[0]
     : "";
 
   const formik = useFormik({
+    validationSchema: settingsMainFormSchema,
     initialValues: {
       firstName: user?.firstName ?? "",
       lastName: user?.lastName ?? "",
@@ -64,8 +57,17 @@ export const useSettingsMainForm = () => {
           coordinates: values.coordinates,
         },
       });
+      console.log(formik.errors);
     },
   });
+
+  const handleLocationChange = (coords: Coordinates) => {
+    formik.setFieldValue("coordinates", coords);
+  };
+
+  const handleFileChange = (file: File | null) => {
+    formik.setFieldValue("avatar", file, true);
+  };
 
   return {
     formik,

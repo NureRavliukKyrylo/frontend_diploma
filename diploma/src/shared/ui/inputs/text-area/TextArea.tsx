@@ -20,6 +20,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
   variant = "default",
   ...props
 }) => {
+  const [isFocused, setIsFocused] = useState(false);
   const [textLength, setTextLength] = useState(
     value
       ? value.toString().length
@@ -28,7 +29,21 @@ export const TextArea: React.FC<TextAreaProps> = ({
         : 0,
   );
 
+  const hasText = textLength > 0;
+
+  const isActive = isFocused || hasText;
+
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleFocus = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+    setIsFocused(true);
+    props.onFocus?.(e);
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLTextAreaElement>) => {
+    setIsFocused(false);
+    props.onBlur?.(e);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (!maxLength || e.target.value.length <= maxLength) {
@@ -69,7 +84,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
       >
         <textarea
           ref={textareaRef}
-          className={`${styles.textarea} ${variantClass}`}
+          className={`${styles.textarea} ${variantClass} ${isActive ? styles.focused : ""}`}
           value={value}
           defaultValue={defaultValue}
           onChange={handleChange}
@@ -79,6 +94,8 @@ export const TextArea: React.FC<TextAreaProps> = ({
             minHeight: `${minHeight}px`,
           }}
           {...props}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
         <div className={`${styles.charCount} ${variantClass}`}>
           {textLength}/{maxLength}

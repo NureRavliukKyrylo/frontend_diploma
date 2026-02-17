@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import type { Coordinates } from "../../../../entities/user";
+import type { Coordinates } from "@shared/config/types";
 
 export const locationSchema = Yup.object({
   coordinates: Yup.object<Coordinates>({
