@@ -1,1 +1,1 @@
-export type ProfileSettingsMode = "main" | "links" | "password";
+export type ProfileSettingsMode = "main" | "links" | "security";

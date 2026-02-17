@@ -8,7 +8,7 @@ interface ProfileEmailInputProps extends React.InputHTMLAttributes<HTMLInputElem
 
 export const ProfileEmailInput: React.FC<ProfileEmailInputProps> = (props) => {
   return (
-    <BaseInput type="email" variant="profile" {...props}>
+    <BaseInput type="email" variant="profile" mode="email" {...props}>
       <span className={styles.profileEmailIcon}>
         <svg
           width="28"

@@ -1,7 +1,7 @@
 import React from "react";
 import { BaseInput } from "../../base-input/BaseInput";
 import styles from "./SocialNetworksInput.module.scss";
-import { Switch } from "@heroui/react";
+import { Switch } from "@shared/ui";
 
 interface SocialNetworksInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;

@@ -28,12 +28,11 @@ export const profileSettingsForms: Record<
         "Add your social media links to connect your profiles in one place.",
     },
   },
-  password: {
+  security: {
     component: <PasswordProfileForm />,
     wrapperProps: {
-      settingsTitle: "Change password",
-      settingsDescription:
-        "Change your password securely — a verification code will be sent to your registered email or phone to confirm the update.",
+      settingsTitle: "Security",
+      settingsDescription: "Manage your account security",
     },
   },
 };

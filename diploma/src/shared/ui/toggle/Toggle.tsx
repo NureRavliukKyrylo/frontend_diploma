@@ -1,5 +1,5 @@
 import styles from "./Toggle.module.scss";
-import type { TabOption } from "@shared/config";
+import type { TabOption } from "@shared/config/types";
 
 interface ToggleProps<T extends string = string> {
   tabs: TabOption<T>[];
