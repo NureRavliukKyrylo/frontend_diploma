@@ -8,6 +8,7 @@ type ResendButtonProps = {
   decrementTimer: () => void;
   serverError?: string | null;
   isLoading: boolean;
+  variant?: "default" | "profile";
 };
 
 export const ResendButton: React.FC<ResendButtonProps> = ({
@@ -17,6 +18,7 @@ export const ResendButton: React.FC<ResendButtonProps> = ({
   decrementTimer,
   serverError,
   isLoading,
+  variant = "default",
 }) => {
   const canResend = seconds === 0;
 
@@ -40,12 +42,14 @@ export const ResendButton: React.FC<ResendButtonProps> = ({
     .toString()
     .padStart(2, "0")}`;
 
+  const variantClass = variant !== "default" ? styles[variant] : "";
+
   return (
     <button
       type="button"
       onClick={handleClick}
       disabled={!canResend}
-      className={`${styles.resendButton} ${
+      className={`${styles.resendButton} ${variantClass} ${
         canResend && !isLoading ? styles.active : styles.disabled
       } ${isLoading ? styles.loading : ""}`}
     >

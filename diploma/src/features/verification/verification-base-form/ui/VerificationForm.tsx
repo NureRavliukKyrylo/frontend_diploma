@@ -1,32 +1,22 @@
 import styles from "./VerificationForm.module.scss";
-import { ResendButton } from "@shared/ui/buttons";
 import { InputOtp } from "@shared/ui/inputs";
-
-import { useAuthStore } from "@entities/user";
 import type { OtpType } from "@shared/config/types";
-import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 interface VerificationFormProps {
   otpType: OtpType;
   formik: any;
-  isLoading: boolean;
-  isLoadingResend: boolean;
-  onResend: () => void;
   verificationError?: string | null;
   resendError?: string | null;
+  children: React.ReactNode;
 }
 
 export const VerificationForm = ({
   otpType,
   formik,
-  isLoading,
-  isLoadingResend,
-  onResend,
   verificationError,
   resendError,
+  children,
 }: VerificationFormProps) => {
-  const { otpTimers, resetOtpTimer, decrementOtpTimer } = useAuthStore();
-
   return (
     <form onSubmit={formik.handleSubmit} className={styles.verificationForm}>
       <div className={styles.wrapperInputResend}>
@@ -41,28 +31,11 @@ export const VerificationForm = ({
           serverError={resendError}
           isInvalid={!!formik.errors.code}
         />
-        <div className={styles.resendButtonWrapperVerification}>
-          <ResendButton
-            seconds={otpTimers[otpType]}
-            onResend={onResend}
-            resetTimer={() => resetOtpTimer(otpType)}
-            decrementTimer={() => decrementOtpTimer(otpType)}
-            serverError={resendError}
-            isLoading={isLoadingResend}
-          />
-        </div>
       </div>
-      <div className={styles.buttonBlock}>
-        <BaseButtonWrapper
-          loading={isLoading}
-          className={styles.confirmVerificationButton}
-        >
-          Confirm
-        </BaseButtonWrapper>
-        {verificationError && (
-          <div className="errorMessage">{verificationError}</div>
-        )}
-      </div>
+      {children}
+      {verificationError && (
+        <div className="errorMessage">{verificationError}</div>
+      )}
     </form>
   );
 };

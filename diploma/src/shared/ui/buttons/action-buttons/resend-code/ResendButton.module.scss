@@ -4,7 +4,6 @@
 .wrapperResendCode {
   margin-bottom: 10px;
 }
-
 .resendButton {
   font-size: 0.875rem;
   font-weight: 500;
@@ -32,6 +31,23 @@
     opacity: 0.6;
     cursor: not-allowed;
     pointer-events: none;
+  }
+
+  &.profile {
+    &.active {
+      color: #000000;
+      @include font-base(18px, 500);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    &.disabled {
+      color: #595959;
+      @include font-base(18px, 700);
+    }
+    span {
+      @include font-base(18px, 500);
+    }
   }
 }
 @include breakpoint.respond-to(tablet) {

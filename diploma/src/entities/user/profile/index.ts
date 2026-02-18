@@ -5,3 +5,4 @@ export {
   createUserProfileSlice,
 } from "./model/slices/userProfileSlice";
 export { profileQuery } from "./model/queries/getProfile";
+export { type VerificationModalType } from "./model/types/verificationModalType";

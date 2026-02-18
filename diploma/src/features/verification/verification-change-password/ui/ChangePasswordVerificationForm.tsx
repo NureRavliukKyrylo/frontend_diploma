@@ -4,39 +4,45 @@ import {
   VerificationForm,
   useVerification,
 } from "@features/verification/verification-base-form";
-import { twoFactorVerification } from "../api/twoFactorVerificationApi";
+import { verificationChangePassword } from "../api/verificationChangePassword";
 import {
   ResendCodeButton,
   useResendCode,
 } from "@features/verification/resend-code";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
-import styles from "./TwoFactorVerificationForm.module.scss";
+import styles from "./ChangePasswordVerificationForm.module.scss";
 
-export const TwoFactorVerificationForm: React.FC = () => {
+interface ChangePasswordVerificationFormProps {
+  onSuccess?: () => void;
+}
+export const ChangePasswordVerificationForm: React.FC<
+  ChangePasswordVerificationFormProps
+> = ({ onSuccess }) => {
   const { resendErrorMessage } = useResendCode({
     type: OtpType.TwoFactor,
   });
   const { formik, isLoading, errorMessage } = useVerification({
-    apiFn: twoFactorVerification,
+    apiFn: verificationChangePassword,
     successRedirect: "/home",
     successMessage: "Two factor verified successfully",
+    onSuccess,
   });
 
   return (
     <VerificationForm
-      otpType={OtpType.TwoFactor}
+      otpType={OtpType.PasswordReset}
       formik={formik}
       verificationError={errorMessage}
       resendError={resendErrorMessage}
     >
-      <div className={styles.actionVerificationBlock}>
-        <ResendCodeButton otpType={OtpType.TwoFactor} />
+      <div className={styles.actionVerificationTwoFactorBlock}>
         <BaseButtonWrapper
           loading={isLoading}
           className={styles.confirmVerificationButton}
         >
-          Confirm
+          Send Code
         </BaseButtonWrapper>
+        <ResendCodeButton otpType={OtpType.TwoFactor} variant="profile" />
       </div>
     </VerificationForm>
   );

@@ -8,17 +8,23 @@ import {
   type ProfileModeSlice,
 } from "../slices/profileModeSlice";
 import { persist } from "zustand/middleware";
-
-type ProfileStore = ProfileSettingsModeSlice & ProfileModeSlice;
+import {
+  createProfileModalVerificationSlice,
+  type ProfileModalVerificationSlice,
+} from "../slices/profileModalVerificationSlice";
+type ProfileStore = ProfileSettingsModeSlice &
+  ProfileModeSlice &
+  ProfileModalVerificationSlice;
 
 export const useUserProfileStore = create<ProfileStore>()(
   persist(
     (...a) => ({
       ...createProfileSettingsModeSlice(...a),
       ...createProfileModeSlice(...a),
+      ...createProfileModalVerificationSlice(...a),
     }),
     {
       name: "user-profile-storage",
-    }
-  )
+    },
+  ),
 );

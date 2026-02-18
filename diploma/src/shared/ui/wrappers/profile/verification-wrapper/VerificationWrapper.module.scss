@@ -1,0 +1,26 @@
+@use "@shared/assets/styles" as *;
+
+.wrapperVerificationContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  .wrapperVerificationInfo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    h1 {
+      @include font-base(40px, 800);
+    }
+    p {
+      color: rgba(0, 0, 0, 0.74);
+      @include font-base(28px, 500);
+      line-height: 120%;
+    }
+  }
+  .childrenContent {
+  }
+}
