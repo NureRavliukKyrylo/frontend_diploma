@@ -4,3 +4,4 @@ export { isPayloadEmpty } from "./validators/payloadEmpty";
 export { queryClient } from "./react-query/queryClient";
 export { getErrorMessage } from "./error-message/getErrorMessage";
 export { getCroppedImage } from "./image/getCroppedImage";
+export { formatDateToInput } from "./date/formatDateToInput";

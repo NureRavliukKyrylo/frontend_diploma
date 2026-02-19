@@ -1,22 +1,32 @@
 import type { Profile } from "@entities/user";
 import { apiClient } from "@shared/api";
 
+type ProfileMainForm = Omit<Profile, "socialLinks">;
+
 export type UpdateProfileDto = {
   firstName: string;
   lastName: string;
-  profile: Profile;
+  avatarFile: File | string | undefined;
+  profile: ProfileMainForm;
 };
 
 export const updateProfile = async (data: UpdateProfileDto) => {
   const formData = new FormData();
 
-  if (data.profile.avatarUrl) {
-    formData.append("avatarFile", data.profile.avatarUrl);
+  if (data.firstName) {
+    formData.append("firstName", data.firstName);
+  }
+
+  if (data.lastName) {
+    formData.append("lastName", data.lastName);
+  }
+
+  if (data.avatarFile) {
+    formData.append("avatarFile", data.avatarFile);
   }
 
   if (data.profile) {
     formData.append("profile", JSON.stringify(data.profile));
-    console.log(data.profile.coordinates);
   }
 
   const response = await apiClient.put("User/profile", formData, {

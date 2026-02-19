@@ -70,6 +70,17 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
       padding-left: 3rem;
     }
   }
+
+  &.verification {
+    .input {
+      padding-left: 15px;
+      border: 1px solid #9c9c9c;
+      border-radius: 10px;
+      &::placeholder {
+        color: rgba(110, 110, 110, 0.6);
+      }
+    }
+  }
   &.focused {
     .label {
       @include font-base(0.55rem, 700);

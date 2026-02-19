@@ -3,13 +3,14 @@ import { useProfile } from "@entities/user/profile";
 import { updateProfile, type UpdateProfileDto } from "../api/updateProfileApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
-import { getErrorMessage } from "@shared/libs";
-import type { Coordinates } from "@shared/config/types";
+import { formatDateToInput, getErrorMessage } from "@shared/libs";
+import { type Coordinates } from "@shared/config/types";
 import { settingsMainFormSchema } from "../libs/settingsMainFormSchema";
 
 export const useSettingsMainForm = () => {
   const { data: user } = useProfile();
   const queryClient = useQueryClient();
+  const formattedDateOfBirth = formatDateToInput(user?.profile?.dateOfBirth);
 
   const mutation = useMutation({
     mutationFn: (data: UpdateProfileDto) => updateProfile(data),
@@ -31,10 +32,6 @@ export const useSettingsMainForm = () => {
     },
   });
 
-  const formattedDateOfBirth = user?.profile?.dateOfBirth
-    ? new Date(user.profile.dateOfBirth).toISOString().split("T")[0]
-    : "";
-
   const formik = useFormik({
     validationSchema: settingsMainFormSchema,
     initialValues: {
@@ -50,14 +47,13 @@ export const useSettingsMainForm = () => {
       mutation.mutate({
         firstName: values.firstName,
         lastName: values.lastName,
+        avatarFile: values.avatar,
         profile: {
           bio: values.about,
           dateOfBirth: values.dateOfBirth,
-          avatarUrl: values.avatar,
           coordinates: values.coordinates,
         },
       });
-      console.log(formik.errors);
     },
   });
 

@@ -5,7 +5,7 @@ interface BaseInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   activeLabel?: string;
   error?: string;
-  variant?: "default" | "profile";
+  variant?: "default" | "profile" | "verification";
   mode?: "default" | "email" | "password" | "social";
   children?: React.ReactNode;
   inputClassName?: string;

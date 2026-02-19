@@ -1,6 +1,7 @@
 import { type VerificationModalType } from "@entities/user/profile";
 import { TwoFactorVerificationContent } from "../ui/content/TwoFactorVerificationContent";
 import { ChangePasswordVerificationContent } from "../ui/content/ChangePasswordVerificationContent";
+import { ResetPasswordVerificationContent } from "../ui/content/ResetPasswordVerificationContent";
 
 export const verificationConfig: Record<
   Exclude<VerificationModalType, null>,
@@ -21,6 +22,7 @@ export const verificationConfig: Record<
   changePassword: {
     steps: {
       1: <ChangePasswordVerificationContent />,
+      2: <ResetPasswordVerificationContent />,
     },
   },
 };

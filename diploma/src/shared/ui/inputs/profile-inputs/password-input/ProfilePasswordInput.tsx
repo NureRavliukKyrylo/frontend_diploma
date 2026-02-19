@@ -7,10 +7,12 @@ import { BaseInput } from "../../base-input/BaseInput";
 
 interface ProfilePasswordInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
+  variant?: "default" | "profile" | "verification";
 }
 
 export const ProfilePasswordInput: React.FC<ProfilePasswordInputProps> = ({
   error,
+  variant = "profile",
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +20,7 @@ export const ProfilePasswordInput: React.FC<ProfilePasswordInputProps> = ({
   const inputType = showPassword ? "text" : "password";
 
   return (
-    <BaseInput {...props} type={inputType} variant="profile" mode="password">
+    <BaseInput {...props} type={inputType} variant={variant} mode="password">
       {props.value && props.value.toString().length > 0 && (
         <button
           type="button"

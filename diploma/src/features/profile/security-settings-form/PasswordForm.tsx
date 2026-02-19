@@ -10,16 +10,17 @@ import { useUserProfileStore } from "@entities/user";
 
 export function PasswordProfileForm({}) {
   const [isSelected, setIsSelected] = useState(false);
-  const { openVerificationModal } = useUserProfileStore();
-
-  const handleModal = (
-    setModal: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => {
-    setModal((prev) => !prev);
-  };
+  const { openVerificationModal, nextVerificationStep } = useUserProfileStore();
 
   return (
     <>
+      <button
+        onClick={() => {
+          nextVerificationStep("changePassword");
+        }}
+      >
+        <h1>asdasdasdasdasd</h1>
+      </button>
       <form className={styles.passwordInfoProfileForm}>
         <div className={styles.securityProfileSection}>
           <div className={styles.passwordProfileText}>

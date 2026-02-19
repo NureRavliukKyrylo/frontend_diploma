@@ -1,4 +1,5 @@
-import type { Profile } from "./profile";
+import type { PrivacySettings, Profile } from "./profile";
+import type { ProfileCompletion } from "./profileCompletionField";
 
 export interface User {
   id: string;
@@ -12,4 +13,6 @@ export interface User {
   googleVerifiedAt: string | null;
   emailVerified: boolean;
   twoFactorEnabled: boolean;
+  privacySettings: PrivacySettings;
+  profileCompletion: ProfileCompletion | null;
 }

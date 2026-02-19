@@ -97,7 +97,6 @@ export function SettingsMainForm() {
         <div className={styles.formInfoPublicProfile}>
           <div className={styles.textAreaProfileSettingsBlock}>
             <TextArea
-              id="about"
               name="about"
               value={formik.values.about}
               onChange={formik.handleChange}

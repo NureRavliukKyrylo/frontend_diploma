@@ -2,10 +2,16 @@ import styles from "./LinksForm.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { SOCIAL_PROFILE_CONFIG } from "../config/socialProfileConfig";
 import { ProfileSocialNetworksInput } from "@shared/ui/inputs";
+import { useSocialLinksSettingsForm } from "../model/useSocialLinksSettingsForm";
 
 export function LinksForm({}) {
+  const { formik, isLoading, errorMessage } = useSocialLinksSettingsForm();
+
   return (
-    <div className={styles.linksInfoProfileForm}>
+    <form
+      onSubmit={formik.handleSubmit}
+      className={styles.linksInfoProfileForm}
+    >
       <div className={styles.linksProfile}>
         <div className={styles.linksProfileText}>
           <h1>Social profiles</h1>
@@ -16,15 +22,19 @@ export function LinksForm({}) {
         </div>
         <div className={styles.formInfolinksProfile}>
           {SOCIAL_PROFILE_CONFIG.map(({ key, placeholder, icon }) => {
-            const switchName = `show${
-              key.charAt(0).toUpperCase() + key.slice(1)
-            }`;
             return (
               <ProfileSocialNetworksInput
                 key={key}
-                name={key}
+                name={`socialLinks.${key}.url`}
                 placeholder={placeholder}
                 icon={icon}
+                value={formik.values.socialLinks[key]?.url ?? ""}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                switchValue={formik.values.socialLinks[key]?.visible ?? false}
+                onSwitchChange={(val) =>
+                  formik.setFieldValue(`socialLinks.${key}.visible`, val)
+                }
               />
             );
           })}
@@ -32,12 +42,14 @@ export function LinksForm({}) {
       </div>
       <div className={styles.blockLinksButtons}>
         <BaseButtonWrapper
-          loading={false}
+          loading={isLoading}
           className={styles.saveProfileLinksButton}
+          type="submit"
         >
           SAVE
         </BaseButtonWrapper>
       </div>
-    </div>
+      {errorMessage && <div className="errorMessage">{errorMessage}</div>}
+    </form>
   );
 }
