@@ -2,9 +2,8 @@ import { useFormik } from "formik";
 import { useAuthStore } from "@entities/user";
 import { contactsSchema } from "../libs/contactsSchema";
 import { useSubmitFillingForm } from "@features/multi-step-filling-info/submit-form";
-import { SocialPlatform } from "@shared/config/types";
-import { platformKeys } from "../configs/platformKeys";
 import type { UpdateUserDto } from "../../submit-form";
+import { SOCIAL_PLATFORMS } from "@shared/config/constants";
 
 export const useContactsForm = () => {
   const {
@@ -18,24 +17,21 @@ export const useContactsForm = () => {
 
   const { handleSubmit, isLoading } = useSubmitFillingForm();
 
-  const initialValues = Object.entries(platformKeys).reduce(
-    (acc, [platformValue, key]) => {
-      const platform = Number(platformValue) as SocialPlatform;
-      const link = profile?.socialLinks?.find(
-        (l: { platform: number }) => l.platform === platform,
-      );
-
-      const fieldName = `Profile.SocialLinks[Platform=${key}]`;
+  const initialValues = SOCIAL_PLATFORMS.reduce(
+    (acc, { platform, key, fieldName }) => {
+      const link = profile?.socialLinks?.find((l) => l.platform === platform);
       const field = privacySettings?.fields?.find(
-        (f: { fieldName: string }) => f.fieldName === fieldName,
+        (f) => f.fieldName === fieldName,
       );
 
-      acc[key] = link?.url;
-      acc[`show${key}`] = field?.visibility === 0 || false;
+      acc[key] = {
+        url: link?.url ?? "",
+        visible: field ? field.visibility === 0 : false,
+      };
 
       return acc;
     },
-    {} as Record<string, any>,
+    {} as Record<string, { url: string; visible: boolean }>,
   );
 
   const formik = useFormik({
@@ -43,11 +39,8 @@ export const useContactsForm = () => {
     validationSchema: contactsSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
-      Object.entries(platformKeys).forEach(([platformValue, key]) => {
-        const platform = Number(platformValue) as SocialPlatform;
-        const fieldName = `Profile.SocialLinks[Platform=${key}]`;
-        const showKey = `show${key}`;
-        const url = values[key];
+      SOCIAL_PLATFORMS.forEach(({ platform, key, fieldName }) => {
+        const { url, visible } = values[key];
 
         if (url) {
           setSocialLink(platform, url);
@@ -55,7 +48,7 @@ export const useContactsForm = () => {
           removeSocialLink(platform);
         }
 
-        if (values[showKey]) {
+        if (visible) {
           setPrivacyField(fieldName, { fieldName, visibility: 0 });
         } else {
           removePrivacyField(fieldName);
@@ -71,13 +64,9 @@ export const useContactsForm = () => {
           phone: profile?.phone,
           dateOfBirth: profile?.dateOfBirth,
           coordinates: profile?.coordinates,
-          ...(profile?.socialLinks?.length
-            ? { socialLinks: profile.socialLinks }
-            : {}),
+          socialLinks: profile?.socialLinks,
         },
-        ...(privacySettings?.fields?.length
-          ? { privacySettings: { fields: privacySettings.fields } }
-          : {}),
+        privacySettings: { fields: privacySettings?.fields },
       };
 
       handleSubmit(payload);

@@ -26,6 +26,7 @@ export const GoogleButton = () => {
         <GoogleLogin
           onSuccess={(credentialResponse) => {
             const credential = credentialResponse.credential;
+            console.log(credential);
             if (credential) {
               loginWithGoogle(credential);
             } else {

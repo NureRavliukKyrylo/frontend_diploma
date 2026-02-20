@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { SOCIAL_PLATFORMS_CONFIG } from "@shared/config/constants";
+import { SOCIAL_PLATFORMS_MAP } from "@shared/config/constants";
 import type { SocialPlatform } from "@shared/config/types/social-links/SocialPlatform";
 import styles from "./SocialPlatforms.module.scss";
 
@@ -14,7 +14,7 @@ export const SocialPlatformItem = ({
   url,
   size = 20,
 }: SocialPlatformItemProps) => {
-  const config = SOCIAL_PLATFORMS_CONFIG[platform];
+  const config = SOCIAL_PLATFORMS_MAP.get(platform);
 
   return (
     <>

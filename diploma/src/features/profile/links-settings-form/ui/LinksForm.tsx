@@ -1,12 +1,12 @@
 import styles from "./LinksForm.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
-import { SOCIAL_PROFILE_CONFIG } from "../config/socialProfileConfig";
+import { SOCIAL_PLATFORMS } from "@shared/config/constants";
 import { ProfileSocialNetworksInput } from "@shared/ui/inputs";
 import { useSocialLinksSettingsForm } from "../model/useSocialLinksSettingsForm";
 
 export function LinksForm({}) {
   const { formik, isLoading, errorMessage } = useSocialLinksSettingsForm();
-
+  console.log(formik.values);
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -21,7 +21,7 @@ export function LinksForm({}) {
           </p>
         </div>
         <div className={styles.formInfolinksProfile}>
-          {SOCIAL_PROFILE_CONFIG.map(({ key, placeholder, icon }) => {
+          {SOCIAL_PLATFORMS.map(({ key, placeholder, icon }) => {
             return (
               <ProfileSocialNetworksInput
                 key={key}

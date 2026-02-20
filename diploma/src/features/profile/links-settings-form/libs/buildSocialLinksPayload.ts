@@ -1,18 +1,14 @@
-import { SocialPlatform } from "@shared/config/types";
-import { SOCIAL_PROFILE_CONFIG } from "../config/socialProfileConfig";
+import { SOCIAL_PLATFORMS } from "@shared/config/constants";
 
 export const buildSocialLinksPayload = (
   socialLinks: Record<string, { url: string; visible: boolean }>,
 ) => {
-  const links = SOCIAL_PROFILE_CONFIG.filter(
-    ({ key }) => socialLinks[key]?.url,
-  ).map(({ key }) => ({
-    platform: SocialPlatform[key as keyof typeof SocialPlatform],
-    url: socialLinks[key].url,
-  }));
+  const links = SOCIAL_PLATFORMS.filter(({ key }) => socialLinks[key]?.url).map(
+    ({ platform, key }) => ({ platform, url: socialLinks[key].url }),
+  );
 
-  const privacyFields = SOCIAL_PROFILE_CONFIG.map(({ key }) => ({
-    fieldName: `Profile.SocialLinks[Platform=${key}]`,
+  const privacyFields = SOCIAL_PLATFORMS.map(({ key, fieldName }) => ({
+    fieldName,
     visibility: socialLinks[key]?.visible ? 0 : 1,
   }));
 

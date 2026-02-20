@@ -2,7 +2,6 @@ import { useFormik } from "formik";
 import { useMutation } from "@tanstack/react-query";
 import { login, type LoginDto } from "../api/loginApi";
 import { loginSchema } from "../libs/loginSchema";
-
 import { useAuthStore, useUserStore } from "@entities/user";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
@@ -10,7 +9,6 @@ import { AuthRoutes } from "@shared/routes";
 import { getErrorMessage } from "@shared/libs";
 
 export const useLogin = () => {
-
   const { loginEmail, loginPassword, rememberMe, clearLoginForm } =
     useAuthStore();
   const { setEmail } = useUserStore();
@@ -19,7 +17,6 @@ export const useLogin = () => {
   const mutation = useMutation({
     mutationFn: (data: LoginDto) => login(data),
     onSuccess: (data) => {
-
       addToast({
         title: "Login Success",
         description: "You have logined successfully",

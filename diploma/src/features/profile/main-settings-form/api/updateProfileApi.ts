@@ -1,7 +1,10 @@
 import type { Profile } from "@entities/user";
 import { apiClient } from "@shared/api";
 
-type ProfileMainForm = Omit<Profile, "socialLinks">;
+type ProfileMainForm = Omit<
+  Profile,
+  "socialLinks" | "activeProjectCount" | "completedProjectCount"
+>;
 
 export type UpdateProfileDto = {
   firstName: string;

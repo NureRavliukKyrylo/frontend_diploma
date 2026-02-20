@@ -1,17 +1,14 @@
-import { SocialPlatform } from "@shared/config/types";
-import { SOCIAL_PROFILE_CONFIG } from "../config/socialProfileConfig";
 import type { User } from "@entities/user/profile";
+import { SOCIAL_PLATFORMS } from "@shared/config/constants";
 
 export const getSocialLinksInitial = (user: User | undefined) =>
-  SOCIAL_PROFILE_CONFIG.reduce(
-    (acc, { key }) => {
+  SOCIAL_PLATFORMS.reduce(
+    (acc, { platform, key, fieldName }) => {
       const found = user?.profile?.socialLinks?.find(
-        (link) =>
-          link.platform === SocialPlatform[key as keyof typeof SocialPlatform],
+        (l) => l.platform === platform,
       );
-
       const privacy = user?.privacySettings?.fields?.find(
-        (field) => field.fieldName === `Profile.SocialLinks[Platform=${key}]`,
+        (f) => f.fieldName === fieldName,
       );
 
       acc[key] = {
