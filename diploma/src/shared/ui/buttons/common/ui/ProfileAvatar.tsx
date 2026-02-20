@@ -1,13 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import styles from "./../styles/ProfileAvatar.module.scss";
-import { useAuthStore } from "@entities/user";
-import { InstagramIcon } from "@shared/assets/icons/brands";
+import { DefaultAvatar } from "@shared/assets/images/user";
 
-export function ProfieAvatar() {
-  const { avatarUrl } = useAuthStore();
+interface ProfileAvatarProps {
+  imageUrl?: string;
+}
+export function ProfieAvatar({ imageUrl }: ProfileAvatarProps) {
   return (
     <Link to="/profile" className={styles.profileAvatar}>
-      <img src={avatarUrl || InstagramIcon} alt={"avatar"} />
+      <img src={imageUrl ?? DefaultAvatar} alt={"avatar"} />
     </Link>
   );
 }

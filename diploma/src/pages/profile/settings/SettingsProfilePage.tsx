@@ -6,8 +6,9 @@ import { useProfile } from "@entities/user/profile";
 
 export function SettingsProfilePage() {
   const { data: user, isLoading, error } = useProfile();
+
   const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ");
-  console.log(user);
+
   return (
     <div className={styles.settingsProfileBlock}>
       <div className={styles.sideBarProfileSettingsBlock}>

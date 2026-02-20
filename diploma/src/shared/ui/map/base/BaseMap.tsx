@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer } from "react-leaflet";
-import type { LatLngExpression } from "leaflet";
+import { type LatLngExpression } from "leaflet";
 import styles from "./BaseMap.module.scss";
 import "leaflet/dist/leaflet.css";
 import {

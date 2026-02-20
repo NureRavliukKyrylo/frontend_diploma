@@ -9,8 +9,11 @@ import {
 } from "@shared/ui/buttons";
 import { NavMenu } from "@shared/ui";
 import { headerLinks } from "./config/headerLinks";
+import { useProfile } from "@entities/user/profile";
 
 export function Header() {
+  const { data: user, isLoading, error } = useProfile();
+
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.headerMainContainer}>
@@ -27,7 +30,7 @@ export function Header() {
         <div className={styles.headerRightBlock}>
           <ActiveProjectsButton />
           <LanguageSwitcherButton />
-          <ProfieAvatar />
+          <ProfieAvatar imageUrl={user?.profile?.avatarUrl} />
         </div>
       </div>
       <div className={styles.headerSubContainer}>

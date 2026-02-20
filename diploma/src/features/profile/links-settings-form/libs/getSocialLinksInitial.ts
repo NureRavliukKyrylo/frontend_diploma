@@ -1,5 +1,5 @@
 import { SocialPlatform } from "@shared/config/types";
-import { SOCIAL_PROFILE_CONFIG } from "@features/profile/links-settings-form/config/socialProfileConfig";
+import { SOCIAL_PROFILE_CONFIG } from "../config/socialProfileConfig";
 import type { User } from "@entities/user/profile";
 
 export const getSocialLinksInitial = (user: User | undefined) =>

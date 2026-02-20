@@ -3,6 +3,7 @@
 $label-color: rgba(0, 0, 0, 0.6);
 
 .mapLocationWrapper {
+  container-type: size;
   background: #ffffff;
   border: 1px solid #000000;
   border-radius: 15px;
@@ -11,9 +12,19 @@ $label-color: rgba(0, 0, 0, 0.6);
   align-items: center;
   justify-content: space-between;
   min-height: 38px;
+  height: 100%;
+  color: #323232;
+  &.profile {
+    height: 100%;
+    border: none;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 0px 15px;
+    color: rgba(0, 0, 0, 0.6);
+  }
   .leftMapContent {
     display: flex;
-    gap: 8px;
+    gap: max(8px, 18cqh);
     .mapIcon {
       left: 0.625rem;
       color: $label-color;
@@ -23,18 +34,17 @@ $label-color: rgba(0, 0, 0, 0.6);
       align-items: center;
 
       svg {
-        width: 22px;
-        height: 22px;
+        width: max(22px, 50cqh);
+        height: max(22px, 50cqh);
       }
     }
 
     h1 {
-      @include font-base(18px, 700);
-      color: #323232;
+      @include font-base(max(18px, 35cqh), 700);
     }
 
     .divider {
-      width: 1px;
+      width: max(1px, 2.5cqh);
       background-color: $label-color;
       transform: scaleX(0.5);
       transform-origin: center;
@@ -42,8 +52,8 @@ $label-color: rgba(0, 0, 0, 0.6);
   }
   .mapOpenButton {
     svg {
-      width: 22px;
-      height: 22px;
+      width: max(22px, 50cqh);
+      height: max(22px, 50cqh);
     }
   }
 }

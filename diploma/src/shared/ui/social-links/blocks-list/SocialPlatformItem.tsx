@@ -17,20 +17,24 @@ export const SocialPlatformItem = ({
   const config = SOCIAL_PLATFORMS_CONFIG[platform];
 
   return (
-    <Link
-      to={url}
-      key={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={styles.blockSocialPlatformLink}
-    >
-      <img
-        src={config.icon}
-        alt={config.name}
-        className={styles.imageSocialPlatformLink}
-        style={{ width: size, height: size }}
-      />
-      <h1 className={styles.socialPlatformTitle}>{config.name}</h1>
-    </Link>
+    <>
+      {config && (
+        <Link
+          to={url}
+          key={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.blockSocialPlatformLink}
+        >
+          <img
+            src={config.icon}
+            alt={config.name}
+            className={styles.imageSocialPlatformLink}
+            style={{ width: size, height: size }}
+          />
+          <h1 className={styles.socialPlatformTitle}>{config.name}</h1>
+        </Link>
+      )}
+    </>
   );
 };

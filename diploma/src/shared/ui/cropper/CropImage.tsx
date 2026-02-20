@@ -1,24 +1,8 @@
-import Cropper, { type Area } from "react-easy-crop";
+import type { ComponentProps } from "react";
+import Cropper from "react-easy-crop";
 
-export interface CropImageProps {
-  image: string;
-  crop: { x: number; y: number };
-  zoom: number;
-  aspect: number;
-  onCropChange: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
-  onZoomChange: React.Dispatch<React.SetStateAction<number>>;
-  onCropComplete: (_: Area, croppedPixels: Area) => void;
-  minZoom: number;
-  maxZoom: number;
-  rotation: number;
-  objectFit:
-    | "contain"
-    | "cover"
-    | "horizontal-cover"
-    | "vertical-cover"
-    | undefined;
-  showGrid: boolean;
-}
+type CropImageProps = ComponentProps<typeof Cropper>;
+
 export const CropImage = (props: CropImageProps) => {
   return (
     <>

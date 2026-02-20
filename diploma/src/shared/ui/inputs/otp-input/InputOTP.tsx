@@ -1,9 +1,9 @@
-import React from "react";
+import React, { type ComponentProps } from "react";
 import styles from "./InputOTP.module.scss";
 import { InputOtp as BaseInputOtp } from "@heroui/input-otp";
 import type { OtpType } from "@shared/config/types";
 
-type InputOtpProps = React.ComponentProps<typeof BaseInputOtp> & {
+type InputOtpProps = ComponentProps<typeof BaseInputOtp> & {
   error?: string;
   serverError?: string | null;
   otpType: OtpType;

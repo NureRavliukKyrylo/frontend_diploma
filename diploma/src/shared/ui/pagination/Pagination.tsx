@@ -1,24 +1,11 @@
 import { Pagination as HeroUIPagination } from "@heroui/react";
+import type { ComponentProps } from "react";
 
-interface PaginationProps {
-  total: number;
-  initialPage?: number;
-  page?: number;
-  onChange?: (page: number) => void;
-}
+type PaginationProps = ComponentProps<typeof HeroUIPagination>;
 
-export const Pagination: React.FC<PaginationProps> = ({
-  total,
-  initialPage = 1,
-  page,
-  onChange,
-}) => {
+export const Pagination: React.FC<PaginationProps> = ({ ...rest }) => {
   return (
     <HeroUIPagination
-      total={total}
-      initialPage={initialPage}
-      page={page}
-      onChange={onChange}
       variant="flat"
       color="default"
       size="md"
@@ -34,6 +21,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         next: "w-9 h-9 min-w-9 bg-transparent hover:bg-gray-100",
         ellipsis: "text-gray-400",
       }}
+      {...rest}
     />
   );
 };

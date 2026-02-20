@@ -51,9 +51,21 @@
     align-items: flex-end;
   }
 }
+.locationDateUserInfo {
+  display: grid;
+  grid-template-columns: minmax(300px, 1.2fr) 1fr 1fr;
+  gap: 20px;
+  .datePickerUserProfileWrapper {
+    border-radius: 10px;
+  }
+  .mapLocationUserProfileWrapper {
+    grid-column: 2 / 4;
+    height: 100%;
+  }
+}
 .userActivityInfo {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
+  grid-template-columns: minmax(300px, 1.2fr) 1fr minmax(300px, 1.2fr);
   gap: 20px;
 
   .projectsBlock {

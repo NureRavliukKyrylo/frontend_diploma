@@ -9,30 +9,23 @@ import { LinkButtonWrapper } from "@shared/ui/buttons";
 import { profileRoutes } from "@shared/routes";
 import { Settings } from "@shared/assets/icons/actions";
 import { UserHeaderWidget } from "@widgets/profile";
-import { SocialPlatform } from "@shared/config/types";
+import { useProfile } from "@entities/user/profile";
 
 export function MainProfilePage() {
   const { profileMode, setProfileMode } = useUserProfileStore();
-  //temporarily mock data
-  const links = [
-    {
-      platform: SocialPlatform.Instagram,
-      url: "https://instagram.com/my-profile",
-    },
-    {
-      platform: SocialPlatform.Telegram,
-      url: "https://t.me/my-profile",
-    },
-    {
-      platform: SocialPlatform.WhatsApp,
-      url: "https://wa.me/1234567890",
-    },
-  ];
+  const { data: user, isLoading, error } = useProfile();
+
+  const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ");
 
   return (
     <div className={styles.mainProfileBlock}>
       <div className={styles.sideBarProfileBlock}>
-        <UserHeaderWidget />
+        <UserHeaderWidget
+          image={user?.profile?.avatarUrl}
+          name={fullName}
+          email={user?.email}
+          phone={user?.profile?.phone}
+        />
         {/*replace with widget later */}
         <div className={styles.organizationBlock}>
           <div className={styles.organizationBlockHeader}>
@@ -40,7 +33,7 @@ export function MainProfilePage() {
           </div>
           <div className={styles.organizationBlockContent}></div>
         </div>
-        <SocialPlatforms links={links} />
+        <SocialPlatforms links={user?.profile?.socialLinks} />
       </div>
       <div className={styles.mainWrapperUserInfo}>
         <div className={styles.actionsChangeBlock}>
@@ -61,7 +54,7 @@ export function MainProfilePage() {
         </div>
         <div className={styles.userActionsBlock}>
           <MainProfileWrapper>
-            {profileMainForms[profileMode]}
+            {profileMainForms[profileMode]({ user })}
           </MainProfileWrapper>
         </div>
       </div>

@@ -21,4 +21,6 @@ export interface Profile {
   socialLinks?: SocialLink[];
   coordinates?: Coordinates | null;
   avatarUrl?: string;
+  activeProjectCount: number;
+  completedProjectCount: number;
 }

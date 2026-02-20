@@ -1,16 +1,35 @@
-import { ProgressBar } from "@shared/ui";
+import { MapLocationModal, ProgressBar } from "@shared/ui";
 import styles from "./ProfileMainWidget.module.scss";
 import { BaseButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
+import type { Coordinates } from "@shared/config/types";
+import { DatePickerInput, MapLocationInput } from "@shared/ui/inputs";
+import { useState } from "react";
 
 interface ProfileMainWidgetProps {
   skillsChildren?: React.ReactNode;
   badgesChildren?: React.ReactNode;
+  description?: string;
+  coordinates?: Coordinates | null;
+  dateBirthday?: string;
+  activeProjects?: number;
+  completedProjects?: number;
   //TODO:level interface,rating mb, adding user info with Pick or smth change all mock data
 }
 export function ProfileMainWidget({
   skillsChildren,
   badgesChildren,
+  description,
+  coordinates,
+  dateBirthday,
+  activeProjects,
+  completedProjects,
 }: ProfileMainWidgetProps) {
+  const [isLocationMapOpen, setIsLocationMapOpen] = useState(false);
+
+  const handleModal = () => {
+    setIsLocationMapOpen((prev) => !prev);
+  };
+
   return (
     <>
       <div className={styles.levelRateInfo}>
@@ -32,18 +51,41 @@ export function ProfileMainWidget({
       </div>
       <div className={styles.bioUser}>
         <ReadMoreButton
-          collapsedHeight={120}
+          collapsedHeight={110}
           className={styles.readMoreMainProfile}
         >
-          <p>
-            I am an active and dedicated volunteer who truly enjoys helping
-            others and making a positive difference in the community. Over the
-            years, I have taken part in charity projects, social initiatives,
-            and event organization, which allowed me to develop strong teamwork,
-            communication, and problem-solving skills. I adapt quickly to new
-            challenges, stay motivated in dynamic environments,
-          </p>
+          <p>{description}</p>
         </ReadMoreButton>
+      </div>
+      <div className={styles.locationDateUserInfo}>
+        <div className={styles.datePickerUserProfileWrapper}>
+          <DatePickerInput
+            name="datePicker"
+            value={dateBirthday}
+            isReadOnly={true}
+            label={"Date of birthday"}
+            classNames={{
+              base: "border-2 border-[rgba(0,0,0,0.3)] ",
+              segment: "!text-[rgba(0,0,0,0.6)]",
+            }}
+          />
+        </div>
+        <div className={styles.mapLocationUserProfileWrapper}>
+          <MapLocationInput
+            handleMapOpen={handleModal}
+            label="Location"
+            variant="profile"
+          />
+        </div>
+        {coordinates && (
+          <MapLocationModal
+            coordinates={coordinates}
+            isMapOpen={isLocationMapOpen}
+            onClose={handleModal}
+            popUpText={""}
+            maxWidth={"1200px"}
+          />
+        )}
       </div>
       <div className={styles.privateUserInfo}></div>
       <div className={styles.userActivityInfo}>
@@ -54,14 +96,14 @@ export function ProfileMainWidget({
                 <h1>ACTIVE</h1>
                 <h2>PROJECTS</h2>
               </div>
-              <p>5</p>
+              <p>{activeProjects ?? "0"}</p>
             </div>
             <div className={styles.projectsUserProfile}>
               <div className={styles.textInfoProjectsUserProfile}>
                 <h1>COMPLETED</h1>
                 <h2>PROJECTS</h2>
               </div>
-              <p>25</p>
+              <p>{completedProjects ?? "0"}</p>
             </div>
           </div>
           <div className={styles.projectsSeeMore}>

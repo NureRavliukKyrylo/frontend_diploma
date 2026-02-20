@@ -1,4 +1,4 @@
-export { BaseMap } from "./map/BaseMap";
+export { BaseMap } from "./map/base/BaseMap";
 
 export { Toggle } from "./toggle/Toggle";
 export { StepperForm } from "./stepper-form/StepperForm";
@@ -11,3 +11,4 @@ export { Pagination } from "./pagination/Pagination";
 export { RatingStars } from "./rating-stars/RatingStars";
 export { CropImage } from "./cropper/CropImage";
 export { Switch } from "./switch/Switch";
+export { MapLocationModal } from "./map/location-modal/MapLocationModal";
