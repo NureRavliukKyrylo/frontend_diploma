@@ -5,7 +5,6 @@ import type { OtpType } from "@shared/config/types";
 
 type InputOtpProps = ComponentProps<typeof BaseInputOtp> & {
   error?: string;
-  serverError?: string | null;
   otpType: OtpType;
 };
 
@@ -13,7 +12,6 @@ export const InputOtp: React.FC<InputOtpProps> = ({
   error,
   classNames,
   otpType,
-  serverError,
   ...props
 }) => {
   return (

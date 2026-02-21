@@ -9,6 +9,7 @@ import {
 } from "../api/updateSocialLinksApi";
 import { getSocialLinksInitial } from "../libs/getSocialLinksInitial";
 import { buildSocialLinksPayload } from "../libs/buildSocialLinksPayload";
+import { linksProfileSchema } from "../libs/linksProfileSchema";
 
 export const useSocialLinksSettingsForm = () => {
   const { data: user } = useProfile();
@@ -38,6 +39,7 @@ export const useSocialLinksSettingsForm = () => {
   const socialLinksInitial = getSocialLinksInitial(user);
 
   const formik = useFormik({
+    validationSchema: linksProfileSchema,
     initialValues: {
       socialLinks: socialLinksInitial,
     },

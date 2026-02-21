@@ -11,6 +11,7 @@ interface VerificationConfig {
   successRedirect?: string;
   successMessage?: string;
   onSuccess?: () => void;
+  extraFields?: Record<string, unknown>;
 }
 
 export const useVerification = ({
@@ -18,6 +19,7 @@ export const useVerification = ({
   successRedirect,
   successMessage = "Code verified successfully",
   onSuccess,
+  extraFields = {},
 }: VerificationConfig) => {
   const router = useRouter();
 
@@ -48,6 +50,7 @@ export const useVerification = ({
     initialValues: {
       code: "",
       userId,
+      ...extraFields,
     },
 
     validationSchema: verifyCodeSchema,
@@ -55,7 +58,7 @@ export const useVerification = ({
       mutation.mutate(values);
     },
   });
-  console.log("code", formik.errors);
+
   return {
     formik,
     handleSubmit: formik.handleSubmit,

@@ -69,6 +69,9 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
     .input.email {
       padding-left: 3rem;
     }
+    .input.password {
+      padding-right: 2.3rem;
+    }
   }
 
   &.verification {
@@ -80,10 +83,16 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
         color: rgba(110, 110, 110, 0.6);
       }
     }
+    .input.email {
+      padding-left: 3rem;
+    }
+    .input.password {
+      padding-right: 2.3rem;
+    }
   }
   &.focused {
     .label {
-      @include font-base(0.55rem, 700);
+      @include font-base(0.75rem, 700);
       top: 0;
       left: 0.75rem;
       background: white;
@@ -94,7 +103,7 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
       background-color: white;
     }
     .input.email {
-      padding-left: 2.9rem;
+      padding-left: 3rem;
     }
     .input.social {
       padding-right: 4rem;
@@ -133,7 +142,7 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
       .label {
         @include font-base(0.55rem, 700);
         top: 0;
-        left: 0.75rem;
+        left: 0.65rem;
         background: white;
       }
       .input.email {

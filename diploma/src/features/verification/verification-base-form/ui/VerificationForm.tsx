@@ -6,7 +6,6 @@ interface VerificationFormProps {
   otpType: OtpType;
   formik: any;
   verificationError?: string | null;
-  resendError?: string | null;
   children: React.ReactNode;
 }
 
@@ -14,7 +13,6 @@ export const VerificationForm = ({
   otpType,
   formik,
   verificationError,
-  resendError,
   children,
 }: VerificationFormProps) => {
   return (
@@ -28,14 +26,15 @@ export const VerificationForm = ({
             formik.setFieldValue("code", val);
           }}
           error={formik.submitCount > 0 ? formik.errors.code : undefined}
-          serverError={resendError}
           isInvalid={!!formik.errors.code}
         />
       </div>
-      {children}
-      {verificationError && (
-        <div className="errorMessage">{verificationError}</div>
-      )}
+      <div className={styles.childrenVerificationSection}>
+        {children}
+        {verificationError && (
+          <div className="errorMessage">{verificationError}</div>
+        )}
+      </div>
     </form>
   );
 };

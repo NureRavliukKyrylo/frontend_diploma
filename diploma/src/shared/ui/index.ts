@@ -12,3 +12,4 @@ export { RatingStars } from "./rating-stars/RatingStars";
 export { CropImage } from "./cropper/CropImage";
 export { Switch } from "./switch/Switch";
 export { MapLocationModal } from "./map/location-modal/MapLocationModal";
+export { BaseSpinner } from "./spinner/BaseSpinner";

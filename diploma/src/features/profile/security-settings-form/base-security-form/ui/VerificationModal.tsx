@@ -1,6 +1,6 @@
 import { BaseModal } from "@shared/ui/modals";
 import { useUserProfileStore } from "@entities/user";
-import { verificationConfig } from "../../configs/verificationConfig";
+import { verificationConfig } from "./verificationConfig";
 
 export const VerificationModal = () => {
   const { activeVerificationModal, verificationSteps, closeVerificationModal } =
@@ -18,7 +18,9 @@ export const VerificationModal = () => {
   return (
     <BaseModal
       isOpen={true}
-      onClose={closeVerificationModal}
+      onClose={() => {
+        closeVerificationModal(activeVerificationModal);
+      }}
       showClosed={false}
       maxWidth="700px"
     >

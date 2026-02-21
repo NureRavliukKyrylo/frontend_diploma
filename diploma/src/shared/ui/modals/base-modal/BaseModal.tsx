@@ -22,12 +22,18 @@ export const BaseModal: React.FC<BaseModalProps> = ({
   onAnimationComplete,
   showClosed = true,
 }) => {
+  const mouseDownTarget = React.useRef<EventTarget | null>(null);
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
           className={styles.overlayModal}
-          onClick={onClose}
+          onMouseDown={(e) => {
+            mouseDownTarget.current = e.target;
+          }}
+          onClick={(e) => {
+            if (mouseDownTarget.current === e.currentTarget) onClose();
+          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

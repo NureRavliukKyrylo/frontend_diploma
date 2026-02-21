@@ -1,7 +1,7 @@
 import styles from "./MapLocationInput.module.scss";
 
 interface MapLocationInputProps {
-  label: string;
+  label?: string;
   handleMapOpen: () => void;
   error?: string;
   variant?: "default" | "profile";
@@ -36,7 +36,7 @@ export const MapLocationInput: React.FC<MapLocationInputProps> = ({
           </svg>
         </span>
         <span className={styles.divider}></span>
-        <h1>{label}</h1>
+        <h1>{label ?? "Location"}</h1>
       </div>
       <button
         type="button"

@@ -1,18 +1,16 @@
 import React from "react";
-import { CircularProgress } from "@heroui/react";
+import type { CircularProgressProps } from "@heroui/react";
 import styles from "./BaseButtonWrapper.module.scss";
+import { BaseSpinner } from "@shared/ui/spinner/BaseSpinner";
 
-interface BaseButtonWrapperProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface BaseButtonWrapperProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  "color"
+> {
   loading?: boolean;
   children: React.ReactNode;
-  spinnerColor?:
-    | "secondary"
-    | "default"
-    | "primary"
-    | "success"
-    | "warning"
-    | "danger";
+  showLoadingText?: boolean;
+  spinnerColor?: CircularProgressProps["color"];
 }
 
 export const BaseButtonWrapper: React.FC<BaseButtonWrapperProps> = ({
@@ -20,28 +18,19 @@ export const BaseButtonWrapper: React.FC<BaseButtonWrapperProps> = ({
   children,
   className = "",
   spinnerColor = "secondary",
+  showLoadingText = true,
   ...props
 }) => {
   return (
     <button
-      className={`${styles.buttonWrapper} ${
-        loading ? styles.loading : ""
-      } ${className}`}
+      className={`${styles.buttonWrapper} ${loading ? styles.loading : ""} ${className}`}
       disabled={loading || props.disabled}
       {...props}
     >
       {loading && (
-        <CircularProgress
-          color={spinnerColor}
-          className={styles.spinner}
-          classNames={{
-            base: "flex justify-center items-center",
-            svg: "w-5 h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8",
-          }}
-        />
+        <BaseSpinner color={spinnerColor} className={styles.spinner} />
       )}
-
-      {loading ? "Loading..." : children}
+      {loading ? (showLoadingText ? "Loading..." : null) : children}
     </button>
   );
 };

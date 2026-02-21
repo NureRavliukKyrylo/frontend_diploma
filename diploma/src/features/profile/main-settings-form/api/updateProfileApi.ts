@@ -7,32 +7,27 @@ type ProfileMainForm = Omit<
 >;
 
 export type UpdateProfileDto = {
-  firstName: string;
-  lastName: string;
+  model: {
+    firstName: string;
+    lastName: string;
+    profile: ProfileMainForm;
+  };
+
   avatarFile: File | string | undefined;
-  profile: ProfileMainForm;
 };
 
 export const updateProfile = async (data: UpdateProfileDto) => {
   const formData = new FormData();
 
-  if (data.firstName) {
-    formData.append("firstName", data.firstName);
-  }
-
-  if (data.lastName) {
-    formData.append("lastName", data.lastName);
-  }
-
   if (data.avatarFile) {
     formData.append("avatarFile", data.avatarFile);
   }
 
-  if (data.profile) {
-    formData.append("profile", JSON.stringify(data.profile));
+  if (data.model) {
+    formData.append("model", JSON.stringify(data.model));
   }
 
-  const response = await apiClient.put("User/profile", formData, {
+  const response = await apiClient.put("User/update", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },

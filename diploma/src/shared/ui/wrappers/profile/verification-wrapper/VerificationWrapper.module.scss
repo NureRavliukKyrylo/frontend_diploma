@@ -3,22 +3,32 @@
 .wrapperVerificationContainer {
   display: flex;
   flex-direction: column;
-  padding: 40px;
+  padding: 50px 40px;
   justify-content: center;
   align-items: center;
-  gap: 25px;
+  gap: 10px;
+  img {
+    width: 130px;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+  }
   .wrapperVerificationInfo {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    text-align: center;
-    h1 {
-      @include font-base(40px, 800);
-    }
-    p {
-      color: rgba(0, 0, 0, 0.74);
-      @include font-base(28px, 500);
-      line-height: 120%;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    .infoVerificationWrapper {
+      text-align: center;
+      h1 {
+        @include font-base(40px, 800);
+      }
+      p {
+        color: rgba(0, 0, 0, 0.74);
+        @include font-base(28px, 500);
+        line-height: 120%;
+      }
     }
   }
   .childrenContent {

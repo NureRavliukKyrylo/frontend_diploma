@@ -1,3 +1,4 @@
+import { ImpactFlowLogo } from "@shared/assets/images/information";
 import styles from "./VerificationWrapper.module.scss";
 
 interface VerificationWrapper {
@@ -12,11 +13,15 @@ export const VerificationWrapper = ({
 }: VerificationWrapper) => {
   return (
     <div className={styles.wrapperVerificationContainer}>
+      <img src={ImpactFlowLogo} alt="ImpactFlow" />
       <div className={styles.wrapperVerificationInfo}>
-        <h1>{title}</h1>
-        <p>{description}</p>
+        <div className={styles.infoVerificationWrapper}>
+          <h1>{title}</h1>
+          <p>{description}</p>
+        </div>
+
+        {children}
       </div>
-      {children}
     </div>
   );
 };

@@ -15,4 +15,7 @@ export interface User {
   twoFactorEnabled: boolean;
   privacySettings: PrivacySettings;
   profileCompletion: ProfileCompletion | null;
+  location: {
+    address: string;
+  };
 }

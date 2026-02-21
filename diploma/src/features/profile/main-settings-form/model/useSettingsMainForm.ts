@@ -45,14 +45,16 @@ export const useSettingsMainForm = () => {
     enableReinitialize: true,
     onSubmit: (values) => {
       mutation.mutate({
-        firstName: values.firstName,
-        lastName: values.lastName,
-        avatarFile: values.avatar,
-        profile: {
-          bio: values.about,
-          dateOfBirth: values.dateOfBirth,
-          coordinates: values.coordinates,
+        model: {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          profile: {
+            bio: values.about,
+            dateOfBirth: values.dateOfBirth,
+            coordinates: values.coordinates,
+          },
         },
+        avatarFile: values.avatar,
       });
     },
   });
@@ -71,5 +73,6 @@ export const useSettingsMainForm = () => {
     errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
     handleLocationChange,
     handleFileChange,
+    user,
   };
 };

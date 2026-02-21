@@ -10,7 +10,6 @@ import { LogOutImage } from "@shared/assets/images/actions";
 export const LogoutButton: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   const closeModal = () => setIsModalOpen(false);
 
   const { handleLogout, isLoading, errorMessage } = useLogout(() => {

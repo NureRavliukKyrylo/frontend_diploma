@@ -1,7 +1,13 @@
 import { type VerificationModalType } from "@entities/user/profile";
-import { TwoFactorVerificationContent } from "../ui/content/TwoFactorVerificationContent";
-import { ChangePasswordVerificationContent } from "../ui/content/ChangePasswordVerificationContent";
-import { ResetPasswordVerificationContent } from "../ui/content/ResetPasswordVerificationContent";
+import { TwoFactorVerificationContent } from "../../set-two-factor";
+import {
+  ChangePasswordVerificationContent,
+  ResetPasswordVerificationContent,
+} from "../../change-password";
+import {
+  ChangeEmailVerificationContent,
+  NewEmailVerificationContent,
+} from "../../change-email";
 
 export const verificationConfig: Record<
   Exclude<VerificationModalType, null>,
@@ -16,7 +22,9 @@ export const verificationConfig: Record<
   },
   emailVerification: {
     steps: {
-      1: <TwoFactorVerificationContent />,
+      1: <ChangeEmailVerificationContent />,
+      2: <NewEmailVerificationContent />,
+      3: <ChangeEmailVerificationContent />,
     },
   },
   changePassword: {

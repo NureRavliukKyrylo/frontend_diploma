@@ -9,3 +9,4 @@ export { dateField } from "./validation/dateValidators";
 export { fileField } from "./validation/fileValidators";
 export { nameField } from "./validation/nameValidators";
 export { textField } from "./validation/textValidators";
+export { withPrivacyField } from "./validation/privacyValidators";

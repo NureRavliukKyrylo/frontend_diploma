@@ -8,19 +8,3 @@
   .buttonBlock {
   }
 }
-
-@include adaptive.respond-to(laptop) {
-  .verificationForm {
-    gap: 25px;
-  }
-}
-@include adaptive.respond-to(tablet) {
-  .verificationForm {
-    gap: 20px;
-  }
-}
-@include adaptive.respond-to(mobile) {
-  .verificationForm {
-    gap: 15px;
-  }
-}

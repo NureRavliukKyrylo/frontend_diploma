@@ -12,9 +12,15 @@ import {
   createProfileModalVerificationSlice,
   type ProfileModalVerificationSlice,
 } from "../slices/profileModalVerificationSlice";
+import {
+  createOtpTimerSlice,
+  type OtpTimerSlice,
+} from "@shared/config/stores/slices/otpTimerSlice";
+
 type ProfileStore = ProfileSettingsModeSlice &
   ProfileModeSlice &
-  ProfileModalVerificationSlice;
+  ProfileModalVerificationSlice &
+  OtpTimerSlice;
 
 export const useUserProfileStore = create<ProfileStore>()(
   persist(
@@ -22,6 +28,7 @@ export const useUserProfileStore = create<ProfileStore>()(
       ...createProfileSettingsModeSlice(...a),
       ...createProfileModeSlice(...a),
       ...createProfileModalVerificationSlice(...a),
+      ...createOtpTimerSlice(...a),
     }),
     {
       name: "user-profile-storage",

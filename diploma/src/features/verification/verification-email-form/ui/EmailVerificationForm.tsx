@@ -5,16 +5,14 @@ import {
   useVerification,
 } from "@features/verification/verification-base-form";
 import { verificationEmail } from "../api/verificationEmailApi";
-import { useResendCode } from "@features/verification/resend-code";
 import { MultiStepFormRoutes } from "@shared/routes";
 import { ResendCodeButton } from "@features/verification/resend-code";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./EmailVerificationForm.module.scss";
+import { useAuthStore } from "@entities/user";
 
 export const EmailVerificationForm: React.FC = () => {
-  const { resendErrorMessage } = useResendCode({
-    type: OtpType.EmailVerification,
-  });
+  const { otpTimers, resetOtpTimer, decrementOtpTimer } = useAuthStore();
   const { formik, isLoading, errorMessage } = useVerification({
     apiFn: verificationEmail,
     successRedirect: MultiStepFormRoutes.fillForm,
@@ -26,10 +24,14 @@ export const EmailVerificationForm: React.FC = () => {
       otpType={OtpType.EmailVerification}
       formik={formik}
       verificationError={errorMessage}
-      resendError={resendErrorMessage}
     >
       <div className={styles.actionVerificationBlock}>
-        <ResendCodeButton otpType={OtpType.EmailVerification} />
+        <ResendCodeButton
+          otpType={OtpType.EmailVerification}
+          otpTimers={otpTimers}
+          decrementOtpTimer={decrementOtpTimer}
+          resetOtpTimer={resetOtpTimer}
+        />
         <BaseButtonWrapper
           loading={isLoading}
           className={styles.confirmVerificationButton}

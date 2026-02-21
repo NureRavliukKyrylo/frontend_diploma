@@ -10,12 +10,14 @@ export interface OtpTimerSlice {
 
 const OTP_INITIAL_SECONDS = 3 * 3;
 
+const createInitialTimers = (value: number): Record<OtpType, number> =>
+  Object.values(OtpType).reduce(
+    (acc, type) => ({ ...acc, [type]: value }),
+    {} as Record<OtpType, number>,
+  );
+
 export const createOtpTimerSlice: StateCreator<OtpTimerSlice> = (set) => ({
-  otpTimers: {
-    [OtpType.EmailVerification]: OTP_INITIAL_SECONDS,
-    [OtpType.TwoFactor]: OTP_INITIAL_SECONDS,
-    [OtpType.PasswordReset]: OTP_INITIAL_SECONDS,
-  },
+  otpTimers: createInitialTimers(OTP_INITIAL_SECONDS),
 
   setOtpSeconds: (type, value) =>
     set((state) => ({

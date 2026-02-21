@@ -22,6 +22,9 @@ export function LinksForm({}) {
         </div>
         <div className={styles.formInfolinksProfile}>
           {SOCIAL_PLATFORMS.map(({ key, placeholder, icon }) => {
+            const fieldError = formik.errors.socialLinks?.[key] as
+              | { url?: string }
+              | undefined;
             return (
               <ProfileSocialNetworksInput
                 key={key}
@@ -35,6 +38,7 @@ export function LinksForm({}) {
                 onSwitchChange={(val) =>
                   formik.setFieldValue(`socialLinks.${key}.visible`, val)
                 }
+                error={formik.submitCount > 0 ? (fieldError?.url ?? "") : ""}
               />
             );
           })}

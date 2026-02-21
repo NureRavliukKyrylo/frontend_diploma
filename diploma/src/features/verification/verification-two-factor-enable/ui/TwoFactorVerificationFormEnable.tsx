@@ -5,12 +5,10 @@ import {
   useVerification,
 } from "@features/verification/verification-base-form";
 import { twoFactorVerificationEnable } from "../api/twoFactorVerificationEnableApi";
-import {
-  ResendCodeButton,
-  useResendCode,
-} from "@features/verification/resend-code";
+import { ResendCodeButton } from "@features/verification/resend-code";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./TwoFactorVerificationFormEnable.module.scss";
+import { useUserProfileStore } from "@entities/user";
 
 interface TwoFactorVerificationFormEnableProps {
   onSuccess?: () => void;
@@ -18,9 +16,7 @@ interface TwoFactorVerificationFormEnableProps {
 export const TwoFactorVerificationFormEnable: React.FC<
   TwoFactorVerificationFormEnableProps
 > = ({ onSuccess }) => {
-  const { resendErrorMessage } = useResendCode({
-    type: OtpType.TwoFactor,
-  });
+  const { otpTimers, resetOtpTimer, decrementOtpTimer } = useUserProfileStore();
   const { formik, isLoading, errorMessage } = useVerification({
     apiFn: twoFactorVerificationEnable,
     successRedirect: "/home",
@@ -33,7 +29,6 @@ export const TwoFactorVerificationFormEnable: React.FC<
       otpType={OtpType.TwoFactor}
       formik={formik}
       verificationError={errorMessage}
-      resendError={resendErrorMessage}
     >
       <div className={styles.actionVerificationTwoFactorBlock}>
         <BaseButtonWrapper
@@ -42,7 +37,13 @@ export const TwoFactorVerificationFormEnable: React.FC<
         >
           Send Code
         </BaseButtonWrapper>
-        <ResendCodeButton otpType={OtpType.TwoFactor} variant="profile" />
+        <ResendCodeButton
+          otpType={OtpType.TwoFactor}
+          otpTimers={otpTimers}
+          resetOtpTimer={resetOtpTimer}
+          decrementOtpTimer={decrementOtpTimer}
+          variant="profile"
+        />
       </div>
     </VerificationForm>
   );

@@ -4,11 +4,21 @@ import styles from "./ProfileEmailInput.module.scss";
 
 interface ProfileEmailInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
+  variant?: "default" | "profile" | "verification";
 }
 
-export const ProfileEmailInput: React.FC<ProfileEmailInputProps> = (props) => {
+export const ProfileEmailInput: React.FC<ProfileEmailInputProps> = ({
+  variant = "profile",
+  ...props
+}) => {
   return (
-    <BaseInput type="email" variant="profile" mode="email" {...props}>
+    <BaseInput
+      error={props.error}
+      type="email"
+      variant={variant}
+      mode="email"
+      {...props}
+    >
       <span className={styles.profileEmailIcon}>
         <svg
           width="28"

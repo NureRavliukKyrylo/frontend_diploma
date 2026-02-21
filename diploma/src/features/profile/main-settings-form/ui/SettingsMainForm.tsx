@@ -18,7 +18,9 @@ export function SettingsMainForm() {
     errorMessage,
     handleFileChange,
     handleLocationChange,
+    user,
   } = useSettingsMainForm();
+
   const [isMapOpen, setIsMapOpen] = useState<boolean>(false);
 
   const handleCloseModal = () => {
@@ -72,7 +74,7 @@ export function SettingsMainForm() {
           </div>
           <div className={styles.mapLocationWrapper}>
             <MapLocationInput
-              label="Location"
+              label={user?.location.address}
               handleMapOpen={handleOpenModal}
             />
             <MapLocationModal
