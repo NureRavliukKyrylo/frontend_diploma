@@ -31,8 +31,6 @@ export function SettingsMainForm() {
     setIsMapOpen(true);
   };
 
-  console.log(formik.touched.avatar ? formik.errors.avatar : null);
-
   return (
     <form onSubmit={formik.handleSubmit} className={styles.mainInfoProfileForm}>
       <div className={styles.publicProfile}>
@@ -133,6 +131,12 @@ export function SettingsMainForm() {
       <div className={styles.lineDividerProfileSettings}></div>
 
       <div className={styles.blockButtons}>
+        <BaseButtonWrapper
+          className={styles.resetProfileButton}
+          onClick={formik.handleReset}
+        >
+          RESET
+        </BaseButtonWrapper>
         <BaseButtonWrapper
           loading={isLoading}
           className={styles.saveProfileButton}

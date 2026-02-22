@@ -1,15 +1,34 @@
 import { SOCIAL_PLATFORMS } from "@shared/config/constants";
 
-export const buildSocialLinksPayload = (
-  socialLinks: Record<string, { url: string; visible: boolean }>,
-) => {
-  const links = SOCIAL_PLATFORMS.filter(({ key }) => socialLinks[key]?.url).map(
-    ({ platform, key }) => ({ platform, url: socialLinks[key].url }),
-  );
+type SocialLinkEntry = { url: string; visible: boolean };
 
-  const privacyFields = SOCIAL_PLATFORMS.map(({ key, fieldName }) => ({
+export const buildSocialLinksPayload = (
+  socialLinks: Record<string, SocialLinkEntry>,
+) => {
+  const cleanedSocialLinks = Object.fromEntries(
+    Object.entries(socialLinks)
+      .map(([key, value]): [string, SocialLinkEntry] => [
+        key,
+        {
+          url: value.url?.trim(),
+          visible: value.visible,
+        },
+      ])
+      .filter(([_, value]) => value.url !== "" && value.url != null),
+  ) as Record<string, SocialLinkEntry>;
+
+  const links = SOCIAL_PLATFORMS.filter(
+    ({ key }) => cleanedSocialLinks[key]?.url,
+  ).map(({ platform, key }) => ({
+    platform,
+    url: cleanedSocialLinks[key].url,
+  }));
+
+  const privacyFields = SOCIAL_PLATFORMS.filter(
+    ({ key }) => cleanedSocialLinks[key]?.url,
+  ).map(({ key, fieldName }) => ({
     fieldName,
-    visibility: socialLinks[key]?.visible ? 0 : 1,
+    visibility: cleanedSocialLinks[key].visible ? 0 : 1,
   }));
 
   return { links, privacyFields };

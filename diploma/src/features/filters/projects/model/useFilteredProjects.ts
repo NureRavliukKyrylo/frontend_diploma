@@ -1,13 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "@tanstack/react-router";
 import { projectsApi } from "@entities/project/api/projectsApi";
 import { useProjectFiltersCategoryStore } from "@entities/project/model/store/ProjectFiltersCategoryStore";
 import { buildFilterParams } from "../libs/buildFilterParams";
-import { categoryDetailRoute } from "@app/routers/categories/$name";
+import { Route } from "@app/routers/_masterLayout/categories/$name"; //temporary
 import { useMemo } from "react";
 
 export const useFilteredProjects = () => {
-  const { categoryName } = useParams({ from: categoryDetailRoute.id });
+  const { name: categoryName } = Route.useParams();
 
   const filters = useProjectFiltersCategoryStore((state) => ({
     startDate: state.startDate,

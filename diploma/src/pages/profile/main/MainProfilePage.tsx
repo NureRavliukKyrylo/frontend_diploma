@@ -33,7 +33,10 @@ export function MainProfilePage() {
           </div>
           <div className={styles.organizationBlockContent}></div>
         </div>
-        <SocialPlatforms links={user?.profile?.socialLinks} />
+        <SocialPlatforms
+          links={user?.profile?.socialLinks}
+          privacySettings={user?.privacySettings}
+        />
       </div>
       <div className={styles.mainWrapperUserInfo}>
         <div className={styles.actionsChangeBlock}>

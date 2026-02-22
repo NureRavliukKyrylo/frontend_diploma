@@ -1,30 +1,30 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useNavigate, useParams, useSearch } from "@tanstack/react-router";
 import { useProjectFiltersCategoryStore } from "@entities/project/model/store/ProjectFiltersCategoryStore";
-import { categoryDetailRoute } from "@app/routers/categories/$name";
-import type { CategorySearchParams } from "@app/routers/categories/$name";
+import { Route } from "@app/routers/_masterLayout/categories/$name";
+import type { CategorySearchParams } from "@app/routers/_masterLayout/categories/$name";
 
 export const useProjectFilters = () => {
   const navigate = useNavigate();
-  const searchParams = useSearch({ from: categoryDetailRoute.id });
-  const params = useParams({ from: categoryDetailRoute.id });
+  const searchParams = Route.useSearch();
+  const params = Route.useParams();
   const isInitialMount = useRef(true);
 
   const startDate = useProjectFiltersCategoryStore((state) => state.startDate);
   const dueDate = useProjectFiltersCategoryStore((state) => state.dueDate);
   const rating = useProjectFiltersCategoryStore((state) => state.rating);
   const categories = useProjectFiltersCategoryStore(
-    (state) => state.categories
+    (state) => state.categories,
   );
   const organizations = useProjectFiltersCategoryStore(
-    (state) => state.organizations
+    (state) => state.organizations,
   );
   const distance = useProjectFiltersCategoryStore((state) => state.distance);
   const search = useProjectFiltersCategoryStore((state) => state.search);
   const page = useProjectFiltersCategoryStore((state) => state.page);
 
   const setFiltersFromUrl = useProjectFiltersCategoryStore(
-    (state) => state.setFiltersFromUrl
+    (state) => state.setFiltersFromUrl,
   );
 
   useEffect(() => {

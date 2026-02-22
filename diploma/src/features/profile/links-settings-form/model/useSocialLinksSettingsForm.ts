@@ -50,11 +50,13 @@ export const useSocialLinksSettingsForm = () => {
       );
 
       mutation.mutate({
-        profile: {
-          socialLinks: links,
-        },
-        privacySettings: {
-          fields: privacyFields,
+        model: {
+          profile: {
+            socialLinks: links,
+          },
+          privacySettings: {
+            fields: privacyFields,
+          },
         },
       });
     },

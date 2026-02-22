@@ -1,5 +1,4 @@
-import { createRoute } from "@tanstack/react-router";
-import { categoriesRootRoute } from "../route";
+import { createFileRoute } from "@tanstack/react-router";
 import { CategoryDetailPage } from "@pages/categories";
 import { z } from "zod";
 
@@ -16,9 +15,14 @@ const categorySearchSchema = z.object({
 
 export type CategorySearchParams = z.infer<typeof categorySearchSchema>;
 
-export const categoryDetailRoute = createRoute({
-  getParentRoute: () => categoriesRootRoute,
-  path: "$categoryName",
-  component: CategoryDetailPage,
+export const Route = createFileRoute("/_masterLayout/categories/$name/")({
+  component: CategoryDetailPageWrapper,
   validateSearch: (search) => categorySearchSchema.parse(search),
 });
+
+function CategoryDetailPageWrapper() {
+  const { name } = Route.useParams();
+  const search = Route.useSearch();
+
+  return <CategoryDetailPage categoryName={name} />;
+}

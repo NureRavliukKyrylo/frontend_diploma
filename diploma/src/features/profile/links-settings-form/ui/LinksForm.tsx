@@ -46,6 +46,12 @@ export function LinksForm({}) {
       </div>
       <div className={styles.blockLinksButtons}>
         <BaseButtonWrapper
+          className={styles.resetProfileLinksButton}
+          onClick={formik.handleReset}
+        >
+          RESET
+        </BaseButtonWrapper>
+        <BaseButtonWrapper
           loading={isLoading}
           className={styles.saveProfileLinksButton}
           type="submit"

@@ -1,7 +1,7 @@
 import type { ProjectFiltersCategory } from "@entities/project/model/types/ProjectFiltersCategory";
 
 export const buildFilterParams = (
-  filters: ProjectFiltersCategory
+  filters: ProjectFiltersCategory,
 ): Record<string, string | string[]> => {
   const params: Record<string, string | string[]> = {};
 

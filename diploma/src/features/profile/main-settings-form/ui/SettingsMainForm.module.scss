@@ -55,21 +55,22 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    .saveProfileButton {
+    gap: 16px;
+    .profileButton {
+      flex: 1 1 100px;
+      max-width: 230px;
+      min-width: 0;
       position: relative;
       overflow: hidden;
-      background: black;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
       border-radius: 30px;
-      width: 50%;
       min-height: 49px;
-      @include font-base(18px, 800);
+      @include font-base(28px, 800);
       @include animation.button-shine();
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: white;
       cursor: pointer;
       transition: color 0.3s ease;
 
@@ -81,6 +82,7 @@
         position: relative;
         z-index: 1;
       }
+
       @include adaptive.respond-to(mobile) {
         min-height: 35px;
         @include font-base(14px, 700);
@@ -100,6 +102,17 @@
         min-height: 47px;
         @include font-base(17px, 900);
       }
+    }
+    .saveProfileButton {
+      @extend .profileButton;
+      background: black;
+      color: white;
+    }
+
+    .resetProfileButton {
+      @extend .profileButton;
+      background: white;
+      color: black;
     }
   }
 }

@@ -1,6 +1,6 @@
 import { BaseModal } from "@shared/ui/modals";
 import { useUserProfileStore } from "@entities/user";
-import { verificationConfig } from "./verificationConfig";
+import { verificationConfig } from "../configs/verificationConfig";
 
 export const VerificationModal = () => {
   const { activeVerificationModal, verificationSteps, closeVerificationModal } =

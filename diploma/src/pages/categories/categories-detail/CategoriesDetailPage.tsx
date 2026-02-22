@@ -1,15 +1,15 @@
 import { CategoryDetailWidget } from "@widgets/categories";
-import { useParams } from "@tanstack/react-router";
-import { categoryDetailRoute } from "@app/routers/categories/$name";
 import { FilterButton } from "@shared/ui/buttons";
 import { CategoryFiltersWidget } from "@widgets/common/filters";
 import { SearchBar } from "@shared/ui/inputs";
 import { useProjectFilters } from "@features/filters/projects/model/useProjectFilters";
 import { useProjectFiltersCategoryStore } from "@entities/project/model/store/ProjectFiltersCategoryStore";
 
-export function CategoryDetailPage() {
-  const { categoryName } = useParams({ from: categoryDetailRoute.id });
+interface CategoryDetailProps {
+  categoryName: string;
+}
 
+export function CategoryDetailPage({ categoryName }: CategoryDetailProps) {
   const demoCategory = {
     imageCategory: "https://placehold.co/600x300",
     titleCategory: categoryName,

@@ -4,8 +4,10 @@ import { apiClient } from "@shared/api";
 type ProfileSocialLinks = Pick<Profile, "socialLinks">;
 
 export type UpdateProfileSocialLinksDto = {
-  profile: ProfileSocialLinks;
-  privacySettings: PrivacySettings;
+  model: {
+    profile: ProfileSocialLinks;
+    privacySettings: PrivacySettings;
+  };
 };
 
 export const updateProfileSocialLinks = async (
@@ -13,11 +15,11 @@ export const updateProfileSocialLinks = async (
 ) => {
   const formData = new FormData();
 
-  if (data.profile) {
-    formData.append("profile", JSON.stringify(data.profile));
+  if (data.model) {
+    formData.append("model", JSON.stringify(data.model));
   }
 
-  const response = await apiClient.put("User/profile", formData, {
+  const response = await apiClient.put("User/update", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
