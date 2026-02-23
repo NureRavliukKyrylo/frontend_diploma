@@ -2,7 +2,11 @@ import styles from "./SecuritySettingsForm.module.scss";
 import { ProfilePasswordInput } from "@shared/ui/inputs";
 import { ProfileEmailInput } from "@shared/ui/inputs";
 import { VerificationModal } from "./VerificationModal";
-import { profileQuery } from "@entities/user/profile";
+import {
+  ConnectedLink,
+  profileQuery,
+  CONNECTED_LINKS_CONFIG,
+} from "@entities/user/profile";
 import { ChangePasswordButton } from "../../change-password";
 import { ChangeEmailButton } from "../../change-email";
 import { TwoFactorSwitch } from "../../set-two-factor";
@@ -10,7 +14,21 @@ import { useQuery } from "@tanstack/react-query";
 
 export function PasswordProfileForm({}) {
   const { data: user } = useQuery(profileQuery.all());
+  const dataLinks = [
+    { platform: "Google", isConnected: true },
+    { platform: "Apple", isConnected: false },
+  ];
 
+  const parsedValues = dataLinks
+    .map(({ platform, isConnected }) => {
+      const config = CONNECTED_LINKS_CONFIG.find(
+        (c) => c.platform === platform,
+      );
+      if (!config) return null;
+
+      return { ...config, isConnected };
+    })
+    .filter(Boolean);
   return (
     <>
       <form className={styles.passwordInfoProfileForm}>
@@ -50,6 +68,19 @@ export function PasswordProfileForm({}) {
           <div className={styles.formInfoPasswordProfile}>
             <ProfileEmailInput value={user?.email} disabled />
             <ChangeEmailButton />
+          </div>
+        </div>
+        <div className={styles.connectedLinksBlock}>
+          <div className={styles.connectedLinksList}>
+            {parsedValues.map((link) => (
+              <ConnectedLink
+                key={link?.platform}
+                description={link?.linkDescriprion}
+                image={link?.imageLink}
+                isConnected={link?.isConnected}
+                title={link?.linkTitle}
+              />
+            ))}
           </div>
         </div>
       </form>

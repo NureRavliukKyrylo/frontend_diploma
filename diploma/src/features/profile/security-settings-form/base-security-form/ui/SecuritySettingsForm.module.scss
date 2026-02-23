@@ -15,11 +15,11 @@
     justify-content: space-between;
     align-items: center;
     > :first-child {
-      flex: 0 0 55%;
+      flex: 0 0 45%;
     }
 
     > :nth-child(2) {
-      flex: 0 0 45%;
+      flex: 0 1 50%;
     }
     .passwordProfileText {
       display: flex;
@@ -69,6 +69,18 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+  }
+
+  .connectedLinksBlock {
+    display: flex;
+    justify-content: flex-end;
+    .connectedLinksList {
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: column;
+      gap: 10px;
+      width: min(50%, 100%);
+    }
   }
 }
 .verificationBlock {
