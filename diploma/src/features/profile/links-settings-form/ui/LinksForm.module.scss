@@ -10,11 +10,11 @@
     display: flex;
     justify-content: space-between;
     > :first-child {
-      flex: 0 0 25%;
+      flex: 0 0 35%;
     }
 
     > :nth-child(2) {
-      flex: 0 0 70%;
+      flex: 0 0 60%;
     }
     .linksProfileText {
       display: flex;
@@ -22,7 +22,6 @@
       h1 {
         color: rgba(0, 0, 0, 0.8);
         @include font-base(30px, 700);
-        line-height: 100%;
       }
       p {
         color: #767575;
@@ -32,7 +31,7 @@
     .formInfolinksProfile {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 15px;
     }
   }
   .blockLinksButtons {

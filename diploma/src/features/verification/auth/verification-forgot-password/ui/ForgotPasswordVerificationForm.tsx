@@ -17,7 +17,7 @@ export const ForgotPasswordVerificationForm: React.FC = () => {
     useAuthStore();
   const { formik, isLoading, errorMessage } = useVerification({
     apiFn: verificationForgotPassword,
-    successRedirect: `../${AuthRoutes.forgotPassword.setPassword}`,
+    successRedirect: AuthRoutes.forgotPassword.setPassword,
     successMessage: "Email verified successfully",
   });
 

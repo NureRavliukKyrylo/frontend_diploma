@@ -7,6 +7,7 @@ import styles from "./ProfileSettingsWidget.module.scss";
 import { LogoutButton } from "@features/auth";
 import { BackButton } from "@shared/ui/buttons";
 import { useUserProfileStore, type ProfileSettingsMode } from "@entities/user";
+import { profileRoutes } from "@shared/routes";
 
 export function ProfileSettingsWidget() {
   const { settingsMode, setSettingsMode } = useUserProfileStore();
@@ -16,7 +17,13 @@ export function ProfileSettingsWidget() {
     <div className={styles.blockSettingsProfileForms}>
       <div className={styles.blockActionsProfileSettings}>
         <div className={styles.backAndToggleSection}>
-          <BackButton className={styles.backButtonProfile} />
+          <div className="">
+            <BackButton
+              from={profileRoutes.settingsFrom}
+              to=".."
+              className={styles.backButtonProfile}
+            />
+          </div>
           <Toggle<ProfileSettingsMode>
             tabs={profileSettingsTabs}
             activeValue={settingsMode}

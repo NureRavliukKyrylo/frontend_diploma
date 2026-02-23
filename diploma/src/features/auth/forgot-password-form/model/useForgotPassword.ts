@@ -27,8 +27,6 @@ export const useForgotPassword = () => {
         color: "success",
       });
 
-
-
       setUserId(data.userId);
 
       router.navigate({

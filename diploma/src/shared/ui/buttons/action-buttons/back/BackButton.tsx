@@ -1,39 +1,23 @@
-import { useNavigate, useRouter } from "@tanstack/react-router";
-import { BaseButtonWrapper } from "../../base-buttons/base-wrapper/BaseButtonWrapper";
 import styles from "./BackButton.module.scss";
 import { Arrow } from "@shared/assets/icons/actions";
+import { LinkButtonWrapper } from "../../base-buttons/link-wrapper/LinkButtonWrapper";
+import type { LinkProps } from "@tanstack/react-router";
 
 interface BackButtonProps {
   disabled?: boolean;
   className?: string;
-  fallbackRoute?: string;
+  from?: LinkProps["from"];
+  to?: LinkProps["to"];
 }
 
-export const BackButton = ({
-  disabled = false,
-  className,
-  fallbackRoute = "/",
-}: BackButtonProps) => {
-  const { history } = useRouter();
-  const navigate = useNavigate();
-
-  const canGoBack = history.length > 1;
-
-  const handleBack = () => {
-    if (canGoBack) {
-      history.go(-1);
-    } else {
-      navigate({ to: fallbackRoute });
-    }
-  };
-
+export const BackButton = ({ className, from, to = ".." }: BackButtonProps) => {
   return (
-    <BaseButtonWrapper
+    <LinkButtonWrapper
       className={`${styles.prevStepperButton} ${className || ""}`}
-      onClick={handleBack}
-      disabled={disabled}
+      from={from}
+      to={to}
     >
       <img src={Arrow} alt="Back" className={styles.arrowIcon} />
-    </BaseButtonWrapper>
+    </LinkButtonWrapper>
   );
 };

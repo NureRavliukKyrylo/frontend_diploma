@@ -1,5 +1,6 @@
 export type VerificationModalType =
   | "emailVerification"
   | "changePassword"
-  | "twoFactor"
+  | "twoFactorEnable"
+  | "twoFactorDisable"
   | null;

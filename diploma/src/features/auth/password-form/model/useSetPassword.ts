@@ -10,7 +10,6 @@ import { useAuthStore, useUserStore } from "@entities/user";
 import { getErrorMessage } from "@shared/libs";
 
 export const useSetPassword = () => {
-
   const router = useRouter();
   const { clearEmailForgotPassword } = useAuthStore();
   const { userId } = useUserStore();
@@ -18,7 +17,6 @@ export const useSetPassword = () => {
   const mutation = useMutation({
     mutationFn: (data: setPasswordDto) => setPassword(data),
     onSuccess: () => {
-
       addToast({
         title: "Password Updated",
         description: "Your password has been updated successfully",

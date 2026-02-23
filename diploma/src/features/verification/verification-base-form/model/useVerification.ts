@@ -1,10 +1,11 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
 import { useUserStore } from "@entities/user";
 import { verifyCodeSchema } from "../libs/verifyCodeSchema";
 import { getErrorMessage } from "@shared/libs";
+import { profileQuery } from "@entities/user/profile";
 
 interface VerificationConfig {
   apiFn: (data: any) => Promise<any>;
@@ -23,7 +24,14 @@ export const useVerification = ({
 }: VerificationConfig) => {
   const router = useRouter();
 
-  const { userId } = useUserStore();
+  const { userId: storeUserId } = useUserStore();
+
+  const { data: user } = useQuery({
+    ...profileQuery.all(),
+    enabled: !storeUserId,
+  });
+
+  const userId = storeUserId ?? user?.id;
 
   const mutation = useMutation({
     mutationFn: apiFn,
@@ -52,6 +60,7 @@ export const useVerification = ({
       userId,
       ...extraFields,
     },
+    enableReinitialize: true,
 
     validationSchema: verifyCodeSchema,
     onSubmit: (values) => {

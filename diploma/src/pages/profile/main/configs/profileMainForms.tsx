@@ -19,6 +19,7 @@ export const profileMainForms: Record<
       dateBirthday={user?.profile?.dateOfBirth}
       activeProjects={user?.profile?.activeProjectCount}
       completedProjects={user?.profile?.completedProjectCount}
+      location={user?.location?.address}
     />
   ),
   projects: () => <></>,

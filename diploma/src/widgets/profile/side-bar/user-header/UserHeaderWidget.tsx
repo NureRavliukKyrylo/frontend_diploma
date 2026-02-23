@@ -28,7 +28,7 @@ export const UserHeaderWidget = ({
           <h1>{email ?? "Unknown"}</h1>
         </div>
         <div className={styles.wrapperInfoProfileUser}>
-          <h1>{phone ?? "Unknown"}</h1>
+          <h1>{phone ?? "No phone number added"}</h1>
         </div>
         {children}
       </div>

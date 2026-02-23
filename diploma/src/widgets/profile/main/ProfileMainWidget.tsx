@@ -13,6 +13,7 @@ interface ProfileMainWidgetProps {
   dateBirthday?: string;
   activeProjects?: number;
   completedProjects?: number;
+  location?: string;
   //TODO:level interface,rating mb, adding user info with Pick or smth change all mock data
 }
 export function ProfileMainWidget({
@@ -23,6 +24,7 @@ export function ProfileMainWidget({
   dateBirthday,
   activeProjects,
   completedProjects,
+  location,
 }: ProfileMainWidgetProps) {
   const [isLocationMapOpen, setIsLocationMapOpen] = useState(false);
 
@@ -73,7 +75,7 @@ export function ProfileMainWidget({
         <div className={styles.mapLocationUserProfileWrapper}>
           <MapLocationInput
             handleMapOpen={handleModal}
-            label="Location"
+            label={location ?? "No location added"}
             variant="profile"
           />
         </div>

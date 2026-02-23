@@ -5,7 +5,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_masterLayout/profile/")({
   loader: async () => {
-    await queryClient.prefetchQuery(profileQuery);
+    await queryClient.ensureQueryData(profileQuery.all());
   },
   pendingComponent: () => <div>Loading profile...</div>,
   component: () => <MainProfilePage />,

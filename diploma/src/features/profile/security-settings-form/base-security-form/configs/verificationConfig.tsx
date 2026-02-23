@@ -1,5 +1,8 @@
 import { type VerificationModalType } from "@entities/user/profile";
-import { TwoFactorVerificationContent } from "../../set-two-factor";
+import {
+  TwoFactorDisableVerificationContent,
+  TwoFactorEnableVerificationContent,
+} from "../../set-two-factor";
 import {
   ChangePasswordVerificationContent,
   ResetPasswordVerificationContent,
@@ -15,10 +18,13 @@ export const verificationConfig: Record<
     steps: Record<number, React.ReactNode>;
   }
 > = {
-  twoFactor: {
+  twoFactorEnable: {
     steps: {
-      1: <TwoFactorVerificationContent />,
+      1: <TwoFactorEnableVerificationContent />,
     },
+  },
+  twoFactorDisable: {
+    steps: { 1: <TwoFactorDisableVerificationContent /> },
   },
   emailVerification: {
     steps: {

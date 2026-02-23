@@ -6,7 +6,6 @@ import { AuthRoutes } from "@shared/routes";
 import { useMutation } from "@tanstack/react-query";
 import { register, type RegisterDto } from "../api/signUpApi";
 import { addToast } from "@heroui/react";
-
 import { getErrorMessage } from "@shared/libs";
 
 export const useRegistration = () => {
@@ -21,11 +20,9 @@ export const useRegistration = () => {
   } = useAuthStore();
   const { setUserId, setFirstName, setLastName, setEmail } = useUserStore();
 
-
   const mutation = useMutation({
     mutationFn: (data: RegisterDto) => register(data),
     onSuccess: (data) => {
-
       addToast({
         title: "Register Success",
         description: "You have registered successfully",
@@ -34,7 +31,7 @@ export const useRegistration = () => {
 
       setUserId(data.userId);
       clearSignupForm();
-      router.navigate({ to: AuthRoutes.verification });
+      router.navigate({ to: AuthRoutes.verification.email });
     },
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error);

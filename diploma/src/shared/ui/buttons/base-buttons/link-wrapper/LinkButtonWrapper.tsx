@@ -1,23 +1,23 @@
 import React from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, type LinkProps } from "@tanstack/react-router";
 import styles from "./LinkButtonWrapper.module.scss";
 
-interface LinkButtonWrapperProps {
-  to: string;
+interface LinkButtonWrapperProps extends LinkProps {
   children: React.ReactNode;
   className?: string;
+  disabled?: boolean;
 }
 
 export const LinkButtonWrapper: React.FC<LinkButtonWrapperProps> = ({
-  to,
   children,
   className = "",
+  disabled,
   ...props
 }) => {
   return (
     <Link
-      to={to}
       className={`${styles.linkCommonButton} ${className}`}
+      aria-disabled={disabled}
       {...props}
     >
       {children}

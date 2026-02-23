@@ -1,21 +1,21 @@
 import { useFormik } from "formik";
-import { useProfile } from "@entities/user/profile";
+import { profileKeys, profileQuery } from "@entities/user/profile";
 import { updateProfile, type UpdateProfileDto } from "../api/updateProfileApi";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { formatDateToInput, getErrorMessage } from "@shared/libs";
 import { type Coordinates } from "@shared/config/types";
 import { settingsMainFormSchema } from "../libs/settingsMainFormSchema";
 
 export const useSettingsMainForm = () => {
-  const { data: user } = useProfile();
+  const { data: user } = useQuery(profileQuery.all());
   const queryClient = useQueryClient();
   const formattedDateOfBirth = formatDateToInput(user?.profile?.dateOfBirth);
 
   const mutation = useMutation({
     mutationFn: (data: UpdateProfileDto) => updateProfile(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
+      queryClient.invalidateQueries({ queryKey: profileKeys.all() });
       addToast({
         title: "Update Profile Success",
         description: "You have updated your profile successfully",

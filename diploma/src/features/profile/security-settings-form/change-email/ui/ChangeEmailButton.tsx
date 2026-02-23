@@ -16,7 +16,7 @@ export const ChangeEmailButton = () => {
     <BaseButtonWrapper
       className={styles.editPasswordButton}
       type="button"
-      loading={isLoading}
+      disabled={isLoading}
       showLoadingText={false}
       onClick={() => {
         sendEmail();

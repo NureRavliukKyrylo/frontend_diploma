@@ -2,13 +2,14 @@ import styles from "./SecuritySettingsForm.module.scss";
 import { ProfilePasswordInput } from "@shared/ui/inputs";
 import { ProfileEmailInput } from "@shared/ui/inputs";
 import { VerificationModal } from "./VerificationModal";
-import { useProfile } from "@entities/user/profile";
+import { profileQuery } from "@entities/user/profile";
 import { ChangePasswordButton } from "../../change-password";
 import { ChangeEmailButton } from "../../change-email";
 import { TwoFactorSwitch } from "../../set-two-factor";
+import { useQuery } from "@tanstack/react-query";
 
 export function PasswordProfileForm({}) {
-  const { data: user } = useProfile();
+  const { data: user } = useQuery(profileQuery.all());
 
   return (
     <>

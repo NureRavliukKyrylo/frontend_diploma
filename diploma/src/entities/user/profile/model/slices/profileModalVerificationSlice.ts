@@ -24,7 +24,8 @@ export const createProfileModalVerificationSlice: StateCreator<
   verificationSteps: {
     emailVerification: 1,
     changePassword: 1,
-    twoFactor: 1,
+    twoFactorEnable: 1,
+    twoFactorDisable: 1,
   },
 
   setNewEmail: (email) => set({ newEmail: email }),

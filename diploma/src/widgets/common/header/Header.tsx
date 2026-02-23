@@ -9,10 +9,11 @@ import {
 } from "@shared/ui/buttons";
 import { NavMenu } from "@shared/ui";
 import { headerLinks } from "./config/headerLinks";
-import { useProfile } from "@entities/user/profile";
+import { profileQuery } from "@entities/user/profile";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 
 export function Header() {
-  const { data: user, isLoading, error } = useProfile();
+  const { data: user, isLoading, error } = useSuspenseQuery(profileQuery.all());
 
   return (
     <div className={styles.headerWrapper}>

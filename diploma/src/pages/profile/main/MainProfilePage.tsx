@@ -9,12 +9,12 @@ import { LinkButtonWrapper } from "@shared/ui/buttons";
 import { profileRoutes } from "@shared/routes";
 import { Settings } from "@shared/assets/icons/actions";
 import { UserHeaderWidget } from "@widgets/profile";
-import { useProfile } from "@entities/user/profile";
+import { profileQuery } from "@entities/user/profile";
+import { useQuery } from "@tanstack/react-query";
 
 export function MainProfilePage() {
   const { profileMode, setProfileMode } = useUserProfileStore();
-  const { data: user, isLoading, error } = useProfile();
-
+  const { data: user, isLoading, error } = useQuery(profileQuery.all());
   const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ");
 
   return (
@@ -49,7 +49,7 @@ export function MainProfilePage() {
             className={styles.toggleProfileMain}
           />
           <LinkButtonWrapper
-            to={profileRoutes.settings.root}
+            to={profileRoutes.settings}
             className={styles.linkSettingsButton}
           >
             <img src={Settings} alt="settings" />

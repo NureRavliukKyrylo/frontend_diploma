@@ -1,9 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
-import { resendCode, type ResendCodeDto } from "../api/resendCodeApi";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { resendCode } from "../api/resendCodeApi";
 import { addToast } from "@heroui/react";
 import type { OtpType } from "@shared/config/types";
 import { getErrorMessage } from "@shared/libs";
-import { useProfile } from "@entities/user/profile";
+import { profileQuery } from "@entities/user/profile";
 
 interface UseResendCodeProps {
   type: OtpType;
@@ -11,7 +11,7 @@ interface UseResendCodeProps {
 }
 
 export const useResendCode = ({ type, resendFn }: UseResendCodeProps) => {
-  const { data: user } = useProfile();
+  const { data: user } = useQuery(profileQuery.all());
 
   const defaultResend = () => resendCode({ userId: user?.id, type });
 
