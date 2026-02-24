@@ -33,6 +33,7 @@ export const useVerification = ({
 
   const userId = storeUserId ?? user?.id;
 
+  console.log(userId);
   const mutation = useMutation({
     mutationFn: apiFn,
     onSuccess: () => {

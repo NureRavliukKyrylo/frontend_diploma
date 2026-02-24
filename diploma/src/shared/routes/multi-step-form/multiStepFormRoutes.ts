@@ -1,3 +1,3 @@
 export const MultiStepFormRoutes = {
-  fillForm: "/filling-info-form",
+  fillForm: "/multi-step-form",
 } as const;

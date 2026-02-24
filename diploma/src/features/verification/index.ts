@@ -5,3 +5,4 @@ export { TwoFactorVerificationProfileForm } from "./profile/verification-two-fac
 export { ChangePasswordVerificationForm } from "./profile/verification-change-password/ui/ChangePasswordVerificationForm";
 export { type CodeType } from "./profile/verification-change-email/api/verificationChangeEmail";
 export { ChangeEmailVerification } from "./profile/verification-change-email/ui/ChangeEmailVerification";
+export { UnlinkVerificationForm } from "./profile/verification-unlink/ui/UnlinkVerificationForm";

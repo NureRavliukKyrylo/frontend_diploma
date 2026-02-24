@@ -11,7 +11,6 @@ export const useGoogle = () => {
   const mutation = useMutation({
     mutationFn: (data: GoogleLoginDto) => googleLogin(data),
     onSuccess: (data) => {
-
       addToast({
         title: "Login Success",
         description: "Signed in with Google successfully.",
@@ -21,7 +20,7 @@ export const useGoogle = () => {
       if (data.newUser) {
         router.navigate({ to: MultiStepFormRoutes.fillForm });
       } else {
-        router.navigate({ to: "/home" });
+        router.navigate({ to: "/" });
       }
     },
     onError: (error: unknown) => {

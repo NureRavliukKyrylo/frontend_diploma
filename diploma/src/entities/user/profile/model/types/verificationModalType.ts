@@ -3,4 +3,5 @@ export type VerificationModalType =
   | "changePassword"
   | "twoFactorEnable"
   | "twoFactorDisable"
+  | "unlink"
   | null;

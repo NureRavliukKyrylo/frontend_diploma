@@ -4,30 +4,31 @@ import {
   VerificationForm,
   useVerification,
 } from "@features/verification/verification-base-form";
-import {
-  twoFactorVerificationProfile,
-  type VerificationProfileDto,
-  type VerificationType,
-} from "../api/twoFactorVerificationApi";
 import { ResendCodeButton } from "@features/verification/resend-code";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
-import styles from "./TwoFactorVerificationForm.module.scss";
+import styles from "./UnlinkVerificationForm.module.scss";
 import { useUserProfileStore } from "@entities/user";
+import type { ConnectedLinkPlatform } from "@entities/user/profile";
+import {
+  verificationUnlink,
+  type UnlinkDto,
+} from "../api/verificationUnlinkApi";
 
-interface TwoFactorVerificationProfileFormProps {
+interface UnlinkVerificationFormProps {
   otpType: OtpType;
-  verificationType: VerificationType;
+  verificationLink: ConnectedLinkPlatform;
   onSuccess?: () => void;
 }
-export const TwoFactorVerificationProfileForm: React.FC<
-  TwoFactorVerificationProfileFormProps
-> = ({ onSuccess, otpType, verificationType }) => {
+
+export const UnlinkVerificationForm: React.FC<UnlinkVerificationFormProps> = ({
+  onSuccess,
+  otpType,
+  verificationLink,
+}) => {
   const { otpTimers, resetOtpTimer, decrementOtpTimer } = useUserProfileStore();
   const { formik, isLoading, errorMessage } = useVerification({
-    apiFn: (data: VerificationProfileDto) =>
-      twoFactorVerificationProfile(data, verificationType),
-    successRedirect: "/",
-    successMessage: `Two factor ${verificationType} verified successfully`,
+    apiFn: (data: UnlinkDto) => verificationUnlink(data, verificationLink),
+    successMessage: `Unlink ${verificationLink} verified successfully`,
     onSuccess,
   });
 
@@ -37,7 +38,7 @@ export const TwoFactorVerificationProfileForm: React.FC<
       formik={formik}
       verificationError={errorMessage}
     >
-      <div className={styles.actionVerificationTwoFactorBlock}>
+      <div className={styles.actionVerificationUnlinkBlock}>
         <BaseButtonWrapper
           loading={isLoading}
           className={styles.confirmVerificationButton}

@@ -11,6 +11,7 @@ import {
   ChangeEmailVerificationContent,
   NewEmailVerificationContent,
 } from "../../change-email";
+import { UnlinkVerificationContent } from "../../connected-links";
 
 export const verificationConfig: Record<
   Exclude<VerificationModalType, null>,
@@ -37,6 +38,11 @@ export const verificationConfig: Record<
     steps: {
       1: <ChangePasswordVerificationContent />,
       2: <ResetPasswordVerificationContent />,
+    },
+  },
+  unlink: {
+    steps: {
+      1: <UnlinkVerificationContent />,
     },
   },
 };
