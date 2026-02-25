@@ -1,15 +1,13 @@
 import { BaseButtonWrapper } from "@shared/ui/buttons";
-import type { ConnectedLinkPlatform } from "../../config/connectedLinks";
 import styles from "./ConnectedLink.module.scss";
 
 interface ConnectedLinkProps {
-  platform: ConnectedLinkPlatform;
   isConnected?: boolean;
   title?: string;
   image?: string;
   description?: string;
   isPending: boolean;
-  handleMutation: (connectedLink: ConnectedLinkPlatform) => void;
+  handleMutation?: () => void;
 }
 
 export const ConnectedLink = ({
@@ -18,7 +16,6 @@ export const ConnectedLink = ({
   image,
   description,
   isPending,
-  platform,
   handleMutation,
 }: ConnectedLinkProps) => {
   return (
@@ -34,10 +31,7 @@ export const ConnectedLink = ({
         type="button"
         className={`${styles.connectButton} ${isConnected ? styles.active : styles.disabled}`}
         disabled={isPending}
-        onClick={() => {
-          if (!isConnected) return;
-          handleMutation(platform);
-        }}
+        onClick={handleMutation}
       >
         <h1>{isConnected ? "Connected" : "Disabled"}</h1>
       </BaseButtonWrapper>

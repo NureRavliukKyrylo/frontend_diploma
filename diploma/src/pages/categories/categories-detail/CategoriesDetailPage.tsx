@@ -1,9 +1,6 @@
 import { CategoryDetailWidget } from "@widgets/categories";
 import { FilterButton } from "@shared/ui/buttons";
-import { CategoryFiltersWidget } from "@widgets/common/filters";
 import { SearchBar } from "@shared/ui/inputs";
-import { useProjectFilters } from "@features/filters/projects/model/useProjectFilters";
-import { useProjectFiltersCategoryStore } from "@entities/project/model/store/ProjectFiltersCategoryStore";
 
 interface CategoryDetailProps {
   categoryName: string;
@@ -31,8 +28,6 @@ export function CategoryDetailPage({ categoryName }: CategoryDetailProps) {
       { name: "Problem Solving" },
     ],
   };
-  const { filters } = useProjectFilters();
-  const setSearch = useProjectFiltersCategoryStore((s) => s.setSearch);
 
   return (
     <>
@@ -45,9 +40,7 @@ export function CategoryDetailPage({ categoryName }: CategoryDetailProps) {
         completedProjects={demoCategory.completedProjects}
         skills={demoCategory.skills}
       />
-      <SearchBar value={filters.search ?? ""} onChange={(v) => setSearch(v)} />
-      <FilterButton />
-      <CategoryFiltersWidget />
+      <FilterButton>hi</FilterButton>
     </>
   );
 }

@@ -2,19 +2,18 @@ import styles from "./SecuritySettingsForm.module.scss";
 import { ProfilePasswordInput } from "@shared/ui/inputs";
 import { ProfileEmailInput } from "@shared/ui/inputs";
 import { VerificationModal } from "./VerificationModal";
-import {
-  ConnectedLink,
-  profileQuery,
-  CONNECTED_LINKS_CONFIG,
-} from "@entities/user/profile";
+import { profileQuery } from "@entities/user/profile";
 import { ChangePasswordButton } from "../../change-password";
 import { ChangeEmailButton } from "../../change-email";
 import { TwoFactorSwitch } from "../../set-two-factor";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { ConnectedLinks } from "../../connected-links";
+import { useUserStore } from "@entities/user";
 
 export function PasswordProfileForm({}) {
-  const { data: user } = useQuery(profileQuery.all());
+  const { data: user } = useSuspenseQuery(profileQuery.all());
+  const { isPasswordSet } = useUserStore();
+
   return (
     <>
       <form className={styles.passwordInfoProfileForm}>
@@ -24,7 +23,11 @@ export function PasswordProfileForm({}) {
             <p>Set a password to protect your account</p>
           </div>
           <div className={styles.formInfoPasswordProfile}>
-            <ProfilePasswordInput value={"MOCKDATAFORUSER"} disabled />
+            {isPasswordSet && (
+              <>
+                <ProfilePasswordInput value={"MOCKDATAFORUSER"} disabled />
+              </>
+            )}
             <ChangePasswordButton />
           </div>
         </div>

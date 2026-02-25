@@ -1,9 +1,12 @@
 import { Switch } from "@shared/ui";
 import { useEnableTwoFactor } from "../model/useEnableTwoFactor";
 import { useDisableTwoFactor } from "../model/useDisableTwoFactor";
+import { useQuery } from "@tanstack/react-query";
+import { profileQuery } from "@entities/user/profile";
 
 export const TwoFactorSwitch = () => {
-  const isEnabled = false;
+  const { data: user } = useQuery(profileQuery.all());
+
   const { enableTwoFactor, isLoading: isEnabling } = useEnableTwoFactor();
   const { disableTwoFactor, isLoading: isDisabling } = useDisableTwoFactor();
 
@@ -19,7 +22,7 @@ export const TwoFactorSwitch = () => {
 
   return (
     <Switch
-      isSelected={isEnabled}
+      isSelected={user?.twoFactorEnabled}
       onValueChange={handleChange}
       isDisabled={isLoading}
       classNames={{

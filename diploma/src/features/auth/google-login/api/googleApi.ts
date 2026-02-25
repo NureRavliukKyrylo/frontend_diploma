@@ -1,7 +1,7 @@
 import { apiClient } from "@shared/api";
 
 export type GoogleLoginDto = {
-  idToken: string;
+  code: string;
 };
 
 export const googleLogin = async (data: GoogleLoginDto) => {

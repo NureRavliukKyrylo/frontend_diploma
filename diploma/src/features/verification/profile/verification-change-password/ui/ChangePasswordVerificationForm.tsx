@@ -8,7 +8,7 @@ import { verificationChangePassword } from "../api/verificationChangePassword";
 import { ResendCodeButton } from "@features/verification/resend-code";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./ChangePasswordVerificationForm.module.scss";
-import { useUserProfileStore } from "@entities/user";
+import { useUserProfileStore, useUserStore } from "@entities/user";
 
 interface ChangePasswordVerificationFormProps {
   onSuccess?: () => void;
@@ -18,9 +18,13 @@ export const ChangePasswordVerificationForm: React.FC<
   ChangePasswordVerificationFormProps
 > = ({ onSuccess }) => {
   const { otpTimers, resetOtpTimer, decrementOtpTimer } = useUserProfileStore();
+  const { isPasswordSet } = useUserStore();
+  const successMessage = isPasswordSet
+    ? "Change Password code"
+    : "Set new password code";
   const { formik, isLoading, errorMessage } = useVerification({
     apiFn: verificationChangePassword,
-    successMessage: "Change Password code verified successfully",
+    successMessage: `${successMessage} verified successfully`,
     onSuccess,
   });
 

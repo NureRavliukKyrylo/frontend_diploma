@@ -1,10 +1,10 @@
-import { AppleIcon, GoogleIcon } from "@shared/assets/icons/brands";
+import { GoogleIcon } from "@shared/assets/icons/brands";
 import { OtpType } from "@shared/config/types";
 
-export type ConnectedLinkPlatform = "google" | "apple";
+export type ConnectedLinkPlatform = "google";
 
 export interface ConnectedLinkConfig {
-  platform: ConnectedLinkPlatform;
+  provider: ConnectedLinkPlatform;
   imageLink: string;
   linkTitle: string;
   linkDescriprion: string;
@@ -13,17 +13,10 @@ export interface ConnectedLinkConfig {
 
 export const CONNECTED_LINKS_CONFIG: ConnectedLinkConfig[] = [
   {
-    platform: "google",
+    provider: "google",
     imageLink: GoogleIcon,
     linkTitle: "Google account",
     linkDescriprion: "Stay in sync with Google",
     otpType: OtpType.GoogleUnlink,
-  },
-  {
-    platform: "apple",
-    imageLink: AppleIcon,
-    linkTitle: "Apple account",
-    linkDescriprion: "Stay in sync with Apple",
-    otpType: OtpType.EmailVerification,
   },
 ] as const;

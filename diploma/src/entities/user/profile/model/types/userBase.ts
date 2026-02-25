@@ -1,3 +1,4 @@
+import type { ConnectedService } from "./connectedService";
 import type { PrivacySettings, Profile } from "./profile";
 import type { ProfileCompletion } from "./profileCompletionField";
 
@@ -15,6 +16,7 @@ export interface User {
   twoFactorEnabled: boolean;
   privacySettings: PrivacySettings;
   profileCompletion: ProfileCompletion | null;
+  connectedServices: ConnectedService[];
   location: {
     address: string;
   };

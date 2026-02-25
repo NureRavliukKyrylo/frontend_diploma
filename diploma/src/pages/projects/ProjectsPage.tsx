@@ -1,6 +1,9 @@
-import { ProjectsListWidget } from "@widgets/projects";
+import { ProjectFiltersWidget, ProjectsListWidget } from "@widgets/projects";
 import { Pagination } from "@shared/ui";
 import { useState } from "react";
+import { getRouteApi, useNavigate, useSearch } from "@tanstack/react-router";
+import { FilterButton } from "@shared/ui/buttons";
+import { SearchBar } from "@shared/ui/inputs";
 
 export function ProjectsPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,18 +44,35 @@ export function ProjectsPage() {
     },
   ];
 
-  const totalPages = Math.ceil(demoProjects.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentProjects = demoProjects.slice(startIndex, endIndex);
 
+  const navigate = useNavigate({ from: "/projects/" });
+  const search = useSearch({ from: "/_masterLayout/projects/" });
+
   return (
     <div>
       <ProjectsListWidget projects={currentProjects} />
+      <FilterButton>
+        <ProjectFiltersWidget />
+      </FilterButton>
+      <SearchBar
+        value={search.search}
+        onChange={(value) => {
+          navigate({
+            search: (prev) => ({ ...prev, search: value }),
+          });
+        }}
+      />
       <Pagination
-        total={totalPages}
-        page={currentPage}
-        onChange={setCurrentPage}
+        total={10}
+        page={search.page}
+        onChange={(page) => {
+          navigate({
+            search: (prev) => ({ ...prev, page }),
+          });
+        }}
       />
     </div>
   );

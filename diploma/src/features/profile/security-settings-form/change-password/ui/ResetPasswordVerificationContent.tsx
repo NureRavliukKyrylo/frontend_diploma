@@ -3,16 +3,19 @@ import styles from "../../base-security-form/ui/SecuritySettingsForm.module.scss
 import { ProfilePasswordInput } from "@shared/ui/inputs";
 import { useSendNewPassword } from "../model/useSendNewPassword";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { useUserStore } from "@entities/user";
 
 export const ResetPasswordVerificationContent = () => {
   const { formik, errorMessage, isLoading } = useSendNewPassword();
+  const { isPasswordSet } = useUserStore();
+
+  const title = isPasswordSet ? "Reset Password" : "Set New Password";
+  const description = isPasswordSet
+    ? "Reset your password quickly and securely to regain access"
+    : "Set a new password to secure your account";
 
   return (
-    <VerificationWrapper
-      title="Reset Password"
-      description="Set a strong password to secure access.
-Always stay safe"
-    >
+    <VerificationWrapper title={title} description={description}>
       <form
         className={styles.verificationChangePassword}
         onSubmit={formik.handleSubmit}

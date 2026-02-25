@@ -20,7 +20,7 @@ export const useUnlinkConnectedLink = () => {
         color: "success",
       });
       const config = CONNECTED_LINKS_CONFIG.find(
-        (c) => c.platform === platform,
+        (c) => c.provider === platform,
       )!;
 
       setUnlinkTarget(platform, config.otpType);

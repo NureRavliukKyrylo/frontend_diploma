@@ -1,0 +1,87 @@
+@use "@shared/assets/styles" as *;
+
+.subHeaderFilter {
+  @include font-base(20px, 700);
+}
+.dividerFilterBlock {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+.projectDeadLine {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  .deadlineCalendarBlock {
+    display: flex;
+    justify-content: space-between;
+    > :first-child {
+      width: 48%;
+    }
+
+    > :last-child {
+      width: 48%;
+    }
+    .startDate {
+      h2 {
+        color: rgba(0, 0, 0, 0.5);
+        @include font-base(15px, 500);
+      }
+      .dateStartInput {
+        border-radius: 10px;
+        height: 40px;
+      }
+    }
+
+    .dueDate {
+      h2 {
+        color: rgba(0, 0, 0, 0.5);
+        @include font-base(15px, 500);
+      }
+      .dateDueInput {
+        border-radius: 10px;
+        height: 40px;
+      }
+    }
+  }
+}
+.projectRating {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  .ratingBlock {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    .valueRating {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 5px;
+      background: #f0f0f0;
+      border-radius: 10px;
+      padding: 5px 8px;
+      width: 100%;
+      .starReview {
+        width: 20px;
+        height: 20px;
+      }
+      .starReviewValue {
+        @include font-base(20px, 900);
+      }
+    }
+  }
+}
+.projectCategories {
+  padding: 20px;
+}
+.projectOrganizations {
+  padding: 20px;
+}
+.projectDistance {
+  padding: 20px;
+}
+.moreOptions {
+  padding: 20px;
+}

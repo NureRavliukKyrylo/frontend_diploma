@@ -7,19 +7,29 @@ export const Pagination: React.FC<PaginationProps> = ({ ...rest }) => {
   return (
     <HeroUIPagination
       variant="flat"
-      color="default"
       size="md"
-      radius="sm"
+      radius="full"
+      dotsJump={3}
       siblings={1}
       boundaries={1}
-      showControls={true}
+      showControls={false}
       classNames={{
-        wrapper: "gap-1",
-        item: "w-9 h-9 min-w-9 bg-transparent text-gray-600 font-medium hover:bg-gray-100",
-        cursor: "bg-black text-white font-medium shadow-sm",
-        prev: "w-9 h-9 min-w-9 bg-transparent hover:bg-gray-100",
-        next: "w-9 h-9 min-w-9 bg-transparent hover:bg-gray-100",
-        ellipsis: "text-gray-400",
+        wrapper: "gap-2",
+        item:
+          "w-12 h-12 min-w-12 rounded-full bg-white " +
+          "text-[rgba(0,0,0,0.4)] font-black text-3xl " +
+          "flex items-center justify-center " +
+          "cursor-pointer transition-transform duration-200 [&[data-hover=true]:not([data-active=true])]:scale-110 s " +
+          "shadow-[0px_2px_10px_rgba(0,0,0,0.25)]" +
+          " [&[data-hover=true]:not([data-active=true])]:bg-white",
+
+        cursor:
+          "w-12 h-12 min-w-12 rounded-full bg-black text-white " +
+          "font-black text-3xl flex items-center justify-center shadow-sm " +
+          "cursor-pointer transition-transform duration-200 hover:scale-105 hover:bg-white " +
+          "shadow-[0px_2px_10px_rgba(0,0,0,0.25)]",
+        ellipsis:
+          "text-[rgba(0,0,0,0.4)] font-black text-3xl cursor-default hover:bg-white",
       }}
       {...rest}
     />
