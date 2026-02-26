@@ -13,35 +13,33 @@ export const BaseDropDown = ({ label, children }: BaseDropDownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={styles.wrapper}>
-      <div className={`${styles.inner} ${isOpen ? styles.active : ""}`}>
-        <BaseButtonWrapper
-          className={`${styles.button} ${isOpen ? styles.buttonActive : ""}`}
-          onClick={() => setIsOpen((prev) => !prev)}
-        >
-          {label}
-          <motion.img
-            src={DownArrow}
-            alt="down arrow"
-            animate={{ rotate: isOpen ? 180 : 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          />
-        </BaseButtonWrapper>
+    <div className={styles.inner}>
+      <BaseButtonWrapper
+        className={`${styles.button} ${isOpen ? styles.buttonActive : ""}`}
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
+        <div className={styles.labelBlock}>{label}</div>
+        <motion.img
+          src={DownArrow}
+          alt="down arrow"
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        />
+      </BaseButtonWrapper>
 
-        <AnimatePresence initial={false}>
-          {isOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.35, ease: "easeInOut" }}
-              style={{ overflow: "hidden" }}
-            >
-              {children}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            className={styles.dropdown}
+            initial={{ opacity: 0, y: -8, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.97 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

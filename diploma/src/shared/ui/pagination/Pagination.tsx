@@ -14,7 +14,7 @@ export const Pagination: React.FC<PaginationProps> = ({ ...rest }) => {
       boundaries={1}
       showControls={false}
       classNames={{
-        wrapper: "gap-2",
+        wrapper: "gap-5",
         item:
           "w-12 h-12 min-w-12 rounded-full bg-white " +
           "text-[rgba(0,0,0,0.4)] font-black text-3xl " +

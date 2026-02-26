@@ -1,6 +1,7 @@
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { routeTree } from "@app/routeTree.gen";
 import { BaseSpinner } from "@shared/ui";
+import { queryClient } from "@shared/libs";
 
 const router = createRouter({
   routeTree,
@@ -22,6 +23,9 @@ const router = createRouter({
       <p className="text-sm text-gray-400">{error.message}</p>
     </div>
   ),
+  context: {
+    queryClient: queryClient,
+  },
 });
 
 declare module "@tanstack/react-router" {

@@ -16,9 +16,9 @@ export const SortDropDown = <T extends string>({
   return (
     <BaseDropDown
       label={
-        <span>
-          Sort by: <strong>{value}</strong>
-        </span>
+        <h1 className={styles.dropDownLabel}>
+          Sort by: <span>{value}</span>
+        </h1>
       }
     >
       <ul className={styles.list}>

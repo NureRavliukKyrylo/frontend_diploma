@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+export const projectSearchDefaults = {
+  orderBy: "Default" as const,
+  page: 1,
+};
+
 export const projectSearchSchema = z.object({
   orderBy: z
     .enum(["Default", "Newest", "TitleAsc", "TitleDesc", "EndingSoon"])

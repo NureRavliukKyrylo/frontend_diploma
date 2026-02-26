@@ -86,5 +86,15 @@
     .searchWrapper {
       height: 66px;
     }
+    .dropDownWrapper {
+      height: 66px;
+    }
+  }
+  .projectsListWrapper {
+  }
+  .paginationWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
   }
 }

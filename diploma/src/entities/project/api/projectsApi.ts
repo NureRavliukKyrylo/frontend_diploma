@@ -1,33 +1,22 @@
 import { apiClient } from "@shared/api";
-
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  rating: number;
-  category: string;
-  organization: string;
-  deadline: string;
-  distance?: number;
-}
+import type { Project } from "../model/types/Project";
+import { z } from "zod";
+import { projectSearchSchema } from "../libs/projectsSearchSchema";
 
 export interface ProjectsResponse {
   data: Project[];
-  total: number;
-  page: number;
-  limit: number;
+  pagination: {
+    totalCount: number;
+    page: number;
+    pageSize: number;
+  };
 }
 
-export const projectsApi = {
-  getFilteredProjects: async (
-    categoryName: string,
-    params: Record<string, string | string[]>
-  ): Promise<ProjectsResponse> => {
-    const response = await apiClient.get<ProjectsResponse>(
-      `/categories/${categoryName}/projects`,
-      { params }
-    );
-    console.log(response);
-    return response.data;
-  },
+export type ProjectSearchParams = z.infer<typeof projectSearchSchema>;
+
+export const getListProjects = async (
+  params?: ProjectSearchParams,
+): Promise<ProjectsResponse> => {
+  const response = await apiClient.get("/Projects/list", { params });
+  return response.data;
 };

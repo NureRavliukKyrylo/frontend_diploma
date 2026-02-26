@@ -1,29 +1,21 @@
-import { ProjectCard } from "@entities/project";
+import { ProjectCard, projectQuery } from "@entities/project";
 import styles from "./ProjectsListWidget.module.scss";
+import { useSearch } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
-interface Project {
-  id: string;
-  imageOrganization: string;
-  nameOrganization: string;
-  titleProject: string;
-  descriptionProject: string;
-}
+export const ProjectsListWidget = () => {
+  const search = useSearch({ from: "/_masterLayout/projects/" });
+  const { data: projects } = useSuspenseQuery(projectQuery.list(search));
 
-interface ProjectsListWidgetProps {
-  projects: Project[];
-  className?: string;
-}
-
-export const ProjectsListWidget = ({ projects }: ProjectsListWidgetProps) => {
   return (
     <div className={styles.projectsListWrapper}>
-      {projects.map((project) => (
+      {projects.data.map((project) => (
         <ProjectCard
           key={project.id}
-          imageOrganization={project.imageOrganization}
-          nameOrganization={project.nameOrganization}
-          titleProject={project.titleProject}
-          descriptionProject={project.descriptionProject}
+          imageOrganization={""}
+          nameOrganization={""}
+          titleProject={project.title}
+          descriptionProject={project.descriprion}
         />
       ))}
     </div>

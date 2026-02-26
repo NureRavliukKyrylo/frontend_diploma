@@ -1,12 +1,10 @@
 import { profileQuery } from "@entities/user/profile";
 import { MainProfilePage } from "@pages/profile";
-import { queryClient } from "@shared/libs";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_masterLayout/profile/")({
-  loader: async () => {
+  loader: async ({ context: { queryClient } }) => {
     await queryClient.ensureQueryData(profileQuery.all());
   },
-  pendingComponent: () => <div>Loading profile...</div>,
   component: () => <MainProfilePage />,
 });
