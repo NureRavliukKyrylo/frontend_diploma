@@ -20,7 +20,9 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
   box-sizing: border-box;
   padding: 0 2.5rem 0 1rem;
   color: #000;
-  transition: border 0.2s ease, background-color 0.2s ease;
+  transition:
+    border 0.2s ease,
+    background-color 0.2s ease;
   outline: none;
   height: 100%;
 
@@ -30,6 +32,21 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
 
   &:focus {
     border-color: $focus-border-color;
+  }
+
+  &.projects {
+    @include font-base(30px, 600);
+    color: rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+    border-radius: 0px;
+    box-shadow: none;
+    background: none;
+    transition: none;
+    &:focus {
+      outline: none;
+      border: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+    }
   }
 }
 

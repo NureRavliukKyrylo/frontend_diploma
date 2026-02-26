@@ -12,37 +12,35 @@ export const FilterButton = ({ children }: FilterButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={styles.wrapperFilter}>
-      <div
-        className={`${styles.filtersInnerBlock} ${isOpen ? styles.active : ""}`}
+    <div
+      className={`${styles.filtersInnerBlock} ${isOpen ? styles.active : ""}`}
+    >
+      <BaseButtonWrapper
+        className={`${styles.filterButton} ${isOpen ? styles.filterButtonActive : ""}`}
+        onClick={() => setIsOpen((prev) => !prev)}
       >
-        <BaseButtonWrapper
-          className={`${styles.filterButton} ${isOpen ? styles.filterButtonActive : ""}`}
-          onClick={() => setIsOpen((prev) => !prev)}
-        >
-          <h1>Filter</h1>
-          <motion.img
-            src={DownArrow}
-            alt="down arrow"
-            animate={{ rotate: isOpen ? 180 : 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          />
-        </BaseButtonWrapper>
+        <h1>Filter</h1>
+        <motion.img
+          src={DownArrow}
+          alt="down arrow"
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        />
+      </BaseButtonWrapper>
 
-        <AnimatePresence initial={false}>
-          {isOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              style={{ overflow: "hidden" }}
-            >
-              {children}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            style={{ overflow: "hidden" }}
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

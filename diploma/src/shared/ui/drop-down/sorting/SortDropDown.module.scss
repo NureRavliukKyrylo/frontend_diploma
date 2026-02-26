@@ -1,0 +1,34 @@
+@use "@shared/assets/styles" as *;
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+}
+
+.item {
+  padding: 8px 20px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.7);
+  @include font-base(15px, 400);
+  border-radius: 8px;
+  margin: 0 8px;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: rgba(0, 0, 0, 0.9);
+  }
+
+  &.itemActive {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.9);
+
+    &::before {
+      content: "✓ ";
+      font-size: 12px;
+    }
+  }
+}

@@ -7,3 +7,5 @@ export { SocialPlatform } from "./social-links/SocialPlatform";
 export { OtpType } from "./verification/OtpType";
 export type { SocialPlatformConfig } from "./social-links/SocialPlatformConfig";
 export type { Coordinates } from "./map/Coordinates";
+export { type SortOption } from "./drop-down/SortOption";
+export { type SortValues } from "./drop-down/SortValues";
