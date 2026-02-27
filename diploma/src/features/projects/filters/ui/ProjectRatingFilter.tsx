@@ -25,6 +25,7 @@ export const ProjectRatingFilter = () => {
           onChange={(rating) => {
             navigate({
               search: (prev) => ({ ...prev, rating: rating as number }),
+              resetScroll: false,
             });
           }}
         />

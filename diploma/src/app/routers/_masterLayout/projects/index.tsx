@@ -8,5 +8,4 @@ export const Route = createFileRoute("/_masterLayout/projects/")({
   search: {
     middlewares: [stripSearchParams(projectSearchDefaults)],
   },
-  resetScroll: false,
 });

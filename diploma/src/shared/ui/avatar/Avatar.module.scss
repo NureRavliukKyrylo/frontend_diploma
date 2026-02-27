@@ -1,0 +1,33 @@
+@use "@shared/assets/styles" as *;
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+}
+
+.circle {
+  border-radius: 50%;
+}
+.rounded {
+  border-radius: 15px;
+}
+.square {
+  border-radius: 4px;
+}
+
+.initials {
+  @include font-base(25px, 800);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

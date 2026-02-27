@@ -7,3 +7,4 @@ export {
   categoriesSearchSchema,
 } from "./model/libs/categorySearchSchema";
 export { AllCategoriesCard } from "./ui/category-card/all-categories/AllCategoriesCard";
+export { CategoryCardSkeleton } from "./ui/category-card/category-item/CategoryCardSkeleton";

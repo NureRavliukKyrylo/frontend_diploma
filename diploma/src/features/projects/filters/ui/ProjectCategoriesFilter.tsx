@@ -28,6 +28,7 @@ export const ProjectCategoriesFilter = () => {
           : [...current, categoryName];
         return { ...prev, categories: updated };
       },
+      resetScroll: false,
     });
   };
 

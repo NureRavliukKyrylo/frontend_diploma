@@ -1,4 +1,6 @@
+import { Avatar } from "@shared/ui";
 import styles from "./ProfileAvatar.module.scss";
+export { Avatar } from "@shared/ui";
 
 interface ProfileAvatarProps {
   avatar: string;
@@ -7,13 +9,10 @@ interface ProfileAvatarProps {
 
 export const ProfileAvatar = ({ avatar, level }: ProfileAvatarProps) => {
   return (
-    <div
-      className={styles.profileAvatarBlock}
-      style={{ backgroundImage: `url(${avatar})` }}
-    >
+    <Avatar src={avatar} shape="rounded" className={styles.profileAvatarBlock}>
       <div className={styles.levelInfoAvatar}>
         <h1 className={styles.levelTextInfo}>{level}</h1>
       </div>
-    </div>
+    </Avatar>
   );
 };

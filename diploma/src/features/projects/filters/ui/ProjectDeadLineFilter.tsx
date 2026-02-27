@@ -21,6 +21,7 @@ export const ProjectDeadlineFilter = () => {
               onChange={(date) => {
                 navigate({
                   search: (prev) => ({ ...prev, startDate: date }),
+                  resetScroll: false,
                 });
               }}
             />

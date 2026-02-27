@@ -12,10 +12,10 @@ export const ProjectsListWidget = () => {
       {projects.data.map((project) => (
         <ProjectCard
           key={project.id}
-          imageOrganization={""}
-          nameOrganization={""}
-          titleProject={project.title}
-          descriptionProject={project.descriprion}
+          image={""}
+          name={""}
+          title={project.title}
+          description={project.descriprion}
         />
       ))}
     </div>

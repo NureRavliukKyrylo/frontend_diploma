@@ -11,7 +11,7 @@ import { Planet } from "@shared/assets/images/information";
 import { Mark } from "@shared/assets/icons/actions";
 import { useQuery } from "@tanstack/react-query";
 import { projectQuery } from "@entities/project";
-import { motion, LayoutGroup } from "framer-motion";
+import { motion } from "framer-motion";
 
 export function ProjectsPage() {
   const navigate = useNavigate({ from: "/projects/" });
@@ -74,29 +74,27 @@ export function ProjectsPage() {
             />
           </div>
         </div>
-        <LayoutGroup>
-          <motion.div
-            layout
-            transition={{
-              layout: {
-                type: "spring",
-                stiffness: 250,
-                damping: 30,
-              },
-            }}
-            className={`${styles.projectsList} ${
-              isFilterOpen ? styles.filterOpen : ""
-            }`}
+        <motion.div
+          layout
+          transition={{
+            layout: {
+              type: "spring",
+              stiffness: 250,
+              damping: 30,
+            },
+          }}
+          className={`${styles.projectsList} ${
+            isFilterOpen ? styles.filterOpen : ""
+          }`}
+        >
+          <Suspense
+            fallback={
+              <LoadingComponent className="flex justify-center items-center w-full h-64" />
+            }
           >
-            <Suspense
-              fallback={
-                <LoadingComponent className="flex justify-center items-center w-full h-64" />
-              }
-            >
-              <ProjectsListWidget />
-            </Suspense>
-          </motion.div>
-        </LayoutGroup>
+            <ProjectsListWidget />
+          </Suspense>
+        </motion.div>
       </div>
       <div className={styles.paginationWrapper}>
         {projects && (

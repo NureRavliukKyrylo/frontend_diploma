@@ -2,35 +2,35 @@ import styles from "./ProjectCard.module.scss";
 import { ReadMoreButton } from "@shared/ui/buttons";
 
 interface ProjectCardProps {
-  imageOrganization: string;
-  nameOrganization: string;
-  titleProject: string;
-  descriptionProject: string;
+  image: string;
+  name: string;
+  title: string;
+  description: string;
 }
 export const ProjectCard = ({
-  imageOrganization,
-  nameOrganization,
-  titleProject,
-  descriptionProject,
+  image,
+  name,
+  title,
+  description,
 }: ProjectCardProps) => {
   return (
     <div className={styles.projectCardWrapper}>
       <div className={styles.organizationInfoBlock}>
         <img
           className={styles.imageOrganization}
-          src={imageOrganization}
+          src={image}
           alt="image organization"
         />
-        <h1>{nameOrganization}</h1>
+        <h1>{name}</h1>
       </div>
       <div className={styles.projectInfoBlock}>
-        <h1>{titleProject}</h1>
+        <h1>{title}</h1>
         <ReadMoreButton
           collapsedHeight={90}
           className={styles.readMoreProjectBlock}
           classNameButton={styles.readMoreProjectButton}
         >
-          <p>{descriptionProject}</p>
+          <p>{description}</p>
         </ReadMoreButton>
       </div>
     </div>

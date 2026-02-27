@@ -1,4 +1,7 @@
-import { CategoriesWidget } from "@widgets/categories";
+import {
+  CategoriesWidget,
+  CategoriesWidgetSkeleton,
+} from "@widgets/categories";
 import { Suspense } from "react";
 import { LoadingComponent, Pagination } from "@shared/ui";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
@@ -12,14 +15,11 @@ export function CategoriesPage() {
 
   return (
     <div className={styles.categoriesWrapperList}>
-      <Suspense
-        fallback={
-          <LoadingComponent className="flex justify-center items-center w-full h-64" />
-        }
-      >
+      <Suspense fallback={<CategoriesWidgetSkeleton items={12} />}>
         <CategoriesWidget
           startSlot={
             <motion.div
+              layout
               whileHover={{ scale: 1.03 }}
               transition={{
                 ease: "easeInOut",
@@ -33,6 +33,7 @@ export function CategoriesPage() {
           }
           renderCard={(category) => (
             <motion.div
+              layout
               whileHover={{ scale: 1.03 }}
               transition={{
                 ease: "easeInOut",
