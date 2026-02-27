@@ -6,18 +6,21 @@ import { DownArrow } from "@shared/assets/icons/actions";
 
 interface FilterButtonProps {
   children: React.ReactNode;
+  onOpenChange?: (value: boolean) => void;
 }
 
-export const FilterButton = ({ children }: FilterButtonProps) => {
+export const FilterButton = ({ children, onOpenChange }: FilterButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div
-      className={`${styles.filtersInnerBlock} ${isOpen ? styles.active : ""}`}
-    >
+    <div className={styles.filtersInnerBlock}>
       <BaseButtonWrapper
         className={`${styles.filterButton} ${isOpen ? styles.filterButtonActive : ""}`}
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => {
+          const newValue = !isOpen;
+          setIsOpen(newValue);
+          onOpenChange?.(newValue);
+        }}
       >
         <h1>Filter</h1>
         <motion.img
@@ -31,10 +34,12 @@ export const FilterButton = ({ children }: FilterButtonProps) => {
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
+            layout
+            className={styles.filterDropdown}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            exit={{ height: 0, opacity: 0.2 }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
             style={{ overflow: "hidden" }}
           >
             {children}

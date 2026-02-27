@@ -2,14 +2,11 @@ import { apiClient } from "@shared/api";
 import type { Project } from "../model/types/Project";
 import { z } from "zod";
 import { projectSearchSchema } from "../libs/projectsSearchSchema";
+import type { PaginationResponse } from "@shared/config/types";
 
 export interface ProjectsResponse {
   data: Project[];
-  pagination: {
-    totalCount: number;
-    page: number;
-    pageSize: number;
-  };
+  pagination: PaginationResponse;
 }
 
 export type ProjectSearchParams = z.infer<typeof projectSearchSchema>;

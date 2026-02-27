@@ -1,34 +1,7 @@
 import { CategoryDetailWidget } from "@widgets/categories";
 import { FilterButton } from "@shared/ui/buttons";
-import { SearchBar } from "@shared/ui/inputs";
 
-interface CategoryDetailProps {
-  categoryName: string;
-}
-
-export function CategoryDetailPage({ categoryName }: CategoryDetailProps) {
-  const demoCategory = {
-    imageCategory: "https://placehold.co/600x300",
-    titleCategory: categoryName,
-    descriptionCategory:
-      "Projects focused on psychological well-being, emotional balance, and building a culture of mutual support. This category includes initiatives that provide psychological assistance, raise awareness about mental health, prevent stress, and create safe spaces for open communication.",
-    allProjects: 32,
-    activeProjects: 7,
-    completedProjects: 25,
-    skills: [
-      { name: "Communication" },
-      { name: "Empathy" },
-      { name: "Conflict Resolution" },
-      { name: "Stress Management" },
-      { name: "Teamwork" },
-      { name: "Critical Thinking" },
-      { name: "Leadership" },
-      { name: "Emotional Intelligence" },
-      { name: "Active Listening" },
-      { name: "Problem Solving" },
-    ],
-  };
-
+export function CategoryDetailPage() {
   return (
     <>
       <CategoryDetailWidget

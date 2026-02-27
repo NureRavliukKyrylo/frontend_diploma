@@ -1,21 +1,24 @@
 import styles from "./CategoriesWidget.module.scss";
-import { type Category } from "@entities/category";
-import { CategoryCard } from "@entities/category";
+import { categoryQuery, type Category } from "@entities/category";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { useSearch } from "@tanstack/react-router";
 
 interface CategoriesWidgetProps {
-  categories: Category[];
+  renderCard: (category: Category) => React.ReactNode;
+  startSlot?: React.ReactNode;
 }
 
-export const CategoriesWidget = ({ categories }: CategoriesWidgetProps) => {
+export const CategoriesWidget = ({
+  renderCard,
+  startSlot,
+}: CategoriesWidgetProps) => {
+  const search = useSearch({ from: "/_masterLayout/categories/" });
+  const { data: categories } = useSuspenseQuery(categoryQuery.list(search));
+
   return (
     <div className={styles.categoriesWidgetBlock}>
-      {categories.map((category) => (
-        <CategoryCard
-          key={category.categoryName}
-          backgroundCategory={category.categoryBackground}
-          categoryName={category.categoryName}
-        />
-      ))}
+      {startSlot}
+      {categories.data.map((category) => renderCard(category))}
     </div>
   );
 };

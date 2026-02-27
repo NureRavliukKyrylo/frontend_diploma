@@ -15,14 +15,7 @@ const categorySearchSchema = z.object({
 
 export type CategorySearchParams = z.infer<typeof categorySearchSchema>;
 
-export const Route = createFileRoute("/_masterLayout/categories/$name/")({
-  component: CategoryDetailPageWrapper,
+export const Route = createFileRoute("/_masterLayout/categories/$id/")({
+  component: CategoryDetailPage,
   validateSearch: (search) => categorySearchSchema.parse(search),
 });
-
-function CategoryDetailPageWrapper() {
-  const { name } = Route.useParams();
-  const search = Route.useSearch();
-
-  return <CategoryDetailPage categoryName={name} />;
-}

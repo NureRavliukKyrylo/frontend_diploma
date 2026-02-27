@@ -1,6 +1,6 @@
 import { ProjectFiltersWidget, ProjectsListWidget } from "@widgets/projects";
 import { LoadingComponent, Pagination } from "@shared/ui";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { FilterButton, LinkButtonWrapper } from "@shared/ui/buttons";
 import { SearchBar } from "@shared/ui/inputs";
@@ -11,11 +11,12 @@ import { Planet } from "@shared/assets/images/information";
 import { Mark } from "@shared/assets/icons/actions";
 import { useQuery } from "@tanstack/react-query";
 import { projectQuery } from "@entities/project";
+import { motion, LayoutGroup } from "framer-motion";
 
 export function ProjectsPage() {
   const navigate = useNavigate({ from: "/projects/" });
   const search = useSearch({ from: "/_masterLayout/projects/" });
-
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const { data: projects } = useQuery(projectQuery.list(search));
 
   return (
@@ -47,9 +48,9 @@ export function ProjectsPage() {
           </div>
         </div>
       </div>
-      <div>
+      <div className={styles.filterProjectsWrapper}>
         <div className={styles.filtersInteractions}>
-          <FilterButton>
+          <FilterButton onOpenChange={(value) => setIsFilterOpen(value)}>
             <ProjectFiltersWidget />
           </FilterButton>
           <div className={styles.searchWrapper}>
@@ -73,15 +74,29 @@ export function ProjectsPage() {
             />
           </div>
         </div>
-        <div className={styles.projectsListWrapper}>
-          <Suspense
-            fallback={
-              <LoadingComponent className="flex justify-center items-center w-full h-64" />
-            }
+        <LayoutGroup>
+          <motion.div
+            layout
+            transition={{
+              layout: {
+                type: "spring",
+                stiffness: 250,
+                damping: 30,
+              },
+            }}
+            className={`${styles.projectsList} ${
+              isFilterOpen ? styles.filterOpen : ""
+            }`}
           >
-            <ProjectsListWidget />
-          </Suspense>
-        </div>
+            <Suspense
+              fallback={
+                <LoadingComponent className="flex justify-center items-center w-full h-64" />
+              }
+            >
+              <ProjectsListWidget />
+            </Suspense>
+          </motion.div>
+        </LayoutGroup>
       </div>
       <div className={styles.paginationWrapper}>
         {projects && (

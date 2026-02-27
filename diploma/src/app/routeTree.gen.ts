@@ -20,7 +20,7 @@ import { Route as AuthLayoutAuthIndexRouteImport } from './routers/_authLayout/a
 import { Route as AuthLayoutAuthVerificationTwoFactorRouteImport } from './routers/_authLayout/auth/verification-two-factor'
 import { Route as AuthLayoutAuthVerificationEmailRouteImport } from './routers/_authLayout/auth/verification-email'
 import { Route as MasterLayoutProfileSettingsIndexRouteImport } from './routers/_masterLayout/profile/settings/index'
-import { Route as MasterLayoutCategoriesNameIndexRouteImport } from './routers/_masterLayout/categories/$name/index'
+import { Route as MasterLayoutCategoriesIdIndexRouteImport } from './routers/_masterLayout/categories/$id/index'
 import { Route as AuthLayoutAuthForgotPasswordIndexRouteImport } from './routers/_authLayout/auth/forgot-password/index'
 import { Route as AuthLayoutAuthForgotPasswordVerificationRouteImport } from './routers/_authLayout/auth/forgot-password/verification'
 import { Route as AuthLayoutAuthForgotPasswordSetPasswordRouteImport } from './routers/_authLayout/auth/forgot-password/set-password'
@@ -84,10 +84,10 @@ const MasterLayoutProfileSettingsIndexRoute =
     path: '/profile/settings/',
     getParentRoute: () => MasterLayoutRoute,
   } as any)
-const MasterLayoutCategoriesNameIndexRoute =
-  MasterLayoutCategoriesNameIndexRouteImport.update({
-    id: '/categories/$name/',
-    path: '/categories/$name/',
+const MasterLayoutCategoriesIdIndexRoute =
+  MasterLayoutCategoriesIdIndexRouteImport.update({
+    id: '/categories/$id/',
+    path: '/categories/$id/',
     getParentRoute: () => MasterLayoutRoute,
   } as any)
 const AuthLayoutAuthForgotPasswordIndexRoute =
@@ -121,7 +121,7 @@ export interface FileRoutesByFullPath {
   '/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordRoute
   '/auth/forgot-password/verification': typeof AuthLayoutAuthForgotPasswordVerificationRoute
   '/auth/forgot-password/': typeof AuthLayoutAuthForgotPasswordIndexRoute
-  '/categories/$name/': typeof MasterLayoutCategoriesNameIndexRoute
+  '/categories/$id/': typeof MasterLayoutCategoriesIdIndexRoute
   '/profile/settings/': typeof MasterLayoutProfileSettingsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -136,7 +136,7 @@ export interface FileRoutesByTo {
   '/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordRoute
   '/auth/forgot-password/verification': typeof AuthLayoutAuthForgotPasswordVerificationRoute
   '/auth/forgot-password': typeof AuthLayoutAuthForgotPasswordIndexRoute
-  '/categories/$name': typeof MasterLayoutCategoriesNameIndexRoute
+  '/categories/$id': typeof MasterLayoutCategoriesIdIndexRoute
   '/profile/settings': typeof MasterLayoutProfileSettingsIndexRoute
 }
 export interface FileRoutesById {
@@ -154,7 +154,7 @@ export interface FileRoutesById {
   '/_authLayout/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordRoute
   '/_authLayout/auth/forgot-password/verification': typeof AuthLayoutAuthForgotPasswordVerificationRoute
   '/_authLayout/auth/forgot-password/': typeof AuthLayoutAuthForgotPasswordIndexRoute
-  '/_masterLayout/categories/$name/': typeof MasterLayoutCategoriesNameIndexRoute
+  '/_masterLayout/categories/$id/': typeof MasterLayoutCategoriesIdIndexRoute
   '/_masterLayout/profile/settings/': typeof MasterLayoutProfileSettingsIndexRoute
 }
 export interface FileRouteTypes {
@@ -171,7 +171,7 @@ export interface FileRouteTypes {
     | '/auth/forgot-password/set-password'
     | '/auth/forgot-password/verification'
     | '/auth/forgot-password/'
-    | '/categories/$name/'
+    | '/categories/$id/'
     | '/profile/settings/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -186,7 +186,7 @@ export interface FileRouteTypes {
     | '/auth/forgot-password/set-password'
     | '/auth/forgot-password/verification'
     | '/auth/forgot-password'
-    | '/categories/$name'
+    | '/categories/$id'
     | '/profile/settings'
   id:
     | '__root__'
@@ -203,7 +203,7 @@ export interface FileRouteTypes {
     | '/_authLayout/auth/forgot-password/set-password'
     | '/_authLayout/auth/forgot-password/verification'
     | '/_authLayout/auth/forgot-password/'
-    | '/_masterLayout/categories/$name/'
+    | '/_masterLayout/categories/$id/'
     | '/_masterLayout/profile/settings/'
   fileRoutesById: FileRoutesById
 }
@@ -293,11 +293,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MasterLayoutProfileSettingsIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
-    '/_masterLayout/categories/$name/': {
-      id: '/_masterLayout/categories/$name/'
-      path: '/categories/$name'
-      fullPath: '/categories/$name/'
-      preLoaderRoute: typeof MasterLayoutCategoriesNameIndexRouteImport
+    '/_masterLayout/categories/$id/': {
+      id: '/_masterLayout/categories/$id/'
+      path: '/categories/$id'
+      fullPath: '/categories/$id/'
+      preLoaderRoute: typeof MasterLayoutCategoriesIdIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
     '/_authLayout/auth/forgot-password/': {
@@ -354,7 +354,7 @@ interface MasterLayoutRouteChildren {
   MasterLayoutCategoriesIndexRoute: typeof MasterLayoutCategoriesIndexRoute
   MasterLayoutProfileIndexRoute: typeof MasterLayoutProfileIndexRoute
   MasterLayoutProjectsIndexRoute: typeof MasterLayoutProjectsIndexRoute
-  MasterLayoutCategoriesNameIndexRoute: typeof MasterLayoutCategoriesNameIndexRoute
+  MasterLayoutCategoriesIdIndexRoute: typeof MasterLayoutCategoriesIdIndexRoute
   MasterLayoutProfileSettingsIndexRoute: typeof MasterLayoutProfileSettingsIndexRoute
 }
 
@@ -362,7 +362,7 @@ const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
   MasterLayoutCategoriesIndexRoute: MasterLayoutCategoriesIndexRoute,
   MasterLayoutProfileIndexRoute: MasterLayoutProfileIndexRoute,
   MasterLayoutProjectsIndexRoute: MasterLayoutProjectsIndexRoute,
-  MasterLayoutCategoriesNameIndexRoute: MasterLayoutCategoriesNameIndexRoute,
+  MasterLayoutCategoriesIdIndexRoute: MasterLayoutCategoriesIdIndexRoute,
   MasterLayoutProfileSettingsIndexRoute: MasterLayoutProfileSettingsIndexRoute,
 }
 

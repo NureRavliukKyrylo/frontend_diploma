@@ -79,18 +79,29 @@
       }
     }
   }
-  .filtersInteractions {
+  .filterProjectsWrapper {
     display: grid;
-    grid-template-columns: 400px 2fr 1fr;
-    gap: 50px;
-    .searchWrapper {
-      height: 66px;
+    gap: 40px;
+    grid-template-columns: 400px 1fr;
+    .filtersInteractions {
+      display: grid;
+      grid-template-columns: 400px 2fr 1fr;
+      gap: 50px;
+      grid-column: 1 / 3;
+
+      .searchWrapper {
+        height: 66px;
+      }
+      .dropDownWrapper {
+        height: 66px;
+      }
     }
-    .dropDownWrapper {
-      height: 66px;
+    .projectsList {
+      grid-column: 1 / 3;
+      &.filterOpen {
+        grid-column: 2/3;
+      }
     }
-  }
-  .projectsListWrapper {
   }
   .paginationWrapper {
     width: 100%;
