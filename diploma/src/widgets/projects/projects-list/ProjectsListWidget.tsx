@@ -12,10 +12,20 @@ export const ProjectsListWidget = () => {
       {projects.data.map((project) => (
         <ProjectCard
           key={project.id}
-          image={""}
-          name={""}
+          image={
+            "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg"
+          }
+          name={"kiberkit"}
           title={project.title}
-          description={project.descriprion}
+          description={project.description}
+          deadline="Feb 4, 2025"
+          progress={59}
+          avatars={[
+            "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+            "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+            "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+          ]}
+          tasks={11}
         />
       ))}
     </div>

@@ -7,8 +7,7 @@ import { SearchBar } from "@shared/ui/inputs";
 import { SortDropDown } from "@shared/ui/drop-down";
 import { sortingItems } from "../config/sortingItems";
 import styles from "./ProjectsPage.module.scss";
-import { Planet } from "@shared/assets/images/information";
-import { Mark } from "@shared/assets/icons/actions";
+import { ProjectsLogo } from "@shared/assets/images/information";
 import { useQuery } from "@tanstack/react-query";
 import { projectQuery } from "@entities/project";
 import { motion } from "framer-motion";
@@ -41,11 +40,8 @@ export function ProjectsPage() {
             </LinkButtonWrapper>
           </div>
         </div>
-        <div className={styles.wrapperPlanetProjects}>
-          <div className={styles.imageProjects}>
-            <img src={Planet} alt="planet" className={styles.planetImage} />
-            <img src={Mark} alt="mark" className={styles.markImage} />
-          </div>
+        <div className={styles.imageProjects}>
+          <img src={ProjectsLogo} alt="planet" />
         </div>
       </div>
       <div className={styles.filterProjectsWrapper}>
@@ -53,26 +49,25 @@ export function ProjectsPage() {
           <FilterButton onOpenChange={(value) => setIsFilterOpen(value)}>
             <ProjectFiltersWidget />
           </FilterButton>
-          <div className={styles.searchWrapper}>
-            <SearchBar
-              value={search.search}
-              onChange={(value) => {
-                navigate({
-                  search: (prev) => ({ ...prev, search: value }),
-                });
-              }}
-              variant="projects"
-            />
-          </div>
-          <div className={styles.dropDownWrapper}>
-            <SortDropDown
-              options={sortingItems}
-              onSelect={(value) =>
-                navigate({ search: (prev) => ({ ...prev, orderBy: value }) })
-              }
-              value={search.orderBy}
-            />
-          </div>
+          <SearchBar
+            value={search.search}
+            onChange={(value) => {
+              navigate({
+                search: (prev) => ({ ...prev, search: value }),
+              });
+            }}
+            variant="projects"
+          />
+          <SortDropDown
+            options={sortingItems}
+            onSelect={(value) =>
+              navigate({
+                search: (prev) => ({ ...prev, orderBy: value }),
+                resetScroll: false,
+              })
+            }
+            value={search.orderBy}
+          />
         </div>
         <motion.div
           layout

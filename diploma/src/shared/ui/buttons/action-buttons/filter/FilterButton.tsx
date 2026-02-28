@@ -40,7 +40,6 @@ export const FilterButton = ({ children, onOpenChange }: FilterButtonProps) => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0.2 }}
             transition={{ duration: 0.35, ease: "easeInOut" }}
-            style={{ overflow: "hidden" }}
           >
             {children}
           </motion.div>

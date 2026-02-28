@@ -1,23 +1,12 @@
-import { CategoryTab, type Category } from "@entities/category";
+import { categoryQuery, CategoryTab } from "@entities/category";
 import styles from "./ProjectFilters.module.scss";
 import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 
 export const ProjectCategoriesFilter = () => {
-  type PickCategory = Pick<Category, "id" | "name">;
-  const categories: PickCategory[] = [
-    { id: "69865869444e0ab357536012", name: "Mental Health" },
-    { id: "69865869444e0ab357536012", name: "Education Projects" },
-    { id: "69865869444e0ab357536012", name: "Elder Care" },
-    { id: "69865869444e0ab357536012", name: "Child Support" },
-    { id: "69865869444e0ab357536012", name: "Medical Help" },
-    { id: "69865869444e0ab357536012", name: "Reconstruction" },
-    { id: "69865869444e0ab357536012", name: "Community Growth" },
-    { id: "69865869444e0ab357536012", name: "Environmental Aid" },
-    { id: "69865869444e0ab357536012", name: "Animal Rescue" },
-  ];
-
   const navigate = useNavigate({ from: "/projects/" });
   const search = useSearch({ from: "/_masterLayout/projects/" });
+  const { data: categories } = useQuery(categoryQuery.all());
 
   const toggleCategory = (categoryName: string) => {
     navigate({
@@ -35,11 +24,11 @@ export const ProjectCategoriesFilter = () => {
   return (
     <div className={styles.projectCategories}>
       <h1 className={styles.subHeaderFilter}>Categories</h1>
-      <div className={styles.categoriesGrid}>
-        {categories.map((category) => (
+      <div className={styles.categoriesListFilter}>
+        {categories?.data.map((category) => (
           <CategoryTab
             key={category.id}
-            categoryName={category.name}
+            name={category.name}
             isSelected={search.categories?.includes(category.name) ?? false}
             onClick={toggleCategory}
           />

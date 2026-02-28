@@ -2,15 +2,14 @@ import React from "react";
 import styles from "./ProgressBar.module.scss";
 
 interface ProgressBarProps {
-  currentXP: number;
-  maxXP: number;
+  current: number;
+  max?: number;
 }
 
-export const ProgressBar: React.FC<ProgressBarProps> = ({
-  currentXP,
-  maxXP,
-}) => {
-  const progressPercentage = Math.min((currentXP / maxXP) * 100, 100);
+export const ProgressBar: React.FC<ProgressBarProps> = ({ current, max }) => {
+  const progressPercentage = max
+    ? Math.min((current / max) * 100, 100)
+    : current;
 
   return (
     <div className={styles.levelProgress}>

@@ -30,11 +30,12 @@ export const BaseDropDown = ({ label, children }: BaseDropDownProps) => {
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
+            layout
             className={styles.dropdown}
-            initial={{ opacity: 0, y: -8, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.97 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0.2 }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
           >
             {children}
           </motion.div>
