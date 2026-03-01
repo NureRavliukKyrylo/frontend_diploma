@@ -1,8 +1,8 @@
 export const SocialPlatform = {
   Telegram: 19,
   Instagram: 1,
-  Viber: 21,
-  WhatsApp: 20,
+  Facebook: 0,
+  X: 3,
   TikTok: 4,
   LinkedIn: 6,
 } as const;

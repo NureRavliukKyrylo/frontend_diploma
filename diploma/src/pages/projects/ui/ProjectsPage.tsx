@@ -73,9 +73,8 @@ export function ProjectsPage() {
           layout
           transition={{
             layout: {
-              type: "spring",
-              stiffness: 250,
-              damping: 30,
+              ease: "backOut",
+              duration: 0.4,
             },
           }}
           className={`${styles.projectsList} ${

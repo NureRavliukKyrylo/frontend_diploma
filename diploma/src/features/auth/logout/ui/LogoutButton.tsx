@@ -3,7 +3,6 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useLogout } from "../model/useLogout";
 import { ConfirmationModal } from "@shared/ui/modals/confirmation-modal/ConfirmationModal";
 import styles from "./LogoutButton.module.scss";
-
 import { Power } from "@shared/assets/icons/actions";
 import { LogOutImage } from "@shared/assets/images/actions";
 

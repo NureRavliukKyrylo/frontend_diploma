@@ -22,6 +22,7 @@ export function SettingsMainForm() {
   } = useSettingsMainForm();
 
   const [isMapOpen, setIsMapOpen] = useState<boolean>(false);
+  const [resetKey, setResetKey] = useState(0);
 
   const handleCloseModal = () => {
     setIsMapOpen(false);
@@ -59,6 +60,7 @@ export function SettingsMainForm() {
           </div>
           <div className={styles.datePickerWrapper}>
             <DatePickerInput
+              key={resetKey}
               name="dateOfBirth"
               value={formik.values.dateOfBirth}
               onChange={(value) => formik.setFieldValue("dateOfBirth", value)}
@@ -66,7 +68,8 @@ export function SettingsMainForm() {
               submit={formik.submitCount > 0}
               showMonthAndYearPickers
               classNames={{
-                inputWrapper: "border-1 border-black",
+                base: "border-1 border-black",
+                inputWrapper: "border-3 border-black shadow-none bg-[#f9f9f9]",
               }}
             />
           </div>
@@ -133,7 +136,11 @@ export function SettingsMainForm() {
       <div className={styles.blockButtons}>
         <BaseButtonWrapper
           className={styles.resetProfileButton}
-          onClick={formik.handleReset}
+          type="button"
+          onClick={() => {
+            formik.handleReset(null);
+            setResetKey((k) => k + 1);
+          }}
         >
           RESET
         </BaseButtonWrapper>

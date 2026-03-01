@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./BaseInput.module.scss";
 
 interface BaseInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -26,6 +26,10 @@ export const BaseInput: React.FC<BaseInputProps> = ({
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [hasText, setHasText] = useState(!!value || !!defaultValue);
+
+  useEffect(() => {
+    setHasText(!!value);
+  }, [value]);
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     setIsFocused(true);

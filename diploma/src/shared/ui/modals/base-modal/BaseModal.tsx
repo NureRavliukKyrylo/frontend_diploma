@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./BaseModal.module.scss";
 import { Close } from "@shared/assets/icons/actions";
+import {
+  modalAnimations,
+  type ModalAnimationType,
+} from "@shared/assets/animations";
 
 interface BaseModalProps {
   isOpen: boolean;
@@ -9,9 +13,11 @@ interface BaseModalProps {
   children: React.ReactNode;
   error?: string | null;
   maxWidth?: string;
-  onAnimationComplete?: () => void;
   showClosed?: boolean;
+  animation?: ModalAnimationType;
 }
+
+import { createPortal } from "react-dom";
 
 export const BaseModal: React.FC<BaseModalProps> = ({
   isOpen,
@@ -19,11 +25,13 @@ export const BaseModal: React.FC<BaseModalProps> = ({
   children,
   error,
   maxWidth = "700px",
-  onAnimationComplete,
   showClosed = true,
+  animation = "default",
 }) => {
   const mouseDownTarget = React.useRef<EventTarget | null>(null);
-  return (
+  const { overlay, modal, transition } = modalAnimations[animation];
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -34,24 +42,21 @@ export const BaseModal: React.FC<BaseModalProps> = ({
           onClick={(e) => {
             if (mouseDownTarget.current === e.currentTarget) onClose();
           }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          variants={overlay}
+          initial="initial"
+          animate="animate"
+          exit="exit"
           transition={{ duration: 0.2 }}
         >
           <motion.div
             className={styles.modalWrapper}
             onClick={(e) => e.stopPropagation()}
-            initial={{ scale: 1, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 1, opacity: 0, y: 20 }}
+            variants={modal}
+            initial="initial"
+            animate="animate"
+            exit="exit"
             style={{ maxWidth }}
-            onAnimationComplete={onAnimationComplete}
-            transition={{
-              type: "spring",
-              stiffness: 300,
-              damping: 25,
-            }}
+            transition={transition}
           >
             {showClosed && (
               <div className={styles.closeButtonBlock}>
@@ -68,6 +73,7 @@ export const BaseModal: React.FC<BaseModalProps> = ({
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 };

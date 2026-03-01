@@ -48,6 +48,7 @@ export function LinksForm({}) {
         <BaseButtonWrapper
           className={styles.resetProfileLinksButton}
           onClick={formik.handleReset}
+          type="reset"
         >
           RESET
         </BaseButtonWrapper>

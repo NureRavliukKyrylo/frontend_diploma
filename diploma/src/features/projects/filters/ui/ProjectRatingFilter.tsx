@@ -13,7 +13,7 @@ export const ProjectRatingFilter = () => {
       <div className={styles.ratingBlock}>
         <div className={styles.valueRating}>
           <img src={Star} alt="star" className={styles.starReview} />
-          <h1 className={styles.starReviewValue}>{search.rating}</h1>
+          <h1 className={styles.starReviewValue}>{search.rating ?? 0}</h1>
         </div>
         <Slider
           aria-label="slider"

@@ -17,7 +17,7 @@ export function ProfileSettingsWidget() {
     <div className={styles.blockSettingsProfileForms}>
       <div className={styles.blockActionsProfileSettings}>
         <div className={styles.backAndToggleSection}>
-          <div className="">
+          <div className={styles.backWrapper}>
             <BackButton
               from={profileRoutes.settingsFrom}
               to=".."
@@ -33,7 +33,9 @@ export function ProfileSettingsWidget() {
             className={styles.toggleProfileSettings}
           />
         </div>
-        <LogoutButton />
+        <div className={styles.logoutWrapper}>
+          <LogoutButton />
+        </div>
       </div>
       <AnimatePresence mode="wait">
         <motion.div

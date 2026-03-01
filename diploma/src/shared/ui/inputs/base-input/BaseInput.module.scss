@@ -3,7 +3,7 @@
 
 $border-radius: 10px;
 $border-color: #ccc;
-$error-color: red;
+$error-color: #dc2626;
 $label-color: rgba(0, 0, 0, 0.6);
 $focus-border-color: rgba(0, 0, 0, 0.6);
 
@@ -58,13 +58,17 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
 
   &.profile {
     .input {
-      border: 1px solid #000000;
+      border: 1px solid black;
       border-radius: 15px;
       height: 40px;
+      background: #f9f9f9;
+      padding-left: 1rem;
     }
 
     .input.social {
       padding-left: 3rem;
+      background: #f9f9f9;
+      padding-left: 3.2rem;
     }
     .input.email {
       padding-left: 3rem;
@@ -101,13 +105,16 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
     .input {
       border: 2px solid $focus-border-color;
       background-color: white;
+      outline: none;
+      transition: border-color 0.2s ease-in-out;
     }
     .input.email {
       padding-left: 3rem;
     }
     .input.social {
       padding-right: 4rem;
-      padding-left: 2.9rem;
+      padding-left: 3.2rem;
+      background-color: white;
     }
     .input.password {
       padding-right: 2.3rem;

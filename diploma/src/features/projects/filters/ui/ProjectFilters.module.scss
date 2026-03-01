@@ -10,7 +10,7 @@
 .projectDeadLine {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   padding: 30px 20px 20px 20px;
   .deadlineCalendarBlock {
     display: flex;
@@ -29,7 +29,6 @@
       }
       .dateStartInput {
         border-radius: 10px;
-        height: 40px;
       }
     }
 
@@ -40,7 +39,6 @@
       }
       .dateDueInput {
         border-radius: 10px;
-        height: 40px;
       }
     }
   }
@@ -48,8 +46,8 @@
 .projectRating {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 20px;
+  gap: 15px;
+  padding: 20px 20px 30px 20px;
   .ratingBlock {
     display: flex;
     align-items: center;
@@ -76,8 +74,8 @@
 .projectCategories {
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  gap: 20px;
+  padding: 20px 20px 30px 20px;
+  gap: 15px;
   .categoriesListFilter {
     display: flex;
     flex-wrap: wrap;
@@ -87,8 +85,8 @@
 .projectOrganizations {
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  gap: 20px;
+  padding: 20px 20px 30px 20px;
+  gap: 15px;
   .organizationssListFilter {
     display: flex;
     flex-wrap: wrap;

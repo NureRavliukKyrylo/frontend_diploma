@@ -14,7 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export function MainProfilePage() {
   const { profileMode, setProfileMode } = useUserProfileStore();
-  const { data: user, isLoading, error } = useQuery(profileQuery.all());
+  const { data: user } = useQuery(profileQuery.all());
   const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ");
 
   return (

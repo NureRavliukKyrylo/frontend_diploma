@@ -7,22 +7,18 @@
   border-radius: 20px;
   padding: 3px;
   width: fit-content;
-  height: 47px;
 
   @include adaptive.respond-to(mobile) {
-    height: 40px;
     border-radius: 16px;
     padding: 2px;
   }
 
   @include adaptive.respond-to(tablet) {
-    height: 44px;
     border-radius: 18px;
     padding: 2.5px;
   }
 
   @include adaptive.respond-to(laptop) {
-    height: 47px;
     border-radius: 20px;
     padding: 3px;
   }

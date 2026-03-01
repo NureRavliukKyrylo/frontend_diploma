@@ -4,6 +4,7 @@ import { BaseButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import type { Coordinates } from "@shared/config/types";
 import { DatePickerInput, MapLocationInput } from "@shared/ui/inputs";
 import { useState } from "react";
+import { LayoutCard } from "@shared/assets/images/layout";
 
 interface ProfileMainWidgetProps {
   skillsChildren?: React.ReactNode;
@@ -40,7 +41,7 @@ export function ProfileMainWidget({
             <span className={styles.current}>Level 12</span>
             <span className={styles.xp}>25/100</span>
           </div>
-          <ProgressBar currentXP={25} maxXP={100} />
+          <ProgressBar current={25} max={100} />
           <div className={styles.footerLevelBar}>
             <span className={styles.label}>Next level</span>
             <span className={styles.next}>Level 2</span>
@@ -112,6 +113,7 @@ export function ProfileMainWidget({
             <BaseButtonWrapper className={styles.seeMoreProjectsButton}>
               SEE MORE
             </BaseButtonWrapper>
+            <img src={LayoutCard} alt="layout" />
           </div>
         </div>
         <div className={styles.skillsBlock}>

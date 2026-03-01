@@ -53,6 +53,7 @@ export const ModalCropper = ({
       onClose={handleClose}
       maxWidth={maxWidth}
       showClosed={false}
+      animation="right"
     >
       <div className={styles.wrapperModalCropper}>
         <h1>POSITION AND CROP</h1>
