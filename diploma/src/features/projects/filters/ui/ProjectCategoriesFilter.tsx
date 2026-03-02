@@ -1,21 +1,26 @@
 import { categoryQuery, CategoryTab } from "@entities/category";
 import styles from "./ProjectFilters.module.scss";
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
+import type { ProjectSearchParams } from "@entities/project";
 
-export const ProjectCategoriesFilter = () => {
+interface ProjectCategoriesFilterProps {
+  search: ProjectSearchParams;
+}
+export const ProjectCategoriesFilter = ({
+  search,
+}: ProjectCategoriesFilterProps) => {
   const navigate = useNavigate({ from: "/projects/" });
-  const search = useSearch({ from: "/_masterLayout/projects/" });
   const { data: categories } = useQuery(categoryQuery.all());
 
-  const toggleCategory = (categoryName: string) => {
+  const toggleCategory = (categoryId: string) => {
     navigate({
       search: (prev) => {
-        const current = prev.categories ?? [];
-        const updated = current.includes(categoryName)
-          ? current.filter((c) => c !== categoryName)
-          : [...current, categoryName];
-        return { ...prev, categories: updated };
+        const current = prev.CategoryIds ?? [];
+        const updated = current.includes(categoryId)
+          ? current.filter((c) => c !== categoryId)
+          : [...current, categoryId];
+        return { ...prev, CategoryIds: updated };
       },
       resetScroll: false,
     });
@@ -29,8 +34,8 @@ export const ProjectCategoriesFilter = () => {
           <CategoryTab
             key={category.id}
             name={category.name}
-            isSelected={search.categories?.includes(category.name) ?? false}
-            onClick={toggleCategory}
+            isSelected={search.CategoryIds?.includes(category.id) ?? false}
+            onClick={() => toggleCategory(category.id)}
           />
         ))}
       </div>

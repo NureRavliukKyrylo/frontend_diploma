@@ -3,7 +3,7 @@ import {
   CategoriesWidgetSkeleton,
 } from "@widgets/categories";
 import { Suspense } from "react";
-import { LoadingComponent, Pagination } from "@shared/ui";
+import { Pagination } from "@shared/ui";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import styles from "./CategoriesPage.module.scss";
 import { AllCategoriesCard, CategoryCard } from "@entities/category";
@@ -43,7 +43,7 @@ export function CategoriesPage() {
               <Link
                 to="/categories/$id"
                 params={{ id: category.id }}
-                search={{ page: 1 }}
+                search={{ Page: 1 }}
               >
                 <CategoryCard
                   background={category.imageUrl}

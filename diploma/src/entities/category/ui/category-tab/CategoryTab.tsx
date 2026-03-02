@@ -3,7 +3,7 @@ import styles from "./CategoryTab.module.scss";
 interface CategoryTabProps {
   name: string;
   isSelected?: boolean;
-  onClick?: (name: string) => void;
+  onClick?: () => void;
 }
 
 //TODO: make this card universal to shared/ui later
@@ -15,7 +15,7 @@ export const CategoryTab = ({
   return (
     <div
       className={`${styles.categoryTabBlock} ${isSelected ? styles.selected : ""} ${onClick ? styles.clickable : ""}`}
-      onClick={() => onClick?.(name)}
+      onClick={() => onClick?.()}
     >
       <h1 className={styles.categoryNameText}>{name}</h1>
     </div>

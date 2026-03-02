@@ -2,7 +2,9 @@ import { queryOptions } from "@tanstack/react-query";
 import {
   getListCategories,
   type CategoriesSearchParams,
-} from "../api/categoryApi";
+} from "../api/categoriesListApi";
+import { getCategoryById } from "../api/categoryIdApi";
+export { getCategoryById } from "../api/categoryIdApi";
 
 export const categoryKeys = {
   all: () => ["categories"] as const,
@@ -11,6 +13,7 @@ export const categoryKeys = {
     "list",
     params,
   ],
+  id: (id: string) => [...categoryKeys.all(), "id", id] as const,
 };
 
 export const categoryQuery = {
@@ -23,5 +26,11 @@ export const categoryQuery = {
     queryOptions({
       queryKey: categoryKeys.list(params),
       queryFn: () => getListCategories(params),
+    }),
+  id: (id: string) =>
+    queryOptions({
+      queryKey: categoryKeys.id(id),
+      queryFn: () => getCategoryById(id),
+      select: (res) => res.data,
     }),
 };

@@ -3,7 +3,7 @@ import styles from "./OrganizationTab.module.scss";
 interface OrganizationTabProps {
   name: string;
   isSelected?: boolean;
-  onClick?: (name: string) => void;
+  onClick?: () => void;
 }
 
 export const OrganizationTab = ({
@@ -14,7 +14,7 @@ export const OrganizationTab = ({
   return (
     <div
       className={`${styles.organizationTabBlock} ${isSelected ? styles.selected : ""} ${onClick ? styles.clickable : ""}`}
-      onClick={() => onClick?.(name)}
+      onClick={() => onClick?.()}
     >
       <h1 className={styles.organizationNameText}>{name}</h1>
     </div>

@@ -1,21 +1,27 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
 import { CategoryDetailPage } from "@pages/categories";
-import { z } from "zod";
-
-const categorySearchSchema = z.object({
-  startDate: z.string().optional(),
-  dueDate: z.string().optional(),
-  rating: z.number().min(0).max(5).optional(),
-  categories: z.array(z.string()).optional().catch([]),
-  organizations: z.array(z.string()).optional().catch([]),
-  distance: z.number().optional(),
-  search: z.string().optional(),
-  page: z.number().min(1).default(1),
-});
-
-export type CategorySearchParams = z.infer<typeof categorySearchSchema>;
+import { categoryQuery } from "@entities/category";
+import {
+  baseProjectSearchSchema,
+  projectQuery,
+  projectSearchDefaults,
+} from "@entities/project";
 
 export const Route = createFileRoute("/_masterLayout/categories/$id/")({
   component: CategoryDetailPage,
-  validateSearch: (search) => categorySearchSchema.parse(search),
+  loader: async ({ context: { queryClient }, params: { id } }) => {
+    await Promise.all([
+      queryClient.ensureQueryData(categoryQuery.id(id)),
+      queryClient.ensureQueryData(
+        projectQuery.list({
+          ...projectSearchDefaults,
+          CategoryIds: [id],
+        }),
+      ),
+    ]);
+  },
+  search: {
+    middlewares: [stripSearchParams(projectSearchDefaults)],
+  },
+  validateSearch: baseProjectSearchSchema,
 });

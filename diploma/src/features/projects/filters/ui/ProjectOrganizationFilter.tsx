@@ -6,26 +6,26 @@ export const ProjectOrganizationFilter = () => {
   const navigate = useNavigate({ from: "/projects/" });
   const search = useSearch({ from: "/_masterLayout/projects/" });
 
-  const toggleOrganization = (name: string) => {
+  const toggleOrganization = (organizationId: string) => {
     // to libs
     navigate({
       search: (prev) => {
-        const current = prev.organizations ?? [];
-        const updated = current.includes(name)
-          ? current.filter((c) => c !== name)
-          : [...current, name];
-        return { ...prev, organizations: updated };
+        const current = prev.OrganizationId ?? [];
+        const updated = current.includes(organizationId)
+          ? current.filter((c) => c !== organizationId)
+          : [...current, organizationId];
+        return { ...prev, OrganizationId: updated };
       },
       resetScroll: false,
     });
   };
 
   const organizations: Organization[] = [
-    { id: "asdasdasdasd", name: "Ancient Greek" },
-    { id: "asdasdasdasd", name: "Ancient Greeks" },
-    { id: "asdasdasdasd", name: "Ancient Greeksd" },
-    { id: "asdasdasdasd", name: "Ancient Greekdd" },
-    { id: "asdasdasdasd", name: "Ancient Greeka" },
+    { id: "asdasdasdSAasd", name: "Ancient Greek" },
+    { id: "asdasdDasdasd", name: "Ancient Greeks" },
+    { id: "asdasdaSDsdasd", name: "Ancient Greeksd" },
+    { id: "asdasdaSDsDdasd", name: "Ancient Greekdd" },
+    { id: "asdasdasSDdasd", name: "Ancient Greeka" },
   ];
 
   return (
@@ -37,9 +37,11 @@ export const ProjectOrganizationFilter = () => {
             key={organization.id}
             name={organization.name}
             isSelected={
-              search.organizations?.includes(organization.name) ?? false
+              search.OrganizationId?.includes(organization.id) ?? false
             }
-            onClick={toggleOrganization}
+            onClick={() => {
+              toggleOrganization(organization.id);
+            }}
           />
         ))}
       </div>

@@ -17,10 +17,10 @@ export const ProjectDeadlineFilter = () => {
               label=""
               showMonthAndYearPickers
               name="startDate"
-              value={search.startDate}
+              value={search.StartDate}
               onChange={(date) => {
                 navigate({
-                  search: (prev) => ({ ...prev, startDate: date }),
+                  search: (prev) => ({ ...prev, StartDate: date }),
                   resetScroll: false,
                 });
               }}
@@ -34,10 +34,10 @@ export const ProjectDeadlineFilter = () => {
               label=""
               showMonthAndYearPickers
               name="dueDate"
-              value={search.endBefore}
+              value={search.EndBefore}
               onChange={(date) => {
                 navigate({
-                  search: (prev) => ({ ...prev, endBefore: date }),
+                  search: (prev) => ({ ...prev, EndBefore: date }),
                   resetScroll: false,
                 });
               }}

@@ -1,5 +1,9 @@
-import { ProjectFiltersWidget, ProjectsListWidget } from "@widgets/projects";
-import { LoadingComponent, Pagination } from "@shared/ui";
+import {
+  ProjectFiltersWidget,
+  ProjectsListWidget,
+  ProjectsListWidgetSkeleton,
+} from "@widgets/projects";
+import { Pagination } from "@shared/ui";
 import { Suspense, useState } from "react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { FilterButton, LinkButtonWrapper } from "@shared/ui/buttons";
@@ -50,10 +54,11 @@ export function ProjectsPage() {
             <ProjectFiltersWidget />
           </FilterButton>
           <SearchBar
-            value={search.search}
+            value={search.Search}
             onChange={(value) => {
               navigate({
-                search: (prev) => ({ ...prev, search: value }),
+                search: (prev) => ({ ...prev, Search: value }),
+                resetScroll: false,
               });
             }}
             variant="projects"
@@ -62,11 +67,11 @@ export function ProjectsPage() {
             options={sortingItems}
             onSelect={(value) =>
               navigate({
-                search: (prev) => ({ ...prev, orderBy: value }),
+                search: (prev) => ({ ...prev, OrderBy: value }),
                 resetScroll: false,
               })
             }
-            value={search.orderBy}
+            value={search.OrderBy}
           />
         </div>
         <motion.div
@@ -81,12 +86,8 @@ export function ProjectsPage() {
             isFilterOpen ? styles.filterOpen : ""
           }`}
         >
-          <Suspense
-            fallback={
-              <LoadingComponent className="flex justify-center items-center w-full h-64" />
-            }
-          >
-            <ProjectsListWidget />
+          <Suspense fallback={<ProjectsListWidgetSkeleton />}>
+            <ProjectsListWidget search={search} />
           </Suspense>
         </motion.div>
       </div>
@@ -94,10 +95,10 @@ export function ProjectsPage() {
         {projects && (
           <Pagination
             total={3}
-            page={search.page}
+            page={search.Page}
             onChange={(page) => {
               navigate({
-                search: (prev) => ({ ...prev, page }),
+                search: (prev) => ({ ...prev, Page: page }),
               });
             }}
           />

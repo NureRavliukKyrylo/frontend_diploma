@@ -1,11 +1,20 @@
 import { ProjectCard, projectQuery } from "@entities/project";
 import styles from "./ProjectsListWidget.module.scss";
-import { useSearch } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import type { ProjectSearchParams } from "@entities/project";
 
-export const ProjectsListWidget = () => {
-  const search = useSearch({ from: "/_masterLayout/projects/" });
-  const { data: projects } = useSuspenseQuery(projectQuery.list(search));
+interface ProjectsListWidgetProps {
+  search: ProjectSearchParams;
+  pageSize?: number;
+}
+
+export const ProjectsListWidget = ({
+  search,
+  pageSize = 9,
+}: ProjectsListWidgetProps) => {
+  const { data: projects } = useSuspenseQuery(
+    projectQuery.list(search, pageSize),
+  );
 
   return (
     <div className={styles.projectsListWrapper}>
