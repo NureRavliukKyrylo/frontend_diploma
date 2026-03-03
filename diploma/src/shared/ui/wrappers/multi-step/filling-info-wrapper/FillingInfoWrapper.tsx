@@ -4,6 +4,7 @@ import { InfoSign } from "@shared/assets/icons/info";
 import { BackButton } from "@shared/ui/buttons";
 import { motion, AnimatePresence } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { Arrow } from "@shared/assets/icons/actions";
 
 interface FillingInfoWrapperProps {
   message: string;
@@ -64,7 +65,11 @@ export function FillingInfoWrapper({
             </motion.div>
           </AnimatePresence>
           <div className={styles.buttonsFillForm}>
-            {activeStep !== 0 && <BackButton onBack={prevStep} />}
+            {activeStep !== 0 && (
+              <BaseButtonWrapper className={styles.backStep} onClick={prevStep}>
+                <img src={Arrow} alt="Back" className={styles.arrowIcon} />{" "}
+              </BaseButtonWrapper>
+            )}
             <div className={styles.interactStepperButtons}>
               {!hideSkipButton && !isLastStep && (
                 <BaseButtonWrapper

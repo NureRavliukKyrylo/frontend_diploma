@@ -1,21 +1,27 @@
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import styles from "./ProjectFilters.module.scss";
 import { OrganizationTab, type Organization } from "@entities/organization";
+import type { ProjectSearchParams } from "@entities/project";
+import type { NavigateParams } from "../model/NavigateParams";
+import { toggleArrayParam } from "../libs/toggleTab";
 
-export const ProjectOrganizationFilter = () => {
-  const navigate = useNavigate({ from: "/projects/" });
-  const search = useSearch({ from: "/_masterLayout/projects/" });
+interface ProjectOrganizationFilterProps {
+  search: ProjectSearchParams;
+  from: NavigateParams;
+}
+
+export const ProjectOrganizationFilter = ({
+  search,
+  from,
+}: ProjectOrganizationFilterProps) => {
+  const navigate = useNavigate({ from });
 
   const toggleOrganization = (organizationId: string) => {
-    // to libs
     navigate({
-      search: (prev) => {
-        const current = prev.OrganizationId ?? [];
-        const updated = current.includes(organizationId)
-          ? current.filter((c) => c !== organizationId)
-          : [...current, organizationId];
-        return { ...prev, OrganizationId: updated };
-      },
+      search: (prev) => ({
+        ...prev,
+        OrganizationId: toggleArrayParam(prev.OrganizationId, organizationId),
+      }),
       resetScroll: false,
     });
   };

@@ -15,7 +15,7 @@ export function CategoriesPage() {
 
   return (
     <div className={styles.categoriesWrapperList}>
-      <Suspense fallback={<CategoriesWidgetSkeleton items={12} />}>
+      <Suspense fallback={<CategoriesWidgetSkeleton />}>
         <CategoriesWidget
           startSlot={
             <motion.div

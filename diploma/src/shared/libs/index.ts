@@ -10,3 +10,5 @@ export { fileField } from "./validation/fileValidators";
 export { nameField } from "./validation/nameValidators";
 export { textField } from "./validation/textValidators";
 export { withPrivacyField } from "./validation/privacyValidators";
+export { useDebounce } from "./hooks/useDebounce";
+export { SetViewOnClick } from "./map/SetViewOnClick";

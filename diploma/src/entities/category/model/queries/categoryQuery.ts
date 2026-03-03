@@ -1,14 +1,15 @@
 import { queryOptions } from "@tanstack/react-query";
 import {
   getListCategories,
-  type CategoriesSearchParams,
+  type CategoryQueryParams,
 } from "../api/categoriesListApi";
 import { getCategoryById } from "../api/categoryIdApi";
+import type { CategoriesSearchParams } from "../libs/categorySearchSchema";
 export { getCategoryById } from "../api/categoryIdApi";
 
 export const categoryKeys = {
   all: () => ["categories"] as const,
-  list: (params: CategoriesSearchParams) => [
+  list: (params: CategoryQueryParams) => [
     ...categoryKeys.all(),
     "list",
     params,
@@ -22,10 +23,10 @@ export const categoryQuery = {
       queryKey: categoryKeys.all(),
       queryFn: () => getListCategories(),
     }),
-  list: (params: CategoriesSearchParams) =>
+  list: (params: CategoriesSearchParams, pageSize?: number) =>
     queryOptions({
-      queryKey: categoryKeys.list(params),
-      queryFn: () => getListCategories(params),
+      queryKey: categoryKeys.list({ ...params, pageSize }),
+      queryFn: () => getListCategories({ ...params, pageSize }),
     }),
   id: (id: string) =>
     queryOptions({

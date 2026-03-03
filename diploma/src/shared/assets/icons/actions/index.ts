@@ -15,3 +15,4 @@ export { default as Reset } from "./reset.png";
 export { default as Grid } from "./grid.png";
 export { default as Edit } from "./edit.png";
 export { default as Mark } from "./mark.png";
+export { default as FullSizeIcon } from "./full-size.png";

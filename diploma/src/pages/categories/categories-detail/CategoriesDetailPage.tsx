@@ -3,7 +3,7 @@ import { FilterButton } from "@shared/ui/buttons";
 import { Suspense, useState } from "react";
 import { SearchBar } from "@shared/ui/inputs";
 import { SortDropDown } from "@shared/ui/drop-down";
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useNavigate, useParams, useSearch } from "@tanstack/react-router";
 import styles from "./CategoriesDetailPage.module.scss";
 import { motion } from "framer-motion";
 import {
@@ -16,14 +16,25 @@ import { CategoryProjectFiltersWidget } from "@widgets/categories";
 export function CategoryDetailPage() {
   const navigate = useNavigate({ from: "/categories/$id/" });
   const search = useSearch({ from: "/_masterLayout/categories/$id/" });
+  const { id } = useParams({ from: "/_masterLayout/categories/$id/" });
+
+  const searchWithCategory = {
+    ...search,
+    CategoryIds: [id],
+  };
+
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+
   return (
     <div className={styles.projectsCategoryWrapper}>
       <CategoryDetailWidget />
       <div className={styles.filterProjectsWrapper}>
         <div className={styles.filtersInteractions}>
           <FilterButton onOpenChange={(value) => setIsFilterOpen(value)}>
-            <CategoryProjectFiltersWidget />
+            <CategoryProjectFiltersWidget
+              search={search}
+              from="/categories/$id/"
+            />
           </FilterButton>
           <SearchBar
             value={search.Search}
@@ -59,7 +70,7 @@ export function CategoryDetailPage() {
           }`}
         >
           <Suspense fallback={<ProjectsListWidgetSkeleton />}>
-            <ProjectsListWidget search={search} />
+            <ProjectsListWidget search={searchWithCategory} />
           </Suspense>
         </motion.div>
       </div>

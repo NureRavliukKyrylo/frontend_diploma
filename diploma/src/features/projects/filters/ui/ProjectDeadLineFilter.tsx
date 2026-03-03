@@ -1,10 +1,19 @@
 import { DatePickerInput } from "@shared/ui/inputs";
 import styles from "./ProjectFilters.module.scss";
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
+import type { ProjectSearchParams } from "@entities/project";
+import type { NavigateParams } from "../model/NavigateParams";
 
-export const ProjectDeadlineFilter = () => {
-  const navigate = useNavigate({ from: "/projects/" });
-  const search = useSearch({ from: "/_masterLayout/projects/" });
+interface ProjectDeadlineProps {
+  search: ProjectSearchParams;
+  from: NavigateParams;
+}
+
+export const ProjectDeadlineFilter = ({
+  search,
+  from,
+}: ProjectDeadlineProps) => {
+  const navigate = useNavigate({ from });
 
   return (
     <div className={styles.projectDeadLine}>

@@ -3,19 +3,29 @@ import {
   ProjectDistanceFilter,
   ProjectOrganizationFilter,
   ProjectRatingFilter,
+  type NavigateParams,
 } from "@features/projects";
 import styles from "./CategoryProjectFiltersWidget.module.scss";
+import type { ProjectSearchParams } from "@entities/project";
 
-export const CategoryProjectFiltersWidget = () => {
+interface CategoryProjectFiltersWidgetProps {
+  search: ProjectSearchParams;
+  from: NavigateParams;
+}
+
+export const CategoryProjectFiltersWidget = ({
+  search,
+  from,
+}: CategoryProjectFiltersWidgetProps) => {
   return (
     <>
-      <ProjectDeadlineFilter />
+      <ProjectDeadlineFilter search={search} from={from} />
       <div className={styles.dividerFilterBlock}></div>
-      <ProjectRatingFilter />
+      <ProjectRatingFilter search={search} from={from} />
       <div className={styles.dividerFilterBlock}></div>
-      <ProjectOrganizationFilter />
+      <ProjectOrganizationFilter search={search} from={from} />
       <div className={styles.dividerFilterBlock}></div>
-      <ProjectDistanceFilter />
+      <ProjectDistanceFilter search={search} from={from} />
       <div className={styles.dividerFilterBlock}></div>
     </>
   );

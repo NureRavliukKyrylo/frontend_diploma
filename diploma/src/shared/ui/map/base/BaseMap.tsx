@@ -6,6 +6,9 @@ import {
   DEFAULT_MAP_COORDINATES,
   DEFAULT_MAP_ZOOM,
 } from "@shared/config/constants";
+import { useRef } from "react";
+import { SetViewOnClick } from "@shared/libs";
+import { FullscreenControl } from "../full-screen/FullScreenControl";
 
 export const BaseMap: React.FC<{
   center?: LatLngExpression;
@@ -19,6 +22,7 @@ export const BaseMap: React.FC<{
   zoom = DEFAULT_MAP_ZOOM,
   children,
 }) => {
+  const animateRef = useRef(true);
   return (
     <div className={styles.mapWrapper}>
       <MapContainer
@@ -30,7 +34,9 @@ export const BaseMap: React.FC<{
           overflow: "hidden",
         }}
       >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <TileLayer url="https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.jpg" />
+        <SetViewOnClick animateRef={animateRef} />
+        <FullscreenControl />
         {children}
       </MapContainer>
     </div>

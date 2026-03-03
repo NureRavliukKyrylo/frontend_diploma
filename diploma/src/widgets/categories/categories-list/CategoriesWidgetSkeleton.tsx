@@ -6,7 +6,7 @@ interface CategoriesWidgetSkeletonProps {
 }
 
 export const CategoriesWidgetSkeleton = ({
-  items = 6,
+  items = 8,
 }: CategoriesWidgetSkeletonProps) => {
   return (
     <div className={styles.categoriesWidgetBlock}>

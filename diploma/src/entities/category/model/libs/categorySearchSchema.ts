@@ -7,3 +7,5 @@ export const categoriesSearchDefaults = {
 export const categoriesSearchSchema = z.object({
   page: z.number().min(1).default(1),
 });
+
+export type CategoriesSearchParams = z.infer<typeof categoriesSearchSchema>;

@@ -45,64 +45,73 @@ export function ProjectsPage() {
           </div>
         </div>
         <div className={styles.imageProjects}>
-          <img src={ProjectsLogo} alt="planet" />
+          <img src={ProjectsLogo} alt="projects" />
         </div>
       </div>
-      <div className={styles.filterProjectsWrapper}>
-        <div className={styles.filtersInteractions}>
-          <FilterButton onOpenChange={(value) => setIsFilterOpen(value)}>
-            <ProjectFiltersWidget />
-          </FilterButton>
-          <SearchBar
-            value={search.Search}
-            onChange={(value) => {
-              navigate({
-                search: (prev) => ({ ...prev, Search: value }),
-                resetScroll: false,
-              });
+      <div className={styles.mainProjectsSection}>
+        <div className={styles.filterProjectsWrapper}>
+          <div className={styles.filtersInteractions}>
+            <FilterButton onOpenChange={(value) => setIsFilterOpen(value)}>
+              <ProjectFiltersWidget search={search} from="/projects/" />
+            </FilterButton>
+            <SearchBar
+              value={search.Search}
+              onChange={(value) => {
+                navigate({
+                  search: (prev) => ({ ...prev, Search: value || undefined }),
+                  resetScroll: false,
+                });
+              }}
+              variant="projects"
+            />
+            <SortDropDown
+              options={sortingItems}
+              onSelect={(value) =>
+                navigate({
+                  search: (prev) => ({ ...prev, OrderBy: value }),
+                  resetScroll: false,
+                })
+              }
+              value={search.OrderBy}
+            />
+          </div>
+          <motion.div
+            layout
+            transition={{
+              layout: {
+                ease: "backOut",
+                duration: 0.4,
+              },
             }}
-            variant="projects"
-          />
-          <SortDropDown
-            options={sortingItems}
-            onSelect={(value) =>
-              navigate({
-                search: (prev) => ({ ...prev, OrderBy: value }),
-                resetScroll: false,
-              })
-            }
-            value={search.OrderBy}
-          />
+            className={`${styles.projectsList} ${
+              isFilterOpen ? styles.filterOpen : ""
+            }`}
+          >
+            {projects?.data?.length === 0 ? (
+              <div className={styles.emptyState}>
+                <h2>No projects found</h2>
+                <p>Try adjusting your filters or search query</p>
+              </div>
+            ) : (
+              <Suspense fallback={<ProjectsListWidgetSkeleton />}>
+                <ProjectsListWidget search={search} />
+              </Suspense>
+            )}
+          </motion.div>
         </div>
-        <motion.div
-          layout
-          transition={{
-            layout: {
-              ease: "backOut",
-              duration: 0.4,
-            },
-          }}
-          className={`${styles.projectsList} ${
-            isFilterOpen ? styles.filterOpen : ""
-          }`}
-        >
-          <Suspense fallback={<ProjectsListWidgetSkeleton />}>
-            <ProjectsListWidget search={search} />
-          </Suspense>
-        </motion.div>
-      </div>
-      <div className={styles.paginationWrapper}>
-        {projects && (
-          <Pagination
-            total={3}
-            page={search.Page}
-            onChange={(page) => {
-              navigate({
-                search: (prev) => ({ ...prev, Page: page }),
-              });
-            }}
-          />
-        )}
+        <div className={styles.paginationWrapper}>
+          {projects && (
+            <Pagination
+              total={3}
+              page={search.Page}
+              onChange={(page) => {
+                navigate({
+                  search: (prev) => ({ ...prev, Page: page }),
+                });
+              }}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
