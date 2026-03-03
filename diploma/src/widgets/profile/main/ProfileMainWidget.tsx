@@ -5,6 +5,7 @@ import type { Coordinates } from "@shared/config/types";
 import { DatePickerInput, MapLocationInput } from "@shared/ui/inputs";
 import { useState } from "react";
 import { LayoutCard } from "@shared/assets/images/layout";
+import { UserMarker } from "@entities/user/profile";
 
 interface ProfileMainWidgetProps {
   skillsChildren?: React.ReactNode;
@@ -87,6 +88,7 @@ export function ProfileMainWidget({
             onClose={handleModal}
             popUpText={""}
             maxWidth={"1200px"}
+            icon={UserMarker}
           />
         )}
       </div>

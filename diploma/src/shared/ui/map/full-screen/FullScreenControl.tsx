@@ -8,7 +8,8 @@ export const FullscreenControl = () => {
   const map = useMap();
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  const toggle = () => {
+  const toggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
     const container = map.getContainer();
     if (!isFullscreen) {
       container.requestFullscreen();

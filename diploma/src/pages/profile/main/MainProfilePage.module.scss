@@ -58,18 +58,29 @@
       justify-content: space-between;
       .toggleProfileMainButton {
         color: rgba(0, 0, 0, 0.8);
+        min-width: 130px;
         padding: 0px 20px;
+        &:hover {
+          background: rgba(231, 226, 226, 0.5);
+        }
       }
       .toggleProfileMainButtonActive {
         background-color: black;
         color: white;
+        @include font-base(25px, 800);
+        transition: font-size 0.2s ease-in-out;
+        color: rgba(255, 255, 255, 0.9);
+        &:hover {
+          background: black;
+        }
       }
       .toggleProfileMain {
         background: rgba(255, 255, 255, 0.6);
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
         height: 100%;
         border-radius: 50px;
-        padding: 10px;
+        padding: 10px 10px;
+        justify-content: space-evenly;
       }
       .linkSettingsButton {
         width: 58px;

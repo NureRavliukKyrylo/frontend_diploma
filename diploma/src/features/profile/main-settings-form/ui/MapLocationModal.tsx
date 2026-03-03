@@ -2,6 +2,7 @@ import { MapLocationPicker } from "@features/map";
 import { BaseModal } from "@shared/ui/modals";
 import styles from "./MapLocationModal.module.scss";
 import type { Coordinates } from "@shared/config/types";
+import { UserMarker } from "@entities/user/profile";
 
 export interface MapLocationModal {
   isMapOpen: boolean;
@@ -34,6 +35,7 @@ export const MapLocationModal = ({
           coordinates={coordinates}
           onLocationChange={setCoordinates}
           popUpText={popUpText}
+          icon={UserMarker}
         />
       </div>
     </BaseModal>

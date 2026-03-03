@@ -1,6 +1,7 @@
 import styles from "./UserLocationPicker.module.scss";
 import { MapLocationPicker } from "@features/map";
 import { useLocationForm } from "../../location-form/model/useLocationForm";
+import { UserMarker } from "@entities/user/profile";
 
 export const UserLocationPicker = () => {
   const { formik, handleLocationChange } = useLocationForm();
@@ -22,6 +23,7 @@ export const UserLocationPicker = () => {
           coordinates={formik.values.coordinates}
           onLocationChange={handleLocationChange}
           popUpText="Your Location"
+          icon={UserMarker}
         />
       </div>
 

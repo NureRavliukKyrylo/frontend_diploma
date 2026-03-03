@@ -3,7 +3,11 @@ import { profileKeys, profileQuery } from "@entities/user/profile";
 import { updateProfile, type UpdateProfileDto } from "../api/updateProfileApi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
-import { formatDateToInput, getErrorMessage } from "@shared/libs";
+import {
+  formatDateToInput,
+  getErrorMessage,
+  reverseGeocode,
+} from "@shared/libs";
 import { type Coordinates } from "@shared/config/types";
 import { settingsMainFormSchema } from "../libs/settingsMainFormSchema";
 
@@ -41,6 +45,7 @@ export const useSettingsMainForm = () => {
       dateOfBirth: formattedDateOfBirth,
       avatar: user?.profile?.avatarUrl,
       coordinates: user?.profile?.coordinates ?? null,
+      location: user?.location.address,
     },
     enableReinitialize: true,
     onSubmit: (values) => {
@@ -59,8 +64,15 @@ export const useSettingsMainForm = () => {
     },
   });
 
-  const handleLocationChange = (coords: Coordinates) => {
+  const handleLocationChange = async (coords: Coordinates) => {
     formik.setFieldValue("coordinates", coords);
+
+    try {
+      const name = await reverseGeocode(coords.latitude, coords.longitude); // 👈
+      formik.setFieldValue("location", name);
+    } catch {
+      formik.setFieldValue("location", "Location");
+    }
   };
 
   const handleFileChange = (file: File | null) => {
@@ -73,6 +85,5 @@ export const useSettingsMainForm = () => {
     errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
     handleLocationChange,
     handleFileChange,
-    user,
   };
 };

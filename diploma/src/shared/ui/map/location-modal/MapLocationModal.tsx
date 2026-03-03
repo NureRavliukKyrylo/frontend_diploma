@@ -4,6 +4,7 @@ import type { Coordinates } from "@shared/config/types";
 import { BaseMap } from "../base/BaseMap";
 import { Marker, Popup } from "react-leaflet";
 import { MapZoomAnimation } from "@shared/libs/map/MapZoomAnimation";
+import type { Icon } from "leaflet";
 
 export interface MapLocationModal {
   isMapOpen: boolean;
@@ -11,6 +12,7 @@ export interface MapLocationModal {
   coordinates: Coordinates | null;
   popUpText: string;
   maxWidth: string;
+  icon: Icon;
 }
 export const MapLocationModal = ({
   isMapOpen,
@@ -18,6 +20,7 @@ export const MapLocationModal = ({
   coordinates,
   popUpText,
   maxWidth,
+  icon,
 }: MapLocationModal) => {
   return (
     <BaseModal
@@ -35,7 +38,10 @@ export const MapLocationModal = ({
           }
         >
           {coordinates && (
-            <Marker position={[coordinates.latitude, coordinates.longitude]}>
+            <Marker
+              position={[coordinates.latitude, coordinates.longitude]}
+              icon={icon}
+            >
               <Popup>{popUpText}</Popup>
             </Marker>
           )}

@@ -12,3 +12,4 @@ export { textField } from "./validation/textValidators";
 export { withPrivacyField } from "./validation/privacyValidators";
 export { useDebounce } from "./hooks/useDebounce";
 export { SetViewOnClick } from "./map/SetViewOnClick";
+export { reverseGeocode } from "./map/reverseGeoCode";

@@ -3,6 +3,7 @@ import { BaseMap } from "@shared/ui";
 import { MapZoomAnimation } from "@shared/libs/map/MapZoomAnimation";
 import { useGeolocation } from "@shared/libs/map/useGeoLocation";
 import { SyncMapEvents } from "../model/setCoordinatesEvent";
+import type { Icon } from "leaflet";
 
 export interface Coordinates {
   latitude: number;
@@ -14,6 +15,7 @@ interface MapLocationPickerProps {
   zoom?: number;
   onLocationChange: (coords: Coordinates) => void;
   popUpText: string;
+  icon: Icon;
 }
 
 export const MapLocationPicker: React.FC<MapLocationPickerProps> = ({
@@ -21,6 +23,7 @@ export const MapLocationPicker: React.FC<MapLocationPickerProps> = ({
   zoom,
   onLocationChange,
   popUpText,
+  icon,
 }) => {
   useGeolocation({ coordinates, onLocationChange });
 
@@ -35,7 +38,10 @@ export const MapLocationPicker: React.FC<MapLocationPickerProps> = ({
       }
     >
       {coordinates && (
-        <Marker position={[coordinates.latitude, coordinates.longitude]}>
+        <Marker
+          position={[coordinates.latitude, coordinates.longitude]}
+          icon={icon}
+        >
           <Popup>{popUpText}</Popup>
         </Marker>
       )}

@@ -18,7 +18,6 @@ export function SettingsMainForm() {
     errorMessage,
     handleFileChange,
     handleLocationChange,
-    user,
   } = useSettingsMainForm();
 
   const [isMapOpen, setIsMapOpen] = useState<boolean>(false);
@@ -75,7 +74,7 @@ export function SettingsMainForm() {
           </div>
           <div className={styles.mapLocationWrapper}>
             <MapLocationInput
-              label={user?.location.address}
+              label={formik.values.location}
               handleMapOpen={handleOpenModal}
             />
             <MapLocationModal

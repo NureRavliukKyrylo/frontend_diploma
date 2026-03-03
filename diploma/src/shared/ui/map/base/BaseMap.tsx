@@ -34,7 +34,7 @@ export const BaseMap: React.FC<{
           overflow: "hidden",
         }}
       >
-        <TileLayer url="https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.jpg" />
+        <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
         <SetViewOnClick animateRef={animateRef} />
         <FullscreenControl />
         {children}
