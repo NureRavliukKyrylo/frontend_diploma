@@ -3,8 +3,15 @@ import { useState } from "react";
 import styles from "./FullScreenControl.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { FullSizeIcon } from "@shared/assets/icons/actions";
+import { positionStyles, type Position } from "@shared/assets/types";
 
-export const FullscreenControl = () => {
+interface FullScreenProps {
+  position?: Position;
+}
+
+export const FullscreenControl = ({
+  position = "topright",
+}: FullScreenProps) => {
   const map = useMap();
   const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -24,6 +31,7 @@ export const FullscreenControl = () => {
       onClick={toggle}
       type="button"
       className={styles.fullScreenButton}
+      style={positionStyles[position]}
     >
       <img src={FullSizeIcon} alt="full-screen" />
     </BaseButtonWrapper>

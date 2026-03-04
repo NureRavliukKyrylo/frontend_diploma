@@ -1,0 +1,25 @@
+@use "@shared/assets/styles" as *;
+
+.zoomControl {
+  position: absolute;
+  z-index: 1000;
+  display: flex;
+  gap: 10px;
+}
+
+.zoomBtn {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  color: white;
+  background: black;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  img {
+    width: 50%;
+    filter: invert(1);
+  }
+}

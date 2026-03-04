@@ -5,7 +5,7 @@ import {
 } from "@widgets/projects";
 import { Pagination } from "@shared/ui";
 import { Suspense, useState } from "react";
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { FilterButton, LinkButtonWrapper } from "@shared/ui/buttons";
 import { SearchBar } from "@shared/ui/inputs";
 import { SortDropDown } from "@shared/ui/drop-down";
@@ -13,8 +13,9 @@ import { sortingItems } from "../config/sortingItems";
 import styles from "./ProjectsPage.module.scss";
 import { ProjectsLogo } from "@shared/assets/images/information";
 import { useQuery } from "@tanstack/react-query";
-import { projectQuery } from "@entities/project";
+import { ProjectCard, projectQuery } from "@entities/project";
 import { motion } from "framer-motion";
+import { formatDateToInput } from "@shared/libs";
 
 export function ProjectsPage() {
   const navigate = useNavigate({ from: "/projects/" });
@@ -94,7 +95,39 @@ export function ProjectsPage() {
               </div>
             ) : (
               <Suspense fallback={<ProjectsListWidgetSkeleton />}>
-                <ProjectsListWidget search={search} />
+                <ProjectsListWidget
+                  renderCard={(project) => (
+                    <motion.div
+                      key={project.id}
+                      whileHover={{ scale: 1.02, y: -2 }}
+                      transition={{
+                        ease: "easeIn",
+                        duration: 0.2,
+                      }}
+                    >
+                      <Link to="/projects/$id" params={{ id: project.id }}>
+                        <ProjectCard
+                          key={project.id}
+                          image={
+                            "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg"
+                          }
+                          name={"kiberkit"}
+                          title={project.title}
+                          description={project.description}
+                          deadline={formatDateToInput(project.endAt)}
+                          progress={59}
+                          avatars={[
+                            "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                            "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                            "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                          ]}
+                          tasks={11}
+                        />
+                      </Link>
+                    </motion.div>
+                  )}
+                  search={search}
+                />
               </Suspense>
             )}
           </motion.div>

@@ -45,7 +45,7 @@ export const useSettingsMainForm = () => {
       dateOfBirth: formattedDateOfBirth,
       avatar: user?.profile?.avatarUrl,
       coordinates: user?.profile?.coordinates ?? null,
-      location: user?.location.address,
+      location: user?.location?.address,
     },
     enableReinitialize: true,
     onSubmit: (values) => {

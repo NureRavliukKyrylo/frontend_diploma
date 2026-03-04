@@ -1,101 +1,86 @@
 @use "@shared/assets/styles" as *;
 
-.subHeaderFilter {
-  @include font-base(20px, 700);
-}
-.dividerFilterBlock {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  width: 100%;
-}
-.projectDeadLine {
+.deadlineCalendarBlock {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 30px 20px 20px 20px;
-  .deadlineCalendarBlock {
-    display: flex;
-    justify-content: space-between;
-    > :first-child {
-      width: 48%;
-    }
+  justify-content: space-between;
+  > :first-child {
+    width: 48%;
+  }
 
-    > :last-child {
-      width: 48%;
+  > :last-child {
+    width: 48%;
+  }
+  .startDate {
+    h2 {
+      color: rgba(0, 0, 0, 0.5);
+      @include font-base(15px, 500);
     }
-    .startDate {
-      h2 {
-        color: rgba(0, 0, 0, 0.5);
-        @include font-base(15px, 500);
-      }
-      .dateStartInput {
-        border-radius: 10px;
-      }
+    .dateStartInput {
+      border-radius: 10px;
     }
+  }
 
-    .dueDate {
-      h2 {
-        color: rgba(0, 0, 0, 0.5);
-        @include font-base(15px, 500);
-      }
-      .dateDueInput {
-        border-radius: 10px;
-      }
+  .dueDate {
+    h2 {
+      color: rgba(0, 0, 0, 0.5);
+      @include font-base(15px, 500);
+    }
+    .dateDueInput {
+      border-radius: 10px;
     }
   }
 }
-.projectRating {
+.ratingBlock {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 20px 20px 30px 20px;
-  .ratingBlock {
+  align-items: center;
+  gap: 20px;
+  .valueRating {
     display: flex;
     align-items: center;
-    gap: 20px;
-    .valueRating {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 5px;
-      background: #f0f0f0;
-      border-radius: 10px;
-      padding: 5px 8px;
-      width: 100%;
-      .starReview {
-        width: 20px;
-        height: 20px;
-      }
-      .starReviewValue {
-        @include font-base(20px, 900);
-      }
+    justify-content: flex-start;
+    gap: 5px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    padding: 5px 8px;
+    width: 100%;
+    .starReview {
+      width: 20px;
+      height: 20px;
+    }
+    .starReviewValue {
+      @include font-base(20px, 900);
     }
   }
 }
-.projectCategories {
+.categoriesListFilter {
   display: flex;
-  flex-direction: column;
-  padding: 20px 20px 30px 20px;
-  gap: 15px;
-  .categoriesListFilter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
+  flex-wrap: wrap;
+  gap: 10px;
 }
-.projectOrganizations {
+
+.organizationssListFilter {
   display: flex;
-  flex-direction: column;
-  padding: 20px 20px 30px 20px;
-  gap: 15px;
-  .organizationssListFilter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
+  flex-wrap: wrap;
+  gap: 10px;
 }
+
 .projectDistance {
   padding: 20px;
 }
 .moreOptions {
   padding: 20px;
+}
+.categoriesListFilter {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

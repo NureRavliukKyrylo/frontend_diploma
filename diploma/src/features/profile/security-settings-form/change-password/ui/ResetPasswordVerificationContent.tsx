@@ -1,5 +1,5 @@
 import { VerificationWrapper } from "@shared/ui/wrappers";
-import styles from "../../base-security-form/ui/SecuritySettingsForm.module.scss";
+import styles from "./ChangePasswordButton.module.scss";
 import { ProfilePasswordInput } from "@shared/ui/inputs";
 import { useSendNewPassword } from "../model/useSendNewPassword";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
@@ -27,6 +27,7 @@ export const ResetPasswordVerificationContent = () => {
           value={formik.values.newPassword}
           onChange={formik.handleChange}
           error={formik.submitCount > 0 ? formik.errors.newPassword : ""}
+          showEyeButton={true}
         />
         <ProfilePasswordInput
           name="confirmPassword"
@@ -35,6 +36,7 @@ export const ResetPasswordVerificationContent = () => {
           value={formik.values.confirmPassword}
           onChange={formik.handleChange}
           error={formik.submitCount > 0 ? formik.errors.confirmPassword : ""}
+          showEyeButton={true}
         />
         <BaseButtonWrapper
           loading={isLoading}

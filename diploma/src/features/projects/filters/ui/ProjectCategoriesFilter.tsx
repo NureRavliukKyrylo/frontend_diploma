@@ -4,15 +4,18 @@ import { useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import type { ProjectSearchParams } from "@entities/project";
 import { toggleArrayParam } from "../libs/toggleTab";
+import type { NavigateParams } from "../model/NavigateParams";
 
 interface ProjectCategoriesFilterProps {
   search: ProjectSearchParams;
+  from: Exclude<NavigateParams, "/categories/$id/">;
 }
 
 export const ProjectCategoriesFilter = ({
   search,
+  from,
 }: ProjectCategoriesFilterProps) => {
-  const navigate = useNavigate({ from: "/projects/" });
+  const navigate = useNavigate({ from });
   const { data: categories } = useQuery(categoryQuery.all());
 
   const toggleCategory = (categoryId: string) => {
@@ -26,18 +29,15 @@ export const ProjectCategoriesFilter = ({
   };
 
   return (
-    <div className={styles.projectCategories}>
-      <h1 className={styles.subHeaderFilter}>Categories</h1>
-      <div className={styles.categoriesListFilter}>
-        {categories?.data.map((category) => (
-          <CategoryTab
-            key={category.id}
-            name={category.name}
-            isSelected={search.CategoryIds?.includes(category.id) ?? false}
-            onClick={() => toggleCategory(category.id)}
-          />
-        ))}
-      </div>
+    <div className={styles.categoriesListFilter}>
+      {categories?.data.map((category) => (
+        <CategoryTab
+          key={category.id}
+          name={category.name}
+          isSelected={search.CategoryIds?.includes(category.id) ?? false}
+          onClick={() => toggleCategory(category.id)}
+        />
+      ))}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { onlineManager, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { logout } from "../api/logoutApi";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
@@ -12,7 +12,6 @@ export const useLogout = (onSuccessCallback?: () => void, showToast = true) => {
     mutationFn: logout,
     onSuccess: async () => {
       await queryClient.cancelQueries();
-      onlineManager.setOnline(false);
       queryClient.clear();
       localStorage.clear();
 

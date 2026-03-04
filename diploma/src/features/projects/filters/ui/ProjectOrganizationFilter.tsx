@@ -35,22 +35,17 @@ export const ProjectOrganizationFilter = ({
   ];
 
   return (
-    <div className={styles.projectOrganizations}>
-      <h1 className={styles.subHeaderFilter}>Organizations</h1>
-      <div className={styles.organizationssListFilter}>
-        {organizations.map((organization) => (
-          <OrganizationTab
-            key={organization.id}
-            name={organization.name}
-            isSelected={
-              search.OrganizationId?.includes(organization.id) ?? false
-            }
-            onClick={() => {
-              toggleOrganization(organization.id);
-            }}
-          />
-        ))}
-      </div>
+    <div className={styles.organizationssListFilter}>
+      {organizations.map((organization) => (
+        <OrganizationTab
+          key={organization.id}
+          name={organization.name}
+          isSelected={search.OrganizationId?.includes(organization.id) ?? false}
+          onClick={() => {
+            toggleOrganization(organization.id);
+          }}
+        />
+      ))}
     </div>
   );
 };

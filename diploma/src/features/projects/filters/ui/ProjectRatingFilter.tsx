@@ -18,32 +18,29 @@ export const ProjectRatingFilter = ({
   const [displayValue, setDisplayValue] = useState(search.Rating ?? 0);
 
   return (
-    <div className={styles.projectRating}>
-      <h1 className={styles.subHeaderFilter}>Project rating</h1>
-      <div className={styles.ratingBlock}>
-        <div className={styles.valueRating}>
-          <img src={Star} alt="star" className={styles.starReview} />
-          <h1 className={styles.starReviewValue}>{displayValue}</h1>
-        </div>
-        <Slider
-          aria-label="slider"
-          size="md"
-          value={search.Rating ?? 0}
-          minValue={0}
-          maxValue={5}
-          step={0.1}
-          onChangeImmediate={(rating) => setDisplayValue(rating)}
-          onChange={(rating) => {
-            navigate({
-              search: (prev) => ({
-                ...prev,
-                Rating: rating === 0 ? undefined : (rating as number),
-              }),
-              resetScroll: false,
-            });
-          }}
-        />
+    <div className={styles.ratingBlock}>
+      <div className={styles.valueRating}>
+        <img src={Star} alt="star" className={styles.starReview} />
+        <h1 className={styles.starReviewValue}>{displayValue}</h1>
       </div>
+      <Slider
+        aria-label="slider"
+        size="md"
+        value={search.Rating ?? 0}
+        minValue={0}
+        maxValue={5}
+        step={0.1}
+        onChangeImmediate={(rating) => setDisplayValue(rating)}
+        onChange={(rating) => {
+          navigate({
+            search: (prev) => ({
+              ...prev,
+              Rating: rating === 0 ? undefined : (rating as number),
+            }),
+            resetScroll: false,
+          });
+        }}
+      />
     </div>
   );
 };

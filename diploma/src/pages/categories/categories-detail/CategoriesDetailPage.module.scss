@@ -1,3 +1,5 @@
+@use "@shared/assets/styles" as *;
+
 .projectsCategoryWrapper {
   width: 90%;
   display: flex;
@@ -15,6 +17,20 @@
     }
     .projectsList {
       grid-column: 1 / 3;
+      min-height: 800px;
+      .emptyState {
+        display: flex;
+        flex-direction: column;
+        h2 {
+          @include font-base(60px, 900);
+          line-height: 120%;
+          color: #1a1a2e;
+        }
+        p {
+          @include font-base(40px, 500);
+          color: #6b7280;
+        }
+      }
       &.filterOpen {
         grid-column: 2/3;
       }

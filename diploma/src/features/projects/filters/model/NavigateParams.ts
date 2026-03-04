@@ -1,1 +1,1 @@
-export type NavigateParams = "/projects/" | "/categories/$id/";
+export type NavigateParams = "/projects/" | "/categories/$id/" | "/map/";

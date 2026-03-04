@@ -1,4 +1,27 @@
+@use "@shared/assets/styles" as *;
+
 .dividerFilterBlock {
   border: 1px solid rgba(0, 0, 0, 0.1);
   width: 100%;
+}
+.subHeaderFilter {
+  @include font-base(20px, 700);
+}
+.projectDeadLine {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 30px 20px 20px 20px;
+}
+.projectRating {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px 20px 30px 20px;
+}
+.projectOrganizations {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 30px 20px;
+  gap: 15px;
 }

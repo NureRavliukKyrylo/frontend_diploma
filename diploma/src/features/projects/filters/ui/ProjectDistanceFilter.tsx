@@ -11,9 +11,5 @@ export const ProjectDistanceFilter = ({
   search,
   from,
 }: ProjectDistanceFilterProps) => {
-  return (
-    <div className={styles.projectDistance}>
-      <h1 className={styles.subHeaderFilter}>Distance</h1>
-    </div>
-  );
+  return <div>hi</div>;
 };

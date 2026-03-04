@@ -1,0 +1,46 @@
+@use "@shared/assets/styles" as *;
+
+.dividerFilterBlock {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+.title {
+  @include font-base(20px, 700);
+}
+
+.divider {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.indicator {
+  color: #888;
+  font-size: 25px;
+}
+
+.base {
+  padding: 10px;
+}
+.trigger {
+  outline: none;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+.scrollableFilters {
+  max-height: 60vh;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+  }
+}

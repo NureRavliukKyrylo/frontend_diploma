@@ -19,13 +19,25 @@ export const CategoryProjectFiltersWidget = ({
 }: CategoryProjectFiltersWidgetProps) => {
   return (
     <>
-      <ProjectDeadlineFilter search={search} from={from} />
+      <div className={styles.projectDeadLine}>
+        <h1 className={styles.subHeaderFilter}>Project deadline due</h1>
+        <ProjectDeadlineFilter search={search} from={from} />
+      </div>
       <div className={styles.dividerFilterBlock}></div>
-      <ProjectRatingFilter search={search} from={from} />
+      <div className={styles.projectRating}>
+        <h1 className={styles.subHeaderFilter}>Project rating</h1>
+        <ProjectRatingFilter search={search} from={from} />
+      </div>
       <div className={styles.dividerFilterBlock}></div>
-      <ProjectOrganizationFilter search={search} from={from} />
+      <div className={styles.projectOrganizations}>
+        <h1 className={styles.subHeaderFilter}>Organizations</h1>
+        <ProjectOrganizationFilter search={search} from={from} />
+      </div>
       <div className={styles.dividerFilterBlock}></div>
-      <ProjectDistanceFilter search={search} from={from} />
+      <div className={styles.projectDistance}>
+        <h1 className={styles.subHeaderFilter}>Distance</h1>
+        <ProjectDistanceFilter search={search} from={from} />
+      </div>
       <div className={styles.dividerFilterBlock}></div>
     </>
   );

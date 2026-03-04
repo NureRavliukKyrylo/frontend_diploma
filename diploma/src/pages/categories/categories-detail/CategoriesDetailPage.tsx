@@ -12,11 +12,16 @@ import {
 } from "@widgets/projects";
 import { sortingItems } from "./config/sortingItems";
 import { CategoryProjectFiltersWidget } from "@widgets/categories";
+import { ProjectCard, projectQuery } from "@entities/project";
+import { formatDateToInput } from "@shared/libs";
+import { Pagination } from "@shared/ui";
+import { useQuery } from "@tanstack/react-query";
 
 export function CategoryDetailPage() {
   const navigate = useNavigate({ from: "/categories/$id/" });
   const search = useSearch({ from: "/_masterLayout/categories/$id/" });
   const { id } = useParams({ from: "/_masterLayout/categories/$id/" });
+  const { data: projects } = useQuery(projectQuery.list(search));
 
   const searchWithCategory = {
     ...search,
@@ -69,10 +74,51 @@ export function CategoryDetailPage() {
             isFilterOpen ? styles.filterOpen : ""
           }`}
         >
-          <Suspense fallback={<ProjectsListWidgetSkeleton />}>
-            <ProjectsListWidget search={searchWithCategory} />
-          </Suspense>
+          {projects?.data?.length === 0 ? (
+            <div className={styles.emptyState}>
+              <h2>No projects found</h2>
+              <p>Try adjusting your filters or search query</p>
+            </div>
+          ) : (
+            <Suspense fallback={<ProjectsListWidgetSkeleton />}>
+              <ProjectsListWidget
+                renderCard={(project) => (
+                  <ProjectCard
+                    key={project.id}
+                    image={
+                      "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg"
+                    }
+                    name={"kiberkit"}
+                    title={project.title}
+                    description={project.description}
+                    deadline={formatDateToInput(project.endAt)}
+                    progress={59}
+                    avatars={[
+                      "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                      "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                      "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                    ]}
+                    tasks={11}
+                  />
+                )}
+                search={searchWithCategory}
+              />
+            </Suspense>
+          )}
         </motion.div>
+      </div>
+      <div className={styles.paginationWrapper}>
+        {projects && (
+          <Pagination
+            total={3}
+            page={search.Page}
+            onChange={(page) => {
+              navigate({
+                search: (prev) => ({ ...prev, Page: page }),
+              });
+            }}
+          />
+        )}
       </div>
     </div>
   );

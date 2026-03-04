@@ -10,7 +10,7 @@ export const ChangePasswordButton = () => {
 
   return (
     <BaseButtonWrapper
-      className={`${styles.editPasswordButton} ${isPasswordSet ? styles.newPassword : ""}`}
+      className={`${styles.changePasswordButton} ${isPasswordSet ? styles.newPassword : ""}`}
       disabled={isLoading}
       type="button"
       showLoadingText={false}
