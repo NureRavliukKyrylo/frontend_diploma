@@ -6,12 +6,19 @@ import { Suspense } from "react";
 import { Pagination } from "@shared/ui";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import styles from "./CategoriesPage.module.scss";
-import { AllCategoriesCard, CategoryCard } from "@entities/category";
+import {
+  AllCategoriesCard,
+  CategoryCard,
+  categoryQuery,
+} from "@entities/category";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
 
 export function CategoriesPage() {
   const navigate = useNavigate({ from: "/categories/" });
   const { page } = useSearch({ from: "/_masterLayout/categories/" });
+  const search = useSearch({ from: "/_masterLayout/categories/" });
+  const { data: categories } = useQuery(categoryQuery.list(search));
 
   return (
     <div className={styles.categoriesWrapperList}>
@@ -55,15 +62,17 @@ export function CategoriesPage() {
         />
       </Suspense>
       <div className={styles.paginationWrapper}>
-        <Pagination
-          total={3}
-          page={page}
-          onChange={(page) => {
-            navigate({
-              search: (prev) => ({ ...prev, page }),
-            });
-          }}
-        />
+        {categories && (
+          <Pagination
+            total={categories.pagination.totalPages}
+            page={page}
+            onChange={(page) => {
+              navigate({
+                search: (prev) => ({ ...prev, page }),
+              });
+            }}
+          />
+        )}
       </div>
     </div>
   );

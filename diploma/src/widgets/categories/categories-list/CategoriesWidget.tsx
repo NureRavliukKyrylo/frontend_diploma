@@ -13,7 +13,7 @@ export const CategoriesWidget = ({
   startSlot,
 }: CategoriesWidgetProps) => {
   const search = useSearch({ from: "/_masterLayout/categories/" });
-  const { data: categories } = useSuspenseQuery(categoryQuery.list(search, 8));
+  const { data: categories } = useSuspenseQuery(categoryQuery.list(search));
 
   return (
     <div className={styles.categoriesWidgetBlock}>

@@ -28,6 +28,7 @@
     "@tanstack/react-query-devtools": "^5.91.3",
     "@tanstack/react-router": "^1.131.50",
     "@tanstack/react-router-devtools": "^1.162.2",
+    "@vis.gl/react-google-maps": "^1.7.1",
     "axios": "^1.12.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -53,6 +54,7 @@
   "devDependencies": {
     "@eslint/js": "^9.36.0",
     "@tanstack/router-vite-plugin": "^1.162.2",
+    "@types/google.maps": "^3.58.1",
     "@types/leaflet": "^1.9.20",
     "@types/node": "^24.8.1",
     "@types/react": "^19.1.13",

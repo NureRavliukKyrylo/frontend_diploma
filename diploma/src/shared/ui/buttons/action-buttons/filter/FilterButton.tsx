@@ -34,7 +34,6 @@ export const FilterButton = ({ children, onOpenChange }: FilterButtonProps) => {
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
-            layout
             className={styles.filterDropdown}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}

@@ -16,6 +16,7 @@ import { ProjectCard, projectQuery } from "@entities/project";
 import { formatDateToInput } from "@shared/libs";
 import { Pagination } from "@shared/ui";
 import { useQuery } from "@tanstack/react-query";
+import { DefaultAvatar } from "@shared/assets/images/user";
 
 export function CategoryDetailPage() {
   const navigate = useNavigate({ from: "/categories/$id/" });
@@ -85,20 +86,27 @@ export function CategoryDetailPage() {
                 renderCard={(project) => (
                   <ProjectCard
                     key={project.id}
-                    image={
-                      "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg"
-                    }
-                    name={"kiberkit"}
+                    image={project.organization?.logoUrl ?? DefaultAvatar}
+                    name={project.organization?.name ?? "Unknown Organization"}
                     title={project.title}
                     description={project.description}
                     deadline={formatDateToInput(project.endAt)}
-                    progress={59}
+                    progress={project.progressPercent}
                     avatars={[
-                      "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
-                      "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
-                      "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                      {
+                        src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                        name: "Kyrylo",
+                      },
+                      {
+                        src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                        name: "Kyrylo",
+                      },
+                      {
+                        src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                        name: "Kyrylo",
+                      },
                     ]}
-                    tasks={11}
+                    tasks={project.tasksTotal}
                   />
                 )}
                 search={searchWithCategory}
@@ -110,7 +118,7 @@ export function CategoryDetailPage() {
       <div className={styles.paginationWrapper}>
         {projects && (
           <Pagination
-            total={3}
+            total={projects.pagination.totalPages}
             page={search.Page}
             onChange={(page) => {
               navigate({

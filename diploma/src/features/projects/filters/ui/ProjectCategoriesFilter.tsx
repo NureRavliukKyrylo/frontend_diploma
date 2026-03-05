@@ -1,10 +1,11 @@
 import { categoryQuery, CategoryTab } from "@entities/category";
 import styles from "./ProjectFilters.module.scss";
 import { useNavigate } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import type { ProjectSearchParams } from "@entities/project";
 import { toggleArrayParam } from "../libs/toggleTab";
 import type { NavigateParams } from "../model/NavigateParams";
+import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 interface ProjectCategoriesFilterProps {
   search: ProjectSearchParams;
@@ -16,7 +17,12 @@ export const ProjectCategoriesFilter = ({
   from,
 }: ProjectCategoriesFilterProps) => {
   const navigate = useNavigate({ from });
-  const { data: categories } = useQuery(categoryQuery.all());
+  const {
+    data: categories = [],
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery(categoryQuery.infinite({ pageSize: 5 }));
 
   const toggleCategory = (categoryId: string) => {
     navigate({
@@ -29,15 +35,26 @@ export const ProjectCategoriesFilter = ({
   };
 
   return (
-    <div className={styles.categoriesListFilter}>
-      {categories?.data.map((category) => (
-        <CategoryTab
-          key={category.id}
-          name={category.name}
-          isSelected={search.CategoryIds?.includes(category.id) ?? false}
-          onClick={() => toggleCategory(category.id)}
-        />
-      ))}
+    <div className={styles.categoriesInfinite}>
+      <div className={styles.categoriesListFilter}>
+        {categories?.map((category) => (
+          <CategoryTab
+            key={category.id}
+            name={category.name}
+            isSelected={search.CategoryIds?.includes(category.id) ?? false}
+            onClick={() => toggleCategory(category.id)}
+          />
+        ))}
+      </div>
+      {hasNextPage && (
+        <BaseButtonWrapper
+          onClick={() => fetchNextPage()}
+          disabled={isFetchingNextPage}
+          className={styles.showMoreCategoriesButton}
+        >
+          {isFetchingNextPage ? "Loading..." : "show more"}
+        </BaseButtonWrapper>
+      )}
     </div>
   );
 };

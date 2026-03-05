@@ -3,4 +3,7 @@ export interface Category {
   name: string;
   description: string;
   imageUrl: string;
+  projectsTotal: number;
+  projectsActive: number;
+  projectsCompleted: number;
 }

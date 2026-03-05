@@ -1,9 +1,15 @@
 import { useNavigate } from "@tanstack/react-router";
 import styles from "./ProjectFilters.module.scss";
-import { OrganizationTab, type Organization } from "@entities/organization";
+import {
+  organizationQuery,
+  OrganizationTab,
+  type Organization,
+} from "@entities/organization";
 import type { ProjectSearchParams } from "@entities/project";
 import type { NavigateParams } from "../model/NavigateParams";
 import { toggleArrayParam } from "../libs/toggleTab";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 interface ProjectOrganizationFilterProps {
   search: ProjectSearchParams;
@@ -15,6 +21,12 @@ export const ProjectOrganizationFilter = ({
   from,
 }: ProjectOrganizationFilterProps) => {
   const navigate = useNavigate({ from });
+  const {
+    data: organizations,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery(organizationQuery.infinite({ pageSize: 5 }));
 
   const toggleOrganization = (organizationId: string) => {
     navigate({
@@ -26,26 +38,31 @@ export const ProjectOrganizationFilter = ({
     });
   };
 
-  const organizations: Organization[] = [
-    { id: "asdasdasdSAasd", name: "Ancient Greek" },
-    { id: "asdasdDasdasd", name: "Ancient Greeks" },
-    { id: "asdasdaSDsdasd", name: "Ancient Greeksd" },
-    { id: "asdasdaSDsDdasd", name: "Ancient Greekdd" },
-    { id: "asdasdasSDdasd", name: "Ancient Greeka" },
-  ];
-
   return (
-    <div className={styles.organizationssListFilter}>
-      {organizations.map((organization) => (
-        <OrganizationTab
-          key={organization.id}
-          name={organization.name}
-          isSelected={search.OrganizationId?.includes(organization.id) ?? false}
-          onClick={() => {
-            toggleOrganization(organization.id);
-          }}
-        />
-      ))}
+    <div className={styles.organizationsInfinite}>
+      <div className={styles.organizationsListFilter}>
+        {organizations?.map((organization) => (
+          <OrganizationTab
+            key={organization.id}
+            name={organization.name}
+            isSelected={
+              search.OrganizationId?.includes(organization.id) ?? false
+            }
+            onClick={() => {
+              toggleOrganization(organization.id);
+            }}
+          />
+        ))}
+      </div>
+      {hasNextPage && (
+        <BaseButtonWrapper
+          onClick={() => fetchNextPage()}
+          disabled={isFetchingNextPage}
+          className={styles.showMoreOrganizationsButton}
+        >
+          {isFetchingNextPage ? "Loading..." : "show more"}
+        </BaseButtonWrapper>
+      )}
     </div>
   );
 };

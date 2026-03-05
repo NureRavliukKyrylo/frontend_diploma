@@ -52,16 +52,36 @@
     }
   }
 }
-.categoriesListFilter {
+.categoriesInfinite {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-end;
   gap: 10px;
+  .categoriesListFilter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .showMoreCategoriesButton {
+    @include font-base(16px, 600);
+    color: #8c0000;
+  }
 }
 
-.organizationssListFilter {
+.organizationsInfinite {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-end;
   gap: 10px;
+  .organizationsListFilter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .showMoreOrganizationsButton {
+    @include font-base(16px, 600);
+    color: #8c0000;
+  }
 }
 
 .projectDistance {
@@ -70,17 +90,110 @@
 .moreOptions {
   padding: 20px;
 }
-.categoriesListFilter {
-  animation: fadeIn 0.2s ease;
-}
+.locationSuggestionsWrapper {
+  .locationWrapper {
+    background: #f0f0f0;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 40px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &.open {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px 10px 0px 0px;
+    }
+    .locationInputWrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      .mapIcon {
+        svg {
+          width: 22px;
+          height: 22px;
+        }
+      }
+      .locationInput {
+        @include font-base(18px, 500);
+        color: #000000;
+        outline: none;
+        width: 100%;
+        &::placeholder {
+          @include font-base(18px, 500);
+        }
+      }
+    }
+    .radiusInputWrapper {
+      display: flex;
+      gap: 10px;
+      .dividerLocationInput {
+        border-left: 1px solid rgba(0, 0, 0, 0.2);
+        transform: scaleX(1.5);
+      }
+      .kmInfoRadius {
+        display: flex;
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
+        .radiusPrefix,
+        .radiusSuffix {
+          @include font-base(18px, 700);
+          color: #8c0000;
+          pointer-events: none;
+        }
+        .radiusInput {
+          outline: none;
+          -moz-appearance: textfield;
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+          @include font-base(18px, 700);
+          color: #8c0000;
+        }
+      }
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .locationDropdown {
+    background: #f0f0f0;
+    border-radius: 0 0 10px 10px;
+    overflow-y: auto;
+    max-height: 200px;
+
+    .locationDropdownInfo {
+      @include font-base(15px, 700);
+      padding: 10px;
+    }
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 4px;
+    }
+
+    li {
+      @include font-base(15px, 700);
+      color: #000;
+      padding: 10px;
+      cursor: pointer;
+      list-style: none;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
   }
 }

@@ -11,7 +11,7 @@
     grid-template-columns: 480px 1fr;
     .filtersInteractions {
       display: grid;
-      grid-template-columns: 480px 2fr 1.2fr;
+      grid-template-columns: 480px 2fr 1fr;
       gap: 30px;
       grid-column: 1 / 3;
     }

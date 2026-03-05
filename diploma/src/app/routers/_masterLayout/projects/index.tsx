@@ -10,6 +10,6 @@ export const Route = createFileRoute("/_masterLayout/projects/")({
     middlewares: [stripSearchParams(projectSearchDefaults)],
   },
   loader: async ({ context: { queryClient } }) => {
-    queryClient.prefetchQuery(categoryQuery.all());
+    queryClient.prefetchInfiniteQuery(categoryQuery.infinite({ pageSize: 5 }));
   },
 });

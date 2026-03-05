@@ -29,17 +29,17 @@ export const CategoryDetailWidget = () => {
             </ReadMoreButton>
             <div className={styles.projectsBlock}>
               <div className={styles.projectInfo}>
-                <h1>{451}</h1>
+                <h1>{category.projectsTotal}</h1>
                 <h2>All projects</h2>
               </div>
               <div className={styles.lineDividerProject} />
               <div className={styles.projectInfo}>
-                <h1>{2}</h1>
+                <h1>{category.projectsActive}</h1>
                 <h2>Active projects</h2>
               </div>
               <div className={styles.lineDividerProject} />
               <div className={styles.projectInfo}>
-                <h1>{3}</h1>
+                <h1>{category.projectsCompleted}</h1>
                 <h2>Completed projects</h2>
               </div>
             </div>

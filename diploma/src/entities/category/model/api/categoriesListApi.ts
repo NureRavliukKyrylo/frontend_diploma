@@ -8,12 +8,8 @@ export interface CategoriesResponse {
   pagination: PaginationResponse;
 }
 
-export type CategoryQueryParams = CategoriesSearchParams & {
-  pageSize?: number;
-};
-
 export const getListCategories = async (
-  params?: CategoryQueryParams,
+  params?: CategoriesSearchParams,
 ): Promise<CategoriesResponse> => {
   const response = await apiClient.get("/Categories/list", { params });
   return response.data;

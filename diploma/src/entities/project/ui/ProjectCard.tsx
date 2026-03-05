@@ -1,7 +1,8 @@
 import { Calendar } from "@shared/assets/icons/info";
 import styles from "./ProjectCard.module.scss";
 import { ReadMoreButton } from "@shared/ui/buttons";
-import { Avatar, ProgressBar } from "@shared/ui";
+import { AvatarGroup, ProgressBar } from "@shared/ui";
+import type { AvatarItem } from "@shared/config/types";
 
 interface ProjectCardProps {
   image: string;
@@ -10,9 +11,10 @@ interface ProjectCardProps {
   description: string;
   deadline: string;
   progress: number;
-  avatars: string[];
+  avatars: AvatarItem[];
   tasks: number;
 }
+
 export const ProjectCard = ({
   image,
   name,
@@ -57,11 +59,11 @@ export const ProjectCard = ({
         <ProgressBar current={progress} />
       </div>
       <div className={styles.footerCard}>
-        <div className={styles.avatarsGroup}>
-          {avatars.map((src, index) => (
-            <Avatar key={index} src={src} className={styles.avatarVolunteer} />
-          ))}
-        </div>
+        <AvatarGroup
+          className={styles.avatarsGroup}
+          avatarClassName={styles.avatarVolunteer}
+          avatars={avatars}
+        />
         <h1>{tasks} task</h1>
       </div>
     </div>

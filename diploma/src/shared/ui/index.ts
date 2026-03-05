@@ -13,5 +13,6 @@ export { Switch } from "./switch/Switch";
 export { MapLocationModal } from "./map/location-modal/MapLocationModal";
 export { BaseSpinner } from "./spinner/BaseSpinner";
 export { LoadingComponent } from "./base-components/LoadingComponent";
-export { Avatar } from "./avatar/Avatar";
+export { Avatar } from "./avatar/avatar-base/Avatar";
 export { Slider } from "./slider/Slider";
+export { AvatarGroup } from "./avatar/avatar-group/AvatarGroup";

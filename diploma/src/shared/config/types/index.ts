@@ -10,3 +10,5 @@ export type { Coordinates } from "./map/Coordinates";
 export { type SortOption } from "./drop-down/SortOption";
 export { type SortValues } from "./drop-down/SortValues";
 export type { PaginationResponse } from "./pagination/PaginationResponse";
+export type { AvatarItem } from "./avatar/AvatarItem";
+export type { LocationSuggestion } from "./map/LocationSuggestion";
