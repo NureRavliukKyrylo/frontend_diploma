@@ -1,0 +1,17 @@
+@use "@shared/assets/styles" as *;
+
+.wrapperMoreOptionsFilter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .completedProject,
+  .joinedProject {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .titleFilterMoreOptions {
+    @include font-base(18px, 500);
+    color: rgba(0, 0, 0, 0.7);
+  }
+}

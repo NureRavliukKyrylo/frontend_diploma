@@ -3,6 +3,9 @@ import { z } from "zod";
 export const projectSearchDefaults = {
   OrderBy: "Default" as const,
   Page: 1,
+  pageSize: 9,
+  ShowCompleted: false,
+  ShowJoined: false,
 };
 
 export const baseProjectSearchSchema = z.object({
@@ -17,6 +20,12 @@ export const baseProjectSearchSchema = z.object({
   RadiusKm: z.number().optional(),
   Search: z.string().optional(),
   Page: z.number().min(1).default(1),
+  Lat: z.number().min(-90).max(90).optional(),
+  Lng: z.number().min(-180).max(180).optional(),
+  Location: z.string().optional(),
+  pageSize: z.number().min(1).default(9),
+  ShowCompleted: z.boolean().optional().default(false).optional(),
+  ShowJoined: z.boolean().optional().default(false).optional(),
 });
 
 export const projectSearchSchema = baseProjectSearchSchema.extend({

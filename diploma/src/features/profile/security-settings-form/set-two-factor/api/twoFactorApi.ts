@@ -1,7 +1,7 @@
 import { apiClient } from "@shared/api";
 
 export const enableTwoFactor = async () => {
-  const response = await apiClient.post("Auth/enable-2fa");
+  const response = await apiClient.post("Auth/2fa/enable/request-code");
   return response.data;
 };
 

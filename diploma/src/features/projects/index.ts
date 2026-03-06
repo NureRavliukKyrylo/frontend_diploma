@@ -1,6 +1,7 @@
-export { ProjectRatingFilter } from "./filters/ui/ProjectRatingFilter";
-export { ProjectCategoriesFilter } from "./filters/ui/ProjectCategoriesFilter";
-export { ProjectDeadlineFilter } from "./filters/ui/ProjectDeadLineFilter";
-export { ProjectOrganizationFilter } from "./filters/ui/ProjectOrganizationFilter";
-export { ProjectDistanceFilter } from "./filters/ui/ProjectDistanceFilter";
+export { ProjectRatingFilter } from "./filters/ui/rating/ProjectRatingFilter";
+export { ProjectCategoriesFilter } from "./filters/ui/categories/ProjectCategoriesFilter";
+export { ProjectDeadlineFilter } from "./filters/ui/dead-line/ProjectDeadLineFilter";
+export { ProjectOrganizationFilter } from "./filters/ui/organizations/ProjectOrganizationFilter";
+export { ProjectDistanceFilter } from "./filters/ui/distance/ProjectDistanceFilter";
 export type { NavigateParams } from "./filters/model/NavigateParams";
+export { MoreOptionsFilter } from "./filters/ui/more-options/MoreOptionsFilter";

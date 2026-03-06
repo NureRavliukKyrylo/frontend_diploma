@@ -1,4 +1,5 @@
 import {
+  MoreOptionsFilter,
   ProjectCategoriesFilter,
   ProjectDeadlineFilter,
   ProjectDistanceFilter,
@@ -24,30 +25,38 @@ export const ProjectFiltersWidget = ({
   const navigate = useNavigate({ from });
   return (
     <>
-      <div className={styles.projectDeadLine}>
-        <h1 className={styles.subHeaderFilter}>Project deadline due</h1>
-        <ProjectDeadlineFilter search={search} from={from} />
+      <div className={styles.scrollableProjectsFilters}>
+        <div className={styles.projectDeadLine}>
+          <h1 className={styles.subHeaderFilter}>Project deadline due</h1>
+          <ProjectDeadlineFilter search={search} from={from} />
+        </div>
+        <div className={styles.dividerFilterBlock}></div>
+        <div className={styles.projectRating}>
+          <h1 className={styles.subHeaderFilter}>Project rating</h1>
+          <ProjectRatingFilter search={search} from={from} />
+        </div>
+        <div className={styles.dividerFilterBlock}></div>
+        <div className={styles.projectCategories}>
+          <h1 className={styles.subHeaderFilter}>Categories</h1>
+          <ProjectCategoriesFilter search={search} from={from} />
+        </div>
+        <div className={styles.dividerFilterBlock}></div>
+        <div className={styles.projectOrganizations}>
+          <h1 className={styles.subHeaderFilter}>Organizations</h1>
+          <ProjectOrganizationFilter search={search} from={from} />
+        </div>
+        <div className={styles.dividerFilterBlock}></div>
+        <div className={styles.projectDistance}>
+          <h1 className={styles.subHeaderFilter}>Distance</h1>
+          <ProjectDistanceFilter search={search} from={from} />
+        </div>
+        <div className={styles.dividerFilterBlock}></div>
+        <div className={styles.moreOptions}>
+          <h1 className={styles.subHeaderFilter}>More options</h1>
+          <MoreOptionsFilter search={search} from={from} />
+        </div>
       </div>
-      <div className={styles.dividerFilterBlock}></div>
-      <div className={styles.projectRating}>
-        <h1 className={styles.subHeaderFilter}>Project rating</h1>
-        <ProjectRatingFilter search={search} from={from} />
-      </div>
-      <div className={styles.dividerFilterBlock}></div>
-      <div className={styles.projectCategories}>
-        <h1 className={styles.subHeaderFilter}>Categories</h1>
-        <ProjectCategoriesFilter search={search} from={from} />
-      </div>
-      <div className={styles.dividerFilterBlock}></div>
-      <div className={styles.projectOrganizations}>
-        <h1 className={styles.subHeaderFilter}>Organizations</h1>
-        <ProjectOrganizationFilter search={search} from={from} />
-      </div>
-      <div className={styles.dividerFilterBlock}></div>
-      <div className={styles.projectDistance}>
-        <h1 className={styles.subHeaderFilter}>Distance</h1>
-        <ProjectDistanceFilter search={search} from={from} />
-      </div>
+
       <div className={styles.dividerFilterBlock}></div>
       <div className={styles.buttonClear}>
         <motion.div

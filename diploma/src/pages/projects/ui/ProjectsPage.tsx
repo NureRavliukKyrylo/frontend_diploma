@@ -60,7 +60,11 @@ export function ProjectsPage() {
               value={search.Search}
               onChange={(value) => {
                 navigate({
-                  search: (prev) => ({ ...prev, Search: value || undefined }),
+                  search: (prev) => ({
+                    ...prev,
+                    Search: value || undefined,
+                    Page: 1,
+                  }),
                   resetScroll: false,
                 });
               }}
@@ -70,7 +74,7 @@ export function ProjectsPage() {
               options={sortingItems}
               onSelect={(value) =>
                 navigate({
-                  search: (prev) => ({ ...prev, OrderBy: value }),
+                  search: (prev) => ({ ...prev, OrderBy: value, Page: 1 }),
                   resetScroll: false,
                 })
               }
@@ -142,8 +146,8 @@ export function ProjectsPage() {
             )}
           </motion.div>
         </div>
-        <div className={styles.paginationWrapper}>
-          {projects && (
+        {projects && (
+          <div className={styles.paginationWrapper}>
             <Pagination
               total={projects.pagination.totalPages}
               page={search.Page}
@@ -153,8 +157,8 @@ export function ProjectsPage() {
                 });
               }}
             />
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

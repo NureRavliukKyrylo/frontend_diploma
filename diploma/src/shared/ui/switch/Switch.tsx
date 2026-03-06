@@ -12,7 +12,7 @@ export const Switch = ({
       aria-label="Visibility toggle"
       classNames={{
         base: `scale-80 sm:scale-90 lg:scale-110 ${externalClassNames?.base ?? ""} `,
-        wrapper: `bg-[rgba(44,44,44,0.6)] ${externalClassNames?.base ?? ""} `,
+        wrapper: `bg-[rgba(44,44,44,0.6)] ${externalClassNames?.wrapper ?? ""} `,
       }}
       {...rest}
     />

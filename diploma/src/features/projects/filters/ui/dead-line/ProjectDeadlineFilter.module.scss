@@ -1,0 +1,32 @@
+@use "@shared/assets/styles" as *;
+
+.deadlineCalendarBlock {
+  display: flex;
+  justify-content: space-between;
+  > :first-child {
+    width: 48%;
+  }
+
+  > :last-child {
+    width: 48%;
+  }
+  .startDate {
+    h2 {
+      color: rgba(0, 0, 0, 0.5);
+      @include font-base(15px, 500);
+    }
+    .dateStartInput {
+      border-radius: 10px;
+    }
+  }
+
+  .dueDate {
+    h2 {
+      color: rgba(0, 0, 0, 0.5);
+      @include font-base(15px, 500);
+    }
+    .dateDueInput {
+      border-radius: 10px;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@use "@shared/assets/styles" as *;
+
+.ratingBlock {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  .valueRating {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    padding: 5px 8px;
+    width: 100%;
+    .starReview {
+      width: 20px;
+      height: 20px;
+    }
+    .starReviewValue {
+      @include font-base(20px, 900);
+    }
+  }
+}

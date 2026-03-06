@@ -15,7 +15,7 @@ export const ProjectsListWidget = ({
   renderCard,
 }: ProjectsListWidgetProps) => {
   const { data: projects } = useSuspenseQuery(
-    projectQuery.list(search, pageSize),
+    projectQuery.list({ ...search, pageSize }),
   );
 
   return (

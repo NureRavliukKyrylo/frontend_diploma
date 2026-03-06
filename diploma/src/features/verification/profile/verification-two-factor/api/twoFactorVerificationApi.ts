@@ -8,8 +8,8 @@ export interface VerificationProfileDto {
 export type VerificationType = "enable" | "disable";
 
 const endpoints: Record<VerificationType, string> = {
-  enable: "Auth/verify-2fa",
-  disable: "Auth/disable/verify-code",
+  enable: "Auth/2fa/enable/verify-code",
+  disable: "Auth/2fa/disable/verify-code",
 };
 
 export const twoFactorVerificationProfile = async (

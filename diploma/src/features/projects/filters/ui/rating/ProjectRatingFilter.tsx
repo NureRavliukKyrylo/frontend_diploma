@@ -1,9 +1,9 @@
 import { Star } from "@shared/assets/icons/info";
-import styles from "./ProjectFilters.module.scss";
+import styles from "./ProjectRatingFilter.module.scss";
 import { useNavigate } from "@tanstack/react-router";
 import { Slider } from "@shared/ui";
 import type { ProjectSearchParams } from "@entities/project";
-import type { NavigateParams } from "../model/NavigateParams";
+import type { NavigateParams } from "../../model/NavigateParams";
 import { useState } from "react";
 
 interface ProjectRatingFilterProps {
@@ -36,6 +36,7 @@ export const ProjectRatingFilter = ({
             search: (prev) => ({
               ...prev,
               Rating: rating === 0 ? undefined : (rating as number),
+              Page: 1,
             }),
             resetScroll: false,
           });

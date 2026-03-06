@@ -1,13 +1,9 @@
 import { useNavigate } from "@tanstack/react-router";
-import styles from "./ProjectFilters.module.scss";
-import {
-  organizationQuery,
-  OrganizationTab,
-  type Organization,
-} from "@entities/organization";
+import styles from "./ProjectOrganizationFilter.module.scss";
+import { organizationQuery, OrganizationTab } from "@entities/organization";
 import type { ProjectSearchParams } from "@entities/project";
-import type { NavigateParams } from "../model/NavigateParams";
-import { toggleArrayParam } from "../libs/toggleTab";
+import type { NavigateParams } from "../../model/NavigateParams";
+import { toggleArrayParam } from "../../libs/toggleTab";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 
@@ -33,6 +29,7 @@ export const ProjectOrganizationFilter = ({
       search: (prev) => ({
         ...prev,
         OrganizationId: toggleArrayParam(prev.OrganizationId, organizationId),
+        Page: 1,
       }),
       resetScroll: false,
     });

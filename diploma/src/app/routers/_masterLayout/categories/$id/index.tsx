@@ -1,5 +1,8 @@
 import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
-import { CategoryDetailPage } from "@pages/categories";
+import {
+  CategoryDetailPage,
+  CategoryDetailPageSkeleton,
+} from "@pages/categories";
 import { categoryQuery } from "@entities/category";
 import {
   baseProjectSearchSchema,
@@ -24,4 +27,5 @@ export const Route = createFileRoute("/_masterLayout/categories/$id/")({
     middlewares: [stripSearchParams(projectSearchDefaults)],
   },
   validateSearch: baseProjectSearchSchema,
+  pendingComponent: CategoryDetailPageSkeleton,
 });

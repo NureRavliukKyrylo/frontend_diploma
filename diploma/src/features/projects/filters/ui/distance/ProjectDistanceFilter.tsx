@@ -1,6 +1,6 @@
 import type { ProjectSearchParams } from "@entities/project";
-import styles from "./ProjectFilters.module.scss";
-import type { NavigateParams } from "../model/NavigateParams";
+import styles from "./ProjectDistanceFilter.module.scss";
+import type { NavigateParams } from "../../model/NavigateParams";
 import { useCallback, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useAutocompleteSuggestions } from "@shared/libs";
@@ -17,10 +17,11 @@ export const ProjectDistanceFilter = ({
   from,
 }: ProjectDistanceFilterProps) => {
   const navigate = useNavigate({ from });
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(search.Location ?? "");
   const [query, setQuery] = useState("");
   const { suggestions, reset, error } = useAutocompleteSuggestions(query);
   const isOpen = suggestions.length > 0 || !!error;
+  const [radiusInput, setRadiusInput] = useState(String(search.RadiusKm ?? 10));
 
   const handleSelect = useCallback(
     ({ displayName, lat, lng }: LocationSuggestion) => {
@@ -28,8 +29,13 @@ export const ProjectDistanceFilter = ({
       setQuery("");
       reset();
       navigate({
-        search: (prev) => ({ ...prev, lat, lng }),
-        resetScroll: false,
+        search: (prev) => ({
+          ...prev,
+          Lat: lat,
+          Lng: lng,
+          Location: displayName,
+          Page: 1,
+        }),
       });
     },
     [navigate],
@@ -38,6 +44,17 @@ export const ProjectDistanceFilter = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
     setQuery(e.target.value);
+    if (!e.target.value) {
+      navigate({
+        search: (prev) => ({
+          ...prev,
+          Lat: undefined,
+          Lng: undefined,
+          Location: undefined,
+        }),
+        resetScroll: false,
+      });
+    }
   };
 
   return (
@@ -75,9 +92,22 @@ export const ProjectDistanceFilter = ({
               type="number"
               min={10}
               max={100}
-              value={search.RadiusKm ?? 10}
+              value={radiusInput}
+              onChange={(e) => {
+                const raw = e.target.value;
+                if (Number(raw) > 100) return;
+                setRadiusInput(raw);
+              }}
+              onBlur={() => {
+                const clamped = Math.max(10, Number(radiusInput));
+                setRadiusInput(String(clamped));
+                navigate({
+                  search: (prev) => ({ ...prev, RadiusKm: clamped, Page: 1 }),
+                  resetScroll: false,
+                });
+              }}
               style={{
-                width: `${(search.RadiusKm ?? 10).toString().length}ch`,
+                width: `${radiusInput.length}ch`,
               }}
             />
             <span className={styles.radiusSuffix}>km</span>

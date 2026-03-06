@@ -38,7 +38,7 @@ export function CategoryDetailPage() {
         <div className={styles.filtersInteractions}>
           <FilterButton onOpenChange={(value) => setIsFilterOpen(value)}>
             <CategoryProjectFiltersWidget
-              search={search}
+              search={searchWithCategory}
               from="/categories/$id/"
             />
           </FilterButton>
@@ -46,7 +46,7 @@ export function CategoryDetailPage() {
             value={search.Search}
             onChange={(value) => {
               navigate({
-                search: (prev) => ({ ...prev, Search: value }),
+                search: (prev) => ({ ...prev, Search: value, Page: 1 }),
                 resetScroll: false,
               });
             }}
@@ -56,7 +56,7 @@ export function CategoryDetailPage() {
             options={sortingItems}
             onSelect={(value) =>
               navigate({
-                search: (prev) => ({ ...prev, OrderBy: value }),
+                search: (prev) => ({ ...prev, OrderBy: value, Page: 1 }),
                 resetScroll: false,
               })
             }

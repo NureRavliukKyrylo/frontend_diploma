@@ -8,13 +8,10 @@ export interface ProjectsResponse {
   pagination: PaginationResponse;
 }
 
-export type ProjectQueryParams = ProjectSearchParams & {
-  pageSize?: number;
-};
-
 export const getListProjects = async (
-  params?: ProjectQueryParams,
+  params?: ProjectSearchParams,
 ): Promise<ProjectsResponse> => {
-  const response = await apiClient.get("/Projects/list", { params });
+  const { Location, ...apiParams } = params ?? {};
+  const response = await apiClient.get("/Projects/list", { params: apiParams });
   return response.data;
 };

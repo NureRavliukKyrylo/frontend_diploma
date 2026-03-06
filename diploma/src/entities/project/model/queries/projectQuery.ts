@@ -1,21 +1,18 @@
-import type { ProjectSearchParams } from "../../libs/projectsSearchSchema";
-import {
-  getListProjects,
-  type ProjectQueryParams,
-} from "../../api/projectsApi";
+import type { ProjectSearchParams } from "@entities/project";
+import { getListProjects } from "../../api/projectsApi";
 import { queryOptions } from "@tanstack/react-query";
 
 export const projectKeys = {
   all: () => ["projects"] as const,
-  list: (params: ProjectQueryParams) =>
+  list: (params: ProjectSearchParams) =>
     [...projectKeys.all(), "list", params] as const,
 };
 
 export const projectQuery = {
-  list: (params: ProjectSearchParams, pageSize?: number) =>
+  list: (params: ProjectSearchParams) =>
     queryOptions({
-      queryKey: projectKeys.list({ ...params, pageSize }),
-      queryFn: () => getListProjects({ ...params, pageSize }),
+      queryKey: projectKeys.list({ ...params }),
+      queryFn: () => getListProjects({ ...params }),
       placeholderData: (prev) => prev,
     }),
 };

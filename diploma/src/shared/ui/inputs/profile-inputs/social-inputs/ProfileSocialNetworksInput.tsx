@@ -35,8 +35,9 @@ export const ProfileSocialNetworksInput: React.FC<
           onValueChange={onSwitchChange}
           aria-label="Visibility toggle"
           classNames={{
-            base: "scale-80 sm:scale-90 lg:scale-95 group-data-[selected=true]:bg-[#8C0000]",
-            wrapper: "bg-[rgba(44,44,44,0.6)]",
+            base: "scale-80 sm:scale-90 lg:scale-95",
+            wrapper:
+              "bg-[rgba(44,44,44,0.3)] group-data-[selected=true]:bg-[#8C0000]",
           }}
         />
       </span>

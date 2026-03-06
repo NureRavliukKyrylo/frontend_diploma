@@ -16,6 +16,7 @@ import type { Position } from "@shared/assets/types";
 interface BaseMapProps extends MapContainerProps {
   zoomPosition?: Position;
   fullscreenPosition?: Position;
+  classNameWrapper?: string;
 }
 
 export const BaseMap: React.FC<BaseMapProps> = ({
@@ -27,12 +28,15 @@ export const BaseMap: React.FC<BaseMapProps> = ({
   zoomPosition = "bottomright",
   fullscreenPosition = "topright",
   children,
+  classNameWrapper,
   ...rest
 }) => {
   const animateRef = useRef(true);
 
   return (
-    <div className={styles.mapWrapper}>
+    <div
+      className={`${styles.mapWrapper} ${classNameWrapper ? ` ${classNameWrapper}` : ""}`}
+    >
       <MapContainer
         center={center}
         zoom={zoom}
@@ -41,10 +45,9 @@ export const BaseMap: React.FC<BaseMapProps> = ({
         minZoom={3}
         maxBoundsViscosity={0.8}
         maxBounds={WORLD_BOUNDS}
+        preferCanvas={true}
         style={{
           height: "100%",
-          borderRadius: "20px",
-          overflow: "hidden",
         }}
         {...rest}
       >

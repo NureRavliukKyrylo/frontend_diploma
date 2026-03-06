@@ -17,6 +17,9 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    flex: 1;
+    min-width: 0;
+    justify-content: space-between;
     .categoryInformation {
       display: flex;
       justify-content: space-between;
@@ -30,10 +33,10 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
+        width: 100%;
         > :first-child {
           width: 55%;
         }
-
         > :last-child {
           width: 40%;
         }
@@ -79,4 +82,51 @@
       }
     }
   }
+}
+.skeletonTitle {
+  height: 60px;
+  width: 40%;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+.skeletonDescLines {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.skeletonDescLine {
+  width: 100%;
+  height: 20px;
+  border-radius: 6px;
+}
+.skeletonDescLineShort {
+  width: 60%;
+  height: 20px;
+  border-radius: 6px;
+}
+.skeletonStatNumber {
+  height: 28px;
+  width: 50px;
+  border-radius: 6px;
+}
+.skeletonStatLabel {
+  height: 16px;
+  width: 90px;
+  border-radius: 5px;
+  margin-top: 6px;
+}
+.skeletonCoreSkillsText {
+  height: 28px;
+  width: 140px;
+  border-radius: 6px;
+}
+.skeletonSkillTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.skeletonSkillTab {
+  height: 36px;
+  border-radius: 20px;
 }

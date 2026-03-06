@@ -14,6 +14,7 @@ export const MapPage = () => {
         zoomPosition="bottomright"
         fullscreenPosition="bottomleft"
         scrollWheelZoom={false}
+        classNameWrapper={styles.mapPage}
       >
         <div className={styles.filterButtonWrapper}>
           <FilterButton>

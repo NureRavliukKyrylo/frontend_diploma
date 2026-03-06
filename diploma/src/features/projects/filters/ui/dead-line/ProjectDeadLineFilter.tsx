@@ -1,8 +1,8 @@
 import { DatePickerInput } from "@shared/ui/inputs";
-import styles from "./ProjectFilters.module.scss";
+import styles from "./ProjectDeadlineFilter.module.scss";
 import { useNavigate } from "@tanstack/react-router";
 import type { ProjectSearchParams } from "@entities/project";
-import type { NavigateParams } from "../model/NavigateParams";
+import type { NavigateParams } from "../../model/NavigateParams";
 
 interface ProjectDeadlineProps {
   search: ProjectSearchParams;
@@ -27,7 +27,7 @@ export const ProjectDeadlineFilter = ({
             value={search.StartDate}
             onChange={(date) => {
               navigate({
-                search: (prev) => ({ ...prev, StartDate: date }),
+                search: (prev) => ({ ...prev, StartDate: date, Page: 1 }),
                 resetScroll: false,
               });
             }}
@@ -44,7 +44,7 @@ export const ProjectDeadlineFilter = ({
             value={search.EndBefore}
             onChange={(date) => {
               navigate({
-                search: (prev) => ({ ...prev, EndBefore: date }),
+                search: (prev) => ({ ...prev, EndBefore: date, Page: 1 }),
                 resetScroll: false,
               });
             }}

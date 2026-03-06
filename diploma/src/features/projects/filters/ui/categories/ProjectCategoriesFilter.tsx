@@ -1,10 +1,10 @@
 import { categoryQuery, CategoryTab } from "@entities/category";
-import styles from "./ProjectFilters.module.scss";
+import styles from "./ProjectCategoriesFilter.module.scss";
 import { useNavigate } from "@tanstack/react-router";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import type { ProjectSearchParams } from "@entities/project";
-import { toggleArrayParam } from "../libs/toggleTab";
-import type { NavigateParams } from "../model/NavigateParams";
+import { toggleArrayParam } from "../../libs/toggleTab";
+import type { NavigateParams } from "../../model/NavigateParams";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 
 interface ProjectCategoriesFilterProps {
@@ -29,6 +29,7 @@ export const ProjectCategoriesFilter = ({
       search: (prev) => ({
         ...prev,
         CategoryIds: toggleArrayParam(prev.CategoryIds, categoryId),
+        Page: 1,
       }),
       resetScroll: false,
     });
