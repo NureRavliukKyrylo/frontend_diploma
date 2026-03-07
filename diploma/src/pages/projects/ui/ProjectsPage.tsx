@@ -78,7 +78,7 @@ export function ProjectsPage() {
                   resetScroll: false,
                 })
               }
-              value={search.OrderBy}
+              value={search.OrderBy ?? "Default"}
             />
           </div>
           <motion.div

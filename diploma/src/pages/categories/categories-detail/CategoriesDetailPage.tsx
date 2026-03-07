@@ -60,7 +60,7 @@ export function CategoryDetailPage() {
                 resetScroll: false,
               })
             }
-            value={search.OrderBy}
+            value={search.OrderBy ?? "Default"}
           />
         </div>
         <motion.div

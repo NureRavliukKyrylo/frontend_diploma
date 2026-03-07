@@ -1,4 +1,5 @@
 import type { Organization } from "@entities/organization";
+import type { Coordinates } from "@shared/config/types";
 
 export interface Project {
   id: string;
@@ -8,4 +9,5 @@ export interface Project {
   progressPercent: number;
   tasksTotal: number;
   organization?: Pick<Organization, "id" | "logoUrl" | "name">;
+  location: Coordinates[];
 }

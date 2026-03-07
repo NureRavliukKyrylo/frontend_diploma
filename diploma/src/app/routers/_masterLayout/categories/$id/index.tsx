@@ -5,7 +5,7 @@ import {
 } from "@pages/categories";
 import { categoryQuery } from "@entities/category";
 import {
-  baseProjectSearchSchema,
+  projectSearchSchema,
   projectQuery,
   projectSearchDefaults,
 } from "@entities/project";
@@ -26,6 +26,6 @@ export const Route = createFileRoute("/_masterLayout/categories/$id/")({
   search: {
     middlewares: [stripSearchParams(projectSearchDefaults)],
   },
-  validateSearch: baseProjectSearchSchema,
+  validateSearch: projectSearchSchema,
   pendingComponent: CategoryDetailPageSkeleton,
 });

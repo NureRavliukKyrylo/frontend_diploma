@@ -17,6 +17,7 @@ interface BaseMapProps extends MapContainerProps {
   zoomPosition?: Position;
   fullscreenPosition?: Position;
   classNameWrapper?: string;
+  fullscreenRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 export const BaseMap: React.FC<BaseMapProps> = ({
@@ -29,6 +30,7 @@ export const BaseMap: React.FC<BaseMapProps> = ({
   fullscreenPosition = "topright",
   children,
   classNameWrapper,
+  fullscreenRef,
   ...rest
 }) => {
   const animateRef = useRef(true);
@@ -54,7 +56,10 @@ export const BaseMap: React.FC<BaseMapProps> = ({
         <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
         <ZoomControl position={zoomPosition} />
         <SetViewOnClick animateRef={animateRef} />
-        <FullscreenControl position={fullscreenPosition} />
+        <FullscreenControl
+          fullscreenRef={fullscreenRef}
+          position={fullscreenPosition}
+        />
         {children}
       </MapContainer>
     </div>

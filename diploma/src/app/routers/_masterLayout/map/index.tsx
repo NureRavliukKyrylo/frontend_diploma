@@ -1,13 +1,13 @@
-import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
-import { MapPage } from "@pages/map";
-import { projectSearchDefaults, projectSearchSchema } from "@entities/project";
 import { categoryQuery } from "@entities/category";
+import { mapProjectDefaults, mapProjectSchema } from "@entities/project";
+import { MapPage } from "@pages/map";
+import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_masterLayout/map/")({
   component: MapPage,
-  validateSearch: projectSearchSchema,
+  validateSearch: mapProjectSchema,
   search: {
-    middlewares: [stripSearchParams(projectSearchDefaults)],
+    middlewares: [stripSearchParams(mapProjectDefaults)],
   },
   loader: async ({ context: { queryClient } }) => {
     queryClient.prefetchInfiniteQuery(categoryQuery.infinite({ pageSize: 5 }));

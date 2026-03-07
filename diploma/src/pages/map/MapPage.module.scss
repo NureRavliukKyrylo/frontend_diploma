@@ -8,6 +8,10 @@
   .mapPage {
     border-radius: 0px;
   }
+  &:fullscreen {
+    width: 100vw;
+    height: 100vh;
+  }
   .filterButtonWrapper {
     position: absolute;
     z-index: 1000;
@@ -15,8 +19,9 @@
     grid-template-columns: 480px 370px;
     align-items: center;
     gap: 20px;
-    grid-template-rows: 54px;
+    grid-template-rows: 58px;
     top: 50px;
     left: 20px;
+    pointer-events: auto;
   }
 }

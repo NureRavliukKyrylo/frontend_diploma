@@ -7,19 +7,22 @@ import { positionStyles, type Position } from "@shared/assets/types";
 
 interface FullScreenProps {
   position?: Position;
+  fullscreenRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 export const FullscreenControl = ({
   position = "topright",
+  fullscreenRef,
 }: FullScreenProps) => {
   const map = useMap();
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const toggle = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const container = map.getContainer();
+    const target = fullscreenRef?.current ?? map.getContainer();
+
     if (!isFullscreen) {
-      container.requestFullscreen();
+      target.requestFullscreen();
     } else {
       document.exitFullscreen();
     }
