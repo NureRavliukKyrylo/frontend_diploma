@@ -1,4 +1,4 @@
-import { BaseMap, map } from "@shared/ui";
+import { BaseMap, map, Pagination } from "@shared/ui";
 import styles from "./MapPage.module.scss";
 import { FilterButton } from "@shared/ui/buttons";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
@@ -6,19 +6,19 @@ import { SearchBar } from "@shared/ui/inputs";
 import {
   CombinedListWidget,
   MapFiltersWidget,
-  OrganizationMarkersWidget,
   ProjectMarkersWidget,
 } from "@widgets/map";
 import { Suspense, useRef } from "react";
-import { ListProjectCard, ProjectMarker } from "@entities/project";
+import {
+  ListProjectCard,
+  ProjectMarker,
+  projectQuery,
+} from "@entities/project";
 import { Marker, Popup } from "react-leaflet";
 import { MapBoundsTracker } from "./MapBoundsTracker";
 import { SearchLocationLayer } from "./SearchLocationLayer";
-import {
-  ListOrganizationCard,
-  OrganizationMarker,
-} from "@entities/organization";
 import { DefaultAvatar } from "@shared/assets/images/user";
+import { useQuery } from "@tanstack/react-query";
 
 export const MapPage = () => {
   const navigate = useNavigate({ from: "/map/" });
@@ -31,6 +31,8 @@ export const MapPage = () => {
       : null;
 
   const radiusMeters = search.RadiusKm != null ? search.RadiusKm * 1000 : null;
+
+  const { data: projects } = useQuery(projectQuery.map(search));
 
   return (
     <div ref={wrapperRef} className={styles.mapPageWrapper}>
@@ -100,41 +102,6 @@ export const MapPage = () => {
               );
             }}
           />
-          <OrganizationMarkersWidget
-            search={mapSearch}
-            renderMarker={(organization) => {
-              const lat = organization.location?.latitude;
-              const lng = organization.location?.longitude;
-
-              if (!lat || !lng) return null;
-
-              return (
-                <Marker
-                  key={organization.id}
-                  position={[lat, lng]}
-                  icon={OrganizationMarker}
-                >
-                  <Popup className={styles.popupOrganization}>
-                    <div className={styles.popupOrganizationContent}>
-                      <img
-                        src={organization.logoUrl ?? DefaultAvatar}
-                        alt="image-organization"
-                      />
-                      <h1>{organization.name}</h1>
-                      <p>{organization.description}</p>
-                      <Link
-                        to="/organizations/$id"
-                        params={{ id: organization.id }}
-                        className={styles.seeMoreButtonOrganizayion}
-                      >
-                        see more
-                      </Link>
-                    </div>
-                  </Popup>
-                </Marker>
-              );
-            }}
-          />
         </Suspense>
       </BaseMap>
 
@@ -146,49 +113,45 @@ export const MapPage = () => {
           onChange={(value) => {
             navigate({
               to: "/map",
-              search: (prev) => ({ ...prev, Search: value }),
+              search: (prev) => ({ ...prev, Search: value || undefined }),
             });
           }}
           variant="projects"
         />
         <div className={styles.combinedList}>
           <FilterButton>
-            <CombinedListWidget
-              organizationParams={{
-                Page: search.Page,
-                pageSize: search.pageSize,
-              }}
-              projectParams={{ Page: search.Page, pageSize: search.pageSize }}
-              renderProjectCard={(project) => (
-                <div
-                  onClick={() => {
-                    const lat = project.location?.latitude;
-                    const lng = project.location?.longitude;
-                    if (lat && lng) map.flyTo(lat, lng, 12);
+            <Suspense fallback={"Loading..."}>
+              <CombinedListWidget
+                projectParams={search}
+                renderProjectCard={(project) => (
+                  <div
+                    onClick={() => {
+                      const lat = project.location?.latitude;
+                      const lng = project.location?.longitude;
+                      if (lat && lng) map.flyTo(lat, lng, 12);
+                    }}
+                  >
+                    <ListProjectCard
+                      key={`proj-${project.id}`}
+                      name={project.title}
+                    />
+                  </div>
+                )}
+              />
+            </Suspense>
+            {projects && projects.pagination.totalPages > 1 && (
+              <div className={styles.paginationWrapper}>
+                <Pagination
+                  total={projects.pagination.totalPages}
+                  page={search.Page}
+                  onChange={(page) => {
+                    navigate({
+                      search: (prev) => ({ ...prev, Page: page }),
+                    });
                   }}
-                >
-                  <ListProjectCard
-                    key={`proj-${project.id}`}
-                    name={project.title}
-                  />
-                </div>
-              )}
-              renderOrganizationCard={(organization) => (
-                <div
-                  onClick={() => {
-                    const lat = organization.location?.latitude;
-                    const lng = organization.location?.longitude;
-                    if (lat && lng) map.flyTo(lat, lng, 12);
-                  }}
-                >
-                  <ListOrganizationCard
-                    key={`org-${organization.id}`}
-                    name={organization.name}
-                    image={organization.logoUrl ?? DefaultAvatar}
-                  />
-                </div>
-              )}
-            />
+                />
+              </div>
+            )}
           </FilterButton>
         </div>
       </div>

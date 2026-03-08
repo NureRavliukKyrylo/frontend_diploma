@@ -9,6 +9,7 @@ import {
   projectQuery,
   projectSearchDefaults,
 } from "@entities/project";
+import { organizationQuery } from "@entities/organization";
 
 export const Route = createFileRoute("/_masterLayout/categories/$id/")({
   component: CategoryDetailPage,
@@ -22,6 +23,9 @@ export const Route = createFileRoute("/_masterLayout/categories/$id/")({
         }),
       ),
     ]);
+    queryClient.prefetchInfiniteQuery(
+      organizationQuery.infinite({ pageSize: 7 }),
+    );
   },
   search: {
     middlewares: [stripSearchParams(projectSearchDefaults)],

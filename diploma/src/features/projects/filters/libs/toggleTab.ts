@@ -1,7 +1,10 @@
 export const toggleArrayParam = <T extends string>(
   current: T[] | undefined,
   value: T,
-): T[] => {
+): T[] | undefined => {
   const arr = current ?? [];
-  return arr.includes(value) ? arr.filter((c) => c !== value) : [...arr, value];
+  const result = arr.includes(value)
+    ? arr.filter((c) => c !== value)
+    : [...arr, value];
+  return result.length > 0 ? result : undefined;
 };

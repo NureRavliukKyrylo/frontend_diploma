@@ -5,6 +5,7 @@ import { ConfirmationModal } from "@shared/ui/modals/confirmation-modal/Confirma
 import styles from "./LogoutButton.module.scss";
 import { Power } from "@shared/assets/icons/actions";
 import { LogOutImage } from "@shared/assets/images/actions";
+import { motion } from "framer-motion";
 
 export const LogoutButton: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +26,15 @@ export const LogoutButton: React.FC = () => {
         className={styles.logoutButton}
         onClick={() => setIsModalOpen(true)}
       >
-        <img src={Power} alt="Power" className={styles.iconLogout} />
+        <motion.img
+          layout
+          src={Power}
+          alt="logout"
+          className={styles.iconLogout}
+          animate={{ scale: 1, rotate: 0 }}
+          whileHover={{ scale: 1.1, rotate: [0, -15, 15, -10, 10, 0] }}
+          transition={{ duration: 0.4 }}
+        />
       </BaseButtonWrapper>
 
       <ConfirmationModal

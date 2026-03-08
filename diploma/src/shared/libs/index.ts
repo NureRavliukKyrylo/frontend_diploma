@@ -15,3 +15,4 @@ export { SetViewOnClick } from "./map/SetViewOnClick";
 export { reverseGeocode } from "./map/reverseGeoCode";
 export { useAutocompleteSuggestions } from "./map/useAutoCompleteSuggestions";
 export { MapZoomAnimation } from "./map/MapZoomAnimation";
+export { capitalize } from "./text/capitalize";

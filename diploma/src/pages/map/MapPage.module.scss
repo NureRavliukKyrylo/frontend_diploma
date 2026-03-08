@@ -123,3 +123,24 @@
     height: 77px;
   }
 }
+.paginationWrapper {
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px 20px 20px;
+}
+
+:global(.projectMarkerIcon) {
+  width: 35px;
+  height: 35px;
+  animation: markerAppear 0.3s ease-in-out forwards;
+}
+@keyframes markerAppear {
+  from {
+    opacity: 0;
+    transform: scale(0) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

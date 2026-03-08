@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { unlinkConnectedLink } from "../api/unlinkConnectedLinkApi";
 import { addToast } from "@heroui/react";
-import { getErrorMessage } from "@shared/libs";
+import { capitalize, getErrorMessage } from "@shared/libs";
 import {
   CONNECTED_LINKS_CONFIG,
   type ConnectedLinkPlatform,
@@ -10,12 +10,15 @@ import { useUserProfileStore } from "@entities/user";
 
 export const useUnlinkConnectedLink = () => {
   const { setUnlinkTarget, openVerificationModal } = useUserProfileStore();
+
   const mutation = useMutation({
     mutationFn: (platform: ConnectedLinkPlatform) =>
       unlinkConnectedLink(platform),
     onSuccess: (_, platform) => {
+      const platformName = capitalize(platform);
+
       addToast({
-        title: `Unlink ${platform} request success`,
+        title: `Unlink ${platformName} request success`,
         description: "You have sent request to unlink successfully",
         color: "success",
       });
@@ -28,9 +31,10 @@ export const useUnlinkConnectedLink = () => {
     },
     onError: (error: unknown, platform) => {
       const errorMessage = getErrorMessage(error);
+      const platformName = capitalize(platform);
 
       addToast({
-        title: `Unlink ${platform} failed`,
+        title: `Unlink ${platformName} failed`,
         description: errorMessage,
         color: "danger",
       });

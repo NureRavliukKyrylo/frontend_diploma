@@ -10,6 +10,7 @@ import { useState } from "react";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useSettingsMainForm } from "../model/useSettingsMainForm";
 import { MapLocationModal } from "./MapLocationModal";
+import { motion } from "framer-motion";
 
 export function SettingsMainForm() {
   const {
@@ -133,23 +134,33 @@ export function SettingsMainForm() {
       <div className={styles.lineDividerProfileSettings}></div>
 
       <div className={styles.blockButtons}>
-        <BaseButtonWrapper
+        <motion.div
+          animate={{ x: 0 }}
+          whileHover={{ x: [0, -4, 4, -4, 4, 0] }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.4 }}
           className={styles.resetProfileButton}
-          type="button"
-          onClick={() => {
-            formik.handleReset(null);
-            setResetKey((k) => k + 1);
-          }}
         >
-          RESET
-        </BaseButtonWrapper>
-        <BaseButtonWrapper
-          loading={isLoading}
+          <BaseButtonWrapper
+            type="button"
+            onClick={() => {
+              formik.handleReset(null);
+              setResetKey((k) => k + 1);
+            }}
+          >
+            RESET
+          </BaseButtonWrapper>
+        </motion.div>
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 200 }}
           className={styles.saveProfileButton}
-          type="submit"
         >
-          SAVE
-        </BaseButtonWrapper>
+          <BaseButtonWrapper loading={isLoading} type="submit">
+            SAVE
+          </BaseButtonWrapper>
+        </motion.div>
       </div>
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>

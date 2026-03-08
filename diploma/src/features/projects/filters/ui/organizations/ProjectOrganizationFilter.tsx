@@ -6,6 +6,7 @@ import type { NavigateParams } from "../../model/NavigateParams";
 import { toggleArrayParam } from "../../libs/toggleTab";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface ProjectOrganizationFilterProps {
   search: ProjectSearchParams;
@@ -22,13 +23,13 @@ export const ProjectOrganizationFilter = ({
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery(organizationQuery.infinite({ pageSize: 5 }));
+  } = useInfiniteQuery(organizationQuery.infinite({ pageSize: 7 }));
 
   const toggleOrganization = (organizationId: string) => {
     navigate({
       search: (prev) => ({
         ...prev,
-        OrganizationId: toggleArrayParam(prev.OrganizationId, organizationId),
+        OrganizationIds: toggleArrayParam(prev.OrganizationIds, organizationId),
         Page: 1,
       }),
       resetScroll: false,
@@ -38,18 +39,26 @@ export const ProjectOrganizationFilter = ({
   return (
     <div className={styles.organizationsInfinite}>
       <div className={styles.organizationsListFilter}>
-        {organizations?.map((organization) => (
-          <OrganizationTab
-            key={organization.id}
-            name={organization.name}
-            isSelected={
-              search.OrganizationId?.includes(organization.id) ?? false
-            }
-            onClick={() => {
-              toggleOrganization(organization.id);
-            }}
-          />
-        ))}
+        <AnimatePresence>
+          {organizations?.map((organization, index) => (
+            <motion.div
+              key={organization.id}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.2, delay: index * 0.05 }}
+              className={styles.organizationTabWrapper}
+            >
+              <OrganizationTab
+                name={organization.name}
+                isSelected={
+                  search.OrganizationIds?.includes(organization.id) ?? false
+                }
+                onClick={() => toggleOrganization(organization.id)}
+              />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
       {hasNextPage && (
         <BaseButtonWrapper

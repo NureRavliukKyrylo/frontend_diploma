@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./BaseModal.module.scss";
 import { Close } from "@shared/assets/icons/actions";
@@ -60,11 +60,15 @@ export const BaseModal: React.FC<BaseModalProps> = ({
           >
             {showClosed && (
               <div className={styles.closeButtonBlock}>
-                <img
+                <motion.img
                   className={styles.closeButton}
                   src={Close}
                   alt="Close Button"
                   onClick={onClose}
+                  whileHover={{ rotate: 90, scale: 1.05 }}
+                  whileTap={{ scale: 0.9 }}
+                  animate={{ rotate: 0 }}
+                  transition={{ type: "spring", stiffness: 200 }}
                 />
               </div>
             )}

@@ -6,6 +6,7 @@ import type { ProjectSearchParams } from "@entities/project";
 import { toggleArrayParam } from "../../libs/toggleTab";
 import type { NavigateParams } from "../../model/NavigateParams";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface ProjectCategoriesFilterProps {
   search: ProjectSearchParams;
@@ -22,7 +23,7 @@ export const ProjectCategoriesFilter = ({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery(categoryQuery.infinite({ pageSize: 5 }));
+  } = useInfiniteQuery(categoryQuery.infinite({ pageSize: 7 }));
 
   const toggleCategory = (categoryId: string) => {
     navigate({
@@ -38,14 +39,24 @@ export const ProjectCategoriesFilter = ({
   return (
     <div className={styles.categoriesInfinite}>
       <div className={styles.categoriesListFilter}>
-        {categories?.map((category) => (
-          <CategoryTab
-            key={category.id}
-            name={category.name}
-            isSelected={search.CategoryIds?.includes(category.id) ?? false}
-            onClick={() => toggleCategory(category.id)}
-          />
-        ))}
+        <AnimatePresence mode="wait">
+          {categories?.map((category, index) => (
+            <motion.div
+              key={category.id}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.2, delay: index * 0.05 }}
+              className={styles.categoryTabWrapper}
+            >
+              <CategoryTab
+                name={category.name}
+                isSelected={search.CategoryIds?.includes(category.id) ?? false}
+                onClick={() => toggleCategory(category.id)}
+              />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
       {hasNextPage && (
         <BaseButtonWrapper

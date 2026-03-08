@@ -3,6 +3,7 @@ import styles from "./ListProjectCard.module.scss";
 export interface ListProjectCardProps {
   name: string;
 }
+
 export const ListProjectCard = ({ name }: ListProjectCardProps) => {
   return (
     <div className={styles.listCardProjectWrapper}>

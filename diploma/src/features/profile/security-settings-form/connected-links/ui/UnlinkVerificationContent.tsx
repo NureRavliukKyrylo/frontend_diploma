@@ -2,7 +2,7 @@ import { useUserProfileStore } from "@entities/user";
 import { UnlinkVerificationForm } from "@features/verification";
 import { VerificationWrapper } from "@shared/ui/wrappers";
 import styles from "../../base-security-form/ui/SecuritySettingsForm.module.scss";
-import { queryClient } from "@shared/libs";
+import { capitalize, queryClient } from "@shared/libs";
 import { profileKeys } from "@entities/user/profile";
 
 export const UnlinkVerificationContent = () => {
@@ -12,10 +12,12 @@ export const UnlinkVerificationContent = () => {
     return null;
   }
 
+  const platform = capitalize(unlinkTarget.platform);
+
   return (
     <VerificationWrapper
-      title={`Unlink ${unlinkTarget.platform}`}
-      description={`Verify your identity to unlink your ${unlinkTarget.platform} account`}
+      title={`Unlink ${platform}`}
+      description={`Verify your identity to unlink your ${platform} account`}
     >
       <div className={styles.verificationBlock}>
         <UnlinkVerificationForm
@@ -25,6 +27,7 @@ export const UnlinkVerificationContent = () => {
             queryClient.invalidateQueries({ queryKey: profileKeys.all() });
             closeVerificationModal("unlink");
           }}
+          platform={platform}
         />
       </div>
     </VerificationWrapper>

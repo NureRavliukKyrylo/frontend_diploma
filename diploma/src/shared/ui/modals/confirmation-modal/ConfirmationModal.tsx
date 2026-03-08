@@ -2,6 +2,7 @@ import React from "react";
 import { BaseModal } from "../base-modal/BaseModal";
 import styles from "./ConfirmationModal.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { motion } from "framer-motion";
 
 interface ConfirmationModalProps {
   isOpen: boolean;
@@ -54,20 +55,28 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         </div>
 
         <div className={styles.actionsConfirmationModal}>
-          <BaseButtonWrapper
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 300 }}
             className={styles.confirmButtonModal}
-            onClick={onConfirm}
-            loading={isLoading}
           >
-            {confirmText}
-          </BaseButtonWrapper>
+            <BaseButtonWrapper onClick={onConfirm} loading={isLoading}>
+              {confirmText}
+            </BaseButtonWrapper>
+          </motion.div>
 
-          <BaseButtonWrapper
+          <motion.div
+            whileHover={{ x: [0, -3, 3, -3, 3, 0] }}
+            whileTap={{ scale: 0.95 }}
+            animate={{ x: 0 }}
+            transition={{ duration: 0.3 }}
             className={styles.cancelButtonModal}
-            onClick={onCancel}
           >
-            {cancelText}
-          </BaseButtonWrapper>
+            <BaseButtonWrapper onClick={onCancel}>
+              {cancelText}
+            </BaseButtonWrapper>
+          </motion.div>
         </div>
       </div>
     </BaseModal>

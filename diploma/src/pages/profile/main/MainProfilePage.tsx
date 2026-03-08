@@ -11,6 +11,7 @@ import { Settings } from "@shared/assets/icons/actions";
 import { UserHeaderWidget } from "@widgets/profile";
 import { profileQuery } from "@entities/user/profile";
 import { useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
 
 export function MainProfilePage() {
   const { profileMode, setProfileMode } = useUserProfileStore();
@@ -52,7 +53,13 @@ export function MainProfilePage() {
             to={profileRoutes.settings}
             className={styles.linkSettingsButton}
           >
-            <img src={Settings} alt="settings" />
+            <motion.img
+              layout
+              src={Settings}
+              alt="settings"
+              whileHover={{ rotate: 90, scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            />
           </LinkButtonWrapper>
         </div>
         <div className={styles.userActionsBlock}>

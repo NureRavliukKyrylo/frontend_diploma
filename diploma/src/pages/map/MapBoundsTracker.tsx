@@ -25,7 +25,7 @@ const getBounds = (map: ReturnType<typeof useMapEvents>): MapBounds => {
 
 export const MapBoundsTracker = ({ onBoundsChange }: Props) => {
   const [bounds, setBounds] = useState<MapBounds | null>(null);
-  const debouncedBounds = useDebounce(bounds, 600);
+  const debouncedBounds = useDebounce(bounds, 300);
 
   const map = useMapEvents({
     moveend: () => setBounds(getBounds(map)),

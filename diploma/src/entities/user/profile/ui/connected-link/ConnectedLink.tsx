@@ -1,5 +1,6 @@
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./ConnectedLink.module.scss";
+import { motion } from "framer-motion";
 
 interface ConnectedLinkProps {
   isConnected?: boolean;
@@ -27,14 +28,20 @@ export const ConnectedLink = ({
           <p>{description}</p>
         </div>
       </div>
-      <BaseButtonWrapper
-        type="button"
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 150 }}
         className={`${styles.connectButton} ${isConnected ? styles.active : styles.disabled}`}
-        disabled={isPending}
-        onClick={handleMutation}
       >
-        <h1>{isConnected ? "Connected" : "Disabled"}</h1>
-      </BaseButtonWrapper>
+        <BaseButtonWrapper
+          type="button"
+          disabled={isPending}
+          onClick={handleMutation}
+        >
+          <h1>{isConnected ? "Connected" : "Disabled"}</h1>
+        </BaseButtonWrapper>
+      </motion.div>
     </div>
   );
 };

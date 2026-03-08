@@ -14,6 +14,7 @@ $label-color: rgba(0, 0, 0, 0.6);
   min-height: 38px;
   height: 100%;
   color: #323232;
+  gap: 5px;
   &.profile {
     height: 100%;
     border: none;
@@ -25,6 +26,8 @@ $label-color: rgba(0, 0, 0, 0.6);
   .leftMapContent {
     display: flex;
     gap: max(8px, 18cqh);
+    min-width: 0;
+    flex: 1;
     .mapIcon {
       left: 0.625rem;
       color: $label-color;
@@ -41,6 +44,11 @@ $label-color: rgba(0, 0, 0, 0.6);
 
     h1 {
       @include font-base(max(18px, 35cqh), 700);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+      flex: 1;
     }
 
     .divider {

@@ -8,6 +8,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    .categoryTabWrapper {
+      display: flex;
+      flex-grow: 1;
+      max-width: 160px;
+    }
   }
   .showMoreCategoriesButton {
     @include font-base(16px, 600);

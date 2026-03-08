@@ -17,18 +17,21 @@ import {
 interface UnlinkVerificationFormProps {
   otpType: OtpType;
   verificationLink: ConnectedLinkPlatform;
+  platform: string;
   onSuccess?: () => void;
 }
 
 export const UnlinkVerificationForm: React.FC<UnlinkVerificationFormProps> = ({
   onSuccess,
   otpType,
+  platform,
   verificationLink,
 }) => {
   const { otpTimers, resetOtpTimer, decrementOtpTimer } = useUserProfileStore();
+
   const { formik, isLoading, errorMessage } = useVerification({
     apiFn: (data: UnlinkDto) => verificationUnlink(data, verificationLink),
-    successMessage: `Unlink ${verificationLink} verified successfully`,
+    successMessage: `Unlink ${platform} verified successfully`,
     onSuccess,
   });
 

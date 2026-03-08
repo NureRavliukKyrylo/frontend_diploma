@@ -62,7 +62,7 @@ export function CategoriesPage() {
         />
       </Suspense>
       <div className={styles.paginationWrapper}>
-        {categories && (
+        {categories && categories.pagination.totalPages > 1 && (
           <Pagination
             total={categories.pagination.totalPages}
             page={page}

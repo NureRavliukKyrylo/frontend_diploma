@@ -2,7 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { useGoogleLogin } from "@react-oauth/google";
 import { addToast } from "@heroui/react";
 import { linkGoogle, type LinkGoogleDto } from "../api/linkGoogleApi";
-import { getErrorMessage } from "@shared/libs";
+import { getErrorMessage, queryClient } from "@shared/libs";
+import { profileKeys } from "@entities/user/profile";
 
 export const useLinkGoogle = () => {
   const mutation = useMutation({
@@ -14,6 +15,7 @@ export const useLinkGoogle = () => {
         description: "You have linked Google successfully",
         color: "success",
       });
+      queryClient.invalidateQueries({ queryKey: profileKeys.all() });
     },
 
     onError: (error: unknown) => {

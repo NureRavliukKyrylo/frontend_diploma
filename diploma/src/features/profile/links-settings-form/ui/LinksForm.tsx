@@ -3,6 +3,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { SOCIAL_PLATFORMS } from "@shared/config/constants";
 import { ProfileSocialNetworksInput } from "@shared/ui/inputs";
 import { useSocialLinksSettingsForm } from "../model/useSocialLinksSettingsForm";
+import { motion } from "framer-motion";
 
 export function LinksForm({}) {
   const { formik, isLoading, errorMessage } = useSocialLinksSettingsForm();
@@ -45,20 +46,33 @@ export function LinksForm({}) {
         </div>
       </div>
       <div className={styles.blockLinksButtons}>
-        <BaseButtonWrapper
+        <motion.div
+          animate={{ x: 0 }}
+          whileHover={{ x: [0, -4, 4, -4, 4, 0] }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.4 }}
           className={styles.resetProfileLinksButton}
-          onClick={formik.handleReset}
-          type="reset"
         >
-          RESET
-        </BaseButtonWrapper>
-        <BaseButtonWrapper
-          loading={isLoading}
+          <BaseButtonWrapper
+            onClick={() => {
+              formik.handleReset(null);
+            }}
+            type="button"
+          >
+            RESET
+          </BaseButtonWrapper>
+        </motion.div>
+
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 200 }}
           className={styles.saveProfileLinksButton}
-          type="submit"
         >
-          SAVE
-        </BaseButtonWrapper>
+          <BaseButtonWrapper loading={isLoading} type="submit">
+            SAVE
+          </BaseButtonWrapper>
+        </motion.div>
       </div>
       {errorMessage && <div className="errorMessage">{errorMessage}</div>}
     </form>

@@ -33,13 +33,13 @@ export const projectFiltersSchema = locationSchema.extend({
   StartDate: z.string().optional(),
   Search: z.string().optional(),
   Rating: z.number().min(0).max(5).optional().catch(5),
-  OrganizationId: z.array(z.string()).optional().catch([]),
+  OrganizationIds: z.array(z.string()).optional().catch(undefined),
   OnlyActive: z.boolean().default(false).optional(),
   ShowJoined: z.boolean().default(false).optional(),
 });
 
 export const projectFiltersWithCategorySchema = projectFiltersSchema
-  .extend({ CategoryIds: z.array(z.string()).optional().catch([]) })
+  .extend({ CategoryIds: z.array(z.string()).optional().catch(undefined) })
   .extend(projectOrderSchema.shape)
   .extend(paginationSchema.shape);
 

@@ -35,6 +35,7 @@ export const ProjectDistanceFilter = ({
           Lng: lng,
           Location: displayName,
           Page: 1,
+          RadiusKm: prev.RadiusKm ?? 10,
         }),
         resetScroll: false,
       });
@@ -52,6 +53,7 @@ export const ProjectDistanceFilter = ({
           Lat: undefined,
           Lng: undefined,
           Location: undefined,
+          RadiusKm: undefined,
         }),
         resetScroll: false,
       });
