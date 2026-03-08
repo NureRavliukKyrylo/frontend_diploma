@@ -14,3 +14,4 @@ export { useDebounce } from "./hooks/useDebounce";
 export { SetViewOnClick } from "./map/SetViewOnClick";
 export { reverseGeocode } from "./map/reverseGeoCode";
 export { useAutocompleteSuggestions } from "./map/useAutoCompleteSuggestions";
+export { MapZoomAnimation } from "./map/MapZoomAnimation";

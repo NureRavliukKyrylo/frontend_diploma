@@ -36,6 +36,7 @@ export const ProjectDistanceFilter = ({
           Location: displayName,
           Page: 1,
         }),
+        resetScroll: false,
       });
     },
     [navigate],

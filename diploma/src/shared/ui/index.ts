@@ -16,3 +16,4 @@ export { LoadingComponent } from "./base-components/LoadingComponent";
 export { Avatar } from "./avatar/avatar-base/Avatar";
 export { Slider } from "./slider/Slider";
 export { AvatarGroup } from "./avatar/avatar-group/AvatarGroup";
+export { map } from "./map/capture/CaptureMap";

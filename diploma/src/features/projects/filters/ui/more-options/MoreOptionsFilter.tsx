@@ -19,12 +19,12 @@ export const MoreOptionsFilter = ({ search, from }: MoreOptionsFilterProps) => {
           Show completed projects
         </h1>
         <Switch
-          isSelected={search.ShowCompleted}
+          isSelected={search.OnlyActive}
           onValueChange={(isSelected) => {
             navigate({
               search: (prev) => ({
                 ...prev,
-                ShowCompleted: isSelected,
+                OnlyActive: isSelected,
                 Page: 1,
               }),
               resetScroll: false,

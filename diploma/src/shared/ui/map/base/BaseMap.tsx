@@ -12,6 +12,7 @@ import { FullscreenControl } from "../full-screen/FullScreenControl";
 import { ZoomControl } from "../zoom-control/ZoomControl";
 import type { MapContainerProps } from "react-leaflet";
 import type { Position } from "@shared/assets/types";
+import { CaptureMap } from "../capture/CaptureMap";
 
 interface BaseMapProps extends MapContainerProps {
   zoomPosition?: Position;
@@ -44,22 +45,27 @@ export const BaseMap: React.FC<BaseMapProps> = ({
         zoom={zoom}
         attributionControl={false}
         zoomControl={false}
-        minZoom={3}
-        maxBoundsViscosity={0.8}
+        minZoom={4}
+        maxBoundsViscosity={1}
         maxBounds={WORLD_BOUNDS}
         preferCanvas={true}
+        worldCopyJump={false}
         style={{
           height: "100%",
         }}
         {...rest}
       >
-        <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
+        <TileLayer
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          noWrap={true}
+        />
         <ZoomControl position={zoomPosition} />
         <SetViewOnClick animateRef={animateRef} />
         <FullscreenControl
           fullscreenRef={fullscreenRef}
           position={fullscreenPosition}
         />
+        <CaptureMap />
         {children}
       </MapContainer>
     </div>

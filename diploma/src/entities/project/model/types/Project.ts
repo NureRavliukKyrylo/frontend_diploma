@@ -9,5 +9,5 @@ export interface Project {
   progressPercent: number;
   tasksTotal: number;
   organization?: Pick<Organization, "id" | "logoUrl" | "name">;
-  location: Coordinates[];
+  location: Coordinates;
 }

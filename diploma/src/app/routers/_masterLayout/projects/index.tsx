@@ -1,4 +1,5 @@
 import { categoryQuery } from "@entities/category";
+import { organizationQuery } from "@entities/organization";
 import {
   projectFiltersWithCategorySchema,
   projectSearchDefaults,
@@ -14,5 +15,8 @@ export const Route = createFileRoute("/_masterLayout/projects/")({
   },
   loader: async ({ context: { queryClient } }) => {
     queryClient.prefetchInfiniteQuery(categoryQuery.infinite({ pageSize: 5 }));
+    queryClient.prefetchInfiniteQuery(
+      organizationQuery.infinite({ pageSize: 5 }),
+    );
   },
 });

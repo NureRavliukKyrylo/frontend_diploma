@@ -11,6 +11,6 @@ export interface OrganizationResponse {
 export const getOrganizationsList = async (
   params: OrganizationSearchParams,
 ): Promise<OrganizationResponse> => {
-  const result = await apiClient.get("/Organizations/list", { params });
+  const result = await apiClient.get("/Organization/list", { params });
   return result.data;
 };

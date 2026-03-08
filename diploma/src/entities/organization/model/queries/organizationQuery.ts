@@ -21,6 +21,12 @@ export const organizationKeys = {
 };
 
 export const organizationQuery = {
+  list: (params: OrganizationSearchParams) =>
+    queryOptions({
+      queryKey: organizationKeys.list({ ...params }),
+      queryFn: () => getOrganizationsList({ ...params }),
+      placeholderData: (prev) => prev,
+    }),
   infinite: (params: OrganizationPaginationParams) =>
     infiniteQueryOptions({
       queryKey: organizationKeys.infinite(params),

@@ -1,25 +1,23 @@
-import z from "zod";
+import { z } from "zod";
+import {
+  paginationSchema,
+  mapBoundsSchema,
+  locationSchema,
+} from "@shared/config/schemas";
 
-export const organizationPaginationSchema = z.object({
-  Page: z.number().min(1).default(1).optional(),
-  pageSize: z.number().min(1).default(9).optional(),
+export const organizationFiltersSchema = locationSchema.extend({
+  Search: z.string().optional(),
+  CategoryIds: z.array(z.string()).optional().catch([]),
 });
 
-export const organizationMapSchema = z.object({
-  MinLat: z.number().min(-90).max(90).optional(),
-  MaxLat: z.number().min(-90).max(90).optional(),
-  MinLng: z.number().min(-180).max(180).optional(),
-  MaxLng: z.number().min(-180).max(180).optional(),
-});
-
-export const organizationSearchBaseSchema = organizationPaginationSchema.extend(
-  organizationMapSchema.shape,
+export const organizationSearchSchema = organizationFiltersSchema.extend(
+  paginationSchema.shape,
 );
 
-export type OrganizationPaginationParams = z.infer<
-  typeof organizationPaginationSchema
->;
+export const organizationMapSchema = organizationFiltersSchema.extend(
+  mapBoundsSchema.shape,
+);
+
+export type OrganizationPaginationParams = z.infer<typeof paginationSchema>;
 export type OrganizationMapParams = z.infer<typeof organizationMapSchema>;
-export type OrganizationSearchParams = z.infer<
-  typeof organizationSearchBaseSchema
->;
+export type OrganizationSearchParams = z.infer<typeof organizationSearchSchema>;
