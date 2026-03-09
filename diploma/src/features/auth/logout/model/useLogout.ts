@@ -4,9 +4,11 @@ import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
 import { getErrorMessage, queryClient } from "@shared/libs";
+import { useUserStore } from "@entities/user";
 
 export const useLogout = (onSuccessCallback?: () => void, showToast = true) => {
   const router = useRouter();
+  const { clearUserInfo } = useUserStore();
 
   const mutation = useMutation({
     mutationFn: logout,
@@ -14,6 +16,9 @@ export const useLogout = (onSuccessCallback?: () => void, showToast = true) => {
       await queryClient.cancelQueries();
       queryClient.clear();
       localStorage.clear();
+      clearUserInfo();
+
+      await router.invalidate();
 
       if (showToast) {
         addToast({

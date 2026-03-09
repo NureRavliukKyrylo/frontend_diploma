@@ -4,7 +4,7 @@ import { mapProjectDefaults, mapProjectSchema } from "@entities/project";
 import { MapPage } from "@pages/map";
 import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_masterLayout/map/")({
+export const Route = createFileRoute("/_noFooterLayout/map/")({
   component: MapPage,
   validateSearch: mapProjectSchema,
   search: {

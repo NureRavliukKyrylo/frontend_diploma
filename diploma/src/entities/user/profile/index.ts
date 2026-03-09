@@ -10,3 +10,4 @@ export { ConnectedLink } from "./ui/connected-link/ConnectedLink";
 export { CONNECTED_LINKS_CONFIG } from "./config/connectedLinks";
 export { type ConnectedLinkPlatform } from "./config/connectedLinks";
 export { UserMarker } from "./ui/user-marker/UserMarker";
+export { useUserStore } from "./model/store/userInfoStore";

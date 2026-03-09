@@ -4,14 +4,15 @@ import type { ReactNode } from "react";
 
 interface IndexLayoutProps {
   children: ReactNode;
+  showFooter?: boolean;
 }
 
-export function IndexLayout({ children }: IndexLayoutProps) {
+export function IndexLayout({ children, showFooter = true }: IndexLayoutProps) {
   return (
     <div className={styles.pageHeaderWrapper}>
       <Header />
       <main className={styles.layoutMain}>{children}</main>
-      <Footer />
+      {showFooter && <Footer />}
     </div>
   );
 }

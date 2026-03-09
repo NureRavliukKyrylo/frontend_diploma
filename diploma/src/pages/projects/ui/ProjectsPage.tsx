@@ -97,7 +97,7 @@ export function ProjectsPage() {
             )}
           </motion.div>
         </div>
-        {projects && (
+        {projects && projects.pagination.totalPages > 1 && (
           <div className={styles.paginationWrapper}>
             <Pagination
               total={projects.pagination.totalPages}

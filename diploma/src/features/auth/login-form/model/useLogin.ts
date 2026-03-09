@@ -4,7 +4,7 @@ import { login, type LoginDto } from "../api/loginApi";
 import { loginSchema } from "../libs/loginSchema";
 import { useAuthStore, useUserStore } from "@entities/user";
 import { addToast } from "@heroui/react";
-import { useRouter } from "@tanstack/react-router";
+import { useRouter, useSearch } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
 import { getErrorMessage } from "@shared/libs";
 
@@ -16,12 +16,15 @@ interface LoginResponse {
 export const useLogin = () => {
   const { loginEmail, loginPassword, rememberMe, clearLoginForm } =
     useAuthStore();
-  const { setEmail, setUserId } = useUserStore();
+  const { setEmail, setUserId, setIsAuthenticated } = useUserStore();
+
   const router = useRouter();
+
+  const search = useSearch({ strict: false }) as { redirect?: string };
 
   const mutation = useMutation({
     mutationFn: (data: LoginDto) => login(data),
-    onSuccess: (data: LoginResponse) => {
+    onSuccess: async (data: LoginResponse) => {
       addToast({
         title: "Login Success",
         description: "You have logined successfully",
@@ -35,7 +38,12 @@ export const useLogin = () => {
         router.navigate({ to: AuthRoutes.verification.twoFactor });
         return;
       }
-      router.navigate({ to: "/" });
+
+      setIsAuthenticated(true);
+
+      await router.invalidate();
+
+      router.navigate({ to: search.redirect ?? "/" });
     },
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error);

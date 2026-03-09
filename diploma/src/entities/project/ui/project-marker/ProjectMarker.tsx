@@ -5,6 +5,6 @@ export const ProjectMarker = L.divIcon({
   className: "",
   html: `<img src="${ProjectMarkerIcon}" class="projectMarkerIcon" />`,
   iconSize: [35, 35],
-  iconAnchor: [20, 35],
+  iconAnchor: [18, 35],
   popupAnchor: [0, -35],
 });

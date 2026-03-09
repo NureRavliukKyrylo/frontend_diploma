@@ -16,3 +16,7 @@ export { reverseGeocode } from "./map/reverseGeoCode";
 export { useAutocompleteSuggestions } from "./map/useAutoCompleteSuggestions";
 export { MapZoomAnimation } from "./map/MapZoomAnimation";
 export { capitalize } from "./text/capitalize";
+export { defaultQueryOptions } from "./react-query/queryClient";
+export { useGeolocation } from "./map/useGeoLocation";
+export { getBounds } from "./map/getBounds";
+export { useMapViewport } from "./map/useMapViewPort";

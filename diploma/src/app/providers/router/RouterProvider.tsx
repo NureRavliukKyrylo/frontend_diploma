@@ -2,6 +2,8 @@ import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { routeTree } from "@app/routeTree.gen";
 import { BaseSpinner } from "@shared/ui";
 import { queryClient } from "@shared/libs";
+import { useUserStore } from "@entities/user";
+import "@entities/user/auth/api/refreshToken";
 
 const router = createRouter({
   routeTree,
@@ -25,6 +27,7 @@ const router = createRouter({
   ),
   context: {
     queryClient: queryClient,
+    auth: undefined!,
   },
   scrollRestoration: true,
   scrollRestorationBehavior: "smooth",
@@ -37,5 +40,11 @@ declare module "@tanstack/react-router" {
 }
 
 export function AppRouterProvider() {
-  return <RouterProvider router={router} />;
+  const { isAuthenticated } = useUserStore();
+  return (
+    <RouterProvider
+      router={router}
+      context={{ auth: { isAuthenticated: isAuthenticated } }}
+    />
+  );
 }

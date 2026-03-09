@@ -1,4 +1,4 @@
-import type { NavLink } from "@shared/config";
+import type { NavLink } from "@shared/config/types";
 
 export const headerLinks: NavLink[] = [
   { title: "PROJECTS", href: "/projects" },

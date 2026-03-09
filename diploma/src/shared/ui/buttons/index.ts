@@ -8,7 +8,6 @@ export { ButtonLayout } from "./common/ui/ButtonLayout";
 export { NotificationButton } from "./common/ui/NotificationButton";
 export { MessagesButton } from "./common/ui/MessagesButton";
 export { ActiveProjectsButton } from "./common/ui/ActiveProjectsButton";
-export { ProfieAvatar } from "./common/ui/ProfileAvatar";
 export { BaseButtonWrapper } from "./base-buttons/base-wrapper/BaseButtonWrapper";
 export { ReadMoreButton } from "./action-buttons/read-more/ReadMoreButton";
 export { ShowMoreItemsButton } from "./action-buttons/show-more/ShowMoreItemsButton";

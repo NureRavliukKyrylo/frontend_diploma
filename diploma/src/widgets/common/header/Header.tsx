@@ -5,16 +5,14 @@ import {
   LanguageSwitcherButton,
   MessagesButton,
   NotificationButton,
-  ProfieAvatar,
 } from "@shared/ui/buttons";
 import { NavMenu } from "@shared/ui";
 import { headerLinks } from "./config/headerLinks";
-import { profileQuery } from "@entities/user/profile";
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useUserStore } from "@entities/user";
+import { HeaderAvatar } from "./avatar/HeaderAvatar";
 
 export function Header() {
-  const { data: user, isLoading, error } = useSuspenseQuery(profileQuery.all());
-
+  const { isAuthenticated } = useUserStore();
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.headerMainContainer}>
@@ -31,7 +29,7 @@ export function Header() {
         <div className={styles.headerRightBlock}>
           <ActiveProjectsButton />
           <LanguageSwitcherButton />
-          <ProfieAvatar imageUrl={user?.profile?.avatarUrl} />
+          {isAuthenticated && <HeaderAvatar />}
         </div>
       </div>
       <div className={styles.headerSubContainer}>

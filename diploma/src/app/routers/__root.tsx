@@ -4,6 +4,9 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 export interface RouterContext {
   queryClient: QueryClient;
+  auth: {
+    isAuthenticated?: boolean;
+  };
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({

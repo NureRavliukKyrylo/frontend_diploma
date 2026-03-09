@@ -1,26 +1,10 @@
 import { useDebounce } from "@shared/libs";
 import { useEffect, useState } from "react";
 import { useMapEvents } from "react-leaflet";
-
-type MapBounds = {
-  MinLat: number;
-  MaxLat: number;
-  MinLng: number;
-  MaxLng: number;
-};
+import { type MapBounds, getBounds } from "../libs/getBounds";
 
 type Props = {
   onBoundsChange: (bounds: MapBounds) => void;
-};
-
-const getBounds = (map: ReturnType<typeof useMapEvents>): MapBounds => {
-  const b = map.getBounds();
-  return {
-    MinLat: b.getSouth(),
-    MaxLat: b.getNorth(),
-    MinLng: b.getWest(),
-    MaxLng: b.getEast(),
-  };
 };
 
 export const MapBoundsTracker = ({ onBoundsChange }: Props) => {

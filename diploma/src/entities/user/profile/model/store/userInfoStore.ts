@@ -12,6 +12,6 @@ export const useUserStore = create<UserInfoSlice>()(
     }),
     {
       name: "user-info-storage",
-    }
-  )
+    },
+  ),
 );

@@ -1,36 +1,5 @@
 @use "@shared/assets/styles" as *;
 
-.mapPageWrapper {
-  width: 100%;
-  height: 110%;
-  min-height: 800px;
-  position: relative;
-  margin: -3rem;
-  overflow: hidden;
-  .mapPage {
-    border-radius: 0px;
-  }
-  &:fullscreen {
-    width: 100vw;
-    height: 100vh;
-  }
-  .filterButtonWrapper {
-    position: absolute;
-    padding: 0px 20px;
-    z-index: 1000;
-    display: grid;
-    width: 100%;
-    grid-template-columns: 480px 370px 1fr 370px;
-    align-items: center;
-    gap: 20px;
-    grid-template-rows: 58px;
-    top: 50px;
-    pointer-events: auto;
-    .combinedList {
-      grid-column: 4/5;
-    }
-  }
-}
 .popupProject {
   :global(.leaflet-popup-content-wrapper) {
     background: rgba(255, 255, 255, 0.8);
@@ -92,41 +61,6 @@
       }
     }
   }
-}
-
-.popupOrganizationContent {
-  display: flex;
-  gap: 10px;
-  flex-direction: column;
-  align-items: center;
-
-  h1 {
-    @include font-base(30px, 900);
-  }
-  p {
-    @include font-base(15px, 400);
-    text-align: center;
-    margin: 0px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    line-height: 130%;
-  }
-  .seeMoreButtonProject {
-    color: #8c0000;
-    text-decoration-line: underline;
-    @include font-base(15px, 800);
-  }
-  img {
-    width: 77px;
-    height: 77px;
-  }
-}
-.paginationWrapper {
-  display: flex;
-  justify-content: center;
-  padding: 10px 20px 20px 20px;
 }
 
 :global(.projectMarkerIcon) {
