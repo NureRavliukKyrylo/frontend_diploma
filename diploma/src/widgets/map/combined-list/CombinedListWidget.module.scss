@@ -3,23 +3,4 @@
   flex-direction: column;
   gap: 20px;
   padding: 20px;
-
-  max-height: 54vh;
-  scrollbar-gutter: stable;
-  contain: layout;
-  transform: translate3d(0, 0, 0);
-  overflow: auto;
-
-  &::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
-  }
 }

@@ -8,16 +8,24 @@ import { twoFactorVerification } from "../api/twoFactorVerificationApi";
 import { ResendCodeButton } from "@features/verification/resend-code";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./TwoFactorVerificationForm.module.scss";
-import { useAuthStore } from "@entities/user";
+import { useAuthStore, useUserStore } from "@entities/user";
+import { useRouter, useSearch } from "@tanstack/react-router";
 
 export const TwoFactorVerificationForm: React.FC = () => {
   const { otpTimers, resetOtpTimer, decrementOtpTimer } = useAuthStore();
+  const { setIsAuthenticated } = useUserStore();
+  const search = useSearch({ strict: false }) as { redirect?: string };
+  const router = useRouter();
+
   const { formik, isLoading, errorMessage } = useVerification({
     apiFn: twoFactorVerification,
-    successRedirect: "/home",
     successMessage: "Two factor verified successfully",
+    onSuccess: async () => {
+      setIsAuthenticated(true);
+      await router.invalidate();
+      router.navigate({ to: search.redirect ?? "/" });
+    },
   });
-
   return (
     <VerificationForm
       otpType={OtpType.TwoFactor}

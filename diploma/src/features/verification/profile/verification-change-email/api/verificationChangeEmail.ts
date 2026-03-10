@@ -9,7 +9,7 @@ export type CodeType = "old-code" | "new-code";
 
 const endpoints: Record<CodeType, string> = {
   "old-code": "Auth/change-email/verify-old-code",
-  "new-code": "Auth/change-email/confirm-new-code",
+  "new-code": "Auth/change-email/confirm-new-email",
 };
 
 export const verificationChangeEmail = async (

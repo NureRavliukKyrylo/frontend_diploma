@@ -20,3 +20,5 @@ export { defaultQueryOptions } from "./react-query/queryClient";
 export { useGeolocation } from "./map/useGeoLocation";
 export { getBounds } from "./map/getBounds";
 export { useMapViewport } from "./map/useMapViewPort";
+export { MapBoundsTracker } from "./map/MapBoundsTracker";
+export type { MapBounds } from "./map/MapBoundsTracker";

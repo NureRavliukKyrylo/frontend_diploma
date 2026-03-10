@@ -1,5 +1,5 @@
 import { VerificationWrapper } from "@shared/ui/wrappers";
-import styles from "../../base-security-form/ui/SecuritySettingsForm.module.scss";
+import styles from "./ChangeEmail.module.scss";
 import { ProfileEmailInput } from "@shared/ui/inputs";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useSendChangeEmailRequest } from "../model/useSendChangeEmailRequest";
@@ -21,10 +21,7 @@ export const NewEmailVerificationContent = () => {
       title="Change email"
       description="Enter your new email below. We'll send a code to confirm it"
     >
-      <form
-        className={styles.verificationChangePassword}
-        onSubmit={formik.handleSubmit}
-      >
+      <form className={styles.verificationEmail} onSubmit={formik.handleSubmit}>
         <ProfileEmailInput
           name="newEmail"
           variant="verification"
@@ -33,16 +30,14 @@ export const NewEmailVerificationContent = () => {
           onChange={formik.handleChange}
           error={formik.submitCount > 0 ? formik.errors.newEmail : ""}
         />
-        <div className={styles.newEmailVerificationBlock}>
-          <BaseButtonWrapper
-            loading={isLoading}
-            className={styles.changePasswordButton}
-            type="submit"
-          >
-            Save New Email
-          </BaseButtonWrapper>
-          {errorMessage && <div className="errorMessage">{errorMessage}</div>}
-        </div>
+        <BaseButtonWrapper
+          loading={isLoading}
+          className={styles.changeNewEmailButton}
+          type="submit"
+        >
+          Save New Email
+        </BaseButtonWrapper>
+        {errorMessage && <div className="errorMessage">{errorMessage}</div>}
       </form>
     </VerificationWrapper>
   );

@@ -1,32 +1,29 @@
 import { BaseModal } from "@shared/ui/modals";
-import styles from "./MapLocationModal.module.scss";
+import styles from "./MapUserLocationModal.module.scss";
 import type { Coordinates } from "@shared/config/types";
-import { BaseMap } from "../base/BaseMap";
+import { BaseMap } from "@shared/ui";
 import { Marker, Popup } from "react-leaflet";
 import { MapZoomAnimation } from "@shared/libs/map/MapZoomAnimation";
-import type { Icon } from "leaflet";
+import { UserMarker } from "@entities/user/profile";
 
-export interface MapLocationModal {
-  isMapOpen: boolean;
-  onClose: () => void;
+export interface MapUserLocationModalProps {
+  fullName: string;
   coordinates: Coordinates | null;
-  popUpText: string;
-  maxWidth: string;
-  icon: Icon;
+  handleModal: () => void;
+  isOpen: boolean;
 }
-export const MapLocationModal = ({
-  isMapOpen,
-  onClose,
+
+export const MapUserLocationModal = ({
   coordinates,
-  popUpText,
-  maxWidth,
-  icon,
-}: MapLocationModal) => {
+  fullName,
+  handleModal,
+  isOpen,
+}: MapUserLocationModalProps) => {
   return (
     <BaseModal
-      isOpen={isMapOpen}
-      onClose={onClose}
-      maxWidth={maxWidth}
+      isOpen={isOpen}
+      onClose={handleModal}
+      maxWidth={"1200px"}
       showClosed={false}
     >
       <div className={styles.mapModalWrapper}>
@@ -40,9 +37,15 @@ export const MapLocationModal = ({
           {coordinates && (
             <Marker
               position={[coordinates.latitude, coordinates.longitude]}
-              icon={icon}
+              icon={UserMarker}
             >
-              <Popup>{popUpText}</Popup>
+              <Popup className={styles.popupUserLocation}>
+                <div className={styles.popupContent}>
+                  <h1 className={styles.userLocationText}>
+                    {fullName}'s location
+                  </h1>
+                </div>
+              </Popup>
             </Marker>
           )}
           <MapZoomAnimation coordinates={coordinates} />

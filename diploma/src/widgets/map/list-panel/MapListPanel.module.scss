@@ -1,3 +1,5 @@
+@use "@shared/assets/styles" as *;
+
 .paginationWrapper {
   display: flex;
   justify-content: center;
@@ -6,4 +8,40 @@
 
 .projectCardListWrapper {
   cursor: pointer;
+}
+
+.emptyState {
+  padding: 10px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  h2 {
+    @include font-base(35px, 900);
+    line-height: 120%;
+    color: #1a1a2e;
+  }
+  p {
+    @include font-base(20px, 500);
+    color: #6b7280;
+  }
+}
+
+.scrollableListBlock {
+  max-height: 58vh;
+  scrollbar-gutter: stable;
+  contain: layout;
+  transform: translate3d(0, 0, 0);
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+  }
 }

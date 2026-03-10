@@ -7,21 +7,23 @@ import { verifyCodeSchema } from "../libs/verifyCodeSchema";
 import { getErrorMessage } from "@shared/libs";
 import { profileQuery } from "@entities/user/profile";
 
-interface VerificationConfig {
-  apiFn: (data: any) => Promise<any>;
+interface VerificationConfig<TData, TResult> {
+  apiFn: (data: TData) => Promise<TResult>;
+  confirmFn?: () => Promise<unknown>;
   successRedirect?: string;
   successMessage?: string;
   onSuccess?: () => void;
   extraFields?: Record<string, unknown>;
 }
 
-export const useVerification = ({
+export const useVerification = <TData, TResult>({
   apiFn,
   successRedirect,
   successMessage = "Code verified successfully",
   onSuccess,
   extraFields = {},
-}: VerificationConfig) => {
+  confirmFn,
+}: VerificationConfig<TData, TResult>) => {
   const router = useRouter();
 
   const { userId: storeUserId } = useUserStore();
@@ -33,9 +35,12 @@ export const useVerification = ({
 
   const userId = storeUserId ?? user?.id;
 
-  console.log(userId);
   const mutation = useMutation({
-    mutationFn: apiFn,
+    mutationFn: async (data: any) => {
+      const result = await apiFn(data);
+      if (confirmFn) await confirmFn();
+      return result;
+    },
     onSuccess: () => {
       addToast({
         title: "Success",

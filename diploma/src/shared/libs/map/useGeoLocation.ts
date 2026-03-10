@@ -4,12 +4,14 @@ import type { Coordinates } from "@shared/config/types";
 export const useGeolocation = ({
   coordinates,
   onLocationChange,
+  enabled = true,
 }: {
   coordinates: Coordinates | null;
   onLocationChange: (coords: Coordinates) => void;
+  enabled?: boolean;
 }) => {
   useEffect(() => {
-    if (coordinates) return;
+    if (!enabled || coordinates) return;
 
     if (!navigator.geolocation) return;
 

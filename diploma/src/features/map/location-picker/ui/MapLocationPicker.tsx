@@ -11,10 +11,11 @@ export interface Coordinates {
 }
 
 interface MapLocationPickerProps {
-  coordinates: Coordinates | null;
+  coordinates?: Coordinates | null;
   zoom?: number;
   onLocationChange: (coords: Coordinates) => void;
-  popUpText: string;
+  popupContent?: React.ReactNode;
+  popupClassName?: string;
   icon: Icon;
 }
 
@@ -22,10 +23,15 @@ export const MapLocationPicker: React.FC<MapLocationPickerProps> = ({
   coordinates,
   zoom,
   onLocationChange,
-  popUpText,
+  popupClassName,
+  popupContent,
   icon,
 }) => {
-  useGeolocation({ coordinates, onLocationChange });
+  useGeolocation({
+    coordinates: coordinates ?? null,
+    onLocationChange,
+    enabled: !coordinates,
+  });
 
   const handleSetCoordinates = (coords: Coordinates) => {
     onLocationChange(coords);
@@ -42,11 +48,11 @@ export const MapLocationPicker: React.FC<MapLocationPickerProps> = ({
           position={[coordinates.latitude, coordinates.longitude]}
           icon={icon}
         >
-          <Popup>{popUpText}</Popup>
+          <Popup className={popupClassName}>{popupContent}</Popup>
         </Marker>
       )}
       <SyncMapEvents setCoordinates={handleSetCoordinates} />
-      <MapZoomAnimation coordinates={coordinates} zoom={zoom} />
+      <MapZoomAnimation coordinates={coordinates ?? null} zoom={zoom} />
     </BaseMap>
   );
 };

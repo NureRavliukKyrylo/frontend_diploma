@@ -1,38 +1,29 @@
-import { MapLocationModal, ProgressBar } from "@shared/ui";
+import { ProgressBar } from "@shared/ui";
 import styles from "./ProfileMainWidget.module.scss";
 import { BaseButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
-import type { Coordinates } from "@shared/config/types";
 import { DatePickerInput, MapLocationInput } from "@shared/ui/inputs";
 import { useState } from "react";
 import { LayoutCard } from "@shared/assets/images/layout";
-import { UserMarker } from "@entities/user/profile";
+import { MapUserLocationModal } from "../user-location-modal/MapUserLocationModal";
+import type { User } from "@entities/user/profile";
 
 interface ProfileMainWidgetProps {
   skillsChildren?: React.ReactNode;
   badgesChildren?: React.ReactNode;
-  description?: string;
-  coordinates?: Coordinates | null;
-  dateBirthday?: string;
-  activeProjects?: number;
-  completedProjects?: number;
-  location?: string;
-  //TODO:level interface,rating mb, adding user info with Pick or smth change all mock data
+  user?: User;
 }
 export function ProfileMainWidget({
   skillsChildren,
   badgesChildren,
-  description,
-  coordinates,
-  dateBirthday,
-  activeProjects,
-  completedProjects,
-  location,
+  user,
 }: ProfileMainWidgetProps) {
   const [isLocationMapOpen, setIsLocationMapOpen] = useState(false);
 
   const handleModal = () => {
     setIsLocationMapOpen((prev) => !prev);
   };
+
+  const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ");
 
   return (
     <>
@@ -55,17 +46,17 @@ export function ProfileMainWidget({
       </div>
       <div className={styles.bioUser}>
         <ReadMoreButton
-          collapsedHeight={110}
+          collapsedHeight={90}
           className={styles.readMoreMainProfile}
         >
-          <p>{description}</p>
+          <p>{user?.profile?.bio}</p>
         </ReadMoreButton>
       </div>
       <div className={styles.locationDateUserInfo}>
         <div className={styles.datePickerUserProfileWrapper}>
           <DatePickerInput
             name="datePicker"
-            value={dateBirthday}
+            value={user?.profile?.dateOfBirth}
             isReadOnly={true}
             label={"Date of birthday"}
             classNames={{
@@ -77,18 +68,16 @@ export function ProfileMainWidget({
         <div className={styles.mapLocationUserProfileWrapper}>
           <MapLocationInput
             handleMapOpen={handleModal}
-            label={location ?? "No location added"}
+            label={user?.location?.address ?? "No location added"}
             variant="profile"
           />
         </div>
-        {coordinates && (
-          <MapLocationModal
-            coordinates={coordinates}
-            isMapOpen={isLocationMapOpen}
-            onClose={handleModal}
-            popUpText={""}
-            maxWidth={"1200px"}
-            icon={UserMarker}
+        {user?.profile?.coordinates && (
+          <MapUserLocationModal
+            isOpen={isLocationMapOpen}
+            coordinates={user?.profile?.coordinates}
+            handleModal={handleModal}
+            fullName={fullName}
           />
         )}
       </div>
@@ -101,14 +90,14 @@ export function ProfileMainWidget({
                 <h1>ACTIVE</h1>
                 <h2>PROJECTS</h2>
               </div>
-              <p>{activeProjects ?? "0"}</p>
+              <p>{user?.profile?.activeProjectCount ?? "0"}</p>
             </div>
             <div className={styles.projectsUserProfile}>
               <div className={styles.textInfoProjectsUserProfile}>
                 <h1>COMPLETED</h1>
                 <h2>PROJECTS</h2>
               </div>
-              <p>{completedProjects ?? "0"}</p>
+              <p>{user?.profile?.completedProjectCount ?? "0"}</p>
             </div>
           </div>
           <div className={styles.projectsSeeMore}>

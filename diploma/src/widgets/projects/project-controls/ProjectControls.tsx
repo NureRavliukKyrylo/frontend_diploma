@@ -1,5 +1,5 @@
 import type { ProjectSearchParams } from "@entities/project";
-import { FilterButton } from "@shared/ui/buttons";
+import { ToggleDropdownButton } from "@shared/ui/buttons";
 import { SearchBar } from "@shared/ui/inputs";
 import { SortDropDown } from "@shared/ui/drop-down";
 import { sortingItems } from "./config/sortingItems";
@@ -21,7 +21,9 @@ export const ProjectControls = ({
   children,
 }: ProjectControlsProps) => (
   <>
-    <FilterButton onOpenChange={onFilterOpen}>{children}</FilterButton>
+    <ToggleDropdownButton onOpenChange={onFilterOpen}>
+      {children}
+    </ToggleDropdownButton>
     <SearchBar value={search.Search} onChange={onSearch} variant="projects" />
     <SortDropDown
       options={sortingItems}

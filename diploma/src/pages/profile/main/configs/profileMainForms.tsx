@@ -12,15 +12,7 @@ export const profileMainForms: Record<
   (props: ProfileFormProps) => React.ReactNode
 > = {
   profile: ({ user }) => (
-    <ProfileMainWidget
-      badgesChildren={<BadgesCarouselWidget />}
-      description={user?.profile?.bio}
-      coordinates={user?.profile?.coordinates}
-      dateBirthday={user?.profile?.dateOfBirth}
-      activeProjects={user?.profile?.activeProjectCount}
-      completedProjects={user?.profile?.completedProjectCount}
-      location={user?.location?.address}
-    />
+    <ProfileMainWidget badgesChildren={<BadgesCarouselWidget />} user={user} />
   ),
   projects: () => <></>,
   archive: () => <></>,

@@ -1,8 +1,9 @@
 import { MapZoomAnimation } from "@shared/libs";
 import { useRef } from "react";
-import { Marker } from "react-leaflet";
+import { Marker, Popup } from "react-leaflet";
 import { UserMarker } from "@entities/user/profile";
 import type { Coordinates } from "@shared/config/types";
+import styles from "../base-page/MapPage.module.scss";
 
 interface MapInitialLocationProps {
   coordinates: Coordinates | null;
@@ -24,7 +25,13 @@ export const MapInitialLocation = ({
       <Marker
         position={[coordinates.latitude, coordinates.longitude]}
         icon={UserMarker}
-      />
+      >
+        <Popup className={styles.popupUserLocation}>
+          <div className={styles.popupContent}>
+            <h1 className={styles.userLocationText}>Your location</h1>
+          </div>
+        </Popup>
+      </Marker>
     </>
   );
 };

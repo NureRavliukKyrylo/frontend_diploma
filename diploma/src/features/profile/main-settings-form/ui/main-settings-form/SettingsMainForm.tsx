@@ -8,8 +8,8 @@ import {
 import { UploadImage } from "@features/profile/upload-image";
 import { useState } from "react";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
-import { useSettingsMainForm } from "../model/useSettingsMainForm";
-import { MapLocationModal } from "./MapLocationModal";
+import { useSettingsMainForm } from "../../model/useSettingsMainForm";
+import { MapLocationModal } from "../location-modal-picker/MapLocationModal";
 import { motion } from "framer-motion";
 
 export function SettingsMainForm() {

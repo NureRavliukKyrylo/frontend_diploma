@@ -1,4 +1,4 @@
-export { FilterButton } from "./action-buttons/filter/FilterButton";
+export { ToggleDropdownButton } from "./action-buttons/toggle/ToggleDropdownButton";
 export { BackButton } from "./action-buttons/back/BackButton";
 export { LinkButtonWrapper } from "./base-buttons/link-wrapper/LinkButtonWrapper";
 export { LanguageSwitcherButton } from "./action-buttons/language-switcher/LanguageSwitcherButton";

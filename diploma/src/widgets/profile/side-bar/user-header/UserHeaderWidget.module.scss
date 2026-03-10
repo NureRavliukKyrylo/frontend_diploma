@@ -8,9 +8,10 @@
   .avatarBlock {
     height: 100%;
   }
-  h1 {
+  .fullNameUser {
     @include font-base(50px, 900);
     line-height: 100%;
+    text-transform: uppercase;
   }
 }
 .wrapperInfoProfileUser {

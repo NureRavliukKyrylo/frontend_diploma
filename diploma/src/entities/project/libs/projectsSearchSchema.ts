@@ -15,7 +15,7 @@ export const projectSearchDefaults = {
 
 export const mapProjectDefaults = {
   Page: 1,
-  pageSize: 5,
+  pageSize: 7,
   OnlyActive: false,
   ShowJoined: false,
 };
@@ -52,7 +52,7 @@ export const mapProjectSchema = projectFiltersSchema
   .extend(paginationSchema.shape)
   .extend({
     CategoryIds: z.array(z.string()).optional().catch([]),
-    pageSize: z.number().min(1).default(5).optional(),
+    pageSize: z.number().min(1).default(7).optional(),
   });
 
 export const projectBaseSchema = projectFiltersWithCategorySchema.extend(

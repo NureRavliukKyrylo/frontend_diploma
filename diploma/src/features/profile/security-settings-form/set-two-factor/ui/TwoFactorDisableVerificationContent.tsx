@@ -1,6 +1,6 @@
 import { TwoFactorVerificationProfileForm } from "@features/verification";
 import { VerificationWrapper } from "@shared/ui/wrappers";
-import styles from "../../base-security-form/ui/SecuritySettingsForm.module.scss";
+import styles from "./TwoFactor.module.scss";
 import { OtpType } from "@shared/config/types";
 import { useUserProfileStore } from "@entities/user";
 

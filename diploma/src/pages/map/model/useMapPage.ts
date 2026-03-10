@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useMapInitialLocation } from "./useMapInitialLocation.ts";
+import type { MapBounds } from "@shared/libs/index.ts";
 
 export const useMapPage = () => {
   const navigate = useNavigate({ from: "/map/" });
@@ -29,8 +30,22 @@ export const useMapPage = () => {
 
   const initialLocation = useMapInitialLocation();
 
+  const handleSearch = (value: string) => {
+    navigate({
+      search: (prev) => ({ ...prev, Search: value || undefined }),
+      resetScroll: false,
+    });
+  };
+
+  const handleSearchBounds = (bounds: MapBounds) => {
+    navigate({
+      search: (prev) => ({ ...prev, ...bounds }),
+      replace: true,
+      resetScroll: false,
+    });
+  };
+
   return {
-    navigate,
     search,
     wrapperRef,
     mapSearch,
@@ -38,5 +53,7 @@ export const useMapPage = () => {
     searchCoordinates,
     radiusMeters,
     initialLocation,
+    handleSearch,
+    handleSearchBounds,
   };
 };

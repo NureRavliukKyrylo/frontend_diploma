@@ -1,6 +1,6 @@
 import { BaseMap } from "@shared/ui";
 import styles from "./MapPage.module.scss";
-import { FilterButton } from "@shared/ui/buttons";
+import { ToggleDropdownButton } from "@shared/ui/buttons/index.ts";
 import { SearchBar } from "@shared/ui/inputs";
 import {
   MapFiltersWidget,
@@ -8,14 +8,13 @@ import {
   MapProjectCluster,
 } from "@widgets/map";
 import { Suspense } from "react";
-import { MapBoundsTracker } from "./MapBoundsTracker";
-import { SearchLocationLayer } from "./SearchLocationLayer";
-import { MapInitialLocation } from "./MapInitialLocation";
-import { useMapPage } from "../model/useMapPage.ts";
+import { MapBoundsTracker } from "@shared/libs/index.ts";
+import { SearchLocationLayer } from "../location-layer/SearchLocationLayer.tsx";
+import { MapInitialLocation } from "../initial-location/MapInitialLocation.tsx";
+import { useMapPage } from "../../model/useMapPage.ts";
 
 export const MapPage = () => {
   const {
-    navigate,
     search,
     wrapperRef,
     mapSearch,
@@ -23,6 +22,8 @@ export const MapPage = () => {
     searchCoordinates,
     radiusMeters,
     initialLocation,
+    handleSearch,
+    handleSearchBounds,
   } = useMapPage();
 
   return (
@@ -35,19 +36,12 @@ export const MapPage = () => {
         fullscreenRef={wrapperRef}
       >
         <MapInitialLocation coordinates={initialLocation} />
-        <MapBoundsTracker
-          onBoundsChange={(bounds) =>
-            navigate({
-              search: (prev) => ({ ...prev, ...bounds }),
-              replace: true,
-              resetScroll: false,
-            })
-          }
-        />
+        <MapBoundsTracker onBoundsChange={handleSearchBounds} />
         {searchCoordinates && (
           <SearchLocationLayer
             coordinates={searchCoordinates}
             radiusMeters={radiusMeters}
+            search={search}
           />
         )}
         <Suspense fallback={null}>
@@ -56,21 +50,11 @@ export const MapPage = () => {
       </BaseMap>
 
       <div className={styles.filterButtonWrapper}>
-        <FilterButton>
+        <ToggleDropdownButton>
           <MapFiltersWidget search={search} from="/map/" />
-        </FilterButton>
-        <SearchBar
-          onChange={(value) =>
-            navigate({
-              to: "/map",
-              search: (prev) => ({ ...prev, Search: value || undefined }),
-            })
-          }
-          variant="projects"
-        />
-        <div className={styles.combinedList}>
-          <MapListPanel listParams={listParams} page={search.Page} />
-        </div>
+        </ToggleDropdownButton>
+        <SearchBar onChange={handleSearch} variant="projects" />
+        <MapListPanel listParams={listParams} page={search.Page} />
       </div>
     </div>
   );

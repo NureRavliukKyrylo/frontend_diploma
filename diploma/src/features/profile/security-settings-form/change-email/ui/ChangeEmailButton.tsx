@@ -1,4 +1,4 @@
-import styles from "../../base-security-form/ui/SecuritySettingsForm.module.scss";
+import styles from "./ChangeEmail.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { Edit } from "@shared/assets/icons/actions";
 import { useSendChangeEmailRequest } from "../model/useSendChangeEmailRequest";
@@ -19,7 +19,7 @@ export const ChangeEmailButton = () => {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 300 }}
-      className={styles.editPasswordButton}
+      className={styles.editEmailButton}
     >
       <BaseButtonWrapper
         type="button"

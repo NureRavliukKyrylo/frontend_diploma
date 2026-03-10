@@ -1,7 +1,7 @@
 import { useUserProfileStore } from "@entities/user";
 import { UnlinkVerificationForm } from "@features/verification";
 import { VerificationWrapper } from "@shared/ui/wrappers";
-import styles from "../../base-security-form/ui/SecuritySettingsForm.module.scss";
+import styles from "./UnlinkVerificationContent.module.scss";
 import { capitalize, queryClient } from "@shared/libs";
 import { profileKeys } from "@entities/user/profile";
 

@@ -38,6 +38,7 @@ export function ReadMoreButton({
   return (
     <div className={`${styles.readMoreContainer} ${className}`}>
       <motion.div
+        layout
         ref={contentRef}
         className={styles.content}
         initial={false}
@@ -53,6 +54,7 @@ export function ReadMoreButton({
         <AnimatePresence>
           {showButton && !isExpanded && (
             <motion.div
+              layout
               className={styles.gradient}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -65,7 +67,10 @@ export function ReadMoreButton({
       {showButton && (
         <button
           className={`${styles.readMoreButton} ${classNameButton}`}
-          onClick={() => setIsExpanded(!isExpanded)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsExpanded(!isExpanded);
+          }}
           type="button"
         >
           {isExpanded ? buttonTextCollapsed : buttonText}

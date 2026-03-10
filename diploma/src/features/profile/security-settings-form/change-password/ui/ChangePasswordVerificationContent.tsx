@@ -1,6 +1,6 @@
 import { ChangePasswordVerificationForm } from "@features/verification";
 import { VerificationWrapper } from "@shared/ui/wrappers";
-import styles from "../../base-security-form/ui/SecuritySettingsForm.module.scss";
+import styles from "./ChangePasswordButton.module.scss";
 import { useUserProfileStore, useUserStore } from "@entities/user";
 
 export const ChangePasswordVerificationContent = () => {

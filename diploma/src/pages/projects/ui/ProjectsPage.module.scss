@@ -21,25 +21,24 @@
         gap: 30px;
         grid-column: 1 / 3;
       }
+      .emptyState {
+        display: flex;
+        flex-direction: column;
+        h2 {
+          @include font-base(60px, 900);
+          line-height: 120%;
+          color: #1a1a2e;
+        }
+        p {
+          @include font-base(40px, 500);
+          color: #6b7280;
+        }
+      }
       .projectsList {
-        min-height: 400px;
+        min-height: 800px;
         grid-column: 1 / 3;
         &.filterOpen {
           grid-column: 2/3;
-          min-height: 800px;
-        }
-        .emptyState {
-          display: flex;
-          flex-direction: column;
-          h2 {
-            @include font-base(60px, 900);
-            line-height: 120%;
-            color: #1a1a2e;
-          }
-          p {
-            @include font-base(40px, 500);
-            color: #6b7280;
-          }
         }
       }
     }
@@ -49,4 +48,7 @@
       justify-content: center;
     }
   }
+}
+.projectCardMotion {
+  cursor: pointer;
 }

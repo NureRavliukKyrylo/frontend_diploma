@@ -23,7 +23,7 @@ export function CategoryDetailPage() {
     handleSort,
     handlePageChange,
   } = useCategoryDetailPage();
-  const { data: projects } = useQuery(projectQuery.list(search));
+  const { data: projects } = useQuery(projectQuery.list(searchWithCategory));
 
   return (
     <div className={styles.projectsCategoryWrapper}>

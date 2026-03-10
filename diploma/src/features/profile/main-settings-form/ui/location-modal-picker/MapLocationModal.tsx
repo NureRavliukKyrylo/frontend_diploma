@@ -19,7 +19,6 @@ export const MapLocationModal = ({
   error,
   coordinates,
   setCoordinates,
-  popUpText,
   maxWidth,
 }: MapLocationModal) => {
   return (
@@ -34,8 +33,13 @@ export const MapLocationModal = ({
         <MapLocationPicker
           coordinates={coordinates}
           onLocationChange={setCoordinates}
-          popUpText={popUpText}
           icon={UserMarker}
+          popupClassName={styles.popupUserLocation}
+          popupContent={
+            <div className={styles.popupContent}>
+              <h1 className={styles.userLocationText}>Your location</h1>
+            </div>
+          }
         />
       </div>
     </BaseModal>

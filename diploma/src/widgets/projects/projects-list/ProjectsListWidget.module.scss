@@ -1,6 +1,7 @@
 .projectsListWrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
   justify-content: center;
   gap: 40px;
+  align-items: stretch;
 }

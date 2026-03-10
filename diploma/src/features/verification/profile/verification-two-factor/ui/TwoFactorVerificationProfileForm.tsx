@@ -5,6 +5,7 @@ import {
   useVerification,
 } from "@features/verification/verification-base-form";
 import {
+  confirmTwoFactorVerification,
   twoFactorVerificationProfile,
   type VerificationProfileDto,
   type VerificationType,
@@ -26,6 +27,7 @@ export const TwoFactorVerificationProfileForm: React.FC<
   const { formik, isLoading, errorMessage } = useVerification({
     apiFn: (data: VerificationProfileDto) =>
       twoFactorVerificationProfile(data, verificationType),
+    confirmFn: () => confirmTwoFactorVerification(verificationType),
     successRedirect: "/",
     successMessage: `Two factor ${verificationType} verified successfully`,
     onSuccess,

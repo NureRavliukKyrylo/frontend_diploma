@@ -23,7 +23,7 @@ export const UserHeaderWidget = ({
         <div className={styles.avatarBlock}>
           <ProfileAvatar avatar={image ?? DefaultAvatar} level={13} />
         </div>
-        <h1>{name ?? "Unknown"}</h1>
+        <h1 className={styles.fullNameUser}>{name ?? "Unknown"}</h1>
         <div className={styles.wrapperInfoProfileUser}>
           <h1>{email ?? "Unknown"}</h1>
         </div>

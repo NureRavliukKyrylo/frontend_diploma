@@ -1,15 +1,20 @@
+import { LocationMarker } from "@features/projects";
 import { MapZoomAnimation } from "@shared/libs";
 import { useRef } from "react";
-import { Circle, Marker } from "react-leaflet";
+import { Circle, Marker, Popup } from "react-leaflet";
+import styles from "../base-page/MapPage.module.scss";
+import type { MapProjectSearchParams } from "@entities/project";
 
 interface SearchLocationLayerProps {
   coordinates: { latitude: number; longitude: number };
   radiusMeters?: number | null;
+  search: MapProjectSearchParams;
 }
 
 export const SearchLocationLayer = ({
   coordinates,
   radiusMeters,
+  search,
 }: SearchLocationLayerProps) => {
   const prevCoordsRef = useRef<{ latitude: number; longitude: number } | null>(
     null,
@@ -28,14 +33,30 @@ export const SearchLocationLayer = ({
   return (
     <>
       {animatedCoords && <MapZoomAnimation coordinates={animatedCoords} />}
-      <Marker position={[coordinates.latitude, coordinates.longitude]} />
+      <Marker
+        position={[coordinates.latitude, coordinates.longitude]}
+        icon={LocationMarker}
+      >
+        <Popup className={styles.popupSearchLocation}>
+          <div className={styles.popupContent}>
+            <h1 className={styles.locationSearchText}>Search area center</h1>
+            <span className={styles.locationName}>{search.Location}</span>
+            {radiusMeters && (
+              <div className={styles.radiusBadge}>
+                ⌀ {(radiusMeters / 1000).toFixed(1)} km radius
+              </div>
+            )}
+          </div>
+        </Popup>
+      </Marker>
+
       {radiusMeters != null && (
         <Circle
           center={[coordinates.latitude, coordinates.longitude]}
           radius={radiusMeters}
           pathOptions={{
-            color: "#3B82F6",
-            fillColor: "#3B82F6",
+            color: "#F97316",
+            fillColor: "#F97316",
             fillOpacity: 0.1,
             weight: 2,
           }}

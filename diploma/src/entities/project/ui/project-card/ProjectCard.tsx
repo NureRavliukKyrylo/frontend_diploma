@@ -26,7 +26,6 @@ export const ProjectCard = ({ project, avatars }: ProjectCardProps) => {
       <div className={styles.projectInfoBlock}>
         <h1>{project.title}</h1>
         <ReadMoreButton
-          collapsedHeight={90}
           className={styles.readMoreProjectBlock}
           classNameButton={styles.readMoreProjectButton}
         >

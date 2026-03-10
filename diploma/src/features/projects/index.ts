@@ -5,3 +5,4 @@ export { ProjectOrganizationFilter } from "./filters/ui/organizations/ProjectOrg
 export { ProjectDistanceFilter } from "./filters/ui/distance/ProjectDistanceFilter";
 export type { NavigateParams } from "./filters/model/NavigateParams";
 export { MoreOptionsFilter } from "./filters/ui/more-options/MoreOptionsFilter";
+export { LocationMarker } from "./filters/ui/location-marker/LocationMarker";

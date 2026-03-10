@@ -11,10 +11,11 @@ export const ChangePasswordButton = () => {
 
   return (
     <motion.div
+      layout
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      transition={{ type: "spring", stiffness: 150 }}
-      className={`${styles.changePasswordButton} ${isPasswordSet ? styles.newPassword : ""}`}
+      transition={{ type: "spring", stiffness: 300 }}
+      className={`${isPasswordSet ? styles.changePasswordButton : styles.newPasswordButton}`}
     >
       <BaseButtonWrapper
         disabled={isLoading}

@@ -22,7 +22,12 @@ export const UserLocationPicker = () => {
         <MapLocationPicker
           coordinates={formik.values.coordinates}
           onLocationChange={handleLocationChange}
-          popUpText="Your Location"
+          popupClassName={styles.popupUserLocation}
+          popupContent={
+            <div className={styles.popupContent}>
+              <h1 className={styles.userLocationText}>Your location</h1>
+            </div>
+          }
           icon={UserMarker}
         />
       </div>

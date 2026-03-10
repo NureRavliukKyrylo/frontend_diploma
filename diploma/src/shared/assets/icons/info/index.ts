@@ -5,3 +5,4 @@ export { default as Star } from "./star.png";
 export { default as SelectedMark } from "./mark.png";
 export { default as CheckMark } from "./check-mark.png";
 export { default as Calendar } from "./calendar.png";
+export { default as ListIcon } from "./list-icon.png";

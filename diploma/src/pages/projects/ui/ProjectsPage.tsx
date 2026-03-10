@@ -7,7 +7,7 @@ import {
 } from "@widgets/projects";
 import { Pagination } from "@shared/ui";
 import { Suspense } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useRouter } from "@tanstack/react-router";
 import styles from "./ProjectsPage.module.scss";
 import { useQuery } from "@tanstack/react-query";
 import { ProjectCard, projectQuery } from "@entities/project";
@@ -24,6 +24,7 @@ export function ProjectsPage() {
     handlePageChange,
   } = useProjectsPage();
   const { data: projects } = useQuery(projectQuery.list(search));
+  const router = useRouter();
 
   return (
     <div className={styles.projectsWrapper}>
@@ -68,27 +69,32 @@ export function ProjectsPage() {
                         ease: "easeIn",
                         duration: 0.2,
                       }}
+                      className={styles.projectCardMotion}
+                      onClick={() =>
+                        router.navigate({
+                          to: "/projects/$id",
+                          params: { id: project.id },
+                        })
+                      }
                     >
-                      <Link to="/projects/$id" params={{ id: project.id }}>
-                        <ProjectCard
-                          key={project.id}
-                          project={project}
-                          avatars={[
-                            {
-                              src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
-                              name: "Kyrylo",
-                            },
-                            {
-                              src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
-                              name: "Kyrylo",
-                            },
-                            {
-                              src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
-                              name: "Kyrylo",
-                            },
-                          ]}
-                        />
-                      </Link>
+                      <ProjectCard
+                        key={project.id}
+                        project={project}
+                        avatars={[
+                          {
+                            src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                            name: "Kyrylo",
+                          },
+                          {
+                            src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                            name: "Kyrylo",
+                          },
+                          {
+                            src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                            name: "Kyrylo",
+                          },
+                        ]}
+                      />
                     </motion.div>
                   )}
                   search={search}

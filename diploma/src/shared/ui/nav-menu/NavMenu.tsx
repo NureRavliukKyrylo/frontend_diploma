@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import styles from "./NavMenu.module.scss";
-import type { NavLink } from "@shared/config";
+import type { NavLink } from "@shared/config/types";
 
 interface NavMenuProps {
   links: NavLink[];

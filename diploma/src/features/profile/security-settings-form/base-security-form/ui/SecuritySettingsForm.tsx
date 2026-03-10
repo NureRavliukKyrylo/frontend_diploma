@@ -9,10 +9,19 @@ import { TwoFactorSwitch } from "../../set-two-factor";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ConnectedLinks } from "../../connected-links";
 import { useUserStore } from "@entities/user";
+import { useEffect } from "react";
 
-export function PasswordProfileForm({}) {
+export function PasswordProfileForm() {
   const { data: user } = useSuspenseQuery(profileQuery.all());
-  const { isPasswordSet } = useUserStore();
+  const { isPasswordSet, setIsPasswordSet } = useUserStore();
+
+  const isPasswordConnected =
+    user.connectedServices.find((s) => s.provider === "password")?.connected ??
+    false;
+
+  useEffect(() => {
+    setIsPasswordSet(isPasswordConnected);
+  }, [isPasswordConnected]);
 
   return (
     <>
