@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import styles from "./ShowMoreItemsButton.module.scss";
 
 interface ShowMoreItemsButtonProps {
@@ -8,7 +8,6 @@ interface ShowMoreItemsButtonProps {
   className?: string;
   classNameButton?: string;
   buttonText?: string;
-  buttonTextCollapsed?: string;
 }
 
 export function ShowMoreItemsButton({
@@ -17,7 +16,6 @@ export function ShowMoreItemsButton({
   className = "",
   classNameButton = "",
   buttonText = "Show more",
-  buttonTextCollapsed = "Show less",
 }: ShowMoreItemsButtonProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -27,47 +25,29 @@ export function ShowMoreItemsButton({
 
   return (
     <div className={`${styles.showMoreContainer} ${className}`}>
-      <div className={styles.itemsGrid}>
-        <AnimatePresence mode="sync">
-          {visibleItems.map((item, index) => (
-            <motion.div
-              key={index}
-              className={styles.test}
-              initial={{ opacity: 0, y: -10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.95 }}
-              transition={{
-                duration: 0.4,
-                delay: isExpanded
-                  ? index * 0.03
-                  : (visibleItems.length - index - 1) * 0.03,
-                ease: [0.4, 0, 0.2, 1],
-              }}
-              layout
-            >
-              {item}
-            </motion.div>
-          ))}
+      <div className={styles.itemsList}>
+        {visibleItems.map((item, index) => (
+          <motion.div
+            key={index}
+            className={styles.itemWrapper}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.2, delay: index * 0.05 }}
+          >
+            {item}
+          </motion.div>
+        ))}
 
-          {hasMoreItems && (
-            <motion.button
-              key="show-more-btn"
-              className={`${styles.showMoreButton} ${classNameButton}`}
-              initial={{ opacity: 0, y: -10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.95 }}
-              transition={{
-                duration: 0.4,
-                ease: [0.4, 0, 0.2, 1],
-              }}
-              onClick={() => setIsExpanded(!isExpanded)}
-              type="button"
-              layout
-            >
-              {isExpanded ? buttonTextCollapsed : buttonText}
-            </motion.button>
-          )}
-        </AnimatePresence>
+        {hasMoreItems && !isExpanded && (
+          <button
+            className={`${styles.showMoreButton} ${classNameButton}`}
+            onClick={() => setIsExpanded(true)}
+            type="button"
+          >
+            {buttonText}
+          </button>
+        )}
       </div>
     </div>
   );

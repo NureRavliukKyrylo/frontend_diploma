@@ -1,3 +1,5 @@
+import type { Skill } from "@entities/skill/model";
+
 export interface Category {
   id: string;
   name: string;
@@ -6,4 +8,5 @@ export interface Category {
   projectsTotal: number;
   projectsActive: number;
   projectsCompleted: number;
+  skills: Pick<Skill, "id" | "name">[];
 }
