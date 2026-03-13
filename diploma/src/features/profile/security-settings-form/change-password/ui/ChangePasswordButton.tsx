@@ -15,13 +15,14 @@ export const ChangePasswordButton = () => {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 300 }}
-      className={`${isPasswordSet ? styles.changePasswordButton : styles.newPasswordButton}`}
+      className={`${isPasswordSet ? styles.changePasswordButtonWrapper : styles.newPasswordButtonWrapper}`}
     >
       <BaseButtonWrapper
         disabled={isLoading}
         type="button"
         showLoadingText={false}
         onClick={() => sendPassword()}
+        className={`${isPasswordSet ? styles.changePasswordButton : styles.newPasswordButton}`}
       >
         {isPasswordSet ? (
           <img src={Edit} alt="pencil-icon" />

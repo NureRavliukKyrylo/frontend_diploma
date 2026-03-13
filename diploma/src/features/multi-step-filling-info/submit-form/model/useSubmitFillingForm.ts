@@ -3,7 +3,8 @@ import { updateUser, type UpdateUserDto } from "../api/fiillingFormApi";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
 import { useAuthStore } from "@entities/user";
-import { getErrorMessage, isPayloadEmpty } from "@shared/libs";
+import { getErrorMessage } from "@shared/libs/error-message";
+import { isPayloadEmpty } from "@shared/libs/validation";
 
 export const useSubmitFillingForm = () => {
   const router = useRouter();

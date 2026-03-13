@@ -3,13 +3,12 @@ import { profileKeys, profileQuery } from "@entities/user/profile";
 import { updateProfile, type UpdateProfileDto } from "../api/updateProfileApi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
-import {
-  formatDateToInput,
-  getErrorMessage,
-  reverseGeocode,
-} from "@shared/libs";
+
 import { type Coordinates } from "@shared/config/types";
 import { settingsMainFormSchema } from "../libs/settingsMainFormSchema";
+import { formatDateToInput } from "@shared/libs/date";
+import { getErrorMessage } from "@shared/libs/error-message";
+import { reverseGeocode } from "@shared/libs/map";
 
 export const useSettingsMainForm = () => {
   const { data: user } = useQuery(profileQuery.all());
@@ -68,7 +67,7 @@ export const useSettingsMainForm = () => {
     formik.setFieldValue("coordinates", coords);
 
     try {
-      const name = await reverseGeocode(coords.latitude, coords.longitude); // 👈
+      const name = await reverseGeocode(coords.latitude, coords.longitude);
       formik.setFieldValue("location", name);
     } catch {
       formik.setFieldValue("location", "Location");

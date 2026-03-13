@@ -4,7 +4,7 @@ import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
 import { useUserStore } from "@entities/user";
 import { verifyCodeSchema } from "../libs/verifyCodeSchema";
-import { getErrorMessage } from "@shared/libs";
+import { getErrorMessage } from "@shared/libs/error-message";
 import { profileQuery } from "@entities/user/profile";
 
 interface VerificationConfig<TData, TResult> {

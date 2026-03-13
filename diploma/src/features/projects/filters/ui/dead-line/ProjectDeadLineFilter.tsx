@@ -3,6 +3,7 @@ import styles from "./ProjectDeadlineFilter.module.scss";
 import { useNavigate } from "@tanstack/react-router";
 import type { ProjectSearchParams } from "@entities/project";
 import type { NavigateParams } from "../../model/NavigateParams";
+import { withDebounce } from "@shared/libs/hocs";
 
 interface ProjectDeadlineProps {
   search: ProjectSearchParams;
@@ -14,13 +15,14 @@ export const ProjectDeadlineFilter = ({
   from,
 }: ProjectDeadlineProps) => {
   const navigate = useNavigate({ from });
+  const DebouncedDatePicker = withDebounce(DatePickerInput, 300);
 
   return (
     <div className={styles.deadlineCalendarBlock}>
       <div className={styles.startDate}>
         <h2>Start date</h2>
         <div className={styles.dateStartInput}>
-          <DatePickerInput
+          <DebouncedDatePicker
             label=""
             showMonthAndYearPickers
             name="startDate"
@@ -37,7 +39,7 @@ export const ProjectDeadlineFilter = ({
       <div className={styles.dueDate}>
         <h2>Due date</h2>
         <div className={styles.dateDueInput}>
-          <DatePickerInput
+          <DebouncedDatePicker
             label=""
             showMonthAndYearPickers
             name="dueDate"

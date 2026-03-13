@@ -1,6 +1,6 @@
 import type { LocationSuggestion } from "@shared/config/types";
 import { useEffect, useState } from "react";
-import { useDebounce } from "../hooks/useDebounce";
+import { useDebounce } from "../../hooks";
 import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_BASE_GEO_URL;

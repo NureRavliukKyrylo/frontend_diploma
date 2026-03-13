@@ -7,7 +7,7 @@ import {
 import { createStepperSlice, type StepperSlice } from "@shared/config/stores";
 import { createLoginSlice, type LoginSlice } from "../slices/loginSlice";
 import { createSignupSlice, type SignupSlice } from "../slices/signUpSlice";
-import { base64ToFile } from "@shared/libs";
+import { base64ToFile } from "@shared/libs/file";
 import {
   createOtpTimerSlice,
   type OtpTimerSlice,

@@ -27,11 +27,7 @@ export const TwoFactorVerificationForm: React.FC = () => {
     },
   });
   return (
-    <VerificationForm
-      otpType={OtpType.TwoFactor}
-      formik={formik}
-      verificationError={errorMessage}
-    >
+    <VerificationForm formik={formik} verificationError={errorMessage}>
       <div className={styles.actionVerificationBlock}>
         <ResendCodeButton
           otpType={OtpType.TwoFactor}

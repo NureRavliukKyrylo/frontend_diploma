@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useMapInitialLocation } from "./useMapInitialLocation.ts";
-import type { MapBounds } from "@shared/libs/index.ts";
+import type { MapBounds } from "@shared/libs/map";
 
 export const useMapPage = () => {
   const navigate = useNavigate({ from: "/map/" });

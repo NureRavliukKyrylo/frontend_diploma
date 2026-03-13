@@ -1,5 +1,5 @@
 import { Slider as HeroSlider } from "@heroui/react";
-import { useDebounce } from "@shared/libs";
+import { useDebounce } from "@shared/libs/hooks";
 import { useEffect, useState } from "react";
 import type { SliderProps as HeroSliderProps } from "@heroui/react";
 

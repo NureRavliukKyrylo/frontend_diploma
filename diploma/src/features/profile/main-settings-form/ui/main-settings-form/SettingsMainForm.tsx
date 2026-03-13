@@ -147,17 +147,21 @@ export function SettingsMainForm() {
               formik.handleReset(null);
               setResetKey((k) => k + 1);
             }}
+            className={styles.resetButton}
           >
             RESET
           </BaseButtonWrapper>
         </motion.div>
         <motion.div
           whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 200 }}
           className={styles.saveProfileButton}
         >
-          <BaseButtonWrapper loading={isLoading} type="submit">
+          <BaseButtonWrapper
+            loading={isLoading}
+            type="submit"
+            className={styles.saveButton}
+          >
             SAVE
           </BaseButtonWrapper>
         </motion.div>

@@ -3,7 +3,7 @@ import styles from "./ProjectDistanceFilter.module.scss";
 import type { NavigateParams } from "../../model/NavigateParams";
 import { useCallback, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { useAutocompleteSuggestions } from "@shared/libs";
+import { useAutocompleteSuggestions } from "@shared/libs/map";
 import type { LocationSuggestion } from "@shared/config/types";
 import { AnimatePresence, motion } from "framer-motion";
 

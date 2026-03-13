@@ -1,30 +1,26 @@
 import { memo } from "react";
 import { Marker, Popup } from "react-leaflet";
-import { Link } from "@tanstack/react-router";
 import {
   createProjectClusterIcon,
   ProjectMarker,
-  projectQuery,
+  ProjectPopupContent,
   toGeoPoints,
   type Project,
+  type ProjectsResponse,
 } from "@entities/project";
-import { DefaultAvatar } from "@shared/assets/images/user";
-import { type MapProjectSearchParams } from "@entities/project";
 import styles from "./MapProjectCluster.module.scss";
 import useSupercluster from "use-supercluster";
-import { useSuspenseQuery } from "@tanstack/react-query";
 import type { ClusterProperties } from "supercluster";
-import { useMapViewport } from "@shared/libs";
+import { useMapViewport } from "@shared/libs/map";
 
 interface MapProjectClusterProps {
-  search: MapProjectSearchParams;
+  data?: ProjectsResponse;
 }
 
-export const MapProjectCluster = memo(({ search }: MapProjectClusterProps) => {
+export const MapProjectCluster = memo(({ data }: MapProjectClusterProps) => {
   const { bounds, zoom, map } = useMapViewport();
-  const { data } = useSuspenseQuery(projectQuery.map(search));
 
-  const points = toGeoPoints(data.data ?? []);
+  const points = toGeoPoints(data?.data ?? []);
   const { clusters, supercluster } = useSupercluster({
     points,
     bounds,
@@ -61,28 +57,7 @@ export const MapProjectCluster = memo(({ search }: MapProjectClusterProps) => {
         return (
           <Marker key={project.id} position={[lat, lng]} icon={ProjectMarker}>
             <Popup className={styles.popupProject}>
-              <div className={styles.popupProjectContent}>
-                <div className={styles.projectInfo}>
-                  <h1>{project.title}</h1>
-                  <p>{project.description}</p>
-                  <Link
-                    to="/projects/$id"
-                    params={{ id: project.id }}
-                    className={styles.seeMoreButtonProject}
-                  >
-                    see more
-                  </Link>
-                </div>
-                <div className={styles.organizationProjectInfo}>
-                  <div className={styles.organizationImage}>
-                    <img
-                      src={project.organization?.logoUrl ?? DefaultAvatar}
-                      alt="organization"
-                    />
-                    <h1>{project.organization?.name}</h1>
-                  </div>
-                </div>
-              </div>
+              <ProjectPopupContent project={project} />
             </Popup>
           </Marker>
         );

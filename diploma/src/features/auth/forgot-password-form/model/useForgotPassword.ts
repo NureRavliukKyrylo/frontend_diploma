@@ -10,7 +10,7 @@ import { useRouter } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
 import { forgotPasswordSchema } from "../libs/forgotPasswordSchema";
 import { useAuthStore, useUserStore } from "@entities/user";
-import { getErrorMessage } from "@shared/libs";
+import { getErrorMessage } from "@shared/libs/error-message";
 
 export const useForgotPassword = () => {
   const router = useRouter();

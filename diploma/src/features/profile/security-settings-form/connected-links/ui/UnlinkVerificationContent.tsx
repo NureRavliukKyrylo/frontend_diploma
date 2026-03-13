@@ -2,13 +2,14 @@ import { useUserProfileStore } from "@entities/user";
 import { UnlinkVerificationForm } from "@features/verification";
 import { VerificationWrapper } from "@shared/ui/wrappers";
 import styles from "./UnlinkVerificationContent.module.scss";
-import { capitalize, queryClient } from "@shared/libs";
+import { capitalize } from "@shared/libs/text";
 import { profileKeys } from "@entities/user/profile";
+import { queryClient } from "@shared/api";
 
 export const UnlinkVerificationContent = () => {
   const { unlinkTarget, closeVerificationModal } = useUserProfileStore();
 
-  if (!unlinkTarget.platform || unlinkTarget.otpType === null) {
+  if (!unlinkTarget.platform) {
     return null;
   }
 
@@ -21,7 +22,6 @@ export const UnlinkVerificationContent = () => {
     >
       <div className={styles.verificationBlock}>
         <UnlinkVerificationForm
-          otpType={unlinkTarget.otpType}
           verificationLink={unlinkTarget.platform}
           onSuccess={() => {
             queryClient.invalidateQueries({ queryKey: profileKeys.all() });

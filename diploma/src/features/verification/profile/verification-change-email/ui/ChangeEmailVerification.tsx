@@ -1,5 +1,4 @@
 import React from "react";
-import { OtpType } from "@shared/config/types";
 import {
   VerificationForm,
   useVerification,
@@ -9,22 +8,19 @@ import {
   type CodeType,
   type VerificationChangeEmailDto,
 } from "../api/verificationChangeEmail";
-import { ResendCodeButton } from "@features/verification/resend-code";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./ChangeEmailVerification.module.scss";
 import { useUserProfileStore } from "@entities/user";
 
 interface ChangeEmailVerificationProps {
   code?: CodeType;
-  otpType: OtpType;
   onSuccess?: () => void;
 }
 
 export const ChangeEmailVerification: React.FC<
   ChangeEmailVerificationProps
-> = ({ code, otpType, onSuccess }) => {
-  const { otpTimers, resetOtpTimer, decrementOtpTimer, newEmail } =
-    useUserProfileStore();
+> = ({ code, onSuccess }) => {
+  const { newEmail } = useUserProfileStore();
   const { formik, isLoading, errorMessage } = useVerification({
     apiFn: (data: VerificationChangeEmailDto) =>
       verificationChangeEmail(data, code ?? "old-code"),
@@ -34,11 +30,7 @@ export const ChangeEmailVerification: React.FC<
   });
 
   return (
-    <VerificationForm
-      otpType={otpType}
-      formik={formik}
-      verificationError={errorMessage}
-    >
+    <VerificationForm formik={formik} verificationError={errorMessage}>
       <div className={styles.actionVerificationChangeEmailBlock}>
         <BaseButtonWrapper
           loading={isLoading}
@@ -46,13 +38,6 @@ export const ChangeEmailVerification: React.FC<
         >
           Send Code
         </BaseButtonWrapper>
-        <ResendCodeButton
-          otpType={otpType}
-          otpTimers={otpTimers}
-          decrementOtpTimer={decrementOtpTimer}
-          resetOtpTimer={resetOtpTimer}
-          variant="profile"
-        />
       </div>
     </VerificationForm>
   );

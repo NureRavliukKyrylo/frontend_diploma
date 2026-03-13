@@ -1,7 +1,9 @@
-import type { ProjectSearchParams } from "@entities/project";
-import { getListProjects } from "../../api/projectsApi";
+import type {
+  MapProjectSearchParams,
+  ProjectSearchParams,
+} from "@entities/project/libs";
+import { getListProjects } from "@entities/project/api";
 import { queryOptions } from "@tanstack/react-query";
-import { type MapProjectSearchParams } from "@entities/project/libs/projectsSearchSchema";
 
 export const projectKeys = {
   all: () => ["projects"] as const,

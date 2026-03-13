@@ -2,8 +2,9 @@ import { useMutation } from "@tanstack/react-query";
 import { useGoogleLogin } from "@react-oauth/google";
 import { addToast } from "@heroui/react";
 import { linkGoogle, type LinkGoogleDto } from "../api/linkGoogleApi";
-import { getErrorMessage, queryClient } from "@shared/libs";
+import { getErrorMessage } from "@shared/libs/error-message";
 import { profileKeys } from "@entities/user/profile";
+import { queryClient } from "@shared/api";
 
 export const useLinkGoogle = () => {
   const mutation = useMutation({

@@ -1,0 +1,85 @@
+@use "@shared/assets/styles" as *;
+
+.popupProjectContent {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+
+  .projectInfo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+      @include font-base(25px, 900);
+      margin-bottom: 5px;
+    }
+    p {
+      @include font-base(18px, 500);
+      text-align: center;
+      margin: 0px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 130%;
+    }
+    .seeMoreButtonProject {
+      color: #8c0000;
+      text-decoration-line: underline;
+      @include font-base(18px, 800);
+    }
+
+    .skeletonTitle {
+      width: 160px;
+      height: 28px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    .skeletonDescLine {
+      width: 220px;
+      height: 18px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+    .skeletonDescLineShort {
+      width: 140px;
+      height: 18px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+    .skeletonLink {
+      width: 80px;
+      height: 18px;
+      border-radius: 6px;
+    }
+  }
+
+  .organizationProjectInfo {
+    .organizationImage {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+
+      img {
+        width: 28px;
+        height: 28px;
+      }
+      h1 {
+        @include font-base(15px, 900);
+      }
+
+      .skeletonOrgImage {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+      }
+      .skeletonOrgName {
+        width: 100px;
+        height: 16px;
+        border-radius: 6px;
+      }
+    }
+  }
+}

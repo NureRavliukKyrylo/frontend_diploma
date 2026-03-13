@@ -7,10 +7,15 @@ import {
 } from "@widgets/projects";
 import { Pagination } from "@shared/ui";
 import { Suspense } from "react";
-import { Link, useRouter } from "@tanstack/react-router";
+import { useRouter } from "@tanstack/react-router";
 import styles from "./ProjectsPage.module.scss";
 import { useQuery } from "@tanstack/react-query";
-import { ProjectCard, projectQuery } from "@entities/project";
+import {
+  ProjectCard,
+  ProjectCardSkeleton,
+  projectQuery,
+  useProjectsListQuery,
+} from "@entities/project";
 import { motion } from "framer-motion";
 import { useProjectsPage } from "../model/useProjectsPage";
 
@@ -59,7 +64,13 @@ export function ProjectsPage() {
                 <p>Try adjusting your filters or search query</p>
               </div>
             ) : (
-              <Suspense fallback={<ProjectsListWidgetSkeleton />}>
+              <Suspense
+                fallback={
+                  <ProjectsListWidgetSkeleton
+                    renderSkeleton={ProjectCardSkeleton}
+                  />
+                }
+              >
                 <ProjectsListWidget
                   renderCard={(project) => (
                     <motion.div
@@ -97,7 +108,7 @@ export function ProjectsPage() {
                       />
                     </motion.div>
                   )}
-                  search={search}
+                  useProjectsQuery={useProjectsListQuery(search)}
                 />
               </Suspense>
             )}

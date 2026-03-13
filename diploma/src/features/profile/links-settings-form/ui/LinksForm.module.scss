@@ -88,15 +88,25 @@
       }
     }
     .saveProfileLinksButton {
-      @extend .profileButton;
-      background: black;
-      color: white;
+      max-width: 230px;
+      width: 100%;
+      .saveButton {
+        @extend .profileButton;
+        background: black;
+        color: white;
+        width: 100%;
+      }
     }
 
     .resetProfileLinksButton {
-      @extend .profileButton;
-      background: white;
-      color: black;
+      max-width: 230px;
+      width: 100%;
+      .resetButton {
+        @extend .profileButton;
+        background: white;
+        color: black;
+        width: 100%;
+      }
     }
   }
 }

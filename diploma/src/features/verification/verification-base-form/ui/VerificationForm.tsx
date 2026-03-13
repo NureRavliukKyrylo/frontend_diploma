@@ -1,16 +1,13 @@
 import styles from "./VerificationForm.module.scss";
 import { InputOtp } from "@shared/ui/inputs";
-import type { OtpType } from "@shared/config/types";
 
 interface VerificationFormProps {
-  otpType: OtpType;
   formik: any;
   verificationError?: string | null;
   children: React.ReactNode;
 }
 
 export const VerificationForm = ({
-  otpType,
   formik,
   verificationError,
   children,
@@ -19,7 +16,6 @@ export const VerificationForm = ({
     <form onSubmit={formik.handleSubmit} className={styles.verificationForm}>
       <div className={styles.wrapperInputResend}>
         <InputOtp
-          otpType={otpType}
           length={6}
           value={formik.values.code}
           onValueChange={(val) => {

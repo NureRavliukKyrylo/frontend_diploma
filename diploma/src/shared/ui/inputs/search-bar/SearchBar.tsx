@@ -1,4 +1,4 @@
-import { useDebounce } from "@shared/libs";
+import { useDebounce } from "@shared/libs/hooks";
 import styles from "./SearchBar.module.scss";
 import { SearchIcon } from "@shared/assets/icons/actions";
 import { useEffect, useState } from "react";

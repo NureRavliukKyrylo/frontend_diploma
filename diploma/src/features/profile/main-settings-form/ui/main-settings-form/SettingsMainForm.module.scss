@@ -57,7 +57,7 @@
     gap: 16px;
     .profileButton {
       flex: 1 1 100px;
-      max-width: 230px;
+
       min-width: 0;
       position: relative;
       overflow: hidden;
@@ -103,15 +103,25 @@
       }
     }
     .saveProfileButton {
-      @extend .profileButton;
-      background: black;
-      color: white;
+      max-width: 230px;
+      width: 100%;
+      .saveButton {
+        @extend .profileButton;
+        background: black;
+        color: white;
+        width: 100%;
+      }
     }
 
     .resetProfileButton {
-      @extend .profileButton;
-      background: white;
-      color: black;
+      max-width: 230px;
+      width: 100%;
+      .resetButton {
+        @extend .profileButton;
+        background: white;
+        color: black;
+        width: 100%;
+      }
     }
   }
 }

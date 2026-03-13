@@ -1,4 +1,4 @@
-import { fileField } from "@shared/libs";
+import { fileField } from "@shared/libs/validation";
 import * as Yup from "yup";
 
 export const imageSchema = Yup.object({

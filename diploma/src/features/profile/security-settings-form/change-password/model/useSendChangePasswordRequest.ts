@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { sendChangePasswordRequest } from "../api/sendChangePasswordRequestApi";
 import { addToast } from "@heroui/react";
 import { useUserProfileStore } from "@entities/user";
-import { getErrorMessage } from "@shared/libs";
+import { getErrorMessage } from "@shared/libs/error-message";
 
 export const useSendChangePasswordRequest = () => {
   const { openVerificationModal } = useUserProfileStore();

@@ -1,4 +1,4 @@
-import { useDebounce } from "@shared/libs";
+import { useDebounce } from "@shared/libs/hooks";
 import { useEffect, useState } from "react";
 import { useMapEvents } from "react-leaflet";
 
@@ -22,6 +22,7 @@ export const getBounds = (map: ReturnType<typeof useMapEvents>): MapBounds => {
     MaxLng: b.getEast(),
   };
 };
+
 export const MapBoundsTracker = ({ onBoundsChange }: Props) => {
   const [bounds, setBounds] = useState<MapBounds | null>(null);
   const debouncedBounds = useDebounce(bounds, 300);

@@ -1,11 +1,10 @@
 import { Calendar } from "@shared/assets/icons/info";
 import styles from "./ProjectCard.module.scss";
-import { ReadMoreButton } from "@shared/ui/buttons";
 import { AvatarGroup, ProgressBar } from "@shared/ui";
 import type { AvatarItem } from "@shared/config/types";
 import type { Project } from "@entities/project/model/types/Project";
 import { DefaultAvatar } from "@shared/assets/images/user";
-import { formatDateToInput } from "@shared/libs";
+import { formatDateToInput } from "@shared/libs/date";
 
 interface ProjectCardProps {
   project: Project;
@@ -25,12 +24,7 @@ export const ProjectCard = ({ project, avatars }: ProjectCardProps) => {
       </div>
       <div className={styles.projectInfoBlock}>
         <h1>{project.title}</h1>
-        <ReadMoreButton
-          className={styles.readMoreProjectBlock}
-          classNameButton={styles.readMoreProjectButton}
-        >
-          <p>{project.description}</p>
-        </ReadMoreButton>
+        <p>{project.description}</p>
       </div>
       <div className={styles.deadlineBlock}>
         <img src={Calendar} alt="calendar-deadline" />

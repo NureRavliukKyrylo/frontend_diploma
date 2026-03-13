@@ -3,7 +3,8 @@ import { logout } from "../api/logoutApi";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
-import { getErrorMessage, queryClient } from "@shared/libs";
+import { getErrorMessage } from "@shared/libs/error-message";
+import { queryClient } from "@shared/api";
 import { useUserStore } from "@entities/user";
 
 export const useLogout = (onSuccessCallback?: () => void, showToast = true) => {

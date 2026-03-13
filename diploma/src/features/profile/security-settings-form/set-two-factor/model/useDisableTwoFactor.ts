@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { disableTwoFactor } from "../api/twoFactorApi";
 import { addToast } from "@heroui/react";
-import { getErrorMessage } from "@shared/libs";
+import { getErrorMessage } from "@shared/libs/error-message";
 import { useUserProfileStore } from "@entities/user";
 
 export const useDisableTwoFactor = () => {

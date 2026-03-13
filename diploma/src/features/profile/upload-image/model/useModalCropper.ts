@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import type { Area } from "react-easy-crop";
-import { getCroppedImage } from "@shared/libs";
+import { getCroppedImage } from "@shared/libs/image";
 import {
   ZOOM_STEP,
   MAX_ZOOM,

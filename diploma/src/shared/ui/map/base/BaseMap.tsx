@@ -7,7 +7,7 @@ import {
   WORLD_BOUNDS,
 } from "@shared/config/constants";
 import { useRef } from "react";
-import { SetViewOnClick } from "@shared/libs";
+import { SetViewOnClick } from "@shared/libs/map";
 import { FullscreenControl } from "../full-screen/FullScreenControl";
 import { ZoomControl } from "../zoom-control/ZoomControl";
 import type { MapContainerProps } from "react-leaflet";

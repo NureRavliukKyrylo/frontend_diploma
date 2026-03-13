@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { profileQuery } from "@entities/user/profile";
 import { useUserStore } from "@entities/user";
-import { useGeolocation } from "@shared/libs";
+import { useGeolocation } from "@shared/libs/map";
 import type { Coordinates } from "@shared/config/types";
 
 export const useMapInitialLocation = () => {

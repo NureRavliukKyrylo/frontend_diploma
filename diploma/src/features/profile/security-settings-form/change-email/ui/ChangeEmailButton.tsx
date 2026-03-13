@@ -19,7 +19,7 @@ export const ChangeEmailButton = () => {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 300 }}
-      className={styles.editEmailButton}
+      className={styles.wrapperEditEmailButton}
     >
       <BaseButtonWrapper
         type="button"
@@ -28,6 +28,7 @@ export const ChangeEmailButton = () => {
         onClick={() => {
           sendEmail();
         }}
+        className={styles.editEmailButton}
       >
         <img src={Edit} alt="pencil-icon" />
       </BaseButtonWrapper>

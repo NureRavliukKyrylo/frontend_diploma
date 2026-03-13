@@ -1,17 +1,23 @@
 import styles from "./ProjectsListWidget.module.scss";
-import { ProjectCardSkeleton } from "@entities/project";
 
 interface ProjectsListWidgetSkeletonProps {
+  renderSkeleton: () => React.ReactNode;
   items?: number;
+  className?: string;
 }
 
 export const ProjectsListWidgetSkeleton = ({
+  renderSkeleton,
   items = 9,
+  className,
 }: ProjectsListWidgetSkeletonProps) => {
+  const wrapperClass =
+    `${styles.projectsListWrapper} ${className ?? ""}`.trim();
+
   return (
-    <div className={styles.projectsListWrapper}>
-      {Array.from({ length: items }).map((_, index) => (
-        <ProjectCardSkeleton key={index} />
+    <div className={wrapperClass}>
+      {Array.from({ length: items }).map((_, i) => (
+        <div key={i}>{renderSkeleton()}</div>
       ))}
     </div>
   );

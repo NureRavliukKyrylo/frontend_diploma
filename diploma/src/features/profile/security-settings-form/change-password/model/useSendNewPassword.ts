@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
-import { getErrorMessage } from "@shared/libs";
+import { getErrorMessage } from "@shared/libs/error-message";
 import { type SendNewPasswordDto } from "../api/sendNewPasswordApi";
 import { sendNewPassword } from "../api/sendNewPasswordApi";
 import { useFormik } from "formik";

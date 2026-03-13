@@ -1,22 +1,28 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { resendCode } from "../api/resendCodeApi";
+import { useMutation } from "@tanstack/react-query";
+import {
+  resendEmailVerification,
+  resendTwoFactor,
+  resendPasswordReset,
+} from "../api/resendCodeApi";
 import { addToast } from "@heroui/react";
-import type { OtpType } from "@shared/config/types";
-import { getErrorMessage } from "@shared/libs";
-import { profileQuery } from "@entities/user/profile";
+import { OtpType } from "@shared/config/types";
+import { getErrorMessage } from "@shared/libs/error-message";
 
 interface UseResendCodeProps {
   type: OtpType;
-  resendFn?: () => Promise<unknown>;
+  userId?: string;
+  email?: string;
 }
 
-export const useResendCode = ({ type, resendFn }: UseResendCodeProps) => {
-  const { data: user } = useQuery(profileQuery.all());
-
-  const defaultResend = () => resendCode({ userId: user?.id, type });
+export const useResendCode = ({ type, userId, email }: UseResendCodeProps) => {
+  const resendMap: Record<OtpType, () => Promise<unknown>> = {
+    [OtpType.EmailVerification]: () => resendEmailVerification(userId ?? ""),
+    [OtpType.TwoFactor]: () => resendTwoFactor(),
+    [OtpType.PasswordReset]: () => resendPasswordReset(email ?? ""),
+  };
 
   const mutation = useMutation({
-    mutationFn: resendFn ?? defaultResend,
+    mutationFn: resendMap[type],
     onSuccess: () => {
       addToast({
         title: "Code sent",

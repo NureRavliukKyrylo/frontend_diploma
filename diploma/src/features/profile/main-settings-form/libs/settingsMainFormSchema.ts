@@ -1,5 +1,10 @@
 import * as Yup from "yup";
-import { nameField, textField, dateField, fileField } from "@shared/libs";
+import {
+  dateField,
+  fileField,
+  nameField,
+  textField,
+} from "@shared/libs/validation";
 
 export const settingsMainFormSchema = Yup.object({
   firstName: nameField({ requiredMessage: "First name is required" }),

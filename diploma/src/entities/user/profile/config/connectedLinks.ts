@@ -8,7 +8,6 @@ export interface ConnectedLinkConfig {
   imageLink: string;
   linkTitle: string;
   linkDescriprion: string;
-  otpType: OtpType;
 }
 
 export const CONNECTED_LINKS_CONFIG: ConnectedLinkConfig[] = [
@@ -17,6 +16,5 @@ export const CONNECTED_LINKS_CONFIG: ConnectedLinkConfig[] = [
     imageLink: GoogleIcon,
     linkTitle: "Google account",
     linkDescriprion: "Stay in sync with Google",
-    otpType: OtpType.GoogleUnlink,
   },
 ] as const;

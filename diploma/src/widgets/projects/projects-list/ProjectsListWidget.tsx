@@ -1,26 +1,40 @@
-import { projectQuery } from "@entities/project";
+import type { Project, ProjectsQueryResult } from "@entities/project";
+import { ProjectsListWidgetSkeleton } from "./ProjectListWidgetSkeleton";
 import styles from "./ProjectsListWidget.module.scss";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import type { Project, ProjectSearchParams } from "@entities/project";
 
 interface ProjectsListWidgetProps {
-  search: ProjectSearchParams;
-  pageSize?: number;
+  useProjectsQuery: () => ProjectsQueryResult;
   renderCard: (project: Project) => React.ReactNode;
+  renderSkeleton?: () => React.ReactNode;
+  skeletonItems?: number;
+  className?: string;
 }
 
 export const ProjectsListWidget = ({
-  search,
-  pageSize = 9,
+  useProjectsQuery,
   renderCard,
+  renderSkeleton,
+  skeletonItems = 9,
+  className,
 }: ProjectsListWidgetProps) => {
-  const { data: projects } = useSuspenseQuery(
-    projectQuery.list({ ...search, pageSize }),
-  );
+  const { data: projects, isLoading } = useProjectsQuery();
+
+  const wrapperClass =
+    `${styles.projectsListWrapper} ${className ?? ""}`.trim();
+
+  if (isLoading && renderSkeleton) {
+    return (
+      <ProjectsListWidgetSkeleton
+        renderSkeleton={renderSkeleton}
+        items={skeletonItems}
+        className={className}
+      />
+    );
+  }
 
   return (
-    <div className={styles.projectsListWrapper}>
-      {projects.data.map((project) => renderCard(project))}
+    <div className={wrapperClass}>
+      {projects?.data.map((project) => renderCard(project))}
     </div>
   );
 };

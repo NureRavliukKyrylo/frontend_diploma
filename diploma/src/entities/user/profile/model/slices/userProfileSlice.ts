@@ -5,7 +5,7 @@ import {
   type PrivacySettings,
   type PrivacyField,
 } from "../types/profile";
-import { fileToBase64 } from "@shared/libs/";
+import { fileToBase64 } from "@shared/libs/file";
 
 export interface UserProfileSlice {
   profile?: Profile;

@@ -58,6 +58,7 @@ export function LinksForm({}) {
               formik.handleReset(null);
             }}
             type="button"
+            className={styles.resetButton}
           >
             RESET
           </BaseButtonWrapper>
@@ -69,7 +70,11 @@ export function LinksForm({}) {
           transition={{ type: "spring", stiffness: 200 }}
           className={styles.saveProfileLinksButton}
         >
-          <BaseButtonWrapper loading={isLoading} type="submit">
+          <BaseButtonWrapper
+            loading={isLoading}
+            type="submit"
+            className={styles.saveButton}
+          >
             SAVE
           </BaseButtonWrapper>
         </motion.div>

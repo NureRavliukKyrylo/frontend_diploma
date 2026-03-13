@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
-import { getErrorMessage } from "@shared/libs";
+import { getErrorMessage } from "@shared/libs/error-message";
 import {
   sendChangeEmailRequest,
   type SendChangeEmailRequestDto,

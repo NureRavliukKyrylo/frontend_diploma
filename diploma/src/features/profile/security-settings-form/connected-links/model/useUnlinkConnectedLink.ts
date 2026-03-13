@@ -1,12 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import { unlinkConnectedLink } from "../api/unlinkConnectedLinkApi";
 import { addToast } from "@heroui/react";
-import { capitalize, getErrorMessage } from "@shared/libs";
-import {
-  CONNECTED_LINKS_CONFIG,
-  type ConnectedLinkPlatform,
-} from "@entities/user/profile";
+import { capitalize } from "@shared/libs/text";
+import { type ConnectedLinkPlatform } from "@entities/user/profile";
 import { useUserProfileStore } from "@entities/user";
+import { getErrorMessage } from "@shared/libs/error-message";
 
 export const useUnlinkConnectedLink = () => {
   const { setUnlinkTarget, openVerificationModal } = useUserProfileStore();
@@ -22,11 +20,8 @@ export const useUnlinkConnectedLink = () => {
         description: "You have sent request to unlink successfully",
         color: "success",
       });
-      const config = CONNECTED_LINKS_CONFIG.find(
-        (c) => c.provider === platform,
-      )!;
 
-      setUnlinkTarget(platform, config.otpType);
+      setUnlinkTarget(platform);
       openVerificationModal("unlink");
     },
     onError: (error: unknown, platform) => {

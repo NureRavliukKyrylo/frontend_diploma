@@ -1,7 +1,7 @@
 import { Marker, Popup } from "react-leaflet";
 import { BaseMap } from "@shared/ui";
-import { MapZoomAnimation } from "@shared/libs/map/MapZoomAnimation";
-import { useGeolocation } from "@shared/libs/map/useGeoLocation";
+import { MapZoomAnimation } from "@shared/libs/map";
+import { useGeolocation } from "@shared/libs/map";
 import { SyncMapEvents } from "../model/setCoordinatesEvent";
 import type { Icon } from "leaflet";
 

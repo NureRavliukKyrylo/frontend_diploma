@@ -6,7 +6,7 @@ import { useAuthStore, useUserStore } from "@entities/user";
 import { addToast } from "@heroui/react";
 import { useRouter, useSearch } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
-import { getErrorMessage } from "@shared/libs";
+import { getErrorMessage } from "@shared/libs/error-message";
 
 interface LoginResponse {
   userId: string;

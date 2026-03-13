@@ -34,18 +34,20 @@
     width: 90%;
     margin-top: 35px;
     justify-content: space-between;
-
-    .confirmButtonModal,
-    .cancelButtonModal {
-      flex: 1;
-      padding: 5px 0;
-      border-radius: 100px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      @include font-base(30px, 600);
+    .wrapperConfirmButtonModal {
+      width: 100%;
+      .confirmButtonModal,
+      .cancelButtonModal {
+        flex: 1;
+        padding: 5px 0;
+        border-radius: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include font-base(30px, 600);
+        width: 100%;
+      }
     }
-
     .confirmButtonModal {
       background: #000;
       color: #fff;

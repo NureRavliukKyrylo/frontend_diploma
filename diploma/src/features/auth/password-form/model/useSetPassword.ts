@@ -2,12 +2,11 @@ import { useMutation } from "@tanstack/react-query";
 import { type setPasswordDto, setPassword } from "../api/setPasswordApi";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
-
 import { AuthRoutes } from "@shared/routes";
 import { useFormik } from "formik";
 import { setPasswordSchema } from "../libs/setPasswordSchema";
 import { useAuthStore, useUserStore } from "@entities/user";
-import { getErrorMessage } from "@shared/libs";
+import { getErrorMessage } from "@shared/libs/error-message";
 
 export const useSetPassword = () => {
   const router = useRouter();

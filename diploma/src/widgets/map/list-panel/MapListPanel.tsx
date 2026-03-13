@@ -3,15 +3,19 @@ import { Suspense } from "react";
 import { motion } from "framer-motion";
 import {
   ListProjectCard,
+  ListProjectCardSkeleton,
   projectQuery,
+  useProjectsMapQuery,
   type ProjectSearchParams,
 } from "@entities/project";
-import { CombinedListWidget } from "../combined-list/CombinedListWidget";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import styles from "./MapListPanel.module.scss";
-import { CombinedListWidgetSkeleton } from "../combined-list/CombinedListWidgetSkeleton";
 import { ToggleDropdownButton } from "@shared/ui/buttons";
+import {
+  ProjectsListWidget,
+  ProjectsListWidgetSkeleton,
+} from "@widgets/projects";
 
 interface MapListPanelProps {
   listParams: ProjectSearchParams;
@@ -30,11 +34,20 @@ export const MapListPanel = ({ listParams, page }: MapListPanelProps) => {
           <p>Try adjusting your filters or search query</p>
         </div>
       ) : (
-        <Suspense fallback={<CombinedListWidgetSkeleton items={5} />}>
+        <Suspense
+          fallback={
+            <ProjectsListWidgetSkeleton
+              renderSkeleton={ListProjectCardSkeleton}
+              className={styles.mapProjectsListWidget}
+              items={6}
+            />
+          }
+        >
           <div className={styles.scrollableListBlock}>
-            <CombinedListWidget
-              projectParams={listParams}
-              renderProjectCard={(project) => (
+            <ProjectsListWidget
+              useProjectsQuery={useProjectsMapQuery(listParams)}
+              className={styles.mapProjectsListWidget}
+              renderCard={(project) => (
                 <motion.div
                   className={styles.projectCardListWrapper}
                   onClick={() => {
@@ -76,7 +89,10 @@ export const MapListPanel = ({ listParams, page }: MapListPanelProps) => {
             total={projects.pagination.totalPages}
             page={page}
             onChange={(page) =>
-              navigate({ search: (prev) => ({ ...prev, Page: page }) })
+              navigate({
+                search: (prev) => ({ ...prev, Page: page }),
+                resetScroll: false,
+              })
             }
           />
         </div>

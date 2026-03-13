@@ -1,7 +1,7 @@
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { routeTree } from "@app/routeTree.gen";
 import { BaseSpinner } from "@shared/ui";
-import { queryClient } from "@shared/libs";
+import { queryClient } from "@shared/api";
 import { useUserStore } from "@entities/user";
 import "@entities/user/auth/api/refreshToken";
 

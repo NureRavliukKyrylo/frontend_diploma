@@ -10,7 +10,6 @@ import { AuthRoutes } from "@shared/routes";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./ForgotPasswordVerificationForm.module.scss";
 import { useAuthStore } from "@entities/user";
-import { verificationForgotPasswordResendCode } from "../api/verificationForgotPasswordResendCodeApi";
 
 export const ForgotPasswordVerificationForm: React.FC = () => {
   const { otpTimers, resetOtpTimer, decrementOtpTimer, emailForgotPassword } =
@@ -22,25 +21,14 @@ export const ForgotPasswordVerificationForm: React.FC = () => {
   });
 
   return (
-    <VerificationForm
-      otpType={OtpType.PasswordReset}
-      formik={formik}
-      verificationError={errorMessage}
-    >
+    <VerificationForm formik={formik} verificationError={errorMessage}>
       <div className={styles.actionVerificationBlock}>
         <ResendCodeButton
           otpType={OtpType.PasswordReset}
           otpTimers={otpTimers}
           decrementOtpTimer={decrementOtpTimer}
           resetOtpTimer={resetOtpTimer}
-          resendFn={
-            emailForgotPassword
-              ? () =>
-                  verificationForgotPasswordResendCode({
-                    email: emailForgotPassword,
-                  })
-              : undefined
-          }
+          email={emailForgotPassword}
         />
         <BaseButtonWrapper
           loading={isLoading}

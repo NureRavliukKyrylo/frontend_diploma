@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import styles from "./FillingInfoWrapper.module.scss";
 import { InfoSign } from "@shared/assets/icons/info";
-import { BackButton } from "@shared/ui/buttons";
 import { motion, AnimatePresence } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { Arrow } from "@shared/assets/icons/actions";

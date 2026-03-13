@@ -1,6 +1,6 @@
 @use "@shared/assets/styles" as *;
 
-.changeNewEmailButton {
+%emailButton {
   position: relative;
   overflow: hidden;
   background: black;
@@ -20,6 +20,11 @@
 
   &:disabled {
     cursor: not-allowed;
+  }
+}
+.wrapperEditEmailButton {
+  .changeNewEmailButton {
+    @extend %emailButton;
   }
 }
 .verificationEmail {
@@ -44,4 +49,7 @@
   img {
     object-fit: contain;
   }
+}
+.setNewEmailButton {
+  @extend %emailButton;
 }

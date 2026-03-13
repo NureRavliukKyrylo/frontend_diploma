@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { deleteProfile } from "../api/deleteProfileApi";
-import { getErrorMessage, queryClient } from "@shared/libs";
+import { getErrorMessage } from "@shared/libs/error-message";
+import { queryClient } from "@shared/api";
 import { profileKeys } from "@entities/user/profile";
 import { addToast } from "@heroui/react";
 

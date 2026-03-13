@@ -7,11 +7,12 @@ import {
   MapListPanel,
   MapProjectCluster,
 } from "@widgets/map";
-import { Suspense } from "react";
-import { MapBoundsTracker } from "@shared/libs/index.ts";
+import { MapBoundsTracker } from "@shared/libs/map/index.ts";
 import { SearchLocationLayer } from "../location-layer/SearchLocationLayer.tsx";
 import { MapInitialLocation } from "../initial-location/MapInitialLocation.tsx";
 import { useMapPage } from "../../model/useMapPage.ts";
+import { useQuery } from "@tanstack/react-query";
+import { projectQuery } from "@entities/project/index.ts";
 
 export const MapPage = () => {
   const {
@@ -25,6 +26,8 @@ export const MapPage = () => {
     handleSearch,
     handleSearchBounds,
   } = useMapPage();
+
+  const { data } = useQuery(projectQuery.map(mapSearch));
 
   return (
     <div ref={wrapperRef} className={styles.mapPageWrapper}>
@@ -44,9 +47,7 @@ export const MapPage = () => {
             search={search}
           />
         )}
-        <Suspense fallback={null}>
-          <MapProjectCluster search={mapSearch} />
-        </Suspense>
+        <MapProjectCluster data={data} />
       </BaseMap>
 
       <div className={styles.filterButtonWrapper}>

@@ -5,7 +5,7 @@ import { useRouter, useSearch } from "@tanstack/react-router";
 
 import { googleLogin, type GoogleLoginDto } from "../api/googleApi";
 import { MultiStepFormRoutes } from "@shared/routes";
-import { getErrorMessage } from "@shared/libs";
+import { getErrorMessage } from "@shared/libs/error-message";
 import { useUserStore } from "@entities/user";
 
 export const useGoogleAuth = () => {

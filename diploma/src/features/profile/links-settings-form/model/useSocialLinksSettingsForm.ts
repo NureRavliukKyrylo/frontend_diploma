@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
-import { getErrorMessage } from "@shared/libs";
+import { getErrorMessage } from "@shared/libs/error-message";
 import {
   updateProfileSocialLinks,
   type UpdateProfileSocialLinksDto,

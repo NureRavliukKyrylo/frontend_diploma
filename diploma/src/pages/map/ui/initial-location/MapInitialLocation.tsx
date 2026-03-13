@@ -1,4 +1,4 @@
-import { MapZoomAnimation } from "@shared/libs";
+import { MapZoomAnimation } from "@shared/libs/map";
 import { useRef } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { UserMarker } from "@entities/user/profile";

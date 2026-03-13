@@ -1,7 +1,6 @@
 import { TwoFactorVerificationProfileForm } from "@features/verification";
 import { VerificationWrapper } from "@shared/ui/wrappers";
 import styles from "./TwoFactor.module.scss";
-import { OtpType } from "@shared/config/types";
 import { useUserProfileStore } from "@entities/user";
 import { useLogout } from "@features/auth";
 
@@ -21,7 +20,6 @@ export const TwoFactorEnableVerificationContent = () => {
     >
       <div className={styles.verificationBlock}>
         <TwoFactorVerificationProfileForm
-          otpType={OtpType.TwoFactor}
           verificationType="enable"
           onSuccess={onSuccess}
         />

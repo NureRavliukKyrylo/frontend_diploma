@@ -11,7 +11,6 @@ export interface ProjectsResponse {
 export const getListProjects = async (
   params?: ProjectBaseParams,
 ): Promise<ProjectsResponse> => {
-  const { Location, ...apiParams } = params ?? {};
-  const response = await apiClient.get("/Projects/list", { params: apiParams });
+  const response = await apiClient.get("/Projects/list", { params });
   return response.data;
 };

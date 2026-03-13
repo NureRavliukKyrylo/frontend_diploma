@@ -29,14 +29,23 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    flex: 1;
     h1 {
       @include font-base(40px, 700);
       line-height: 120%;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     p {
       color: rgba(0, 0, 0, 0.6);
       @include font-base(20px, 400);
       line-height: 130%;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     .readMoreProjectBlock {
       display: flex;
@@ -53,7 +62,6 @@
     display: flex;
     gap: 5px;
     align-items: center;
-    margin-top: auto;
     img {
       width: 25px;
       height: 25px;

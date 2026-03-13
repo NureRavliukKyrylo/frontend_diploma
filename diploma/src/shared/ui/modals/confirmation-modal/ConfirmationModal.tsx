@@ -59,9 +59,13 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className={styles.confirmButtonModal}
+            className={styles.wrapperConfirmButtonModal}
           >
-            <BaseButtonWrapper onClick={onConfirm} loading={isLoading}>
+            <BaseButtonWrapper
+              onClick={onConfirm}
+              loading={isLoading}
+              className={styles.confirmButtonModal}
+            >
               {confirmText}
             </BaseButtonWrapper>
           </motion.div>
@@ -71,9 +75,12 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
             whileTap={{ scale: 0.95 }}
             animate={{ x: 0 }}
             transition={{ duration: 0.3 }}
-            className={styles.cancelButtonModal}
+            className={styles.wrapperConfirmButtonModal}
           >
-            <BaseButtonWrapper onClick={onCancel}>
+            <BaseButtonWrapper
+              onClick={onCancel}
+              className={styles.cancelButtonModal}
+            >
               {cancelText}
             </BaseButtonWrapper>
           </motion.div>

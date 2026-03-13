@@ -8,7 +8,8 @@ interface ResendCodeButton {
   otpTimers: Record<number, number>;
   resetOtpTimer: (type: number) => void;
   decrementOtpTimer: (type: number) => void;
-  resendFn?: () => Promise<unknown>;
+  userId?: string;
+  email?: string;
 }
 
 export const ResendCodeButton = ({
@@ -17,11 +18,13 @@ export const ResendCodeButton = ({
   otpTimers,
   resetOtpTimer,
   decrementOtpTimer,
-  resendFn,
+  userId,
+  email,
 }: ResendCodeButton) => {
   const { resend, isLoadingResend, resendErrorMessage } = useResendCode({
     type: otpType,
-    resendFn,
+    userId,
+    email,
   });
 
   return (

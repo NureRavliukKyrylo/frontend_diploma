@@ -1,5 +1,5 @@
 import { LocationMarker } from "@features/projects";
-import { MapZoomAnimation } from "@shared/libs";
+import { MapZoomAnimation } from "@shared/libs/map";
 import { useRef } from "react";
 import { Circle, Marker, Popup } from "react-leaflet";
 import styles from "../base-page/MapPage.module.scss";

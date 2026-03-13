@@ -1,17 +1,14 @@
 import React, { type ComponentProps } from "react";
 import styles from "./InputOTP.module.scss";
 import { InputOtp as BaseInputOtp } from "@heroui/input-otp";
-import type { OtpType } from "@shared/config/types";
 
 type InputOtpProps = ComponentProps<typeof BaseInputOtp> & {
   error?: string;
-  otpType: OtpType;
 };
 
 export const InputOtp: React.FC<InputOtpProps> = ({
   error,
   classNames,
-  otpType,
   ...props
 }) => {
   return (

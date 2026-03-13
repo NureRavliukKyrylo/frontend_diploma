@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 import { SOCIAL_PLATFORMS } from "@shared/config/constants";
-import { withPrivacyField } from "@shared/libs";
+import { withPrivacyField } from "@shared/libs/validation";
 
 export const contactsSchema = Yup.object(
   SOCIAL_PLATFORMS.reduce(

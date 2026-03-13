@@ -9,7 +9,6 @@ export interface ProfileModalVerificationSlice {
   newEmail: string | null;
   unlinkTarget: {
     platform: ConnectedLinkPlatform | null;
-    otpType: OtpType | null;
   };
   openVerificationModal: (modal: Exclude<VerificationModalType, null>) => void;
   closeVerificationModal: (modal: Exclude<VerificationModalType, null>) => void;
@@ -19,10 +18,7 @@ export interface ProfileModalVerificationSlice {
   ) => void;
   nextVerificationStep: (modal: Exclude<VerificationModalType, null>) => void;
   setNewEmail: (email: string) => void;
-  setUnlinkTarget: (
-    platform: ConnectedLinkPlatform | null,
-    otpType: OtpType | null,
-  ) => void;
+  setUnlinkTarget: (platform: ConnectedLinkPlatform | null) => void;
 }
 
 export const createProfileModalVerificationSlice: StateCreator<
@@ -30,7 +26,7 @@ export const createProfileModalVerificationSlice: StateCreator<
 > = (set) => ({
   newEmail: null,
   activeVerificationModal: null,
-  unlinkTarget: { platform: null, otpType: null },
+  unlinkTarget: { platform: null },
   verificationSteps: {
     emailVerification: 1,
     changePassword: 1,
@@ -43,8 +39,7 @@ export const createProfileModalVerificationSlice: StateCreator<
 
   openVerificationModal: (modal) => set({ activeVerificationModal: modal }),
 
-  setUnlinkTarget: (platform, otpType) =>
-    set({ unlinkTarget: { platform: platform, otpType: otpType } }),
+  setUnlinkTarget: (platform) => set({ unlinkTarget: { platform: platform } }),
 
   closeVerificationModal: (modal) =>
     set((state) => ({

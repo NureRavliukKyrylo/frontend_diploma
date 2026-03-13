@@ -40,7 +40,7 @@ export const ResetPasswordVerificationContent = () => {
         />
         <BaseButtonWrapper
           loading={isLoading}
-          className={styles.newPasswordButton}
+          className={styles.setNewPasswordButton}
           type="submit"
         >
           Save Password

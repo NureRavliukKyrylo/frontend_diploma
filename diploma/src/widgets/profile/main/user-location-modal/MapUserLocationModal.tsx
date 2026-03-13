@@ -3,7 +3,7 @@ import styles from "./MapUserLocationModal.module.scss";
 import type { Coordinates } from "@shared/config/types";
 import { BaseMap } from "@shared/ui";
 import { Marker, Popup } from "react-leaflet";
-import { MapZoomAnimation } from "@shared/libs/map/MapZoomAnimation";
+import { MapZoomAnimation } from "@shared/libs/map";
 import { UserMarker } from "@entities/user/profile";
 
 export interface MapUserLocationModalProps {
@@ -25,6 +25,7 @@ export const MapUserLocationModal = ({
       onClose={handleModal}
       maxWidth={"1200px"}
       showClosed={false}
+      animation="right"
     >
       <div className={styles.mapModalWrapper}>
         <BaseMap

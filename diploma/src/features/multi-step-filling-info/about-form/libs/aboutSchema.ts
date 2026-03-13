@@ -1,4 +1,4 @@
-import { dateField, textField } from "@shared/libs";
+import { dateField, textField } from "@shared/libs/validation";
 import * as Yup from "yup";
 
 export const aboutFormSchema = Yup.object({

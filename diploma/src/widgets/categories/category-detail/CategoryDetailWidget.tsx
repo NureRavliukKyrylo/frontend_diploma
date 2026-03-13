@@ -5,6 +5,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
 import { SkillTab } from "@entities/skill";
 import type { Skill } from "@entities/skill/model";
+import { motion } from "framer-motion";
 
 export const CategoryDetailWidget = () => {
   const { id } = useParams({ from: "/_masterLayout/categories/$id/" });
@@ -63,7 +64,13 @@ export const CategoryDetailWidget = () => {
           <h1 className={styles.coreSkillsText}>Core skills</h1>
           <ShowMoreItemsButton
             items={fakeSkills.map((skill) => (
-              <SkillTab key={skill.id} name={skill.name} />
+              <motion.div
+                key={skill.id}
+                whileHover={{ scale: 1.02, y: -2 }}
+                transition={{ ease: "easeInOut", duration: 0.15 }}
+              >
+                <SkillTab name={skill.name} />
+              </motion.div>
             ))}
             initialVisibleCount={6}
             buttonText="See more"

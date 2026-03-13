@@ -40,13 +40,15 @@ export function ShowMoreItemsButton({
         ))}
 
         {hasMoreItems && !isExpanded && (
-          <button
+          <motion.button
             className={`${styles.showMoreButton} ${classNameButton}`}
             onClick={() => setIsExpanded(true)}
             type="button"
+            whileHover={{ scale: 1.02, y: -2 }}
+            transition={{ ease: "easeInOut", duration: 0.15 }}
           >
             {buttonText}
-          </button>
+          </motion.button>
         )}
       </div>
     </div>

@@ -28,6 +28,7 @@ export const MapLocationModal = ({
       error={error}
       maxWidth={maxWidth}
       showClosed={false}
+      animation="right"
     >
       <div className={styles.mapModalWrapper}>
         <MapLocationPicker

@@ -6,7 +6,7 @@ import { AuthRoutes } from "@shared/routes";
 import { useMutation } from "@tanstack/react-query";
 import { register, type RegisterDto } from "../api/signUpApi";
 import { addToast } from "@heroui/react";
-import { getErrorMessage } from "@shared/libs";
+import { getErrorMessage } from "@shared/libs/error-message";
 
 export const useRegistration = () => {
   const router = useRouter();

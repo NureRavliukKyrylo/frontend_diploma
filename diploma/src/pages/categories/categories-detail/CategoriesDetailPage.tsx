@@ -8,10 +8,16 @@ import {
   ProjectsListWidgetSkeleton,
 } from "@widgets/projects";
 import { CategoryProjectFiltersWidget } from "@widgets/categories";
-import { ProjectCard, projectQuery } from "@entities/project";
+import {
+  ProjectCard,
+  ProjectCardSkeleton,
+  projectQuery,
+  useProjectsListQuery,
+} from "@entities/project";
 import { Pagination } from "@shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { useCategoryDetailPage } from "./model/useCategoryDetailPage";
+import { useRouter } from "@tanstack/react-router";
 
 export function CategoryDetailPage() {
   const {
@@ -23,6 +29,7 @@ export function CategoryDetailPage() {
     handleSort,
     handlePageChange,
   } = useCategoryDetailPage();
+  const router = useRouter();
   const { data: projects } = useQuery(projectQuery.list(searchWithCategory));
 
   return (
@@ -60,29 +67,51 @@ export function CategoryDetailPage() {
               <p>Try adjusting your filters or search query</p>
             </div>
           ) : (
-            <Suspense fallback={<ProjectsListWidgetSkeleton />}>
+            <Suspense
+              fallback={
+                <ProjectsListWidgetSkeleton
+                  renderSkeleton={ProjectCardSkeleton}
+                />
+              }
+            >
               <ProjectsListWidget
                 renderCard={(project) => (
-                  <ProjectCard
+                  <motion.div
                     key={project.id}
-                    project={project}
-                    avatars={[
-                      {
-                        src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
-                        name: "Kyrylo",
-                      },
-                      {
-                        src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
-                        name: "Kyrylo",
-                      },
-                      {
-                        src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
-                        name: "Kyrylo",
-                      },
-                    ]}
-                  />
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    transition={{
+                      ease: "easeIn",
+                      duration: 0.2,
+                    }}
+                    className={styles.projectCardMotion}
+                    onClick={() =>
+                      router.navigate({
+                        to: "/projects/$id",
+                        params: { id: project.id },
+                      })
+                    }
+                  >
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      avatars={[
+                        {
+                          src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                          name: "Kyrylo",
+                        },
+                        {
+                          src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                          name: "Kyrylo",
+                        },
+                        {
+                          src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
+                          name: "Kyrylo",
+                        },
+                      ]}
+                    />
+                  </motion.div>
                 )}
-                search={searchWithCategory}
+                useProjectsQuery={useProjectsListQuery(search)}
               />
             </Suspense>
           )}

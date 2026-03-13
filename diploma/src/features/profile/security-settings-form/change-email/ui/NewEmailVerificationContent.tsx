@@ -32,7 +32,7 @@ export const NewEmailVerificationContent = () => {
         />
         <BaseButtonWrapper
           loading={isLoading}
-          className={styles.changeNewEmailButton}
+          className={styles.setNewEmailButton}
           type="submit"
         >
           Save New Email
