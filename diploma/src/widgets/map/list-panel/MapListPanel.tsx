@@ -12,10 +12,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import styles from "./MapListPanel.module.scss";
 import { ToggleDropdownButton } from "@shared/ui/buttons";
-import {
-  ProjectsListWidget,
-  ProjectsListWidgetSkeleton,
-} from "@widgets/projects";
+import { ProjectsListWidget } from "@widgets/projects";
+import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 
 interface MapListPanelProps {
   listParams: ProjectSearchParams;
@@ -36,7 +34,7 @@ export const MapListPanel = ({ listParams, page }: MapListPanelProps) => {
       ) : (
         <Suspense
           fallback={
-            <ProjectsListWidgetSkeleton
+            <ListWidgetSkeleton
               renderSkeleton={ListProjectCardSkeleton}
               className={styles.mapProjectsListWidget}
               items={6}

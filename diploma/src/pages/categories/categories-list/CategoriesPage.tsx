@@ -1,7 +1,4 @@
-import {
-  CategoriesWidget,
-  CategoriesWidgetSkeleton,
-} from "@widgets/categories";
+import { CategoriesListWidget } from "@widgets/categories";
 import { Suspense } from "react";
 import { Pagination } from "@shared/ui";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
@@ -9,10 +6,13 @@ import styles from "./CategoriesPage.module.scss";
 import {
   AllCategoriesCard,
   CategoryCard,
+  CategoryCardSkeleton,
   categoryQuery,
+  useCategoriesListQuery,
 } from "@entities/category";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
+import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 
 export function CategoriesPage() {
   const navigate = useNavigate({ from: "/categories/" });
@@ -22,8 +22,16 @@ export function CategoriesPage() {
 
   return (
     <div className={styles.categoriesWrapperList}>
-      <Suspense fallback={<CategoriesWidgetSkeleton />}>
-        <CategoriesWidget
+      <Suspense
+        fallback={
+          <ListWidgetSkeleton
+            renderSkeleton={CategoryCardSkeleton}
+            className={styles.skeletonListCategories}
+            items={10}
+          />
+        }
+      >
+        <CategoriesListWidget
           startSlot={
             <motion.div
               layout
@@ -59,6 +67,7 @@ export function CategoriesPage() {
               </Link>
             </motion.div>
           )}
+          useCategoriesQuery={useCategoriesListQuery(search)}
         />
       </Suspense>
       <div className={styles.paginationWrapper}>

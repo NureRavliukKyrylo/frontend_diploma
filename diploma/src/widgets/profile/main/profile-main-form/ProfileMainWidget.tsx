@@ -12,6 +12,7 @@ interface ProfileMainWidgetProps {
   badgesChildren?: React.ReactNode;
   user?: User;
 }
+
 export function ProfileMainWidget({
   skillsChildren,
   badgesChildren,
@@ -108,7 +109,7 @@ export function ProfileMainWidget({
           </div>
         </div>
         <div className={styles.skillsBlock}>
-          <h1>SKILLS</h1>
+          <h1 className={styles.skillsProfileTitle}>SKILLS</h1>
           {skillsChildren}
           <div className={styles.buttonSkillsBlock}>
             <BaseButtonWrapper className={styles.seeMoreSkillsButton}>

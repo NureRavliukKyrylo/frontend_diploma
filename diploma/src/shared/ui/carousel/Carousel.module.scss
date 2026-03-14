@@ -1,4 +1,4 @@
-.sliderWrapper {
+.carouselWrapper {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -6,24 +6,30 @@
   position: relative;
 }
 
-.navBtn {
-  background: #222;
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: 20px;
-  border-radius: 6px;
-  transition: 0.2s ease;
+.backCarouselButton,
+.nextCarouselButton {
+  position: absolute;
+  z-index: 1000;
+}
 
-  &:hover {
-    background: #444;
-  }
+.backCarouselButton {
+  left: -30px;
+}
+.nextCarouselButton {
+  right: -30px;
+}
+.nextCarouselImage {
+  transform: rotate(180deg);
+}
+.itemsRow {
+  display: flex;
+  gap: 16px;
 }
 
 .sliderContainer {
   overflow: hidden;
   width: 100%;
+  padding: 20px;
 }
 
 .sliderInner {

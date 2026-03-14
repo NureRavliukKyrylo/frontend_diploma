@@ -1,35 +1,36 @@
-import { useState, useRef, useEffect, Children } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Carousel.module.scss";
+import { ArrowCarousel } from "@shared/assets/icons/actions";
 
-interface CarouselProps {
-  children: React.ReactNode;
-  gap?: number;
+interface CarouselProps<T> {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
   minItemWidth?: number;
+  keyExtractor: (item: T) => string;
 }
 
-export function Carousel({
-  children,
-  gap = 16,
+export function Carousel<T>({
+  items,
+  renderItem,
   minItemWidth = 200,
-}: CarouselProps) {
+  keyExtractor,
+}: CarouselProps<T>) {
   const [index, setIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [itemWidth, setItemWidth] = useState(0);
   const [visibleCount, setVisibleCount] = useState(1);
-
-  const items = Children.toArray(children);
+  const [direction, setDirection] = useState(1);
 
   useEffect(() => {
     const updateDimensions = () => {
       if (containerRef.current) {
         const containerWidth = containerRef.current.offsetWidth;
 
-        let count = Math.floor((containerWidth + gap) / (minItemWidth + gap));
+        let count = Math.floor(containerWidth / minItemWidth);
         count = Math.max(1, Math.min(count, items.length));
 
-        const totalGap = gap * (count - 1);
-        const calculatedWidth = (containerWidth - totalGap) / count;
+        const calculatedWidth = containerWidth / count;
 
         setVisibleCount(count);
         setItemWidth(calculatedWidth);
@@ -39,65 +40,52 @@ export function Carousel({
     updateDimensions();
     window.addEventListener("resize", updateDimensions);
     return () => window.removeEventListener("resize", updateDimensions);
-  }, [gap, minItemWidth, items.length]);
+  }, [minItemWidth, items.length]);
 
   const getWrappedIndex = (i: number) =>
     ((i % items.length) + items.length) % items.length;
 
-  const paginate = (dir: number) => setIndex((prev) => prev + dir);
+  const paginate = (dir: number) => {
+    setIndex((prev) => prev + dir);
+    setDirection(dir);
+  };
 
   const visibleItems = Array.from(
     { length: visibleCount },
-    (_, i) => items[getWrappedIndex(index + i)]
+    (_, i) => items[getWrappedIndex(index + i)],
   );
-
-  const canGoPrev = items.length > visibleCount;
-  const canGoNext = items.length > visibleCount;
-
+  console.log(index);
   return (
-    <div className={styles.sliderWrapper}>
+    <div className={styles.carouselWrapper}>
       <button
         onClick={() => paginate(-1)}
-        disabled={!canGoPrev}
-        className={styles.navBtn}
-        style={{ opacity: canGoPrev ? 1 : 0.3 }}
+        className={styles.backCarouselButton}
       >
-        ⟨
+        <ArrowCarousel />
       </button>
 
       <div ref={containerRef} className={styles.sliderContainer}>
-        <div
-          className={styles.itemsRow}
-          style={{ display: "flex", gap, overflow: "hidden" }}
-        >
+        <div className={styles.itemsRow}>
           <AnimatePresence initial={false} mode="popLayout">
             {visibleItems.map((item, i) => (
               <motion.div
-                key={`${index + i}-${getWrappedIndex(index + i)}`}
                 layout
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                style={{
-                  minWidth: itemWidth,
-                  maxWidth: itemWidth,
-                }}
+                key={`${index + i}-${keyExtractor(item)}`}
+                initial={{ opacity: 0, x: 60 * direction, scale: 0.9 }}
+                exit={{ opacity: 0, x: -60 * direction, scale: 0.9 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ type: "spring", stiffness: 260, damping: 25 }}
+                style={{ minWidth: itemWidth, maxWidth: itemWidth }}
               >
-                {item}
+                {renderItem(item)}
               </motion.div>
             ))}
           </AnimatePresence>
         </div>
       </div>
 
-      <button
-        onClick={() => paginate(1)}
-        disabled={!canGoNext}
-        className={styles.navBtn}
-        style={{ opacity: canGoNext ? 1 : 0.3 }}
-      >
-        ⟩
+      <button onClick={() => paginate(1)} className={styles.nextCarouselButton}>
+        <ArrowCarousel className={styles.nextCarouselImage} />
       </button>
     </div>
   );

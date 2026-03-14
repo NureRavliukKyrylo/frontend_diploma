@@ -2,11 +2,7 @@ import { CategoryDetailWidget } from "@widgets/categories";
 import { Suspense } from "react";
 import styles from "./CategoriesDetailPage.module.scss";
 import { motion } from "framer-motion";
-import {
-  ProjectControls,
-  ProjectsListWidget,
-  ProjectsListWidgetSkeleton,
-} from "@widgets/projects";
+import { ProjectControls, ProjectsListWidget } from "@widgets/projects";
 import { CategoryProjectFiltersWidget } from "@widgets/categories";
 import {
   ProjectCard,
@@ -18,6 +14,7 @@ import { Pagination } from "@shared/ui";
 import { useQuery } from "@tanstack/react-query";
 import { useCategoryDetailPage } from "./model/useCategoryDetailPage";
 import { useRouter } from "@tanstack/react-router";
+import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 
 export function CategoryDetailPage() {
   const {
@@ -69,8 +66,9 @@ export function CategoryDetailPage() {
           ) : (
             <Suspense
               fallback={
-                <ProjectsListWidgetSkeleton
+                <ListWidgetSkeleton
                   renderSkeleton={ProjectCardSkeleton}
+                  className={styles.projectsListSkeletonWrapper}
                 />
               }
             >
@@ -111,7 +109,7 @@ export function CategoryDetailPage() {
                     />
                   </motion.div>
                 )}
-                useProjectsQuery={useProjectsListQuery(search)}
+                useProjectsQuery={useProjectsListQuery(searchWithCategory)}
               />
             </Suspense>
           )}

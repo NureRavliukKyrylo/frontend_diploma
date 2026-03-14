@@ -1,6 +1,6 @@
-import type { ProjectsResponse } from "@entities/project/api";
+import type { Project } from "./Project";
 
 export interface ProjectsQueryResult {
-  data: ProjectsResponse | undefined;
+  data: Project[] | undefined;
   isLoading?: boolean;
 }

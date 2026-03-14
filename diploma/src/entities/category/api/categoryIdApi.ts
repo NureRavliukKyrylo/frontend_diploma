@@ -1,5 +1,5 @@
 import { apiClient } from "@shared/api";
-import type { Category } from "../types/Category";
+import type { Category } from "../model";
 import { type ApiResponse } from "@shared/api";
 
 export const getCategoryById = async (

@@ -1,6 +1,6 @@
 import type { Project, ProjectsQueryResult } from "@entities/project";
-import { ProjectsListWidgetSkeleton } from "./ProjectListWidgetSkeleton";
 import styles from "./ProjectsListWidget.module.scss";
+import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 
 interface ProjectsListWidgetProps {
   useProjectsQuery: () => ProjectsQueryResult;
@@ -24,7 +24,7 @@ export const ProjectsListWidget = ({
 
   if (isLoading && renderSkeleton) {
     return (
-      <ProjectsListWidgetSkeleton
+      <ListWidgetSkeleton
         renderSkeleton={renderSkeleton}
         items={skeletonItems}
         className={className}
@@ -34,7 +34,7 @@ export const ProjectsListWidget = ({
 
   return (
     <div className={wrapperClass}>
-      {projects?.data.map((project) => renderCard(project))}
+      {projects?.map((project) => renderCard(project))}
     </div>
   );
 };

@@ -18,3 +18,4 @@ export { default as Mark } from "./mark.png";
 export { default as FullSizeIcon } from "./full-size.png";
 export { default as PlusIcon } from "./plus.png";
 export { default as MinusIcon } from "./minus.png";
+export { default as ArrowCarousel } from "./carousel-arrow.svg?react";

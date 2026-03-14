@@ -1,0 +1,1 @@
+export { getMyBadges } from "./getMyBadgesApi";

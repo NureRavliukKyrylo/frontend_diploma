@@ -1,10 +1,18 @@
 @use "@shared/assets/styles" as *;
 
-.skillImageCard {
-  width: 80%;
-  border-radius: 50%;
-}
+.skillCardWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+  .skillImageCard {
+    width: 70px;
+    border-radius: 50%;
+  }
 
-.skillTitleCard {
-  @include font-base(15px, 500);
+  .skillTitleCard {
+    @include font-base(15px, 500);
+  }
 }

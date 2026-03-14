@@ -5,6 +5,8 @@ export { categoryQuery } from "./model/queries/categoryQuery";
 export {
   categoriesSearchDefaults,
   categoriesSearchSchema,
-} from "./model/libs/categorySearchSchema";
+} from "./libs/categorySearchSchema";
 export { AllCategoriesCard } from "./ui/category-card/all-categories/AllCategoriesCard";
 export { CategoryCardSkeleton } from "./ui/category-card/category-item/CategoryCardSkeleton";
+export { type CategoriesQueryResult } from "./model/types/CategoriesResultQuery";
+export { useCategoriesListQuery } from "./model/hooks/useCategoriesListQuery";

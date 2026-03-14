@@ -1,5 +1,4 @@
-export { CategoriesWidget } from "./categories-list/CategoriesWidget";
+export { CategoriesListWidget } from "./categories-list/CategoriesListWidget";
 export { CategoryDetailWidget } from "./category-detail/CategoryDetailWidget";
-export { CategoriesWidgetSkeleton } from "./categories-list/CategoriesWidgetSkeleton";
 export { CategoryProjectFiltersWidget } from "./category-detail/filters/CategoryProjectFiltersWidget";
 export { CategoryDetailWidgetSkeleton } from "./category-detail/CategoryDetailWidgetSkeleton";

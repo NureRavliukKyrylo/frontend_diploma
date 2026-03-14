@@ -1,8 +1,7 @@
 import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
-import { getListCategories } from "../api/categoriesListApi";
-import { getCategoryById } from "../api/categoryIdApi";
-import type { CategoriesSearchParams } from "../libs/categorySearchSchema";
-export { getCategoryById } from "../api/categoryIdApi";
+import { getListCategories } from "@entities/category/api";
+import { getCategoryById } from "@entities/category/api";
+import type { CategoriesSearchParams } from "../../libs/categorySearchSchema";
 
 export const categoryKeys = {
   all: () => ["categories"] as const,

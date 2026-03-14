@@ -3,7 +3,6 @@ import {
   ProjectFiltersWidget,
   ProjectsHeader,
   ProjectsListWidget,
-  ProjectsListWidgetSkeleton,
 } from "@widgets/projects";
 import { Pagination } from "@shared/ui";
 import { Suspense } from "react";
@@ -18,6 +17,7 @@ import {
 } from "@entities/project";
 import { motion } from "framer-motion";
 import { useProjectsPage } from "../model/useProjectsPage";
+import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 
 export function ProjectsPage() {
   const {
@@ -66,8 +66,9 @@ export function ProjectsPage() {
             ) : (
               <Suspense
                 fallback={
-                  <ProjectsListWidgetSkeleton
+                  <ListWidgetSkeleton
                     renderSkeleton={ProjectCardSkeleton}
+                    className={styles.projectsListSkeletonWrapper}
                   />
                 }
               >

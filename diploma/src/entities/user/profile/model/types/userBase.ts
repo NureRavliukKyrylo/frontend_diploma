@@ -1,3 +1,4 @@
+import type { Skill } from "@entities/skill";
 import type { ConnectedService } from "./connectedService";
 import type { PrivacySettings, Profile } from "./profile";
 import type { ProfileCompletion } from "./profileCompletionField";
@@ -20,4 +21,5 @@ export interface User {
   location: {
     address: string;
   };
+  skills: Skill[];
 }

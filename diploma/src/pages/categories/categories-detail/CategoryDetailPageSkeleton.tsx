@@ -1,7 +1,7 @@
 import { Skeleton } from "@heroui/skeleton";
 import styles from "./CategoriesDetailPage.module.scss";
 import { CategoryDetailWidgetSkeleton } from "@widgets/categories";
-import { ProjectsListWidgetSkeleton } from "@widgets/projects";
+import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ProjectCardSkeleton } from "@entities/project";
 
 export const CategoryDetailPageSkeleton = () => {
@@ -17,9 +17,10 @@ export const CategoryDetailPageSkeleton = () => {
         </div>
 
         <div className={styles.projectsList}>
-          <ProjectsListWidgetSkeleton
+          <ListWidgetSkeleton
             renderSkeleton={ProjectCardSkeleton}
             items={9}
+            className={styles.projectsListSkeletonWrapper}
           />
         </div>
       </div>
