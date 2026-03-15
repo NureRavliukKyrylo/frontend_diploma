@@ -12,6 +12,7 @@
     .filtersInteractions {
       display: grid;
       grid-template-columns: 480px 2fr 1fr;
+      grid-template-rows: minmax(54px, auto);
       gap: 30px;
       grid-column: 1 / 3;
     }

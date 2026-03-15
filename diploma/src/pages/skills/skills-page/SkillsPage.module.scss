@@ -13,7 +13,7 @@
     .filterControlBlock {
       display: grid;
       grid-template-columns: 1fr 379px 354px;
-      grid-template-rows: minmax(54px, auto);
+      grid-template-rows: minmax(50px, auto);
       gap: 30px;
 
       & > *:first-child {

@@ -1,1 +1,1 @@
-export { AssingSkillModal } from "./assign-skill/ui/AssignSkillModal";
+export { AssingSkillModal } from "./assign-skill/ui/assign-skill-modal/AssignSkillModal";

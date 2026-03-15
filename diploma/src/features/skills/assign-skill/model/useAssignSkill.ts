@@ -34,6 +34,7 @@ export const useAssignSkill = (skillId: string) => {
 
   return {
     formik,
+    mutation,
     errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
     handleSubmit: formik.handleSubmit,
     isLoading: mutation.isPending,

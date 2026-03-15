@@ -14,6 +14,8 @@
     h1 {
       @include font-base(25px, 900);
       margin-bottom: 5px;
+      text-align: center;
+      line-height: 120%;
     }
     p {
       @include font-base(18px, 500);

@@ -16,7 +16,6 @@
   max-height: 90vh;
   background: #fff;
   border-radius: 50px;
-  overflow-y: auto;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   position: relative;
@@ -31,4 +30,9 @@
       margin-bottom: 10px;
     }
   }
+}
+
+.childrenSection {
+  overflow-y: auto;
+  max-height: 80vh;
 }
