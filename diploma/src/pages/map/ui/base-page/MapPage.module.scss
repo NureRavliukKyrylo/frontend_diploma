@@ -21,9 +21,10 @@
     display: grid;
     width: 100%;
     grid-template-columns: 480px 370px 1fr 350px;
+
     align-items: center;
     gap: 20px;
-    grid-template-rows: 58px;
+    grid-template-rows: minmax(54px, auto);
     top: 50px;
     pointer-events: auto;
 

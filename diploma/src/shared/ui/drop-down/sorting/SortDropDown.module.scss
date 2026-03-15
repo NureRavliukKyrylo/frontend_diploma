@@ -1,7 +1,7 @@
 @use "@shared/assets/styles" as *;
 
 .dropDownLabel {
-  @include font-base(30px, 600);
+  @include font-base(clamp(12px, 45cqh, 30px), 600);
   color: rgba(0, 0, 0, 0.6);
 }
 
@@ -19,7 +19,7 @@
   }
 
   .item {
-    padding: 5px 30px 5px 30px;
+    padding: clamp(2px, 0.5vh, 5px) clamp(15px, 3vh, 30px);
     cursor: pointer;
     border-radius: 8px;
 
@@ -35,8 +35,8 @@
       color 0.15s ease;
 
     img {
-      width: 19px;
-      height: 19px;
+      width: clamp(15px, 2.5vh, 19px);
+      height: clamp(12px, 2vh, 20px);
     }
 
     &.itemActive {

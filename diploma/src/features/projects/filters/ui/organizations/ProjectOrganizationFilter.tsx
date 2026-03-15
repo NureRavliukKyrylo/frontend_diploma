@@ -23,7 +23,7 @@ export const ProjectOrganizationFilter = ({
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery(organizationQuery.infinite({ pageSize: 7 }));
+  } = useInfiniteQuery(organizationQuery.infinite({ PageSize: 7 }));
 
   const toggleOrganization = (organizationId: string) => {
     navigate({

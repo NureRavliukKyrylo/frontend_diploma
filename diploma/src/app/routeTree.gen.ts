@@ -16,6 +16,7 @@ import { Route as IndexRouteImport } from './routers/index'
 import { Route as MultiStepFormIndexRouteImport } from './routers/multi-step-form/index'
 import { Route as MasterLayoutProfileRouteImport } from './routers/_masterLayout/profile'
 import { Route as NoFooterLayoutMapIndexRouteImport } from './routers/_noFooterLayout/map/index'
+import { Route as MasterLayoutSkillsIndexRouteImport } from './routers/_masterLayout/skills/index'
 import { Route as MasterLayoutProjectsIndexRouteImport } from './routers/_masterLayout/projects/index'
 import { Route as MasterLayoutProfileIndexRouteImport } from './routers/_masterLayout/profile/index'
 import { Route as MasterLayoutCategoriesIndexRouteImport } from './routers/_masterLayout/categories/index'
@@ -60,6 +61,11 @@ const NoFooterLayoutMapIndexRoute = NoFooterLayoutMapIndexRouteImport.update({
   id: '/map/',
   path: '/map/',
   getParentRoute: () => NoFooterLayoutRoute,
+} as any)
+const MasterLayoutSkillsIndexRoute = MasterLayoutSkillsIndexRouteImport.update({
+  id: '/skills/',
+  path: '/skills/',
+  getParentRoute: () => MasterLayoutRoute,
 } as any)
 const MasterLayoutProjectsIndexRoute =
   MasterLayoutProjectsIndexRouteImport.update({
@@ -143,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/categories/': typeof MasterLayoutCategoriesIndexRoute
   '/profile/': typeof MasterLayoutProfileIndexRoute
   '/projects/': typeof MasterLayoutProjectsIndexRoute
+  '/skills/': typeof MasterLayoutSkillsIndexRoute
   '/map/': typeof NoFooterLayoutMapIndexRoute
   '/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordRoute
   '/auth/forgot-password/verification': typeof AuthLayoutAuthForgotPasswordVerificationRoute
@@ -160,6 +167,7 @@ export interface FileRoutesByTo {
   '/categories': typeof MasterLayoutCategoriesIndexRoute
   '/profile': typeof MasterLayoutProfileIndexRoute
   '/projects': typeof MasterLayoutProjectsIndexRoute
+  '/skills': typeof MasterLayoutSkillsIndexRoute
   '/map': typeof NoFooterLayoutMapIndexRoute
   '/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordRoute
   '/auth/forgot-password/verification': typeof AuthLayoutAuthForgotPasswordVerificationRoute
@@ -182,6 +190,7 @@ export interface FileRoutesById {
   '/_masterLayout/categories/': typeof MasterLayoutCategoriesIndexRoute
   '/_masterLayout/profile/': typeof MasterLayoutProfileIndexRoute
   '/_masterLayout/projects/': typeof MasterLayoutProjectsIndexRoute
+  '/_masterLayout/skills/': typeof MasterLayoutSkillsIndexRoute
   '/_noFooterLayout/map/': typeof NoFooterLayoutMapIndexRoute
   '/_authLayout/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordRoute
   '/_authLayout/auth/forgot-password/verification': typeof AuthLayoutAuthForgotPasswordVerificationRoute
@@ -202,6 +211,7 @@ export interface FileRouteTypes {
     | '/categories/'
     | '/profile/'
     | '/projects/'
+    | '/skills/'
     | '/map/'
     | '/auth/forgot-password/set-password'
     | '/auth/forgot-password/verification'
@@ -219,6 +229,7 @@ export interface FileRouteTypes {
     | '/categories'
     | '/profile'
     | '/projects'
+    | '/skills'
     | '/map'
     | '/auth/forgot-password/set-password'
     | '/auth/forgot-password/verification'
@@ -240,6 +251,7 @@ export interface FileRouteTypes {
     | '/_masterLayout/categories/'
     | '/_masterLayout/profile/'
     | '/_masterLayout/projects/'
+    | '/_masterLayout/skills/'
     | '/_noFooterLayout/map/'
     | '/_authLayout/auth/forgot-password/set-password'
     | '/_authLayout/auth/forgot-password/verification'
@@ -307,6 +319,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/map/'
       preLoaderRoute: typeof NoFooterLayoutMapIndexRouteImport
       parentRoute: typeof NoFooterLayoutRoute
+    }
+    '/_masterLayout/skills/': {
+      id: '/_masterLayout/skills/'
+      path: '/skills'
+      fullPath: '/skills/'
+      preLoaderRoute: typeof MasterLayoutSkillsIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
     }
     '/_masterLayout/projects/': {
       id: '/_masterLayout/projects/'
@@ -438,6 +457,7 @@ interface MasterLayoutRouteChildren {
   MasterLayoutProfileRoute: typeof MasterLayoutProfileRouteWithChildren
   MasterLayoutCategoriesIndexRoute: typeof MasterLayoutCategoriesIndexRoute
   MasterLayoutProjectsIndexRoute: typeof MasterLayoutProjectsIndexRoute
+  MasterLayoutSkillsIndexRoute: typeof MasterLayoutSkillsIndexRoute
   MasterLayoutCategoriesIdIndexRoute: typeof MasterLayoutCategoriesIdIndexRoute
   MasterLayoutProjectsIdIndexRoute: typeof MasterLayoutProjectsIdIndexRoute
 }
@@ -446,6 +466,7 @@ const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
   MasterLayoutProfileRoute: MasterLayoutProfileRouteWithChildren,
   MasterLayoutCategoriesIndexRoute: MasterLayoutCategoriesIndexRoute,
   MasterLayoutProjectsIndexRoute: MasterLayoutProjectsIndexRoute,
+  MasterLayoutSkillsIndexRoute: MasterLayoutSkillsIndexRoute,
   MasterLayoutCategoriesIdIndexRoute: MasterLayoutCategoriesIdIndexRoute,
   MasterLayoutProjectsIdIndexRoute: MasterLayoutProjectsIdIndexRoute,
 }

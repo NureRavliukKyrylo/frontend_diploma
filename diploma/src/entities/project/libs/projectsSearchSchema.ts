@@ -8,14 +8,14 @@ import {
 export const projectSearchDefaults = {
   OrderBy: "Default" as const,
   Page: 1,
-  pageSize: 9,
+  PageSize: 9,
   OnlyActive: false,
   ShowJoined: false,
 };
 
 export const mapProjectDefaults = {
   Page: 1,
-  pageSize: 7,
+  PageSize: 7,
   OnlyActive: false,
   ShowJoined: false,
 };
@@ -52,7 +52,7 @@ export const mapProjectSchema = projectFiltersSchema
   .extend(paginationSchema.shape)
   .extend({
     CategoryIds: z.array(z.string()).optional().catch([]),
-    pageSize: z.number().min(1).default(7).optional(),
+    PageSize: z.number().min(1).default(7).optional(),
   });
 
 export const projectBaseSchema = projectFiltersWithCategorySchema.extend(

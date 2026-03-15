@@ -23,7 +23,7 @@ export const ProjectCategoriesFilter = ({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery(categoryQuery.infinite({ pageSize: 7 }));
+  } = useInfiniteQuery(categoryQuery.infinite({ PageSize: 7 }));
 
   const toggleCategory = (categoryId: string) => {
     navigate({

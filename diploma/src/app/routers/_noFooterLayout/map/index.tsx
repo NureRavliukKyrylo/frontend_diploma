@@ -11,9 +11,9 @@ export const Route = createFileRoute("/_noFooterLayout/map/")({
     middlewares: [stripSearchParams(mapProjectDefaults)],
   },
   loader: async ({ context: { queryClient } }) => {
-    queryClient.prefetchInfiniteQuery(categoryQuery.infinite({ pageSize: 7 }));
+    queryClient.prefetchInfiniteQuery(categoryQuery.infinite({ PageSize: 7 }));
     queryClient.prefetchInfiniteQuery(
-      organizationQuery.infinite({ pageSize: 7 }),
+      organizationQuery.infinite({ PageSize: 7 }),
     );
   },
 });

@@ -5,4 +5,6 @@ export type { SkillsQueryResult } from "./model";
 export { skillsQuery } from "./model/queries/skillQueries";
 export { useSkillsListQuery } from "./model/hooks/useSkillsListQuery";
 export { useMySkillsListQuery } from "./model/hooks/useMySkillsQuery";
-export type { SkillLevel } from "./model/types/SkillLevel";
+export { type SkillLevel, SkillLevelType } from "./model/types/SkillLevel";
+export { SkillControlCard } from "./ui/skill-control-card/SkillControlCard";
+export { skillSearchSchema } from "./libs/SkillsSearchParams";

@@ -1,5 +1,4 @@
 import { GoogleIcon } from "@shared/assets/icons/brands";
-import { OtpType } from "@shared/config/types";
 
 export type ConnectedLinkPlatform = "google";
 

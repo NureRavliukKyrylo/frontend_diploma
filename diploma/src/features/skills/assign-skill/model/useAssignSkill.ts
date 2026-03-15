@@ -2,8 +2,9 @@ import { useMutation } from "@tanstack/react-query";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { addToast } from "@heroui/react";
 import { assignSkill, type SkillAssignDTO } from "../api/assignSkillApi";
+import { useFormik } from "formik";
 
-export const useAssignSkill = () => {
+export const useAssignSkill = (skillId: string) => {
   const mutation = useMutation({
     mutationFn: (data: SkillAssignDTO) => assignSkill(data),
     onSuccess: () => {
@@ -23,9 +24,18 @@ export const useAssignSkill = () => {
       });
     },
   });
+
+  const formik = useFormik<SkillAssignDTO>({
+    initialValues: { level: 0, skillId },
+    onSubmit: (values: SkillAssignDTO) => {
+      mutation.mutate(values);
+    },
+  });
+
   return {
+    formik,
     errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
-    handleAssignSkill: (data: SkillAssignDTO) => mutation.mutate(data),
+    handleSubmit: formik.handleSubmit,
     isLoading: mutation.isPending,
   };
 };

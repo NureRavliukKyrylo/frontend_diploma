@@ -8,7 +8,7 @@ export const useMapPage = () => {
   const search = useSearch({ from: "/_noFooterLayout/map/" });
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const { Page, pageSize, ...mapSearch } = search;
+  const { Page, PageSize, ...mapSearch } = search;
   const {
     Lat,
     Lng,

@@ -1,6 +1,7 @@
 @use "@shared/assets/styles" as *;
 
 .inner {
+  container-type: size;
   position: relative;
   width: 100%;
   display: flex;
@@ -12,19 +13,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
-  padding: 10px 20px;
+
   width: 100%;
   z-index: 101;
+
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
+
+  padding: clamp(2px, 30cqh, 10px) clamp(10px, 35cqh, 20px);
+
   transition:
     border-radius 0.3s ease,
     clip-path 0.3s ease-in;
+
   img {
-    width: 25px;
-    height: 20px;
+    width: clamp(15px, 37cqh, 25px);
+    height: clamp(12px, 30cqh, 20px);
     flex-shrink: 0;
   }
+
   &.buttonActive {
     border-radius: 30px 30px 0 0;
     clip-path: inset(-20px -20px 1px -20px);
@@ -36,9 +43,13 @@
   top: 100%;
   left: 0;
   width: 100%;
+
   z-index: 100;
+
   background: #fff;
   border-radius: 0 0 30px 30px;
+
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+
   overflow: hidden;
 }

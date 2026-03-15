@@ -24,7 +24,7 @@ export const Route = createFileRoute("/_masterLayout/categories/$id/")({
       ),
     ]);
     queryClient.prefetchInfiniteQuery(
-      organizationQuery.infinite({ pageSize: 7 }),
+      organizationQuery.infinite({ PageSize: 7 }),
     );
   },
   search: {

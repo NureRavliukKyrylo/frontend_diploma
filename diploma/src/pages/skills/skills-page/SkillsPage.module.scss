@@ -1,0 +1,45 @@
+@use "@shared/assets/styles" as *;
+
+.skillsPageWrapper {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  .skillsPageHeader {
+    gap: 20px;
+    .titleSkillsPage {
+      @include font-base(50px, 700);
+    }
+    .filterControlBlock {
+      display: grid;
+      grid-template-columns: 1fr 379px 354px;
+      grid-template-rows: minmax(54px, auto);
+      gap: 30px;
+
+      & > *:first-child {
+        grid-column-start: 2;
+      }
+    }
+  }
+  .pageSkillsMainContent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .skillStats {
+      color: #7d7d7d;
+      @include font-base(25px, 600);
+    }
+    .skillsListWrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      justify-content: center;
+      gap: 30px;
+      align-items: stretch;
+    }
+  }
+  .paginationWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}

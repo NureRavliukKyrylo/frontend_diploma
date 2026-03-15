@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const paginationSchema = z.object({
   Page: z.number().min(1).default(1).optional(),
-  pageSize: z.number().min(1).default(9).optional(),
+  PageSize: z.number().min(1).default(9).optional(),
 });
 
 export const mapBoundsSchema = z.object({

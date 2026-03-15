@@ -1,7 +1,6 @@
 import type { StateCreator } from "zustand";
 import type { VerificationModalType } from "../types/verificationModalType";
 import type { ConnectedLinkPlatform } from "../../config/connectedLinks";
-import type { OtpType } from "@shared/config/types";
 
 export interface ProfileModalVerificationSlice {
   activeVerificationModal: VerificationModalType;

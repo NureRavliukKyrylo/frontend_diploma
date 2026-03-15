@@ -11,6 +11,7 @@
   flex-wrap: wrap;
   column-gap: 20px;
   row-gap: 15px;
+  align-items: center;
 }
 
 .showMoreButton {
@@ -27,6 +28,4 @@
 }
 .itemWrapper {
   flex-shrink: 0;
-  flex-grow: 1;
-  max-width: 150px;
 }

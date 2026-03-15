@@ -1,4 +1,4 @@
-export { default as SearchIcon } from "./search.png";
+export { default as SearchIcon } from "./search.svg?react";
 export { default as Bell } from "./bell.png";
 export { default as MessageIcon } from "./message.png";
 export { default as EyeActive } from "./eye_password_active.png";
@@ -19,3 +19,4 @@ export { default as FullSizeIcon } from "./full-size.png";
 export { default as PlusIcon } from "./plus.png";
 export { default as MinusIcon } from "./minus.png";
 export { default as ArrowCarousel } from "./carousel-arrow.svg?react";
+export { default as MoreActionsIcon } from "./more-button.png";

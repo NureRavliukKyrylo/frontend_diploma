@@ -14,9 +14,9 @@ export const Route = createFileRoute("/_masterLayout/projects/")({
     middlewares: [stripSearchParams(projectSearchDefaults)],
   },
   loader: async ({ context: { queryClient } }) => {
-    queryClient.prefetchInfiniteQuery(categoryQuery.infinite({ pageSize: 7 }));
+    queryClient.prefetchInfiniteQuery(categoryQuery.infinite({ PageSize: 7 }));
     queryClient.prefetchInfiniteQuery(
-      organizationQuery.infinite({ pageSize: 7 }),
+      organizationQuery.infinite({ PageSize: 7 }),
     );
   },
 });

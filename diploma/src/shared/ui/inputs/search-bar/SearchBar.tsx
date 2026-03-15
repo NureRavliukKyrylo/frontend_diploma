@@ -36,7 +36,7 @@ export const SearchBar = ({
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
-      <img src={SearchIcon} alt="search icon" className={styles.icon} />
+      <SearchIcon className={styles.icon} />
     </div>
   );
 };

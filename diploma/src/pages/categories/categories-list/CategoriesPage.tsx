@@ -16,7 +16,7 @@ import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 
 export function CategoriesPage() {
   const navigate = useNavigate({ from: "/categories/" });
-  const { page } = useSearch({ from: "/_masterLayout/categories/" });
+  const { Page } = useSearch({ from: "/_masterLayout/categories/" });
   const search = useSearch({ from: "/_masterLayout/categories/" });
   const { data: categories } = useQuery(categoryQuery.list(search));
 
@@ -74,10 +74,10 @@ export function CategoriesPage() {
         {categories && categories.pagination.totalPages > 1 && (
           <Pagination
             total={categories.pagination.totalPages}
-            page={page}
-            onChange={(page) => {
+            page={Page}
+            onChange={(Page) => {
               navigate({
-                search: (prev) => ({ ...prev, page }),
+                search: (prev) => ({ ...prev, Page }),
               });
             }}
           />
