@@ -6,12 +6,17 @@ import { Toggle } from "@shared/ui";
 import styles from "./ProfileSettingsWidget.module.scss";
 import { LogoutButton } from "@features/auth";
 import { BackButton } from "@shared/ui/buttons";
-import { useUserProfileStore, type ProfileSettingsMode } from "@entities/user";
+import { useProfileTabs, type ProfileSettingsMode } from "@entities/user";
 import { profileRoutes } from "@shared/routes";
+import { useSearch } from "@tanstack/react-router";
 
 export function ProfileSettingsWidget() {
-  const { settingsMode, setSettingsMode } = useUserProfileStore();
-  const { component, wrapperProps } = profileSettingsForms[settingsMode];
+  const search = useSearch({ from: "/_masterLayout/profile/settings/" });
+  const { activeTab, handleTabChange } = useProfileTabs<ProfileSettingsMode>({
+    search,
+    navigateParams: "/profile/settings/",
+  });
+  const { component, wrapperProps } = profileSettingsForms[activeTab];
 
   return (
     <div className={styles.blockSettingsProfileForms}>
@@ -26,8 +31,8 @@ export function ProfileSettingsWidget() {
           </div>
           <Toggle<ProfileSettingsMode>
             tabs={profileSettingsTabs}
-            activeValue={settingsMode}
-            onChange={setSettingsMode}
+            activeValue={activeTab}
+            onChange={handleTabChange}
             buttonClassName={styles.toggleProfileSettingsButton}
             activeButtonClassName={styles.toggleProfileSettingsButtonActive}
             className={styles.toggleProfileSettings}
@@ -39,7 +44,7 @@ export function ProfileSettingsWidget() {
       </div>
       <AnimatePresence mode="wait">
         <motion.div
-          key={settingsMode}
+          key={activeTab}
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -30 }}

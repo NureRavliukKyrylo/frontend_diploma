@@ -7,9 +7,10 @@ import { toggleArrayParam } from "../../libs/toggleTab";
 import type { NavigateParams } from "../../model/NavigateParams";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { AnimatePresence, motion } from "framer-motion";
+import type { SkillsSearchParams } from "@entities/skill/libs";
 
 interface ProjectCategoriesFilterProps {
-  search: ProjectSearchParams;
+  search: ProjectSearchParams | SkillsSearchParams;
   from: Exclude<NavigateParams, "/categories/$id/">;
 }
 

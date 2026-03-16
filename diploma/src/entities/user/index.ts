@@ -10,3 +10,12 @@ export { type ProfileSettingsMode } from "./profile/model/types/profileSettingsM
 export { useUserProfileStore } from "./profile/model/store/userProfileStore";
 export { type ProfileMode } from "./profile/model/types/profileMode";
 export { ProfileAvatar } from "./profile/ui/profile-avatar/ProfileAvatar";
+export {
+  profileSearchSchema,
+  profileSearchDefaults,
+  profileSettingsSearchSchema,
+  profileSettingsSearchDefaults,
+  type ProfileSearchParams,
+  type ProfileSettingsSearchParams,
+} from "./profile/libs/profileSearchSchema";
+export { useProfileTabs } from "./profile/model/hooks/useProfileTabs";

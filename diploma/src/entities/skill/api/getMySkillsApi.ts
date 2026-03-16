@@ -1,7 +1,16 @@
-import { apiClient, type ApiResponse } from "@shared/api";
+import { apiClient } from "@shared/api";
 import type { Skill } from "../model";
+import type { PaginationResponse } from "@shared/config/types";
+import type { SkillsProfileSearchParams } from "../libs";
 
-export const getMySkills = async (): Promise<ApiResponse<Skill[]>> => {
-  const response = await apiClient.get("/Skills/my");
+export interface SkillsResponse {
+  data: Skill[];
+  pagination: PaginationResponse;
+}
+
+export const getMySkills = async (
+  params?: SkillsProfileSearchParams,
+): Promise<SkillsResponse> => {
+  const response = await apiClient.get("/Skills/my", { params });
   return response.data;
 };

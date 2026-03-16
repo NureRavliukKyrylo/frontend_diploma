@@ -7,6 +7,7 @@ interface SkillsListWidgetProps {
   skills?: Skill[];
   renderCard: (skill: Skill) => React.ReactNode;
   renderSkeleton?: () => React.ReactNode;
+  startSlot?: React.ReactNode;
   skeletonItems?: number;
   className?: string;
 }
@@ -18,6 +19,7 @@ export const SkillsListWidget = ({
   className,
   renderSkeleton,
   skeletonItems,
+  startSlot,
 }: SkillsListWidgetProps) => {
   const queryResult = useSkillsQuery?.();
 
@@ -38,6 +40,7 @@ export const SkillsListWidget = ({
 
   return (
     <div className={wrapperClass}>
+      {startSlot}
       {skills?.map((skill) => renderCard(skill))}
     </div>
   );

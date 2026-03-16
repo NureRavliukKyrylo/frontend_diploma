@@ -3,8 +3,11 @@ import { getErrorMessage } from "@shared/libs/error-message";
 import { addToast } from "@heroui/react";
 import { assignSkill, type SkillAssignDTO } from "../api/assignSkillApi";
 import { useFormik } from "formik";
+import { queryClient } from "@shared/api";
+import { profileQuery } from "@entities/user/profile";
+import { skillsQuery } from "@entities/skill";
 
-export const useAssignSkill = (skillId: string) => {
+export const useAssignSkill = (skillId: string, onSuccess?: () => void) => {
   const mutation = useMutation({
     mutationFn: (data: SkillAssignDTO) => assignSkill(data),
     onSuccess: () => {
@@ -13,6 +16,9 @@ export const useAssignSkill = (skillId: string) => {
         description: "You have assigned skill successfully",
         color: "success",
       });
+      onSuccess?.();
+      queryClient.invalidateQueries(profileQuery.all());
+      queryClient.invalidateQueries(skillsQuery.my());
     },
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error);

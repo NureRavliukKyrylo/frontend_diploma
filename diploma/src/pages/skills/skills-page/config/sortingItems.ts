@@ -1,6 +1,6 @@
 import type { SortOption } from "@shared/config/types";
 
-type SortSkillsValues = "Default" | "NameAsc" | "NameDesc";
+export type SortSkillsValues = "Default" | "NameAsc" | "NameDesc";
 
 export const sortingItems: SortOption<SortSkillsValues>[] = [
   { label: "Default", value: "Default" },

@@ -3,7 +3,7 @@ import { useAssignSkill } from "../../model/useAssignSkill";
 import { type Skill } from "@entities/skill";
 import { useState } from "react";
 import { ASSIGN_SKILL_STEPS } from "../../config/steps";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 interface AssignSkillModalProps {
   isOpen: boolean;
@@ -16,16 +16,15 @@ export const AssingSkillModal = ({
   onClose,
   skill,
 }: AssignSkillModalProps) => {
-  const { errorMessage, handleSubmit, mutation, formik, isLoading } =
-    useAssignSkill(skill.id);
-  const [stepIndex, setStepIndex] = useState(0);
-
   const handleClose = () => {
     setStepIndex(0);
     formik.resetForm();
     mutation.reset();
     onClose();
   };
+  const { errorMessage, handleSubmit, mutation, formik, isLoading } =
+    useAssignSkill(skill.id, handleClose);
+  const [stepIndex, setStepIndex] = useState(0);
 
   const CurrentStep = ASSIGN_SKILL_STEPS[stepIndex];
 

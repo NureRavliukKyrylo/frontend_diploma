@@ -12,6 +12,7 @@ interface MenuItem {
   key: string;
   label: string;
   onClick: () => void;
+  variant?: "assign" | "update" | "delete";
 }
 
 interface SkillControlCardProps {
@@ -33,14 +34,21 @@ export const SkillControlCard = ({
         </DropdownTrigger>
         <DropdownMenu>
           {menuItems.map((item) => (
-            <DropdownItem key={item.key} onClick={item.onClick}>
+            <DropdownItem
+              key={item.key}
+              onClick={item.onClick}
+              classNames={{
+                base: `${styles.menuItem} ${styles[item.variant ?? "assign"]}`,
+                title: styles.menuItemTitle,
+              }}
+            >
               {item.label}
             </DropdownItem>
           ))}
         </DropdownMenu>
       </Dropdown>
       <div className={styles.skillControlInfo}>
-        <img src={skill.image} alt="skill-image" />
+        <img src={skill.iconUrl} alt="skill-image" />
         <h1>{skill.name}</h1>
       </div>
     </div>

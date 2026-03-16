@@ -1,6 +1,10 @@
 import { ProgressBar } from "@shared/ui";
 import styles from "./ProfileMainWidget.module.scss";
-import { BaseButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
+import {
+  BaseButtonWrapper,
+  LinkButtonWrapper,
+  ReadMoreButton,
+} from "@shared/ui/buttons";
 import { DatePickerInput, MapLocationInput } from "@shared/ui/inputs";
 import { useState } from "react";
 import { LayoutCard } from "@shared/assets/images/layout";
@@ -109,12 +113,17 @@ export function ProfileMainWidget({
           </div>
         </div>
         <div className={styles.skillsBlock}>
-          <h1 className={styles.skillsProfileTitle}>SKILLS</h1>
-          {skillsChildren}
+          <div className={styles.skillProfileWrapper}>
+            <h1 className={styles.skillsProfileTitle}>SKILLS</h1>
+            {skillsChildren}
+          </div>
           <div className={styles.buttonSkillsBlock}>
-            <BaseButtonWrapper className={styles.seeMoreSkillsButton}>
+            <LinkButtonWrapper
+              to="/skills"
+              className={styles.seeMoreSkillsButton}
+            >
               See more
-            </BaseButtonWrapper>
+            </LinkButtonWrapper>
           </div>
         </div>
       </div>

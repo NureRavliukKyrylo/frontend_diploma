@@ -56,7 +56,7 @@ export const StepConfirmLevelInfo = ({
           >
             <BaseButtonWrapper
               type="submit"
-              loading={isLoading}
+              disabled={isLoading}
               className={styles.btn}
             >
               <img src={Arrow} alt="arrow-icon" />

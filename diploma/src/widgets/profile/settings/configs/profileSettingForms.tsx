@@ -12,7 +12,7 @@ export const profileSettingsForms: Record<
   ProfileSettingsMode,
   SettingsFormConfig
 > = {
-  main: {
+  settings: {
     component: <SettingsMainForm />,
     wrapperProps: {
       settingsTitle: "User profile",

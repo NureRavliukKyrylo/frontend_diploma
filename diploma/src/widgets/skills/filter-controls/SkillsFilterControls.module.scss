@@ -1,0 +1,35 @@
+@use "@shared/assets/styles" as *;
+
+.categoriesFilterBlock {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 30px 20px;
+  gap: 15px;
+  .categoriesTitle {
+    @include font-base(20px, 700);
+  }
+}
+.dividerFilterBlock {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+.buttonClear {
+  padding: 30px;
+
+  .animationButtonBlock {
+    display: flex;
+    justify-content: center;
+    @include font-base(18px, 900);
+    color: #000000;
+    background: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .clearFiltersButton {
+      padding: 10px 30px;
+      width: 100%;
+    }
+  }
+}

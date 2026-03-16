@@ -1,12 +1,4 @@
 import { create } from "zustand";
-import {
-  createProfileSettingsModeSlice,
-  type ProfileSettingsModeSlice,
-} from "../slices/profileSettingsModeSlice";
-import {
-  createProfileModeSlice,
-  type ProfileModeSlice,
-} from "../slices/profileModeSlice";
 import { persist } from "zustand/middleware";
 import {
   createProfileModalVerificationSlice,
@@ -17,16 +9,11 @@ import {
   type OtpTimerSlice,
 } from "@shared/config/stores/slices/otpTimerSlice";
 
-type ProfileStore = ProfileSettingsModeSlice &
-  ProfileModeSlice &
-  ProfileModalVerificationSlice &
-  OtpTimerSlice;
+type ProfileStore = ProfileModalVerificationSlice & OtpTimerSlice;
 
 export const useUserProfileStore = create<ProfileStore>()(
   persist(
     (...a) => ({
-      ...createProfileSettingsModeSlice(...a),
-      ...createProfileModeSlice(...a),
       ...createProfileModalVerificationSlice(...a),
       ...createOtpTimerSlice(...a),
     }),

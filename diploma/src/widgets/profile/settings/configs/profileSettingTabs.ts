@@ -2,7 +2,7 @@ import type { TabOption } from "@shared/config/types";
 import { type ProfileSettingsMode } from "@entities/user";
 
 export const profileSettingsTabs: TabOption<ProfileSettingsMode>[] = [
-  { label: "SETTINGS", value: "main" },
+  { label: "SETTINGS", value: "settings" },
   { label: "LINKS", value: "links" },
   { label: "SECURITY", value: "security" },
 ];

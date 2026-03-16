@@ -1,5 +1,5 @@
 import styles from "./MainProfilePage.module.scss";
-import { useUserProfileStore, type ProfileMode } from "@entities/user";
+import { useProfileTabs, type ProfileMode } from "@entities/user";
 import { SocialPlatforms, Toggle } from "@shared/ui";
 export { ProfileMainWidget } from "@widgets/profile";
 import { profileMainTabs } from "./configs/profileMainTabs";
@@ -12,9 +12,16 @@ import { UserHeaderWidget } from "@widgets/profile";
 import { profileQuery } from "@entities/user/profile";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
+import { useSearch } from "@tanstack/react-router";
 
 export function MainProfilePage() {
-  const { profileMode, setProfileMode } = useUserProfileStore();
+  const search = useSearch({ from: "/_masterLayout/profile/" });
+
+  const { activeTab, handleTabChange } = useProfileTabs<ProfileMode>({
+    search,
+    navigateParams: "/profile/",
+  });
+
   const { data: user } = useQuery(profileQuery.all());
   const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ");
 
@@ -43,8 +50,8 @@ export function MainProfilePage() {
         <div className={styles.actionsChangeBlock}>
           <Toggle<ProfileMode>
             tabs={profileMainTabs}
-            activeValue={profileMode}
-            onChange={setProfileMode}
+            activeValue={activeTab}
+            onChange={handleTabChange}
             buttonClassName={styles.toggleProfileMainButton}
             activeButtonClassName={styles.toggleProfileMainButtonActive}
             className={styles.toggleProfileMain}
@@ -64,7 +71,7 @@ export function MainProfilePage() {
         </div>
         <div className={styles.userActionsBlock}>
           <MainProfileWrapper>
-            {profileMainForms[profileMode]({ user })}
+            {profileMainForms[activeTab]({ user })}
           </MainProfileWrapper>
         </div>
       </div>

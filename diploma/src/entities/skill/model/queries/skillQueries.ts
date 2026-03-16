@@ -1,23 +1,30 @@
 import { getMySkills, getSkills } from "@entities/skill/api";
-import type { SkillsSearchParams } from "@entities/skill/libs";
+import type {
+  SkillsProfileSearchParams,
+  SkillsSearchParams,
+} from "@entities/skill/libs";
 import { queryOptions } from "@tanstack/react-query";
 
 export const skillKeys = {
   all: () => ["skills"] as const,
   list: (params: SkillsSearchParams) =>
     [...skillKeys.all(), "list", params] as const,
-  my: () => [...skillKeys.all(), "my"],
+  my: (params?: SkillsProfileSearchParams) => [
+    ...skillKeys.all(),
+    "my",
+    params,
+  ],
 };
 
 export const skillsQuery = {
   list: (params: SkillsSearchParams) =>
     queryOptions({
-      queryKey: skillKeys.all(),
+      queryKey: skillKeys.list(params),
       queryFn: () => getSkills({ ...params }),
     }),
-  my: () =>
+  my: (params?: SkillsProfileSearchParams) =>
     queryOptions({
-      queryKey: skillKeys.my(),
-      queryFn: () => getMySkills(),
+      queryKey: skillKeys.my(params),
+      queryFn: () => getMySkills({ ...params }),
     }),
 };

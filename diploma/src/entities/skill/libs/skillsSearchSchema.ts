@@ -7,6 +7,12 @@ export const skillSearchDefaults = {
   PageSize: 12,
 };
 
+export const skillProfileSearchDefaults = {
+  OrderBy: "Default" as const,
+  Page: 1,
+  PageSize: 8,
+};
+
 export const skillFiltersSchema = z.object({
   OrderBy: z
     .enum(["Default", "NameAsc", "NameDesc"])
@@ -14,13 +20,22 @@ export const skillFiltersSchema = z.object({
     .catch("Default")
     .optional(),
   Search: z.string().optional(),
-  CategoryIds: z.array(z.string()).optional().catch(undefined),
 });
 
 export const skillSearchSchema = skillFiltersSchema
   .extend(paginationSchema.shape)
   .extend({
     PageSize: z.number().min(1).default(12).optional(),
+    CategoryIds: z.array(z.string()).optional().catch(undefined),
+  });
+
+export const skillProfileSearchSchema = skillFiltersSchema
+  .extend(paginationSchema.shape)
+  .extend({
+    PageSize: z.number().min(1).default(8).optional(),
   });
 
 export type SkillsSearchParams = z.infer<typeof skillSearchSchema>;
+export type SkillsProfileSearchParams = z.infer<
+  typeof skillProfileSearchSchema
+>;

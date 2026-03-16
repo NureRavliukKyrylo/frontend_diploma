@@ -10,7 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 interface ProjectOrganizationFilterProps {
   search: ProjectSearchParams;
-  from: NavigateParams;
+  from: Exclude<NavigateParams, "/skills/">;
 }
 
 export const ProjectOrganizationFilter = ({

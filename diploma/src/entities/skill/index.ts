@@ -7,4 +7,11 @@ export { useSkillsListQuery } from "./model/hooks/useSkillsListQuery";
 export { useMySkillsListQuery } from "./model/hooks/useMySkillsQuery";
 export { type SkillLevel, SkillLevelType } from "./model/types/SkillLevel";
 export { SkillControlCard } from "./ui/skill-control-card/SkillControlCard";
-export { skillSearchSchema } from "./libs/SkillsSearchParams";
+export {
+  skillSearchSchema,
+  skillProfileSearchSchema,
+  skillProfileSearchDefaults,
+  skillSearchDefaults,
+} from "./libs/skillsSearchSchema";
+export { SkillControlCardSkeleton } from "./ui/skill-control-card/SkillControlCardSkeleton";
+export type { SkillsProfileSearchParams } from "./libs";

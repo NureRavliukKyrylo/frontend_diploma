@@ -4,6 +4,6 @@ import { type ProfileMode } from "@entities/user";
 export const profileMainTabs: TabOption<ProfileMode>[] = [
   { label: "PROFILE", value: "profile" },
   { label: "PROJECTS", value: "projects" },
-  { label: "ARCHIVE", value: "archive" },
+  { label: "SKILLS", value: "skills" },
   { label: "INVENTORY", value: "inventory" },
 ];

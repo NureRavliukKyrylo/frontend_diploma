@@ -1,0 +1,41 @@
+@use "@shared/assets/styles" as *;
+
+.skillsProfileWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+
+  .skillsProfileControl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .skillProfileTitle {
+      @include font-base(50px, 800);
+    }
+    .filtersProfileSkill {
+      width: 60%;
+      display: flex;
+      height: 44px;
+      justify-content: space-between;
+      align-items: center;
+      > * {
+        flex: 0 0 47%;
+      }
+    }
+  }
+  .skillsProfileList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .totalSkills {
+      @include font-base(20px, 600);
+      align-self: flex-end;
+      color: #626262;
+    }
+  }
+  .paginationWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}

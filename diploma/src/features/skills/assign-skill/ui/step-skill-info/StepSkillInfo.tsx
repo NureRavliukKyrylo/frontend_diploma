@@ -7,7 +7,7 @@ export const StepSkillInfo = ({ skill, onNext, error }: StepProps) => {
   return (
     <div className={styles.wrapperAssignSkillInfo}>
       <div className={styles.skillImageWrapper}>
-        <img src={skill.image} alt="skill-image" />
+        <img src={skill.iconUrl} alt="skill-image" />
       </div>
       <motion.div
         initial={{ opacity: 0, scale: 0.97 }}
@@ -23,7 +23,7 @@ export const StepSkillInfo = ({ skill, onNext, error }: StepProps) => {
           </div>
           <div className={styles.modalDivider} />
           <div className={styles.skillCategories}>
-            {skill.categoryIds.map((category) => (
+            {skill.categories.map((category) => (
               <div key={category.id} className={styles.categorySkillTab}>
                 {category.name}
               </div>

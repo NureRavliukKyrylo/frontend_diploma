@@ -5,6 +5,8 @@ import type { User } from "@entities/user/profile";
 import { BadgesCarouselWidget, BadgesListWidget } from "@widgets/badges";
 import { ProfileMainWidget } from "@widgets/profile";
 import { SkillsListWidget } from "@widgets/skills";
+import styles from "../MainProfilePage.module.scss";
+import { ProfileSkillsTab } from "../skill-tab/ProfileSkillTab";
 
 interface ProfileFormProps {
   user?: User;
@@ -66,15 +68,16 @@ export const profileMainForms: Record<
       skillsChildren={
         <SkillsListWidget
           renderCard={(skill) => (
-            <SkillCard image={skill.image} title={skill.name} />
+            <SkillCard image={skill.iconUrl} title={skill.name} />
           )}
+          className={styles.skillsProfileList}
           skills={user?.skills}
         />
       }
     />
   ),
   projects: () => <></>,
-  archive: () => <></>,
+  skills: () => <ProfileSkillsTab />,
   inventory: () => (
     <BadgesListWidget
       badges={demoBadges}

@@ -4,13 +4,20 @@
   padding: 8px;
   display: flex;
   gap: 5px;
-  justify-content: center;
   align-items: center;
   background: #f0f0f0;
   box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.6);
   border-radius: 30px;
-  flex-grow: 1;
-  max-width: 180px;
+  width: fit-content;
+  justify-content: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  transition:
+    background 0.2s ease,
+    border 0.2s ease,
+    color 0.2s ease;
 
   &.clickable {
     cursor: pointer;

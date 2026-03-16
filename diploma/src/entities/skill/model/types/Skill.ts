@@ -3,7 +3,7 @@ import type { Category } from "@entities/category";
 export interface Skill {
   id: string;
   name: string;
-  image: string;
+  iconUrl: string;
   description: string;
-  categoryIds: Pick<Category, "id" | "name">[];
+  categories: Pick<Category, "id" | "name">[];
 }

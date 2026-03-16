@@ -16,7 +16,11 @@ export const SortDropDown = <T extends string>({
 }: SortDropDownProps<T>) => {
   return (
     <BaseDropDown
-      label={<h1 className={styles.dropDownLabel}>Sort by: {value}</h1>}
+      label={
+        <h1 className={styles.dropDownLabel}>
+          Sort by: {options.find((o) => o.value === value)?.label}
+        </h1>
+      }
     >
       {options.map((option) => {
         const isActive = value.includes(option.value);
