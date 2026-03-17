@@ -23,25 +23,9 @@
       }
     }
   }
-  .skillsProfileList {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    .totalSkills {
-      @include font-base(20px, 600);
-      align-self: flex-end;
-      color: #626262;
-    }
-  }
   .paginationWrapper {
     width: 100%;
     display: flex;
     justify-content: center;
   }
-}
-
-.skeletonText {
-  width: 100px;
-  height: 24px;
-  border-radius: 8px;
 }

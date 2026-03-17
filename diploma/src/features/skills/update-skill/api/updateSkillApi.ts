@@ -7,6 +7,6 @@ export interface SkillUpdateDTO {
 }
 
 export const updateSkill = async (data: SkillUpdateDTO) => {
-  const response = await apiClient.put("Skills/assign", data);
+  const response = await apiClient.put("Skills/update-level", data);
   return response.data;
 };

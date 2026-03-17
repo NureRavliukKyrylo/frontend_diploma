@@ -98,10 +98,6 @@
   flex-wrap: wrap;
   gap: 10px;
 }
-.skillsProfileTabList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
-  gap: 30px;
-  align-items: stretch;
-  grid-auto-rows: auto;
+.cardBaseProfileBlock {
+  --card-justify-content: flex-start;
 }

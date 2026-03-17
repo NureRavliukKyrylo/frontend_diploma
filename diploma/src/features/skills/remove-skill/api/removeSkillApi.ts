@@ -6,7 +6,7 @@ export interface RemoveSkillDTO {
 
 export const removeSkill = async (data: RemoveSkillDTO) => {
   const response = await apiClient.delete("Skills/remove", {
-    data: data,
+    params: { skillId: data.skillId },
   });
   return response.data;
 };

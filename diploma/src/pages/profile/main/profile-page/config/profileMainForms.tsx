@@ -1,12 +1,12 @@
 import { BadgeCardDetailed, type Badge, type Tier } from "@entities/badge";
-import { SkillCard } from "@entities/skill";
+import { SkillCardBase } from "@entities/skill";
 import { type ProfileMode } from "@entities/user";
 import type { User } from "@entities/user/profile";
 import { BadgesCarouselWidget, BadgesListWidget } from "@widgets/badges";
 import { ProfileMainWidget } from "@widgets/profile";
 import { SkillsListWidget } from "@widgets/skills";
-import styles from "../MainProfilePage.module.scss";
-import { ProfileSkillsTab } from "../skill-tab/ProfileSkillTab";
+import styles from "../ui/MainProfilePage.module.scss";
+import { ProfileSkillsTab } from "../../skill-tab";
 
 interface ProfileFormProps {
   user?: User;
@@ -68,10 +68,14 @@ export const profileMainForms: Record<
       skillsChildren={
         <SkillsListWidget
           renderCard={(skill) => (
-            <SkillCard image={skill.iconUrl} title={skill.name} />
+            <SkillCardBase
+              classNameBase={styles.cardBaseProfileBlock}
+              iconUrl={skill.iconUrl}
+              name={skill.name}
+            />
           )}
           className={styles.skillsProfileList}
-          skills={user?.skills}
+          skills={user?.skills?.slice(0, 4)}
         />
       }
     />

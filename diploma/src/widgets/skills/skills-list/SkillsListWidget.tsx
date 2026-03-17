@@ -5,7 +5,7 @@ import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 interface SkillsListWidgetProps<TSkill = Skill> {
   useSkillsQuery?: () => SkillsQueryResult<TSkill>;
   skills?: TSkill[];
-  renderCard: (skill: TSkill) => React.ReactNode;
+  renderCard: (skill: TSkill, index: number) => React.ReactNode;
   renderSkeleton?: () => React.ReactNode;
   startSlot?: React.ReactNode;
   skeletonItems?: number;
@@ -41,7 +41,7 @@ export const SkillsListWidget = <TSkill extends Skill | SkillProfile>({
   return (
     <div className={wrapperClass}>
       {startSlot}
-      {skills?.map((skill) => renderCard(skill))}
+      {skills?.map((skill, index) => renderCard(skill, index))}
     </div>
   );
 };

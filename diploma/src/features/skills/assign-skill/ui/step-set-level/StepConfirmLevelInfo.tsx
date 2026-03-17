@@ -54,7 +54,7 @@ export const StepConfirmLevelInfo = ({
             className={styles.assignSkillLevelButton}
           >
             <BaseButtonWrapper
-              type="button"
+              type="submit"
               loading={isLoading}
               className={styles.btn}
             >

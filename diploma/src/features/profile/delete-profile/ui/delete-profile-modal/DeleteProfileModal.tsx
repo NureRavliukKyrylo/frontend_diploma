@@ -1,5 +1,5 @@
 import { ConfirmationModal } from "@shared/ui/modals";
-import { useDeleteProfile } from "../model/useDeleteProfile";
+import { useDeleteProfile } from "../../model/useDeleteProfile";
 import { DeleteModal } from "@shared/assets/images/actions";
 import styles from "./DeleteProfileModal.module.scss";
 

@@ -38,7 +38,7 @@ export const StepSkillInfo = ({ skill, onNext, error }: StepProps) => {
           className={styles.assignSkillButton}
         >
           <BaseButtonWrapper
-            type="submit"
+            type="button"
             onClick={onNext}
             className={styles.btn}
           >

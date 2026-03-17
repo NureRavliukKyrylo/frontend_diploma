@@ -60,34 +60,52 @@ export const SkillsPage = () => {
                 <p>Try adjusting your filters or search query</p>
               </div>
             ) : (
-              <AnimatePresence mode="wait">
-                <Suspense
-                  fallback={
-                    <ListWidgetSkeleton
-                      items={12}
-                      renderSkeleton={SkillControlCardSkeleton}
-                      className={styles.skillsListWrapper}
-                    />
-                  }
-                >
-                  <SkillsListWidget
-                    renderCard={(skill) => (
-                      <SkillControlCard
-                        skill={skill}
-                        menuItems={[
-                          {
-                            key: "assign",
-                            label: "Assign skill",
-                            onClick: () => handleAssignSkill(skill),
-                          },
-                        ]}
-                      />
-                    )}
+              <Suspense
+                fallback={
+                  <ListWidgetSkeleton
+                    items={12}
+                    renderSkeleton={() => <SkillControlCardSkeleton />}
                     className={styles.skillsListWrapper}
-                    useSkillsQuery={useSkillsListQuery(search)}
                   />
-                </Suspense>
-              </AnimatePresence>
+                }
+              >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={JSON.stringify(search)}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <SkillsListWidget
+                      renderCard={(skill, index) => (
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            duration: 0.4,
+                            ease: "easeOut",
+                            delay: index * 0.06,
+                          }}
+                        >
+                          <SkillControlCard
+                            skill={skill}
+                            menuItems={[
+                              {
+                                key: "assign",
+                                label: "Assign skill",
+                                onClick: () => handleAssignSkill(skill),
+                              },
+                            ]}
+                          />
+                        </motion.div>
+                      )}
+                      className={styles.skillsListWrapper}
+                      useSkillsQuery={useSkillsListQuery(search)}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </Suspense>
             )}
           </motion.div>
         </div>

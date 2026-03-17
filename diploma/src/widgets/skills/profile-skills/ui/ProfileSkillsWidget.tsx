@@ -2,26 +2,24 @@ import { SearchBar } from "@shared/ui/inputs";
 import styles from "./ProfileSkillsWidget.module.scss";
 import { SortDropDown } from "@shared/ui/drop-down";
 import { sortingItems } from "@pages/skills/skills-page/config/sortingItems";
-import { Pagination, Skeleton } from "@heroui/react";
+import { Pagination } from "@heroui/react";
 import { type SkillsProfileSearchParams } from "@entities/skill";
 import { useProfileSkills } from "../model/useProfileSkills";
+import type { PaginationResponse } from "@shared/config/types";
 
 interface ProfileSkillWidgetProps {
   skills: React.ReactNode;
   search: SkillsProfileSearchParams;
+  pagination?: PaginationResponse;
 }
 
 export const ProfileSkillsWidget = ({
   skills,
   search,
+  pagination,
 }: ProfileSkillWidgetProps) => {
-  const {
-    data,
-    handlePageChange,
-    handleSearchChange,
-    handleSortChange,
-    isLoading,
-  } = useProfileSkills(search);
+  const { handlePageChange, handleSearchChange, handleSortChange } =
+    useProfileSkills();
 
   return (
     <div className={styles.skillsProfileWrapper}>
@@ -40,20 +38,11 @@ export const ProfileSkillsWidget = ({
           />
         </div>
       </div>
-      <div className={styles.skillsProfileList}>
-        <h1 className={styles.totalSkills}>
-          {isLoading ? (
-            <Skeleton className={styles.skeletonText} />
-          ) : (
-            <>Skills ({data?.pagination.totalCount})</>
-          )}
-        </h1>
-        {skills}
-      </div>
-      {data && data?.pagination.totalPages > 1 && (
+      {skills}
+      {pagination && pagination.totalPages > 1 && (
         <div className={styles.paginationWrapper}>
           <Pagination
-            total={data.pagination.totalPages}
+            total={pagination.totalPages}
             page={search.Page}
             onChange={handlePageChange}
           />

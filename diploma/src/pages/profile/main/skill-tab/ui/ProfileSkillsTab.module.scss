@@ -1,0 +1,36 @@
+@use "@shared/assets/styles" as *;
+
+.skillsProfileWrapperList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  .totalSkills {
+    @include font-base(20px, 600);
+    align-self: flex-end;
+    color: #626262;
+  }
+}
+
+.skillsProfileList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+  gap: 30px;
+  align-items: stretch;
+  grid-auto-rows: auto;
+}
+
+.skeletonText {
+  width: 100px;
+  height: 30px;
+  border-radius: 8px;
+  align-self: flex-end;
+}
+.profileSkillControlBlock {
+  --card-name-size: 18px;
+  --card-img-size: 90px;
+  --card-gap: 5px;
+  .skillLevel {
+    @include font-base(17px, 500);
+    color: #535353;
+  }
+}

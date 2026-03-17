@@ -1,16 +1,23 @@
 import { AddingPlus } from "@shared/assets/icons/actions";
 import styles from "./AssignSkillCard.module.scss";
 import { Link } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 
 export const AssignSkillCard = () => {
   return (
-    <Link to="/skills" className={styles.assignSkillCardWapper}>
-      <div className={styles.cardAssignSkillContent}>
-        <div className={styles.assignSkillButton}>
-          <AddingPlus />
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 200, damping: 25 }}
+    >
+      <Link to="/skills" className={styles.assignSkillCardWapper}>
+        <div className={styles.cardAssignSkillContent}>
+          <div className={styles.assignSkillButton}>
+            <AddingPlus />
+          </div>
+          <h1>NEW SKILL</h1>
         </div>
-        <h1>NEW SKILL</h1>
-      </div>
-    </Link>
+      </Link>
+    </motion.div>
   );
 };

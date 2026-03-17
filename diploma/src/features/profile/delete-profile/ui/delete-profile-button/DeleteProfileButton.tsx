@@ -1,7 +1,7 @@
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./DeleteProfileButton.module.scss";
 import { useState } from "react";
-import { DeleteProfileModal } from "./DeleteProfileModal";
+import { DeleteProfileModal } from "../delete-profile-modal/DeleteProfileModal";
 import { motion } from "framer-motion";
 
 export const DeleteProfileButton = () => {
