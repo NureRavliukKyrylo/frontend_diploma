@@ -6,7 +6,7 @@ export { default as Arrow } from "./arrow.png";
 export { default as Upload } from "./upload.png";
 export { default as Power } from "./power.png";
 export { default as Settings } from "./settings.png";
-export { default as Close } from "./close.png";
+export { default as Close } from "./close.svg?react";
 export { default as DownArrow } from "./down-arrow.png";
 export { default as ZoomIn } from "./zoom_in.png";
 export { default as ZoomOut } from "./zoom_out.png";

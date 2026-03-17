@@ -7,6 +7,7 @@ import {
   DropdownTrigger,
 } from "@heroui/react";
 import { MoreActionsIcon } from "@shared/assets/icons/actions";
+import type { SkillProfile } from "@entities/skill";
 
 interface MenuItem {
   key: string;
@@ -15,15 +16,15 @@ interface MenuItem {
   variant?: "assign" | "update" | "delete";
 }
 
-interface SkillControlCardProps {
-  skill: Skill;
+interface SkillControlCardProps<TSkill = Skill> {
+  skill: TSkill;
   menuItems: MenuItem[];
 }
 
-export const SkillControlCard = ({
+export const SkillControlCard = <TSkill extends Skill | SkillProfile>({
   skill,
   menuItems,
-}: SkillControlCardProps) => {
+}: SkillControlCardProps<TSkill>) => {
   return (
     <div className={styles.skilControlCardWrapper}>
       <Dropdown placement="top-start" shouldBlockScroll={false}>

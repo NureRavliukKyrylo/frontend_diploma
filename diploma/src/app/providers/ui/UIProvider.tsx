@@ -18,6 +18,11 @@ export const UIProvider = ({ children }: Props) => {
           radius: "md",
           hideIcon: false,
         }}
+        regionProps={{
+          classNames: {
+            base: "z-[9999]",
+          },
+        }}
       />
       {children}
     </HeroUIProvider>

@@ -60,16 +60,15 @@ export const BaseModal: React.FC<BaseModalProps> = ({
           >
             {showClosed && (
               <div className={styles.closeButtonBlock}>
-                <motion.img
+                <motion.div
                   className={styles.closeButton}
-                  src={Close}
-                  alt="Close Button"
                   onClick={onClose}
                   whileHover={{ rotate: 90, scale: 1.05 }}
                   whileTap={{ scale: 0.9 }}
-                  animate={{ rotate: 0 }}
                   transition={{ type: "spring", stiffness: 200 }}
-                />
+                >
+                  <Close />
+                </motion.div>
               </div>
             )}
             <div className={styles.childrenSection}>{children}</div>

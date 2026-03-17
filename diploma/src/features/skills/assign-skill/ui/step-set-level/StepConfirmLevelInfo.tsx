@@ -2,7 +2,6 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./StepConfirmLevelInfo.module.scss";
 import { SkillLevelType, type SkillLevel } from "@entities/skill";
 import type { StepProps } from "../../config/steps";
-import { Arrow } from "@shared/assets/icons/actions";
 import { motion } from "framer-motion";
 
 export const StepConfirmLevelInfo = ({
@@ -49,17 +48,17 @@ export const StepConfirmLevelInfo = ({
             ))}
           </div>
           <motion.div
-            whileHover={{ x: 4 }}
-            whileTap={{ scale: 0.92 }}
+            whileTap={{ scale: 0.96 }}
+            whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400, damping: 20 }}
             className={styles.assignSkillLevelButton}
           >
             <BaseButtonWrapper
-              type="submit"
-              disabled={isLoading}
+              type="button"
+              loading={isLoading}
               className={styles.btn}
             >
-              <img src={Arrow} alt="arrow-icon" />
+              ADD SKILL
             </BaseButtonWrapper>
           </motion.div>
         </div>

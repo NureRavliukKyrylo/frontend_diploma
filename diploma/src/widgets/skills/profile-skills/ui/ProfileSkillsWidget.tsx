@@ -1,12 +1,10 @@
 import { SearchBar } from "@shared/ui/inputs";
 import styles from "./ProfileSkillsWidget.module.scss";
-import { useNavigate, useSearch } from "@tanstack/react-router";
-import type { SortSkillsValues } from "@pages/skills";
 import { SortDropDown } from "@shared/ui/drop-down";
 import { sortingItems } from "@pages/skills/skills-page/config/sortingItems";
-import { Pagination } from "@heroui/react";
-import { useQuery } from "@tanstack/react-query";
-import { skillsQuery, type SkillsProfileSearchParams } from "@entities/skill";
+import { Pagination, Skeleton } from "@heroui/react";
+import { type SkillsProfileSearchParams } from "@entities/skill";
+import { useProfileSkills } from "../model/useProfileSkills";
 
 interface ProfileSkillWidgetProps {
   skills: React.ReactNode;
@@ -17,23 +15,13 @@ export const ProfileSkillsWidget = ({
   skills,
   search,
 }: ProfileSkillWidgetProps) => {
-  const navigate = useNavigate({ from: "/profile/" });
-  const { data } = useQuery(skillsQuery.my(search));
-
-  const handlePageChange = (page: number) =>
-    navigate({ search: (prev) => ({ ...prev, Page: page }) });
-
-  const handleSearchChange = (value: string) =>
-    navigate({
-      search: (prev) => ({ ...prev, Search: value || undefined, Page: 1 }),
-      resetScroll: false,
-    });
-
-  const handleSortChange = (value: SortSkillsValues) =>
-    navigate({
-      search: (prev) => ({ ...prev, OrderBy: value, Page: 1 }),
-      resetScroll: false,
-    });
+  const {
+    data,
+    handlePageChange,
+    handleSearchChange,
+    handleSortChange,
+    isLoading,
+  } = useProfileSkills(search);
 
   return (
     <div className={styles.skillsProfileWrapper}>
@@ -53,9 +41,24 @@ export const ProfileSkillsWidget = ({
         </div>
       </div>
       <div className={styles.skillsProfileList}>
-        <h1 className={styles.totalSkills}>Skills</h1>
+        <h1 className={styles.totalSkills}>
+          {isLoading ? (
+            <Skeleton className={styles.skeletonText} />
+          ) : (
+            <>Skills ({data?.pagination.totalCount})</>
+          )}
+        </h1>
         {skills}
       </div>
+      {data && data?.pagination.totalPages > 1 && (
+        <div className={styles.paginationWrapper}>
+          <Pagination
+            total={data.pagination.totalPages}
+            page={search.Page}
+            onChange={handlePageChange}
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -119,7 +119,8 @@ export function ProfileMainWidget({
           </div>
           <div className={styles.buttonSkillsBlock}>
             <LinkButtonWrapper
-              to="/skills"
+              to="/profile"
+              search={{ tab: "skills" }}
               className={styles.seeMoreSkillsButton}
             >
               See more

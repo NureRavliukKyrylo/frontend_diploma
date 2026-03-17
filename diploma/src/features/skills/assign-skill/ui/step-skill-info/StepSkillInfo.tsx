@@ -2,6 +2,7 @@ import styles from "./StepSkillInfo.module.scss";
 import type { StepProps } from "../../config/steps";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { motion } from "framer-motion";
+import { Arrow } from "@shared/assets/icons/actions";
 
 export const StepSkillInfo = ({ skill, onNext, error }: StepProps) => {
   return (
@@ -31,17 +32,17 @@ export const StepSkillInfo = ({ skill, onNext, error }: StepProps) => {
           </div>
         </div>
         <motion.div
-          whileTap={{ scale: 0.96 }}
-          whileHover={{ scale: 1.02 }}
+          whileHover={{ x: 4 }}
+          whileTap={{ scale: 0.92 }}
           transition={{ type: "spring", stiffness: 400, damping: 20 }}
           className={styles.assignSkillButton}
         >
           <BaseButtonWrapper
-            type="button"
+            type="submit"
             onClick={onNext}
             className={styles.btn}
           >
-            ADD SKILL
+            <img src={Arrow} alt="arrow-icon" />
           </BaseButtonWrapper>
         </motion.div>
       </motion.div>

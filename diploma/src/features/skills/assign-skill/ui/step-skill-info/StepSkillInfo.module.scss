@@ -23,7 +23,6 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
     .topContentWrapper {
       display: flex;
       justify-content: center;
@@ -70,15 +69,20 @@
     }
     .assignSkillButton {
       background: #1a1a2e;
-      color: #ffffff;
-      border-radius: 30px;
-      letter-spacing: 1.5px;
-      @include font-base(18px, 700);
-      text-transform: uppercase;
-      width: 40%;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      align-self: center;
+      display: flex;
+      align-self: flex-end;
       .btn {
         width: 100%;
-        padding: 12px 40px;
+        img {
+          filter: invert(1);
+          transform: rotate(180deg);
+          width: 60%;
+        }
       }
     }
   }

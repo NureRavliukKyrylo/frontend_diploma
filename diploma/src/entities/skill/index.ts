@@ -15,3 +15,5 @@ export {
 } from "./libs/skillsSearchSchema";
 export { SkillControlCardSkeleton } from "./ui/skill-control-card/SkillControlCardSkeleton";
 export type { SkillsProfileSearchParams } from "./libs";
+export type { SkillProfile } from "./model/types/SkillProfile";
+export { skillKeys } from "./model/queries/skillQueries";

@@ -7,3 +7,8 @@ export interface Skill {
   description: string;
   categories: Pick<Category, "id" | "name">[];
 }
+export type SkillProfile = Omit<Skill, "id"> & {
+  skillId: string;
+  level: number;
+  verified: boolean;
+};

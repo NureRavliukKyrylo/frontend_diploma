@@ -1,5 +1,7 @@
 import { ConfirmationModal } from "@shared/ui/modals";
 import { useDeleteProfile } from "../model/useDeleteProfile";
+import { DeleteModal } from "@shared/assets/images/actions";
+import styles from "./DeleteProfileModal.module.scss";
 
 interface DeleteProfileModal {
   isOpen: boolean;
@@ -20,7 +22,9 @@ export const DeleteProfileModal = ({ isOpen, onClose }: DeleteProfileModal) => {
       cancelText="Cancel"
       error={errorMessage}
       isLoading={isLoading}
-      image=""
+      confirmButtonClassName={styles.confirmButtonProfile}
+      image={DeleteModal}
+      imageClassName={styles.imageDelete}
       maxWidth="700px"
     ></ConfirmationModal>
   );

@@ -9,6 +9,7 @@ export const skillKeys = {
   all: () => ["skills"] as const,
   list: (params: SkillsSearchParams) =>
     [...skillKeys.all(), "list", params] as const,
+  myAll: () => [...skillKeys.all(), "my"] as const,
   my: (params?: SkillsProfileSearchParams) => [
     ...skillKeys.all(),
     "my",

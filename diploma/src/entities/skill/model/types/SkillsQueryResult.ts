@@ -1,6 +1,6 @@
 import type { Skill } from "./Skill";
 
-export type SkillsQueryResult = {
-  data: Skill[] | undefined;
+export type SkillsQueryResult<TSkill = Skill> = {
+  data: TSkill[] | undefined;
   isLoading?: boolean;
 };

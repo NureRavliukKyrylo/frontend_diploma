@@ -15,7 +15,10 @@ interface ConfirmationModalProps {
   isLoading?: boolean;
   error?: string | null;
   image?: string;
+  imageClassName?: string;
   maxWidth?: string;
+  confirmButtonClassName?: string;
+  cancelButtonClassName?: string;
 }
 
 export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
@@ -29,19 +32,17 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   isLoading = false,
   error,
   image,
+  imageClassName,
   maxWidth = "650px",
+  confirmButtonClassName,
+  cancelButtonClassName,
 }) => {
   return (
-    <BaseModal
-      isOpen={isOpen}
-      onClose={onCancel}
-      error={error}
-      maxWidth={maxWidth}
-    >
+    <BaseModal isOpen={isOpen} onClose={onCancel} maxWidth={maxWidth}>
       <div className={styles.modalConfirmationWrapper}>
         {image && (
           <img
-            className={styles.modalConfirmationImage}
+            className={`${styles.modalConfirmationImage} ${imageClassName ?? ""}`}
             src={image}
             alt="modal image"
           />
@@ -64,7 +65,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
             <BaseButtonWrapper
               onClick={onConfirm}
               loading={isLoading}
-              className={styles.confirmButtonModal}
+              className={`${styles.confirmButtonModal} ${confirmButtonClassName ?? ""}`}
             >
               {confirmText}
             </BaseButtonWrapper>
@@ -79,12 +80,13 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
           >
             <BaseButtonWrapper
               onClick={onCancel}
-              className={styles.cancelButtonModal}
+              className={`${styles.cancelButtonModal} ${cancelButtonClassName ?? ""}`}
             >
               {cancelText}
             </BaseButtonWrapper>
           </motion.div>
         </div>
+        {error && <div className="errorMessage">{error}</div>}
       </div>
     </BaseModal>
   );

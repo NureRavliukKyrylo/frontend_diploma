@@ -1,18 +1,18 @@
-import type { Skill, SkillsQueryResult } from "@entities/skill";
+import type { Skill, SkillProfile, SkillsQueryResult } from "@entities/skill";
 import styles from "./SkillsListWidget.module.scss";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 
-interface SkillsListWidgetProps {
-  useSkillsQuery?: () => SkillsQueryResult;
-  skills?: Skill[];
-  renderCard: (skill: Skill) => React.ReactNode;
+interface SkillsListWidgetProps<TSkill = Skill> {
+  useSkillsQuery?: () => SkillsQueryResult<TSkill>;
+  skills?: TSkill[];
+  renderCard: (skill: TSkill) => React.ReactNode;
   renderSkeleton?: () => React.ReactNode;
   startSlot?: React.ReactNode;
   skeletonItems?: number;
   className?: string;
 }
 
-export const SkillsListWidget = ({
+export const SkillsListWidget = <TSkill extends Skill | SkillProfile>({
   useSkillsQuery,
   renderCard,
   skills: readySkills,
@@ -20,7 +20,7 @@ export const SkillsListWidget = ({
   renderSkeleton,
   skeletonItems,
   startSlot,
-}: SkillsListWidgetProps) => {
+}: SkillsListWidgetProps<TSkill>) => {
   const queryResult = useSkillsQuery?.();
 
   const skills = readySkills ?? queryResult?.data;

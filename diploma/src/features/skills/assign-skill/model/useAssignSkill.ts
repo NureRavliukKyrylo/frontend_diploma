@@ -5,7 +5,7 @@ import { assignSkill, type SkillAssignDTO } from "../api/assignSkillApi";
 import { useFormik } from "formik";
 import { queryClient } from "@shared/api";
 import { profileQuery } from "@entities/user/profile";
-import { skillsQuery } from "@entities/skill";
+import { skillKeys } from "@entities/skill";
 
 export const useAssignSkill = (skillId: string, onSuccess?: () => void) => {
   const mutation = useMutation({
@@ -18,7 +18,7 @@ export const useAssignSkill = (skillId: string, onSuccess?: () => void) => {
       });
       onSuccess?.();
       queryClient.invalidateQueries(profileQuery.all());
-      queryClient.invalidateQueries(skillsQuery.my());
+      queryClient.invalidateQueries({ queryKey: skillKeys.myAll() });
     },
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error);
