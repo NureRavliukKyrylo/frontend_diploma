@@ -4,7 +4,7 @@ import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 
 interface CategoriesListWidgetProps {
   useCategoriesQuery?: () => CategoriesQueryResult;
-  renderCard: (category: Category) => React.ReactNode;
+  renderCard: (category: Category, index: number) => React.ReactNode;
   startSlot?: React.ReactNode;
   renderSkeleton?: () => React.ReactNode;
   skeletonItems?: number;
@@ -39,7 +39,7 @@ export const CategoriesListWidget = ({
   return (
     <div className={wrapperClass}>
       {startSlot}
-      {categories?.map((category) => renderCard(category))}
+      {categories?.map((category, index) => renderCard(category, index))}
     </div>
   );
 };

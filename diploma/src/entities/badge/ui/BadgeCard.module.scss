@@ -24,3 +24,23 @@
     }
   }
 }
+
+.badgeCardWrapper {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 10px;
+  .badgeInfo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    h1 {
+      color: rgba(0, 0, 0, 0.8);
+      @include font-base(20px, 600);
+    }
+    p {
+      @include font-base(20px, 800);
+    }
+  }
+}

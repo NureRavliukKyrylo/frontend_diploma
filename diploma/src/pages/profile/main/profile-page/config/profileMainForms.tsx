@@ -17,21 +17,21 @@ const demoBadges: Badge[] = [
     id: "asdasdsd",
     image: "https://images.unsplash.com/photo-1614294148960-9aa740632a87?w=400",
     tier: "S" as Tier,
-    name: "",
+    name: "Top-200 volunteer",
     description: "",
   },
   {
     id: "asdasdsds",
     image: "https://images.unsplash.com/photo-1579547621113-e4bb2a19bdd6?w=400",
     tier: "A" as Tier,
-    name: "",
+    name: "First Step",
     description: "",
   },
   {
     id: "asdasdsdd",
     image: "https://images.unsplash.com/photo-1614288533766-ba18c1ea0685?w=400",
     tier: "S" as Tier,
-    name: "",
+    name: "Active Heart",
     description: "",
   },
   {
@@ -83,9 +83,18 @@ export const profileMainForms: Record<
   projects: () => <></>,
   skills: () => <ProfileSkillsTab />,
   inventory: () => (
-    <BadgesListWidget
-      badges={demoBadges}
-      renderCard={(badge) => <BadgeCardDetailed badge={badge} />}
-    />
+    <div className={styles.inventoryWrapper}>
+      <h1 className={styles.achievementsTitle}>Achievements</h1>
+      <BadgesListWidget
+        badges={demoBadges}
+        className={styles.badgesProfileList}
+        renderCard={(badge) => (
+          <BadgeCardDetailed
+            badge={badge}
+            classImgName={styles.badgeImageWrapper}
+          />
+        )}
+      />
+    </div>
   ),
 };

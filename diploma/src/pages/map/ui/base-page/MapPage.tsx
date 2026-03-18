@@ -1,4 +1,4 @@
-import { BaseMap } from "@shared/ui";
+import { BaseMap, map } from "@shared/ui";
 import styles from "./MapPage.module.scss";
 import { ToggleDropdownButton } from "@shared/ui/buttons/index.ts";
 import { SearchBar } from "@shared/ui/inputs";
@@ -13,6 +13,7 @@ import { MapInitialLocation } from "../initial-location/MapInitialLocation.tsx";
 import { useMapPage } from "../../model/useMapPage.ts";
 import { useQuery } from "@tanstack/react-query";
 import { projectQuery } from "@entities/project/index.ts";
+import { useState } from "react";
 
 export const MapPage = () => {
   const {
@@ -28,6 +29,7 @@ export const MapPage = () => {
   } = useMapPage();
 
   const { data } = useQuery(projectQuery.map(mapSearch));
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   return (
     <div ref={wrapperRef} className={styles.mapPageWrapper}>
@@ -47,7 +49,7 @@ export const MapPage = () => {
             search={search}
           />
         )}
-        <MapProjectCluster data={data} />
+        <MapProjectCluster selectedId={selectedId} data={data} />
       </BaseMap>
 
       <div className={styles.filterButtonWrapper}>
@@ -55,7 +57,14 @@ export const MapPage = () => {
           <MapFiltersWidget search={search} from="/map/" />
         </ToggleDropdownButton>
         <SearchBar onChange={handleSearch} variant="projects" />
-        <MapListPanel listParams={listParams} page={search.Page} />
+        <MapListPanel
+          listParams={listParams}
+          page={search.Page}
+          onSelectProject={(id, lat, lng) => {
+            setSelectedId(id);
+            map.flyTo(lat, lng, 16);
+          }}
+        />
       </div>
     </div>
   );

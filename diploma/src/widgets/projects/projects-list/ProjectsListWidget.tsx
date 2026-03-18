@@ -4,7 +4,7 @@ import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 
 interface ProjectsListWidgetProps {
   useProjectsQuery: () => ProjectsQueryResult;
-  renderCard: (project: Project) => React.ReactNode;
+  renderCard: (project: Project, index: number) => React.ReactNode;
   renderSkeleton?: () => React.ReactNode;
   skeletonItems?: number;
   className?: string;
@@ -34,7 +34,7 @@ export const ProjectsListWidget = ({
 
   return (
     <div className={wrapperClass}>
-      {projects?.map((project) => renderCard(project))}
+      {projects?.map((project, index) => renderCard(project, index))}
     </div>
   );
 };

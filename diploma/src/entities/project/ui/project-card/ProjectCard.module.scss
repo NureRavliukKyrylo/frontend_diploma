@@ -31,7 +31,7 @@
     gap: 8px;
     flex: 1;
     h1 {
-      @include font-base(40px, 700);
+      @include font-base(30px, 700);
       line-height: 120%;
       display: -webkit-box;
       -webkit-line-clamp: 2;

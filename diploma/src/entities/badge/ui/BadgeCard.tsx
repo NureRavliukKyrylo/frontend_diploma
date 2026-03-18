@@ -4,7 +4,9 @@ import styles from "./BadgeCard.module.scss";
 
 export interface BadgeCardProps {
   badge: Badge;
+  classImgName?: string;
 }
+
 export const BadgeCard = ({ badge }: BadgeCardProps) => {
   return (
     <div
@@ -21,13 +23,15 @@ export const BadgeCard = ({ badge }: BadgeCardProps) => {
   );
 };
 
-export const BadgeCardDetailed = ({ badge }: BadgeCardProps) => {
+export const BadgeCardDetailed = ({ badge, classImgName }: BadgeCardProps) => {
   return (
     <div className={styles.badgeCardWrapper}>
-      <BadgeCard badge={badge} />
+      <div className={classImgName}>
+        <BadgeCard badge={badge} />
+      </div>
       <div className={styles.badgeInfo}>
-        <span className={styles.badgeName}>{badge.name}</span>
-        <span style={{ color: TierColors[badge.tier] }}>{badge.tier}</span>
+        <h1>{badge.name}</h1>
+        <p style={{ color: TierColors[badge.tier] }}>RANK {badge.tier}</p>
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ interface CarouselProps<T> {
   items: T[];
   renderItem: (item: T) => React.ReactNode;
   minItemWidth?: number;
+  maxItemWidth?: number;
   keyExtractor: (item: T) => string;
 }
 
@@ -14,33 +15,46 @@ export function Carousel<T>({
   items,
   renderItem,
   minItemWidth = 200,
+  maxItemWidth = 250,
   keyExtractor,
 }: CarouselProps<T>) {
   const [index, setIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [itemWidth, setItemWidth] = useState(0);
-  const [visibleCount, setVisibleCount] = useState(1);
   const [direction, setDirection] = useState(1);
 
+  const [visibleCount, setVisibleCount] = useState(1);
+
   useEffect(() => {
-    const updateDimensions = () => {
-      if (containerRef.current) {
-        const containerWidth = containerRef.current.offsetWidth;
+    const updateWidth = () => {
+      if (!containerRef.current) return;
+      const el = containerRef.current;
 
-        let count = Math.floor(containerWidth / minItemWidth);
-        count = Math.max(1, Math.min(count, items.length));
+      const style = getComputedStyle(el);
+      const paddingLeft = parseFloat(style.paddingLeft);
+      const paddingRight = parseFloat(style.paddingRight);
+      const innerWidth = el.clientWidth - paddingLeft - paddingRight;
 
-        const calculatedWidth = containerWidth / count;
+      let count = Math.floor(innerWidth / minItemWidth);
+      count = Math.max(1, Math.min(count, items.length));
 
-        setVisibleCount(count);
-        setItemWidth(calculatedWidth);
-      }
+      const itemsRowEl = el.querySelector(`.${styles.itemsRow}`) as HTMLElement;
+      const gap = itemsRowEl ? parseFloat(getComputedStyle(itemsRowEl).gap) : 0;
+      const totalGap = gap * (count - 1);
+
+      const rawWidth = (innerWidth - totalGap) / count;
+      const clampedWidth = maxItemWidth
+        ? Math.min(rawWidth, maxItemWidth)
+        : rawWidth;
+
+      setVisibleCount(count);
+      setItemWidth(clampedWidth);
     };
 
-    updateDimensions();
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
-  }, [minItemWidth, items.length]);
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, [minItemWidth, maxItemWidth, items.length]);
 
   const getWrappedIndex = (i: number) =>
     ((i % items.length) + items.length) % items.length;

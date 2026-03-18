@@ -1,4 +1,4 @@
-import { map, Pagination } from "@shared/ui";
+import { Pagination } from "@shared/ui";
 import { Suspense } from "react";
 import { motion } from "framer-motion";
 import {
@@ -18,9 +18,14 @@ import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 interface MapListPanelProps {
   listParams: ProjectSearchParams;
   page?: number;
+  onSelectProject: (id: string, lat: number, lng: number) => void;
 }
 
-export const MapListPanel = ({ listParams, page }: MapListPanelProps) => {
+export const MapListPanel = ({
+  listParams,
+  page,
+  onSelectProject,
+}: MapListPanelProps) => {
   const navigate = useNavigate({ from: "/map/" });
   const { data: projects } = useQuery(projectQuery.map(listParams));
 
@@ -51,7 +56,7 @@ export const MapListPanel = ({ listParams, page }: MapListPanelProps) => {
                   onClick={() => {
                     const lat = project.location?.latitude;
                     const lng = project.location?.longitude;
-                    if (lat && lng) map.flyTo(lat, lng, 12);
+                    if (lat && lng) onSelectProject(project.id, lat, lng);
                   }}
                   whileHover="hover"
                   initial="rest"

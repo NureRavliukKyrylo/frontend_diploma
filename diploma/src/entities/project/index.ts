@@ -21,3 +21,4 @@ export type { ProjectsResponse } from "./api/projectsApi";
 export { type ProjectsQueryResult } from "./model/types/ProjectQueryResult";
 export { useProjectsListQuery } from "./model/hooks/useProjectsListQuery";
 export { useProjectsMapQuery } from "./model/hooks/useProjectsMapQuery";
+export { ProjectMarkerAnimated } from "./ui/project-marker/ProjectMarker";

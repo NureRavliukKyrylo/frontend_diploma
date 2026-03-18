@@ -16,3 +16,4 @@ export { Avatar } from "./avatar/avatar-base/Avatar";
 export { Slider } from "./slider/Slider";
 export { AvatarGroup } from "./avatar/avatar-group/AvatarGroup";
 export { map } from "./map/capture/CaptureMap";
+export { AnimatedMarker } from "./map/animated-marker/AnimatedMarker";

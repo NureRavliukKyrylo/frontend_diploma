@@ -5,7 +5,7 @@ import type { Badge, BadgesQueryResult } from "@entities/badge/model";
 interface BadgesListWidgetProps {
   useBadgesQuery?: () => BadgesQueryResult;
   badges?: Badge[];
-  renderCard: (badge: Badge) => React.ReactNode;
+  renderCard: (badge: Badge, index: number) => React.ReactNode;
   renderSkeleton?: () => React.ReactNode;
   skeletonItems?: number;
   className?: string;
@@ -38,7 +38,7 @@ export const BadgesListWidget = ({
 
   return (
     <div className={wrapperClass}>
-      {badges?.map((badge) => renderCard(badge))}
+      {badges?.map((badge, index) => renderCard(badge, index))}
     </div>
   );
 };
