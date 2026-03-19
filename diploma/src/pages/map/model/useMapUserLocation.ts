@@ -5,7 +5,7 @@ import { useUserStore } from "@entities/user";
 import { useGeolocation } from "@shared/libs/map";
 import type { Coordinates } from "@shared/config/types";
 
-export const useMapInitialLocation = () => {
+export const useMapUserLocation = () => {
   const isAuthenticated = useUserStore((s) => s.isAuthenticated);
   const [geoCoords, setGeoCoords] = useState<Coordinates | null>(null);
 
@@ -18,8 +18,8 @@ export const useMapInitialLocation = () => {
     user?.profile?.coordinates?.latitude &&
     user?.profile?.coordinates?.longitude
       ? {
-          latitude: user.profile.coordinates?.latitude,
-          longitude: user.profile.coordinates?.longitude,
+          latitude: user.profile.coordinates.latitude,
+          longitude: user.profile.coordinates.longitude,
         }
       : null;
 
@@ -28,5 +28,5 @@ export const useMapInitialLocation = () => {
     onLocationChange: setGeoCoords,
   });
 
-  return profileCoords ?? geoCoords;
+  return profileCoords ?? geoCoords ?? null;
 };

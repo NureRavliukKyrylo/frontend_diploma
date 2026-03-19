@@ -7,6 +7,9 @@ export const map = {
   flyTo: (lat: number, lng: number, zoom = 14) => {
     mapInstance?.flyTo([lat, lng], zoom, { duration: 1.2 });
   },
+  onMoveEnd: (cb: () => void) => {
+    mapInstance?.once("moveend", cb);
+  },
 };
 
 export const CaptureMap = () => {

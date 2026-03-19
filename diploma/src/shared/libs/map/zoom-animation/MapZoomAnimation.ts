@@ -8,10 +8,12 @@ import {
 interface MapZoomAnimationProps {
   coordinates: { latitude: number; longitude: number } | null;
   zoom?: number;
+  onAnimationEnd?: () => void;
 }
 export const MapZoomAnimation: React.FC<MapZoomAnimationProps> = ({
   coordinates,
   zoom = DEFAULT_MAP_ZOOM_ANIMATION,
+  onAnimationEnd,
 }) => {
   const map = useMap();
 
@@ -30,6 +32,12 @@ export const MapZoomAnimation: React.FC<MapZoomAnimationProps> = ({
           duration: 0.8,
         },
       );
+    }
+    if (onAnimationEnd) {
+      map.once("moveend", onAnimationEnd);
+      return () => {
+        map.off("moveend", onAnimationEnd);
+      };
     }
   }, [coordinates, map, zoom]);
 

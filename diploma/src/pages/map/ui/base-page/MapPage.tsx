@@ -7,13 +7,13 @@ import {
   MapListPanel,
   MapProjectCluster,
 } from "@widgets/map";
-import { MapBoundsTracker } from "@shared/libs/map/index.ts";
+import { MapBoundsTracker, MapInitialBounds } from "@shared/libs/map/index.ts";
 import { SearchLocationLayer } from "../location-layer/SearchLocationLayer.tsx";
-import { MapInitialLocation } from "../initial-location/MapInitialLocation.tsx";
+import { MapUserLocation } from "../initial-location/MapUserLocation.tsx";
 import { useMapPage } from "../../model/useMapPage.ts";
 import { useQuery } from "@tanstack/react-query";
-import { projectQuery } from "@entities/project/index.ts";
-import { useState } from "react";
+import { projectQuery } from "@entities/project";
+import { useRef, useState } from "react";
 
 export const MapPage = () => {
   const {
@@ -21,16 +21,19 @@ export const MapPage = () => {
     wrapperRef,
     mapSearch,
     listParams,
-    searchCoordinates,
     radiusMeters,
-    initialLocation,
+    searchCoordinates,
+    hasBounds,
+    initialCoords,
+    initialZoom,
     handleSearch,
     handleSearchBounds,
+    userLocation,
   } = useMapPage();
 
   const { data } = useQuery(projectQuery.map(mapSearch));
   const [selectedId, setSelectedId] = useState<string | null>(null);
-
+  const boundsReadyRef = useRef<() => void>(() => {});
   return (
     <div ref={wrapperRef} className={styles.mapPageWrapper}>
       <BaseMap
@@ -39,9 +42,30 @@ export const MapPage = () => {
         scrollWheelZoom={false}
         classNameWrapper={styles.mapPage}
         fullscreenRef={wrapperRef}
+        zoom={!hasBounds ? initialZoom : undefined}
+        center={
+          !hasBounds && initialCoords
+            ? [initialCoords.latitude, initialCoords.longitude]
+            : undefined
+        }
       >
-        <MapInitialLocation coordinates={initialLocation} />
-        <MapBoundsTracker onBoundsChange={handleSearchBounds} />
+        {hasBounds && (
+          <MapInitialBounds
+            minLat={search.MinLat!}
+            maxLat={search.MaxLat!}
+            minLng={search.MinLng!}
+            maxLng={search.MaxLng!}
+          />
+        )}
+        <MapUserLocation
+          coordinates={userLocation}
+          animate={!searchCoordinates}
+          onAnimationEnd={() => boundsReadyRef.current()}
+        />
+        <MapBoundsTracker
+          onBoundsChange={handleSearchBounds}
+          readyRef={boundsReadyRef}
+        />
         {searchCoordinates && (
           <SearchLocationLayer
             coordinates={searchCoordinates}
@@ -56,7 +80,11 @@ export const MapPage = () => {
         <ToggleDropdownButton>
           <MapFiltersWidget search={search} from="/map/" />
         </ToggleDropdownButton>
-        <SearchBar onChange={handleSearch} variant="projects" />
+        <SearchBar
+          onChange={handleSearch}
+          value={search.Search}
+          variant="projects"
+        />
         <MapListPanel
           listParams={listParams}
           page={search.Page}

@@ -1,9 +1,10 @@
 import { useDebounce } from "@shared/libs/hooks";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMapEvents } from "react-leaflet";
 
 type Props = {
   onBoundsChange: (bounds: MapBounds) => void;
+  readyRef: React.RefObject<() => void>;
 };
 
 export type MapBounds = {
@@ -11,6 +12,7 @@ export type MapBounds = {
   MaxLat: number;
   MinLng: number;
   MaxLng: number;
+  Zoom: number;
 };
 
 export const getBounds = (map: ReturnType<typeof useMapEvents>): MapBounds => {
@@ -20,22 +22,26 @@ export const getBounds = (map: ReturnType<typeof useMapEvents>): MapBounds => {
     MaxLat: b.getNorth(),
     MinLng: b.getWest(),
     MaxLng: b.getEast(),
+    Zoom: map.getZoom(),
   };
 };
 
-export const MapBoundsTracker = ({ onBoundsChange }: Props) => {
+export const MapBoundsTracker = ({ onBoundsChange, readyRef }: Props) => {
   const [bounds, setBounds] = useState<MapBounds | null>(null);
   const debouncedBounds = useDebounce(bounds, 300);
+  const isReady = useRef(false);
+  readyRef.current = () => {
+    isReady.current = true;
+  };
 
   const map = useMapEvents({
-    moveend: () => setBounds(getBounds(map)),
-    zoomend: () => setBounds(getBounds(map)),
+    moveend: () => isReady.current && setBounds(getBounds(map)),
+    zoomend: () => isReady.current && setBounds(getBounds(map)),
   });
 
   useEffect(() => {
     setBounds(getBounds(map));
   }, []);
-
   useEffect(() => {
     if (!debouncedBounds) return;
     onBoundsChange(debouncedBounds);

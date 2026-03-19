@@ -1,14 +1,14 @@
 import { useRef } from "react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
-import { useMapInitialLocation } from "./useMapInitialLocation.ts";
 import type { MapBounds } from "@shared/libs/map";
+import { useMapUserLocation } from "./useMapUserLocation";
 
 export const useMapPage = () => {
   const navigate = useNavigate({ from: "/map/" });
   const search = useSearch({ from: "/_noFooterLayout/map/" });
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const { Page, PageSize, ...mapSearch } = search;
+  const { Page, PageSize, Zoom, ...mapSearch } = search;
   const {
     Lat,
     Lng,
@@ -18,6 +18,7 @@ export const useMapPage = () => {
     MaxLat,
     MinLng,
     MaxLng,
+    Zoom: zoomList,
     ...listParams
   } = search;
 
@@ -25,10 +26,17 @@ export const useMapPage = () => {
     search.Lat != null && search.Lng != null
       ? { latitude: search.Lat, longitude: search.Lng }
       : null;
+  const hasBounds =
+    search.MinLat != null &&
+    search.MaxLat != null &&
+    search.MinLng != null &&
+    search.MaxLng != null;
 
   const radiusMeters = search.RadiusKm != null ? search.RadiusKm * 1000 : null;
+  const userLocation = useMapUserLocation();
+  const initialCoords = !hasBounds ? (searchCoordinates ?? userLocation) : null;
 
-  const initialLocation = useMapInitialLocation();
+  const initialZoom = search.Zoom ?? (searchCoordinates ? 12 : 5);
 
   const handleSearch = (value: string) => {
     navigate({
@@ -50,10 +58,13 @@ export const useMapPage = () => {
     wrapperRef,
     mapSearch,
     listParams,
-    searchCoordinates,
     radiusMeters,
-    initialLocation,
+    searchCoordinates,
+    hasBounds,
+    initialCoords,
+    initialZoom,
     handleSearch,
     handleSearchBounds,
+    userLocation,
   };
 };

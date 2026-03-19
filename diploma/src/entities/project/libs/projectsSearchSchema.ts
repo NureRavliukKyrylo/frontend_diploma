@@ -53,6 +53,7 @@ export const mapProjectSchema = projectFiltersSchema
   .extend({
     CategoryIds: z.array(z.string()).optional().catch([]),
     PageSize: z.number().min(1).default(7).optional(),
+    Zoom: z.number().optional(),
   });
 
 export const projectBaseSchema = projectFiltersWithCategorySchema.extend(
