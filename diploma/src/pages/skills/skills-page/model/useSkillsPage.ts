@@ -2,7 +2,7 @@ import { skillsQuery, type Skill } from "@entities/skill";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
-import type { SortSkillsValues } from "../config/sortingItems";
+import type { SortSkillsValues } from "@entities/skill";
 
 export const useSkillsPage = () => {
   const search = useSearch({ from: "/_masterLayout/skills/" });
@@ -27,8 +27,6 @@ export const useSkillsPage = () => {
       resetScroll: false,
     });
 
-  const handleClearFilters = () => navigate({ search: {} });
-
   const handleToggleFilter = () => setFilterOpen((prev) => !prev);
 
   const handleAssignSkill = (skill: Skill) => {
@@ -47,7 +45,6 @@ export const useSkillsPage = () => {
     handlePageChange,
     handleSearchChange,
     handleSortChange,
-    handleClearFilters,
     handleToggleFilter,
     handleAssignSkill,
     handleCloseModal,

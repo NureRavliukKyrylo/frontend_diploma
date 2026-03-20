@@ -1,4 +1,3 @@
 export { ProjectsListWidget } from "./projects-list/ProjectsListWidget";
-export { ProjectFiltersWidget } from "./filters/ProjectFiltersWidget";
+export { ProjectFiltersWidget } from "./filters/base-filter/ui/ProjectFiltersWidget";
 export { ProjectsHeader } from "./projects-header/ProjectsHeader";
-export { ProjectControls } from "./project-controls/ProjectControls";

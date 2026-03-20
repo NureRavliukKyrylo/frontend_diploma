@@ -1,9 +1,9 @@
 import styles from "./SkillsPage.module.scss";
-import { sortingItems } from "./config/sortingItems";
-import { SkillsFilterControls, SkillsListWidget } from "@widgets/skills";
+import { SkillsListWidget } from "@widgets/skills";
 import {
   SkillControlCard,
   SkillControlCardSkeleton,
+  sortingSkillItems,
   useSkillsListQuery,
 } from "@entities/skill";
 import { Pagination } from "@shared/ui";
@@ -12,6 +12,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useSkillsPage } from "./model/useSkillsPage";
 import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
+import { ToggleDropdownButton } from "@shared/ui/buttons";
+import { SearchBar } from "@shared/ui/inputs";
+import { SkillsFilterWidget } from "@widgets/skills/filters/ui/SkillsFilterWidget";
+import { SortDropDown } from "@shared/ui/drop-down";
 
 export const SkillsPage = () => {
   const {
@@ -23,7 +27,6 @@ export const SkillsPage = () => {
     handlePageChange,
     handleSearchChange,
     handleSortChange,
-    handleClearFilters,
     handleToggleFilter,
     handleAssignSkill,
     handleCloseModal,
@@ -38,13 +41,18 @@ export const SkillsPage = () => {
       <div className={styles.mainSkillsSection}>
         <div className={styles.filterSkillsWrapper}>
           <div className={styles.filtersInteractions}>
-            <SkillsFilterControls
-              search={search}
-              onSearchChange={handleSearchChange}
-              onSortChange={handleSortChange}
-              onClearFilters={handleClearFilters}
-              onToggleFilter={handleToggleFilter}
-              sortingItems={sortingItems}
+            <ToggleDropdownButton onOpenChange={handleToggleFilter}>
+              <SkillsFilterWidget search={search} />
+            </ToggleDropdownButton>
+            <SearchBar
+              value={search.Search}
+              onChange={handleSearchChange}
+              variant="projects"
+            />
+            <SortDropDown
+              options={sortingSkillItems}
+              onSelect={handleSortChange}
+              value={search.OrderBy ?? "Default"}
             />
           </div>
 

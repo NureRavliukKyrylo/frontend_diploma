@@ -1,16 +1,18 @@
 import z from "zod";
+import { paginationSchema } from "@shared/config/schemas";
 
 export const profileSearchDefaults = {
   tab: "profile" as const,
   OrderBy: "Default" as const,
   Page: 1,
+  PageSize: 8,
 };
 
 export const profileSettingsSearchDefaults = {
   tab: "settings" as const,
 };
 
-export const profileSearchSchema = z.object({
+export const profileSearchBaseSchema = z.object({
   tab: z
     .enum(["profile", "projects", "skills", "inventory"])
     .default("profile")
@@ -20,9 +22,14 @@ export const profileSearchSchema = z.object({
     .default("Default")
     .catch("Default")
     .optional(),
-  Page: z.number().default(1).optional(),
   Search: z.string().optional(),
 });
+
+export const profileSearchSchema = profileSearchBaseSchema
+  .extend(paginationSchema.shape)
+  .extend({
+    PageSize: z.number().min(1).default(8).optional(),
+  });
 
 export const profileSettingsSearchSchema = z.object({
   tab: z

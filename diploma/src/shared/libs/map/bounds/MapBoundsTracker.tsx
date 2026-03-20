@@ -30,8 +30,10 @@ export const MapBoundsTracker = ({ onBoundsChange, readyRef }: Props) => {
   const [bounds, setBounds] = useState<MapBounds | null>(null);
   const debouncedBounds = useDebounce(bounds, 300);
   const isReady = useRef(false);
+
   readyRef.current = () => {
     isReady.current = true;
+    setBounds(getBounds(map));
   };
 
   const map = useMapEvents({
@@ -39,9 +41,6 @@ export const MapBoundsTracker = ({ onBoundsChange, readyRef }: Props) => {
     zoomend: () => isReady.current && setBounds(getBounds(map)),
   });
 
-  useEffect(() => {
-    setBounds(getBounds(map));
-  }, []);
   useEffect(() => {
     if (!debouncedBounds) return;
     onBoundsChange(debouncedBounds);

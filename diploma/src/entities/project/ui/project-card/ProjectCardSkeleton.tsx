@@ -1,5 +1,5 @@
 import { Skeleton } from "@heroui/skeleton";
-import styles from "./ProjectCard.module.scss";
+import styles from "./base/ProjectCardBase.module.scss";
 
 export const ProjectCardSkeleton = () => {
   return (

@@ -33,6 +33,7 @@ export const useAssignSkill = (skillId: string, onSuccess?: () => void) => {
 
   const formik = useFormik<SkillAssignDTO>({
     initialValues: { level: 0, skillId },
+    enableReinitialize: true,
     onSubmit: (values: SkillAssignDTO) => {
       mutation.mutate(values);
     },

@@ -1,8 +1,8 @@
 import { SearchBar } from "@shared/ui/inputs";
 import styles from "./ProfileSkillsWidget.module.scss";
 import { SortDropDown } from "@shared/ui/drop-down";
-import { sortingItems } from "@pages/skills/skills-page/config/sortingItems";
-import { Pagination } from "@heroui/react";
+import { sortingSkillItems } from "@entities/skill";
+import { Pagination } from "@shared/ui";
 import { type SkillsProfileSearchParams } from "@entities/skill";
 import { useProfileSkills } from "../model/useProfileSkills";
 import type { PaginationResponse } from "@shared/config/types";
@@ -32,7 +32,7 @@ export const ProfileSkillsWidget = ({
             onChange={handleSearchChange}
           />
           <SortDropDown
-            options={sortingItems}
+            options={sortingSkillItems}
             onSelect={handleSortChange}
             value={search.OrderBy ?? "Default"}
           />

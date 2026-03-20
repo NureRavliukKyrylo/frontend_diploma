@@ -1,4 +1,5 @@
 export type {
   ProjectSearchParams,
   MapProjectSearchParams,
-} from "./projectsSearchSchema";
+} from "./schemas/projectsSearchSchema";
+export type { MyProjectSearchParams } from "./schemas/myProjectsSearchParams";

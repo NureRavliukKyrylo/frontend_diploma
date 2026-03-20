@@ -1,22 +1,22 @@
 import { DatePickerInput } from "@shared/ui/inputs";
 import styles from "./ProjectDeadlineFilter.module.scss";
-import { useNavigate } from "@tanstack/react-router";
-import type { ProjectSearchParams } from "@entities/project";
-import type { NavigateParams } from "../../model/NavigateParams";
 import { withDebounce } from "@shared/libs/hocs";
 
-interface ProjectDeadlineProps {
-  search: ProjectSearchParams;
-  from: NavigateParams;
+const DebouncedDatePicker = withDebounce(DatePickerInput, 300);
+
+interface ProjectDeadlineFilterProps {
+  startDate?: string;
+  endBefore?: string;
+  onStartDateChange: (date: string | undefined) => void;
+  onEndBeforeChange: (date: string | undefined) => void;
 }
 
 export const ProjectDeadlineFilter = ({
-  search,
-  from,
-}: ProjectDeadlineProps) => {
-  const navigate = useNavigate({ from });
-  const DebouncedDatePicker = withDebounce(DatePickerInput, 300);
-
+  startDate,
+  endBefore,
+  onStartDateChange,
+  onEndBeforeChange,
+}: ProjectDeadlineFilterProps) => {
   return (
     <div className={styles.deadlineCalendarBlock}>
       <div className={styles.startDate}>
@@ -26,13 +26,8 @@ export const ProjectDeadlineFilter = ({
             label=""
             showMonthAndYearPickers
             name="startDate"
-            value={search.StartDate}
-            onChange={(date) => {
-              navigate({
-                search: (prev) => ({ ...prev, StartDate: date, Page: 1 }),
-                resetScroll: false,
-              });
-            }}
+            value={startDate}
+            onChange={(value) => onStartDateChange(value)}
           />
         </div>
       </div>
@@ -43,13 +38,8 @@ export const ProjectDeadlineFilter = ({
             label=""
             showMonthAndYearPickers
             name="dueDate"
-            value={search.EndBefore}
-            onChange={(date) => {
-              navigate({
-                search: (prev) => ({ ...prev, EndBefore: date, Page: 1 }),
-                resetScroll: false,
-              });
-            }}
+            value={endBefore}
+            onChange={(value) => onEndBeforeChange(value)}
           />
         </div>
       </div>

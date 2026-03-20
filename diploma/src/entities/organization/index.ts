@@ -9,3 +9,4 @@ export {
   type OrganizationPaginationParams,
 } from "./libs/organizationSearchSchema";
 export { ListOrganizationCard } from "./ui/list-card/ListOrganizationCard";
+export { useOrganizationsInfiniteQuery } from "./model/hooks/useOrganizationsInfiniteQuery";

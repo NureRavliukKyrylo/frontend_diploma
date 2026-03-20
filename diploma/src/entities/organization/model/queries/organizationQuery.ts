@@ -1,6 +1,5 @@
 import { getOrganizationsList } from "@entities/organization/api/organizationsListApi";
 import type {
-  OrganizationMapParams,
   OrganizationPaginationParams,
   OrganizationSearchParams,
 } from "@entities/organization/libs/organizationSearchSchema";
@@ -15,9 +14,6 @@ export const organizationKeys = {
   ],
   infinite: (params: OrganizationPaginationParams) =>
     [...organizationKeys.list(params), "infinite"] as const,
-  map: (params: OrganizationMapParams) => [
-    [...organizationKeys.all(), "map", params] as const,
-  ],
 };
 
 export const organizationQuery = {
@@ -35,11 +31,5 @@ export const organizationQuery = {
       initialPageParam: 1,
       getNextPageParam: (lastPage) => lastPage.pagination.nextPage ?? undefined,
       select: (data) => data.pages.flatMap((page) => page.data),
-    }),
-  map: (params: OrganizationMapParams) =>
-    queryOptions({
-      queryKey: organizationKeys.map({ ...params }),
-      queryFn: () => getOrganizationsList({ ...params }),
-      placeholderData: (prev) => prev,
     }),
 };

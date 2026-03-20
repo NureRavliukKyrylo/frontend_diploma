@@ -3,6 +3,6 @@ export { ProjectCategoriesFilter } from "./filters/ui/categories/ProjectCategori
 export { ProjectDeadlineFilter } from "./filters/ui/dead-line/ProjectDeadLineFilter";
 export { ProjectOrganizationFilter } from "./filters/ui/organizations/ProjectOrganizationFilter";
 export { ProjectDistanceFilter } from "./filters/ui/distance/ProjectDistanceFilter";
-export type { NavigateParams } from "./filters/model/NavigateParams";
-export { MoreOptionsFilter } from "./filters/ui/more-options/MoreOptionsFilter";
 export { LocationMarker } from "./filters/ui/location-marker/LocationMarker";
+export { OnlyActiveFilter } from "./filters/ui/more-options/only-active/OnlyActiveFilter";
+export { ShowJoinedFilter } from "./filters/ui/more-options/show-joined/ShowJoinedFilter";

@@ -1,40 +1,26 @@
-import { useNavigate } from "@tanstack/react-router";
 import styles from "./ProjectOrganizationFilter.module.scss";
-import { organizationQuery, OrganizationTab } from "@entities/organization";
-import type { ProjectSearchParams } from "@entities/project";
-import type { NavigateParams } from "../../model/NavigateParams";
-import { toggleArrayParam } from "../../libs/toggleTab";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { OrganizationTab, type Organization } from "@entities/organization";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { AnimatePresence, motion } from "framer-motion";
+import type { QueryResult } from "@shared/config/types";
 
 interface ProjectOrganizationFilterProps {
-  search: ProjectSearchParams;
-  from: Exclude<NavigateParams, "/skills/">;
+  useOrganizationsQuery: () => QueryResult<Organization>;
+  selectedIds?: string[];
+  onToggle: (id: string) => void;
 }
 
 export const ProjectOrganizationFilter = ({
-  search,
-  from,
+  useOrganizationsQuery,
+  selectedIds,
+  onToggle,
 }: ProjectOrganizationFilterProps) => {
-  const navigate = useNavigate({ from });
   const {
-    data: organizations,
-    hasNextPage,
+    data: organizations = [],
     fetchNextPage,
+    hasNextPage,
     isFetchingNextPage,
-  } = useInfiniteQuery(organizationQuery.infinite({ PageSize: 7 }));
-
-  const toggleOrganization = (organizationId: string) => {
-    navigate({
-      search: (prev) => ({
-        ...prev,
-        OrganizationIds: toggleArrayParam(prev.OrganizationIds, organizationId),
-        Page: 1,
-      }),
-      resetScroll: false,
-    });
-  };
+  } = useOrganizationsQuery();
 
   return (
     <div className={styles.organizationsInfinite}>
@@ -51,10 +37,8 @@ export const ProjectOrganizationFilter = ({
             >
               <OrganizationTab
                 name={organization.name}
-                isSelected={
-                  search.OrganizationIds?.includes(organization.id) ?? false
-                }
-                onClick={() => toggleOrganization(organization.id)}
+                isSelected={selectedIds?.includes(organization.id) ?? false}
+                onClick={() => onToggle(organization.id)}
               />
             </motion.div>
           ))}
@@ -62,7 +46,7 @@ export const ProjectOrganizationFilter = ({
       </div>
       {hasNextPage && (
         <BaseButtonWrapper
-          onClick={() => fetchNextPage()}
+          onClick={() => fetchNextPage?.()}
           disabled={isFetchingNextPage}
           className={styles.showMoreOrganizationsButton}
         >

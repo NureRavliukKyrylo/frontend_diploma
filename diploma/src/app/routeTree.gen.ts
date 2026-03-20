@@ -23,6 +23,7 @@ import { Route as MasterLayoutCategoriesIndexRouteImport } from './routers/_mast
 import { Route as AuthLayoutAuthIndexRouteImport } from './routers/_authLayout/auth/index'
 import { Route as AuthLayoutAuthVerificationTwoFactorRouteImport } from './routers/_authLayout/auth/verification-two-factor'
 import { Route as AuthLayoutAuthVerificationEmailRouteImport } from './routers/_authLayout/auth/verification-email'
+import { Route as MasterLayoutProjectsMyIndexRouteImport } from './routers/_masterLayout/projects/my/index'
 import { Route as MasterLayoutProjectsIdIndexRouteImport } from './routers/_masterLayout/projects/$id/index'
 import { Route as MasterLayoutProfileSettingsIndexRouteImport } from './routers/_masterLayout/profile/settings/index'
 import { Route as MasterLayoutCategoriesIdIndexRouteImport } from './routers/_masterLayout/categories/$id/index'
@@ -102,6 +103,12 @@ const AuthLayoutAuthVerificationEmailRoute =
     path: '/auth/verification-email',
     getParentRoute: () => AuthLayoutRoute,
   } as any)
+const MasterLayoutProjectsMyIndexRoute =
+  MasterLayoutProjectsMyIndexRouteImport.update({
+    id: '/projects/my/',
+    path: '/projects/my/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
 const MasterLayoutProjectsIdIndexRoute =
   MasterLayoutProjectsIdIndexRouteImport.update({
     id: '/projects/$id/',
@@ -157,6 +164,7 @@ export interface FileRoutesByFullPath {
   '/categories/$id/': typeof MasterLayoutCategoriesIdIndexRoute
   '/profile/settings/': typeof MasterLayoutProfileSettingsIndexRoute
   '/projects/$id/': typeof MasterLayoutProjectsIdIndexRoute
+  '/projects/my/': typeof MasterLayoutProjectsMyIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -175,6 +183,7 @@ export interface FileRoutesByTo {
   '/categories/$id': typeof MasterLayoutCategoriesIdIndexRoute
   '/profile/settings': typeof MasterLayoutProfileSettingsIndexRoute
   '/projects/$id': typeof MasterLayoutProjectsIdIndexRoute
+  '/projects/my': typeof MasterLayoutProjectsMyIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -198,6 +207,7 @@ export interface FileRoutesById {
   '/_masterLayout/categories/$id/': typeof MasterLayoutCategoriesIdIndexRoute
   '/_masterLayout/profile/settings/': typeof MasterLayoutProfileSettingsIndexRoute
   '/_masterLayout/projects/$id/': typeof MasterLayoutProjectsIdIndexRoute
+  '/_masterLayout/projects/my/': typeof MasterLayoutProjectsMyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -219,6 +229,7 @@ export interface FileRouteTypes {
     | '/categories/$id/'
     | '/profile/settings/'
     | '/projects/$id/'
+    | '/projects/my/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -237,6 +248,7 @@ export interface FileRouteTypes {
     | '/categories/$id'
     | '/profile/settings'
     | '/projects/$id'
+    | '/projects/my'
   id:
     | '__root__'
     | '/'
@@ -259,6 +271,7 @@ export interface FileRouteTypes {
     | '/_masterLayout/categories/$id/'
     | '/_masterLayout/profile/settings/'
     | '/_masterLayout/projects/$id/'
+    | '/_masterLayout/projects/my/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -369,6 +382,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLayoutAuthVerificationEmailRouteImport
       parentRoute: typeof AuthLayoutRoute
     }
+    '/_masterLayout/projects/my/': {
+      id: '/_masterLayout/projects/my/'
+      path: '/projects/my'
+      fullPath: '/projects/my/'
+      preLoaderRoute: typeof MasterLayoutProjectsMyIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
     '/_masterLayout/projects/$id/': {
       id: '/_masterLayout/projects/$id/'
       path: '/projects/$id'
@@ -460,6 +480,7 @@ interface MasterLayoutRouteChildren {
   MasterLayoutSkillsIndexRoute: typeof MasterLayoutSkillsIndexRoute
   MasterLayoutCategoriesIdIndexRoute: typeof MasterLayoutCategoriesIdIndexRoute
   MasterLayoutProjectsIdIndexRoute: typeof MasterLayoutProjectsIdIndexRoute
+  MasterLayoutProjectsMyIndexRoute: typeof MasterLayoutProjectsMyIndexRoute
 }
 
 const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
@@ -469,6 +490,7 @@ const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
   MasterLayoutSkillsIndexRoute: MasterLayoutSkillsIndexRoute,
   MasterLayoutCategoriesIdIndexRoute: MasterLayoutCategoriesIdIndexRoute,
   MasterLayoutProjectsIdIndexRoute: MasterLayoutProjectsIdIndexRoute,
+  MasterLayoutProjectsMyIndexRoute: MasterLayoutProjectsMyIndexRoute,
 }
 
 const MasterLayoutRouteWithChildren = MasterLayoutRoute._addFileChildren(

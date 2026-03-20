@@ -1,6 +1,6 @@
 import { apiClient } from "@shared/api";
 import type { Project } from "../model/types/Project";
-import { type ProjectBaseParams } from "../libs/projectsSearchSchema";
+import { type ProjectBaseParams } from "../libs/schemas/projectsSearchSchema";
 import type { PaginationResponse } from "@shared/config/types";
 
 export interface ProjectsResponse {

@@ -1,9 +1,10 @@
-import type { Skill, SkillProfile, SkillsQueryResult } from "@entities/skill";
+import type { Skill, SkillProfile } from "@entities/skill";
 import styles from "./SkillsListWidget.module.scss";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
+import type { QueryResult } from "@shared/config/types";
 
 interface SkillsListWidgetProps<TSkill = Skill> {
-  useSkillsQuery?: () => SkillsQueryResult<TSkill>;
+  useSkillsQuery?: () => QueryResult<TSkill>;
   skills?: TSkill[];
   renderCard: (skill: TSkill, index: number) => React.ReactNode;
   renderSkeleton?: () => React.ReactNode;

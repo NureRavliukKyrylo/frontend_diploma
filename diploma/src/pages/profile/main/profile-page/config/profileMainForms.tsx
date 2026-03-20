@@ -1,12 +1,13 @@
-import { BadgeCardDetailed, type Badge, type Tier } from "@entities/badge";
+import { type Badge, type Tier } from "@entities/badge";
 import { SkillCardBase } from "@entities/skill";
 import { type ProfileMode } from "@entities/user";
 import type { User } from "@entities/user/profile";
-import { BadgesCarouselWidget, BadgesListWidget } from "@widgets/badges";
+import { BadgesCarouselWidget } from "@widgets/badges";
 import { ProfileMainWidget } from "@widgets/profile";
 import { SkillsListWidget } from "@widgets/skills";
 import styles from "../ui/MainProfilePage.module.scss";
 import { ProfileSkillsTab } from "../../skill-tab";
+import { ProfileInventoryTab } from "../../inventory-tab";
 
 interface ProfileFormProps {
   user?: User;
@@ -80,21 +81,7 @@ export const profileMainForms: Record<
       }
     />
   ),
-  projects: () => <></>,
+  projects: () => <div className={styles.projectsBlock}></div>,
   skills: () => <ProfileSkillsTab />,
-  inventory: () => (
-    <div className={styles.inventoryWrapper}>
-      <h1 className={styles.achievementsTitle}>Achievements</h1>
-      <BadgesListWidget
-        badges={demoBadges}
-        className={styles.badgesProfileList}
-        renderCard={(badge) => (
-          <BadgeCardDetailed
-            badge={badge}
-            classImgName={styles.badgeImageWrapper}
-          />
-        )}
-      />
-    </div>
-  ),
+  inventory: () => <ProfileInventoryTab />,
 };

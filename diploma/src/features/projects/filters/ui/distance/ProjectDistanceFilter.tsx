@@ -1,63 +1,44 @@
-import type { ProjectSearchParams } from "@entities/project";
 import styles from "./ProjectDistanceFilter.module.scss";
-import type { NavigateParams } from "../../model/NavigateParams";
 import { useCallback, useState } from "react";
-import { useNavigate } from "@tanstack/react-router";
 import { useAutocompleteSuggestions } from "@shared/libs/map";
 import type { LocationSuggestion } from "@shared/config/types";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface ProjectDistanceFilterProps {
-  search: ProjectSearchParams;
-  from: NavigateParams;
+  defaultLocation?: string;
+  defaultRadiusKm?: number;
+  onLocationSelect: (location: LocationSuggestion, radiusKm: number) => void;
+  onLocationClear: () => void;
+  onRadiusChange: (radiusKm: number) => void;
 }
 
 export const ProjectDistanceFilter = ({
-  search,
-  from,
+  defaultLocation,
+  defaultRadiusKm = 10,
+  onLocationSelect,
+  onLocationClear,
+  onRadiusChange,
 }: ProjectDistanceFilterProps) => {
-  const navigate = useNavigate({ from });
-  const [inputValue, setInputValue] = useState(search.Location ?? "");
+  const [inputValue, setInputValue] = useState(defaultLocation ?? "");
   const [query, setQuery] = useState("");
+  const [radiusInput, setRadiusInput] = useState(String(defaultRadiusKm));
   const { suggestions, reset, error } = useAutocompleteSuggestions(query);
   const isOpen = suggestions.length > 0 || !!error;
-  const [radiusInput, setRadiusInput] = useState(String(search.RadiusKm ?? 10));
 
   const handleSelect = useCallback(
-    ({ displayName, lat, lng }: LocationSuggestion) => {
-      setInputValue(displayName);
+    (suggestion: LocationSuggestion) => {
+      setInputValue(suggestion.displayName);
       setQuery("");
       reset();
-      navigate({
-        search: (prev) => ({
-          ...prev,
-          Lat: lat,
-          Lng: lng,
-          Location: displayName,
-          Page: 1,
-          RadiusKm: prev.RadiusKm ?? 10,
-        }),
-        resetScroll: false,
-      });
+      onLocationSelect(suggestion, Number(radiusInput));
     },
-    [navigate],
+    [onLocationSelect, radiusInput],
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
     setQuery(e.target.value);
-    if (!e.target.value) {
-      navigate({
-        search: (prev) => ({
-          ...prev,
-          Lat: undefined,
-          Lng: undefined,
-          Location: undefined,
-          RadiusKm: undefined,
-        }),
-        resetScroll: false,
-      });
-    }
+    if (!e.target.value) onLocationClear();
   };
 
   return (
@@ -104,10 +85,7 @@ export const ProjectDistanceFilter = ({
               onBlur={() => {
                 const clamped = Math.max(10, Number(radiusInput));
                 setRadiusInput(String(clamped));
-                navigate({
-                  search: (prev) => ({ ...prev, RadiusKm: clamped, Page: 1 }),
-                  resetScroll: false,
-                });
+                onRadiusChange(clamped);
               }}
               style={{
                 width: `${radiusInput.length}ch`,

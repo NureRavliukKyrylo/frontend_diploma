@@ -1,8 +1,9 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import type { BadgesQueryResult } from "../types/BadgesQueryResult";
 import { badgesQuery } from "../queries/badgesQuery";
+import type { Badge } from "../types/Badge";
+import type { QueryResult } from "@shared/config/types";
 
-export const useMyBadgesQuery = () => (): BadgesQueryResult => {
+export const useMyBadgesQuery = () => (): QueryResult<Badge> => {
   const { data } = useSuspenseQuery(badgesQuery.my());
   return { data: data.data };
 };

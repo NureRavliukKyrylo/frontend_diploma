@@ -2,12 +2,13 @@ import { CategoryDetailWidget } from "@widgets/categories";
 import { Suspense } from "react";
 import styles from "./CategoriesDetailPage.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
-import { ProjectControls, ProjectsListWidget } from "@widgets/projects";
+import { ProjectsListWidget } from "@widgets/projects";
 import { CategoryProjectFiltersWidget } from "@widgets/categories";
 import {
-  ProjectCard,
+  ProjectCardBase,
   ProjectCardSkeleton,
   projectQuery,
+  sortingProjectItems,
   useProjectsListQuery,
 } from "@entities/project";
 import { Pagination } from "@shared/ui";
@@ -15,6 +16,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useCategoryDetailPage } from "./model/useCategoryDetailPage";
 import { useRouter } from "@tanstack/react-router";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
+import { ToggleDropdownButton } from "@shared/ui/buttons";
+import { SearchBar } from "@shared/ui/inputs";
+import { SortDropDown } from "@shared/ui/drop-down";
 
 export function CategoryDetailPage() {
   const {
@@ -40,17 +44,19 @@ export function CategoryDetailPage() {
       </motion.div>
       <div className={styles.filterProjectsWrapper}>
         <div className={styles.filtersInteractions}>
-          <ProjectControls
-            search={search}
-            onSearch={handleSearch}
-            onSort={handleSort}
-            onFilterOpen={setIsFilterOpen}
-          >
-            <CategoryProjectFiltersWidget
-              search={searchWithCategory}
-              from="/categories/$id/"
-            />
-          </ProjectControls>
+          <ToggleDropdownButton onOpenChange={setIsFilterOpen}>
+            <CategoryProjectFiltersWidget search={searchWithCategory} />
+          </ToggleDropdownButton>
+          <SearchBar
+            value={search.Search}
+            onChange={handleSearch}
+            variant="projects"
+          />
+          <SortDropDown
+            options={sortingProjectItems}
+            onSelect={handleSort}
+            value={search.OrderBy ?? "Default"}
+          />
         </div>
         <motion.div
           layout
@@ -120,7 +126,7 @@ export function CategoryDetailPage() {
                           })
                         }
                       >
-                        <ProjectCard
+                        <ProjectCardBase
                           project={project}
                           avatars={[
                             {

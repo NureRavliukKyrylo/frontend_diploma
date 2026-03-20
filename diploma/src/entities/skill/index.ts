@@ -1,7 +1,6 @@
 export { SkillCardBase } from "./ui/skill-card/base/SkillCardBase";
 export { SkillTab } from "./ui/skill-tab/SkillTab";
 export type { Skill } from "./model";
-export type { SkillsQueryResult } from "./model";
 export { skillsQuery } from "./model/queries/skillQueries";
 export { useSkillsListQuery } from "./model/hooks/useSkillsListQuery";
 export { useMySkillsListQuery } from "./model/hooks/useMySkillsQuery";
@@ -17,3 +16,7 @@ export { SkillControlCardSkeleton } from "./ui/skill-card/control/SkillControlCa
 export type { SkillsProfileSearchParams } from "./libs";
 export type { SkillProfile } from "./model/types/SkillProfile";
 export { skillKeys } from "./model/queries/skillQueries";
+export {
+  sortingSkillItems,
+  type SortSkillsValues,
+} from "./config/sortingSkillItems";

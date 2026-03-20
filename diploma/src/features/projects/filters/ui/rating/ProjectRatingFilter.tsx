@@ -1,21 +1,18 @@
 import { Star } from "@shared/assets/icons/info";
 import styles from "./ProjectRatingFilter.module.scss";
-import { useNavigate } from "@tanstack/react-router";
 import { Slider } from "@shared/ui";
-import type { ProjectSearchParams } from "@entities/project";
-import type { NavigateParams } from "../../model/NavigateParams";
 import { useState } from "react";
 
 interface ProjectRatingFilterProps {
-  search: ProjectSearchParams;
-  from: NavigateParams;
+  rating?: number;
+  onRatingChange: (rating: number | undefined) => void;
 }
+
 export const ProjectRatingFilter = ({
-  search,
-  from,
+  rating,
+  onRatingChange,
 }: ProjectRatingFilterProps) => {
-  const navigate = useNavigate({ from });
-  const [displayValue, setDisplayValue] = useState(search.Rating ?? 0);
+  const [displayValue, setDisplayValue] = useState(rating ?? 0);
 
   return (
     <div className={styles.ratingBlock}>
@@ -26,21 +23,14 @@ export const ProjectRatingFilter = ({
       <Slider
         aria-label="slider"
         size="md"
-        value={search.Rating ?? 0}
+        value={rating ?? 0}
         minValue={0}
         maxValue={5}
         step={0.1}
         onChangeImmediate={(rating) => setDisplayValue(rating)}
-        onChange={(rating) => {
-          navigate({
-            search: (prev) => ({
-              ...prev,
-              Rating: rating === 0 ? undefined : (rating as number),
-              Page: 1,
-            }),
-            resetScroll: false,
-          });
-        }}
+        onChange={(value) =>
+          onRatingChange(value === 0 ? undefined : (value as number))
+        }
       />
     </div>
   );

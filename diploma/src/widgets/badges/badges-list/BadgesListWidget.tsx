@@ -1,9 +1,10 @@
 import styles from "./BadgesListWidget.module.scss";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
-import type { Badge, BadgesQueryResult } from "@entities/badge/model";
+import type { Badge } from "@entities/badge/model";
+import type { QueryResult } from "@shared/config/types";
 
 interface BadgesListWidgetProps {
-  useBadgesQuery?: () => BadgesQueryResult;
+  useBadgesQuery?: () => QueryResult<Badge>;
   badges?: Badge[];
   renderCard: (badge: Badge, index: number) => React.ReactNode;
   renderSkeleton?: () => React.ReactNode;

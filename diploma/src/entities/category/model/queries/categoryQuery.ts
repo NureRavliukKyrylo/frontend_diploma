@@ -36,7 +36,7 @@ export const categoryQuery = {
     infiniteQueryOptions({
       queryKey: categoryKeys.infinite(params),
       queryFn: ({ pageParam }) =>
-        getListCategories({ ...params, page: pageParam }),
+        getListCategories({ ...params, Page: pageParam }),
       initialPageParam: 1,
       getNextPageParam: (lastPage) => lastPage.pagination.nextPage ?? undefined,
       select: (data) => data.pages.flatMap((page) => page.data),

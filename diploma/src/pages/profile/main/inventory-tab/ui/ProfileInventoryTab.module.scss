@@ -1,0 +1,22 @@
+@use "@shared/assets/styles" as *;
+
+.badgesProfileList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(217px, 1fr));
+  gap: 30px;
+  align-items: stretch;
+  grid-auto-rows: auto;
+}
+
+.badgeImageWrapper {
+  aspect-ratio: 3/4;
+}
+
+.inventoryWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  .achievementsTitle {
+    @include font-base(40px, 900);
+  }
+}

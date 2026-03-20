@@ -1,9 +1,10 @@
-import type { Category, CategoriesQueryResult } from "@entities/category";
+import type { Category } from "@entities/category";
 import styles from "./CategoriesWidget.module.scss";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
+import type { QueryResult } from "@shared/config/types";
 
 interface CategoriesListWidgetProps {
-  useCategoriesQuery?: () => CategoriesQueryResult;
+  useCategoriesQuery?: () => QueryResult<Category>;
   renderCard: (category: Category, index: number) => React.ReactNode;
   startSlot?: React.ReactNode;
   renderSkeleton?: () => React.ReactNode;

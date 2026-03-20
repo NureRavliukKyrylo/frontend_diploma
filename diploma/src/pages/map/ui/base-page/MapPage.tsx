@@ -59,7 +59,7 @@ export const MapPage = () => {
         )}
         <MapUserLocation
           coordinates={userLocation}
-          animate={!searchCoordinates}
+          animate={!searchCoordinates && !hasBounds}
           onAnimationEnd={() => boundsReadyRef.current()}
         />
         <MapBoundsTracker
@@ -78,7 +78,7 @@ export const MapPage = () => {
 
       <div className={styles.filterButtonWrapper}>
         <ToggleDropdownButton>
-          <MapFiltersWidget search={search} from="/map/" />
+          <MapFiltersWidget search={search} />
         </ToggleDropdownButton>
         <SearchBar
           onChange={handleSearch}

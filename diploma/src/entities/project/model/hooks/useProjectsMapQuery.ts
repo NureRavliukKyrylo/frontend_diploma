@@ -1,10 +1,11 @@
 import type { MapProjectSearchParams } from "@entities/project/libs";
 import { projectQuery } from "../queries/projectQuery";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import type { ProjectsQueryResult } from "../types/ProjectQueryResult";
+import type { Project } from "../types/Project";
+import type { QueryResult } from "@shared/config/types";
 
 export const useProjectsMapQuery =
-  (search: MapProjectSearchParams) => (): ProjectsQueryResult => {
+  (search: MapProjectSearchParams) => (): QueryResult<Project> => {
     const { data } = useSuspenseQuery(projectQuery.map(search));
     return { data: data.data };
   };

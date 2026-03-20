@@ -1,4 +1,4 @@
-import type { SortValues } from "@shared/config/types";
+import type { ProjectSortValues } from "@entities/project";
 import { useNavigate, useParams, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 
@@ -16,7 +16,7 @@ export const useCategoryDetailPage = () => {
       resetScroll: false,
     });
 
-  const handleSort = (value: SortValues) =>
+  const handleSort = (value: ProjectSortValues) =>
     navigate({
       search: (prev) => ({ ...prev, OrderBy: value, Page: 1 }),
       resetScroll: false,

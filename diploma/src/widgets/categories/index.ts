@@ -1,4 +1,4 @@
 export { CategoriesListWidget } from "./categories-list/CategoriesListWidget";
-export { CategoryDetailWidget } from "./category-detail/CategoryDetailWidget";
-export { CategoryProjectFiltersWidget } from "./category-detail/filters/CategoryProjectFiltersWidget";
-export { CategoryDetailWidgetSkeleton } from "./category-detail/CategoryDetailWidgetSkeleton";
+export { CategoryDetailWidget } from "./category-detail/header-card/CategoryDetailWidget";
+export { CategoryProjectFiltersWidget } from "./category-detail/filters/ui/CategoryProjectFiltersWidget";
+export { CategoryDetailWidgetSkeleton } from "./category-detail/header-card/CategoryDetailWidgetSkeleton";
