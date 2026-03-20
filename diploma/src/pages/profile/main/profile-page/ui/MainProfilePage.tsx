@@ -24,7 +24,6 @@ export function MainProfilePage() {
 
   const { data: user } = useQuery(profileQuery.all());
   const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ");
-
   return (
     <div className={styles.mainProfileBlock}>
       <div className={styles.sideBarProfileBlock}>

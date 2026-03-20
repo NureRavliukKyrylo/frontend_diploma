@@ -30,3 +30,5 @@ export {
   sortingProjectItems,
   type ProjectSortValues,
 } from "./config/sortingProjectItems";
+export { type MyProjectsMode } from "./model/types/MyProjectsMode";
+export { useMyProjectsTabs } from "./model/hooks/useMyProjectsTab";

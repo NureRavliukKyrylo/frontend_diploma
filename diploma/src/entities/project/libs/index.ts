@@ -1,3 +1,5 @@
+export { myProjectSearchDefaults } from "./schemas/myProjectsSearchParams";
+
 export type {
   ProjectSearchParams,
   MapProjectSearchParams,
