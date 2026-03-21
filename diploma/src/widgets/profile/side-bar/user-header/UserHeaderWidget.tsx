@@ -25,7 +25,7 @@ export const UserHeaderWidget = ({
         </div>
         <h1 className={styles.fullNameUser}>{name ?? "Unknown"}</h1>
         <div className={styles.wrapperInfoProfileUser}>
-          <h1>{email ?? "Unknown"}</h1>
+          <h1 className={styles.emailUser}>{email ?? "Unknown"}</h1>
         </div>
         <div className={styles.wrapperInfoProfileUser}>
           <h1>{phone ?? "No phone number added"}</h1>

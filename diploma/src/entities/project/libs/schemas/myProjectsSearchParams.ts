@@ -29,7 +29,7 @@ export const myProjectSearchDefaults = {
 export const myProjectsFiltersBaseSchema = z.object({
   Search: z.string().optional(),
   OrganizationIds: z.array(z.string()).optional().catch(undefined),
-  OnlyActive: z.boolean().default(false).optional(),
+  OnlyActive: z.boolean().optional(),
   StartDate: z.string().optional(),
   EndBefore: z.string().optional(),
   CategoryIds: z.array(z.string()).optional().catch([]),

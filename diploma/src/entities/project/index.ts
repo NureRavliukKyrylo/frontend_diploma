@@ -1,4 +1,3 @@
-export { ProjectCardBase } from "./ui/project-card/base/ProjectCardBase";
 export {
   projectSearchSchema,
   projectSearchDefaults,
@@ -32,3 +31,5 @@ export {
 } from "./config/sortingProjectItems";
 export { type MyProjectsMode } from "./model/types/MyProjectsMode";
 export { useMyProjectsTabs } from "./model/hooks/useMyProjectsTab";
+export { ProjectCard } from "./ui/project-card/item-list/ProjectCard";
+export { ProjectControlCard } from "./ui/project-card/control/ProjectControlCard";

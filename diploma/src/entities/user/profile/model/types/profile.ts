@@ -1,3 +1,4 @@
+import type { Organization } from "@entities/organization";
 import {
   type Coordinates,
   type SocialPlatformLink,
@@ -21,4 +22,5 @@ export interface Profile {
   avatarUrl?: string;
   activeProjectCount?: number;
   completedProjectCount?: number;
+  organizations: Organization[];
 }

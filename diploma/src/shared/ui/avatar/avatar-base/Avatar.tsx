@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import styles from "./Avatar.module.scss";
+import { getAvatarColor } from "@shared/libs/avatar";
 
 type AvatarShape = "circle" | "rounded" | "square";
 type AvatarVariant = "default" | "initials";
@@ -12,7 +13,6 @@ interface AvatarProps {
   size?: number;
   className?: string;
   children?: ReactNode;
-  initialsClassName?: string;
 }
 
 export const Avatar = ({
@@ -22,7 +22,6 @@ export const Avatar = ({
   variant = "default",
   className,
   children,
-  initialsClassName,
 }: AvatarProps) => {
   const initials =
     fallback
@@ -33,25 +32,25 @@ export const Avatar = ({
       .join("")
       .toUpperCase() ?? "?";
 
+  const colors = getAvatarColor(initials);
+
   return (
     <div
       className={[styles.avatar, styles[shape], styles[variant], className]
         .filter(Boolean)
         .join(" ")}
+      style={
+        variant === "initials" ? { backgroundColor: colors.bg } : undefined
+      }
     >
       {src && (
         <img src={src} alt={fallback ?? "avatar"} className={styles.image} />
       )}
       {!src && variant === "initials" && (
-        <h1
-          className={[styles.initials, initialsClassName]
-            .filter(Boolean)
-            .join(" ")}
-        >
+        <h1 className={styles.initials} style={{ color: colors.text }}>
           {initials}
         </h1>
       )}
-
       {children}
     </div>
   );

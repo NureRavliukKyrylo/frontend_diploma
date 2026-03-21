@@ -9,7 +9,7 @@ import { useRouter } from "@tanstack/react-router";
 import styles from "./ProjectsPage.module.scss";
 import { useQuery } from "@tanstack/react-query";
 import {
-  ProjectCardBase,
+  ProjectCard,
   ProjectCardSkeleton,
   projectQuery,
   sortingProjectItems,
@@ -128,23 +128,7 @@ export function ProjectsPage() {
                             })
                           }
                         >
-                          <ProjectCardBase
-                            project={project}
-                            avatars={[
-                              {
-                                src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
-                                name: "Kyrylo",
-                              },
-                              {
-                                src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
-                                name: "Kyrylo",
-                              },
-                              {
-                                src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
-                                name: "Kyrylo",
-                              },
-                            ]}
-                          />
+                          <ProjectCard project={project} />
                         </motion.div>
                       )}
                       useProjectsQuery={useProjectsListQuery(search)}

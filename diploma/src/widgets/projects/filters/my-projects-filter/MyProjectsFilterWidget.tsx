@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import styles from "./MyProjectsFilterWidget.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
-import { useCategoriesInfiniteQuery } from "@entities/category";
-import { useOrganizationsInfiniteQuery } from "@entities/organization";
+import { useCategoriesFiltersInfiniteQuery } from "@entities/category";
+import { useOrganizationsFiltersInfiniteQuery } from "@entities/organization";
 import {
   OnlyActiveFilter,
   ProjectCategoriesFilter,
@@ -42,7 +42,9 @@ export const MyProjectsFilterWidget = ({
         <div className={styles.projectCategories}>
           <h1 className={styles.subHeaderFilter}>Categories</h1>
           <ProjectCategoriesFilter
-            useCategoriesQuery={useCategoriesInfiniteQuery({ PageSize: 7 })}
+            useCategoriesQuery={useCategoriesFiltersInfiniteQuery({
+              PageSize: 7,
+            })}
             selectedIds={search.CategoryIds}
             onToggle={onCategoryToggle}
           />
@@ -51,7 +53,7 @@ export const MyProjectsFilterWidget = ({
         <div className={styles.projectOrganizations}>
           <h1 className={styles.subHeaderFilter}>Organizations</h1>
           <ProjectOrganizationFilter
-            useOrganizationsQuery={useOrganizationsInfiniteQuery({
+            useOrganizationsQuery={useOrganizationsFiltersInfiniteQuery({
               PageSize: 7,
             })}
             selectedIds={search.OrganizationIds}
@@ -63,7 +65,7 @@ export const MyProjectsFilterWidget = ({
           <h1 className={styles.subHeaderFilter}>More options</h1>
           <div className={styles.moreOptionsBlock}>
             <OnlyActiveFilter
-              value={search.OnlyActive}
+              value={search.OnlyActive ?? false}
               onChange={onOnlyActiveChange}
             />
           </div>

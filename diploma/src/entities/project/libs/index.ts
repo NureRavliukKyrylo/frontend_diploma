@@ -5,3 +5,4 @@ export type {
   MapProjectSearchParams,
 } from "./schemas/projectsSearchSchema";
 export type { MyProjectSearchParams } from "./schemas/myProjectsSearchParams";
+export { memberPreviewToAvatar } from "./preview-to-avatar/memberPreviewToAvatar";

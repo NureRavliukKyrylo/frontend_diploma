@@ -33,7 +33,10 @@ export const useMapPage = () => {
     search.MaxLng != null;
 
   const radiusMeters = search.RadiusKm != null ? search.RadiusKm * 1000 : null;
-  const userLocation = useMapUserLocation();
+
+  const { coordinates: userLocation, isReady: locationReady } =
+    useMapUserLocation();
+
   const initialCoords = !hasBounds ? (searchCoordinates ?? userLocation) : null;
 
   const initialZoom = search.Zoom ?? (searchCoordinates ? 12 : 5);
@@ -66,5 +69,6 @@ export const useMapPage = () => {
     handleSearch,
     handleSearchBounds,
     userLocation,
+    locationReady,
   };
 };

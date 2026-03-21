@@ -6,3 +6,4 @@ export { ProjectDistanceFilter } from "./filters/ui/distance/ProjectDistanceFilt
 export { LocationMarker } from "./filters/ui/location-marker/LocationMarker";
 export { OnlyActiveFilter } from "./filters/ui/more-options/only-active/OnlyActiveFilter";
 export { ShowJoinedFilter } from "./filters/ui/more-options/show-joined/ShowJoinedFilter";
+export { LeaveProjectModal } from "./leave-project/ui/LeaveProjectModal";

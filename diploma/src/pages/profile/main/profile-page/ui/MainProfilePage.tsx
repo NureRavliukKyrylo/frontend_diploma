@@ -13,6 +13,9 @@ import { profileQuery } from "@entities/user/profile";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { useSearch } from "@tanstack/react-router";
+import { OrganizationsListWidget } from "@widgets/organizations";
+import { OrganizationItem } from "@entities/organization";
+import { DefaultAvatar } from "@shared/assets/images/user";
 
 export function MainProfilePage() {
   const search = useSearch({ from: "/_masterLayout/profile/" });
@@ -33,12 +36,28 @@ export function MainProfilePage() {
           email={user?.email}
           phone={user?.profile?.phone}
         />
-        {/*replace with widget later */}
         <div className={styles.organizationBlock}>
           <div className={styles.organizationBlockHeader}>
             <h1>Organizations</h1>
           </div>
-          <div className={styles.organizationBlockContent}></div>
+          <div className={styles.organizationBlockContent}>
+            {user?.profile?.organizations.length === 0 ? (
+              <div className={styles.emptyState}>
+                <h2>No organizations joined</h2>
+              </div>
+            ) : (
+              <OrganizationsListWidget
+                className={styles.organizationsList}
+                organizations={user?.profile?.organizations.slice(0, 4)}
+                renderCard={(organization) => (
+                  <OrganizationItem
+                    iconUrl={organization.logoUrl ?? DefaultAvatar}
+                    name={organization.name}
+                  />
+                )}
+              />
+            )}
+          </div>
         </div>
         <SocialPlatforms
           links={user?.profile?.socialLinks}

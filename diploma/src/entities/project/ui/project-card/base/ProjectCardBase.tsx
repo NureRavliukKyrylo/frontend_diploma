@@ -1,52 +1,30 @@
-import { Calendar } from "@shared/assets/icons/info";
+import type { ReactNode } from "react";
 import styles from "./ProjectCardBase.module.scss";
-import { AvatarGroup, ProgressBar } from "@shared/ui";
-import type { AvatarItem } from "@shared/config/types";
 import type { Project } from "@entities/project/model/types/Project";
 import { DefaultAvatar } from "@shared/assets/images/user";
-import { formatDateToInput } from "@shared/libs/date";
 
 interface ProjectCardBaseProps {
   project: Project;
-  avatars: AvatarItem[];
+  bottomContent?: ReactNode;
 }
 
-export const ProjectCardBase = ({ project, avatars }: ProjectCardBaseProps) => {
-  return (
-    <div className={styles.projectCardWrapper}>
-      <div className={styles.organizationInfoBlock}>
-        <img
-          className={styles.imageOrganization}
-          src={project.organization?.logoUrl ?? DefaultAvatar}
-          alt="image organization"
-        />
-        <h1>{project.organization?.name ?? "Unknown Organization"}</h1>
-      </div>
-      <div className={styles.projectInfoBlock}>
-        <h1>{project.title}</h1>
-        <p>{project.description}</p>
-      </div>
-      <div className={styles.deadlineBlock}>
-        <img src={Calendar} alt="calendar-deadline" />
-        <h1>
-          Deadline: <span>{formatDateToInput(project.endAt)}</span>
-        </h1>
-      </div>
-      <div className={styles.progressBlock}>
-        <div className={styles.progressInfo}>
-          <h1>Progress</h1>
-          <h2>{project.progressPercent} %</h2>
-        </div>
-        <ProgressBar current={project.progressPercent} />
-      </div>
-      <div className={styles.footerCard}>
-        <AvatarGroup
-          className={styles.avatarsGroup}
-          avatarClassName={styles.avatarVolunteer}
-          avatars={avatars}
-        />
-        <h1>{project.tasksTotal} task</h1>
-      </div>
+export const ProjectCardBase = ({
+  project,
+  bottomContent,
+}: ProjectCardBaseProps) => (
+  <>
+    <div className={styles.organizationInfoBlock}>
+      <img
+        className={styles.imageOrganization}
+        src={project.organization?.logoUrl ?? DefaultAvatar}
+        alt="image organization"
+      />
+      <h1>{project.organization?.name ?? "Unknown Organization"}</h1>
     </div>
-  );
-};
+    <div className={styles.projectInfoBlock}>
+      <h1>{project.title}</h1>
+      <p>{project.description}</p>
+    </div>
+    {bottomContent}
+  </>
+);

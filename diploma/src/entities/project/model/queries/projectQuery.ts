@@ -10,8 +10,9 @@ export const projectKeys = {
   all: () => ["projects"] as const,
   list: (params: ProjectSearchParams) =>
     [...projectKeys.all(), "list", params] as const,
+  mys: () => [...projectKeys.all(), "my"] as const,
   my: (params: MyProjectSearchParams) =>
-    [...projectKeys.all(), "my", params] as const,
+    [...projectKeys.mys(), params] as const,
   map: (params: MapProjectSearchParams) =>
     [...projectKeys.all(), "map", params] as const,
 };

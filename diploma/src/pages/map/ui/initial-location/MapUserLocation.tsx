@@ -21,11 +21,9 @@ export const MapUserLocation = ({
 
   useEffect(() => {
     if (!coordinates) {
-      onAnimationEnd?.();
       return;
     }
     if (!animate) {
-      onAnimationEnd?.();
       return;
     }
     if (!hasFlown.current) {

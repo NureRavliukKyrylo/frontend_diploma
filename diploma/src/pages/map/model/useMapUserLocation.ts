@@ -23,10 +23,12 @@ export const useMapUserLocation = () => {
         }
       : null;
 
+  const isReady = !isAuthenticated || !!profileCoords || !!geoCoords;
+
   useGeolocation({
     coordinates: profileCoords,
     onLocationChange: setGeoCoords,
   });
 
-  return profileCoords ?? geoCoords ?? null;
+  return { coordinates: profileCoords ?? geoCoords ?? null, isReady };
 };

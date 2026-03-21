@@ -1,4 +1,5 @@
 import { getOrganizationsList } from "@entities/organization/api/organizationsListApi";
+import { getOrganizationsListFilters } from "@entities/organization/api/organizationsListFiltersApi";
 import type {
   OrganizationPaginationParams,
   OrganizationSearchParams,
@@ -14,6 +15,8 @@ export const organizationKeys = {
   ],
   infinite: (params: OrganizationPaginationParams) =>
     [...organizationKeys.list(params), "infinite"] as const,
+  infiniteMy: (params: OrganizationPaginationParams) =>
+    [...organizationKeys.list(params), "infinite-my"] as const,
 };
 
 export const organizationQuery = {
@@ -28,6 +31,15 @@ export const organizationQuery = {
       queryKey: organizationKeys.infinite(params),
       queryFn: ({ pageParam }) =>
         getOrganizationsList({ ...params, Page: pageParam }),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage) => lastPage.pagination.nextPage ?? undefined,
+      select: (data) => data.pages.flatMap((page) => page.data),
+    }),
+  infiniteMy: (params: OrganizationPaginationParams) =>
+    infiniteQueryOptions({
+      queryKey: organizationKeys.infiniteMy(params),
+      queryFn: ({ pageParam }) =>
+        getOrganizationsListFilters({ ...params, Page: pageParam }),
       initialPageParam: 1,
       getNextPageParam: (lastPage) => lastPage.pagination.nextPage ?? undefined,
       select: (data) => data.pages.flatMap((page) => page.data),

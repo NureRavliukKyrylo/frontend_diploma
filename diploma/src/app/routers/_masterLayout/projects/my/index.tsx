@@ -30,9 +30,11 @@ export const Route = createFileRoute("/_masterLayout/projects/my/")({
     ],
   },
   loader: async ({ context: { queryClient } }) => {
-    queryClient.prefetchInfiniteQuery(categoryQuery.infinite({ PageSize: 7 }));
     queryClient.prefetchInfiniteQuery(
-      organizationQuery.infinite({ PageSize: 7 }),
+      categoryQuery.infiniteMy({ PageSize: 7 }),
+    );
+    queryClient.prefetchInfiniteQuery(
+      organizationQuery.infiniteMy({ PageSize: 7 }),
     );
   },
 });

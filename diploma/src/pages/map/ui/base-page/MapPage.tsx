@@ -13,7 +13,7 @@ import { MapUserLocation } from "../initial-location/MapUserLocation.tsx";
 import { useMapPage } from "../../model/useMapPage.ts";
 import { useQuery } from "@tanstack/react-query";
 import { projectQuery } from "@entities/project";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const MapPage = () => {
   const {
@@ -29,11 +29,20 @@ export const MapPage = () => {
     handleSearch,
     handleSearchBounds,
     userLocation,
+    locationReady,
   } = useMapPage();
 
   const { data } = useQuery(projectQuery.map(mapSearch));
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const boundsReadyRef = useRef<() => void>(() => {});
+
+  useEffect(() => {
+    if (!locationReady) return;
+    if (hasBounds || !!searchCoordinates || !userLocation) {
+      boundsReadyRef.current();
+    }
+  }, [locationReady, hasBounds, !!searchCoordinates, !!userLocation]);
+
   return (
     <div ref={wrapperRef} className={styles.mapPageWrapper}>
       <BaseMap
@@ -59,7 +68,7 @@ export const MapPage = () => {
         )}
         <MapUserLocation
           coordinates={userLocation}
-          animate={!searchCoordinates && !hasBounds}
+          animate={!searchCoordinates && !hasBounds && locationReady}
           onAnimationEnd={() => boundsReadyRef.current()}
         />
         <MapBoundsTracker

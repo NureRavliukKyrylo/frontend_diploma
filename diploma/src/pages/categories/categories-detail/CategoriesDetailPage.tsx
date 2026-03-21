@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ProjectsListWidget } from "@widgets/projects";
 import { CategoryProjectFiltersWidget } from "@widgets/categories";
 import {
-  ProjectCardBase,
+  ProjectCard,
   ProjectCardSkeleton,
   projectQuery,
   sortingProjectItems,
@@ -126,23 +126,7 @@ export function CategoryDetailPage() {
                           })
                         }
                       >
-                        <ProjectCardBase
-                          project={project}
-                          avatars={[
-                            {
-                              src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
-                              name: "Kyrylo",
-                            },
-                            {
-                              src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
-                              name: "Kyrylo",
-                            },
-                            {
-                              src: "https://impactflowavatar.blob.core.windows.net/avatar/avatars/8f62543b-1f21-4927-93cd-d873d3ed3e51.jpg",
-                              name: "Kyrylo",
-                            },
-                          ]}
-                        />
+                        <ProjectCard project={project} />
                       </motion.div>
                     )}
                     useProjectsQuery={useProjectsListQuery(search)}

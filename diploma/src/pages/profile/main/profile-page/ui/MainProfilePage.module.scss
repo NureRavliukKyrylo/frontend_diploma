@@ -6,7 +6,7 @@
   width: 75%;
 
   > :first-child {
-    flex: 20 0 0;
+    flex: 23 0 0;
   }
 
   > :last-child {
@@ -27,7 +27,7 @@
         background: #ffffff;
         box-shadow: 2px -6px 7px 0px rgba(0, 0, 0, 0.1);
         border-radius: 20px 20px 0 0;
-        padding: 5px 30px;
+        padding: 2px 30px 0px 30px;
         width: fit-content;
         margin-bottom: -2px;
         position: relative;
@@ -42,10 +42,27 @@
         background: #ffffff;
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
         border-radius: 0px 15px 15px 15px;
-        padding: 40px 30px 30px;
-        min-height: 180px;
+        padding: 20px;
         position: relative;
+        min-height: 100px;
         z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .organizationsList {
+          display: flex;
+          gap: 10px;
+          width: 100%;
+          justify-content: start;
+          align-items: baseline;
+        }
+        .emptyState {
+          h2 {
+            @include font-base(20px, 700);
+            color: rgba(0, 0, 0, 0.6);
+            text-align: center;
+          }
+        }
       }
     }
   }
@@ -101,24 +118,4 @@
 }
 .cardBaseProfileBlock {
   --card-justify-content: flex-start;
-}
-.badgesProfileList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(217px, 1fr));
-  gap: 30px;
-  align-items: stretch;
-  grid-auto-rows: auto;
-}
-
-.badgeImageWrapper {
-  aspect-ratio: 3/4;
-}
-
-.inventoryWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  .achievementsTitle {
-    @include font-base(40px, 900);
-  }
 }

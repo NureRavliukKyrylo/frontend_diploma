@@ -90,11 +90,11 @@ export const ProjectFiltersWidget = ({ search }: ProjectFiltersWidgetProps) => {
           <h1 className={styles.subHeaderFilter}>More options</h1>
           <div className={styles.moreOptionsBlock}>
             <ShowJoinedFilter
-              value={search.ShowJoined}
+              value={search.ShowJoined ?? false}
               onChange={onShowJoinedChange}
             />
             <OnlyActiveFilter
-              value={search.OnlyActive}
+              value={search.OnlyActive ?? false}
               onChange={onOnlyActiveChange}
             />
           </div>

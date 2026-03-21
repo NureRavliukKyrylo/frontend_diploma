@@ -34,8 +34,8 @@ export const projectFiltersSchema = locationSchema.extend({
   Search: z.string().optional(),
   Rating: z.number().min(0).max(5).optional().catch(5),
   OrganizationIds: z.array(z.string()).optional().catch(undefined),
-  OnlyActive: z.boolean().default(false).optional(),
-  ShowJoined: z.boolean().default(false).optional(),
+  OnlyActive: z.boolean().optional(),
+  ShowJoined: z.boolean().optional(),
 });
 
 export const projectFiltersWithCategorySchema = projectFiltersSchema

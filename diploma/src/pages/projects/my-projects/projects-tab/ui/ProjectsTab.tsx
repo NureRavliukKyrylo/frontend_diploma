@@ -1,4 +1,4 @@
-import { useSearch } from "@tanstack/react-router";
+import { useRouter, useSearch } from "@tanstack/react-router";
 import styles from "./ProjectsTab.module.scss";
 import { ToggleDropdownButton } from "@shared/ui/buttons";
 import { MyProjectsFilterWidget, ProjectsListWidget } from "@widgets/projects/";
@@ -6,17 +6,16 @@ import { useProjectsTab } from "../model/useProjectsTab";
 import { SearchBar } from "@shared/ui/inputs";
 import { SortDropDown } from "@shared/ui/drop-down";
 import {
-  ProjectCardBase,
   ProjectCardSkeleton,
-  projectQuery,
+  ProjectControlCard,
   sortingProjectItems,
 } from "@entities/project";
 import { Pagination } from "@shared/ui";
-import { useQuery } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
 import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { useMyProjectsListQuery } from "@entities/project/model/hooks/useMyProjectsListQuery";
+import { LeaveProjectModal } from "@features/projects";
 
 export const ProjectsTab = () => {
   const search = useSearch({ from: "/_masterLayout/projects/my/" });
@@ -26,9 +25,15 @@ export const ProjectsTab = () => {
     handleSearch,
     handleSort,
     handlePageChange,
-  } = useProjectsTab();
-
-  const { data: projects } = useQuery(projectQuery.my(search));
+    hasActiveFilters,
+    isEmpty,
+    projects,
+    handleCloseModal,
+    handleLeaveProject,
+    isModalOpen,
+    selectedProject,
+  } = useProjectsTab(search);
+  const router = useRouter();
 
   return (
     <>
@@ -54,10 +59,19 @@ export const ProjectsTab = () => {
           transition={{ layout: { ease: "backOut", duration: 0.4 } }}
           className={`${styles.myProjectsList} ${isFilterOpen ? styles.filterOpen : ""}`}
         >
-          {projects?.data?.length === 0 ? (
+          {isEmpty ? (
             <div className={styles.emptyState}>
-              <h2>No projects found</h2>
-              <p>Try adjusting your filters or search query</p>
+              {hasActiveFilters ? (
+                <>
+                  <h2>No projects found</h2>
+                  <p>Try adjusting your filters or search query</p>
+                </>
+              ) : (
+                <>
+                  <h2>No projects yet</h2>
+                  <p>Join your first project to get started</p>
+                </>
+              )}
             </div>
           ) : (
             <Suspense
@@ -93,16 +107,35 @@ export const ProjectsTab = () => {
                             },
                           }),
                           hover: {
-                            scale: 1.03,
+                            scale: 1.01,
                             transition: { ease: "easeInOut", duration: 0.2 },
                           },
                         }}
                         initial="hidden"
                         animate="visible"
                         whileHover="hover"
+                        transition={{
+                          scale: { ease: "easeInOut", duration: 0.2 },
+                        }}
                         className={styles.projectCardMotion}
+                        onClick={() =>
+                          router.navigate({
+                            to: "/projects/$id",
+                            params: { id: project.id },
+                          })
+                        }
                       >
-                        <ProjectCardBase project={project} avatars={[]} />
+                        <ProjectControlCard
+                          project={project}
+                          menuItems={[
+                            {
+                              key: "leave",
+                              label: "Leave Project",
+                              onClick: () => handleLeaveProject(project),
+                              variant: "leave",
+                            },
+                          ]}
+                        />
                       </motion.div>
                     )}
                     useProjectsQuery={useMyProjectsListQuery(search)}
@@ -121,6 +154,14 @@ export const ProjectsTab = () => {
             onChange={handlePageChange}
           />
         </div>
+      )}
+      {selectedProject && (
+        <LeaveProjectModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          projectId={selectedProject.id}
+          projectName={selectedProject.title}
+        />
       )}
     </>
   );

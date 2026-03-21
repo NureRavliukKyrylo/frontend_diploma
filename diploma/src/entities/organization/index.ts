@@ -10,3 +10,5 @@ export {
 } from "./libs/organizationSearchSchema";
 export { ListOrganizationCard } from "./ui/list-card/ListOrganizationCard";
 export { useOrganizationsInfiniteQuery } from "./model/hooks/useOrganizationsInfiniteQuery";
+export { useOrganizationsFiltersInfiniteQuery } from "./model/hooks/useOrganizationsFilterInfiniteQuery";
+export { OrganizationItem } from "./ui/organization-item/OrganizationItem";
