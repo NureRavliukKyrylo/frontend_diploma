@@ -1,5 +1,4 @@
-import type { Badge } from "../model/types/Badge";
-import { TierColors } from "../model/types/TierColors";
+import { TierColors, type Badge } from "../model";
 import styles from "./BadgeCard.module.scss";
 
 export interface BadgeCardProps {

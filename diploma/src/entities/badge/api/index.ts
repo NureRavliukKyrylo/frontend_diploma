@@ -1,1 +1,1 @@
-export { getMyBadges } from "./getMyBadgesApi";
+export { getMyBadges } from "./list-badges/getMyBadgesApi";

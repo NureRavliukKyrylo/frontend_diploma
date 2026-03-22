@@ -1,8 +1,8 @@
 import type { MyProjectSearchParams } from "@entities/project/libs";
-import { projectQuery } from "../queries/projectQuery";
+import { projectQuery } from "../queries";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import type { QueryResult } from "@shared/config/types";
-import type { Project } from "../types/Project";
+import type { Project } from "../types";
 
 export const useMyProjectsListQuery =
   (search: MyProjectSearchParams) => (): QueryResult<Project> => {

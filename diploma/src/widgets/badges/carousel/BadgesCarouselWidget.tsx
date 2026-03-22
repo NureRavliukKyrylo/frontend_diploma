@@ -1,7 +1,7 @@
 import { Carousel } from "@shared/ui";
 import { BadgeCard } from "@entities/badge";
 import styles from "./BadgesCarouselWidget.module.scss";
-import type { Badge } from "@entities/badge/model/types/Badge";
+import type { Badge } from "@entities/badge/model/types/badge/Badge";
 import { motion } from "framer-motion";
 import type { BadgesQueryResult } from "@entities/badge/model";
 

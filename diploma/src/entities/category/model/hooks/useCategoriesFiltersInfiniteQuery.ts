@@ -1,8 +1,8 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { categoryQuery } from "../queries/categoryQuery";
-import type { CategoriesSearchParams } from "@entities/category/libs";
+import { categoryQuery } from "../queries";
+import type { CategoriesSearchParams } from "../../libs";
 import type { QueryResult } from "@shared/config/types";
-import type { Category } from "../types/Category";
+import type { Category } from "../types";
 
 export const useCategoriesFiltersInfiniteQuery =
   (params: CategoriesSearchParams) => (): QueryResult<Category> => {

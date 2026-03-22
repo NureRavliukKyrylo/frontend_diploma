@@ -1,1 +1,2 @@
-export { type Skill } from "./types/Skill";
+export { type Skill } from "./types/skill/Skill";
+export type { SkillProfile } from "./types/skill-profile/SkillProfile";

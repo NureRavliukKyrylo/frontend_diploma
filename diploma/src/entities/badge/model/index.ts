@@ -1,2 +1,2 @@
-export { type Badge } from "./types/Badge";
-export { type BadgesQueryResult } from "./types/BadgesQueryResult";
+export { type Badge } from "./types/badge/Badge";
+export { TierColors } from "./types/tier/TierColors";

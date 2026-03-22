@@ -1,8 +1,9 @@
-export { myProjectSearchDefaults } from "./schemas/myProjectsSearchParams";
+export { myProjectSearchDefaults } from "./search-shema/myProjectsSearchParams";
 
 export type {
   ProjectSearchParams,
   MapProjectSearchParams,
-} from "./schemas/projectsSearchSchema";
-export type { MyProjectSearchParams } from "./schemas/myProjectsSearchParams";
-export { memberPreviewToAvatar } from "./preview-to-avatar/memberPreviewToAvatar";
+} from "./search-shema/projectsSearchSchema";
+export type { MyProjectSearchParams } from "./search-shema/myProjectsSearchParams";
+export { getProjectStatusConfig } from "./status-config/getProjectStatusConfig";
+export type { ProjectBaseParams } from "./search-shema/projectsSearchSchema";

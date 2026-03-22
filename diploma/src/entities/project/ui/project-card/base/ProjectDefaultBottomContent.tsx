@@ -1,9 +1,9 @@
 import { Calendar } from "@shared/assets/icons/info";
 import styles from "./ProjectCardBase.module.scss";
 import { AvatarGroup, ProgressBar } from "@shared/ui";
-import type { Project } from "@entities/project/model/types/Project";
+import type { Project } from "../../../model";
 import { formatDateToText } from "@shared/libs/date";
-import { memberPreviewToAvatar } from "@entities/project/libs";
+import { memberPreviewToAvatar } from "@entities/user";
 
 interface ProjectDefaultBottomContentProps {
   project: Project;

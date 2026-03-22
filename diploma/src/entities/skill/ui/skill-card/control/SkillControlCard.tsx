@@ -1,4 +1,4 @@
-import type { Skill } from "@entities/skill/model";
+import type { Skill } from "../../../model";
 import styles from "./SkillControlCard.module.scss";
 import {
   Dropdown,

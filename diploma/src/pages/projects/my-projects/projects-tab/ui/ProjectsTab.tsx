@@ -16,6 +16,14 @@ import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { useMyProjectsListQuery } from "@entities/project/model/hooks/useMyProjectsListQuery";
 import { LeaveProjectModal } from "@features/projects";
+import {
+  layoutTransition,
+  fadeVariants,
+  fadeDuration,
+  createCardVariants,
+} from "@shared/assets/animations";
+
+const staggeredCardVariantsSubtle = createCardVariants({ hoverScale: 1.01 });
 
 export const ProjectsTab = () => {
   const search = useSearch({ from: "/_masterLayout/projects/my/" });
@@ -53,10 +61,11 @@ export const ProjectsTab = () => {
             value={search.OrderBy ?? "Default"}
           />
         </div>
+
         <motion.div
           layout
           initial={false}
-          transition={{ layout: { ease: "backOut", duration: 0.4 } }}
+          transition={{ layout: layoutTransition }}
           className={`${styles.myProjectsList} ${isFilterOpen ? styles.filterOpen : ""}`}
         >
           {isEmpty ? (
@@ -85,38 +94,18 @@ export const ProjectsTab = () => {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={JSON.stringify(search)}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
+                  {...fadeVariants}
+                  transition={fadeDuration}
                 >
                   <ProjectsListWidget
                     renderCard={(project, index) => (
                       <motion.div
                         key={project.id}
                         custom={index + 1}
-                        variants={{
-                          hidden: { opacity: 0, y: 20 },
-                          visible: (i) => ({
-                            opacity: 1,
-                            y: 0,
-                            transition: {
-                              duration: 0.4,
-                              ease: "easeOut",
-                              delay: i * 0.06,
-                            },
-                          }),
-                          hover: {
-                            scale: 1.01,
-                            transition: { ease: "easeInOut", duration: 0.2 },
-                          },
-                        }}
+                        variants={staggeredCardVariantsSubtle}
                         initial="hidden"
                         animate="visible"
                         whileHover="hover"
-                        transition={{
-                          scale: { ease: "easeInOut", duration: 0.2 },
-                        }}
                         className={styles.projectCardMotion}
                         onClick={() =>
                           router.navigate({
@@ -146,6 +135,7 @@ export const ProjectsTab = () => {
           )}
         </motion.div>
       </div>
+
       {projects && projects.pagination.totalPages > 1 && (
         <div className={styles.paginationWrapper}>
           <Pagination
@@ -155,6 +145,7 @@ export const ProjectsTab = () => {
           />
         </div>
       )}
+
       {selectedProject && (
         <LeaveProjectModal
           isOpen={isModalOpen}

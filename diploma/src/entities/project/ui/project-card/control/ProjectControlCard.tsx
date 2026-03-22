@@ -5,10 +5,11 @@ import {
   DropdownTrigger,
 } from "@heroui/react";
 import { MoreActionsIcon } from "@shared/assets/icons/actions";
-import type { Project } from "@entities/project/model/types/Project";
+import type { Project } from "../../../model";
 import { ProjectCardBase } from "../base/ProjectCardBase";
 import { ProjectDefaultBottomContent } from "../base/ProjectDefaultBottomContent";
 import styles from "./ProjectControlCard.module.scss";
+import { getProjectStatusConfig } from "../../../libs";
 
 interface MenuItem {
   key: string;
@@ -25,35 +26,49 @@ interface ProjectControlCardProps {
 export const ProjectControlCard = ({
   project,
   menuItems,
-}: ProjectControlCardProps) => (
-  <div className={styles.projectControlCardWrapper}>
-    <Dropdown placement="top-start" shouldBlockScroll={false}>
-      <DropdownTrigger>
-        <button
-          className={styles.moreActionsButton}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <img src={MoreActionsIcon} alt="more-actions" />
-        </button>
-      </DropdownTrigger>
-      <DropdownMenu>
-        {menuItems.map((item) => (
-          <DropdownItem
-            key={item.key}
-            onClick={item.onClick}
-            classNames={{
-              base: `${styles.menuItem} ${styles[item.variant ?? "default"]}`,
-              title: styles.menuItemTitle,
-            }}
+}: ProjectControlCardProps) => {
+  const statusConfig = getProjectStatusConfig(project.volunteerProjectState);
+  return (
+    <div
+      className={`${styles.projectControlCardWrapper} ${styles[project.volunteerProjectState]}`}
+    >
+      <Dropdown placement="top-start" shouldBlockScroll={false}>
+        <DropdownTrigger>
+          <button
+            className={styles.moreActionsButton}
+            onClick={(e) => e.stopPropagation()}
           >
-            {item.label}
-          </DropdownItem>
-        ))}
-      </DropdownMenu>
-    </Dropdown>
-    <ProjectCardBase
-      project={project}
-      bottomContent={<ProjectDefaultBottomContent project={project} />}
-    />
-  </div>
-);
+            <img src={MoreActionsIcon} alt="more-actions" />
+          </button>
+        </DropdownTrigger>
+        <DropdownMenu>
+          {menuItems.map((item) => (
+            <DropdownItem
+              key={item.key}
+              onClick={item.onClick}
+              classNames={{
+                base: `${styles.menuItem} ${styles[item.variant ?? "default"]}`,
+                title: styles.menuItemTitle,
+              }}
+            >
+              {item.label}
+            </DropdownItem>
+          ))}
+        </DropdownMenu>
+      </Dropdown>
+      <ProjectCardBase
+        project={project}
+        topContent={
+          <div
+            className={styles.statusBadge}
+            style={{ background: statusConfig.bg, color: statusConfig.color }}
+          >
+            <span className={styles.statusDot} />
+            {statusConfig.label}
+          </div>
+        }
+        bottomContent={<ProjectDefaultBottomContent project={project} />}
+      />
+    </div>
+  );
+};

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_URL } from "@shared/config/constants";
 import { apiClient } from "@shared/api";
-import { useUserStore } from "@entities/user/profile";
+import { useUserStore } from "../../profile";
 
 export const refreshToken = async () => {
   try {

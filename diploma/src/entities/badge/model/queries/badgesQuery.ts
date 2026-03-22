@@ -1,4 +1,4 @@
-import { getMyBadges } from "@entities/badge/api";
+import { getMyBadges } from "../../api";
 import { queryOptions } from "@tanstack/react-query";
 
 export const badgesKeys = {

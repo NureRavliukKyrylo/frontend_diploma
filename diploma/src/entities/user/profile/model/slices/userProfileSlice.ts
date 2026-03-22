@@ -1,10 +1,6 @@
 import { type StateCreator } from "zustand";
 import { SocialPlatform, type Coordinates } from "@shared/config/types";
-import {
-  type Profile,
-  type PrivacySettings,
-  type PrivacyField,
-} from "../types/profile";
+import { type Profile, type PrivacySettings, type PrivacyField } from "../";
 import { fileToBase64 } from "@shared/libs/file";
 
 export interface UserProfileSlice {

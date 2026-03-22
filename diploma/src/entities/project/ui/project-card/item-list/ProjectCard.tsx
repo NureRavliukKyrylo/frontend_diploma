@@ -1,4 +1,4 @@
-import type { Project } from "@entities/project/model/types/Project";
+import type { Project } from "../../../model";
 import { ProjectCardBase } from "../base/ProjectCardBase";
 import { ProjectDefaultBottomContent } from "../base/ProjectDefaultBottomContent";
 import styles from "./ProjectCard.module.scss";

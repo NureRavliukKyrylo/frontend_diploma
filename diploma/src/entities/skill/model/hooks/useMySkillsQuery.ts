@@ -1,7 +1,7 @@
-import { skillsQuery } from "../queries/skillQueries";
+import { skillsQuery } from "../queries";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import type { SkillsProfileSearchParams } from "@entities/skill/libs";
-import type { SkillProfile } from "../types/SkillProfile";
+import type { SkillsProfileSearchParams } from "../../libs";
+import type { SkillProfile } from "../types";
 import type { QueryResult } from "@shared/config/types";
 
 export const useMySkillsListQuery =

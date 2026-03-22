@@ -10,6 +10,21 @@
   gap: 10px;
   height: 100%;
   position: relative;
+  border-left: 3px solid transparent;
+
+  &.active {
+    border-left-color: #639922;
+  }
+  &.endingSoon {
+    border-left-color: #ef9f27;
+  }
+  &.completed {
+    border-left-color: #378add;
+  }
+  &.archived {
+    border-left-color: #888780;
+    opacity: 0.7;
+  }
   .moreActionsButton {
     align-self: flex-end;
     cursor: pointer;
@@ -47,4 +62,22 @@
   @include font-base(15px, 500);
   color: #374151;
   transition: color 0.15s ease;
+}
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 15px;
+  border-radius: 20px;
+  @include font-base(16px, 600);
+  width: fit-content;
+
+  &::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+  }
 }

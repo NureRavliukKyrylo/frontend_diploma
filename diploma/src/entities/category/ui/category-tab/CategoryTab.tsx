@@ -6,7 +6,6 @@ interface CategoryTabProps {
   onClick?: () => void;
 }
 
-//TODO: make this card universal to shared/ui later
 export const CategoryTab = ({
   name,
   isSelected,

@@ -1,3 +1,3 @@
-export type { SkillsResponse } from "./getSkillsApi";
-export { getSkills } from "./getSkillsApi";
-export { getMySkills } from "./getMySkillsApi";
+export type { SkillsResponse } from "./skills-list/getSkillsApi";
+export { getSkills } from "./skills-list/getSkillsApi";
+export { getMySkills } from "./skills-list/getMySkillsApi";

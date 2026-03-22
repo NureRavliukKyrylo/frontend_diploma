@@ -13,6 +13,15 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
+import {
+  fadeVariants,
+  fadeDuration,
+  createCardVariants,
+} from "@shared/assets/animations";
+
+const categoryCardVariants = createCardVariants({
+  hover: { ease: "easeInOut", duration: 0.3 },
+});
 
 export function CategoriesPage() {
   const navigate = useNavigate({ from: "/categories/" });
@@ -34,26 +43,14 @@ export function CategoriesPage() {
         <AnimatePresence mode="wait">
           <motion.div
             key={JSON.stringify(search)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            {...fadeVariants}
+            transition={fadeDuration}
           >
             <CategoriesListWidget
               startSlot={
                 <motion.div
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      transition: { duration: 0.4, ease: "easeOut", delay: 0 },
-                    },
-                    hover: {
-                      scale: 1.03,
-                      transition: { ease: "easeInOut", duration: 0.3 },
-                    },
-                  }}
+                  custom={0}
+                  variants={categoryCardVariants}
                   initial="hidden"
                   animate="visible"
                   whileHover="hover"
@@ -67,26 +64,11 @@ export function CategoriesPage() {
                 <motion.div
                   key={category.id}
                   custom={index + 1}
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: (i) => ({
-                      opacity: 1,
-                      y: 0,
-                      transition: {
-                        duration: 0.4,
-                        ease: "easeOut",
-                        delay: i * 0.06,
-                      },
-                    }),
-                    hover: {
-                      scale: 1.03,
-                      transition: { ease: "easeInOut", duration: 0.3 },
-                    },
-                  }}
+                  variants={categoryCardVariants}
                   initial="hidden"
                   animate="visible"
                   whileHover="hover"
-                  transition={{ scale: { ease: "easeInOut", duration: 0.3 } }}
+                  transition={{ scale: { ease: "easeInOut", duration: 0.2 } }}
                 >
                   <Link
                     to="/categories/$id"
@@ -105,16 +87,15 @@ export function CategoriesPage() {
           </motion.div>
         </AnimatePresence>
       </Suspense>
+
       <div className={styles.paginationWrapper}>
         {categories && categories.pagination.totalPages > 1 && (
           <Pagination
             total={categories.pagination.totalPages}
             page={Page}
-            onChange={(Page) => {
-              navigate({
-                search: (prev) => ({ ...prev, Page }),
-              });
-            }}
+            onChange={(Page) =>
+              navigate({ search: (prev) => ({ ...prev, Page }) })
+            }
           />
         )}
       </div>

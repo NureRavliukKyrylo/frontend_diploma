@@ -1,4 +1,4 @@
-import type { Project } from "../../model/types/Project";
+import type { Project } from "../../model";
 
 export const toGeoPoints = (projects: Project[]) =>
   projects.flatMap((project) => {

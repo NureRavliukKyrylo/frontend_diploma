@@ -2,6 +2,11 @@ import { BadgeCardDetailed, type Badge, type Tier } from "@entities/badge";
 import { BadgesListWidget } from "@widgets/badges";
 import styles from "./ProfileInventoryTab.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  fadeVariants,
+  fadeDuration,
+  staggeredCardVariantsNoHover,
+} from "@shared/assets/animations";
 
 export const ProfileInventoryTab = () => {
   const demoBadges: Badge[] = [
@@ -57,24 +62,16 @@ export const ProfileInventoryTab = () => {
     <div className={styles.inventoryWrapper}>
       <h1 className={styles.achievementsTitle}>Achievements</h1>
       <AnimatePresence mode="wait">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-        >
+        <motion.div {...fadeVariants} transition={fadeDuration}>
           <BadgesListWidget
             badges={demoBadges}
             className={styles.badgesProfileList}
             renderCard={(badge, index) => (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.4,
-                  ease: "easeOut",
-                  delay: index * 0.06,
-                }}
+                custom={index + 1}
+                variants={staggeredCardVariantsNoHover}
+                initial="hidden"
+                animate="visible"
               >
                 <BadgeCardDetailed
                   badge={badge}

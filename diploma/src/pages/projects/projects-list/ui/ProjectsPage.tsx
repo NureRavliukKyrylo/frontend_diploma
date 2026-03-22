@@ -21,6 +21,18 @@ import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ToggleDropdownButton } from "@shared/ui/buttons";
 import { SearchBar } from "@shared/ui/inputs";
 import { SortDropDown } from "@shared/ui/drop-down";
+import {
+  layoutTransition,
+  fadeVariants,
+  fadeDuration,
+  staggeredCardVariants,
+  createFadeVariants,
+} from "@shared/assets/animations";
+
+const headerVariants = createFadeVariants({
+  initial: { opacity: 0, y: -20 },
+  animate: { opacity: 1, y: 0 },
+});
 
 export function ProjectsPage() {
   const {
@@ -37,12 +49,12 @@ export function ProjectsPage() {
   return (
     <div className={styles.projectsWrapper}>
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
+        {...headerVariants}
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
         <ProjectsHeader search={search} />
       </motion.div>
+
       <div className={styles.mainProjectsSection}>
         <div className={styles.filterProjectsWrapper}>
           <div className={styles.filtersInteractions}>
@@ -60,15 +72,11 @@ export function ProjectsPage() {
               value={search.OrderBy ?? "Default"}
             />
           </div>
+
           <motion.div
             layout
             initial={false}
-            transition={{
-              layout: {
-                ease: "backOut",
-                duration: 0.4,
-              },
-            }}
+            transition={{ layout: layoutTransition }}
             className={`${styles.projectsList} ${isFilterOpen ? styles.filterOpen : ""}`}
           >
             {projects?.data?.length === 0 ? (
@@ -88,38 +96,18 @@ export function ProjectsPage() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={JSON.stringify(search)}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
+                    {...fadeVariants}
+                    transition={fadeDuration}
                   >
                     <ProjectsListWidget
                       renderCard={(project, index) => (
                         <motion.div
                           key={project.id}
                           custom={index + 1}
-                          variants={{
-                            hidden: { opacity: 0, y: 20 },
-                            visible: (i) => ({
-                              opacity: 1,
-                              y: 0,
-                              transition: {
-                                duration: 0.4,
-                                ease: "easeOut",
-                                delay: i * 0.06,
-                              },
-                            }),
-                            hover: {
-                              scale: 1.03,
-                              transition: { ease: "easeInOut", duration: 0.2 },
-                            },
-                          }}
+                          variants={staggeredCardVariants}
                           initial="hidden"
                           animate="visible"
                           whileHover="hover"
-                          transition={{
-                            scale: { ease: "easeInOut", duration: 0.2 },
-                          }}
                           className={styles.projectCardMotion}
                           onClick={() =>
                             router.navigate({
@@ -139,6 +127,7 @@ export function ProjectsPage() {
             )}
           </motion.div>
         </div>
+
         {projects && projects.pagination.totalPages > 1 && (
           <div className={styles.paginationWrapper}>
             <Pagination

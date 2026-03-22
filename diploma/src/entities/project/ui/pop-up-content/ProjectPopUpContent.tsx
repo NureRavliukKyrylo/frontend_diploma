@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { DefaultAvatar } from "@shared/assets/images/user";
-import type { Project } from "@entities/project/model";
+import type { Project } from "../../model";
 import styles from "./ProjectPopupContent.module.scss";
 
 interface ProjectPopupContentProps {

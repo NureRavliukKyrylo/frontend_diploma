@@ -1,6 +1,6 @@
 import type { StateCreator } from "zustand";
-import type { VerificationModalType } from "../types/verificationModalType";
-import type { ConnectedLinkPlatform } from "../../config/connectedLinks";
+import type { VerificationModalType } from "../";
+import type { ConnectedLinkPlatform } from "../../config";
 
 export interface ProfileModalVerificationSlice {
   activeVerificationModal: VerificationModalType;

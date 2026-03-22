@@ -16,6 +16,11 @@ import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { Skeleton } from "@heroui/react";
 import { useProfileSkillsTab } from "../model/useProfileSkillsTab";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  fadeVariants,
+  fadeDuration,
+  staggeredCardVariantsNoHover,
+} from "@shared/assets/animations";
 
 export const ProfileSkillsTab = () => {
   const {
@@ -37,7 +42,7 @@ export const ProfileSkillsTab = () => {
           <Suspense
             fallback={
               <div className={styles.skillsProfileWrapperList}>
-                <Skeleton className={styles.skeletonText}></Skeleton>
+                <Skeleton className={styles.skeletonText} />
                 <ListWidgetSkeleton
                   renderSkeleton={() => <SkillControlCardSkeleton showLevel />}
                   className={styles.skillsProfileList}
@@ -53,34 +58,27 @@ export const ProfileSkillsTab = () => {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={JSON.stringify(search)}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
+                  {...fadeVariants}
+                  transition={fadeDuration}
                 >
                   <SkillsListWidget<SkillProfile>
                     startSlot={
                       <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          duration: 0.4,
-                          ease: "easeOut",
-                          delay: 0.1,
-                        }}
+                        custom={0}
+                        variants={staggeredCardVariantsNoHover}
+                        initial="hidden"
+                        animate="visible"
                       >
                         <AssignSkillCard />
                       </motion.div>
                     }
                     renderCard={(skill, index) => (
                       <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          duration: 0.4,
-                          ease: "easeOut",
-                          delay: 0.1 + index * 0.08,
-                        }}
+                        key={skill.skillId}
+                        custom={index + 1}
+                        variants={staggeredCardVariantsNoHover}
+                        initial="hidden"
+                        animate="visible"
                       >
                         <SkillControlCard
                           skill={skill}

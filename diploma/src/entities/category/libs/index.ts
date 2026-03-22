@@ -1,1 +1,1 @@
-export { type CategoriesSearchParams } from "./categorySearchSchema";
+export { type CategoriesSearchParams } from "./search-schema/categorySearchSchema";

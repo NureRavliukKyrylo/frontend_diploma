@@ -6,7 +6,7 @@
   width: 75%;
 
   > :first-child {
-    flex: 23 0 0;
+    flex: 25 0 0;
   }
 
   > :last-child {
@@ -18,7 +18,6 @@
     flex-direction: column;
     gap: 30px;
 
-    //organization scss idk maybe change
     .organizationBlock {
       position: relative;
       width: 100%;

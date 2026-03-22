@@ -16,6 +16,12 @@ import { ToggleDropdownButton } from "@shared/ui/buttons";
 import { SearchBar } from "@shared/ui/inputs";
 import { SkillsFilterWidget } from "@widgets/skills/filters/ui/SkillsFilterWidget";
 import { SortDropDown } from "@shared/ui/drop-down";
+import {
+  layoutTransition,
+  fadeVariants,
+  fadeDuration,
+  staggeredCardVariantsNoHover,
+} from "@shared/assets/animations";
 
 export const SkillsPage = () => {
   const {
@@ -59,7 +65,7 @@ export const SkillsPage = () => {
           <motion.div
             layout
             initial={false}
-            transition={{ layout: { ease: "backOut", duration: 0.4 } }}
+            transition={{ layout: layoutTransition }}
             className={`${styles.skillsList} ${filterOpen ? styles.filterOpen : ""}`}
           >
             {data?.data.length === 0 ? (
@@ -80,21 +86,17 @@ export const SkillsPage = () => {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={JSON.stringify(search)}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
+                    {...fadeVariants}
+                    transition={fadeDuration}
                   >
                     <SkillsListWidget
                       renderCard={(skill, index) => (
                         <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            duration: 0.4,
-                            ease: "easeOut",
-                            delay: index * 0.06,
-                          }}
+                          key={skill.id}
+                          custom={index + 1}
+                          variants={staggeredCardVariantsNoHover}
+                          initial="hidden"
+                          animate="visible"
                         >
                           <SkillControlCard
                             skill={skill}

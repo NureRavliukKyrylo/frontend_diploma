@@ -1,2 +1,2 @@
-export type { SkillsSearchParams } from "./skillsSearchSchema";
-export type { SkillsProfileSearchParams } from "./skillsSearchSchema";
+export type { SkillsSearchParams } from "./search-shema/skillsSearchSchema";
+export type { SkillsProfileSearchParams } from "./search-shema/skillsSearchSchema";

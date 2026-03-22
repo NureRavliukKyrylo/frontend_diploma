@@ -3,7 +3,7 @@ import { leaveProject, type LeaveProjectDto } from "../api";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { queryClient } from "@shared/api";
-import { projectKeys } from "@entities/project/model/queries/projectQuery";
+import { projectKeys } from "@entities/project/model/queries/project-query/projectQuery";
 import { profileKeys } from "@entities/user/profile";
 
 export const useLeaveProject = (onSuccess?: () => void) => {

@@ -1,10 +1,9 @@
 import { useNavigate } from "@tanstack/react-router";
-import type { ProfileMode } from "../types/profileMode";
-import type { ProfileSettingsMode } from "../types/profileSettingsMode";
+import type { ProfileMode, ProfileSettingsMode } from "../";
 import {
   profileSearchDefaults,
   profileSettingsSearchDefaults,
-} from "../../libs/profileSearchSchema";
+} from "../../libs";
 
 type AnyProfileTab = ProfileMode | ProfileSettingsMode;
 
