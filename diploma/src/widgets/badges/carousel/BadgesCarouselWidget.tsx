@@ -3,10 +3,10 @@ import { BadgeCard } from "@entities/badge";
 import styles from "./BadgesCarouselWidget.module.scss";
 import type { Badge } from "@entities/badge/model/types/badge/Badge";
 import { motion } from "framer-motion";
-import type { BadgesQueryResult } from "@entities/badge/model";
+import type { QueryResult } from "@shared/config/types";
 
 interface BadgesCarouselWidgetProps {
-  useBadgesQuery?: () => BadgesQueryResult;
+  useBadgesQuery?: () => QueryResult<Badge>;
   badges?: Badge[];
   minItemWidth?: number;
 }

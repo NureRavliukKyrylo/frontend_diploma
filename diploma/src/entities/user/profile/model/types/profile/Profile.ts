@@ -1,3 +1,4 @@
+import type { Badge } from "@entities/badge";
 import type { Organization } from "@entities/organization";
 import {
   type Coordinates,
@@ -23,4 +24,5 @@ export interface Profile {
   activeProjectCount?: number;
   completedProjectCount?: number;
   organizations?: Organization[];
+  badgesPreview?: Badge[];
 }

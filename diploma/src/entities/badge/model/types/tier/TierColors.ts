@@ -7,4 +7,5 @@ export const TierColors: Record<Tier, string> = {
   C: "#004A09",
   E: "#00878C",
   D: "#69008C",
+  F: "#5C5C5C",
 };

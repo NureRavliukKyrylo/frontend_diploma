@@ -1,3 +1,5 @@
+@use "@shared/assets/styles" as *;
+
 .projectCardWrapper {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
@@ -7,4 +9,44 @@
   flex-direction: column;
   gap: 10px;
   height: 100%;
+}
+.footerCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .avatarsGroup {
+    display: flex;
+    align-items: center;
+    .avatarVolunteer {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      margin-left: -10px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+    .remainingAvatarItem {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 1px solid rgb(0, 0, 0, 0.1);
+      margin-left: -10px;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      aspect-ratio: 1 / 1;
+      background-color: white;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    }
+  }
+  h1 {
+    color: rgba(0, 0, 0, 0.4);
+    @include font-base(18px, 400);
+  }
 }

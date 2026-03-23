@@ -1,14 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
-import { leaveProject, type LeaveProjectDto } from "../api";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { queryClient } from "@shared/api";
-import { projectKeys } from "@entities/project/model/queries/project-query/projectQuery";
+import { projectKeys } from "@entities/project";
 import { profileKeys } from "@entities/user/profile";
+import { leaveParticipation } from "@shared/api/participation";
 
 export const useLeaveProject = (onSuccess?: () => void) => {
   const mutation = useMutation({
-    mutationFn: (data: LeaveProjectDto) => leaveProject(data),
+    mutationFn: (entityId: string) =>
+      leaveParticipation({ entityId, entityType: "project" }),
     onSuccess: () => {
       addToast({
         title: "Leaving Project Success",
@@ -32,7 +33,7 @@ export const useLeaveProject = (onSuccess?: () => void) => {
   return {
     mutation,
     errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
-    handleLeaveProject: (data: LeaveProjectDto) => mutation.mutate(data),
+    handleLeaveProject: (entityId: string) => mutation.mutate(entityId),
     isLoading: mutation.isPending,
   };
 };

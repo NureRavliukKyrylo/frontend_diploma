@@ -12,3 +12,4 @@ export type { PaginationResponse } from "./pagination/PaginationResponse";
 export type { AvatarItem } from "./avatar/AvatarItem";
 export type { LocationSuggestion } from "./map/LocationSuggestion";
 export type { QueryResult } from "./query-result/QueryResult";
+export type { EntityType } from "./entity/EntityType";

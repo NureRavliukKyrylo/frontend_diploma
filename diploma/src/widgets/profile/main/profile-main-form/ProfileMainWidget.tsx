@@ -106,9 +106,12 @@ export function ProfileMainWidget({
             </div>
           </div>
           <div className={styles.projectsSeeMore}>
-            <BaseButtonWrapper className={styles.seeMoreProjectsButton}>
+            <LinkButtonWrapper
+              to="/projects/my"
+              className={styles.seeMoreProjectsButton}
+            >
               SEE MORE
-            </BaseButtonWrapper>
+            </LinkButtonWrapper>
             <img src={LayoutCard} alt="layout" />
           </div>
         </div>

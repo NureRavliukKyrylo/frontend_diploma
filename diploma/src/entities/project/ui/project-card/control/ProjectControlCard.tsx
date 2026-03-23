@@ -10,6 +10,8 @@ import { ProjectCardBase } from "../base/ProjectCardBase";
 import { ProjectDefaultBottomContent } from "../base/ProjectDefaultBottomContent";
 import styles from "./ProjectControlCard.module.scss";
 import { getProjectStatusConfig } from "../../../libs";
+import { LinkButtonWrapper } from "@shared/ui/buttons";
+import { motion } from "framer-motion";
 
 interface MenuItem {
   key: string;
@@ -67,7 +69,30 @@ export const ProjectControlCard = ({
             {statusConfig.label}
           </div>
         }
-        bottomContent={<ProjectDefaultBottomContent project={project} />}
+        bottomContent={
+          <div className={styles.bottomProjectContent}>
+            <div className={styles.defaultBottomContent}>
+              <ProjectDefaultBottomContent project={project} />
+            </div>
+            <motion.div
+              whileHover={{
+                scale: 1.03,
+                backgroundColor: "#000000",
+                color: "#ffffff",
+              }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className={styles.learnMoreMyProject}
+            >
+              <LinkButtonWrapper
+                to="/projects/$id"
+                params={{ id: project.id }}
+                className={styles.btnLink}
+              >
+                Get Started
+              </LinkButtonWrapper>
+            </motion.div>
+          </div>
+        }
       />
     </div>
   );

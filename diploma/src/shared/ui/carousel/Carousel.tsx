@@ -27,22 +27,17 @@ export function Carousel<T>({
 
   useEffect(() => {
     const updateWidth = () => {
-      if (!containerRef.current) return;
-      const el = containerRef.current;
+      const parent = containerRef.current?.parentElement;
+      if (!parent) return;
 
-      const style = getComputedStyle(el);
-      const paddingLeft = parseFloat(style.paddingLeft);
-      const paddingRight = parseFloat(style.paddingRight);
-      const innerWidth = el.clientWidth - paddingLeft - paddingRight;
+      const parentWidth = parent.clientWidth;
 
-      let count = Math.floor(innerWidth / minItemWidth);
+      let count = Math.floor(parentWidth / minItemWidth);
       count = Math.max(1, Math.min(count, items.length));
 
-      const itemsRowEl = el.querySelector(`.${styles.itemsRow}`) as HTMLElement;
-      const gap = itemsRowEl ? parseFloat(getComputedStyle(itemsRowEl).gap) : 0;
+      const gap = 16;
       const totalGap = gap * (count - 1);
-
-      const rawWidth = (innerWidth - totalGap) / count;
+      const rawWidth = (parentWidth - totalGap) / count;
       const clampedWidth = maxItemWidth
         ? Math.min(rawWidth, maxItemWidth)
         : rawWidth;
@@ -68,17 +63,16 @@ export function Carousel<T>({
     { length: visibleCount },
     (_, i) => items[getWrappedIndex(index + i)],
   );
-  console.log(index);
+
   return (
-    <div className={styles.carouselWrapper}>
+    <div ref={containerRef} className={styles.carouselWrapper}>
       <button
         onClick={() => paginate(-1)}
         className={styles.backCarouselButton}
       >
         <ArrowCarousel />
       </button>
-
-      <div ref={containerRef} className={styles.sliderContainer}>
+      <div className={styles.sliderContainer}>
         <div className={styles.itemsRow}>
           <AnimatePresence initial={false} mode="popLayout">
             {visibleItems.map((item, i) => (
@@ -97,9 +91,8 @@ export function Carousel<T>({
           </AnimatePresence>
         </div>
       </div>
-
       <button onClick={() => paginate(1)} className={styles.nextCarouselButton}>
-        <ArrowCarousel className={styles.nextCarouselImage} />
+        <ArrowCarousel />
       </button>
     </div>
   );

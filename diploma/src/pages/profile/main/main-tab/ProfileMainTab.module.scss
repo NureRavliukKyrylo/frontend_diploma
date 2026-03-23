@@ -1,0 +1,9 @@
+.skillsProfileList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.cardBaseProfileBlock {
+  --card-justify-content: flex-start;
+  --card-skill-height: auto;
+}

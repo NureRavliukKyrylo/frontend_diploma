@@ -41,14 +41,14 @@ export function MainProfilePage() {
             <h1>Organizations</h1>
           </div>
           <div className={styles.organizationBlockContent}>
-            {user?.profile?.organizations.length === 0 ? (
+            {user?.profile?.organizations?.length === 0 ? (
               <div className={styles.emptyState}>
                 <h2>No organizations joined</h2>
               </div>
             ) : (
               <OrganizationsListWidget
                 className={styles.organizationsList}
-                organizations={user?.profile?.organizations.slice(0, 4)}
+                organizations={user?.profile?.organizations?.slice(0, 4)}
                 renderCard={(organization) => (
                   <OrganizationItem
                     iconUrl={organization.logoUrl ?? DefaultAvatar}

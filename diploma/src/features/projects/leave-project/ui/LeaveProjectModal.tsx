@@ -27,7 +27,7 @@ export const LeaveProjectModal = ({
     });
 
   const handleLeave = () => {
-    handleLeaveProject({ entityId: projectId });
+    handleLeaveProject(projectId);
   };
 
   return (

@@ -68,7 +68,6 @@ export const MapProjectCluster = memo(
           if (cluster.properties.cluster) {
             return (
               <AnimatedMarker
-                appearAnimation
                 key={`cluster-${cluster.id}`}
                 position={[lat, lng]}
                 fromPosition={getFromPosition(`cluster-${cluster.id}`)}

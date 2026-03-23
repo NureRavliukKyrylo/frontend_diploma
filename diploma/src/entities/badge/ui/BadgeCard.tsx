@@ -10,13 +10,13 @@ export const BadgeCard = ({ badge }: BadgeCardProps) => {
   return (
     <div
       className={styles.badgeImageBlock}
-      style={{ backgroundImage: `url(${badge.image})` }}
+      style={{ backgroundImage: `url(${badge.iconUrl})` }}
     >
       <div
         className={styles.badgeInfoTier}
-        style={{ color: TierColors[badge.tier] }}
+        style={{ color: TierColors[badge.rank] }}
       >
-        <h1>{badge.tier}</h1>
+        <h1>{badge.rank}</h1>
       </div>
     </div>
   );
@@ -29,8 +29,8 @@ export const BadgeCardDetailed = ({ badge, classImgName }: BadgeCardProps) => {
         <BadgeCard badge={badge} />
       </div>
       <div className={styles.badgeInfo}>
-        <h1>{badge.name}</h1>
-        <p style={{ color: TierColors[badge.tier] }}>RANK {badge.tier}</p>
+        <h1>{badge.title}</h1>
+        <p style={{ color: TierColors[badge.rank] }}>RANK {badge.rank}</p>
       </div>
     </div>
   );

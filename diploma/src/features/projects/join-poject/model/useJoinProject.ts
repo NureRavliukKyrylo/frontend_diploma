@@ -1,11 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
-import { joinProject, type JoinProjectDTO } from "../api/joinProjectApi";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { addToast } from "@heroui/react";
+import { joinParticipation } from "@shared/api/participation";
 
 export const useJoinProject = () => {
   const mutation = useMutation({
-    mutationFn: (data: JoinProjectDTO) => joinProject(data),
+    mutationFn: (entityId: string) =>
+      joinParticipation({ entityId, entityType: "project" }),
     onSuccess: () => {
       addToast({
         title: "Joining Project Success",
@@ -15,7 +16,6 @@ export const useJoinProject = () => {
     },
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error);
-
       addToast({
         title: "Joining Project Failed",
         description: errorMessage,
@@ -25,7 +25,7 @@ export const useJoinProject = () => {
   });
   return {
     errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
-    handleJoinProject: (data: JoinProjectDTO) => mutation.mutate(data),
+    handleJoinProject: (entityId: string) => mutation.mutate(entityId),
     isLoading: mutation.isPending,
   };
 };

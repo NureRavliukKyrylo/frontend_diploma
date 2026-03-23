@@ -3,13 +3,14 @@ import type {
   MyProjectSearchParams,
   ProjectSearchParams,
 } from "../../../libs";
-import { getListProjects, getMyProjects } from "../../../api";
+import { getListProjects, getMyProjects, getProjectId } from "../../../api";
 import { queryOptions } from "@tanstack/react-query";
 
 export const projectKeys = {
   all: () => ["projects"] as const,
   list: (params: ProjectSearchParams) =>
     [...projectKeys.all(), "list", params] as const,
+  id: (id: string) => [...projectKeys.all(), "id", id],
   mys: () => [...projectKeys.all(), "my"] as const,
   my: (params: MyProjectSearchParams) =>
     [...projectKeys.mys(), params] as const,
@@ -23,6 +24,11 @@ export const projectQuery = {
       queryKey: projectKeys.list({ ...params }),
       queryFn: () => getListProjects({ ...params }),
       placeholderData: (prev) => prev,
+    }),
+  id: (id: string) =>
+    queryOptions({
+      queryKey: projectKeys.id(id),
+      queryFn: () => getProjectId(id),
     }),
   my: (params: MyProjectSearchParams) =>
     queryOptions({

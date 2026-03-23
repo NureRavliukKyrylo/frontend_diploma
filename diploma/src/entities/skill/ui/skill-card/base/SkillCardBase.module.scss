@@ -6,7 +6,7 @@
   align-items: center;
   flex-direction: column;
   gap: var(--card-gap, 10px);
-  height: 100%;
+  height: var(--card-skill-height, 100%);
   .baseSkillInfo {
     display: flex;
     justify-content: center;

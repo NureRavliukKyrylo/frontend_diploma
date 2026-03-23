@@ -1,4 +1,4 @@
-import { useRouter, useSearch } from "@tanstack/react-router";
+import { useSearch } from "@tanstack/react-router";
 import styles from "./ProjectsTab.module.scss";
 import { ToggleDropdownButton } from "@shared/ui/buttons";
 import { MyProjectsFilterWidget, ProjectsListWidget } from "@widgets/projects/";
@@ -6,8 +6,8 @@ import { useProjectsTab } from "../model/useProjectsTab";
 import { SearchBar } from "@shared/ui/inputs";
 import { SortDropDown } from "@shared/ui/drop-down";
 import {
-  ProjectCardSkeleton,
   ProjectControlCard,
+  ProjectControlCardSkeleton,
   sortingProjectItems,
 } from "@entities/project";
 import { Pagination } from "@shared/ui";
@@ -20,10 +20,8 @@ import {
   layoutTransition,
   fadeVariants,
   fadeDuration,
-  createCardVariants,
+  staggeredCardVariantsNoHover,
 } from "@shared/assets/animations";
-
-const staggeredCardVariantsSubtle = createCardVariants({ hoverScale: 1.01 });
 
 export const ProjectsTab = () => {
   const search = useSearch({ from: "/_masterLayout/projects/my/" });
@@ -41,7 +39,6 @@ export const ProjectsTab = () => {
     isModalOpen,
     selectedProject,
   } = useProjectsTab(search);
-  const router = useRouter();
 
   return (
     <>
@@ -86,7 +83,7 @@ export const ProjectsTab = () => {
             <Suspense
               fallback={
                 <ListWidgetSkeleton
-                  renderSkeleton={ProjectCardSkeleton}
+                  renderSkeleton={ProjectControlCardSkeleton}
                   className={styles.projectsListSkeletonWrapper}
                 />
               }
@@ -102,17 +99,10 @@ export const ProjectsTab = () => {
                       <motion.div
                         key={project.id}
                         custom={index + 1}
-                        variants={staggeredCardVariantsSubtle}
+                        variants={staggeredCardVariantsNoHover}
                         initial="hidden"
                         animate="visible"
                         whileHover="hover"
-                        className={styles.projectCardMotion}
-                        onClick={() =>
-                          router.navigate({
-                            to: "/projects/$id",
-                            params: { id: project.id },
-                          })
-                        }
                       >
                         <ProjectControlCard
                           project={project}

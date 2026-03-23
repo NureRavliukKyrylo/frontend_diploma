@@ -5,6 +5,7 @@ export const TierList = {
   C: "C",
   E: "E",
   D: "D",
+  F: "F",
 } as const;
 
 export type Tier = keyof typeof TierList;

@@ -2,8 +2,8 @@ import type { Tier } from "../tier/TierList";
 
 export interface Badge {
   id: string;
-  image: string;
-  name: string;
+  title: string;
+  iconUrl: string;
   description: string;
-  tier: Tier;
+  rank: Tier;
 }

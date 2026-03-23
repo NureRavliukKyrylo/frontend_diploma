@@ -9,7 +9,7 @@ export {
 } from "./libs/search-shema/projectsSearchSchema";
 export { projectQuery } from "./model/queries/project-query/projectQuery";
 export { type Project } from "./model/types/project/Project";
-export { ProjectCardSkeleton } from "./ui/project-card/ProjectCardSkeleton";
+export { ProjectCardSkeleton } from "./ui/project-card/item-list/ProjectCardSkeleton";
 export { ProjectMarker } from "./ui/project-marker/ProjectMarker";
 export { ListProjectCard } from "./ui/list-card/ListProjectCard";
 export { toGeoPoints } from "./libs/to-coordinates/toGeoProject";
@@ -33,3 +33,5 @@ export { type MyProjectsMode } from "./model/types/projects-mode/MyProjectsMode"
 export { useMyProjectsTabs } from "./model/hooks/useMyProjectsTab";
 export { ProjectCard } from "./ui/project-card/item-list/ProjectCard";
 export { ProjectControlCard } from "./ui/project-card/control/ProjectControlCard";
+export { projectKeys } from "./model/queries/project-query/projectQuery";
+export { ProjectControlCardSkeleton } from "./ui/project-card/control/ProjectControlCardSkeleton";
