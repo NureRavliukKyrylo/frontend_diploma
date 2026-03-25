@@ -43,7 +43,7 @@ export const useLogin = () => {
 
       await router.invalidate();
 
-      router.navigate({ to: search.redirect ?? "/" });
+      router.navigate({ to: search.redirect ?? "/projects" });
     },
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error);

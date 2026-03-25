@@ -1,0 +1,39 @@
+@use "@shared/assets/styles" as *;
+
+.membersProjectList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  grid-auto-rows: minmax(300px, auto);
+  justify-content: center;
+  gap: 40px;
+  align-items: stretch;
+}
+
+.showMoreButton {
+  display: block;
+  margin: 16px auto 0;
+  padding: 10px 32px;
+  width: fit-content;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  @include font-base(16px, 800);
+}
+
+.startMembersSlot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  h1 {
+    @include font-base(40px, 700);
+    text-align: center;
+  }
+  h2 {
+    color: rgba(0, 0, 0, 0.8);
+    @include font-base(20px, 400);
+    text-align: center;
+    line-height: 120%;
+  }
+}

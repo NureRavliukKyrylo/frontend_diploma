@@ -1,21 +1,32 @@
-import { useParams } from "@tanstack/react-router";
+import { useParams, useSearch } from "@tanstack/react-router";
 import styles from "./ProjectPage.module.scss";
 import { useQuery } from "@tanstack/react-query";
-import { projectQuery } from "@entities/project";
-import { ProgressBar } from "@shared/ui";
+import { projectQuery, useProjectTabs } from "@entities/project";
+import { ProgressBar, Toggle } from "@shared/ui";
 import { ReadMoreButton } from "@shared/ui/buttons";
 import { JoinProjectButton } from "@features/projects";
-import { OverviewTab } from "../overview-tab/OverviewTab";
 import { profileQuery } from "@entities/user/profile";
+import { projectMainTabs } from "./config/projectMainTabs";
+import { getProjectMainForms } from "./config/projectMainForms";
+import { AnimatePresence, motion } from "framer-motion";
 
 export const ProjectPage = () => {
   const { id } = useParams({ from: "/_masterLayout/projects/$id/" });
+  const search = useSearch({ from: "/_masterLayout/projects/$id/" });
   const { data: project } = useQuery(projectQuery.id(id));
   const { data: user } = useQuery(profileQuery.all());
+  const { activeTab, handleTabChange } = useProjectTabs(search.tab, id);
+
+  const forms = getProjectMainForms({ project, user, projectId: id });
 
   return (
     <div className={styles.wrapperProjectPage}>
-      <div className={styles.projectPageHeader}>
+      <motion.div
+        className={styles.projectPageHeader}
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
         <div className={styles.headerProjectInfo}>
           <h1>{project?.title}</h1>
           <div className={styles.organizationInfo}>
@@ -47,14 +58,32 @@ export const ProjectPage = () => {
           <ReadMoreButton collapsedHeight={90}>
             <p>{project?.description}</p>
           </ReadMoreButton>
-          <div className={styles.wrapperButton}>
-            <div className={styles.joinProjectBlockButton}>
-              {project?.id && <JoinProjectButton projectId={project.id} />}
-            </div>
+          <div className={styles.joinProjectBlockButton}>
+            {project?.id && <JoinProjectButton projectId={project.id} />}
           </div>
         </div>
+      </motion.div>
+      <div className={styles.toggleWrapper}>
+        <Toggle
+          tabs={projectMainTabs}
+          activeValue={activeTab}
+          onChange={handleTabChange}
+          buttonClassName={styles.toggleProjectButton}
+          activeButtonClassName={styles.toggleProjectButtonActive}
+          className={styles.toggleProject}
+        />
       </div>
-      <OverviewTab project={project} user={user} />
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.2 }}
+        >
+          {forms[activeTab]}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };

@@ -35,3 +35,9 @@ export { ProjectCard } from "./ui/project-card/item-list/ProjectCard";
 export { ProjectControlCard } from "./ui/project-card/control/ProjectControlCard";
 export { projectKeys } from "./model/queries/project-query/projectQuery";
 export { ProjectControlCardSkeleton } from "./ui/project-card/control/ProjectControlCardSkeleton";
+export {
+  projectDetailSchema,
+  projectDetailDefaults,
+} from "./libs/search-shema/projectDetailSearchSchema";
+export { useProjectTabs } from "./model/hooks/useMyProjectsTab";
+export type { ProjectMode } from "./model/types";

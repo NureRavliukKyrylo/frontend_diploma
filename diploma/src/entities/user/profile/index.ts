@@ -12,3 +12,5 @@ export { type ConnectedLinkPlatform } from "./config/connected-links/connectedLi
 export { UserMarker } from "./ui/user-marker/UserMarker";
 export { useUserStore } from "./model/store/userInfoStore";
 export { MapUserLocation } from "./ui/user-location/MapUserLocation";
+export { MemberCard } from "./ui/member-card/MemberCard";
+export { MemberCardSkeleton } from "./ui/member-card/MemberCardSkeleton";
