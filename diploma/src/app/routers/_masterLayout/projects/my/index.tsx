@@ -5,8 +5,7 @@ import {
 import { MyProjectsPage } from "@pages/projects";
 import { createFileRoute } from "@tanstack/react-router";
 import { type MyProjectsMode } from "@entities/project";
-import { categoryQuery } from "@entities/category";
-import { organizationQuery } from "@entities/organization";
+import { filtersQuery } from "@shared/api/filters";
 
 export const Route = createFileRoute("/_masterLayout/projects/my/")({
   component: MyProjectsPage,
@@ -31,10 +30,18 @@ export const Route = createFileRoute("/_masterLayout/projects/my/")({
   },
   loader: async ({ context: { queryClient } }) => {
     queryClient.prefetchInfiniteQuery(
-      categoryQuery.infiniteMy({ PageSize: 7 }),
+      filtersQuery.infinite({
+        pageSize: 7,
+        entityType: "project",
+        facetType: "category",
+      }),
     );
     queryClient.prefetchInfiniteQuery(
-      organizationQuery.infiniteMy({ PageSize: 7 }),
+      filtersQuery.infinite({
+        pageSize: 7,
+        entityType: "project",
+        facetType: "organization",
+      }),
     );
   },
 });

@@ -29,6 +29,7 @@ export const projectQuery = {
     queryOptions({
       queryKey: projectKeys.id(id),
       queryFn: () => getProjectId(id),
+      select: (res) => res.data,
     }),
   my: (params: MyProjectSearchParams) =>
     queryOptions({

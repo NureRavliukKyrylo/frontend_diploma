@@ -7,13 +7,13 @@ import {
   MapListPanel,
   MapProjectCluster,
 } from "@widgets/map";
-import { MapBoundsTracker, MapInitialBounds } from "@shared/libs/map/index.ts";
+import { MapBoundsTracker, MapInitialBounds } from "@shared/libs/map";
 import { SearchLocationLayer } from "../location-layer/SearchLocationLayer.tsx";
-import { MapUserLocation } from "../initial-location/MapUserLocation.tsx";
 import { useMapPage } from "../../model/useMapPage.ts";
 import { useQuery } from "@tanstack/react-query";
 import { projectQuery } from "@entities/project";
 import { useEffect, useRef, useState } from "react";
+import { MapUserLocation } from "@entities/user/profile";
 
 export const MapPage = () => {
   const {

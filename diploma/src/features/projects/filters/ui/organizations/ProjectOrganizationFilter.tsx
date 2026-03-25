@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { QueryResult } from "@shared/config/types";
 
 interface ProjectOrganizationFilterProps {
-  useOrganizationsQuery: () => QueryResult<Organization>;
+  useOrganizationsQuery: () => QueryResult<Pick<Organization, "id" | "name">>;
   selectedIds?: string[];
   onToggle: (id: string) => void;
 }

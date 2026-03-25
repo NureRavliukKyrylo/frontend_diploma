@@ -9,3 +9,4 @@ export { MapZoomAnimation } from "./zoom-animation/MapZoomAnimation";
 export type { MapBounds } from "./bounds/MapBoundsTracker";
 export { useClusterAnimation } from "./cluster-animation/useClusterAnimation";
 export { MapInitialBounds } from "./initial-bounds/MapInitialBouds";
+export { useMapZoomOnce } from "./zoom-animation/useMapZoomOnce";

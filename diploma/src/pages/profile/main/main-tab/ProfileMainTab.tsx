@@ -13,7 +13,17 @@ export const ProfileMainTab = ({ user }: ProfileMainTab) => {
   return (
     <ProfileMainWidget
       badgesChildren={
-        <BadgesCarouselWidget badges={user?.profile?.badgesPreview} />
+        user?.profile?.badgesPreview ? (
+          <BadgesCarouselWidget badges={user.profile.badgesPreview} />
+        ) : (
+          <div className={styles.noBadgesContainer}>
+            <p className={styles.noBadgesTitle}>No badges yet</p>
+            <p className={styles.noBadgesSubtitle}>
+              Complete challenges and grow your skills — your first badge is
+              just around the corner!
+            </p>
+          </div>
+        )
       }
       user={user}
       skillsChildren={

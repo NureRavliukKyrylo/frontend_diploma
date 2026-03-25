@@ -1,12 +1,6 @@
+import type { Category } from "@entities/category";
 import type { Organization } from "@entities/organization";
-import type { Coordinates } from "@shared/config/types";
-
-export interface MemberPreview {
-  userId: string;
-  firstName: string;
-  lastName: string;
-  avatarUrl: string;
-}
+import type { Coordinates, ParticipationMember } from "@shared/config/types";
 
 export interface Project {
   id: string;
@@ -15,9 +9,11 @@ export interface Project {
   endAt: string;
   progressPercent: number;
   tasksTotal: number;
+  eventsTotal: number;
   organization?: Pick<Organization, "id" | "logoUrl" | "name">;
+  categories?: Category[];
   location: Coordinates;
   memberCount: number;
-  memberPreviews: MemberPreview[];
+  memberPreviews: ParticipationMember[];
   volunteerProjectState: "active" | "endingSoon" | "completed" | "archived";
 }

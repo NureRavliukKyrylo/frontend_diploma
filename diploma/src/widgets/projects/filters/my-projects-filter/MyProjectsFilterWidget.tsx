@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import styles from "./MyProjectsFilterWidget.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
-import { useCategoriesFiltersInfiniteQuery } from "@entities/category";
-import { useOrganizationsFiltersInfiniteQuery } from "@entities/organization";
 import {
   OnlyActiveFilter,
   ProjectCategoriesFilter,
@@ -11,6 +9,7 @@ import {
 } from "@features/projects";
 import type { MyProjectSearchParams } from "@entities/project";
 import { useMyProjectFilters } from "./model/useMyProjectsFilter";
+import { useFiltersInfiniteQuery } from "@shared/api/filters";
 
 interface MyProjectsFilterWidgetProps {
   search: MyProjectSearchParams;
@@ -42,8 +41,10 @@ export const MyProjectsFilterWidget = ({
         <div className={styles.projectCategories}>
           <h1 className={styles.subHeaderFilter}>Categories</h1>
           <ProjectCategoriesFilter
-            useCategoriesQuery={useCategoriesFiltersInfiniteQuery({
-              PageSize: 7,
+            useCategoriesQuery={useFiltersInfiniteQuery({
+              pageSize: 7,
+              entityType: "project",
+              facetType: "category",
             })}
             selectedIds={search.CategoryIds}
             onToggle={onCategoryToggle}
@@ -53,8 +54,10 @@ export const MyProjectsFilterWidget = ({
         <div className={styles.projectOrganizations}>
           <h1 className={styles.subHeaderFilter}>Organizations</h1>
           <ProjectOrganizationFilter
-            useOrganizationsQuery={useOrganizationsFiltersInfiniteQuery({
-              PageSize: 7,
+            useOrganizationsQuery={useFiltersInfiniteQuery({
+              pageSize: 7,
+              entityType: "project",
+              facetType: "organization",
             })}
             selectedIds={search.OrganizationIds}
             onToggle={onOrganizationToggle}

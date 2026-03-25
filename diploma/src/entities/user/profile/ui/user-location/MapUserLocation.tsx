@@ -1,9 +1,8 @@
-import { MapZoomAnimation } from "@shared/libs/map";
-import { useEffect, useRef, useState } from "react";
+import { MapZoomAnimation, useMapZoomOnce } from "@shared/libs/map";
 import { Marker, Popup } from "react-leaflet";
 import { UserMarker } from "@entities/user/profile";
 import type { Coordinates } from "@shared/config/types";
-import styles from "../base-page/MapPage.module.scss";
+import styles from "./MapUserLocation.module.scss";
 
 interface MapUserLocationProps {
   coordinates: Coordinates | null;
@@ -16,21 +15,7 @@ export const MapUserLocation = ({
   animate = true,
   onAnimationEnd,
 }: MapUserLocationProps) => {
-  const hasFlown = useRef(false);
-  const [shouldAnimate, setShouldAnimate] = useState(false);
-
-  useEffect(() => {
-    if (!coordinates) {
-      return;
-    }
-    if (!animate) {
-      return;
-    }
-    if (!hasFlown.current) {
-      hasFlown.current = true;
-      setShouldAnimate(true);
-    }
-  }, [coordinates]);
+  const { shouldAnimate, stopAnimation } = useMapZoomOnce(coordinates, animate);
 
   if (!coordinates) return null;
 
@@ -41,7 +26,7 @@ export const MapUserLocation = ({
           coordinates={coordinates}
           zoom={11}
           onAnimationEnd={() => {
-            setShouldAnimate(false);
+            stopAnimation();
             onAnimationEnd?.();
           }}
         />

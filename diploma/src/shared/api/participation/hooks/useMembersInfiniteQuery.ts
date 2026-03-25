@@ -1,0 +1,18 @@
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { participationQuery } from "../queries/participationQuery";
+import type { GetMembersParams } from "../get-members/getMembersApi";
+import type { ParticipationMember } from "@shared/config/types";
+import type { QueryResult } from "@shared/config/types";
+
+export const useMembersInfiniteQuery =
+  (params: Omit<GetMembersParams, "page">) =>
+  (): QueryResult<ParticipationMember> => {
+    const {
+      data = [],
+      fetchNextPage,
+      hasNextPage,
+      isFetchingNextPage,
+    } = useInfiniteQuery(participationQuery.membersInfinite(params));
+
+    return { data, fetchNextPage, hasNextPage, isFetchingNextPage };
+  };

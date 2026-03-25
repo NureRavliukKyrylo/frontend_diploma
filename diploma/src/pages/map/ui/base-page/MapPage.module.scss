@@ -50,8 +50,7 @@
   }
 }
 
-.popupSearchLocation,
-.popupUserLocation {
+.popupSearchLocation {
   :global(.leaflet-popup-content-wrapper) {
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0px 2px 10px rgba(99, 99, 99, 0.5);
@@ -93,14 +92,5 @@
       @include font-base(13px, 600);
       margin-top: 2px;
     }
-  }
-}
-
-.popupUserLocation {
-  .userLocationText {
-    @include font-base(20px, 900);
-    color: rgba(0, 0, 0, 0.4);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
   }
 }

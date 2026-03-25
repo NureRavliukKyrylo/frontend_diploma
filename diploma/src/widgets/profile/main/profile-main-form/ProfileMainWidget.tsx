@@ -1,10 +1,6 @@
 import { ProgressBar } from "@shared/ui";
 import styles from "./ProfileMainWidget.module.scss";
-import {
-  BaseButtonWrapper,
-  LinkButtonWrapper,
-  ReadMoreButton,
-} from "@shared/ui/buttons";
+import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import { DatePickerInput, MapLocationInput } from "@shared/ui/inputs";
 import { useState } from "react";
 import { LayoutCard } from "@shared/assets/images/layout";

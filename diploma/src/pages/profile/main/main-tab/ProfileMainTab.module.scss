@@ -1,3 +1,5 @@
+@use "@shared/assets/styles" as *;
+
 .skillsProfileList {
   display: flex;
   flex-wrap: wrap;
@@ -6,4 +8,18 @@
 .cardBaseProfileBlock {
   --card-justify-content: flex-start;
   --card-skill-height: auto;
+}
+
+.noBadgesContainer {
+  display: flex;
+  flex-direction: column;
+  .noBadgesTitle {
+    @include font-base(30px, 900);
+    line-height: 120%;
+    color: #1a1a2e;
+  }
+  .noBadgesSubtitle {
+    @include font-base(20px, 500);
+    color: #6b7280;
+  }
 }

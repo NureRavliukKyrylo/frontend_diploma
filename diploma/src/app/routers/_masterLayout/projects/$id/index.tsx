@@ -1,9 +1,6 @@
+import { ProjectPage } from "@pages/projects";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_masterLayout/projects/$id/")({
-  component: RouteComponent,
+  component: ProjectPage,
 });
-
-function RouteComponent() {
-  return <div>Hello "/_masterLayout/projects/$id/"!</div>;
-}

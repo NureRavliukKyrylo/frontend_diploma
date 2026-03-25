@@ -7,6 +7,7 @@ interface CategoriesListWidgetProps {
   useCategoriesQuery?: () => QueryResult<Category>;
   renderCard: (category: Category, index: number) => React.ReactNode;
   startSlot?: React.ReactNode;
+  categories?: Category[];
   renderSkeleton?: () => React.ReactNode;
   skeletonItems?: number;
   className?: string;
@@ -19,9 +20,10 @@ export const CategoriesListWidget = ({
   renderSkeleton,
   skeletonItems,
   className,
+  categories: readyCategories,
 }: CategoriesListWidgetProps) => {
   const queryResult = useCategoriesQuery?.();
-  const categories = queryResult?.data;
+  const categories = readyCategories ?? queryResult?.data;
   const isLoading = queryResult?.isLoading ?? false;
 
   const wrapperClass =
