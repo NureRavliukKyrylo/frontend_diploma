@@ -59,14 +59,16 @@ export const useContactsForm = () => {
 
       const payload: UpdateUserDto = {
         avatarFile: avatarFile,
-        profile: {
-          bio: profile?.bio,
-          phone: profile?.phone,
-          dateOfBirth: profile?.dateOfBirth,
-          coordinates: profile?.coordinates,
-          socialLinks: profile?.socialLinks,
+        model: {
+          profile: {
+            bio: profile?.bio,
+            phone: profile?.phone,
+            dateOfBirth: profile?.dateOfBirth,
+            coordinates: profile?.coordinates,
+            socialLinks: profile?.socialLinks,
+          },
+          privacySettings: { fields: privacySettings?.fields },
         },
-        privacySettings: { fields: privacySettings?.fields },
       };
 
       handleSubmit(payload);
