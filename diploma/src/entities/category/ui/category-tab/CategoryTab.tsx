@@ -4,19 +4,21 @@ interface CategoryTabProps {
   name: string;
   isSelected?: boolean;
   onClick?: () => void;
+  className?: string;
 }
 
 export const CategoryTab = ({
   name,
   isSelected,
   onClick,
+  className,
 }: CategoryTabProps) => {
   return (
     <div
-      className={`${styles.categoryTabBlock} ${isSelected ? styles.selected : ""} ${onClick ? styles.clickable : ""}`}
+      className={`${styles.categoryTabBlock} ${isSelected ? styles.selected : ""} ${onClick ? styles.clickable : ""}  ${className ?? ""}`}
       onClick={() => onClick?.()}
     >
-      <h1 className={styles.categoryNameText}>{name}</h1>
+      {name}
     </div>
   );
 };

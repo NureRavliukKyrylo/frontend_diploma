@@ -1,7 +1,7 @@
 import { ProjectMarker, type Project } from "@entities/project";
 import styles from "./OverviewTab.module.scss";
 import { CategoriesListWidget } from "@widgets/categories";
-import { CategoryTab } from "@entities/category";
+import { CategoryTab, type Category } from "@entities/category";
 import { BaseMap } from "@shared/ui";
 import { MapZoomAnimation } from "@shared/libs/map";
 import { Marker, Popup } from "react-leaflet";
@@ -13,8 +13,53 @@ interface OverviewTabProps {
   user?: User;
 }
 
+const mockCategories: Category[] = [
+  {
+    id: "1",
+    name: "Animal Rescue",
+    description: "Helping abandoned and injured animals find safety and care.",
+    imageUrl: "https://placehold.co/400x300?text=Animal+Rescue",
+    projectsTotal: 24,
+    projectsActive: 10,
+    projectsCompleted: 14,
+    skills: [
+      { id: "s1", name: "Veterinary Care" },
+      { id: "s2", name: "Animal Handling" },
+      { id: "s3", name: "Fundraising" },
+    ],
+  },
+  {
+    id: "2",
+    name: "Environmental Aid",
+    description: "Protecting ecosystems and promoting sustainable practices.",
+    imageUrl: "https://placehold.co/400x300?text=Environmental+Aid",
+    projectsTotal: 18,
+    projectsActive: 7,
+    projectsCompleted: 11,
+    skills: [
+      { id: "s4", name: "Conservation" },
+      { id: "s5", name: "Environmental Research" },
+      { id: "s6", name: "Community Outreach" },
+    ],
+  },
+  {
+    id: "3",
+    name: "Elder Care",
+    description:
+      "Supporting the elderly with companionship and essential services.",
+    imageUrl: "https://placehold.co/400x300?text=Elder+Care",
+    projectsTotal: 15,
+    projectsActive: 6,
+    projectsCompleted: 9,
+    skills: [
+      { id: "s7", name: "Nursing" },
+      { id: "s8", name: "Social Work" },
+      { id: "s9", name: "Transportation" },
+    ],
+  },
+];
 export const OverviewTab = ({ project, user }: OverviewTabProps) => {
-  const hasCategories = project?.categories && project.categories.length > 0;
+  const hasCategories = mockCategories && mockCategories.length > 0;
   const mapRef = useRef<HTMLDivElement>(null);
   const [mapVisible, setMapVisible] = useState(false);
 
@@ -39,9 +84,14 @@ export const OverviewTab = ({ project, user }: OverviewTabProps) => {
         <h1>CATEGORIES</h1>
         {hasCategories ? (
           <CategoriesListWidget
-            renderCard={(category) => <CategoryTab name={category.name} />}
+            renderCard={(category) => (
+              <CategoryTab
+                className={styles.categoryProject}
+                name={category.name}
+              />
+            )}
             className={styles.categoriesProjectList}
-            categories={project?.categories}
+            categories={mockCategories}
           />
         ) : (
           <p className={styles.noCategoriesText}>

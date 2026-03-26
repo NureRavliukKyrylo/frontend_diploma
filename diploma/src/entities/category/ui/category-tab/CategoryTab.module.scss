@@ -18,6 +18,10 @@
     background 0.2s ease,
     border 0.2s ease,
     color 0.2s ease;
+  @include font-base(16px, 500);
+  line-height: 100%;
+  color: rgba(0, 0, 0, 0.8);
+  text-align: center;
 
   &.clickable {
     cursor: pointer;
@@ -26,14 +30,6 @@
     background: rgba(140, 0, 0, 0.17);
     border: 1px solid rgba(140, 0, 0, 0.5);
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
-    .categoryNameText {
-      font-weight: 700;
-    }
-  }
-  .categoryNameText {
-    @include font-base(16px, 500);
-    line-height: 100%;
-    color: rgba(0, 0, 0, 0.8);
-    text-align: center;
+    font-weight: 700;
   }
 }

@@ -41,9 +41,9 @@ export const ProjectPage = () => {
           <div className={styles.levelProjectInfo}>
             <div className={styles.headerLevelBar}>
               <span className={styles.current}>Level 12</span>
-              <span className={styles.xp}>{project?.progressPercent}/100</span>
+              <span className={styles.xp}>{45}/100</span>
             </div>
-            <ProgressBar current={project?.progressPercent ?? 0} max={100} />
+            <ProgressBar current={45} max={100} />
             <div className={styles.footerLevelBar}>
               <span className={styles.label}>Next level</span>
               <span className={styles.next}>Level 13</span>

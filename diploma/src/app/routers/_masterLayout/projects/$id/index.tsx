@@ -13,8 +13,8 @@ export const Route = createFileRoute("/_masterLayout/projects/$id/")({
   search: {
     middlewares: [stripSearchParams(projectDetailDefaults)],
   },
-  loader: ({ context: { queryClient }, params: { id } }) => {
-    queryClient.ensureQueryData(projectQuery.id(id));
+  loader: async ({ context: { queryClient }, params: { id } }) => {
+    await queryClient.ensureQueryData(projectQuery.id(id));
     queryClient.prefetchInfiniteQuery(
       participationQuery.membersInfinite({
         entityId: id,
