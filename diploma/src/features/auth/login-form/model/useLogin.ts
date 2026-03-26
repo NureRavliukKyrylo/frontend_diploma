@@ -39,9 +39,9 @@ export const useLogin = () => {
         return;
       }
 
-      setIsAuthenticated(true);
-
       await router.invalidate();
+
+      setIsAuthenticated(true);
 
       router.navigate({ to: search.redirect ?? "/projects" });
     },
