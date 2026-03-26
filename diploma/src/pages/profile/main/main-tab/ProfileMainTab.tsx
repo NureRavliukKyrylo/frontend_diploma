@@ -13,7 +13,7 @@ export const ProfileMainTab = ({ user }: ProfileMainTab) => {
   return (
     <ProfileMainWidget
       badgesChildren={
-        user?.profile?.badgesPreview ? (
+        user?.profile?.badgesPreview?.length ? (
           <BadgesCarouselWidget badges={user.profile.badgesPreview} />
         ) : (
           <div className={styles.noBadgesContainer}>
