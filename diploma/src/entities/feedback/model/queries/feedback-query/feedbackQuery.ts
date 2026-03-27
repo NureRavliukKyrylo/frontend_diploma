@@ -1,5 +1,5 @@
 import { infiniteQueryOptions } from "@tanstack/react-query";
-import { type FeedbackSearchParams, getFeedbacksEntity } from "../../api";
+import { type FeedbackSearchParams, getFeedbacksEntity } from "../../../api";
 import type { EntityType } from "@shared/config/types";
 
 export const feedbackKeys = {

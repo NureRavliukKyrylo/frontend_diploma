@@ -57,3 +57,16 @@ button {
     margin-top: 0.25rem;
   }
 }
+
+.errorHttpMessage {
+  color: $error-color;
+  @include font-base(21px, 800);
+
+  @include adaptive.respond-to(tablet) {
+    font-size: 16px;
+  }
+
+  @include adaptive.respond-to(mobile) {
+    font-size: 14px;
+  }
+}

@@ -2,19 +2,14 @@ import type { ParticipationMember } from "@shared/config/types";
 import type { QueryResult } from "@shared/config/types";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import styles from "./MembersListWidget.module.scss";
-
-interface PaginationRenderProps {
-  fetchNextPage: () => void;
-  isFetchingNextPage: boolean;
-  hasNextPage: boolean;
-}
+import { type PaginationRender } from "@shared/config/types";
 
 interface MembersListWidgetProps {
   useMembersQuery?: () => QueryResult<ParticipationMember>;
   members?: ParticipationMember[];
   renderCard: (member: ParticipationMember, index: number) => React.ReactNode;
   renderSkeleton?: () => React.ReactNode;
-  renderPagination?: (props: PaginationRenderProps) => React.ReactNode;
+  renderPagination?: (props: PaginationRender) => React.ReactNode;
   skeletonItems?: number;
   startSlot?: React.ReactNode;
   className?: string;

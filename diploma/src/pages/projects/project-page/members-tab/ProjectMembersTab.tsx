@@ -5,6 +5,8 @@ import { useMembersInfiniteQuery } from "@shared/api/participation";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
+import { getHttpErrorInfo } from "@shared/libs/error";
+import { ErrorBoundary } from "react-error-boundary";
 
 interface ProjectMembersTab {
   projectId: string;
@@ -12,52 +14,64 @@ interface ProjectMembersTab {
 
 export const ProjectMembersTab = ({ projectId }: ProjectMembersTab) => {
   return (
-    <Suspense
-      fallback={
-        <ListWidgetSkeleton
-          className={styles.membersProjectList}
-          renderSkeleton={() => <MemberCardSkeleton />}
-          items={9}
-        />
-      }
-    >
-      <MembersListWidget
-        renderCard={(member) => (
-          <MemberCard
-            fullName={`${member.firstName} ${member.lastName}`}
-            image={member.avatarUrl}
-            role={member.roleId}
-          />
-        )}
-        className={styles.membersProjectList}
-        useMembersQuery={useMembersInfiniteQuery({
-          entityId: projectId,
-          pageSize: 9,
-          entityType: "project",
-        })}
-        renderPagination={({
-          fetchNextPage,
-          isFetchingNextPage,
-          hasNextPage,
-        }) =>
-          hasNextPage && (
-            <BaseButtonWrapper
-              onClick={fetchNextPage}
-              disabled={isFetchingNextPage}
-              loading={isFetchingNextPage}
-              className={styles.showMoreButton}
-            >
-              Show more
-            </BaseButtonWrapper>
-          )
-        }
-        startSlot={
-          <div className={styles.startMembersSlot}>
-            <h1>Team members</h1>
-            <h2>These are the volunteers helping us create positive change</h2>
+    <ErrorBoundary
+      fallbackRender={({ error }) => {
+        return (
+          <div className={styles.errorState}>
+            <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
           </div>
+        );
+      }}
+    >
+      <Suspense
+        fallback={
+          <ListWidgetSkeleton
+            className={styles.membersProjectList}
+            renderSkeleton={() => <MemberCardSkeleton />}
+            items={9}
+          />
         }
-      />
-    </Suspense>
+      >
+        <MembersListWidget
+          renderCard={(member) => (
+            <MemberCard
+              fullName={`${member.firstName} ${member.lastName}`}
+              image={member.avatarUrl}
+              role={member.roleId}
+            />
+          )}
+          className={styles.membersProjectList}
+          useMembersQuery={useMembersInfiniteQuery({
+            entityId: projectId,
+            pageSize: 9,
+            entityType: "project",
+          })}
+          renderPagination={({
+            fetchNextPage,
+            isFetchingNextPage,
+            hasNextPage,
+          }) =>
+            hasNextPage && (
+              <BaseButtonWrapper
+                onClick={fetchNextPage}
+                disabled={isFetchingNextPage}
+                loading={isFetchingNextPage}
+                className={styles.showMoreButton}
+              >
+                Show more
+              </BaseButtonWrapper>
+            )
+          }
+          startSlot={
+            <div className={styles.startMembersSlot}>
+              <h1>Team members</h1>
+              <h2>
+                These are the volunteers helping us create positive change
+              </h2>
+            </div>
+          }
+        />
+      </Suspense>
+    </ErrorBoundary>
   );
 };
