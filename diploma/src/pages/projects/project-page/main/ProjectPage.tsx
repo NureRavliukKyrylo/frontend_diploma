@@ -5,19 +5,20 @@ import { projectQuery, useProjectTabs } from "@entities/project";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { ReadMoreButton } from "@shared/ui/buttons";
 import { JoinProjectButton } from "@features/projects";
-import { profileQuery } from "@entities/user/profile";
 import { projectMainTabs } from "./config/projectMainTabs";
 import { getProjectMainForms } from "./config/projectMainForms";
 import { AnimatePresence, motion } from "framer-motion";
+import { useMapUserLocation } from "@features/map";
 
 export const ProjectPage = () => {
   const { id } = useParams({ from: "/_masterLayout/projects/$id/" });
   const search = useSearch({ from: "/_masterLayout/projects/$id/" });
   const { data: project } = useQuery(projectQuery.id(id));
-  const { data: user } = useQuery(profileQuery.all());
   const { activeTab, handleTabChange } = useProjectTabs(search.tab, id);
 
-  const forms = getProjectMainForms({ project, user, projectId: id });
+  const { coordinates: userLocation } = useMapUserLocation();
+
+  const forms = getProjectMainForms({ project, userLocation, projectId: id });
 
   return (
     <div className={styles.wrapperProjectPage}>
@@ -71,6 +72,7 @@ export const ProjectPage = () => {
           buttonClassName={styles.toggleProjectButton}
           activeButtonClassName={styles.toggleProjectButtonActive}
           className={styles.toggleProject}
+          pillClassName={styles.toggleProjectPill}
         />
       </div>
       <AnimatePresence mode="wait">

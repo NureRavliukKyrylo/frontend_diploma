@@ -110,14 +110,12 @@
       }
     }
     .toggleProjectButtonActive {
-      background-color: black;
-      color: white;
-      @include font-base(25px, 800);
-      transition: font-size 0.2s ease-in-out;
       color: rgba(255, 255, 255, 0.9);
-      border-radius: 18px;
+      font-weight: 800;
+      transform: scale(1.1);
+      transition: transform 0.2s ease-in-out;
       &:hover {
-        background: black;
+        background: transparent;
       }
     }
     .toggleProject {
@@ -128,6 +126,9 @@
       padding: 10px;
       justify-content: space-between;
       width: 100%;
+    }
+    .toggleProjectPill {
+      background-color: black;
     }
   }
 }

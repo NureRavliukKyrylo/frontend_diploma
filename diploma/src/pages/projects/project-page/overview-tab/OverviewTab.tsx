@@ -5,15 +5,16 @@ import { CategoryTab } from "@entities/category";
 import { BaseMap } from "@shared/ui";
 import { MapZoomAnimation } from "@shared/libs/map";
 import { Marker, Popup } from "react-leaflet";
-import { MapUserLocation, type User } from "@entities/user/profile";
+import { MapUserLocation } from "@entities/user/profile";
 import { useEffect, useRef, useState } from "react";
+import type { Coordinates } from "@shared/config/types";
 
 interface OverviewTabProps {
   project?: Project;
-  user?: User;
+  userLocation?: Coordinates | null;
 }
 
-export const OverviewTab = ({ project, user }: OverviewTabProps) => {
+export const OverviewTab = ({ project, userLocation }: OverviewTabProps) => {
   const hasCategories = project?.categories && project?.categories.length > 0;
   const mapRef = useRef<HTMLDivElement>(null);
   const [mapVisible, setMapVisible] = useState(false);
@@ -108,11 +109,8 @@ export const OverviewTab = ({ project, user }: OverviewTabProps) => {
                   </Popup>
                 </Marker>
               </>
-              {user?.profile?.coordinates && (
-                <MapUserLocation
-                  coordinates={user.profile.coordinates}
-                  animate={false}
-                />
+              {userLocation && (
+                <MapUserLocation coordinates={userLocation} animate={false} />
               )}
             </BaseMap>
           )}

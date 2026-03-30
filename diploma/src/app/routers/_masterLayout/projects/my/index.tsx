@@ -2,13 +2,11 @@ import {
   myProjectSearchDefaults,
   myProjectsFiltersSchema,
 } from "@entities/project";
-import { MyProjectsPage } from "@pages/projects";
 import { createFileRoute } from "@tanstack/react-router";
 import { type MyProjectsMode } from "@entities/project";
 import { filtersQuery } from "@shared/api/filters";
 
 export const Route = createFileRoute("/_masterLayout/projects/my/")({
-  component: MyProjectsPage,
   validateSearch: myProjectsFiltersSchema,
   search: {
     middlewares: [

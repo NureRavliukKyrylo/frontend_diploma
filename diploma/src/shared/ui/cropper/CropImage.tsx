@@ -1,7 +1,20 @@
 import type { ComponentProps } from "react";
 import Cropper from "react-easy-crop";
 
-type CropImageProps = ComponentProps<typeof Cropper>;
+type CropImageProps = {
+  image: string;
+  crop: { x: number; y: number };
+  zoom: number;
+  aspect?: number;
+  onCropChange: (crop: { x: number; y: number }) => void;
+  onZoomChange: (zoom: number) => void;
+  onCropComplete?: ComponentProps<typeof Cropper>["onCropComplete"];
+  minZoom?: number;
+  maxZoom?: number;
+  rotation?: number;
+  objectFit?: ComponentProps<typeof Cropper>["objectFit"];
+  showGrid?: boolean;
+};
 
 export const CropImage = (props: CropImageProps) => {
   return (

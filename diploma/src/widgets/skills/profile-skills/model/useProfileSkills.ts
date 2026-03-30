@@ -1,4 +1,4 @@
-import type { SortSkillsValues } from "@pages/skills";
+import type { SortSkillsValues } from "@entities/skill";
 import { useNavigate } from "@tanstack/react-router";
 
 export const useProfileSkills = () => {

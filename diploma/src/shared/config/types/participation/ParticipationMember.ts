@@ -3,5 +3,5 @@ export interface ParticipationMember {
   firstName: string;
   lastName: string;
   avatarUrl: string;
-  roleId: string;
+  role: { roleId: string; name: string };
 }

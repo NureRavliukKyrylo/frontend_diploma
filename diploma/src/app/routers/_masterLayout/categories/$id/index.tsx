@@ -1,8 +1,4 @@
 import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
-import {
-  CategoryDetailPage,
-  CategoryDetailPageSkeleton,
-} from "@pages/categories";
 import { categoryQuery } from "@entities/category";
 import {
   projectSearchSchema,
@@ -12,7 +8,6 @@ import {
 import { organizationQuery } from "@entities/organization";
 
 export const Route = createFileRoute("/_masterLayout/categories/$id/")({
-  component: CategoryDetailPage,
   loader: async ({ context: { queryClient }, params: { id } }) => {
     await Promise.all([
       queryClient.ensureQueryData(categoryQuery.id(id)),
@@ -31,5 +26,4 @@ export const Route = createFileRoute("/_masterLayout/categories/$id/")({
     middlewares: [stripSearchParams(projectSearchDefaults)],
   },
   validateSearch: projectSearchSchema,
-  pendingComponent: CategoryDetailPageSkeleton,
 });

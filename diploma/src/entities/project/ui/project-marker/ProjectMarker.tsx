@@ -1,18 +1,13 @@
-import L from "leaflet";
-import { ProjectMarker as ProjectMarkerIcon } from "@shared/assets/icons/markers";
+import { MarkerIcon } from "@shared/assets/icons/markers";
+import { createMarkerIcon } from "@shared/libs/map";
 
-export const ProjectMarker = L.divIcon({
-  className: "",
-  html: `<img src="${ProjectMarkerIcon}" class="projectMarkerIcon" />`,
-  iconSize: [35, 35],
-  iconAnchor: [18, 35],
-  popupAnchor: [0, -35],
+export const ProjectMarker = createMarkerIcon({
+  icon: MarkerIcon,
+  color: "#8C0000",
 });
 
-export const ProjectMarkerAnimated = L.divIcon({
-  className: "",
-  html: `<img src="${ProjectMarkerIcon}" class="projectMarkerIcon marker-bounce" />`,
-  iconSize: [35, 35],
-  iconAnchor: [18, 35],
-  popupAnchor: [0, -35],
+export const ProjectMarkerAnimated = createMarkerIcon({
+  icon: MarkerIcon,
+  color: "#8C0000",
+  extraClass: "marker-bounce",
 });

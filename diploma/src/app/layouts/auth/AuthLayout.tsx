@@ -13,19 +13,22 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
     <div className={styles.authWrapper}>
       <div className={styles.navButtonsAuth}>
         <LanguageSwitcherButton />
-        <LinkButtonWrapper
-          to="/terms-and-conditions"
-          className={styles.headerLinkButton}
-        >
+        <LinkButtonWrapper to="/auth" className={styles.headerLinkButton}>
+          {" "}
+          {/* stub for now */}
           <img src={TermsCondition} alt="terms condition" />
         </LinkButtonWrapper>
-        <LinkButtonWrapper to="/policy" className={styles.headerLinkButton}>
+        <LinkButtonWrapper to="/auth" className={styles.headerLinkButton}>
+          {" "}
+          {/* stub for now */}
           <img src={Policy} alt="policy" />
         </LinkButtonWrapper>
       </div>
       {children}
       <div className={styles.footerButtonAuth}>
-        <LinkButtonWrapper to="/policy" className={styles.footerLinkButton}>
+        <LinkButtonWrapper to="/auth" className={styles.footerLinkButton}>
+          {" "}
+          {/* stub for now */}
           <img src={QuestionSign} alt="question sign" />
         </LinkButtonWrapper>
       </div>

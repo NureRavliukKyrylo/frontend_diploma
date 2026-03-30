@@ -2,18 +2,15 @@ import { BaseMap, map } from "@shared/ui";
 import styles from "./MapPage.module.scss";
 import { ToggleDropdownButton } from "@shared/ui/buttons/index.ts";
 import { SearchBar } from "@shared/ui/inputs";
-import {
-  MapFiltersWidget,
-  MapListPanel,
-  MapProjectCluster,
-} from "@widgets/map";
+import { MapFiltersWidget, MapListPanel } from "@widgets/map";
 import { MapBoundsTracker, MapInitialBounds } from "@shared/libs/map";
 import { SearchLocationLayer } from "../location-layer/SearchLocationLayer.tsx";
 import { useMapPage } from "../../model/useMapPage.ts";
 import { useQuery } from "@tanstack/react-query";
 import { projectQuery } from "@entities/project";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { MapUserLocation } from "@entities/user/profile";
+import { ProjectClusters } from "../project-clusters/ProjectClusters.tsx";
 
 export const MapPage = () => {
   const {
@@ -35,13 +32,6 @@ export const MapPage = () => {
   const { data } = useQuery(projectQuery.map(mapSearch));
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const boundsReadyRef = useRef<() => void>(() => {});
-
-  useEffect(() => {
-    if (!locationReady) return;
-    if (hasBounds || !!searchCoordinates || !userLocation) {
-      boundsReadyRef.current();
-    }
-  }, [locationReady, hasBounds, !!searchCoordinates, !!userLocation]);
 
   return (
     <div ref={wrapperRef} className={styles.mapPageWrapper}>
@@ -66,14 +56,19 @@ export const MapPage = () => {
             maxLng={search.MaxLng!}
           />
         )}
-        <MapUserLocation
-          coordinates={userLocation}
-          animate={!searchCoordinates && !hasBounds && locationReady}
-          onAnimationEnd={() => boundsReadyRef.current()}
-        />
         <MapBoundsTracker
           onBoundsChange={handleSearchBounds}
           readyRef={boundsReadyRef}
+          fireOnMount={hasBounds || !!searchCoordinates}
+        />
+        <MapUserLocation
+          coordinates={userLocation}
+          animate={!searchCoordinates && !hasBounds && locationReady}
+          onAnimationEnd={
+            !hasBounds && !searchCoordinates
+              ? () => boundsReadyRef.current()
+              : undefined
+          }
         />
         {searchCoordinates && (
           <SearchLocationLayer
@@ -82,7 +77,7 @@ export const MapPage = () => {
             search={search}
           />
         )}
-        <MapProjectCluster selectedId={selectedId} data={data} />
+        <ProjectClusters selectedId={selectedId} data={data} />
       </BaseMap>
 
       <div className={styles.filterButtonWrapper}>

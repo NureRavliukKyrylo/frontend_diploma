@@ -10,6 +10,7 @@
 
   :global(.leaflet-popup-content) {
     margin: 0;
+    min-width: 250px;
   }
   :global(.leaflet-popup-close-button) {
     top: 5px !important;
@@ -19,9 +20,7 @@
   }
 }
 
-:global(.projectMarkerIcon) {
-  width: 35px;
-  height: 35px;
+:global(.markerIcon) {
   animation: markerAppear 0.3s ease-in-out forwards;
 }
 @keyframes markerAppear {

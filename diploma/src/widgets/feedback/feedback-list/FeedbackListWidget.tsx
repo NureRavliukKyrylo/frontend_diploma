@@ -11,7 +11,6 @@ interface FeedbackListWidgetProps {
   renderPagination?: (props: PaginationRender) => React.ReactNode;
   skeletonItems?: number;
   startSlot?: React.ReactNode;
-  endSlot?: React.ReactNode;
   className?: string;
 }
 
@@ -23,7 +22,6 @@ export const FeedbackListWidget = ({
   renderPagination,
   skeletonItems,
   startSlot,
-  endSlot,
   className,
 }: FeedbackListWidgetProps) => {
   const feedbacks = readyFeedbacks ?? query?.data ?? [];
@@ -47,7 +45,6 @@ export const FeedbackListWidget = ({
       {startSlot}
       {feedbacks.map((feedback, index) => renderCard(feedback, index))}
       {renderPagination?.({ fetchNextPage, isFetchingNextPage, hasNextPage })}
-      {endSlot}
     </div>
   );
 };

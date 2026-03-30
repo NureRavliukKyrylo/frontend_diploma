@@ -1,4 +1,3 @@
-export type { MemberPreview } from "./types/user/MemberPreview";
 export type { User } from "./types/user/User";
 export type { ProfileMode } from "./types/modes/ProfileMode";
 export type { ProfileSettingsMode } from "./types/modes/ProfileSettingsMode";

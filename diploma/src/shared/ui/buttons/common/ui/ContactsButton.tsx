@@ -3,7 +3,9 @@ import styles from "../styles/ContactsButton.module.scss";
 
 export const ContactsButton = () => {
   return (
-    <Link to="/contacts" className={styles.contactsButton}>
+    <Link to="/auth" className={styles.contactsButton}>
+      {" "}
+      {/* stub for now */}
       Contact Us
     </Link>
   );

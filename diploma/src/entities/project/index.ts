@@ -14,7 +14,7 @@ export { ProjectMarker } from "./ui/project-marker/ProjectMarker";
 export { ListProjectCard } from "./ui/list-card/ListProjectCard";
 export { toGeoPoints } from "./libs/to-coordinates/toGeoProject";
 export { ListProjectCardSkeleton } from "./ui/list-card/ListProjectCardSkeleton";
-export { createProjectClusterIcon } from "./ui/project-marker/ProjectCluster";
+export { ProjectClusterIcon } from "./ui/project-marker/ProjectCluster";
 export { ProjectPopupContent } from "./ui/pop-up-content/ProjectPopUpContent";
 export type { ProjectsResponse } from "./api/list-projects/projectsApi";
 export { useProjectsListQuery } from "./model/hooks/useProjectsListQuery";

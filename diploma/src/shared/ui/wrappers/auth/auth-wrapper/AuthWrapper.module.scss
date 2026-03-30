@@ -18,6 +18,16 @@
       display: flex;
       justify-content: start;
       margin-bottom: 40px;
+      .toggleAuthButton {
+        &:hover {
+          background: #cfcfcf;
+        }
+      }
+      .toggleActiveAuthButton {
+        &:hover {
+          background: transparent;
+        }
+      }
     }
 
     .apiAuth {

@@ -36,6 +36,8 @@ export function ProfileSettingsWidget() {
             buttonClassName={styles.toggleProfileSettingsButton}
             activeButtonClassName={styles.toggleProfileSettingsButtonActive}
             className={styles.toggleProfileSettings}
+            pillClassName={styles.toggleProfileSettingsPill}
+            innerWrapperClassName={styles.toggleProfileSettingsInnerWrapper}
           />
         </div>
         <div className={styles.logoutWrapper}>

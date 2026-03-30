@@ -27,6 +27,8 @@ export function AuthWrapper<T extends string>({
             tabs={tabs}
             activeValue={activeValue}
             onChange={onChange}
+            buttonClassName={styles.toggleAuthButton}
+            activeButtonClassName={styles.toggleActiveAuthButton}
           />
         </div>
 

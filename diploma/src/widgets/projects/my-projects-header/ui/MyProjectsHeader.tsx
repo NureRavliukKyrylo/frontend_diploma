@@ -33,9 +33,10 @@ export const MyProjectsHeader = ({
             tabs={myProjectMainTabs}
             activeValue={activeTab}
             onChange={onTabChange}
-            buttonClassName={styles.toggleProfileMainProjectsButton}
-            activeButtonClassName={styles.toggleProfileMainProjectsButtonActive}
-            className={styles.toggleProfileMainProjects}
+            buttonClassName={styles.toggleMyProjectsButton}
+            activeButtonClassName={styles.toggleMyProjectsButtonActive}
+            className={styles.toggleMyProjects}
+            pillClassName={styles.toggleMyProjectsPill}
           />
         </div>
         <div className={styles.usersDetailedInfo}>

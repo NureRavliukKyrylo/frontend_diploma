@@ -2,11 +2,6 @@ import { useDebounce } from "@shared/libs/hooks";
 import { useEffect, useRef, useState } from "react";
 import { useMapEvents } from "react-leaflet";
 
-type Props = {
-  onBoundsChange: (bounds: MapBounds) => void;
-  readyRef: React.RefObject<() => void>;
-};
-
 export type MapBounds = {
   MinLat: number;
   MaxLat: number;
@@ -26,20 +21,42 @@ export const getBounds = (map: ReturnType<typeof useMapEvents>): MapBounds => {
   };
 };
 
-export const MapBoundsTracker = ({ onBoundsChange, readyRef }: Props) => {
+type Props = {
+  onBoundsChange: (bounds: MapBounds) => void;
+  readyRef?: React.RefObject<() => void>;
+  fireOnMount?: boolean;
+};
+
+export const MapBoundsTracker = ({
+  onBoundsChange,
+  readyRef,
+  fireOnMount,
+}: Props) => {
   const [bounds, setBounds] = useState<MapBounds | null>(null);
   const debouncedBounds = useDebounce(bounds, 300);
   const isReady = useRef(false);
-
-  readyRef.current = () => {
-    isReady.current = true;
-    setBounds(getBounds(map));
-  };
 
   const map = useMapEvents({
     moveend: () => isReady.current && setBounds(getBounds(map)),
     zoomend: () => isReady.current && setBounds(getBounds(map)),
   });
+
+  useEffect(() => {
+    // assign AFTER mount — map is guaranteed ready here
+    if (readyRef) {
+      readyRef.current = () => {
+        if (isReady.current) return;
+        isReady.current = true;
+        setBounds(getBounds(map));
+      };
+    }
+
+    // self-fire — no parent coordination needed
+    if (fireOnMount) {
+      isReady.current = true;
+      setBounds(getBounds(map));
+    }
+  }, []);
 
   useEffect(() => {
     if (!debouncedBounds) return;

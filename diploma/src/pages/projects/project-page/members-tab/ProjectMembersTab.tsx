@@ -37,7 +37,7 @@ export const ProjectMembersTab = ({ projectId }: ProjectMembersTab) => {
             <MemberCard
               fullName={`${member.firstName} ${member.lastName}`}
               image={member.avatarUrl}
-              role={member.roleId}
+              role={member.role.name}
             />
           )}
           className={styles.membersProjectList}

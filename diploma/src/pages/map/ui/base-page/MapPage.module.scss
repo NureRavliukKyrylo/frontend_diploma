@@ -34,11 +34,10 @@
   }
 }
 
-:global(.locationMarkerIcon) {
-  width: 35px;
-  height: 35px;
+:global(.markerIcon) {
   animation: markerAppear 0.3s ease-in-out forwards;
 }
+
 @keyframes markerAppear {
   from {
     opacity: 0;

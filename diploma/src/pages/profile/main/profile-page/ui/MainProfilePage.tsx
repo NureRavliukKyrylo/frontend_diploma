@@ -59,10 +59,12 @@ export function MainProfilePage() {
             )}
           </div>
         </div>
-        <SocialPlatforms
-          links={user?.profile?.socialLinks}
-          privacySettings={user?.privacySettings}
-        />
+        <div className={styles.socialPlatformsWrapper}>
+          <SocialPlatforms
+            links={user?.profile?.socialLinks}
+            privacySettings={user?.privacySettings}
+          />
+        </div>
       </div>
       <div className={styles.mainWrapperUserInfo}>
         <div className={styles.actionsChangeBlock}>
@@ -73,6 +75,7 @@ export function MainProfilePage() {
             buttonClassName={styles.toggleProfileMainButton}
             activeButtonClassName={styles.toggleProfileMainButtonActive}
             className={styles.toggleProfileMain}
+            pillClassName={styles.toggleProfilePill}
           />
           <LinkButtonWrapper
             to={profileRoutes.settings}

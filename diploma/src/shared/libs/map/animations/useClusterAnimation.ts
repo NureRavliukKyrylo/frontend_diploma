@@ -1,10 +1,13 @@
 import { useEffect, useRef } from "react";
 import type { AnyProps, ClusterProperties, PointFeature } from "supercluster";
 import type Supercluster from "supercluster";
+import type { GeoJsonProperties } from "geojson";
 
 type AnyCluster = PointFeature<(ClusterProperties & AnyProps) | AnyProps> & {
   id?: number | string;
 };
+
+type AnySupercluster = Supercluster<GeoJsonProperties, ClusterProperties>;
 
 function getNodeKey(cluster: AnyCluster): string {
   if (!cluster.properties.cluster) {
@@ -18,7 +21,7 @@ function getNodeKey(cluster: AnyCluster): string {
 
 export function useClusterAnimation(
   clusters: AnyCluster[],
-  supercluster: Supercluster | undefined,
+  supercluster: AnySupercluster | undefined,
 ) {
   const nodeToClusterPos = useRef<Map<string, [number, number]>>(new Map());
   const fromPositions = new Map<string, [number, number]>();

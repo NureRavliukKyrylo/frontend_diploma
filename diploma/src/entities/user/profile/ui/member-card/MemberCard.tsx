@@ -13,7 +13,7 @@ export const MemberCard = ({ image, fullName, role }: MemberCardProps) => {
       <Avatar src={image} className={styles.imageMember} fallback={fullName} />
       <div className={styles.userInitials}>
         <h1>{fullName}</h1>
-        <h2>User</h2>
+        <h2>{role}</h2>
       </div>
     </div>
   );
