@@ -17,10 +17,7 @@
   }
 }
 .projectInfoBlock {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex: 1;
+  display: contents;
   h1 {
     @include font-base(30px, 700);
     line-height: 120%;
@@ -48,6 +45,9 @@
       color: rgba(140, 0, 0, 0.6);
     }
   }
+}
+.bottomContent {
+  display: contents;
 }
 .deadlineBlock {
   display: flex;

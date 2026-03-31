@@ -6,16 +6,22 @@ import { Toggle } from "@shared/ui";
 import styles from "./ProfileSettingsWidget.module.scss";
 import { LogoutButton } from "@features/auth";
 import { BackButton } from "@shared/ui/buttons";
-import { useProfileTabs, type ProfileSettingsMode } from "@entities/user";
+import {
+  profileSettingsSearchDefaults,
+  type ProfileSettingsMode,
+} from "@entities/user";
 import { profileRoutes } from "@shared/routes";
-import { useSearch } from "@tanstack/react-router";
+import { useNavigate, useSearch } from "@tanstack/react-router";
 
 export function ProfileSettingsWidget() {
   const search = useSearch({ from: "/_masterLayout/profile/settings/" });
-  const { activeTab, handleTabChange } = useProfileTabs<ProfileSettingsMode>({
-    search,
-    navigateParams: "/profile/settings/",
-  });
+  const navigate = useNavigate({ from: "/profile/settings/" });
+
+  const activeTab = search.tab as ProfileSettingsMode;
+  const handleTabChange = (tab: ProfileSettingsMode) => {
+    navigate({ search: { ...profileSettingsSearchDefaults, tab } });
+  };
+
   const { component, wrapperProps } = profileSettingsForms[activeTab];
 
   return (
@@ -47,10 +53,17 @@ export function ProfileSettingsWidget() {
       <AnimatePresence mode="wait">
         <motion.div
           key={activeTab}
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -30 }}
-          transition={{ duration: 0.25 }}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            transition: { duration: 0.25, ease: "easeOut" },
+          }}
+          exit={{
+            opacity: 0,
+            x: -20,
+            transition: { duration: 0.2, ease: "easeIn" },
+          }}
         >
           <SettingsWrapper
             settingsTitle={wrapperProps?.settingsTitle}

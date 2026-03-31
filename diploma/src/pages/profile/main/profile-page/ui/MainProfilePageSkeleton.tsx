@@ -9,46 +9,24 @@ export const MainProfilePageSkeleton = () => {
         <UserHeaderWidgetSkeleton />
 
         <div className={styles.organizationBlock}>
-          <div className={styles.organizationBlockHeader}>
-            <Skeleton className={styles.orgBlockTitle} />
-          </div>
-          <div className={styles.organizationBlockContent}>
-            <div className={styles.organizationsList}>
-              {[...Array(3)].map((_, i) => (
-                <div key={i} className={styles.organizationItem}>
-                  <Skeleton className={styles.orgIcon} />
-                  <Skeleton className={styles.orgName} />
-                </div>
-              ))}
-            </div>
-          </div>
+          <Skeleton className={styles.skOrgHeader} />
+          <Skeleton className={styles.skOrgBody} />
         </div>
 
-        <div className={styles.socialPlatformsBlock}>
-          {[...Array(3)].map((_, i) => (
-            <Skeleton key={i} className={styles.socialPlatformItem} />
+        <div className={styles.socialPlatformsWrapper}>
+          {[...Array(2)].map((_, i) => (
+            <Skeleton key={i} className={styles.skSocialItem} />
           ))}
         </div>
       </div>
 
       <div className={styles.mainWrapperUserInfo}>
         <div className={styles.actionsChangeBlock}>
-          <Skeleton className={styles.toggleSkeleton} />
-          <Skeleton className={styles.settingsButtonSkeleton} />
+          <Skeleton className={styles.skToggle} />
+          <Skeleton className={styles.skSettingsBtn} />
         </div>
-
         <div className={styles.userActionsBlock}>
-          <div className={styles.mainContentArea}>
-            <Skeleton className={styles.contentTitle} />
-            <Skeleton className={styles.contentLine} />
-            <Skeleton className={styles.contentLine} />
-            <Skeleton className={styles.contentLineShort} />
-            <div className={styles.contentGrid}>
-              {[...Array(4)].map((_, i) => (
-                <Skeleton key={i} className={styles.contentCard} />
-              ))}
-            </div>
-          </div>
+          <Skeleton className={styles.skContent} />
         </div>
       </div>
     </div>

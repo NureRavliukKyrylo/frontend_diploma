@@ -10,6 +10,7 @@ interface MembersListWidgetProps {
   renderCard: (member: ParticipationMember, index: number) => React.ReactNode;
   renderSkeleton?: () => React.ReactNode;
   renderPagination?: (props: PaginationRender) => React.ReactNode;
+  renderEmpty?: (members: ParticipationMember[]) => React.ReactNode;
   skeletonItems?: number;
   startSlot?: React.ReactNode;
   className?: string;
@@ -24,6 +25,7 @@ export const MembersListWidget = ({
   skeletonItems,
   startSlot,
   className,
+  renderEmpty,
 }: MembersListWidgetProps) => {
   const queryResult = useMembersQuery?.();
   const members = readyMembers ?? queryResult?.data ?? [];
@@ -45,10 +47,19 @@ export const MembersListWidget = ({
   }
 
   return (
-    <div className={wrapperClass}>
-      {startSlot}
-      {members.map((member, index) => renderCard(member, index))}
-      {renderPagination?.({ fetchNextPage, isFetchingNextPage, hasNextPage })}
-    </div>
+    <>
+      {renderEmpty?.(members) ?? (
+        <div className={wrapperClass}>
+          {startSlot}
+          {members.map((member, index) => renderCard(member, index))}
+
+          {renderPagination?.({
+            fetchNextPage,
+            isFetchingNextPage,
+            hasNextPage,
+          })}
+        </div>
+      )}
+    </>
   );
 };

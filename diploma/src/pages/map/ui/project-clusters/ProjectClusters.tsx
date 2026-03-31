@@ -5,7 +5,6 @@ import {
   ProjectMarker,
   ProjectMarkerAnimated,
   ProjectPopupContent,
-  toGeoPoints,
   type Project,
   type ProjectsResponse,
 } from "@entities/project";
@@ -15,7 +14,10 @@ import {
   type ClusterRenderProps,
   type EntityRenderProps,
 } from "@widgets/map";
-import { useSelectedMarkerBounce } from "@shared/libs/map";
+import {
+  convertToClusterFeatures,
+  useSelectedMarkerBounce,
+} from "@shared/libs/map";
 import styles from "./ProjectClusters.module.scss";
 
 interface ProjectClustersProps {
@@ -23,11 +25,11 @@ interface ProjectClustersProps {
   selectedId?: string | null;
 }
 
-type ProjectProperties = { project: Project };
+type ProjectProperties = { item: Project };
 
 export const ProjectClusters = memo(
   ({ data, selectedId }: ProjectClustersProps) => {
-    const points = toGeoPoints(data?.data ?? []);
+    const points = convertToClusterFeatures(data?.data ?? []);
     const getFromPositionRef = useRef<
       (id: string) => [number, number] | undefined
     >(() => undefined);
@@ -53,22 +55,20 @@ export const ProjectClusters = memo(
     );
 
     const renderEntity = ({
-      properties: { project },
+      properties: { item },
       position,
       fromPosition,
       isSelected,
     }: EntityRenderProps<ProjectProperties>) => (
       <AnimatedMarker
-        ref={registerMarker(project.id)}
+        ref={registerMarker(item.id)}
         position={position}
         fromPosition={fromPosition}
         icon={ProjectMarker}
-        onAnimationEnd={
-          isSelected ? () => triggerBounce(project.id) : undefined
-        }
+        onAnimationEnd={isSelected ? () => triggerBounce(item.id) : undefined}
       >
         <Popup className={styles.popupProject}>
-          <ProjectPopupContent project={project} />
+          <ProjectPopupContent project={item} />
         </Popup>
       </AnimatedMarker>
     );
@@ -77,7 +77,7 @@ export const ProjectClusters = memo(
       <MapCluster<ProjectProperties>
         points={points}
         selectedId={selectedId}
-        getEntityId={({ project }) => project.id}
+        getEntityId={({ item }) => item.id}
         renderCluster={renderCluster}
         renderEntity={renderEntity}
       />

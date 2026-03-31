@@ -6,3 +6,4 @@ export {
 export type { Event } from "./model";
 export { EventClusterIcon } from "./ui/event-marker/EventCluster";
 export { EventMarker } from "./ui/event-marker/EventMarker";
+export { type EventResponse } from "./api/list-events/eventsApi";

@@ -12,7 +12,6 @@ export { type Project } from "./model/types/project/Project";
 export { ProjectCardSkeleton } from "./ui/project-card/item-list/ProjectCardSkeleton";
 export { ProjectMarker } from "./ui/project-marker/ProjectMarker";
 export { ListProjectCard } from "./ui/list-card/ListProjectCard";
-export { toGeoPoints } from "./libs/to-coordinates/toGeoProject";
 export { ListProjectCardSkeleton } from "./ui/list-card/ListProjectCardSkeleton";
 export { ProjectClusterIcon } from "./ui/project-marker/ProjectCluster";
 export { ProjectPopupContent } from "./ui/pop-up-content/ProjectPopUpContent";
@@ -30,7 +29,6 @@ export {
   type ProjectSortValues,
 } from "./config/sortingProjectItems";
 export { type MyProjectsMode } from "./model/types/projects-mode/MyProjectsMode";
-export { useMyProjectsTabs } from "./model/hooks/useMyProjectsTab";
 export { ProjectCard } from "./ui/project-card/item-list/ProjectCard";
 export { ProjectControlCard } from "./ui/project-card/control/ProjectControlCard";
 export { projectKeys } from "./model/queries/project-query/projectQuery";
@@ -39,5 +37,4 @@ export {
   projectDetailSchema,
   projectDetailDefaults,
 } from "./libs/search-shema/projectDetailSearchSchema";
-export { useProjectTabs } from "./model/hooks/useMyProjectsTab";
 export type { ProjectMode } from "./model/types";

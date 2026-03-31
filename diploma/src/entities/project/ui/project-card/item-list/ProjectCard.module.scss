@@ -5,8 +5,9 @@
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.8);
   padding: 20px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 6;
   gap: 10px;
   height: 100%;
 }

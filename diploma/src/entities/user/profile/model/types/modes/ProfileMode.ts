@@ -1,1 +1,1 @@
-export type ProfileMode = "profile" | "projects" | "skills" | "inventory";
+export type ProfileMode = "profile" | "statistics" | "skills" | "inventory";

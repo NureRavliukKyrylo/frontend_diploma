@@ -31,17 +31,19 @@
   }
 }
 
-.skeletonAvatar {
-  aspect-ratio: 1/1;
+.skAvatar {
+  width: 100%;
+  aspect-ratio: 1 / 1;
   border-radius: 15px;
 }
-.skeletonFullName {
-  width: 180px;
+
+.skFullName {
+  width: 75%;
   height: 80px;
   border-radius: 8px;
 }
 
 .wrapperInfoProfileUserSkeleton {
   border-radius: 40px;
-  height: 70px;
+  height: 40px;
 }

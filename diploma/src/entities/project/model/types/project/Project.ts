@@ -1,6 +1,10 @@
 import type { Category } from "@entities/category";
 import type { Organization } from "@entities/organization";
-import type { Coordinates, ParticipationMember } from "@shared/config/types";
+import type {
+  Coordinates,
+  ParticipationMember,
+  Policy,
+} from "@shared/config/types";
 
 export interface Project {
   id: string;
@@ -16,4 +20,6 @@ export interface Project {
   memberCount: number;
   memberPreviews: ParticipationMember[];
   volunteerProjectState: "active" | "endingSoon" | "completed" | "archived";
+  locationInfo: { address: string };
+  joinPolicy: Policy;
 }

@@ -14,7 +14,7 @@ export const profileMainForms: Record<
   (props: ProfileFormProps) => React.ReactNode
 > = {
   profile: ({ user }) => <ProfileMainTab user={user} />,
-  projects: () => <div className={styles.projectsBlock}></div>,
+  statistics: () => <div className={styles.projectsBlock}></div>,
   skills: () => <ProfileSkillsTab />,
   inventory: () => <ProfileInventoryTab />,
 };

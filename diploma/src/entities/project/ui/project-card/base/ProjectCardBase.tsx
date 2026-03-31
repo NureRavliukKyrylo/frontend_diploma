@@ -28,6 +28,6 @@ export const ProjectCardBase = ({
       <h1>{project.title}</h1>
       <p>{project.description}</p>
     </div>
-    {bottomContent}
+    <div className={styles.bottomContent}>{bottomContent}</div>
   </>
 );

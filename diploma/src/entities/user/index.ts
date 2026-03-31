@@ -18,5 +18,4 @@ export {
   type ProfileSearchParams,
   type ProfileSettingsSearchParams,
 } from "./profile/libs/search-schema/profileSearchSchema";
-export { useProfileTabs } from "./profile/model/hooks/useProfileTabs";
 export { memberPreviewToAvatar } from "./profile/libs/member-to-avatar/memberPreviewToAvatar";

@@ -16,3 +16,55 @@
     gap: 30px;
   }
 }
+.blockSettingsProfileForms {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.skBackBtn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skToggle {
+  flex: 1;
+  height: 60px;
+  border-radius: 50px;
+}
+
+.skLogoutBtn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  grid-column: 3 / 4;
+}
+
+.skContent {
+  width: 100%;
+  min-height: 800px;
+  border-radius: 20px;
+}
+
+.skDeleteButton {
+  height: 57px;
+  border-radius: 25px;
+  width: 100%;
+}
+
+.blockActionsProfileSettings {
+  display: grid;
+  grid-template-columns: 560px 1fr 60px;
+  grid-template-rows: auto;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.backAndToggleSection {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}

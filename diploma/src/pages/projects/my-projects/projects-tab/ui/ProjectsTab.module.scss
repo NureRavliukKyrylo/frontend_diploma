@@ -23,6 +23,10 @@
     }
   }
 }
+
+.motionCard {
+  display: grid;
+}
 .paginationWrapper {
   width: 100%;
   display: flex;
@@ -31,7 +35,7 @@
 
 .projectsListSkeletonWrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(470px, 1fr));
   justify-content: center;
   gap: 40px;
   align-items: stretch;

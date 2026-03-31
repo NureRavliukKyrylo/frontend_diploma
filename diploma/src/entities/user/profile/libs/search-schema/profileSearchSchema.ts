@@ -14,7 +14,7 @@ export const profileSettingsSearchDefaults = {
 
 export const profileSearchBaseSchema = z.object({
   tab: z
-    .enum(["profile", "projects", "skills", "inventory"])
+    .enum(["profile", "statistics", "skills", "inventory"])
     .default("profile")
     .catch("profile"),
   OrderBy: z

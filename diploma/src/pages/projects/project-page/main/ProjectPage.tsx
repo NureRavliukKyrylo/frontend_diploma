@@ -1,7 +1,7 @@
-import { useParams, useSearch } from "@tanstack/react-router";
+import { useNavigate, useParams, useSearch } from "@tanstack/react-router";
 import styles from "./ProjectPage.module.scss";
 import { useQuery } from "@tanstack/react-query";
-import { projectQuery, useProjectTabs } from "@entities/project";
+import { projectQuery, type ProjectMode } from "@entities/project";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { ReadMoreButton } from "@shared/ui/buttons";
 import { JoinProjectButton } from "@features/projects";
@@ -9,16 +9,27 @@ import { projectMainTabs } from "./config/projectMainTabs";
 import { getProjectMainForms } from "./config/projectMainForms";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMapUserLocation } from "@features/map";
+import { eventQuery } from "@entities/event";
+import { formatDateToText } from "@shared/libs/date";
 
 export const ProjectPage = () => {
   const { id } = useParams({ from: "/_masterLayout/projects/$id/" });
   const search = useSearch({ from: "/_masterLayout/projects/$id/" });
   const { data: project } = useQuery(projectQuery.id(id));
-  const { activeTab, handleTabChange } = useProjectTabs(search.tab, id);
-
+  const { data: events } = useQuery(eventQuery.list({ ProjectIds: [id] }));
   const { coordinates: userLocation } = useMapUserLocation();
+  const navigate = useNavigate({ from: "/projects/$id/" });
 
-  const forms = getProjectMainForms({ project, userLocation, projectId: id });
+  const activeTab = search.tab;
+  const handleTabChange = (tab: ProjectMode) => {
+    navigate({ params: { id }, search: { tab }, resetScroll: false });
+  };
+  const forms = getProjectMainForms({
+    project,
+    userLocation,
+    events: events?.data,
+    projectId: id,
+  });
 
   return (
     <div className={styles.wrapperProjectPage}>
@@ -29,13 +40,40 @@ export const ProjectPage = () => {
         transition={{ duration: 0.3 }}
       >
         <div className={styles.headerProjectInfo}>
-          <h1>{project?.title}</h1>
-          <div className={styles.organizationInfo}>
-            <img
-              src={project?.organization?.logoUrl}
-              alt="organization-image"
-            />
-            <p>{project?.organization?.name}</p>
+          <div className={styles.mainProjectData}>
+            <h1>{project?.title}</h1>
+            <div className={styles.organizationInfo}>
+              <img
+                src={project?.organization?.logoUrl}
+                alt="organization-image"
+              />
+              <p>{project?.organization?.name}</p>
+            </div>
+          </div>
+          <div className={styles.projectMetaInfo}>
+            {project?.joinPolicy && (
+              <span
+                className={`${styles.metaChip} ${
+                  project.joinPolicy === "open"
+                    ? styles.metaChipOpen
+                    : styles.metaChipApproval
+                }`}
+              >
+                {project.joinPolicy === "open"
+                  ? "Open to join"
+                  : "Approval required"}
+              </span>
+            )}
+            {project?.endAt && (
+              <span className={styles.metaChip}>
+                Deadline: {formatDateToText(project.endAt)}
+              </span>
+            )}
+            {project?.locationInfo && (
+              <span className={styles.metaChip}>
+                {project.locationInfo.address}
+              </span>
+            )}
           </div>
         </div>
         <div className={styles.statsProjectInfo}>

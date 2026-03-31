@@ -5,9 +5,13 @@ import { motion } from "framer-motion";
 
 interface JoinProjectButtonProps {
   projectId: string;
+  isJoined?: boolean;
 }
 
-export const JoinProjectButton = ({ projectId }: JoinProjectButtonProps) => {
+export const JoinProjectButton = ({
+  projectId,
+  isJoined,
+}: JoinProjectButtonProps) => {
   const { handleJoinProject, isLoading } = useJoinProject();
 
   return (
@@ -18,10 +22,18 @@ export const JoinProjectButton = ({ projectId }: JoinProjectButtonProps) => {
     >
       <BaseButtonWrapper
         loading={isLoading}
-        className={styles.joinProjectButton}
+        className={`${styles.joinProjectButton} ${isJoined ? styles.joined : styles.notJoined}`}
         onClick={() => handleJoinProject(projectId)}
       >
-        Join Project
+        <motion.span
+          key="join"
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.18 }}
+        >
+          {isJoined ? "Leave Project" : "Join Project"}
+        </motion.span>
       </BaseButtonWrapper>
     </motion.div>
   );

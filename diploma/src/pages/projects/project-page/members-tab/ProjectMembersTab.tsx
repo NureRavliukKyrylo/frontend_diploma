@@ -70,6 +70,14 @@ export const ProjectMembersTab = ({ projectId }: ProjectMembersTab) => {
               </h2>
             </div>
           }
+          renderEmpty={(members) =>
+            members.length === 0 ? (
+              <div className={styles.emptyState}>
+                <h2>No members yet</h2>
+                <p>Be the first to join and make a difference</p>
+              </div>
+            ) : null
+          }
         />
       </Suspense>
     </ErrorBoundary>

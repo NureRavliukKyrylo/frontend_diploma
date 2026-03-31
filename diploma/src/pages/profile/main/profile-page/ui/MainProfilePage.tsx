@@ -1,5 +1,5 @@
 import styles from "./MainProfilePage.module.scss";
-import { useProfileTabs, type ProfileMode } from "@entities/user";
+import { profileSearchDefaults, type ProfileMode } from "@entities/user";
 import { SocialPlatforms, Toggle } from "@shared/ui";
 export { ProfileMainWidget } from "@widgets/profile";
 import { profileMainTabs } from "../config/profileMainTabs";
@@ -11,31 +11,38 @@ import { Settings } from "@shared/assets/icons/actions";
 import { UserHeaderWidget } from "@widgets/profile";
 import { profileQuery } from "@entities/user/profile";
 import { useQuery } from "@tanstack/react-query";
-import { motion } from "framer-motion";
-import { useSearch } from "@tanstack/react-router";
+import { AnimatePresence, motion } from "framer-motion";
+import { useNavigate, useSearch } from "@tanstack/react-router";
 import { OrganizationsListWidget } from "@widgets/organizations";
 import { OrganizationItem } from "@entities/organization";
 import { DefaultAvatar } from "@shared/assets/images/user";
 
 export function MainProfilePage() {
   const search = useSearch({ from: "/_masterLayout/profile/" });
+  const navigate = useNavigate({ from: "/profile/" });
 
-  const { activeTab, handleTabChange } = useProfileTabs<ProfileMode>({
-    search,
-    navigateParams: "/profile/",
-  });
+  const activeTab = search.tab as ProfileMode;
+  const handleTabChange = (tab: ProfileMode) => {
+    navigate({ search: { ...profileSearchDefaults, tab } });
+  };
 
   const { data: user } = useQuery(profileQuery.all());
   const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ");
   return (
     <div className={styles.mainProfileBlock}>
-      <div className={styles.sideBarProfileBlock}>
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: "easeOut", delay: 0 }}
+        className={styles.sideBarProfileBlock}
+      >
         <UserHeaderWidget
           image={user?.profile?.avatarUrl}
           name={fullName}
           email={user?.email}
           phone={user?.profile?.phone}
         />
+
         <div className={styles.organizationBlock}>
           <div className={styles.organizationBlockHeader}>
             <h1>Organizations</h1>
@@ -59,15 +66,22 @@ export function MainProfilePage() {
             )}
           </div>
         </div>
+
         <div className={styles.socialPlatformsWrapper}>
           <SocialPlatforms
             links={user?.profile?.socialLinks}
             privacySettings={user?.privacySettings}
           />
         </div>
-      </div>
+      </motion.div>
+
       <div className={styles.mainWrapperUserInfo}>
-        <div className={styles.actionsChangeBlock}>
+        <motion.div
+          className={styles.actionsChangeBlock}
+          initial={{ opacity: 0, x: 16 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.25, ease: "easeOut" }}
+        >
           <Toggle<ProfileMode>
             tabs={profileMainTabs}
             activeValue={activeTab}
@@ -89,11 +103,28 @@ export function MainProfilePage() {
               transition={{ type: "spring", stiffness: 200, damping: 15 }}
             />
           </LinkButtonWrapper>
-        </div>
+        </motion.div>
         <div className={styles.userActionsBlock}>
-          <MainProfileWrapper>
-            {profileMainForms[activeTab]({ user })}
-          </MainProfileWrapper>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                transition: { duration: 0.25, ease: "easeOut" },
+              }}
+              exit={{
+                opacity: 0,
+                x: -20,
+                transition: { duration: 0.2, ease: "easeIn" },
+              }}
+            >
+              <MainProfileWrapper>
+                {profileMainForms[activeTab]({ user })}
+              </MainProfileWrapper>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </div>

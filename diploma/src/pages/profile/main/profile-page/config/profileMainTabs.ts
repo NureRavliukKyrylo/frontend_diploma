@@ -3,7 +3,7 @@ import { type ProfileMode } from "@entities/user";
 
 export const profileMainTabs: TabOption<ProfileMode>[] = [
   { label: "PROFILE", value: "profile" },
-  { label: "PROJECTS", value: "projects" },
+  { label: "STATISTICS", value: "statistics" },
   { label: "SKILLS", value: "skills" },
   { label: "INVENTORY", value: "inventory" },
 ];

@@ -103,6 +103,7 @@ export const ProjectsTab = () => {
                         initial="hidden"
                         animate="visible"
                         whileHover="hover"
+                        className={styles.motionCard}
                       >
                         <ProjectControlCard
                           project={project}

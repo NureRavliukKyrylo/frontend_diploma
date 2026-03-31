@@ -6,10 +6,17 @@ export const ProjectPageSkeleton = () => {
     <div className={styles.wrapperProjectPage}>
       <div className={styles.projectPageHeader}>
         <div className={styles.headerProjectInfo}>
-          <Skeleton className={styles.skeletonTitle} />
-          <div className={styles.organizationInfo}>
-            <Skeleton className={styles.skeletonOrgImage} />
-            <Skeleton className={styles.skeletonOrgName} />
+          <div className={styles.mainProjectData}>
+            <Skeleton className={styles.skeletonTitle} />
+            <div className={styles.organizationInfo}>
+              <Skeleton className={styles.skeletonOrgImage} />
+              <Skeleton className={styles.skeletonOrgName} />
+            </div>
+          </div>
+          <div className={styles.projectMetaInfo}>
+            <Skeleton className={styles.skeletonMetaChip} />
+            <Skeleton className={styles.skeletonMetaChip} />
+            <Skeleton className={styles.skeletonMetaChip} />
           </div>
         </div>
         <div className={styles.statsProjectInfo}>
@@ -18,10 +25,8 @@ export const ProjectPageSkeleton = () => {
         </div>
         <div className={styles.projectFooterContent}>
           <Skeleton className={styles.skeletonDescription} />
-          <div className={styles.wrapperButton}>
-            <div className={styles.joinProjectBlockButton}>
-              <Skeleton className={styles.skeletonButton} />
-            </div>
+          <div className={styles.joinProjectBlockButton}>
+            <Skeleton className={styles.skeletonButton} />
           </div>
         </div>
       </div>
