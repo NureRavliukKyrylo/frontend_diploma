@@ -49,16 +49,17 @@ export const MembersListWidget = ({
   return (
     <>
       {renderEmpty?.(members) ?? (
-        <div className={wrapperClass}>
-          {startSlot}
-          {members.map((member, index) => renderCard(member, index))}
-
+        <>
+          <div className={wrapperClass}>
+            {startSlot}
+            {members.map((member, index) => renderCard(member, index))}
+          </div>
           {renderPagination?.({
             fetchNextPage,
             isFetchingNextPage,
             hasNextPage,
           })}
-        </div>
+        </>
       )}
     </>
   );

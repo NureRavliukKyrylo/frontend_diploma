@@ -11,7 +11,8 @@ export const useOrganizationsInfiniteQuery =
       fetchNextPage,
       hasNextPage,
       isFetchingNextPage,
+      isError,
     } = useInfiniteQuery(organizationQuery.infinite(params));
 
-    return { data, fetchNextPage, hasNextPage, isFetchingNextPage };
+    return { data, fetchNextPage, hasNextPage, isFetchingNextPage, isError };
   };

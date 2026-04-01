@@ -1,7 +1,8 @@
-import { badgesQuery } from "@entities/badge/model/queries/badgesQuery";
+import { badgesQuery } from "@entities/badge";
 import { skillsQuery } from "@entities/skill";
 import { profileSearchSchema, profileSearchDefaults } from "@entities/user";
 import { profileQuery } from "@entities/user/profile";
+import { MainProfilePageSkeleton } from "@pages/profile";
 import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_masterLayout/profile/")({
@@ -16,4 +17,5 @@ export const Route = createFileRoute("/_masterLayout/profile/")({
     queryClient.prefetchQuery(skillsQuery.my(skillsSearch));
     queryClient.prefetchQuery(badgesQuery.my());
   },
+  pendingComponent: MainProfilePageSkeleton,
 });

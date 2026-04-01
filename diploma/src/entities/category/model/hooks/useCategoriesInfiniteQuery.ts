@@ -11,7 +11,8 @@ export const useCategoriesInfiniteQuery =
       fetchNextPage,
       hasNextPage,
       isFetchingNextPage,
+      isError,
     } = useInfiniteQuery(categoryQuery.infinite(params));
 
-    return { data, fetchNextPage, hasNextPage, isFetchingNextPage };
+    return { data, fetchNextPage, hasNextPage, isFetchingNextPage, isError };
   };

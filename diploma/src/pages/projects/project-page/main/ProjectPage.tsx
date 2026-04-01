@@ -1,6 +1,6 @@
 import { useNavigate, useParams, useSearch } from "@tanstack/react-router";
 import styles from "./ProjectPage.module.scss";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { projectQuery, type ProjectMode } from "@entities/project";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { ReadMoreButton } from "@shared/ui/buttons";
@@ -15,7 +15,7 @@ import { formatDateToText } from "@shared/libs/date";
 export const ProjectPage = () => {
   const { id } = useParams({ from: "/_masterLayout/projects/$id/" });
   const search = useSearch({ from: "/_masterLayout/projects/$id/" });
-  const { data: project } = useQuery(projectQuery.id(id));
+  const { data: project } = useSuspenseQuery(projectQuery.id(id));
   const { data: events } = useQuery(eventQuery.list({ ProjectIds: [id] }));
   const { coordinates: userLocation } = useMapUserLocation();
   const navigate = useNavigate({ from: "/projects/$id/" });

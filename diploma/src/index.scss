@@ -60,13 +60,24 @@ button {
 
 .errorHttpMessage {
   color: $error-color;
-  @include font-base(21px, 800);
+  @include font-base(var(--error-message-size, 21px), 800);
 
   @include adaptive.respond-to(tablet) {
-    font-size: 16px;
+    font-size: var(--error-message-size-tablet, 16px);
   }
-
   @include adaptive.respond-to(mobile) {
-    font-size: 14px;
+    font-size: var(--error-message-size-mobile, 14px);
+  }
+}
+
+.errorHint {
+  color: rgba(0, 0, 0, 0.4);
+  @include font-base(var(--error-hint-size, 14px), 400);
+
+  @include adaptive.respond-to(tablet) {
+    font-size: var(--error-hint-size-tablet, 12px);
+  }
+  @include adaptive.respond-to(mobile) {
+    font-size: var(--error-hint-size-mobile, 11px);
   }
 }

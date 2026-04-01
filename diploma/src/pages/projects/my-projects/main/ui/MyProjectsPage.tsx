@@ -8,6 +8,7 @@ import {
   myProjectSearchDefaults,
   type MyProjectsMode,
 } from "@entities/project";
+import { AnimatePresence, motion } from "framer-motion";
 
 export const MyProjectsPage = () => {
   const { data: user } = useQuery(profileQuery.all());
@@ -32,7 +33,17 @@ export const MyProjectsPage = () => {
         )}
       </div>
       <div className={styles.activityInfo}>
-        {myProjectsMainForms[activeTab]}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+          >
+            {myProjectsMainForms[activeTab]}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

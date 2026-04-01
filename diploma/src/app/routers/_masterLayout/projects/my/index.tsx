@@ -5,6 +5,7 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { type MyProjectsMode } from "@entities/project";
 import { filtersQuery } from "@shared/api/filters";
+import { MyProjectsPageSkeleton } from "@pages/projects";
 
 export const Route = createFileRoute("/_masterLayout/projects/my/")({
   validateSearch: myProjectsFiltersSchema,
@@ -14,14 +15,16 @@ export const Route = createFileRoute("/_masterLayout/projects/my/")({
         const result = next(search);
         const tab = (result.tab ?? "projects") as MyProjectsMode;
         const defaults = myProjectSearchDefaults[tab];
+        const globalTabDefault = "projects";
 
         return Object.fromEntries(
-          Object.entries(result).filter(
-            ([key, value]) =>
-              key === "tab" ||
+          Object.entries(result).filter(([key, value]) => {
+            if (key === "tab") return value !== globalTabDefault;
+            return (
               JSON.stringify(value) !==
-                JSON.stringify(defaults[key as keyof typeof defaults]),
-          ),
+              JSON.stringify(defaults[key as keyof typeof defaults])
+            );
+          }),
         );
       },
     ],
@@ -42,4 +45,5 @@ export const Route = createFileRoute("/_masterLayout/projects/my/")({
       }),
     );
   },
+  pendingComponent: MyProjectsPageSkeleton,
 });

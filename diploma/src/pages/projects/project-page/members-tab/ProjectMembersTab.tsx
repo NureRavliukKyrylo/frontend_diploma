@@ -19,6 +19,9 @@ export const ProjectMembersTab = ({ projectId }: ProjectMembersTab) => {
         return (
           <div className={styles.errorState}>
             <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
+            <p className="errorHint">
+              Try reloading the page or come back later.
+            </p>
           </div>
         );
       }}
@@ -43,7 +46,7 @@ export const ProjectMembersTab = ({ projectId }: ProjectMembersTab) => {
           className={styles.membersProjectList}
           useMembersQuery={useMembersInfiniteQuery({
             entityId: projectId,
-            pageSize: 9,
+            pageSize: 8,
             entityType: "project",
           })}
           renderPagination={({

@@ -26,6 +26,8 @@
 
 .motionCard {
   display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 6;
 }
 .paginationWrapper {
   width: 100%;

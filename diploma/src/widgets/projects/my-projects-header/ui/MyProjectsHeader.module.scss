@@ -80,7 +80,7 @@
         color: #8c0000;
         background: #ffffff;
         @include font-base(25px, 700);
-        max-width: 300px;
+        width: fit-content;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -105,4 +105,37 @@
       }
     }
   }
+}
+
+.avatarSk {
+  aspect-ratio: 1/1;
+  max-width: 316px;
+  width: 316px;
+  border-radius: 15px;
+  flex-shrink: 0;
+}
+
+.toggleSk {
+  height: 58px;
+  border-radius: 50px;
+  width: 40%;
+}
+
+.nameSk {
+  width: 420px;
+  height: 72px;
+  border-radius: 10px;
+}
+
+.emailSk {
+  width: 260px;
+  height: 36px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.statisticsBlockSk {
+  width: 100%;
+  min-height: 100px;
+  border-radius: 30px;
 }

@@ -15,7 +15,8 @@ export const useFiltersInfiniteQuery =
       fetchNextPage,
       hasNextPage,
       isFetchingNextPage,
+      isError,
     } = useInfiniteQuery(filtersQuery.infinite(params));
 
-    return { data, fetchNextPage, hasNextPage, isFetchingNextPage };
+    return { data, fetchNextPage, hasNextPage, isFetchingNextPage, isError };
   };

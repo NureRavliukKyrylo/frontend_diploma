@@ -18,3 +18,12 @@
     align-self: flex-end;
   }
 }
+
+.emptyText {
+  color: rgba(0, 0, 0, 0.4);
+  @include font-base(17px, 500);
+}
+.errorMessage {
+  color: #dc2626;
+  @include font-base(17px, 500);
+}

@@ -20,7 +20,20 @@ export const ProjectOrganizationFilter = ({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    isError,
   } = useOrganizationsQuery();
+
+  if (isError) {
+    return (
+      <div className={styles.stateMessage}>
+        <p className={styles.errorMessage}>Failed to load organizations</p>
+      </div>
+    );
+  }
+
+  if (organizations.length === 0) {
+    return <p className={styles.emptyText}>No organizations found</p>;
+  }
 
   return (
     <div className={styles.organizationsInfinite}>

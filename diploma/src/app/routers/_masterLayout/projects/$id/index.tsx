@@ -22,7 +22,7 @@ export const Route = createFileRoute("/_masterLayout/projects/$id/")({
       participationQuery.membersInfinite({
         entityId: id,
         entityType: "project",
-        pageSize: 9,
+        pageSize: 8,
       }),
     );
   },

@@ -20,7 +20,20 @@ export const ProjectCategoriesFilter = ({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    isError,
   } = useCategoriesQuery();
+
+  if (isError) {
+    return (
+      <div className={styles.stateMessage}>
+        <p className={styles.errorMessage}>Failed to load organizations</p>
+      </div>
+    );
+  }
+
+  if (categories.length === 0) {
+    return <p className={styles.emptyText}>No categories found</p>;
+  }
 
   return (
     <div className={styles.categoriesInfinite}>

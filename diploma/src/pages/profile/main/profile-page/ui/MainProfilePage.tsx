@@ -10,7 +10,7 @@ import { profileRoutes } from "@shared/routes";
 import { Settings } from "@shared/assets/icons/actions";
 import { UserHeaderWidget } from "@widgets/profile";
 import { profileQuery } from "@entities/user/profile";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { OrganizationsListWidget } from "@widgets/organizations";
@@ -26,7 +26,7 @@ export function MainProfilePage() {
     navigate({ search: { ...profileSearchDefaults, tab } });
   };
 
-  const { data: user } = useQuery(profileQuery.all());
+  const { data: user } = useSuspenseQuery(profileQuery.all());
   const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ");
   return (
     <div className={styles.mainProfileBlock}>

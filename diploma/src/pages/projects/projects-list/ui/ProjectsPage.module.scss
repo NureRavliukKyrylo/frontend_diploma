@@ -53,7 +53,10 @@
 .projectCardMotion {
   cursor: pointer;
   display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 6;
 }
+
 .projectsListSkeletonWrapper {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
