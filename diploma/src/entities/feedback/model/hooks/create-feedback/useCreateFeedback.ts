@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { createFeedback, type CreateFeedbackDto } from "../../../api";
 import { feedbackKeys } from "../../queries";
-import { getErrorMessage } from "react-error-boundary";
+import { getErrorMessage } from "@shared/libs/error-message";
 import { addToast } from "@heroui/react";
 import type { EntityType } from "@shared/config/types";
 import { queryClient } from "@shared/api";
