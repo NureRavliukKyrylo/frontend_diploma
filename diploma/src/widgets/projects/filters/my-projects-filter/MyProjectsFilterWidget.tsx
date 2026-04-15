@@ -1,19 +1,18 @@
 import { motion } from "framer-motion";
 import styles from "./MyProjectsFilterWidget.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
-import {
-  OnlyActiveFilter,
-  ProjectCategoriesFilter,
-  ProjectDeadlineFilter,
-  ProjectOrganizationFilter,
-} from "@features/projects";
-import type { MyProjectSearchParams } from "@entities/project";
+import { CategoriesListFilter } from "@features/project";
+import type { MyProjectsSearchParams } from "@entities/project";
 import { useMyProjectFilters } from "./model/useMyProjectsFilter";
 import { useFiltersInfiniteQuery } from "@shared/api/filters";
+import { DateRangeFilter, SwitchFilter } from "@shared/ui/filters";
+import { OrganizationsListFilter } from "@features/organization";
+import { mapQueryData } from "@shared/libs/query";
 
 interface MyProjectsFilterWidgetProps {
-  search: MyProjectSearchParams;
+  search: MyProjectsSearchParams;
 }
+
 export const MyProjectsFilterWidget = ({
   search,
 }: MyProjectsFilterWidgetProps) => {
@@ -30,7 +29,7 @@ export const MyProjectsFilterWidget = ({
       <div className={styles.scrollableProjectsFilters}>
         <div className={styles.projectDeadLine}>
           <h1 className={styles.subHeaderFilter}>Project deadline due</h1>
-          <ProjectDeadlineFilter
+          <DateRangeFilter
             startDate={search.StartDate}
             endBefore={search.EndBefore}
             onStartDateChange={onStartDateChange}
@@ -40,12 +39,15 @@ export const MyProjectsFilterWidget = ({
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectCategories}>
           <h1 className={styles.subHeaderFilter}>Categories</h1>
-          <ProjectCategoriesFilter
-            useCategoriesQuery={useFiltersInfiniteQuery({
-              pageSize: 7,
-              entityType: "project",
-              facetType: "category",
-            })}
+          <CategoriesListFilter
+            useCategoriesQuery={mapQueryData(
+              useFiltersInfiniteQuery({
+                pageSize: 7,
+                entityType: "project",
+                facetType: "category",
+              }),
+              ({ id, title }) => ({ id, name: title }),
+            )}
             selectedIds={search.CategoryIds}
             onToggle={onCategoryToggle}
           />
@@ -53,12 +55,15 @@ export const MyProjectsFilterWidget = ({
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectOrganizations}>
           <h1 className={styles.subHeaderFilter}>Organizations</h1>
-          <ProjectOrganizationFilter
-            useOrganizationsQuery={useFiltersInfiniteQuery({
-              pageSize: 7,
-              entityType: "project",
-              facetType: "organization",
-            })}
+          <OrganizationsListFilter
+            useOrganizationsQuery={mapQueryData(
+              useFiltersInfiniteQuery({
+                pageSize: 7,
+                entityType: "event",
+                facetType: "organization",
+              }),
+              ({ id, title }) => ({ id, name: title }),
+            )}
             selectedIds={search.OrganizationIds}
             onToggle={onOrganizationToggle}
           />
@@ -67,7 +72,8 @@ export const MyProjectsFilterWidget = ({
         <div className={styles.moreOptions}>
           <h1 className={styles.subHeaderFilter}>More options</h1>
           <div className={styles.moreOptionsBlock}>
-            <OnlyActiveFilter
+            <SwitchFilter
+              label="Display completed projects"
               value={search.OnlyActive ?? false}
               onChange={onOnlyActiveChange}
             />

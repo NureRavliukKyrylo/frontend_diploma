@@ -18,9 +18,6 @@ export const filtersQuery = {
         getUserRelatedFilters({ ...params, page: pageParam }),
       initialPageParam: 1,
       getNextPageParam: (lastPage) => lastPage.pagination.nextPage ?? undefined,
-      select: (data) =>
-        data.pages.flatMap((page) =>
-          page.data.map((item) => ({ id: item.id, name: item.title })),
-        ),
+      select: (data) => data.pages.flatMap((page) => page.data),
     }),
 };

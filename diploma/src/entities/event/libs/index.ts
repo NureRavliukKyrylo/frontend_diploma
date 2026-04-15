@@ -1,1 +1,4 @@
-export type { EventSearchParams } from "./search-schema/eventsSearchSchema";
+export type {
+  EventSearchParams,
+  EventPaginationParams,
+} from "./search-schema/eventsSearchSchema";

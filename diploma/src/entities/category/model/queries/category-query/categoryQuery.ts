@@ -1,7 +1,6 @@
 import { getListCategories, getCategoryById } from "../../../api";
 import type { CategoriesSearchParams } from "../../../libs";
 import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
-import { type UserRelatedFiltersParams } from "@shared/api/filters";
 
 export const categoryKeys = {
   all: () => ["categories"] as const,
@@ -13,8 +12,6 @@ export const categoryKeys = {
   id: (id: string) => [...categoryKeys.all(), "id", id] as const,
   infinite: (params: CategoriesSearchParams) =>
     [...categoryKeys.list(params), "infinite"] as const,
-  infiniteFilters: (params: UserRelatedFiltersParams) =>
-    [...categoryKeys.all(), "infinite-filters", params] as const,
 };
 
 export const categoryQuery = {

@@ -1,6 +1,5 @@
 export { CategoryCard } from "./ui/category-card/category-item/CategoryCard";
 export { type Category } from "./model/types/category/Category";
-export { CategoryTab } from "./ui/category-tab/CategoryTab";
 export { categoryQuery } from "./model/queries/category-query/categoryQuery";
 export {
   categoriesSearchDefaults,

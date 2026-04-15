@@ -1,12 +1,4 @@
-import {
-  OnlyActiveFilter,
-  ProjectCategoriesFilter,
-  ProjectDeadlineFilter,
-  ProjectDistanceFilter,
-  ProjectOrganizationFilter,
-  ProjectRatingFilter,
-  ShowJoinedFilter,
-} from "@features/projects";
+import { CategoriesListFilter } from "@features/project";
 import styles from "./ProjectFiltersWidget.module.scss";
 import type { ProjectSearchParams } from "@entities/project";
 import { motion } from "framer-motion";
@@ -14,6 +6,13 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useCategoriesInfiniteQuery } from "@entities/category";
 import { useOrganizationsInfiniteQuery } from "@entities/organization";
 import { useProjectFilters } from "../model/useProjectFilters";
+import {
+  DateRangeFilter,
+  DistanceFilter,
+  RatingFilter,
+  SwitchFilter,
+} from "@shared/ui/filters";
+import { OrganizationsListFilter } from "@features/organization";
 
 interface ProjectFiltersWidgetProps {
   search: ProjectSearchParams;
@@ -39,7 +38,7 @@ export const ProjectFiltersWidget = ({ search }: ProjectFiltersWidgetProps) => {
       <div className={styles.scrollableProjectsFilters}>
         <div className={styles.projectDeadLine}>
           <h1 className={styles.subHeaderFilter}>Project deadline due</h1>
-          <ProjectDeadlineFilter
+          <DateRangeFilter
             startDate={search.StartDate}
             endBefore={search.EndBefore}
             onStartDateChange={onStartDateChange}
@@ -49,7 +48,7 @@ export const ProjectFiltersWidget = ({ search }: ProjectFiltersWidgetProps) => {
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectRating}>
           <h1 className={styles.subHeaderFilter}>Project rating</h1>
-          <ProjectRatingFilter
+          <RatingFilter
             rating={search.Rating}
             onRatingChange={onRatingChange}
           />
@@ -57,7 +56,7 @@ export const ProjectFiltersWidget = ({ search }: ProjectFiltersWidgetProps) => {
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectCategories}>
           <h1 className={styles.subHeaderFilter}>Categories</h1>
-          <ProjectCategoriesFilter
+          <CategoriesListFilter
             useCategoriesQuery={useCategoriesInfiniteQuery({ PageSize: 7 })}
             selectedIds={search.CategoryIds}
             onToggle={onCategoryToggle}
@@ -66,7 +65,7 @@ export const ProjectFiltersWidget = ({ search }: ProjectFiltersWidgetProps) => {
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectOrganizations}>
           <h1 className={styles.subHeaderFilter}>Organizations</h1>
-          <ProjectOrganizationFilter
+          <OrganizationsListFilter
             useOrganizationsQuery={useOrganizationsInfiniteQuery({
               PageSize: 7,
             })}
@@ -77,7 +76,7 @@ export const ProjectFiltersWidget = ({ search }: ProjectFiltersWidgetProps) => {
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectDistance}>
           <h1 className={styles.subHeaderFilter}>Distance</h1>
-          <ProjectDistanceFilter
+          <DistanceFilter
             defaultLocation={search.Location}
             defaultRadiusKm={search.RadiusKm}
             onLocationSelect={onLocationSelect}
@@ -89,11 +88,13 @@ export const ProjectFiltersWidget = ({ search }: ProjectFiltersWidgetProps) => {
         <div className={styles.moreOptions}>
           <h1 className={styles.subHeaderFilter}>More options</h1>
           <div className={styles.moreOptionsBlock}>
-            <ShowJoinedFilter
+            <SwitchFilter
+              label="Show completed projects"
               value={search.ShowJoined ?? false}
               onChange={onShowJoinedChange}
             />
-            <OnlyActiveFilter
+            <SwitchFilter
+              label="Display joined projects"
               value={search.OnlyActive ?? false}
               onChange={onOnlyActiveChange}
             />

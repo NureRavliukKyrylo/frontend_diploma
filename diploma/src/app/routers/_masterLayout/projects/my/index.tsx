@@ -1,6 +1,7 @@
 import {
-  myProjectSearchDefaults,
+  myProjectsSearchDefaults,
   myProjectsFiltersSchema,
+  type MyProjectsBaseSearch,
 } from "@entities/project";
 import { createFileRoute } from "@tanstack/react-router";
 import { type MyProjectsMode } from "@entities/project";
@@ -9,12 +10,13 @@ import { MyProjectsPageSkeleton } from "@pages/projects";
 
 export const Route = createFileRoute("/_masterLayout/projects/my/")({
   validateSearch: myProjectsFiltersSchema,
+  loaderDeps: ({ search }) => search,
   search: {
     middlewares: [
       ({ search, next }) => {
-        const result = next(search);
+        const result = next(search) as MyProjectsBaseSearch;
         const tab = (result.tab ?? "projects") as MyProjectsMode;
-        const defaults = myProjectSearchDefaults[tab];
+        const defaults = myProjectsSearchDefaults[tab];
         const globalTabDefault = "projects";
 
         return Object.fromEntries(
@@ -29,21 +31,40 @@ export const Route = createFileRoute("/_masterLayout/projects/my/")({
       },
     ],
   },
-  loader: async ({ context: { queryClient } }) => {
-    queryClient.prefetchInfiniteQuery(
-      filtersQuery.infinite({
-        pageSize: 7,
-        entityType: "project",
-        facetType: "category",
-      }),
-    );
-    queryClient.prefetchInfiniteQuery(
-      filtersQuery.infinite({
-        pageSize: 7,
-        entityType: "project",
-        facetType: "organization",
-      }),
-    );
+  loader: async ({ context: { queryClient }, deps }) => {
+    const search = deps as MyProjectsBaseSearch;
+
+    if (search.tab === "events") {
+      queryClient.prefetchInfiniteQuery(
+        filtersQuery.infinite({
+          pageSize: 7,
+          entityType: "event",
+          facetType: "project",
+        }),
+      );
+      queryClient.prefetchInfiniteQuery(
+        filtersQuery.infinite({
+          pageSize: 7,
+          entityType: "event",
+          facetType: "organization",
+        }),
+      );
+    } else {
+      queryClient.prefetchInfiniteQuery(
+        filtersQuery.infinite({
+          pageSize: 7,
+          entityType: "project",
+          facetType: "category",
+        }),
+      );
+      queryClient.prefetchInfiniteQuery(
+        filtersQuery.infinite({
+          pageSize: 7,
+          entityType: "project",
+          facetType: "organization",
+        }),
+      );
+    }
   },
   pendingComponent: MyProjectsPageSkeleton,
 });

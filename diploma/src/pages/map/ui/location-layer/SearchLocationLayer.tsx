@@ -1,4 +1,4 @@
-import { LocationMarker } from "@features/projects";
+import { LocationMarker } from "./LocationMarker";
 import { MapZoomAnimation } from "@shared/libs/map";
 import { useRef } from "react";
 import { Circle, Marker, Popup } from "react-leaflet";

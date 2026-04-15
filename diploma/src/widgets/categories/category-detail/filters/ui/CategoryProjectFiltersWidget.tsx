@@ -1,11 +1,3 @@
-import {
-  OnlyActiveFilter,
-  ProjectDeadlineFilter,
-  ProjectDistanceFilter,
-  ProjectOrganizationFilter,
-  ProjectRatingFilter,
-  ShowJoinedFilter,
-} from "@features/projects";
 import styles from "./CategoryProjectFiltersWidget.module.scss";
 import type { ProjectSearchParams } from "@entities/project";
 import { motion } from "framer-motion";
@@ -13,6 +5,13 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { Link } from "@tanstack/react-router";
 import { useCategoryProjectFilters } from "../model/useCategoryProjectsFilter";
 import { useOrganizationsInfiniteQuery } from "@entities/organization";
+import {
+  DateRangeFilter,
+  DistanceFilter,
+  RatingFilter,
+  SwitchFilter,
+} from "@shared/ui/filters";
+import { OrganizationsListFilter } from "@features/organization";
 
 interface CategoryProjectFiltersWidgetProps {
   search: ProjectSearchParams;
@@ -56,7 +55,7 @@ export const CategoryProjectFiltersWidget = ({
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectDeadLine}>
           <h1 className={styles.subHeaderFilter}>Project deadline due</h1>
-          <ProjectDeadlineFilter
+          <DateRangeFilter
             startDate={search.StartDate}
             endBefore={search.EndBefore}
             onStartDateChange={onStartDateChange}
@@ -66,7 +65,7 @@ export const CategoryProjectFiltersWidget = ({
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectRating}>
           <h1 className={styles.subHeaderFilter}>Project rating</h1>
-          <ProjectRatingFilter
+          <RatingFilter
             rating={search.Rating}
             onRatingChange={onRatingChange}
           />
@@ -74,7 +73,7 @@ export const CategoryProjectFiltersWidget = ({
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectOrganizations}>
           <h1 className={styles.subHeaderFilter}>Organizations</h1>
-          <ProjectOrganizationFilter
+          <OrganizationsListFilter
             useOrganizationsQuery={useOrganizationsInfiniteQuery({
               PageSize: 7,
             })}
@@ -85,7 +84,7 @@ export const CategoryProjectFiltersWidget = ({
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectDistance}>
           <h1 className={styles.subHeaderFilter}>Distance</h1>
-          <ProjectDistanceFilter
+          <DistanceFilter
             defaultLocation={search.Location}
             defaultRadiusKm={search.RadiusKm}
             onLocationSelect={onLocationSelect}
@@ -97,11 +96,13 @@ export const CategoryProjectFiltersWidget = ({
         <div className={styles.moreOptions}>
           <h1 className={styles.subHeaderFilter}>More options</h1>
           <div className={styles.moreOptionsBlock}>
-            <ShowJoinedFilter
+            <SwitchFilter
+              label="Show completed projects"
               value={search.ShowJoined ?? false}
               onChange={onShowJoinedChange}
             />
-            <OnlyActiveFilter
+            <SwitchFilter
+              label="Display joined projects"
               value={search.OnlyActive ?? false}
               onChange={onOnlyActiveChange}
             />

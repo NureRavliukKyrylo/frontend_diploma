@@ -1,0 +1,12 @@
+@use "@shared/assets/styles" as *;
+
+.switchFilter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleSwitchFilter {
+  @include font-base(18px, 500);
+  color: rgba(0, 0, 0, 0.7);
+}

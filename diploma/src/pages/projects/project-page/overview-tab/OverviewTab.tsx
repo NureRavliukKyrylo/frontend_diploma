@@ -1,8 +1,7 @@
 import { ProjectMarker, type Project } from "@entities/project";
 import styles from "./OverviewTab.module.scss";
 import { CategoriesListWidget } from "@widgets/categories";
-import { CategoryTab } from "@entities/category";
-import { BaseMap } from "@shared/ui";
+import { BaseMap, Tab } from "@shared/ui";
 import { MapZoomAnimation } from "@shared/libs/map";
 import { Marker, Popup } from "react-leaflet";
 import { MapUserLocation } from "@entities/user/profile";
@@ -48,10 +47,7 @@ export const OverviewTab = ({
         {hasCategories ? (
           <CategoriesListWidget
             renderCard={(category) => (
-              <CategoryTab
-                className={styles.categoryProject}
-                name={category.name}
-              />
+              <Tab className={styles.categoryProject} name={category.name} />
             )}
             className={styles.categoriesProjectList}
             categories={project?.categories}

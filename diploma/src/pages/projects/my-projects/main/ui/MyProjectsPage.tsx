@@ -5,7 +5,7 @@ import { useNavigate, useSearch } from "@tanstack/react-router";
 import { myProjectsMainForms } from "../config/myProjectsMainForms";
 import { MyProjectsHeader } from "@widgets/projects";
 import {
-  myProjectSearchDefaults,
+  myProjectsSearchDefaults,
   type MyProjectsMode,
 } from "@entities/project";
 import { AnimatePresence, motion } from "framer-motion";
@@ -18,7 +18,7 @@ export const MyProjectsPage = () => {
 
   const activeTab = search.tab;
   const handleTabChange = (tab: MyProjectsMode) => {
-    navigate({ search: myProjectSearchDefaults[tab] });
+    navigate({ search: myProjectsSearchDefaults[tab] });
   };
 
   return (

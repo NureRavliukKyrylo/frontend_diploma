@@ -1,15 +1,14 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { filtersQuery } from "../queries/filtersQuery";
-import type { UserRelatedFiltersParams } from "../get-filters/volunteerFilters";
+import type {
+  UserRelatedFilterItem,
+  UserRelatedFiltersParams,
+} from "../get-filters/volunteerFilters";
 import type { QueryResult } from "@shared/config/types";
 
-interface FilterItem {
-  id: string;
-  name: string;
-}
-
 export const useFiltersInfiniteQuery =
-  (params: UserRelatedFiltersParams) => (): QueryResult<FilterItem> => {
+  (params: UserRelatedFiltersParams) =>
+  (): QueryResult<UserRelatedFilterItem> => {
     const {
       data = [],
       fetchNextPage,

@@ -1,0 +1,29 @@
+@use "@shared/assets/styles" as *;
+
+.projectsInfinite {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .projectsListFilter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    .projectTabWrapper {
+      display: flex;
+    }
+  }
+  .showMoreProjectsButton {
+    @include font-base(16px, 600);
+    color: #8c0000;
+    align-self: flex-end;
+  }
+}
+
+.emptyText {
+  color: rgba(0, 0, 0, 0.4);
+  @include font-base(17px, 500);
+}
+.errorMessage {
+  color: #dc2626;
+  @include font-base(17px, 500);
+}

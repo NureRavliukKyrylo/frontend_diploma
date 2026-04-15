@@ -15,7 +15,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { useMyProjectsListQuery } from "@entities/project/model/hooks/useMyProjectsListQuery";
-import { LeaveProjectModal } from "@features/projects";
+import { LeaveProjectModal } from "@features/project";
 import {
   layoutTransition,
   fadeVariants,
@@ -25,6 +25,9 @@ import {
 
 export const ProjectsTab = () => {
   const search = useSearch({ from: "/_masterLayout/projects/my/" });
+
+  if (search.tab !== "projects") return null;
+
   const {
     isFilterOpen,
     setIsFilterOpen,

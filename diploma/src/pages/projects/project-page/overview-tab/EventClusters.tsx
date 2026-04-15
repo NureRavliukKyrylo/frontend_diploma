@@ -18,7 +18,6 @@ type EventProperties = { item: Event };
 
 export const EventClusters = memo(({ data }: EventClustersProps) => {
   const points = convertToClusterFeatures(data ?? []);
-  console.log(data);
   const renderCluster = ({
     position,
     fromPosition,

@@ -21,9 +21,9 @@ export { useProjectsMapQuery } from "./model/hooks/useProjectsMapQuery";
 export { ProjectMarkerAnimated } from "./ui/project-marker/ProjectMarker";
 export {
   myProjectsFiltersSchema,
-  type MyProjectSearchParams,
-  myProjectSearchDefaults,
-} from "./libs/search-shema/myProjectsSearchParams";
+  type MyProjectsSearchParams,
+  myProjectsSearchDefaults,
+} from "./libs/search-shema/myProjectsSearchSchema";
 export {
   sortingProjectItems,
   type ProjectSortValues,
@@ -38,3 +38,9 @@ export {
   projectDetailDefaults,
 } from "./libs/search-shema/projectDetailSearchSchema";
 export type { ProjectMode } from "./model/types";
+export { useProjectsInfiniteQuery } from "./model/hooks/useProjectsInfiniteQuery";
+export type {
+  MyProjectsBaseSearch,
+  MyEventsSearchParams,
+  MyTasksSearchParams,
+} from "./libs/search-shema/myProjectsSearchSchema";

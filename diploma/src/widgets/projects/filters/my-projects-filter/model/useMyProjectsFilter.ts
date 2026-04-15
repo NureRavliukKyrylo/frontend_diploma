@@ -1,12 +1,12 @@
 import { useNavigate } from "@tanstack/react-router";
 import { toggleArrayParam } from "@shared/libs/search-params";
-import type { MyProjectSearchParams } from "@entities/project";
+import type { MyProjectsSearchParams } from "@entities/project";
 
 export const useMyProjectFilters = () => {
   const navigate = useNavigate({ from: "/projects/my/" });
 
   const nav = (
-    updater: (prev: MyProjectSearchParams) => MyProjectSearchParams,
+    updater: (prev: MyProjectsSearchParams) => MyProjectsSearchParams,
   ) => navigate({ search: updater, resetScroll: false });
 
   return {

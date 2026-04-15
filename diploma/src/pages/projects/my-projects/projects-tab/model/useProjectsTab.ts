@@ -2,13 +2,13 @@ import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   projectQuery,
-  type MyProjectSearchParams,
+  type MyProjectsSearchParams,
   type Project,
   type ProjectSortValues,
 } from "@entities/project";
 import { useQuery } from "@tanstack/react-query";
 
-export const useProjectsTab = (search: MyProjectSearchParams) => {
+export const useProjectsTab = (search: MyProjectsSearchParams) => {
   const navigate = useNavigate({ from: "/projects/my/" });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,20 +18,18 @@ export const useProjectsTab = (search: MyProjectSearchParams) => {
   > | null>(null);
   const { data } = useQuery(projectQuery.my(search));
 
+  const nav = (
+    updater: (prev: MyProjectsSearchParams) => MyProjectsSearchParams,
+  ) => navigate({ search: updater, resetScroll: false });
+
   const handleSearch = (value: string) =>
-    navigate({
-      search: (prev) => ({ ...prev, Search: value || undefined, Page: 1 }),
-      resetScroll: false,
-    });
+    nav((prev) => ({ ...prev, Search: value || undefined, Page: 1 }));
 
   const handleSort = (value: ProjectSortValues) =>
-    navigate({
-      search: (prev) => ({ ...prev, OrderBy: value, Page: 1 }),
-      resetScroll: false,
-    });
+    nav((prev) => ({ ...prev, OrderBy: value, Page: 1 }));
 
   const handlePageChange = (page: number) =>
-    navigate({ search: (prev) => ({ ...prev, Page: page }) });
+    nav((prev) => ({ ...prev, Page: page }));
 
   const handleLeaveProject = (project: Pick<Project, "id" | "title">) => {
     setSelectedProject(project);

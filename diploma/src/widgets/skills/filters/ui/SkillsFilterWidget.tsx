@@ -1,7 +1,7 @@
 import type { SkillsSearchParams } from "@entities/skill/libs";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./SkillsFilterWidget.module.scss";
-import { ProjectCategoriesFilter } from "@features/projects";
+import { CategoriesListFilter } from "@features/project";
 import { motion } from "framer-motion";
 import { useCategoriesInfiniteQuery } from "@entities/category";
 import { useSkillsFilters } from "../model/useSkillsFilter";
@@ -12,11 +12,12 @@ interface SkillsFilterWidgetProps {
 
 export const SkillsFilterWidget = ({ search }: SkillsFilterWidgetProps) => {
   const { onCategoryToggle, onClearFilters } = useSkillsFilters();
+
   return (
     <>
       <div className={styles.categoriesFilterBlock}>
         <h1 className={styles.categoriesTitle}>Categories</h1>
-        <ProjectCategoriesFilter
+        <CategoriesListFilter
           selectedIds={search.CategoryIds}
           onToggle={onCategoryToggle}
           useCategoriesQuery={useCategoriesInfiniteQuery({ PageSize: 7 })}

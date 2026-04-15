@@ -1,4 +1,3 @@
-export { OrganizationTab } from "./ui/organization-tab/OrganizationTab";
 export { type Organization } from "./model/types/organization/Organization";
 export {
   organizationKeys,
@@ -11,3 +10,7 @@ export {
 export { ListOrganizationCard } from "./ui/list-card/ListOrganizationCard";
 export { useOrganizationsInfiniteQuery } from "./model/hooks/useOrganizationsInfiniteQuery";
 export { OrganizationItem } from "./ui/organization-item/OrganizationItem";
+export {
+  organizationSearchDefaults,
+  organizationSearchSchema,
+} from "./libs/search-schema/organizationSearchSchema";

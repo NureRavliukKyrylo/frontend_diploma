@@ -60,6 +60,7 @@ export const projectBaseSchema = projectFiltersWithCategorySchema.extend(
   mapBoundsSchema.shape,
 );
 
+export type ProjectPaginationParams = z.infer<typeof paginationSchema>;
 export type ProjectSearchParams = z.infer<typeof projectBaseSchema>;
 export type MapProjectSearchParams = z.infer<typeof mapProjectSchema>;
 export type ProjectBaseParams = z.infer<typeof projectBaseSchema>;

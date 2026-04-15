@@ -1,0 +1,77 @@
+@use "@shared/assets/styles" as *;
+
+.dividerFilterBlock {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+.subHeaderFilter {
+  @include font-base(20px, 700);
+}
+.projectDeadLine {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 25px 20px 20px 20px;
+}
+
+.projectCategories {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 30px 20px;
+  gap: 15px;
+}
+.projectOrganizations {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 30px 20px;
+  gap: 15px;
+}
+.buttonClear {
+  padding: 30px;
+
+  .animationButtonBlock {
+    display: flex;
+    justify-content: center;
+    @include font-base(20px, 900);
+    color: #000000;
+    background: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .clearFiltersButton {
+      padding: 15px 30px;
+      width: 100%;
+    }
+  }
+}
+
+.moreOptions {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 30px 20px;
+  gap: 15px;
+  .moreOptionsBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+.scrollableProjectsFilters {
+  max-height: 730px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+  }
+}

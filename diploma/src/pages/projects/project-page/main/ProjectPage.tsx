@@ -4,7 +4,7 @@ import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { projectQuery, type ProjectMode } from "@entities/project";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { ReadMoreButton } from "@shared/ui/buttons";
-import { JoinProjectButton } from "@features/projects";
+import { JoinProjectButton } from "@features/project";
 import { projectMainTabs } from "./config/projectMainTabs";
 import { getProjectMainForms } from "./config/projectMainForms";
 import { AnimatePresence, motion } from "framer-motion";

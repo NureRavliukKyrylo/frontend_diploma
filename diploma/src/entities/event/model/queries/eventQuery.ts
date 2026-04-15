@@ -1,6 +1,6 @@
-import type { EventSearchParams } from "../../libs";
+import type { EventPaginationParams, EventSearchParams } from "../../libs";
 import { getListEvents, getMyEvents, getEventId } from "../../api";
-import { queryOptions } from "@tanstack/react-query";
+import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
 
 export const eventKeys = {
   all: () => ["events"] as const,
@@ -9,6 +9,8 @@ export const eventKeys = {
   id: (id: string) => [...eventKeys.all(), "id", id] as const,
   mys: () => [...eventKeys.all(), "my"] as const,
   my: (params: EventSearchParams) => [...eventKeys.mys(), params] as const,
+  infinite: (params: EventPaginationParams) =>
+    [...eventKeys.list(params), "infinite"] as const,
 };
 
 export const eventQuery = {
@@ -29,5 +31,13 @@ export const eventQuery = {
       queryKey: eventKeys.my({ ...params }),
       queryFn: () => getMyEvents({ ...params }),
       placeholderData: (prev) => prev,
+    }),
+  infinite: (params: EventPaginationParams) =>
+    infiniteQueryOptions({
+      queryKey: eventKeys.infinite(params),
+      queryFn: ({ pageParam }) => getListEvents({ ...params, Page: pageParam }),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage) => lastPage.pagination.nextPage ?? undefined,
+      select: (data) => data.pages.flatMap((page) => page.data),
     }),
 };

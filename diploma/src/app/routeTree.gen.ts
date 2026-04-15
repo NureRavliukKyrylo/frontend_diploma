@@ -20,6 +20,8 @@ import { Route as NoFooterLayoutMapIndexRouteImport } from './routers/_noFooterL
 import { Route as MasterLayoutSkillsIndexRouteImport } from './routers/_masterLayout/skills/index'
 import { Route as MasterLayoutProjectsIndexRouteImport } from './routers/_masterLayout/projects/index'
 import { Route as MasterLayoutProfileIndexRouteImport } from './routers/_masterLayout/profile/index'
+import { Route as MasterLayoutOrganizationsIndexRouteImport } from './routers/_masterLayout/organizations/index'
+import { Route as MasterLayoutEventsIndexRouteImport } from './routers/_masterLayout/events/index'
 import { Route as MasterLayoutCategoriesIndexRouteImport } from './routers/_masterLayout/categories/index'
 import { Route as MasterLayoutProjectsMyIndexRouteImport } from './routers/_masterLayout/projects/my/index'
 import { Route as MasterLayoutProjectsIdIndexRouteImport } from './routers/_masterLayout/projects/$id/index'
@@ -111,6 +113,17 @@ const MasterLayoutProfileIndexRoute =
   } as any).lazy(() =>
     import('./routers/_masterLayout/profile/index.lazy').then((d) => d.Route),
   )
+const MasterLayoutOrganizationsIndexRoute =
+  MasterLayoutOrganizationsIndexRouteImport.update({
+    id: '/organizations/',
+    path: '/organizations/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
+const MasterLayoutEventsIndexRoute = MasterLayoutEventsIndexRouteImport.update({
+  id: '/events/',
+  path: '/events/',
+  getParentRoute: () => MasterLayoutRoute,
+} as any)
 const MasterLayoutCategoriesIndexRoute =
   MasterLayoutCategoriesIndexRouteImport.update({
     id: '/categories/',
@@ -219,6 +232,8 @@ export interface FileRoutesByFullPath {
   '/auth/verification-email': typeof AuthLayoutAuthVerificationEmailLazyRoute
   '/auth/verification-two-factor': typeof AuthLayoutAuthVerificationTwoFactorLazyRoute
   '/categories/': typeof MasterLayoutCategoriesIndexRoute
+  '/events/': typeof MasterLayoutEventsIndexRoute
+  '/organizations/': typeof MasterLayoutOrganizationsIndexRoute
   '/profile/': typeof MasterLayoutProfileIndexRoute
   '/projects/': typeof MasterLayoutProjectsIndexRoute
   '/skills/': typeof MasterLayoutSkillsIndexRoute
@@ -238,6 +253,8 @@ export interface FileRoutesByTo {
   '/auth/verification-email': typeof AuthLayoutAuthVerificationEmailLazyRoute
   '/auth/verification-two-factor': typeof AuthLayoutAuthVerificationTwoFactorLazyRoute
   '/categories': typeof MasterLayoutCategoriesIndexRoute
+  '/events': typeof MasterLayoutEventsIndexRoute
+  '/organizations': typeof MasterLayoutOrganizationsIndexRoute
   '/profile': typeof MasterLayoutProfileIndexRoute
   '/projects': typeof MasterLayoutProjectsIndexRoute
   '/skills': typeof MasterLayoutSkillsIndexRoute
@@ -262,6 +279,8 @@ export interface FileRoutesById {
   '/_authLayout/auth/verification-email': typeof AuthLayoutAuthVerificationEmailLazyRoute
   '/_authLayout/auth/verification-two-factor': typeof AuthLayoutAuthVerificationTwoFactorLazyRoute
   '/_masterLayout/categories/': typeof MasterLayoutCategoriesIndexRoute
+  '/_masterLayout/events/': typeof MasterLayoutEventsIndexRoute
+  '/_masterLayout/organizations/': typeof MasterLayoutOrganizationsIndexRoute
   '/_masterLayout/profile/': typeof MasterLayoutProfileIndexRoute
   '/_masterLayout/projects/': typeof MasterLayoutProjectsIndexRoute
   '/_masterLayout/skills/': typeof MasterLayoutSkillsIndexRoute
@@ -284,6 +303,8 @@ export interface FileRouteTypes {
     | '/auth/verification-email'
     | '/auth/verification-two-factor'
     | '/categories/'
+    | '/events/'
+    | '/organizations/'
     | '/profile/'
     | '/projects/'
     | '/skills/'
@@ -303,6 +324,8 @@ export interface FileRouteTypes {
     | '/auth/verification-email'
     | '/auth/verification-two-factor'
     | '/categories'
+    | '/events'
+    | '/organizations'
     | '/profile'
     | '/projects'
     | '/skills'
@@ -326,6 +349,8 @@ export interface FileRouteTypes {
     | '/_authLayout/auth/verification-email'
     | '/_authLayout/auth/verification-two-factor'
     | '/_masterLayout/categories/'
+    | '/_masterLayout/events/'
+    | '/_masterLayout/organizations/'
     | '/_masterLayout/profile/'
     | '/_masterLayout/projects/'
     | '/_masterLayout/skills/'
@@ -426,6 +451,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/profile/'
       preLoaderRoute: typeof MasterLayoutProfileIndexRouteImport
       parentRoute: typeof MasterLayoutProfileRoute
+    }
+    '/_masterLayout/organizations/': {
+      id: '/_masterLayout/organizations/'
+      path: '/organizations'
+      fullPath: '/organizations/'
+      preLoaderRoute: typeof MasterLayoutOrganizationsIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/events/': {
+      id: '/_masterLayout/events/'
+      path: '/events'
+      fullPath: '/events/'
+      preLoaderRoute: typeof MasterLayoutEventsIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
     }
     '/_masterLayout/categories/': {
       id: '/_masterLayout/categories/'
@@ -543,6 +582,8 @@ const MasterLayoutProfileRouteWithChildren =
 interface MasterLayoutRouteChildren {
   MasterLayoutProfileRoute: typeof MasterLayoutProfileRouteWithChildren
   MasterLayoutCategoriesIndexRoute: typeof MasterLayoutCategoriesIndexRoute
+  MasterLayoutEventsIndexRoute: typeof MasterLayoutEventsIndexRoute
+  MasterLayoutOrganizationsIndexRoute: typeof MasterLayoutOrganizationsIndexRoute
   MasterLayoutProjectsIndexRoute: typeof MasterLayoutProjectsIndexRoute
   MasterLayoutSkillsIndexRoute: typeof MasterLayoutSkillsIndexRoute
   MasterLayoutCategoriesIdIndexRoute: typeof MasterLayoutCategoriesIdIndexRoute
@@ -553,6 +594,8 @@ interface MasterLayoutRouteChildren {
 const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
   MasterLayoutProfileRoute: MasterLayoutProfileRouteWithChildren,
   MasterLayoutCategoriesIndexRoute: MasterLayoutCategoriesIndexRoute,
+  MasterLayoutEventsIndexRoute: MasterLayoutEventsIndexRoute,
+  MasterLayoutOrganizationsIndexRoute: MasterLayoutOrganizationsIndexRoute,
   MasterLayoutProjectsIndexRoute: MasterLayoutProjectsIndexRoute,
   MasterLayoutSkillsIndexRoute: MasterLayoutSkillsIndexRoute,
   MasterLayoutCategoriesIdIndexRoute: MasterLayoutCategoriesIdIndexRoute,

@@ -1,4 +1,3 @@
-import { type UserRelatedFiltersParams } from "@shared/api/filters";
 import { getOrganizationsList } from "../../../api";
 import type {
   OrganizationSearchParams,
@@ -15,8 +14,6 @@ export const organizationKeys = {
   ],
   infinite: (params: OrganizationPaginationParams) =>
     [...organizationKeys.list(params), "infinite"] as const,
-  infiniteFilters: (params: UserRelatedFiltersParams) =>
-    [...organizationKeys.all(), "infinite-filters", params] as const,
 };
 
 export const organizationQuery = {

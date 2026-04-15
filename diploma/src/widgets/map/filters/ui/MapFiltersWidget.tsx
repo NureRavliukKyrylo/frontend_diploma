@@ -1,12 +1,4 @@
-import {
-  OnlyActiveFilter,
-  ProjectCategoriesFilter,
-  ProjectDeadlineFilter,
-  ProjectDistanceFilter,
-  ProjectOrganizationFilter,
-  ProjectRatingFilter,
-  ShowJoinedFilter,
-} from "@features/projects";
+import { CategoriesListFilter } from "@features/project";
 import type { ProjectSearchParams } from "@entities/project";
 import styles from "./MapFiltersWidget.module.scss";
 import { Accordion, AccordionItem } from "@heroui/react";
@@ -15,6 +7,13 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useCategoriesInfiniteQuery } from "@entities/category";
 import { useOrganizationsInfiniteQuery } from "@entities/organization";
 import { useMapFilters } from "../model/useMapFilters";
+import {
+  DateRangeFilter,
+  DistanceFilter,
+  RatingFilter,
+  SwitchFilter,
+} from "@shared/ui/filters";
+import { OrganizationsListFilter } from "@features/organization";
 
 interface MapFiltersWidgetProps {
   search: ProjectSearchParams;
@@ -55,7 +54,7 @@ export const MapFiltersWidget = ({ search }: MapFiltersWidgetProps) => {
           }}
         >
           <AccordionItem key="deadline" title="Project deadline due">
-            <ProjectDeadlineFilter
+            <DateRangeFilter
               startDate={search.StartDate}
               endBefore={search.EndBefore}
               onStartDateChange={onStartDateChange}
@@ -63,20 +62,20 @@ export const MapFiltersWidget = ({ search }: MapFiltersWidgetProps) => {
             />
           </AccordionItem>
           <AccordionItem key="rating" title="Project rating">
-            <ProjectRatingFilter
+            <RatingFilter
               rating={search.Rating}
               onRatingChange={onRatingChange}
             />
           </AccordionItem>
           <AccordionItem key="categories" title="Categories">
-            <ProjectCategoriesFilter
+            <CategoriesListFilter
               useCategoriesQuery={useCategoriesInfiniteQuery({ PageSize: 7 })}
               selectedIds={search.CategoryIds}
               onToggle={onCategoryToggle}
             />
           </AccordionItem>
           <AccordionItem key="organization" title="Organizations">
-            <ProjectOrganizationFilter
+            <OrganizationsListFilter
               useOrganizationsQuery={useOrganizationsInfiniteQuery({
                 PageSize: 7,
               })}
@@ -85,7 +84,7 @@ export const MapFiltersWidget = ({ search }: MapFiltersWidgetProps) => {
             />
           </AccordionItem>
           <AccordionItem key="distance" title="Distance">
-            <ProjectDistanceFilter
+            <DistanceFilter
               defaultLocation={search.Location}
               defaultRadiusKm={search.RadiusKm}
               onLocationSelect={onLocationSelect}
@@ -95,12 +94,14 @@ export const MapFiltersWidget = ({ search }: MapFiltersWidgetProps) => {
           </AccordionItem>
           <AccordionItem key="moreOptions" title="More options">
             <div className={styles.moreOptionsBlock}>
-              <ShowJoinedFilter
-                value={search.ShowJoined}
+              <SwitchFilter
+                label="Show completed projects"
+                value={search.ShowJoined ?? false}
                 onChange={onShowJoinedChange}
               />
-              <OnlyActiveFilter
-                value={search.OnlyActive}
+              <SwitchFilter
+                label="Display joined projects"
+                value={search.OnlyActive ?? false}
                 onChange={onOnlyActiveChange}
               />
             </div>
