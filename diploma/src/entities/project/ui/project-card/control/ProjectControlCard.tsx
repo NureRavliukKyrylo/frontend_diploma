@@ -9,27 +9,22 @@ import type { Project } from "../../../model";
 import { ProjectCardBase } from "../base/ProjectCardBase";
 import { ProjectDefaultBottomContent } from "../base/ProjectDefaultBottomContent";
 import styles from "./ProjectControlCard.module.scss";
-import { getProjectStatusConfig } from "../../../libs";
 import { LinkButtonWrapper } from "@shared/ui/buttons";
 import { motion } from "framer-motion";
-
-interface MenuItem {
-  key: string;
-  label: string;
-  onClick: () => void;
-  variant?: "default" | "leave";
-}
+import { getEntityStatusConfig } from "@shared/libs/entity";
+import type { MenuItem } from "@shared/config/types";
 
 interface ProjectControlCardProps {
   project: Project;
-  menuItems: MenuItem[];
+  menuItems: MenuItem<"default" | "leave">[];
 }
 
 export const ProjectControlCard = ({
   project,
   menuItems,
 }: ProjectControlCardProps) => {
-  const statusConfig = getProjectStatusConfig(project.volunteerProjectState);
+  const statusConfig = getEntityStatusConfig(project.volunteerProjectState);
+
   return (
     <div
       className={`${styles.projectControlCardWrapper} ${styles[project.volunteerProjectState]}`}

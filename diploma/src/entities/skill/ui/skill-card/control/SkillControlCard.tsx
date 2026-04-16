@@ -9,17 +9,11 @@ import {
 import { MoreActionsIcon } from "@shared/assets/icons/actions";
 import type { SkillProfile } from "@entities/skill";
 import { SkillCardBase } from "../base/SkillCardBase";
-
-interface MenuItem {
-  key: string;
-  label: string;
-  onClick: () => void;
-  variant?: "assign" | "update" | "delete";
-}
+import type { MenuItem } from "@shared/config/types";
 
 interface SkillControlCardProps<TSkill extends Skill | SkillProfile> {
   skill: TSkill;
-  menuItems: MenuItem[];
+  menuItems: MenuItem<"assign" | "update" | "delete">[];
   className?: string;
   bottomSlot?: (skill: TSkill) => React.ReactNode;
 }

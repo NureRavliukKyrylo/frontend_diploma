@@ -17,3 +17,5 @@ export type { FacetType } from "./entity/FacetType";
 export type { ParticipationMember } from "./participation/ParticipationMember";
 export type { PaginationRender } from "./pagination/PaginationRender";
 export type { Policy } from "./entity/Policy";
+export type { EntityStatus, StatusConfig } from "./entity-status/EntityStatus";
+export type { MenuItem } from "./drop-down/MenuItem";

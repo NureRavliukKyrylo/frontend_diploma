@@ -7,3 +7,4 @@ export {
   WORLD_BOUNDS,
 } from "./map";
 export { ZOOM_STEP, MAX_ZOOM, MIN_ZOOM, ROTATION_STEP } from "./imageCrop";
+export { ENTITY_STATUS_MAP } from "./EntityStatus";
