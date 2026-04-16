@@ -19,6 +19,7 @@ export const OrganizationFiltersWidget = ({
     onRadiusChange,
     onShowJoinedChange,
     onClearFilters,
+    onIncludeArchived,
   } = useOrganizationFilters();
 
   return (
@@ -47,12 +48,12 @@ export const OrganizationFiltersWidget = ({
           <h1 className={styles.subHeaderFilter}>More options</h1>
           <div className={styles.moreOptionsBlock}>
             <SwitchFilter
-              label="Show completed projects"
+              label="Include archived organizations"
               value={search.IncludeArchived ?? false}
-              onChange={onShowJoinedChange}
+              onChange={onIncludeArchived}
             />
             <SwitchFilter
-              label="Display joined projects"
+              label="Display joined organizations"
               value={search.ShowJoined ?? false}
               onChange={onShowJoinedChange}
             />

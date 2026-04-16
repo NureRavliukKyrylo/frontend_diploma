@@ -18,7 +18,7 @@ export const useMyEventsFilters = () => {
     onProjectToggle: (id: string) =>
       nav((prev) => ({
         ...prev,
-        CategoryIds: toggleArrayParam(prev.ProjectIds, id),
+        ProjectIds: toggleArrayParam(prev.ProjectIds, id),
         Page: 1,
       })),
 

@@ -49,6 +49,28 @@ export const Route = createFileRoute("/_masterLayout/projects/my/")({
           facetType: "organization",
         }),
       );
+    } else if (search.tab === "tasks") {
+      queryClient.prefetchInfiniteQuery(
+        filtersQuery.infinite({
+          pageSize: 7,
+          entityType: "task",
+          facetType: "project",
+        }),
+      );
+      queryClient.prefetchInfiniteQuery(
+        filtersQuery.infinite({
+          pageSize: 7,
+          entityType: "task",
+          facetType: "organization",
+        }),
+      );
+      queryClient.prefetchInfiniteQuery(
+        filtersQuery.infinite({
+          pageSize: 7,
+          entityType: "task",
+          facetType: "event",
+        }),
+      );
     } else {
       queryClient.prefetchInfiniteQuery(
         filtersQuery.infinite({

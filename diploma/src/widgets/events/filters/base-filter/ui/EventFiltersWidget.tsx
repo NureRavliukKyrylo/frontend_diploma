@@ -1,4 +1,4 @@
-import styles from "./ProjectFiltersWidget.module.scss";
+import styles from "./EventFiltersWidget.module.scss";
 import { useProjectsInfiniteQuery } from "@entities/project";
 import { motion } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
@@ -75,7 +75,7 @@ export const EventFiltersWidget = ({ search }: EventFiltersWidgetProps) => {
           />
         </div>
         <div className={styles.dividerFilterBlock} />
-        <div className={styles.projectDistance}>
+        <div className={styles.eventDistance}>
           <h1 className={styles.subHeaderFilter}>Distance</h1>
           <DistanceFilter
             defaultLocation={search.Location}
@@ -92,12 +92,12 @@ export const EventFiltersWidget = ({ search }: EventFiltersWidgetProps) => {
             <SwitchFilter
               label="Show completed projects"
               value={search.IncludeArchived ?? false}
-              onChange={onShowJoinedChange}
+              onChange={onOnlyActiveChange}
             />
             <SwitchFilter
               label="Display joined projects"
               value={search.ShowJoined ?? false}
-              onChange={onOnlyActiveChange}
+              onChange={onShowJoinedChange}
             />
             <SwitchFilter
               label="Display series events"

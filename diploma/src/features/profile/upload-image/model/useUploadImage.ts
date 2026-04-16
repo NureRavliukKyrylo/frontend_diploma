@@ -25,7 +25,6 @@ export const useUploadImage = ({ src, onChange }: UseUploadImageParams) => {
     try {
       setError(null);
 
-      // 🔹 Validate only avatar field
       await settingsMainFormSchema.validateAt("avatar", { avatar: file });
 
       const previewUrl = URL.createObjectURL(file);

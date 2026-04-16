@@ -7,25 +7,27 @@
 .subHeaderFilter {
   @include font-base(20px, 700);
 }
-.projectDeadLine {
+.eventDeadLine {
   display: flex;
   flex-direction: column;
   gap: 15px;
   padding: 25px 20px 20px 20px;
 }
 
-.projectCategories {
+.eventOrganizations {
   display: flex;
   flex-direction: column;
   padding: 20px 20px 30px 20px;
   gap: 15px;
 }
-.projectOrganizations {
+
+.eventProjects {
   display: flex;
   flex-direction: column;
   padding: 20px 20px 30px 20px;
   gap: 15px;
 }
+
 .buttonClear {
   padding: 30px;
 

@@ -1,6 +1,7 @@
 import z from "zod";
 import { projectOrderSchema } from "./projectsSearchSchema";
 import { eventOrderSchema } from "@entities/event";
+import { tasksOrderSchema } from "@entities/task";
 
 export const myProjectsSearchDefaults = {
   projects: {
@@ -21,6 +22,7 @@ export const myProjectsSearchDefaults = {
     tab: "tasks" as const,
     Page: 1,
     PageSize: 5,
+    OrderBy: "Default" as const,
     OnlyActive: false,
   },
 } as const;
@@ -50,7 +52,6 @@ export const eventsTabSchema = baseFields.extend({
   tab: z.literal("events"),
   From: z.string().optional(),
   To: z.string().optional(),
-  OrganizationIds: z.array(z.string()).optional().catch(undefined),
   ProjectIds: z.array(z.string()).optional().catch(undefined),
   OrderBy: eventOrderSchema.shape.OrderBy.default(
     myProjectsSearchDefaults.events.OrderBy,
@@ -61,6 +62,13 @@ export const eventsTabSchema = baseFields.extend({
 export const tasksTabSchema = baseFields.extend({
   tab: z.literal("tasks"),
   Status: z.string().optional(),
+  From: z.string().optional(),
+  To: z.string().optional(),
+  ProjectIds: z.array(z.string()).optional().catch(undefined),
+  EventIds: z.array(z.string()).optional().catch(undefined),
+  OrderBy: tasksOrderSchema.shape.OrderBy.default(
+    myProjectsSearchDefaults.tasks.OrderBy,
+  ),
   PageSize: z.number().min(1).default(myProjectsSearchDefaults.tasks.PageSize),
 });
 

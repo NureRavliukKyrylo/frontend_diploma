@@ -9,6 +9,7 @@ import {
   ProjectControlCard,
   ProjectControlCardSkeleton,
   sortingProjectItems,
+  type MyProjectsSearchParams,
 } from "@entities/project";
 import { Pagination } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
@@ -26,8 +27,6 @@ import {
 export const ProjectsTab = () => {
   const search = useSearch({ from: "/_masterLayout/projects/my/" });
 
-  if (search.tab !== "projects") return null;
-
   const {
     isFilterOpen,
     setIsFilterOpen,
@@ -41,7 +40,9 @@ export const ProjectsTab = () => {
     handleLeaveProject,
     isModalOpen,
     selectedProject,
-  } = useProjectsTab(search);
+  } = useProjectsTab(search as MyProjectsSearchParams);
+
+  if (search.tab !== "projects") return null;
 
   return (
     <>

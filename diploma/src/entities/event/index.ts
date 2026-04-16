@@ -10,3 +10,8 @@ export { EventMarker } from "./ui/event-marker/EventMarker";
 export { type EventResponse } from "./api/list-events/eventsApi";
 export { eventOrderSchema } from "./libs/search-schema/eventsSearchSchema";
 export { useEventsInfiniteQuery } from "./model/hooks/useEventsInfiniteQuery";
+export { useEventsListQuery } from "./model/hooks/useEventsListQuery";
+export {
+  type EventSortValues,
+  sortingEventItems,
+} from "./config/sortingEventItems";

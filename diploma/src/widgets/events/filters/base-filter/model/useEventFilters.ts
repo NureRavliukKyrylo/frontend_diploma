@@ -56,7 +56,7 @@ export const useEventFilters = () => {
       nav((prev) => ({ ...prev, RadiusKm: radiusKm, Page: 1 })),
 
     onOnlyActiveChange: (value: boolean) =>
-      nav((prev) => ({ ...prev, OnlyActive: value, Page: 1 })),
+      nav((prev) => ({ ...prev, IncludeArchived: value, Page: 1 })),
 
     onShowJoinedChange: (value: boolean) =>
       nav((prev) => ({ ...prev, ShowJoined: value, Page: 1 })),

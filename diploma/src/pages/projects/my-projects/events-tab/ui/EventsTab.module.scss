@@ -1,0 +1,58 @@
+@use "@shared/assets/styles" as *;
+
+.mainMyEventsSection {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: 480px 1fr;
+  .filtersBlock {
+    display: grid;
+    grid-template-columns: 480px 350px 1fr 300px;
+    grid-template-rows: minmax(54px, auto);
+    gap: 30px;
+    grid-column: 1 / 3;
+    & > *:last-child {
+      grid-column: 4;
+    }
+  }
+
+  .myProjectsList {
+    min-height: 800px;
+    grid-column: 1 / 3;
+    &.filterOpen {
+      grid-column: 2 / 3;
+    }
+  }
+}
+
+.motionCard {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 6;
+}
+.paginationWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.projectsListSkeletonWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(470px, 1fr));
+  justify-content: center;
+  gap: 40px;
+  align-items: stretch;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  h2 {
+    @include font-base(50px, 900);
+    line-height: 120%;
+    color: #1a1a2e;
+  }
+  p {
+    @include font-base(30px, 500);
+    color: #6b7280;
+  }
+}

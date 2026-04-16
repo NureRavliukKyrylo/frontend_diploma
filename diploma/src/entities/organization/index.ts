@@ -14,3 +14,8 @@ export {
   organizationSearchDefaults,
   organizationSearchSchema,
 } from "./libs/search-schema/organizationSearchSchema";
+export { useOrganizationsListQuery } from "./model/hooks/useOrganizationsListQuery";
+export {
+  type OrganizationSortValues,
+  sortingOrganizationsItems,
+} from "./config/sortingOrganizationItems";

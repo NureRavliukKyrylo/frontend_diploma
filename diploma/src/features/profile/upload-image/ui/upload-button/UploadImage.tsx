@@ -23,7 +23,6 @@ export const UploadImage = ({ src, onChange }: UploadImageProps) => {
     error,
   } = useUploadImage({ src, onChange });
 
-  console.log(error);
   return (
     <>
       <div className={styles.uploadWrapper}>
