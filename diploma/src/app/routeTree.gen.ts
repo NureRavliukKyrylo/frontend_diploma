@@ -24,9 +24,12 @@ import { Route as MasterLayoutProfileIndexRouteImport } from './routers/_masterL
 import { Route as MasterLayoutOrganizationsIndexRouteImport } from './routers/_masterLayout/organizations/index'
 import { Route as MasterLayoutEventsIndexRouteImport } from './routers/_masterLayout/events/index'
 import { Route as MasterLayoutCategoriesIndexRouteImport } from './routers/_masterLayout/categories/index'
+import { Route as MasterLayoutTasksIdIndexRouteImport } from './routers/_masterLayout/tasks/$id/index'
 import { Route as MasterLayoutProjectsMyIndexRouteImport } from './routers/_masterLayout/projects/my/index'
 import { Route as MasterLayoutProjectsIdIndexRouteImport } from './routers/_masterLayout/projects/$id/index'
 import { Route as MasterLayoutProfileSettingsIndexRouteImport } from './routers/_masterLayout/profile/settings/index'
+import { Route as MasterLayoutOrganizationsIdIndexRouteImport } from './routers/_masterLayout/organizations/$id/index'
+import { Route as MasterLayoutEventsIdIndexRouteImport } from './routers/_masterLayout/events/$id/index'
 import { Route as MasterLayoutCategoriesIdIndexRouteImport } from './routers/_masterLayout/categories/$id/index'
 
 const MultiStepFormIndexLazyRouteImport = createFileRoute('/multi-step-form/')()
@@ -178,6 +181,12 @@ const AuthLayoutAuthForgotPasswordIndexLazyRoute =
       (d) => d.Route,
     ),
   )
+const MasterLayoutTasksIdIndexRoute =
+  MasterLayoutTasksIdIndexRouteImport.update({
+    id: '/tasks/$id/',
+    path: '/tasks/$id/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
 const MasterLayoutProjectsMyIndexRoute =
   MasterLayoutProjectsMyIndexRouteImport.update({
     id: '/projects/my/',
@@ -208,6 +217,18 @@ const MasterLayoutProfileSettingsIndexRoute =
       (d) => d.Route,
     ),
   )
+const MasterLayoutOrganizationsIdIndexRoute =
+  MasterLayoutOrganizationsIdIndexRouteImport.update({
+    id: '/organizations/$id/',
+    path: '/organizations/$id/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
+const MasterLayoutEventsIdIndexRoute =
+  MasterLayoutEventsIdIndexRouteImport.update({
+    id: '/events/$id/',
+    path: '/events/$id/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
 const MasterLayoutCategoriesIdIndexRoute =
   MasterLayoutCategoriesIdIndexRouteImport.update({
     id: '/categories/$id/',
@@ -257,9 +278,12 @@ export interface FileRoutesByFullPath {
   '/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordLazyRoute
   '/auth/forgot-password/verification': typeof AuthLayoutAuthForgotPasswordVerificationLazyRoute
   '/categories/$id/': typeof MasterLayoutCategoriesIdIndexRoute
+  '/events/$id/': typeof MasterLayoutEventsIdIndexRoute
+  '/organizations/$id/': typeof MasterLayoutOrganizationsIdIndexRoute
   '/profile/settings/': typeof MasterLayoutProfileSettingsIndexRoute
   '/projects/$id/': typeof MasterLayoutProjectsIdIndexRoute
   '/projects/my/': typeof MasterLayoutProjectsMyIndexRoute
+  '/tasks/$id/': typeof MasterLayoutTasksIdIndexRoute
   '/auth/forgot-password/': typeof AuthLayoutAuthForgotPasswordIndexLazyRoute
 }
 export interface FileRoutesByTo {
@@ -279,9 +303,12 @@ export interface FileRoutesByTo {
   '/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordLazyRoute
   '/auth/forgot-password/verification': typeof AuthLayoutAuthForgotPasswordVerificationLazyRoute
   '/categories/$id': typeof MasterLayoutCategoriesIdIndexRoute
+  '/events/$id': typeof MasterLayoutEventsIdIndexRoute
+  '/organizations/$id': typeof MasterLayoutOrganizationsIdIndexRoute
   '/profile/settings': typeof MasterLayoutProfileSettingsIndexRoute
   '/projects/$id': typeof MasterLayoutProjectsIdIndexRoute
   '/projects/my': typeof MasterLayoutProjectsMyIndexRoute
+  '/tasks/$id': typeof MasterLayoutTasksIdIndexRoute
   '/auth/forgot-password': typeof AuthLayoutAuthForgotPasswordIndexLazyRoute
 }
 export interface FileRoutesById {
@@ -306,9 +333,12 @@ export interface FileRoutesById {
   '/_authLayout/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordLazyRoute
   '/_authLayout/auth/forgot-password/verification': typeof AuthLayoutAuthForgotPasswordVerificationLazyRoute
   '/_masterLayout/categories/$id/': typeof MasterLayoutCategoriesIdIndexRoute
+  '/_masterLayout/events/$id/': typeof MasterLayoutEventsIdIndexRoute
+  '/_masterLayout/organizations/$id/': typeof MasterLayoutOrganizationsIdIndexRoute
   '/_masterLayout/profile/settings/': typeof MasterLayoutProfileSettingsIndexRoute
   '/_masterLayout/projects/$id/': typeof MasterLayoutProjectsIdIndexRoute
   '/_masterLayout/projects/my/': typeof MasterLayoutProjectsMyIndexRoute
+  '/_masterLayout/tasks/$id/': typeof MasterLayoutTasksIdIndexRoute
   '/_authLayout/auth/forgot-password/': typeof AuthLayoutAuthForgotPasswordIndexLazyRoute
 }
 export interface FileRouteTypes {
@@ -331,9 +361,12 @@ export interface FileRouteTypes {
     | '/auth/forgot-password/set-password'
     | '/auth/forgot-password/verification'
     | '/categories/$id/'
+    | '/events/$id/'
+    | '/organizations/$id/'
     | '/profile/settings/'
     | '/projects/$id/'
     | '/projects/my/'
+    | '/tasks/$id/'
     | '/auth/forgot-password/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -353,9 +386,12 @@ export interface FileRouteTypes {
     | '/auth/forgot-password/set-password'
     | '/auth/forgot-password/verification'
     | '/categories/$id'
+    | '/events/$id'
+    | '/organizations/$id'
     | '/profile/settings'
     | '/projects/$id'
     | '/projects/my'
+    | '/tasks/$id'
     | '/auth/forgot-password'
   id:
     | '__root__'
@@ -379,9 +415,12 @@ export interface FileRouteTypes {
     | '/_authLayout/auth/forgot-password/set-password'
     | '/_authLayout/auth/forgot-password/verification'
     | '/_masterLayout/categories/$id/'
+    | '/_masterLayout/events/$id/'
+    | '/_masterLayout/organizations/$id/'
     | '/_masterLayout/profile/settings/'
     | '/_masterLayout/projects/$id/'
     | '/_masterLayout/projects/my/'
+    | '/_masterLayout/tasks/$id/'
     | '/_authLayout/auth/forgot-password/'
   fileRoutesById: FileRoutesById
 }
@@ -521,6 +560,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLayoutAuthForgotPasswordIndexLazyRouteImport
       parentRoute: typeof AuthLayoutRoute
     }
+    '/_masterLayout/tasks/$id/': {
+      id: '/_masterLayout/tasks/$id/'
+      path: '/tasks/$id'
+      fullPath: '/tasks/$id/'
+      preLoaderRoute: typeof MasterLayoutTasksIdIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
     '/_masterLayout/projects/my/': {
       id: '/_masterLayout/projects/my/'
       path: '/projects/my'
@@ -541,6 +587,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/profile/settings/'
       preLoaderRoute: typeof MasterLayoutProfileSettingsIndexRouteImport
       parentRoute: typeof MasterLayoutProfileRoute
+    }
+    '/_masterLayout/organizations/$id/': {
+      id: '/_masterLayout/organizations/$id/'
+      path: '/organizations/$id'
+      fullPath: '/organizations/$id/'
+      preLoaderRoute: typeof MasterLayoutOrganizationsIdIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/events/$id/': {
+      id: '/_masterLayout/events/$id/'
+      path: '/events/$id'
+      fullPath: '/events/$id/'
+      preLoaderRoute: typeof MasterLayoutEventsIdIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
     }
     '/_masterLayout/categories/$id/': {
       id: '/_masterLayout/categories/$id/'
@@ -615,8 +675,11 @@ interface MasterLayoutRouteChildren {
   MasterLayoutSkillsIndexRoute: typeof MasterLayoutSkillsIndexRoute
   MasterLayoutTasksIndexRoute: typeof MasterLayoutTasksIndexRoute
   MasterLayoutCategoriesIdIndexRoute: typeof MasterLayoutCategoriesIdIndexRoute
+  MasterLayoutEventsIdIndexRoute: typeof MasterLayoutEventsIdIndexRoute
+  MasterLayoutOrganizationsIdIndexRoute: typeof MasterLayoutOrganizationsIdIndexRoute
   MasterLayoutProjectsIdIndexRoute: typeof MasterLayoutProjectsIdIndexRoute
   MasterLayoutProjectsMyIndexRoute: typeof MasterLayoutProjectsMyIndexRoute
+  MasterLayoutTasksIdIndexRoute: typeof MasterLayoutTasksIdIndexRoute
 }
 
 const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
@@ -628,8 +691,11 @@ const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
   MasterLayoutSkillsIndexRoute: MasterLayoutSkillsIndexRoute,
   MasterLayoutTasksIndexRoute: MasterLayoutTasksIndexRoute,
   MasterLayoutCategoriesIdIndexRoute: MasterLayoutCategoriesIdIndexRoute,
+  MasterLayoutEventsIdIndexRoute: MasterLayoutEventsIdIndexRoute,
+  MasterLayoutOrganizationsIdIndexRoute: MasterLayoutOrganizationsIdIndexRoute,
   MasterLayoutProjectsIdIndexRoute: MasterLayoutProjectsIdIndexRoute,
   MasterLayoutProjectsMyIndexRoute: MasterLayoutProjectsMyIndexRoute,
+  MasterLayoutTasksIdIndexRoute: MasterLayoutTasksIdIndexRoute,
 }
 
 const MasterLayoutRouteWithChildren = MasterLayoutRoute._addFileChildren(

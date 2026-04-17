@@ -26,7 +26,7 @@ export const MyTasksFilterWidget = ({ search }: MyTasksFilterWidgetProps) => {
 
   return (
     <>
-      <div className={styles.scrollableEventFilters}>
+      <div className={styles.scrollableTasksFilters}>
         <div className={styles.taskDeadLine}>
           <h1 className={styles.subHeaderFilter}>Task deadline due</h1>
           <DateRangeFilter

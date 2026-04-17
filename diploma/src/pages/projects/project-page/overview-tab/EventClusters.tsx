@@ -7,7 +7,12 @@ import {
   type EntityRenderProps,
 } from "@widgets/map";
 import styles from "./EventClusters.module.scss";
-import { EventClusterIcon, EventMarker, type Event } from "@entities/event";
+import {
+  EventClusterIcon,
+  EventMarker,
+  EventPopupContent,
+  type Event,
+} from "@entities/event";
 import { convertToClusterFeatures } from "@shared/libs/map";
 
 interface EventClustersProps {
@@ -43,7 +48,7 @@ export const EventClusters = memo(({ data }: EventClustersProps) => {
       icon={EventMarker}
     >
       <Popup className={styles.popupProject}>
-        <div>{item.id}</div>
+        <EventPopupContent event={item} />
       </Popup>
     </AnimatedMarker>
   );

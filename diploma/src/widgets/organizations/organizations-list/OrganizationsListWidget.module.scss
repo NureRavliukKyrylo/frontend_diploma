@@ -1,0 +1,8 @@
+.organizationsListWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  justify-content: center;
+  gap: 40px;
+  align-items: stretch;
+  grid-template-rows: auto;
+}

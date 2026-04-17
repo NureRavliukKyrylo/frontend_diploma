@@ -30,7 +30,7 @@ export const Avatar = ({
       .map((w) => w[0])
       .slice(0, 2)
       .join("")
-      .toUpperCase() ?? "?";
+      .toUpperCase() || "?";
 
   const colors = getAvatarColor(initials);
 

@@ -19,10 +19,9 @@ export const TaskCardBase = ({
   endContent,
 }: TaskCardBaseProps) => (
   <>
-    <div className={styles.organizationInfoBlock}>
+    <div className={styles.headerTaskBlock}>
       <div className={styles.startSection}>
         <img
-          className={styles.imageOrganization}
           src={task.organization?.logoUrl ?? DefaultAvatar}
           alt="image organization"
         />
@@ -41,10 +40,13 @@ export const TaskCardBase = ({
 
     <div className={styles.endSection}>
       <div className={styles.deadlineBlock}>
-        <img src={Calendar} alt="calendar-deadline" />
-        <h1>
-          Deadline: <span>{formatDateToText(task.endAt)}</span>
-        </h1>
+        <div className={styles.deadlineInner}>
+          <img src={Calendar} alt="calendar-deadline" />
+          <div className={styles.deadlineTextInfo}>
+            <h1>Deadline:</h1>
+            <span>{formatDateToText(task.endAt)}</span>
+          </div>
+        </div>
       </div>
       {endContent}
     </div>

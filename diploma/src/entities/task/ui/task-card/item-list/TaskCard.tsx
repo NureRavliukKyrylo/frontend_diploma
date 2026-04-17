@@ -12,14 +12,18 @@ export const TaskCard = ({ task }: TaskCardProps) => (
   <div className={styles.taskCardWrapper}>
     <TaskCardBase
       task={task}
-      endContent={
-        <AvatarGroup
-          className={styles.avatarsGroup}
-          avatarClassName={styles.avatarVolunteer}
-          remainingClassName={styles.remainingAvatarItem}
-          avatars={task.memberPreviews?.map(memberPreviewToAvatar) ?? []}
-          maxItems={3}
-        />
+      startContent={
+        task.memberPreviews?.length ? (
+          <AvatarGroup
+            className={styles.avatarsGroup}
+            avatarClassName={styles.avatarVolunteer}
+            remainingClassName={styles.remainingAvatarItem}
+            avatars={task.memberPreviews.map(memberPreviewToAvatar)}
+            maxItems={3}
+          />
+        ) : (
+          <p className={styles.noMembers}>No volunteers joined yet</p>
+        )
       }
     />
   </div>

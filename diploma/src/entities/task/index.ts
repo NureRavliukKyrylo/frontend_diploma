@@ -11,3 +11,5 @@ export {
   sortingTaskItems,
   type TaskSortValues,
 } from "./config/sortingTaskItems";
+export { TaskCard } from "./ui/task-card/item-list/TaskCard";
+export { TaskCardSkeleton } from "./ui/task-card/item-list/TaskCardSkeleton";

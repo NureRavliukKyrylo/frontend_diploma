@@ -36,7 +36,7 @@ export const EventFiltersWidget = ({ search }: EventFiltersWidgetProps) => {
 
   return (
     <>
-      <div className={styles.scrollableEventFilters}>
+      <div className={styles.scrollableEventsFilters}>
         <div className={styles.eventDeadLine}>
           <h1 className={styles.subHeaderFilter}>Event deadline due</h1>
           <DateRangeFilter

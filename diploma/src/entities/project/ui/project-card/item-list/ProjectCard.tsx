@@ -17,13 +17,17 @@ export const ProjectCard = ({ project }: ProjectCardProps) => (
         <>
           <ProjectDefaultBottomContent project={project} />
           <div className={styles.footerCard}>
-            <AvatarGroup
-              className={styles.avatarsGroup}
-              avatarClassName={styles.avatarVolunteer}
-              remainingClassName={styles.remainingAvatarItem}
-              avatars={project.memberPreviews.map(memberPreviewToAvatar)}
-              maxItems={3}
-            />
+            {project.memberPreviews?.length ? (
+              <AvatarGroup
+                className={styles.avatarsGroup}
+                avatarClassName={styles.avatarVolunteer}
+                remainingClassName={styles.remainingAvatarItem}
+                avatars={project.memberPreviews.map(memberPreviewToAvatar)}
+                maxItems={3}
+              />
+            ) : (
+              <p className={styles.noMembers}>No volunteers joined yet</p>
+            )}
             <h1>{project.tasksTotal} task</h1>
           </div>
         </>

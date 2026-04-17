@@ -4,7 +4,7 @@ import styles from "./TasksListWidget.module.scss";
 import type { Task } from "@entities/task";
 
 interface TasksListWidgetProps {
-  query?: QueryResult<Task>;
+  useTasksQuery?: () => QueryResult<Task>;
   tasks?: Task[];
   renderCard: (task: Task, index: number) => React.ReactNode;
   renderSkeleton?: () => React.ReactNode;
@@ -14,7 +14,7 @@ interface TasksListWidgetProps {
 }
 
 export const TasksListWidget = ({
-  query,
+  useTasksQuery,
   tasks: readyTasks,
   renderCard,
   renderSkeleton,
@@ -22,8 +22,9 @@ export const TasksListWidget = ({
   startSlot,
   className,
 }: TasksListWidgetProps) => {
-  const tasks = readyTasks ?? query?.data ?? [];
-  const isLoading = query?.isLoading ?? false;
+  const queryResult = useTasksQuery?.();
+  const tasks = readyTasks ?? queryResult?.data ?? [];
+  const isLoading = queryResult?.isLoading ?? false;
 
   if (isLoading && renderSkeleton) {
     return (

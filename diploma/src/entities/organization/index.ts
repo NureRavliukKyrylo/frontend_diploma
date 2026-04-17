@@ -19,3 +19,5 @@ export {
   type OrganizationSortValues,
   sortingOrganizationsItems,
 } from "./config/sortingOrganizationItems";
+export { OrganizationCard } from "./ui/organization-card/item-list/OrganizationCard";
+export { OrganizationCardSkeleton } from "./ui/organization-card/item-list/OrganizationCardSkeleton";

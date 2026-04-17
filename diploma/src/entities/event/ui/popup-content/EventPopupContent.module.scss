@@ -1,11 +1,11 @@
 @use "@shared/assets/styles" as *;
 
-.popupProjectContent {
+.popupEventContent {
   display: flex;
   gap: 20px;
   flex-direction: column;
 
-  .projectInfo {
+  .eventInfo {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -17,6 +17,7 @@
       text-align: center;
       line-height: 120%;
     }
+
     p {
       @include font-base(18px, 500);
       text-align: center;
@@ -27,26 +28,12 @@
       overflow: hidden;
       line-height: 130%;
     }
-    .seeMoreButtonProject {
+
+    .seeMoreButtonEvent {
       color: #8c0000;
       text-decoration-line: underline;
       @include font-base(18px, 800);
-    }
-  }
-
-  .organizationProjectInfo {
-    .organizationImage {
-      display: flex;
-      gap: 5px;
-      align-items: center;
-
-      img {
-        width: 28px;
-        height: 28px;
-      }
-      h1 {
-        @include font-base(15px, 900);
-      }
+      margin-top: 6px;
     }
   }
 }

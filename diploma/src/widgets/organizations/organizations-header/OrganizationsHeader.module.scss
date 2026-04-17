@@ -1,0 +1,104 @@
+@use "@shared/assets/styles" as *;
+
+.organizationListHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  .organizationsMainInfo {
+    flex: 1.3;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 50px;
+    .headerTextOrganizations {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      .headerText {
+        background: linear-gradient(90deg, #8c0000 0%, #260000 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        text-transform: uppercase;
+        @include font-base(45px, 800);
+        line-height: 120%;
+      }
+      .totalOrganizations {
+        color: #b3b3b3;
+        @include font-base(22px, 600);
+      }
+    }
+    .bottomTextOrganizations {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .bottomText {
+        color: #2d2d2d;
+        @include font-base(25px, 500);
+      }
+      .joinedOrganizationsText {
+        color: #2d2d2d;
+        @include font-base(25px, 500);
+      }
+      .toOrganizationsLink {
+        text-decoration-line: underline;
+
+        background: linear-gradient(90deg, #8c0000 85.1%, #260000 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        @include font-base(25px, 700);
+      }
+    }
+  }
+  .organizationsMainInfoImage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    min-width: 350px;
+    flex-shrink: 0;
+    justify-content: flex-end;
+
+    .img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1/1;
+      min-width: 350px;
+    }
+  }
+}
+
+.headerTextSk {
+  width: 560px;
+  height: 108px;
+  border-radius: 10px;
+}
+
+.totalOrganizationsSk {
+  width: 200px;
+  height: 27px;
+  border-radius: 8px;
+  margin-top: 4px;
+}
+
+.bottomTextSk {
+  width: 100%;
+  height: 90px;
+  border-radius: 10px;
+}
+
+.joinedTextSk {
+  width: 75%;
+  height: 30px;
+  border-radius: 8px;
+}
+
+.imageSk {
+  width: 100%;
+  aspect-ratio: 1/1;
+  width: 550px;
+  height: 510px;
+  border-radius: 30%;
+}

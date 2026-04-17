@@ -15,3 +15,4 @@ export {
   type EventSortValues,
   sortingEventItems,
 } from "./config/sortingEventItems";
+export { EventPopupContent } from "./ui/popup-content/EventPopupContent";

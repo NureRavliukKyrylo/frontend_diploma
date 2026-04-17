@@ -35,8 +35,8 @@
           color: #6b7280;
         }
       }
-      .projectsList {
-        min-height: 800px;
+      .organizationsList {
+        min-height: 570px;
         grid-column: 1 / 3;
         &.filterOpen {
           grid-column: 2/3;
@@ -50,17 +50,51 @@
     }
   }
 }
-.projectCardMotion {
+.organizationCardMotion {
   cursor: pointer;
   display: grid;
   grid-template-rows: subgrid;
-  grid-row: span 6;
+  grid-row: span 4;
 }
 
-.projectsListSkeletonWrapper {
+.organizationsListSkeletonWrapper {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
   justify-content: center;
   gap: 40px;
   align-items: stretch;
+}
+
+.filterToggleSk {
+  height: 54px;
+  border-radius: 30px;
+}
+
+.searchBarSk {
+  height: 54px;
+  border-radius: 30px;
+}
+
+.sortDropdownSk {
+  height: 54px;
+  border-radius: 30px;
+}
+
+.organizationCardSk {
+  width: 100%;
+  height: 280px;
+  border-radius: 20px;
+}
+
+.paginationSk {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.paginationDotSk {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
 }

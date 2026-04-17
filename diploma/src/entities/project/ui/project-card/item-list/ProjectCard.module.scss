@@ -50,4 +50,9 @@
     color: rgba(0, 0, 0, 0.4);
     @include font-base(18px, 400);
   }
+  .noMembers {
+    @include font-base(18px, 600);
+    line-height: 120%;
+    color: #1a1a2e;
+  }
 }
