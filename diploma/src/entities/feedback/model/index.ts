@@ -1,1 +1,1 @@
-export { type FeedBack } from "./types/FeedBack";
+export { type Feedback } from "./types/FeedBack";

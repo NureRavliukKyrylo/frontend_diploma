@@ -7,7 +7,6 @@ export { ProgressBar } from "./progress-bar/ProgressBar";
 export { Carousel } from "./carousel/Carousel";
 export { SocialPlatforms } from "./social-links/blocks-list/SocialPlatforms";
 export { Pagination } from "./pagination/Pagination";
-export { RatingStars } from "./rating-stars/RatingStars";
 export { CropImage } from "./cropper/CropImage";
 export { Switch } from "./switch/Switch";
 export { BaseSpinner } from "./spinner/BaseSpinner";

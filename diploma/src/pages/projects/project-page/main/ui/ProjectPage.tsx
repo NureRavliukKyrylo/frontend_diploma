@@ -5,12 +5,13 @@ import { projectQuery, type ProjectMode } from "@entities/project";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { ReadMoreButton } from "@shared/ui/buttons";
 import { JoinProjectButton } from "@features/project";
-import { projectMainTabs } from "./config/projectMainTabs";
-import { getProjectMainForms } from "./config/projectMainForms";
+import { projectMainTabs } from "../config/projectMainTabs";
+import { getProjectMainForms } from "../config/projectMainForms";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMapUserLocation } from "@features/map";
 import { eventQuery } from "@entities/event";
 import { formatDateToText } from "@shared/libs/date";
+import { profileQuery, useUserStore } from "@entities/user/profile";
 
 export const ProjectPage = () => {
   const { id } = useParams({ from: "/_masterLayout/projects/$id/" });
@@ -18,6 +19,11 @@ export const ProjectPage = () => {
   const { data: project } = useSuspenseQuery(projectQuery.id(id));
   const { data: events } = useQuery(eventQuery.list({ ProjectIds: [id] }));
   const { coordinates: userLocation } = useMapUserLocation();
+  const isAuthenticated = useUserStore((s) => s.isAuthenticated);
+  const { data: user } = useQuery({
+    ...profileQuery.all(),
+    enabled: !!isAuthenticated,
+  });
   const navigate = useNavigate({ from: "/projects/$id/" });
 
   const activeTab = search.tab;
@@ -29,6 +35,7 @@ export const ProjectPage = () => {
     userLocation,
     events: events?.data,
     projectId: id,
+    userId: user?.id,
   });
 
   return (

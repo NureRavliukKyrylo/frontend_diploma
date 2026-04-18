@@ -19,3 +19,4 @@ export type { PaginationRender } from "./pagination/PaginationRender";
 export type { Policy } from "./entity/Policy";
 export type { EntityStatus, StatusConfig } from "./entity-status/EntityStatus";
 export type { MenuItem } from "./drop-down/MenuItem";
+export type { Rating } from "./rating/Rating";

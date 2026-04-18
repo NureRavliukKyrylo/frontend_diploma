@@ -42,6 +42,7 @@ export const useUpdateFeedback = ({
 
   return {
     handleUpdateFeedback: mutation.mutate,
+    mutation,
     isLoading: mutation.isPending,
     errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
   };

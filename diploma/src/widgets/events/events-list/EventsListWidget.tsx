@@ -4,7 +4,7 @@ import styles from "./EventsListWidget.module.scss";
 import type { Event } from "@entities/event";
 
 interface EventsListWidgetProps {
-  query?: QueryResult<Event>;
+  useEventsQuery?: () => QueryResult<Event>;
   events?: Event[];
   renderCard: (event: Event, index: number) => React.ReactNode;
   renderSkeleton?: () => React.ReactNode;
@@ -14,7 +14,7 @@ interface EventsListWidgetProps {
 }
 
 export const EventsListWidget = ({
-  query,
+  useEventsQuery,
   events: readyEvents,
   renderCard,
   renderSkeleton,
@@ -22,8 +22,9 @@ export const EventsListWidget = ({
   startSlot,
   className,
 }: EventsListWidgetProps) => {
-  const events = readyEvents ?? query?.data ?? [];
-  const isLoading = query?.isLoading ?? false;
+  const queryResult = useEventsQuery?.();
+  const events = readyEvents ?? queryResult?.data ?? [];
+  const isLoading = queryResult?.isLoading ?? false;
 
   if (isLoading && renderSkeleton) {
     return (

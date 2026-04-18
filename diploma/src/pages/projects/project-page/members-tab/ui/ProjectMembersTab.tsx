@@ -31,7 +31,6 @@ export const ProjectMembersTab = ({ projectId }: ProjectMembersTab) => {
           <ListWidgetSkeleton
             className={styles.membersProjectList}
             renderSkeleton={() => <MemberCardSkeleton />}
-            items={9}
           />
         }
       >

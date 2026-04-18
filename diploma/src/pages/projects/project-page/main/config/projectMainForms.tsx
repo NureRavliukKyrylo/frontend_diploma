@@ -1,14 +1,16 @@
 import type { Project, ProjectMode } from "@entities/project";
-import { OverviewTab } from "../../overview-tab/OverviewTab";
-import { ProjectMembersTab } from "../../members-tab/ProjectMembersTab";
 import type { Coordinates } from "@shared/config/types";
 import type { Event } from "@entities/event";
+import { OverviewTab } from "../../overview-tab";
+import { ProjectMembersTab } from "../../members-tab";
+import { FeedbackTab } from "../../feedback-tab";
 
 interface ProjectTabsProps {
-  project?: Project;
+  project: Project;
   userLocation?: Coordinates | null;
   events?: Event[];
   projectId: string;
+  userId?: string;
 }
 
 export const getProjectMainForms = (
@@ -22,5 +24,5 @@ export const getProjectMainForms = (
     />
   ),
   members: <ProjectMembersTab projectId={props.projectId} />,
-  feedback: <></>,
+  feedback: <FeedbackTab project={props.project} />,
 });

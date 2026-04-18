@@ -14,7 +14,7 @@ export const RatingFilter = ({ rating, onRatingChange }: RatingFilterProps) => {
   return (
     <div className={styles.ratingBlock}>
       <div className={styles.valueRating}>
-        <img src={Star} alt="star" className={styles.starReview} />
+        <Star className={styles.starReview} />
         <h1 className={styles.starReviewValue}>{displayValue}</h1>
       </div>
       <Slider

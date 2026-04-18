@@ -1,5 +1,9 @@
-export interface FeedBack {
+import type { ParticipationMember } from "@shared/config/types";
+
+export interface Feedback {
+  id: string;
   rating: number;
-  comment: string;
+  comment?: string;
   createdAt: string;
+  member: ParticipationMember;
 }

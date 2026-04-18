@@ -1,9 +1,9 @@
 import { apiClient } from "@shared/api";
 import type { EntityType, PaginationResponse } from "@shared/config/types";
-import type { FeedBack } from "../../model";
+import type { Feedback } from "../../model";
 
 export interface FeedbacksResponse {
-  data: FeedBack[];
+  data: Feedback[];
   pagination: PaginationResponse;
 }
 

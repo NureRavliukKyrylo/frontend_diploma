@@ -7,11 +7,11 @@ import { Marker, Popup } from "react-leaflet";
 import { MapUserLocation } from "@entities/user/profile";
 import { useEffect, useRef, useState } from "react";
 import type { Coordinates } from "@shared/config/types";
-import { EventClusters } from "./EventClusters";
+import { EventClusters } from "../event-cluster/EventClusters";
 import type { Event } from "@entities/event";
 
 interface OverviewTabProps {
-  project?: Project;
+  project: Project;
   events?: Event[];
   userLocation?: Coordinates | null;
 }
@@ -24,7 +24,7 @@ export const OverviewTab = ({
   const hasCategories = project?.categories && project?.categories.length > 0;
   const mapRef = useRef<HTMLDivElement>(null);
   const [mapVisible, setMapVisible] = useState(false);
-  console.log(events);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
