@@ -2,6 +2,7 @@ import type { Feedback } from "@entities/feedback/model";
 import styles from "./FeedbackBase.module.scss";
 import { Stars } from "@shared/ui/stars";
 import { formatDateToInput } from "@shared/libs/date";
+import { getFullName } from "@entities/user";
 
 interface FeedbackBaseProps {
   feedback: Feedback;
@@ -9,18 +10,15 @@ interface FeedbackBaseProps {
 }
 
 export const FeedbackBase = ({ feedback, displayName }: FeedbackBaseProps) => {
-  const fullName =
-    displayName ??
-    [feedback.member?.firstName, feedback.member?.lastName]
-      .filter(Boolean)
-      .join(" ");
-
   return (
     <>
       <div className={styles.memberInfo}>
         <img src={feedback.member.avatarUrl} alt="memberAvatar" />
         <div className={styles.initialsMember}>
-          <h1>{fullName}</h1>
+          <h1>
+            {displayName ??
+              getFullName(feedback.member.firstName, feedback.member.lastName)}
+          </h1>
           <h2>{feedback.member.role.name}</h2>
         </div>
       </div>

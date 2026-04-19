@@ -7,12 +7,12 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@heroui/react";
-import { MoreActionsIcon } from "@shared/assets/icons/actions";
+import { ActionsIcon } from "@shared/assets/icons/actions";
 import { FeedbackBase } from "../base/FeedbackBase";
 
 interface FeedbackControlCardProps {
   feedback: Feedback;
-  menuItems: MenuItem<"default" | "edit" | "leave">[];
+  menuItems: MenuItem<"default" | "edit" | "delete">[];
   displayName?: string;
 }
 
@@ -29,7 +29,7 @@ export const FeedbackControlCard = ({
             className={styles.moreActionsButton}
             onClick={(e) => e.stopPropagation()}
           >
-            <img src={MoreActionsIcon} alt="more-actions" />
+            <ActionsIcon className={styles.actions} />
           </button>
         </DropdownTrigger>
         <DropdownMenu>

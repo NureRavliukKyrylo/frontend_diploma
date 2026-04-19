@@ -7,12 +7,14 @@ import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import { ErrorBoundary } from "react-error-boundary";
+import { TeamMembers } from "@shared/assets/images/entity-information";
 
 interface ProjectMembersTab {
   projectId: string;
+  userId?: string;
 }
 
-export const ProjectMembersTab = ({ projectId }: ProjectMembersTab) => {
+export const ProjectMembersTab = ({ projectId, userId }: ProjectMembersTab) => {
   return (
     <ErrorBoundary
       fallbackRender={({ error }) => {
@@ -35,13 +37,14 @@ export const ProjectMembersTab = ({ projectId }: ProjectMembersTab) => {
         }
       >
         <MembersListWidget
-          renderCard={(member) => (
-            <MemberCard
-              fullName={`${member.firstName} ${member.lastName}`}
-              image={member.avatarUrl}
-              role={member.role.name}
-            />
-          )}
+          renderCard={(member) => {
+            const isMember = userId != null && member.userId === String(userId);
+
+            if (isMember) {
+              return <MemberCard member={member} displayName="You" />;
+            }
+            return <MemberCard member={member} />;
+          }}
           className={styles.membersProjectList}
           useMembersQuery={useMembersInfiniteQuery({
             entityId: projectId,
@@ -66,10 +69,11 @@ export const ProjectMembersTab = ({ projectId }: ProjectMembersTab) => {
           }
           startSlot={
             <div className={styles.startMembersSlot}>
-              <h1>Team members</h1>
-              <h2>
-                These are the volunteers helping us create positive change
-              </h2>
+              <div className={styles.textBlock}>
+                <h1>Team</h1>
+                <h2>members</h2>
+              </div>
+              <img src={TeamMembers} alt="team-members" />
             </div>
           }
           renderEmpty={(members) =>

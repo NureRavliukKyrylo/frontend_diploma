@@ -39,8 +39,11 @@ export {
 } from "./libs/search-shema/projectDetailSearchSchema";
 export type { ProjectMode } from "./model/types";
 export { useProjectsInfiniteQuery } from "./model/hooks/useProjectsInfiniteQuery";
-export type {
-  MyProjectsBaseSearch,
-  MyEventsSearchParams,
-  MyTasksSearchParams,
+export {
+  type MyProjectsBaseSearch,
+  type MyEventsSearchParams,
+  type MyTasksSearchParams,
+  eventsTabSchema,
+  projectsTabSchema,
+  tasksTabSchema,
 } from "./libs/search-shema/myProjectsSearchSchema";

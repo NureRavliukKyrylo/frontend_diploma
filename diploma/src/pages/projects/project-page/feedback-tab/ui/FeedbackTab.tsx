@@ -24,7 +24,7 @@ import { getHttpErrorInfo } from "@shared/libs/error";
 
 interface FeedbackTabProps {
   project: Project;
-  userId?: number;
+  userId?: string;
 }
 
 export const mockRating: Rating = {
@@ -118,7 +118,7 @@ export const FeedbackTab = ({ project, userId }: FeedbackTabProps) => {
                   PageSize: 3,
                 },
               )}
-              renderCard={(feedback, index) => {
+              renderCard={(feedback) => {
                 const isOwner =
                   userId != null && feedback.member.userId === String(userId);
 
@@ -133,7 +133,14 @@ export const FeedbackTab = ({ project, userId }: FeedbackTabProps) => {
                   );
                 }
 
-                return <FeedbackCard feedback={feedback} key={feedback.id} />;
+                return (
+                  <FeedbackControlCard
+                    feedback={feedback}
+                    displayName="You"
+                    menuItems={getMenuItems(feedback)}
+                    key={feedback.id}
+                  />
+                );
               }}
               renderPagination={({
                 fetchNextPage,

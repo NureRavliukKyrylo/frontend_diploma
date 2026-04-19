@@ -19,5 +19,5 @@ export { default as FullSizeIcon } from "./full-size.png";
 export { default as PlusIcon } from "./plus.png";
 export { default as MinusIcon } from "./minus.png";
 export { default as ArrowCarousel } from "./carousel-arrow.svg?react";
-export { default as MoreActionsIcon } from "./more-button.png";
 export { default as AddingPlus } from "./adding-plus.svg?react";
+export { default as ActionsIcon } from "./svgviewer-output.svg?react";

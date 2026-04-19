@@ -63,59 +63,98 @@
     justify-content: center;
     gap: 50px;
     > :first-child {
-      flex: 0 0 calc(30% - 25px);
+      flex: 0 0 350px;
     }
 
     > :nth-child(2) {
-      flex: 0 0 calc(70% - 25px);
+      flex: 1 0;
     }
     .projectPageMainInfo {
       display: flex;
       flex-direction: column;
-      gap: 40px;
+      gap: 60px;
       .headerTextInfo {
         display: flex;
         flex-direction: column;
-        gap: 30px;
-        h2 {
-          color: #8c0000;
-          @include font-base(30px, 800);
-          text-transform: uppercase;
-          line-height: 120%;
-          text-align: center;
+        gap: 20px;
+        .activitiesLocations {
+          display: flex;
+          justify-content: flex-start;
+          flex-direction: column;
+          background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          text-fill-color: transparent;
+          h2 {
+            @include font-base(30px, 800);
+            text-transform: uppercase;
+            line-height: 100%;
+            font-style: italic;
+          }
+          span {
+            @include font-base(40px, 800);
+            text-transform: uppercase;
+            line-height: 120%;
+          }
         }
+
         p {
-          text-align: right;
+          text-align: end;
           @include font-base(20px, 500);
           line-height: 140%;
+          max-width: 300px;
+          align-self: flex-end;
         }
       }
-      .totalTasks,
-      .totalEvents {
-        background: #ffffff;
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
-        border-radius: 20px;
-        padding: 20px;
-        h1 {
-          font-style: italic !important;
-          @include font-base(20px, 500);
-          line-height: 100%;
+      .activitiesBlock {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .activeActivities {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 20px;
+          .totalTasks,
+          .totalEvents {
+            flex: 1;
+            background: #ffffff;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+            border-radius: 20px;
+            padding: 25px 15px;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .headerTitle {
+              h1 {
+                font-style: italic !important;
+                @include font-base(20px, 500);
+                line-height: 100%;
+              }
+              h2 {
+                @include font-base(25px, 800);
+                line-height: 100%;
+              }
+            }
+          }
+          p {
+            @include font-base(50px, 700);
+            color: #8c0000;
+            text-align: right;
+            line-height: 100%;
+          }
         }
-        h2 {
-          @include font-base(25px, 800);
-          line-height: 100%;
+        .activitiesImageBlock {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img {
+            width: 250px;
+          }
         }
       }
-      .tasksTotalText,
-      .eventsTotalText {
-        @include font-base(50px, 700);
-        color: #8c0000;
-        text-align: right;
-        line-height: 100%;
-      }
-    }
-    .mapWrapper {
-      height: 650px;
     }
   }
 }

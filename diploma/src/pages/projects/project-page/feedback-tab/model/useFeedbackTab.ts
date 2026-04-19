@@ -25,13 +25,13 @@ export const useFeedbackTab = () => {
       key: "edit",
       label: "Edit Feedback",
       onClick: () => handleOpenModal(feedback, "edit"),
-      variant: "default" as const,
+      variant: "edit" as const,
     },
     {
       key: "delete",
       label: "Delete Feedback",
       onClick: () => handleOpenModal(feedback, "delete"),
-      variant: "leave" as const,
+      variant: "delete" as const,
     },
   ];
 

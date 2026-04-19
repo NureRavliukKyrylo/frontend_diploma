@@ -2,39 +2,31 @@ import {
   myProjectsSearchDefaults,
   myProjectsFiltersSchema,
   type MyProjectsBaseSearch,
+  eventsTabSchema,
+  projectsTabSchema,
+  tasksTabSchema,
+  projectQuery,
 } from "@entities/project";
 import { createFileRoute } from "@tanstack/react-router";
-import { type MyProjectsMode } from "@entities/project";
 import { filtersQuery } from "@shared/api/filters";
 import { MyProjectsPageSkeleton } from "@pages/projects";
+import { eventQuery } from "@entities/event";
+import { taskQuery } from "@entities/task";
+import { createTabCleanerMiddleware } from "@shared/libs/search-params";
 
 export const Route = createFileRoute("/_masterLayout/projects/my/")({
   validateSearch: myProjectsFiltersSchema,
-  loaderDeps: ({ search }) => search,
   search: {
     middlewares: [
-      ({ search, next }) => {
-        const result = next(search) as MyProjectsBaseSearch;
-        const tab = (result.tab ?? "projects") as MyProjectsMode;
-        const defaults = myProjectsSearchDefaults[tab];
-        const globalTabDefault = "projects";
-
-        return Object.fromEntries(
-          Object.entries(result).filter(([key, value]) => {
-            if (key === "tab") return value !== globalTabDefault;
-            return (
-              JSON.stringify(value) !==
-              JSON.stringify(defaults[key as keyof typeof defaults])
-            );
-          }),
-        );
-      },
+      createTabCleanerMiddleware(myProjectsSearchDefaults, "projects"),
     ],
   },
-  loader: async ({ context: { queryClient }, deps }) => {
-    const search = deps as MyProjectsBaseSearch;
-
+  loader: async ({ context: { queryClient }, location }) => {
+    const search = location.search as MyProjectsBaseSearch;
+    let searchParams;
     if (search.tab === "events") {
+      searchParams = eventsTabSchema.parse(location.search);
+      await queryClient.ensureQueryData(eventQuery.my(searchParams));
       queryClient.prefetchInfiniteQuery(
         filtersQuery.infinite({
           pageSize: 7,
@@ -50,6 +42,8 @@ export const Route = createFileRoute("/_masterLayout/projects/my/")({
         }),
       );
     } else if (search.tab === "tasks") {
+      searchParams = tasksTabSchema.parse(location.search);
+      await queryClient.ensureQueryData(taskQuery.my(searchParams));
       queryClient.prefetchInfiniteQuery(
         filtersQuery.infinite({
           pageSize: 7,
@@ -72,6 +66,8 @@ export const Route = createFileRoute("/_masterLayout/projects/my/")({
         }),
       );
     } else {
+      searchParams = projectsTabSchema.parse(location.search);
+      await queryClient.ensureQueryData(projectQuery.my(searchParams));
       queryClient.prefetchInfiniteQuery(
         filtersQuery.infinite({
           pageSize: 7,

@@ -23,6 +23,8 @@ export const getProjectMainForms = (
       events={props.events}
     />
   ),
-  members: <ProjectMembersTab projectId={props.projectId} />,
+  members: (
+    <ProjectMembersTab projectId={props.projectId} userId={props.userId} />
+  ),
   feedback: <FeedbackTab project={props.project} />,
 });

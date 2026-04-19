@@ -19,3 +19,4 @@ export {
   type ProfileSettingsSearchParams,
 } from "./profile/libs/search-schema/profileSearchSchema";
 export { memberPreviewToAvatar } from "./profile/libs/member-to-avatar/memberPreviewToAvatar";
+export { getFullName } from "./profile/libs/full-name/getFullName";

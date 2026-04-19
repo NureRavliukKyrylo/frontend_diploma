@@ -4,7 +4,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@heroui/react";
-import { MoreActionsIcon } from "@shared/assets/icons/actions";
+import { ActionsIcon } from "@shared/assets/icons/actions";
 import { motion } from "framer-motion";
 import { LinkButtonWrapper } from "@shared/ui/buttons";
 import type { Task } from "../../../model";
@@ -29,7 +29,7 @@ export const TaskControlCard = ({ task, menuItems }: TaskControlCardProps) => {
             className={styles.moreActionsButton}
             onClick={(e) => e.stopPropagation()}
           >
-            <img src={MoreActionsIcon} alt="more-actions" />
+            <ActionsIcon className={styles.actionsIcon} />
           </button>
         </DropdownTrigger>
         <DropdownMenu>

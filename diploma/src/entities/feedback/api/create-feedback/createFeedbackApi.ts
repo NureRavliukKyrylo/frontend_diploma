@@ -9,6 +9,6 @@ export interface CreateFeedbackDto {
 }
 
 export const createFeedback = async (data: CreateFeedbackDto) => {
-  const response = await apiClient.post("/Feedback", data);
+  const response = await apiClient.post("/Feedback/create", data);
   return response.data;
 };

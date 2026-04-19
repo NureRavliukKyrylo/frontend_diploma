@@ -31,7 +31,7 @@ export const CreateFeedbackModal = ({
   });
 
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose} maxWidth="640px">
+    <BaseModal isOpen={isOpen} onClose={handleClose} maxWidth="640px">
       <FeedbackForm
         formik={formik}
         isLoading={isLoading}

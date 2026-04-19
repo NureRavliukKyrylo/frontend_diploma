@@ -38,11 +38,13 @@ export const EditFeedbackModal = ({
   });
 
   return (
-    <BaseModal isOpen={isOpen} onClose={onClose} maxWidth="640px">
+    <BaseModal isOpen={isOpen} onClose={handleClose} maxWidth="640px">
       <FeedbackForm
         formik={formik}
         isLoading={isLoading}
-        buttonText="Submit Feedback"
+        buttonText="Update Feedback"
+        title="Edit Your Feedback"
+        description="Update your rating or comment below."
       />
     </BaseModal>
   );

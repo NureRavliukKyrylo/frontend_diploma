@@ -4,7 +4,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@heroui/react";
-import { MoreActionsIcon } from "@shared/assets/icons/actions";
+import { ActionsIcon } from "@shared/assets/icons/actions";
 import type { Project } from "../../../model";
 import { ProjectCardBase } from "../base/ProjectCardBase";
 import { ProjectDefaultBottomContent } from "../base/ProjectDefaultBottomContent";
@@ -35,7 +35,7 @@ export const ProjectControlCard = ({
             className={styles.moreActionsButton}
             onClick={(e) => e.stopPropagation()}
           >
-            <img src={MoreActionsIcon} alt="more-actions" />
+            <ActionsIcon className={styles.actionsIcon} />
           </button>
         </DropdownTrigger>
         <DropdownMenu>

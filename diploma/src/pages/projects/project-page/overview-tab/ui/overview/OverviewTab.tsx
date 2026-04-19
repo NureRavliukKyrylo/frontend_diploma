@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Coordinates } from "@shared/config/types";
 import { EventClusters } from "../event-cluster/EventClusters";
 import type { Event } from "@entities/event";
+import { Activities } from "@shared/assets/images/entity-information";
 
 interface OverviewTabProps {
   project: Project;
@@ -61,25 +62,35 @@ export const OverviewTab = ({
       <div className={styles.mapLocationBlock}>
         <div className={styles.projectPageMainInfo}>
           <div className={styles.headerTextInfo}>
-            <h2>Project & Event Locations</h2>
+            <div className={styles.activitiesLocations}>
+              <h2>Activities</h2>
+              <span>Locations</span>
+            </div>
             <p>
-              Discover where this project's activities and events are taking
-              place across the map.
+              Explore all tasks within this project and see where they are
+              located
             </p>
           </div>
-          <div className={styles.totalTasks}>
-            <h1>TOTAL</h1>
-            <h2>TASKS</h2>
-            <p className={styles.tasksTotalText}>
-              {project?.tasksTotal ?? "0"}
-            </p>
-          </div>
-          <div className={styles.totalEvents}>
-            <h1>TOTAL</h1>
-            <h2>EVENTS</h2>
-            <p className={styles.eventsTotalText}>
-              {project?.eventsTotal ?? "0"}
-            </p>
+          <div className={styles.activitiesBlock}>
+            <div className={styles.activeActivities}>
+              <div className={styles.totalEvents}>
+                <div className={styles.headerTitle}>
+                  <h1>ACTIVE</h1>
+                  <h2>EVENTS</h2>
+                </div>
+                <p>{project?.eventsTotal ?? "0"}</p>
+              </div>
+              <div className={styles.totalTasks}>
+                <div className={styles.headerTitle}>
+                  <h1>ACTIVE</h1>
+                  <h2>TASKS</h2>
+                </div>
+                <p>{project?.tasksTotal ?? "0"}</p>
+              </div>
+            </div>
+            <div className={styles.activitiesImageBlock}>
+              <img src={Activities} alt="activities-image" />
+            </div>
           </div>
         </div>
         <div className={styles.mapWrapper} ref={mapRef}>

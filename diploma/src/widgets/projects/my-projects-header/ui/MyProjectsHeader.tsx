@@ -7,6 +7,7 @@ import { myProjectMainTabs } from "../config/myProjectMainTabs";
 import type { MyProjectsMode } from "@entities/project";
 import { Arrow } from "@shared/assets/icons/actions";
 import { Layout } from "@shared/assets/images/layout";
+import { getFullName } from "@entities/user";
 
 interface MyProjectsHeaderProps {
   activeTab: MyProjectsMode;
@@ -19,8 +20,6 @@ export const MyProjectsHeader = ({
   onTabChange,
   user,
 }: MyProjectsHeaderProps) => {
-  const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ");
-
   return (
     <>
       <Avatar
@@ -41,7 +40,7 @@ export const MyProjectsHeader = ({
         </div>
         <div className={styles.usersDetailedInfo}>
           <div className={styles.baseUserInfo}>
-            <h1>{fullName}</h1>
+            <h1>{getFullName(user.firstName, user.lastName)}</h1>
             <h2>{user?.email}</h2>
           </div>
           <div

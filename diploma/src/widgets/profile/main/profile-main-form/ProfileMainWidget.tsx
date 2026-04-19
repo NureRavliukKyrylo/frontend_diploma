@@ -6,6 +6,7 @@ import { useState } from "react";
 import { LayoutCard } from "@shared/assets/images/layout";
 import { MapUserLocationModal } from "../user-location-modal/MapUserLocationModal";
 import type { User } from "@entities/user/profile";
+import { getFullName } from "@entities/user";
 
 interface ProfileMainWidgetProps {
   skillsChildren?: React.ReactNode;
@@ -23,8 +24,6 @@ export function ProfileMainWidget({
   const handleModal = () => {
     setIsLocationMapOpen((prev) => !prev);
   };
-
-  const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ");
 
   return (
     <>
@@ -78,7 +77,7 @@ export function ProfileMainWidget({
             isOpen={isLocationMapOpen}
             coordinates={user?.profile?.coordinates}
             handleModal={handleModal}
-            fullName={fullName}
+            fullName={getFullName(user.firstName, user.lastName)}
           />
         )}
       </div>

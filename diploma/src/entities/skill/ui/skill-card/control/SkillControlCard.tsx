@@ -6,7 +6,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@heroui/react";
-import { MoreActionsIcon } from "@shared/assets/icons/actions";
+import { ActionsIcon } from "@shared/assets/icons/actions";
 import type { SkillProfile } from "@entities/skill";
 import { SkillCardBase } from "../base/SkillCardBase";
 import type { MenuItem } from "@shared/config/types";
@@ -28,7 +28,7 @@ export const SkillControlCard = <TSkill extends Skill | SkillProfile>({
     <Dropdown placement="top-start" shouldBlockScroll={false}>
       <DropdownTrigger>
         <button className={styles.moreActionsButton}>
-          <img src={MoreActionsIcon} alt="more-actions" />
+          <ActionsIcon className={styles.actionsIcon} />
         </button>
       </DropdownTrigger>
       <DropdownMenu>
