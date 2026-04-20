@@ -9,16 +9,10 @@
   align-items: stretch;
 }
 
-.showMoreButton {
-  display: block;
-  margin: 16px auto 0;
-  padding: 10px 32px;
-  width: fit-content;
-  background-color: #4f46e5;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  @include font-base(16px, 800);
+.wrapperMembersProjectList {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .startMembersSlot {

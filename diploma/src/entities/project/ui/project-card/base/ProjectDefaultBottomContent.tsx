@@ -13,10 +13,8 @@ export const ProjectDefaultBottomContent = ({
 }: ProjectDefaultBottomContentProps) => (
   <>
     <div className={styles.deadlineBlock}>
-      <img src={Calendar} alt="calendar-deadline" />
-      <h1>
-        Deadline: <span>{formatDateToText(project.endAt)}</span>
-      </h1>
+      <Calendar className={styles.calendarProject} />
+      <span>{formatDateToText(project.endAt)}</span>
     </div>
     <div className={styles.progressBlock}>
       <div className={styles.progressInfo}>

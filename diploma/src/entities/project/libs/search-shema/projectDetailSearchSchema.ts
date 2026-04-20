@@ -6,7 +6,7 @@ export const projectDetailDefaults = {
 
 export const projectDetailSchema = z.object({
   tab: z
-    .enum(["overview", "members", "feedback"])
+    .enum(["overview", "members", "feedback", "events", "tasks"])
     .default("overview")
     .catch("overview"),
 });

@@ -1,10 +1,9 @@
 import type { Project } from "@entities/project";
-import styles from "./FeedbackTab.module.scss";
+import styles from "./ProjectFeedbackTab.module.scss";
 import { Stars } from "@shared/ui/stars";
 import { ProgressBar } from "@shared/ui";
 import { FeedbacksListWidget } from "@widgets/feedback";
 import {
-  FeedbackCard,
   FeedbackCardSkeleton,
   FeedbackControlCard,
   useFeedbacksInfiniteQuery,
@@ -15,14 +14,14 @@ import {
   DeleteFeedbackModal,
   EditFeedbackModal,
 } from "@features/feedback";
-import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { BaseButtonWrapper, LoadMoreButton } from "@shared/ui/buttons";
 import type { Rating } from "@shared/config/types";
 import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
 
-interface FeedbackTabProps {
+interface ProjectFeedbackTabProps {
   project: Project;
   userId?: string;
 }
@@ -39,7 +38,10 @@ export const mockRating: Rating = {
   ],
 };
 
-export const FeedbackTab = ({ project, userId }: FeedbackTabProps) => {
+export const ProjectFeedbackTab = ({
+  project,
+  userId,
+}: ProjectFeedbackTabProps) => {
   const {
     modalType,
     selectedFeedback,
@@ -148,14 +150,10 @@ export const FeedbackTab = ({ project, userId }: FeedbackTabProps) => {
                 hasNextPage,
               }) =>
                 hasNextPage && (
-                  <BaseButtonWrapper
+                  <LoadMoreButton
                     onClick={fetchNextPage}
-                    disabled={isFetchingNextPage}
-                    loading={isFetchingNextPage}
-                    className={styles.showMoreButton}
-                  >
-                    Show more
-                  </BaseButtonWrapper>
+                    isLoading={isFetchingNextPage}
+                  />
                 )
               }
               renderEmpty={(feedbacks) =>

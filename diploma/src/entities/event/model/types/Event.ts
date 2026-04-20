@@ -1,6 +1,11 @@
 import type { Organization } from "@entities/organization";
 import type { Project } from "@entities/project";
-import type { Coordinates } from "@shared/config/types";
+import type {
+  Coordinates,
+  EntityStatus,
+  ParticipationMember,
+  Rating,
+} from "@shared/config/types";
 
 export interface Event {
   id: string;
@@ -14,4 +19,8 @@ export interface Event {
   location: Coordinates;
   memberCount: number;
   type: string;
+  rating: Rating;
+  memberPreviews: ParticipationMember[];
+  recurrence: string;
+  status: EntityStatus;
 }

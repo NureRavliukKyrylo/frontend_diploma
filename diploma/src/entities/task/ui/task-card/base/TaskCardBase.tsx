@@ -41,7 +41,7 @@ export const TaskCardBase = ({
     <div className={styles.endSection}>
       <div className={styles.deadlineBlock}>
         <div className={styles.deadlineInner}>
-          <img src={Calendar} alt="calendar-deadline" />
+          <Calendar className={styles.calendarTask} />
           <div className={styles.deadlineTextInfo}>
             <h1>Deadline:</h1>
             <span>{formatDateToText(task.endAt)}</span>

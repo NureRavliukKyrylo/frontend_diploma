@@ -7,6 +7,7 @@ interface EventsListWidgetProps {
   useEventsQuery?: () => QueryResult<Event>;
   events?: Event[];
   renderCard: (event: Event, index: number) => React.ReactNode;
+  renderEmpty?: (events: Event[]) => React.ReactNode;
   renderSkeleton?: () => React.ReactNode;
   skeletonItems?: number;
   startSlot?: React.ReactNode;
@@ -18,6 +19,7 @@ export const EventsListWidget = ({
   events: readyEvents,
   renderCard,
   renderSkeleton,
+  renderEmpty,
   skeletonItems,
   startSlot,
   className,
@@ -37,9 +39,15 @@ export const EventsListWidget = ({
   }
 
   return (
-    <div className={`${styles.feedbackListWrapper} ${className ?? ""}`.trim()}>
-      {startSlot}
-      {events.map((event, index) => renderCard(event, index))}
-    </div>
+    <>
+      {renderEmpty?.(events) ?? (
+        <div
+          className={`${styles.feedbackListWrapper} ${className ?? ""}`.trim()}
+        >
+          {startSlot}
+          {events.map((event, index) => renderCard(event, index))}
+        </div>
+      )}
+    </>
   );
 };

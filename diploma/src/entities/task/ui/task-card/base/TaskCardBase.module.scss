@@ -49,8 +49,9 @@
       display: flex;
       align-items: center;
       gap: 5px;
-      img {
+      .calendarTask {
         width: 27px;
+        height: 27px;
       }
       .deadlineTextInfo {
         display: flex;

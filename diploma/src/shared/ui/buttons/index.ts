@@ -11,3 +11,4 @@ export { ActiveProjectsButton } from "./common/ui/ActiveProjectsButton";
 export { BaseButtonWrapper } from "./base-buttons/base-wrapper/BaseButtonWrapper";
 export { ReadMoreButton } from "./action-buttons/read-more/ReadMoreButton";
 export { ShowMoreItemsButton } from "./action-buttons/show-more/ShowMoreItemsButton";
+export { LoadMoreButton } from "./action-buttons/load-more/LoadMoreButton";

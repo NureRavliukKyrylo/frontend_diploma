@@ -34,7 +34,6 @@ export const ProjectPage = () => {
     project,
     userLocation,
     events: events?.data,
-    projectId: id,
     userId: user?.id,
   });
 
@@ -48,7 +47,10 @@ export const ProjectPage = () => {
       >
         <div className={styles.headerProjectInfo}>
           <div className={styles.mainProjectData}>
-            <h1>{project?.title}</h1>
+            <div className={styles.titleHeader}>
+              <h1>{project?.title}</h1>
+              <span>Project</span>
+            </div>
             <div className={styles.organizationInfo}>
               <img
                 src={project?.organization?.logoUrl}

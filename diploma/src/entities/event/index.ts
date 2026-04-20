@@ -16,3 +16,5 @@ export {
   sortingEventItems,
 } from "./config/sortingEventItems";
 export { EventPopupContent } from "./ui/popup-content/EventPopupContent";
+export { EventCard } from "./ui/event-card/list-item/EventCard";
+export { EventControlCard } from "./ui/event-card/control-card/EventControlCard";

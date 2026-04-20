@@ -1,1 +1,1 @@
-export { FeedbackTab } from "./ui/FeedbackTab";
+export { ProjectFeedbackTab } from "./ui/ProjectFeedbackTab";
