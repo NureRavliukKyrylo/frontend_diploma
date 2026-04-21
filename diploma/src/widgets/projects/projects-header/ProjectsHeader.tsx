@@ -1,13 +1,13 @@
 import { LinkButtonWrapper } from "@shared/ui/buttons";
 import styles from "./ProjectsHeader.module.scss";
 import { ProjectsLogo } from "@shared/assets/images/information";
-import type { MapProjectSearchParams } from "@entities/project";
+import type { MapProjectRequestParams } from "@entities/project";
 
 interface ProjectsHeaderProps {
-  search: MapProjectSearchParams;
+  search: MapProjectRequestParams;
 }
 export const ProjectsHeader = ({ search }: ProjectsHeaderProps) => {
-  const mapSearch: MapProjectSearchParams = {
+  const mapSearch: MapProjectRequestParams = {
     Lat: search.Lat,
     Lng: search.Lng,
     Location: search.Location,

@@ -7,16 +7,18 @@ export const ProjectPageSkeleton = () => {
       <div className={styles.projectPageHeader}>
         <div className={styles.headerProjectInfo}>
           <div className={styles.mainProjectData}>
-            <Skeleton className={styles.skeletonTitle} />
+            <div className={styles.titleHeader}>
+              <Skeleton className={styles.skeletonTitle} />
+              <div className={styles.projectMetaInfo}>
+                <Skeleton className={styles.skeletonMetaChip} />
+                <Skeleton className={styles.skeletonMetaChip} />
+                <Skeleton className={styles.skeletonMetaChip} />
+              </div>
+            </div>
             <div className={styles.organizationInfo}>
               <Skeleton className={styles.skeletonOrgImage} />
               <Skeleton className={styles.skeletonOrgName} />
             </div>
-          </div>
-          <div className={styles.projectMetaInfo}>
-            <Skeleton className={styles.skeletonMetaChip} />
-            <Skeleton className={styles.skeletonMetaChip} />
-            <Skeleton className={styles.skeletonMetaChip} />
           </div>
         </div>
         <div className={styles.statsProjectInfo}>

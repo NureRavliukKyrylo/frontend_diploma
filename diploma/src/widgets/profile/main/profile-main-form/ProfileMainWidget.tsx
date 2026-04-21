@@ -67,7 +67,7 @@ export function ProfileMainWidget({
         </div>
         <div className={styles.mapLocationUserProfileWrapper}>
           <MapLocationInput
-            handleMapOpen={handleModal}
+            handleMapOpen={user?.profile?.coordinates ? handleModal : undefined}
             label={user?.location?.address ?? "No location added"}
             variant="profile"
           />
@@ -102,7 +102,7 @@ export function ProfileMainWidget({
           </div>
           <div className={styles.projectsSeeMore}>
             <LinkButtonWrapper
-              to="/projects/my"
+              to="/activities/my"
               className={styles.seeMoreProjectsButton}
             >
               SEE MORE

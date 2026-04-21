@@ -10,6 +10,7 @@ import type { Coordinates } from "@shared/config/types";
 import { EventClusters } from "../event-cluster/EventClusters";
 import type { Event } from "@entities/event";
 import { Activities } from "@shared/assets/images/entity-information";
+import { MapLocationInput } from "@shared/ui/inputs";
 
 interface OverviewTabProps {
   project: Project;
@@ -70,6 +71,12 @@ export const OverviewTab = ({
               Explore all tasks within this project and see where they are
               located
             </p>
+            <div className={styles.wrapperLocation}>
+              <MapLocationInput
+                variant="entity"
+                label={project.locationInfo.address}
+              />
+            </div>
           </div>
           <div className={styles.activitiesBlock}>
             <div className={styles.activeActivities}>

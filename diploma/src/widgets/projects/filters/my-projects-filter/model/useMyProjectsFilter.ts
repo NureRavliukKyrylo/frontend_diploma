@@ -3,11 +3,15 @@ import { toggleArrayParam } from "@shared/libs/search-params";
 import type { MyProjectsSearchParams } from "@entities/project";
 
 export const useMyProjectFilters = () => {
-  const navigate = useNavigate({ from: "/projects/my/" });
+  const navigate = useNavigate({ from: "/activities/my/" });
 
   const nav = (
     updater: (prev: MyProjectsSearchParams) => MyProjectsSearchParams,
-  ) => navigate({ search: updater, resetScroll: false });
+  ) =>
+    navigate({
+      search: (prev) => updater(prev as MyProjectsSearchParams),
+      resetScroll: false,
+    });
 
   return {
     onStartDateChange: (date: string | undefined) =>

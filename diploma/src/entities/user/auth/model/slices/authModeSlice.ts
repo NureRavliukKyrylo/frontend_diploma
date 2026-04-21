@@ -1,5 +1,5 @@
 import { type StateCreator } from "zustand";
-import { type AuthMode } from "../types/authMode";
+import type { AuthMode } from "../types/AuthMode";
 
 export interface AuthModeSlice {
   mode: AuthMode;

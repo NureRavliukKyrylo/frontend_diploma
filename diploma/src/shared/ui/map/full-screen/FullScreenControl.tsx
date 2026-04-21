@@ -36,7 +36,7 @@ export const FullscreenControl = ({
       className={styles.fullScreenButton}
       style={positionStyles[position]}
     >
-      <img src={FullSizeIcon} alt="full-screen" />
+      <FullSizeIcon className={styles.fullSizeIcon} />
     </BaseButtonWrapper>
   );
 };

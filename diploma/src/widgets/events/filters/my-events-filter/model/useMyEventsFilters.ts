@@ -1,12 +1,15 @@
 import { useNavigate } from "@tanstack/react-router";
 import { toggleArrayParam } from "@shared/libs/search-params";
-import type { MyEventsSearchParams } from "@entities/project";
+import type { MyEventsSearchParams } from "@entities/event";
 
 export const useMyEventsFilters = () => {
-  const navigate = useNavigate({ from: "/projects/my/" });
+  const navigate = useNavigate({ from: "/activities/my/" });
 
   const nav = (updater: (prev: MyEventsSearchParams) => MyEventsSearchParams) =>
-    navigate({ search: updater, resetScroll: false });
+    navigate({
+      search: (prev) => updater(prev as MyEventsSearchParams),
+      resetScroll: false,
+    });
 
   return {
     onStartDateChange: (date: string | undefined) =>

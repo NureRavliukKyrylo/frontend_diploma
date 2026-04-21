@@ -77,6 +77,7 @@ export function SettingsMainForm() {
             <MapLocationInput
               label={formik.values.location}
               handleMapOpen={handleOpenModal}
+              variant="editProfile"
             />
             <MapLocationModal
               isMapOpen={isMapOpen}

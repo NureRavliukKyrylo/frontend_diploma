@@ -2,15 +2,15 @@ import { motion } from "framer-motion";
 import styles from "./MyProjectsFilterWidget.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { CategoriesListFilter } from "@features/project";
-import type { MyProjectsSearchParams } from "@entities/project";
 import { useMyProjectFilters } from "./model/useMyProjectsFilter";
 import { useFiltersInfiniteQuery } from "@shared/api/filters";
 import { DateRangeFilter, SwitchFilter } from "@shared/ui/filters";
 import { OrganizationsListFilter } from "@features/organization";
 import { mapQueryData } from "@shared/libs/query";
+import type { MyProjectsRequestParams } from "@entities/project";
 
 interface MyProjectsFilterWidgetProps {
-  search: MyProjectsSearchParams;
+  search: MyProjectsRequestParams;
 }
 
 export const MyProjectsFilterWidget = ({
@@ -59,7 +59,7 @@ export const MyProjectsFilterWidget = ({
             useOrganizationsQuery={mapQueryData(
               useFiltersInfiniteQuery({
                 pageSize: 7,
-                entityType: "event",
+                entityType: "project",
                 facetType: "organization",
               }),
               ({ id, title }) => ({ id, name: title }),

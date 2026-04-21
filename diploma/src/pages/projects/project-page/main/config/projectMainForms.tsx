@@ -2,9 +2,8 @@ import type { Project, ProjectMode } from "@entities/project";
 import type { Coordinates } from "@shared/config/types";
 import type { Event } from "@entities/event";
 import { OverviewTab } from "../../overview-tab";
-import { ProjectMembersTab } from "../../members-tab";
-import { ProjectFeedbackTab } from "../../feedback-tab";
 import { ProjectEventsTab } from "../../events-tab";
+import { ActivityFeedbackTab, ActivityMembersTab } from "@widgets/activities";
 
 interface ProjectTabsProps {
   project: Project;
@@ -24,9 +23,19 @@ export const getProjectMainForms = (
     />
   ),
   members: (
-    <ProjectMembersTab projectId={props.project.id} userId={props.userId} />
+    <ActivityMembersTab
+      entityId={props.project.id}
+      userId={props.userId}
+      entityType="project"
+    />
   ),
-  feedback: <ProjectFeedbackTab project={props.project} />,
+  feedback: (
+    <ActivityFeedbackTab
+      entityType="project"
+      userId={props.userId}
+      entityId={props.project.id}
+    />
+  ),
   events: <ProjectEventsTab projectId={props.project.id} />,
   tasks: <></>,
 });

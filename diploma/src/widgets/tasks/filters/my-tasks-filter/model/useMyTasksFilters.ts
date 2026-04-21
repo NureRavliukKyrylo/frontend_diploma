@@ -1,12 +1,15 @@
 import { useNavigate } from "@tanstack/react-router";
 import { toggleArrayParam } from "@shared/libs/search-params";
-import type { MyTasksSearchParams } from "@entities/project";
+import type { MyTasksSearchParams } from "@entities/task";
 
 export const useMyTasksFilters = () => {
-  const navigate = useNavigate({ from: "/projects/my/" });
+  const navigate = useNavigate({ from: "/activities/my/" });
 
   const nav = (updater: (prev: MyTasksSearchParams) => MyTasksSearchParams) =>
-    navigate({ search: updater, resetScroll: false });
+    navigate({
+      search: (prev) => updater(prev as MyTasksSearchParams),
+      resetScroll: false,
+    });
 
   return {
     onStartDateChange: (date: string | undefined) =>

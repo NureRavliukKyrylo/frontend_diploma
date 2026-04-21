@@ -24,13 +24,14 @@ import { Route as MasterLayoutProfileIndexRouteImport } from './routers/_masterL
 import { Route as MasterLayoutOrganizationsIndexRouteImport } from './routers/_masterLayout/organizations/index'
 import { Route as MasterLayoutEventsIndexRouteImport } from './routers/_masterLayout/events/index'
 import { Route as MasterLayoutCategoriesIndexRouteImport } from './routers/_masterLayout/categories/index'
+import { Route as MasterLayoutActivitiesIndexRouteImport } from './routers/_masterLayout/activities/index'
 import { Route as MasterLayoutTasksIdIndexRouteImport } from './routers/_masterLayout/tasks/$id/index'
-import { Route as MasterLayoutProjectsMyIndexRouteImport } from './routers/_masterLayout/projects/my/index'
 import { Route as MasterLayoutProjectsIdIndexRouteImport } from './routers/_masterLayout/projects/$id/index'
 import { Route as MasterLayoutProfileSettingsIndexRouteImport } from './routers/_masterLayout/profile/settings/index'
 import { Route as MasterLayoutOrganizationsIdIndexRouteImport } from './routers/_masterLayout/organizations/$id/index'
 import { Route as MasterLayoutEventsIdIndexRouteImport } from './routers/_masterLayout/events/$id/index'
 import { Route as MasterLayoutCategoriesIdIndexRouteImport } from './routers/_masterLayout/categories/$id/index'
+import { Route as MasterLayoutActivitiesMyIndexRouteImport } from './routers/_masterLayout/activities/my/index'
 
 const MultiStepFormIndexLazyRouteImport = createFileRoute('/multi-step-form/')()
 const AuthLayoutAuthIndexLazyRouteImport =
@@ -151,6 +152,12 @@ const MasterLayoutCategoriesIndexRoute =
       (d) => d.Route,
     ),
   )
+const MasterLayoutActivitiesIndexRoute =
+  MasterLayoutActivitiesIndexRouteImport.update({
+    id: '/activities/',
+    path: '/activities/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
 const AuthLayoutAuthVerificationTwoFactorLazyRoute =
   AuthLayoutAuthVerificationTwoFactorLazyRouteImport.update({
     id: '/auth/verification-two-factor',
@@ -187,16 +194,6 @@ const MasterLayoutTasksIdIndexRoute =
     path: '/tasks/$id/',
     getParentRoute: () => MasterLayoutRoute,
   } as any)
-const MasterLayoutProjectsMyIndexRoute =
-  MasterLayoutProjectsMyIndexRouteImport.update({
-    id: '/projects/my/',
-    path: '/projects/my/',
-    getParentRoute: () => MasterLayoutRoute,
-  } as any).lazy(() =>
-    import('./routers/_masterLayout/projects/my/index.lazy').then(
-      (d) => d.Route,
-    ),
-  )
 const MasterLayoutProjectsIdIndexRoute =
   MasterLayoutProjectsIdIndexRouteImport.update({
     id: '/projects/$id/',
@@ -239,6 +236,16 @@ const MasterLayoutCategoriesIdIndexRoute =
       (d) => d.Route,
     ),
   )
+const MasterLayoutActivitiesMyIndexRoute =
+  MasterLayoutActivitiesMyIndexRouteImport.update({
+    id: '/activities/my/',
+    path: '/activities/my/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any).lazy(() =>
+    import('./routers/_masterLayout/activities/my/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 const AuthLayoutAuthForgotPasswordVerificationLazyRoute =
   AuthLayoutAuthForgotPasswordVerificationLazyRouteImport.update({
     id: '/auth/forgot-password/verification',
@@ -266,6 +273,7 @@ export interface FileRoutesByFullPath {
   '/multi-step-form/': typeof MultiStepFormIndexLazyRoute
   '/auth/verification-email': typeof AuthLayoutAuthVerificationEmailLazyRoute
   '/auth/verification-two-factor': typeof AuthLayoutAuthVerificationTwoFactorLazyRoute
+  '/activities/': typeof MasterLayoutActivitiesIndexRoute
   '/categories/': typeof MasterLayoutCategoriesIndexRoute
   '/events/': typeof MasterLayoutEventsIndexRoute
   '/organizations/': typeof MasterLayoutOrganizationsIndexRoute
@@ -277,12 +285,12 @@ export interface FileRoutesByFullPath {
   '/auth/': typeof AuthLayoutAuthIndexLazyRoute
   '/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordLazyRoute
   '/auth/forgot-password/verification': typeof AuthLayoutAuthForgotPasswordVerificationLazyRoute
+  '/activities/my/': typeof MasterLayoutActivitiesMyIndexRoute
   '/categories/$id/': typeof MasterLayoutCategoriesIdIndexRoute
   '/events/$id/': typeof MasterLayoutEventsIdIndexRoute
   '/organizations/$id/': typeof MasterLayoutOrganizationsIdIndexRoute
   '/profile/settings/': typeof MasterLayoutProfileSettingsIndexRoute
   '/projects/$id/': typeof MasterLayoutProjectsIdIndexRoute
-  '/projects/my/': typeof MasterLayoutProjectsMyIndexRoute
   '/tasks/$id/': typeof MasterLayoutTasksIdIndexRoute
   '/auth/forgot-password/': typeof AuthLayoutAuthForgotPasswordIndexLazyRoute
 }
@@ -291,6 +299,7 @@ export interface FileRoutesByTo {
   '/multi-step-form': typeof MultiStepFormIndexLazyRoute
   '/auth/verification-email': typeof AuthLayoutAuthVerificationEmailLazyRoute
   '/auth/verification-two-factor': typeof AuthLayoutAuthVerificationTwoFactorLazyRoute
+  '/activities': typeof MasterLayoutActivitiesIndexRoute
   '/categories': typeof MasterLayoutCategoriesIndexRoute
   '/events': typeof MasterLayoutEventsIndexRoute
   '/organizations': typeof MasterLayoutOrganizationsIndexRoute
@@ -302,12 +311,12 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthLayoutAuthIndexLazyRoute
   '/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordLazyRoute
   '/auth/forgot-password/verification': typeof AuthLayoutAuthForgotPasswordVerificationLazyRoute
+  '/activities/my': typeof MasterLayoutActivitiesMyIndexRoute
   '/categories/$id': typeof MasterLayoutCategoriesIdIndexRoute
   '/events/$id': typeof MasterLayoutEventsIdIndexRoute
   '/organizations/$id': typeof MasterLayoutOrganizationsIdIndexRoute
   '/profile/settings': typeof MasterLayoutProfileSettingsIndexRoute
   '/projects/$id': typeof MasterLayoutProjectsIdIndexRoute
-  '/projects/my': typeof MasterLayoutProjectsMyIndexRoute
   '/tasks/$id': typeof MasterLayoutTasksIdIndexRoute
   '/auth/forgot-password': typeof AuthLayoutAuthForgotPasswordIndexLazyRoute
 }
@@ -321,6 +330,7 @@ export interface FileRoutesById {
   '/multi-step-form/': typeof MultiStepFormIndexLazyRoute
   '/_authLayout/auth/verification-email': typeof AuthLayoutAuthVerificationEmailLazyRoute
   '/_authLayout/auth/verification-two-factor': typeof AuthLayoutAuthVerificationTwoFactorLazyRoute
+  '/_masterLayout/activities/': typeof MasterLayoutActivitiesIndexRoute
   '/_masterLayout/categories/': typeof MasterLayoutCategoriesIndexRoute
   '/_masterLayout/events/': typeof MasterLayoutEventsIndexRoute
   '/_masterLayout/organizations/': typeof MasterLayoutOrganizationsIndexRoute
@@ -332,12 +342,12 @@ export interface FileRoutesById {
   '/_authLayout/auth/': typeof AuthLayoutAuthIndexLazyRoute
   '/_authLayout/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordLazyRoute
   '/_authLayout/auth/forgot-password/verification': typeof AuthLayoutAuthForgotPasswordVerificationLazyRoute
+  '/_masterLayout/activities/my/': typeof MasterLayoutActivitiesMyIndexRoute
   '/_masterLayout/categories/$id/': typeof MasterLayoutCategoriesIdIndexRoute
   '/_masterLayout/events/$id/': typeof MasterLayoutEventsIdIndexRoute
   '/_masterLayout/organizations/$id/': typeof MasterLayoutOrganizationsIdIndexRoute
   '/_masterLayout/profile/settings/': typeof MasterLayoutProfileSettingsIndexRoute
   '/_masterLayout/projects/$id/': typeof MasterLayoutProjectsIdIndexRoute
-  '/_masterLayout/projects/my/': typeof MasterLayoutProjectsMyIndexRoute
   '/_masterLayout/tasks/$id/': typeof MasterLayoutTasksIdIndexRoute
   '/_authLayout/auth/forgot-password/': typeof AuthLayoutAuthForgotPasswordIndexLazyRoute
 }
@@ -349,6 +359,7 @@ export interface FileRouteTypes {
     | '/multi-step-form/'
     | '/auth/verification-email'
     | '/auth/verification-two-factor'
+    | '/activities/'
     | '/categories/'
     | '/events/'
     | '/organizations/'
@@ -360,12 +371,12 @@ export interface FileRouteTypes {
     | '/auth/'
     | '/auth/forgot-password/set-password'
     | '/auth/forgot-password/verification'
+    | '/activities/my/'
     | '/categories/$id/'
     | '/events/$id/'
     | '/organizations/$id/'
     | '/profile/settings/'
     | '/projects/$id/'
-    | '/projects/my/'
     | '/tasks/$id/'
     | '/auth/forgot-password/'
   fileRoutesByTo: FileRoutesByTo
@@ -374,6 +385,7 @@ export interface FileRouteTypes {
     | '/multi-step-form'
     | '/auth/verification-email'
     | '/auth/verification-two-factor'
+    | '/activities'
     | '/categories'
     | '/events'
     | '/organizations'
@@ -385,12 +397,12 @@ export interface FileRouteTypes {
     | '/auth'
     | '/auth/forgot-password/set-password'
     | '/auth/forgot-password/verification'
+    | '/activities/my'
     | '/categories/$id'
     | '/events/$id'
     | '/organizations/$id'
     | '/profile/settings'
     | '/projects/$id'
-    | '/projects/my'
     | '/tasks/$id'
     | '/auth/forgot-password'
   id:
@@ -403,6 +415,7 @@ export interface FileRouteTypes {
     | '/multi-step-form/'
     | '/_authLayout/auth/verification-email'
     | '/_authLayout/auth/verification-two-factor'
+    | '/_masterLayout/activities/'
     | '/_masterLayout/categories/'
     | '/_masterLayout/events/'
     | '/_masterLayout/organizations/'
@@ -414,12 +427,12 @@ export interface FileRouteTypes {
     | '/_authLayout/auth/'
     | '/_authLayout/auth/forgot-password/set-password'
     | '/_authLayout/auth/forgot-password/verification'
+    | '/_masterLayout/activities/my/'
     | '/_masterLayout/categories/$id/'
     | '/_masterLayout/events/$id/'
     | '/_masterLayout/organizations/$id/'
     | '/_masterLayout/profile/settings/'
     | '/_masterLayout/projects/$id/'
-    | '/_masterLayout/projects/my/'
     | '/_masterLayout/tasks/$id/'
     | '/_authLayout/auth/forgot-password/'
   fileRoutesById: FileRoutesById
@@ -539,6 +552,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MasterLayoutCategoriesIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
+    '/_masterLayout/activities/': {
+      id: '/_masterLayout/activities/'
+      path: '/activities'
+      fullPath: '/activities/'
+      preLoaderRoute: typeof MasterLayoutActivitiesIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
     '/_authLayout/auth/verification-two-factor': {
       id: '/_authLayout/auth/verification-two-factor'
       path: '/auth/verification-two-factor'
@@ -565,13 +585,6 @@ declare module '@tanstack/react-router' {
       path: '/tasks/$id'
       fullPath: '/tasks/$id/'
       preLoaderRoute: typeof MasterLayoutTasksIdIndexRouteImport
-      parentRoute: typeof MasterLayoutRoute
-    }
-    '/_masterLayout/projects/my/': {
-      id: '/_masterLayout/projects/my/'
-      path: '/projects/my'
-      fullPath: '/projects/my/'
-      preLoaderRoute: typeof MasterLayoutProjectsMyIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
     '/_masterLayout/projects/$id/': {
@@ -607,6 +620,13 @@ declare module '@tanstack/react-router' {
       path: '/categories/$id'
       fullPath: '/categories/$id/'
       preLoaderRoute: typeof MasterLayoutCategoriesIdIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/activities/my/': {
+      id: '/_masterLayout/activities/my/'
+      path: '/activities/my'
+      fullPath: '/activities/my/'
+      preLoaderRoute: typeof MasterLayoutActivitiesMyIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
     '/_authLayout/auth/forgot-password/verification': {
@@ -668,33 +688,35 @@ const MasterLayoutProfileRouteWithChildren =
 
 interface MasterLayoutRouteChildren {
   MasterLayoutProfileRoute: typeof MasterLayoutProfileRouteWithChildren
+  MasterLayoutActivitiesIndexRoute: typeof MasterLayoutActivitiesIndexRoute
   MasterLayoutCategoriesIndexRoute: typeof MasterLayoutCategoriesIndexRoute
   MasterLayoutEventsIndexRoute: typeof MasterLayoutEventsIndexRoute
   MasterLayoutOrganizationsIndexRoute: typeof MasterLayoutOrganizationsIndexRoute
   MasterLayoutProjectsIndexRoute: typeof MasterLayoutProjectsIndexRoute
   MasterLayoutSkillsIndexRoute: typeof MasterLayoutSkillsIndexRoute
   MasterLayoutTasksIndexRoute: typeof MasterLayoutTasksIndexRoute
+  MasterLayoutActivitiesMyIndexRoute: typeof MasterLayoutActivitiesMyIndexRoute
   MasterLayoutCategoriesIdIndexRoute: typeof MasterLayoutCategoriesIdIndexRoute
   MasterLayoutEventsIdIndexRoute: typeof MasterLayoutEventsIdIndexRoute
   MasterLayoutOrganizationsIdIndexRoute: typeof MasterLayoutOrganizationsIdIndexRoute
   MasterLayoutProjectsIdIndexRoute: typeof MasterLayoutProjectsIdIndexRoute
-  MasterLayoutProjectsMyIndexRoute: typeof MasterLayoutProjectsMyIndexRoute
   MasterLayoutTasksIdIndexRoute: typeof MasterLayoutTasksIdIndexRoute
 }
 
 const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
   MasterLayoutProfileRoute: MasterLayoutProfileRouteWithChildren,
+  MasterLayoutActivitiesIndexRoute: MasterLayoutActivitiesIndexRoute,
   MasterLayoutCategoriesIndexRoute: MasterLayoutCategoriesIndexRoute,
   MasterLayoutEventsIndexRoute: MasterLayoutEventsIndexRoute,
   MasterLayoutOrganizationsIndexRoute: MasterLayoutOrganizationsIndexRoute,
   MasterLayoutProjectsIndexRoute: MasterLayoutProjectsIndexRoute,
   MasterLayoutSkillsIndexRoute: MasterLayoutSkillsIndexRoute,
   MasterLayoutTasksIndexRoute: MasterLayoutTasksIndexRoute,
+  MasterLayoutActivitiesMyIndexRoute: MasterLayoutActivitiesMyIndexRoute,
   MasterLayoutCategoriesIdIndexRoute: MasterLayoutCategoriesIdIndexRoute,
   MasterLayoutEventsIdIndexRoute: MasterLayoutEventsIdIndexRoute,
   MasterLayoutOrganizationsIdIndexRoute: MasterLayoutOrganizationsIdIndexRoute,
   MasterLayoutProjectsIdIndexRoute: MasterLayoutProjectsIdIndexRoute,
-  MasterLayoutProjectsMyIndexRoute: MasterLayoutProjectsMyIndexRoute,
   MasterLayoutTasksIdIndexRoute: MasterLayoutTasksIdIndexRoute,
 }
 

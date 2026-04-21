@@ -2,16 +2,16 @@ import { motion } from "framer-motion";
 import styles from "./MyTasksFilterWidget.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { ProjectsListFilter } from "@features/project";
-import type { MyTasksSearchParams } from "@entities/project";
 import { useMyTasksFilters } from "./model/useMyTasksFilters";
 import { useFiltersInfiniteQuery } from "@shared/api/filters";
 import { DateRangeFilter, SwitchFilter } from "@shared/ui/filters";
 import { OrganizationsListFilter } from "@features/organization";
 import { mapQueryData } from "@shared/libs/query";
 import { EventsListFilter } from "@features/event";
+import type { MyTasksRequestParams } from "@entities/task";
 
 interface MyTasksFilterWidgetProps {
-  search: MyTasksSearchParams;
+  search: MyTasksRequestParams;
 }
 
 export const MyTasksFilterWidget = ({ search }: MyTasksFilterWidgetProps) => {

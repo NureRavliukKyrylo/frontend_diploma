@@ -9,8 +9,8 @@
   padding: 5px;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  img {
-    width: 80%;
-    filter: invert(1);
+  .fullSizeIcon {
+    width: 100%;
+    color: white;
   }
 }

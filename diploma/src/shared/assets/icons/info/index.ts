@@ -8,3 +8,4 @@ export { default as ListIcon } from "./list-icon.png";
 export { default as Star } from "./star.svg?react";
 export { default as Reccurence } from "./reccurence.svg?react";
 export { default as Comment } from "./comment.svg?react";
+export { default as MapIcon } from "./mapIcon.svg?react";

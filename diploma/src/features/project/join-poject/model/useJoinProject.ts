@@ -19,7 +19,7 @@ export const useJoinProject = () => {
         color: "success",
       });
       queryClient.invalidateQueries({ queryKey: projectKeys.mys() });
-      router.navigate({ to: "/projects/my" });
+      router.navigate({ to: "/activities/my" });
     },
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error);

@@ -6,6 +6,7 @@ export {
   mapProjectSchema,
   type ProjectSearchParams,
   type MapProjectSearchParams,
+  type MapProjectRequestParams,
 } from "./libs/search-shema/projectsSearchSchema";
 export { projectQuery } from "./model/queries/project-query/projectQuery";
 export { type Project } from "./model/types/project/Project";
@@ -19,11 +20,6 @@ export type { ProjectsResponse } from "./api/list-projects/projectsApi";
 export { useProjectsListQuery } from "./model/hooks/useProjectsListQuery";
 export { useProjectsMapQuery } from "./model/hooks/useProjectsMapQuery";
 export { ProjectMarkerAnimated } from "./ui/project-marker/ProjectMarker";
-export {
-  myProjectsFiltersSchema,
-  type MyProjectsSearchParams,
-  myProjectsSearchDefaults,
-} from "./libs/search-shema/myProjectsSearchSchema";
 export {
   sortingProjectItems,
   type ProjectSortValues,
@@ -40,10 +36,9 @@ export {
 export type { ProjectMode } from "./model/types";
 export { useProjectsInfiniteQuery } from "./model/hooks/useProjectsInfiniteQuery";
 export {
-  type MyProjectsBaseSearch,
-  type MyEventsSearchParams,
-  type MyTasksSearchParams,
-  eventsTabSchema,
   projectsTabSchema,
-  tasksTabSchema,
-} from "./libs/search-shema/myProjectsSearchSchema";
+  type MyProjectsSearchParams,
+  type MyProjectsRequestParams,
+  projectsTabDefaults,
+} from "./libs/search-shema/projectsTabSchema";
+export { useMyProjectsListQuery } from "./model/hooks/useMyProjectsListQuery";

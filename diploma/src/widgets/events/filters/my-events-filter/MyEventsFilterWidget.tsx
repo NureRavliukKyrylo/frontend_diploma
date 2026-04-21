@@ -2,15 +2,15 @@ import { motion } from "framer-motion";
 import styles from "./MyEventsFilterWidget.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { ProjectsListFilter } from "@features/project";
-import type { MyEventsSearchParams } from "@entities/project";
 import { useMyEventsFilters } from "./model/useMyEventsFilters";
 import { useFiltersInfiniteQuery } from "@shared/api/filters";
 import { DateRangeFilter, SwitchFilter } from "@shared/ui/filters";
 import { OrganizationsListFilter } from "@features/organization";
 import { mapQueryData } from "@shared/libs/query";
+import type { MyEventsRequestParams } from "@entities/event";
 
 interface MyEventsFilterWidgetProps {
-  search: MyEventsSearchParams;
+  search: MyEventsRequestParams;
 }
 
 export const MyEventsFilterWidget = ({ search }: MyEventsFilterWidgetProps) => {

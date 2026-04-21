@@ -29,7 +29,7 @@ export const OrganizationHeader = ({
           </h1>
           <h1 className={styles.joinedOrganizationsText}>
             Want to see the organizations you’ve already joined?{" "}
-            <Link to="/projects/my" className={styles.toOrganizationsLink}>
+            <Link to="/activities/my" className={styles.toOrganizationsLink}>
               Click
             </Link>
           </h1>

@@ -12,6 +12,7 @@ import { useMapUserLocation } from "@features/map";
 import { eventQuery } from "@entities/event";
 import { formatDateToText } from "@shared/libs/date";
 import { profileQuery, useUserStore } from "@entities/user/profile";
+import { Calendar } from "@shared/assets/icons/info";
 
 export const ProjectPage = () => {
   const { id } = useParams({ from: "/_masterLayout/projects/$id/" });
@@ -49,7 +50,30 @@ export const ProjectPage = () => {
           <div className={styles.mainProjectData}>
             <div className={styles.titleHeader}>
               <h1>{project?.title}</h1>
-              <span>Project</span>
+              <div className={styles.projectMetaInfo}>
+                <span className={styles.metaChipProject}>Project</span>
+                {project?.endAt && (
+                  <span className={`${styles.metaChip} ${styles.calendar}`}>
+                    <Calendar className={styles.calendarImg} />
+                    <span>{formatDateToText(project.endAt)}</span>
+                  </span>
+                )}
+                {project?.joinPolicy && (
+                  <span
+                    className={`${styles.metaChip} ${
+                      project.joinPolicy === "open"
+                        ? styles.metaChipOpen
+                        : styles.metaChipApproval
+                    }`}
+                  >
+                    <span>
+                      {project.joinPolicy === "open"
+                        ? "Open to join"
+                        : "Approval required"}
+                    </span>
+                  </span>
+                )}
+              </div>
             </div>
             <div className={styles.organizationInfo}>
               <img
@@ -58,31 +82,6 @@ export const ProjectPage = () => {
               />
               <p>{project?.organization?.name}</p>
             </div>
-          </div>
-          <div className={styles.projectMetaInfo}>
-            {project?.joinPolicy && (
-              <span
-                className={`${styles.metaChip} ${
-                  project.joinPolicy === "open"
-                    ? styles.metaChipOpen
-                    : styles.metaChipApproval
-                }`}
-              >
-                {project.joinPolicy === "open"
-                  ? "Open to join"
-                  : "Approval required"}
-              </span>
-            )}
-            {project?.endAt && (
-              <span className={styles.metaChip}>
-                Deadline: {formatDateToText(project.endAt)}
-              </span>
-            )}
-            {project?.locationInfo && (
-              <span className={styles.metaChip}>
-                {project.locationInfo.address}
-              </span>
-            )}
           </div>
         </div>
         <div className={styles.statsProjectInfo}>
