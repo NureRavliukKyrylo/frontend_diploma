@@ -5,12 +5,12 @@ import { BaseMap, Tab } from "@shared/ui";
 import { MapZoomAnimation } from "@shared/libs/map";
 import { Marker, Popup } from "react-leaflet";
 import { MapUserLocation } from "@entities/user/profile";
-import { useEffect, useRef, useState } from "react";
 import type { Coordinates } from "@shared/config/types";
 import { EventClusters } from "../event-cluster/EventClusters";
 import type { Event } from "@entities/event";
 import { Activities } from "@shared/assets/images/entity-information";
 import { MapLocationInput } from "@shared/ui/inputs";
+import { useIntersectionReveal } from "@shared/libs/hooks";
 
 interface OverviewTabProps {
   project: Project;
@@ -24,23 +24,7 @@ export const OverviewTab = ({
   events,
 }: OverviewTabProps) => {
   const hasCategories = project?.categories && project?.categories.length > 0;
-  const mapRef = useRef<HTMLDivElement>(null);
-  const [mapVisible, setMapVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setMapVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.4 },
-    );
-
-    if (mapRef.current) observer.observe(mapRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const { isVisible, ref } = useIntersectionReveal<HTMLDivElement>();
 
   return (
     <div className={styles.overviewWrapper}>
@@ -100,18 +84,15 @@ export const OverviewTab = ({
             </div>
           </div>
         </div>
-        <div className={styles.mapWrapper} ref={mapRef}>
+        <div className={styles.mapWrapper} ref={ref}>
           {project?.location && (
             <BaseMap
               zoom={6}
               center={[project.location.latitude, project.location.longitude]}
             >
               <>
-                {mapVisible && (
-                  <MapZoomAnimation
-                    coordinates={project.location}
-                    onAnimationEnd={() => setMapVisible(false)}
-                  />
+                {isVisible && (
+                  <MapZoomAnimation coordinates={project.location} />
                 )}
                 <Marker
                   icon={ProjectMarker}

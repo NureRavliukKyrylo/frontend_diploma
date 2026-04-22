@@ -4,10 +4,13 @@ import type { LocationSuggestion } from "@shared/config/types";
 import { eventsTabDefaults, type EventSearchParams } from "@entities/event";
 
 export const useEventFilters = () => {
-  const navigate = useNavigate({ from: "/events/" });
+  const navigate = useNavigate({ from: "/activities/" });
 
   const nav = (updater: (prev: EventSearchParams) => EventSearchParams) =>
-    navigate({ search: updater, resetScroll: false });
+    navigate({
+      search: (prev) => updater(prev as EventSearchParams),
+      resetScroll: false,
+    });
 
   return {
     onStartDateChange: (date: string | undefined) =>

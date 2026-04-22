@@ -1,4 +1,7 @@
-export type { TaskSearchParams } from "./search-schema/tasksSearchSchema";
+export type {
+  TaskSearchParams,
+  TasksRequestParams,
+} from "./search-schema/tasksSearchSchema";
 export type {
   MyTasksSearchParams,
   MyTasksRequestParams,

@@ -24,13 +24,8 @@ import {
   fadeVariants,
   fadeDuration,
   staggeredCardVariants,
-  createFadeVariants,
+  headerVariants,
 } from "@shared/assets/animations";
-
-const headerVariants = createFadeVariants({
-  initial: { opacity: 0, y: -20 },
-  animate: { opacity: 1, y: 0 },
-});
 
 export function CategoryDetailPage() {
   const {

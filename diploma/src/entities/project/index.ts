@@ -24,7 +24,6 @@ export {
   sortingProjectItems,
   type ProjectSortValues,
 } from "./config/sortingProjectItems";
-export { type MyProjectsMode } from "./model/types/projects-mode/MyProjectsMode";
 export { ProjectCard } from "./ui/project-card/item-list/ProjectCard";
 export { ProjectControlCard } from "./ui/project-card/control/ProjectControlCard";
 export { projectKeys } from "./model/queries/project-query/projectQuery";
@@ -42,3 +41,4 @@ export {
   projectsTabDefaults,
 } from "./libs/search-shema/projectsTabSchema";
 export { useMyProjectsListQuery } from "./model/hooks/useMyProjectsListQuery";
+export { projectBaseSchema } from "./libs/search-shema/projectsSearchSchema";

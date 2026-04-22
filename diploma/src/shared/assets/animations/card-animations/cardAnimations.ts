@@ -58,3 +58,8 @@ export const staggeredCardVariants = createCardVariants();
 export const staggeredCardVariantsNoHover = createCardVariants({
   enableHover: false,
 });
+
+export const headerVariants = createFadeVariants({
+  initial: { opacity: 0, y: -20 },
+  animate: { opacity: 1, y: 0 },
+});

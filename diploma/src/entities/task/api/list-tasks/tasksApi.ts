@@ -1,5 +1,5 @@
 import type { Task } from "../../model";
-import type { TaskSearchParams } from "../../libs";
+import type { TasksRequestParams } from "../../libs";
 import { apiClient } from "@shared/api";
 import type { PaginationResponse } from "@shared/config/types";
 
@@ -9,7 +9,7 @@ export interface TaskResponse {
 }
 
 export const getListTasks = async (
-  params?: TaskSearchParams,
+  params?: TasksRequestParams,
 ): Promise<TaskResponse> => {
   const response = await apiClient.get("/Tasks/list", { params });
   return response.data;

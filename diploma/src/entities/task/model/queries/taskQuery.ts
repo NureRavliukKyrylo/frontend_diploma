@@ -1,10 +1,11 @@
-import type { MyTasksRequestParams, TaskSearchParams } from "../../libs";
+import type { MyTasksRequestParams } from "../../libs";
 import { getListTasks, getMyTasks, getTaskId } from "../../api";
 import { queryOptions } from "@tanstack/react-query";
+import type { TasksRequestParams } from "@entities/task/libs/search-schema/tasksSearchSchema";
 
 export const taskKeys = {
   all: () => ["tasks"] as const,
-  list: (params: TaskSearchParams) =>
+  list: (params: TasksRequestParams) =>
     [...taskKeys.all(), "list", params] as const,
   id: (id: string) => [...taskKeys.all(), "id", id] as const,
   mys: () => [...taskKeys.all(), "my"] as const,
@@ -12,7 +13,7 @@ export const taskKeys = {
 };
 
 export const taskQuery = {
-  list: (params: TaskSearchParams) =>
+  list: (params: TasksRequestParams) =>
     queryOptions({
       queryKey: taskKeys.list({ ...params }),
       queryFn: () => getListTasks({ ...params }),

@@ -7,6 +7,7 @@ import {
 import { projectsTabBaseSchema } from "./projectsTabSchema";
 
 export const projectSearchDefaults = {
+  tab: "projects" as const,
   OrderBy: "Default" as const,
   Page: 1,
   PageSize: 9,
@@ -23,8 +24,8 @@ export const mapProjectDefaults = {
 
 export const projectFiltersSchema = locationSchema.extend({
   Rating: z.number().min(0).max(5).optional().catch(5),
-  OnlyActive: z.boolean().optional(),
-  ShowJoined: z.boolean().optional(),
+  OnlyActive: z.boolean().optional().default(false),
+  ShowJoined: z.boolean().optional().default(false),
 });
 
 export const projectFiltersWithCategorySchema = projectFiltersSchema

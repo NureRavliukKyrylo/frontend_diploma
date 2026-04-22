@@ -4,6 +4,7 @@ import type {
   Coordinates,
   EntityStatus,
   ParticipationMember,
+  Policy,
   Rating,
 } from "@shared/config/types";
 
@@ -23,4 +24,6 @@ export interface Event {
   memberPreviews: ParticipationMember[];
   recurrence: string;
   status: EntityStatus;
+  locationInfo: { address: string };
+  joinPolicy: Policy;
 }

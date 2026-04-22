@@ -4,10 +4,13 @@ import type { LocationSuggestion } from "@shared/config/types";
 import type { ProjectSearchParams } from "@entities/project";
 
 export const useProjectFilters = () => {
-  const navigate = useNavigate({ from: "/projects/" });
+  const navigate = useNavigate({ from: "/activities/" });
 
   const nav = (updater: (prev: ProjectSearchParams) => ProjectSearchParams) =>
-    navigate({ search: updater, resetScroll: false });
+    navigate({
+      search: (prev) => updater(prev as ProjectSearchParams),
+      resetScroll: false,
+    });
 
   return {
     onStartDateChange: (date: string | undefined) =>

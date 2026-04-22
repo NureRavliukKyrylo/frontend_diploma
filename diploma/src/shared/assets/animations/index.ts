@@ -8,6 +8,7 @@ export {
   createFadeDuration,
   createFadeVariants,
   createLayoutTransition,
+  headerVariants,
 } from "./card-animations/cardAnimations";
 
 export { modalAnimations } from "./modal-animations/modalAnimations";

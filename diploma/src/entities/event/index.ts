@@ -23,3 +23,8 @@ export {
   eventsTabDefaults,
   type MyEventsRequestParams,
 } from "./libs/search-schema/eventsTabSchema";
+export { type EventMode } from "./model/types/EventMode";
+export {
+  eventDetailDefaults,
+  eventDetailSchema,
+} from "./libs/search-schema/eventDetailSearchSchema";

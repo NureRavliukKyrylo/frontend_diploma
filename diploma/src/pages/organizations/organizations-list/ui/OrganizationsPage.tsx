@@ -18,9 +18,9 @@ import {
   OrganizationsListWidget,
 } from "@widgets/organizations";
 import {
-  createFadeVariants,
   fadeDuration,
   fadeVariants,
+  headerVariants,
   layoutTransition,
   staggeredCardVariants,
 } from "@shared/assets/animations";
@@ -28,11 +28,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { useRouter } from "@tanstack/react-router";
-
-const headerVariants = createFadeVariants({
-  initial: { opacity: 0, y: -20 },
-  animate: { opacity: 1, y: 0 },
-});
 
 export function OrganizationsPage() {
   const {

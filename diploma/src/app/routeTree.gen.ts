@@ -19,7 +19,6 @@ import { Route as MasterLayoutProfileRouteImport } from './routers/_masterLayout
 import { Route as NoFooterLayoutMapIndexRouteImport } from './routers/_noFooterLayout/map/index'
 import { Route as MasterLayoutTasksIndexRouteImport } from './routers/_masterLayout/tasks/index'
 import { Route as MasterLayoutSkillsIndexRouteImport } from './routers/_masterLayout/skills/index'
-import { Route as MasterLayoutProjectsIndexRouteImport } from './routers/_masterLayout/projects/index'
 import { Route as MasterLayoutProfileIndexRouteImport } from './routers/_masterLayout/profile/index'
 import { Route as MasterLayoutOrganizationsIndexRouteImport } from './routers/_masterLayout/organizations/index'
 import { Route as MasterLayoutEventsIndexRouteImport } from './routers/_masterLayout/events/index'
@@ -109,14 +108,6 @@ const MasterLayoutSkillsIndexRoute = MasterLayoutSkillsIndexRouteImport.update({
 } as any).lazy(() =>
   import('./routers/_masterLayout/skills/index.lazy').then((d) => d.Route),
 )
-const MasterLayoutProjectsIndexRoute =
-  MasterLayoutProjectsIndexRouteImport.update({
-    id: '/projects/',
-    path: '/projects/',
-    getParentRoute: () => MasterLayoutRoute,
-  } as any).lazy(() =>
-    import('./routers/_masterLayout/projects/index.lazy').then((d) => d.Route),
-  )
 const MasterLayoutProfileIndexRoute =
   MasterLayoutProfileIndexRouteImport.update({
     id: '/',
@@ -157,7 +148,11 @@ const MasterLayoutActivitiesIndexRoute =
     id: '/activities/',
     path: '/activities/',
     getParentRoute: () => MasterLayoutRoute,
-  } as any)
+  } as any).lazy(() =>
+    import('./routers/_masterLayout/activities/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 const AuthLayoutAuthVerificationTwoFactorLazyRoute =
   AuthLayoutAuthVerificationTwoFactorLazyRouteImport.update({
     id: '/auth/verification-two-factor',
@@ -278,7 +273,6 @@ export interface FileRoutesByFullPath {
   '/events/': typeof MasterLayoutEventsIndexRoute
   '/organizations/': typeof MasterLayoutOrganizationsIndexRoute
   '/profile/': typeof MasterLayoutProfileIndexRoute
-  '/projects/': typeof MasterLayoutProjectsIndexRoute
   '/skills/': typeof MasterLayoutSkillsIndexRoute
   '/tasks/': typeof MasterLayoutTasksIndexRoute
   '/map/': typeof NoFooterLayoutMapIndexRoute
@@ -304,7 +298,6 @@ export interface FileRoutesByTo {
   '/events': typeof MasterLayoutEventsIndexRoute
   '/organizations': typeof MasterLayoutOrganizationsIndexRoute
   '/profile': typeof MasterLayoutProfileIndexRoute
-  '/projects': typeof MasterLayoutProjectsIndexRoute
   '/skills': typeof MasterLayoutSkillsIndexRoute
   '/tasks': typeof MasterLayoutTasksIndexRoute
   '/map': typeof NoFooterLayoutMapIndexRoute
@@ -335,7 +328,6 @@ export interface FileRoutesById {
   '/_masterLayout/events/': typeof MasterLayoutEventsIndexRoute
   '/_masterLayout/organizations/': typeof MasterLayoutOrganizationsIndexRoute
   '/_masterLayout/profile/': typeof MasterLayoutProfileIndexRoute
-  '/_masterLayout/projects/': typeof MasterLayoutProjectsIndexRoute
   '/_masterLayout/skills/': typeof MasterLayoutSkillsIndexRoute
   '/_masterLayout/tasks/': typeof MasterLayoutTasksIndexRoute
   '/_noFooterLayout/map/': typeof NoFooterLayoutMapIndexRoute
@@ -364,7 +356,6 @@ export interface FileRouteTypes {
     | '/events/'
     | '/organizations/'
     | '/profile/'
-    | '/projects/'
     | '/skills/'
     | '/tasks/'
     | '/map/'
@@ -390,7 +381,6 @@ export interface FileRouteTypes {
     | '/events'
     | '/organizations'
     | '/profile'
-    | '/projects'
     | '/skills'
     | '/tasks'
     | '/map'
@@ -420,7 +410,6 @@ export interface FileRouteTypes {
     | '/_masterLayout/events/'
     | '/_masterLayout/organizations/'
     | '/_masterLayout/profile/'
-    | '/_masterLayout/projects/'
     | '/_masterLayout/skills/'
     | '/_masterLayout/tasks/'
     | '/_noFooterLayout/map/'
@@ -515,13 +504,6 @@ declare module '@tanstack/react-router' {
       path: '/skills'
       fullPath: '/skills/'
       preLoaderRoute: typeof MasterLayoutSkillsIndexRouteImport
-      parentRoute: typeof MasterLayoutRoute
-    }
-    '/_masterLayout/projects/': {
-      id: '/_masterLayout/projects/'
-      path: '/projects'
-      fullPath: '/projects/'
-      preLoaderRoute: typeof MasterLayoutProjectsIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
     '/_masterLayout/profile/': {
@@ -692,7 +674,6 @@ interface MasterLayoutRouteChildren {
   MasterLayoutCategoriesIndexRoute: typeof MasterLayoutCategoriesIndexRoute
   MasterLayoutEventsIndexRoute: typeof MasterLayoutEventsIndexRoute
   MasterLayoutOrganizationsIndexRoute: typeof MasterLayoutOrganizationsIndexRoute
-  MasterLayoutProjectsIndexRoute: typeof MasterLayoutProjectsIndexRoute
   MasterLayoutSkillsIndexRoute: typeof MasterLayoutSkillsIndexRoute
   MasterLayoutTasksIndexRoute: typeof MasterLayoutTasksIndexRoute
   MasterLayoutActivitiesMyIndexRoute: typeof MasterLayoutActivitiesMyIndexRoute
@@ -709,7 +690,6 @@ const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
   MasterLayoutCategoriesIndexRoute: MasterLayoutCategoriesIndexRoute,
   MasterLayoutEventsIndexRoute: MasterLayoutEventsIndexRoute,
   MasterLayoutOrganizationsIndexRoute: MasterLayoutOrganizationsIndexRoute,
-  MasterLayoutProjectsIndexRoute: MasterLayoutProjectsIndexRoute,
   MasterLayoutSkillsIndexRoute: MasterLayoutSkillsIndexRoute,
   MasterLayoutTasksIndexRoute: MasterLayoutTasksIndexRoute,
   MasterLayoutActivitiesMyIndexRoute: MasterLayoutActivitiesMyIndexRoute,

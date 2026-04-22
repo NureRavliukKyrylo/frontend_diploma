@@ -32,7 +32,7 @@ export const eventsTabBaseSchema = eventsTabBaseShape
   .extend(paginationSchema.shape);
 
 export const eventsTabSchema = eventsTabBaseSchema.extend({
-  OnlyActive: z.boolean().optional(),
+  OnlyActive: z.boolean().optional().default(false),
 });
 
 export type MyEventsSearchParams = z.infer<typeof eventsTabSchema>;
