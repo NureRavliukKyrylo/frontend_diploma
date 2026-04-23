@@ -85,7 +85,6 @@
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-          text-fill-color: transparent;
           h2 {
             @include font-base(30px, 800);
             text-transform: uppercase;
@@ -119,30 +118,33 @@
           align-items: center;
           justify-content: center;
           gap: 20px;
-          .totalTasks,
-          .totalEvents {
+          .totalTasks {
             flex: 1;
             background: #ffffff;
             box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
             border-radius: 20px;
-            padding: 25px 15px;
-            min-height: 160px;
+            padding: 25px 25px 25px 45px;
+            height: 120px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
             .headerTitle {
               h1 {
                 font-style: italic !important;
-                @include font-base(20px, 500);
+                @include font-base(25px, 500);
                 line-height: 100%;
               }
               h2 {
-                @include font-base(25px, 800);
+                @include font-base(35px, 800);
                 line-height: 100%;
               }
             }
           }
           p {
+            position: absolute;
+            right: 25px;
+            bottom: 15px;
             @include font-base(50px, 700);
             color: #8c0000;
             text-align: right;
@@ -162,7 +164,7 @@
   }
 }
 
-.popupProject {
+.popupContent {
   :global(.leaflet-popup-content-wrapper) {
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0px 2px 10px rgba(99, 99, 99, 0.5);
@@ -179,21 +181,28 @@
   :global(.leaflet-popup-close-button) {
     display: none;
   }
-  .popupProjectTitle {
+  .popupLabel {
+    @include font-base(11px, 400);
+    text-transform: uppercase;
+    color: #999;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .popupEventTitle {
     @include font-base(18px, 700);
     color: #1a1a1a;
     margin-bottom: 4px;
     letter-spacing: 0.2px;
   }
 
-  .popupProjectLocation {
+  .popupEventLocation {
     @include font-base(14px, 400);
     color: #888;
     letter-spacing: 0.3px;
   }
 }
 
-:global(.projectMarkerIcon) {
+:global(.eventMarkerIcon) {
   width: 35px;
   height: 35px;
   animation: markerAppear 0.3s ease-in-out forwards;

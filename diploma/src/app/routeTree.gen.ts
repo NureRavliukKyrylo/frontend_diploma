@@ -17,11 +17,9 @@ import { Route as AuthLayoutRouteImport } from './routers/_authLayout'
 import { Route as IndexRouteImport } from './routers/index'
 import { Route as MasterLayoutProfileRouteImport } from './routers/_masterLayout/profile'
 import { Route as NoFooterLayoutMapIndexRouteImport } from './routers/_noFooterLayout/map/index'
-import { Route as MasterLayoutTasksIndexRouteImport } from './routers/_masterLayout/tasks/index'
 import { Route as MasterLayoutSkillsIndexRouteImport } from './routers/_masterLayout/skills/index'
 import { Route as MasterLayoutProfileIndexRouteImport } from './routers/_masterLayout/profile/index'
 import { Route as MasterLayoutOrganizationsIndexRouteImport } from './routers/_masterLayout/organizations/index'
-import { Route as MasterLayoutEventsIndexRouteImport } from './routers/_masterLayout/events/index'
 import { Route as MasterLayoutCategoriesIndexRouteImport } from './routers/_masterLayout/categories/index'
 import { Route as MasterLayoutActivitiesIndexRouteImport } from './routers/_masterLayout/activities/index'
 import { Route as MasterLayoutTasksIdIndexRouteImport } from './routers/_masterLayout/tasks/$id/index'
@@ -94,13 +92,6 @@ const NoFooterLayoutMapIndexRoute = NoFooterLayoutMapIndexRouteImport.update({
 } as any).lazy(() =>
   import('./routers/_noFooterLayout/map/index.lazy').then((d) => d.Route),
 )
-const MasterLayoutTasksIndexRoute = MasterLayoutTasksIndexRouteImport.update({
-  id: '/tasks/',
-  path: '/tasks/',
-  getParentRoute: () => MasterLayoutRoute,
-} as any).lazy(() =>
-  import('./routers/_masterLayout/tasks/index.lazy').then((d) => d.Route),
-)
 const MasterLayoutSkillsIndexRoute = MasterLayoutSkillsIndexRouteImport.update({
   id: '/skills/',
   path: '/skills/',
@@ -126,13 +117,6 @@ const MasterLayoutOrganizationsIndexRoute =
       (d) => d.Route,
     ),
   )
-const MasterLayoutEventsIndexRoute = MasterLayoutEventsIndexRouteImport.update({
-  id: '/events/',
-  path: '/events/',
-  getParentRoute: () => MasterLayoutRoute,
-} as any).lazy(() =>
-  import('./routers/_masterLayout/events/index.lazy').then((d) => d.Route),
-)
 const MasterLayoutCategoriesIndexRoute =
   MasterLayoutCategoriesIndexRouteImport.update({
     id: '/categories/',
@@ -270,11 +254,9 @@ export interface FileRoutesByFullPath {
   '/auth/verification-two-factor': typeof AuthLayoutAuthVerificationTwoFactorLazyRoute
   '/activities/': typeof MasterLayoutActivitiesIndexRoute
   '/categories/': typeof MasterLayoutCategoriesIndexRoute
-  '/events/': typeof MasterLayoutEventsIndexRoute
   '/organizations/': typeof MasterLayoutOrganizationsIndexRoute
   '/profile/': typeof MasterLayoutProfileIndexRoute
   '/skills/': typeof MasterLayoutSkillsIndexRoute
-  '/tasks/': typeof MasterLayoutTasksIndexRoute
   '/map/': typeof NoFooterLayoutMapIndexRoute
   '/auth/': typeof AuthLayoutAuthIndexLazyRoute
   '/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordLazyRoute
@@ -295,11 +277,9 @@ export interface FileRoutesByTo {
   '/auth/verification-two-factor': typeof AuthLayoutAuthVerificationTwoFactorLazyRoute
   '/activities': typeof MasterLayoutActivitiesIndexRoute
   '/categories': typeof MasterLayoutCategoriesIndexRoute
-  '/events': typeof MasterLayoutEventsIndexRoute
   '/organizations': typeof MasterLayoutOrganizationsIndexRoute
   '/profile': typeof MasterLayoutProfileIndexRoute
   '/skills': typeof MasterLayoutSkillsIndexRoute
-  '/tasks': typeof MasterLayoutTasksIndexRoute
   '/map': typeof NoFooterLayoutMapIndexRoute
   '/auth': typeof AuthLayoutAuthIndexLazyRoute
   '/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordLazyRoute
@@ -325,11 +305,9 @@ export interface FileRoutesById {
   '/_authLayout/auth/verification-two-factor': typeof AuthLayoutAuthVerificationTwoFactorLazyRoute
   '/_masterLayout/activities/': typeof MasterLayoutActivitiesIndexRoute
   '/_masterLayout/categories/': typeof MasterLayoutCategoriesIndexRoute
-  '/_masterLayout/events/': typeof MasterLayoutEventsIndexRoute
   '/_masterLayout/organizations/': typeof MasterLayoutOrganizationsIndexRoute
   '/_masterLayout/profile/': typeof MasterLayoutProfileIndexRoute
   '/_masterLayout/skills/': typeof MasterLayoutSkillsIndexRoute
-  '/_masterLayout/tasks/': typeof MasterLayoutTasksIndexRoute
   '/_noFooterLayout/map/': typeof NoFooterLayoutMapIndexRoute
   '/_authLayout/auth/': typeof AuthLayoutAuthIndexLazyRoute
   '/_authLayout/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordLazyRoute
@@ -353,11 +331,9 @@ export interface FileRouteTypes {
     | '/auth/verification-two-factor'
     | '/activities/'
     | '/categories/'
-    | '/events/'
     | '/organizations/'
     | '/profile/'
     | '/skills/'
-    | '/tasks/'
     | '/map/'
     | '/auth/'
     | '/auth/forgot-password/set-password'
@@ -378,11 +354,9 @@ export interface FileRouteTypes {
     | '/auth/verification-two-factor'
     | '/activities'
     | '/categories'
-    | '/events'
     | '/organizations'
     | '/profile'
     | '/skills'
-    | '/tasks'
     | '/map'
     | '/auth'
     | '/auth/forgot-password/set-password'
@@ -407,11 +381,9 @@ export interface FileRouteTypes {
     | '/_authLayout/auth/verification-two-factor'
     | '/_masterLayout/activities/'
     | '/_masterLayout/categories/'
-    | '/_masterLayout/events/'
     | '/_masterLayout/organizations/'
     | '/_masterLayout/profile/'
     | '/_masterLayout/skills/'
-    | '/_masterLayout/tasks/'
     | '/_noFooterLayout/map/'
     | '/_authLayout/auth/'
     | '/_authLayout/auth/forgot-password/set-password'
@@ -492,13 +464,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NoFooterLayoutMapIndexRouteImport
       parentRoute: typeof NoFooterLayoutRoute
     }
-    '/_masterLayout/tasks/': {
-      id: '/_masterLayout/tasks/'
-      path: '/tasks'
-      fullPath: '/tasks/'
-      preLoaderRoute: typeof MasterLayoutTasksIndexRouteImport
-      parentRoute: typeof MasterLayoutRoute
-    }
     '/_masterLayout/skills/': {
       id: '/_masterLayout/skills/'
       path: '/skills'
@@ -518,13 +483,6 @@ declare module '@tanstack/react-router' {
       path: '/organizations'
       fullPath: '/organizations/'
       preLoaderRoute: typeof MasterLayoutOrganizationsIndexRouteImport
-      parentRoute: typeof MasterLayoutRoute
-    }
-    '/_masterLayout/events/': {
-      id: '/_masterLayout/events/'
-      path: '/events'
-      fullPath: '/events/'
-      preLoaderRoute: typeof MasterLayoutEventsIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
     '/_masterLayout/categories/': {
@@ -672,10 +630,8 @@ interface MasterLayoutRouteChildren {
   MasterLayoutProfileRoute: typeof MasterLayoutProfileRouteWithChildren
   MasterLayoutActivitiesIndexRoute: typeof MasterLayoutActivitiesIndexRoute
   MasterLayoutCategoriesIndexRoute: typeof MasterLayoutCategoriesIndexRoute
-  MasterLayoutEventsIndexRoute: typeof MasterLayoutEventsIndexRoute
   MasterLayoutOrganizationsIndexRoute: typeof MasterLayoutOrganizationsIndexRoute
   MasterLayoutSkillsIndexRoute: typeof MasterLayoutSkillsIndexRoute
-  MasterLayoutTasksIndexRoute: typeof MasterLayoutTasksIndexRoute
   MasterLayoutActivitiesMyIndexRoute: typeof MasterLayoutActivitiesMyIndexRoute
   MasterLayoutCategoriesIdIndexRoute: typeof MasterLayoutCategoriesIdIndexRoute
   MasterLayoutEventsIdIndexRoute: typeof MasterLayoutEventsIdIndexRoute
@@ -688,10 +644,8 @@ const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
   MasterLayoutProfileRoute: MasterLayoutProfileRouteWithChildren,
   MasterLayoutActivitiesIndexRoute: MasterLayoutActivitiesIndexRoute,
   MasterLayoutCategoriesIndexRoute: MasterLayoutCategoriesIndexRoute,
-  MasterLayoutEventsIndexRoute: MasterLayoutEventsIndexRoute,
   MasterLayoutOrganizationsIndexRoute: MasterLayoutOrganizationsIndexRoute,
   MasterLayoutSkillsIndexRoute: MasterLayoutSkillsIndexRoute,
-  MasterLayoutTasksIndexRoute: MasterLayoutTasksIndexRoute,
   MasterLayoutActivitiesMyIndexRoute: MasterLayoutActivitiesMyIndexRoute,
   MasterLayoutCategoriesIdIndexRoute: MasterLayoutCategoriesIdIndexRoute,
   MasterLayoutEventsIdIndexRoute: MasterLayoutEventsIdIndexRoute,

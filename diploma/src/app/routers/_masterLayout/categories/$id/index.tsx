@@ -6,16 +6,18 @@ import {
   projectSearchDefaults,
 } from "@entities/project";
 import { organizationQuery } from "@entities/organization";
+import { CategoryDetailPageSkeleton } from "@pages/categories";
+
+const { tab, ...searchDefaults } = projectSearchDefaults;
 
 export const Route = createFileRoute("/_masterLayout/categories/$id/")({
-  loader: async ({ context: { queryClient }, params: { id } }) => {
+  loader: async ({ context: { queryClient }, params: { id }, location }) => {
+    const search = projectSearchSchema.parse(location.search);
+
     await Promise.all([
       queryClient.ensureQueryData(categoryQuery.id(id)),
       queryClient.ensureQueryData(
-        projectQuery.list({
-          ...projectSearchDefaults,
-          CategoryIds: [id],
-        }),
+        projectQuery.list({ ...search, CategoryIds: [id] }),
       ),
     ]);
     queryClient.prefetchInfiniteQuery(
@@ -23,7 +25,8 @@ export const Route = createFileRoute("/_masterLayout/categories/$id/")({
     );
   },
   search: {
-    middlewares: [stripSearchParams(projectSearchDefaults)],
+    middlewares: [stripSearchParams(searchDefaults)],
   },
   validateSearch: projectSearchSchema,
+  pendingComponent: CategoryDetailPageSkeleton,
 });

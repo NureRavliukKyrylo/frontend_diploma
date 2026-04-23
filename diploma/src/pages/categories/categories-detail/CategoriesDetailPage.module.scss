@@ -62,6 +62,9 @@
   }
 }
 .projectCardMotion {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 6;
   cursor: pointer;
 }
 .projectsListSkeletonWrapper {

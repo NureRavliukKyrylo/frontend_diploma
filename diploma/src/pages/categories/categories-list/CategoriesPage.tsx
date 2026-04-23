@@ -55,7 +55,7 @@ export function CategoriesPage() {
                   animate="visible"
                   whileHover="hover"
                 >
-                  <Link to="/projects">
+                  <Link to="/activities">
                     <AllCategoriesCard />
                   </Link>
                 </motion.div>

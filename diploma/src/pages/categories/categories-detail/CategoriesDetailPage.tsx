@@ -112,7 +112,7 @@ export function CategoryDetailPage() {
                         <ProjectCard project={project} />
                       </motion.div>
                     )}
-                    useProjectsQuery={useProjectsListQuery(search)}
+                    useProjectsQuery={useProjectsListQuery(searchWithCategory)}
                   />
                 </motion.div>
               </AnimatePresence>

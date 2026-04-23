@@ -11,26 +11,26 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useMapUserLocation } from "@features/map";
 import { eventQuery } from "@entities/event";
 import { formatDateToText } from "@shared/libs/date";
-import { profileQuery, useUserStore } from "@entities/user/profile";
 import { Calendar } from "@shared/assets/icons/info";
+import { getPolicyStatusConfig } from "@shared/libs/entity";
 
 export const ProjectPage = () => {
   const { id } = useParams({ from: "/_masterLayout/projects/$id/" });
   const search = useSearch({ from: "/_masterLayout/projects/$id/" });
   const { data: project } = useSuspenseQuery(projectQuery.id(id));
   const { data: events } = useQuery(eventQuery.list({ ProjectIds: [id] }));
-  const { coordinates: userLocation } = useMapUserLocation();
-  const isAuthenticated = useUserStore((s) => s.isAuthenticated);
-  const { data: user } = useQuery({
-    ...profileQuery.all(),
-    enabled: !!isAuthenticated,
-  });
+  const { user, coordinates: userLocation } = useMapUserLocation();
   const navigate = useNavigate({ from: "/projects/$id/" });
 
   const activeTab = search.tab;
   const handleTabChange = (tab: ProjectMode) => {
     navigate({ params: { id }, search: { tab }, resetScroll: false });
   };
+
+  const policyConfig = project?.joinPolicy
+    ? getPolicyStatusConfig(project.joinPolicy)
+    : null;
+
   const forms = getProjectMainForms({
     project,
     userLocation,
@@ -58,18 +58,20 @@ export const ProjectPage = () => {
                     <span>{formatDateToText(project.endAt)}</span>
                   </span>
                 )}
-                {project?.joinPolicy && (
+                {policyConfig && (
                   <span
-                    className={`${styles.metaChip} ${
-                      project.joinPolicy === "open"
-                        ? styles.metaChipOpen
-                        : styles.metaChipApproval
-                    }`}
+                    className={`${styles.metaChip} ${styles.policy}`}
+                    style={{ boxShadow: policyConfig.boxShadow }}
                   >
-                    <span>
-                      {project.joinPolicy === "open"
-                        ? "Open to join"
-                        : "Approval required"}
+                    <span
+                      style={{
+                        background: policyConfig.gradient,
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        backgroundClip: "text",
+                      }}
+                    >
+                      {policyConfig.label}
                     </span>
                   </span>
                 )}

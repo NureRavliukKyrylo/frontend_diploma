@@ -1,5 +1,4 @@
 import styles from "./CategoryProjectFiltersWidget.module.scss";
-import type { ProjectSearchParams } from "@entities/project";
 import { motion } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { Link } from "@tanstack/react-router";
@@ -12,9 +11,10 @@ import {
   SwitchFilter,
 } from "@shared/ui/filters";
 import { OrganizationsListFilter } from "@features/organization";
+import type { ProjectRequestParams } from "@entities/project/libs";
 
 interface CategoryProjectFiltersWidgetProps {
-  search: ProjectSearchParams;
+  search: ProjectRequestParams;
 }
 
 export const CategoryProjectFiltersWidget = ({
@@ -44,7 +44,7 @@ export const CategoryProjectFiltersWidget = ({
             className={styles.animationButtonBlock}
           >
             <Link
-              to="/projects"
+              to="/activities"
               search={search}
               className={styles.showAllProjectsButton}
             >

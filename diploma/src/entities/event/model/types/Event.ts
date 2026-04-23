@@ -15,8 +15,9 @@ export interface Event {
   endAt: string;
   progressPercent: number;
   tasksTotal: number;
+  activeTasks: number;
   organization?: Pick<Organization, "id" | "logoUrl" | "name">;
-  project?: Pick<Project, "id" | "title">;
+  project?: Project;
   location: Coordinates;
   memberCount: number;
   type: string;

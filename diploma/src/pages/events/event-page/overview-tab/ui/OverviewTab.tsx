@@ -1,14 +1,14 @@
-import { ProjectMarker } from "@entities/project";
 import styles from "./OverviewTab.module.scss";
 import { BaseMap } from "@shared/ui";
 import { MapZoomAnimation } from "@shared/libs/map";
 import { Marker, Popup } from "react-leaflet";
 import { MapUserLocation } from "@entities/user/profile";
 import type { Coordinates } from "@shared/config/types";
-import type { Event } from "@entities/event";
+import { EventMarker, type Event } from "@entities/event";
 import { Activities } from "@shared/assets/images/entity-information";
 import { MapLocationInput } from "@shared/ui/inputs";
 import { useIntersectionReveal } from "@shared/libs/hooks";
+import { ProjectMarker, ProjectPopupContent } from "@entities/project";
 
 interface OverviewTabProps {
   event: Event;
@@ -54,7 +54,7 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
           </div>
         </div>
         <div className={styles.mapWrapper} ref={ref}>
-          {event?.location && (
+          {event.location && (
             <BaseMap
               zoom={6}
               center={[event.location.latitude, event.location.longitude]}
@@ -62,17 +62,31 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
               <>
                 {isVisible && <MapZoomAnimation coordinates={event.location} />}
                 <Marker
-                  icon={ProjectMarker}
+                  icon={EventMarker}
                   position={[event.location.latitude, event.location.longitude]}
                 >
-                  <Popup className={styles.popupProject}>
-                    <h3 className={styles.popupProjectTitle}>{event.title}</h3>
-                    <p className={styles.popupProjectLocation}>
+                  <Popup className={styles.popupContent}>
+                    <h3 className={styles.popupEventTitle}>{event.title}</h3>
+                    <p className={styles.popupEventLocation}>
                       📍 Event location
                     </p>
                   </Popup>
                 </Marker>
               </>
+              {event.project && (
+                <Marker
+                  icon={ProjectMarker}
+                  position={[
+                    event.project.location.latitude,
+                    event.project.location.longitude,
+                  ]}
+                >
+                  <Popup className={styles.popupContent}>
+                    <div className={styles.popupLabel}>Related project</div>
+                    <ProjectPopupContent project={event.project} />
+                  </Popup>
+                </Marker>
+              )}
               {userLocation && (
                 <MapUserLocation coordinates={userLocation} animate={false} />
               )}

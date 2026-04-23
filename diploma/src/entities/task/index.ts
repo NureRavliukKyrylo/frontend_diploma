@@ -18,3 +18,4 @@ export {
   type MyTasksRequestParams,
   tasksTabDefaults,
 } from "./libs/search-schema/taskTabSchema";
+export { type TaskMode } from "./model/types/TaskMode";

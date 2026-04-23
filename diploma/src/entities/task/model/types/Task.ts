@@ -1,5 +1,12 @@
 import type { Organization } from "@entities/organization";
-import type { EntityStatus, ParticipationMember } from "@shared/config/types";
+import type {
+  EntityStatus,
+  ParticipationMember,
+  Policy,
+  Rating,
+} from "@shared/config/types";
+import type { Event } from "@entities/event";
+import type { Project } from "@entities/project";
 
 export interface Task {
   id: string;
@@ -10,4 +17,10 @@ export interface Task {
   organization: Organization;
   status: EntityStatus;
   memberPreviews: ParticipationMember[];
+  event: Event;
+  project: Project;
+  recurrence: string;
+  joinPolicy: Policy;
+  rating: Rating;
+  progressPercent: number;
 }

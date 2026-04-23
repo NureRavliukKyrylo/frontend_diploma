@@ -21,7 +21,7 @@ export const useSubmitFillingForm = () => {
         color: "success",
       });
       clearFillingForm();
-      router.navigate({ to: "/projects" });
+      router.navigate({ to: "/activities" });
     },
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error);
@@ -31,7 +31,7 @@ export const useSubmitFillingForm = () => {
 
   const handleSubmit = (payload: UpdateUserDto) => {
     if (isPayloadEmpty(payload)) {
-      router.navigate({ to: "/projects" });
+      router.navigate({ to: "/activities" });
     } else {
       mutation.mutate(payload);
     }

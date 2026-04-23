@@ -24,17 +24,17 @@ export const mapProjectDefaults = {
 
 export const projectFiltersSchema = locationSchema.extend({
   Rating: z.number().min(0).max(5).optional().catch(5),
-  OnlyActive: z.boolean().optional().default(false),
-  ShowJoined: z.boolean().optional().default(false),
+  OnlyActive: z.boolean().default(false).optional(),
+  ShowJoined: z.boolean().default(false).optional(),
 });
 
 export const projectFiltersWithCategorySchema = projectFiltersSchema
   .extend({ CategoryIds: z.array(z.string()).optional().catch(undefined) })
   .extend(projectsTabBaseSchema.shape);
 
-export const projectSearchSchema = projectFiltersSchema.extend(
-  projectsTabBaseSchema.shape,
-);
+export const projectSearchSchema = projectFiltersSchema
+  .extend(projectsTabBaseSchema.shape)
+  .omit({ tab: true });
 
 export const mapProjectSchema = projectFiltersSchema
   .extend(mapBoundsSchema.shape)

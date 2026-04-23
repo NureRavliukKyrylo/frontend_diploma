@@ -1,4 +1,5 @@
 import { eventQuery } from "@entities/event";
+import { feedbackQuery } from "@entities/feedback";
 import {
   projectDetailDefaults,
   projectDetailSchema,
@@ -24,6 +25,9 @@ export const Route = createFileRoute("/_masterLayout/projects/$id/")({
         entityType: "project",
         pageSize: 8,
       }),
+    );
+    queryClient.prefetchInfiniteQuery(
+      feedbackQuery.infinite("project", id, { PageSize: 3 }),
     );
   },
   pendingComponent: ProjectPageSkeleton,

@@ -32,7 +32,7 @@ export const projectsTabBaseSchema = projectsTabBaseShape
 
 export const projectsTabSchema = projectsTabBaseSchema.extend({
   CategoryIds: z.array(z.string()).optional().catch([]),
-  OnlyActive: z.boolean().default(false),
+  OnlyActive: z.boolean().default(false).optional(),
 });
 
 export type MyProjectsSearchParams = z.infer<typeof projectsTabSchema>;

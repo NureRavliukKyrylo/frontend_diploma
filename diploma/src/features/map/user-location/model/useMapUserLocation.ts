@@ -30,5 +30,5 @@ export const useMapUserLocation = () => {
     onLocationChange: setGeoCoords,
   });
 
-  return { coordinates: profileCoords ?? geoCoords ?? null, isReady };
+  return { user, coordinates: profileCoords ?? geoCoords ?? null, isReady };
 };
