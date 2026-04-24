@@ -4,7 +4,7 @@ import {
   eventQuery,
 } from "@entities/event";
 import { feedbackQuery } from "@entities/feedback";
-import { EventPage } from "@pages/events";
+import { EventPageSkeleton } from "@pages/events";
 import { participationQuery } from "@shared/api/participation";
 import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
 
@@ -24,5 +24,5 @@ export const Route = createFileRoute("/_masterLayout/events/$id/")({
       feedbackQuery.infinite("event", id, { PageSize: 3 }),
     );
   },
-  component: EventPage,
+  pendingComponent: EventPageSkeleton,
 });

@@ -39,11 +39,15 @@
   }
   .taskCardMotion {
     cursor: pointer;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    grid-template-columns: 1fr auto;
   }
 
   .tasksListWrapper {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(800px, 1fr));
     justify-content: center;
     gap: 40px;
     align-items: stretch;

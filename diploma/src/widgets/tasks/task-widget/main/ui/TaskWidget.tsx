@@ -1,5 +1,5 @@
 import styles from "./TaskWidget.module.scss";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import { JoinProjectButton } from "@features/project";
@@ -16,22 +16,56 @@ import {
   getEntityStatusConfig,
   getPolicyStatusConfig,
 } from "@shared/libs/entity";
+import { TaskWidgetSkeleton } from "./TaskWidgetSkeleton";
+import { getHttpErrorInfo } from "@shared/libs/error";
 
 export const TaskWidget = () => {
   const { taskId, taskMode, handleModeChange } = useTaskDrawer();
-  const { data: task } = useSuspenseQuery(taskQuery.id(taskId!));
+
+  const {
+    data: task,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    ...taskQuery.id(taskId!),
+    enabled: !!taskId,
+  });
+
   const { user, coordinates: userLocation } = useMapUserLocation();
 
-  const statusConfig = getEntityStatusConfig(task.status);
+  if (isLoading) return <TaskWidgetSkeleton />;
+
+  if (isError)
+    return (
+      <div className={styles.errorState}>
+        <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
+        <p className="errorHint">Try reloading the page or come back later.</p>
+      </div>
+    );
+
+  const hasLocation = !!(task?.event?.location || task?.project?.location);
+
+  const availableTabs = hasLocation
+    ? taskMainTabs
+    : taskMainTabs.filter((t) => t.value !== "overview");
+
+  const safeMode = availableTabs.some((t) => t.value === taskMode)
+    ? taskMode
+    : "members";
+
+  const statusConfig = task ? getEntityStatusConfig(task.status) : null;
   const policyConfig = task?.joinPolicy
     ? getPolicyStatusConfig(task.joinPolicy)
     : null;
 
-  const forms = getTaskMainForms({
-    task,
-    userLocation,
-    userId: user?.id,
-  });
+  const forms = task
+    ? getTaskMainForms({
+        task,
+        userLocation,
+        userId: user?.id,
+      })
+    : null;
 
   return (
     <div className={styles.wrapperTaskWidget}>
@@ -45,11 +79,11 @@ export const TaskWidget = () => {
           <div
             className={styles.taskStatus}
             style={{
-              color: statusConfig.color,
-              boxShadow: `0px 2px 10px ${statusConfig.bg}`,
+              color: statusConfig?.color,
+              boxShadow: `0px 5px 15px  ${statusConfig?.shadow}`,
             }}
           >
-            {statusConfig.label}
+            {statusConfig?.label}
           </div>
           <div className={styles.mainTaskData}>
             <div className={styles.taskOrganizationInfo}>
@@ -150,28 +184,30 @@ export const TaskWidget = () => {
           </div>
         </div>
       </motion.div>
-      <div className={styles.toggleWrapper}>
-        <Toggle
-          tabs={taskMainTabs}
-          activeValue={taskMode}
-          onChange={handleModeChange}
-          buttonClassName={styles.toggleTaskButton}
-          activeButtonClassName={styles.toggleTaskButtonActive}
-          className={styles.toggleTask}
-          pillClassName={styles.toggleTaskPill}
-        />
+      <div className={styles.contentBlock}>
+        <div className={styles.toggleWrapper}>
+          <Toggle
+            tabs={availableTabs}
+            activeValue={safeMode}
+            onChange={handleModeChange}
+            buttonClassName={styles.toggleTaskButton}
+            activeButtonClassName={styles.toggleTaskButtonActive}
+            className={styles.toggleTask}
+            pillClassName={styles.toggleTaskPill}
+          />
+        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={taskMode}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+          >
+            {forms && forms[taskMode]}
+          </motion.div>
+        </AnimatePresence>
       </div>
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={taskMode}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.2 }}
-        >
-          {forms[taskMode]}
-        </motion.div>
-      </AnimatePresence>
     </div>
   );
 };

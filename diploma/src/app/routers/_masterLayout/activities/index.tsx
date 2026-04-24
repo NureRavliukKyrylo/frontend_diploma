@@ -18,7 +18,9 @@ export const Route = createFileRoute("/_masterLayout/activities/")({
     const search = location.search as ListActivitiesSearch;
     const config = activitiesTabLoaderConfig[search.tab ?? "projects"];
 
-    const { tab, ...params } = config.schema.parse(location.search) as any;
+    const { tab, taskMode, taskId, ...params } = config.schema.parse(
+      location.search,
+    ) as any;
 
     await queryClient.ensureQueryData(config.query(params) as any);
     config.prefetch(queryClient);

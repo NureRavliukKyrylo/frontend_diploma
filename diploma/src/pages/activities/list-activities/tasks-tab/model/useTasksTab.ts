@@ -4,14 +4,13 @@ import {
   type TaskSortValues,
 } from "@entities/task";
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate, useRouter } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
 export const useTasksTab = (search: TaskSearchParams) => {
   const navigate = useNavigate({ from: "/activities/" });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const { data: tasks } = useQuery(taskQuery.list(search));
-  const router = useRouter();
 
   const nav = (updater: (prev: TaskSearchParams) => TaskSearchParams) =>
     navigate({
@@ -35,7 +34,6 @@ export const useTasksTab = (search: TaskSearchParams) => {
     handleSearch,
     handleSort,
     handlePageChange,
-    router,
     tasks,
   };
 };

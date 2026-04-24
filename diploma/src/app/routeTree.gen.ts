@@ -204,7 +204,11 @@ const MasterLayoutEventsIdIndexRoute =
     id: '/events/$id/',
     path: '/events/$id/',
     getParentRoute: () => MasterLayoutRoute,
-  } as any)
+  } as any).lazy(() =>
+    import('./routers/_masterLayout/events/$id/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 const MasterLayoutCategoriesIdIndexRoute =
   MasterLayoutCategoriesIdIndexRouteImport.update({
     id: '/categories/$id/',

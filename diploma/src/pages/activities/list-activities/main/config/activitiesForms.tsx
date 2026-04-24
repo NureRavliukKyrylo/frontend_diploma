@@ -19,7 +19,12 @@ export const ActivitiesContent = ({
   tab: ListActivitiesMode;
   search: ListActivitiesSearch;
 }) => {
-  const { tab: _, ...searchWithoutTab } = search;
+  const {
+    tab: _,
+    taskMode: _taskMode,
+    ...searchWithoutTab
+  } = search as ListActivitiesSearch & { taskMode?: string };
+
   const TabComponent = myActivitiesForms[tab];
   return <TabComponent search={searchWithoutTab} />;
 };

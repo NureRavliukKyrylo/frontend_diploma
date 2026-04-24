@@ -19,3 +19,5 @@ export {
   tasksTabDefaults,
 } from "./libs/search-schema/taskTabSchema";
 export { type TaskMode } from "./model/types/TaskMode";
+export type { TaskStatus } from "./model/types/TaskStatus";
+export type { TasksRequestParams } from "./libs";

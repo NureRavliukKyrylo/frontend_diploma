@@ -1,7 +1,7 @@
 import styles from "./ListActivitiesPage.module.scss";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { myActivitiesSearchDefaults } from "@pages/activities";
+import { listActivitiesSearchDefaults } from "@pages/activities";
 import {
   ListActivitiesHeader,
   type ListActivitiesMode,
@@ -16,7 +16,7 @@ export const ListActivitiesPage = () => {
 
   const activeTab = search.tab;
   const handleTabChange = (tab: ListActivitiesMode) => {
-    navigate({ search: myActivitiesSearchDefaults[tab], resetScroll: false });
+    navigate({ search: listActivitiesSearchDefaults[tab], resetScroll: false });
   };
 
   return (

@@ -13,8 +13,10 @@ export const useTaskDrawer = () => {
       resetScroll: false,
     });
 
-  const openTask = (taskId: string, taskMode: TaskMode = "overview") =>
+  const openTask = (taskId: string, hasLocation?: boolean) => {
+    const taskMode: TaskMode = hasLocation ? "overview" : "members";
     nav((prev) => ({ ...prev, taskId, taskMode }));
+  };
 
   const closeTask = () =>
     nav((prev) => ({ ...prev, taskId: undefined, taskMode: undefined }));

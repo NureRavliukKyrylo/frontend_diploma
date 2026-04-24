@@ -8,7 +8,13 @@ import {
 import { useTasksTab } from "../model/useTasksTab";
 import styles from "./TasksTab.module.scss";
 import { ToggleDropdownButton } from "@shared/ui/buttons";
-import { TaskFiltersWidget, TasksListWidget } from "@widgets/tasks";
+import {
+  TaskFiltersWidget,
+  TasksListWidget,
+  TaskWidget,
+  TaskWidgetSkeleton,
+  useTaskDrawer,
+} from "@widgets/tasks";
 import { SearchBar } from "@shared/ui/inputs";
 import { SortDropDown } from "@shared/ui/drop-down";
 import { AnimatePresence, motion } from "framer-motion";
@@ -20,15 +26,18 @@ import {
 } from "@shared/assets/animations";
 import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
-import { Pagination } from "@heroui/react";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
+import { Pagination } from "@shared/ui";
+import { Drawer } from "@mui/material";
 
 interface TasksTabProps {
   search: TaskSearchParams;
 }
 
 export const TasksTab = ({ search }: TasksTabProps) => {
+  const { isOpen, openTask, closeTask, taskId } = useTaskDrawer();
+  const { taskId: _, taskMode: __, ...tasksSearch } = search;
   const {
     isFilterOpen,
     setIsFilterOpen,
@@ -36,8 +45,7 @@ export const TasksTab = ({ search }: TasksTabProps) => {
     handleSort,
     handlePageChange,
     tasks,
-    router,
-  } = useTasksTab(search);
+  } = useTasksTab(tasksSearch);
 
   return (
     <div className={styles.mainTasksSection}>
@@ -91,7 +99,7 @@ export const TasksTab = ({ search }: TasksTabProps) => {
               >
                 <AnimatePresence mode="wait">
                   <motion.div
-                    key={JSON.stringify(search)}
+                    key={JSON.stringify(tasksSearch)}
                     {...fadeVariants}
                     transition={fadeDuration}
                   >
@@ -106,23 +114,52 @@ export const TasksTab = ({ search }: TasksTabProps) => {
                           animate="visible"
                           whileHover="hover"
                           className={styles.taskCardMotion}
-                          onClick={() =>
-                            router.navigate({
-                              to: "/tasks/$id",
-                              params: { id: task.id },
-                            })
-                          }
+                          onClick={() => {
+                            const hasLocation = !!(
+                              task.event?.location || task.project?.location
+                            );
+                            openTask(task.id, hasLocation);
+                          }}
                         >
                           <TaskCard task={task} />
                         </motion.div>
                       )}
-                      useTasksQuery={useTasksListQuery(search)}
+                      useTasksQuery={useTasksListQuery(tasksSearch)}
                     />
                   </motion.div>
                 </AnimatePresence>
               </Suspense>
             )}
           </motion.div>
+          <Drawer
+            open={isOpen}
+            onClose={closeTask}
+            anchor="right"
+            sx={{
+              zIndex: 10000,
+              "& .MuiDrawer-paper": {
+                maxWidth: "1000px",
+                width: "100%",
+                backgroundColor: "#F4F4F4",
+                borderRadius: 0,
+                overflow: "hidden",
+              },
+              "& .MuiBackdrop-root.MuiModal-backdrop": {
+                backgroundColor: "rgba(0, 0, 0, 0.2)",
+              },
+            }}
+          >
+            <div
+              style={{
+                height: "100%",
+                overflowY: "auto",
+                scrollbarWidth: "none",
+                padding: 0,
+              }}
+            >
+              {taskId && <TaskWidget />}
+            </div>
+          </Drawer>
         </div>
 
         {tasks && tasks.pagination.totalPages > 1 && (
