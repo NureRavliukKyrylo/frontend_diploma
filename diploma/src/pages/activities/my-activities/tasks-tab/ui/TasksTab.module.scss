@@ -24,23 +24,10 @@
   }
 }
 
-.motionCard {
-  display: grid;
-  grid-template-rows: subgrid;
-  grid-row: span 6;
-}
 .paginationWrapper {
   width: 100%;
   display: flex;
   justify-content: center;
-}
-
-.projectsListSkeletonWrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(470px, 1fr));
-  justify-content: center;
-  gap: 40px;
-  align-items: stretch;
 }
 
 .emptyState {

@@ -46,17 +46,19 @@ export const FeedbacksListWidget = ({
   return (
     <>
       {renderEmpty?.(feedbacks) ?? (
-        <div
-          className={`${styles.feedbackListWrapper} ${className ?? ""}`.trim()}
-        >
-          {startSlot}
-          {feedbacks.map((feedback, index) => renderCard(feedback, index))}
+        <>
+          <div
+            className={`${styles.feedbackListWrapper} ${className ?? ""}`.trim()}
+          >
+            {startSlot}
+            {feedbacks.map((feedback, index) => renderCard(feedback, index))}
+          </div>
           {renderPagination?.({
             fetchNextPage,
             isFetchingNextPage,
             hasNextPage,
           })}
-        </div>
+        </>
       )}
     </>
   );

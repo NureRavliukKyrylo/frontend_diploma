@@ -44,7 +44,9 @@
     grid-row: span 3;
     grid-template-columns: 1fr auto;
   }
-
+  .skeletonWrapper {
+    display: grid;
+  }
   .tasksListWrapper {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(800px, 1fr));

@@ -1,7 +1,11 @@
 import { useNavigate, useParams, useSearch } from "@tanstack/react-router";
 import styles from "./ProjectPage.module.scss";
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
-import { projectQuery, type ProjectMode } from "@entities/project";
+import {
+  projectDetailDefaults,
+  projectQuery,
+  type ProjectMode,
+} from "@entities/project";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { ReadMoreButton } from "@shared/ui/buttons";
 import { JoinProjectButton } from "@features/project";
@@ -16,15 +20,20 @@ import { getPolicyStatusConfig } from "@shared/libs/entity";
 
 export const ProjectPage = () => {
   const { id } = useParams({ from: "/_masterLayout/projects/$id/" });
-  const search = useSearch({ from: "/_masterLayout/projects/$id/" });
+  const { tab, ...search } = useSearch({
+    from: "/_masterLayout/projects/$id/",
+  });
   const { data: project } = useSuspenseQuery(projectQuery.id(id));
   const { data: events } = useQuery(eventQuery.list({ ProjectIds: [id] }));
   const { user, coordinates: userLocation } = useMapUserLocation();
   const navigate = useNavigate({ from: "/projects/$id/" });
 
-  const activeTab = search.tab;
   const handleTabChange = (tab: ProjectMode) => {
-    navigate({ params: { id }, search: { tab }, resetScroll: false });
+    navigate({
+      params: { id },
+      search: projectDetailDefaults[tab],
+      resetScroll: false,
+    });
   };
 
   const policyConfig = project?.joinPolicy
@@ -36,6 +45,7 @@ export const ProjectPage = () => {
     userLocation,
     events: events?.data,
     userId: user?.id,
+    search,
   });
 
   return (
@@ -115,7 +125,7 @@ export const ProjectPage = () => {
       <div className={styles.toggleWrapper}>
         <Toggle
           tabs={projectMainTabs}
-          activeValue={activeTab}
+          activeValue={tab}
           onChange={handleTabChange}
           buttonClassName={styles.toggleProjectButton}
           activeButtonClassName={styles.toggleProjectButtonActive}
@@ -125,13 +135,13 @@ export const ProjectPage = () => {
       </div>
       <AnimatePresence mode="wait">
         <motion.div
-          key={activeTab}
+          key={tab}
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.2 }}
         >
-          {forms[activeTab]}
+          {forms[tab]}
         </motion.div>
       </AnimatePresence>
     </div>

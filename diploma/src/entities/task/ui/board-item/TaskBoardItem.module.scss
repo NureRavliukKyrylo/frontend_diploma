@@ -1,0 +1,140 @@
+@use "@shared/assets/styles" as *;
+
+.taskBoardItemWrapper {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+  h1 {
+    @include font-base(22px, 700);
+    line-height: 120%;
+  }
+  p {
+    color: #8f8f8f;
+    @include font-base(20px, 400);
+    line-height: 100%;
+  }
+  .deadlineBlock {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    .calendarTask {
+      width: 25px;
+      height: 25px;
+      opacity: 0.3;
+    }
+    span {
+      @include font-base(18px, 600);
+      background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-transform: uppercase;
+    }
+  }
+  .dividerLine {
+    border: 1px solid rgba(166, 166, 166, 0.3);
+    width: 100%;
+  }
+  .footerContent {
+    .avatarsGroup {
+      display: flex;
+      align-items: center;
+      .avatarVolunteer {
+        width: 29px;
+        height: 29px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        margin-left: -10px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+      .remainingAvatarItem {
+        width: 29px;
+        height: 29px;
+        border-radius: 50%;
+        border: 1px solid rgb(0, 0, 0, 0.1);
+        margin-left: -10px;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex-shrink: 0;
+        aspect-ratio: 1 / 1;
+        background-color: white;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        font-size: 14px;
+      }
+    }
+    .noMembers {
+      @include font-base(18px, 600);
+      line-height: 120%;
+      color: #1a1a2e;
+    }
+    .totalFeedbacksInfo {
+      background: #ffffff;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      padding: 5px;
+      .feedbackIcon {
+        width: 19px;
+        height: 17px;
+      }
+      h1 {
+        @include font-base(15px, 400);
+        color: #8f8f8f;
+      }
+    }
+  }
+}
+
+.skeletonTitle {
+  width: 80%;
+  height: 26px;
+  border-radius: 6px;
+}
+
+.skeletonDescLine {
+  width: 100%;
+  height: 18px;
+  border-radius: 5px;
+}
+
+.skeletonDescLineShort {
+  width: 60%;
+  height: 18px;
+  border-radius: 5px;
+}
+
+.skeletonCalendarIcon {
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.skeletonDeadlineDate {
+  width: 80px;
+  height: 18px;
+  border-radius: 5px;
+}
+
+.skeletonAvatar {
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  margin-left: -10px;
+  flex-shrink: 0;
+}
+
+.skeletonFeedbackBadge {
+  width: 45px;
+  height: 30px;
+  border-radius: 10px;
+}

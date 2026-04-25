@@ -9,3 +9,7 @@ export { default as Star } from "./star.svg?react";
 export { default as Reccurence } from "./reccurence.svg?react";
 export { default as Comment } from "./comment.svg?react";
 export { default as MapIcon } from "./mapIcon.svg?react";
+export { default as PlannedStatus } from "./plannedStatus.svg?react";
+export { default as InProgressStatus } from "./inProgress.svg?react";
+export { default as DoneStatus } from "./doneStatus.svg?react";
+export { default as OnHoldStatus } from "./onHoldStatus.svg?react";

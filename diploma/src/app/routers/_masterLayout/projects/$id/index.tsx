@@ -1,34 +1,50 @@
-import { eventQuery } from "@entities/event";
-import { feedbackQuery } from "@entities/feedback";
 import {
   projectDetailDefaults,
-  projectDetailSchema,
-  projectQuery,
+  projectDetailSearchSchema,
+  type ProjectDetailSearch,
 } from "@entities/project";
-import { ProjectPageSkeleton } from "@pages/projects";
-import { participationQuery } from "@shared/api/participation";
-import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
+import { projectQuery } from "@entities/project";
+import {
+  projectDetailTabLoaderConfig,
+  ProjectPageSkeleton,
+} from "@pages/projects";
+import { createTabCleanerMiddleware } from "@shared/libs/search-params";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_masterLayout/projects/$id/")({
-  validateSearch: projectDetailSchema,
+  validateSearch: projectDetailSearchSchema,
   search: {
-    middlewares: [stripSearchParams(projectDetailDefaults)],
+    middlewares: [
+      createTabCleanerMiddleware(projectDetailDefaults, "overview"),
+    ],
   },
-  loader: async ({ context: { queryClient }, params: { id } }) => {
-    await Promise.all([
-      queryClient.ensureQueryData(projectQuery.id(id)),
-      queryClient.ensureQueryData(eventQuery.list({ ProjectIds: [id] })),
-    ]);
-    queryClient.prefetchInfiniteQuery(
-      participationQuery.membersInfinite({
-        entityId: id,
-        entityType: "project",
-        pageSize: 8,
-      }),
-    );
-    queryClient.prefetchInfiniteQuery(
-      feedbackQuery.infinite("project", id, { PageSize: 3 }),
-    );
+  loader: async ({ context: { queryClient }, params: { id }, location }) => {
+    const search = location.search as ProjectDetailSearch;
+    const config = projectDetailTabLoaderConfig[search.tab ?? "overview"];
+
+    const { tab, ...params } = config.schema.parse(location.search) as any;
+
+    await queryClient.ensureQueryData(projectQuery.id(id));
+
+    const query = config.query(id, params);
+
+    switch (config.queryType) {
+      case "none":
+        break;
+      case "multi":
+        await Promise.all(
+          (query as any[]).map((q) => queryClient.ensureQueryData(q)),
+        );
+        break;
+      case "infinite":
+        await queryClient.ensureInfiniteQueryData(query as any);
+        break;
+      case "query":
+        await queryClient.ensureQueryData(query as any);
+        break;
+    }
+
+    config.prefetch(queryClient, id);
   },
   pendingComponent: ProjectPageSkeleton,
 });

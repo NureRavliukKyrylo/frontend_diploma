@@ -14,16 +14,12 @@ export const TaskCardSkeleton = () => {
         <div className={baseStyles.taskInfoBlock}>
           <Skeleton className={styles.skeletonTitle} />
           <Skeleton className={styles.skeletonDescLine} />
-          <Skeleton className={styles.skeletonDescLine} />
           <Skeleton className={styles.skeletonDescLineShort} />
         </div>
 
         <div className={styles.avatarsGroup}>
           {[...Array(3)].map((_, i) => (
-            <Skeleton
-              key={i}
-              className={`${styles.avatarVolunteer} ${styles.skeletonAvatar}`}
-            />
+            <Skeleton key={i} className={styles.skeletonAvatar} />
           ))}
         </div>
       </div>

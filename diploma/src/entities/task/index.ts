@@ -21,3 +21,5 @@ export {
 export { type TaskMode } from "./model/types/TaskMode";
 export type { TaskStatus } from "./model/types/TaskStatus";
 export type { TasksRequestParams } from "./libs";
+export { TaskBoardItem } from "./ui/board-item/TaskBoardItem";
+export { TaskBoardItemSkeleton } from "./ui/board-item/TaskBoardItemSkeleton";

@@ -1,4 +1,11 @@
-import type { Project, ProjectMode } from "@entities/project";
+import type {
+  EventsSearch,
+  FeedbackSearch,
+  MembersSearch,
+  Project,
+  ProjectDetailSearch,
+  ProjectMode,
+} from "@entities/project";
 import type { Coordinates } from "@shared/config/types";
 import type { Event } from "@entities/event";
 import { OverviewTab } from "../../overview-tab";
@@ -10,6 +17,7 @@ interface ProjectTabsProps {
   userLocation?: Coordinates | null;
   events?: Event[];
   userId?: string;
+  search: Omit<ProjectDetailSearch, "tab">;
 }
 
 export const getProjectMainForms = (
@@ -26,6 +34,7 @@ export const getProjectMainForms = (
     <ActivityMembersTab
       entityId={props.project.id}
       userId={props.userId}
+      search={props.search as MembersSearch}
       entityType="project"
     />
   ),
@@ -34,8 +43,14 @@ export const getProjectMainForms = (
       entityType="project"
       userId={props.userId}
       entityId={props.project.id}
+      search={props.search as FeedbackSearch}
     />
   ),
-  events: <ProjectEventsTab projectId={props.project.id} />,
+  events: (
+    <ProjectEventsTab
+      projectId={props.project.id}
+      search={props.search as EventsSearch}
+    />
+  ),
   tasks: <></>,
 });

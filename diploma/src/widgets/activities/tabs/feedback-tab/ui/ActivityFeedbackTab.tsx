@@ -19,11 +19,13 @@ import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
+import type { FeedbackSearch } from "@entities/project";
 
 interface ActivityFeedbackTabProps {
   entityId: string;
   userId?: string;
   entityType: EntityType;
+  search: FeedbackSearch;
 }
 
 export const mockRating: Rating = {
@@ -42,6 +44,7 @@ export const ActivityFeedbackTab = ({
   entityId,
   userId,
   entityType,
+  search,
 }: ActivityFeedbackTabProps) => {
   const {
     modalType,
@@ -108,7 +111,7 @@ export const ActivityFeedbackTab = ({
               <ListWidgetSkeleton
                 className={styles.feedbackList}
                 renderSkeleton={() => <FeedbackCardSkeleton />}
-                items={9}
+                items={3}
               />
             }
           >
@@ -117,9 +120,7 @@ export const ActivityFeedbackTab = ({
               useFeedbacksQuery={useFeedbacksInfiniteQuery(
                 entityType,
                 entityId,
-                {
-                  PageSize: 3,
-                },
+                search,
               )}
               renderCard={(feedback) => {
                 const isOwner =
@@ -158,7 +159,7 @@ export const ActivityFeedbackTab = ({
                 )
               }
               renderEmpty={(feedbacks) =>
-                feedbacks.length === 0 && feedbacks ? (
+                feedbacks && feedbacks.length === 0 ? (
                   <div className={styles.emptyState}>
                     <h2>No Feedbacks yet</h2>
                     <p>Be the first one to leave a feedback</p>

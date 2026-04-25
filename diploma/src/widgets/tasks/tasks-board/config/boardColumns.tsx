@@ -1,4 +1,10 @@
 import type { TaskStatus } from "@entities/task";
+import {
+  DoneStatus,
+  InProgressStatus,
+  OnHoldStatus,
+  PlannedStatus,
+} from "@shared/assets/icons/info";
 import type { ReactNode } from "react";
 
 export interface BoardColumnConfig {
@@ -8,8 +14,8 @@ export interface BoardColumnConfig {
 }
 
 export const boardColumns: BoardColumnConfig[] = [
-  { status: "planned", title: "PLANNED", icon: <div /> },
-  { status: "inProgress", title: "IN PROGRESS", icon: <div /> },
-  { status: "done", title: "DONE", icon: <div /> },
-  { status: "hold", title: "ON HOLD", icon: <div /> },
+  { status: "planned", title: "PLANNED", icon: <PlannedStatus /> },
+  { status: "inProgress", title: "IN PROGRESS", icon: <InProgressStatus /> },
+  { status: "done", title: "DONE", icon: <DoneStatus /> },
+  { status: "hold", title: "ON HOLD", icon: <OnHoldStatus /> },
 ];

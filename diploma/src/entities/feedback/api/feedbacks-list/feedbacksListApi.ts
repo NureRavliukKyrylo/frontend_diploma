@@ -10,6 +10,7 @@ export interface FeedbacksResponse {
 export interface FeedbackSearchParams {
   Page?: number;
   PageSize?: number;
+  OrderBy?: any; //so far any
 }
 
 export const getFeedbacksEntity = async (

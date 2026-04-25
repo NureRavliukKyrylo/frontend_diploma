@@ -6,12 +6,14 @@ import { getHttpErrorInfo } from "@shared/libs/error";
 import { ErrorBoundary } from "react-error-boundary";
 import { EventsListWidget } from "@widgets/events";
 import { EventCard, useEventsListQuery } from "@entities/event";
+import type { EventsSearch } from "@entities/project";
 
 interface ProjectEventsTab {
   projectId: string;
+  search: EventsSearch;
 }
 
-export const ProjectEventsTab = ({ projectId }: ProjectEventsTab) => {
+export const ProjectEventsTab = ({ search, projectId }: ProjectEventsTab) => {
   return (
     <>
       <ErrorBoundary
@@ -39,7 +41,7 @@ export const ProjectEventsTab = ({ projectId }: ProjectEventsTab) => {
             className={styles.eventsProjectList}
             useEventsQuery={useEventsListQuery({
               ProjectIds: [projectId],
-              PageSize: 9,
+              ...search,
             })}
           />
         </Suspense>

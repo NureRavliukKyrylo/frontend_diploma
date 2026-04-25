@@ -1,2 +1,3 @@
 export { ProjectPage } from "./project-page/main/ui/ProjectPage";
 export { ProjectPageSkeleton } from "./project-page/main/ui/ProjectPageSkeleton";
+export { projectDetailTabLoaderConfig } from "./project-page/main/config/projectTabLoaderConfig";

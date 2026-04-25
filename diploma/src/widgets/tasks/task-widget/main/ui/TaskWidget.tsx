@@ -100,7 +100,7 @@ export const TaskWidget = () => {
                   {task?.endAt && (
                     <span className={`${styles.metaChip} ${styles.calendar}`}>
                       <Calendar className={styles.calendarImg} />
-                      <span>{formatDateToText(task.endAt)}</span>
+                      <span>{formatDateToText(task.endAt, true)}</span>
                     </span>
                   )}
                   {policyConfig && (

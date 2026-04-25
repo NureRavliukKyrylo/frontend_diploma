@@ -29,8 +29,19 @@ export { ProjectControlCard } from "./ui/project-card/control/ProjectControlCard
 export { projectKeys } from "./model/queries/project-query/projectQuery";
 export { ProjectControlCardSkeleton } from "./ui/project-card/control/ProjectControlCardSkeleton";
 export {
-  projectDetailSchema,
+  projectDetailSearchSchema,
   projectDetailDefaults,
+  type ProjectDetailSearch,
+  type EventsSearch,
+  type FeedbackSearch,
+  type MembersSearch,
+  type OverviewSearch,
+  type TasksSearch,
+  eventsSchema,
+  feedbackSchema,
+  membersSchema,
+  overviewSchema,
+  tasksSchema,
 } from "./libs/search-shema/projectDetailSearchSchema";
 export type { ProjectMode } from "./model/types";
 export { useProjectsInfiniteQuery } from "./model/hooks/useProjectsInfiniteQuery";

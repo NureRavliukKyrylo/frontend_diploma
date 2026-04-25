@@ -12,7 +12,6 @@ import {
   TaskFiltersWidget,
   TasksListWidget,
   TaskWidget,
-  TaskWidgetSkeleton,
   useTaskDrawer,
 } from "@widgets/tasks";
 import { SearchBar } from "@shared/ui/inputs";
@@ -92,7 +91,11 @@ export const TasksTab = ({ search }: TasksTabProps) => {
               <Suspense
                 fallback={
                   <ListWidgetSkeleton
-                    renderSkeleton={TaskCardSkeleton}
+                    renderSkeleton={() => (
+                      <div className={styles.skeletonWrapper}>
+                        <TaskCardSkeleton />
+                      </div>
+                    )}
                     className={styles.tasksListWrapper}
                   />
                 }
