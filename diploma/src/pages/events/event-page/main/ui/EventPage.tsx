@@ -6,7 +6,11 @@ import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import { JoinProjectButton } from "@features/project";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMapUserLocation } from "@features/map";
-import { eventQuery, type EventMode } from "@entities/event";
+import {
+  eventDetailDefaults,
+  eventQuery,
+  type EventMode,
+} from "@entities/event";
 import { formatDateToText } from "@shared/libs/date";
 import { Calendar, Reccurence } from "@shared/assets/icons/info";
 import { getEventMainForms } from "../config/eventMainForms";
@@ -16,14 +20,17 @@ import { getPolicyStatusConfig } from "@shared/libs/entity";
 
 export const EventPage = () => {
   const { id } = useParams({ from: "/_masterLayout/events/$id/" });
-  const search = useSearch({ from: "/_masterLayout/events/$id/" });
+  const { tab, ...search } = useSearch({ from: "/_masterLayout/events/$id/" });
   const { data: event } = useSuspenseQuery(eventQuery.id(id));
   const { user, coordinates: userLocation } = useMapUserLocation();
   const navigate = useNavigate({ from: "/events/$id/" });
 
-  const activeTab = search.tab;
   const handleTabChange = (tab: EventMode) => {
-    navigate({ params: { id }, search: { tab }, resetScroll: false });
+    navigate({
+      params: { id },
+      search: eventDetailDefaults[tab],
+      resetScroll: false,
+    });
   };
 
   const policyConfig = event?.joinPolicy
@@ -34,6 +41,7 @@ export const EventPage = () => {
     event,
     userLocation,
     userId: user?.id,
+    search,
   });
 
   return (
@@ -133,7 +141,7 @@ export const EventPage = () => {
       <div className={styles.toggleWrapper}>
         <Toggle
           tabs={eventMainTabs}
-          activeValue={activeTab}
+          activeValue={tab}
           onChange={handleTabChange}
           buttonClassName={styles.toggleEventButton}
           activeButtonClassName={styles.toggleEventButtonActive}
@@ -143,13 +151,13 @@ export const EventPage = () => {
       </div>
       <AnimatePresence mode="wait">
         <motion.div
-          key={activeTab}
+          key={tab}
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.2 }}
         >
-          {forms[activeTab]}
+          {forms[tab]}
         </motion.div>
       </AnimatePresence>
     </div>

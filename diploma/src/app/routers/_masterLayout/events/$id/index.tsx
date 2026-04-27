@@ -1,28 +1,46 @@
 import {
   eventDetailDefaults,
-  eventDetailSchema,
+  eventDetailSearchSchema,
   eventQuery,
+  type EventDetailSearch,
 } from "@entities/event";
-import { feedbackQuery } from "@entities/feedback";
-import { EventPageSkeleton } from "@pages/events";
-import { participationQuery } from "@shared/api/participation";
-import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
+import { eventDetailTabLoaderConfig, EventPageSkeleton } from "@pages/events";
+import { createTabCleanerMiddleware } from "@shared/libs/search-params";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_masterLayout/events/$id/")({
-  validateSearch: eventDetailSchema,
-  search: { middlewares: [stripSearchParams(eventDetailDefaults)] },
-  loader: async ({ context: { queryClient }, params: { id } }) => {
+  validateSearch: eventDetailSearchSchema,
+  search: {
+    middlewares: [createTabCleanerMiddleware(eventDetailDefaults, "overview")],
+  },
+  loader: async ({ context: { queryClient }, location, params: { id } }) => {
+    const search = location.search as EventDetailSearch;
+
+    const config = eventDetailTabLoaderConfig[search.tab ?? "overview"];
+
+    const { tab, ...params } = config.schema.parse(location.search) as any;
+
     await queryClient.ensureQueryData(eventQuery.id(id));
-    queryClient.prefetchInfiniteQuery(
-      participationQuery.membersInfinite({
-        entityId: id,
-        entityType: "event",
-        pageSize: 8,
-      }),
-    );
-    queryClient.prefetchInfiniteQuery(
-      feedbackQuery.infinite("event", id, { PageSize: 3 }),
-    );
+
+    const query = config.query(id, params);
+
+    switch (config.queryType) {
+      case "none":
+        break;
+      case "multi":
+        await Promise.all(
+          (query as any[]).map((q) => queryClient.ensureQueryData(q)),
+        );
+        break;
+      case "infinite":
+        await queryClient.ensureInfiniteQueryData(query as any);
+        break;
+      case "query":
+        await queryClient.ensureQueryData(query as any);
+        break;
+    }
+
+    config.prefetch(queryClient, id);
   },
   pendingComponent: EventPageSkeleton,
 });

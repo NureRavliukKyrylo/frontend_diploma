@@ -1,10 +1,14 @@
+import { taskDrawerDefaults } from "@entities/task";
 import {
   activitiesTabLoaderConfig,
   listActivitiesSearchDefaults,
   listActivitiesSearchSchema,
   type ListActivitiesSearch,
 } from "@pages/activities";
-import { createTabCleanerMiddleware } from "@shared/libs/search-params";
+import {
+  createDrawerCleanerMiddleware,
+  createTabCleanerMiddleware,
+} from "@shared/libs/search-params";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_masterLayout/activities/")({
@@ -12,6 +16,13 @@ export const Route = createFileRoute("/_masterLayout/activities/")({
   search: {
     middlewares: [
       createTabCleanerMiddleware(listActivitiesSearchDefaults, "projects"),
+      createDrawerCleanerMiddleware({
+        idKey: "taskId",
+        modeKey: "taskMode",
+        drawerKeys: ["taskId", "taskMode", "DrawerPageSize", "DrawerOrderBy"],
+        modeDefaults: taskDrawerDefaults,
+        fallbackMode: "overview",
+      }),
     ],
   },
   loader: async ({ context: { queryClient }, location }) => {

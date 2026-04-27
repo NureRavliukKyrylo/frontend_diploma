@@ -3,17 +3,13 @@ import {
   TaskCard,
   TaskCardSkeleton,
   useTasksListQuery,
+  type TaskDetailSearch,
   type TaskSearchParams,
 } from "@entities/task";
 import { useTasksTab } from "../model/useTasksTab";
 import styles from "./TasksTab.module.scss";
 import { ToggleDropdownButton } from "@shared/ui/buttons";
-import {
-  TaskFiltersWidget,
-  TasksListWidget,
-  TaskWidget,
-  useTaskDrawer,
-} from "@widgets/tasks";
+import { TaskFiltersWidget, TasksListWidget, TaskWidget } from "@widgets/tasks";
 import { SearchBar } from "@shared/ui/inputs";
 import { SortDropDown } from "@shared/ui/drop-down";
 import { AnimatePresence, motion } from "framer-motion";
@@ -29,13 +25,15 @@ import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import { Pagination } from "@shared/ui";
 import { Drawer } from "@mui/material";
+import { useActivitiesTaskDrawer } from "../model/useActivitiesTaskDrawer";
 
 interface TasksTabProps {
   search: TaskSearchParams;
 }
 
 export const TasksTab = ({ search }: TasksTabProps) => {
-  const { isOpen, openTask, closeTask, taskId } = useTaskDrawer();
+  const { isOpen, openTask, closeTask, taskId, handleModeChange, taskMode } =
+    useActivitiesTaskDrawer();
   const { taskId: _, taskMode: __, ...tasksSearch } = search;
   const {
     isFilterOpen,
@@ -118,10 +116,7 @@ export const TasksTab = ({ search }: TasksTabProps) => {
                           whileHover="hover"
                           className={styles.taskCardMotion}
                           onClick={() => {
-                            const hasLocation = !!(
-                              task.event?.location || task.project?.location
-                            );
-                            openTask(task.id, hasLocation);
+                            openTask(task.id);
                           }}
                         >
                           <TaskCard task={task} />
@@ -160,7 +155,14 @@ export const TasksTab = ({ search }: TasksTabProps) => {
                 padding: 0,
               }}
             >
-              {taskId && <TaskWidget />}
+              {taskId && (
+                <TaskWidget
+                  search={search as TaskDetailSearch}
+                  handleModeChange={handleModeChange}
+                  taskMode={taskMode}
+                  taskId={taskId}
+                />
+              )}
             </div>
           </Drawer>
         </div>

@@ -7,7 +7,10 @@ export const useCategoryProjectFilters = () => {
   const navigate = useNavigate({ from: "/categories/$id/" });
 
   const nav = (updater: (prev: ProjectSearchParams) => ProjectSearchParams) =>
-    navigate({ search: updater, resetScroll: false });
+    navigate({
+      search: (prev) => updater(prev as ProjectSearchParams),
+      resetScroll: false,
+    });
 
   return {
     onStartDateChange: (date: string | undefined) =>

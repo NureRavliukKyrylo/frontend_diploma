@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { tasksTabBaseSchema } from "./taskTabSchema";
-import { taskDrawerSchema } from "./taskDrawerSchema";
+import { taskDrawerDefaults } from "./taskDrawerSchema";
 
 export const tasksSearchDefaults = {
   tab: "tasks" as const,
@@ -8,14 +8,23 @@ export const tasksSearchDefaults = {
   Page: 1,
   PageSize: 9,
   taskId: undefined,
-  taskMode: "overview" as const,
+  ...taskDrawerDefaults.overview,
 };
 
-export const tasksFiltersSchema = z.object({});
+export const tasksFiltersSchema = z.object({
+  taskId: z.string().optional(),
+  taskMode: z
+    .enum(["overview", "members", "feedbacks"])
+    .optional()
+    .catch(undefined),
+});
 
 export const tasksSearchSchema = tasksFiltersSchema
   .extend(tasksTabBaseSchema.shape)
-  .extend(taskDrawerSchema.shape);
+  .extend({
+    DrawerPageSize: z.number().optional(),
+    DrawerOrderBy: z.enum(["default", "date", "asc", "desc"]).optional(),
+  });
 
 export type TaskSearchParams = z.infer<typeof tasksSearchSchema>;
 export type TasksRequestParams = Omit<

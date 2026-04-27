@@ -1,28 +1,36 @@
-import type { TaskMode, TaskSearchParams } from "@entities/task";
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import { type TaskMode } from "@entities/task";
 
-export const useTaskDrawer = () => {
-  const search = useSearch({
-    from: "/_masterLayout/activities/",
-  }) as TaskSearchParams;
-  const navigate = useNavigate({ from: "/activities/" });
+export type TaskDrawerSearch = {
+  taskId?: string;
+  taskMode?: "overview" | "members" | "feedbacks";
+  DrawerPageSize?: number;
+  DrawerOrderBy?: "default" | "date" | "asc" | "desc";
+};
 
-  const nav = (updater: (prev: TaskSearchParams) => TaskSearchParams) =>
-    navigate({
-      search: (prev) => updater(prev as TaskSearchParams),
-      resetScroll: false,
-    });
+type NavFn = (updater: (prev: TaskDrawerSearch) => TaskDrawerSearch) => void;
 
-  const openTask = (taskId: string, hasLocation?: boolean) => {
-    const taskMode: TaskMode = hasLocation ? "overview" : "members";
+export const useTaskDrawer = (search: TaskDrawerSearch, nav: NavFn) => {
+  const openTask = (taskId: string, taskMode: TaskMode = "overview") => {
     nav((prev) => ({ ...prev, taskId, taskMode }));
   };
 
   const closeTask = () =>
-    nav((prev) => ({ ...prev, taskId: undefined, taskMode: undefined }));
+    nav((prev) => ({
+      ...prev,
+      taskId: undefined,
+      taskMode: undefined,
+      DrawerPageSize: undefined,
+      DrawerOrderBy: undefined,
+    }));
 
-  const handleModeChange = (taskMode: TaskMode) =>
-    nav((prev) => ({ ...prev, taskMode }));
+  const handleModeChange = (taskMode: TaskMode) => {
+    nav((prev) => ({
+      ...prev,
+      taskMode,
+      DrawerPageSize: undefined,
+      DrawerOrderBy: undefined,
+    }));
+  };
 
   return {
     taskId: search.taskId,

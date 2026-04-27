@@ -38,6 +38,7 @@ export const ProjectsTab = ({ search }: ProjectsTabProps) => {
     router,
   } = useProjectsTab(search);
 
+  console.log(search.OrderBy);
   return (
     <div className={styles.mainProjectsSection}>
       <ErrorBoundary

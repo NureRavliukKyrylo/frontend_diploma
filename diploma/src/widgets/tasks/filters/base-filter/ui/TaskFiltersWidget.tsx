@@ -9,10 +9,10 @@ import { OrganizationsListFilter } from "@features/organization";
 import { useEventsInfiniteQuery } from "@entities/event";
 import { ProjectsListFilter } from "@features/project";
 import { EventsListFilter } from "@features/event";
-import type { TaskSearchParams } from "@entities/task";
+import type { TasksRequestParams } from "@entities/task";
 
 interface TaskFiltersWidgetProps {
-  search: TaskSearchParams;
+  search: TasksRequestParams;
 }
 
 export const TaskFiltersWidget = ({ search }: TaskFiltersWidgetProps) => {

@@ -19,13 +19,13 @@ import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
-import type { FeedbackSearch } from "@entities/project";
 
 interface ActivityFeedbackTabProps {
   entityId: string;
   userId?: string;
   entityType: EntityType;
-  search: FeedbackSearch;
+  PageSize?: number;
+  OrderBy: "default" | "date" | "asc" | "desc";
 }
 
 export const mockRating: Rating = {
@@ -44,7 +44,8 @@ export const ActivityFeedbackTab = ({
   entityId,
   userId,
   entityType,
-  search,
+  PageSize,
+  OrderBy,
 }: ActivityFeedbackTabProps) => {
   const {
     modalType,
@@ -120,7 +121,7 @@ export const ActivityFeedbackTab = ({
               useFeedbacksQuery={useFeedbacksInfiniteQuery(
                 entityType,
                 entityId,
-                search,
+                { PageSize, OrderBy },
               )}
               renderCard={(feedback) => {
                 const isOwner =

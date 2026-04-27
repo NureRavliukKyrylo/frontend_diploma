@@ -39,12 +39,13 @@ export const projectSearchSchema = projectFiltersSchema
 export const mapProjectSchema = projectFiltersSchema
   .extend(mapBoundsSchema.shape)
   .extend(paginationSchema.shape)
+  .extend(projectsTabBaseSchema.shape)
+  .omit({ tab: true, PageSize: true, OrderBy: true })
   .extend({
     CategoryIds: z.array(z.string()).optional().catch([]),
     PageSize: z.number().min(1).default(7).optional(),
     Zoom: z.number().optional(),
-  })
-  .extend(projectsTabBaseSchema.shape);
+  });
 
 export const projectBaseSchema = projectFiltersWithCategorySchema
   .extend(mapBoundsSchema.shape)

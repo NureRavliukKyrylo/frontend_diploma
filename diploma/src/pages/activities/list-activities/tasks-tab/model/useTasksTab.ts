@@ -1,20 +1,20 @@
 import {
   taskQuery,
-  type TaskSearchParams,
   type TaskSortValues,
+  type TasksRequestParams,
 } from "@entities/task";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
-export const useTasksTab = (search: TaskSearchParams) => {
+export const useTasksTab = (search: TasksRequestParams) => {
   const navigate = useNavigate({ from: "/activities/" });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const { data: tasks } = useQuery(taskQuery.list(search));
 
-  const nav = (updater: (prev: TaskSearchParams) => TaskSearchParams) =>
+  const nav = (updater: (prev: TasksRequestParams) => TasksRequestParams) =>
     navigate({
-      search: (prev) => updater(prev as TaskSearchParams),
+      search: (prev) => updater(prev as TasksRequestParams),
       resetScroll: false,
     });
 
@@ -25,7 +25,9 @@ export const useTasksTab = (search: TaskSearchParams) => {
     nav((prev) => ({ ...prev, OrderBy: value, Page: 1 }));
 
   const handlePageChange = (page: number) =>
-    nav((prev) => ({ ...prev, Page: page }));
+    navigate({
+      search: (prev) => ({ ...prev, Page: page }),
+    });
 
   return {
     search,

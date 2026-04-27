@@ -34,7 +34,7 @@ export const getProjectMainForms = (
     <ActivityMembersTab
       entityId={props.project.id}
       userId={props.userId}
-      search={props.search as MembersSearch}
+      PageSize={(props.search as MembersSearch).PageSize}
       entityType="project"
     />
   ),
@@ -43,7 +43,8 @@ export const getProjectMainForms = (
       entityType="project"
       userId={props.userId}
       entityId={props.project.id}
-      search={props.search as FeedbackSearch}
+      PageSize={(props.search as FeedbackSearch).PageSize}
+      OrderBy={(props.search as FeedbackSearch).OrderBy}
     />
   ),
   events: (

@@ -2,6 +2,7 @@ import z from "zod";
 import { projectsTabSchema, projectsTabDefaults } from "@entities/project";
 import { eventsTabSchema, eventsTabDefaults } from "@entities/event";
 import { tasksTabSchema, tasksTabDefaults } from "@entities/task";
+import type { MyActivitiesMode } from "@widgets/activities";
 
 export const myActivitiesSearchDefaults = {
   projects: projectsTabDefaults,
@@ -15,6 +16,11 @@ export const myActivitiesSearchSchema = z
     eventsTabSchema,
     tasksTabSchema,
   ])
-  .catch({ ...projectsTabDefaults });
+  .catch((ctx) => {
+    const input = ctx.value as any;
+    const tab = input?.tab ?? "projects";
+    const defaults = myActivitiesSearchDefaults[tab as MyActivitiesMode];
+    return { ...defaults, ...input };
+  });
 
 export type MyActivitiesSearch = z.infer<typeof myActivitiesSearchSchema>;

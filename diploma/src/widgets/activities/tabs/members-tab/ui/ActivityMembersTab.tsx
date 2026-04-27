@@ -9,20 +9,19 @@ import { getHttpErrorInfo } from "@shared/libs/error";
 import { ErrorBoundary } from "react-error-boundary";
 import { TeamMembers } from "@shared/assets/images/entity-information";
 import type { EntityType } from "@shared/config/types";
-import type { MembersSearch } from "@entities/project";
 
 interface ActivityMembersTabProps {
   entityId: string;
   userId?: string;
   entityType: EntityType;
-  search: MembersSearch;
+  PageSize?: number;
 }
 
 export const ActivityMembersTab = ({
   entityType,
   entityId,
   userId,
-  search,
+  PageSize,
 }: ActivityMembersTabProps) => {
   return (
     <ErrorBoundary
@@ -59,7 +58,7 @@ export const ActivityMembersTab = ({
             className={styles.membersProjectList}
             useMembersQuery={useMembersInfiniteQuery({
               entityId,
-              pageSize: search.PageSize,
+              pageSize: PageSize,
               entityType,
             })}
             renderPagination={({

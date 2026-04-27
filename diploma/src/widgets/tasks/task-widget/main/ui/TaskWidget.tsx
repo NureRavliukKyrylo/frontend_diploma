@@ -8,10 +8,13 @@ import { useMapUserLocation } from "@features/map";
 import { formatDateToText } from "@shared/libs/date";
 import { Calendar, Reccurence } from "@shared/assets/icons/info";
 import { Arrow } from "@shared/assets/icons/actions";
-import { taskQuery } from "@entities/task";
+import {
+  taskQuery,
+  type TaskDetailSearch,
+  type TaskMode,
+} from "@entities/task";
 import { getTaskMainForms } from "../config/taskMainForms";
 import { taskMainTabs } from "../config/taskMainTabs";
-import { useTaskDrawer } from "../model/useTaskDrawer";
 import {
   getEntityStatusConfig,
   getPolicyStatusConfig,
@@ -19,9 +22,19 @@ import {
 import { TaskWidgetSkeleton } from "./TaskWidgetSkeleton";
 import { getHttpErrorInfo } from "@shared/libs/error";
 
-export const TaskWidget = () => {
-  const { taskId, taskMode, handleModeChange } = useTaskDrawer();
+interface TaskWidgetProps {
+  search: TaskDetailSearch;
+  taskId?: string;
+  taskMode: TaskMode;
+  handleModeChange: (taskMode: TaskMode) => void;
+}
 
+export const TaskWidget = ({
+  search,
+  handleModeChange,
+  taskMode,
+  taskId,
+}: TaskWidgetProps) => {
   const {
     data: task,
     isLoading,
@@ -44,16 +57,6 @@ export const TaskWidget = () => {
       </div>
     );
 
-  const hasLocation = !!(task?.event?.location || task?.project?.location);
-
-  const availableTabs = hasLocation
-    ? taskMainTabs
-    : taskMainTabs.filter((t) => t.value !== "overview");
-
-  const safeMode = availableTabs.some((t) => t.value === taskMode)
-    ? taskMode
-    : "members";
-
   const statusConfig = task ? getEntityStatusConfig(task.status) : null;
   const policyConfig = task?.joinPolicy
     ? getPolicyStatusConfig(task.joinPolicy)
@@ -64,6 +67,7 @@ export const TaskWidget = () => {
         task,
         userLocation,
         userId: user?.id,
+        search,
       })
     : null;
 
@@ -187,8 +191,8 @@ export const TaskWidget = () => {
       <div className={styles.contentBlock}>
         <div className={styles.toggleWrapper}>
           <Toggle
-            tabs={availableTabs}
-            activeValue={safeMode}
+            tabs={taskMainTabs}
+            activeValue={taskMode}
             onChange={handleModeChange}
             buttonClassName={styles.toggleTaskButton}
             activeButtonClassName={styles.toggleTaskButtonActive}

@@ -26,7 +26,9 @@ export const useProjectsTab = (search: ProjectSearchParams) => {
     nav((prev) => ({ ...prev, OrderBy: value, Page: 1 }));
 
   const handlePageChange = (page: number) =>
-    nav((prev) => ({ ...prev, Page: page }));
+    navigate({
+      search: (prev) => ({ ...prev, Page: page }),
+    });
 
   return {
     search,

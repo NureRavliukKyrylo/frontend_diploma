@@ -26,5 +26,14 @@ export {
 export { type EventMode } from "./model/types/EventMode";
 export {
   eventDetailDefaults,
-  eventDetailSchema,
+  eventDetailSearchSchema,
+  feedbackSchema,
+  membersSchema,
+  overviewSchema,
+  tasksSchema,
+  type EventDetailSearch,
+  type FeedbackEventSearch,
+  type MembersEventSearch,
+  type OverviewEventSearch,
+  type TasksEventSearch,
 } from "./libs/search-schema/eventDetailSearchSchema";
