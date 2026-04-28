@@ -1,11 +1,5 @@
-import { type TaskMode } from "@entities/task";
-
-export type TaskDrawerSearch = {
-  taskId?: string;
-  taskMode?: "overview" | "members" | "feedbacks";
-  DrawerPageSize?: number;
-  DrawerOrderBy?: "default" | "date" | "asc" | "desc";
-};
+import type { FeedbackSortValues } from "@entities/feedback";
+import { type TaskDrawerSearch, type TaskMode } from "@entities/task";
 
 type NavFn = (updater: (prev: TaskDrawerSearch) => TaskDrawerSearch) => void;
 
@@ -32,6 +26,13 @@ export const useTaskDrawer = (search: TaskDrawerSearch, nav: NavFn) => {
     }));
   };
 
+  const handleSortChange = (value: FeedbackSortValues) => {
+    nav((prev) => ({
+      ...prev,
+      DrawerOrderBy: value,
+    }));
+  };
+
   return {
     taskId: search.taskId,
     taskMode: search.taskMode ?? "overview",
@@ -39,5 +40,6 @@ export const useTaskDrawer = (search: TaskDrawerSearch, nav: NavFn) => {
     openTask,
     closeTask,
     handleModeChange,
+    handleSortChange,
   };
 };

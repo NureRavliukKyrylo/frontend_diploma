@@ -5,7 +5,9 @@ import { FeedbacksListWidget } from "@widgets/feedback";
 import {
   FeedbackCardSkeleton,
   FeedbackControlCard,
+  sortingFeedbackItems,
   useFeedbacksInfiniteQuery,
+  type FeedbackSortValues,
 } from "@entities/feedback";
 import { useFeedbackTab } from "../model/useFeedbackTab";
 import {
@@ -19,13 +21,15 @@ import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
+import { SortDropDown } from "@shared/ui/drop-down";
 
 interface ActivityFeedbackTabProps {
   entityId: string;
   userId?: string;
   entityType: EntityType;
   PageSize?: number;
-  OrderBy: "default" | "date" | "asc" | "desc";
+  OrderBy: FeedbackSortValues;
+  handleSort: (value: FeedbackSortValues) => void;
 }
 
 export const mockRating: Rating = {
@@ -46,6 +50,7 @@ export const ActivityFeedbackTab = ({
   entityType,
   PageSize,
   OrderBy,
+  handleSort,
 }: ActivityFeedbackTabProps) => {
   const {
     modalType,
@@ -90,6 +95,13 @@ export const ActivityFeedbackTab = ({
             >
               Submit Feedback
             </BaseButtonWrapper>
+            <div className={styles.sortWrapper}>
+              <SortDropDown
+                options={sortingFeedbackItems}
+                onSelect={handleSort}
+                value={OrderBy ?? "Default"}
+              />
+            </div>
           </div>
         </div>
       </div>

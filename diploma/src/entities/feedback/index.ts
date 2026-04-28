@@ -9,3 +9,7 @@ export { useFeedbacksInfiniteQuery } from "./model/hooks/get-feedback/useFeedbac
 export { FeedbackCard } from "./ui/feedback-card/list-item/FeedbackCard";
 export { FeedbackControlCard } from "./ui/feedback-card/control/FeedbackControlCard";
 export { FeedbackCardSkeleton } from "./ui/feedback-card/list-item/FeedbackCardSkeleton";
+export {
+  type FeedbackSortValues,
+  sortingFeedbackItems,
+} from "./config/sortingFeedbackItems";

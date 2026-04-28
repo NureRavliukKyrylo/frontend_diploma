@@ -1,3 +1,5 @@
+@use "@shared/assets/styles" as *;
+
 .eventsProjectList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -5,4 +7,19 @@
   justify-content: center;
   gap: 40px;
   align-items: stretch;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 300px;
+
+  h2 {
+    @include font-base(30px, 800);
+    color: rgba(0, 0, 0, 0.7);
+  }
 }

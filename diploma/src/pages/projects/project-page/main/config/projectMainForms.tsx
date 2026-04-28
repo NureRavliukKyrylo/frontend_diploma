@@ -11,6 +11,9 @@ import type { Event } from "@entities/event";
 import { OverviewTab } from "../../overview-tab";
 import { ProjectEventsTab } from "../../events-tab";
 import { ActivityFeedbackTab, ActivityMembersTab } from "@widgets/activities";
+import type { FeedbackSortValues } from "@entities/feedback";
+import type { TaskDrawerSearch, TasksRequestParams } from "@entities/task";
+import { TasksTab } from "../../tasks-tab";
 
 interface ProjectTabsProps {
   project: Project;
@@ -18,6 +21,8 @@ interface ProjectTabsProps {
   events?: Event[];
   userId?: string;
   search: Omit<ProjectDetailSearch, "tab">;
+  filters?: Omit<TasksRequestParams, "Status">;
+  handleSort: (value: FeedbackSortValues) => void;
 }
 
 export const getProjectMainForms = (
@@ -45,6 +50,7 @@ export const getProjectMainForms = (
       entityId={props.project.id}
       PageSize={(props.search as FeedbackSearch).PageSize}
       OrderBy={(props.search as FeedbackSearch).OrderBy}
+      handleSort={props.handleSort}
     />
   ),
   events: (
@@ -53,5 +59,10 @@ export const getProjectMainForms = (
       search={props.search as EventsSearch}
     />
   ),
-  tasks: <></>,
+  tasks: (
+    <TasksTab
+      search={props.search as TaskDrawerSearch}
+      filters={props.filters}
+    />
+  ),
 });

@@ -2,9 +2,9 @@ import type { TaskDrawerSearch } from "@entities/task";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useTaskDrawer } from "@widgets/tasks";
 
-export const useActivitiesTaskDrawer = () => {
-  const search = useSearch({ from: "/_masterLayout/activities/" });
-  const navigate = useNavigate({ from: "/activities/" });
+export const useTasksTabProject = () => {
+  const search = useSearch({ from: "/_masterLayout/projects/$id/" });
+  const navigate = useNavigate({ from: "/projects/$id/" });
 
   return useTaskDrawer(search as TaskDrawerSearch, (updater) => {
     navigate({

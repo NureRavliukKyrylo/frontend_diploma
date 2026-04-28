@@ -8,12 +8,17 @@ import type {
 } from "@entities/event";
 import { ActivityFeedbackTab, ActivityMembersTab } from "@widgets/activities";
 import { OverviewTab } from "../../overview-tab";
+import type { FeedbackSortValues } from "@entities/feedback";
+import { TasksTab } from "../../tasks-tab";
+import type { TaskDrawerSearch, TasksRequestParams } from "@entities/task";
 
 interface EventTabsProps {
   event: Event;
   userLocation?: Coordinates | null;
   userId?: string;
   search: Omit<EventDetailSearch, "tab">;
+  handleSort: (value: FeedbackSortValues) => void;
+  filters?: Omit<TasksRequestParams, "Status">;
 }
 
 export const getEventMainForms = (
@@ -37,7 +42,13 @@ export const getEventMainForms = (
       entityId={props.event.id}
       PageSize={(props.search as FeedbackEventSearch).PageSize}
       OrderBy={(props.search as FeedbackEventSearch).OrderBy}
+      handleSort={props.handleSort}
     />
   ),
-  tasks: <></>,
+  tasks: (
+    <TasksTab
+      search={props.search as TaskDrawerSearch}
+      filters={props.filters}
+    />
+  ),
 });

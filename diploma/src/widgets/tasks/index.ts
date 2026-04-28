@@ -4,3 +4,4 @@ export { MyTasksFilterWidget } from "./filters/my-tasks-filter/MyTasksFilterWidg
 export { TaskWidget } from "./task-widget/main/ui/TaskWidget";
 export { useTaskDrawer } from "./task-widget/main/model/useTaskDrawer";
 export { TaskWidgetSkeleton } from "./task-widget/main/ui/TaskWidgetSkeleton";
+export { TaskBoard } from "./tasks-board/ui/board/TaskBoard";

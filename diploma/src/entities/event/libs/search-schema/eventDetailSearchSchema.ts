@@ -11,7 +11,7 @@ export const eventDetailDefaults = {
   feedback: {
     tab: "feedback" as const,
     PageSize: 3,
-    OrderBy: "default" as const,
+    OrderBy: "Default" as const,
   },
   tasks: {
     tab: "tasks" as const,
@@ -32,9 +32,9 @@ export const feedbackSchema = z.object({
   tab: z.literal("feedback"),
   PageSize: z.number().default(3).catch(3),
   OrderBy: z
-    .enum(["default", "date", "asc", "desc"])
-    .default("default")
-    .catch("default"),
+    .enum(["Default", "Newest", "Latest"])
+    .default("Default")
+    .catch("Default"),
 });
 
 export const tasksSchema = z.object({

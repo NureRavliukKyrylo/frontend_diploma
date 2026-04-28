@@ -1,32 +1,24 @@
 import styles from "./TaskWidget.module.scss";
-import { useQuery } from "@tanstack/react-query";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import { JoinProjectButton } from "@features/project";
 import { AnimatePresence, motion } from "framer-motion";
-import { useMapUserLocation } from "@features/map";
 import { formatDateToText } from "@shared/libs/date";
 import { Calendar, Reccurence } from "@shared/assets/icons/info";
 import { Arrow } from "@shared/assets/icons/actions";
-import {
-  taskQuery,
-  type TaskDetailSearch,
-  type TaskMode,
-} from "@entities/task";
-import { getTaskMainForms } from "../config/taskMainForms";
+import { type TaskDrawerSearch, type TaskMode } from "@entities/task";
 import { taskMainTabs } from "../config/taskMainTabs";
-import {
-  getEntityStatusConfig,
-  getPolicyStatusConfig,
-} from "@shared/libs/entity";
 import { TaskWidgetSkeleton } from "./TaskWidgetSkeleton";
 import { getHttpErrorInfo } from "@shared/libs/error";
+import type { FeedbackSortValues } from "@entities/feedback";
+import { useTaskWidget } from "../model/useTaskWidget";
 
 interface TaskWidgetProps {
-  search: TaskDetailSearch;
+  search: TaskDrawerSearch;
   taskId?: string;
   taskMode: TaskMode;
   handleModeChange: (taskMode: TaskMode) => void;
+  handleSort: (value: FeedbackSortValues) => void;
 }
 
 export const TaskWidget = ({
@@ -34,18 +26,10 @@ export const TaskWidget = ({
   handleModeChange,
   taskMode,
   taskId,
+  handleSort,
 }: TaskWidgetProps) => {
-  const {
-    data: task,
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
-    ...taskQuery.id(taskId!),
-    enabled: !!taskId,
-  });
-
-  const { user, coordinates: userLocation } = useMapUserLocation();
+  const { task, isLoading, isError, error, statusConfig, policyConfig, forms } =
+    useTaskWidget({ taskId, search, handleSort });
 
   if (isLoading) return <TaskWidgetSkeleton />;
 
@@ -56,20 +40,6 @@ export const TaskWidget = ({
         <p className="errorHint">Try reloading the page or come back later.</p>
       </div>
     );
-
-  const statusConfig = task ? getEntityStatusConfig(task.status) : null;
-  const policyConfig = task?.joinPolicy
-    ? getPolicyStatusConfig(task.joinPolicy)
-    : null;
-
-  const forms = task
-    ? getTaskMainForms({
-        task,
-        userLocation,
-        userId: user?.id,
-        search,
-      })
-    : null;
 
   return (
     <div className={styles.wrapperTaskWidget}>

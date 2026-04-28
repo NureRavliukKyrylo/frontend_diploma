@@ -21,6 +21,7 @@ import { Route as MasterLayoutSkillsIndexRouteImport } from './routers/_masterLa
 import { Route as MasterLayoutProfileIndexRouteImport } from './routers/_masterLayout/profile/index'
 import { Route as MasterLayoutOrganizationsIndexRouteImport } from './routers/_masterLayout/organizations/index'
 import { Route as MasterLayoutCategoriesIndexRouteImport } from './routers/_masterLayout/categories/index'
+import { Route as MasterLayoutCalendarIndexRouteImport } from './routers/_masterLayout/calendar/index'
 import { Route as MasterLayoutActivitiesIndexRouteImport } from './routers/_masterLayout/activities/index'
 import { Route as MasterLayoutTasksIdIndexRouteImport } from './routers/_masterLayout/tasks/$id/index'
 import { Route as MasterLayoutProjectsIdIndexRouteImport } from './routers/_masterLayout/projects/$id/index'
@@ -127,6 +128,12 @@ const MasterLayoutCategoriesIndexRoute =
       (d) => d.Route,
     ),
   )
+const MasterLayoutCalendarIndexRoute =
+  MasterLayoutCalendarIndexRouteImport.update({
+    id: '/calendar/',
+    path: '/calendar/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
 const MasterLayoutActivitiesIndexRoute =
   MasterLayoutActivitiesIndexRouteImport.update({
     id: '/activities/',
@@ -257,6 +264,7 @@ export interface FileRoutesByFullPath {
   '/auth/verification-email': typeof AuthLayoutAuthVerificationEmailLazyRoute
   '/auth/verification-two-factor': typeof AuthLayoutAuthVerificationTwoFactorLazyRoute
   '/activities/': typeof MasterLayoutActivitiesIndexRoute
+  '/calendar/': typeof MasterLayoutCalendarIndexRoute
   '/categories/': typeof MasterLayoutCategoriesIndexRoute
   '/organizations/': typeof MasterLayoutOrganizationsIndexRoute
   '/profile/': typeof MasterLayoutProfileIndexRoute
@@ -280,6 +288,7 @@ export interface FileRoutesByTo {
   '/auth/verification-email': typeof AuthLayoutAuthVerificationEmailLazyRoute
   '/auth/verification-two-factor': typeof AuthLayoutAuthVerificationTwoFactorLazyRoute
   '/activities': typeof MasterLayoutActivitiesIndexRoute
+  '/calendar': typeof MasterLayoutCalendarIndexRoute
   '/categories': typeof MasterLayoutCategoriesIndexRoute
   '/organizations': typeof MasterLayoutOrganizationsIndexRoute
   '/profile': typeof MasterLayoutProfileIndexRoute
@@ -308,6 +317,7 @@ export interface FileRoutesById {
   '/_authLayout/auth/verification-email': typeof AuthLayoutAuthVerificationEmailLazyRoute
   '/_authLayout/auth/verification-two-factor': typeof AuthLayoutAuthVerificationTwoFactorLazyRoute
   '/_masterLayout/activities/': typeof MasterLayoutActivitiesIndexRoute
+  '/_masterLayout/calendar/': typeof MasterLayoutCalendarIndexRoute
   '/_masterLayout/categories/': typeof MasterLayoutCategoriesIndexRoute
   '/_masterLayout/organizations/': typeof MasterLayoutOrganizationsIndexRoute
   '/_masterLayout/profile/': typeof MasterLayoutProfileIndexRoute
@@ -334,6 +344,7 @@ export interface FileRouteTypes {
     | '/auth/verification-email'
     | '/auth/verification-two-factor'
     | '/activities/'
+    | '/calendar/'
     | '/categories/'
     | '/organizations/'
     | '/profile/'
@@ -357,6 +368,7 @@ export interface FileRouteTypes {
     | '/auth/verification-email'
     | '/auth/verification-two-factor'
     | '/activities'
+    | '/calendar'
     | '/categories'
     | '/organizations'
     | '/profile'
@@ -384,6 +396,7 @@ export interface FileRouteTypes {
     | '/_authLayout/auth/verification-email'
     | '/_authLayout/auth/verification-two-factor'
     | '/_masterLayout/activities/'
+    | '/_masterLayout/calendar/'
     | '/_masterLayout/categories/'
     | '/_masterLayout/organizations/'
     | '/_masterLayout/profile/'
@@ -494,6 +507,13 @@ declare module '@tanstack/react-router' {
       path: '/categories'
       fullPath: '/categories/'
       preLoaderRoute: typeof MasterLayoutCategoriesIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/calendar/': {
+      id: '/_masterLayout/calendar/'
+      path: '/calendar'
+      fullPath: '/calendar/'
+      preLoaderRoute: typeof MasterLayoutCalendarIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
     '/_masterLayout/activities/': {
@@ -633,6 +653,7 @@ const MasterLayoutProfileRouteWithChildren =
 interface MasterLayoutRouteChildren {
   MasterLayoutProfileRoute: typeof MasterLayoutProfileRouteWithChildren
   MasterLayoutActivitiesIndexRoute: typeof MasterLayoutActivitiesIndexRoute
+  MasterLayoutCalendarIndexRoute: typeof MasterLayoutCalendarIndexRoute
   MasterLayoutCategoriesIndexRoute: typeof MasterLayoutCategoriesIndexRoute
   MasterLayoutOrganizationsIndexRoute: typeof MasterLayoutOrganizationsIndexRoute
   MasterLayoutSkillsIndexRoute: typeof MasterLayoutSkillsIndexRoute
@@ -647,6 +668,7 @@ interface MasterLayoutRouteChildren {
 const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
   MasterLayoutProfileRoute: MasterLayoutProfileRouteWithChildren,
   MasterLayoutActivitiesIndexRoute: MasterLayoutActivitiesIndexRoute,
+  MasterLayoutCalendarIndexRoute: MasterLayoutCalendarIndexRoute,
   MasterLayoutCategoriesIndexRoute: MasterLayoutCategoriesIndexRoute,
   MasterLayoutOrganizationsIndexRoute: MasterLayoutOrganizationsIndexRoute,
   MasterLayoutSkillsIndexRoute: MasterLayoutSkillsIndexRoute,

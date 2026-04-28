@@ -1,48 +1,16 @@
-import { useNavigate, useParams, useSearch } from "@tanstack/react-router";
 import styles from "./EventPage.module.scss";
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import { JoinProjectButton } from "@features/project";
 import { AnimatePresence, motion } from "framer-motion";
-import { useMapUserLocation } from "@features/map";
-import {
-  eventDetailDefaults,
-  eventQuery,
-  type EventMode,
-} from "@entities/event";
 import { formatDateToText } from "@shared/libs/date";
 import { Calendar, Reccurence } from "@shared/assets/icons/info";
-import { getEventMainForms } from "../config/eventMainForms";
 import { eventMainTabs } from "../config/eventMainTabs";
 import { Arrow } from "@shared/assets/icons/actions";
-import { getPolicyStatusConfig } from "@shared/libs/entity";
+import { useEventPage } from "../model/useEventPage";
 
 export const EventPage = () => {
-  const { id } = useParams({ from: "/_masterLayout/events/$id/" });
-  const { tab, ...search } = useSearch({ from: "/_masterLayout/events/$id/" });
-  const { data: event } = useSuspenseQuery(eventQuery.id(id));
-  const { user, coordinates: userLocation } = useMapUserLocation();
-  const navigate = useNavigate({ from: "/events/$id/" });
-
-  const handleTabChange = (tab: EventMode) => {
-    navigate({
-      params: { id },
-      search: eventDetailDefaults[tab],
-      resetScroll: false,
-    });
-  };
-
-  const policyConfig = event?.joinPolicy
-    ? getPolicyStatusConfig(event.joinPolicy)
-    : null;
-
-  const forms = getEventMainForms({
-    event,
-    userLocation,
-    userId: user?.id,
-    search,
-  });
+  const { tab, event, policyConfig, forms, handleTabChange } = useEventPage();
 
   return (
     <div className={styles.wrapperEventPage}>

@@ -1,52 +1,16 @@
-import { useNavigate, useParams, useSearch } from "@tanstack/react-router";
 import styles from "./ProjectPage.module.scss";
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
-import {
-  projectDetailDefaults,
-  projectQuery,
-  type ProjectMode,
-} from "@entities/project";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { ReadMoreButton } from "@shared/ui/buttons";
 import { JoinProjectButton } from "@features/project";
 import { projectMainTabs } from "../config/projectMainTabs";
-import { getProjectMainForms } from "../config/projectMainForms";
 import { AnimatePresence, motion } from "framer-motion";
-import { useMapUserLocation } from "@features/map";
-import { eventQuery } from "@entities/event";
 import { formatDateToText } from "@shared/libs/date";
 import { Calendar } from "@shared/assets/icons/info";
-import { getPolicyStatusConfig } from "@shared/libs/entity";
+import { useProjectPage } from "../model/useProjectPage";
 
 export const ProjectPage = () => {
-  const { id } = useParams({ from: "/_masterLayout/projects/$id/" });
-  const { tab, ...search } = useSearch({
-    from: "/_masterLayout/projects/$id/",
-  });
-  const { data: project } = useSuspenseQuery(projectQuery.id(id));
-  const { data: events } = useQuery(eventQuery.list({ ProjectIds: [id] }));
-  const { user, coordinates: userLocation } = useMapUserLocation();
-  const navigate = useNavigate({ from: "/projects/$id/" });
-
-  const handleTabChange = (tab: ProjectMode) => {
-    navigate({
-      params: { id },
-      search: projectDetailDefaults[tab],
-      resetScroll: false,
-    });
-  };
-
-  const policyConfig = project?.joinPolicy
-    ? getPolicyStatusConfig(project.joinPolicy)
-    : null;
-
-  const forms = getProjectMainForms({
-    project,
-    userLocation,
-    events: events?.data,
-    userId: user?.id,
-    search,
-  });
+  const { tab, project, policyConfig, forms, handleTabChange } =
+    useProjectPage();
 
   return (
     <div className={styles.wrapperProjectPage}>

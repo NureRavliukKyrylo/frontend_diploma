@@ -23,11 +23,11 @@ export const tasksSearchSchema = tasksFiltersSchema
   .extend(tasksTabBaseSchema.shape)
   .extend({
     DrawerPageSize: z.number().optional(),
-    DrawerOrderBy: z.enum(["default", "date", "asc", "desc"]).optional(),
+    DrawerOrderBy: z.enum(["Default", "Newest", "Latest"]).optional(),
   });
 
 export type TaskSearchParams = z.infer<typeof tasksSearchSchema>;
 export type TasksRequestParams = Omit<
   z.infer<typeof tasksSearchSchema>,
-  "tab" | "taskMode" | "taskId"
+  "tab" | "taskMode" | "taskId" | "DrawerPageSize" | "DrawerOrderBy"
 >;

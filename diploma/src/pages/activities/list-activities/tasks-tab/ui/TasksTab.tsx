@@ -3,7 +3,7 @@ import {
   TaskCard,
   TaskCardSkeleton,
   useTasksListQuery,
-  type TaskDetailSearch,
+  type TaskDrawerSearch,
   type TaskSearchParams,
 } from "@entities/task";
 import { useTasksTab } from "../model/useTasksTab";
@@ -32,9 +32,16 @@ interface TasksTabProps {
 }
 
 export const TasksTab = ({ search }: TasksTabProps) => {
-  const { isOpen, openTask, closeTask, taskId, handleModeChange, taskMode } =
-    useActivitiesTaskDrawer();
-  const { taskId: _, taskMode: __, ...tasksSearch } = search;
+  const {
+    isOpen,
+    openTask,
+    closeTask,
+    taskId,
+    handleModeChange,
+    taskMode,
+    handleSortChange,
+  } = useActivitiesTaskDrawer();
+  const { taskId: _, taskMode: __, DrawerOrderBy, ...tasksSearch } = search;
   const {
     isFilterOpen,
     setIsFilterOpen,
@@ -133,34 +140,16 @@ export const TasksTab = ({ search }: TasksTabProps) => {
             open={isOpen}
             onClose={closeTask}
             anchor="right"
-            sx={{
-              zIndex: 10000,
-              "& .MuiDrawer-paper": {
-                maxWidth: "1000px",
-                width: "100%",
-                backgroundColor: "#F4F4F4",
-                borderRadius: 0,
-                overflow: "hidden",
-              },
-              "& .MuiBackdrop-root.MuiModal-backdrop": {
-                backgroundColor: "rgba(0, 0, 0, 0.2)",
-              },
-            }}
+            className={styles.drawer}
           >
-            <div
-              style={{
-                height: "100%",
-                overflowY: "auto",
-                scrollbarWidth: "none",
-                padding: 0,
-              }}
-            >
+            <div className={styles.drawerContent}>
               {taskId && (
                 <TaskWidget
-                  search={search as TaskDetailSearch}
+                  search={search as TaskDrawerSearch}
                   handleModeChange={handleModeChange}
                   taskMode={taskMode}
                   taskId={taskId}
+                  handleSort={handleSortChange}
                 />
               )}
             </div>

@@ -43,6 +43,13 @@ export const ProjectEventsTab = ({ search, projectId }: ProjectEventsTab) => {
               ProjectIds: [projectId],
               ...search,
             })}
+            renderEmpty={(events) =>
+              events && events.length === 0 ? (
+                <div className={styles.emptyState}>
+                  <h2>No Events yet</h2>
+                </div>
+              ) : null
+            }
           />
         </Suspense>
       </ErrorBoundary>
