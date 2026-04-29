@@ -19,11 +19,11 @@ export const EventDefaultBottomContent = ({
       </div>
       <div className={styles.progressBlock}>
         <ProgressCircle
-          value={event.progressPercent}
+          value={event.progressPercent ?? 0}
           gradient={`linear-gradient(360deg, #8C0000 0%, #260000 ${event.progressPercent}%)`}
           className={styles.circle}
         />
-        <h1>{event.progressPercent} %</h1>
+        <h1>{event.progressPercent ?? 0} %</h1>
       </div>
     </div>
     <div className={styles.dividerLine}></div>

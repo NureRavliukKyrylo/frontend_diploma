@@ -1,12 +1,12 @@
 import styles from "./ProjectPage.module.scss";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { ReadMoreButton } from "@shared/ui/buttons";
-import { JoinProjectButton } from "@features/project";
 import { projectMainTabs } from "../config/projectMainTabs";
 import { AnimatePresence, motion } from "framer-motion";
 import { formatDateToText } from "@shared/libs/date";
 import { Calendar } from "@shared/assets/icons/info";
 import { useProjectPage } from "../model/useProjectPage";
+import { ParticipationJoinButton } from "@features/participation";
 
 export const ProjectPage = () => {
   const { tab, project, policyConfig, forms, handleTabChange } =
@@ -82,7 +82,12 @@ export const ProjectPage = () => {
             <p>{project?.description}</p>
           </ReadMoreButton>
           <div className={styles.joinProjectBlockButton}>
-            {project?.id && <JoinProjectButton projectId={project.id} />}
+            {project?.id && (
+              <ParticipationJoinButton
+                entityId={project.id}
+                entityType="project"
+              />
+            )}
           </div>
         </div>
       </motion.div>

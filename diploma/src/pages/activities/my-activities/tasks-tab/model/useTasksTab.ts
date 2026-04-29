@@ -4,12 +4,18 @@ import { useQuery } from "@tanstack/react-query";
 import {
   taskQuery,
   type MyTasksSearchParams,
+  type Task,
   type TaskSortValues,
 } from "@entities/task";
 
 export const useTasksTab = (search: MyTasksSearchParams) => {
   const navigate = useNavigate({ from: "/activities/my/" });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTask, setSelectedTask] = useState<Pick<
+    Task,
+    "id" | "title"
+  > | null>(null);
   const { data } = useQuery(taskQuery.my(search));
 
   const nav = (updater: (prev: MyTasksSearchParams) => MyTasksSearchParams) =>
@@ -27,6 +33,21 @@ export const useTasksTab = (search: MyTasksSearchParams) => {
   const handlePageChange = (page: number) =>
     nav((prev) => ({ ...prev, Page: page }));
 
+  const handleLeaveTask = (task: Pick<Task, "id" | "title">) => {
+    setSelectedTask(task);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => setIsModalOpen(false);
+
+  const hasActiveFilters = !!(
+    data?.appliedFilters.search ||
+    data?.appliedFilters.categoryIds ||
+    data?.appliedFilters.organizationIds ||
+    data?.appliedFilters.endBefore ||
+    data?.appliedFilters.startDate ||
+    data?.appliedFilters.onlyActive
+  );
   const isEmpty = data?.pagination.totalCount === 0;
 
   return {
@@ -37,5 +58,10 @@ export const useTasksTab = (search: MyTasksSearchParams) => {
     handlePageChange,
     tasks: data,
     isEmpty,
+    isModalOpen,
+    handleCloseModal,
+    handleLeaveTask,
+    selectedTask,
+    hasActiveFilters,
   };
 };

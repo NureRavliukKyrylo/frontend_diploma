@@ -37,6 +37,6 @@ export const useMyProjectFilters = () => {
     onOnlyActiveChange: (value: boolean) =>
       nav((prev) => ({ ...prev, OnlyActive: value, Page: 1 })),
 
-    onClearFilters: () => navigate({ search: {} }),
+    onClearFilters: () => navigate({ search: (prev) => ({ tab: prev.tab }) }),
   };
 };

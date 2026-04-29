@@ -11,12 +11,9 @@ export {
 export { SkillControlCard } from "./ui/skill-card/control/SkillControlCard";
 export {
   skillSearchSchema,
-  skillProfileSearchSchema,
-  skillProfileSearchDefaults,
   skillSearchDefaults,
 } from "./libs/search-shema/skillsSearchSchema";
 export { SkillControlCardSkeleton } from "./ui/skill-card/control/SkillControlCardSkeleton";
-export type { SkillsProfileSearchParams } from "./libs";
 export type { SkillProfile } from "./model/types/skill-profile/SkillProfile";
 export { skillKeys } from "./model/queries/skill-query/skillQueries";
 export {

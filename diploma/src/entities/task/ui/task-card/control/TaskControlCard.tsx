@@ -23,34 +23,9 @@ export const TaskControlCard = ({ task, menuItems }: TaskControlCardProps) => {
 
   return (
     <div className={`${styles.taskControlCardWrapper} ${styles[task.status]}`}>
-      <Dropdown placement="top-start" shouldBlockScroll={false}>
-        <DropdownTrigger>
-          <button
-            className={styles.moreActionsButton}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <ActionsIcon className={styles.actionsIcon} />
-          </button>
-        </DropdownTrigger>
-        <DropdownMenu>
-          {menuItems.map((item) => (
-            <DropdownItem
-              key={item.key}
-              onClick={item.onClick}
-              classNames={{
-                base: `${styles.menuItem} ${styles[item.variant ?? "default"]}`,
-                title: styles.menuItemTitle,
-              }}
-            >
-              {item.label}
-            </DropdownItem>
-          ))}
-        </DropdownMenu>
-      </Dropdown>
-
       <TaskCardBase
         task={task}
-        startContent={
+        topContent={
           <div
             className={styles.statusBadge}
             style={{ background: statusConfig.bg, color: statusConfig.color }}
@@ -58,6 +33,32 @@ export const TaskControlCard = ({ task, menuItems }: TaskControlCardProps) => {
             <span className={styles.statusDot} />
             {statusConfig.label}
           </div>
+        }
+        middleContent={
+          <Dropdown placement="top" shouldBlockScroll={false}>
+            <DropdownTrigger>
+              <button
+                className={styles.moreActionsButton}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ActionsIcon className={styles.actionsIcon} />
+              </button>
+            </DropdownTrigger>
+            <DropdownMenu>
+              {menuItems.map((item) => (
+                <DropdownItem
+                  key={item.key}
+                  onClick={item.onClick}
+                  classNames={{
+                    base: `${styles.menuItem} ${styles[item.variant ?? "default"]}`,
+                    title: styles.menuItemTitle,
+                  }}
+                >
+                  {item.label}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
         }
         endContent={
           <motion.div

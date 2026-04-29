@@ -5,7 +5,7 @@ export {
   type PrivacySettings,
   type PrivacyField,
 } from "./profile/model/types/profile/Profile";
-export type { AuthMode } from "./auth/model/types/authMode";
+export type { AuthMode } from "./auth/model/types/AuthMode";
 export { type ProfileSettingsMode } from "./profile/model/types/modes/ProfileSettingsMode";
 export { useUserProfileStore } from "./profile/model/store/userProfileStore";
 export { type ProfileMode } from "./profile/model/types/modes/ProfileMode";
@@ -13,10 +13,14 @@ export { ProfileAvatar } from "./profile/ui/profile-avatar/ProfileAvatar";
 export {
   profileSearchSchema,
   profileSearchDefaults,
-  profileSettingsSearchSchema,
-  profileSettingsSearchDefaults,
   type ProfileSearchParams,
-  type ProfileSettingsSearchParams,
+  type SkillsProfileSearchParams,
+  type InventoryProfileSearchParams,
 } from "./profile/libs/search-schema/profileSearchSchema";
 export { memberPreviewToAvatar } from "./profile/libs/member-to-avatar/memberPreviewToAvatar";
 export { getFullName } from "./profile/libs/full-name/getFullName";
+export {
+  profileSettingsSearchSchema,
+  type ProfileSettingsSearchParams,
+  profileSettingsSearchDefaults,
+} from "./profile/libs/search-schema/profileSettingsSearchSchema";

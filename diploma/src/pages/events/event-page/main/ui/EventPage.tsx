@@ -1,13 +1,13 @@
 import styles from "./EventPage.module.scss";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
-import { JoinProjectButton } from "@features/project";
 import { AnimatePresence, motion } from "framer-motion";
 import { formatDateToText } from "@shared/libs/date";
 import { Calendar, Reccurence } from "@shared/assets/icons/info";
 import { eventMainTabs } from "../config/eventMainTabs";
 import { Arrow } from "@shared/assets/icons/actions";
 import { useEventPage } from "../model/useEventPage";
+import { ParticipationJoinButton } from "@features/participation";
 
 export const EventPage = () => {
   const { tab, event, policyConfig, forms, handleTabChange } = useEventPage();
@@ -102,7 +102,12 @@ export const EventPage = () => {
             <p>{event?.description}</p>
           </ReadMoreButton>
           <div className={styles.joinEventBlockButton}>
-            {event?.id && <JoinProjectButton projectId={event.id} />}
+            {event?.id && (
+              <ParticipationJoinButton
+                entityId={event.id}
+                entityType={"event"}
+              />
+            )}
           </div>
         </div>
       </motion.div>

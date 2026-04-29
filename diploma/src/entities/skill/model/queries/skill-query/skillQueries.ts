@@ -1,8 +1,6 @@
+import type { SkillsProfileSearchParams } from "@entities/user";
 import { getMySkills, getSkills } from "../../../api";
-import type {
-  SkillsProfileSearchParams,
-  SkillsSearchParams,
-} from "../../../libs";
+import type { SkillsSearchParams } from "../../../libs";
 import { queryOptions } from "@tanstack/react-query";
 
 export const skillKeys = {
@@ -10,11 +8,7 @@ export const skillKeys = {
   list: (params: SkillsSearchParams) =>
     [...skillKeys.all(), "list", params] as const,
   myAll: () => [...skillKeys.all(), "my"] as const,
-  my: (params?: SkillsProfileSearchParams) => [
-    ...skillKeys.all(),
-    "my",
-    params,
-  ],
+  my: (params: SkillsProfileSearchParams) => [...skillKeys.all(), "my", params],
 };
 
 export const skillsQuery = {
@@ -23,7 +17,7 @@ export const skillsQuery = {
       queryKey: skillKeys.list(params),
       queryFn: () => getSkills({ ...params }),
     }),
-  my: (params?: SkillsProfileSearchParams) =>
+  my: (params: SkillsProfileSearchParams) =>
     queryOptions({
       queryKey: skillKeys.my(params),
       queryFn: () => getMySkills({ ...params }),

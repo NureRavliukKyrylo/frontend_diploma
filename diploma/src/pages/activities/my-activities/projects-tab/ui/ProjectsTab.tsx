@@ -16,13 +16,13 @@ import { Pagination } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
 import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
-import { LeaveProjectModal } from "@features/project";
 import {
   layoutTransition,
   fadeVariants,
   fadeDuration,
   staggeredCardVariantsNoHover,
 } from "@shared/assets/animations";
+import { LeaveConfirmationModal } from "@features/participation";
 
 export const ProjectsTab = ({ search }: { search: MyProjectsSearchParams }) => {
   const {
@@ -140,11 +140,12 @@ export const ProjectsTab = ({ search }: { search: MyProjectsSearchParams }) => {
       )}
 
       {selectedProject && (
-        <LeaveProjectModal
+        <LeaveConfirmationModal
           isOpen={isModalOpen}
           onClose={handleCloseModal}
-          projectId={selectedProject.id}
-          projectName={selectedProject.title}
+          entityId={selectedProject.id}
+          entityType="project"
+          entityName={selectedProject.title}
         />
       )}
     </>

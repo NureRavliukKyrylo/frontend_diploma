@@ -7,6 +7,7 @@ import { formatDateToText } from "@shared/libs/date";
 
 interface TaskCardBaseProps {
   task: Task;
+  topContent?: ReactNode;
   startContent?: ReactNode;
   middleContent?: ReactNode;
   endContent?: ReactNode;
@@ -17,6 +18,7 @@ export const TaskCardBase = ({
   startContent,
   middleContent,
   endContent,
+  topContent,
 }: TaskCardBaseProps) => (
   <>
     <div className={styles.headerTaskBlock}>
@@ -26,6 +28,7 @@ export const TaskCardBase = ({
           alt="image organization"
         />
         <h1>{task.organization?.name ?? "Unknown Organization"}</h1>
+        {topContent}
       </div>
 
       <div className={styles.taskInfoBlock}>
@@ -36,7 +39,7 @@ export const TaskCardBase = ({
       {startContent}
     </div>
 
-    {middleContent}
+    <div className={styles.middleSection}>{middleContent}</div>
 
     <div className={styles.endSection}>
       <div className={styles.deadlineBlock}>

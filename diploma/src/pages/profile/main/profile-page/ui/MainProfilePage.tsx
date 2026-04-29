@@ -1,5 +1,9 @@
 import styles from "./MainProfilePage.module.scss";
-import { profileSearchDefaults, type ProfileMode } from "@entities/user";
+import {
+  getFullName,
+  profileSearchDefaults,
+  type ProfileMode,
+} from "@entities/user";
 import { SocialPlatforms, Toggle } from "@shared/ui";
 export { ProfileMainWidget } from "@widgets/profile";
 import { profileMainTabs } from "../config/profileMainTabs";
@@ -18,16 +22,15 @@ import { OrganizationItem } from "@entities/organization";
 import { DefaultAvatar } from "@shared/assets/images/user";
 
 export function MainProfilePage() {
-  const search = useSearch({ from: "/_masterLayout/profile/" });
+  const { tab, ...search } = useSearch({ from: "/_masterLayout/profile/" });
   const navigate = useNavigate({ from: "/profile/" });
-
-  const activeTab = search.tab as ProfileMode;
+  console.log(search);
   const handleTabChange = (tab: ProfileMode) => {
-    navigate({ search: { ...profileSearchDefaults, tab } });
+    navigate({ search: profileSearchDefaults[tab] });
   };
 
   const { data: user } = useSuspenseQuery(profileQuery.all());
-  const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ");
+
   return (
     <div className={styles.mainProfileBlock}>
       <motion.div
@@ -38,7 +41,7 @@ export function MainProfilePage() {
       >
         <UserHeaderWidget
           image={user?.profile?.avatarUrl}
-          name={fullName}
+          name={getFullName(user.firstName, user.lastName)}
           email={user?.email}
           phone={user?.profile?.phone}
         />
@@ -84,7 +87,7 @@ export function MainProfilePage() {
         >
           <Toggle<ProfileMode>
             tabs={profileMainTabs}
-            activeValue={activeTab}
+            activeValue={tab}
             onChange={handleTabChange}
             buttonClassName={styles.toggleProfileMainButton}
             activeButtonClassName={styles.toggleProfileMainButtonActive}
@@ -107,7 +110,7 @@ export function MainProfilePage() {
         <div className={styles.userActionsBlock}>
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeTab}
+              key={tab}
               initial={{ opacity: 0, x: 20 }}
               animate={{
                 opacity: 1,
@@ -121,7 +124,7 @@ export function MainProfilePage() {
               }}
             >
               <MainProfileWrapper>
-                {profileMainForms[activeTab]({ user })}
+                {profileMainForms[tab]({ user, search })}
               </MainProfileWrapper>
             </motion.div>
           </AnimatePresence>

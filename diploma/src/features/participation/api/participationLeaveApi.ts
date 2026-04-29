@@ -2,7 +2,7 @@ import type { EntityType } from "@shared/config/types";
 import { apiClient } from "@shared/api";
 
 export interface LeaveParticipationDto {
-  entityType: EntityType;
+  entityType: Exclude<EntityType, "organization">;
   entityId: string;
   comment?: string;
 }

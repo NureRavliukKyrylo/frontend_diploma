@@ -3,9 +3,9 @@ import styles from "./ProfileSkillsWidget.module.scss";
 import { SortDropDown } from "@shared/ui/drop-down";
 import { sortingSkillItems } from "@entities/skill";
 import { Pagination } from "@shared/ui";
-import { type SkillsProfileSearchParams } from "@entities/skill";
 import { useProfileSkills } from "../model/useProfileSkills";
 import type { PaginationResponse } from "@shared/config/types";
+import type { SkillsProfileSearchParams } from "@entities/user";
 
 interface ProfileSkillWidgetProps {
   skills: React.ReactNode;

@@ -15,7 +15,7 @@
     }
   }
 
-  .myProjectsList {
+  .myTasksList {
     min-height: 800px;
     grid-column: 1 / 3;
     &.filterOpen {
@@ -24,6 +24,19 @@
   }
 }
 
+.myTasksListWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(900px, 1fr));
+  justify-content: center;
+  gap: 40px;
+  align-items: stretch;
+}
+
+.motionCard {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+}
 .paginationWrapper {
   width: 100%;
   display: flex;

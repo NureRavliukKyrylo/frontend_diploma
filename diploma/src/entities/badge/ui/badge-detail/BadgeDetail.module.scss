@@ -1,0 +1,116 @@
+@use "@shared/styles/assets" as *;
+
+.iconUrl {
+  border: 5px solid #000000;
+  border-radius: 30px;
+  height: 100%;
+  min-width: 0;
+}
+.badgeDetailInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .headerInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    h1 {
+      @include font-base(60px, 900);
+      line-height: 110%;
+    }
+    h2 {
+      @include font-base(30px, 700);
+      line-height: 110%;
+      text-transform: uppercase;
+    }
+  }
+
+  .middleInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    p {
+      @include font-base(20px, 400);
+      line-height: 110%;
+    }
+    .metaInfo {
+      display: flex;
+      gap: 10px;
+      .receivedAll,
+      .earnedOn {
+        flex: 1 1;
+        background: #ffffff;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 15px;
+        padding: 10px;
+        .titleInfo {
+          display: flex;
+          flex-direction: column;
+          h1 {
+            @include font-base(18px, 500);
+            text-transform: uppercase;
+            font-style: italic;
+            line-height: 100%;
+          }
+          h2 {
+            @include font-base(20px, 800);
+            text-transform: uppercase;
+            line-height: 100%;
+          }
+        }
+        p {
+          @include font-base(25px, 700);
+          color: #8c0000;
+          line-height: 100%;
+        }
+      }
+    }
+    .rarityBlock {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      background: #ffffff;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+      border-radius: 15px;
+      padding: 5px;
+      h1 {
+        @include font-base(20px, 800);
+        line-height: 100%;
+      }
+    }
+  }
+  .bottomInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .progressBlock {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      h1 {
+        @include font-base(25px, 900);
+        line-height: 100%;
+      }
+      h2 {
+        color: rgba(0, 0, 0, 0.6);
+        @include font-base(15px, 600);
+        line-height: 100%;
+        span {
+          font-weight: 900;
+        }
+      }
+    }
+    .requirementsBadge {
+      background: #ffffff;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+      border-radius: 0px 30px;
+      padding: 10px;
+      h1 {
+        @include font-base(15px, 600);
+      }
+    }
+  }
+}

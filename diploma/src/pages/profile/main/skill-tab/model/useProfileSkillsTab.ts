@@ -3,14 +3,13 @@ import {
   skillsQuery,
   type SkillProfile,
 } from "@entities/skill";
+import type { SkillsProfileSearchParams } from "@entities/user";
 import { useQuery } from "@tanstack/react-query";
-import { useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 
 type ModalType = "remove" | "update" | null;
 
-export const useProfileSkillsTab = () => {
-  const { tab, ...search } = useSearch({ from: "/_masterLayout/profile/" });
+export const useProfileSkillsTab = (search: SkillsProfileSearchParams) => {
   const [modalType, setModalType] = useState<ModalType>(null);
   const [selectedSkill, setSelectedSkill] = useState<SkillProfile | null>(null);
   const { data } = useQuery(skillsQuery.my(search));

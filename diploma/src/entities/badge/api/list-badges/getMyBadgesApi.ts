@@ -7,7 +7,14 @@ interface MyBadgesRespone {
   pagination: PaginationResponse;
 }
 
-export const getMyBadges = async (): Promise<MyBadgesRespone> => {
-  const response = await apiClient.get("Badges/my");
+export interface MyBadgesSearchParams {
+  Page?: number;
+  PageSize?: number;
+}
+
+export const getMyBadges = async (
+  params?: MyBadgesSearchParams,
+): Promise<MyBadgesRespone> => {
+  const response = await apiClient.get("Badges/my", { params });
   return response.data;
 };

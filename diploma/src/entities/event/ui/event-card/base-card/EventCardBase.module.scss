@@ -35,17 +35,13 @@
     overflow: hidden;
   }
 }
-.bottomContent {
-  display: contents;
-}
+
 .dividerLine {
-  border: 1px solid rgba(166, 166, 166, 0.3);
+  border: 1px solid rgba(166, 166, 166, 0.2);
   width: 100%;
 }
 .defaultBottomBlock {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: contents;
 }
 .bottomBlock {
   display: flex;
@@ -58,7 +54,6 @@
     .calendarEvent {
       width: 25px;
       height: 25px;
-      opacity: 0.3;
     }
     span {
       @include font-base(18px, 600);

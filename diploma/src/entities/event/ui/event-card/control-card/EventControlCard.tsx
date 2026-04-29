@@ -66,9 +66,8 @@ export const EventControlCard = ({
         }
         bottomContent={
           <div className={styles.bottomEventContent}>
-            <div className={styles.defaultBottomContent}>
-              <EventDefaultBottomContent event={event} />
-            </div>
+            <EventDefaultBottomContent event={event} />
+
             <motion.div
               whileHover={{
                 scale: 1.03,

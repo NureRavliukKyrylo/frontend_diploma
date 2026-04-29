@@ -1,7 +1,7 @@
 import { apiClient } from "@shared/api";
 import type { PaginationResponse } from "@shared/config/types";
-import type { SkillsProfileSearchParams } from "../../libs";
 import type { SkillProfile } from "../../model";
+import type { SkillsProfileSearchParams } from "@entities/user";
 
 export interface SkillsResponse {
   data: SkillProfile[];

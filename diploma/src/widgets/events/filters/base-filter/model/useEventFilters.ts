@@ -1,7 +1,7 @@
 import { useNavigate } from "@tanstack/react-router";
 import { toggleArrayParam } from "@shared/libs/search-params";
 import type { LocationSuggestion } from "@shared/config/types";
-import { eventsTabDefaults, type EventSearchParams } from "@entities/event";
+import { type EventSearchParams } from "@entities/event";
 
 export const useEventFilters = () => {
   const navigate = useNavigate({ from: "/activities/" });
@@ -67,6 +67,6 @@ export const useEventFilters = () => {
     onIncludeSeries: (value: boolean) =>
       nav((prev) => ({ ...prev, IncludeSeriesMasters: value, Page: 1 })),
 
-    onClearFilters: () => navigate({ search: eventsTabDefaults }),
+    onClearFilters: () => navigate({ search: (prev) => ({ tab: prev.tab }) }),
   };
 };

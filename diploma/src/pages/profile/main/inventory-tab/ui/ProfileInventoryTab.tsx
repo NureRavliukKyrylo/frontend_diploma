@@ -1,7 +1,7 @@
 import {
   BadgeCardDetailed,
   BadgeCardDetailedSkeleton,
-  useMyBadgesQuery,
+  useMyBadgesInfiniteQuery,
 } from "@entities/badge";
 import { BadgesListWidget } from "@widgets/badges";
 import styles from "./ProfileInventoryTab.module.scss";
@@ -13,39 +13,107 @@ import {
 } from "@shared/assets/animations";
 import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
+import type { InventoryProfileSearchParams } from "@entities/user";
+import { LoadMoreButton } from "@shared/ui/buttons";
+import { getHttpErrorInfo } from "@shared/libs/error";
+import { ErrorBoundary } from "react-error-boundary";
+import { useNavigate } from "@tanstack/react-router";
+import { BaseModal } from "@shared/ui/modals";
 
-export const ProfileInventoryTab = () => {
+interface ProfileInventoryTabProps {
+  search: InventoryProfileSearchParams;
+}
+
+export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
+  const { badgeId, ...badgesSearch } = search;
+  const navigate = useNavigate({ from: "/profile/" });
+  const handleOpenBadge = (badgeId: string) => {
+    navigate({
+      search: (prev) => ({ ...prev, badgeId: badgeId }),
+      resetScroll: false,
+    });
+  };
+  const handleCloseBadge = () => {
+    navigate({
+      search: (prev) => ({ ...prev, badgeId: undefined }),
+      resetScroll: false,
+    });
+  };
   return (
     <div className={styles.inventoryWrapper}>
       <h1 className={styles.achievementsTitle}>Achievements</h1>
       <AnimatePresence mode="wait">
         <motion.div {...fadeVariants} transition={fadeDuration}>
-          <Suspense
-            fallback={
-              <ListWidgetSkeleton
-                renderSkeleton={() => <BadgeCardDetailedSkeleton />}
-                className={styles.badgesProfileList}
-                items={8}
-              />
-            }
+          <ErrorBoundary
+            fallbackRender={({ error }) => {
+              return (
+                <div className={styles.errorState}>
+                  <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
+                  <p className="errorHint">
+                    Try reloading the page or come back later.
+                  </p>
+                </div>
+              );
+            }}
           >
-            <BadgesListWidget
-              useBadgesQuery={useMyBadgesQuery()}
-              className={styles.badgesProfileList}
-              renderCard={(badge, index) => (
-                <motion.div
-                  custom={index + 1}
-                  variants={staggeredCardVariantsNoHover}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <BadgeCardDetailed badge={badge} />
-                </motion.div>
-              )}
-            />
-          </Suspense>
+            <Suspense
+              fallback={
+                <ListWidgetSkeleton
+                  renderSkeleton={() => <BadgeCardDetailedSkeleton />}
+                  className={styles.badgesProfileList}
+                  items={8}
+                />
+              }
+            >
+              <BadgesListWidget
+                useBadgesQuery={useMyBadgesInfiniteQuery(badgesSearch)}
+                className={styles.badgesProfileList}
+                renderCard={(badge, index) => (
+                  <motion.div
+                    custom={index + 1}
+                    variants={staggeredCardVariantsNoHover}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    <BadgeCardDetailed
+                      onClick={() => handleOpenBadge(badge.id)}
+                      classImgName={styles.interactiveBadge}
+                      badge={badge}
+                    />
+                  </motion.div>
+                )}
+                renderPagination={({
+                  fetchNextPage,
+                  isFetchingNextPage,
+                  hasNextPage,
+                }) =>
+                  hasNextPage && (
+                    <LoadMoreButton
+                      onClick={fetchNextPage}
+                      isLoading={isFetchingNextPage}
+                    />
+                  )
+                }
+                renderEmpty={(badges) =>
+                  badges.length === 0 ? (
+                    <div className={styles.emptyState}>
+                      <h2>No badges yet</h2>
+                      <p>Be the first to join and make a difference</p>
+                    </div>
+                  ) : null
+                }
+              />
+            </Suspense>
+          </ErrorBoundary>
         </motion.div>
       </AnimatePresence>
+      <BaseModal
+        isOpen={!!badgeId}
+        maxWidth="1200px"
+        onClose={handleCloseBadge}
+      >
+        <div></div>
+      </BaseModal>
     </div>
   );
 };

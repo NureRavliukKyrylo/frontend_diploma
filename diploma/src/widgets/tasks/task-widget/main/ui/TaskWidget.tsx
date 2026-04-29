@@ -1,7 +1,6 @@
 import styles from "./TaskWidget.module.scss";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
-import { JoinProjectButton } from "@features/project";
 import { AnimatePresence, motion } from "framer-motion";
 import { formatDateToText } from "@shared/libs/date";
 import { Calendar, Reccurence } from "@shared/assets/icons/info";
@@ -12,6 +11,7 @@ import { TaskWidgetSkeleton } from "./TaskWidgetSkeleton";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import type { FeedbackSortValues } from "@entities/feedback";
 import { useTaskWidget } from "../model/useTaskWidget";
+import { ParticipationJoinButton } from "@features/participation";
 
 interface TaskWidgetProps {
   search: TaskDrawerSearch;
@@ -154,7 +154,9 @@ export const TaskWidget = ({
             <p>{task?.description}</p>
           </ReadMoreButton>
           <div className={styles.joinTaskBlockButton}>
-            {task?.id && <JoinProjectButton projectId={task.id} />}
+            {task?.id && (
+              <ParticipationJoinButton entityId={task.id} entityType="task" />
+            )}
           </div>
         </div>
       </motion.div>

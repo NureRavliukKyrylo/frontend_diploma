@@ -37,3 +37,4 @@ export {
   type OverviewEventSearch,
   type TasksEventSearch,
 } from "./libs/search-schema/eventDetailSearchSchema";
+export { useMyEventsListQuery } from "./model/hooks/useMyEventsListQuery";

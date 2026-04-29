@@ -28,6 +28,6 @@ export const EventCardBase = ({
       <h1>{event.title}</h1>
       <p>{event.description}</p>
     </div>
-    <div className={styles.bottomContent}>{bottomContent}</div>
+    {bottomContent}
   </>
 );

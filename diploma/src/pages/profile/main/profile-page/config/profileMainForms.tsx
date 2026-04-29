@@ -1,4 +1,9 @@
-import { type ProfileMode } from "@entities/user";
+import {
+  type InventoryProfileSearchParams,
+  type ProfileMode,
+  type ProfileSearchParams,
+  type SkillsProfileSearchParams,
+} from "@entities/user";
 import type { User } from "@entities/user/profile";
 import styles from "../ui/MainProfilePage.module.scss";
 import { ProfileSkillsTab } from "../../skill-tab";
@@ -7,6 +12,7 @@ import { ProfileMainTab } from "../../main-tab/ProfileMainTab";
 
 interface ProfileFormProps {
   user?: User;
+  search?: Omit<ProfileSearchParams, "tab">;
 }
 
 export const profileMainForms: Record<
@@ -15,6 +21,10 @@ export const profileMainForms: Record<
 > = {
   profile: ({ user }) => <ProfileMainTab user={user} />,
   statistics: () => <div className={styles.projectsBlock}></div>,
-  skills: () => <ProfileSkillsTab />,
-  inventory: () => <ProfileInventoryTab />,
+  skills: ({ search }) => (
+    <ProfileSkillsTab search={search as SkillsProfileSearchParams} />
+  ),
+  inventory: ({ search }) => (
+    <ProfileInventoryTab search={search as InventoryProfileSearchParams} />
+  ),
 };

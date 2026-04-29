@@ -21,17 +21,21 @@ import {
   fadeDuration,
   staggeredCardVariantsNoHover,
 } from "@shared/assets/animations";
+import type { SkillsProfileSearchParams } from "@entities/user";
 
-export const ProfileSkillsTab = () => {
+interface ProfileSkillsTabProps {
+  search: SkillsProfileSearchParams;
+}
+
+export const ProfileSkillsTab = ({ search }: ProfileSkillsTabProps) => {
   const {
-    search,
     data,
     modalType,
     selectedSkill,
     getMenuItems,
     handleCloseModal,
     getSkillLabel,
-  } = useProfileSkillsTab();
+  } = useProfileSkillsTab(search);
 
   return (
     <>

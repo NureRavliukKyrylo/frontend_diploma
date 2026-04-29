@@ -1,4 +1,1 @@
-export {
-  profileSearchDefaults,
-  profileSettingsSearchDefaults,
-} from "./search-schema/profileSearchSchema";
+export { profileSearchDefaults } from "./search-schema/profileSearchSchema";

@@ -1,6 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 import { toggleArrayParam } from "@shared/libs/search-params";
-import { tasksSearchDefaults, type TaskSearchParams } from "@entities/task";
+import { type TaskSearchParams } from "@entities/task";
 
 export const useTaskFilters = () => {
   const navigate = useNavigate({ from: "/activities/" });
@@ -42,6 +42,6 @@ export const useTaskFilters = () => {
         Page: 1,
       })),
 
-    onClearFilters: () => navigate({ search: tasksSearchDefaults }),
+    onClearFilters: () => navigate({ search: (prev) => ({ tab: prev.tab }) }),
   };
 };

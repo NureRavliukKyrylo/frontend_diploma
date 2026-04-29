@@ -2,7 +2,7 @@ import { apiClient } from "@shared/api";
 import type { EntityType } from "@shared/config/types";
 
 export interface JoinParticipationDto {
-  entityType: EntityType;
+  entityType: Exclude<EntityType, "organization">;
   entityId: string;
   roleId?: string;
 }

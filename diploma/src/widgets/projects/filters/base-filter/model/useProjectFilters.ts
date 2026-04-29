@@ -64,6 +64,6 @@ export const useProjectFilters = () => {
     onShowJoinedChange: (value: boolean) =>
       nav((prev) => ({ ...prev, ShowJoined: value, Page: 1 })),
 
-    onClearFilters: () => navigate({ search: {} }),
+    onClearFilters: () => navigate({ search: (prev) => ({ tab: prev.tab }) }),
   };
 };

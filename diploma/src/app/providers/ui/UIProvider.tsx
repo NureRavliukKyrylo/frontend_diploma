@@ -20,7 +20,7 @@ export const UIProvider = ({ children }: Props) => {
         }}
         regionProps={{
           classNames: {
-            base: "z-[9999]",
+            base: "z-[10001]",
           },
         }}
       />

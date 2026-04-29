@@ -25,3 +25,4 @@ export { TaskBoardItem } from "./ui/board-item/TaskBoardItem";
 export { TaskBoardItemSkeleton } from "./ui/board-item/TaskBoardItemSkeleton";
 export type { TaskDrawerSearch } from "./libs/search-schema/taskDrawerSchema";
 export { taskDrawerDefaults } from "./libs/search-schema/taskDrawerSchema";
+export { useMyTasksListQuery } from "./model/hooks/useMyTasksListQuery";

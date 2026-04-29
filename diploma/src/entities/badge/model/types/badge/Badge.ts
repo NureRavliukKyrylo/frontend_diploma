@@ -6,4 +6,11 @@ export interface Badge {
   iconUrl: string;
   description: string;
   rank: Tier;
+  awardedCountTotal: number;
+  firstAwardedAt: string;
+  isUnlocked: boolean;
+  progressPercent: number;
+  ruleProgress: {
+    label: string;
+  }[];
 }
