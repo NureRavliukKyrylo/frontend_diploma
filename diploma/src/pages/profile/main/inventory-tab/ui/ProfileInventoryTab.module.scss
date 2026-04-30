@@ -59,3 +59,11 @@
 .errorHttpMessage {
   font-size: 30px;
 }
+
+.badgeDetailWrapper {
+  padding: 60px;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: stretch;
+}

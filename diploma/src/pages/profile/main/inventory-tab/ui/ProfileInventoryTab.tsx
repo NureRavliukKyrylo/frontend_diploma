@@ -3,7 +3,7 @@ import {
   BadgeCardDetailedSkeleton,
   useMyBadgesInfiniteQuery,
 } from "@entities/badge";
-import { BadgesListWidget } from "@widgets/badges";
+import { BadgeDetailWidget, BadgesListWidget } from "@widgets/badges";
 import styles from "./ProfileInventoryTab.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -107,13 +107,20 @@ export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
           </ErrorBoundary>
         </motion.div>
       </AnimatePresence>
-      <BaseModal
-        isOpen={!!badgeId}
-        maxWidth="1200px"
-        onClose={handleCloseBadge}
-      >
-        <div></div>
-      </BaseModal>
+      {badgeId && (
+        <BaseModal
+          isOpen={!!badgeId}
+          maxWidth="1300px"
+          onClose={handleCloseBadge}
+          showClosed={false}
+        >
+          <Suspense fallback={"loading"}>
+            <div className={styles.badgeDetailWrapper}>
+              <BadgeDetailWidget id={badgeId} />
+            </div>
+          </Suspense>
+        </BaseModal>
+      )}
     </div>
   );
 };

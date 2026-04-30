@@ -13,6 +13,10 @@ export { ProfileAvatar } from "./profile/ui/profile-avatar/ProfileAvatar";
 export {
   profileSearchSchema,
   profileSearchDefaults,
+  inventoryTabSchema,
+  profileTabSchema,
+  skillsTabSchema,
+  statisticsTabSchema,
   type ProfileSearchParams,
   type SkillsProfileSearchParams,
   type InventoryProfileSearchParams,

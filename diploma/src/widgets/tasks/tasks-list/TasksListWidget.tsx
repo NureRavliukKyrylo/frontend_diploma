@@ -48,7 +48,9 @@ export const TasksListWidget = ({
       {renderEmpty?.(tasks) ?? (
         <>
           <div
-            className={`${styles.tasksListWrapper} ${className ?? ""}`.trim()}
+            className={[styles.tasksListWrapper, className]
+              .filter(Boolean)
+              .join(" ")}
           >
             {startSlot}
             {tasks.map((task, index) => renderCard(task, index))}

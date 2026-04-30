@@ -2,7 +2,7 @@ import styles from "./TaskBoardColumn.module.scss";
 import { TasksListWidget } from "@widgets/tasks";
 import { useTasksListQuery } from "@entities/task";
 import type { TaskStatus } from "@entities/task";
-import { Suspense, type ReactNode } from "react";
+import { Suspense } from "react";
 import { useTaskBoardContext } from "../../model/TaskBoardContext";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { LoadMoreButton } from "@shared/ui/buttons";
@@ -12,7 +12,7 @@ import { getHttpErrorInfo } from "@shared/libs/error";
 interface TaskBoardColumnProps {
   status: TaskStatus;
   title: string;
-  icon: ReactNode;
+  icon: string;
 }
 
 export const TaskBoardColumn = ({
@@ -27,7 +27,7 @@ export const TaskBoardColumn = ({
     <div className={styles.column}>
       <div className={styles.columnHeader}>
         <div className={styles.columnTitle}>
-          <span className={styles.statusIcon}>{icon}</span>
+          <img src={icon} className={styles.statusIcon} />
           <span className={styles.statusTitle}>{title}</span>
         </div>
         {onAddTask && (

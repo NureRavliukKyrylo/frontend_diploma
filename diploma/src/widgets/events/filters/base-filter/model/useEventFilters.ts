@@ -36,6 +36,13 @@ export const useEventFilters = () => {
         Page: 1,
       })),
 
+    onSkillToggle: (id: string) =>
+      nav((prev) => ({
+        ...prev,
+        SkillIds: toggleArrayParam(prev.SkillIds, id),
+        Page: 1,
+      })),
+
     onLocationSelect: (location: LocationSuggestion, radiusKm: number) =>
       nav((prev) => ({
         ...prev,

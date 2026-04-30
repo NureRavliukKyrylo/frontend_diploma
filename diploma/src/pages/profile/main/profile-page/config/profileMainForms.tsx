@@ -8,7 +8,7 @@ import type { User } from "@entities/user/profile";
 import styles from "../ui/MainProfilePage.module.scss";
 import { ProfileSkillsTab } from "../../skill-tab";
 import { ProfileInventoryTab } from "../../inventory-tab";
-import { ProfileMainTab } from "../../main-tab/ProfileMainTab";
+import { ProfileMainTab } from "../../main-tab/ui/ProfileMainTab";
 
 interface ProfileFormProps {
   user?: User;

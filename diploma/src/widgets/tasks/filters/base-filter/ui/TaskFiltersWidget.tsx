@@ -10,6 +10,8 @@ import { useEventsInfiniteQuery } from "@entities/event";
 import { ProjectsListFilter } from "@features/project";
 import { EventsListFilter } from "@features/event";
 import type { TasksRequestParams } from "@entities/task";
+import { SkillsListFilter } from "@features/skills";
+import { useSkillsInfiniteQuery } from "@entities/skill";
 
 interface TaskFiltersWidgetProps {
   search: TasksRequestParams;
@@ -24,6 +26,7 @@ export const TaskFiltersWidget = ({ search }: TaskFiltersWidgetProps) => {
     onOrganizationToggle,
     onClearFilters,
     onEventToggle,
+    onSkillToggle,
   } = useTaskFilters();
 
   return (
@@ -36,6 +39,15 @@ export const TaskFiltersWidget = ({ search }: TaskFiltersWidgetProps) => {
             endBefore={search.To}
             onStartDateChange={onStartDateChange}
             onEndBeforeChange={onEndBeforeChange}
+          />
+        </div>
+        <div className={styles.dividerFilterBlock} />
+        <div className={styles.taskSkills}>
+          <h1 className={styles.subHeaderFilter}>Required skills</h1>
+          <SkillsListFilter
+            useSkillsQuery={useSkillsInfiniteQuery({ PageSize: 7 })}
+            selectedIds={search.SkillIds}
+            onToggle={onSkillToggle}
           />
         </div>
         <div className={styles.dividerFilterBlock} />

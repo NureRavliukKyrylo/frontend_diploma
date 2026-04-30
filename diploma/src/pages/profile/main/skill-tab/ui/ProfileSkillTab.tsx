@@ -37,6 +37,7 @@ export const ProfileSkillsTab = ({ search }: ProfileSkillsTabProps) => {
     getSkillLabel,
   } = useProfileSkillsTab(search);
 
+  console.log("skills", search);
   return (
     <>
       <ProfileSkillsWidget

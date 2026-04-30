@@ -20,3 +20,4 @@ export {
   sortingSkillItems,
   type SortSkillsValues,
 } from "./config/sortingSkillItems";
+export { useSkillsInfiniteQuery } from "./model/hooks/useSkillsInfiniteQuery";

@@ -1,1 +1,4 @@
-export type { SkillsSearchParams } from "./search-shema/skillsSearchSchema";
+export type {
+  SkillsSearchParams,
+  SkillsInfiniteSearchParams,
+} from "./search-shema/skillsSearchSchema";

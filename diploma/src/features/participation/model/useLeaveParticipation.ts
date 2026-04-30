@@ -5,6 +5,7 @@ import { profileKeys } from "@entities/user/profile";
 import type { EntityType } from "@shared/config/types";
 import { queryKeyMap } from "../config/queryKeyMap";
 import { leaveParticipation } from "../api/participationLeaveApi";
+import { filtersKeys } from "@shared/api/filters";
 
 interface UseLeaveParticipationOptions {
   entityType: Exclude<EntityType, "organization">;
@@ -36,6 +37,9 @@ export const useLeaveParticipation = ({
         });
       }
       queryClient.invalidateQueries({ queryKey: queryKeyMap[entityType]() });
+      queryClient.invalidateQueries({
+        queryKey: filtersKeys.infinite({ entityType }),
+      });
       queryClient.invalidateQueries({ queryKey: profileKeys.all() });
       onSuccess?.();
     },

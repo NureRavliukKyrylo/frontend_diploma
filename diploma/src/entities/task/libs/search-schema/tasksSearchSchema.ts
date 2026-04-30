@@ -17,6 +17,7 @@ export const tasksFiltersSchema = z.object({
     .enum(["overview", "members", "feedbacks"])
     .optional()
     .catch(undefined),
+  SkillIds: z.array(z.string()).optional().catch(undefined),
 });
 
 export const tasksSearchSchema = tasksFiltersSchema

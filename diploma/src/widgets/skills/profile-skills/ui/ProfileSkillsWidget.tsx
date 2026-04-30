@@ -20,7 +20,6 @@ export const ProfileSkillsWidget = ({
 }: ProfileSkillWidgetProps) => {
   const { handlePageChange, handleSearchChange, handleSortChange } =
     useProfileSkills();
-
   return (
     <div className={styles.skillsProfileWrapper}>
       <div className={styles.skillsProfileControl}>

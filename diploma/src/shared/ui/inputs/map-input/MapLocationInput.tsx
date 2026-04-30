@@ -23,7 +23,7 @@ export const MapLocationInput: React.FC<MapLocationInputProps> = ({
         </span>
 
         <span className={styles.divider}></span>
-        <h1>{label ?? "Location"}</h1>
+        <h1 title={label ?? "Location"}>{label ?? "Location"}</h1>
       </div>
       {handleMapOpen && (
         <button

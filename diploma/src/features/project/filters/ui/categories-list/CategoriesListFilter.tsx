@@ -27,7 +27,7 @@ export const CategoriesListFilter = ({
   if (isError) {
     return (
       <div className={styles.stateMessage}>
-        <p className={styles.errorMessage}>Failed to load organizations</p>
+        <p className={styles.errorMessage}>Failed to load categories</p>
       </div>
     );
   }

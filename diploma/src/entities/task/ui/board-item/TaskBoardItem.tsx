@@ -17,7 +17,7 @@ export const TaskBoardItem = ({ task }: TaskBoardItemProps) => {
       <p>{task.description}</p>
       <div className={styles.deadlineBlock}>
         <Calendar className={styles.calendarTask} />
-        <span>{formatDateToText(task.endAt)}</span>
+        <span>{formatDateToText(task.endAt, true)}</span>
       </div>
       <div className={styles.dividerLine}></div>
       <div className={styles.footerContent}>

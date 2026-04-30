@@ -1,6 +1,6 @@
 import styles from "./OverviewTab.module.scss";
 import { BaseMap } from "@shared/ui";
-import { MapZoomAnimation } from "@shared/libs/map";
+import { MapResizer, MapZoomAnimation } from "@shared/libs/map";
 import { Marker, Popup } from "react-leaflet";
 import { MapUserLocation } from "@entities/user/profile";
 import type { Coordinates } from "@shared/config/types";
@@ -59,6 +59,7 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
               zoom={6}
               center={[event.location.latitude, event.location.longitude]}
             >
+              <MapResizer />
               <>
                 {isVisible && <MapZoomAnimation coordinates={event.location} />}
                 <Marker

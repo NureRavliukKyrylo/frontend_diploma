@@ -5,6 +5,7 @@ import { profileKeys } from "@entities/user/profile";
 import type { EntityType } from "@shared/config/types";
 import { queryKeyMap } from "../config/queryKeyMap";
 import { joinParticipation } from "../api/participationJoinApi";
+import { filtersKeys } from "@shared/api/filters";
 
 interface UseJoinParticipationOptions {
   entityType: Exclude<EntityType, "organization">;
@@ -36,6 +37,9 @@ export const useJoinParticipation = ({
         });
       }
       queryClient.invalidateQueries({ queryKey: queryKeyMap[entityType]() });
+      queryClient.invalidateQueries({
+        queryKey: filtersKeys.infinite({ entityType }),
+      });
       queryClient.invalidateQueries({ queryKey: profileKeys.all() });
       onSuccess?.();
     },

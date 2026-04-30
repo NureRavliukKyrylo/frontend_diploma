@@ -24,7 +24,6 @@
     .calendarTask {
       width: 25px;
       height: 25px;
-      opacity: 0.3;
     }
     span {
       @include font-base(18px, 600);
@@ -33,6 +32,7 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       text-transform: uppercase;
+      line-height: 100%;
     }
   }
   .dividerLine {

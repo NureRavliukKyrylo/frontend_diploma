@@ -35,6 +35,13 @@ export const useTaskFilters = () => {
         Page: 1,
       })),
 
+    onSkillToggle: (id: string) =>
+      nav((prev) => ({
+        ...prev,
+        SkillIds: toggleArrayParam(prev.SkillIds, id),
+        Page: 1,
+      })),
+
     onEventToggle: (id: string) =>
       nav((prev) => ({
         ...prev,

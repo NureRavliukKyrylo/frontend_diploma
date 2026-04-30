@@ -24,3 +24,7 @@ export const skillSearchSchema = skillFiltersSchema
   });
 
 export type SkillsSearchParams = z.infer<typeof skillSearchSchema>;
+export type SkillsInfiniteSearchParams = Pick<
+  z.infer<typeof skillSearchSchema>,
+  "PageSize" | "Page"
+>;

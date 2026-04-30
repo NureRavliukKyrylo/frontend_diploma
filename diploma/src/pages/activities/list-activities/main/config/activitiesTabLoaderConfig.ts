@@ -17,6 +17,7 @@ import { categoryQuery } from "@entities/category";
 import { organizationQuery } from "@entities/organization";
 import type { QueryClient } from "@tanstack/react-query";
 import type { ZodType } from "zod";
+import { skillsQuery } from "@entities/skill";
 
 type TabParams = EventSearchParams | TaskSearchParams | ProjectSearchParams;
 
@@ -39,6 +40,7 @@ export const activitiesTabLoaderConfig: {
       queryClient.prefetchInfiniteQuery(
         organizationQuery.infinite({ PageSize: 7 }),
       );
+      queryClient.prefetchInfiniteQuery(skillsQuery.infinite({ PageSize: 7 }));
     },
   },
   tasks: {
@@ -49,6 +51,7 @@ export const activitiesTabLoaderConfig: {
       queryClient.prefetchInfiniteQuery(
         organizationQuery.infinite({ PageSize: 7 }),
       );
+      queryClient.prefetchInfiniteQuery(skillsQuery.infinite({ PageSize: 7 }));
       queryClient.prefetchInfiniteQuery(eventQuery.infinite({ PageSize: 7 }));
     },
   },

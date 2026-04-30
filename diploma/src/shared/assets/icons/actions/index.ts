@@ -21,3 +21,4 @@ export { default as ArrowCarousel } from "./carousel-arrow.svg?react";
 export { default as AddingPlus } from "./adding-plus.svg?react";
 export { default as ActionsIcon } from "./moreActions.svg?react";
 export { default as FullSizeIcon } from "./fullSize.svg?react";
+export { default as ShareIcon } from "./share.png";

@@ -2,7 +2,7 @@ import { ProjectMarker, type Project } from "@entities/project";
 import styles from "./OverviewTab.module.scss";
 import { CategoriesListWidget } from "@widgets/categories";
 import { BaseMap, Tab } from "@shared/ui";
-import { MapZoomAnimation } from "@shared/libs/map";
+import { MapResizer, MapZoomAnimation } from "@shared/libs/map";
 import { Marker, Popup } from "react-leaflet";
 import { MapUserLocation } from "@entities/user/profile";
 import type { Coordinates } from "@shared/config/types";
@@ -90,6 +90,7 @@ export const OverviewTab = ({
               zoom={6}
               center={[project.location.latitude, project.location.longitude]}
             >
+              <MapResizer />
               <>
                 {isVisible && (
                   <MapZoomAnimation coordinates={project.location} />

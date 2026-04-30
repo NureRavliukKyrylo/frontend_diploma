@@ -14,3 +14,4 @@ export { useMapZoomOnce } from "./animations/useMapZoomOnce";
 export { createMarkerIcon } from "./marker-factory/createMarkerIcon";
 export { createClusterIcon } from "./marker-factory/createClusterIcon";
 export { convertToClusterFeatures } from "./coords-adapter/convertToClusterFeatures";
+export { MapResizer } from "./bounds/MapResizer";

@@ -13,6 +13,8 @@ import {
 import { OrganizationsListFilter } from "@features/organization";
 import type { EventSearchParams } from "@entities/event";
 import { ProjectsListFilter } from "@features/project";
+import { SkillsListFilter } from "@features/skills";
+import { useSkillsInfiniteQuery } from "@entities/skill";
 
 interface EventFiltersWidgetProps {
   search: EventSearchParams;
@@ -32,6 +34,7 @@ export const EventFiltersWidget = ({ search }: EventFiltersWidgetProps) => {
     onShowJoinedChange,
     onClearFilters,
     onIncludeSeries,
+    onSkillToggle,
   } = useEventFilters();
 
   return (
@@ -52,6 +55,15 @@ export const EventFiltersWidget = ({ search }: EventFiltersWidgetProps) => {
           <RatingFilter
             rating={search.Rating}
             onRatingChange={onRatingChange}
+          />
+        </div>
+        <div className={styles.dividerFilterBlock} />
+        <div className={styles.eventSkills}>
+          <h1 className={styles.subHeaderFilter}>Required skills</h1>
+          <SkillsListFilter
+            useSkillsQuery={useSkillsInfiniteQuery({ PageSize: 7 })}
+            selectedIds={search.SkillIds}
+            onToggle={onSkillToggle}
           />
         </div>
         <div className={styles.dividerFilterBlock} />

@@ -17,6 +17,7 @@ export const eventsFiltersSchema = z.object({
   IncludeSeriesMasters: z.boolean().optional(),
   ShowJoined: z.boolean().optional().catch(false),
   IncludeArchived: z.boolean().optional(),
+  SkillIds: z.array(z.string()).optional().catch(undefined),
 });
 
 export const eventsSearchSchema = eventsFiltersSchema
