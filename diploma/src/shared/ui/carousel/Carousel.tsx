@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Carousel.module.scss";
-import { ArrowCarousel } from "@shared/assets/icons/actions";
+import { NavigationArrow } from "@shared/assets/icons/actions";
 
 interface CarouselProps<T> {
   items: T[];
@@ -70,7 +70,7 @@ export function Carousel<T>({
         onClick={() => paginate(-1)}
         className={styles.backCarouselButton}
       >
-        <ArrowCarousel />
+        <NavigationArrow />
       </button>
       <div className={styles.sliderContainer}>
         <div className={styles.itemsRow}>
@@ -92,7 +92,7 @@ export function Carousel<T>({
         </div>
       </div>
       <button onClick={() => paginate(1)} className={styles.nextCarouselButton}>
-        <ArrowCarousel />
+        <NavigationArrow />
       </button>
     </div>
   );

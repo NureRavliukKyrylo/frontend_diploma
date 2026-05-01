@@ -13,11 +13,6 @@ function RouteComponent() {
     <div style={{ width: "85%" }}>
       <BaseCalendar
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
-        headerToolbar={{
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay",
-        }}
       />
     </div>
   );

@@ -17,13 +17,20 @@ export const Route = createFileRoute("/_masterLayout/profile/")({
     middlewares: [createTabCleanerMiddleware(profileSearchDefaults, "profile")],
   },
   loader: async ({ context: { queryClient }, location }) => {
-    const { tab, ...params } = profileSearchSchema.parse(
+    const { tab, badgeId, ...params } = profileSearchSchema.parse(
       location.search,
-    ) as ProfileSearchParams;
+    ) as ProfileSearchParams & { badgeId: string };
+
     const config = profileTabLoaderConfig[tab ?? "profile"];
 
     await queryClient.ensureQueryData(profileQuery.all());
-    await queryClient.ensureQueryData(config.query(params as any) as any);
+    if (config.infinite) {
+      await queryClient.ensureInfiniteQueryData(
+        config.query(params as any) as any,
+      );
+    } else {
+      await queryClient.ensureQueryData(config.query(params as any) as any);
+    }
     config.prefetch(queryClient);
   },
   pendingComponent: MainProfilePageSkeleton,

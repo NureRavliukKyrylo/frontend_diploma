@@ -23,6 +23,7 @@ type ProfileTabConfig<T extends ProfileTabParams> = {
   schema: ZodType<T>;
   query: (params: T) => unknown;
   prefetch: (queryClient: QueryClient) => void;
+  infinite?: boolean;
 };
 
 const { tab: _s, ...skillsDefaults } = profileSearchDefaults.skills;
@@ -69,5 +70,6 @@ export const profileTabLoaderConfig: {
     prefetch: (queryClient) => {
       queryClient.prefetchQuery(skillsQuery.my(skillsDefaults));
     },
+    infinite: true,
   },
 };

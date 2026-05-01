@@ -24,7 +24,7 @@ import { DefaultAvatar } from "@shared/assets/images/user";
 export function MainProfilePage() {
   const { tab, ...search } = useSearch({ from: "/_masterLayout/profile/" });
   const navigate = useNavigate({ from: "/profile/" });
-  console.log(search);
+
   const handleTabChange = (tab: ProfileMode) => {
     navigate({ search: profileSearchDefaults[tab] });
   };

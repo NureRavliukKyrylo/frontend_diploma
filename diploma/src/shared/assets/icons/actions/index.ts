@@ -17,7 +17,7 @@ export { default as Edit } from "./edit.png";
 export { default as Mark } from "./mark.png";
 export { default as PlusIcon } from "./plus.png";
 export { default as MinusIcon } from "./minus.png";
-export { default as ArrowCarousel } from "./carousel-arrow.svg?react";
+export { default as NavigationArrow } from "./navigationArrow.svg?react";
 export { default as AddingPlus } from "./adding-plus.svg?react";
 export { default as ActionsIcon } from "./moreActions.svg?react";
 export { default as FullSizeIcon } from "./fullSize.svg?react";

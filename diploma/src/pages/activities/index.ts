@@ -13,3 +13,4 @@ export {
 } from "./list-activities/main/libs/listActivitiesSearchSchema";
 export { activitiesTabLoaderConfig } from "./list-activities/main/config/activitiesTabLoaderConfig";
 export { ListActivitiesPage } from "./list-activities/main/ui/ListActivitiesPage";
+export { ListActivitiesPageSkeleton } from "./list-activities/main/ui/ListActivitiesPageSkeleton";

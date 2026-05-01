@@ -3,7 +3,11 @@ import {
   BadgeCardDetailedSkeleton,
   useMyBadgesInfiniteQuery,
 } from "@entities/badge";
-import { BadgeDetailWidget, BadgesListWidget } from "@widgets/badges";
+import {
+  BadgeDetailWidget,
+  BadgeDetailWidgetSkeleton,
+  BadgesListWidget,
+} from "@widgets/badges";
 import styles from "./ProfileInventoryTab.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -39,6 +43,7 @@ export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
       resetScroll: false,
     });
   };
+  console.log(badgesSearch);
   return (
     <div className={styles.inventoryWrapper}>
       <h1 className={styles.achievementsTitle}>Achievements</h1>
@@ -76,6 +81,7 @@ export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
                     animate="visible"
                   >
                     <BadgeCardDetailed
+                      key={badge.id}
                       onClick={() => handleOpenBadge(badge.id)}
                       classImgName={styles.interactiveBadge}
                       badge={badge}
@@ -114,11 +120,30 @@ export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
           onClose={handleCloseBadge}
           showClosed={false}
         >
-          <Suspense fallback={"loading"}>
-            <div className={styles.badgeDetailWrapper}>
-              <BadgeDetailWidget id={badgeId} />
-            </div>
-          </Suspense>
+          <ErrorBoundary
+            fallbackRender={({ error }) => {
+              return (
+                <div className={styles.errorState}>
+                  <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
+                  <p className="errorHint">
+                    Try reloading the page or come back later.
+                  </p>
+                </div>
+              );
+            }}
+          >
+            <Suspense
+              fallback={
+                <div className={styles.badgeDetailWrapper}>
+                  <BadgeDetailWidgetSkeleton />
+                </div>
+              }
+            >
+              <div className={styles.badgeDetailWrapper}>
+                <BadgeDetailWidget id={badgeId} />
+              </div>
+            </Suspense>
+          </ErrorBoundary>
         </BaseModal>
       )}
     </div>
