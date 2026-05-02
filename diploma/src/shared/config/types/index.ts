@@ -20,3 +20,5 @@ export type { Policy, PolicyConfig } from "./entity/Policy";
 export type { EntityStatus, StatusConfig } from "./entity/EntityStatus";
 export type { MenuItem } from "./drop-down/MenuItem";
 export type { Rating } from "./rating/Rating";
+export type { CalendarView } from "./calendar/CalendarView";
+export type { EventType } from "./calendar/EventType";

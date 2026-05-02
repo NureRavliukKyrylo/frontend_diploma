@@ -1,12 +1,13 @@
 import FullCalendar from "@fullcalendar/react";
 import type { CalendarOptions } from "@fullcalendar/core";
 import styles from "./BaseCalendar.module.scss";
-import { useRef, useState, useCallback } from "react";
-import type { TabOption } from "@shared/config/types";
-import { Toggle } from "../toggle/Toggle";
+import { useRef, useState, useCallback, useEffect } from "react";
+import type { CalendarView, TabOption } from "@shared/config/types";
+import { Toggle } from "../../toggle/Toggle";
 import { NavigationArrow } from "@shared/assets/icons/actions";
-
-type CalendarView = "dayGridMonth" | "timeGridWeek" | "timeGridDay";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import timeGridPlugin from "@fullcalendar/timegrid";
 
 const VIEW_TABS: TabOption<CalendarView>[] = [
   { label: "Month", value: "dayGridMonth" },
@@ -14,11 +15,33 @@ const VIEW_TABS: TabOption<CalendarView>[] = [
   { label: "Day", value: "timeGridDay" },
 ];
 
-export const BaseCalendar = (props: CalendarOptions) => {
+interface BaseCalendarProps extends CalendarOptions {
+  initialView?: CalendarView;
+  initialDate?: string;
+  onViewChange?: (view: CalendarView, date: Date) => void;
+  onNavigate?: (date: Date, view: CalendarView) => void;
+}
+
+export const BaseCalendar = ({
+  initialView = "dayGridMonth",
+  initialDate,
+  onViewChange,
+  onNavigate,
+  ...props
+}: BaseCalendarProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const calendarRef = useRef<FullCalendar>(null);
-  const [activeView, setActiveView] = useState<CalendarView>("dayGridMonth");
+  const [activeView, setActiveView] = useState<CalendarView>(initialView);
   const [title, setTitle] = useState("");
+
+  useEffect(() => {
+    const api = calendarRef.current?.getApi();
+    if (!api) return;
+
+    if (initialView) api.changeView(initialView);
+    if (initialDate) api.gotoDate(initialDate);
+    syncTitle();
+  }, [initialView, initialDate]);
 
   const syncTitle = useCallback(() => {
     const api = calendarRef.current?.getApi();
@@ -28,26 +51,21 @@ export const BaseCalendar = (props: CalendarOptions) => {
   const handleViewChange = (view: CalendarView) => {
     setActiveView(view);
     const api = calendarRef.current?.getApi();
-    if (api) {
-      api.changeView(view);
-      setTitle(api.view.title);
-    }
+    if (!api) return;
+
+    api.changeView(view);
+    setTitle(api.view.title);
     wrapperRef.current?.setAttribute("data-view", view);
+    onViewChange?.(view, api.getDate());
   };
 
-  const handlePrev = () => {
-    calendarRef.current?.getApi().prev();
-    syncTitle();
-  };
+  const navigate = (direction: "prev" | "next" | "today") => {
+    const api = calendarRef.current?.getApi();
+    if (!api) return;
 
-  const handleNext = () => {
-    calendarRef.current?.getApi().next();
+    api[direction]();
     syncTitle();
-  };
-
-  const handleToday = () => {
-    calendarRef.current?.getApi().today();
-    syncTitle();
+    onNavigate?.(api.getDate(), activeView);
   };
 
   return (
@@ -59,8 +77,10 @@ export const BaseCalendar = (props: CalendarOptions) => {
       <div className={styles.headerCalendar}>
         <div className={styles.headerStart}>
           <span className={styles.calendarTitle}>{title}</span>
-
-          <button className={styles.todayButton} onClick={handleToday}>
+          <button
+            className={styles.todayButton}
+            onClick={() => navigate("today")}
+          >
             Today
           </button>
         </div>
@@ -77,10 +97,16 @@ export const BaseCalendar = (props: CalendarOptions) => {
             />
           </div>
           <div className={styles.navigationsBlock}>
-            <button className={styles.prevButton} onClick={handlePrev}>
+            <button
+              className={styles.prevButton}
+              onClick={() => navigate("prev")}
+            >
               <NavigationArrow />
             </button>
-            <button className={styles.nextButton} onClick={handleNext}>
+            <button
+              className={styles.nextButton}
+              onClick={() => navigate("next")}
+            >
               <NavigationArrow />
             </button>
           </div>
@@ -90,12 +116,17 @@ export const BaseCalendar = (props: CalendarOptions) => {
         ref={calendarRef}
         expandRows={true}
         height="auto"
-        initialView={activeView}
+        initialView={initialView}
+        initialDate={initialDate}
         headerToolbar={false}
         viewDidMount={(info) => {
           wrapperRef.current?.setAttribute("data-view", info.view.type);
           setTitle(info.view.title);
         }}
+        eventBackgroundColor="transparent"
+        eventBorderColor="transparent"
+        eventTextColor="transparent"
+        plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
         {...props}
       />
     </div>

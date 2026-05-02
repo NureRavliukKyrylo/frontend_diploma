@@ -1,0 +1,100 @@
+@use "@shared/assets/styles" as *;
+
+.middleContent {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  .baseInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .subBaseInfoBlock {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+      .timeIcon {
+        color: #b3b3b3;
+      }
+      .divider {
+        box-shadow: 0 0 0 0.5px #8c0000;
+      }
+      .calendarDivider {
+        box-shadow: 0 0 0 0.5px #8c0000;
+      }
+      .calendarInfo {
+        background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        @include font-base(25px, 600);
+      }
+      .info {
+        color: rgba(0, 0, 0, 0.6);
+        @include font-base(25px, 600);
+      }
+    }
+  }
+  .descriptionInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    h1 {
+      color: rgba(0, 0, 0, 0.8);
+      @include font-base(28px, 700);
+    }
+    p {
+      color: rgba(0, 0, 0, 0.5);
+      @include font-base(25px, 500);
+    }
+  }
+  .participationsInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    h1 {
+      color: rgba(0, 0, 0, 0.8);
+      @include font-base(28px, 700);
+    }
+    .avatarsGroup {
+      display: flex;
+      align-items: center;
+      .avatarVolunteer {
+        width: 66px;
+        height: 66px;
+        border-radius: 50%;
+        border: 1px solid #fff;
+        margin-left: -10px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+      .remainingAvatarItem {
+        width: 66px;
+        height: 66px;
+        border-radius: 50%;
+        border: 1px solid rgb(0, 0, 0, 0.1);
+        margin-left: -10px;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex-shrink: 0;
+        aspect-ratio: 1 / 1;
+        background-color: white;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        font-size: 17px;
+      }
+    }
+    .noMembers {
+      @include font-base(18px, 600);
+      line-height: 120%;
+      color: #1a1a2e;
+    }
+  }
+}

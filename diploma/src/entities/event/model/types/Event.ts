@@ -12,6 +12,7 @@ export interface Event {
   id: string;
   title: string;
   description: string;
+  startAt: string;
   endAt: string;
   progressPercent: number;
   tasksTotal: number;

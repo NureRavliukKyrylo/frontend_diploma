@@ -142,6 +142,21 @@
   flex-direction: column;
   gap: 40px;
 
+  :global(.fc-daygrid-event-harness::before) {
+    content: none !important;
+  }
+
+  :global(.fc-daygrid-event-harness::after) {
+    content: none !important;
+  }
+
+  :global(.fc-daygrid-event:hover),
+  :global(.fc-event:hover) {
+    background: transparent !important;
+    border-color: transparent !important;
+    opacity: 1 !important;
+  }
+
   :global(.fc) {
     height: 100%;
   }

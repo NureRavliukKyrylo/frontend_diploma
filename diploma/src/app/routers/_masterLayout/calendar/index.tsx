@@ -1,19 +1,12 @@
-import { BaseCalendar } from "@shared/ui";
-import { createFileRoute } from "@tanstack/react-router";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import timeGridPlugin from "@fullcalendar/timegrid";
+import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
+import {
+  calendarDefaults,
+  calendarSearchSchema,
+  VolunteerCalendar,
+} from "@pages/calendar";
 
 export const Route = createFileRoute("/_masterLayout/calendar/")({
-  component: RouteComponent,
+  component: VolunteerCalendar,
+  validateSearch: calendarSearchSchema,
+  search: { middlewares: [stripSearchParams(calendarDefaults)] },
 });
-
-function RouteComponent() {
-  return (
-    <div style={{ width: "85%" }}>
-      <BaseCalendar
-        plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
-      />
-    </div>
-  );
-}

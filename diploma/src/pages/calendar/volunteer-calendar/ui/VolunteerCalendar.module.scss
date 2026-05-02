@@ -1,0 +1,12 @@
+.volunteerCalendarWrapper {
+  width: 85%;
+}
+.eventCard {
+  cursor: pointer;
+  width: 100%;
+}
+.inset {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}

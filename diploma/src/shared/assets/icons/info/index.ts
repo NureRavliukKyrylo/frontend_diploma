@@ -13,3 +13,4 @@ export { default as PlannedStatus } from "./plannedStatus.png";
 export { default as InProgressStatus } from "./inProgress.png";
 export { default as DoneStatus } from "./doneStatus.png";
 export { default as OnHoldStatus } from "./onHoldStatus.png";
+export { default as TimeIcon } from "./time.svg?react";
