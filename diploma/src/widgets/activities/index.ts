@@ -5,5 +5,4 @@ export { MyActivitiesHeaderSkeleton } from "./my-activities-header/ui/MyActiviti
 export { type MyActivitiesMode } from "./my-activities-header/config/MyActivitiesMode";
 export { ListActivitiesHeader } from "./list-activities-header/ListActivitiesHeader";
 export { ListActivitiesHeaderSkeleton } from "./list-activities-header/ListActivitiesHeaderSkeleton";
-export { type ListActivitiesMode } from "./list-activities-header/config/ListActivitiesMode";
 export { ActivityTasksTab } from "./tabs/tasks-tab/ui/ActivityTasksTab";

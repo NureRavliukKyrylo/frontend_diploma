@@ -10,3 +10,4 @@ export { ZOOM_STEP, MAX_ZOOM, MIN_ZOOM, ROTATION_STEP } from "./imageCrop";
 export { ENTITY_STATUS_MAP } from "./EntityStatus";
 export { POLICY_STATUS_MAP } from "./PolicyStatus";
 export { EVENT_COLOR } from "./EventTypeColor";
+export { listActivitiesTabs } from "./listActivitiesTabs";

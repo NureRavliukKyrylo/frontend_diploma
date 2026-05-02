@@ -1,5 +1,4 @@
-import type { TabOption } from "@shared/config/types";
-import type { ListActivitiesMode } from "./ListActivitiesMode";
+import type { ListActivitiesMode, TabOption } from "@shared/config/types";
 
 export const listActivitiesTabs: TabOption<ListActivitiesMode>[] = [
   { label: "PROJECTS", value: "projects" },

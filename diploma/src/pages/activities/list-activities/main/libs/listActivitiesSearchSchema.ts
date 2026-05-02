@@ -1,7 +1,7 @@
 import { eventSearchDefaults, eventsSearchSchema } from "@entities/event";
 import { projectBaseSchema, projectSearchDefaults } from "@entities/project";
 import { tasksSearchDefaults, tasksSearchSchema } from "@entities/task";
-import type { ListActivitiesMode } from "@widgets/activities";
+import type { ListActivitiesMode } from "@shared/config/types";
 import z from "zod";
 
 export const listActivitiesSearchDefaults = {

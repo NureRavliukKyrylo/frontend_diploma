@@ -39,3 +39,4 @@ export {
 } from "./libs/search-schema/eventDetailSearchSchema";
 export { useMyEventsListQuery } from "./model/hooks/useMyEventsListQuery";
 export { EventCalendarDetail } from "./ui/event-detail/calendar/EventCalendarDetail";
+export { eventsNoCategoriesSchema } from "./libs/search-schema/eventsSearchSchema";

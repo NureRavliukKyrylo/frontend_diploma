@@ -1,10 +1,10 @@
 import { ProjectsTab } from "../../projects-tab";
 import { EventsTab } from "../../events-tab";
 import { TasksTab } from "../../tasks-tab";
-import type { ListActivitiesSearch } from "@pages/activities";
 import type { ListActivitiesMode } from "@shared/config/types";
+import type { CategoryDetailSearch } from "../libs/categoryDetailSearchSchema";
 
-const myActivitiesForms: Record<
+const categoryActivitiesForms: Record<
   ListActivitiesMode,
   React.FC<{ search: any }>
 > = {
@@ -17,14 +17,14 @@ export const ActivitiesContent = ({
   search,
 }: {
   tab: ListActivitiesMode;
-  search: ListActivitiesSearch;
+  search: CategoryDetailSearch;
 }) => {
   const {
     tab: _,
     taskMode: _taskMode,
     ...searchWithoutTab
-  } = search as ListActivitiesSearch & { taskMode?: string };
+  } = search as CategoryDetailSearch & { taskMode?: string };
 
-  const TabComponent = myActivitiesForms[tab];
+  const TabComponent = categoryActivitiesForms[tab];
   return <TabComponent search={searchWithoutTab} />;
 };

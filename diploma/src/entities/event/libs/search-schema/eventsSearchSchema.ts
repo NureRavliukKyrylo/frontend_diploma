@@ -18,11 +18,16 @@ export const eventsFiltersSchema = z.object({
   ShowJoined: z.boolean().optional().catch(false),
   IncludeArchived: z.boolean().optional(),
   SkillIds: z.array(z.string()).optional().catch(undefined),
+  CategoryIds: z.array(z.string()).optional().catch([]),
 });
 
 export const eventsSearchSchema = eventsFiltersSchema
   .extend(eventsTabBaseSchema.shape)
   .extend(locationSchema.shape);
+
+export const eventsNoCategoriesSchema = ventsSearchSchema.omit({
+  CategoryIds: true,
+});
 
 export type EventSearchParams = z.infer<typeof eventsSearchSchema>;
 export type EventRequestParams = Omit<

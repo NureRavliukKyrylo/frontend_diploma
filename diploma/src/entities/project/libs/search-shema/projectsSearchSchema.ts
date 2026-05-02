@@ -51,6 +51,10 @@ export const projectBaseSchema = projectFiltersWithCategorySchema
   .extend(mapBoundsSchema.shape)
   .extend(projectsTabBaseSchema.shape);
 
+export const projectsNoCategoriesSchema = projectBaseSchema.omit({
+  CategoryIds: true,
+});
+
 export type ProjectPaginationParams = z.infer<typeof paginationSchema>;
 export type ProjectSearchParams = z.infer<typeof projectBaseSchema>;
 export type ProjectRequestParams = Omit<

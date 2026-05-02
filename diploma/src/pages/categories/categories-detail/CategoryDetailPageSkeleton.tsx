@@ -1,13 +1,13 @@
 import { Skeleton } from "@heroui/skeleton";
 import styles from "./CategoriesDetailPage.module.scss";
-import { CategoryDetailWidgetSkeleton } from "@widgets/categories";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ProjectCardSkeleton } from "@entities/project";
+import { CategoryDetailHeaderSkeleton } from "@widgets/categories";
 
 export const CategoryDetailPageSkeleton = () => {
   return (
     <div className={styles.projectsCategoryWrapper}>
-      <CategoryDetailWidgetSkeleton />
+      <CategoryDetailHeaderSkeleton />
 
       <div className={styles.filterProjectsWrapper}>
         <div className={styles.filtersInteractions}>

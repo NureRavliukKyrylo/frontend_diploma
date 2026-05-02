@@ -18,6 +18,7 @@ export const tasksFiltersSchema = z.object({
     .optional()
     .catch(undefined),
   SkillIds: z.array(z.string()).optional().catch(undefined),
+  CategoryIds: z.array(z.string()).optional().catch([]),
 });
 
 export const tasksSearchSchema = tasksFiltersSchema
@@ -26,6 +27,10 @@ export const tasksSearchSchema = tasksFiltersSchema
     DrawerPageSize: z.number().optional(),
     DrawerOrderBy: z.enum(["Default", "Newest", "Latest"]).optional(),
   });
+
+export const tasksNoCategoriesSchema = tasksSearchSchema.omit({
+  CategoryIds: true,
+});
 
 export type TaskSearchParams = z.infer<typeof tasksSearchSchema>;
 export type TasksRequestParams = Omit<

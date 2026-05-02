@@ -1,4 +1,4 @@
-import { CategoryDetailWidget } from "@widgets/categories";
+import { CategoryDetailHeader } from "@widgets/categories";
 import { Suspense } from "react";
 import styles from "./CategoriesDetailPage.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
@@ -7,14 +7,11 @@ import { CategoryProjectFiltersWidget } from "@widgets/categories";
 import {
   ProjectCard,
   ProjectCardSkeleton,
-  projectQuery,
   sortingProjectItems,
   useProjectsListQuery,
 } from "@entities/project";
 import { Pagination } from "@shared/ui";
-import { useQuery } from "@tanstack/react-query";
 import { useCategoryDetailPage } from "./model/useCategoryDetailPage";
-import { useRouter } from "@tanstack/react-router";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ToggleDropdownButton } from "@shared/ui/buttons";
 import { SearchBar } from "@shared/ui/inputs";
@@ -36,9 +33,10 @@ export function CategoryDetailPage() {
     handleSearch,
     handleSort,
     handlePageChange,
+    category,
+    projects,
+    router,
   } = useCategoryDetailPage();
-  const router = useRouter();
-  const { data: projects } = useQuery(projectQuery.list(searchWithCategory));
 
   return (
     <div className={styles.projectsCategoryWrapper}>
@@ -46,7 +44,13 @@ export function CategoryDetailPage() {
         {...headerVariants}
         transition={{ duration: 0.4, ease: "easeOut" }}
       >
-        <CategoryDetailWidget />
+        {category && (
+          <CategoryDetailHeader
+            activeTab="projects"
+            onTabChange={() => console.log()}
+            category={category}
+          />
+        )}
       </motion.div>
 
       <div className={styles.filterProjectsWrapper}>

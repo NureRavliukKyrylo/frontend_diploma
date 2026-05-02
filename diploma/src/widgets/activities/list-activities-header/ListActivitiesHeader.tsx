@@ -1,9 +1,9 @@
 import styles from "./ListActivitiesHeader.module.scss";
 import { ActivitiesLogo } from "@shared/assets/images/information";
 import { Link } from "@tanstack/react-router";
-import type { ListActivitiesMode } from "./config/ListActivitiesMode";
 import { Toggle } from "@shared/ui";
-import { listActivitiesTabs } from "./config/listActivitiesTabs";
+import type { ListActivitiesMode } from "@shared/config/types";
+import { listActivitiesTabs } from "@shared/config/constants";
 
 interface ListActivitiesHeaderProps {
   activeTab: ListActivitiesMode;

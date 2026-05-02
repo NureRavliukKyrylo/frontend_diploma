@@ -1,14 +1,25 @@
-import type { ProjectSortValues } from "@entities/project";
-import { useNavigate, useParams, useSearch } from "@tanstack/react-router";
+import { categoryQuery } from "@entities/category";
+import { projectQuery, type ProjectSortValues } from "@entities/project";
+import { useQuery } from "@tanstack/react-query";
+import {
+  useNavigate,
+  useParams,
+  useRouter,
+  useSearch,
+} from "@tanstack/react-router";
 import { useState } from "react";
 
 export const useCategoryDetailPage = () => {
   const navigate = useNavigate({ from: "/categories/$id/" });
   const search = useSearch({ from: "/_masterLayout/categories/$id/" });
+  const router = useRouter();
   const { id } = useParams({ from: "/_masterLayout/categories/$id/" });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const searchWithCategory = { ...search, CategoryIds: [id] };
+
+  const { data: projects } = useQuery(projectQuery.list(searchWithCategory));
+  const { data: category } = useQuery(categoryQuery.id(id));
 
   const handleSearch = (value: string) =>
     navigate({
@@ -33,5 +44,8 @@ export const useCategoryDetailPage = () => {
     handleSearch,
     handleSort,
     handlePageChange,
+    router,
+    projects,
+    category,
   };
 };

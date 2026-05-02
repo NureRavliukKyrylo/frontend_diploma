@@ -7,6 +7,7 @@ export {
   type ProjectSearchParams,
   type MapProjectSearchParams,
   type MapProjectRequestParams,
+  projectsNoCategoriesSchema,
 } from "./libs/search-shema/projectsSearchSchema";
 export { projectQuery } from "./model/queries/project-query/projectQuery";
 export { type Project } from "./model/types/project/Project";
