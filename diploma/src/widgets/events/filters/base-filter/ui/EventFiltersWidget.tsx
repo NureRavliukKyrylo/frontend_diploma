@@ -11,16 +11,25 @@ import {
   SwitchFilter,
 } from "@shared/ui/filters";
 import { OrganizationsListFilter } from "@features/organization";
-import type { EventSearchParams } from "@entities/event";
-import { ProjectsListFilter } from "@features/project";
+import { CategoriesListFilter, ProjectsListFilter } from "@features/project";
 import { SkillsListFilter } from "@features/skills";
 import { useSkillsInfiniteQuery } from "@entities/skill";
+import type { EventRequestParams } from "@entities/event/libs";
+import { Link } from "@tanstack/react-router";
+import { useCategoriesInfiniteQuery } from "@entities/category";
+import type { BaseFiltersRoute } from "@shared/config/types";
 
 interface EventFiltersWidgetProps {
-  search: EventSearchParams;
+  search: EventRequestParams;
+  includeCategories?: boolean;
+  from?: BaseFiltersRoute;
 }
 
-export const EventFiltersWidget = ({ search }: EventFiltersWidgetProps) => {
+export const EventFiltersWidget = ({
+  search,
+  includeCategories = true,
+  from = "/activities/",
+}: EventFiltersWidgetProps) => {
   const {
     onStartDateChange,
     onEndBeforeChange,
@@ -35,11 +44,30 @@ export const EventFiltersWidget = ({ search }: EventFiltersWidgetProps) => {
     onClearFilters,
     onIncludeSeries,
     onSkillToggle,
-  } = useEventFilters();
+    onCategoryToggle,
+  } = useEventFilters(from);
 
   return (
     <>
       <div className={styles.scrollableEventsFilters}>
+        {!includeCategories && (
+          <div className={styles.buttonShowAllEvents}>
+            <motion.div
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              className={styles.animationButtonBlock}
+            >
+              <Link
+                to="/activities"
+                search={{ tab: "events", ...search }}
+                className={styles.showAllEventsButton}
+              >
+                SHOW ALL EVENTS
+              </Link>
+            </motion.div>
+          </div>
+        )}
         <div className={styles.eventDeadLine}>
           <h1 className={styles.subHeaderFilter}>Event deadline due</h1>
           <DateRangeFilter
@@ -57,6 +85,19 @@ export const EventFiltersWidget = ({ search }: EventFiltersWidgetProps) => {
             onRatingChange={onRatingChange}
           />
         </div>
+        {includeCategories && (
+          <>
+            <div className={styles.dividerFilterBlock} />
+            <div className={styles.eventCategories}>
+              <h1 className={styles.subHeaderFilter}>Categories</h1>
+              <CategoriesListFilter
+                useCategoriesQuery={useCategoriesInfiniteQuery({ PageSize: 7 })}
+                selectedIds={search.CategoryIds}
+                onToggle={onCategoryToggle}
+              />
+            </div>
+          </>
+        )}
         <div className={styles.dividerFilterBlock} />
         <div className={styles.eventSkills}>
           <h1 className={styles.subHeaderFilter}>Required skills</h1>

@@ -11,7 +11,7 @@ export interface BadgeCardProps {
 export const BadgeCard = ({ badge }: BadgeCardProps) => {
   return (
     <div
-      className={styles.badgeImageBlock}
+      className={`${styles.badgeImageBlock} ${!badge.isUnlocked ? styles.locked : ""}`}
       style={{ backgroundImage: `url(${badge.iconUrl})` }}
     >
       <div

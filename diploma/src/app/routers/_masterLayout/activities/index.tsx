@@ -12,8 +12,6 @@ import {
 } from "@shared/libs/search-params";
 import { createFileRoute } from "@tanstack/react-router";
 
-const promise = async () => new Promise((resolve) => setTimeout(resolve, 2000));
-
 export const Route = createFileRoute("/_masterLayout/activities/")({
   validateSearch: listActivitiesSearchSchema,
   search: {
@@ -29,7 +27,6 @@ export const Route = createFileRoute("/_masterLayout/activities/")({
     ],
   },
   loader: async ({ context: { queryClient }, location }) => {
-    await promise();
     const search = location.search as ListActivitiesSearch;
     const config = activitiesTabLoaderConfig[search.tab ?? "projects"];
 

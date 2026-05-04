@@ -1,17 +1,16 @@
 import {
-  sortingTaskItems,
-  TaskCard,
-  TaskCardSkeleton,
-  useTasksListQuery,
-  type TaskDrawerSearch,
-  type TaskSearchParams,
-} from "@entities/task";
-import { useTasksTab } from "../model/useTasksTab";
-import styles from "./TasksTab.module.scss";
+  EventCard,
+  sortingEventItems,
+  useEventsListQuery,
+  type EventSearchParamsNoCategories,
+} from "@entities/event";
+import { useEventsTab } from "../model/useEventsTab";
+import styles from "./EventsTab.module.scss";
 import { ToggleDropdownButton } from "@shared/ui/buttons";
-import { TaskFiltersWidget, TasksListWidget, TaskWidget } from "@widgets/tasks";
+import { EventFiltersWidget, EventsListWidget } from "@widgets/events";
 import { SearchBar } from "@shared/ui/inputs";
 import { SortDropDown } from "@shared/ui/drop-down";
+import { Pagination } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   fadeDuration,
@@ -21,39 +20,28 @@ import {
 } from "@shared/assets/animations";
 import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
+import { ProjectCardSkeleton } from "@entities/project";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
-import { Pagination } from "@shared/ui";
-import { Drawer } from "@mui/material";
-import { useCategoryDetailTaskDrawer } from "../model/useCategoryDetailTaskDrawer";
 
-interface TasksTabProps {
-  search: TaskSearchParams;
+interface EventsTabProps {
+  search: EventSearchParamsNoCategories;
   categoryId: string;
 }
 
-export const TasksTab = ({ search, categoryId }: TasksTabProps) => {
-  const {
-    isOpen,
-    openTask,
-    closeTask,
-    taskId,
-    handleModeChange,
-    taskMode,
-    handleSortChange,
-  } = useCategoryDetailTaskDrawer();
-  const { taskId: _, taskMode: __, DrawerOrderBy, ...tasksSearch } = search;
+export const EventsTab = ({ search, categoryId }: EventsTabProps) => {
   const {
     isFilterOpen,
     setIsFilterOpen,
     handleSearch,
     handleSort,
     handlePageChange,
-    tasks,
-  } = useTasksTab(tasksSearch, categoryId);
+    events,
+    router,
+  } = useEventsTab(search, categoryId);
 
   return (
-    <div className={styles.categoryTasksSection}>
+    <div className={styles.categoryEventsSection}>
       <ErrorBoundary
         fallbackRender={({ error }) => {
           return (
@@ -66,10 +54,10 @@ export const TasksTab = ({ search, categoryId }: TasksTabProps) => {
           );
         }}
       >
-        <div className={styles.filterTasksWrapper}>
+        <div className={styles.filterEventsWrapper}>
           <div className={styles.filtersInteractions}>
             <ToggleDropdownButton onOpenChange={setIsFilterOpen}>
-              <TaskFiltersWidget
+              <EventFiltersWidget
                 search={search}
                 includeCategories={false}
                 from="/categories/$id/"
@@ -81,7 +69,7 @@ export const TasksTab = ({ search, categoryId }: TasksTabProps) => {
               variant="projects"
             />
             <SortDropDown
-              options={sortingTaskItems}
+              options={sortingEventItems}
               onSelect={handleSort}
               value={search.OrderBy ?? "Default"}
             />
@@ -90,53 +78,52 @@ export const TasksTab = ({ search, categoryId }: TasksTabProps) => {
             layout
             initial={false}
             transition={{ layout: layoutTransition }}
-            className={`${styles.tasksList} ${isFilterOpen ? styles.filterOpen : ""}`}
+            className={`${styles.eventsList} ${isFilterOpen ? styles.filterOpen : ""}`}
           >
-            {tasks?.data?.length === 0 ? (
+            {events?.data?.length === 0 ? (
               <div className={styles.emptyState}>
-                <h2>No Tasks found</h2>
+                <h2>No events found</h2>
                 <p>Try adjusting your filters or search query</p>
               </div>
             ) : (
               <Suspense
                 fallback={
                   <ListWidgetSkeleton
-                    renderSkeleton={() => (
-                      <div className={styles.skeletonWrapper}>
-                        <TaskCardSkeleton />
-                      </div>
-                    )}
-                    className={styles.tasksListWrapper}
+                    renderSkeleton={ProjectCardSkeleton}
+                    className={styles.eventsListWrapper}
                   />
                 }
               >
                 <AnimatePresence mode="wait">
                   <motion.div
-                    key={JSON.stringify(tasksSearch)}
+                    key={JSON.stringify(search)}
                     {...fadeVariants}
                     transition={fadeDuration}
                   >
-                    <TasksListWidget
-                      className={styles.tasksListWrapper}
-                      renderCard={(task, index) => (
+                    <EventsListWidget
+                      className={styles.eventsListWrapper}
+                      renderCard={(event, index) => (
                         <motion.div
-                          key={task.id}
+                          key={event.id}
                           custom={index + 1}
                           variants={staggeredCardVariants}
                           initial="hidden"
                           animate="visible"
                           whileHover="hover"
-                          className={styles.taskCardMotion}
-                          onClick={() => {
-                            openTask(task.id);
-                          }}
+                          className={styles.eventCardMotion}
+                          onClick={() =>
+                            router.navigate({
+                              to: "/events/$id",
+                              params: { id: event.id },
+                            })
+                          }
                         >
-                          <TaskCard task={task} />
+                          <EventCard event={event} />
                         </motion.div>
                       )}
-                      useTasksQuery={useTasksListQuery({
+                      useEventsQuery={useEventsListQuery({
                         CategoryIds: [categoryId],
-                        ...tasksSearch,
+                        ...search,
                       })}
                     />
                   </motion.div>
@@ -144,30 +131,12 @@ export const TasksTab = ({ search, categoryId }: TasksTabProps) => {
               </Suspense>
             )}
           </motion.div>
-          <Drawer
-            open={isOpen}
-            onClose={closeTask}
-            anchor="right"
-            className={styles.drawer}
-          >
-            <div className={styles.drawerContent}>
-              {taskId && (
-                <TaskWidget
-                  search={search as TaskDrawerSearch}
-                  handleModeChange={handleModeChange}
-                  taskMode={taskMode}
-                  taskId={taskId}
-                  handleSort={handleSortChange}
-                />
-              )}
-            </div>
-          </Drawer>
         </div>
 
-        {tasks && tasks.pagination.totalPages > 1 && (
+        {events && events.pagination.totalPages > 1 && (
           <div className={styles.paginationWrapper}>
             <Pagination
-              total={tasks.pagination.totalPages}
+              total={events.pagination.totalPages}
               page={search.Page}
               onChange={handlePageChange}
             />

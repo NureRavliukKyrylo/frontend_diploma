@@ -11,8 +11,10 @@ import {
   flip,
   shift,
   offset,
+  type VirtualElement,
 } from "@floating-ui/react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect } from "react";
 
 interface CalendarEventInfoProps {
   activityId: string;
@@ -20,7 +22,7 @@ interface CalendarEventInfoProps {
   onClose: () => void;
   onPrev?: () => void;
   onNext?: () => void;
-  anchor: HTMLElement;
+  anchor: Element | VirtualElement;
 }
 
 export const CalendarEventInfo = ({
@@ -32,11 +34,14 @@ export const CalendarEventInfo = ({
   anchor,
 }: CalendarEventInfoProps) => {
   const { refs, floatingStyles } = useFloating({
-    elements: { reference: anchor },
     whileElementsMounted: autoUpdate,
-    placement: "left-start",
+    placement: "left",
     middleware: [offset(12), flip(), shift({ padding: 8 })],
   });
+
+  useEffect(() => {
+    refs.setReference(anchor);
+  }, [anchor]);
 
   const { data: event, isLoading: isEventLoading } = useQuery({
     ...eventQuery.id(activityId),
@@ -64,54 +69,92 @@ export const CalendarEventInfo = ({
         exit={{ opacity: 0, scale: 0.95, x: 8 }}
         transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
       >
-        <Close className={styles.closeWindow} onClick={onClose} />
-
         <div className={styles.infoEvent}>
           <div className={styles.headerInfo}>
-            <h1>{title}</h1>
-
-            <div className={styles.navigationsBlock}>
-              {onPrev && (
-                <button
-                  className={styles.prevButton}
-                  onClick={onPrev}
-                  disabled={!onPrev}
-                >
-                  <NavigationArrow />
-                </button>
-              )}
-              {onNext && (
-                <button
-                  className={styles.nextButton}
-                  onClick={onNext}
-                  disabled={!onNext}
-                >
-                  <NavigationArrow />
-                </button>
-              )}
-            </div>
-          </div>
-
-          {isLoading ? (
-            <div className={styles.skeleton} />
-          ) : type === "event" && event ? (
-            <>
-              <EventCalendarDetail event={event} />
-              <div className={styles.bottomContent}>
-                <h1>Will you be attending the event?</h1>
-                <div className={styles.actions}>
-                  <BaseButtonWrapper className={styles.attendingAgree}>
-                    Yes
-                  </BaseButtonWrapper>
-                  <BaseButtonWrapper className={styles.attendingDisagree}>
-                    No
-                  </BaseButtonWrapper>
-                </div>
+            <div className={styles.leftBlock}>
+              <h1>{title}</h1>
+              <div className={styles.navigationsBlock}>
+                {onPrev && (
+                  <button
+                    className={styles.prevButton}
+                    onClick={onPrev}
+                    disabled={!onPrev}
+                  >
+                    <NavigationArrow />
+                  </button>
+                )}
+                {onNext && (
+                  <button
+                    className={styles.nextButton}
+                    onClick={onNext}
+                    disabled={!onNext}
+                  >
+                    <NavigationArrow />
+                  </button>
+                )}
               </div>
-            </>
-          ) : task ? (
-            <TaskCalendarDetail task={task} />
-          ) : null}
+            </div>
+            <motion.div
+              className={styles.closeWindow}
+              onClick={onClose}
+              whileHover={{ rotate: 90, scale: 1.05 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 200 }}
+            >
+              <Close />
+            </motion.div>
+          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activityId}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                transition: { duration: 0.25, ease: "easeOut" },
+              }}
+              exit={{
+                opacity: 0,
+                x: -20,
+                transition: { duration: 0.2, ease: "easeIn" },
+              }}
+              className={styles.infoEvent}
+            >
+              {isLoading ? (
+                <div className={styles.skeleton} />
+              ) : type === "event" && event ? (
+                <>
+                  <EventCalendarDetail event={event} />
+                  <div className={styles.bottomContent}>
+                    <h1>Will you be attending the event?</h1>
+                    <div className={styles.actions}>
+                      <BaseButtonWrapper className={styles.attendingAgree}>
+                        Yes
+                      </BaseButtonWrapper>
+                      <BaseButtonWrapper className={styles.attendingDisagree}>
+                        No
+                      </BaseButtonWrapper>
+                    </div>
+                  </div>
+                </>
+              ) : task ? (
+                <>
+                  <TaskCalendarDetail task={task} />
+                  <div className={styles.bottomContent}>
+                    <h1>Will you be completing the task?</h1>
+                    <div className={styles.actions}>
+                      <BaseButtonWrapper className={styles.attendingAgree}>
+                        Yes
+                      </BaseButtonWrapper>
+                      <BaseButtonWrapper className={styles.attendingDisagree}>
+                        No
+                      </BaseButtonWrapper>
+                    </div>
+                  </div>
+                </>
+              ) : null}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </motion.div>
     </div>

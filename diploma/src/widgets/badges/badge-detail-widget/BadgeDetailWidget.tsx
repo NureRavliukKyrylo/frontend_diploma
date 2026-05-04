@@ -7,6 +7,14 @@ import { ProgressBar } from "@shared/ui";
 import { badgesQuery, TierColors } from "@entities/badge";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ShareBadgeButton } from "@features/badge";
+import { Link } from "@tanstack/react-router";
+
+const entityTypeToRoute = {
+  organization: "/organizations/$id",
+  project: "/projects/$id",
+  event: "/events/$id",
+  task: "/tasks/$id",
+} as const;
 
 export const BadgeDetailWidget = ({ id }: { id: string }) => {
   const { data: badge } = useSuspenseQuery(badgesQuery.id(id));
@@ -27,8 +35,25 @@ export const BadgeDetailWidget = ({ id }: { id: string }) => {
               />
             )}
           </div>
-
-          <h2 style={{ color: TierColors[badge.rank] }}>Rank {badge.rank}</h2>
+          <div className={styles.rankEntity}>
+            <h2 style={{ color: TierColors[badge.rank] }}>Rank {badge.rank}</h2>
+            {badge.scopeEntityType ? (
+              <Link
+                to={entityTypeToRoute[badge.scopeEntityType]}
+                params={{ id: badge.scopeEntityId }}
+                className={styles.entityInfo}
+              >
+                {badge.scopeEntityType === "organization" && (
+                  <img src="" alt="organization-image" />
+                )}
+                <p>{badge.scopeEntityType}</p>
+              </Link>
+            ) : (
+              <div className={styles.entityInfo}>
+                <p>ImpactFlow</p>
+              </div>
+            )}
+          </div>
         </div>
         <div className={styles.middleInfo}>
           <ReadMoreButton collapsedHeight={80}>

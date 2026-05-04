@@ -6,18 +6,21 @@ import type { CategoryDetailSearch } from "../libs/categoryDetailSearchSchema";
 
 const categoryActivitiesForms: Record<
   ListActivitiesMode,
-  React.FC<{ search: any }>
+  React.FC<{ search: any; categoryId: string }>
 > = {
   projects: ProjectsTab,
   events: EventsTab,
   tasks: TasksTab,
 };
-export const ActivitiesContent = ({
+
+export const ActivitiesCategoryContent = ({
   tab,
   search,
+  categoryId,
 }: {
   tab: ListActivitiesMode;
   search: CategoryDetailSearch;
+  categoryId: string;
 }) => {
   const {
     tab: _,
@@ -26,5 +29,5 @@ export const ActivitiesContent = ({
   } = search as CategoryDetailSearch & { taskMode?: string };
 
   const TabComponent = categoryActivitiesForms[tab];
-  return <TabComponent search={searchWithoutTab} />;
+  return <TabComponent search={searchWithoutTab} categoryId={categoryId} />;
 };

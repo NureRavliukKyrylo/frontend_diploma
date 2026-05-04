@@ -67,3 +67,7 @@ export type MapProjectRequestParams = Omit<
   "tab"
 >;
 export type ProjectBaseParams = Omit<z.infer<typeof projectBaseSchema>, "tab">;
+export type ProjectSearchParamsNoCategories = Omit<
+  ProjectSearchParams,
+  "CategoryIds"
+>;

@@ -54,3 +54,4 @@ export {
 } from "./libs/search-shema/projectsTabSchema";
 export { useMyProjectsListQuery } from "./model/hooks/useMyProjectsListQuery";
 export { projectBaseSchema } from "./libs/search-shema/projectsSearchSchema";
+export { type ProjectSearchParamsNoCategories } from "./libs/search-shema/projectsSearchSchema";

@@ -1,10 +1,13 @@
 import { useNavigate } from "@tanstack/react-router";
 import { toggleArrayParam } from "@shared/libs/search-params";
-import type { LocationSuggestion } from "@shared/config/types";
+import type {
+  BaseFiltersRoute,
+  LocationSuggestion,
+} from "@shared/config/types";
 import { type EventSearchParams } from "@entities/event";
 
-export const useEventFilters = () => {
-  const navigate = useNavigate({ from: "/activities/" });
+export const useEventFilters = (from: BaseFiltersRoute) => {
+  const navigate = useNavigate({ from });
 
   const nav = (updater: (prev: EventSearchParams) => EventSearchParams) =>
     navigate({
@@ -60,6 +63,13 @@ export const useEventFilters = () => {
         Lng: undefined,
         Location: undefined,
         RadiusKm: undefined,
+      })),
+
+    onCategoryToggle: (id: string) =>
+      nav((prev) => ({
+        ...prev,
+        CategoryIds: toggleArrayParam(prev.CategoryIds, id),
+        Page: 1,
       })),
 
     onRadiusChange: (radiusKm: number) =>

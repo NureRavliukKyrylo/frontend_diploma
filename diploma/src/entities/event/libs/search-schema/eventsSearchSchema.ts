@@ -25,7 +25,7 @@ export const eventsSearchSchema = eventsFiltersSchema
   .extend(eventsTabBaseSchema.shape)
   .extend(locationSchema.shape);
 
-export const eventsNoCategoriesSchema = ventsSearchSchema.omit({
+export const eventsNoCategoriesSchema = eventsSearchSchema.omit({
   CategoryIds: true,
 });
 
@@ -33,4 +33,8 @@ export type EventSearchParams = z.infer<typeof eventsSearchSchema>;
 export type EventRequestParams = Omit<
   z.infer<typeof eventsSearchSchema>,
   "tab"
+>;
+export type EventSearchParamsNoCategories = Omit<
+  EventSearchParams,
+  "CategoryIds"
 >;

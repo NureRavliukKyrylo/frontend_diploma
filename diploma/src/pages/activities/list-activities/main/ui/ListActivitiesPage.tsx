@@ -2,12 +2,10 @@ import styles from "./ListActivitiesPage.module.scss";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { listActivitiesSearchDefaults } from "@pages/activities";
-import {
-  ListActivitiesHeader,
-  type ListActivitiesMode,
-} from "@widgets/activities";
+import { ListActivitiesHeader } from "@widgets/activities";
 import { ActivitiesContent } from "../config/activitiesForms";
 import { headerVariants } from "@shared/assets/animations";
+import type { ListActivitiesMode } from "@shared/config/types";
 
 export const ListActivitiesPage = () => {
   const search = useSearch({ from: "/_masterLayout/activities/" });

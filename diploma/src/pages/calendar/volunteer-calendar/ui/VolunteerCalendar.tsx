@@ -14,7 +14,7 @@ const events: EventInput[] = [
     extendedProps: { type: "task" },
   },
   {
-    id: "69eb1949b27f92a95fe614a5",
+    id: "69eb1832b27f92a95fe614a4",
     title: "Fix login bug",
     start: "2026-05-02",
     allDay: true,
@@ -43,7 +43,10 @@ export const VolunteerCalendar = () => {
         initialDate={initialDate}
         onViewChange={handleViewChange}
         onNavigate={handleNavigate}
-        dateClick={(info) => handleDateClick(info.date, info.jsEvent)}
+        dateClick={(info) => {
+          if (info.dayEl.classList.contains("fc-day-other")) return;
+          handleDateClick(info.date, info.jsEvent);
+        }}
         eventContent={(info) => (
           <CalendarEventItem
             info={info}
@@ -58,7 +61,6 @@ export const VolunteerCalendar = () => {
           <>
             <div className={styles.inset} onClick={handleClose} />
             <CalendarEventInfo
-              key={activeInfo.id}
               activityId={activeInfo.id}
               type={activeInfo.type}
               onClose={handleClose}

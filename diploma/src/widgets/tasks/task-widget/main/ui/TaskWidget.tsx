@@ -96,12 +96,18 @@ export const TaskWidget = ({
                   )}
                 </div>
               </div>
-              <div className={styles.organizationInfo}>
-                <img
-                  src={task?.organization?.logoUrl}
-                  alt="organization-image"
-                />
-                <p>{task?.organization?.name}</p>
+              <div className={styles.rightBlockInfo}>
+                <div className={styles.organizationInfo}>
+                  <img
+                    src={task?.organization?.logoUrl}
+                    alt="organization-image"
+                  />
+                  <p>{task?.organization?.name}</p>
+                </div>
+                <div className={styles.ratingTaskInfo}>
+                  <h1>4.5</h1>
+                  <p>(120 votes)</p>
+                </div>
               </div>
             </div>
             <div className={styles.relatedActivities}>
@@ -130,23 +136,6 @@ export const TaskWidget = ({
                 </div>
               )}
             </div>
-          </div>
-        </div>
-        <div className={styles.statsTaskInfo}>
-          <div className={styles.levelTaskInfo}>
-            <div className={styles.headerLevelBar}>
-              <span className={styles.current}>Level 12</span>
-              <span className={styles.xp}>{task?.progressPercent}/100</span>
-            </div>
-            <ProgressBar current={task?.progressPercent ?? 0} max={100} />
-            <div className={styles.footerLevelBar}>
-              <span className={styles.label}>Next level</span>
-              <span className={styles.next}>Level 13</span>
-            </div>
-          </div>
-          <div className={styles.ratingTaskInfo}>
-            <h1>4.5</h1>
-            <p>(120 votes)</p>
           </div>
         </div>
         <div className={styles.taskFooterContent}>

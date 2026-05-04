@@ -1,35 +1,46 @@
-import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
-import { categoryQuery } from "@entities/category";
+import { createFileRoute } from "@tanstack/react-router";
 import {
-  projectSearchSchema,
-  projectQuery,
-  projectSearchDefaults,
-} from "@entities/project";
-import { organizationQuery } from "@entities/organization";
-import { CategoryDetailPageSkeleton } from "@pages/categories";
+  CategoryDetailPageSkeleton,
+  categoryDetailSearchSchema,
+  categoryDetailSearchDefaults,
+  type CategoryDetailSearch,
+  categoryDetailTabLoaderConfig,
+} from "@pages/categories";
+import {
+  createDrawerCleanerMiddleware,
+  createTabCleanerMiddleware,
+} from "@shared/libs/search-params";
+import { taskDrawerDefaults } from "@entities/task";
+import { categoryQuery } from "@entities/category";
 
-const { tab, ...searchDefaults } = projectSearchDefaults;
-const promise = () =>
-  new Promise((resolve) => {
-    setTimeout(resolve, 2000);
-  });
 export const Route = createFileRoute("/_masterLayout/categories/$id/")({
+  search: {
+    middlewares: [
+      createTabCleanerMiddleware(categoryDetailSearchDefaults, "projects"),
+      createDrawerCleanerMiddleware({
+        idKey: "taskId",
+        modeKey: "taskMode",
+        drawerKeys: ["taskId", "taskMode", "DrawerPageSize", "DrawerOrderBy"],
+        modeDefaults: taskDrawerDefaults,
+        fallbackMode: "overview",
+      }),
+    ],
+  },
+  validateSearch: categoryDetailSearchSchema,
   loader: async ({ context: { queryClient }, params: { id }, location }) => {
-    const search = projectSearchSchema.parse(location.search);
-    await promise();
+    const search = location.search as CategoryDetailSearch;
+    const config = categoryDetailTabLoaderConfig[search.tab ?? "projects"];
+
+    const { tab, taskMode, taskId, ...params } = config.schema.parse(
+      location.search,
+    ) as any;
+
     await Promise.all([
       queryClient.ensureQueryData(categoryQuery.id(id)),
-      queryClient.ensureQueryData(
-        projectQuery.list({ ...search, CategoryIds: [id] }),
-      ),
+      queryClient.ensureQueryData(config.query(params, id) as any),
     ]);
-    queryClient.prefetchInfiniteQuery(
-      organizationQuery.infinite({ PageSize: 7 }),
-    );
+
+    config.prefetch(queryClient);
   },
-  search: {
-    middlewares: [stripSearchParams(searchDefaults)],
-  },
-  validateSearch: projectSearchSchema,
   pendingComponent: CategoryDetailPageSkeleton,
 });

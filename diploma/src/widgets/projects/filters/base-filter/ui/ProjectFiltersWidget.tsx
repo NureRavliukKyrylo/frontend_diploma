@@ -1,6 +1,5 @@
 import { CategoriesListFilter } from "@features/project";
 import styles from "./ProjectFiltersWidget.module.scss";
-import type { ProjectSearchParams } from "@entities/project";
 import { motion } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useCategoriesInfiniteQuery } from "@entities/category";
@@ -13,12 +12,21 @@ import {
   SwitchFilter,
 } from "@shared/ui/filters";
 import { OrganizationsListFilter } from "@features/organization";
+import { Link } from "@tanstack/react-router";
+import type { ProjectRequestParams } from "@entities/project/libs";
+import type { BaseFiltersRoute } from "@shared/config/types";
 
 interface ProjectFiltersWidgetProps {
-  search: ProjectSearchParams;
+  search: ProjectRequestParams;
+  includeCategories?: boolean;
+  from?: BaseFiltersRoute;
 }
 
-export const ProjectFiltersWidget = ({ search }: ProjectFiltersWidgetProps) => {
+export const ProjectFiltersWidget = ({
+  search,
+  includeCategories = true,
+  from = "/activities/",
+}: ProjectFiltersWidgetProps) => {
   const {
     onStartDateChange,
     onEndBeforeChange,
@@ -31,11 +39,29 @@ export const ProjectFiltersWidget = ({ search }: ProjectFiltersWidgetProps) => {
     onOnlyActiveChange,
     onShowJoinedChange,
     onClearFilters,
-  } = useProjectFilters();
+  } = useProjectFilters(from);
 
   return (
     <>
       <div className={styles.scrollableProjectsFilters}>
+        {!includeCategories && (
+          <div className={styles.buttonShowAllProjects}>
+            <motion.div
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              className={styles.animationButtonBlock}
+            >
+              <Link
+                to="/activities"
+                search={{ tab: "projects", ...search }}
+                className={styles.showAllProjectsButton}
+              >
+                SHOW ALL PROJECTS
+              </Link>
+            </motion.div>
+          </div>
+        )}
         <div className={styles.projectDeadLine}>
           <h1 className={styles.subHeaderFilter}>Project deadline due</h1>
           <DateRangeFilter
@@ -53,15 +79,19 @@ export const ProjectFiltersWidget = ({ search }: ProjectFiltersWidgetProps) => {
             onRatingChange={onRatingChange}
           />
         </div>
-        <div className={styles.dividerFilterBlock} />
-        <div className={styles.projectCategories}>
-          <h1 className={styles.subHeaderFilter}>Categories</h1>
-          <CategoriesListFilter
-            useCategoriesQuery={useCategoriesInfiniteQuery({ PageSize: 7 })}
-            selectedIds={search.CategoryIds}
-            onToggle={onCategoryToggle}
-          />
-        </div>
+        {includeCategories && (
+          <>
+            <div className={styles.dividerFilterBlock} />
+            <div className={styles.projectCategories}>
+              <h1 className={styles.subHeaderFilter}>Categories</h1>
+              <CategoriesListFilter
+                useCategoriesQuery={useCategoriesInfiniteQuery({ PageSize: 7 })}
+                selectedIds={search.CategoryIds}
+                onToggle={onCategoryToggle}
+              />
+            </div>
+          </>
+        )}
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectOrganizations}>
           <h1 className={styles.subHeaderFilter}>Organizations</h1>

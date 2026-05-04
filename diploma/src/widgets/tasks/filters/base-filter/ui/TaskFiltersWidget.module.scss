@@ -7,6 +7,29 @@
 .subHeaderFilter {
   @include font-base(20px, 700);
 }
+
+.buttonShowAllTasks {
+  padding: 30px;
+
+  .animationButtonBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .showAllTasksButton {
+      @include font-base(25px, 900);
+      color: #000000;
+      background: #ffffff;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+      border-radius: 30px;
+      padding: 5px 30px;
+      width: 80%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
 .taskDeadLine {
   display: flex;
   flex-direction: column;
@@ -32,6 +55,13 @@
   gap: 15px;
 }
 .taskSkills {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 30px 20px;
+  gap: 15px;
+}
+
+.taskCategories {
   display: flex;
   flex-direction: column;
   padding: 20px 20px 30px 20px;

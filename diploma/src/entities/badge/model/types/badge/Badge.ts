@@ -1,3 +1,4 @@
+import type { EntityType } from "@shared/config/types";
 import type { Tier } from "../tier/TierList";
 
 export interface Badge {
@@ -13,4 +14,6 @@ export interface Badge {
   ruleProgress: {
     label: string;
   }[];
+  scopeEntityType: EntityType;
+  scopeEntityId: string;
 }

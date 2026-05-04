@@ -27,6 +27,7 @@ import { getHttpErrorInfo } from "@shared/libs/error";
 interface ProjectsTabProps {
   search: ProjectSearchParams;
 }
+
 export const ProjectsTab = ({ search }: ProjectsTabProps) => {
   const {
     isFilterOpen,

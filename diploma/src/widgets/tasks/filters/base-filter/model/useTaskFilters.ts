@@ -1,9 +1,10 @@
 import { useNavigate } from "@tanstack/react-router";
 import { toggleArrayParam } from "@shared/libs/search-params";
 import { type TaskSearchParams } from "@entities/task";
+import type { BaseFiltersRoute } from "@shared/config/types";
 
-export const useTaskFilters = () => {
-  const navigate = useNavigate({ from: "/activities/" });
+export const useTaskFilters = (from: BaseFiltersRoute) => {
+  const navigate = useNavigate({ from });
 
   const nav = (updater: (prev: TaskSearchParams) => TaskSearchParams) =>
     navigate({
@@ -46,6 +47,13 @@ export const useTaskFilters = () => {
       nav((prev) => ({
         ...prev,
         EventIds: toggleArrayParam(prev.EventIds, id),
+        Page: 1,
+      })),
+
+    onCategoryToggle: (id: string) =>
+      nav((prev) => ({
+        ...prev,
+        CategoryIds: toggleArrayParam(prev.CategoryIds, id),
         Page: 1,
       })),
 

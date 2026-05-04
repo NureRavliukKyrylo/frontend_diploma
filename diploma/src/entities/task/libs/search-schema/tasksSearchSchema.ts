@@ -19,6 +19,7 @@ export const tasksFiltersSchema = z.object({
     .catch(undefined),
   SkillIds: z.array(z.string()).optional().catch(undefined),
   CategoryIds: z.array(z.string()).optional().catch([]),
+  Rating: z.number().min(0).max(5).optional().catch(5),
 });
 
 export const tasksSearchSchema = tasksFiltersSchema
@@ -36,4 +37,8 @@ export type TaskSearchParams = z.infer<typeof tasksSearchSchema>;
 export type TasksRequestParams = Omit<
   z.infer<typeof tasksSearchSchema>,
   "tab" | "taskMode" | "taskId" | "DrawerPageSize" | "DrawerOrderBy"
+>;
+export type TaskSearchParamsNoCategories = Omit<
+  TaskSearchParams,
+  "CategoryIds"
 >;

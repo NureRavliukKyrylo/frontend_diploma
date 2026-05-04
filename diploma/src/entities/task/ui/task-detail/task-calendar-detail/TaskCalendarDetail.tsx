@@ -15,8 +15,10 @@ export const TaskCalendarDetail = ({ task }: TaskCalendarDetailProps) => (
       <div className={styles.baseInfo}>
         <div className={styles.subBaseInfoBlock}>
           <Calendar />
-          <div className={styles.divider} />
-          <span className={styles.info}>{formatDateToText(task.startAt)}</span>
+          <div className={styles.calendarDivider} />
+          <span className={styles.calendarInfo}>
+            {formatDateToText(task.startAt)}
+          </span>
         </div>
         <div className={styles.subBaseInfoBlock}>
           <TimeIcon className={styles.timeIcon} />

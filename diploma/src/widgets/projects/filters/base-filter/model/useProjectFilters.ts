@@ -1,10 +1,13 @@
 import { useNavigate } from "@tanstack/react-router";
 import { toggleArrayParam } from "@shared/libs/search-params";
-import type { LocationSuggestion } from "@shared/config/types";
+import type {
+  BaseFiltersRoute,
+  LocationSuggestion,
+} from "@shared/config/types";
 import type { ProjectSearchParams } from "@entities/project";
 
-export const useProjectFilters = () => {
-  const navigate = useNavigate({ from: "/activities/" });
+export const useProjectFilters = (from: BaseFiltersRoute) => {
+  const navigate = useNavigate({ from });
 
   const nav = (updater: (prev: ProjectSearchParams) => ProjectSearchParams) =>
     navigate({
