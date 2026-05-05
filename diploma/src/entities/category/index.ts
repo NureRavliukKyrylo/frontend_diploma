@@ -9,3 +9,4 @@ export { AllCategoriesCard } from "./ui/category-card/all-categories/AllCategori
 export { CategoryCardSkeleton } from "./ui/category-card/category-item/CategoryCardSkeleton";
 export { useCategoriesListQuery } from "./model/hooks/useCategoriesListQuery";
 export { useCategoriesInfiniteQuery } from "./model/hooks/useCategoriesInfiniteQuery";
+export { RelatedCategoryCard } from "./ui/category-card/related-category-card/RelatedCategoryCard";

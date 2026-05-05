@@ -23,7 +23,7 @@ export const BackButton = ({ className, from, to = ".." }: BackButtonProps) => {
         from={from}
         to={to}
       >
-        <img src={Arrow} alt="Back" className={styles.arrowIcon} />
+        <Arrow className={styles.arrowIcon} />
       </LinkButtonWrapper>
     </motion.div>
   );

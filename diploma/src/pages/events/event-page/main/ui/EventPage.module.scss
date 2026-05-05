@@ -173,9 +173,10 @@
         background: white;
         border-radius: 100%;
         width: 30px;
-        img {
+        .toProjectArrow {
           width: 12px;
-          transform: rotate(180deg);
+          height: 12px;
+          color: black;
         }
       }
     }

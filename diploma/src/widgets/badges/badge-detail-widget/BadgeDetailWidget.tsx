@@ -8,6 +8,7 @@ import { badgesQuery, TierColors } from "@entities/badge";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ShareBadgeButton } from "@features/badge";
 import { Link } from "@tanstack/react-router";
+import { LockedIcon } from "@shared/assets/icons/info";
 
 const entityTypeToRoute = {
   organization: "/organizations/$id",
@@ -23,6 +24,11 @@ export const BadgeDetailWidget = ({ id }: { id: string }) => {
     <>
       <div className={styles.imageWrapper}>
         <img className={styles.iconUrl} src={badge.iconUrl} alt="badge-image" />
+        {!badge.isUnlocked && (
+          <div className={styles.lockedOverlay}>
+            <LockedIcon />
+          </div>
+        )}
       </div>
       <div className={styles.badgeDetailInfo}>
         <div className={styles.headerInfo}>

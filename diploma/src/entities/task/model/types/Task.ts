@@ -7,6 +7,8 @@ import type {
 } from "@shared/config/types";
 import type { Event } from "@entities/event";
 import type { Project } from "@entities/project";
+import type { Category } from "@entities/category";
+import type { Skill } from "@entities/skill";
 
 export interface Task {
   id: string;
@@ -23,4 +25,6 @@ export interface Task {
   joinPolicy: Policy;
   rating: Rating;
   progressPercent: number;
+  categories: Category[];
+  skills: Skill[];
 }

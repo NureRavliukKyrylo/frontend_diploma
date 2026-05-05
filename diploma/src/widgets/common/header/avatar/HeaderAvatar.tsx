@@ -8,7 +8,11 @@ import { DefaultAvatar } from "@shared/assets/images/user";
 export function HeaderAvatar() {
   const { data: user } = useSuspenseQuery({ ...profileQuery.all() });
   return (
-    <Link to="/profile" className={styles.wrapperHeaderAvatar}>
+    <Link
+      to="/profile"
+      search={{ tab: "profile" }}
+      className={styles.wrapperHeaderAvatar}
+    >
       <Avatar
         src={user.profile?.avatarUrl ?? DefaultAvatar}
         shape="circle"

@@ -66,7 +66,7 @@ export function FillingInfoWrapper({
           <div className={styles.buttonsFillForm}>
             {activeStep !== 0 && (
               <BaseButtonWrapper className={styles.backStep} onClick={prevStep}>
-                <img src={Arrow} alt="Back" className={styles.arrowIcon} />{" "}
+                <Arrow className={styles.arrowIcon} />
               </BaseButtonWrapper>
             )}
             <div className={styles.interactStepperButtons}>

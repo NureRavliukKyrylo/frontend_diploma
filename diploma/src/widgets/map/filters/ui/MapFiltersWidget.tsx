@@ -1,5 +1,5 @@
 import { CategoriesListFilter } from "@features/project";
-import type { ProjectSearchParams } from "@entities/project";
+import type { MapProjectRequestParams } from "@entities/project";
 import styles from "./MapFiltersWidget.module.scss";
 import { Accordion, AccordionItem } from "@heroui/react";
 import { motion } from "framer-motion";
@@ -16,7 +16,7 @@ import {
 import { OrganizationsListFilter } from "@features/organization";
 
 interface MapFiltersWidgetProps {
-  search: ProjectSearchParams;
+  search: MapProjectRequestParams;
 }
 
 export const MapFiltersWidget = ({ search }: MapFiltersWidgetProps) => {

@@ -200,9 +200,9 @@
         background: white;
         border-radius: 100%;
         width: 30px;
-        img {
+        .goToActivityLink {
           width: 12px;
-          transform: rotate(180deg);
+          color: black;
         }
       }
     }

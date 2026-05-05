@@ -13,6 +13,7 @@
   justify-content: flex-end;
   align-items: flex-start;
   aspect-ratio: 3/4;
+  position: relative;
   .badgeInfoTier {
     padding: 5px 15px;
     background: white;
@@ -24,6 +25,16 @@
       @include font-base(30px, 900);
     }
   }
+  .lockedOverlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &.skeleton {
     border: none;
     box-shadow: none;

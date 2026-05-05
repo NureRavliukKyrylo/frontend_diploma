@@ -5,6 +5,16 @@
   max-width: 400px;
   min-width: 200px;
   align-self: stretch;
+  position: relative;
+  .lockedOverlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .iconUrl {

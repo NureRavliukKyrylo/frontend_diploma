@@ -6,7 +6,7 @@ import {
   ListProjectCardSkeleton,
   projectQuery,
   useProjectsMapQuery,
-  type ProjectSearchParams,
+  type MapProjectRequestParams,
 } from "@entities/project";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
@@ -16,7 +16,7 @@ import { ProjectsListWidget } from "@widgets/projects";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 
 interface MapListPanelProps {
-  listParams: ProjectSearchParams;
+  listParams: MapProjectRequestParams;
   page?: number;
   onSelectProject: (id: string, lat: number, lng: number) => void;
 }

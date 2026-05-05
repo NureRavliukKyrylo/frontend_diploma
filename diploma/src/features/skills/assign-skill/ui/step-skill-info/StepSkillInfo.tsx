@@ -42,7 +42,7 @@ export const StepSkillInfo = ({ skill, onNext, error }: StepProps) => {
             onClick={onNext}
             className={styles.btn}
           >
-            <img src={Arrow} alt="arrow-icon" />
+            <Arrow className={styles.arrowSkill} />
           </BaseButtonWrapper>
         </motion.div>
       </motion.div>

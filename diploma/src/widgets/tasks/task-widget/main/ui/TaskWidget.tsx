@@ -1,5 +1,5 @@
 import styles from "./TaskWidget.module.scss";
-import { ProgressBar, Toggle } from "@shared/ui";
+import { Toggle } from "@shared/ui";
 import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import { AnimatePresence, motion } from "framer-motion";
 import { formatDateToText } from "@shared/libs/date";
@@ -119,7 +119,7 @@ export const TaskWidget = ({
                     params={{ id: task.project?.id }}
                     className={styles.goToActivity}
                   >
-                    <img src={Arrow} alt="arrow" />
+                    <Arrow className={styles.goToActivityLink} />
                   </LinkButtonWrapper>
                 </div>
               )}
@@ -131,7 +131,7 @@ export const TaskWidget = ({
                     params={{ id: task.event?.id }}
                     className={styles.goToActivity}
                   >
-                    <img src={Arrow} alt="arrow" />
+                    <Arrow className={styles.goToActivityLink} />
                   </LinkButtonWrapper>
                 </div>
               )}

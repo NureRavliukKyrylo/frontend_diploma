@@ -74,7 +74,7 @@ export const EventPage = () => {
                   params={{ id: event.project?.id }}
                   className={styles.goToProject}
                 >
-                  <img src={Arrow} alt="arrow" />
+                  <Arrow className={styles.toProjectArrow} />
                 </LinkButtonWrapper>
               </div>
             )}

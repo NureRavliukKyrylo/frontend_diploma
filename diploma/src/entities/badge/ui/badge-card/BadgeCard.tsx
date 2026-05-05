@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { TierColors, type Badge } from "../../model";
 import styles from "./BadgeCard.module.scss";
+import { LockedIcon } from "@shared/assets/icons/info";
 
 export interface BadgeCardProps {
   badge: Badge;
@@ -9,9 +10,10 @@ export interface BadgeCardProps {
 }
 
 export const BadgeCard = ({ badge }: BadgeCardProps) => {
+  console.log(!badge.isUnlocked);
   return (
     <div
-      className={`${styles.badgeImageBlock} ${!badge.isUnlocked ? styles.locked : ""}`}
+      className={`${styles.badgeImageBlock} ${badge.isUnlocked === false ? styles.locked : ""}`}
       style={{ backgroundImage: `url(${badge.iconUrl})` }}
     >
       <div
@@ -20,6 +22,11 @@ export const BadgeCard = ({ badge }: BadgeCardProps) => {
       >
         <h1>{badge.rank}</h1>
       </div>
+      {badge.isUnlocked === false && (
+        <div className={styles.lockedOverlay}>
+          <LockedIcon />
+        </div>
+      )}
     </div>
   );
 };

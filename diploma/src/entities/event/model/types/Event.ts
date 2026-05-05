@@ -1,5 +1,7 @@
+import type { Category } from "@entities/category";
 import type { Organization } from "@entities/organization";
 import type { Project } from "@entities/project";
+import type { Skill } from "@entities/skill";
 import type {
   Coordinates,
   EntityStatus,
@@ -28,4 +30,6 @@ export interface Event {
   status: EntityStatus;
   locationInfo: { address: string };
   joinPolicy: Policy;
+  categories: Category[];
+  skills: Skill[];
 }

@@ -1,7 +1,6 @@
 import { ProjectMarker, type Project } from "@entities/project";
 import styles from "./OverviewTab.module.scss";
-import { CategoriesListWidget } from "@widgets/categories";
-import { BaseMap, Tab } from "@shared/ui";
+import { BaseMap } from "@shared/ui";
 import { MapResizer, MapZoomAnimation } from "@shared/libs/map";
 import { Marker, Popup } from "react-leaflet";
 import { MapUserLocation } from "@entities/user/profile";
@@ -11,6 +10,9 @@ import type { Event } from "@entities/event";
 import { Activities } from "@shared/assets/images/entity-information";
 import { MapLocationInput } from "@shared/ui/inputs";
 import { useIntersectionReveal } from "@shared/libs/hooks";
+import { RelatedCategoryCard } from "@entities/category";
+import { LinkButtonWrapper, ShowMoreItemsButton } from "@shared/ui/buttons";
+import { Arrow } from "@shared/assets/icons/actions";
 
 interface OverviewTabProps {
   project: Project;
@@ -28,22 +30,32 @@ export const OverviewTab = ({
 
   return (
     <div className={styles.overviewWrapper}>
-      <div className={styles.categoriesBlock}>
-        <h1>CATEGORIES</h1>
-        {hasCategories ? (
-          <CategoriesListWidget
-            renderCard={(category) => (
-              <Tab className={styles.categoryProject} name={category.name} />
-            )}
-            className={styles.categoriesProjectList}
-            categories={project?.categories}
-          />
-        ) : (
-          <p className={styles.noCategoriesText}>
-            This project hasn't set any categories yet.
-          </p>
-        )}
-      </div>
+      {hasCategories ? (
+        <ShowMoreItemsButton
+          items={
+            project?.categories?.map((category) => (
+              <RelatedCategoryCard category={category}>
+                <LinkButtonWrapper
+                  to="/categories/$id"
+                  params={{ id: category.id }}
+                  className={styles.categoryLinkWrapper}
+                >
+                  <Arrow className={styles.goToCategory} />
+                </LinkButtonWrapper>
+              </RelatedCategoryCard>
+            )) ?? []
+          }
+          classNameItems={styles.categoriesProjectList}
+          className={styles.wrapperCategories}
+          classNameButton={styles.buttonShowMore}
+          initialVisibleCount={4}
+          buttonPosition="below"
+        />
+      ) : (
+        <p className={styles.noCategoriesText}>
+          This project hasn't set any categories yet.
+        </p>
+      )}
       <div className={styles.mapLocationBlock}>
         <div className={styles.projectPageMainInfo}>
           <div className={styles.headerTextInfo}>

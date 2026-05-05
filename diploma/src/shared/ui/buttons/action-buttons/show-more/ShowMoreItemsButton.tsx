@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { motion } from "framer-motion";
 import styles from "./ShowMoreItemsButton.module.scss";
 
@@ -7,7 +7,9 @@ interface ShowMoreItemsButtonProps {
   initialVisibleCount?: number;
   className?: string;
   classNameButton?: string;
-  buttonText?: string;
+  classNameItems?: string;
+  buttonContent?: ReactNode;
+  buttonPosition?: "inline" | "below";
 }
 
 export function ShowMoreItemsButton({
@@ -15,7 +17,9 @@ export function ShowMoreItemsButton({
   initialVisibleCount = 6,
   className = "",
   classNameButton = "",
-  buttonText = "Show more",
+  buttonContent = "Show more",
+  buttonPosition = "inline",
+  classNameItems = "",
 }: ShowMoreItemsButtonProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -23,9 +27,21 @@ export function ShowMoreItemsButton({
   const visibleItems =
     hasMoreItems && !isExpanded ? items.slice(0, initialVisibleCount) : items;
 
+  const button = hasMoreItems && !isExpanded && (
+    <motion.button
+      className={`${styles.showMoreButton} ${classNameButton}`}
+      onClick={() => setIsExpanded(true)}
+      type="button"
+      whileHover={{ scale: 1.02, y: -2 }}
+      transition={{ ease: "easeInOut", duration: 0.15 }}
+    >
+      {buttonContent}
+    </motion.button>
+  );
+
   return (
     <div className={`${styles.showMoreContainer} ${className}`}>
-      <div className={styles.itemsList}>
+      <div className={`${styles.itemsList} ${classNameItems}`}>
         {visibleItems.map((item, index) => (
           <motion.div
             key={index}
@@ -39,18 +55,10 @@ export function ShowMoreItemsButton({
           </motion.div>
         ))}
 
-        {hasMoreItems && !isExpanded && (
-          <motion.button
-            className={`${styles.showMoreButton} ${classNameButton}`}
-            onClick={() => setIsExpanded(true)}
-            type="button"
-            whileHover={{ scale: 1.02, y: -2 }}
-            transition={{ ease: "easeInOut", duration: 0.15 }}
-          >
-            {buttonText}
-          </motion.button>
-        )}
+        {buttonPosition === "inline" && button}
       </div>
+
+      {buttonPosition === "below" && button}
     </div>
   );
 }

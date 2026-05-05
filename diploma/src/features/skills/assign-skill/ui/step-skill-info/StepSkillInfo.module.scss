@@ -78,9 +78,8 @@
       align-self: flex-end;
       .btn {
         width: 100%;
-        img {
-          filter: invert(1);
-          transform: rotate(180deg);
+        .arrowSkill {
+          color: white;
           width: 60%;
         }
       }

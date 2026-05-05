@@ -7,7 +7,10 @@ export const useMapFilters = () => {
   const navigate = useNavigate({ from: "/map/" });
 
   const nav = (updater: (prev: ProjectSearchParams) => ProjectSearchParams) =>
-    navigate({ search: updater, resetScroll: false });
+    navigate({
+      search: (prev) => updater(prev as ProjectSearchParams),
+      resetScroll: false,
+    });
 
   return {
     onStartDateChange: (date: string | undefined) =>

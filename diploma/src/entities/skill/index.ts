@@ -1,5 +1,4 @@
 export { SkillCardBase } from "./ui/skill-card/base/SkillCardBase";
-export { SkillTab } from "./ui/skill-tab/SkillTab";
 export type { Skill } from "./model";
 export { skillsQuery } from "./model/queries/skill-query/skillQueries";
 export { useSkillsListQuery } from "./model/hooks/useSkillsListQuery";

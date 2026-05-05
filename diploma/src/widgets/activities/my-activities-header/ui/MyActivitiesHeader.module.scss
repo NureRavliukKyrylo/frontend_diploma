@@ -97,10 +97,9 @@
         justify-content: center;
         align-items: center;
         gap: 20px;
-        img {
+        .backArrow {
           width: 29px;
-          filter: invert(1);
-          transform: rotate(180deg);
+          color: white;
         }
       }
     }

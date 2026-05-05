@@ -78,6 +78,8 @@
             object-fit: contain;
             opacity: 0.8;
             width: 80%;
+            color: black;
+            transform: rotate(180deg);
           }
         }
         .interactStepperButtons {

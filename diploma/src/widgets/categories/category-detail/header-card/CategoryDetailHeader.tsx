@@ -1,12 +1,11 @@
 import styles from "./CategoryDetailHeader.module.scss";
 import { CategoryLogo } from "@shared/assets/images/information";
-import { Toggle } from "@shared/ui";
+import { Tab, Toggle } from "@shared/ui";
 import type { Category } from "@entities/category";
 import { ReadMoreButton, ShowMoreItemsButton } from "@shared/ui/buttons";
 import { motion } from "framer-motion";
 import type { ListActivitiesMode } from "@shared/config/types";
 import { listActivitiesTabs } from "@shared/config/constants";
-import { Tab } from "@heroui/react";
 
 interface CategoryDetailHeaderProps {
   activeTab: ListActivitiesMode;
@@ -68,7 +67,7 @@ export const CategoryDetailHeader = ({
                   </motion.div>
                 ))}
                 initialVisibleCount={6}
-                buttonText="See more"
+                buttonContent="See more"
               />
             )}
           </div>

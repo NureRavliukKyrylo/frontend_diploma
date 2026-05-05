@@ -1,5 +1,5 @@
 import styles from "./OverviewTab.module.scss";
-import { BaseMap } from "@shared/ui";
+import { BaseMap, Tab } from "@shared/ui";
 import { MapResizer, MapZoomAnimation } from "@shared/libs/map";
 import { Marker, Popup } from "react-leaflet";
 import { MapUserLocation } from "@entities/user/profile";
@@ -9,6 +9,9 @@ import { Activities } from "@shared/assets/images/entity-information";
 import { MapLocationInput } from "@shared/ui/inputs";
 import { useIntersectionReveal } from "@shared/libs/hooks";
 import { ProjectMarker, ProjectPopupContent } from "@entities/project";
+import { LinkButtonWrapper, ShowMoreItemsButton } from "@shared/ui/buttons";
+import { RelatedCategoryCard } from "@entities/category";
+import { ActionsIcon, Arrow } from "@shared/assets/icons/actions";
 
 interface OverviewTabProps {
   event: Event;
@@ -17,9 +20,58 @@ interface OverviewTabProps {
 
 export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
   const { isVisible, ref } = useIntersectionReveal<HTMLDivElement>();
-
+  const hasCategories = event?.categories && event?.categories.length > 0;
+  const hasSkills = event?.skills && event?.skills.length > 0;
   return (
     <div className={styles.overviewWrapper}>
+      {hasCategories ? (
+        <ShowMoreItemsButton
+          items={
+            event?.categories?.map((category) => (
+              <RelatedCategoryCard category={category}>
+                <LinkButtonWrapper
+                  to="/categories/$id"
+                  params={{ id: category.id }}
+                  className={styles.categoryLinkWrapper}
+                >
+                  <Arrow className={styles.goToCategory} />
+                </LinkButtonWrapper>
+              </RelatedCategoryCard>
+            )) ?? []
+          }
+          classNameItems={styles.categoriesEventList}
+          className={styles.wrapperCategories}
+          classNameButton={styles.buttonShowMoreCategories}
+          initialVisibleCount={4}
+          buttonPosition="below"
+        />
+      ) : (
+        <p className={styles.noCategoriesText}>
+          This event hasn't set any categories yet.
+        </p>
+      )}
+      <div className={styles.skillsBlock}>
+        <div className={styles.headerSkills}>
+          <h1>TASK Skills</h1>
+        </div>
+        {hasSkills ? (
+          <ShowMoreItemsButton
+            items={
+              event?.skills.map((skill) => (
+                <Tab className={styles.skillWrapper} name={skill.name} />
+              )) ?? []
+            }
+            classNameItems={styles.skillsTaskList}
+            classNameButton={styles.buttonShowMoreSkills}
+            buttonContent={<ActionsIcon className={styles.actions} />}
+            initialVisibleCount={7}
+          />
+        ) : (
+          <p className={styles.noSkillsText}>
+            This task doesn't require any skills.
+          </p>
+        )}
+      </div>
       <div className={styles.skillsBlock}></div>
       <div className={styles.mapLocationBlock}>
         <div className={styles.projectPageMainInfo}>

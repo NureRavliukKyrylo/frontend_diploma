@@ -54,7 +54,7 @@ export const MyActivitiesHeader = ({
               className={styles.backToProfileButton}
               to="/profile"
             >
-              BACK <img src={Arrow} alt="arrow-back" />
+              BACK <Arrow className={styles.backArrow} />
             </LinkButtonWrapper>
           </div>
         </div>

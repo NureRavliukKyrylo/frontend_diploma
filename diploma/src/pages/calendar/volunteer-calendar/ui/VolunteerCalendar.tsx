@@ -4,6 +4,8 @@ import { BaseCalendar, CalendarEventItem } from "@shared/ui/calendar";
 import { useVolunteerCalendarPage } from "../model/useVolunteerCalendarPage";
 import { CalendarEventInfo } from "@widgets/calendar";
 import { AnimatePresence } from "framer-motion";
+import { useAvailabilityContextMenu } from "../model/useAvailabiltyContextMenu";
+import { AvailabilityContextMenu } from "./AvailabilityContextMenu";
 
 const events: EventInput[] = [
   {
@@ -35,9 +37,23 @@ export const VolunteerCalendar = () => {
     handleNext,
     handleClose,
   } = useVolunteerCalendarPage(events);
-
+  const {
+    calendarRef,
+    menuState,
+    menuItems,
+    handleClose: handleCloseMenu,
+  } = useAvailabilityContextMenu({
+    slots: [
+      { day: new Date("2026-05-05"), start: "09:00:00", end: "12:00:00" },
+      { day: new Date("2026-05-07"), start: "14:00:00", end: "17:00:00" },
+      { day: new Date("2026-05-12"), start: "10:00:00", end: "13:00:00" },
+    ],
+    onAdd: (date) => console.log("add", date),
+    onUpdate: (slot, date) => console.log("update", slot, date),
+    onDelete: (slot) => console.log("delete", slot),
+  });
   return (
-    <div className={styles.volunteerCalendarWrapper}>
+    <div className={styles.volunteerCalendarWrapper} ref={calendarRef}>
       <BaseCalendar
         initialView={initialView}
         initialDate={initialDate}
@@ -56,6 +72,13 @@ export const VolunteerCalendar = () => {
         events={events}
         dayMaxEvents={true}
       />
+      {menuState && (
+        <AvailabilityContextMenu
+          anchor={menuState.anchor}
+          menuItems={menuItems}
+          onClose={handleCloseMenu}
+        />
+      )}
       <AnimatePresence mode="wait">
         {activeInfo && (
           <>
