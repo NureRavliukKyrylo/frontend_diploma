@@ -6,8 +6,10 @@ export interface AvailabilitySlot {
   end: string;
 }
 
+type MenuAnchor = Element | { getBoundingClientRect: () => DOMRect };
+
 interface ContextMenuState {
-  anchor: Element;
+  anchor: MenuAnchor;
   date: Date;
   existingSlot: AvailabilitySlot | null;
 }
@@ -18,7 +20,11 @@ interface UseAvailabilityContextMenuProps {
   onUpdate: (slot: AvailabilitySlot, date: Date) => void;
   onDelete: (slot: AvailabilitySlot) => void;
 }
-
+const isPast = (date: Date) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return date < today;
+};
 export function useAvailabilityContextMenu({
   slots,
   onAdd,
@@ -42,16 +48,47 @@ export function useAvailabilityContextMenu({
     const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault();
 
-      const cell = (e.target as Element).closest("[data-date]");
-      if (!cell) return;
+      const directCell = (e.target as Element).closest("[data-date]");
+      if (directCell) {
+        const dateStr = directCell.getAttribute("data-date")!;
+        const [y, m, d] = dateStr.split("-").map(Number);
+        const date = new Date(y, m - 1, d);
+        if (isPast(date)) return;
+        const existingSlot = slots.find((s) => isSameDay(s.day, date)) ?? null;
+        setMenuState({ anchor: directCell, date, existingSlot });
+        return;
+      }
 
-      const dateStr = cell.getAttribute("data-date");
-      if (!dateStr) return;
+      const cols = el.querySelectorAll<Element>(".fc-timegrid-col[data-date]");
+      for (const col of cols) {
+        const { left, right } = col.getBoundingClientRect();
+        if (e.clientX < left || e.clientX > right) continue;
 
-      const date = new Date(dateStr);
-      const existingSlot = slots.find((s) => isSameDay(s.day, date)) ?? null;
+        const dateStr = col.getAttribute("data-date")!;
+        const [y, m, d] = dateStr.split("-").map(Number);
+        const date = new Date(y, m - 1, d);
+        if (isPast(date)) return;
+        const existingSlot = slots.find((s) => isSameDay(s.day, date)) ?? null;
 
-      setMenuState({ anchor: cell, date, existingSlot });
+        const clickY = e.clientY;
+        const anchor: MenuAnchor = {
+          getBoundingClientRect: () =>
+            ({
+              x: left,
+              y: clickY,
+              top: clickY,
+              bottom: clickY,
+              left,
+              right,
+              width: right - left,
+              height: 0,
+              toJSON: () => {},
+            }) as DOMRect,
+        };
+
+        setMenuState({ anchor, date, existingSlot });
+        return;
+      }
     };
 
     el.addEventListener("contextmenu", handleContextMenu);
@@ -97,10 +134,5 @@ export function useAvailabilityContextMenu({
     ];
   }, [menuState, onAdd, onUpdate, onDelete, handleClose]);
 
-  return {
-    calendarRef,
-    menuState,
-    menuItems,
-    handleClose,
-  };
+  return { calendarRef, menuState, menuItems, handleClose };
 }

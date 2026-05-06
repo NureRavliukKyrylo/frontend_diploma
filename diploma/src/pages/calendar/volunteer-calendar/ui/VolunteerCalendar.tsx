@@ -6,6 +6,8 @@ import { CalendarEventInfo } from "@widgets/calendar";
 import { AnimatePresence } from "framer-motion";
 import { useAvailabilityContextMenu } from "../model/useAvailabiltyContextMenu";
 import { AvailabilityContextMenu } from "./AvailabilityContextMenu";
+import { useState } from "react";
+import { AvailabilityFormPopover } from "./AvailabilityFormPopover";
 
 const events: EventInput[] = [
   {
@@ -24,7 +26,26 @@ const events: EventInput[] = [
   },
 ];
 
+const isSameDay = (a: Date, b: Date) =>
+  a.getFullYear() === b.getFullYear() &&
+  a.getMonth() === b.getMonth() &&
+  a.getDate() === b.getDate();
+
+const SLOTS = [
+  { day: new Date(2026, 4, 5), start: "09:00:00", end: "12:00:00" },
+  { day: new Date(2026, 4, 7), start: "14:00:00", end: "17:00:00" },
+  { day: new Date(2026, 4, 12), start: "10:00:00", end: "13:00:00" },
+];
+
+interface FormState {
+  anchor: Element | { getBoundingClientRect: () => DOMRect };
+  date: Date;
+  start?: string;
+  end?: string;
+}
+
 export const VolunteerCalendar = () => {
+  const [formState, setFormState] = useState<FormState | null>(null);
   const {
     initialView,
     initialDate,
@@ -37,19 +58,27 @@ export const VolunteerCalendar = () => {
     handleNext,
     handleClose,
   } = useVolunteerCalendarPage(events);
+
   const {
     calendarRef,
     menuState,
     menuItems,
     handleClose: handleCloseMenu,
   } = useAvailabilityContextMenu({
-    slots: [
-      { day: new Date("2026-05-05"), start: "09:00:00", end: "12:00:00" },
-      { day: new Date("2026-05-07"), start: "14:00:00", end: "17:00:00" },
-      { day: new Date("2026-05-12"), start: "10:00:00", end: "13:00:00" },
-    ],
-    onAdd: (date) => console.log("add", date),
-    onUpdate: (slot, date) => console.log("update", slot, date),
+    slots: SLOTS,
+    onAdd: (date) => {
+      setFormState({ anchor: menuState!.anchor, date });
+      handleCloseMenu();
+    },
+    onUpdate: (slot, date) => {
+      setFormState({
+        anchor: menuState!.anchor,
+        date,
+        start: slot.start,
+        end: slot.end,
+      });
+      handleCloseMenu();
+    },
     onDelete: (slot) => console.log("delete", slot),
   });
   return (
@@ -71,12 +100,26 @@ export const VolunteerCalendar = () => {
         )}
         events={events}
         dayMaxEvents={true}
+        dayCellClassNames={({ date }) =>
+          SLOTS.some((s) => isSameDay(s.day, date))
+            ? ["fc-day--has-availability"]
+            : []
+        }
       />
       {menuState && (
         <AvailabilityContextMenu
           anchor={menuState.anchor}
           menuItems={menuItems}
           onClose={handleCloseMenu}
+        />
+      )}
+      {formState && (
+        <AvailabilityFormPopover
+          anchor={formState.anchor}
+          date={formState.date}
+          start={formState.start}
+          end={formState.end}
+          onClose={() => setFormState(null)}
         />
       )}
       <AnimatePresence mode="wait">

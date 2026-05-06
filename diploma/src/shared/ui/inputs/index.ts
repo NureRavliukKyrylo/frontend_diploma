@@ -11,3 +11,4 @@ export { ProfilePasswordInput } from "./profile-inputs/password-input/ProfilePas
 export { MapLocationInput } from "./map-input/MapLocationInput";
 export { ProfileSocialNetworksInput } from "./profile-inputs/social-inputs/ProfileSocialNetworksInput";
 export { ProfileEmailInput } from "./profile-inputs/email-input/ProfileEmailInput";
+export { TimeRangePicker } from "./time-range-picker/TimeRangePicker";

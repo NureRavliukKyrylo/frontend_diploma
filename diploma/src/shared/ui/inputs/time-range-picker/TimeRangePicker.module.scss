@@ -1,0 +1,55 @@
+@use "@shared/assets/styles" as *;
+
+.timeRangePicker {
+  :global(.MuiPickersInputBase-root) {
+    color: #18181b;
+    background-color: #ffffff;
+    border-radius: 20px !important;
+  }
+  :global(.MuiPickersInputBase-sectionsContainer) {
+    padding: 12px 5px;
+  }
+  :global(.MuiPickersInputBase-sectionContent) {
+    @include font-base(clamp(14px, 1.2vw, 17px), 500);
+  }
+
+  :global(.MuiPickersInputBase-sectionAfter) {
+    @include font-base(clamp(14px, 1.2vw, 17px), 500);
+  }
+  :global(.MuiPickersInputBase-root):hover
+    :global(.MuiPickersOutlinedInput-notchedOutline) {
+    border-color: #3f3f46;
+  }
+
+  :global(.MuiPickersInputBase-root.MuiPickersOutlinedInput-root.Mui-focused)
+    :global(.MuiPickersOutlinedInput-notchedOutline) {
+    border-color: #18181b;
+    border-width: 1px;
+  }
+
+  :global(.MuiPickersInputBase-input) {
+    @include font-base(clamp(14px, 1.2vw, 15px), 500);
+    font-style: inherit;
+
+    padding: 8px 12px;
+  }
+
+  :global(.MuiPickersOutlinedInput-notchedOutline) {
+    border-color: #d4d4d8;
+    border-radius: 20px;
+  }
+
+  :global(.MuiInputLabel-root) {
+    font-size: clamp(11px, 1.1vw, 14px);
+    color: #71717a;
+
+    &:global(.Mui-focused) {
+      color: #18181b;
+    }
+  }
+
+  :global(.MuiFormHelperText-root) {
+    font-size: clamp(10px, 0.9vw, 12px);
+    margin-left: 2px;
+  }
+}
