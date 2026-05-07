@@ -60,6 +60,7 @@ export function useAvailabilityContextMenu({
       }
 
       const cols = el.querySelectorAll<Element>(".fc-timegrid-col[data-date]");
+
       for (const col of cols) {
         const { left, right } = col.getBoundingClientRect();
         if (e.clientX < left || e.clientX > right) continue;
@@ -70,17 +71,18 @@ export function useAvailabilityContextMenu({
         if (isPast(date)) return;
         const existingSlot = slots.find((s) => isSameDay(s.day, date)) ?? null;
 
+        const clickX = e.clientX;
         const clickY = e.clientY;
         const anchor: MenuAnchor = {
           getBoundingClientRect: () =>
             ({
-              x: left,
+              x: clickX,
               y: clickY,
               top: clickY,
               bottom: clickY,
-              left,
-              right,
-              width: right - left,
+              left: clickX,
+              right: clickX,
+              width: 0,
               height: 0,
               toJSON: () => {},
             }) as DOMRect,

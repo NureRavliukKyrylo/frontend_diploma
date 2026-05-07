@@ -57,19 +57,21 @@ export const OrganizationCardBase = ({
 
       <div className={styles.statsOrganizationBlock}>
         <div className={styles.statItem}>
-          <span className={styles.statValue}>{organization.rating}</span>
+          <span className={styles.statValue}>{organization.rating.value}</span>
           <span className={styles.statLabel}>RATING</span>
         </div>
 
         <div className={styles.statItem}>
           <span className={styles.statValue}>
-            {organization.totalActivities}
+            {organization.totalActivities ?? 0}
           </span>
           <span className={styles.statLabel}>ALL ACTIVITIES</span>
         </div>
 
         <div className={styles.statItem}>
-          <span className={styles.statValue}>{organization.activeCount}</span>
+          <span className={styles.statValue}>
+            {organization.activeCount ?? 0}
+          </span>
           <span className={styles.statLabel}>ACTIVE</span>
         </div>
       </div>

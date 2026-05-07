@@ -5,8 +5,8 @@ export interface Category {
   name: string;
   description: string;
   imageUrl: string;
-  projectsTotal: number;
-  projectsActive: number;
-  projectsCompleted: number;
+  activitiesTotal: number;
+  activitiesActive: number;
+  activitiesCompleted: number;
   skills: Pick<Skill, "id" | "name">[];
 }

@@ -1,121 +1,118 @@
 @use "@shared/assets/styles" as *;
-.wrapperMain {
+.eventInfoWrapper {
+  padding: 40px;
+  border-radius: 50px;
+  background: #ffffff;
+  box-shadow: 0px 2px 20px rgba(140, 0, 0, 0.5);
   width: 700px;
-  z-index: 10000;
-  .eventInfoWrapper {
-    padding: 40px;
-    border-radius: 50px;
-    background: #ffffff;
-    box-shadow: 0px 2px 20px rgba(140, 0, 0, 0.5);
-    .closeWindow {
-      width: 25px;
-      cursor: pointer;
-    }
-    .infoEvent {
+  .closeWindow {
+    width: 25px;
+    cursor: pointer;
+  }
+  .infoEvent {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    .headerInfo {
       display: flex;
-      flex-direction: column;
-      gap: 30px;
-      .headerInfo {
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      position: relative;
+      padding-bottom: 25px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent 0%,
+          #8c0000 30%,
+          #8c0000 60%,
+          transparent 100%
+        );
+        opacity: 0.8;
+      }
+      .leftBlock {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 40px;
-        position: relative;
-        padding-bottom: 25px;
-
-        &::after {
-          content: "";
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 1px;
-          background: linear-gradient(
-            to right,
-            transparent 0%,
-            #8c0000 30%,
-            #8c0000 60%,
-            transparent 100%
-          );
-          opacity: 0.8;
-        }
-        .leftBlock {
-          display: flex;
-          align-items: center;
-          gap: 15px;
-          h1 {
-            @include font-base(30px, 700);
-            background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-transform: uppercase;
-            line-height: 110%;
-          }
-          .navigationsBlock {
-            display: flex;
-            gap: 10px;
-
-            .prevButton,
-            .nextButton {
-              background: white;
-              border-radius: 50%;
-              width: 27px;
-              height: 27px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
-              transition: opacity 0.15s;
-
-              &:hover {
-                opacity: 0.75;
-              }
-
-              svg {
-                width: 10px;
-                height: 16px;
-                color: #8c0000;
-                display: block;
-              }
-            }
-
-            .nextButton {
-              transform: rotate(180deg);
-              padding-right: 3px;
-            }
-          }
-        }
-      }
-
-      .bottomContent {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
+        gap: 15px;
         h1 {
-          color: rgba(0, 0, 0, 0.8);
-          @include font-base(24px, 700);
+          @include font-base(30px, 700);
+          background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          text-transform: uppercase;
+          line-height: 110%;
         }
-        .actions {
+        .navigationsBlock {
           display: flex;
-          gap: 20px;
-          .attendingAgree {
-            background: #000000;
-            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
-            border-radius: 30px;
-            color: #ffffff;
-            @include font-base(28px, 700);
-            min-width: 140px;
+          gap: 10px;
+
+          .prevButton,
+          .nextButton {
+            background: white;
+            border-radius: 50%;
+            width: 27px;
+            height: 27px;
             display: flex;
             justify-content: center;
             align-items: center;
-            text-transform: uppercase;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+            transition: opacity 0.15s;
+
+            &:hover {
+              opacity: 0.75;
+            }
+
+            svg {
+              width: 10px;
+              height: 16px;
+              color: #8c0000;
+              display: block;
+            }
           }
-          .attendingDisagree {
-            @extend .attendingAgree;
-            background: #f5f5f5;
-            color: rgba(0, 0, 0, 0.7);
+
+          .nextButton {
+            transform: rotate(180deg);
+            padding-right: 3px;
           }
+        }
+      }
+    }
+
+    .bottomContent {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      h1 {
+        color: rgba(0, 0, 0, 0.8);
+        @include font-base(24px, 700);
+      }
+      .actions {
+        display: flex;
+        gap: 20px;
+        .attendingAgree {
+          background: #000000;
+          box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+          border-radius: 30px;
+          color: #ffffff;
+          @include font-base(28px, 700);
+          min-width: 140px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-transform: uppercase;
+        }
+        .attendingDisagree {
+          @extend .attendingAgree;
+          background: #f5f5f5;
+          color: rgba(0, 0, 0, 0.7);
         }
       }
     }

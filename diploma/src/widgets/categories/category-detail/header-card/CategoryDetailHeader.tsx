@@ -37,18 +37,18 @@ export const CategoryDetailHeader = ({
           </div>
           <div className={styles.projectsBlock}>
             <div className={styles.projectInfo}>
-              <h1>{category.projectsTotal}</h1>
-              <h2>All projects</h2>
+              <h1>{category.activitiesTotal}</h1>
+              <h2>All activities</h2>
             </div>
             <div className={styles.lineDividerProject} />
             <div className={styles.projectInfo}>
-              <h1>{category.projectsActive}</h1>
-              <h2>Active projects</h2>
+              <h1>{category.activitiesActive}</h1>
+              <h2>Active activities</h2>
             </div>
             <div className={styles.lineDividerProject} />
             <div className={styles.projectInfo}>
-              <h1>{category.projectsCompleted}</h1>
-              <h2>Completed projects</h2>
+              <h1>{category.activitiesCompleted}</h1>
+              <h2>Completed activities</h2>
             </div>
           </div>
           <div className={styles.categorySkills}>

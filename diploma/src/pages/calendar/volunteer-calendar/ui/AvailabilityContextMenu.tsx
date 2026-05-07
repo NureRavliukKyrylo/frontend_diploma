@@ -1,4 +1,4 @@
-import { BasePopover } from "./BasePopover";
+import { BasePopover } from "@shared/ui/modals";
 import styles from "./AvailabilityContextMenu.module.scss";
 import type { MenuItem } from "@shared/config/types";
 

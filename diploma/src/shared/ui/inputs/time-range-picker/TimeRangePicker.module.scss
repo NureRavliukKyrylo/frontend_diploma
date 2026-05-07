@@ -1,10 +1,18 @@
 @use "@shared/assets/styles" as *;
 
 .timeRangePicker {
-  :global(.MuiPickersInputBase-root) {
+  height: inherit;
+  :global(.MuiPickersTextField-root) {
+    height: inherit !important;
+  }
+  :global(.MuiFormControl-root.MuiPickersInputBase-root) {
     color: #18181b;
     background-color: #ffffff;
     border-radius: 20px !important;
+    height: inherit !important;
+  }
+  :global(.MuiPickersInputBase-root) {
+    height: inherit !important;
   }
   :global(.MuiPickersInputBase-sectionsContainer) {
     padding: 12px 5px;

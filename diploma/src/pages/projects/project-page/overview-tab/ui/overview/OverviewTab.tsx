@@ -78,17 +78,17 @@ export const OverviewTab = ({
             <div className={styles.activeActivities}>
               <div className={styles.totalEvents}>
                 <div className={styles.headerTitle}>
-                  <h1>ACTIVE</h1>
+                  <h1>COMPLETED</h1>
                   <h2>EVENTS</h2>
                 </div>
-                <p>{project?.eventsTotal ?? "0"}</p>
+                <p>{project?.eventsCompleted ?? "0"}</p>
               </div>
               <div className={styles.totalTasks}>
                 <div className={styles.headerTitle}>
-                  <h1>ACTIVE</h1>
+                  <h1>COMPLETED</h1>
                   <h2>TASKS</h2>
                 </div>
-                <p>{project?.tasksTotal ?? "0"}</p>
+                <p>{project?.tasksCompleted ?? "0"}</p>
               </div>
             </div>
             <div className={styles.activitiesImageBlock}>

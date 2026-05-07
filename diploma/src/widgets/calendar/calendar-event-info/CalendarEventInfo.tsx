@@ -5,16 +5,8 @@ import type { EventType } from "@shared/config/types";
 import { Close, NavigationArrow } from "@shared/assets/icons/actions";
 import styles from "./CalendarEventInfo.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
-import {
-  useFloating,
-  autoUpdate,
-  flip,
-  shift,
-  offset,
-  type VirtualElement,
-} from "@floating-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect } from "react";
+import { BasePopover } from "@shared/ui/modals";
 
 interface CalendarEventInfoProps {
   activityId: string;
@@ -22,7 +14,7 @@ interface CalendarEventInfoProps {
   onClose: () => void;
   onPrev?: () => void;
   onNext?: () => void;
-  anchor: Element | VirtualElement;
+  anchor: Element | { getBoundingClientRect: () => DOMRect };
 }
 
 export const CalendarEventInfo = ({
@@ -33,16 +25,6 @@ export const CalendarEventInfo = ({
   onNext,
   anchor,
 }: CalendarEventInfoProps) => {
-  const { refs, floatingStyles } = useFloating({
-    whileElementsMounted: autoUpdate,
-    placement: "left",
-    middleware: [offset(12), flip(), shift({ padding: 8 })],
-  });
-
-  useEffect(() => {
-    refs.setReference(anchor);
-  }, [anchor]);
-
   const { data: event, isLoading: isEventLoading } = useQuery({
     ...eventQuery.id(activityId),
     enabled: type === "event",
@@ -57,11 +39,7 @@ export const CalendarEventInfo = ({
   const title = event?.title ?? task?.title;
 
   return (
-    <div
-      ref={refs.setFloating}
-      style={floatingStyles}
-      className={styles.wrapperMain}
-    >
+    <BasePopover anchor={anchor} onClose={onClose} placement="right">
       <motion.div
         className={styles.eventInfoWrapper}
         initial={{ opacity: 0, scale: 0.95, x: 8 }}
@@ -157,6 +135,6 @@ export const CalendarEventInfo = ({
           </AnimatePresence>
         </div>
       </motion.div>
-    </div>
+    </BasePopover>
   );
 };

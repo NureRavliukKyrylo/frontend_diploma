@@ -12,7 +12,12 @@ interface BasePopoverProps {
   anchor: Element | { getBoundingClientRect: () => DOMRect };
   children: ReactNode;
   onClose: () => void;
-  placement?: "right-start" | "left-start" | "bottom-start" | "top-start";
+  placement?:
+    | "right-start"
+    | "left-start"
+    | "bottom-start"
+    | "top-start"
+    | "right";
   closeOnScroll?: boolean;
 }
 

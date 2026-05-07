@@ -11,16 +11,16 @@ import { AvailabilityFormPopover } from "./AvailabilityFormPopover";
 
 const events: EventInput[] = [
   {
-    id: "69eb1949b27f92a95fe614a5",
+    id: "69fc45fad9578c44255549cf",
     title: "Team Sync",
     start: "2026-05-02T10:00:00",
     end: "2026-05-02T10:30:00",
     extendedProps: { type: "task" },
   },
   {
-    id: "69eb1832b27f92a95fe614a4",
+    id: "69fc45fad9578c44255549d0",
     title: "Fix login bug",
-    start: "2026-05-02",
+    start: "2026-05-05",
     allDay: true,
     extendedProps: { type: "task" },
   },
@@ -106,6 +106,7 @@ export const VolunteerCalendar = () => {
             : []
         }
       />
+
       {menuState && (
         <AvailabilityContextMenu
           anchor={menuState.anchor}
@@ -113,19 +114,20 @@ export const VolunteerCalendar = () => {
           onClose={handleCloseMenu}
         />
       )}
-      {formState && (
-        <AvailabilityFormPopover
-          anchor={formState.anchor}
-          date={formState.date}
-          start={formState.start}
-          end={formState.end}
-          onClose={() => setFormState(null)}
-        />
-      )}
+      <AnimatePresence mode="wait">
+        {formState && (
+          <AvailabilityFormPopover
+            anchor={formState.anchor}
+            date={formState.date}
+            start={formState.start}
+            end={formState.end}
+            onClose={() => setFormState(null)}
+          />
+        )}
+      </AnimatePresence>
       <AnimatePresence mode="wait">
         {activeInfo && (
           <>
-            <div className={styles.inset} onClick={handleClose} />
             <CalendarEventInfo
               activityId={activeInfo.id}
               type={activeInfo.type}

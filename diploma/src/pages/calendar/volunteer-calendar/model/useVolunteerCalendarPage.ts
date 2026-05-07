@@ -6,13 +6,12 @@ import { taskQuery } from "@entities/task";
 import type { CalendarView, EventType } from "@shared/config/types";
 import type { EventInput } from "@fullcalendar/core";
 import { parseInitialDate, serializeDate } from "../libs/dateSerializers";
-import type { VirtualElement } from "@floating-ui/react";
 
 interface ActiveInfo {
   id: string;
   type: EventType;
   cellEvents: Array<{ id: string; type: EventType }>;
-  anchor: VirtualElement;
+  anchor: { getBoundingClientRect: () => DOMRect };
 }
 
 export const useVolunteerCalendarPage = (events: EventInput[]) => {
@@ -41,10 +40,6 @@ export const useVolunteerCalendarPage = (events: EventInput[]) => {
 
   const handleDateClick = useCallback(
     (date: Date, jsEvent: MouseEvent) => {
-      const cell =
-        (jsEvent.target as HTMLElement).closest<HTMLElement>(
-          ".fc-timegrid-slot, .fc-daygrid-day",
-        ) ?? (jsEvent.target as HTMLElement);
       const cellEvents = events
         .filter((e) => {
           const eventDate = new Date(e.start as string);
@@ -61,28 +56,37 @@ export const useVolunteerCalendarPage = (events: EventInput[]) => {
 
       if (!cellEvents.length) return;
 
-      const virtualAnchor: VirtualElement = {
-        getBoundingClientRect: () => {
-          const rect = cell.getBoundingClientRect();
-          return {
-            x: rect.left + rect.width / 2,
-            y: rect.top + rect.height / 2,
-            width: 0,
-            height: 0,
-            top: rect.top + rect.height / 2,
-            left: rect.left + rect.width / 2,
-            right: rect.left + rect.width / 2,
-            bottom: rect.top + rect.height / 2,
-          };
-        },
-      };
+      const { clientX, clientY } = jsEvent;
+
+      const isTimeGrid = !!(jsEvent.target as HTMLElement).closest(
+        ".fc-timegrid",
+      );
+
+      const anchor = isTimeGrid
+        ? {
+            getBoundingClientRect: () =>
+              ({
+                x: clientX,
+                y: clientY,
+                top: clientY,
+                bottom: clientY,
+                left: clientX,
+                right: clientX,
+                width: 0,
+                height: 0,
+                toJSON: () => {},
+              }) as DOMRect,
+          }
+        : ((jsEvent.target as HTMLElement).closest<HTMLElement>(
+            ".fc-daygrid-day",
+          ) ?? (jsEvent.target as HTMLElement));
 
       const first = cellEvents[0];
       setActiveInfo({
         id: first.id,
         type: first.type,
         cellEvents,
-        anchor: virtualAnchor,
+        anchor,
       });
       prefetchNext(cellEvents, 0);
     },

@@ -1,5 +1,5 @@
 import { SetAvailabilityForm } from "@features/calendar";
-import { BasePopover } from "./BasePopover";
+import { BasePopover } from "@shared/ui/modals";
 
 interface AvailabilityFormPopoverProps {
   anchor: Element | { getBoundingClientRect: () => DOMRect };

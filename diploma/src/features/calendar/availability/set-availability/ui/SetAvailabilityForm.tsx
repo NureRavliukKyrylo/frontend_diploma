@@ -23,7 +23,13 @@ export const SetAvailabilityForm = ({
   onClose,
 }: SetAvailabilityFormProps) => {
   return (
-    <div className={styles.wrapperAvailabilityForm}>
+    <motion.div
+      className={styles.wrapperAvailabilityForm}
+      initial={{ opacity: 0, scale: 0.95, y: -8 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95, y: -8 }}
+      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+    >
       <div className={styles.headerForm}>
         <span>
           {formatDayOfWeek(date)}, {formatDateToText(date.toISOString())}
@@ -43,12 +49,14 @@ export const SetAvailabilityForm = ({
           <div className={styles.setRange}>
             <h1>Set time-range availability</h1>
             <div className={styles.optionsToChose}>
-              <TimeRangePicker
-                value={[
-                  formatDateToTime(date, start),
-                  formatDateToTime(date, end),
-                ]}
-              />
+              <div className={styles.timeRangeWrapper}>
+                <TimeRangePicker
+                  value={[
+                    formatDateToTime(date, start),
+                    formatDateToTime(date, end),
+                  ]}
+                />
+              </div>
               <button className={styles.allDay} type="button">
                 All Day
               </button>
@@ -56,7 +64,9 @@ export const SetAvailabilityForm = ({
           </div>
           <div className={styles.setRecurrence}>
             <Checkbox name="isRecurrence">
-              Are you usually not available on {formatDayOfWeek(date)}s?
+              <h1>
+                Are you usually not available on {formatDayOfWeek(date)}s?
+              </h1>
             </Checkbox>
           </div>
         </div>
@@ -67,12 +77,12 @@ export const SetAvailabilityForm = ({
           <BaseButtonWrapper
             className={styles.cancelButton}
             onClick={onClose}
-            type="submit"
+            type="button"
           >
-            Set availability
+            Cancel
           </BaseButtonWrapper>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 };

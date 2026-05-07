@@ -16,8 +16,8 @@ export interface Project {
   progressPercent: number;
   tasksTotal: number;
   eventsTotal: number;
-  activeTasks: number;
-  activeEvents: number;
+  tasksCompleted: number;
+  eventsCompleted: number;
   organization?: Pick<Organization, "id" | "logoUrl" | "name">;
   categories?: Category[];
   location: Coordinates;
