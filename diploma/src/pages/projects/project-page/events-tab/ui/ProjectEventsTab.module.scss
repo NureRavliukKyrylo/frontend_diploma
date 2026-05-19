@@ -2,13 +2,25 @@
 
 .eventsProjectList {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-  grid-auto-rows: minmax(300px, auto);
+  grid-template-columns: repeat(auto-fill, minmax(430px, 1fr));
   justify-content: center;
   gap: 40px;
   align-items: stretch;
+  width: 100%;
 }
-
+.eventCardMotion {
+  cursor: pointer;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 4;
+}
+.eventsPaginationWrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
 .emptyState {
   display: flex;
   flex-direction: column;

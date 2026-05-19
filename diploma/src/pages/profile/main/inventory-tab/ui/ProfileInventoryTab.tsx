@@ -43,7 +43,7 @@ export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
       resetScroll: false,
     });
   };
-  console.log(badgesSearch);
+
   return (
     <div className={styles.inventoryWrapper}>
       <h1 className={styles.achievementsTitle}>Achievements</h1>

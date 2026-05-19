@@ -3,3 +3,5 @@ export { formatDateToText } from "./date-to-text/formatDateToText";
 export { formatHourTime } from "./format-hour-time/formatHourTime";
 export { formatDayOfWeek } from "./date-to-day/formatDayOfWeek";
 export { formatDateToTime } from "./date-to-input/formatDateToTime";
+export { isSameDay } from "./same-day/isSameDay";
+export { isPast } from "./is-past/isPast";

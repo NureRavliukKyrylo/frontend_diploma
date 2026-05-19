@@ -11,7 +11,10 @@ import { TaskWidgetSkeleton } from "./TaskWidgetSkeleton";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import type { FeedbackSortValues } from "@entities/feedback";
 import { useTaskWidget } from "../model/useTaskWidget";
-import { ParticipationJoinButton } from "@features/participation";
+import {
+  ParticipationJoinButton,
+  ParticipationLeaveButton,
+} from "@features/participation";
 
 interface TaskWidgetProps {
   search: TaskDrawerSearch;
@@ -142,11 +145,25 @@ export const TaskWidget = ({
           <ReadMoreButton collapsedHeight={90}>
             <p>{task?.description}</p>
           </ReadMoreButton>
-          <div className={styles.joinTaskBlockButton}>
-            {task?.id && (
-              <ParticipationJoinButton entityId={task.id} entityType="task" />
-            )}
-          </div>
+          {task?.id && task.hasPendingJoinRequest && (
+            <p className={styles.pendingRequest}>
+              Your join request is pending approval
+            </p>
+          )}
+
+          {task?.id && !task.hasPendingJoinRequest && (
+            <div className={styles.joinTaskBlockButton}>
+              {task.isJoined ? (
+                <ParticipationLeaveButton
+                  entityId={task.id}
+                  entityType="task"
+                  entityName="Task"
+                />
+              ) : (
+                <ParticipationJoinButton entityId={task.id} entityType="task" />
+              )}
+            </div>
+          )}
         </div>
       </motion.div>
       <div className={styles.contentBlock}>

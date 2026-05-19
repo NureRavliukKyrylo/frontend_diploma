@@ -30,7 +30,7 @@ export const OverviewTab = ({
 
   return (
     <div className={styles.overviewWrapper}>
-      {hasCategories ? (
+      {hasCategories && (
         <ShowMoreItemsButton
           items={
             project?.categories?.map((category) => (
@@ -51,10 +51,6 @@ export const OverviewTab = ({
           initialVisibleCount={4}
           buttonPosition="below"
         />
-      ) : (
-        <p className={styles.noCategoriesText}>
-          This project hasn't set any categories yet.
-        </p>
       )}
       <div className={styles.mapLocationBlock}>
         <div className={styles.projectPageMainInfo}>

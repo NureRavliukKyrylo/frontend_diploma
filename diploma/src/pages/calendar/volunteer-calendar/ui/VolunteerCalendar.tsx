@@ -1,5 +1,4 @@
 import styles from "./VolunteerCalendar.module.scss";
-import type { EventInput } from "@fullcalendar/core/index.js";
 import { BaseCalendar, CalendarEventItem } from "@shared/ui/calendar";
 import { useVolunteerCalendarPage } from "../model/useVolunteerCalendarPage";
 import { CalendarEventInfo } from "@widgets/calendar";
@@ -8,28 +7,10 @@ import { useAvailabilityContextMenu } from "../model/useAvailabiltyContextMenu";
 import { AvailabilityContextMenu } from "./AvailabilityContextMenu";
 import { useState } from "react";
 import { AvailabilityFormPopover } from "./AvailabilityFormPopover";
-
-const events: EventInput[] = [
-  {
-    id: "69fc45fad9578c44255549cf",
-    title: "Team Sync",
-    start: "2026-05-02T10:00:00",
-    end: "2026-05-02T10:30:00",
-    extendedProps: { type: "task" },
-  },
-  {
-    id: "69fc45fad9578c44255549d0",
-    title: "Fix login bug",
-    start: "2026-05-05",
-    allDay: true,
-    extendedProps: { type: "task" },
-  },
-];
-
-const isSameDay = (a: Date, b: Date) =>
-  a.getFullYear() === b.getFullYear() &&
-  a.getMonth() === b.getMonth() &&
-  a.getDate() === b.getDate();
+import { isSameDay } from "@shared/libs/date";
+import { useSearch } from "@tanstack/react-router";
+import { calendarDefaults } from "../libs/calendarSearchSchema";
+import { useCalendarMyActivities } from "@entities/user/calendar";
 
 const SLOTS = [
   { day: new Date(2026, 4, 5), start: "09:00:00", end: "12:00:00" },
@@ -44,8 +25,46 @@ interface FormState {
   end?: string;
 }
 
+export const getCalendarRange = (
+  tab: string,
+  date: Date,
+): { From: Date; To: Date } => {
+  switch (tab) {
+    case "dayGridMonth":
+      return {
+        From: new Date(date.getFullYear(), date.getMonth(), 1),
+        To: new Date(date.getFullYear(), date.getMonth() + 1, 0),
+      };
+    case "timeGridWeek": {
+      const day = date.getDay();
+      const monday = new Date(date);
+      monday.setDate(date.getDate() - ((day + 6) % 7));
+      const sunday = new Date(monday);
+      sunday.setDate(monday.getDate() + 6);
+      return { From: monday, To: sunday };
+    }
+    case "timeGridDay":
+      return {
+        From: date,
+        To: date,
+      };
+    default:
+      return {
+        From: new Date(date.getFullYear(), date.getMonth(), 1),
+        To: new Date(date.getFullYear(), date.getMonth() + 1, 0),
+      };
+  }
+};
+
 export const VolunteerCalendar = () => {
   const [formState, setFormState] = useState<FormState | null>(null);
+  const search = useSearch({ from: "/_masterLayout/calendar/" });
+  const { From, To } = getCalendarRange(
+    search.tab ?? calendarDefaults.tab,
+    search.date ? new Date(search.date) : new Date(),
+  );
+  const events = useCalendarMyActivities({ From, To });
+
   const {
     initialView,
     initialDate,
@@ -99,7 +118,6 @@ export const VolunteerCalendar = () => {
           />
         )}
         events={events}
-        dayMaxEvents={true}
         dayCellClassNames={({ date }) =>
           SLOTS.some((s) => isSameDay(s.day, date))
             ? ["fc-day--has-availability"]

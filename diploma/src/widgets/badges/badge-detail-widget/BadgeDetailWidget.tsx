@@ -42,7 +42,9 @@ export const BadgeDetailWidget = ({ id }: { id: string }) => {
             )}
           </div>
           <div className={styles.rankEntity}>
-            <h2 style={{ color: TierColors[badge.rank] }}>Rank {badge.rank}</h2>
+            <h2 style={{ color: TierColors[badge.rank.name] }}>
+              Rank {badge.rank.name}
+            </h2>
             {badge.scopeEntityType ? (
               <Link
                 to={entityTypeToRoute[badge.scopeEntityType]}
@@ -84,7 +86,7 @@ export const BadgeDetailWidget = ({ id }: { id: string }) => {
           <div className={styles.rarityBlock}>
             <h1>RARITY</h1>
             <Stars
-              value={TierOrder[badge.rank]}
+              value={TierOrder[badge.rank.name]}
               maxStars={Object.keys(TierOrder).length}
               classNameStar={styles.rarityStar}
             />

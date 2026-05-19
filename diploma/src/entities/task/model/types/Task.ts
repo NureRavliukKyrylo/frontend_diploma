@@ -27,4 +27,7 @@ export interface Task {
   progressPercent: number;
   categories: Category[];
   skills: Skill[];
+  isJoined: boolean;
+  canSubmitFeedback: boolean;
+  hasPendingJoinRequest: boolean;
 }

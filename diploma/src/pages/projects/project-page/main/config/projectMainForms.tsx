@@ -50,6 +50,7 @@ export const getProjectMainForms = (
       entityId={props.project.id}
       PageSize={(props.search as FeedbackSearch).PageSize}
       OrderBy={(props.search as FeedbackSearch).OrderBy}
+      canSubmitFeedback={props.project.canSubmitFeedback}
       handleSort={props.handleSort}
     />
   ),

@@ -43,6 +43,7 @@ export const getEventMainForms = (
       PageSize={(props.search as FeedbackEventSearch).PageSize}
       OrderBy={(props.search as FeedbackEventSearch).OrderBy}
       handleSort={props.handleSort}
+      canSubmitFeedback={props.event.canSubmitFeedback}
     />
   ),
   tasks: (

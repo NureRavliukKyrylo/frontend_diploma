@@ -24,7 +24,7 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
   const hasSkills = event?.skills && event?.skills.length > 0;
   return (
     <div className={styles.overviewWrapper}>
-      {hasCategories ? (
+      {hasCategories && (
         <ShowMoreItemsButton
           items={
             event?.categories?.map((category) => (
@@ -45,16 +45,12 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
           initialVisibleCount={4}
           buttonPosition="below"
         />
-      ) : (
-        <p className={styles.noCategoriesText}>
-          This event hasn't set any categories yet.
-        </p>
       )}
       <div className={styles.skillsBlock}>
         <div className={styles.headerSkills}>
-          <h1>TASK Skills</h1>
+          <h1>EVENT Skills</h1>
         </div>
-        {hasSkills ? (
+        {hasSkills && (
           <ShowMoreItemsButton
             items={
               event?.skills.map((skill) => (
@@ -66,10 +62,6 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
             buttonContent={<ActionsIcon className={styles.actions} />}
             initialVisibleCount={7}
           />
-        ) : (
-          <p className={styles.noSkillsText}>
-            This task doesn't require any skills.
-          </p>
         )}
       </div>
       <div className={styles.skillsBlock}></div>
@@ -97,7 +89,7 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
                   <h1>ACTIVE</h1>
                   <h2>TASKS</h2>
                 </div>
-                <p>{event?.tasksTotal ?? "0"}</p>
+                <p>{event?.activeTasks ?? "0"}</p>
               </div>
             </div>
             <div className={styles.activitiesImageBlock}>

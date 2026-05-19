@@ -27,7 +27,7 @@ export const OverviewTab = ({ task, userLocation }: OverviewTabProps) => {
 
   return (
     <div className={styles.overviewWrapper}>
-      {hasCategories ? (
+      {hasCategories && (
         <ShowMoreItemsButton
           items={
             task?.categories?.map((category) => (
@@ -48,16 +48,12 @@ export const OverviewTab = ({ task, userLocation }: OverviewTabProps) => {
           initialVisibleCount={3}
           buttonPosition="below"
         />
-      ) : (
-        <p className={styles.noCategoriesText}>
-          This task hasn't set any categories yet.
-        </p>
       )}
       <div className={styles.skillsBlock}>
         <div className={styles.headerSkills}>
           <h1>TASK Skills</h1>
         </div>
-        {hasSkills ? (
+        {hasSkills && (
           <ShowMoreItemsButton
             items={
               task?.skills?.map((skill) => (
@@ -69,10 +65,6 @@ export const OverviewTab = ({ task, userLocation }: OverviewTabProps) => {
             buttonContent={<ActionsIcon className={styles.actions} />}
             initialVisibleCount={7}
           />
-        ) : (
-          <p className={styles.noSkillsText}>
-            This task doesn't require any skills.
-          </p>
         )}
       </div>
       {hasLocation && (

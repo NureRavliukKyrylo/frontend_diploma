@@ -29,6 +29,7 @@ interface ActivityFeedbackTabProps {
   entityType: EntityType;
   PageSize?: number;
   OrderBy: FeedbackSortValues;
+  canSubmitFeedback: boolean;
   handleSort: (value: FeedbackSortValues) => void;
 }
 
@@ -50,6 +51,7 @@ export const ActivityFeedbackTab = ({
   entityType,
   PageSize,
   OrderBy,
+  canSubmitFeedback,
   handleSort,
 }: ActivityFeedbackTabProps) => {
   const {
@@ -61,64 +63,66 @@ export const ActivityFeedbackTab = ({
   } = useFeedbackTab();
 
   return (
-    <div className={styles.feedbackTabWrapper}>
-      <div className={styles.headerWrapper}>
-        <div className={styles.overAllRatingInfo}>
-          <div className={styles.baseInfo}>
-            <h1 className={styles.baseRating}>4</h1>
-            <Stars
-              value={4}
-              gradient="linear-gradient(180deg, #8C0000 0%, #260000 100%)"
-            />
-            <h1 className={styles.totalVotes}>120 VOTES</h1>
+    <ErrorBoundary
+      fallbackRender={({ error }) => {
+        return (
+          <div className={styles.errorState}>
+            <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
+            <p className="errorHint">
+              Try reloading the page or come back later.
+            </p>
           </div>
-          <div className={styles.detailedInfo}>
-            {mockRating.detailInfo.map((rating) => (
-              <div className={styles.ratingLine}>
-                <h1 className={styles.ratingValue}>{rating.value} STARS</h1>
-                <ProgressBar
-                  current={rating.percentOfAll}
-                  className={styles.progressRating}
-                />
-                <h1 className={styles.votesOfValue}>
-                  {rating.totalVotes} VOTES
-                </h1>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className={styles.actionsFeedback}>
-          <div className={styles.actions}>
-            <BaseButtonWrapper
-              className={styles.submitFeedback}
-              onClick={() => setModalType("create")}
-            >
-              Submit Feedback
-            </BaseButtonWrapper>
-            <div className={styles.sortWrapper}>
-              <SortDropDown
-                options={sortingFeedbackItems}
-                onSelect={handleSort}
-                value={OrderBy ?? "Default"}
+        );
+      }}
+    >
+      <div className={styles.feedbackTabWrapper}>
+        <div className={styles.headerWrapper}>
+          <div className={styles.overAllRatingInfo}>
+            <div className={styles.baseInfo}>
+              <h1 className={styles.baseRating}>4</h1>
+              <Stars
+                value={4}
+                gradient="linear-gradient(180deg, #8C0000 0%, #260000 100%)"
               />
+              <h1 className={styles.totalVotes}>120 VOTES</h1>
+            </div>
+            <div className={styles.detailedInfo}>
+              {mockRating.detailInfo.map((rating) => (
+                <div className={styles.ratingLine}>
+                  <h1 className={styles.ratingValue}>{rating.value} STARS</h1>
+                  <ProgressBar
+                    current={rating.percentOfAll}
+                    className={styles.progressRating}
+                  />
+                  <h1 className={styles.votesOfValue}>
+                    {rating.totalVotes} VOTES
+                  </h1>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className={styles.actionsFeedback}>
+            <div className={styles.actions}>
+              {canSubmitFeedback && (
+                <BaseButtonWrapper
+                  className={styles.submitFeedback}
+                  onClick={() => setModalType("create")}
+                >
+                  Submit Feedback
+                </BaseButtonWrapper>
+              )}
+              <div className={styles.sortWrapper}>
+                <SortDropDown
+                  options={sortingFeedbackItems}
+                  onSelect={handleSort}
+                  value={OrderBy ?? "Default"}
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className={styles.mainContent}>
-        <h1 className={styles.reviewTitle}>Review</h1>
-        <ErrorBoundary
-          fallbackRender={({ error }) => {
-            return (
-              <div className={styles.errorState}>
-                <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-                <p className="errorHint">
-                  Try reloading the page or come back later.
-                </p>
-              </div>
-            );
-          }}
-        >
+        <div className={styles.mainContent}>
+          <h1 className={styles.reviewTitle}>Review</h1>
           <Suspense
             fallback={
               <ListWidgetSkeleton
@@ -181,32 +185,32 @@ export const ActivityFeedbackTab = ({
               }
             />
           </Suspense>
-        </ErrorBoundary>
+        </div>
+        <CreateFeedbackModal
+          entityType={entityType}
+          entityId={entityId}
+          isOpen={modalType === "create"}
+          onClose={handleCloseModal}
+        />
+        {selectedFeedback && (
+          <>
+            <EditFeedbackModal
+              entityType={entityType}
+              entityId={entityId}
+              feedback={selectedFeedback}
+              isOpen={modalType === "edit"}
+              onClose={handleCloseModal}
+            />
+            <DeleteFeedbackModal
+              entityType={entityType}
+              entityId={entityId}
+              feedbackId={selectedFeedback.id}
+              isOpen={modalType === "delete"}
+              onClose={handleCloseModal}
+            />
+          </>
+        )}
       </div>
-      <CreateFeedbackModal
-        entityType={entityType}
-        entityId={entityId}
-        isOpen={modalType === "create"}
-        onClose={handleCloseModal}
-      />
-      {selectedFeedback && (
-        <>
-          <EditFeedbackModal
-            entityType={entityType}
-            entityId={entityId}
-            feedback={selectedFeedback}
-            isOpen={modalType === "edit"}
-            onClose={handleCloseModal}
-          />
-          <DeleteFeedbackModal
-            entityType={entityType}
-            entityId={entityId}
-            feedbackId={selectedFeedback.id}
-            isOpen={modalType === "delete"}
-            onClose={handleCloseModal}
-          />
-        </>
-      )}
-    </div>
+    </ErrorBoundary>
   );
 };

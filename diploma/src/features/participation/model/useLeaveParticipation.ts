@@ -6,6 +6,7 @@ import type { EntityType } from "@shared/config/types";
 import { queryKeyMap } from "../config/queryKeyMap";
 import { leaveParticipation } from "../api/participationLeaveApi";
 import { filtersKeys } from "@shared/api/filters";
+import { capitalize } from "@shared/libs/text";
 
 interface UseLeaveParticipationOptions {
   entityType: Exclude<EntityType, "organization">;
@@ -23,20 +24,25 @@ export const useLeaveParticipation = ({
   const mutation = useMutation({
     mutationFn: () => leaveParticipation({ entityId, entityType }),
     onSuccess: (response) => {
-      if (response?.message) {
+      if (response?.requiresApproval) {
         addToast({
-          title: `${entityType} Approval Required`,
+          title: `${capitalize(entityType)} Approval Required`,
           description: response.message,
           color: "warning",
         });
       } else {
         addToast({
-          title: `Left ${entityType} Successfully`,
-          description: `You have left ${entityType} successfully.`,
+          title: `Left ${capitalize(entityType)} Successfully`,
+          description: `You have left ${capitalize(entityType)} successfully.`,
           color: "success",
         });
       }
-      queryClient.invalidateQueries({ queryKey: queryKeyMap[entityType]() });
+      queryClient.invalidateQueries({
+        queryKey: queryKeyMap[entityType].id(entityId),
+      });
+      queryClient.invalidateQueries({
+        queryKey: queryKeyMap[entityType].mys(),
+      });
       queryClient.invalidateQueries({
         queryKey: filtersKeys.infinite({ entityType }),
       });

@@ -6,6 +6,7 @@ import type { EntityType } from "@shared/config/types";
 import { queryKeyMap } from "../config/queryKeyMap";
 import { joinParticipation } from "../api/participationJoinApi";
 import { filtersKeys } from "@shared/api/filters";
+import { capitalize } from "@shared/libs/text";
 
 interface UseJoinParticipationOptions {
   entityType: Exclude<EntityType, "organization">;
@@ -23,20 +24,25 @@ export const useJoinParticipation = ({
   const mutation = useMutation({
     mutationFn: () => joinParticipation({ entityId, entityType }),
     onSuccess: (response) => {
-      if (response?.message) {
+      if (response?.requiresApproval) {
         addToast({
-          title: "Approval Required",
+          title: `${capitalize(entityType)} Approval Required`,
           description: response.message,
           color: "warning",
         });
       } else {
         addToast({
-          title: "Joined Successfully",
-          description: "You have joined successfully.",
+          title: `Joined ${capitalize(entityType)} Successfully`,
+          description: `You have joined ${capitalize(entityType)} successfully.`,
           color: "success",
         });
       }
-      queryClient.invalidateQueries({ queryKey: queryKeyMap[entityType]() });
+      queryClient.invalidateQueries({
+        queryKey: queryKeyMap[entityType].id(entityId),
+      });
+      queryClient.invalidateQueries({
+        queryKey: queryKeyMap[entityType].mys(),
+      });
       queryClient.invalidateQueries({
         queryKey: filtersKeys.infinite({ entityType }),
       });

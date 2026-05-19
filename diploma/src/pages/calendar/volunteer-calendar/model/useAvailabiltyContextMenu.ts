@@ -1,3 +1,4 @@
+import { isPast } from "@shared/libs/date";
 import { useState, useCallback, useEffect, useRef, useMemo } from "react";
 
 export interface AvailabilitySlot {
@@ -20,11 +21,7 @@ interface UseAvailabilityContextMenuProps {
   onUpdate: (slot: AvailabilitySlot, date: Date) => void;
   onDelete: (slot: AvailabilitySlot) => void;
 }
-const isPast = (date: Date) => {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  return date < today;
-};
+
 export function useAvailabilityContextMenu({
   slots,
   onAdd,
@@ -48,6 +45,25 @@ export function useAvailabilityContextMenu({
     const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault();
 
+      const makeAnchor = (): MenuAnchor => {
+        const x = e.clientX;
+        const y = e.clientY;
+        return {
+          getBoundingClientRect: () =>
+            ({
+              x,
+              y,
+              top: y,
+              bottom: y,
+              left: x,
+              right: x,
+              width: 0,
+              height: 0,
+              toJSON: () => {},
+            }) as DOMRect,
+        };
+      };
+
       const directCell = (e.target as Element).closest("[data-date]");
       if (directCell) {
         const dateStr = directCell.getAttribute("data-date")!;
@@ -55,7 +71,7 @@ export function useAvailabilityContextMenu({
         const date = new Date(y, m - 1, d);
         if (isPast(date)) return;
         const existingSlot = slots.find((s) => isSameDay(s.day, date)) ?? null;
-        setMenuState({ anchor: directCell, date, existingSlot });
+        setMenuState({ anchor: makeAnchor(), date, existingSlot });
         return;
       }
 

@@ -229,7 +229,13 @@
       p {
         @include font-base(20px, 400);
       }
-
+      .pendingRequest {
+        @include font-base(25px, 800);
+        background: linear-gradient(360deg, #f59e0b 0%, #b45309 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
       .joinEventBlockButton {
         width: 40%;
         margin: 0 auto;

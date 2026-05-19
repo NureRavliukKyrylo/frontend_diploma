@@ -6,7 +6,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { formatDateToText } from "@shared/libs/date";
 import { Calendar } from "@shared/assets/icons/info";
 import { useProjectPage } from "../model/useProjectPage";
-import { ParticipationJoinButton } from "@features/participation";
+import {
+  ParticipationJoinButton,
+  ParticipationLeaveButton,
+} from "@features/participation";
 
 export const ProjectPage = () => {
   const { tab, project, policyConfig, forms, handleTabChange } =
@@ -73,22 +76,36 @@ export const ProjectPage = () => {
             </div>
           </div>
           <div className={styles.ratingProjectInfo}>
-            <h1>4.5</h1>
-            <p>(120 votes)</p>
+            <h1>{project.rating.value}</h1>
+            <p>({project.rating.totalVotes} VOTES)</p>
           </div>
         </div>
         <div className={styles.projectFooterContent}>
           <ReadMoreButton collapsedHeight={90}>
             <p>{project?.description}</p>
           </ReadMoreButton>
-          <div className={styles.joinProjectBlockButton}>
-            {project?.id && (
-              <ParticipationJoinButton
-                entityId={project.id}
-                entityType="project"
-              />
-            )}
-          </div>
+          {project?.id && project.hasPendingJoinRequest && (
+            <p className={styles.pendingRequest}>
+              Your join request is pending approval
+            </p>
+          )}
+
+          {project?.id && !project.hasPendingJoinRequest && (
+            <div className={styles.joinProjectBlockButton}>
+              {project.isJoined ? (
+                <ParticipationLeaveButton
+                  entityId={project.id}
+                  entityType="project"
+                  entityName="Project"
+                />
+              ) : (
+                <ParticipationJoinButton
+                  entityId={project.id}
+                  entityType="project"
+                />
+              )}
+            </div>
+          )}
         </div>
       </motion.div>
       <div className={styles.toggleWrapper}>

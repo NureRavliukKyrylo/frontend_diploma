@@ -5,8 +5,17 @@ import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import { ErrorBoundary } from "react-error-boundary";
 import { EventsListWidget } from "@widgets/events";
-import { EventCard, useEventsListQuery } from "@entities/event";
+import { EventCard, eventQuery, useEventsListQuery } from "@entities/event";
 import type { EventsSearch } from "@entities/project";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  fadeDuration,
+  fadeVariants,
+  staggeredCardVariants,
+} from "@shared/assets/animations";
+import { useNavigate, useRouter } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { Pagination } from "@shared/ui";
 
 interface ProjectEventsTab {
   projectId: string;
@@ -14,6 +23,16 @@ interface ProjectEventsTab {
 }
 
 export const ProjectEventsTab = ({ search, projectId }: ProjectEventsTab) => {
+  const router = useRouter();
+  const { data: events } = useQuery(
+    eventQuery.list({ ProjectIds: [projectId], ...search }),
+  );
+  const navigate = useNavigate({ from: "/projects/$id/" });
+
+  const handlePageChange = (page: number) => {
+    navigate({ search: (prev) => ({ ...prev, Page: page }) });
+  };
+
   return (
     <>
       <ErrorBoundary
@@ -28,30 +47,67 @@ export const ProjectEventsTab = ({ search, projectId }: ProjectEventsTab) => {
           );
         }}
       >
-        <Suspense
-          fallback={
-            <ListWidgetSkeleton
-              className={styles.eventsProjectList}
-              renderSkeleton={() => <MemberCardSkeleton />}
-            />
-          }
-        >
-          <EventsListWidget
-            renderCard={(event) => <EventCard event={event} />}
-            className={styles.eventsProjectList}
-            useEventsQuery={useEventsListQuery({
-              ProjectIds: [projectId],
-              ...search,
-            })}
-            renderEmpty={(events) =>
-              events && events.length === 0 ? (
-                <div className={styles.emptyState}>
-                  <h2>No Events yet</h2>
-                </div>
-              ) : null
+        <div className={styles.eventsPaginationWrapper}>
+          <Suspense
+            fallback={
+              <ListWidgetSkeleton
+                className={styles.eventsProjectList}
+                renderSkeleton={() => <MemberCardSkeleton />}
+              />
             }
-          />
-        </Suspense>
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                {...fadeVariants}
+                transition={fadeDuration}
+                style={{ width: "100%" }}
+              >
+                <EventsListWidget
+                  renderCard={(event, index) => (
+                    <motion.div
+                      key={event.id}
+                      custom={index + 1}
+                      variants={staggeredCardVariants}
+                      initial="hidden"
+                      animate="visible"
+                      whileHover="hover"
+                      className={styles.eventCardMotion}
+                      onClick={() =>
+                        router.navigate({
+                          to: "/events/$id",
+                          params: { id: event.id },
+                        })
+                      }
+                    >
+                      <EventCard event={event} />
+                    </motion.div>
+                  )}
+                  className={styles.eventsProjectList}
+                  useEventsQuery={useEventsListQuery({
+                    ProjectIds: [projectId],
+                    ...search,
+                  })}
+                  renderEmpty={(events) =>
+                    events && events.length === 0 ? (
+                      <div className={styles.emptyState}>
+                        <h2>No Events yet</h2>
+                      </div>
+                    ) : null
+                  }
+                />
+              </motion.div>
+            </AnimatePresence>
+          </Suspense>
+          {events && events.pagination.totalPages > 1 && (
+            <div className={styles.paginationWrapper}>
+              <Pagination
+                total={events.pagination.totalPages}
+                page={search.Page}
+                onChange={handlePageChange}
+              />
+            </div>
+          )}
+        </div>
       </ErrorBoundary>
     </>
   );

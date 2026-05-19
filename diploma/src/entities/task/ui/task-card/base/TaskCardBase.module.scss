@@ -26,15 +26,24 @@
   grid-column: 1;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 
   h1 {
     @include font-base(30px, 700);
-    line-height: 100%;
+    line-height: 120%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   p {
     color: rgba(0, 0, 0, 0.6);
     @include font-base(20px, 300);
-    line-height: 110%;
+    line-height: 120%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 

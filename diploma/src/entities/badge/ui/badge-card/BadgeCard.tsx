@@ -18,9 +18,9 @@ export const BadgeCard = ({ badge }: BadgeCardProps) => {
     >
       <div
         className={styles.badgeInfoTier}
-        style={{ color: TierColors[badge.rank] }}
+        style={{ color: TierColors[badge.rank.name] }}
       >
-        <h1>{badge.rank}</h1>
+        <h1>{badge.rank.name}</h1>
       </div>
       {badge.isUnlocked === false && (
         <div className={styles.lockedOverlay}>
@@ -53,7 +53,9 @@ export const BadgeCardDetailed = ({
       </Wrapper>
       <div className={styles.badgeInfo}>
         <h1>{badge.title}</h1>
-        <p style={{ color: TierColors[badge.rank] }}>RANK {badge.rank}</p>
+        <p style={{ color: TierColors[badge.rank.name] }}>
+          RANK {badge.rank.name}
+        </p>
       </div>
     </div>
   );

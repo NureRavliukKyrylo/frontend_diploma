@@ -37,7 +37,7 @@ export const ParticipationLeaveButton = ({
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18 }}
           >
-            Leave
+            Leave {entityName}
           </motion.span>
         </BaseButtonWrapper>
       </motion.div>

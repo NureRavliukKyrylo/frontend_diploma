@@ -114,8 +114,9 @@ export const BaseCalendar = ({
       </div>
       <FullCalendar
         ref={calendarRef}
-        expandRows={true}
         height="auto"
+        expandRows={true}
+        dayMaxEvents={2}
         initialView={initialView}
         initialDate={initialDate}
         headerToolbar={false}

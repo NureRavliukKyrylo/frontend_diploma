@@ -32,4 +32,7 @@ export interface Event {
   joinPolicy: Policy;
   categories: Category[];
   skills: Skill[];
+  isJoined: boolean;
+  canSubmitFeedback: boolean;
+  hasPendingJoinRequest: boolean;
 }

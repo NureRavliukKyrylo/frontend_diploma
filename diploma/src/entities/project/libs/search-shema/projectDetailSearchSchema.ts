@@ -16,7 +16,7 @@ export const projectDetailDefaults = {
   },
   events: {
     tab: "events" as const,
-    PageSize: 9,
+    PageSize: 6,
     Page: 1,
   },
   tasks: {
@@ -46,7 +46,7 @@ export const feedbackSchema = z.object({
 
 export const eventsSchema = z.object({
   tab: z.literal("events"),
-  PageSize: z.number().default(9).catch(9),
+  PageSize: z.number().default(6).catch(6),
   Page: z.number().default(1).catch(1),
 });
 

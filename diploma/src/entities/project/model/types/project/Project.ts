@@ -27,4 +27,7 @@ export interface Project {
   locationInfo: { address: string };
   joinPolicy: Policy;
   rating: Rating;
+  isJoined: boolean;
+  canSubmitFeedback: boolean;
+  hasPendingJoinRequest: boolean;
 }

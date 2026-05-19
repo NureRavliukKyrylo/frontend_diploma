@@ -7,7 +7,10 @@ import { Calendar, Reccurence } from "@shared/assets/icons/info";
 import { eventMainTabs } from "../config/eventMainTabs";
 import { Arrow } from "@shared/assets/icons/actions";
 import { useEventPage } from "../model/useEventPage";
-import { ParticipationJoinButton } from "@features/participation";
+import {
+  ParticipationJoinButton,
+  ParticipationLeaveButton,
+} from "@features/participation";
 
 export const EventPage = () => {
   const { tab, event, policyConfig, forms, handleTabChange } = useEventPage();
@@ -101,14 +104,28 @@ export const EventPage = () => {
           <ReadMoreButton collapsedHeight={90}>
             <p>{event?.description}</p>
           </ReadMoreButton>
-          <div className={styles.joinEventBlockButton}>
-            {event?.id && (
-              <ParticipationJoinButton
-                entityId={event.id}
-                entityType={"event"}
-              />
-            )}
-          </div>
+          {event?.id && event.hasPendingJoinRequest && (
+            <p className={styles.pendingRequest}>
+              Your join request is pending approval
+            </p>
+          )}
+
+          {event?.id && !event.hasPendingJoinRequest && (
+            <div className={styles.joinEventBlockButton}>
+              {event.isJoined ? (
+                <ParticipationLeaveButton
+                  entityId={event.id}
+                  entityType="event"
+                  entityName="Event"
+                />
+              ) : (
+                <ParticipationJoinButton
+                  entityId={event.id}
+                  entityType="event"
+                />
+              )}
+            </div>
+          )}
         </div>
       </motion.div>
       <div className={styles.toggleWrapper}>

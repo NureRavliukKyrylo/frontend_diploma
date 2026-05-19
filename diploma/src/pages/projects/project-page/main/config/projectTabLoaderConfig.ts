@@ -53,7 +53,7 @@ export const projectDetailTabLoaderConfig: {
         }),
       );
       queryClient.prefetchQuery(
-        eventQuery.list({ ProjectIds: [projectId], PageSize: 9 }),
+        eventQuery.list({ ProjectIds: [projectId], PageSize: 6 }),
       );
       taskStatuses.forEach((status) =>
         queryClient.prefetchQuery(
@@ -84,7 +84,7 @@ export const projectDetailTabLoaderConfig: {
         }),
       );
       queryClient.prefetchQuery(
-        eventQuery.list({ ProjectIds: [projectId], PageSize: 9 }),
+        eventQuery.list({ ProjectIds: [projectId], PageSize: 6 }),
       );
     },
   },
@@ -106,7 +106,7 @@ export const projectDetailTabLoaderConfig: {
         }),
       );
       queryClient.prefetchQuery(
-        eventQuery.list({ ProjectIds: [projectId], PageSize: 9 }),
+        eventQuery.list({ ProjectIds: [projectId], PageSize: 6 }),
       );
     },
   },
@@ -163,7 +163,7 @@ export const projectDetailTabLoaderConfig: {
         }),
       );
       queryClient.prefetchQuery(
-        eventQuery.list({ ProjectIds: [projectId], PageSize: 9 }),
+        eventQuery.list({ ProjectIds: [projectId], PageSize: 6 }),
       );
     },
   },

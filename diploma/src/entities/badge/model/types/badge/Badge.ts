@@ -6,7 +6,7 @@ export interface Badge {
   title: string;
   iconUrl: string;
   description: string;
-  rank: Tier;
+  rank: { value: number; name: Tier };
   awardedCountTotal: number;
   firstAwardedAt: string;
   isUnlocked: boolean;

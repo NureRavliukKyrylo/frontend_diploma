@@ -42,7 +42,6 @@ export const MapBoundsTracker = ({
   });
 
   useEffect(() => {
-    // assign AFTER mount — map is guaranteed ready here
     if (readyRef) {
       readyRef.current = () => {
         if (isReady.current) return;
@@ -51,7 +50,6 @@ export const MapBoundsTracker = ({
       };
     }
 
-    // self-fire — no parent coordination needed
     if (fireOnMount) {
       isReady.current = true;
       setBounds(getBounds(map));
