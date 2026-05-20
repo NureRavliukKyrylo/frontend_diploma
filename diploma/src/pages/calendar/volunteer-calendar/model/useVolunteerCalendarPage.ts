@@ -10,7 +10,8 @@ import { parseInitialDate, serializeDate } from "../libs/dateSerializers";
 interface ActiveInfo {
   id: string;
   type: EventType;
-  cellEvents: Array<{ id: string; type: EventType }>;
+  title: string;
+  cellEvents: Array<{ id: string; type: EventType; title: string }>;
   anchor: { getBoundingClientRect: () => DOMRect };
 }
 
@@ -40,18 +41,37 @@ export const useVolunteerCalendarPage = (events: EventInput[]) => {
 
   const handleDateClick = useCallback(
     (date: Date, jsEvent: MouseEvent) => {
+      const normalize = (d: Date) =>
+        new Date(d.getFullYear(), d.getMonth(), d.getDate());
+
+      const clickedDay = normalize(date);
+
       const cellEvents = events
         .filter((e) => {
-          const eventDate = new Date(e.start as string);
-          return (
-            eventDate.getFullYear() === date.getFullYear() &&
-            eventDate.getMonth() === date.getMonth() &&
-            eventDate.getDate() === date.getDate()
-          );
+          if (e.startRecur) {
+            const from = normalize(new Date(e.startRecur as string));
+            if (clickedDay < from) return false;
+
+            if (e.endRecur) {
+              const to = normalize(new Date(e.endRecur as string));
+              if (clickedDay > to) return false;
+            }
+
+            if (!e.daysOfWeek || (e.daysOfWeek as number[]).length === 0) {
+              return true;
+            }
+
+            return (e.daysOfWeek as number[]).includes(clickedDay.getDay());
+          }
+
+          if (!e.start) return false;
+          const eventDate = normalize(new Date(e.start as string));
+          return eventDate.getTime() === clickedDay.getTime();
         })
         .map((e) => ({
           id: String(e.id),
           type: e.extendedProps?.type as EventType,
+          title: e.title ?? "",
         }));
 
       if (!cellEvents.length) return;
@@ -86,6 +106,7 @@ export const useVolunteerCalendarPage = (events: EventInput[]) => {
         id: first.id,
         type: first.type,
         cellEvents,
+        title: first.title,
         anchor,
       });
       prefetchNext(cellEvents, 0);
@@ -97,14 +118,24 @@ export const useVolunteerCalendarPage = (events: EventInput[]) => {
     if (!activeInfo) return;
     const prev = activeInfo.cellEvents[currentIndex - 1];
     if (!prev) return;
-    setActiveInfo({ ...activeInfo, id: prev.id, type: prev.type });
+    setActiveInfo({
+      ...activeInfo,
+      id: prev.id,
+      title: prev.title,
+      type: prev.type,
+    });
   }, [activeInfo, currentIndex]);
 
   const handleNext = useCallback(() => {
     if (!activeInfo) return;
     const next = activeInfo.cellEvents[currentIndex + 1];
     if (!next) return;
-    setActiveInfo({ ...activeInfo, id: next.id, type: next.type });
+    setActiveInfo({
+      ...activeInfo,
+      id: next.id,
+      title: next.title,
+      type: next.type,
+    });
     prefetchNext(activeInfo.cellEvents, currentIndex + 1);
   }, [activeInfo, currentIndex, prefetchNext]);
 

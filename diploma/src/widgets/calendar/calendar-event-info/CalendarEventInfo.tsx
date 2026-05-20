@@ -7,9 +7,11 @@ import styles from "./CalendarEventInfo.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { AnimatePresence, motion } from "framer-motion";
 import { BasePopover } from "@shared/ui/modals";
+import { CalendarDetailSkeleton } from "./CalendarDetailSkeleton";
 
 interface CalendarEventInfoProps {
   activityId: string;
+  title: string;
   type: EventType;
   onClose: () => void;
   onPrev?: () => void;
@@ -19,6 +21,7 @@ interface CalendarEventInfoProps {
 
 export const CalendarEventInfo = ({
   activityId,
+  title,
   type,
   onClose,
   onPrev,
@@ -36,7 +39,6 @@ export const CalendarEventInfo = ({
   });
 
   const isLoading = isEventLoading || isTaskLoading;
-  const title = event?.title ?? task?.title;
 
   return (
     <BasePopover anchor={anchor} onClose={onClose} placement="right">
@@ -99,7 +101,7 @@ export const CalendarEventInfo = ({
               className={styles.infoEvent}
             >
               {isLoading ? (
-                <div className={styles.skeleton} />
+                <CalendarDetailSkeleton />
               ) : type === "event" && event ? (
                 <>
                   <EventCalendarDetail event={event} />

@@ -118,3 +118,117 @@
     }
   }
 }
+
+.middleContent {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.baseInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subBaseInfoBlock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.skeletonIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.skeletonDivider {
+  width: 1px;
+  height: 29px;
+  background: rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.skeletonDateText {
+  width: 160px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+.skeletonText {
+  width: 220px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+.descriptionInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeletonHeading {
+  width: 160px;
+  height: 28px;
+  border-radius: 8px;
+  margin-bottom: 2px;
+}
+
+.skeletonDescLine {
+  width: 100%;
+  height: 20px;
+  border-radius: 6px;
+}
+
+.skeletonDescLineShort {
+  width: 55%;
+  height: 20px;
+  border-radius: 6px;
+}
+
+.participationsInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.avatarsGroup {
+  display: flex;
+  align-items: center;
+}
+
+.skeletonAvatar {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  margin-left: -10px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.bottomContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.skeletonQuestion {
+  width: 70%;
+  height: 28px;
+  border-radius: 8px;
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+}
+
+.skeletonButton {
+  min-width: 140px;
+  height: 52px;
+  border-radius: 30px;
+}

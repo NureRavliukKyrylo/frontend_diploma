@@ -1,7 +1,7 @@
 import { Calendar, TimeIcon } from "@shared/assets/icons/info";
 import { AvatarGroup } from "@shared/ui";
 import styles from "./TaskCalendarDetail.module.scss";
-import { formatDateToText } from "@shared/libs/date";
+import { formatDateToText, formatHourTime } from "@shared/libs/date";
 import type { Task } from "@entities/task/model";
 import { memberPreviewToAvatar } from "@entities/user";
 
@@ -24,12 +24,12 @@ export const TaskCalendarDetail = ({ task }: TaskCalendarDetailProps) => (
           <TimeIcon className={styles.timeIcon} />
           <div className={styles.divider} />
           <span className={styles.info}>
-            {formatDateToText(task.startAt) ?? "All time"}
+            {formatHourTime(task.startAt) ?? "All time"}
           </span>
         </div>
       </div>
       <div className={styles.descriptionInfo}>
-        <h1>About this event</h1>
+        <h1>About this task</h1>
         <p>{task.description}</p>
       </div>
       <div className={styles.participationsInfo}>

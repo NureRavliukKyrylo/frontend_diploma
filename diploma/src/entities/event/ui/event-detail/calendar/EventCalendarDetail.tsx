@@ -2,7 +2,7 @@ import { Calendar, MapIcon, TimeIcon } from "@shared/assets/icons/info";
 import { AvatarGroup } from "@shared/ui";
 import styles from "./EventCalendarDetail.module.scss";
 import type { Event } from "@entities/event/model";
-import { formatDateToText } from "@shared/libs/date";
+import { formatDateToText, formatHourTime } from "@shared/libs/date";
 import { memberPreviewToAvatar } from "@entities/user";
 
 interface EventCalendarDetailProps {
@@ -21,7 +21,7 @@ export const EventCalendarDetail = ({ event }: EventCalendarDetailProps) => (
           </span>
         </div>
         <div className={styles.subBaseInfoBlock}>
-          <MapIcon />
+          <MapIcon className={styles.mapIcon} />
           <div className={styles.divider} />
           <span className={styles.info}>{event.locationInfo.address}</span>
         </div>
@@ -29,7 +29,7 @@ export const EventCalendarDetail = ({ event }: EventCalendarDetailProps) => (
           <TimeIcon className={styles.timeIcon} />
           <div className={styles.divider} />
           <span className={styles.info}>
-            {formatDateToText(event.startAt) ?? "All time"}
+            {formatHourTime(event.startAt) ?? "All time"}
           </span>
         </div>
       </div>

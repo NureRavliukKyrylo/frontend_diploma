@@ -7,63 +7,35 @@ import { useAvailabilityContextMenu } from "../model/useAvailabiltyContextMenu";
 import { AvailabilityContextMenu } from "./AvailabilityContextMenu";
 import { useState } from "react";
 import { AvailabilityFormPopover } from "./AvailabilityFormPopover";
-import { isSameDay } from "@shared/libs/date";
 import { useSearch } from "@tanstack/react-router";
 import { calendarDefaults } from "../libs/calendarSearchSchema";
-import { useCalendarMyActivities } from "@entities/user/calendar";
-
-const SLOTS = [
-  { day: new Date(2026, 4, 5), start: "09:00:00", end: "12:00:00" },
-  { day: new Date(2026, 4, 7), start: "14:00:00", end: "17:00:00" },
-  { day: new Date(2026, 4, 12), start: "10:00:00", end: "13:00:00" },
-];
+import {
+  calendarQuery,
+  slotMatchesDate,
+  useCalendarMyActivities,
+  type AvailabilitySlot,
+} from "@entities/user/calendar";
+import { getCalendarRange } from "../libs/getCalendarRange";
+import { useQuery } from "@tanstack/react-query";
+import { DeleteAvailabilityModal } from "@features/calendar";
 
 interface FormState {
   anchor: Element | { getBoundingClientRect: () => DOMRect };
   date: Date;
-  start?: string;
-  end?: string;
+  availability?: AvailabilitySlot;
 }
-
-export const getCalendarRange = (
-  tab: string,
-  date: Date,
-): { From: Date; To: Date } => {
-  switch (tab) {
-    case "dayGridMonth":
-      return {
-        From: new Date(date.getFullYear(), date.getMonth(), 1),
-        To: new Date(date.getFullYear(), date.getMonth() + 1, 0),
-      };
-    case "timeGridWeek": {
-      const day = date.getDay();
-      const monday = new Date(date);
-      monday.setDate(date.getDate() - ((day + 6) % 7));
-      const sunday = new Date(monday);
-      sunday.setDate(monday.getDate() + 6);
-      return { From: monday, To: sunday };
-    }
-    case "timeGridDay":
-      return {
-        From: date,
-        To: date,
-      };
-    default:
-      return {
-        From: new Date(date.getFullYear(), date.getMonth(), 1),
-        To: new Date(date.getFullYear(), date.getMonth() + 1, 0),
-      };
-  }
-};
 
 export const VolunteerCalendar = () => {
   const [formState, setFormState] = useState<FormState | null>(null);
+  const [deleteSlot, setDeleteSlot] = useState<AvailabilitySlot | null>(null);
   const search = useSearch({ from: "/_masterLayout/calendar/" });
   const { From, To } = getCalendarRange(
     search.tab ?? calendarDefaults.tab,
     search.date ? new Date(search.date) : new Date(),
   );
   const events = useCalendarMyActivities({ From, To });
+  const { data } = useQuery(calendarQuery.availabilitySlots());
+  const slots: AvailabilitySlot[] = data ?? [];
 
   const {
     initialView,
@@ -84,7 +56,7 @@ export const VolunteerCalendar = () => {
     menuItems,
     handleClose: handleCloseMenu,
   } = useAvailabilityContextMenu({
-    slots: SLOTS,
+    slots,
     onAdd: (date) => {
       setFormState({ anchor: menuState!.anchor, date });
       handleCloseMenu();
@@ -93,12 +65,11 @@ export const VolunteerCalendar = () => {
       setFormState({
         anchor: menuState!.anchor,
         date,
-        start: slot.start,
-        end: slot.end,
+        availability: slot,
       });
       handleCloseMenu();
     },
-    onDelete: (slot) => console.log("delete", slot),
+    onDelete: (slot) => setDeleteSlot(slot),
   });
   return (
     <div className={styles.volunteerCalendarWrapper} ref={calendarRef}>
@@ -119,7 +90,7 @@ export const VolunteerCalendar = () => {
         )}
         events={events}
         dayCellClassNames={({ date }) =>
-          SLOTS.some((s) => isSameDay(s.day, date))
+          slots.some((s) => slotMatchesDate(s, date))
             ? ["fc-day--has-availability"]
             : []
         }
@@ -137,17 +108,24 @@ export const VolunteerCalendar = () => {
           <AvailabilityFormPopover
             anchor={formState.anchor}
             date={formState.date}
-            start={formState.start}
-            end={formState.end}
+            availability={formState.availability}
             onClose={() => setFormState(null)}
           />
         )}
       </AnimatePresence>
+      {deleteSlot && (
+        <DeleteAvailabilityModal
+          slot={deleteSlot}
+          isOpen={!!deleteSlot}
+          onClose={() => setDeleteSlot(null)}
+        />
+      )}
       <AnimatePresence mode="wait">
         {activeInfo && (
           <>
             <CalendarEventInfo
               activityId={activeInfo.id}
+              title={activeInfo.title}
               type={activeInfo.type}
               onClose={handleClose}
               anchor={activeInfo.anchor}

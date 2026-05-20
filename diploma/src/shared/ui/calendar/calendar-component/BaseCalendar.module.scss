@@ -238,6 +238,53 @@
     background: rgba(140, 0, 0, 0.2);
   }
 
+  &:not([data-view="timeGridWeek"]):not([data-view="timeGridDay"]) {
+    :global(.fc-day--has-availability .fc-daygrid-day-frame) {
+      box-shadow:
+        2px 2px 10px rgba(0, 0, 0, 0.25),
+        inset 2px 0 0 #16a34a;
+      &:hover {
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    :global(.fc-day-today.fc-day--has-availability .fc-daygrid-day-frame) {
+      box-shadow:
+        0px 2px 10px rgba(0, 0, 0, 0.25),
+        inset 2px 0 0 #16a34a;
+      &:hover {
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+
+  :global(.fc-popover) {
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    border: none !important;
+    overflow: hidden;
+  }
+
+  :global(.fc-popover-header) {
+    background: #f4f4f4 !important;
+    padding: 8px 12px !important;
+    @include font-base(18px !important, 700 !important);
+    color: #2a2a2a !important;
+  }
+
+  :global(.fc-popover-body) {
+    background: #ffffff !important;
+    padding: 6px 8px !important;
+  }
+
+  :global(.fc-daygrid-more-link) {
+    @include font-base(12px, 800);
+    color: #2a2a2a;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
   :global(.fc-daygrid-day-frame) {
     outline: none;
     background: #ffffff;
@@ -346,6 +393,17 @@
       text-shadow: 0px 0px 10px rgba(140, 0, 0, 0.5);
       font-weight: 900;
     }
+    :global(.fc-timegrid-body .fc-timegrid-col.fc-day--has-availability) {
+      box-shadow:
+        inset 2px 0 0 #16a34a,
+        -1px 0 0 #c8c8c8;
+    }
+
+    :global(.fc-col-header-cell.fc-day--has-availability) {
+      box-shadow:
+        inset 2px 0 0 #16a34a,
+        -1px 0 0 #c8c8c8;
+    }
   }
 
   &[data-view="timeGridDay"] {
@@ -356,6 +414,13 @@
       color: #8c0000;
       text-shadow: 0px 0px 10px rgba(140, 0, 0, 0.5);
       @include font-base(clamp(9px, 1.1vw, 25px), 900);
+    }
+    :global(.fc-timegrid-body .fc-timegrid-col.fc-day--has-availability) {
+      box-shadow: inset 2px 0 0 #16a34a;
+    }
+
+    :global(.fc-col-header-cell.fc-day--has-availability) {
+      box-shadow: inset 2px 0 0 #16a34a;
     }
   }
 

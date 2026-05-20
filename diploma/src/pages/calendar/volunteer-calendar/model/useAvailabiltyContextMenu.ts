@@ -1,11 +1,9 @@
+import {
+  slotMatchesDate,
+  type AvailabilitySlot,
+} from "@entities/user/calendar";
 import { isPast } from "@shared/libs/date";
 import { useState, useCallback, useEffect, useRef, useMemo } from "react";
-
-export interface AvailabilitySlot {
-  day: Date;
-  start: string;
-  end: string;
-}
 
 type MenuAnchor = Element | { getBoundingClientRect: () => DOMRect };
 
@@ -31,11 +29,6 @@ export function useAvailabilityContextMenu({
   const [menuState, setMenuState] = useState<ContextMenuState | null>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
 
-  const isSameDay = (a: Date, b: Date) =>
-    a.getFullYear() === b.getFullYear() &&
-    a.getMonth() === b.getMonth() &&
-    a.getDate() === b.getDate();
-
   const handleClose = useCallback(() => setMenuState(null), []);
 
   useEffect(() => {
@@ -46,8 +39,7 @@ export function useAvailabilityContextMenu({
       e.preventDefault();
 
       const makeAnchor = (): MenuAnchor => {
-        const x = e.clientX;
-        const y = e.clientY;
+        const { clientX: x, clientY: y } = e;
         return {
           getBoundingClientRect: () =>
             ({
@@ -64,47 +56,33 @@ export function useAvailabilityContextMenu({
         };
       };
 
+      const resolveDate = (cell: Element): Date | null => {
+        const dateStr = cell.getAttribute("data-date");
+        if (!dateStr) return null;
+        const [yr, mo, dy] = dateStr.split("-").map(Number);
+        return new Date(yr, mo - 1, dy);
+      };
+
       const directCell = (e.target as Element).closest("[data-date]");
       if (directCell) {
-        const dateStr = directCell.getAttribute("data-date")!;
-        const [y, m, d] = dateStr.split("-").map(Number);
-        const date = new Date(y, m - 1, d);
-        if (isPast(date)) return;
-        const existingSlot = slots.find((s) => isSameDay(s.day, date)) ?? null;
+        const date = resolveDate(directCell);
+        if (!date || isPast(date)) return;
+        const existingSlot =
+          slots.find((s) => slotMatchesDate(s, date)) ?? null;
         setMenuState({ anchor: makeAnchor(), date, existingSlot });
         return;
       }
 
       const cols = el.querySelectorAll<Element>(".fc-timegrid-col[data-date]");
-
       for (const col of cols) {
         const { left, right } = col.getBoundingClientRect();
         if (e.clientX < left || e.clientX > right) continue;
 
-        const dateStr = col.getAttribute("data-date")!;
-        const [y, m, d] = dateStr.split("-").map(Number);
-        const date = new Date(y, m - 1, d);
-        if (isPast(date)) return;
-        const existingSlot = slots.find((s) => isSameDay(s.day, date)) ?? null;
-
-        const clickX = e.clientX;
-        const clickY = e.clientY;
-        const anchor: MenuAnchor = {
-          getBoundingClientRect: () =>
-            ({
-              x: clickX,
-              y: clickY,
-              top: clickY,
-              bottom: clickY,
-              left: clickX,
-              right: clickX,
-              width: 0,
-              height: 0,
-              toJSON: () => {},
-            }) as DOMRect,
-        };
-
-        setMenuState({ anchor, date, existingSlot });
+        const date = resolveDate(col);
+        if (!date || isPast(date)) return;
+        const existingSlot =
+          slots.find((s) => slotMatchesDate(s, date)) ?? null;
+        setMenuState({ anchor: makeAnchor(), date, existingSlot });
         return;
       }
     };
@@ -115,7 +93,6 @@ export function useAvailabilityContextMenu({
 
   const menuItems = useMemo(() => {
     if (!menuState) return [];
-
     if (menuState.existingSlot) {
       return [
         {
@@ -138,7 +115,6 @@ export function useAvailabilityContextMenu({
         },
       ];
     }
-
     return [
       {
         key: "assign" as const,
