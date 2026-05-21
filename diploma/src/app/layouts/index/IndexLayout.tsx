@@ -10,7 +10,9 @@ interface IndexLayoutProps {
 export function IndexLayout({ children, showFooter = true }: IndexLayoutProps) {
   return (
     <div className={styles.pageHeaderWrapper}>
+      <Header />
       <main className={styles.layoutMain}>{children}</main>
+      {showFooter && <Footer />}
     </div>
   );
 }
