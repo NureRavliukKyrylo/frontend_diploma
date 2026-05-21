@@ -24,6 +24,19 @@
     background 0.2s ease,
     border 0.2s ease,
     color 0.2s ease;
+
+  @include respond-to(laptop) {
+    font-size: 14px;
+    padding: 7px;
+  }
+  @include respond-to(tablet) {
+    font-size: 13px;
+    padding: 6px 7px;
+  }
+  @include respond-to(mobile) {
+    font-size: 12px;
+    padding: 5px 6px;
+  }
 }
 
 .selected {

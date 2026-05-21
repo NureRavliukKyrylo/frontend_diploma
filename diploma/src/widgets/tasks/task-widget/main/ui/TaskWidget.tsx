@@ -157,7 +157,7 @@ export const TaskWidget = ({
                 <ParticipationLeaveButton
                   entityId={task.id}
                   entityType="task"
-                  entityName="Task"
+                  entityName={task.title}
                 />
               ) : (
                 <ParticipationJoinButton entityId={task.id} entityType="task" />

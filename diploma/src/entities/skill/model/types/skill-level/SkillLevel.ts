@@ -1,8 +1,8 @@
 export const SkillLevelType = {
-  Beginner: 0,
-  Intermediate: 1,
-  Advanced: 2,
-  Expert: 3,
+  beginner: 0,
+  intermediate: 1,
+  advanced: 2,
+  expert: 3,
 };
 
 export type SkillLevel = (typeof SkillLevelType)[keyof typeof SkillLevelType];

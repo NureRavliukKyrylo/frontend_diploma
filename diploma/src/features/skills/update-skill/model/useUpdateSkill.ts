@@ -5,13 +5,17 @@ import { updateSkill, type SkillUpdateDTO } from "../api/updateSkillApi";
 import { useFormik } from "formik";
 import { queryClient } from "@shared/api";
 import { profileQuery } from "@entities/user/profile";
-import { skillKeys, type SkillLevel } from "@entities/skill";
+import { skillKeys, SkillLevelType } from "@entities/skill";
 
 export const useUpdateSkill = (
   skillId: string,
-  level: SkillLevel,
+  level: string,
   onSuccess?: () => void,
 ) => {
+  const levelValue =
+    SkillLevelType[level as keyof typeof SkillLevelType] ??
+    SkillLevelType.beginner;
+
   const mutation = useMutation({
     mutationFn: (data: SkillUpdateDTO) => updateSkill(data),
     onSuccess: () => {
@@ -36,7 +40,7 @@ export const useUpdateSkill = (
   });
 
   const formik = useFormik({
-    initialValues: { level, skillId },
+    initialValues: { level: levelValue, skillId },
     onSubmit: (values: SkillUpdateDTO) => mutation.mutate(values),
   });
 

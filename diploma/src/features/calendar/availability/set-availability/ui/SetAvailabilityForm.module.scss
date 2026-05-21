@@ -60,7 +60,7 @@
         flex-direction: column;
         gap: 15px;
         h1 {
-          @include font-base(20px, 800);
+          @include font-base(18px, 800);
           line-height: 120%;
           text-transform: uppercase;
         }
@@ -74,7 +74,7 @@
           flex-direction: column;
           gap: 15px;
           h1 {
-            @include font-base(20px, 800);
+            @include font-base(18px, 800);
             line-height: 120%;
             text-transform: uppercase;
           }

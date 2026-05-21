@@ -41,3 +41,5 @@ export { useMyEventsListQuery } from "./model/hooks/useMyEventsListQuery";
 export { EventCalendarDetail } from "./ui/event-detail/calendar/EventCalendarDetail";
 export { eventsNoCategoriesSchema } from "./libs/search-schema/eventsSearchSchema";
 export { type EventSearchParamsNoCategories } from "./libs/search-schema/eventsSearchSchema";
+export { EventCardSkeleton } from "./ui/event-card/list-item/EventCardSkeleton";
+export { EventControlCardSkeleton } from "./ui/event-card/control-card/EventControlCardSkeleton";

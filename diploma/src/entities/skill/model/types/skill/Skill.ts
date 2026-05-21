@@ -6,4 +6,5 @@ export interface Skill {
   iconUrl: string;
   description: string;
   categories: Pick<Category, "id" | "name">[];
+  level: string;
 }

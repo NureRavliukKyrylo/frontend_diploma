@@ -1,8 +1,4 @@
-import {
-  SkillLevelType,
-  skillsQuery,
-  type SkillProfile,
-} from "@entities/skill";
+import { skillsQuery, type SkillProfile } from "@entities/skill";
 import type { SkillsProfileSearchParams } from "@entities/user";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
@@ -39,12 +35,6 @@ export const useProfileSkillsTab = (search: SkillsProfileSearchParams) => {
     },
   ];
 
-  const getSkillLabel = (skill: SkillProfile) =>
-    Object.keys(SkillLevelType).find(
-      (key) =>
-        SkillLevelType[key as keyof typeof SkillLevelType] === skill.level,
-    );
-
   return {
     search,
     data,
@@ -52,6 +42,5 @@ export const useProfileSkillsTab = (search: SkillsProfileSearchParams) => {
     selectedSkill,
     getMenuItems,
     handleCloseModal,
-    getSkillLabel,
   };
 };

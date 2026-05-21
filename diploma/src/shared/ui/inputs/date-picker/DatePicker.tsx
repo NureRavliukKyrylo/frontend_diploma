@@ -57,7 +57,7 @@ export const DatePickerInput = ({
                   ? "!bg-white data-[hover=true]:!bg-white data-[focus=true]:!bg-white data-[focus-within=true]:!bg-white"
                   : "!bg-[#f9f9f9] data-[hover=true]:!bg-[#f9f9f9] data-[focus=true]:!bg-[#f9f9f9]"
             } ${externalClassNames?.inputWrapper ?? ""}`,
-            input: `${isInvalid ? "!text-[#DC2626]" : "text-gray-800"} text-[18px] font-[500] ${externalClassNames?.input ?? ""}`,
+            input: `${isInvalid ? "!text-[#DC2626]" : "text-gray-800"} text-[14px] sm:text-[15px] md:text-[16px] lp:text-[18px] font-[500] ${externalClassNames?.input ?? ""}`,
             segment: `${isInvalid ? "!text-[#DC2626]" : ""} ${externalClassNames?.segment ?? ""}`,
             selectorIcon: `${isInvalid ? "text-[#DC2626]" : "text-gray-600"} ${externalClassNames?.selectorIcon ?? ""}`,
             errorMessage: `text-[#DC2626] ${externalClassNames?.errorMessage ?? ""}`,

@@ -4,6 +4,15 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  @include respond-to(laptop) {
+    gap: 14px;
+  }
+  @include respond-to(tablet) {
+    gap: 12px;
+  }
+  @include respond-to(mobile) {
+    gap: 10px;
+  }
   .valueRating {
     display: flex;
     align-items: center;
@@ -17,9 +26,30 @@
       width: 25px;
       height: 25px;
       fill: black;
+      @include respond-to(laptop) {
+        width: 22px;
+        height: 22px;
+      }
+      @include respond-to(tablet) {
+        width: 20px;
+        height: 20px;
+      }
+      @include respond-to(mobile) {
+        width: 18px;
+        height: 18px;
+      }
     }
     .starReviewValue {
       @include font-base(20px, 900);
+      @include respond-to(laptop) {
+        font-size: 18px;
+      }
+      @include respond-to(tablet) {
+        font-size: 16px;
+      }
+      @include respond-to(mobile) {
+        font-size: 16px;
+      }
     }
   }
 }

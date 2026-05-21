@@ -1,15 +1,25 @@
 @use "@shared/assets/styles" as *;
 
 .dropDownLabel {
-  @include font-base(clamp(12px, 45cqh, 30px), 600);
+  @include font-base(20px, 600);
   color: rgba(0, 0, 0, 0.6);
+
+  @include respond-to(laptop) {
+    font-size: 18px;
+  }
+  @include respond-to(tablet) {
+    font-size: 15px;
+  }
+  @include respond-to(mobile) {
+    font-size: 14px;
+  }
 }
 
 .wrapperItem {
   &:hover {
     background: rgba(0, 0, 0, 0.05);
     color: rgba(0, 0, 0, 0.9);
-    border-radius: 0px;
+    border-radius: 0;
   }
   &:first-child {
     padding-top: 5px;
@@ -19,24 +29,43 @@
   }
 
   .item {
-    padding: clamp(2px, 0.5vh, 5px) clamp(15px, 3vh, 30px);
+    padding: 5px 30px;
     cursor: pointer;
     border-radius: 8px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     @include font-base(18px, 500);
     color: rgba(0, 0, 0, 0.7);
-
     transition:
       background 0.15s ease,
       color 0.15s ease;
 
+    @include respond-to(laptop) {
+      font-size: 16px;
+      padding: 4px 24px;
+    }
+    @include respond-to(tablet) {
+      font-size: 14px;
+      padding: 3px 20px;
+    }
+    @include respond-to(mobile) {
+      font-size: 13px;
+      padding: 3px 16px;
+    }
+
     img {
-      width: clamp(15px, 2.5vh, 19px);
-      height: clamp(12px, 2vh, 20px);
+      width: 19px;
+      height: 20px;
+
+      @include respond-to(tablet) {
+        width: 16px;
+        height: 17px;
+      }
+      @include respond-to(mobile) {
+        width: 15px;
+        height: 15px;
+      }
     }
 
     &.itemActive {

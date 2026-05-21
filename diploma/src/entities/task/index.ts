@@ -29,3 +29,4 @@ export { taskDrawerDefaults } from "./libs/search-schema/taskDrawerSchema";
 export { useMyTasksListQuery } from "./model/hooks/useMyTasksListQuery";
 export { TaskCalendarDetail } from "./ui/task-detail/task-calendar-detail/TaskCalendarDetail";
 export { type TaskSearchParamsNoCategories } from "./libs/search-schema/tasksSearchSchema";
+export { TaskControlCardSkeleton } from "./ui/task-card/control/TaskControlCardSkeleton";

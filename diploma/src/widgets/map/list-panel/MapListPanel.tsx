@@ -78,7 +78,7 @@ export const MapListPanel = ({
                 >
                   <ListProjectCard
                     key={`proj-${project.id}`}
-                    name={project.title}
+                    project={project}
                   />
                 </motion.div>
               )}

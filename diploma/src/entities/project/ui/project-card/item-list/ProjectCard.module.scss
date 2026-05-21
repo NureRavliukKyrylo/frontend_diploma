@@ -10,25 +10,68 @@
   grid-row: span 6;
   gap: 10px;
   height: 100%;
+
+  @include respond-to(desktop) {
+    padding: 18px;
+    gap: 10px;
+  }
+
+  @include respond-to(laptop) {
+    padding: 16px;
+    gap: 9px;
+  }
+
+  @include respond-to(tablet) {
+    padding: 15px;
+    gap: 8px;
+  }
+
+  @include respond-to(mobile) {
+    padding: 14px;
+    gap: 8px;
+  }
 }
+
 .footerCard {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   .avatarsGroup {
     display: flex;
     align-items: center;
+
     .avatarVolunteer {
       width: 45px;
       height: 45px;
       border-radius: 50%;
       border: 2px solid #fff;
       margin-left: -10px;
-
       &:first-child {
         margin-left: 0;
       }
+
+      @include respond-to(desktop) {
+        width: 42px;
+        height: 42px;
+      }
+
+      @include respond-to(laptop) {
+        width: 38px;
+        height: 38px;
+      }
+
+      @include respond-to(tablet) {
+        width: 35px;
+        height: 35px;
+      }
+
+      @include respond-to(mobile) {
+        width: 32px;
+        height: 32px;
+      }
     }
+
     .remainingAvatarItem {
       width: 45px;
       height: 45px;
@@ -44,15 +87,69 @@
       aspect-ratio: 1 / 1;
       background-color: white;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+
+      @include respond-to(desktop) {
+        width: 42px;
+        height: 42px;
+      }
+
+      @include respond-to(laptop) {
+        width: 38px;
+        height: 38px;
+      }
+
+      @include respond-to(tablet) {
+        width: 35px;
+        height: 35px;
+      }
+
+      @include respond-to(mobile) {
+        width: 32px;
+        height: 32px;
+      }
     }
   }
+
   h1 {
     color: rgba(0, 0, 0, 0.4);
     @include font-base(18px, 400);
+
+    @include respond-to(desktop) {
+      font-size: 17px;
+    }
+
+    @include respond-to(laptop) {
+      font-size: 16px;
+    }
+
+    @include respond-to(tablet) {
+      font-size: 15px;
+    }
+
+    @include respond-to(mobile) {
+      font-size: 14px;
+    }
   }
+
   .noMembers {
     @include font-base(18px, 600);
     line-height: 120%;
     color: #1a1a2e;
+
+    @include respond-to(desktop) {
+      font-size: 16px;
+    }
+
+    @include respond-to(laptop) {
+      font-size: 15px;
+    }
+
+    @include respond-to(tablet) {
+      font-size: 14px;
+    }
+
+    @include respond-to(mobile) {
+      font-size: 13px;
+    }
   }
 }

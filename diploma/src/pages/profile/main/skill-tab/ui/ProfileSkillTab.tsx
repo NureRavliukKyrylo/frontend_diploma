@@ -22,22 +22,16 @@ import {
   staggeredCardVariantsNoHover,
 } from "@shared/assets/animations";
 import type { SkillsProfileSearchParams } from "@entities/user";
+import { capitalize } from "@shared/libs/text";
 
 interface ProfileSkillsTabProps {
   search: SkillsProfileSearchParams;
 }
 
 export const ProfileSkillsTab = ({ search }: ProfileSkillsTabProps) => {
-  const {
-    data,
-    modalType,
-    selectedSkill,
-    getMenuItems,
-    handleCloseModal,
-    getSkillLabel,
-  } = useProfileSkillsTab(search);
+  const { data, modalType, selectedSkill, getMenuItems, handleCloseModal } =
+    useProfileSkillsTab(search);
 
-  console.log("skills", search);
   return (
     <>
       <ProfileSkillsWidget
@@ -91,7 +85,7 @@ export const ProfileSkillsTab = ({ search }: ProfileSkillsTabProps) => {
                           className={styles.profileSkillControlBlock}
                           bottomSlot={() => (
                             <div className={styles.skillLevel}>
-                              Level: {getSkillLabel(skill)}
+                              Level: {capitalize(skill.level)}
                             </div>
                           )}
                         />

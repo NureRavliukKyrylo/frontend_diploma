@@ -3,28 +3,53 @@
 .deadlineCalendarBlock {
   display: flex;
   justify-content: space-between;
+  gap: 12px;
+
   > :first-child {
     width: 48%;
   }
-
   > :last-child {
     width: 48%;
   }
-  .startDate {
-    h2 {
-      color: rgba(0, 0, 0, 0.5);
-      @include font-base(15px, 500);
+
+  @include respond-to(laptop) {
+    flex-direction: column;
+    gap: 10px;
+    > :first-child,
+    > :last-child {
+      width: 100%;
     }
-    .dateStartInput {
-      border-radius: 10px;
+  }
+  @include respond-to(tablet) {
+    gap: 8px;
+  }
+  @include respond-to(mobile) {
+    flex-direction: column;
+    gap: 10px;
+    > :first-child,
+    > :last-child {
+      width: 100%;
     }
   }
 
+  .startDate,
   .dueDate {
     h2 {
       color: rgba(0, 0, 0, 0.5);
       @include font-base(15px, 500);
+
+      @include respond-to(laptop) {
+        font-size: 14px;
+      }
+      @include respond-to(tablet) {
+        font-size: 13px;
+      }
+      @include respond-to(mobile) {
+        font-size: 13px;
+      }
     }
+
+    .dateStartInput,
     .dateDueInput {
       border-radius: 10px;
     }

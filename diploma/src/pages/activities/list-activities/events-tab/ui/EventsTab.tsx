@@ -1,5 +1,6 @@
 import {
   EventCard,
+  EventCardSkeleton,
   sortingEventItems,
   useEventsListQuery,
   type EventSearchParams,
@@ -20,13 +21,13 @@ import {
 } from "@shared/assets/animations";
 import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
-import { ProjectCardSkeleton } from "@entities/project";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
 
 interface EventsTabProps {
   search: EventSearchParams;
 }
+
 export const EventsTab = ({ search }: EventsTabProps) => {
   const {
     isFilterOpen,
@@ -83,7 +84,7 @@ export const EventsTab = ({ search }: EventsTabProps) => {
               <Suspense
                 fallback={
                   <ListWidgetSkeleton
-                    renderSkeleton={ProjectCardSkeleton}
+                    renderSkeleton={EventCardSkeleton}
                     className={styles.eventsListWrapper}
                   />
                 }

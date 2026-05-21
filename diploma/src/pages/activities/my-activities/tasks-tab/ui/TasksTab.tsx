@@ -7,6 +7,7 @@ import { useTasksTab } from "../model/useTasksTab";
 import { MyTasksFilterWidget, TasksListWidget } from "@widgets/tasks";
 import {
   sortingTaskItems,
+  TaskControlCardSkeleton,
   useMyTasksListQuery,
   type MyTasksSearchParams,
 } from "@entities/task";
@@ -81,7 +82,12 @@ export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
             <Suspense
               fallback={
                 <ListWidgetSkeleton
-                  renderSkeleton={() => "LOADING"}
+                  renderSkeleton={() => (
+                    <div className={styles.motionCard}>
+                      <TaskControlCardSkeleton />
+                    </div>
+                  )}
+                  items={5}
                   className={styles.myTasksListWrapper}
                 />
               }

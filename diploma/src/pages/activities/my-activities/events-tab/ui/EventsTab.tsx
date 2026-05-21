@@ -6,6 +6,7 @@ import { Pagination } from "@shared/ui";
 import { useEventsTab } from "../model/useEventsTab";
 import {
   EventControlCard,
+  EventControlCardSkeleton,
   sortingEventItems,
   useMyEventsListQuery,
   type MyEventsSearchParams,
@@ -80,7 +81,11 @@ export const EventsTab = ({ search }: { search: MyEventsSearchParams }) => {
             <Suspense
               fallback={
                 <ListWidgetSkeleton
-                  renderSkeleton={() => "LOADING"}
+                  renderSkeleton={() => (
+                    <div className={styles.motionCard}>
+                      <EventControlCardSkeleton />
+                    </div>
+                  )}
                   className={styles.myEventsListWrapper}
                 />
               }

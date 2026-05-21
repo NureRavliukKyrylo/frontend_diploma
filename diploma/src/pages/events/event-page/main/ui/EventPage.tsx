@@ -116,7 +116,7 @@ export const EventPage = () => {
                 <ParticipationLeaveButton
                   entityId={event.id}
                   entityType="event"
-                  entityName="Event"
+                  entityName={event.title}
                 />
               ) : (
                 <ParticipationJoinButton
