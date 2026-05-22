@@ -26,38 +26,32 @@ export const MyActivitiesHeader = ({
         src={user?.profile?.avatarUrl ?? DefaultAvatar}
         className={styles.myActivitiesAvatar}
       />
-      <div className={styles.manageBlock}>
-        <div className={styles.myActivitiesToggle}>
-          <Toggle
-            tabs={myActivitiesTabs}
-            activeValue={activeTab}
-            onChange={onTabChange}
-            buttonClassName={styles.toggleMyActivitiesButton}
-            activeButtonClassName={styles.toggleMyActivitiesButtonActive}
-            className={styles.toggleMyActivities}
-            pillClassName={styles.toggleMyActivitiesPill}
-          />
+      <div className={styles.myActivitiesToggle}>
+        <Toggle
+          tabs={myActivitiesTabs}
+          activeValue={activeTab}
+          onChange={onTabChange}
+          buttonClassName={styles.toggleMyActivitiesButton}
+          activeButtonClassName={styles.toggleMyActivitiesButtonActive}
+          className={styles.toggleMyActivities}
+          pillClassName={styles.toggleMyActivitiesPill}
+          innerWrapperClassName={styles.innerToggleBLock}
+        />
+      </div>
+      <div className={styles.baseUserInfo}>
+        <h1>{getFullName(user.firstName, user.lastName)}</h1>
+        <h2>{user?.email}</h2>
+      </div>
+      <div
+        className={styles.statisticsInnerBlock}
+        style={{ backgroundImage: `url(${Layout})` }}
+      >
+        <div className={styles.usersActivitiesTitle}>
+          {user?.firstName}'s Activities
         </div>
-        <div className={styles.usersDetailedInfo}>
-          <div className={styles.baseUserInfo}>
-            <h1>{getFullName(user.firstName, user.lastName)}</h1>
-            <h2>{user?.email}</h2>
-          </div>
-          <div
-            className={styles.statisticsInnerBlock}
-            style={{ backgroundImage: `url(${Layout})` }}
-          >
-            <div className={styles.usersActivitiesTitle}>
-              {user?.firstName}'s Activities
-            </div>
-            <LinkButtonWrapper
-              className={styles.backToProfileButton}
-              to="/profile"
-            >
-              BACK <Arrow className={styles.backArrow} />
-            </LinkButtonWrapper>
-          </div>
-        </div>
+        <LinkButtonWrapper className={styles.backToProfileButton} to="/profile">
+          BACK <Arrow className={styles.backArrow} />
+        </LinkButtonWrapper>
       </div>
     </>
   );

@@ -29,7 +29,11 @@ export const ProjectControlCard = ({
     <div
       className={`${styles.projectControlCardWrapper} ${styles[project.volunteerProjectState]}`}
     >
-      <Dropdown placement="top-start" shouldBlockScroll={false}>
+      <Dropdown
+        placement="top-start"
+        classNames={{ content: styles.dropdownContent }}
+        shouldBlockScroll={false}
+      >
         <DropdownTrigger>
           <button
             className={styles.moreActionsButton}
