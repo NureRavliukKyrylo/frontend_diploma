@@ -59,7 +59,9 @@ export const DatePickerInput = ({
             } ${externalClassNames?.inputWrapper ?? ""}`,
             input: `${isInvalid ? "!text-[#DC2626]" : "text-gray-800"} text-[14px] sm:text-[15px] md:text-[16px] lp:text-[18px] font-[500] ${externalClassNames?.input ?? ""}`,
             segment: `${isInvalid ? "!text-[#DC2626]" : ""} ${externalClassNames?.segment ?? ""}`,
-            selectorIcon: `${isInvalid ? "text-[#DC2626]" : "text-gray-600"} ${externalClassNames?.selectorIcon ?? ""}`,
+            selectorIcon: `${
+              isInvalid ? "text-[#DC2626]" : "text-gray-600"
+            } text-base sm:text-lg md:text-xl ${externalClassNames?.selectorIcon ?? ""}`,
             errorMessage: `text-[#DC2626] ${externalClassNames?.errorMessage ?? ""}`,
             calendar: "!overflow-hidden [&>*]:!overflow-hidden",
           }}

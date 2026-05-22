@@ -1,3 +1,5 @@
+@use "@shared/assets/styles" as *;
+
 .organizationsListWrapper {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
@@ -5,4 +7,15 @@
   gap: 40px;
   align-items: stretch;
   grid-template-rows: auto;
+  @include respond-to(laptop) {
+    gap: 24px;
+  }
+  @include respond-to(tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 16px;
+  }
+  @include respond-to(mobile) {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 }

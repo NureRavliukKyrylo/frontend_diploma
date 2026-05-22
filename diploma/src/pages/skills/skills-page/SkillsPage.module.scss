@@ -5,23 +5,84 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
+
+  @include respond-to(null, 1425px) {
+    gap: 30px;
+    width: 90%;
+  }
+  @include respond-to(null, 1270px) {
+    width: 95%;
+    gap: 24px;
+  }
+  @include respond-to(mobile) {
+    width: 100%;
+    padding: 0 16px;
+    gap: 16px;
+  }
+
   .skillsPageHeader {
     display: flex;
     flex-direction: column;
     gap: 50px;
+
+    @include respond-to(laptop) {
+      gap: 36px;
+    }
+    @include respond-to(tablet) {
+      gap: 24px;
+    }
+    @include respond-to(mobile) {
+      gap: 16px;
+    }
+
     .titleSkillsPage {
       @include font-base(50px, 700);
+
+      @include respond-to(laptop) {
+        font-size: 40px;
+      }
+      @include respond-to(tablet) {
+        font-size: 32px;
+      }
+      @include respond-to(mobile) {
+        font-size: 24px;
+      }
     }
   }
+
   .mainSkillsSection {
     display: flex;
     flex-direction: column;
     gap: 40px;
 
+    @include respond-to(laptop) {
+      gap: 24px;
+    }
+    @include respond-to(tablet) {
+      gap: 16px;
+    }
+    @include respond-to(mobile) {
+      gap: 12px;
+    }
+
     .filterSkillsWrapper {
       display: grid;
       gap: 40px;
       grid-template-columns: 360px 1fr;
+      align-items: start;
+
+      @include respond-to(laptop) {
+        grid-template-columns: 0.7fr 1fr;
+        gap: 24px;
+      }
+      @include respond-to(tablet) {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      @include respond-to(mobile) {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
 
       .filtersInteractions {
         display: grid;
@@ -39,13 +100,80 @@
         > *:nth-child(3) {
           grid-column: 4;
         }
+
+        @include respond-to(laptop) {
+          grid-template-columns: 2fr 2fr 1fr;
+          grid-template-rows: 50px;
+          gap: 16px;
+
+          > *:nth-child(1) {
+            grid-column: 1;
+          }
+          > *:nth-child(2) {
+            grid-column: 2;
+          }
+          > *:nth-child(3) {
+            grid-column: 3;
+          }
+        }
+        @include respond-to(tablet) {
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: minmax(40px, auto) 40px;
+          grid-auto-rows: auto;
+          gap: 12px;
+          grid-column: 1 / 3;
+          align-items: start;
+
+          > *:nth-child(1) {
+            grid-column: 1 / 3;
+          }
+          > *:nth-child(2) {
+            grid-column: 1;
+          }
+          > *:nth-child(3) {
+            grid-column: 2;
+          }
+        }
+        @include respond-to(mobile) {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          grid-column: 1 / 2;
+
+          & > * {
+            min-height: 35px;
+          }
+          & > *:first-child {
+            min-height: unset;
+          }
+        }
       }
 
       .skillsList {
         grid-column: 1 / 3;
         min-height: 500px;
+
+        @include respond-to(laptop) {
+          min-height: 400px;
+        }
+        @include respond-to(tablet) {
+          grid-column: 1 / 3;
+          min-height: 300px;
+        }
+        @include respond-to(mobile) {
+          grid-column: 1 / 2;
+          min-height: 240px;
+        }
+
         &.filterOpen {
           grid-column: 2 / 3;
+
+          @include respond-to(tablet) {
+            grid-column: 1 / 3;
+          }
+          @include respond-to(mobile) {
+            grid-column: 1 / 2;
+          }
         }
 
         .skillsListWrapper {
@@ -53,6 +181,19 @@
           grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
           gap: 30px;
           align-items: stretch;
+
+          @include respond-to(laptop) {
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+          }
+          @include respond-to(tablet) {
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+          }
+          @include respond-to(mobile) {
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 12px;
+          }
         }
       }
 
@@ -60,14 +201,35 @@
         h2 {
           @include font-base(50px, 900);
           color: #1a1a2e;
+
+          @include respond-to(laptop) {
+            font-size: 38px;
+          }
+          @include respond-to(tablet) {
+            font-size: 28px;
+          }
+          @include respond-to(mobile) {
+            font-size: 22px;
+          }
         }
         p {
           @include font-base(30px, 500);
           color: #6b7280;
+
+          @include respond-to(laptop) {
+            font-size: 22px;
+          }
+          @include respond-to(tablet) {
+            font-size: 18px;
+          }
+          @include respond-to(mobile) {
+            font-size: 14px;
+          }
         }
       }
     }
   }
+
   .paginationWrapper {
     width: 100%;
     display: flex;
@@ -75,29 +237,87 @@
   }
 }
 
+.errorHttpMessage {
+  font-size: 30px;
+}
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
 .titleSk {
   width: 340px;
   height: 60px;
   border-radius: 12px;
+
+  @include respond-to(laptop) {
+    width: 260px;
+    height: 50px;
+  }
+  @include respond-to(tablet) {
+    width: 200px;
+    height: 40px;
+  }
+  @include respond-to(mobile) {
+    width: 160px;
+    height: 32px;
+    border-radius: 8px;
+  }
 }
 
 .filterToggleSk {
   height: 50px;
   border-radius: 30px;
+
+  @include respond-to(tablet) {
+    height: 40px;
+  }
+  @include respond-to(mobile) {
+    height: 35px;
+  }
 }
 
 .searchBarSk {
   height: 50px;
   border-radius: 30px;
+
+  @include respond-to(tablet) {
+    height: 40px;
+  }
+  @include respond-to(mobile) {
+    height: 35px;
+  }
 }
 
 .sortDropdownSk {
   height: 50px;
   border-radius: 30px;
+
+  @include respond-to(tablet) {
+    height: 40px;
+  }
+  @include respond-to(mobile) {
+    height: 35px;
+  }
 }
 
 .paginationSk {
   width: 260px;
   height: 40px;
   border-radius: 30px;
+
+  @include respond-to(tablet) {
+    width: 200px;
+    height: 36px;
+  }
+  @include respond-to(mobile) {
+    width: 160px;
+    height: 32px;
+  }
 }

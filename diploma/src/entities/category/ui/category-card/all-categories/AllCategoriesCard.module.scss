@@ -10,6 +10,10 @@
   container-type: inline-size;
   height: 100%;
 
+  @include respond-to(mobile) {
+    border-radius: 10px;
+  }
+
   .titleCategories {
     grid-row: 2 / 3;
     grid-column: 1;
@@ -17,23 +21,29 @@
     position: relative;
     z-index: 1;
     display: flex;
-    padding: 0px 10px;
+    padding: 0 10px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    @include respond-to(mobile) {
+      padding: 0 6px;
+    }
+
     .textGroup {
       display: flex;
       flex-direction: column;
 
       h1 {
         align-self: flex-start;
-        @include font-base(clamp(1.5rem, 12cqi, 3.5rem), 500);
+        @include font-base(clamp(0.8rem, 12cqi, 3.5rem), 500);
         font-style: italic;
         color: #8c0000;
         line-height: 120%;
       }
+
       h2 {
-        @include font-base(clamp(1.5rem, 12cqi, 3.5rem), 900);
+        @include font-base(clamp(0.8rem, 12cqi, 3.5rem), 900);
       }
     }
   }
@@ -46,5 +56,9 @@
     object-fit: cover;
     border-radius: 15px;
     object-position: center;
+
+    @include respond-to(mobile) {
+      border-radius: 10px;
+    }
   }
 }

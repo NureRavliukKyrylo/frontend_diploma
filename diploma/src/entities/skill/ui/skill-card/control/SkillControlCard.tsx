@@ -25,7 +25,11 @@ export const SkillControlCard = <TSkill extends Skill | SkillProfile>({
   className,
 }: SkillControlCardProps<TSkill>) => (
   <div className={`${styles.skillControlCardWrapper} ${className ?? ""}`}>
-    <Dropdown placement="top-start" shouldBlockScroll={false}>
+    <Dropdown
+      placement="top-start"
+      shouldBlockScroll={false}
+      classNames={{ content: styles.dropdownContent }}
+    >
       <DropdownTrigger>
         <button className={styles.moreActionsButton}>
           <ActionsIcon className={styles.actionsIcon} />

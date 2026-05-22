@@ -22,6 +22,8 @@ import {
   fadeDuration,
   staggeredCardVariantsNoHover,
 } from "@shared/assets/animations";
+import { ErrorBoundary } from "react-error-boundary";
+import { getHttpErrorInfo } from "@shared/libs/error";
 
 export const SkillsPage = () => {
   const {
@@ -39,105 +41,118 @@ export const SkillsPage = () => {
   } = useSkillsPage();
 
   return (
-    <div className={styles.skillsPageWrapper}>
-      <div className={styles.skillsPageHeader}>
-        <h1 className={styles.titleSkillsPage}>Explore & Assign Skills</h1>
-      </div>
+    <ErrorBoundary
+      fallbackRender={({ error }) => {
+        return (
+          <div className={styles.errorState}>
+            <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
+            <p className="errorHint">
+              Try reloading the page or come back later.
+            </p>
+          </div>
+        );
+      }}
+    >
+      <div className={styles.skillsPageWrapper}>
+        <div className={styles.skillsPageHeader}>
+          <h1 className={styles.titleSkillsPage}>Explore & Assign Skills</h1>
+        </div>
 
-      <div className={styles.mainSkillsSection}>
-        <div className={styles.filterSkillsWrapper}>
-          <div className={styles.filtersInteractions}>
-            <ToggleDropdownButton onOpenChange={handleToggleFilter}>
-              <SkillsFilterWidget search={search} />
-            </ToggleDropdownButton>
-            <SearchBar
-              value={search.Search}
-              onChange={handleSearchChange}
-              variant="projects"
-            />
-            <SortDropDown
-              options={sortingSkillItems}
-              onSelect={handleSortChange}
-              value={search.OrderBy ?? "Default"}
+        <div className={styles.mainSkillsSection}>
+          <div className={styles.filterSkillsWrapper}>
+            <div className={styles.filtersInteractions}>
+              <ToggleDropdownButton onOpenChange={handleToggleFilter}>
+                <SkillsFilterWidget search={search} />
+              </ToggleDropdownButton>
+              <SearchBar
+                value={search.Search}
+                onChange={handleSearchChange}
+                variant="projects"
+              />
+              <SortDropDown
+                options={sortingSkillItems}
+                onSelect={handleSortChange}
+                value={search.OrderBy ?? "Default"}
+              />
+            </div>
+
+            <motion.div
+              layout
+              initial={false}
+              transition={{ layout: layoutTransition }}
+              className={`${styles.skillsList} ${filterOpen ? styles.filterOpen : ""}`}
+            >
+              {data?.data.length === 0 ? (
+                <div className={styles.emptyState}>
+                  <h2>No skills found</h2>
+                  <p>Try adjusting your filters or search query</p>
+                </div>
+              ) : (
+                <Suspense
+                  fallback={
+                    <ListWidgetSkeleton
+                      items={12}
+                      renderSkeleton={() => <SkillControlCardSkeleton />}
+                      className={styles.skillsListWrapper}
+                    />
+                  }
+                >
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={JSON.stringify(search)}
+                      {...fadeVariants}
+                      transition={fadeDuration}
+                    >
+                      <SkillsListWidget
+                        renderCard={(skill, index) => (
+                          <motion.div
+                            key={skill.id}
+                            custom={index + 1}
+                            variants={staggeredCardVariantsNoHover}
+                            initial="hidden"
+                            animate="visible"
+                          >
+                            <SkillControlCard
+                              skill={skill}
+                              menuItems={[
+                                {
+                                  key: "assign",
+                                  label: "Assign skill",
+                                  onClick: () => handleAssignSkill(skill),
+                                },
+                              ]}
+                            />
+                          </motion.div>
+                        )}
+                        className={styles.skillsListWrapper}
+                        useSkillsQuery={useSkillsListQuery(search)}
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                </Suspense>
+              )}
+            </motion.div>
+          </div>
+        </div>
+
+        {data && data.pagination.totalPages > 1 && (
+          <div className={styles.paginationWrapper}>
+            <Pagination
+              total={data.pagination.totalPages}
+              page={search.Page}
+              onChange={handlePageChange}
             />
           </div>
+        )}
 
-          <motion.div
-            layout
-            initial={false}
-            transition={{ layout: layoutTransition }}
-            className={`${styles.skillsList} ${filterOpen ? styles.filterOpen : ""}`}
-          >
-            {data?.data.length === 0 ? (
-              <div className={styles.emptyState}>
-                <h2>No skills found</h2>
-                <p>Try adjusting your filters or search query</p>
-              </div>
-            ) : (
-              <Suspense
-                fallback={
-                  <ListWidgetSkeleton
-                    items={12}
-                    renderSkeleton={() => <SkillControlCardSkeleton />}
-                    className={styles.skillsListWrapper}
-                  />
-                }
-              >
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={JSON.stringify(search)}
-                    {...fadeVariants}
-                    transition={fadeDuration}
-                  >
-                    <SkillsListWidget
-                      renderCard={(skill, index) => (
-                        <motion.div
-                          key={skill.id}
-                          custom={index + 1}
-                          variants={staggeredCardVariantsNoHover}
-                          initial="hidden"
-                          animate="visible"
-                        >
-                          <SkillControlCard
-                            skill={skill}
-                            menuItems={[
-                              {
-                                key: "assign",
-                                label: "Assign skill",
-                                onClick: () => handleAssignSkill(skill),
-                              },
-                            ]}
-                          />
-                        </motion.div>
-                      )}
-                      className={styles.skillsListWrapper}
-                      useSkillsQuery={useSkillsListQuery(search)}
-                    />
-                  </motion.div>
-                </AnimatePresence>
-              </Suspense>
-            )}
-          </motion.div>
-        </div>
-      </div>
-
-      {data && data.pagination.totalPages > 1 && (
-        <div className={styles.paginationWrapper}>
-          <Pagination
-            total={data.pagination.totalPages}
-            page={search.Page}
-            onChange={handlePageChange}
+        {selectedSkill && (
+          <AssingSkillModal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            skill={selectedSkill}
           />
-        </div>
-      )}
-
-      {selectedSkill && (
-        <AssingSkillModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          skill={selectedSkill}
-        />
-      )}
-    </div>
+        )}
+      </div>
+    </ErrorBoundary>
   );
 };

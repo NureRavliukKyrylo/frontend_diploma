@@ -1,7 +1,25 @@
+@use "@shared/assets/styles" as *;
+
 .categoriesWidgetBlock {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-auto-rows: auto;
   gap: 60px;
   row-gap: 40px;
+
+  @include respond-to(laptop) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 40px;
+    row-gap: 28px;
+  }
+  @include respond-to(tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 24px;
+    row-gap: 20px;
+  }
+  @include respond-to(mobile) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    row-gap: 14px;
+  }
 }

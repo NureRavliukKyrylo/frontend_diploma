@@ -7,6 +7,22 @@
   align-items: start;
   justify-content: space-between;
   gap: 80px;
+
+  @include respond-to(laptop) {
+    grid-template-columns: 1fr 400px;
+    gap: 40px;
+    min-height: 320px;
+  }
+  @include respond-to(tablet) {
+    grid-template-columns: 1fr 200px;
+    gap: 20px;
+    min-height: auto;
+  }
+  @include respond-to(mobile) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    min-height: auto;
+  }
 }
 
 .categoryInformation {
@@ -14,14 +30,37 @@
   flex-direction: column;
   height: 100%;
   justify-content: space-between;
-  padding: 70px 25px 0px 25px;
+  padding: 70px 25px 0 25px;
   gap: 40px;
+
+  @include respond-to(laptop) {
+    padding: 40px 18px 0 18px;
+    gap: 28px;
+  }
+  @include respond-to(tablet) {
+    padding: 20px 12px 0 12px;
+    gap: 20px;
+  }
+  @include respond-to(mobile) {
+    padding: 8px 0 0 0;
+    gap: 16px;
+  }
 }
 
 .textCategoryInformation {
   display: flex;
   flex-direction: column;
   gap: 40px;
+
+  @include respond-to(laptop) {
+    gap: 28px;
+  }
+  @include respond-to(tablet) {
+    gap: 20px;
+  }
+  @include respond-to(mobile) {
+    gap: 16px;
+  }
 }
 
 .textCategory {
@@ -37,11 +76,31 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     line-height: 110%;
+
+    @include respond-to(laptop) {
+      font-size: 36px;
+    }
+    @include respond-to(tablet) {
+      font-size: 26px;
+    }
+    @include respond-to(mobile) {
+      font-size: 22px;
+    }
   }
 
   h2 {
     @include font-base(22px, 600);
     color: #b3b3b3;
+
+    @include respond-to(laptop) {
+      font-size: 18px;
+    }
+    @include respond-to(tablet) {
+      font-size: 16px;
+    }
+    @include respond-to(mobile) {
+      font-size: 14px;
+    }
   }
 }
 
@@ -50,10 +109,27 @@
   flex-direction: column;
   gap: 40px;
 
+  @include respond-to(tablet) {
+    gap: 16px;
+  }
+  @include respond-to(mobile) {
+    gap: 10px;
+  }
+
   p {
     @include font-base(21px, 500);
     color: #2d2d2d;
     line-height: 120%;
+
+    @include respond-to(laptop) {
+      font-size: 17px;
+    }
+    @include respond-to(tablet) {
+      font-size: 14px;
+    }
+    @include respond-to(mobile) {
+      font-size: 13px;
+    }
   }
 }
 
@@ -70,12 +146,24 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+
+  @include respond-to(mobile) {
+    font-size: 13px;
+  }
 }
 
 .projectsBlock {
   display: flex;
   gap: 15px;
   align-items: center;
+
+  @include respond-to(tablet) {
+    gap: 10px;
+  }
+  @include respond-to(mobile) {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
 }
 
 .projectInfo {
@@ -85,11 +173,31 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+
+    @include respond-to(laptop) {
+      font-size: 21px;
+    }
+    @include respond-to(tablet) {
+      font-size: 18px;
+    }
+    @include respond-to(mobile) {
+      font-size: 16px;
+    }
   }
 
   h2 {
     @include font-base(15px, 500);
     color: rgba(0, 0, 0, 0.6);
+
+    @include respond-to(laptop) {
+      font-size: 13px;
+    }
+    @include respond-to(tablet) {
+      font-size: 12px;
+    }
+    @include respond-to(mobile) {
+      font-size: 11px;
+    }
   }
 }
 
@@ -102,15 +210,40 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+
+  @include respond-to(tablet) {
+    gap: 10px;
+  }
+  @include respond-to(mobile) {
+    gap: 8px;
+  }
+
   .noSkills {
     @include font-base(18px, 500);
     color: rgba(0, 0, 0, 0.35);
     letter-spacing: 0.01em;
+
+    @include respond-to(tablet) {
+      font-size: 15px;
+    }
+    @include respond-to(mobile) {
+      font-size: 13px;
+    }
   }
 }
 
 .coreSkillsText {
   @include font-base(25px, 700);
+
+  @include respond-to(laptop) {
+    font-size: 21px;
+  }
+  @include respond-to(tablet) {
+    font-size: 18px;
+  }
+  @include respond-to(mobile) {
+    font-size: 16px;
+  }
 }
 
 .skillTab {
@@ -120,6 +253,19 @@
   color: rgba(0, 0, 0, 0.8);
   @include font-base(20px, 600);
   padding: 5px 25px;
+
+  @include respond-to(laptop) {
+    font-size: 17px;
+    padding: 5px 20px;
+  }
+  @include respond-to(tablet) {
+    font-size: 15px;
+    padding: 4px 16px;
+  }
+  @include respond-to(mobile) {
+    font-size: 13px;
+    padding: 3px 12px;
+  }
 }
 
 .skillsWrapper {
@@ -128,6 +274,13 @@
 
 .listActivitiesToggle {
   height: 58px;
+
+  @include respond-to(tablet) {
+    height: 50px;
+  }
+  @include respond-to(mobile) {
+    height: 40px;
+  }
 }
 
 .toggleListActivities {
@@ -138,16 +291,35 @@
   padding: 7px;
   justify-content: space-between;
   width: 100%;
+
+  @include respond-to(tablet) {
+    padding: 6px;
+  }
+  @include respond-to(mobile) {
+    padding: 5px;
+  }
 }
 
 .toggleListActivitiesButton {
   color: rgba(0, 0, 0, 0.8);
   flex-grow: 1;
-  padding: 0px 20px;
+  padding: 0 20px;
   @include font-base(25px, 500);
-
   &:hover {
     background: rgba(231, 226, 226, 0.5);
+  }
+
+  @include respond-to(laptop) {
+    font-size: 20px;
+    padding: 0 14px;
+  }
+  @include respond-to(tablet) {
+    font-size: 16px;
+    padding: 0 10px;
+  }
+  @include respond-to(mobile) {
+    font-size: 13px;
+    padding: 0 6px;
   }
 }
 
@@ -156,7 +328,6 @@
   font-weight: 800;
   transform: scale(1.1);
   transition: transform 0.2s ease-in-out;
-
   &:hover {
     background: transparent;
   }
@@ -173,10 +344,21 @@
   align-items: center;
   justify-content: center;
 
+  @include respond-to(mobile) {
+    display: none;
+  }
+
   img {
     width: 100%;
     min-height: 500px;
     display: block;
+
+    @include respond-to(laptop) {
+      min-height: 380px;
+    }
+    @include respond-to(tablet) {
+      min-height: 220px;
+    }
   }
 }
 
@@ -184,18 +366,49 @@
   width: 85%;
   height: 95px;
   border-radius: 10px;
+
+  @include respond-to(laptop) {
+    height: 74px;
+  }
+  @include respond-to(tablet) {
+    height: 52px;
+  }
+  @include respond-to(mobile) {
+    height: 40px;
+    border-radius: 8px;
+  }
 }
 
 .subtitleSk {
   width: 140px;
   height: 24px;
   border-radius: 8px;
+
+  @include respond-to(tablet) {
+    width: 110px;
+    height: 19px;
+  }
+  @include respond-to(mobile) {
+    width: 80px;
+    height: 16px;
+  }
 }
 
 .descriptionSk {
   width: 100%;
   height: 110px;
   border-radius: 12px;
+
+  @include respond-to(laptop) {
+    height: 88px;
+  }
+  @include respond-to(tablet) {
+    height: 64px;
+  }
+  @include respond-to(mobile) {
+    height: 50px;
+    border-radius: 8px;
+  }
 }
 
 .statNumberSk {
@@ -203,39 +416,99 @@
   height: 28px;
   border-radius: 6px;
   margin-bottom: 6px;
+
+  @include respond-to(tablet) {
+    width: 40px;
+    height: 22px;
+  }
+  @include respond-to(mobile) {
+    width: 32px;
+    height: 18px;
+    margin-bottom: 4px;
+  }
 }
 
 .statLabelSk {
   width: 80px;
   height: 18px;
   border-radius: 6px;
+
+  @include respond-to(tablet) {
+    width: 60px;
+    height: 14px;
+  }
+  @include respond-to(mobile) {
+    width: 48px;
+    height: 12px;
+  }
 }
 
 .coreSkillsTitleSk {
   width: 110px;
   height: 28px;
   border-radius: 8px;
+
+  @include respond-to(tablet) {
+    width: 88px;
+    height: 22px;
+  }
+  @include respond-to(mobile) {
+    width: 70px;
+    height: 18px;
+  }
 }
 
 .skillTabsSk {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+
+  @include respond-to(mobile) {
+    gap: 7px;
+  }
 }
 
 .skillTabSk {
   height: 36px;
   border-radius: 25px 15px;
+
+  @include respond-to(laptop) {
+    height: 30px;
+  }
+  @include respond-to(tablet) {
+    height: 26px;
+  }
+  @include respond-to(mobile) {
+    height: 22px;
+  }
 }
 
 .toggleSk {
   width: 100%;
   height: 58px;
   border-radius: 20px;
+
+  @include respond-to(tablet) {
+    height: 50px;
+  }
+  @include respond-to(mobile) {
+    height: 40px;
+    border-radius: 14px;
+  }
 }
 
 .imageSk {
   width: 100%;
   min-height: 650px;
   border-radius: 30%;
+
+  @include respond-to(laptop) {
+    min-height: 460px;
+  }
+  @include respond-to(tablet) {
+    min-height: 240px;
+  }
+  @include respond-to(mobile) {
+    display: none;
+  }
 }

@@ -13,6 +13,27 @@
   --card-name-weight: 800;
   --card-name-max-width: none;
   --card-gap: 10px;
+
+  @include respond-to(laptop) {
+    padding: 24px;
+    min-height: 200px;
+    --card-img-size: 85px;
+    --card-name-size: 18px;
+  }
+  @include respond-to(tablet) {
+    padding: 20px;
+    min-height: 180px;
+    --card-img-size: 75px;
+    --card-name-size: 16px;
+  }
+  @include respond-to(mobile) {
+    padding: 16px;
+    min-height: 150px;
+    --card-img-size: 60px;
+    --card-name-size: 14px;
+    border-radius: 12px;
+  }
+
   .moreActionsButton {
     align-self: flex-end;
     cursor: pointer;
@@ -21,12 +42,33 @@
     top: 20px;
     right: 15px;
 
+    @include respond-to(tablet) {
+      top: 14px;
+      right: 10px;
+      padding: 8px;
+    }
+    @include respond-to(mobile) {
+      top: 10px;
+      right: 8px;
+      padding: 6px;
+    }
+
     .actionsIcon {
       width: 30px;
       height: 30px;
       display: block;
+
+      @include respond-to(tablet) {
+        width: 24px;
+        height: 24px;
+      }
+      @include respond-to(mobile) {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
+
   .skillControlInfo {
     display: flex;
     justify-content: space-around;
@@ -42,6 +84,15 @@
     }
   }
 }
+
+.dropdownContent {
+  @include respond-to(tablet) {
+    min-width: 150px;
+  }
+  @include respond-to(mobile) {
+    min-width: 130px;
+  }
+}
 .menuItem {
   border-radius: 8px;
   transition:
@@ -49,36 +100,35 @@
     transform 0.15s ease;
   cursor: pointer;
 
-  &.assign {
-    &:hover {
-      background: #f0fdf4;
-      transform: translateX(3px);
-      .menuItemTitle {
-        color: #16a34a;
-        font-weight: 600;
-      }
-    }
+  @include respond-to(tablet) {
+    padding: 2px 5px;
+  }
+  @include respond-to(mobile) {
+    padding: 0px 5px;
   }
 
-  &.update {
-    &:hover {
-      background: #eef2ff;
-      transform: translateX(3px);
-      .menuItemTitle {
-        color: #4f46e5;
-        font-weight: 600;
-      }
+  &.assign:hover {
+    background: #f0fdf4;
+    transform: translateX(3px);
+    .menuItemTitle {
+      color: #16a34a;
+      font-weight: 600;
     }
   }
-
-  &.delete {
-    &:hover {
-      background: #fef2f2;
-      transform: translateX(3px);
-      .menuItemTitle {
-        color: #ef4444;
-        font-weight: 600;
-      }
+  &.update:hover {
+    background: #eef2ff;
+    transform: translateX(3px);
+    .menuItemTitle {
+      color: #4f46e5;
+      font-weight: 600;
+    }
+  }
+  &.delete:hover {
+    background: #fef2f2;
+    transform: translateX(3px);
+    .menuItemTitle {
+      color: #ef4444;
+      font-weight: 600;
     }
   }
 }
@@ -87,6 +137,13 @@
   @include font-base(15px, 500);
   color: #374151;
   transition: color 0.15s ease;
+
+  @include respond-to(tablet) {
+    font-size: 14px;
+  }
+  @include respond-to(mobile) {
+    font-size: 13px;
+  }
 }
 
 .skeletonMenuButton {
@@ -96,6 +153,19 @@
   position: absolute;
   top: 20px;
   right: 15px;
+
+  @include respond-to(tablet) {
+    width: 40px;
+    height: 18px;
+    top: 14px;
+    right: 10px;
+  }
+  @include respond-to(mobile) {
+    width: 32px;
+    height: 16px;
+    top: 10px;
+    right: 8px;
+  }
 }
 
 .skeletonImage {
@@ -104,18 +174,54 @@
   border-radius: 50%;
   margin-bottom: 10px;
   flex-shrink: 0;
+
+  @include respond-to(laptop) {
+    width: 85px;
+    height: 85px;
+  }
+  @include respond-to(tablet) {
+    width: 75px;
+    height: 75px;
+  }
+  @include respond-to(mobile) {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 6px;
+  }
 }
 
 .skeletonName {
   width: 200px;
   height: 20px;
   border-radius: 6px;
+
+  @include respond-to(laptop) {
+    width: 160px;
+    height: 18px;
+  }
+  @include respond-to(tablet) {
+    width: 130px;
+    height: 16px;
+  }
+  @include respond-to(mobile) {
+    width: 100px;
+    height: 14px;
+  }
 }
 
 .skeletonLevel {
   width: 80px;
   height: 16px;
   border-radius: 6px;
+
+  @include respond-to(tablet) {
+    width: 65px;
+    height: 14px;
+  }
+  @include respond-to(mobile) {
+    width: 50px;
+    height: 12px;
+  }
 }
 
 .skillCardBaseSkeleton {

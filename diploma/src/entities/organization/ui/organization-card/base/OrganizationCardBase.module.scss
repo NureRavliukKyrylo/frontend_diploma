@@ -4,36 +4,87 @@
   display: flex;
   align-items: center;
   gap: 15px;
+
+  @include respond-to(tablet) {
+    gap: 10px;
+  }
+  @include respond-to(mobile) {
+    gap: 8px;
+  }
+
   img {
     filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.25));
     border-radius: 10px;
     width: 100px;
+
+    @include respond-to(laptop) {
+      width: 80px;
+    }
+    @include respond-to(tablet) {
+      width: 68px;
+    }
+    @include respond-to(mobile) {
+      width: 54px;
+      border-radius: 8px;
+    }
   }
+
   .headerOrganizationInfo {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 8px;
+
+    @include respond-to(mobile) {
+      gap: 5px;
+    }
+
     .organizationName {
       @include font-base(40px, 700);
       line-height: 100%;
+
+      @include respond-to(laptop) {
+        font-size: 32px;
+      }
+      @include respond-to(tablet) {
+        font-size: 26px;
+      }
+      @include respond-to(mobile) {
+        font-size: 20px;
+      }
     }
+
     .organizationProgressBlock {
       display: flex;
       flex-direction: column;
       gap: 5px;
+
+      @include respond-to(mobile) {
+        gap: 3px;
+      }
+
       .organizationLevel {
         @include font-base(13px, 600);
         line-height: 120%;
+
+        @include respond-to(mobile) {
+          font-size: 11px;
+        }
       }
     }
   }
 }
+
 .projectsRelatedBlock {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
   align-items: center;
+
+  @include respond-to(mobile) {
+    gap: 6px;
+  }
+
   .projectTag {
     background: #ffffff;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
@@ -44,10 +95,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @include respond-to(laptop) {
+      font-size: 13px;
+      padding: 5px 16px;
+    }
+    @include respond-to(tablet) {
+      font-size: 12px;
+      padding: 4px 12px;
+    }
+    @include respond-to(mobile) {
+      font-size: 11px;
+      padding: 3px 10px;
+    }
   }
+
   .remainingProjects {
     @extend .projectTag;
     padding: 6px 8px;
+
+    @include respond-to(mobile) {
+      padding: 3px 6px;
+    }
   }
 }
 
@@ -55,6 +124,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+
   .statItem {
     display: flex;
     justify-content: center;
@@ -64,10 +134,30 @@
 
   .statValue {
     @include font-base(20px, 900);
+
+    @include respond-to(laptop) {
+      font-size: 17px;
+    }
+    @include respond-to(tablet) {
+      font-size: 15px;
+    }
+    @include respond-to(mobile) {
+      font-size: 13px;
+    }
   }
 
   .statLabel {
     @include font-base(13px, 600);
     color: rgba(0, 0, 0, 0.6);
+
+    @include respond-to(laptop) {
+      font-size: 12px;
+    }
+    @include respond-to(tablet) {
+      font-size: 11px;
+    }
+    @include respond-to(mobile) {
+      font-size: 10px;
+    }
   }
 }

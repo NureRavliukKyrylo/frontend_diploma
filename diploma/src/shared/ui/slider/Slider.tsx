@@ -32,6 +32,11 @@ export const Slider = ({
         setInputValue(value as number);
         onChangeImmediate?.(value as number);
       }}
+      classNames={{
+        base: "w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg",
+        thumb: "w-5.5 h-5.5 md:w-6 md:h-6",
+        track: "h-2 sm:h-1.5 md:h-2",
+      }}
       {...props}
     />
   );

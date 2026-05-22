@@ -6,10 +6,30 @@
 }
 .subHeaderFilter {
   @include font-base(20px, 700);
+
+  @include respond-to(laptop) {
+    font-size: 18px;
+  }
+  @include respond-to(tablet) {
+    font-size: 16px;
+  }
+  @include respond-to(mobile) {
+    font-size: 15px;
+  }
 }
 
 .buttonShowAllTasks {
   padding: 30px;
+
+  @include respond-to(laptop) {
+    padding: 22px;
+  }
+  @include respond-to(tablet) {
+    padding: 16px;
+  }
+  @include respond-to(mobile) {
+    padding: 12px;
+  }
 
   .animationButtonBlock {
     display: flex;
@@ -26,6 +46,19 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
+      @include respond-to(laptop) {
+        font-size: 21px;
+        padding: 5px 24px;
+      }
+      @include respond-to(tablet) {
+        font-size: 18px;
+        padding: 5px 20px;
+      }
+      @include respond-to(mobile) {
+        font-size: 16px;
+        padding: 5px 16px;
+      }
     }
   }
 }
@@ -35,30 +68,95 @@
   flex-direction: column;
   gap: 15px;
   padding: 25px 20px 20px 20px;
+
+  @include respond-to(laptop) {
+    padding: 20px 16px 16px 16px;
+    gap: 12px;
+  }
+  @include respond-to(tablet) {
+    padding: 16px 14px 14px 14px;
+    gap: 10px;
+  }
+  @include respond-to(mobile) {
+    padding: 12px 10px 10px 10px;
+    gap: 8px;
+  }
 }
 .taskRating {
   display: flex;
   flex-direction: column;
   gap: 15px;
   padding: 20px 20px 30px 20px;
+
+  @include respond-to(laptop) {
+    padding: 20px 16px 16px 16px;
+    gap: 12px;
+  }
+  @include respond-to(tablet) {
+    padding: 16px 14px 14px 14px;
+    gap: 10px;
+  }
+  @include respond-to(mobile) {
+    padding: 12px 10px 10px 10px;
+    gap: 8px;
+  }
 }
 .taskProjects {
   display: flex;
   flex-direction: column;
   padding: 20px 20px 30px 20px;
   gap: 15px;
+
+  @include respond-to(laptop) {
+    padding: 20px 16px 16px 16px;
+    gap: 12px;
+  }
+  @include respond-to(tablet) {
+    padding: 16px 14px 14px 14px;
+    gap: 10px;
+  }
+  @include respond-to(mobile) {
+    padding: 12px 10px 10px 10px;
+    gap: 8px;
+  }
 }
 .taskOrganizations {
   display: flex;
   flex-direction: column;
   padding: 20px 20px 30px 20px;
   gap: 15px;
+
+  @include respond-to(laptop) {
+    padding: 20px 16px 16px 16px;
+    gap: 12px;
+  }
+  @include respond-to(tablet) {
+    padding: 16px 14px 14px 14px;
+    gap: 10px;
+  }
+  @include respond-to(mobile) {
+    padding: 12px 10px 10px 10px;
+    gap: 8px;
+  }
 }
 .taskSkills {
   display: flex;
   flex-direction: column;
   padding: 20px 20px 30px 20px;
   gap: 15px;
+
+  @include respond-to(laptop) {
+    padding: 20px 16px 16px 16px;
+    gap: 12px;
+  }
+  @include respond-to(tablet) {
+    padding: 16px 14px 14px 14px;
+    gap: 10px;
+  }
+  @include respond-to(mobile) {
+    padding: 12px 10px 10px 10px;
+    gap: 8px;
+  }
 }
 
 .taskCategories {
@@ -66,6 +164,19 @@
   flex-direction: column;
   padding: 20px 20px 30px 20px;
   gap: 15px;
+
+  @include respond-to(laptop) {
+    padding: 20px 16px 16px 16px;
+    gap: 12px;
+  }
+  @include respond-to(tablet) {
+    padding: 16px 14px 14px 14px;
+    gap: 10px;
+  }
+  @include respond-to(mobile) {
+    padding: 12px 10px 10px 10px;
+    gap: 8px;
+  }
 }
 
 .taskEvents {
@@ -73,10 +184,33 @@
   flex-direction: column;
   padding: 20px 20px 30px 20px;
   gap: 15px;
+
+  @include respond-to(laptop) {
+    padding: 20px 16px 16px 16px;
+    gap: 12px;
+  }
+  @include respond-to(tablet) {
+    padding: 16px 14px 14px 14px;
+    gap: 10px;
+  }
+  @include respond-to(mobile) {
+    padding: 12px 10px 10px 10px;
+    gap: 8px;
+  }
 }
 
 .buttonClear {
   padding: 30px;
+
+  @include respond-to(laptop) {
+    padding: 22px;
+  }
+  @include respond-to(tablet) {
+    padding: 16px;
+  }
+  @include respond-to(mobile) {
+    padding: 12px;
+  }
 
   .animationButtonBlock {
     display: flex;
@@ -89,25 +223,53 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @include respond-to(laptop) {
+      font-size: 17px;
+    }
+    @include respond-to(tablet) {
+      font-size: 15px;
+    }
+    @include respond-to(mobile) {
+      font-size: 14px;
+    }
+
     .clearFiltersButton {
       padding: 15px 30px;
       width: 100%;
+
+      @include respond-to(laptop) {
+        padding: 12px 24px;
+      }
+      @include respond-to(tablet) {
+        padding: 10px 20px;
+      }
+      @include respond-to(mobile) {
+        padding: 8px 16px;
+      }
     }
   }
 }
 
 .scrollableTaskFilters {
-  max-height: 800px;
+  max-height: 730px;
   overflow-y: auto;
+
+  @include respond-to(laptop) {
+    max-height: 600px;
+  }
+  @include respond-to(tablet) {
+    max-height: 500px;
+  }
+  @include respond-to(mobile) {
+    max-height: 420px;
+  }
 
   &::-webkit-scrollbar {
     width: 4px;
   }
-
   &::-webkit-scrollbar-track {
     background: transparent;
   }
-
   &::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.15);
     border-radius: 4px;
