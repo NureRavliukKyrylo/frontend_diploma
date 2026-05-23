@@ -108,8 +108,8 @@ export const TaskWidget = ({
                   <p>{task?.organization?.name}</p>
                 </div>
                 <div className={styles.ratingTaskInfo}>
-                  <h1>4.5</h1>
-                  <p>(120 votes)</p>
+                  <h1>{task?.rating.value}</h1>
+                  <p>({task?.rating.totalVotes} VOTES)</p>
                 </div>
               </div>
             </div>
@@ -117,25 +117,35 @@ export const TaskWidget = ({
               {task?.project && (
                 <div className={styles.activityPill}>
                   <h1>PROJECT</h1>
-                  <LinkButtonWrapper
-                    to="/projects/$id"
-                    params={{ id: task.project?.id }}
-                    className={styles.goToActivity}
+                  <motion.div
+                    whileHover={{ x: 4 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
                   >
-                    <Arrow className={styles.goToActivityLink} />
-                  </LinkButtonWrapper>
+                    <LinkButtonWrapper
+                      to="/projects/$id"
+                      params={{ id: task.project?.id }}
+                      className={styles.goToActivity}
+                    >
+                      <Arrow className={styles.goToActivityLink} />
+                    </LinkButtonWrapper>
+                  </motion.div>
                 </div>
               )}
               {task?.event && (
                 <div className={styles.activityPill}>
                   <h1>EVENT</h1>
-                  <LinkButtonWrapper
-                    to="/events/$id"
-                    params={{ id: task.event?.id }}
-                    className={styles.goToActivity}
+                  <motion.div
+                    whileHover={{ x: 4 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
                   >
-                    <Arrow className={styles.goToActivityLink} />
-                  </LinkButtonWrapper>
+                    <LinkButtonWrapper
+                      to="/events/$id"
+                      params={{ id: task.event?.id }}
+                      className={styles.goToActivity}
+                    >
+                      <Arrow className={styles.goToActivityLink} />
+                    </LinkButtonWrapper>
+                  </motion.div>
                 </div>
               )}
             </div>

@@ -24,9 +24,8 @@ import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import { Pagination } from "@shared/ui";
-import { Drawer } from "@mui/material";
 import { useActivitiesTaskDrawer } from "../model/useActivitiesTaskDrawer";
-
+import { SwipeableDrawer } from "@mui/material";
 interface TasksTabProps {
   search: TaskSearchParams;
 }
@@ -136,9 +135,10 @@ export const TasksTab = ({ search }: TasksTabProps) => {
               </Suspense>
             )}
           </motion.div>
-          <Drawer
+          <SwipeableDrawer
             open={isOpen}
             onClose={closeTask}
+            onOpen={() => {}}
             anchor="right"
             className={styles.drawer}
           >
@@ -153,7 +153,7 @@ export const TasksTab = ({ search }: TasksTabProps) => {
                 />
               )}
             </div>
-          </Drawer>
+          </SwipeableDrawer>
         </div>
 
         {tasks && tasks.pagination.totalPages > 1 && (

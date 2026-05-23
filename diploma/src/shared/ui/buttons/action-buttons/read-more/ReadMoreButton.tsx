@@ -9,6 +9,7 @@ interface ReadMoreButtonProps {
   classNameButton?: string;
   buttonText?: string;
   buttonTextCollapsed?: string;
+  gradientColor?: string;
 }
 
 export function ReadMoreButton({
@@ -18,6 +19,7 @@ export function ReadMoreButton({
   classNameButton = "",
   buttonText = "Read more",
   buttonTextCollapsed = "Read less",
+  gradientColor = "255, 255, 255",
 }: ReadMoreButtonProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [showButton, setShowButton] = useState(false);
@@ -36,7 +38,10 @@ export function ReadMoreButton({
   }, [collapsedHeight, children]);
 
   return (
-    <div className={`${styles.readMoreContainer} ${className}`}>
+    <div
+      className={`${styles.readMoreContainer} ${className}`}
+      style={{ "--gradient-color": gradientColor } as React.CSSProperties}
+    >
       <motion.div
         layout
         ref={contentRef}

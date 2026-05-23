@@ -64,7 +64,11 @@ export const BadgeDetailWidget = ({ id }: { id: string }) => {
           </div>
         </div>
         <div className={styles.middleInfo}>
-          <ReadMoreButton collapsedHeight={80}>
+          <ReadMoreButton
+            collapsedHeight={80}
+            className={styles.readMoreButtonContainer}
+            classNameButton={styles.readMoreButtonBadge}
+          >
             <p>{badge.description}</p>
           </ReadMoreButton>
           <div className={styles.metaInfo}>

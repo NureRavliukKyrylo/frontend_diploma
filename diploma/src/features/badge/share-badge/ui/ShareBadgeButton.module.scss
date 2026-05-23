@@ -1,3 +1,5 @@
+@use "@shared/assets/styles" as *;
+
 .socialNetworksWrapper {
   display: inline-flex;
   align-items: center;
@@ -21,6 +23,18 @@
     white-space: nowrap;
     z-index: 2;
 
+    @include respond-to(tablet) {
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 32px;
+    }
+    @include respond-to(mobile) {
+      gap: 4px;
+      padding: 4px 8px;
+      border-radius: 24px;
+      right: calc(100% + 8px);
+    }
+
     .networkBtn {
       display: flex;
       align-items: center;
@@ -29,6 +43,19 @@
 
       &:hover {
         transform: scale(1.15);
+      }
+
+      @include respond-to(tablet) {
+        svg {
+          width: 30px !important;
+          height: 30px !important;
+        }
+      }
+      @include respond-to(mobile) {
+        svg {
+          width: 26px !important;
+          height: 26px !important;
+        }
       }
     }
   }
@@ -39,7 +66,22 @@
     cursor: pointer;
     flex-shrink: 0;
     z-index: 2;
+
+    @include respond-to(laptop) {
+      width: 36px;
+      height: 36px;
+    }
+
+    @include respond-to(tablet) {
+      width: 36px;
+      height: 36px;
+    }
+    @include respond-to(mobile) {
+      width: 30px;
+      height: 30px;
+    }
   }
+
   .backdrop {
     position: fixed;
     inset: 0;

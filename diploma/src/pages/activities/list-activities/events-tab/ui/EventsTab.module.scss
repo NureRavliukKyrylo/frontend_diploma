@@ -103,7 +103,6 @@
       grid-column: 1 / 3;
 
       @include respond-to(tablet) {
-        grid-column: 1 / 2;
         min-height: 400px;
       }
       @include respond-to(mobile) {

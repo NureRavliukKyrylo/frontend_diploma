@@ -7,18 +7,50 @@
   align-items: center;
   flex-direction: column;
   gap: 10px;
+
+  @include respond-to(laptop) {
+    padding: 32px;
+  }
+  @include respond-to(tablet) {
+    padding: 24px;
+    gap: 8px;
+  }
+  @include respond-to(mobile) {
+    padding: 16px;
+    gap: 6px;
+  }
+
   .modalConfirmationImage {
     max-width: 60%;
     height: auto;
     object-fit: contain;
+
+    @include respond-to(tablet) {
+      max-width: 50%;
+    }
+    @include respond-to(mobile) {
+      max-width: 45%;
+    }
   }
+
   .modalConfirmationTitle {
     h2 {
       @include font-base(40px, 800);
       text-align: center;
       line-height: 120%;
+
+      @include respond-to(laptop) {
+        font-size: 32px;
+      }
+      @include respond-to(tablet) {
+        font-size: 26px;
+      }
+      @include respond-to(mobile) {
+        font-size: 20px;
+      }
     }
   }
+
   .modalConfirmationDescription {
     p {
       color: rgba(0, 0, 0, 0.74);
@@ -27,16 +59,47 @@
       max-width: 650px;
       text-align: center;
       line-height: 120%;
+
+      @include respond-to(laptop) {
+        font-size: 22px;
+        max-width: 520px;
+      }
+      @include respond-to(tablet) {
+        font-size: 18px;
+        max-width: 420px;
+      }
+      @include respond-to(mobile) {
+        font-size: 14px;
+        max-width: 100%;
+      }
     }
   }
+
   .actionsConfirmationModal {
     display: flex;
     gap: 20px;
     width: 90%;
     margin-top: 35px;
     justify-content: space-between;
+
+    @include respond-to(laptop) {
+      margin-top: 26px;
+      gap: 16px;
+    }
+    @include respond-to(tablet) {
+      margin-top: 20px;
+      gap: 12px;
+      width: 100%;
+    }
+    @include respond-to(mobile) {
+      margin-top: 14px;
+      gap: 10px;
+      width: 100%;
+    }
+
     .wrapperConfirmButtonModal {
       width: 100%;
+
       .confirmButtonModal,
       .cancelButtonModal {
         flex: 1;
@@ -47,8 +110,21 @@
         align-items: center;
         @include font-base(30px, 600);
         width: 100%;
+
+        @include respond-to(laptop) {
+          font-size: 24px;
+        }
+        @include respond-to(tablet) {
+          font-size: 18px;
+          padding: 4px 0;
+        }
+        @include respond-to(mobile) {
+          font-size: 15px;
+          padding: 3px 0;
+        }
       }
     }
+
     .confirmButtonModal {
       background: #000;
       color: #fff;

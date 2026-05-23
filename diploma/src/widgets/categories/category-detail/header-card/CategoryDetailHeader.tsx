@@ -24,13 +24,14 @@ export const CategoryDetailHeader = ({
         <div className={styles.textCategoryInformation}>
           <div className={styles.textCategory}>
             <h1>{category.name}</h1>
-            <h2>432 activities</h2>
+            <h2>{category.activitiesTotal} activities</h2>
           </div>
           <div className={styles.categoryDescription}>
             <ReadMoreButton
               collapsedHeight={90}
               className={styles.readMoreCategoryBlock}
               classNameButton={styles.readMoreCategoryButton}
+              gradientColor="244, 244, 244"
             >
               <p>{category.description}</p>
             </ReadMoreButton>
@@ -68,6 +69,8 @@ export const CategoryDetailHeader = ({
                 ))}
                 initialVisibleCount={6}
                 buttonContent="See more"
+                classNameItems={styles.skillItems}
+                classNameButton={styles.skillReadMore}
               />
             )}
           </div>

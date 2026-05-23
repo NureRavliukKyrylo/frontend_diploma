@@ -1,6 +1,6 @@
 import styles from "./ProjectPage.module.scss";
 import { ProgressBar, Toggle } from "@shared/ui";
-import { ReadMoreButton } from "@shared/ui/buttons";
+import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import { projectMainTabs } from "../config/projectMainTabs";
 import { AnimatePresence, motion } from "framer-motion";
 import { formatDateToText } from "@shared/libs/date";
@@ -54,13 +54,25 @@ export const ProjectPage = () => {
                 )}
               </div>
             </div>
-            <div className={styles.organizationInfo}>
-              <img
-                src={project?.organization?.logoUrl}
-                alt="organization-image"
-              />
-              <p>{project?.organization?.name}</p>
-            </div>
+            <motion.div
+              whileHover={{
+                scale: 1.04,
+              }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 22 }}
+            >
+              <LinkButtonWrapper
+                to="/organizations/$id"
+                params={{ id: project.organization?.id }}
+                className={styles.organizationInfo}
+              >
+                <img
+                  src={project?.organization?.logoUrl}
+                  alt="organization-image"
+                />
+                <p>{project?.organization?.name}</p>
+              </LinkButtonWrapper>
+            </motion.div>
           </div>
         </div>
         <div className={styles.statsProjectInfo}>

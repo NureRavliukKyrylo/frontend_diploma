@@ -61,24 +61,41 @@ export const EventPage = () => {
                   )}
                 </div>
               </div>
-              <div className={styles.organizationInfo}>
-                <img
-                  src={event?.organization?.logoUrl}
-                  alt="organization-image"
-                />
-                <p>{event?.organization?.name}</p>
-              </div>
+              <motion.div
+                whileHover={{
+                  scale: 1.04,
+                }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 400, damping: 22 }}
+              >
+                <LinkButtonWrapper
+                  to="/organizations/$id"
+                  params={{ id: event.organization?.id }}
+                  className={styles.organizationInfo}
+                >
+                  <img
+                    src={event?.organization?.logoUrl}
+                    alt="organization-image"
+                  />
+                  <p>{event?.organization?.name}</p>
+                </LinkButtonWrapper>
+              </motion.div>
             </div>
             {event?.project && (
               <div className={styles.projectPill}>
                 <h1>PROJECT</h1>
-                <LinkButtonWrapper
-                  to="/projects/$id"
-                  params={{ id: event.project?.id }}
-                  className={styles.goToProject}
+                <motion.div
+                  whileHover={{ x: 4 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
                 >
-                  <Arrow className={styles.toProjectArrow} />
-                </LinkButtonWrapper>
+                  <LinkButtonWrapper
+                    to="/projects/$id"
+                    params={{ id: event.project?.id }}
+                    className={styles.goToProject}
+                  >
+                    <Arrow className={styles.toProjectArrow} />
+                  </LinkButtonWrapper>
+                </motion.div>
               </div>
             )}
           </div>
@@ -96,12 +113,16 @@ export const EventPage = () => {
             </div>
           </div>
           <div className={styles.ratingEventInfo}>
-            <h1>4.5</h1>
-            <p>(120 votes)</p>
+            <h1>{event.rating.value}</h1>
+            <p>({event.rating.totalVotes} votes)</p>
           </div>
         </div>
         <div className={styles.eventFooterContent}>
-          <ReadMoreButton collapsedHeight={90}>
+          <ReadMoreButton
+            collapsedHeight={90}
+            className={styles.readMoreButtonContainer}
+            classNameButton={styles.readMoreButtonEvent}
+          >
             <p>{event?.description}</p>
           </ReadMoreButton>
           {event?.id && event.hasPendingJoinRequest && (

@@ -5,7 +5,12 @@ import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import { ErrorBoundary } from "react-error-boundary";
 import { EventsListWidget } from "@widgets/events";
-import { EventCard, eventQuery, useEventsListQuery } from "@entities/event";
+import {
+  EventCard,
+  EventCardSkeleton,
+  eventQuery,
+  useEventsListQuery,
+} from "@entities/event";
 import type { EventsSearch } from "@entities/project";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -52,7 +57,7 @@ export const ProjectEventsTab = ({ search, projectId }: ProjectEventsTab) => {
             fallback={
               <ListWidgetSkeleton
                 className={styles.eventsProjectList}
-                renderSkeleton={() => <MemberCardSkeleton />}
+                renderSkeleton={() => <EventCardSkeleton />}
               />
             }
           >

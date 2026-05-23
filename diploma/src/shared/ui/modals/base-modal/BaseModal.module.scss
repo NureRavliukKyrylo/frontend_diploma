@@ -1,3 +1,5 @@
+@use "@shared/assets/styles" as *;
+
 .overlayModal {
   position: fixed;
   top: 0;
@@ -19,8 +21,20 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   position: relative;
+
+  @include respond-to(tablet) {
+    width: 95%;
+    border-radius: 36px;
+  }
+  @include respond-to(mobile) {
+    width: 95%;
+    max-height: 95vh;
+    border-radius: 24px;
+  }
+
   .closeButtonBlock {
     margin-bottom: 10px;
+
     .closeButton {
       position: absolute;
       inset: 35px 40px auto auto;
@@ -28,6 +42,26 @@
       height: 34px;
       cursor: pointer;
       margin-bottom: 10px;
+      @include respond-to(tablet) {
+        inset: 24px 28px auto auto;
+        width: 28px;
+        height: 28px;
+      }
+      @include respond-to(mobile) {
+        inset: 16px 18px auto auto;
+        width: 28px;
+        height: 28px;
+      }
+      .closeButtonImg {
+        @include respond-to(tablet) {
+          width: 28px;
+          height: 28px;
+        }
+        @include respond-to(mobile) {
+          width: 24px;
+          height: 24px;
+        }
+      }
     }
   }
 }
@@ -35,4 +69,8 @@
 .childrenSection {
   overflow-y: auto;
   max-height: 90vh;
+
+  @include respond-to(mobile) {
+    max-height: 95vh;
+  }
 }

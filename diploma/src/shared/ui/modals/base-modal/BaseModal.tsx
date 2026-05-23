@@ -67,7 +67,7 @@ export const BaseModal: React.FC<BaseModalProps> = ({
                   whileTap={{ scale: 0.9 }}
                   transition={{ type: "spring", stiffness: 200 }}
                 >
-                  <Close />
+                  <Close className={styles.closeButtonImg} />
                 </motion.div>
               </div>
             )}

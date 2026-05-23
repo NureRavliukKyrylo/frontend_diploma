@@ -268,6 +268,29 @@
   }
 }
 
+.skillItems {
+  @include respond-to(tablet) {
+    column-gap: 14px;
+    row-gap: 10px;
+  }
+  @include respond-to(mobile) {
+    column-gap: 10px;
+    row-gap: 8px;
+  }
+}
+
+.skillReadMore {
+  @include respond-to(tablet) {
+    font-size: 16px;
+    padding: 4px 22px;
+  }
+  @include respond-to(mobile) {
+    font-size: 14px;
+    padding: 2px 16px;
+    border-radius: 12px;
+  }
+}
+
 .skillsWrapper {
   display: flex;
 }

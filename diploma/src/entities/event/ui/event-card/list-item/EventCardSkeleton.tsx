@@ -16,12 +16,12 @@ export const EventCardSkeleton = () => (
     </div>
 
     <div className={styles.eventCardFooter}>
-      <hr className={baseStyles.dividerLine} />
-
       <div className={baseStyles.bottomBlock}>
         <Skeleton className={styles.skeletonDeadline} />
         <Skeleton className={styles.skeletonProgress} />
       </div>
+
+      <hr className={baseStyles.dividerLine} />
 
       <div className={styles.footerCard}>
         <div className={styles.avatarsGroup}>

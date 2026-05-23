@@ -66,4 +66,15 @@
   flex-direction: row;
   gap: 40px;
   align-items: stretch;
+
+  @include respond-to(null, 1200px) {
+    padding: 40px;
+    gap: 28px;
+  }
+  @include respond-to(null, 900px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    gap: 20px;
+  }
 }

@@ -32,6 +32,7 @@ export const getTaskMainForms = (
       PageSize={props.search?.DrawerPageSize ?? 3}
       OrderBy={props.search?.DrawerOrderBy ?? "Default"}
       handleSort={props.handleSort}
+      canSubmitFeedback={props.task.canSubmitFeedback}
     />
   ),
 });

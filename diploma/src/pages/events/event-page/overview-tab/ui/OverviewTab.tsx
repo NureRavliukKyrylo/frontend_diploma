@@ -86,7 +86,7 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
             <div className={styles.activeActivities}>
               <div className={styles.totalTasks}>
                 <div className={styles.headerTitle}>
-                  <h1>ACTIVE</h1>
+                  <h1>COMPLETED</h1>
                   <h2>TASKS</h2>
                 </div>
                 <p>{event?.activeTasks ?? "0"}</p>
@@ -102,6 +102,7 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
             <BaseMap
               zoom={6}
               center={[event.location.latitude, event.location.longitude]}
+              classNameWrapper={styles.mapEventWrapper}
             >
               <MapResizer />
               <>
