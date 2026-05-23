@@ -7,19 +7,50 @@
   justify-content: center;
   gap: 40px;
   align-items: stretch;
+
+  @include respond-to(laptop) {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    grid-auto-rows: minmax(240px, auto);
+  }
+  @include respond-to(tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    grid-auto-rows: minmax(200px, auto);
+  }
+  @include respond-to(mobile) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    grid-auto-rows: minmax(160px, auto);
+  }
 }
 
 .wrapperMembersProjectList {
   display: flex;
   flex-direction: column;
   gap: 40px;
+
+  @include respond-to(tablet) {
+    gap: 24px;
+  }
+  @include respond-to(mobile) {
+    gap: 16px;
+  }
 }
 
 .startMembersSlot {
   display: flex;
-  padding: 30px 0px;
+  padding: 30px 0;
   position: relative;
   flex-direction: column;
+
+  @include respond-to(tablet) {
+    padding: 20px 0;
+  }
+  @include respond-to(mobile) {
+    padding: 14px 0;
+  }
+
   .textBlock {
     display: flex;
     flex-direction: column;
@@ -34,6 +65,16 @@
       font-style: italic;
       text-transform: uppercase;
       line-height: 100%;
+
+      @include respond-to(laptop) {
+        font-size: 32px;
+      }
+      @include respond-to(tablet) {
+        font-size: 26px;
+      }
+      @include respond-to(mobile) {
+        font-size: 22px;
+      }
     }
 
     h2 {
@@ -41,13 +82,34 @@
       font-weight: 800;
       text-transform: uppercase;
       line-height: 120%;
+
+      @include respond-to(laptop) {
+        font-size: 32px;
+      }
+      @include respond-to(tablet) {
+        font-size: 26px;
+      }
+      @include respond-to(mobile) {
+        font-size: 22px;
+      }
     }
   }
+
   img {
     width: 240px;
     position: absolute;
     right: 0;
     bottom: 0;
+
+    @include respond-to(laptop) {
+      width: 180px;
+    }
+    @include respond-to(tablet) {
+      width: 140px;
+    }
+    @include respond-to(mobile) {
+      width: 100px;
+    }
   }
 }
 
@@ -61,6 +123,12 @@
   width: 100%;
   text-align: center;
 }
+.errorHttpMessage {
+  font-size: 30px;
+  @include respond-to(mobile) {
+    font-size: 22px;
+  }
+}
 
 .emptyState {
   display: flex;
@@ -72,17 +140,28 @@
   width: 100%;
   min-height: 300px;
 
+  @include respond-to(mobile) {
+    padding: 40px 16px;
+  }
+
   h2 {
     @include font-base(30px, 800);
     color: rgba(0, 0, 0, 0.7);
+    @include respond-to(tablet) {
+      font-size: 24px;
+    }
+    @include respond-to(mobile) {
+      font-size: 20px;
+    }
   }
-
   p {
     @include font-base(22px, 400);
     color: rgba(0, 0, 0, 0.4);
+    @include respond-to(tablet) {
+      font-size: 18px;
+    }
+    @include respond-to(mobile) {
+      font-size: 15px;
+    }
   }
-}
-
-.errorHttpMessage {
-  font-size: 30px;
 }

@@ -59,13 +59,19 @@ $label-color: rgba(0, 0, 0, 0.6);
       align-items: center;
 
       .mapIcon {
-        width: max(22px, 50cqh);
-        height: max(22px, 50cqh);
+        width: max(18px, 50cqh);
+        height: max(18px, 50cqh);
       }
     }
 
     h1 {
       @include font-base(max(18px, 35cqh), 700);
+      @include respond-to(tablet) {
+        font-size: max(16px, 35cqh);
+      }
+      @include respond-to(mobile) {
+        font-size: max(14px, 35cqh);
+      }
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -84,8 +90,8 @@ $label-color: rgba(0, 0, 0, 0.6);
   .mapOpenButton {
     .fullSizeIcon {
       color: rgba(114, 114, 114, 0.8);
-      width: max(22px, 50cqh);
-      height: max(22px, 50cqh);
+      width: max(18px, 50cqh);
+      height: max(18px, 50cqh);
     }
   }
 }

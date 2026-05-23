@@ -81,7 +81,11 @@ export const ProjectPage = () => {
           </div>
         </div>
         <div className={styles.projectFooterContent}>
-          <ReadMoreButton collapsedHeight={90}>
+          <ReadMoreButton
+            collapsedHeight={90}
+            className={styles.readMoreButtonContainer}
+            classNameButton={styles.readMoreButtonProject}
+          >
             <p>{project?.description}</p>
           </ReadMoreButton>
           {project?.id && project.hasPendingJoinRequest && (

@@ -1,3 +1,5 @@
+@use "@shared/assets/styles" as *;
+
 .fullScreenButton {
   width: 50px;
   height: 50px;
@@ -9,8 +11,22 @@
   padding: 5px;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+
+  @include respond-to(tablet) {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+  }
+  @include respond-to(mobile) {
+    width: 34px;
+    height: 34px;
+    border-radius: 7px;
+    padding: 4px;
+  }
+
   .fullSizeIcon {
-    width: 100%;
+    width: 80%;
+    height: 80%;
     color: white;
   }
 }

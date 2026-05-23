@@ -81,7 +81,7 @@ export const MapPage = () => {
       </BaseMap>
 
       <div className={styles.filterButtonWrapper}>
-        <ToggleDropdownButton>
+        <ToggleDropdownButton variant="map">
           <MapFiltersWidget search={search} />
         </ToggleDropdownButton>
         <SearchBar

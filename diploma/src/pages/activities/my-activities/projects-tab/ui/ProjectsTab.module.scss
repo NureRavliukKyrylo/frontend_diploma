@@ -30,7 +30,7 @@
       grid-column: 4;
     }
 
-    @include respond-to(null, 1300px) {
+    @include respond-to(null, 1550px) {
       grid-template-columns: 2fr 2fr 1fr;
       grid-template-rows: 50px;
       gap: 16px;

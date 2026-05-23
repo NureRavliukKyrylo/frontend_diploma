@@ -23,11 +23,13 @@ export const TaskCardBase = ({
   <>
     <div className={styles.headerTaskBlock}>
       <div className={styles.startSection}>
-        <img
-          src={task.organization?.logoUrl ?? DefaultAvatar}
-          alt="image organization"
-        />
-        <h1>{task.organization?.name ?? "Unknown Organization"}</h1>
+        <div className={styles.organizationInfo}>
+          <img
+            src={task.organization?.logoUrl ?? DefaultAvatar}
+            alt="image organization"
+          />
+          <h1>{task.organization?.name ?? "Unknown Organization"}</h1>
+        </div>
         {topContent}
       </div>
 

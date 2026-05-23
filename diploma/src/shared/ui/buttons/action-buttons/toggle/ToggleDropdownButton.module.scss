@@ -102,5 +102,19 @@
       width: 100%;
       border-radius: 0 0 30px 30px;
     }
+    &.map,
+    &.list {
+      position: absolute;
+      z-index: 102;
+
+      @include respond-to(tablet) {
+        position: absolute;
+        overflow: hidden;
+      }
+      @include respond-to(mobile) {
+        position: absolute;
+        overflow: hidden;
+      }
+    }
   }
 }

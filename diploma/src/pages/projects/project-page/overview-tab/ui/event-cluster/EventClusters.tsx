@@ -47,7 +47,7 @@ export const EventClusters = memo(({ data }: EventClustersProps) => {
       fromPosition={fromPosition}
       icon={EventMarker}
     >
-      <Popup className={styles.popupProject}>
+      <Popup className={styles.popupEvent}>
         <EventPopupContent event={item} />
       </Popup>
     </AnimatedMarker>

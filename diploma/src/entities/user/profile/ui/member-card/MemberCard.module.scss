@@ -11,23 +11,67 @@
   gap: 15px;
   justify-content: center;
   height: 100%;
+
+  @include respond-to(tablet) {
+    padding: 16px;
+    gap: 10px;
+  }
+  @include respond-to(mobile) {
+    padding: 12px;
+    gap: 8px;
+    border-radius: 12px;
+  }
+
   .imageMember {
     border: 1px solid #000000;
     border-radius: 50%;
     width: 125px;
+
+    @include respond-to(laptop) {
+      width: 100px;
+    }
+    @include respond-to(tablet) {
+      width: 80px;
+    }
+    @include respond-to(mobile) {
+      width: 64px;
+    }
   }
+
   .userInitials {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
     h1 {
       @include font-base(20px, 700);
       line-height: 100%;
+
+      @include respond-to(laptop) {
+        font-size: 17px;
+      }
+      @include respond-to(tablet) {
+        font-size: 15px;
+      }
+      @include respond-to(mobile) {
+        font-size: 13px;
+      }
     }
+
     h2 {
       color: rgba(0, 0, 0, 0.8);
       @include font-base(20px, 500);
+
+      @include respond-to(laptop) {
+        font-size: 17px;
+      }
+      @include respond-to(tablet) {
+        font-size: 15px;
+      }
+      @include respond-to(mobile) {
+        font-size: 13px;
+      }
     }
   }
 }
@@ -37,17 +81,35 @@
   height: 16px;
   border-radius: 6px;
   margin-top: 10px;
+  @include respond-to(mobile) {
+    width: 90px;
+    height: 13px;
+  }
 }
-
 .skeletonRole {
   width: 80px;
   height: 14px;
   border-radius: 6px;
   margin-top: 10px;
+  @include respond-to(mobile) {
+    width: 60px;
+    height: 11px;
+  }
 }
-
 .imageMemberSkeleton {
   border-radius: 50%;
   width: 125px;
   height: 125px;
+  @include respond-to(laptop) {
+    width: 100px;
+    height: 100px;
+  }
+  @include respond-to(tablet) {
+    width: 80px;
+    height: 80px;
+  }
+  @include respond-to(mobile) {
+    width: 64px;
+    height: 64px;
+  }
 }

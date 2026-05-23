@@ -92,11 +92,12 @@ export const OverviewTab = ({
             </div>
           </div>
         </div>
-        <div className={styles.mapWrapper} ref={ref}>
+        <div ref={ref}>
           {project?.location && (
             <BaseMap
               zoom={6}
               center={[project.location.latitude, project.location.longitude]}
+              classNameWrapper={styles.mapProjectWrapper}
             >
               <MapResizer />
               <>

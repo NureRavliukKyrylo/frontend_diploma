@@ -29,7 +29,11 @@ export const EventControlCard = ({
     <div
       className={`${styles.eventControlCardWrapper} ${styles[event.status]}`}
     >
-      <Dropdown placement="top-start" shouldBlockScroll={false}>
+      <Dropdown
+        placement="top-start"
+        shouldBlockScroll={false}
+        classNames={{ content: styles.dropdownContent }}
+      >
         <DropdownTrigger>
           <button
             className={styles.moreActionsButton}

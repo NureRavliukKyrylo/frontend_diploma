@@ -35,7 +35,11 @@ export const TaskControlCard = ({ task, menuItems }: TaskControlCardProps) => {
           </div>
         }
         middleContent={
-          <Dropdown placement="top" shouldBlockScroll={false}>
+          <Dropdown
+            placement="top"
+            shouldBlockScroll={false}
+            classNames={{ content: styles.dropdownContent }}
+          >
             <DropdownTrigger>
               <button
                 className={styles.moreActionsButton}

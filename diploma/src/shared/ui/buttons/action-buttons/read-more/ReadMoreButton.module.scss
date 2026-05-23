@@ -24,6 +24,10 @@
   );
   pointer-events: none;
   z-index: 1;
+
+  @include respond-to(mobile) {
+    height: 36px;
+  }
 }
 
 .readMoreButton {
@@ -35,4 +39,17 @@
   padding: 8px 0;
   margin-top: 4px;
   transition: color 0.2s ease;
+
+  @include respond-to(laptop) {
+    font-size: 17px;
+  }
+  @include respond-to(tablet) {
+    font-size: 15px;
+    padding: 6px 0;
+  }
+  @include respond-to(mobile) {
+    font-size: 13px;
+    padding: 5px 0;
+    margin-top: 2px;
+  }
 }

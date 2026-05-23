@@ -4,6 +4,13 @@
   display: flex;
   justify-content: center;
   padding: 10px 20px 20px 20px;
+
+  @include respond-to(tablet) {
+    padding: 8px 14px 14px 14px;
+  }
+  @include respond-to(mobile) {
+    padding: 6px 10px 10px 10px;
+  }
 }
 
 .projectCardListWrapper {
@@ -14,14 +21,43 @@
   padding: 10px 20px 20px 20px;
   display: flex;
   flex-direction: column;
+
+  @include respond-to(tablet) {
+    padding: 10px 14px 16px 14px;
+  }
+  @include respond-to(mobile) {
+    padding: 8px 10px 12px 10px;
+  }
+
   h2 {
     @include font-base(35px, 900);
     line-height: 120%;
     color: #1a1a2e;
+
+    @include respond-to(laptop) {
+      font-size: 28px;
+    }
+    @include respond-to(tablet) {
+      font-size: 22px;
+    }
+    @include respond-to(mobile) {
+      font-size: 18px;
+    }
   }
+
   p {
     @include font-base(20px, 500);
     color: #6b7280;
+
+    @include respond-to(laptop) {
+      font-size: 17px;
+    }
+    @include respond-to(tablet) {
+      font-size: 15px;
+    }
+    @include respond-to(mobile) {
+      font-size: 13px;
+    }
   }
 }
 
@@ -32,14 +68,19 @@
   transform: translate3d(0, 0, 0);
   overflow: auto;
 
+  @include respond-to(tablet) {
+    max-height: 45vh;
+  }
+  @include respond-to(mobile) {
+    max-height: 38vh;
+  }
+
   &::-webkit-scrollbar {
     width: 4px;
   }
-
   &::-webkit-scrollbar-track {
     background: transparent;
   }
-
   &::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.15);
     border-radius: 4px;
@@ -51,4 +92,13 @@
   flex-direction: column;
   gap: 20px;
   padding: 20px;
+
+  @include respond-to(tablet) {
+    gap: 14px;
+    padding: 14px;
+  }
+  @include respond-to(mobile) {
+    gap: 10px;
+    padding: 10px;
+  }
 }
