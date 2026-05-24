@@ -1,22 +1,109 @@
 @use "@shared/assets/styles" as *;
 
 .mainProfileBlock {
-  display: flex;
-  gap: 30px;
+  display: grid;
+  grid-template-columns: 0.7fr 2fr;
+  grid-template-rows: auto 1fr;
+  gap: 24px 30px;
   width: 75%;
 
-  > :first-child {
-    flex: 25 0 0;
+  > .sideBarProfileBlock {
+    grid-column: 1;
+    grid-row: 1 / 3;
   }
-
-  > :last-child {
-    flex: 75 1 0;
+  > .actionsChangeBlock {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+  }
+  > .userActionsBlock {
+    grid-column: 2;
+    grid-row: 2;
     min-width: 0;
   }
+
+  @include respond-to(null, 1500px) {
+    width: 90%;
+  }
+  @include respond-to(tablet) {
+    width: 95%;
+  }
+  @include respond-to(mobile) {
+    width: 100%;
+    padding: 0 16px;
+  }
+
+  @include respond-to(laptop) {
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto auto;
+    gap: 24px 30px;
+
+    > .sideBarProfileBlock {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    > .actionsChangeBlock {
+      grid-column: 1 / 3;
+      grid-row: 1;
+    }
+    > .userActionsBlock {
+      grid-column: 2;
+      grid-row: 2;
+    }
+  }
+
+  @include respond-to(tablet) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 20px;
+    align-items: start;
+
+    > .sideBarProfileBlock {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    > .actionsChangeBlock {
+      grid-column: 1;
+      grid-row: 1;
+      display: block;
+    }
+    > .userActionsBlock {
+      grid-column: 1;
+      grid-row: 3;
+    }
+  }
+
+  @include respond-to(mobile) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-items: start;
+
+    > .sideBarProfileBlock {
+      grid-row: 1;
+      grid-column: 1 / 3;
+    }
+    > .actionsChangeBlock {
+      grid-column: 1 / 3;
+      grid-row: 2;
+      display: block;
+    }
+    > .userActionsBlock {
+      grid-column: 1 / 3;
+      grid-row: 3;
+    }
+  }
+
   .sideBarProfileBlock {
     display: flex;
     flex-direction: column;
     gap: 30px;
+
+    @include respond-to(tablet) {
+      gap: 20px;
+    }
+    @include respond-to(mobile) {
+      gap: 16px;
+    }
 
     .organizationBlock {
       position: relative;
@@ -26,21 +113,37 @@
         background: #ffffff;
         box-shadow: 2px -6px 7px 0px rgba(0, 0, 0, 0.1);
         border-radius: 20px 20px 0 0;
-        padding: 2px 30px 0px 30px;
+        padding: 2px 30px 0 30px;
         width: fit-content;
         margin-bottom: -2px;
         position: relative;
         z-index: 2;
 
+        @include respond-to(tablet) {
+          padding: 2px 16px 0 16px;
+        }
+
+        @include respond-to(mobile) {
+          padding: 2px 16px 0 16px;
+        }
+
         h1 {
           @include font-base(15px, 600);
+
+          @include respond-to(tablet) {
+            font-size: 13px;
+          }
+
+          @include respond-to(mobile) {
+            font-size: 13px;
+          }
         }
       }
 
       .organizationBlockContent {
         background: #ffffff;
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
-        border-radius: 0px 15px 15px 15px;
+        border-radius: 0 15px 15px 15px;
         padding: 20px;
         position: relative;
         min-height: 100px;
@@ -48,80 +151,187 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
+        @include respond-to(tablet) {
+          padding: 14px;
+          min-height: 70px;
+        }
+
+        @include respond-to(mobile) {
+          padding: 14px;
+          min-height: 70px;
+        }
+
         .organizationsList {
           display: flex;
           gap: 10px;
           width: 100%;
           justify-content: start;
           align-items: baseline;
+          flex-wrap: wrap;
         }
+
         .emptyState {
           h2 {
             @include font-base(20px, 700);
             color: rgba(0, 0, 0, 0.6);
             text-align: center;
+
+            @include respond-to(tablet) {
+              font-size: 16px;
+            }
+
+            @include respond-to(mobile) {
+              font-size: 16px;
+            }
           }
         }
       }
     }
   }
-  .mainWrapperUserInfo {
+
+  .actionsChangeBlock {
+    height: 58px;
     display: flex;
-    flex-direction: column;
-    gap: 50px;
-    .actionsChangeBlock {
-      height: 58px;
-      display: flex;
-      justify-content: space-between;
-      .toggleProfileMainButton {
-        color: rgba(0, 0, 0, 0.8);
-        min-width: 130px;
-        padding: 0px 20px;
-        &:hover {
-          background: rgba(231, 226, 226, 0.5);
-        }
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    @include respond-to(tablet) {
+      height: auto;
+      align-items: stretch;
+      flex-wrap: wrap;
+    }
+    @include respond-to(mobile) {
+      gap: 10px;
+      height: auto;
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .toggleProfileMainButton {
+      color: rgba(0, 0, 0, 0.8);
+      min-width: 130px;
+      padding: 0 20px;
+      flex-grow: 1;
+      &:hover {
+        background: rgba(231, 226, 226, 0.5);
       }
-      .toggleProfileMainButtonActive {
-        color: rgba(255, 255, 255, 0.9);
-        font-weight: 800;
-        transform: scale(1.1);
-        transition: transform 0.2s ease-in-out;
-        &:hover {
-          background: transparent;
-        }
+
+      @include respond-to(laptop) {
+        padding: 0 14px;
+        font-size: 18px;
       }
-      .toggleProfileMain {
-        background: rgba(255, 255, 255, 0.6);
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
-        height: 100%;
-        border-radius: 50px;
-        padding: 10px 10px;
-        justify-content: space-evenly;
+      @include respond-to(tablet) {
+        padding: 0 10px;
+        font-size: 15px;
       }
-      .toggleProfilePill {
-        background-color: black;
-      }
-      .linkSettingsButton {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: white;
-        border-radius: 50%;
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
-        width: 58px;
-        img {
-          width: 70%;
-        }
+      @include respond-to(mobile) {
+        padding: 0 8px;
+        font-size: 13px;
+        min-width: unset;
       }
     }
-    .userActionsBlock {
+
+    .toggleInnerBlock {
+      @include respond-to(tablet) {
+        justify-content: space-between;
+      }
+      @include respond-to(mobile) {
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+    }
+    .toggleProfileMainButtonActive {
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 800;
+      transform: scale(1.1);
+      transition: transform 0.2s ease-in-out;
+
+      @include respond-to(tablet) {
+        transform: scale(1.05);
+      }
+      @include respond-to(mobile) {
+        transform: scale(1.02);
+      }
+
+      &:hover {
+        background: transparent;
+      }
+    }
+
+    .toggleProfileMain {
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+      height: 100%;
+      border-radius: 50px;
+      padding: 10px;
+      justify-content: space-evenly;
+
+      @include respond-to(tablet) {
+        flex: 1;
+        padding: 5px;
+        max-width: 600px;
+        min-height: 45px;
+      }
+      @include respond-to(mobile) {
+        padding: 5px;
+        width: 100%;
+        min-height: 35px;
+      }
+    }
+
+    .toggleProfilePill {
+      background-color: black;
+    }
+
+    .linkSettingsButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      border-radius: 50%;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+      width: 58px;
+      height: 58px;
+      flex-shrink: 0;
+      margin-left: auto;
+
+      @include respond-to(tablet) {
+        width: 45px;
+        height: 45px;
+      }
+      @include respond-to(mobile) {
+        width: 40px;
+        height: 40px;
+      }
+
+      img {
+        width: 70%;
+      }
     }
   }
+
+  .userActionsBlock {
+    min-width: 0;
+  }
 }
+
 .socialPlatformsWrapper {
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @include respond-to(tablet) {
+    justify-content: center;
+    align-items: center;
+  }
+
+  @include respond-to(mobile) {
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+  }
 }
 
 .skOrgHeader {
@@ -131,25 +341,44 @@
   position: relative;
   z-index: 2;
   margin-bottom: -2px;
+
+  @include respond-to(mobile) {
+    width: 86px;
+    height: 24px;
+  }
 }
 
 .skOrgBody {
   width: 100%;
   height: 100px;
   border-radius: 0 15px 15px 15px;
+
+  @include respond-to(mobile) {
+    height: 80px;
+  }
 }
 
 .skSocialItem {
   height: 40px;
   border-radius: 40px;
   width: 100%;
+
+  @include respond-to(mobile) {
+    height: 34px;
+  }
 }
 
 .skToggle {
-  width: 55%;
+  flex: 1;
   height: 58px;
   border-radius: 50px;
-  margin-right: 10px;
+
+  @include respond-to(tablet) {
+    height: 50px;
+  }
+  @include respond-to(mobile) {
+    height: 44px;
+  }
 }
 
 .skSettingsBtn {
@@ -157,10 +386,30 @@
   height: 58px;
   border-radius: 50%;
   flex-shrink: 0;
+
+  @include respond-to(tablet) {
+    width: 50px;
+    height: 50px;
+  }
+  @include respond-to(mobile) {
+    width: 44px;
+    height: 44px;
+  }
 }
 
 .skContent {
   width: 100%;
   min-height: 900px;
   border-radius: 20px;
+
+  @include respond-to(laptop) {
+    min-height: 700px;
+  }
+  @include respond-to(tablet) {
+    min-height: 500px;
+  }
+  @include respond-to(mobile) {
+    min-height: 400px;
+    border-radius: 14px;
+  }
 }

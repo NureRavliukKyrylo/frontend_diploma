@@ -6,7 +6,6 @@ interface UserHeaderWidgetProps {
   image?: string;
   name: string;
   email?: string;
-  phone?: string;
   children?: React.ReactNode;
 }
 
@@ -14,24 +13,18 @@ export const UserHeaderWidget = ({
   image,
   name,
   email,
-  phone,
   children,
 }: UserHeaderWidgetProps) => {
   return (
-    <>
-      <div className={styles.avatarBlockInfoSideBar}>
-        <div className={styles.avatarBlock}>
-          <ProfileAvatar avatar={image ?? DefaultAvatar} level={13} />
-        </div>
-        <h1 className={styles.fullNameUser}>{name ?? "Unknown"}</h1>
-        <div className={styles.wrapperInfoProfileUser}>
-          <h1 className={styles.emailUser}>{email ?? "Unknown"}</h1>
-        </div>
-        <div className={styles.wrapperInfoProfileUser}>
-          <h1>{phone ?? "No phone number added"}</h1>
-        </div>
-        {children}
+    <div className={styles.avatarBlockInfoSideBar}>
+      <div className={styles.avatarBlock}>
+        <ProfileAvatar avatar={image ?? DefaultAvatar} level={13} />
       </div>
-    </>
+      <h1 className={styles.fullNameUser}>{name ?? "Unknown"}</h1>
+      <div className={styles.wrapperInfoProfileUser}>
+        <h1 className={styles.emailUser}>{email ?? "Unknown"}</h1>
+      </div>
+      <div className={styles.childrenBlock}>{children}</div>
+    </div>
   );
 };

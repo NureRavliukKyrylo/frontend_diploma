@@ -43,92 +43,90 @@ export function MainProfilePage() {
           image={user?.profile?.avatarUrl}
           name={getFullName(user.firstName, user.lastName)}
           email={user?.email}
-          phone={user?.profile?.phone}
-        />
-
-        <div className={styles.organizationBlock}>
-          <div className={styles.organizationBlockHeader}>
-            <h1>Organizations</h1>
+        >
+          <div className={styles.organizationBlock}>
+            <div className={styles.organizationBlockHeader}>
+              <h1>Organizations</h1>
+            </div>
+            <div className={styles.organizationBlockContent}>
+              {user?.profile?.organizations?.length === 0 ? (
+                <div className={styles.emptyState}>
+                  <h2>No organizations joined</h2>
+                </div>
+              ) : (
+                <OrganizationsListWidget
+                  className={styles.organizationsList}
+                  organizations={user?.profile?.organizations?.slice(0, 4)}
+                  renderCard={(organization) => (
+                    <OrganizationItem
+                      iconUrl={organization.logoUrl ?? DefaultAvatar}
+                      name={organization.name}
+                    />
+                  )}
+                />
+              )}
+            </div>
           </div>
-          <div className={styles.organizationBlockContent}>
-            {user?.profile?.organizations?.length === 0 ? (
-              <div className={styles.emptyState}>
-                <h2>No organizations joined</h2>
-              </div>
-            ) : (
-              <OrganizationsListWidget
-                className={styles.organizationsList}
-                organizations={user?.profile?.organizations?.slice(0, 4)}
-                renderCard={(organization) => (
-                  <OrganizationItem
-                    iconUrl={organization.logoUrl ?? DefaultAvatar}
-                    name={organization.name}
-                  />
-                )}
-              />
-            )}
-          </div>
-        </div>
 
-        <div className={styles.socialPlatformsWrapper}>
-          <SocialPlatforms
-            links={user?.profile?.socialLinks}
-            privacySettings={user?.privacySettings}
-          />
-        </div>
+          <div className={styles.socialPlatformsWrapper}>
+            <SocialPlatforms
+              links={user?.profile?.socialLinks}
+              privacySettings={user?.privacySettings}
+            />
+          </div>
+        </UserHeaderWidget>
       </motion.div>
 
-      <div className={styles.mainWrapperUserInfo}>
-        <motion.div
-          className={styles.actionsChangeBlock}
-          initial={{ opacity: 0, x: 16 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.25, ease: "easeOut" }}
+      <motion.div
+        className={styles.actionsChangeBlock}
+        initial={{ opacity: 0, x: 16 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
+      >
+        <Toggle<ProfileMode>
+          tabs={profileMainTabs}
+          activeValue={tab}
+          onChange={handleTabChange}
+          buttonClassName={styles.toggleProfileMainButton}
+          activeButtonClassName={styles.toggleProfileMainButtonActive}
+          className={styles.toggleProfileMain}
+          pillClassName={styles.toggleProfilePill}
+          innerWrapperClassName={styles.toggleInnerBlock}
+        />
+        <LinkButtonWrapper
+          to={profileRoutes.settings}
+          className={styles.linkSettingsButton}
         >
-          <Toggle<ProfileMode>
-            tabs={profileMainTabs}
-            activeValue={tab}
-            onChange={handleTabChange}
-            buttonClassName={styles.toggleProfileMainButton}
-            activeButtonClassName={styles.toggleProfileMainButtonActive}
-            className={styles.toggleProfileMain}
-            pillClassName={styles.toggleProfilePill}
+          <motion.img
+            layout
+            src={Settings}
+            alt="settings"
+            whileHover={{ rotate: 90, scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
           />
-          <LinkButtonWrapper
-            to={profileRoutes.settings}
-            className={styles.linkSettingsButton}
+        </LinkButtonWrapper>
+      </motion.div>
+      <div className={styles.userActionsBlock}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={tab}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{
+              opacity: 1,
+              x: 0,
+              transition: { duration: 0.25, ease: "easeOut" },
+            }}
+            exit={{
+              opacity: 0,
+              x: -20,
+              transition: { duration: 0.2, ease: "easeIn" },
+            }}
           >
-            <motion.img
-              layout
-              src={Settings}
-              alt="settings"
-              whileHover={{ rotate: 90, scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            />
-          </LinkButtonWrapper>
-        </motion.div>
-        <div className={styles.userActionsBlock}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={tab}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{
-                opacity: 1,
-                x: 0,
-                transition: { duration: 0.25, ease: "easeOut" },
-              }}
-              exit={{
-                opacity: 0,
-                x: -20,
-                transition: { duration: 0.2, ease: "easeIn" },
-              }}
-            >
-              <MainProfileWrapper>
-                {profileMainForms[tab]({ user, search })}
-              </MainProfileWrapper>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+            <MainProfileWrapper>
+              {profileMainForms[tab]({ user, search })}
+            </MainProfileWrapper>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

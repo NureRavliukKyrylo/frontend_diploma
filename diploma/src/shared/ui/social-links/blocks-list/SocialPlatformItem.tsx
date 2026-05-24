@@ -14,7 +14,9 @@ export const SocialPlatformItem = ({
   url,
   size = 20,
 }: SocialPlatformItemProps) => {
-  const config = SOCIAL_PLATFORMS_MAP.get(platform);
+  console.log(typeof platform);
+  const config = SOCIAL_PLATFORMS_MAP.get(Number(platform) as SocialPlatform);
+  console.log("config", config);
 
   return (
     <>

@@ -10,7 +10,6 @@ export interface BadgeCardProps {
 }
 
 export const BadgeCard = ({ badge }: BadgeCardProps) => {
-  console.log(!badge.isUnlocked);
   return (
     <div
       className={`${styles.badgeImageBlock} ${badge.isUnlocked === false ? styles.locked : ""}`}

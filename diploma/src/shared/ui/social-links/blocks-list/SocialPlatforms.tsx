@@ -14,19 +14,28 @@ export const SocialPlatforms = ({
   privacySettings,
   size = 33,
 }: SocialPlatformsProps) => {
+  console.log(
+    "links",
+    links?.map((links) => links.platform),
+  );
   const privacyLinks = SOCIAL_PLATFORMS.reduce<
     { platform: SocialPlatform; url: string }[]
   >((acc, { platform, fieldName }) => {
+    console.log(platform);
     const found = links?.find((field) => field.platform == platform);
+    console.log("found", found);
     const privacy = privacySettings?.fields?.find(
       (field) => field.fieldName === fieldName,
     );
+    console.log(privacy);
     if (found && privacy?.visibility !== 0) {
       acc.push({ platform: found.platform, url: found.url });
     }
-
+    console.log(acc);
     return acc;
   }, []);
+
+  console.log("result", privacyLinks);
 
   return (
     <>

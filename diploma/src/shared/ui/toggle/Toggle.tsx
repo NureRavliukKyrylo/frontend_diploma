@@ -25,9 +25,12 @@ export const Toggle = <T extends string>({
   innerWrapperClassName = "",
 }: ToggleProps<T>) => {
   const buttonRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
-  const [pill, setPill] = useState<{ left: number; width: number } | null>(
-    null,
-  );
+  const [pill, setPill] = useState<{
+    left: number;
+    width: number;
+    top: number;
+    height: number;
+  } | null>(null);
 
   useEffect(() => {
     const activeBtn = buttonRefs.current.get(activeValue);
@@ -37,6 +40,8 @@ export const Toggle = <T extends string>({
       setPill({
         left: activeBtn.offsetLeft,
         width: activeBtn.offsetWidth,
+        top: activeBtn.offsetTop,
+        height: activeBtn.offsetHeight,
       });
     };
 
@@ -62,7 +67,12 @@ export const Toggle = <T extends string>({
           <motion.div
             className={`${styles.pill} ${pillClassName}`.trim()}
             initial={false}
-            animate={{ left: pill.left, width: pill.width }}
+            animate={{
+              left: pill.left,
+              width: pill.width,
+              top: pill.top,
+              height: pill.height,
+            }}
             transition={{ type: "spring", stiffness: 500, damping: 35 }}
           />
         )}

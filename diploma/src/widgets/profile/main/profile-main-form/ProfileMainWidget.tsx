@@ -7,6 +7,7 @@ import { LayoutCard } from "@shared/assets/images/layout";
 import { MapUserLocationModal } from "../user-location-modal/MapUserLocationModal";
 import type { User } from "@entities/user/profile";
 import { getFullName } from "@entities/user";
+import { motion } from "framer-motion";
 
 interface ProfileMainWidgetProps {
   skillsChildren?: React.ReactNode;
@@ -101,12 +102,16 @@ export function ProfileMainWidget({
             </div>
           </div>
           <div className={styles.projectsSeeMore}>
-            <LinkButtonWrapper
-              to="/activities/my"
+            <motion.div
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
               className={styles.seeMoreProjectsButton}
             >
-              SEE MORE
-            </LinkButtonWrapper>
+              <LinkButtonWrapper to="/activities/my">
+                SEE MORE
+              </LinkButtonWrapper>
+            </motion.div>
             <img src={LayoutCard} alt="layout" />
           </div>
         </div>
@@ -116,13 +121,16 @@ export function ProfileMainWidget({
             {skillsChildren}
           </div>
           <div className={styles.buttonSkillsBlock}>
-            <LinkButtonWrapper
-              to="/profile"
-              search={{ tab: "skills" }}
+            <motion.div
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
               className={styles.seeMoreSkillsButton}
             >
-              See more
-            </LinkButtonWrapper>
+              <LinkButtonWrapper to="/profile" search={{ tab: "skills" }}>
+                See more
+              </LinkButtonWrapper>
+            </motion.div>
           </div>
         </div>
       </div>
