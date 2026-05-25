@@ -16,6 +16,14 @@
   width: 40px;
   height: 40px;
   opacity: 0.6;
+  @include respond-to(tablet) {
+    width: 34px;
+    height: 34px;
+  }
+  @include respond-to(mobile) {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .hiddenGoogleLogin {

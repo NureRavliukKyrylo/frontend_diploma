@@ -14,7 +14,18 @@ export const ProfileMainTab = ({ user }: ProfileMainTab) => {
     <ProfileMainWidget
       badgesChildren={
         user?.profile?.badgesPreview?.length ? (
-          <BadgesCarouselWidget badges={user.profile.badgesPreview} />
+          <BadgesCarouselWidget
+            badges={user.profile.badgesPreview}
+            minItemWidth={
+              window.innerWidth < 600
+                ? 100
+                : window.innerWidth < 900
+                  ? 130
+                  : window.innerWidth < 1200
+                    ? 160
+                    : 230
+            }
+          />
         ) : (
           <div className={styles.noBadgesContainer}>
             <p className={styles.noBadgesTitle}>No badges yet</p>

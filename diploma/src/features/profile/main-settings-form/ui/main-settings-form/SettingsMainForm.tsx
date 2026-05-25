@@ -11,6 +11,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useSettingsMainForm } from "../../model/useSettingsMainForm";
 import { MapLocationModal } from "../location-modal-picker/MapLocationModal";
 import { motion } from "framer-motion";
+import { useMediaQuery } from "usehooks-ts";
 
 export function SettingsMainForm() {
   const {
@@ -31,6 +32,11 @@ export function SettingsMainForm() {
   const handleOpenModal = () => {
     setIsMapOpen(true);
   };
+  const isLaptop = useMediaQuery("(max-width: 1200px)");
+  const isMobile = useMediaQuery("(max-width: 600px)");
+  const isTablet = useMediaQuery("(max-width: 900px)");
+
+  const minHeight = isMobile ? 140 : isTablet ? 180 : 220;
 
   return (
     <form onSubmit={formik.handleSubmit} className={styles.mainInfoProfileForm}>
@@ -106,7 +112,7 @@ export function SettingsMainForm() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.submitCount > 0 ? formik.errors.about : ""}
-              minHeight={220}
+              minHeight={minHeight}
               variant="profile"
             />
           </div>
@@ -125,6 +131,7 @@ export function SettingsMainForm() {
         </div>
         <div className={styles.formInfoPublicProfile}>
           <UploadImage
+            maxWidth={isLaptop ? "600px" : undefined}
             src={formik.values.avatar}
             onChange={handleFileChange}
             error={formik.touched.avatar ? formik.errors.avatar : null}

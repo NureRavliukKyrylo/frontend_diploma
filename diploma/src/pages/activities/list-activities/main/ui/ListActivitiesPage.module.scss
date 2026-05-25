@@ -111,15 +111,4 @@
   width: 100%;
   min-height: 600px;
   border-radius: 20px;
-
-  @include respond-to(laptop) {
-    min-height: 480px;
-  }
-  @include respond-to(tablet) {
-    min-height: 360px;
-  }
-  @include respond-to(mobile) {
-    min-height: 280px;
-    border-radius: 14px;
-  }
 }

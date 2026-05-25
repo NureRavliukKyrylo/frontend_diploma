@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 export function LinksForm({}) {
   const { formik, isLoading, errorMessage } = useSocialLinksSettingsForm();
-  console.log(formik.values);
+
   return (
     <form
       onSubmit={formik.handleSubmit}

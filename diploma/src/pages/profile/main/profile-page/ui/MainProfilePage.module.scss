@@ -227,7 +227,7 @@
         font-size: 15px;
       }
       @include respond-to(mobile) {
-        padding: 0 8px;
+        padding: 5px 8px;
         font-size: 13px;
         min-width: unset;
       }
@@ -375,6 +375,7 @@
 
   @include respond-to(tablet) {
     height: 50px;
+    margin-bottom: 10px;
   }
   @include respond-to(mobile) {
     height: 44px;
@@ -392,8 +393,7 @@
     height: 50px;
   }
   @include respond-to(mobile) {
-    width: 44px;
-    height: 44px;
+    display: none;
   }
 }
 

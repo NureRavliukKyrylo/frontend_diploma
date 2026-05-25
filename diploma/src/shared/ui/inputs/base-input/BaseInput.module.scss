@@ -36,6 +36,16 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
 
     &::placeholder {
       @include font-base();
+
+      @include respond-to(laptop) {
+        font-size: 16px;
+      }
+      @include respond-to(tablet) {
+        font-size: 14px;
+      }
+      @include respond-to(mobile) {
+        font-size: 13px;
+      }
     }
   }
 
@@ -55,7 +65,14 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
   .label.social {
     left: 2.8rem;
   }
-
+  .label.email {
+    @include respond-to(tablet) {
+      left: 2.6rem;
+    }
+    @include respond-to(mobile) {
+      left: 2.5rem;
+    }
+  }
   &.profile {
     .input {
       border: 1px solid black;
@@ -69,6 +86,12 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
       padding-left: 3rem;
       background: #f9f9f9;
       padding-left: 3.2rem;
+      @include respond-to(tablet) {
+        padding-left: 2.7rem;
+      }
+      @include respond-to(mobile) {
+        padding-left: 2.4rem;
+      }
     }
     .input.email {
       padding-left: 3rem;

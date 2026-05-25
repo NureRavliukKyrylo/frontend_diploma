@@ -31,11 +31,11 @@ export function Carousel<T>({
       if (!parent) return;
 
       const parentWidth = parent.clientWidth;
-
       let count = Math.floor(parentWidth / minItemWidth);
+      console.log(count);
       count = Math.max(1, Math.min(count, items.length));
 
-      const gap = 16;
+      const gap = parentWidth < 600 ? 8 : parentWidth < 900 ? 12 : 16;
       const totalGap = gap * (count - 1);
       const rawWidth = (parentWidth - totalGap) / count;
       const clampedWidth = maxItemWidth

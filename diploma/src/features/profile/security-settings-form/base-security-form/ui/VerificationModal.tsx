@@ -1,10 +1,12 @@
 import { BaseModal } from "@shared/ui/modals";
 import { useUserProfileStore } from "@entities/user";
 import { verificationConfig } from "../configs/verificationConfig";
+import { useMediaQuery } from "usehooks-ts";
 
 export const VerificationModal = () => {
   const { activeVerificationModal, verificationSteps, closeVerificationModal } =
     useUserProfileStore();
+  const isTabletOrLess = useMediaQuery("(max-width: 900px)");
 
   if (!activeVerificationModal) return null;
 
@@ -22,7 +24,7 @@ export const VerificationModal = () => {
         closeVerificationModal(activeVerificationModal);
       }}
       showClosed={false}
-      maxWidth="700px"
+      maxWidth={isTabletOrLess ? "500px" : "700px"}
     >
       {StepComponent}
     </BaseModal>

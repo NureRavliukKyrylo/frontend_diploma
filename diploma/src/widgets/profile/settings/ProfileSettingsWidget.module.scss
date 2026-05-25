@@ -1,74 +1,194 @@
 @use "@shared/assets/styles" as *;
 
-.blockSettingsProfileForms {
-  width: 70%;
+.headerSideBar {
   display: flex;
-  flex-direction: column;
-  gap: 50px;
-  .blockActionsProfileSettings {
+  align-items: center;
+  gap: 16px;
+  height: 60px;
+  align-items: stretch;
+
+  @include respond-to(laptop) {
+    gap: 14px;
+  }
+  @include respond-to(tablet) {
     display: grid;
-    grid-template-columns: 560px 1fr 60px;
-    grid-template-rows: auto;
-    justify-content: space-between;
-    height: 60px;
-    .backAndToggleSection {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      .backWrapper {
-        background: #ffffff;
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
-        padding: 5px;
-        border-radius: 50%;
-        width: 56px;
-      }
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    height: auto;
+    gap: 12px;
+    align-items: stretch;
+
+    .toggleProfileSettings {
+      grid-column: 1 / 4;
+      grid-row: 1;
+    }
+    .backWrapper {
+      grid-column: 1;
+      grid-row: 2;
+      width: auto;
     }
     .logoutWrapper {
-      background: #ffffff;
-      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
-      padding: 5px;
-      border-radius: 50%;
-      grid-column: 3 / 4;
+      grid-column: 3;
+      grid-row: 2;
+      width: auto;
     }
   }
-  .toggleProfileSettingsButton {
-    color: rgba(0, 0, 0, 0.8);
-    min-width: 130px;
-    padding: 0px 20px;
-    &:hover {
-      background: rgba(231, 226, 226, 0.5);
+  @include respond-to(mobile) {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    height: auto;
+    gap: 10px;
+    align-items: stretch;
+
+    .toggleProfileSettings {
+      grid-column: 1 / 4;
+      grid-row: 1;
+    }
+    .backWrapper {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    .logoutWrapper {
+      grid-column: 3;
+      grid-row: 2;
     }
   }
-  .toggleProfileSettingsButtonActive {
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 800;
-    transform: scale(1.1);
-    transition: transform 0.2s ease-in-out;
-    &:hover {
-      background: transparent;
-    }
-  }
-  .toggleProfileSettings {
-    background: rgba(255, 255, 255, 0.6);
+
+  .backWrapper {
+    background: #ffffff;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
-    height: 100%;
-    border-radius: 50px;
-    padding: 10px 0px;
+    padding: 5px;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include respond-to(tablet) {
+      max-width: 50px;
+      max-height: 50px;
+    }
+    @include respond-to(mobile) {
+      max-width: 46px;
+      max-height: 46px;
+      padding: 4px;
+    }
+  }
+
+  .logoutWrapper {
+    background: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    padding: 5px;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include respond-to(tablet) {
+      max-width: 50px;
+      max-height: 50px;
+    }
+    @include respond-to(mobile) {
+      max-width: 46px;
+      max-height: 46px;
+    }
+  }
+}
+
+.toggleProfileSettingsButton {
+  color: rgba(0, 0, 0, 0.8);
+  min-width: 130px;
+  padding: 0 20px;
+  flex-grow: 1;
+
+  &:hover {
+    background: rgba(231, 226, 226, 0.5);
+  }
+
+  @include respond-to(laptop) {
+    min-width: 100px;
+    padding: 0 14px;
+    font-size: 18px;
+  }
+  @include respond-to(tablet) {
+    min-width: 80px;
+    padding: 0 10px;
+    font-size: 15px;
+  }
+  @include respond-to(mobile) {
+    min-width: unset;
+    padding: 0px 8px;
+    font-size: 13px;
+  }
+}
+
+.toggleProfileSettingsButtonActive {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 800;
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+
+  @include respond-to(tablet) {
+    transform: scale(1.05);
+  }
+  @include respond-to(mobile) {
+    transform: scale(1.02);
+  }
+
+  &:hover {
+    background: transparent;
+  }
+}
+
+.toggleProfileSettings {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  height: 100%;
+  border-radius: 50px;
+  padding: 10px 0;
+  width: 100%;
+
+  @include respond-to(tablet) {
+    flex: 1;
+    padding: 5px 0;
+    min-height: 45px;
+  }
+  @include respond-to(mobile) {
+    padding: 4px 0;
+    min-height: 40px;
     width: 100%;
   }
-  .toggleProfileSettingsPill {
-    background-color: black;
-  }
-  .toggleProfileSettingsInnerWrapper {
-    justify-content: space-between;
-    padding: 0px 10px;
-  }
-  .backButtonProfile {
-    background: black;
+}
 
-    img {
-      filter: invert(1);
-      opacity: 1;
-    }
+.toggleProfileSettingsPill {
+  background-color: black;
+}
+
+.toggleProfileSettingsInnerWrapper {
+  justify-content: space-between;
+  padding: 0 10px;
+
+  @include respond-to(tablet) {
+    justify-content: space-between;
   }
+  @include respond-to(mobile) {
+    padding: 0 6px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
+
+.backButtonProfile {
+  background: black;
+
+  img {
+    filter: invert(1);
+    opacity: 1;
+  }
+}
+
+.settingsContent {
+  min-width: 0;
 }

@@ -10,16 +10,9 @@ export const SettingsProfilePageSkeleton = () => {
         <Skeleton className={styles.skDeleteButton} />
       </div>
 
-      <div className={styles.blockSettingsProfileForms}>
-        <div className={styles.blockActionsProfileSettings}>
-          <div className={styles.backAndToggleSection}>
-            <Skeleton className={styles.skBackBtn} />
-            <Skeleton className={styles.skToggle} />
-          </div>
-          <Skeleton className={styles.skLogoutBtn} />
-        </div>
-        <Skeleton className={styles.skContent} />
-      </div>
+      <Skeleton className={styles.skToggle} />
+
+      <Skeleton className={styles.skContent} />
     </div>
   );
 };

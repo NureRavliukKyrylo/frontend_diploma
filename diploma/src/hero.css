@@ -6,6 +6,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  --breakpoint-xss: 24rem;
   --breakpoint-xs: 30rem;
   --breakpoint-lp: 75rem;
 }

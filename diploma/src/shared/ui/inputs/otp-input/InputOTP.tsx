@@ -24,7 +24,7 @@ export const InputOtp: React.FC<InputOtpProps> = ({
             "segment",
             "basis-0 flex-1",
             "max-w-[65px] min-w-[28px]",
-            "h-[40px] xs:h-[55px] xs:w-[50px] sm:h-[55px] md:h-[60px] lg:h-[65px]",
+            "h-[40px] xss:h-[50px] xs:h-[55px] xs:w-[50px] sm:h-[55px] md:h-[60px] lg:h-[65px]",
             "flex items-center justify-center rounded-xl",
             "border border-black shadow-md font-inter font-bold text-black",
             "text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px]",

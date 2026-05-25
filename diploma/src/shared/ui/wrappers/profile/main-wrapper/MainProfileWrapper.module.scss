@@ -1,3 +1,5 @@
+@use "@shared/assets/styles" as *;
+
 .mainProfileWrapper {
   display: flex;
   flex-direction: column;
@@ -6,4 +8,12 @@
   padding: 30px 40px;
   gap: 20px;
   background-color: #ffffff;
+  @include respond-to(tablet) {
+    padding: 20px 30px;
+    gap: 15px;
+  }
+  @include respond-to(mobile) {
+    padding: 20px 20px;
+    gap: 13px;
+  }
 }

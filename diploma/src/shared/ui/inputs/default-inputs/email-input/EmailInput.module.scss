@@ -1,3 +1,5 @@
+@use "@shared/assets/styles" as *;
+
 $label-color: rgba(0, 0, 0, 0.6);
 
 .emailIcon {
@@ -13,6 +15,18 @@ $label-color: rgba(0, 0, 0, 0.6);
     width: 1.75rem;
     height: 1.75rem;
   }
+  @include respond-to(tablet) {
+    svg {
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+  }
+  @include respond-to(mobile) {
+    svg {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+  }
 }
 
 .emailInputDivider {
@@ -24,4 +38,10 @@ $label-color: rgba(0, 0, 0, 0.6);
   background-color: $label-color;
   transform: scaleX(0.5);
   transform-origin: center;
+  @include respond-to(tablet) {
+    left: 2.5rem;
+  }
+  @include respond-to(mobile) {
+    left: 2.4rem;
+  }
 }

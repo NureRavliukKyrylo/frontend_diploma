@@ -8,9 +8,14 @@ interface UploadImageProps {
   onChange: (file: File | null) => void;
   error?: string | null;
   inputName?: string;
+  maxWidth?: string;
 }
 
-export const UploadImage = ({ src, onChange }: UploadImageProps) => {
+export const UploadImage = ({
+  src,
+  onChange,
+  maxWidth = "820px",
+}: UploadImageProps) => {
   const {
     inputRef,
     isModalCropOpen,
@@ -65,7 +70,7 @@ export const UploadImage = ({ src, onChange }: UploadImageProps) => {
           src={preview}
           isOpen={isModalCropOpen}
           onClose={handleClose}
-          maxWidth="820px"
+          maxWidth={maxWidth}
           onSave={handleSave}
         />
       )}

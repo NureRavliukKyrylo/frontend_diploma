@@ -12,6 +12,7 @@ import {
 } from "@entities/user";
 import { profileRoutes } from "@shared/routes";
 import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useMediaQuery } from "usehooks-ts";
 
 export function ProfileSettingsWidget() {
   const search = useSearch({ from: "/_masterLayout/profile/settings/" });
@@ -24,55 +25,61 @@ export function ProfileSettingsWidget() {
 
   const { component, wrapperProps } = profileSettingsForms[activeTab];
 
+  const isMobile = useMediaQuery("(max-width: 600px)");
+  const isTablet = useMediaQuery("(max-width: 900px)");
+
+  const minHeight = isMobile ? 140 : isTablet ? 180 : 220;
   return (
-    <div className={styles.blockSettingsProfileForms}>
-      <div className={styles.blockActionsProfileSettings}>
-        <div className={styles.backAndToggleSection}>
-          <div className={styles.backWrapper}>
-            <BackButton
-              from={profileRoutes.settingsFrom}
-              to=".."
-              className={styles.backButtonProfile}
-            />
-          </div>
-          <Toggle<ProfileSettingsMode>
-            tabs={profileSettingsTabs}
-            activeValue={activeTab}
-            onChange={handleTabChange}
-            buttonClassName={styles.toggleProfileSettingsButton}
-            activeButtonClassName={styles.toggleProfileSettingsButtonActive}
-            className={styles.toggleProfileSettings}
-            pillClassName={styles.toggleProfileSettingsPill}
-            innerWrapperClassName={styles.toggleProfileSettingsInnerWrapper}
+    <>
+      <div className={styles.headerSideBar}>
+        <div className={styles.backWrapper}>
+          <BackButton
+            from={profileRoutes.settingsFrom}
+            to=".."
+            className={styles.backButtonProfile}
           />
         </div>
+        <Toggle<ProfileSettingsMode>
+          tabs={profileSettingsTabs}
+          activeValue={activeTab}
+          onChange={handleTabChange}
+          buttonClassName={styles.toggleProfileSettingsButton}
+          activeButtonClassName={styles.toggleProfileSettingsButtonActive}
+          className={styles.toggleProfileSettings}
+          pillClassName={styles.toggleProfileSettingsPill}
+          innerWrapperClassName={styles.toggleProfileSettingsInnerWrapper}
+        />
+
         <div className={styles.logoutWrapper}>
           <LogoutButton />
         </div>
       </div>
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeTab}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{
-            opacity: 1,
-            x: 0,
-            transition: { duration: 0.25, ease: "easeOut" },
-          }}
-          exit={{
-            opacity: 0,
-            x: -20,
-            transition: { duration: 0.2, ease: "easeIn" },
-          }}
-        >
-          <SettingsWrapper
-            settingsTitle={wrapperProps?.settingsTitle}
-            settingsDescription={wrapperProps?.settingsDescription}
+
+      <div className={styles.settingsContent}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{
+              opacity: 1,
+              x: 0,
+              transition: { duration: 0.25, ease: "easeOut" },
+            }}
+            exit={{
+              opacity: 0,
+              x: -20,
+              transition: { duration: 0.2, ease: "easeIn" },
+            }}
           >
-            {component}
-          </SettingsWrapper>
-        </motion.div>
-      </AnimatePresence>
-    </div>
+            <SettingsWrapper
+              settingsTitle={wrapperProps?.settingsTitle}
+              settingsDescription={wrapperProps?.settingsDescription}
+            >
+              {component}
+            </SettingsWrapper>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </>
   );
 }

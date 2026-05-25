@@ -9,6 +9,7 @@ export const AssignSkillCard = () => {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       transition={{ type: "spring", stiffness: 200, damping: 25 }}
+      style={{ height: "100%" }}
     >
       <Link to="/skills" className={styles.assignSkillCardWapper}>
         <div className={styles.cardAssignSkillContent}>

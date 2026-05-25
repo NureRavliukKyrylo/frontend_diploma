@@ -67,6 +67,7 @@ export const ProfileSkillsTab = ({ search }: ProfileSkillsTabProps) => {
                         variants={staggeredCardVariantsNoHover}
                         initial="hidden"
                         animate="visible"
+                        style={{ height: "100%" }}
                       >
                         <AssignSkillCard />
                       </motion.div>

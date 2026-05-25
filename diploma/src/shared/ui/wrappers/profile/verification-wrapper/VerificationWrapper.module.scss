@@ -7,11 +7,35 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+
+  @include respond-to(laptop) {
+    padding: 40px 32px;
+  }
+  @include respond-to(tablet) {
+    padding: 30px 24px;
+    gap: 8px;
+  }
+  @include respond-to(mobile) {
+    padding: 20px 16px;
+    gap: 6px;
+  }
+
   img {
     width: 130px;
     aspect-ratio: 1 / 1;
     object-fit: contain;
+
+    @include respond-to(laptop) {
+      width: 100px;
+    }
+    @include respond-to(tablet) {
+      width: 80px;
+    }
+    @include respond-to(mobile) {
+      width: 64px;
+    }
   }
+
   .wrapperVerificationInfo {
     display: flex;
     justify-content: center;
@@ -19,18 +43,46 @@
     align-items: center;
     gap: 20px;
     width: 100%;
+
+    @include respond-to(tablet) {
+      gap: 16px;
+    }
+    @include respond-to(mobile) {
+      gap: 12px;
+    }
+
     .infoVerificationWrapper {
       text-align: center;
+
       h1 {
         @include font-base(40px, 800);
+
+        @include respond-to(laptop) {
+          font-size: 32px;
+        }
+        @include respond-to(tablet) {
+          font-size: 26px;
+        }
+        @include respond-to(mobile) {
+          font-size: 20px;
+        }
       }
+
       p {
         color: rgba(0, 0, 0, 0.74);
         @include font-base(28px, 500);
         line-height: 120%;
+
+        @include respond-to(laptop) {
+          font-size: 22px;
+        }
+        @include respond-to(tablet) {
+          font-size: 18px;
+        }
+        @include respond-to(mobile) {
+          font-size: 14px;
+        }
       }
     }
-  }
-  .childrenContent {
   }
 }

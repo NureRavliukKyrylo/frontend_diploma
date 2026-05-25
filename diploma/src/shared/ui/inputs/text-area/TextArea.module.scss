@@ -15,17 +15,36 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
         border-color: $error-color;
       }
     }
+
     &.profile {
       .textarea {
         border-radius: 20px;
         font-size: 18px;
         background: #f9f9f9;
+
+        @include respond-to(tablet) {
+          font-size: 15px;
+          border-radius: 16px;
+        }
+        @include respond-to(mobile) {
+          font-size: 13px;
+          border-radius: 14px;
+        }
       }
+
       .charCount {
         color: #8c0000;
         @include font-base(18px, 800);
+
+        @include respond-to(tablet) {
+          font-size: 14px;
+        }
+        @include respond-to(mobile) {
+          font-size: 12px;
+        }
       }
     }
+
     .textarea {
       width: 100%;
       padding: $textarea-padding;
@@ -43,6 +62,22 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
         box-shadow 0.2s ease,
         background-color 0.2s ease;
 
+      @include respond-to(laptop) {
+        font-size: 17px;
+        padding: 16px;
+        padding-bottom: calc(16px + #{$charCount-height});
+      }
+      @include respond-to(tablet) {
+        font-size: 15px;
+        padding: 14px;
+        padding-bottom: calc(14px + #{$charCount-height});
+      }
+      @include respond-to(mobile) {
+        font-size: 13px;
+        padding: 12px;
+        padding-bottom: calc(12px + #{$charCount-height});
+      }
+
       &.focused {
         background: #ffffff;
         outline: none;
@@ -58,11 +93,27 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
       @include font-base(15px, 700);
       color: rgba(0, 0, 0, 0.6);
       pointer-events: none;
+
+      @include respond-to(tablet) {
+        bottom: 14px;
+        right: 10px;
+        font-size: 13px;
+      }
+      @include respond-to(mobile) {
+        bottom: 12px;
+        right: 8px;
+        font-size: 11px;
+      }
     }
   }
+
   .errorInput {
     @include font-base(13px, 700);
     color: $error-color;
     margin-top: 0.25rem;
+
+    @include respond-to(mobile) {
+      font-size: 11px;
+    }
   }
 }

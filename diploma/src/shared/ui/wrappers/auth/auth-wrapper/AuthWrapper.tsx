@@ -49,9 +49,6 @@ export function AuthWrapper<T extends string>({
             <span>OR SIGN UP WITH</span>
           </div>
           <div className={styles.apiButtons}>
-            <button className={styles.appleSign}>
-              <img src={AppleIcon} alt="apple" />
-            </button>
             <GoogleButton />
           </div>
         </div>

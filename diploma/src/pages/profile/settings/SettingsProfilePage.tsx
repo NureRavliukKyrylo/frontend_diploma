@@ -16,7 +16,6 @@ export function SettingsProfilePage() {
           image={user?.profile?.avatarUrl}
           name={getFullName(user.firstName, user.lastName)}
           email={user?.email}
-          phone={user?.profile?.phone}
         >
           <DeleteProfileButton />
         </UserHeaderWidget>

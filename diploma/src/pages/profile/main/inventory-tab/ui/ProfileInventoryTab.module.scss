@@ -6,6 +6,19 @@
   gap: 30px;
   align-items: stretch;
   grid-auto-rows: auto;
+
+  @include respond-to(laptop) {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 22px;
+  }
+  @include respond-to(tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+  }
+  @include respond-to(mobile) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
 }
 
 .badgeImageWrapper {
@@ -16,8 +29,26 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @include respond-to(tablet) {
+    gap: 16px;
+  }
+  @include respond-to(mobile) {
+    gap: 12px;
+  }
+
   .achievementsTitle {
     @include font-base(40px, 900);
+
+    @include respond-to(laptop) {
+      font-size: 32px;
+    }
+    @include respond-to(tablet) {
+      font-size: 26px;
+    }
+    @include respond-to(mobile) {
+      font-size: 22px;
+    }
   }
 }
 
@@ -42,22 +73,66 @@
   width: 100%;
   min-height: 300px;
 
+  @include respond-to(tablet) {
+    padding: 40px 16px;
+    min-height: 240px;
+  }
+  @include respond-to(mobile) {
+    padding: 30px 12px;
+    min-height: 200px;
+  }
+
   h2 {
     @include font-base(30px, 800);
     color: rgba(0, 0, 0, 0.7);
+
+    @include respond-to(tablet) {
+      font-size: 24px;
+    }
+    @include respond-to(mobile) {
+      font-size: 20px;
+    }
   }
 
   p {
     @include font-base(22px, 400);
     color: rgba(0, 0, 0, 0.4);
+
+    @include respond-to(tablet) {
+      font-size: 18px;
+    }
+    @include respond-to(mobile) {
+      font-size: 15px;
+    }
   }
 }
 
 .interactiveBadge {
   cursor: pointer;
+  max-width: 300px;
+  width: 100%;
+  margin: 0 auto;
+
+  @include respond-to(laptop) {
+    max-width: 260px;
+  }
+  @include respond-to(tablet) {
+    max-width: 220px;
+  }
+  @include respond-to(mobile) {
+    max-width: 150px;
+  }
 }
+
 .errorHttpMessage {
   font-size: 30px;
+
+  @include respond-to(tablet) {
+    font-size: 24px;
+  }
+  @include respond-to(mobile) {
+    font-size: 20px;
+  }
 }
 
 .badgeDetailWrapper {
@@ -76,5 +151,9 @@
     align-items: center;
     padding: 24px;
     gap: 20px;
+  }
+  @include respond-to(mobile) {
+    padding: 16px;
+    gap: 16px;
   }
 }

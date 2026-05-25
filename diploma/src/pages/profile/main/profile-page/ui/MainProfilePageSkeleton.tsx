@@ -20,14 +20,12 @@ export const MainProfilePageSkeleton = () => {
         </div>
       </div>
 
-      <div className={styles.mainWrapperUserInfo}>
-        <div className={styles.actionsChangeBlock}>
-          <Skeleton className={styles.skToggle} />
-          <Skeleton className={styles.skSettingsBtn} />
-        </div>
-        <div className={styles.userActionsBlock}>
-          <Skeleton className={styles.skContent} />
-        </div>
+      <div className={styles.actionsChangeBlock}>
+        <Skeleton className={styles.skToggle} />
+        <Skeleton className={styles.skSettingsBtn} />
+      </div>
+      <div className={styles.userActionsBlock}>
+        <Skeleton className={styles.skContent} />
       </div>
     </div>
   );
