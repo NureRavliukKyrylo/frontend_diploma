@@ -4,71 +4,186 @@
   display: flex;
   flex-direction: column;
   gap: 25px;
+
+  @include respond-to(tablet) {
+    gap: 18px;
+  }
+  @include respond-to(mobile) {
+    gap: 12px;
+  }
+
   .baseInfo {
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    @include respond-to(mobile) {
+      gap: 6px;
+    }
+
     .subBaseInfoBlock {
       display: flex;
       align-items: center;
       gap: 10px;
+
+      @include respond-to(tablet) {
+        gap: 8px;
+      }
+      @include respond-to(mobile) {
+        gap: 6px;
+      }
+
       svg {
         width: 30px;
         height: 30px;
+        flex-shrink: 0;
+
+        @include respond-to(tablet) {
+          width: 22px;
+          height: 22px;
+        }
+        @include respond-to(mobile) {
+          width: 18px;
+          height: 18px;
+        }
       }
+
       .timeIcon {
         color: #b3b3b3;
       }
       .mapIcon {
         color: rgba(0, 0, 0, 0.3);
       }
+
       .divider {
         box-shadow: 0 0 0 0.2px rgba(0, 0, 0, 0.6);
         height: 29px;
         align-self: center;
+
+        @include respond-to(tablet) {
+          height: 22px;
+        }
+        @include respond-to(mobile) {
+          height: 18px;
+        }
       }
+
       .calendarDivider {
         box-shadow: 0 0 0 0.5px #8c0000;
         height: 29px;
         align-self: center;
+
+        @include respond-to(tablet) {
+          height: 22px;
+        }
+        @include respond-to(mobile) {
+          height: 18px;
+        }
       }
+
       .calendarInfo {
         background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         @include font-base(21px, 600);
+
+        @include respond-to(laptop) {
+          font-size: 18px;
+        }
+        @include respond-to(tablet) {
+          font-size: 15px;
+        }
+        @include respond-to(mobile) {
+          font-size: 12px;
+        }
       }
+
       .info {
         color: rgba(0, 0, 0, 0.6);
         @include font-base(21px, 600);
+
+        @include respond-to(laptop) {
+          font-size: 18px;
+        }
+        @include respond-to(tablet) {
+          font-size: 15px;
+        }
+        @include respond-to(mobile) {
+          font-size: 12px;
+        }
       }
     }
   }
+
   .descriptionInfo {
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    @include respond-to(mobile) {
+      gap: 6px;
+    }
+
     h1 {
       color: rgba(0, 0, 0, 0.8);
       @include font-base(24px, 700);
+
+      @include respond-to(laptop) {
+        font-size: 20px;
+      }
+      @include respond-to(tablet) {
+        font-size: 16px;
+      }
+      @include respond-to(mobile) {
+        font-size: 13px;
+      }
     }
+
     p {
       color: rgba(0, 0, 0, 0.5);
       @include font-base(21px, 500);
+
+      @include respond-to(laptop) {
+        font-size: 17px;
+      }
+      @include respond-to(tablet) {
+        font-size: 14px;
+      }
+      @include respond-to(mobile) {
+        font-size: 12px;
+      }
     }
   }
+
   .participationsInfo {
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+    @include respond-to(mobile) {
+      gap: 6px;
+    }
+
     h1 {
       color: rgba(0, 0, 0, 0.8);
       @include font-base(24px, 700);
+
+      @include respond-to(laptop) {
+        font-size: 20px;
+      }
+      @include respond-to(tablet) {
+        font-size: 16px;
+      }
+      @include respond-to(mobile) {
+        font-size: 13px;
+      }
     }
+
     .avatarsGroup {
       display: flex;
       align-items: center;
+
       .avatarVolunteer {
         width: 66px;
         height: 66px;
@@ -79,7 +194,17 @@
         &:first-child {
           margin-left: 0;
         }
+
+        @include respond-to(tablet) {
+          width: 48px;
+          height: 48px;
+        }
+        @include respond-to(mobile) {
+          width: 36px;
+          height: 36px;
+        }
       }
+
       .remainingAvatarItem {
         width: 66px;
         height: 66px;
@@ -96,12 +221,31 @@
         background-color: white;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
         font-size: 17px;
+
+        @include respond-to(tablet) {
+          width: 48px;
+          height: 48px;
+          font-size: 13px;
+        }
+        @include respond-to(mobile) {
+          width: 36px;
+          height: 36px;
+          font-size: 11px;
+        }
       }
     }
+
     .noMembers {
       @include font-base(18px, 600);
       line-height: 120%;
       color: rgba(0, 0, 0, 0.35);
+
+      @include respond-to(tablet) {
+        font-size: 14px;
+      }
+      @include respond-to(mobile) {
+        font-size: 12px;
+      }
     }
   }
 }

@@ -8,6 +8,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { AnimatePresence, motion } from "framer-motion";
 import { BasePopover } from "@shared/ui/modals";
 import { CalendarDetailSkeleton } from "./CalendarDetailSkeleton";
+import { useMediaQuery } from "usehooks-ts";
 
 interface CalendarEventInfoProps {
   activityId: string;
@@ -28,6 +29,7 @@ export const CalendarEventInfo = ({
   onNext,
   anchor,
 }: CalendarEventInfoProps) => {
+  const isTablet = useMediaQuery("(max-width: 900px)");
   const { data: event, isLoading: isEventLoading } = useQuery({
     ...eventQuery.id(activityId),
     enabled: type === "event",
@@ -41,7 +43,12 @@ export const CalendarEventInfo = ({
   const isLoading = isEventLoading || isTaskLoading;
 
   return (
-    <BasePopover anchor={anchor} onClose={onClose} placement="right">
+    <BasePopover
+      anchor={anchor}
+      onClose={onClose}
+      placement={isTablet ? "bottom-start" : "right"}
+      center={isTablet}
+    >
       <motion.div
         className={styles.eventInfoWrapper}
         initial={{ opacity: 0, scale: 0.95, x: 8 }}

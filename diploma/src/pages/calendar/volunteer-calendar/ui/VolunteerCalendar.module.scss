@@ -1,6 +1,19 @@
+@use "@shared/assets/styles" as *;
+
 .volunteerCalendarWrapper {
   width: 85%;
+
+  @include respond-to(null, 1500px) {
+    width: 92%;
+  }
+  @include respond-to(null, 1200px) {
+    width: 100%;
+  }
+  @include respond-to(mobile) {
+    width: 100%;
+  }
 }
+
 .eventCard {
   cursor: pointer;
   width: 100%;

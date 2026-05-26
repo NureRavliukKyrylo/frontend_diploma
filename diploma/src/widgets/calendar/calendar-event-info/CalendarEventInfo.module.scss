@@ -1,18 +1,73 @@
 @use "@shared/assets/styles" as *;
+
 .eventInfoWrapper {
   padding: 40px;
   border-radius: 50px;
   background: #ffffff;
   box-shadow: 0px 2px 20px rgba(140, 0, 0, 0.5);
   width: 700px;
-  .closeWindow {
-    width: 25px;
-    cursor: pointer;
+
+  @include respond-to(laptop) {
+    width: 580px;
+    padding: 32px;
+    border-radius: 40px;
   }
+  @include respond-to(tablet) {
+    width: 480px;
+    padding: 24px;
+    border-radius: 32px;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  @include respond-to(mobile) {
+    width: calc(100vw - 32px);
+    padding: 14px;
+    border-radius: 20px;
+    max-height: 75vh;
+    overflow-y: auto;
+  }
+
+  .closeWindow {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+
+    @include respond-to(laptop) {
+      width: 28px;
+      height: 28px;
+    }
+    @include respond-to(tablet) {
+      width: 22px;
+      height: 22px;
+    }
+    @include respond-to(mobile) {
+      width: 18px;
+      height: 18px;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  }
+
   .infoEvent {
     display: flex;
     flex-direction: column;
     gap: 30px;
+
+    @include respond-to(tablet) {
+      gap: 20px;
+    }
+    @include respond-to(mobile) {
+      gap: 14px;
+    }
+
     .headerInfo {
       display: flex;
       align-items: center;
@@ -20,6 +75,15 @@
       gap: 40px;
       position: relative;
       padding-bottom: 25px;
+
+      @include respond-to(tablet) {
+        gap: 20px;
+        padding-bottom: 16px;
+      }
+      @include respond-to(mobile) {
+        gap: 12px;
+        padding-bottom: 12px;
+      }
 
       &::after {
         content: "";
@@ -37,10 +101,19 @@
         );
         opacity: 0.8;
       }
+
       .leftBlock {
         display: flex;
         align-items: center;
         gap: 15px;
+
+        @include respond-to(tablet) {
+          gap: 10px;
+        }
+        @include respond-to(mobile) {
+          gap: 8px;
+        }
+
         h1 {
           @include font-base(30px, 700);
           background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
@@ -49,10 +122,28 @@
           background-clip: text;
           text-transform: uppercase;
           line-height: 110%;
+
+          @include respond-to(laptop) {
+            font-size: 24px;
+          }
+          @include respond-to(tablet) {
+            font-size: 18px;
+          }
+          @include respond-to(mobile) {
+            font-size: 14px;
+          }
         }
+
         .navigationsBlock {
           display: flex;
           gap: 10px;
+
+          @include respond-to(tablet) {
+            gap: 7px;
+          }
+          @include respond-to(mobile) {
+            gap: 5px;
+          }
 
           .prevButton,
           .nextButton {
@@ -70,11 +161,29 @@
               opacity: 0.75;
             }
 
+            @include respond-to(tablet) {
+              width: 22px;
+              height: 22px;
+            }
+            @include respond-to(mobile) {
+              width: 18px;
+              height: 18px;
+            }
+
             svg {
               width: 10px;
               height: 16px;
               color: #8c0000;
               display: block;
+
+              @include respond-to(tablet) {
+                width: 8px;
+                height: 13px;
+              }
+              @include respond-to(mobile) {
+                width: 6px;
+                height: 10px;
+              }
             }
           }
 
@@ -90,13 +199,40 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+
+      @include respond-to(tablet) {
+        gap: 14px;
+      }
+      @include respond-to(mobile) {
+        gap: 10px;
+      }
+
       h1 {
         color: rgba(0, 0, 0, 0.8);
         @include font-base(24px, 700);
+
+        @include respond-to(laptop) {
+          font-size: 20px;
+        }
+        @include respond-to(tablet) {
+          font-size: 16px;
+        }
+        @include respond-to(mobile) {
+          font-size: 13px;
+        }
       }
+
       .actions {
         display: flex;
         gap: 20px;
+
+        @include respond-to(tablet) {
+          gap: 14px;
+        }
+        @include respond-to(mobile) {
+          gap: 10px;
+        }
+
         .attendingAgree {
           background: #000000;
           box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
@@ -108,7 +244,26 @@
           justify-content: center;
           align-items: center;
           text-transform: uppercase;
+          padding: 8px 0;
+
+          @include respond-to(laptop) {
+            font-size: 22px;
+            min-width: 120px;
+          }
+          @include respond-to(tablet) {
+            font-size: 16px;
+            min-width: 90px;
+            border-radius: 22px;
+            padding: 6px 0;
+          }
+          @include respond-to(mobile) {
+            font-size: 13px;
+            min-width: 70px;
+            border-radius: 18px;
+            padding: 4px 0;
+          }
         }
+
         .attendingDisagree {
           @extend .attendingAgree;
           background: #f5f5f5;
@@ -123,18 +278,33 @@
   display: flex;
   flex-direction: column;
   gap: 25px;
+
+  @include respond-to(tablet) {
+    gap: 18px;
+  }
+  @include respond-to(mobile) {
+    gap: 12px;
+  }
 }
 
 .baseInfo {
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  @include respond-to(mobile) {
+    gap: 6px;
+  }
 }
 
 .subBaseInfoBlock {
   display: flex;
   align-items: center;
   gap: 10px;
+
+  @include respond-to(mobile) {
+    gap: 6px;
+  }
 }
 
 .skeletonIcon {
@@ -142,6 +312,15 @@
   height: 30px;
   border-radius: 6px;
   flex-shrink: 0;
+
+  @include respond-to(tablet) {
+    width: 24px;
+    height: 24px;
+  }
+  @include respond-to(mobile) {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .skeletonDivider {
@@ -149,24 +328,53 @@
   height: 29px;
   background: rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
+
+  @include respond-to(tablet) {
+    height: 22px;
+  }
+  @include respond-to(mobile) {
+    height: 18px;
+  }
 }
 
 .skeletonDateText {
   width: 160px;
   height: 24px;
   border-radius: 6px;
+
+  @include respond-to(tablet) {
+    width: 130px;
+    height: 18px;
+  }
+  @include respond-to(mobile) {
+    width: 90px;
+    height: 14px;
+  }
 }
 
 .skeletonText {
   width: 220px;
   height: 24px;
   border-radius: 6px;
+
+  @include respond-to(tablet) {
+    width: 180px;
+    height: 18px;
+  }
+  @include respond-to(mobile) {
+    width: 120px;
+    height: 14px;
+  }
 }
 
 .descriptionInfo {
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  @include respond-to(mobile) {
+    gap: 6px;
+  }
 }
 
 .skeletonHeading {
@@ -174,24 +382,51 @@
   height: 28px;
   border-radius: 8px;
   margin-bottom: 2px;
+
+  @include respond-to(tablet) {
+    width: 130px;
+    height: 20px;
+  }
+  @include respond-to(mobile) {
+    width: 90px;
+    height: 16px;
+  }
 }
 
 .skeletonDescLine {
   width: 100%;
   height: 20px;
   border-radius: 6px;
+
+  @include respond-to(tablet) {
+    height: 15px;
+  }
+  @include respond-to(mobile) {
+    height: 12px;
+  }
 }
 
 .skeletonDescLineShort {
   width: 55%;
   height: 20px;
   border-radius: 6px;
+
+  @include respond-to(tablet) {
+    height: 15px;
+  }
+  @include respond-to(mobile) {
+    height: 12px;
+  }
 }
 
 .participationsInfo {
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  @include respond-to(mobile) {
+    gap: 6px;
+  }
 }
 
 .avatarsGroup {
@@ -208,27 +443,67 @@
   &:first-child {
     margin-left: 0;
   }
+
+  @include respond-to(tablet) {
+    width: 48px;
+    height: 48px;
+  }
+  @include respond-to(mobile) {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 .bottomContent {
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @include respond-to(tablet) {
+    gap: 14px;
+  }
+  @include respond-to(mobile) {
+    gap: 10px;
+  }
 }
 
 .skeletonQuestion {
   width: 70%;
   height: 28px;
   border-radius: 8px;
+
+  @include respond-to(tablet) {
+    height: 20px;
+  }
+  @include respond-to(mobile) {
+    height: 16px;
+  }
 }
 
 .actions {
   display: flex;
   gap: 20px;
+
+  @include respond-to(tablet) {
+    gap: 14px;
+  }
+  @include respond-to(mobile) {
+    gap: 10px;
+  }
 }
 
 .skeletonButton {
   min-width: 140px;
   height: 52px;
   border-radius: 30px;
+
+  @include respond-to(tablet) {
+    min-width: 100px;
+    height: 40px;
+  }
+  @include respond-to(mobile) {
+    min-width: 72px;
+    height: 30px;
+    border-radius: 18px;
+  }
 }
