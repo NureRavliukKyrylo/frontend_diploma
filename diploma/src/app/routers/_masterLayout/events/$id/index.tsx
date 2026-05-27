@@ -4,14 +4,27 @@ import {
   eventQuery,
   type EventDetailSearch,
 } from "@entities/event";
+import { taskDrawerDefaults } from "@entities/task";
 import { eventDetailTabLoaderConfig, EventPageSkeleton } from "@pages/events";
-import { createTabCleanerMiddleware } from "@shared/libs/search-params";
+import {
+  createDrawerCleanerMiddleware,
+  createTabCleanerMiddleware,
+} from "@shared/libs/search-params";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_masterLayout/events/$id/")({
   validateSearch: eventDetailSearchSchema,
   search: {
-    middlewares: [createTabCleanerMiddleware(eventDetailDefaults, "overview")],
+    middlewares: [
+      createTabCleanerMiddleware(eventDetailDefaults, "overview"),
+      createDrawerCleanerMiddleware({
+        idKey: "taskId",
+        modeKey: "taskMode",
+        drawerKeys: ["taskId", "taskMode", "DrawerPageSize", "DrawerOrderBy"],
+        modeDefaults: taskDrawerDefaults,
+        fallbackMode: "overview",
+      }),
+    ],
   },
   loader: async ({ context: { queryClient }, location, params: { id } }) => {
     const search = location.search as EventDetailSearch;
@@ -29,7 +42,7 @@ export const Route = createFileRoute("/_masterLayout/events/$id/")({
         break;
       case "multi":
         await Promise.all(
-          (query as any[]).map((q) => queryClient.ensureQueryData(q)),
+          (query as any[]).map((q) => queryClient.ensureInfiniteQueryData(q)),
         );
         break;
       case "infinite":

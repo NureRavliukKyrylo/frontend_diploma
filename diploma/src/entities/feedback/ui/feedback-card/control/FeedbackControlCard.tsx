@@ -23,31 +23,40 @@ export const FeedbackControlCard = ({
 }: FeedbackControlCardProps) => {
   return (
     <div className={styles.feedbackControlWrapper}>
-      <Dropdown placement="top-start" shouldBlockScroll={false}>
-        <DropdownTrigger>
-          <button
-            className={styles.moreActionsButton}
-            onClick={(e) => e.stopPropagation()}
+      <FeedbackBase
+        feedback={feedback}
+        displayName={displayName}
+        rightContent={
+          <Dropdown
+            placement="top-start"
+            shouldBlockScroll={false}
+            classNames={{ content: styles.dropdownContent }}
           >
-            <ActionsIcon className={styles.actions} />
-          </button>
-        </DropdownTrigger>
-        <DropdownMenu>
-          {menuItems.map((item) => (
-            <DropdownItem
-              key={item.key}
-              onClick={item.onClick}
-              classNames={{
-                base: `${styles.menuItem} ${styles[item.variant ?? "default"]}`,
-                title: styles.menuItemTitle,
-              }}
-            >
-              {item.label}
-            </DropdownItem>
-          ))}
-        </DropdownMenu>
-      </Dropdown>
-      <FeedbackBase feedback={feedback} displayName={displayName} />
+            <DropdownTrigger>
+              <button
+                className={styles.moreActionsButton}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ActionsIcon className={styles.actions} />
+              </button>
+            </DropdownTrigger>
+            <DropdownMenu>
+              {menuItems.map((item) => (
+                <DropdownItem
+                  key={item.key}
+                  onClick={item.onClick}
+                  classNames={{
+                    base: `${styles.menuItem} ${styles[item.variant ?? "default"]}`,
+                    title: styles.menuItemTitle,
+                  }}
+                >
+                  {item.label}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+        }
+      />
     </div>
   );
 };

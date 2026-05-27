@@ -1,5 +1,5 @@
 import styles from "./EventsTab.module.scss";
-import { ToggleDropdownButton } from "@shared/ui/buttons";
+import { LinkButtonWrapper, ToggleDropdownButton } from "@shared/ui/buttons";
 import { SearchBar } from "@shared/ui/inputs";
 import { SortDropDown } from "@shared/ui/drop-down";
 import { Pagination } from "@shared/ui";
@@ -118,6 +118,25 @@ export const EventsTab = ({ search }: { search: MyEventsSearchParams }) => {
                               variant: "leave",
                             },
                           ]}
+                          actionButton={
+                            <motion.div
+                              whileHover={{
+                                scale: 1.03,
+                                backgroundColor: "#000000",
+                                color: "#ffffff",
+                              }}
+                              transition={{ duration: 0.3, ease: "easeInOut" }}
+                              className={styles.learnMoreMyProject}
+                            >
+                              <LinkButtonWrapper
+                                to="/events/my/$id"
+                                params={{ id: event.id }}
+                                className={styles.btnLink}
+                              >
+                                Get Started
+                              </LinkButtonWrapper>
+                            </motion.div>
+                          }
                         />
                       </motion.div>
                     )}

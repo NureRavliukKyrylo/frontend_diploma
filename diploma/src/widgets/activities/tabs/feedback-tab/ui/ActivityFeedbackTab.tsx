@@ -3,6 +3,7 @@ import { Stars } from "@shared/ui/stars";
 import { ProgressBar } from "@shared/ui";
 import { FeedbacksListWidget } from "@widgets/feedback";
 import {
+  FeedbackCard,
   FeedbackCardSkeleton,
   FeedbackControlCard,
   sortingFeedbackItems,
@@ -22,6 +23,7 @@ import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import { SortDropDown } from "@shared/ui/drop-down";
+import { motion } from "framer-motion";
 
 interface ActivityFeedbackTabProps {
   entityId: string;
@@ -31,19 +33,8 @@ interface ActivityFeedbackTabProps {
   OrderBy: FeedbackSortValues;
   canSubmitFeedback: boolean;
   handleSort: (value: FeedbackSortValues) => void;
+  rating: Rating;
 }
-
-export const mockRating: Rating = {
-  value: 4.2,
-  totalVotes: 1240,
-  detailInfo: [
-    { value: 5, totalVotes: 720, percentOfAll: 58 },
-    { value: 4, totalVotes: 300, percentOfAll: 24 },
-    { value: 3, totalVotes: 120, percentOfAll: 10 },
-    { value: 2, totalVotes: 60, percentOfAll: 5 },
-    { value: 1, totalVotes: 40, percentOfAll: 3 },
-  ],
-};
 
 export const ActivityFeedbackTab = ({
   entityId,
@@ -53,6 +44,7 @@ export const ActivityFeedbackTab = ({
   OrderBy,
   canSubmitFeedback,
   handleSort,
+  rating,
 }: ActivityFeedbackTabProps) => {
   const {
     modalType,
@@ -62,6 +54,8 @@ export const ActivityFeedbackTab = ({
     setModalType,
   } = useFeedbackTab();
 
+  const ratingValues = [5, 4, 3, 2, 1];
+  console.log(userId);
   return (
     <ErrorBoundary
       fallbackRender={({ error }) => {
@@ -79,38 +73,49 @@ export const ActivityFeedbackTab = ({
         <div className={styles.headerWrapper}>
           <div className={styles.overAllRatingInfo}>
             <div className={styles.baseInfo}>
-              <h1 className={styles.baseRating}>4</h1>
+              <h1 className={styles.baseRating}>{rating.value}</h1>
               <Stars
-                value={4}
+                value={rating.value}
                 gradient="linear-gradient(180deg, #8C0000 0%, #260000 100%)"
+                classNameStar={styles.starRating}
               />
-              <h1 className={styles.totalVotes}>120 VOTES</h1>
+              <h1 className={styles.totalVotes}>{rating.totalVotes} VOTES</h1>
             </div>
             <div className={styles.detailedInfo}>
-              {mockRating.detailInfo.map((rating) => (
-                <div className={styles.ratingLine}>
-                  <h1 className={styles.ratingValue}>{rating.value} STARS</h1>
-                  <ProgressBar
-                    current={rating.percentOfAll}
-                    className={styles.progressRating}
-                  />
-                  <h1 className={styles.votesOfValue}>
-                    {rating.totalVotes} VOTES
-                  </h1>
-                </div>
-              ))}
+              {ratingValues.map((value) => {
+                const detail = rating.detailInfo.find((d) => d.value === value);
+                return (
+                  <div key={value} className={styles.ratingLine}>
+                    <h1 className={styles.ratingValue}>{value} STARS</h1>
+                    <ProgressBar
+                      current={detail?.percentOfAll ?? 0}
+                      className={styles.progressRating}
+                    />
+                    <h1 className={styles.votesOfValue}>
+                      {detail?.totalVotes ?? 0} VOTES
+                    </h1>
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className={styles.actionsFeedback}>
             <div className={styles.actions}>
               {canSubmitFeedback && (
-                <BaseButtonWrapper
-                  className={styles.submitFeedback}
-                  onClick={() => setModalType("create")}
+                <motion.div
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
                 >
-                  Submit Feedback
-                </BaseButtonWrapper>
+                  <BaseButtonWrapper
+                    className={styles.submitFeedback}
+                    onClick={() => setModalType("create")}
+                  >
+                    Submit Feedback
+                  </BaseButtonWrapper>
+                </motion.div>
               )}
+
               <div className={styles.sortWrapper}>
                 <SortDropDown
                   options={sortingFeedbackItems}
@@ -141,7 +146,7 @@ export const ActivityFeedbackTab = ({
               )}
               renderCard={(feedback) => {
                 const isOwner =
-                  userId != null && feedback.member.userId === String(userId);
+                  userId != null && feedback.author.userId === String(userId);
 
                 if (isOwner) {
                   return (
@@ -154,14 +159,7 @@ export const ActivityFeedbackTab = ({
                   );
                 }
 
-                return (
-                  <FeedbackControlCard
-                    feedback={feedback}
-                    displayName="You"
-                    menuItems={getMenuItems(feedback)}
-                    key={feedback.id}
-                  />
-                );
+                return <FeedbackCard feedback={feedback} key={feedback.id} />;
               }}
               renderPagination={({
                 fetchNextPage,

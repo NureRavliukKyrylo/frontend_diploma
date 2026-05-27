@@ -110,11 +110,11 @@ export const SetAvailabilityForm = ({
                     onChange={([start, end]) => {
                       formik.setFieldValue(
                         "startTime",
-                        start ? start.format("HH:mm") : "",
+                        start ? start.format("HH:mm:ss[Z]") : "",
                       );
                       formik.setFieldValue(
                         "endTime",
-                        end ? end.format("HH:mm") : "",
+                        end ? end.format("HH:mm:ss[Z]") : "",
                       );
                     }}
                     disabled={formik.values.allDay}

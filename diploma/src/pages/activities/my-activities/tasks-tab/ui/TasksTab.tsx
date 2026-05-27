@@ -1,5 +1,5 @@
 import styles from "./TasksTab.module.scss";
-import { ToggleDropdownButton } from "@shared/ui/buttons";
+import { LinkButtonWrapper, ToggleDropdownButton } from "@shared/ui/buttons";
 import { SearchBar } from "@shared/ui/inputs";
 import { SortDropDown } from "@shared/ui/drop-down";
 import { Pagination } from "@shared/ui";
@@ -25,6 +25,7 @@ import { TaskControlCard } from "@entities/task/ui/task-card/control/TaskControl
 import { LeaveConfirmationModal } from "@features/participation";
 
 export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
+  const { tab, taskId, taskMode, ...taskSearch } = search;
   const {
     setIsFilterOpen,
     handleSearch,
@@ -38,7 +39,7 @@ export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
     isFilterOpen,
     isModalOpen,
     selectedTask,
-  } = useTasksTab(search);
+  } = useTasksTab(taskSearch);
 
   return (
     <>
@@ -94,7 +95,7 @@ export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
             >
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={JSON.stringify(search)}
+                  key={JSON.stringify(taskSearch)}
                   {...fadeVariants}
                   transition={fadeDuration}
                 >
@@ -120,10 +121,30 @@ export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
                               variant: "leave",
                             },
                           ]}
+                          actionsButton={
+                            <motion.div
+                              whileHover={{
+                                scale: 1.03,
+                                backgroundColor: "#000000",
+                                color: "#ffffff",
+                              }}
+                              transition={{ duration: 0.3, ease: "easeInOut" }}
+                              className={styles.getStartedButton}
+                            >
+                              <LinkButtonWrapper
+                                to="/activities/my"
+                                search={{ tab: "tasks", taskId: task.id }}
+                                resetScroll={false}
+                                className={styles.btnLink}
+                              >
+                                Get Started
+                              </LinkButtonWrapper>
+                            </motion.div>
+                          }
                         />
                       </motion.div>
                     )}
-                    useTasksQuery={useMyTasksListQuery(search)}
+                    useTasksQuery={useMyTasksListQuery(taskSearch)}
                   />
                 </motion.div>
               </AnimatePresence>

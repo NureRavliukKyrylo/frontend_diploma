@@ -6,14 +6,25 @@ import {
   type MyActivitiesSearch,
 } from "@pages/activities";
 import { createFileRoute } from "@tanstack/react-router";
-import { createTabCleanerMiddleware } from "@shared/libs/search-params";
+import {
+  createDrawerCleanerMiddleware,
+  createTabCleanerMiddleware,
+} from "@shared/libs/search-params";
 import { filtersQuery } from "@shared/api/filters";
+import { taskDrawerJoinedDefaults } from "@entities/task";
 
 export const Route = createFileRoute("/_masterLayout/activities/my/")({
   validateSearch: myActivitiesSearchSchema,
   search: {
     middlewares: [
       createTabCleanerMiddleware(myActivitiesSearchDefaults, "projects"),
+      createDrawerCleanerMiddleware({
+        idKey: "taskId",
+        modeKey: "taskMode",
+        drawerKeys: ["taskId", "taskMode"],
+        modeDefaults: taskDrawerJoinedDefaults,
+        fallbackMode: "comments",
+      }),
     ],
   },
   loader: async ({ context: { queryClient }, location }) => {

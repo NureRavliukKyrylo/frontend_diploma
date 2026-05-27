@@ -52,6 +52,7 @@ export const getProjectMainForms = (
       OrderBy={(props.search as FeedbackSearch).OrderBy}
       canSubmitFeedback={props.project.canSubmitFeedback}
       handleSort={props.handleSort}
+      rating={props.project.rating}
     />
   ),
   events: (

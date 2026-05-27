@@ -5,5 +5,5 @@ export interface Feedback {
   rating: number;
   comment?: string;
   createdAt: string;
-  member: ParticipationMember;
+  author: ParticipationMember;
 }

@@ -12,7 +12,7 @@ export const joinedProjectDefaults = {
   },
   tasks: {
     tab: "tasks" as const,
-    PageSize: 4,
+    PageSize: 2,
     ...taskDrawerDefaults.overview,
   },
 };
@@ -23,23 +23,13 @@ export const overviewSchema = z.object({
 
 export const feedbackSchema = z.object({
   tab: z.literal("feedback"),
-  PageSize: z.number().default(3).catch(3),
-  OrderBy: z
-    .enum(["Default", "Newest", "Latest"])
-    .default("Default")
-    .catch("Default"),
 });
 
 export const tasksSchema = z.object({
   tab: z.literal("tasks"),
-  PageSize: z.number().default(4).catch(4),
-  DrawerPageSize: z.number().optional(),
-  DrawerOrderBy: z.enum(["Default", "Newest", "Latest"]).optional(),
+  PageSize: z.number().default(2).catch(2),
   taskId: z.string().optional(),
-  taskMode: z
-    .enum(["overview", "members", "feedbacks"])
-    .optional()
-    .catch(undefined),
+  taskMode: z.enum(["comments", "feedback"]).optional().catch(undefined),
 });
 
 export const joinedProjectSearchSchema = z

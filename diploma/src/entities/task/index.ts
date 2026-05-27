@@ -15,8 +15,6 @@ export { TaskCard } from "./ui/task-card/item-list/TaskCard";
 export { TaskCardSkeleton } from "./ui/task-card/item-list/TaskCardSkeleton";
 export {
   tasksTabSchema,
-  type MyTasksSearchParams,
-  type MyTasksRequestParams,
   tasksTabDefaults,
 } from "./libs/search-schema/taskTabSchema";
 export { type TaskMode } from "./model/types/TaskMode";
@@ -30,3 +28,10 @@ export { useMyTasksListQuery } from "./model/hooks/useMyTasksListQuery";
 export { TaskCalendarDetail } from "./ui/task-detail/task-calendar-detail/TaskCalendarDetail";
 export { type TaskSearchParamsNoCategories } from "./libs/search-schema/tasksSearchSchema";
 export { TaskControlCardSkeleton } from "./ui/task-card/control/TaskControlCardSkeleton";
+export { type MyTasksRequestParams, type MyTasksSearchParams } from "./libs";
+export {
+  joinedTaskSearchSchema,
+  taskDrawerJoinedDefaults,
+} from "./libs/search-schema/joinedTaskSearchSchema";
+export { useTasksInfiniteQuery } from "./model/hooks/useTasksInfiniteQuery";
+export { taskStatuses } from "./config/taskStatuses";

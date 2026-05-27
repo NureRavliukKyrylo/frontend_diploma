@@ -11,6 +11,6 @@ export interface AddAvailabilityDto {
 }
 
 export const addAvailability = async (data: AddAvailabilityDto) => {
-  const result = await apiClient.post("calendar/time-slots", data);
+  const result = await apiClient.post("/users/me/availability-slots", data);
   return result.data;
 };

@@ -1,6 +1,6 @@
 import styles from "./TaskBoardColumn.module.scss";
 import { TasksListWidget } from "@widgets/tasks";
-import { useTasksListQuery } from "@entities/task";
+import { useTasksInfiniteQuery } from "@entities/task";
 import type { TaskStatus } from "@entities/task";
 import { Suspense } from "react";
 import { useTaskBoardContext } from "../../model/TaskBoardContext";
@@ -53,7 +53,7 @@ export const TaskBoardColumn = ({
           fallback={
             renderSkeleton ? (
               <ListWidgetSkeleton
-                items={4}
+                items={2}
                 renderSkeleton={renderSkeleton}
                 className={styles.columnCards}
               />
@@ -61,7 +61,10 @@ export const TaskBoardColumn = ({
           }
         >
           <TasksListWidget
-            useTasksQuery={useTasksListQuery({ ...filters, Status: status })}
+            useTasksQuery={useTasksInfiniteQuery({
+              ...filters,
+              Status: status,
+            })}
             renderCard={renderCard}
             className={styles.columnCards}
             renderPagination={({

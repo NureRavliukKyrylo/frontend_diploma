@@ -1,5 +1,5 @@
 import styles from "./ProjectsTab.module.scss";
-import { ToggleDropdownButton } from "@shared/ui/buttons";
+import { LinkButtonWrapper, ToggleDropdownButton } from "@shared/ui/buttons";
 import { MyProjectsFilterWidget, ProjectsListWidget } from "@widgets/projects/";
 import { useProjectsTab } from "../model/useProjectsTab";
 import { SearchBar } from "@shared/ui/inputs";
@@ -117,6 +117,25 @@ export const ProjectsTab = ({ search }: { search: MyProjectsSearchParams }) => {
                               variant: "leave",
                             },
                           ]}
+                          actionButton={
+                            <motion.div
+                              whileHover={{
+                                scale: 1.03,
+                                backgroundColor: "#000000",
+                                color: "#ffffff",
+                              }}
+                              transition={{ duration: 0.3, ease: "easeInOut" }}
+                              className={styles.learnMoreMyProject}
+                            >
+                              <LinkButtonWrapper
+                                to="/projects/my/$id"
+                                params={{ id: project.id }}
+                                className={styles.btnLink}
+                              >
+                                Get Started
+                              </LinkButtonWrapper>
+                            </motion.div>
+                          }
                         />
                       </motion.div>
                     )}

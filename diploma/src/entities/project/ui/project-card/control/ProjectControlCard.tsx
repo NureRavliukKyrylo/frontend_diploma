@@ -9,19 +9,19 @@ import type { Project } from "../../../model";
 import { ProjectCardBase } from "../base/ProjectCardBase";
 import { ProjectDefaultBottomContent } from "../base/ProjectDefaultBottomContent";
 import styles from "./ProjectControlCard.module.scss";
-import { LinkButtonWrapper } from "@shared/ui/buttons";
-import { motion } from "framer-motion";
 import { getEntityStatusConfig } from "@shared/libs/entity";
 import type { MenuItem } from "@shared/config/types";
 
 interface ProjectControlCardProps {
   project: Project;
   menuItems: MenuItem<"default" | "leave">[];
+  actionButton?: React.ReactNode;
 }
 
 export const ProjectControlCard = ({
   project,
   menuItems,
+  actionButton,
 }: ProjectControlCardProps) => {
   const statusConfig = getEntityStatusConfig(project.volunteerProjectState);
 
@@ -73,23 +73,7 @@ export const ProjectControlCard = ({
             <div className={styles.defaultBottomContent}>
               <ProjectDefaultBottomContent project={project} />
             </div>
-            <motion.div
-              whileHover={{
-                scale: 1.03,
-                backgroundColor: "#000000",
-                color: "#ffffff",
-              }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className={styles.learnMoreMyProject}
-            >
-              <LinkButtonWrapper
-                to="/projects/$id"
-                params={{ id: project.id }}
-                className={styles.btnLink}
-              >
-                Get Started
-              </LinkButtonWrapper>
-            </motion.div>
+            {actionButton}
           </div>
         }
       />

@@ -69,13 +69,28 @@
           line-height: 100%;
 
           @include respond-to(laptop) {
-            font-size: 56px;
+            font-size: 52px;
           }
           @include respond-to(tablet) {
-            font-size: 46px;
+            font-size: 42px;
           }
           @include respond-to(mobile) {
-            font-size: 52px;
+            font-size: 36px;
+          }
+        }
+
+        .starRating {
+          @include respond-to(laptop) {
+            width: 34px;
+            height: 34px;
+          }
+          @include respond-to(tablet) {
+            width: 28px;
+            height: 28px;
+          }
+          @include respond-to(mobile) {
+            width: 28px;
+            height: 28px;
           }
         }
 

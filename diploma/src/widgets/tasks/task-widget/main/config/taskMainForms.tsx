@@ -33,6 +33,7 @@ export const getTaskMainForms = (
       OrderBy={props.search?.DrawerOrderBy ?? "Default"}
       handleSort={props.handleSort}
       canSubmitFeedback={props.task.canSubmitFeedback}
+      rating={props.task.rating}
     />
   ),
 });

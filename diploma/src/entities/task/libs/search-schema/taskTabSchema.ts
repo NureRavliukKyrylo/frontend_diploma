@@ -37,6 +37,4 @@ export const tasksTabSchema = tasksTabBaseSchema.extend({
   PageSize: z.number().min(1).default(tasksTabDefaults.PageSize),
 });
 
-export type MyTasksSearchParams = z.infer<typeof tasksTabSchema>;
-export type MyTasksRequestParams = Omit<z.infer<typeof tasksTabSchema>, "tab">;
 export type TaskPaginationParams = z.infer<typeof paginationSchema>;

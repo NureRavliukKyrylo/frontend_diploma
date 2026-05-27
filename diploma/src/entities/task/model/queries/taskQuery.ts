@@ -1,12 +1,14 @@
 import type { MyTasksRequestParams } from "../../libs";
 import { getListTasks, getMyTasks, getTaskId } from "../../api";
-import { queryOptions } from "@tanstack/react-query";
+import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
 import type { TasksRequestParams } from "@entities/task/libs/search-schema/tasksSearchSchema";
 
 export const taskKeys = {
   all: () => ["tasks"] as const,
   list: (params: TasksRequestParams) =>
     [...taskKeys.all(), "list", params] as const,
+  infinite: (params: TasksRequestParams) =>
+    [...taskKeys.list(params), "infinite"] as const,
   id: (id: string) => [...taskKeys.all(), "id", id] as const,
   mys: () => [...taskKeys.all(), "my"] as const,
   my: (params: MyTasksRequestParams) => [...taskKeys.mys(), params] as const,
@@ -18,6 +20,14 @@ export const taskQuery = {
       queryKey: taskKeys.list({ ...params }),
       queryFn: () => getListTasks({ ...params }),
       placeholderData: (prev) => prev,
+    }),
+  listInfinite: (params: TasksRequestParams) =>
+    infiniteQueryOptions({
+      queryKey: taskKeys.infinite({ ...params }),
+      queryFn: ({ pageParam }) => getListTasks({ Page: pageParam, ...params }),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage) => lastPage.pagination.nextPage ?? undefined,
+      select: (data) => data.pages.flatMap((page) => page.data),
     }),
   id: (id: string) =>
     queryOptions({

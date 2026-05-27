@@ -26,7 +26,9 @@ export const tasksSearchSchema = tasksFiltersSchema
   .extend(tasksTabBaseSchema.shape)
   .extend({
     DrawerPageSize: z.number().optional(),
-    DrawerOrderBy: z.enum(["Default", "Newest", "Latest"]).optional(),
+    DrawerOrderBy: z
+      .enum(["Default", "DateAsc", "DateDesc", "RatingAsc", "RatingDesc"])
+      .optional(),
   });
 
 export const tasksNoCategoriesSchema = tasksSearchSchema.omit({

@@ -3,12 +3,13 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
   taskQuery,
+  type MyTasksRequestParams,
   type MyTasksSearchParams,
   type Task,
   type TaskSortValues,
 } from "@entities/task";
 
-export const useTasksTab = (search: MyTasksSearchParams) => {
+export const useTasksTab = (search: MyTasksRequestParams) => {
   const navigate = useNavigate({ from: "/activities/my/" });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);

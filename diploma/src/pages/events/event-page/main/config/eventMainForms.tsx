@@ -44,6 +44,7 @@ export const getEventMainForms = (
       OrderBy={(props.search as FeedbackEventSearch).OrderBy}
       handleSort={props.handleSort}
       canSubmitFeedback={props.event.canSubmitFeedback}
+      rating={props.event.rating}
     />
   ),
   tasks: (

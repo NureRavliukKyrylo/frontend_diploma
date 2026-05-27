@@ -5,8 +5,6 @@ import {
   DropdownTrigger,
 } from "@heroui/react";
 import { ActionsIcon } from "@shared/assets/icons/actions";
-import { motion } from "framer-motion";
-import { LinkButtonWrapper } from "@shared/ui/buttons";
 import type { Task } from "../../../model";
 import { TaskCardBase } from "../base/TaskCardBase";
 import styles from "./TaskControlCard.module.scss";
@@ -16,9 +14,14 @@ import type { MenuItem } from "@shared/config/types";
 interface TaskControlCardProps {
   task: Task;
   menuItems: MenuItem<"default" | "leave">[];
+  actionsButton?: React.ReactNode;
 }
 
-export const TaskControlCard = ({ task, menuItems }: TaskControlCardProps) => {
+export const TaskControlCard = ({
+  task,
+  menuItems,
+  actionsButton,
+}: TaskControlCardProps) => {
   const statusConfig = getEntityStatusConfig(task.status);
 
   return (
@@ -64,25 +67,7 @@ export const TaskControlCard = ({ task, menuItems }: TaskControlCardProps) => {
             </DropdownMenu>
           </Dropdown>
         }
-        endContent={
-          <motion.div
-            whileHover={{
-              scale: 1.03,
-              backgroundColor: "#000000",
-              color: "#ffffff",
-            }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={styles.getStartedButton}
-          >
-            <LinkButtonWrapper
-              to="/tasks/$id"
-              params={{ id: task.id }}
-              className={styles.btnLink}
-            >
-              Get Started
-            </LinkButtonWrapper>
-          </motion.div>
-        }
+        endContent={<>{actionsButton}</>}
       />
     </div>
   );

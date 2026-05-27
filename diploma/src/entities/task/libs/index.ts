@@ -3,6 +3,6 @@ export type {
   TasksRequestParams,
 } from "./search-schema/tasksSearchSchema";
 export type {
-  MyTasksSearchParams,
   MyTasksRequestParams,
-} from "./search-schema/taskTabSchema";
+  MyTasksSearchParams,
+} from "./search-schema/joinedTaskSearchSchema";

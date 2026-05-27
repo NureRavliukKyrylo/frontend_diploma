@@ -4,11 +4,15 @@ import {
   type ProjectDetailSearch,
 } from "@entities/project";
 import { projectQuery } from "@entities/project";
+import { taskDrawerDefaults } from "@entities/task";
 import {
   projectDetailTabLoaderConfig,
   ProjectPageSkeleton,
 } from "@pages/projects";
-import { createTabCleanerMiddleware } from "@shared/libs/search-params";
+import {
+  createDrawerCleanerMiddleware,
+  createTabCleanerMiddleware,
+} from "@shared/libs/search-params";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_masterLayout/projects/$id/")({
@@ -16,6 +20,13 @@ export const Route = createFileRoute("/_masterLayout/projects/$id/")({
   search: {
     middlewares: [
       createTabCleanerMiddleware(projectDetailDefaults, "overview"),
+      createDrawerCleanerMiddleware({
+        idKey: "taskId",
+        modeKey: "taskMode",
+        drawerKeys: ["taskId", "taskMode", "DrawerPageSize", "DrawerOrderBy"],
+        modeDefaults: taskDrawerDefaults,
+        fallbackMode: "overview",
+      }),
     ],
   },
   loader: async ({ context: { queryClient }, params: { id }, location }) => {
@@ -33,7 +44,7 @@ export const Route = createFileRoute("/_masterLayout/projects/$id/")({
         break;
       case "multi":
         await Promise.all(
-          (query as any[]).map((q) => queryClient.ensureQueryData(q)),
+          (query as any[]).map((q) => queryClient.ensureInfiniteQueryData(q)),
         );
         break;
       case "infinite":

@@ -5,9 +5,10 @@ import { getErrorMessage } from "@shared/libs/error-message";
 import { addToast } from "@heroui/react";
 import type { EntityType } from "@shared/config/types";
 import { queryClient } from "@shared/api";
+import { feedbackQueryKeyMap } from "../../../config";
 
 interface UseDeleteFeedbackOptions {
-  entityType: EntityType;
+  entityType: Exclude<EntityType, "organization">;
   entityId: string;
   onSuccess?: () => void;
 }
@@ -22,6 +23,9 @@ export const useDeleteFeedback = ({
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: feedbackKeys.entity(entityType, entityId),
+      });
+      queryClient.invalidateQueries({
+        queryKey: feedbackQueryKeyMap[entityType].id(entityId),
       });
       addToast({
         title: "Feedback deleted",

@@ -10,7 +10,7 @@ import {
   type TasksEventSearch,
 } from "@entities/event";
 import { feedbackQuery } from "@entities/feedback";
-import { taskQuery, type TaskStatus } from "@entities/task";
+import { taskQuery, taskStatuses } from "@entities/task";
 import { participationQuery } from "@shared/api/participation";
 import type { QueryClient } from "@tanstack/react-query";
 import type { ZodType } from "zod";
@@ -21,8 +21,6 @@ type TabConfig<T extends EventDetailSearch> = {
   query: (eventId: string, params: Omit<T, "tab">) => unknown;
   prefetch: (queryClient: QueryClient, eventId: string) => void;
 };
-
-const taskStatuses: TaskStatus[] = ["done", "planned", "inProgress", "hold"];
 
 export const eventDetailTabLoaderConfig: {
   overview: TabConfig<OverviewEventSearch>;
@@ -49,10 +47,10 @@ export const eventDetailTabLoaderConfig: {
         }),
       );
       taskStatuses.forEach((status) =>
-        queryClient.prefetchQuery(
-          taskQuery.list({
+        queryClient.prefetchInfiniteQuery(
+          taskQuery.listInfinite({
             EventIds: [eventId],
-            PageSize: 4,
+            PageSize: 2,
             Status: status,
           }),
         ),
@@ -103,7 +101,7 @@ export const eventDetailTabLoaderConfig: {
     schema: tasksSchema,
     query: (eventId, { PageSize }) =>
       taskStatuses.map((status) =>
-        taskQuery.list({
+        taskQuery.listInfinite({
           EventIds: [eventId],
           PageSize,
           Status: status,

@@ -13,7 +13,7 @@ import {
   type ProjectDetailSearch,
   type TasksSearch,
 } from "@entities/project";
-import { taskQuery, type TaskStatus } from "@entities/task";
+import { taskQuery, taskStatuses } from "@entities/task";
 import { participationQuery } from "@shared/api/participation";
 import type { QueryClient } from "@tanstack/react-query";
 import type { ZodType } from "zod";
@@ -24,8 +24,6 @@ type TabConfig<T extends ProjectDetailSearch> = {
   query: (projectId: string, params: Omit<T, "tab">) => unknown;
   prefetch: (queryClient: QueryClient, projectId: string) => void;
 };
-
-const taskStatuses: TaskStatus[] = ["done", "planned", "inProgress", "hold"];
 
 export const projectDetailTabLoaderConfig: {
   overview: TabConfig<OverviewSearch>;
@@ -56,10 +54,10 @@ export const projectDetailTabLoaderConfig: {
         eventQuery.list({ ProjectIds: [projectId], PageSize: 6 }),
       );
       taskStatuses.forEach((status) =>
-        queryClient.prefetchQuery(
-          taskQuery.list({
+        queryClient.prefetchInfiniteQuery(
+          taskQuery.listInfinite({
             ProjectIds: [projectId],
-            PageSize: 4,
+            PageSize: 2,
             Status: status,
           }),
         ),
@@ -142,7 +140,7 @@ export const projectDetailTabLoaderConfig: {
     schema: tasksSchema,
     query: (projectId, { PageSize }) =>
       taskStatuses.map((status) =>
-        taskQuery.list({
+        taskQuery.listInfinite({
           ProjectIds: [projectId],
           PageSize,
           Status: status,
