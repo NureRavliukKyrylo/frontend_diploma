@@ -43,3 +43,14 @@ export { eventsNoCategoriesSchema } from "./libs/search-schema/eventsSearchSchem
 export { type EventSearchParamsNoCategories } from "./libs/search-schema/eventsSearchSchema";
 export { EventCardSkeleton } from "./ui/event-card/list-item/EventCardSkeleton";
 export { EventControlCardSkeleton } from "./ui/event-card/control-card/EventControlCardSkeleton";
+export type { EventJoinedMode } from "./model/types/EventJoinedMode";
+export {
+  eventJoinedDefaults,
+  eventJoinedSearchSchema,
+} from "./libs/search-schema/joinedEventSearchShema";
+export {
+  type EventAttendance,
+  type EventAttendanceView,
+} from "./model/types/EventAttendance";
+export { EventAttendanceListItem } from "./ui/event-attendance-item/EventAttendanceListItem";
+export { EventAttendanceListItemSkeleton } from "./ui/event-attendance-item/EventAttendanceListItemSkeleton";

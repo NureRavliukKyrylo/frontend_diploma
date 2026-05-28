@@ -1,20 +1,20 @@
 import type { QueryResult } from "@shared/config/types";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import styles from "./EventsListWidget.module.scss";
-import type { Event } from "@entities/event";
+import type { Event, EventAttendance } from "@entities/event";
 
-interface EventsListWidgetProps {
-  useEventsQuery?: () => QueryResult<Event>;
-  events?: Event[];
-  renderCard: (event: Event, index: number) => React.ReactNode;
-  renderEmpty?: (events: Event[]) => React.ReactNode;
+interface EventsListWidgetProps<TEvent = Event> {
+  useEventsQuery?: () => QueryResult<TEvent>;
+  events?: TEvent[];
+  renderCard: (event: TEvent, index: number) => React.ReactNode;
+  renderEmpty?: (events: TEvent[]) => React.ReactNode;
   renderSkeleton?: () => React.ReactNode;
   skeletonItems?: number;
   startSlot?: React.ReactNode;
   className?: string;
 }
 
-export const EventsListWidget = ({
+export const EventsListWidget = <TEvent extends Event | EventAttendance>({
   useEventsQuery,
   events: readyEvents,
   renderCard,
@@ -23,7 +23,7 @@ export const EventsListWidget = ({
   skeletonItems,
   startSlot,
   className,
-}: EventsListWidgetProps) => {
+}: EventsListWidgetProps<TEvent>) => {
   const queryResult = useEventsQuery?.();
   const events = readyEvents ?? queryResult?.data ?? [];
   const isLoading = queryResult?.isLoading ?? false;
@@ -41,9 +41,7 @@ export const EventsListWidget = ({
   return (
     <>
       {renderEmpty?.(events) ?? (
-        <div
-          className={`${styles.feedbackListWrapper} ${className ?? ""}`.trim()}
-        >
+        <div className={`${styles.eventsList} ${className ?? ""}`.trim()}>
           {startSlot}
           {events.map((event, index) => renderCard(event, index))}
         </div>

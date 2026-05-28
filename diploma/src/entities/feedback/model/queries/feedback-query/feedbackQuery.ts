@@ -1,5 +1,9 @@
-import { infiniteQueryOptions } from "@tanstack/react-query";
-import { type FeedbackSearchParams, getFeedbacksEntity } from "../../../api";
+import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
+import {
+  type FeedbackSearchParams,
+  getFeedbacksEntity,
+  getMyFeedback,
+} from "../../../api";
 import type { EntityType } from "@shared/config/types";
 
 export const feedbackKeys = {
@@ -12,6 +16,10 @@ export const feedbackKeys = {
     params?: FeedbackSearchParams,
   ) =>
     [...feedbackKeys.entity(entityType, entityId), "infinite", params] as const,
+  myFeedback: (entityType: EntityType, entityId: string) => [
+    ...feedbackKeys.entity(entityType, entityId),
+    "my",
+  ],
 };
 
 export const feedbackQuery = {
@@ -30,5 +38,11 @@ export const feedbackQuery = {
       initialPageParam: 1,
       getNextPageParam: (lastPage) => lastPage.pagination.nextPage ?? undefined,
       select: (data) => data.pages.flatMap((page) => page.data),
+    }),
+  my: (entityType: EntityType, entityId: string) =>
+    queryOptions({
+      queryKey: feedbackKeys.myFeedback(entityType, entityId),
+      queryFn: () => getMyFeedback(entityType, entityId),
+      placeholderData: (prev) => prev,
     }),
 };

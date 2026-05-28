@@ -1,4 +1,3 @@
-import { taskDrawerDefaults } from "@entities/task";
 import z from "zod";
 
 export const joinedProjectDefaults = {
@@ -13,7 +12,6 @@ export const joinedProjectDefaults = {
   tasks: {
     tab: "tasks" as const,
     PageSize: 2,
-    ...taskDrawerDefaults.overview,
   },
 };
 
@@ -29,7 +27,6 @@ export const tasksSchema = z.object({
   tab: z.literal("tasks"),
   PageSize: z.number().default(2).catch(2),
   taskId: z.string().optional(),
-  taskMode: z.enum(["comments", "feedback"]).optional().catch(undefined),
 });
 
 export const joinedProjectSearchSchema = z

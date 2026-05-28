@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const eventDetailDefaults = {
+export const eventJoinedDefaults = {
   overview: {
     tab: "overview" as const,
   },
@@ -42,7 +42,7 @@ export const eventJoinedSearchSchema = z
     feedbackSchema,
     tasksSchema,
   ])
-  .catch({ ...eventDetailDefaults.overview });
+  .catch({ ...eventJoinedDefaults.overview });
 
 export type JoinedEventSearch = z.infer<typeof eventJoinedSearchSchema>;
 export type OverviewEventSearch = z.infer<typeof overviewSchema>;

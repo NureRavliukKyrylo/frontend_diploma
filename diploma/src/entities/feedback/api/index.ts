@@ -11,3 +11,4 @@ export {
   type UpdateFeedbackDto,
   updateFeedback,
 } from "./update-feedback/updateFeedbackApi";
+export { getMyFeedback } from "./feedback-my/feedbackMyApi";

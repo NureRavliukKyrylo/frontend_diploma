@@ -47,7 +47,7 @@ export const projectDetailTabLoaderConfig: {
       queryClient.prefetchInfiniteQuery(
         feedbackQuery.infinite("project", projectId, {
           PageSize: 3,
-          OrderBy: "default",
+          OrderBy: "Default",
         }),
       );
       queryClient.prefetchQuery(
@@ -78,7 +78,7 @@ export const projectDetailTabLoaderConfig: {
       queryClient.prefetchInfiniteQuery(
         feedbackQuery.infinite("project", projectId, {
           PageSize: 3,
-          OrderBy: "default",
+          OrderBy: "Default",
         }),
       );
       queryClient.prefetchQuery(
@@ -129,7 +129,7 @@ export const projectDetailTabLoaderConfig: {
       queryClient.prefetchInfiniteQuery(
         feedbackQuery.infinite("project", projectId, {
           PageSize: 3,
-          OrderBy: "default",
+          OrderBy: "Default",
         }),
       );
     },
@@ -157,7 +157,7 @@ export const projectDetailTabLoaderConfig: {
       queryClient.prefetchInfiniteQuery(
         feedbackQuery.infinite("project", projectId, {
           PageSize: 3,
-          OrderBy: "default",
+          OrderBy: "Default",
         }),
       );
       queryClient.prefetchQuery(

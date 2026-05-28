@@ -13,3 +13,4 @@ export {
   type FeedbackSortValues,
   sortingFeedbackItems,
 } from "./config/sortingFeedbackItems";
+export { useFeedbackTab } from "./model/hooks/feedback-tab/useFeedbackTab";

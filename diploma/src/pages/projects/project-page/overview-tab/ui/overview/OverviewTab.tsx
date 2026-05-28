@@ -60,7 +60,7 @@ export const OverviewTab = ({
               <span>Locations</span>
             </div>
             <p>
-              Explore all tasks within this project and see where they are
+              Explore all activities within this project and see where they are
               located
             </p>
             <div className={styles.wrapperLocation}>

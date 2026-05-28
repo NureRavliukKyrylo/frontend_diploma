@@ -8,9 +8,9 @@ import {
   FeedbackControlCard,
   sortingFeedbackItems,
   useFeedbacksInfiniteQuery,
+  useFeedbackTab,
   type FeedbackSortValues,
 } from "@entities/feedback";
-import { useFeedbackTab } from "../model/useFeedbackTab";
 import {
   CreateFeedbackModal,
   DeleteFeedbackModal,
@@ -55,7 +55,7 @@ export const ActivityFeedbackTab = ({
   } = useFeedbackTab();
 
   const ratingValues = [5, 4, 3, 2, 1];
-  console.log(userId);
+
   return (
     <ErrorBoundary
       fallbackRender={({ error }) => {

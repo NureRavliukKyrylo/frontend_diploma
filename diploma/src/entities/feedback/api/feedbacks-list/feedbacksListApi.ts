@@ -1,6 +1,7 @@
 import { apiClient } from "@shared/api";
 import type { EntityType, PaginationResponse } from "@shared/config/types";
 import type { Feedback } from "../../model";
+import type { FeedbackSortValues } from "../../config";
 
 export interface FeedbacksResponse {
   data: Feedback[];
@@ -10,7 +11,7 @@ export interface FeedbacksResponse {
 export interface FeedbackSearchParams {
   Page?: number;
   PageSize?: number;
-  OrderBy?: any; //so far any
+  OrderBy?: FeedbackSortValues;
 }
 
 export const getFeedbacksEntity = async (

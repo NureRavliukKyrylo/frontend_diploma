@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Feedback } from "@entities/feedback/model";
+import type { Feedback } from "../../types/FeedBack";
 
 type ModalType = "create" | "edit" | "delete" | null;
 

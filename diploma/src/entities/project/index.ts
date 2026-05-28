@@ -59,3 +59,4 @@ export {
   joinedProjectSearchSchema,
   joinedProjectDefaults,
 } from "./libs/search-shema/joinedProjectSearchSchema";
+export { type ProjectJoinedMode } from "./model/types/projects-mode/ProjectJoinedMode";
