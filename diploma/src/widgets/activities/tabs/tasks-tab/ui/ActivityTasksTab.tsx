@@ -1,4 +1,4 @@
-import { Drawer } from "@mui/material";
+import { SwipeableDrawer } from "@mui/material";
 import { TaskBoardItem, TaskBoardItemSkeleton } from "@entities/task";
 import { TaskBoard, TaskWidget } from "@widgets/tasks";
 import type {
@@ -47,8 +47,9 @@ export const ActivityTasksTab = ({
         </div>
       )}
     />
-    <Drawer
+    <SwipeableDrawer
       open={isOpen}
+      onOpen={() => {}}
       onClose={closeTask}
       anchor="right"
       className={styles.drawer}
@@ -64,6 +65,6 @@ export const ActivityTasksTab = ({
           />
         )}
       </div>
-    </Drawer>
+    </SwipeableDrawer>
   </>
 );

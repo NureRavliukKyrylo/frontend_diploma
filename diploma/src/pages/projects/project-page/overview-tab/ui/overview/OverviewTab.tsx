@@ -13,6 +13,7 @@ import { useIntersectionReveal } from "@shared/libs/hooks";
 import { RelatedCategoryCard } from "@entities/category";
 import { LinkButtonWrapper, ShowMoreItemsButton } from "@shared/ui/buttons";
 import { Arrow } from "@shared/assets/icons/actions";
+import { useMediaQuery } from "usehooks-ts";
 
 interface OverviewTabProps {
   project: Project;
@@ -26,6 +27,7 @@ export const OverviewTab = ({
   events,
 }: OverviewTabProps) => {
   const hasCategories = project?.categories && project?.categories.length > 0;
+  const isDesktop = useMediaQuery("(min-width: 1050px)");
   const { isVisible, ref } = useIntersectionReveal<HTMLDivElement>();
 
   return (
@@ -87,9 +89,11 @@ export const OverviewTab = ({
                 <p>{project?.tasksCompleted ?? "0"}</p>
               </div>
             </div>
-            <div className={styles.activitiesImageBlock}>
-              <img src={Activities} alt="activities-image" />
-            </div>
+            {isDesktop && (
+              <div className={styles.activitiesImageBlock}>
+                <img src={Activities} alt="activities-image" />
+              </div>
+            )}
           </div>
         </div>
         <div ref={ref}>

@@ -40,7 +40,7 @@ const MyFeedback = ({
       <div className={styles.emptyState}>
         <h2>No feedback yet</h2>
         <p>
-          You've joined — now share what you think. Be the first to leave a
+          You've joined - now share what you think. Be the first to leave a
           review.
         </p>
       </div>
@@ -80,9 +80,9 @@ export const JoinedFeedbackTab = ({
         </div>
       )}
     >
-      <div className={styles.feedbackTabWrapper}>
+      <div className={styles.feedbackJoinedTabWrapper}>
         <div className={styles.headerWrapper}>
-          <div className={styles.actionsFeedback}>
+          <div className={styles.actionsJoinedFeedback}>
             {canSubmitFeedback && (
               <motion.div
                 whileHover={{ scale: 1.03 }}

@@ -7,5 +7,3 @@ export interface EventAttendance {
   description: string;
   status?: AttendanceStatus;
 }
-
-export type EventAttendanceView = "month" | "week" | "day";

@@ -8,16 +8,15 @@ import { AvailabilityContextMenu } from "./AvailabilityContextMenu";
 import { useState } from "react";
 import { AvailabilityFormPopover } from "./AvailabilityFormPopover";
 import { useSearch } from "@tanstack/react-router";
-import { calendarDefaults } from "../libs/calendarSearchSchema";
 import {
   calendarQuery,
   slotMatchesDate,
   useCalendarMyActivities,
   type AvailabilitySlot,
 } from "@entities/user/calendar";
-import { getCalendarRange } from "../libs/getCalendarRange";
 import { useQuery } from "@tanstack/react-query";
 import { DeleteAvailabilityModal } from "@features/calendar";
+import { getCalendarRange } from "@shared/libs/date";
 
 interface FormState {
   anchor: Element | { getBoundingClientRect: () => DOMRect };
@@ -30,7 +29,6 @@ export const VolunteerCalendar = () => {
   const [deleteSlot, setDeleteSlot] = useState<AvailabilitySlot | null>(null);
   const search = useSearch({ from: "/_masterLayout/calendar/" });
   const { From, To } = getCalendarRange(
-    search.tab ?? calendarDefaults.tab,
     search.date ? new Date(search.date) : new Date(),
   );
   const events = useCalendarMyActivities({ From, To });

@@ -1,4 +1,4 @@
-import styles from "./OverviewTab.module.scss";
+import styles from "./OverviewTabJoined.module.scss";
 import { BaseMap } from "@shared/ui";
 import { MapResizer, MapZoomAnimation } from "@shared/libs/map";
 import { Marker, Popup } from "react-leaflet";
@@ -8,6 +8,7 @@ import { EventMarker, type Event } from "@entities/event";
 import { Activities } from "@shared/assets/images/entity-information";
 import { MapLocationInput } from "@shared/ui/inputs";
 import { useIntersectionReveal } from "@shared/libs/hooks";
+import { useMediaQuery } from "usehooks-ts";
 
 interface OverviewTabJoinedProps {
   event: Event;
@@ -19,14 +20,14 @@ export const OverviewTabJoined = ({
   userLocation,
 }: OverviewTabJoinedProps) => {
   const { isVisible, ref } = useIntersectionReveal<HTMLDivElement>();
+  const isDesktop = useMediaQuery("(min-width: 1050px)");
 
   return (
-    <div className={styles.overviewWrapper}>
-      <div className={styles.skillsBlock}></div>
+    <div className={styles.overviewJoinedWrapper}>
       <div className={styles.mapLocationBlock}>
-        <div className={styles.projectPageMainInfo}>
+        <div className={styles.projectJoinedEventMainInfo}>
           <div className={styles.headerTextInfo}>
-            <div className={styles.activitiesLocations}>
+            <div className={styles.activityLocation}>
               <h2>Event</h2>
               <span>Location</span>
             </div>
@@ -38,7 +39,7 @@ export const OverviewTabJoined = ({
             </div>
           </div>
           <div className={styles.activitiesBlock}>
-            <div className={styles.activeActivities}>
+            <div className={styles.totalActivities}>
               <div className={styles.totalTasks}>
                 <div className={styles.headerTitle}>
                   <h1>COMPLETED</h1>
@@ -46,6 +47,8 @@ export const OverviewTabJoined = ({
                 </div>
                 <p>{event?.tasksTotal ?? "0"}</p>
               </div>
+            </div>
+            <div className={styles.activeActivities}>
               <div className={styles.activeTasks}>
                 <div className={styles.headerTitle}>
                   <h1>ACTIVE</h1>
@@ -54,9 +57,11 @@ export const OverviewTabJoined = ({
                 <p>{event?.activeTasks ?? "0"}</p>
               </div>
             </div>
-            <div className={styles.activitiesImageBlock}>
-              <img src={Activities} alt="activities-image" />
-            </div>
+            {isDesktop && (
+              <div className={styles.activitiesImageBlock}>
+                <img src={Activities} alt="activities-image" />
+              </div>
+            )}
           </div>
         </div>
         <div className={styles.mapWrapper} ref={ref}>
@@ -64,7 +69,7 @@ export const OverviewTabJoined = ({
             <BaseMap
               zoom={6}
               center={[event.location.latitude, event.location.longitude]}
-              classNameWrapper={styles.mapEventWrapper}
+              classNameWrapper={styles.mapJoinedEventWrapper}
             >
               <MapResizer />
               <>

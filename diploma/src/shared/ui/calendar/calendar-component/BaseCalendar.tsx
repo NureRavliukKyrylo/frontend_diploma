@@ -2,24 +2,24 @@ import FullCalendar from "@fullcalendar/react";
 import type { CalendarOptions } from "@fullcalendar/core";
 import styles from "./BaseCalendar.module.scss";
 import { useRef, useState, useCallback, useEffect } from "react";
-import type { CalendarView, TabOption } from "@shared/config/types";
+import type { CalendarTab, TabOption } from "@shared/config/types";
 import { Toggle } from "../../toggle/Toggle";
 import { NavigationArrow } from "@shared/assets/icons/actions";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 
-const VIEW_TABS: TabOption<CalendarView>[] = [
+const VIEW_TABS: TabOption<CalendarTab>[] = [
   { label: "Month", value: "dayGridMonth" },
   { label: "Week", value: "timeGridWeek" },
   { label: "Day", value: "timeGridDay" },
 ];
 
 interface BaseCalendarProps extends CalendarOptions {
-  initialView?: CalendarView;
+  initialView?: CalendarTab;
   initialDate?: string;
-  onViewChange?: (view: CalendarView, date: Date) => void;
-  onNavigate?: (date: Date, view: CalendarView) => void;
+  onViewChange?: (view: CalendarTab, date: Date) => void;
+  onNavigate?: (date: Date, view: CalendarTab) => void;
 }
 
 export const BaseCalendar = ({
@@ -31,7 +31,7 @@ export const BaseCalendar = ({
 }: BaseCalendarProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const calendarRef = useRef<FullCalendar>(null);
-  const [activeView, setActiveView] = useState<CalendarView>(initialView);
+  const [activeView, setActiveView] = useState<CalendarTab>(initialView);
   const [title, setTitle] = useState("");
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export const BaseCalendar = ({
     if (api) setTitle(api.view.title);
   }, []);
 
-  const handleViewChange = (view: CalendarView) => {
+  const handleViewChange = (view: CalendarTab) => {
     setActiveView(view);
     const api = calendarRef.current?.getApi();
     if (!api) return;

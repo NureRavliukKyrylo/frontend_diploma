@@ -1,100 +1,18 @@
 @use "@shared/assets/styles" as *;
 
-.overviewWrapper {
+.overviewJoinedWrapper {
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 30px;
 
   @include respond-to(laptop) {
-    gap: 40px;
+    gap: 24px;
   }
-  @include respond-to(null, 1050px) {
-    gap: 28px;
-    flex: unset;
+  @include respond-to(tablet) {
+    gap: 20px;
   }
   @include respond-to(mobile) {
-    gap: 20px;
-    flex: unset;
-  }
-
-  .categoryLinkWrapper {
-    background: #ffffff;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-
-    @include respond-to(laptop) {
-      width: 54px;
-      height: 54px;
-    }
-    @include respond-to(tablet) {
-      width: 44px;
-      height: 44px;
-    }
-    @include respond-to(mobile) {
-      width: 36px;
-      height: 36px;
-    }
-
-    .goToCategory {
-      color: #8c0000;
-      width: 24px;
-      height: 24px;
-
-      @include respond-to(laptop) {
-        width: 20px;
-        height: 20px;
-      }
-      @include respond-to(tablet) {
-        width: 16px;
-        height: 16px;
-      }
-      @include respond-to(mobile) {
-        width: 14px;
-        height: 14px;
-      }
-    }
-  }
-
-  .categoriesProjectList {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    justify-content: center;
-    gap: 40px;
-    row-gap: 30px;
-
-    @include respond-to(laptop) {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-      row-gap: 20px;
-    }
-    @include respond-to(tablet) {
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      row-gap: 14px;
-    }
-    @include respond-to(mobile) {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      row-gap: 12px;
-    }
-  }
-
-  .buttonShowMore {
-    align-self: flex-end;
-  }
-
-  .noCategoriesText {
-    text-align: center;
-    @include font-base(20px, 700);
-    @include respond-to(mobile) {
-      font-size: 16px;
-    }
+    gap: 16px;
   }
 
   .mapLocationBlock {
@@ -118,23 +36,20 @@
     @include respond-to(null, 1050px) {
       flex-direction: column;
       gap: 24px;
-      > :first-child {
-        flex: unset;
-      }
+      > :first-child,
       > :nth-child(2) {
         flex: unset;
       }
     }
     @include respond-to(mobile) {
-      > :first-child {
-        flex: unset;
-      }
+      gap: 16px;
+      > :first-child,
       > :nth-child(2) {
         flex: unset;
       }
     }
 
-    .projectPageMainInfo {
+    .projectJoinedEventMainInfo {
       display: flex;
       flex-direction: column;
       gap: 60px;
@@ -147,7 +62,6 @@
       }
       @include respond-to(mobile) {
         gap: 20px;
-        flex: unset;
       }
 
       .headerTextInfo {
@@ -159,7 +73,7 @@
           gap: 14px;
         }
 
-        .activitiesLocations {
+        .activityLocation {
           display: flex;
           justify-content: flex-start;
           flex-direction: column;
@@ -178,10 +92,10 @@
               font-size: 24px;
             }
             @include respond-to(tablet) {
-              font-size: 22px;
+              font-size: 20px;
             }
             @include respond-to(mobile) {
-              font-size: 18px;
+              font-size: 17px;
             }
           }
 
@@ -194,10 +108,10 @@
               font-size: 32px;
             }
             @include respond-to(tablet) {
-              font-size: 28px;
+              font-size: 26px;
             }
             @include respond-to(mobile) {
-              font-size: 24px;
+              font-size: 22px;
             }
           }
         }
@@ -236,11 +150,12 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+
         @include respond-to(null, 1050px) {
-          gap: 5px;
+          gap: 15px;
         }
         @include respond-to(mobile) {
-          gap: 0px;
+          gap: 10px;
         }
 
         .activeActivities {
@@ -253,67 +168,69 @@
             gap: 12px;
           }
 
-          .totalTasks,
-          .totalEvents {
+          .activeTasks {
             flex: 1;
             background: #ffffff;
             box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
             border-radius: 20px;
-            padding: 25px 15px;
-            min-height: 160px;
+            padding: 25px 25px 25px 45px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
 
             @include respond-to(laptop) {
-              padding: 20px 12px;
-              min-height: 130px;
+              padding: 20px 20px 20px 32px;
+              height: 100px;
             }
             @include respond-to(tablet) {
-              padding: 16px 10px;
-              min-height: 110px;
+              padding: 16px 16px 16px 24px;
+              height: 90px;
+              border-radius: 14px;
             }
             @include respond-to(mobile) {
-              padding: 12px 8px;
-              min-height: 90px;
-              border-radius: 14px;
+              padding: 12px 12px 12px 18px;
+              height: 80px;
+              border-radius: 12px;
             }
 
             .headerTitle {
               h1 {
                 font-style: italic !important;
-                @include font-base(20px, 500);
-                line-height: 100%;
-
-                @include respond-to(laptop) {
-                  font-size: 17px;
-                }
-                @include respond-to(tablet) {
-                  font-size: 15px;
-                }
-                @include respond-to(mobile) {
-                  font-size: 13px;
-                }
-              }
-
-              h2 {
-                @include font-base(25px, 800);
+                @include font-base(25px, 500);
                 line-height: 100%;
 
                 @include respond-to(laptop) {
                   font-size: 20px;
                 }
                 @include respond-to(tablet) {
-                  font-size: 18px;
+                  font-size: 17px;
                 }
                 @include respond-to(mobile) {
-                  font-size: 15px;
+                  font-size: 14px;
+                }
+              }
+
+              h2 {
+                @include font-base(35px, 800);
+                line-height: 100%;
+
+                @include respond-to(laptop) {
+                  font-size: 28px;
+                }
+                @include respond-to(tablet) {
+                  font-size: 24px;
+                }
+                @include respond-to(mobile) {
+                  font-size: 20px;
                 }
               }
             }
           }
 
           p {
+            right: 25px;
+            bottom: 15px;
             @include font-base(50px, 700);
             color: #8c0000;
             text-align: right;
@@ -322,13 +239,27 @@
 
             @include respond-to(laptop) {
               font-size: 40px;
+              right: 20px;
+              bottom: 12px;
             }
             @include respond-to(tablet) {
-              font-size: 28px;
+              font-size: 32px;
+              right: 16px;
+              bottom: 10px;
             }
             @include respond-to(mobile) {
-              font-size: 24px;
+              font-size: 26px;
+              right: 12px;
+              bottom: 8px;
             }
+          }
+        }
+
+        .totalActivities {
+          @extend .activeActivities;
+
+          .totalTasks {
+            @extend .activeTasks;
           }
         }
 
@@ -347,19 +278,21 @@
         }
       }
     }
-    .mapProjectWrapper {
+
+    .mapWrapper {
       @include respond-to(null, 1050px) {
-        height: 600px;
+        height: 500px;
       }
       @include respond-to(mobile) {
-        height: 500px;
+        height: 400px;
       }
     }
   }
 }
 
-.popupProject {
+.popupContent {
   width: fit-content;
+
   :global(.leaflet-popup-content-wrapper) {
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0px 2px 10px rgba(99, 99, 99, 0.5);
@@ -382,7 +315,15 @@
     display: none;
   }
 
-  .popupProjectTitle {
+  .popupLabel {
+    @include font-base(11px, 400);
+    text-transform: uppercase;
+    color: #999;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  .popupEventTitle {
     @include font-base(18px, 700);
     color: #1a1a1a;
     margin-bottom: 4px;
@@ -393,7 +334,7 @@
     }
   }
 
-  .popupProjectLocation {
+  .popupEventLocation {
     @include font-base(14px, 400);
     color: #888;
     letter-spacing: 0.3px;
@@ -404,7 +345,7 @@
   }
 }
 
-:global(.projectMarkerIcon) {
+:global(.eventMarkerIcon) {
   width: 35px;
   height: 35px;
   animation: markerAppear 0.3s ease-in-out forwards;

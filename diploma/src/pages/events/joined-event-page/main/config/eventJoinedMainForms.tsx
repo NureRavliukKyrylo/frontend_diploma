@@ -1,8 +1,9 @@
 import type { Coordinates } from "@shared/config/types";
 import type {
+  AttendanceEventSearch,
   Event,
-  EventDetailSearch,
   EventJoinedMode,
+  JoinedEventSearch,
 } from "@entities/event";
 import type { TasksRequestParams } from "@entities/task";
 import { OverviewTabJoined } from "../../overview-tab/ui/OverviewTabJoined";
@@ -13,7 +14,7 @@ import { TasksTabJoined } from "../../tasks-tab";
 interface EventJoinedTabsProps {
   event: Event;
   userLocation?: Coordinates | null;
-  search: Omit<EventDetailSearch, "tab">;
+  search: Omit<JoinedEventSearch, "tab">;
   filters?: Omit<TasksRequestParams, "Status">;
 }
 
@@ -31,5 +32,10 @@ export const getJoinedEventMainForms = (
     />
   ),
   tasks: <TasksTabJoined />,
-  attendance: <AttendanceTabJoined />,
+  attendance: (
+    <AttendanceTabJoined
+      eventId={props.event.id}
+      search={props.search as AttendanceEventSearch}
+    />
+  ),
 });

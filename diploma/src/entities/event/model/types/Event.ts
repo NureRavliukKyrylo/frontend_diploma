@@ -5,6 +5,7 @@ import type { Skill } from "@entities/skill";
 import type {
   Coordinates,
   EntityStatus,
+  LevelProgress,
   ParticipationMember,
   Policy,
   Rating,
@@ -16,7 +17,7 @@ export interface Event {
   description: string;
   startAt: string;
   endAt: string;
-  progressPercent: number;
+  progress: LevelProgress;
   tasksTotal: number;
   activeTasks: number;
   organization?: Pick<Organization, "id" | "logoUrl" | "name">;

@@ -1,13 +1,13 @@
 import type { Feedback } from "@entities/feedback/model";
 import { apiClient } from "@shared/api";
 import type { EntityType } from "@shared/config/types";
-
+import type { ApiResponse } from "@shared/api";
 export const getMyFeedback = async (
   entityType: EntityType,
   entityId: string,
-): Promise<Feedback> => {
+): Promise<ApiResponse<Feedback>> => {
   const result = await apiClient.get(
-    `Feedback/entity/${entityType}/${entityId}`,
+    `Feedback/my/entity/${entityType}/${entityId}`,
   );
   return result.data;
 };

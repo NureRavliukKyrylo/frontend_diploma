@@ -2,7 +2,7 @@ import styles from "./EventPage.module.scss";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import { AnimatePresence, motion } from "framer-motion";
-import { formatDateToText } from "@shared/libs/date";
+import { formatDateRange } from "@shared/libs/date";
 import { Calendar, Reccurence } from "@shared/assets/icons/info";
 import { eventMainTabs } from "../config/eventMainTabs";
 import { Arrow } from "@shared/assets/icons/actions";
@@ -39,7 +39,7 @@ export const EventPage = () => {
                   {event?.endAt && (
                     <span className={`${styles.metaChip} ${styles.calendar}`}>
                       <Calendar className={styles.calendarImg} />
-                      <span>{formatDateToText(event.endAt)}</span>
+                      <span>{formatDateRange(event.startAt, event.endAt)}</span>
                     </span>
                   )}
                   {policyConfig && (
@@ -103,13 +103,23 @@ export const EventPage = () => {
         <div className={styles.statsEventInfo}>
           <div className={styles.levelEventInfo}>
             <div className={styles.headerLevelBar}>
-              <span className={styles.current}>Level 12</span>
-              <span className={styles.xp}>{event?.progressPercent}/100</span>
+              <span className={styles.current}>
+                Level {event.progress.level ?? 0}
+              </span>
+              <span className={styles.xp}>
+                {event?.progress.currentProgress}/{event.progress.maxProgress}
+              </span>
             </div>
-            <ProgressBar current={event?.progressPercent ?? 0} max={100} />
+            <ProgressBar
+              current={event?.progress.currentProgress ?? 0}
+              max={event.progress.maxProgress}
+            />
             <div className={styles.footerLevelBar}>
               <span className={styles.label}>Next level</span>
-              <span className={styles.next}>Level 13</span>
+              <span className={styles.next}>
+                Level{" "}
+                {event.progress?.level == null ? 1 : event.progress.level + 1}
+              </span>
             </div>
           </div>
           <div className={styles.ratingEventInfo}>

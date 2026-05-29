@@ -1,21 +1,22 @@
-import styles from "./EventPage.module.scss";
+import styles from "./JoinedEventPage.module.scss";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import { AnimatePresence, motion } from "framer-motion";
-import { formatDateToText } from "@shared/libs/date";
-import { Calendar, Reccurence } from "@shared/assets/icons/info";
+import { formatDateRange } from "@shared/libs/date";
+import { Calendar, Reccurence, RoleIcon } from "@shared/assets/icons/info";
 import { Arrow } from "@shared/assets/icons/actions";
 import { ParticipationLeaveButton } from "@features/participation";
 import { eventJoinedMainTabs } from "../config/eventJoinedMainTabs";
 import { useJoinedEventPage } from "../model/useJoinedEventPage";
+import { ChatIcon } from "@shared/assets/icons/info";
 
 export const JoinedEventPage = () => {
   const { tab, event, forms, handleTabChange } = useJoinedEventPage();
 
   return (
-    <div className={styles.wrapperEventPage}>
+    <div className={styles.wrapperJoinedEventPage}>
       <motion.div
-        className={styles.eventPageHeader}
+        className={styles.eventJoinedPageHeader}
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
@@ -25,8 +26,10 @@ export const JoinedEventPage = () => {
             <div className={styles.eventOrganizationInfo}>
               <div className={styles.titleHeader}>
                 <h1>{event?.title}</h1>
-                <div className={styles.eventMetaInfo}>
-                  <span className={styles.metaChipEvent}>Event</span>
+                <div className={styles.eventJoinedMetaInfo}>
+                  <span className={styles.metaChipJoinedEvent}>
+                    Joined Event
+                  </span>
                   {event?.recurrence && (
                     <span className={styles.reccurenceInfo}>
                       <Reccurence className={styles.reccurenceIcon} />
@@ -36,30 +39,51 @@ export const JoinedEventPage = () => {
                   {event?.endAt && (
                     <span className={`${styles.metaChip} ${styles.calendar}`}>
                       <Calendar className={styles.calendarImg} />
-                      <span>{formatDateToText(event.endAt)}</span>
+                      <span>{formatDateRange(event.startAt, event.endAt)}</span>
                     </span>
                   )}
+                  <span className={`${styles.metaChip} ${styles.roleChip}`}>
+                    <RoleIcon className={styles.role} />
+                    <span>Contributor</span>
+                  </span>
                 </div>
               </div>
-              <motion.div
-                whileHover={{
-                  scale: 1.04,
-                }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 400, damping: 22 }}
-              >
-                <LinkButtonWrapper
-                  to="/organizations/$id"
-                  params={{ id: event.organization?.id }}
-                  className={styles.organizationInfo}
+              <div className={styles.chatOrganizationBlock}>
+                <motion.div
+                  whileHover={{
+                    scale: 1.04,
+                  }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 22 }}
                 >
-                  <img
-                    src={event?.organization?.logoUrl}
-                    alt="organization-image"
-                  />
-                  <p>{event?.organization?.name}</p>
-                </LinkButtonWrapper>
-              </motion.div>
+                  <LinkButtonWrapper
+                    to="/organizations/$id"
+                    params={{ id: event.organization?.id }}
+                    className={styles.organizationInfo}
+                  >
+                    <img
+                      src={event?.organization?.logoUrl}
+                      alt="organization-image"
+                    />
+                    <p>{event?.organization?.name}</p>
+                  </LinkButtonWrapper>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 16, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{
+                    duration: 0.4,
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                  }}
+                  whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <LinkButtonWrapper className={styles.chatWrapper}>
+                    <ChatIcon className={styles.chatIcon} />
+                    <h1>EVENT CHAT</h1>
+                  </LinkButtonWrapper>
+                </motion.div>
+              </div>
             </div>
             {event?.project && (
               <div className={styles.projectPill}>
@@ -80,22 +104,32 @@ export const JoinedEventPage = () => {
             )}
           </div>
         </div>
-        <div className={styles.statsEventInfo}>
+        <div className={styles.statsJoinedEventInfo}>
           <div className={styles.headerLevelBar}>
-            <span className={styles.current}>Level 12</span>
-            <span className={styles.xp}>{event?.progressPercent}/100</span>
+            <span className={styles.current}>
+              Level {event.progress.level ?? 0}
+            </span>
+            <span className={styles.xp}>
+              {event?.progress.currentProgress}/{event.progress.maxProgress}
+            </span>
           </div>
-          <ProgressBar current={event?.progressPercent ?? 0} max={100} />
+          <ProgressBar
+            current={event?.progress.currentProgress ?? 0}
+            max={event.progress.maxProgress}
+          />
           <div className={styles.footerLevelBar}>
             <span className={styles.label}>Next level</span>
-            <span className={styles.next}>Level 13</span>
+            <span className={styles.next}>
+              Level{" "}
+              {event.progress?.level == null ? 1 : event.progress.level + 1}
+            </span>
           </div>
         </div>
-        <div className={styles.eventFooterContent}>
+        <div className={styles.eventJoinedFooterContent}>
           <ReadMoreButton
             collapsedHeight={90}
             className={styles.readMoreButtonContainer}
-            classNameButton={styles.readMoreButtonEvent}
+            classNameButton={styles.readMoreButtonJoinedEvent}
           >
             <p>{event?.description}</p>
           </ReadMoreButton>
@@ -121,10 +155,10 @@ export const JoinedEventPage = () => {
           tabs={eventJoinedMainTabs}
           activeValue={tab}
           onChange={handleTabChange}
-          buttonClassName={styles.toggleEventButton}
-          activeButtonClassName={styles.toggleEventButtonActive}
-          className={styles.toggleEvent}
-          pillClassName={styles.toggleEventPill}
+          buttonClassName={styles.toggleJoinedEventButton}
+          activeButtonClassName={styles.toggleJoinedEventButtonActive}
+          className={styles.toggleJoinedEvent}
+          pillClassName={styles.toggleJoinedEventPill}
         />
       </div>
       <AnimatePresence mode="wait">

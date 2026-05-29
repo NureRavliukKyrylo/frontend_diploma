@@ -3,6 +3,7 @@ import type { Organization } from "@entities/organization";
 import type {
   Coordinates,
   EntityStatus,
+  LevelProgress,
   ParticipationMember,
   Policy,
   Rating,
@@ -12,8 +13,9 @@ export interface Project {
   id: string;
   title: string;
   description: string;
+  startAt: string;
   endAt: string;
-  progressPercent: number;
+  progress: LevelProgress;
   tasksTotal: number;
   eventsTotal: number;
   tasksCompleted: number;

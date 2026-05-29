@@ -4,6 +4,7 @@ import {
 } from "@entities/project";
 import { createFileRoute } from "@tanstack/react-router";
 import { createTabCleanerMiddleware } from "@shared/libs/search-params";
+import { JoinedProjectPage } from "@pages/projects";
 
 export const Route = createFileRoute("/_masterLayout/projects/my/$id/")({
   validateSearch: joinedProjectSearchSchema,
@@ -12,9 +13,5 @@ export const Route = createFileRoute("/_masterLayout/projects/my/$id/")({
       createTabCleanerMiddleware(joinedProjectDefaults, "overview"),
     ],
   },
-  component: RouteComponent,
+  component: JoinedProjectPage,
 });
-
-function RouteComponent() {
-  return <div>Hello "/_masterLayout/projects/my/$id/"!</div>;
-}

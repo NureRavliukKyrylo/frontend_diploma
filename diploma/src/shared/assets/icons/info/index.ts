@@ -15,3 +15,5 @@ export { default as DoneStatus } from "./doneStatus.png";
 export { default as OnHoldStatus } from "./onHoldStatus.png";
 export { default as TimeIcon } from "./time.svg?react";
 export { default as LockedIcon } from "./locked.svg?react";
+export { default as ChatIcon } from "./chat.svg?react";
+export { default as RoleIcon } from "./role.svg?react";

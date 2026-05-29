@@ -1,0 +1,730 @@
+@use "@shared/assets/styles" as *;
+
+.wrapperJoinedEventPage {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  @include respond-to(null, 1400px) {
+    width: 82%;
+    gap: 30px;
+  }
+  @include respond-to(tablet) {
+    width: 95%;
+    gap: 24px;
+  }
+  @include respond-to(mobile) {
+    width: 100%;
+    padding: 0 16px;
+    gap: 20px;
+  }
+
+  .eventJoinedPageHeader {
+    background: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 20px 40px;
+    padding: 40px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @include respond-to(laptop) {
+      padding: 30px 36px;
+      gap: 28px;
+    }
+    @include respond-to(tablet) {
+      padding: 24px;
+      gap: 20px;
+      border-radius: 16px 28px;
+    }
+    @include respond-to(mobile) {
+      padding: 16px;
+      gap: 16px;
+      border-radius: 12px 20px;
+    }
+
+    .headerEventInfo {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .mainEventData {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .eventOrganizationInfo {
+          display: flex;
+          gap: 60px;
+          align-items: center;
+
+          @include respond-to(laptop) {
+            gap: 30px;
+          }
+          @include respond-to(tablet) {
+            gap: 20px;
+            flex-wrap: wrap;
+          }
+          @include respond-to(mobile) {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 14px;
+          }
+
+          .titleHeader {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            row-gap: 12px;
+
+            h1 {
+              @include font-base(45px, 700);
+              line-height: 100%;
+
+              @include respond-to(laptop) {
+                font-size: 36px;
+              }
+              @include respond-to(tablet) {
+                font-size: 28px;
+              }
+              @include respond-to(mobile) {
+                font-size: 22px;
+              }
+            }
+
+            .eventJoinedMetaInfo {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 15px;
+              row-gap: 20px;
+              margin-top: 5px;
+              align-items: stretch;
+
+              @include respond-to(tablet) {
+                gap: 10px;
+                row-gap: 12px;
+              }
+              @include respond-to(mobile) {
+                gap: 8px;
+                row-gap: 8px;
+                margin-top: 3px;
+              }
+
+              .metaChipJoinedEvent {
+                background: #ffffff;
+                box-shadow: 0px 2px 10px rgba(148, 0, 0, 0.6);
+                border-radius: 100px;
+                padding: 4px 25px;
+                flex-shrink: 0;
+                white-space: nowrap;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                @include font-base(18px, 700);
+                background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                color: transparent;
+
+                @include respond-to(laptop) {
+                  font-size: 15px;
+                  padding: 4px 18px;
+                }
+                @include respond-to(tablet) {
+                  font-size: 13px;
+                  padding: 3px 14px;
+                }
+                @include respond-to(mobile) {
+                  font-size: 12px;
+                  padding: 3px 12px;
+                }
+              }
+
+              .reccurenceInfo {
+                background: linear-gradient(90deg, #c8c8c8 0%, #ffffff 100%);
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+                border-radius: 100px;
+                width: fit-content;
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                padding: 3px 15px 3px 7px;
+
+                @include respond-to(laptop) {
+                  padding: 3px 12px 3px 6px;
+                }
+                @include respond-to(mobile) {
+                  padding: 2px 8px 2px 5px;
+                }
+
+                h1 {
+                  background: linear-gradient(90deg, #000000 0%, #666666 100%);
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                  background-clip: text;
+                  text-transform: uppercase;
+                  @include font-base(15px, 700);
+
+                  @include respond-to(laptop) {
+                    font-size: 13px;
+                  }
+                  @include respond-to(tablet) {
+                    font-size: 12px;
+                  }
+                  @include respond-to(mobile) {
+                    font-size: 11px;
+                  }
+                }
+
+                .reccurenceIcon {
+                  width: 20px;
+                  height: 20px;
+
+                  @include respond-to(laptop) {
+                    width: 17px;
+                    height: 17px;
+                  }
+                  @include respond-to(mobile) {
+                    width: 14px;
+                    height: 14px;
+                  }
+                }
+              }
+
+              .metaChip {
+                background: #eeeeee;
+                box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+                border-radius: 20px;
+                padding: 4px 15px;
+                @include font-base(18px, 700);
+                white-space: nowrap;
+                display: flex;
+                align-items: center;
+
+                @include respond-to(laptop) {
+                  font-size: 15px;
+                  padding: 4px 12px;
+                }
+                @include respond-to(tablet) {
+                  font-size: 13px;
+                  padding: 3px 10px;
+                }
+                @include respond-to(mobile) {
+                  font-size: 12px;
+                  padding: 3px 8px;
+                }
+
+                &.policy {
+                  text-transform: uppercase;
+                  span {
+                    color: transparent;
+                    text-transform: uppercase;
+                  }
+                }
+              }
+              .roleChip {
+                display: flex;
+                gap: 5px;
+                align-items: center;
+                .role {
+                  width: 22px;
+                  height: 22px;
+
+                  @include respond-to(tablet) {
+                    width: 18px;
+                    height: 18px;
+                  }
+                  @include respond-to(mobile) {
+                    width: 15px;
+                    height: 15px;
+                  }
+                }
+              }
+              .calendar {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                @include respond-to(mobile) {
+                  gap: 5px;
+                }
+
+                .calendarImg {
+                  width: 22px;
+                  height: 22px;
+
+                  @include respond-to(tablet) {
+                    width: 18px;
+                    height: 18px;
+                  }
+                  @include respond-to(mobile) {
+                    width: 15px;
+                    height: 15px;
+                  }
+                }
+
+                span {
+                  background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                  background-clip: text;
+                  color: transparent;
+                }
+              }
+            }
+          }
+          .chatOrganizationBlock {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .organizationInfo {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              gap: 10px;
+              background: #ffffff;
+              box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+              border-radius: 100px;
+              padding: 10px 20px;
+              margin-left: auto;
+              flex-shrink: 0;
+
+              @include respond-to(tablet) {
+                padding: 8px 14px;
+                gap: 7px;
+              }
+              @include respond-to(mobile) {
+                margin-left: 0;
+                padding: 7px 12px;
+              }
+
+              img {
+                border-radius: 5px;
+                border: 2px solid #000000;
+                width: 36px;
+                height: 36px;
+                filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.25));
+
+                @include respond-to(tablet) {
+                  width: 28px;
+                  height: 28px;
+                }
+                @include respond-to(mobile) {
+                  width: 24px;
+                  height: 24px;
+                }
+              }
+
+              p {
+                text-transform: uppercase;
+                @include font-base(25px, 900);
+                max-width: 170px;
+                text-align: center;
+                line-height: 110%;
+                letter-spacing: 0.01em;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+
+                @include respond-to(laptop) {
+                  font-size: 20px;
+                  max-width: 140px;
+                }
+                @include respond-to(tablet) {
+                  font-size: 16px;
+                  max-width: 110px;
+                }
+                @include respond-to(mobile) {
+                  font-size: 14px;
+                  max-width: 90px;
+                }
+              }
+            }
+            .chatWrapper {
+              background: white;
+              @include font-base(20px, 900);
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              gap: 10px;
+              background: #ffffff;
+              box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+              border-radius: 100px;
+              padding: 5px;
+              @include respond-to(laptop) {
+                font-size: 18px;
+              }
+              @include respond-to(tablet) {
+                font-size: 16px;
+              }
+              @include respond-to(mobile) {
+                font-size: 14px;
+              }
+              .chatIcon {
+                color: #ff0505a3;
+                width: 30px;
+                height: 30px;
+                @include respond-to(laptop) {
+                  width: 26px;
+                  height: 26px;
+                }
+                @include respond-to(tablet) {
+                  width: 24px;
+                  height: 24px;
+                }
+                @include respond-to(mobile) {
+                  width: 20px;
+                  height: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .projectPill {
+      background: linear-gradient(90deg, #000000 0%, #666666 81.25%);
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+      border-radius: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 200px;
+      padding: 5px 9px 5px 20px;
+
+      @include respond-to(mobile) {
+        max-width: 160px;
+        padding: 4px 4px 4px 14px;
+      }
+
+      h1 {
+        @include font-base(20px, 700);
+        background: linear-gradient(270deg, #ffffff 29.81%, #d5d5d5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+
+        @include respond-to(tablet) {
+          font-size: 17px;
+        }
+        @include respond-to(mobile) {
+          font-size: 15px;
+        }
+      }
+
+      .goToProject {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: white;
+        border-radius: 100%;
+        width: 30px;
+        height: 30px;
+
+        @include respond-to(tablet) {
+          width: 26px;
+          height: 26px;
+        }
+        @include respond-to(mobile) {
+          width: 22px;
+          height: 22px;
+        }
+
+        .toProjectArrow {
+          width: 12px;
+          height: 12px;
+          color: black;
+
+          @include respond-to(mobile) {
+            width: 10px;
+            height: 10px;
+          }
+        }
+      }
+    }
+
+    .statsJoinedEventInfo {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      width: 100%;
+
+      .headerLevelBar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @include font-base(25px, 900);
+        color: black;
+
+        @include respond-to(laptop) {
+          font-size: 20px;
+        }
+        @include respond-to(tablet) {
+          font-size: 17px;
+        }
+        @include respond-to(mobile) {
+          font-size: 15px;
+        }
+      }
+
+      .footerLevelBar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: rgba(0, 0, 0, 0.6);
+        @include font-base(15px, 600);
+
+        @include respond-to(mobile) {
+          font-size: 13px;
+        }
+      }
+    }
+
+    .eventJoinedFooterContent {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .readMoreButtonContainer {
+        display: flex;
+        flex-direction: column;
+      }
+      .readMoreButtonJoinedEvent {
+        align-self: flex-end;
+      }
+
+      @include respond-to(mobile) {
+        gap: 14px;
+      }
+
+      p {
+        @include font-base(20px, 400);
+
+        @include respond-to(tablet) {
+          font-size: 16px;
+        }
+        @include respond-to(mobile) {
+          font-size: 14px;
+        }
+      }
+
+      .pendingRequest {
+        @include font-base(25px, 800);
+        background: linear-gradient(360deg, #f59e0b 0%, #b45309 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+
+        @include respond-to(tablet) {
+          font-size: 20px;
+        }
+        @include respond-to(mobile) {
+          font-size: 17px;
+        }
+      }
+
+      .leaveEventBlockButton {
+        width: 40%;
+        margin: 0 auto;
+
+        @include respond-to(tablet) {
+          width: 60%;
+        }
+        @include respond-to(mobile) {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .toggleWrapper {
+    width: 100%;
+
+    .toggleJoinedEventButton {
+      color: rgba(0, 0, 0, 0.8);
+      flex-grow: 1;
+      padding: 6px 20px;
+      @include font-base(25px, 500);
+      &:hover {
+        background: rgba(231, 226, 226, 0.5);
+      }
+
+      @include respond-to(laptop) {
+        font-size: 20px;
+        padding: 6px 14px;
+      }
+      @include respond-to(tablet) {
+        font-size: 16px;
+        padding: 6px 10px;
+      }
+      @include respond-to(mobile) {
+        font-size: 12px;
+        padding: 4px 6px;
+      }
+    }
+
+    .toggleJoinedEventButtonActive {
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 800;
+      transform: scale(1.1);
+      transition: transform 0.2s ease-in-out;
+
+      @include respond-to(tablet) {
+        transform: scale(1.05);
+      }
+      @include respond-to(mobile) {
+        transform: scale(1.02);
+      }
+
+      &:hover {
+        background: transparent;
+      }
+    }
+
+    .toggleJoinedEvent {
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+      height: 100%;
+      border-radius: 20px;
+      padding: 10px;
+      justify-content: space-between;
+      width: 100%;
+
+      @include respond-to(tablet) {
+        padding: 5px;
+      }
+      @include respond-to(mobile) {
+        padding: 3px;
+      }
+    }
+
+    .toggleJoinedEventPill {
+      background-color: black;
+    }
+  }
+}
+
+.skeletonTitle {
+  width: 340px;
+  height: 50px;
+  border-radius: 10px;
+  @include respond-to(laptop) {
+    width: 260px;
+    height: 40px;
+  }
+  @include respond-to(tablet) {
+    width: 200px;
+    height: 32px;
+  }
+  @include respond-to(mobile) {
+    width: 160px;
+    height: 26px;
+  }
+}
+.skeletonOrgImage {
+  width: 56px;
+  height: 56px;
+  border-radius: 5px;
+  @include respond-to(tablet) {
+    width: 42px;
+    height: 42px;
+  }
+  @include respond-to(mobile) {
+    width: 34px;
+    height: 34px;
+  }
+}
+.skeletonOrgName {
+  width: 120px;
+  height: 24px;
+  border-radius: 6px;
+  @include respond-to(tablet) {
+    width: 90px;
+    height: 20px;
+  }
+  @include respond-to(mobile) {
+    width: 70px;
+    height: 16px;
+  }
+}
+.skeletonLevelBar {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  @include respond-to(laptop) {
+    height: 34px;
+  }
+  @include respond-to(tablet) {
+    height: 28px;
+  }
+  @include respond-to(mobile) {
+    height: 22px;
+  }
+}
+.skeletonRating {
+  width: 80px;
+  height: 60px;
+  border-radius: 10px;
+  @include respond-to(tablet) {
+    width: 60px;
+    height: 48px;
+  }
+}
+.skeletonDescription {
+  width: 100%;
+  height: 80px;
+  border-radius: 10px;
+  @include respond-to(tablet) {
+    height: 64px;
+  }
+  @include respond-to(mobile) {
+    height: 50px;
+  }
+}
+.skeletonButton {
+  width: 100%;
+  height: 48px;
+  border-radius: 40px;
+  @include respond-to(tablet) {
+    height: 42px;
+  }
+  @include respond-to(mobile) {
+    height: 38px;
+  }
+}
+.skeletonToggle {
+  width: 100%;
+  height: 60px;
+  border-radius: 20px;
+  @include respond-to(tablet) {
+    height: 50px;
+  }
+  @include respond-to(mobile) {
+    height: 44px;
+  }
+}
+.skeletonContent {
+  width: 100%;
+  height: 500px;
+  border-radius: 20px;
+}
+.skeletonMetaChip {
+  height: 40px;
+  width: 120px;
+  border-radius: 20px;
+  @include respond-to(tablet) {
+    height: 30px;
+    width: 90px;
+  }
+  @include respond-to(mobile) {
+    height: 26px;
+    width: 76px;
+  }
+}

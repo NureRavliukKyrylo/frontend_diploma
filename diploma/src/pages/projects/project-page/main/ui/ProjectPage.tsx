@@ -3,7 +3,7 @@ import { ProgressBar, Toggle } from "@shared/ui";
 import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import { projectMainTabs } from "../config/projectMainTabs";
 import { AnimatePresence, motion } from "framer-motion";
-import { formatDateToText } from "@shared/libs/date";
+import { formatDateRange } from "@shared/libs/date";
 import { Calendar } from "@shared/assets/icons/info";
 import { useProjectPage } from "../model/useProjectPage";
 import {
@@ -32,7 +32,9 @@ export const ProjectPage = () => {
                 {project?.endAt && (
                   <span className={`${styles.metaChip} ${styles.calendar}`}>
                     <Calendar className={styles.calendarImg} />
-                    <span>{formatDateToText(project.endAt)}</span>
+                    <span>
+                      {formatDateRange(project.startAt, project.endAt)}
+                    </span>
                   </span>
                 )}
                 {policyConfig && (
@@ -78,13 +80,26 @@ export const ProjectPage = () => {
         <div className={styles.statsProjectInfo}>
           <div className={styles.levelProjectInfo}>
             <div className={styles.headerLevelBar}>
-              <span className={styles.current}>Level 12</span>
-              <span className={styles.xp}>{project?.progressPercent}/100</span>
+              <span className={styles.current}>
+                Level {project.progress.level ?? 0}
+              </span>
+              <span className={styles.xp}>
+                {project?.progress.currentProgress}/
+                {project.progress.maxProgress}
+              </span>
             </div>
-            <ProgressBar current={project?.progressPercent ?? 0} max={100} />
+            <ProgressBar
+              current={project?.progress.currentProgress ?? 0}
+              max={project.progress.maxProgress}
+            />
             <div className={styles.footerLevelBar}>
               <span className={styles.label}>Next level</span>
-              <span className={styles.next}>Level 13</span>
+              <span className={styles.next}>
+                Level{" "}
+                {project.progress?.level == null
+                  ? 1
+                  : project.progress.level + 1}
+              </span>
             </div>
           </div>
           <div className={styles.ratingProjectInfo}>

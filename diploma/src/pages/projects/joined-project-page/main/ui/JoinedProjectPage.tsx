@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "./JoinedProjectPage.module.scss";
 import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
-import { Calendar } from "@shared/assets/icons/info";
-import { formatDateToText } from "@shared/libs/date";
+import { Calendar, ChatIcon, RoleIcon } from "@shared/assets/icons/info";
+import { formatDateRange } from "@shared/libs/date";
 import { useProjectJoinedPage } from "../model/useProjectJoinedPage";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { ParticipationLeaveButton } from "@features/participation";
@@ -12,64 +12,99 @@ export const JoinedProjectPage = () => {
   const { tab, project, forms, handleTabChange } = useProjectJoinedPage();
 
   return (
-    <div className={styles.wrapperProjectPage}>
+    <div className={styles.wrapperJoinedProjectPage}>
       <motion.div
-        className={styles.projectPageHeader}
+        className={styles.projectJoinedPageHeader}
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <div className={styles.headerProjectInfo}>
-          <div className={styles.mainProjectData}>
+        <div className={styles.headerJoinedProjectInfo}>
+          <div className={styles.mainJoinedProjectData}>
             <div className={styles.titleHeader}>
               <h1>{project?.title}</h1>
-              <div className={styles.projectMetaInfo}>
-                <span className={styles.metaChipProject}>Joined Project</span>
+              <div className={styles.projectJoinedMetaInfo}>
+                <span className={styles.metaChipJoinedProject}>
+                  Joined Project
+                </span>
                 {project?.endAt && (
                   <span className={`${styles.metaChip} ${styles.calendar}`}>
                     <Calendar className={styles.calendarImg} />
-                    <span>{formatDateToText(project.endAt)}</span>
+                    <span>
+                      {formatDateRange(project.startAt, project.endAt)}
+                    </span>
                   </span>
                 )}
+                <span className={`${styles.metaChip} ${styles.roleChip}`}>
+                  <RoleIcon className={styles.role} />
+                  <span>Contributor</span>
+                </span>
               </div>
             </div>
-            <motion.div
-              whileHover={{
-                scale: 1.04,
-              }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 400, damping: 22 }}
-            >
-              <LinkButtonWrapper
-                to="/organizations/$id"
-                params={{ id: project.organization?.id }}
-                className={styles.organizationInfo}
+            <div className={styles.chatOrganizationBlock}>
+              <motion.div
+                whileHover={{
+                  scale: 1.04,
+                }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 400, damping: 22 }}
               >
-                <img
-                  src={project?.organization?.logoUrl}
-                  alt="organization-image"
-                />
-                <p>{project?.organization?.name}</p>
-              </LinkButtonWrapper>
-            </motion.div>
+                <LinkButtonWrapper
+                  to="/organizations/$id"
+                  params={{ id: project.organization?.id }}
+                  className={styles.organizationInfo}
+                >
+                  <img
+                    src={project?.organization?.logoUrl}
+                    alt="organization-image"
+                  />
+                  <p>{project?.organization?.name}</p>
+                </LinkButtonWrapper>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 16, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{
+                  duration: 0.4,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
+                whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <LinkButtonWrapper className={styles.chatWrapper}>
+                  <ChatIcon className={styles.chatIcon} />
+                  <h1>PROJECT CHAT</h1>
+                </LinkButtonWrapper>
+              </motion.div>
+            </div>
           </div>
         </div>
-        <div className={styles.statsProjectInfo}>
+        <div className={styles.statsJoinedProjectInfo}>
           <div className={styles.headerLevelBar}>
-            <span className={styles.current}>Level 12</span>
-            <span className={styles.xp}>{project?.progressPercent}/100</span>
+            <span className={styles.current}>
+              Level {project.progress.level ?? 0}
+            </span>
+            <span className={styles.xp}>
+              {project?.progress.currentProgress}/{project.progress.maxProgress}
+            </span>
           </div>
-          <ProgressBar current={project?.progressPercent ?? 0} max={100} />
+          <ProgressBar
+            current={project?.progress.currentProgress ?? 0}
+            max={project.progress.maxProgress}
+          />
           <div className={styles.footerLevelBar}>
             <span className={styles.label}>Next level</span>
-            <span className={styles.next}>Level 13</span>
+            <span className={styles.next}>
+              Level{" "}
+              {project.progress?.level == null ? 1 : project.progress.level + 1}
+            </span>
           </div>
         </div>
-        <div className={styles.projectFooterContent}>
+        <div className={styles.projectJoinedFooterContent}>
           <ReadMoreButton
             collapsedHeight={90}
             className={styles.readMoreButtonContainer}
-            classNameButton={styles.readMoreButtonProject}
+            classNameButton={styles.readMoreButtonJoinedProject}
           >
             <p>{project?.description}</p>
           </ReadMoreButton>
@@ -80,7 +115,7 @@ export const JoinedProjectPage = () => {
           )}
 
           {project?.id && !project.hasPendingJoinRequest && (
-            <div className={styles.leaveProjectBlockButton}>
+            <div className={styles.leaveJoinedProjectBlockButton}>
               <ParticipationLeaveButton
                 entityId={project.id}
                 entityType="project"
@@ -95,10 +130,10 @@ export const JoinedProjectPage = () => {
           tabs={joinedProjectMainTabs}
           activeValue={tab}
           onChange={handleTabChange}
-          buttonClassName={styles.toggleProjectButton}
-          activeButtonClassName={styles.toggleProjectButtonActive}
-          className={styles.toggleProject}
-          pillClassName={styles.toggleProjectPill}
+          buttonClassName={styles.toggleJoinedProjectButton}
+          activeButtonClassName={styles.toggleJoinedProjectButtonActive}
+          className={styles.toggleJoinedProject}
+          pillClassName={styles.toggleJoinedProjectPill}
         />
       </div>
       <AnimatePresence mode="wait">

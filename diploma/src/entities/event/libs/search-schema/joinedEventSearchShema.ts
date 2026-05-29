@@ -6,6 +6,7 @@ export const eventJoinedDefaults = {
   },
   attendance: {
     tab: "attendance" as const,
+    view: "month" as const,
   },
   feedback: {
     tab: "feedback" as const,
@@ -22,8 +23,8 @@ export const overviewSchema = z.object({
 
 export const attendanceSchema = z.object({
   tab: z.literal("attendance"),
-  From: z.string().optional(),
-  To: z.string().optional(),
+  date: z.string().optional(),
+  view: z.enum(["month", "week", "day"]).default("month").optional(),
 });
 
 export const feedbackSchema = z.object({

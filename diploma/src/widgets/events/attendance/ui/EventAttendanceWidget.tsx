@@ -1,6 +1,6 @@
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import styles from "./EventAttendanceWidget.module.scss";
-import type { TabOption } from "@shared/config/types";
+import type { CalendarView, TabOption } from "@shared/config/types";
 import { Toggle } from "@shared/ui";
 import { EventsListWidget } from "@widgets/events";
 import {
@@ -8,7 +8,6 @@ import {
   EventAttendanceListItemSkeleton,
   eventQuery,
   type EventAttendance,
-  type EventAttendanceView,
 } from "@entities/event";
 import { formatTitle } from "../libs/formatTitle";
 import { NavigationArrow } from "@shared/assets/icons/actions";
@@ -16,8 +15,9 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
+import { filterByDateRange } from "@shared/libs/date";
 
-const VIEW_TABS: TabOption<EventAttendanceView>[] = [
+const VIEW_TABS: TabOption<CalendarView>[] = [
   { label: "Month", value: "month" },
   { label: "Week", value: "week" },
   { label: "Day", value: "day" },
@@ -27,29 +27,28 @@ interface EventAttendanceWidgetProps {
   from: Date;
   to: Date;
   eventId: string;
-  weekView?: boolean;
+  activeView: CalendarView;
+  currentDate: Date;
+  onViewChange?: (view: CalendarView) => void;
+  onDateChange?: (date: string) => void;
 }
 
 export const EventAttendanceWidget = ({
   from,
   to,
   eventId,
-  weekView,
+  activeView,
+  currentDate,
+  onDateChange,
+  onViewChange,
 }: EventAttendanceWidgetProps) => {
-  const [activeView, setActiveView] = useState<EventAttendanceView>(
-    weekView ? "week" : "month",
-  );
-  const [currentDate, setCurrentDate] = useState(new Date());
-
   const navigate = (direction: "prev" | "next") => {
     const delta = direction === "next" ? 1 : -1;
-    setCurrentDate((prev) => {
-      const next = new Date(prev);
-      if (activeView === "month") next.setMonth(next.getMonth() + delta);
-      else if (activeView === "week") next.setDate(next.getDate() + 7 * delta);
-      else next.setDate(next.getDate() + delta);
-      return next;
-    });
+    const next = new Date(currentDate);
+    if (activeView === "month") next.setMonth(next.getMonth() + delta);
+    else if (activeView === "week") next.setDate(next.getDate() + 7 * delta);
+    else next.setDate(next.getDate() + delta);
+    onDateChange?.(next.toISOString());
   };
 
   return (
@@ -90,7 +89,7 @@ export const EventAttendanceWidget = ({
             <Toggle
               tabs={VIEW_TABS}
               activeValue={activeView}
-              onChange={setActiveView}
+              onChange={(view) => onViewChange?.(view)}
               buttonClassName={styles.toggleCalendarButton}
               activeButtonClassName={styles.toggleCalendarButtonActive}
               className={styles.toggleCalendar}
@@ -117,7 +116,12 @@ export const EventAttendanceWidget = ({
               const { data } = useSuspenseQuery(
                 eventQuery.eventAttendance(eventId, { From: from, To: to }),
               );
-              return { data };
+              const filtered = filterByDateRange(
+                data.data,
+                activeView,
+                currentDate,
+              );
+              return { data: filtered };
             }}
             renderCard={(attendance) => (
               <EventAttendanceListItem

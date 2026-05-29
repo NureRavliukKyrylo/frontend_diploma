@@ -1,1 +1,3 @@
-export type CalendarView = "dayGridMonth" | "timeGridWeek" | "timeGridDay";
+export type CalendarTab = "dayGridMonth" | "timeGridWeek" | "timeGridDay";
+
+export type CalendarView = "month" | "week" | "day";

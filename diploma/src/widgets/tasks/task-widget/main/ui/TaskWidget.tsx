@@ -2,7 +2,7 @@ import styles from "./TaskWidget.module.scss";
 import { Toggle } from "@shared/ui";
 import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import { AnimatePresence, motion } from "framer-motion";
-import { formatDateToText } from "@shared/libs/date";
+import { formatDateRange } from "@shared/libs/date";
 import { Calendar, Reccurence } from "@shared/assets/icons/info";
 import { Arrow } from "@shared/assets/icons/actions";
 import { type TaskDrawerSearch, type TaskMode } from "@entities/task";
@@ -77,7 +77,7 @@ export const TaskWidget = ({
                   {task?.endAt && (
                     <span className={`${styles.metaChip} ${styles.calendar}`}>
                       <Calendar className={styles.calendarImg} />
-                      <span>{formatDateToText(task.endAt, true)}</span>
+                      <span>{formatDateRange(task.startAt, task.endAt)}</span>
                     </span>
                   )}
                   {policyConfig && (

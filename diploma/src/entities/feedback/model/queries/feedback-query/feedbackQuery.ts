@@ -44,5 +44,6 @@ export const feedbackQuery = {
       queryKey: feedbackKeys.myFeedback(entityType, entityId),
       queryFn: () => getMyFeedback(entityType, entityId),
       placeholderData: (prev) => prev,
+      select: (data) => data.data,
     }),
 };

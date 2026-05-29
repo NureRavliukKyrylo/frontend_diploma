@@ -19,9 +19,9 @@ export const ProjectDefaultBottomContent = ({
     <div className={styles.progressBlock}>
       <div className={styles.progressInfo}>
         <h1>Progress</h1>
-        <h2>{project.progressPercent} %</h2>
+        <h2>{project.progress.percent} %</h2>
       </div>
-      <ProgressBar current={project.progressPercent} />
+      <ProgressBar current={project.progress.percent} />
     </div>
   </>
 );

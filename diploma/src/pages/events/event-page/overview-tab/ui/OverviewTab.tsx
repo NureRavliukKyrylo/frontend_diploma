@@ -12,6 +12,7 @@ import { ProjectMarker, ProjectPopupContent } from "@entities/project";
 import { LinkButtonWrapper, ShowMoreItemsButton } from "@shared/ui/buttons";
 import { RelatedCategoryCard } from "@entities/category";
 import { ActionsIcon, Arrow } from "@shared/assets/icons/actions";
+import { useMediaQuery } from "usehooks-ts";
 
 interface OverviewTabProps {
   event: Event;
@@ -22,6 +23,8 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
   const { isVisible, ref } = useIntersectionReveal<HTMLDivElement>();
   const hasCategories = event?.categories && event?.categories.length > 0;
   const hasSkills = event?.skills && event?.skills.length > 0;
+  const isDesktop = useMediaQuery("(min-width: 1050px)");
+
   return (
     <div className={styles.overviewWrapper}>
       {hasCategories && (
@@ -66,7 +69,7 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
       </div>
       <div className={styles.skillsBlock}></div>
       <div className={styles.mapLocationBlock}>
-        <div className={styles.projectPageMainInfo}>
+        <div className={styles.eventPageMainInfo}>
           <div className={styles.headerTextInfo}>
             <div className={styles.activitiesLocations}>
               <h2>Activities</h2>
@@ -92,9 +95,11 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
                 <p>{event?.activeTasks ?? "0"}</p>
               </div>
             </div>
-            <div className={styles.activitiesImageBlock}>
-              <img src={Activities} alt="activities-image" />
-            </div>
+            {isDesktop && (
+              <div className={styles.activitiesImageBlock}>
+                <img src={Activities} alt="activities-image" />
+              </div>
+            )}
           </div>
         </div>
         <div className={styles.mapWrapper} ref={ref}>

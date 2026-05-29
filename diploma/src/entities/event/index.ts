@@ -47,10 +47,9 @@ export type { EventJoinedMode } from "./model/types/EventJoinedMode";
 export {
   eventJoinedDefaults,
   eventJoinedSearchSchema,
+  type AttendanceEventSearch,
+  type JoinedEventSearch,
 } from "./libs/search-schema/joinedEventSearchShema";
-export {
-  type EventAttendance,
-  type EventAttendanceView,
-} from "./model/types/EventAttendance";
+export { type EventAttendance } from "./model/types/EventAttendance";
 export { EventAttendanceListItem } from "./ui/event-attendance-item/EventAttendanceListItem";
 export { EventAttendanceListItemSkeleton } from "./ui/event-attendance-item/EventAttendanceListItemSkeleton";

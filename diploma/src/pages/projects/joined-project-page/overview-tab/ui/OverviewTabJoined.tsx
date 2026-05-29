@@ -1,5 +1,5 @@
 import { ProjectMarker, type Project } from "@entities/project";
-import styles from "./OverviewTab.module.scss";
+import styles from "./OverviewTabJoined.module.scss";
 import { BaseMap } from "@shared/ui";
 import { MapResizer, MapZoomAnimation } from "@shared/libs/map";
 import { Marker, Popup } from "react-leaflet";
@@ -8,6 +8,7 @@ import type { Coordinates } from "@shared/config/types";
 import { Activities } from "@shared/assets/images/entity-information";
 import { MapLocationInput } from "@shared/ui/inputs";
 import { useIntersectionReveal } from "@shared/libs/hooks";
+import { useMediaQuery } from "usehooks-ts";
 
 interface OverviewTabJoinedProps {
   project: Project;
@@ -19,13 +20,14 @@ export const OverviewTabJoined = ({
   userLocation,
 }: OverviewTabJoinedProps) => {
   const { isVisible, ref } = useIntersectionReveal<HTMLDivElement>();
+  const isDesktop = useMediaQuery("(min-width: 1050px)");
 
   return (
-    <div className={styles.overviewWrapper}>
+    <div className={styles.overviewJoinedWrapper}>
       <div className={styles.mapLocationBlock}>
-        <div className={styles.projectPageMainInfo}>
+        <div className={styles.projectJoinedPageMainInfo}>
           <div className={styles.headerTextInfo}>
-            <div className={styles.activitiesLocations}>
+            <div className={styles.activityLocation}>
               <h2>Project</h2>
               <span>Location</span>
             </div>
@@ -69,9 +71,11 @@ export const OverviewTabJoined = ({
                 <p>{project?.tasksCompleted ?? "0"}</p>
               </div>
             </div>
-            <div className={styles.activitiesImageBlock}>
-              <img src={Activities} alt="activities-image" />
-            </div>
+            {isDesktop && (
+              <div className={styles.activitiesImageBlock}>
+                <img src={Activities} alt="activities-image" />
+              </div>
+            )}
           </div>
         </div>
         <div ref={ref}>
@@ -79,7 +83,7 @@ export const OverviewTabJoined = ({
             <BaseMap
               zoom={6}
               center={[project.location.latitude, project.location.longitude]}
-              classNameWrapper={styles.mapProjectWrapper}
+              classNameWrapper={styles.mapJoinedProjectWrapper}
             >
               <MapResizer />
               <>

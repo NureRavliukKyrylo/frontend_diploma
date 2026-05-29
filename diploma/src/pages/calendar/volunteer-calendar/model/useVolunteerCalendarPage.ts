@@ -3,7 +3,7 @@ import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { eventQuery } from "@entities/event";
 import { taskQuery } from "@entities/task";
-import type { CalendarView, EventType } from "@shared/config/types";
+import type { CalendarTab, EventType } from "@shared/config/types";
 import type { EventInput } from "@fullcalendar/core";
 import { parseInitialDate, serializeDate } from "../libs/dateSerializers";
 
@@ -140,7 +140,7 @@ export const useVolunteerCalendarPage = (events: EventInput[]) => {
   }, [activeInfo, currentIndex, prefetchNext]);
 
   const handleViewChange = useCallback(
-    (newView: CalendarView, currentDate: Date) => {
+    (newView: CalendarTab, currentDate: Date) => {
       navigate({
         search: { tab: newView, date: serializeDate(newView, currentDate) },
       });
@@ -149,7 +149,7 @@ export const useVolunteerCalendarPage = (events: EventInput[]) => {
   );
 
   const handleNavigate = useCallback(
-    (currentDate: Date, currentView: CalendarView) => {
+    (currentDate: Date, currentView: CalendarTab) => {
       navigate({
         search: (prev) => ({
           ...prev,

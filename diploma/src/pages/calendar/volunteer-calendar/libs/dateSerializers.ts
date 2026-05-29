@@ -1,6 +1,6 @@
-import type { CalendarView } from "@shared/config/types";
+import type { CalendarTab } from "@shared/config/types";
 
-export function serializeDate(view: CalendarView, date: Date): string {
+export function serializeDate(view: CalendarTab, date: Date): string {
   const pad = (n: number) => String(n).padStart(2, "0");
   const year = date.getFullYear();
   const month = pad(date.getMonth() + 1);

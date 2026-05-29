@@ -1,4 +1,3 @@
-import { MemberCardSkeleton } from "@entities/user/profile";
 import styles from "./ProjectEventsTab.module.scss";
 import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
