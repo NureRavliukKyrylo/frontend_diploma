@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
-import styles from "./DisputeButton.module.scss";
+import styles from "./DisputeAttendanceButton.module.scss";
 import { DisputeAttendanceModal } from "../modal/DisputeAttendanceModal";
 
 interface DisputeButtonProps {

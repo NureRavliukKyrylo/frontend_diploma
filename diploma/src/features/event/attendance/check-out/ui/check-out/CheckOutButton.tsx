@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
-import styles from "./CheckInButton.module.scss";
+import styles from "./CheckOutButton.module.scss";
 import { CheckOutModal } from "../modal/CheckOutModal";
 
 interface CheckOutButtonProps {

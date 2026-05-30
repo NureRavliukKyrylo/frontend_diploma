@@ -110,7 +110,7 @@
   white-space: nowrap;
   @include font-base(13px, 600);
 
-  scss&.draft {
+  &.draft {
     background: rgba(148, 163, 184, 0.12);
     color: #475569;
   }
