@@ -31,3 +31,11 @@ export interface Task {
   canSubmitFeedback: boolean;
   hasPendingJoinRequest: boolean;
 }
+
+export interface TaskJoined extends Task {
+  chatId: string;
+  currentUserRole: {
+    roleId: string;
+    name: string;
+  };
+}

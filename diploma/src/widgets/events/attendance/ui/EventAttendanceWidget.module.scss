@@ -216,14 +216,14 @@
 
 .tableHeader {
   display: grid;
-  grid-template-columns: 1.4fr 2fr 1fr;
+  grid-template-columns: 1.4fr 2fr 0.6fr 1fr;
   padding: 10px 24px;
   background: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.07);
 
   @include respond-to(tablet) {
     padding: 8px 20px;
-    grid-template-columns: 1.2fr 2fr 1fr;
+    grid-template-columns: 1.2fr 2fr 0.6fr 1fr;
   }
   @include respond-to(mobile) {
     padding: 8px 16px;

@@ -15,7 +15,7 @@ export const useProjectJoinedPage = () => {
     from: "/_masterLayout/projects/my/$id/",
   });
 
-  const { data: project } = useSuspenseQuery(projectQuery.id(id));
+  const { data: project } = useSuspenseQuery(projectQuery.joinedId(id));
   const { coordinates: userLocation } = useMapUserLocation();
 
   const navigate = useNavigate({ from: "/projects/my/$id/" });

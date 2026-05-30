@@ -37,7 +37,7 @@ export const JoinedProjectPage = () => {
                 )}
                 <span className={`${styles.metaChip} ${styles.roleChip}`}>
                   <RoleIcon className={styles.role} />
-                  <span>Contributor</span>
+                  <span>{project.currentUserRole.name}</span>
                 </span>
               </div>
             </div>

@@ -5,6 +5,7 @@ import type { FeedbackFormValues } from "../model/useFeedbackForm";
 import { Stars } from "@shared/ui/stars";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./FeedbackForm.module.scss";
+import { TextAreaForm } from "@shared/ui/inputs";
 
 interface FeedbackFormProps {
   formik: FormikProps<FeedbackFormValues>;
@@ -61,7 +62,7 @@ export const FeedbackForm = ({
               style={{ overflow: "hidden" }}
             >
               <h1>What could we improve?</h1>
-              <textarea
+              <TextAreaForm
                 name="comment"
                 value={formik.values.comment}
                 onChange={formik.handleChange}

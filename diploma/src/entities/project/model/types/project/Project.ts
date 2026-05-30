@@ -33,3 +33,11 @@ export interface Project {
   canSubmitFeedback: boolean;
   hasPendingJoinRequest: boolean;
 }
+
+export interface ProjectJoined extends Project {
+  chatId: string;
+  currentUserRole: {
+    roleId: string;
+    name: string;
+  };
+}

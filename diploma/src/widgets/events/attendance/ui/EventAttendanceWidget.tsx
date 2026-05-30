@@ -101,6 +101,7 @@ export const EventAttendanceWidget = ({
         <div className={styles.tableHeader}>
           <span className={styles.tableHeaderCell}>Date</span>
           <span className={styles.tableHeaderCell}>Description</span>
+          <span className={styles.tableHeaderCell}>Minutes</span>
           <span className={styles.tableHeaderCell}>Status</span>
         </div>
         <Suspense

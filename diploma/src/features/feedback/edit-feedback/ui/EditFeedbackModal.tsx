@@ -7,7 +7,7 @@ import {
 import type { Feedback } from "@entities/feedback/model";
 
 interface EditFeedbackModalProps {
-  entityType: EntityType;
+  entityType: Exclude<EntityType, "organization">;
   entityId: string;
   isOpen: boolean;
   onClose: () => void;

@@ -5,7 +5,7 @@ import type { EntityType } from "@shared/config/types";
 import { useDeleteFeedback } from "@entities/feedback";
 
 interface DeleteFeedbackModalProps {
-  entityType: EntityType;
+  entityType: Exclude<EntityType, "organization">;
   entityId: string;
   feedbackId: string;
   isOpen: boolean;

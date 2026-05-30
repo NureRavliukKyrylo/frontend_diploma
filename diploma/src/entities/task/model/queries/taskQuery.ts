@@ -1,5 +1,10 @@
 import type { MyTasksRequestParams } from "../../libs";
-import { getListTasks, getMyTasks, getTaskId } from "../../api";
+import {
+  getListTasks,
+  getMyTasks,
+  getTaskId,
+  getTaskJoinedId,
+} from "../../api";
 import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
 import type { TasksRequestParams } from "@entities/task/libs/search-schema/tasksSearchSchema";
 
@@ -10,6 +15,7 @@ export const taskKeys = {
   infinite: (params: TasksRequestParams) =>
     [...taskKeys.list(params), "infinite"] as const,
   id: (id: string) => [...taskKeys.all(), "id", id] as const,
+  joinedId: (id: string) => [...taskKeys.id(id), "joined"] as const,
   mys: () => [...taskKeys.all(), "my"] as const,
   my: (params: MyTasksRequestParams) => [...taskKeys.mys(), params] as const,
 };
@@ -33,6 +39,12 @@ export const taskQuery = {
     queryOptions({
       queryKey: taskKeys.id(id),
       queryFn: () => getTaskId(id),
+      select: (res) => res.data,
+    }),
+  joinedId: (id: string) =>
+    queryOptions({
+      queryKey: taskKeys.joinedId(id),
+      queryFn: () => getTaskJoinedId(id),
       select: (res) => res.data,
     }),
   my: (params: MyTasksRequestParams) =>

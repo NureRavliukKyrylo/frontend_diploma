@@ -4,7 +4,12 @@ import type {
   ProjectPaginationParams,
   ProjectRequestParams,
 } from "../../../libs";
-import { getListProjects, getMyProjects, getProjectId } from "../../../api";
+import {
+  getListProjects,
+  getMyProjects,
+  getProjectId,
+  getProjectJoinedId,
+} from "../../../api";
 import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
 
 export const projectKeys = {
@@ -12,6 +17,7 @@ export const projectKeys = {
   list: (params: ProjectRequestParams) =>
     [...projectKeys.all(), "list", params] as const,
   id: (id: string) => [...projectKeys.all(), "id", id],
+  joinedId: (id: string) => [...projectKeys.id(id), "joined"],
   mys: () => [...projectKeys.all(), "my"] as const,
   my: (params: MyProjectsRequestParams) =>
     [...projectKeys.mys(), params] as const,
@@ -32,6 +38,12 @@ export const projectQuery = {
     queryOptions({
       queryKey: projectKeys.id(id),
       queryFn: () => getProjectId(id),
+      select: (res) => res.data,
+    }),
+  joinedId: (id: string) =>
+    queryOptions({
+      queryKey: projectKeys.joinedId(id),
+      queryFn: () => getProjectJoinedId(id),
       select: (res) => res.data,
     }),
   my: (params: MyProjectsRequestParams) =>

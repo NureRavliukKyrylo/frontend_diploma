@@ -44,7 +44,7 @@ export const JoinedEventPage = () => {
                   )}
                   <span className={`${styles.metaChip} ${styles.roleChip}`}>
                     <RoleIcon className={styles.role} />
-                    <span>Contributor</span>
+                    <span>{event.currentUserRole.name}</span>
                   </span>
                 </div>
               </div>

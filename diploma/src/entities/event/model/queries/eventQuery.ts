@@ -9,6 +9,7 @@ import {
   getEventId,
   type EventAttendanceSearchParams,
   getEventAttendancesList,
+  getEventJoinedId,
 } from "../../api";
 import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
 
@@ -17,6 +18,7 @@ export const eventKeys = {
   list: (params: EventRequestParams) =>
     [...eventKeys.all(), "list", params] as const,
   id: (id: string) => [...eventKeys.all(), "id", id] as const,
+  joinedId: (id: string) => [...eventKeys.id(id), "joined"] as const,
   mys: () => [...eventKeys.all(), "my"] as const,
   my: (params: MyEventsRequestParams) => [...eventKeys.mys(), params] as const,
   infinite: (params: EventPaginationParams) =>
@@ -39,6 +41,12 @@ export const eventQuery = {
     queryOptions({
       queryKey: eventKeys.id(id),
       queryFn: () => getEventId(id),
+      select: (res) => res.data,
+    }),
+  joinedId: (id: string) =>
+    queryOptions({
+      queryKey: eventKeys.joinedId(id),
+      queryFn: () => getEventJoinedId(id),
       select: (res) => res.data,
     }),
   my: (params: MyEventsRequestParams) =>

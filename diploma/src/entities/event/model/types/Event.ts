@@ -37,3 +37,11 @@ export interface Event {
   canSubmitFeedback: boolean;
   hasPendingJoinRequest: boolean;
 }
+
+export interface EventJoined extends Event {
+  chatId: string;
+  currentUserRole: {
+    roleId: string;
+    name: string;
+  };
+}

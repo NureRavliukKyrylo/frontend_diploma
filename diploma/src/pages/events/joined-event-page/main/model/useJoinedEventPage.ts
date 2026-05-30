@@ -15,7 +15,7 @@ export const useJoinedEventPage = () => {
     from: "/_masterLayout/events/my/$id/",
   });
 
-  const { data: event } = useSuspenseQuery(eventQuery.id(id));
+  const { data: event } = useSuspenseQuery(eventQuery.joinedId(id));
   const { coordinates: userLocation } = useMapUserLocation();
 
   const navigate = useNavigate({ from: "/events/my/$id/" });

@@ -5,3 +5,4 @@ export {
   getEventAttendancesList,
   type EventAttendanceSearchParams,
 } from "./list-attendances/eventAttendancesListApi";
+export { getEventJoinedId } from "./event-id/eventJoinedApi";
