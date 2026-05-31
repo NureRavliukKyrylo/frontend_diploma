@@ -1,3 +1,4 @@
+import { joinedTaskSearchModeSchema } from "@entities/task";
 import z from "zod";
 
 export const eventJoinedDefaults = {
@@ -31,10 +32,11 @@ export const feedbackSchema = z.object({
   tab: z.literal("feedback"),
 });
 
-export const tasksSchema = z.object({
-  tab: z.literal("tasks"),
-  PageSize: z.number().default(4).catch(4),
-});
+export const tasksSchema = z
+  .object({
+    tab: z.literal("tasks"),
+  })
+  .extend(joinedTaskSearchModeSchema.shape);
 
 export const eventJoinedSearchSchema = z
   .discriminatedUnion("tab", [
@@ -49,4 +51,4 @@ export type JoinedEventSearch = z.infer<typeof eventJoinedSearchSchema>;
 export type OverviewEventSearch = z.infer<typeof overviewSchema>;
 export type AttendanceEventSearch = z.infer<typeof attendanceSchema>;
 export type FeedbackEventSearch = z.infer<typeof feedbackSchema>;
-export type TasksEventSearch = z.infer<typeof tasksSchema>;
+export type TasksEventJoinedSearch = z.infer<typeof tasksSchema>;

@@ -20,8 +20,6 @@ export {
 export { type TaskMode } from "./model/types/TaskMode";
 export type { TaskStatus } from "./model/types/TaskStatus";
 export type { TasksRequestParams } from "./libs";
-export { TaskBoardItem } from "./ui/board-item/TaskBoardItem";
-export { TaskBoardItemSkeleton } from "./ui/board-item/TaskBoardItemSkeleton";
 export type { TaskDrawerSearch } from "./libs/search-schema/taskDrawerSchema";
 export { taskDrawerDefaults } from "./libs/search-schema/taskDrawerSchema";
 export { useMyTasksListQuery } from "./model/hooks/useMyTasksListQuery";
@@ -32,6 +30,15 @@ export { type MyTasksRequestParams, type MyTasksSearchParams } from "./libs";
 export {
   joinedTaskSearchSchema,
   taskDrawerJoinedDefaults,
+  type TaskDrawerJoinedSearch,
+  joinedTaskSearchModeSchema,
 } from "./libs/search-schema/joinedTaskSearchSchema";
 export { useTasksInfiniteQuery } from "./model/hooks/useTasksInfiniteQuery";
 export { taskStatuses } from "./config/taskStatuses";
+export type { TaskJoinedMode } from "./model/types/TaskJoinedMode";
+export { useMyTasksInfiniteQuery } from "./model/hooks/useMyTasksInfiniteQuery";
+export { TaskBoardListItem } from "./ui/board-item/item-list/TaskBoardListItem";
+export { TaskBoardListItemSkeleton } from "./ui/board-item/item-list/TaskBoardListItemSkeleton";
+export { TaskBoardControlItem } from "./ui/board-item/control/TaskBoardControlItem";
+export { TaskBoardControlItemSkeleton } from "./ui/board-item/control/TaskBoardControlItemSkeleton";
+export { TaskCommentItem } from "./ui/comment-item/TaskCommentItem";

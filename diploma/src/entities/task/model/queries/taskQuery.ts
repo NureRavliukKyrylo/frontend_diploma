@@ -2,6 +2,7 @@ import type { MyTasksRequestParams } from "../../libs";
 import {
   getListTasks,
   getMyTasks,
+  getTaskComments,
   getTaskId,
   getTaskJoinedId,
 } from "../../api";
@@ -15,9 +16,13 @@ export const taskKeys = {
   infinite: (params: TasksRequestParams) =>
     [...taskKeys.list(params), "infinite"] as const,
   id: (id: string) => [...taskKeys.all(), "id", id] as const,
+  comments: (id: string, params: { PageSize: number }) =>
+    [...taskKeys.id(id), params, "comments"] as const,
   joinedId: (id: string) => [...taskKeys.id(id), "joined"] as const,
   mys: () => [...taskKeys.all(), "my"] as const,
   my: (params: MyTasksRequestParams) => [...taskKeys.mys(), params] as const,
+  infiniteMy: (params: MyTasksRequestParams) =>
+    [...taskKeys.my(params), "infinite"] as const,
 };
 
 export const taskQuery = {
@@ -41,6 +46,15 @@ export const taskQuery = {
       queryFn: () => getTaskId(id),
       select: (res) => res.data,
     }),
+  comments: (id: string, params: { PageSize: number }) =>
+    infiniteQueryOptions({
+      queryKey: taskKeys.comments(id, { ...params }),
+      queryFn: ({ pageParam }) =>
+        getTaskComments(id, { ...params, Page: pageParam }),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage) => lastPage.pagination.nextPage ?? undefined,
+      select: (data) => data.pages.flatMap((page) => page.data),
+    }),
   joinedId: (id: string) =>
     queryOptions({
       queryKey: taskKeys.joinedId(id),
@@ -52,5 +66,13 @@ export const taskQuery = {
       queryKey: taskKeys.my({ ...params }),
       queryFn: () => getMyTasks({ ...params }),
       placeholderData: (prev) => prev,
+    }),
+  infiniteMy: (params: MyTasksRequestParams) =>
+    infiniteQueryOptions({
+      queryKey: taskKeys.infiniteMy({ ...params }),
+      queryFn: ({ pageParam }) => getMyTasks({ Page: pageParam, ...params }),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage) => lastPage.pagination.nextPage ?? undefined,
+      select: (data) => data.pages.flatMap((page) => page.data),
     }),
 };

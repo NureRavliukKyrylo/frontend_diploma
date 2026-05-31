@@ -49,6 +49,7 @@ export {
   eventJoinedSearchSchema,
   type AttendanceEventSearch,
   type JoinedEventSearch,
+  type TasksEventJoinedSearch,
 } from "./libs/search-schema/joinedEventSearchShema";
 export { type EventAttendance } from "./model/types/EventAttendance";
 export { EventAttendanceListItem } from "./ui/event-attendance-item/EventAttendanceListItem";

@@ -9,3 +9,4 @@ export { isSameDay } from "./same-day/isSameDay";
 export { isPast } from "./is-past/isPast";
 export { getCalendarRange } from "./calendar-range/getCalendarRange";
 export { filterByDateRange } from "./calendar-range/filterByDateRange";
+export { formatTimeAgo } from "./time-ago/formatTimeAgo";

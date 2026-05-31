@@ -28,7 +28,7 @@ import { motion } from "framer-motion";
 interface ActivityFeedbackTabProps {
   entityId: string;
   userId?: string;
-  entityType: EntityType;
+  entityType: Exclude<EntityType, "organization">;
   PageSize?: number;
   OrderBy: FeedbackSortValues;
   canSubmitFeedback: boolean;

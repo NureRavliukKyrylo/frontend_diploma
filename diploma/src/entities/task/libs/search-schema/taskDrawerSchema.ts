@@ -18,6 +18,7 @@ export const taskDrawerDefaults = {
 export type TaskDrawerSearch = {
   taskId?: string;
   taskMode?: "overview" | "members" | "feedbacks";
+  PageSize: number;
   DrawerPageSize?: number;
   DrawerOrderBy?: FeedbackSortValues;
 };

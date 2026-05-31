@@ -5,7 +5,10 @@ import type {
   EventJoinedMode,
   JoinedEventSearch,
 } from "@entities/event";
-import type { TasksRequestParams } from "@entities/task";
+import type {
+  MyTasksRequestParams,
+  TaskDrawerJoinedSearch,
+} from "@entities/task";
 import { OverviewTabJoined } from "../../overview-tab/ui/OverviewTabJoined";
 import { AttendanceTabJoined } from "../../attendance-tab";
 import { JoinedFeedbackTab } from "@widgets/feedback";
@@ -15,7 +18,7 @@ interface EventJoinedTabsProps {
   event: Event;
   userLocation?: Coordinates | null;
   search: Omit<JoinedEventSearch, "tab">;
-  filters?: Omit<TasksRequestParams, "Status">;
+  filters?: Omit<MyTasksRequestParams, "Status">;
 }
 
 export const getJoinedEventMainForms = (
@@ -31,7 +34,12 @@ export const getJoinedEventMainForms = (
       canSubmitFeedback={props.event.canSubmitFeedback}
     />
   ),
-  tasks: <TasksTabJoined />,
+  tasks: (
+    <TasksTabJoined
+      search={props.search as TaskDrawerJoinedSearch}
+      filters={props.filters}
+    />
+  ),
   attendance: (
     <AttendanceTabJoined
       eventId={props.event.id}

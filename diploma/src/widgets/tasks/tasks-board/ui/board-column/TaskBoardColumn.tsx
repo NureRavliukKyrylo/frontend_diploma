@@ -1,18 +1,19 @@
 import styles from "./TaskBoardColumn.module.scss";
 import { TasksListWidget } from "@widgets/tasks";
-import { useTasksInfiniteQuery } from "@entities/task";
-import type { TaskStatus } from "@entities/task";
+import type { Task, TaskStatus } from "@entities/task";
 import { Suspense } from "react";
 import { useTaskBoardContext } from "../../model/TaskBoardContext";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { LoadMoreButton } from "@shared/ui/buttons";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
+import type { QueryResult } from "@shared/config/types";
 
 interface TaskBoardColumnProps {
   status: TaskStatus;
   title: string;
   icon: string;
+  useTasksQuery?: () => QueryResult<Task>;
 }
 
 export const TaskBoardColumn = ({
@@ -20,7 +21,7 @@ export const TaskBoardColumn = ({
   title,
   icon,
 }: TaskBoardColumnProps) => {
-  const { renderCard, renderSkeleton, onAddTask, filters } =
+  const { renderCard, renderSkeleton, onAddTask, useTasksQuery } =
     useTaskBoardContext();
 
   return (
@@ -61,10 +62,7 @@ export const TaskBoardColumn = ({
           }
         >
           <TasksListWidget
-            useTasksQuery={useTasksInfiniteQuery({
-              ...filters,
-              Status: status,
-            })}
+            useTasksQuery={useTasksQuery(status)}
             renderCard={renderCard}
             className={styles.columnCards}
             renderPagination={({

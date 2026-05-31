@@ -1,3 +1,4 @@
+import { joinedTaskSearchModeSchema } from "@entities/task";
 import z from "zod";
 
 export const joinedProjectDefaults = {
@@ -23,11 +24,11 @@ export const feedbackSchema = z.object({
   tab: z.literal("feedback"),
 });
 
-export const tasksSchema = z.object({
-  tab: z.literal("tasks"),
-  PageSize: z.number().default(2).catch(2),
-  taskId: z.string().optional(),
-});
+export const tasksSchema = z
+  .object({
+    tab: z.literal("tasks"),
+  })
+  .extend(joinedTaskSearchModeSchema.shape);
 
 export const joinedProjectSearchSchema = z
   .discriminatedUnion("tab", [overviewSchema, feedbackSchema, tasksSchema])

@@ -1,12 +1,13 @@
 import { createContext, useContext } from "react";
-import type { Task, TaskStatus, TasksRequestParams } from "@entities/task";
+import type { Task, TaskStatus } from "@entities/task";
 import type { ReactNode } from "react";
+import type { QueryResult } from "@shared/config/types";
 
 interface TaskBoardContextValue {
   renderCard: (task: Task, index: number) => ReactNode;
   renderSkeleton?: () => ReactNode;
   onAddTask?: (status: TaskStatus) => void;
-  filters?: Omit<TasksRequestParams, "Status">;
+  useTasksQuery: (status: TaskStatus) => () => QueryResult<Task>;
 }
 
 const TaskBoardContext = createContext<TaskBoardContextValue | null>(null);

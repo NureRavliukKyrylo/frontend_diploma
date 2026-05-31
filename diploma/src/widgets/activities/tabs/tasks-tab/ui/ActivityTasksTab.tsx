@@ -1,5 +1,9 @@
 import { SwipeableDrawer } from "@mui/material";
-import { TaskBoardItem, TaskBoardItemSkeleton } from "@entities/task";
+import {
+  TaskBoardListItem,
+  TaskBoardListItemSkeleton,
+  useTasksInfiniteQuery,
+} from "@entities/task";
 import { TaskBoard, TaskWidget } from "@widgets/tasks";
 import type {
   Task,
@@ -35,15 +39,17 @@ export const ActivityTasksTab = ({
 }: ActivityTasksTabProps) => (
   <>
     <TaskBoard
-      filters={filters}
-      renderSkeleton={() => <TaskBoardItemSkeleton />}
+      useTasksQuery={(status) =>
+        useTasksInfiniteQuery({ ...filters, Status: status })
+      }
+      renderSkeleton={() => <TaskBoardListItemSkeleton />}
       renderCard={(task: Task) => (
         <div
           key={task.id}
           className={styles.cardWrapper}
           onClick={() => openTask(task.id)}
         >
-          <TaskBoardItem task={task} />
+          <TaskBoardListItem task={task} />
         </div>
       )}
     />

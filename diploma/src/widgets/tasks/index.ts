@@ -5,3 +5,6 @@ export { TaskWidget } from "./task-widget/main/ui/TaskWidget";
 export { useTaskDrawer } from "./task-widget/main/model/useTaskDrawer";
 export { TaskWidgetSkeleton } from "./task-widget/main/ui/TaskWidgetSkeleton";
 export { TaskBoard } from "./tasks-board/ui/board/TaskBoard";
+export { TaskWidgetJoined } from "./joined-task-widget/ui/TaskWidgetJoined";
+export { useTaskJoinedDrawer } from "./joined-task-widget/model/useTaskJoinedDrawer";
+export { JoinedTasksTab } from "./joined-tasks-tab/ui/JoinedTasksTab";

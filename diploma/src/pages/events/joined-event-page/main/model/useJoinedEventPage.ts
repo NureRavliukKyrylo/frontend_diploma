@@ -6,7 +6,7 @@ import {
   type EventJoinedMode,
 } from "@entities/event";
 import { useMapUserLocation } from "@features/map";
-import type { TaskDrawerSearch } from "@entities/task";
+import type { TaskDrawerJoinedSearch } from "@entities/task";
 import { getJoinedEventMainForms } from "../config/eventJoinedMainForms";
 
 export const useJoinedEventPage = () => {
@@ -28,8 +28,8 @@ export const useJoinedEventPage = () => {
     });
   };
 
-  const { taskId, taskMode, DrawerPageSize, DrawerOrderBy, ...taskFilters } =
-    search as TaskDrawerSearch;
+  const { taskId, taskMode, CommentsPageSize, ...taskFilters } =
+    search as TaskDrawerJoinedSearch;
 
   const filters = { ...taskFilters, EventIds: [id] };
 

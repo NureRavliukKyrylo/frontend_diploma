@@ -1,0 +1,67 @@
+@use "@shared/assets/styles" as *;
+
+.taskBoardControlItemwrapper {
+  position: relative;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+}
+
+.actionsAnchor {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+.actionsButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.actionsIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.dropdownContent {
+  min-width: 140px;
+}
+
+.menuItem {
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+
+  &.leave:hover {
+    background: #fef2f2;
+    transform: translateX(3px);
+    .menuItemTitle {
+      color: #ef4444;
+      font-weight: 600;
+    }
+  }
+
+  &.changeStatus:hover {
+    background: #f0f9ff;
+    transform: translateX(3px);
+    .menuItemTitle {
+      color: #0284c7;
+      font-weight: 600;
+    }
+  }
+}
+.menuItemTitle {
+  @include font-base(15px, 500);
+  color: #374151;
+  transition: color 0.15s ease;
+}

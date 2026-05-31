@@ -4,7 +4,10 @@ import type {
   ProjectJoinedMode,
 } from "@entities/project";
 import type { Coordinates } from "@shared/config/types";
-import type { TasksRequestParams } from "@entities/task";
+import type {
+  MyTasksRequestParams,
+  TaskDrawerJoinedSearch,
+} from "@entities/task";
 import { JoinedFeedbackTab } from "@widgets/feedback";
 import { TasksTabJoined } from "../../tasks-tab";
 import { OverviewTabJoined } from "../../overview-tab";
@@ -13,7 +16,7 @@ interface JoinedProjectTabsProps {
   project: Project;
   userLocation?: Coordinates | null;
   search: Omit<ProjectDetailSearch, "tab">;
-  filters?: Omit<TasksRequestParams, "Status">;
+  filters?: Omit<MyTasksRequestParams, "Status">;
 }
 
 export const getJoinedProjectMainForms = (
@@ -32,5 +35,10 @@ export const getJoinedProjectMainForms = (
       entityType="project"
     />
   ),
-  tasks: <TasksTabJoined />,
+  tasks: (
+    <TasksTabJoined
+      search={props.search as TaskDrawerJoinedSearch}
+      filters={props.filters}
+    />
+  ),
 });
