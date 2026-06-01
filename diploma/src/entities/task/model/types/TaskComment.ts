@@ -4,7 +4,9 @@ export interface TaskComment {
   body: string;
   updatedAt: Date;
   parentCommentId: string | null;
-  replyToUserId?: TaskComment[];
+  replyToUserId?: string | null;
   authorName: string;
   authorRoleName: string;
+  authorAvatarUrl: string;
+  replies: TaskComment[];
 }

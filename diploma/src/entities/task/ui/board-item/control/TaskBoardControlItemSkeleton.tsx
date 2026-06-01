@@ -1,5 +1,5 @@
 import { Skeleton } from "@heroui/skeleton";
-import styles from "./TaskBoardListItem.module.scss";
+import styles from "./TaskBoardControlItem.module.scss";
 import baseStyles from "../base/TaskBoardItemBase.module.scss";
 
 export const TaskBoardControlItemSkeleton = () => (

@@ -40,7 +40,13 @@ export const TasksTab = ({ search }: TasksTabProps) => {
     taskMode,
     handleSortChange,
   } = useActivitiesTaskDrawer();
-  const { taskId: _, taskMode: __, DrawerOrderBy, ...tasksSearch } = search;
+  const {
+    taskId: _,
+    taskMode: __,
+    DrawerOrderBy,
+    DrawerPageSize,
+    ...tasksSearch
+  } = search;
   const {
     isFilterOpen,
     setIsFilterOpen,

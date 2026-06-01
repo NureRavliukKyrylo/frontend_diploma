@@ -155,25 +155,36 @@ export const TaskWidget = ({
           <ReadMoreButton collapsedHeight={90}>
             <p>{task?.description}</p>
           </ReadMoreButton>
+          {task?.id && task.hasPendingLeaveRequest && (
+            <p className={`${styles.pendingRequest} ${styles.leave}`}>
+              Your leave request is pending approval
+            </p>
+          )}
+
           {task?.id && task.hasPendingJoinRequest && (
             <p className={styles.pendingRequest}>
               Your join request is pending approval
             </p>
           )}
 
-          {task?.id && !task.hasPendingJoinRequest && (
-            <div className={styles.joinTaskBlockButton}>
-              {task.isJoined ? (
-                <ParticipationLeaveButton
-                  entityId={task.id}
-                  entityType="task"
-                  entityName={task.title}
-                />
-              ) : (
-                <ParticipationJoinButton entityId={task.id} entityType="task" />
-              )}
-            </div>
-          )}
+          {task?.id &&
+            !task.hasPendingJoinRequest &&
+            !task.hasPendingLeaveRequest && (
+              <div className={styles.joinTaskBlockButton}>
+                {task.isJoined ? (
+                  <ParticipationLeaveButton
+                    entityId={task.id}
+                    entityType="task"
+                    entityName={task.title}
+                  />
+                ) : (
+                  <ParticipationJoinButton
+                    entityId={task.id}
+                    entityType="task"
+                  />
+                )}
+              </div>
+            )}
         </div>
       </motion.div>
       <div className={styles.contentBlock}>

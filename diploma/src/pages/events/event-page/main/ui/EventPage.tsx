@@ -135,28 +135,36 @@ export const EventPage = () => {
           >
             <p>{event?.description}</p>
           </ReadMoreButton>
+          {event?.id && event.hasPendingLeaveRequest && (
+            <p className={`${styles.pendingRequest} ${styles.leave}`}>
+              Your leave request is pending approval
+            </p>
+          )}
+
           {event?.id && event.hasPendingJoinRequest && (
             <p className={styles.pendingRequest}>
               Your join request is pending approval
             </p>
           )}
 
-          {event?.id && !event.hasPendingJoinRequest && (
-            <div className={styles.joinEventBlockButton}>
-              {event.isJoined ? (
-                <ParticipationLeaveButton
-                  entityId={event.id}
-                  entityType="event"
-                  entityName={event.title}
-                />
-              ) : (
-                <ParticipationJoinButton
-                  entityId={event.id}
-                  entityType="event"
-                />
-              )}
-            </div>
-          )}
+          {event?.id &&
+            !event.hasPendingJoinRequest &&
+            !event.hasPendingLeaveRequest && (
+              <div className={styles.joinEventBlockButton}>
+                {event.isJoined ? (
+                  <ParticipationLeaveButton
+                    entityId={event.id}
+                    entityType="event"
+                    entityName={event.title}
+                  />
+                ) : (
+                  <ParticipationJoinButton
+                    entityId={event.id}
+                    entityType="event"
+                  />
+                )}
+              </div>
+            )}
         </div>
       </motion.div>
       <div className={styles.toggleWrapper}>

@@ -12,6 +12,7 @@ import {
 } from "@shared/libs/search-params";
 import { filtersQuery } from "@shared/api/filters";
 import { taskDrawerJoinedDefaults } from "@entities/task";
+import { profileQuery } from "@entities/user/profile";
 
 export const Route = createFileRoute("/_masterLayout/activities/my/")({
   validateSearch: myActivitiesSearchSchema,
@@ -33,7 +34,10 @@ export const Route = createFileRoute("/_masterLayout/activities/my/")({
 
     const { tab, ...params } = config.schema.parse(location.search) as any;
 
-    await queryClient.ensureQueryData(config.query(params) as any);
+    await Promise.all([
+      queryClient.ensureQueryData(config.query(params) as any),
+      queryClient.ensureQueryData(profileQuery.all()),
+    ]);
 
     config.filters.forEach(({ entityType, facetType }) =>
       queryClient.prefetchInfiniteQuery(

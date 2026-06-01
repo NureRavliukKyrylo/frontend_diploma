@@ -108,13 +108,13 @@ export const JoinedProjectPage = () => {
           >
             <p>{project?.description}</p>
           </ReadMoreButton>
-          {project?.id && project.hasPendingJoinRequest && (
+          {project?.id && project.hasPendingLeaveRequest && (
             <p className={styles.pendingRequest}>
-              Your join request is pending approval
+              Your leave request is pending approval
             </p>
           )}
 
-          {project?.id && !project.hasPendingJoinRequest && (
+          {project?.id && !project.hasPendingLeaveRequest && (
             <div className={styles.leaveJoinedProjectBlockButton}>
               <ParticipationLeaveButton
                 entityId={project.id}

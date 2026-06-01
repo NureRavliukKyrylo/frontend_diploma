@@ -14,8 +14,8 @@ export const TaskBoardItemBase = ({
   footerContent,
 }: TaskBoardItemBaseProps) => (
   <>
-    <h1>{task.title}</h1>
-    <p>{task.description}</p>
+    <h1 className={styles.taskBoardTitle}>{task.title}</h1>
+    <p className={styles.taskBoardDescription}>{task.description}</p>
     <div className={styles.deadlineBlock}>
       <Calendar className={styles.calendarTask} />
       <span>{formatDateToText(task.endAt, true)}</span>

@@ -1,4 +1,4 @@
-import styles from "./TaskWidget.module.scss";
+import styles from "./TaskWidgetJoined.module.scss";
 import { Toggle } from "@shared/ui";
 import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import { AnimatePresence, motion } from "framer-motion";
@@ -165,23 +165,19 @@ export const TaskWidgetJoined = ({
           <ReadMoreButton collapsedHeight={90}>
             <p>{task?.description}</p>
           </ReadMoreButton>
-          {task?.id && task.hasPendingJoinRequest && (
+          {task?.id && task.hasPendingLeaveRequest && (
             <p className={styles.pendingRequest}>
-              Your join request is pending approval
+              Your leave request is pending approval
             </p>
           )}
 
-          {task?.id && !task.hasPendingJoinRequest && (
-            <div className={styles.joinTaskBlockButton}>
-              {task.isJoined ? (
-                <ParticipationLeaveButton
-                  entityId={task.id}
-                  entityType="task"
-                  entityName={task.title}
-                />
-              ) : (
-                <ParticipationJoinButton entityId={task.id} entityType="task" />
-              )}
+          {task?.id && !task.hasPendingLeaveRequest && (
+            <div className={styles.leaveJoinedTaskBlockButton}>
+              <ParticipationLeaveButton
+                entityId={task.id}
+                entityType="task"
+                entityName={task.title}
+              />
             </div>
           )}
         </div>

@@ -1,1 +1,1 @@
-export type TaskMode = "overview" | "members" | "feedbacks";
+export type TaskMode = "overview" | "comments" | "members" | "feedbacks";

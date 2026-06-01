@@ -133,13 +133,13 @@ export const JoinedEventPage = () => {
           >
             <p>{event?.description}</p>
           </ReadMoreButton>
-          {event?.id && event.hasPendingJoinRequest && (
+          {event?.id && event.hasPendingLeaveRequest && (
             <p className={styles.pendingRequest}>
-              Your join request is pending approval
+              Your leave request is pending approval
             </p>
           )}
 
-          {event?.id && (
+          {event?.id && !event.hasPendingLeaveRequest && (
             <div className={styles.leaveEventBlockButton}>
               <ParticipationLeaveButton
                 entityId={event.id}

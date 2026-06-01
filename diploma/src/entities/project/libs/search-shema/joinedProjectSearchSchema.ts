@@ -13,6 +13,7 @@ export const joinedProjectDefaults = {
   tasks: {
     tab: "tasks" as const,
     PageSize: 2,
+    CommentsPageSize: 7,
   },
 };
 

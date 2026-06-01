@@ -18,7 +18,7 @@ export const RelatedCategoryCard = ({
       </div>
       <div className={styles.footerContent}>
         <div className={styles.activitiesTotal}>
-          <h1>42</h1>
+          <h1>{category.activitiesTotal}</h1>
           <h2>Activities</h2>
         </div>
         {children}

@@ -42,3 +42,4 @@ export { TaskBoardListItemSkeleton } from "./ui/board-item/item-list/TaskBoardLi
 export { TaskBoardControlItem } from "./ui/board-item/control/TaskBoardControlItem";
 export { TaskBoardControlItemSkeleton } from "./ui/board-item/control/TaskBoardControlItemSkeleton";
 export { TaskCommentItem } from "./ui/comment-item/TaskCommentItem";
+export { TaskCommentItemSkeleton } from "./ui/comment-item/TaskCommentItemSkeletom";

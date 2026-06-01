@@ -2,6 +2,7 @@ import type { SkillProfile } from "@entities/skill";
 import type { ConnectedService } from "../services/ConnectedService";
 import type { PrivacySettings, Profile } from "../profile/Profile";
 import type { ProfileCompletion } from "../profile/ProfileCompletionField";
+import type { LevelProgress, Rating } from "@shared/config/types";
 
 export interface User {
   id: string;
@@ -22,4 +23,6 @@ export interface User {
     address: string;
   };
   skills: SkillProfile[];
+  rating: Rating;
+  progress: LevelProgress;
 }

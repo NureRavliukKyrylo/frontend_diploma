@@ -32,6 +32,7 @@ export interface Project {
   isJoined: boolean;
   canSubmitFeedback: boolean;
   hasPendingJoinRequest: boolean;
+  hasPendingLeaveRequest: boolean;
 }
 
 export interface ProjectJoined extends Project {

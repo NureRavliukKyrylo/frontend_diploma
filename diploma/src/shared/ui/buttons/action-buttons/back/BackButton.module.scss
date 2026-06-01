@@ -10,7 +10,7 @@
   color: #000000;
   height: 100%;
   padding: 7px;
-  @include animation.button-hover-effect(white, 0.25s);
+  @include animation.button-hover-effect(0.25s);
   display: flex;
   justify-content: center;
   align-items: center;

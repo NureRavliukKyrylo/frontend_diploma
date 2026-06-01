@@ -115,28 +115,36 @@ export const ProjectPage = () => {
           >
             <p>{project?.description}</p>
           </ReadMoreButton>
+          {project?.id && project.hasPendingLeaveRequest && (
+            <p className={`${styles.pendingRequest} ${styles.leave}`}>
+              Your leave request is pending approval
+            </p>
+          )}
+
           {project?.id && project.hasPendingJoinRequest && (
             <p className={styles.pendingRequest}>
               Your join request is pending approval
             </p>
           )}
 
-          {project?.id && !project.hasPendingJoinRequest && (
-            <div className={styles.joinProjectBlockButton}>
-              {project.isJoined ? (
-                <ParticipationLeaveButton
-                  entityId={project.id}
-                  entityType="project"
-                  entityName={project.title}
-                />
-              ) : (
-                <ParticipationJoinButton
-                  entityId={project.id}
-                  entityType="project"
-                />
-              )}
-            </div>
-          )}
+          {project?.id &&
+            !project.hasPendingJoinRequest &&
+            !project.hasPendingLeaveRequest && (
+              <div className={styles.joinProjectBlockButton}>
+                {project.isJoined ? (
+                  <ParticipationLeaveButton
+                    entityId={project.id}
+                    entityType="project"
+                    entityName={project.title}
+                  />
+                ) : (
+                  <ParticipationJoinButton
+                    entityId={project.id}
+                    entityType="project"
+                  />
+                )}
+              </div>
+            )}
         </div>
       </motion.div>
       <div className={styles.toggleWrapper}>

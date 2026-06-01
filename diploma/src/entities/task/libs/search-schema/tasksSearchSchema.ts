@@ -14,7 +14,7 @@ export const tasksSearchDefaults = {
 export const tasksFiltersSchema = z.object({
   taskId: z.string().optional(),
   taskMode: z
-    .enum(["overview", "members", "feedbacks"])
+    .enum(["overview", "comments", "members", "feedbacks"])
     .optional()
     .catch(undefined),
   SkillIds: z.array(z.string()).optional().catch(undefined),

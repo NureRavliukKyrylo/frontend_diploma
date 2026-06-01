@@ -4,6 +4,10 @@ export const taskDrawerDefaults = {
   overview: {
     taskMode: "overview" as const,
   },
+  comments: {
+    taskMode: "comments" as const,
+    DrawerPageSize: 7,
+  },
   members: {
     taskMode: "members" as const,
     DrawerPageSize: 8,
@@ -17,7 +21,7 @@ export const taskDrawerDefaults = {
 
 export type TaskDrawerSearch = {
   taskId?: string;
-  taskMode?: "overview" | "members" | "feedbacks";
+  taskMode?: "overview" | "comments" | "members" | "feedbacks";
   PageSize: number;
   DrawerPageSize?: number;
   DrawerOrderBy?: FeedbackSortValues;

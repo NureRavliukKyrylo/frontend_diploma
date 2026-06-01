@@ -527,6 +527,12 @@
         @include respond-to(mobile) {
           font-size: 17px;
         }
+        &.leave {
+          background: linear-gradient(180deg, #8c0000 0%, #b91515 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
       }
 
       .joinEventBlockButton {

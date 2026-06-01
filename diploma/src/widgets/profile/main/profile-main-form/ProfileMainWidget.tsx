@@ -31,18 +31,28 @@ export function ProfileMainWidget({
       <div className={styles.levelRateInfo}>
         <div className={styles.levelUserInfo}>
           <div className={styles.headerLevelBar}>
-            <span className={styles.current}>Level 12</span>
-            <span className={styles.xp}>25/100</span>
+            <span className={styles.current}>Level {user?.progress.level}</span>
+            <span className={styles.xp}>
+              {user?.progress.currentProgress +
+                "/" +
+                user?.progress.maxProgress}
+            </span>
           </div>
-          <ProgressBar current={25} max={100} />
+          <ProgressBar
+            current={user?.progress.currentProgress ?? 0}
+            max={user?.progress.maxProgress}
+          />
           <div className={styles.footerLevelBar}>
             <span className={styles.label}>Next level</span>
-            <span className={styles.next}>Level 2</span>
+            <span className={styles.next}>
+              Level{" "}
+              {user?.progress?.level == null ? 1 : user?.progress.level + 1}
+            </span>
           </div>
         </div>
         <div className={styles.ratingUserInfo}>
-          <h1>4.5</h1>
-          <p>(120 votes)</p>
+          <h1>{user?.rating.value}</h1>
+          <p>({user?.rating.totalVotes} VOTES)</p>
         </div>
       </div>
       <div className={styles.bioUser}>

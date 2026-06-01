@@ -14,7 +14,8 @@ export const eventJoinedDefaults = {
   },
   tasks: {
     tab: "tasks" as const,
-    PageSize: 4,
+    PageSize: 2,
+    CommentsPageSize: 7,
   },
 };
 
