@@ -9,6 +9,8 @@ interface TaskTabsProps {
   task: Task;
   userLocation?: Coordinates | null;
   userId?: string;
+  userName?: string;
+  avatarUrl?: string;
   search?: TaskDrawerSearch;
   handleSort: (value: FeedbackSortValues) => void;
 }
@@ -22,6 +24,8 @@ export const getTaskMainForms = (
       PageSize={props.search?.DrawerPageSize ?? 7}
       taskId={props.task.id}
       userId={props.userId}
+      userName={props.userName}
+      avatarUrl={props.avatarUrl}
     />
   ),
   members: (

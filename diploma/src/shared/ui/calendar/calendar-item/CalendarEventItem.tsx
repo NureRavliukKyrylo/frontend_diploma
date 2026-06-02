@@ -3,27 +3,41 @@ import styles from "./CalendarEventItem.module.scss";
 import type { EventType } from "@shared/config/types";
 import { EVENT_COLOR } from "@shared/config/constants";
 import { formatHourTime } from "@shared/libs/date";
+import { Link } from "@tanstack/react-router";
 
 interface CalendarEventItemProps {
   info: EventContentArg;
   onClick?: (id: string, type: EventType) => void;
 }
 
-export const CalendarEventItem = ({
-  info,
-  onClick,
-}: CalendarEventItemProps) => {
+const getLinkProps = (type: EventType, id: string) => {
+  switch (type) {
+    case "event":
+      return {
+        to: "/events/my/$id" as const,
+        params: { id },
+      };
+
+    case "task":
+      return {
+        to: "/activities/my" as const,
+        search: {
+          tab: "tasks" as const,
+          taskId: id,
+        },
+      };
+  }
+};
+
+export const CalendarEventItem = ({ info }: CalendarEventItemProps) => {
   const type = info.event.extendedProps.type as EventType;
   const color = EVENT_COLOR[type];
   const view = info.view.type;
   const isMonthView = view === "dayGridMonth";
+  const linkProps = getLinkProps(type, info.event.id);
 
   return (
-    <div
-      className={`${styles.eventCard} ${onClick ? styles.isInteractive : ""}`}
-      data-view={view}
-      onClick={() => onClick?.(info.event.id, type)}
-    >
+    <Link {...linkProps} className={styles.eventCard} data-view={view}>
       {isMonthView ? (
         <>
           <span
@@ -49,6 +63,6 @@ export const CalendarEventItem = ({
           <span className={styles.titleWrapper}>{info.event.title}</span>
         </div>
       )}
-    </div>
+    </Link>
   );
 };

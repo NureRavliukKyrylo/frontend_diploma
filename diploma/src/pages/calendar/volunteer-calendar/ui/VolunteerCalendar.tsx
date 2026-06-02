@@ -80,12 +80,7 @@ export const VolunteerCalendar = () => {
           if (info.dayEl.classList.contains("fc-day-other")) return;
           handleDateClick(info.date, info.jsEvent);
         }}
-        eventContent={(info) => (
-          <CalendarEventItem
-            info={info}
-            onClick={(id, type) => console.log(id, type)}
-          />
-        )}
+        eventContent={(info) => <CalendarEventItem info={info} />}
         events={events}
         dayCellClassNames={({ date }) =>
           slots.some((s) => slotMatchesDate(s, date))

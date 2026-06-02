@@ -1,0 +1,101 @@
+@use "@shared/assets/styles" as *;
+
+.formEdit {
+  .createCommentWrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    @include respond-to(tablet) {
+      gap: 14px;
+    }
+    @include respond-to(mobile) {
+      gap: 10px;
+    }
+
+    .formEdit {
+      width: 100%;
+    }
+
+    .editMessageWrapper {
+      width: 100%;
+    }
+  }
+
+  .actions {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+
+    @include respond-to(tablet) {
+      right: 10px;
+    }
+    @include respond-to(mobile) {
+      right: 8px;
+    }
+
+    .editMessage {
+      transition: opacity 0.2s;
+
+      &.loading {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      .icon {
+        width: 40px;
+        height: 40px;
+        color: black;
+
+        @include respond-to(tablet) {
+          width: 30px;
+          height: 30px;
+        }
+        @include respond-to(mobile) {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+
+    .cancel {
+      @include font-base(19px, 600);
+      color: #9ca3af;
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+
+      @include respond-to(tablet) {
+        font-size: 15px;
+        padding: 3px 8px;
+      }
+      @include respond-to(mobile) {
+        font-size: 12px;
+        padding: 2px 6px;
+      }
+
+      &:hover {
+        color: #943838;
+      }
+
+      &:active {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+.inputEdit {
+  padding: 10px;
+
+  @include respond-to(tablet) {
+    padding: 8px;
+  }
+  @include respond-to(mobile) {
+    padding: 6px;
+  }
+}

@@ -11,7 +11,12 @@ export interface EditCommentFormValues {
   body: string;
 }
 
-export const useEditComment = (taskId: string, commentId: string) => {
+export const useEditComment = (
+  taskId: string,
+  commentId: string,
+  initialBody: string,
+  onCancel?: () => void,
+) => {
   const mutation = useMutation({
     mutationFn: (body: string) => editComment(commentId, { body }),
     onSuccess: () => {
@@ -23,6 +28,7 @@ export const useEditComment = (taskId: string, commentId: string) => {
       queryClient.invalidateQueries({
         queryKey: taskKeys.id(taskId),
       });
+      onCancel?.();
     },
     onError: (error: unknown) => {
       addToast({
@@ -34,10 +40,11 @@ export const useEditComment = (taskId: string, commentId: string) => {
   });
 
   const formik = useFormik<EditCommentFormValues>({
-    initialValues: { body: "" },
+    initialValues: { body: initialBody },
     validationSchema: editCommentValidationSchema,
-    onSubmit: (values) => {
-      mutation.mutate(values.body);
+    onSubmit: async (values, helpers) => {
+      await mutation.mutateAsync(values.body);
+      helpers.resetForm();
     },
   });
 

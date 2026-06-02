@@ -1,20 +1,20 @@
 import z from "zod";
 import { projectsTabSchema, projectsTabDefaults } from "@entities/project";
 import { eventsTabSchema, eventsTabDefaults } from "@entities/event";
-import { tasksTabSchema, tasksTabDefaults } from "@entities/task";
+import { joinedTaskSearchSchema, joinedTaskTabDefaults } from "@entities/task";
 import type { MyActivitiesMode } from "@widgets/activities";
 
 export const myActivitiesSearchDefaults = {
   projects: projectsTabDefaults,
   events: eventsTabDefaults,
-  tasks: tasksTabDefaults,
+  tasks: joinedTaskTabDefaults,
 };
 
 export const myActivitiesSearchSchema = z
   .discriminatedUnion("tab", [
     projectsTabSchema,
     eventsTabSchema,
-    tasksTabSchema,
+    joinedTaskSearchSchema,
   ])
   .catch((ctx) => {
     const input = ctx.value as any;

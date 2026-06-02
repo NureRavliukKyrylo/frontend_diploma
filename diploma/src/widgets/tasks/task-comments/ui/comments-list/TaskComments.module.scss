@@ -15,7 +15,7 @@
     }
     @include respond-to(mobile) {
       --avatar-size: 40px;
-      --comment-padding-top: 3px;
+      --comment-padding-top: 12px;
     }
   }
 }

@@ -4,6 +4,6 @@ export const editComment = async (
   commentId: string,
   data: { body: string },
 ) => {
-  const result = await apiClient.put(`/Tasks/${commentId}/comments`, data);
+  const result = await apiClient.put(`/Tasks/comments/${commentId}`, data);
   return result.data;
 };

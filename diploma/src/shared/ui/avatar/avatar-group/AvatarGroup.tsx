@@ -27,7 +27,6 @@ export const AvatarGroup = ({
           key={i}
           src={avatar.src ?? undefined}
           fallback={avatar.name}
-          variant={!avatar.src ? "initials" : "default"}
           className={avatarClassName}
         />
       ))}

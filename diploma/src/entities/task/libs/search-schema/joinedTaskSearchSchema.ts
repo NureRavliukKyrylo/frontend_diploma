@@ -1,6 +1,15 @@
 import z from "zod";
 import { tasksTabBaseSchema } from "./taskTabSchema";
 
+export const joinedTaskTabDefaults = {
+  tab: "tasks" as const,
+  Page: 1,
+  PageSize: 9,
+  OrderBy: "Default" as const,
+  OnlyActive: false,
+  CommentsPageSize: 7,
+};
+
 export const taskDrawerJoinedDefaults = {
   comments: {
     taskMode: "comments" as const,

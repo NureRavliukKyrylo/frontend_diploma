@@ -4,7 +4,11 @@ import { SearchBar } from "@shared/ui/inputs";
 import { SortDropDown } from "@shared/ui/drop-down";
 import { Pagination } from "@shared/ui";
 import { useTasksTab } from "../model/useTasksTab";
-import { MyTasksFilterWidget, TasksListWidget } from "@widgets/tasks";
+import {
+  MyTasksFilterWidget,
+  TasksListWidget,
+  TaskWidgetJoined,
+} from "@widgets/tasks";
 import {
   sortingTaskItems,
   TaskControlCardSkeleton,
@@ -23,9 +27,13 @@ import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { TaskControlCard } from "@entities/task/ui/task-card/control/TaskControlCard";
 import { LeaveConfirmationModal } from "@features/participation";
+import { SwipeableDrawer } from "@mui/material";
+import { useMyActivitiesTaskDrawer } from "../model/useMyActivitiesTaskDrawer";
 
 export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
-  const { tab, taskId, taskMode, ...taskSearch } = search;
+  const { tab, taskId: _, taskMode: __, ...taskSearch } = search;
+  const { isOpen, openTask, closeTask, taskId, handleModeChange, taskMode } =
+    useMyActivitiesTaskDrawer();
   const {
     setIsFilterOpen,
     handleSearch,
@@ -110,6 +118,9 @@ export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
                         animate="visible"
                         whileHover="hover"
                         className={styles.motionCard}
+                        onClick={() => {
+                          openTask(task.id);
+                        }}
                       >
                         <TaskControlCard
                           task={task}
@@ -152,6 +163,24 @@ export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
           )}
         </motion.div>
       </div>
+      <SwipeableDrawer
+        open={isOpen}
+        onClose={closeTask}
+        onOpen={() => {}}
+        anchor="right"
+        className={styles.drawer}
+      >
+        <div className={styles.drawerContent}>
+          {taskId && (
+            <TaskWidgetJoined
+              search={search as TaskDrawerSearch}
+              handleModeChange={handleModeChange}
+              taskMode={taskMode}
+              taskId={taskId}
+            />
+          )}
+        </div>
+      </SwipeableDrawer>
 
       {tasks && tasks.pagination.totalPages > 1 && (
         <div className={styles.paginationWrapper}>

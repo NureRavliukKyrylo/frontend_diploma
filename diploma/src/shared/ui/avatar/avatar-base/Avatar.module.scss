@@ -23,6 +23,13 @@
 
 .initials {
   @include font-base(25px, 800);
+
+  @include respond-to(tablet) {
+    font-size: 18px;
+  }
+  @include respond-to(mobile) {
+    font-size: 14px;
+  }
 }
 
 .image {

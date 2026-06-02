@@ -32,6 +32,7 @@ export {
   taskDrawerJoinedDefaults,
   type TaskDrawerJoinedSearch,
   joinedTaskSearchModeSchema,
+  joinedTaskTabDefaults,
 } from "./libs/search-schema/joinedTaskSearchSchema";
 export { useTasksInfiniteQuery } from "./model/hooks/useTasksInfiniteQuery";
 export { taskStatuses } from "./config/taskStatuses";

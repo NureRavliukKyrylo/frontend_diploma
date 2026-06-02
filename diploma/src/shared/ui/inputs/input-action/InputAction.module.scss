@@ -1,0 +1,52 @@
+@use "@shared/assets/styles" as *;
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+
+  .input {
+    background: linear-gradient(90deg, #f9f9f9 0%, #dbdbdb 100%);
+    box-shadow: inset 0px 2px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 20px 100px 100px 20px;
+    width: 100%;
+    outline: none;
+    box-sizing: border-box;
+    padding: 15px 60px 15px 30px;
+    @include font-base(20px, 500);
+    color: black;
+
+    @include respond-to(tablet) {
+      padding: 12px 50px 12px 22px;
+      font-size: 17px;
+      border-radius: 16px 100px 100px 16px;
+    }
+    @include respond-to(mobile) {
+      padding: 10px 42px 10px 16px;
+      font-size: 14px;
+      border-radius: 12px 100px 100px 12px;
+    }
+
+    &::placeholder {
+      @include font-base(20px, 600);
+      color: #878787;
+
+      @include respond-to(tablet) {
+        font-size: 17px;
+      }
+      @include respond-to(mobile) {
+        font-size: 14px;
+      }
+    }
+
+    &.edit {
+      padding: 12px 130px 12px 20px;
+
+      @include respond-to(tablet) {
+        padding: 10px 110px 10px 16px;
+      }
+      @include respond-to(mobile) {
+        padding: 8px 90px 8px 14px;
+      }
+    }
+  }
+}

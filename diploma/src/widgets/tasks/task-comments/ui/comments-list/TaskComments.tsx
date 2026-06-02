@@ -6,6 +6,7 @@ import type { TaskComment } from "@entities/task/model";
 import type { MenuItem } from "@shared/config/types";
 import { useTaskComments } from "../../model/useTaskComments";
 import { useLayoutEffect, useRef } from "react";
+import { DeleteCommentModal, EditCommentForm } from "@features/tasks";
 
 interface TaskCommentsProps {
   PageSize: number;
@@ -18,6 +19,9 @@ interface CommentListProps {
   depth?: number;
   userId?: string;
   getMenuItems: (comment: TaskComment) => MenuItem<"edit" | "delete">[];
+  editingId: string | null;
+  taskId: string;
+  onCancel: () => void;
 }
 
 export const TaskComments = ({
@@ -25,8 +29,14 @@ export const TaskComments = ({
   PageSize,
   userId,
 }: TaskCommentsProps) => {
-  const { getMenuItems, modalType, selectedTaskComment, handleCloseModal } =
-    useTaskComments();
+  const {
+    getMenuItems,
+    modalType,
+    selectedTaskComment,
+    handleCloseModal,
+    editingId,
+    handleCancel,
+  } = useTaskComments();
 
   const {
     data: comments,
@@ -50,11 +60,23 @@ export const TaskComments = ({
         comments={comments}
         userId={userId}
         getMenuItems={getMenuItems}
+        editingId={editingId}
+        taskId={taskId}
+        onCancel={handleCancel}
       />
       {hasNextPage && (
         <LoadMoreButton
           onClick={fetchNextPage}
           isLoading={isFetchingNextPage}
+        />
+      )}
+      {selectedTaskComment && (
+        <DeleteCommentModal
+          commentContent={selectedTaskComment.body}
+          commentId={selectedTaskComment.id}
+          taskId={taskId}
+          isOpen={modalType === "delete"}
+          onClose={handleCloseModal}
         />
       )}
     </div>
@@ -66,6 +88,9 @@ const CommentList = ({
   depth = 0,
   userId,
   getMenuItems,
+  editingId,
+  taskId,
+  onCancel,
 }: CommentListProps) => {
   const firstCommentRef = useRef<HTMLDivElement>(null);
   const repliesRef = useRef<HTMLDivElement>(null);
@@ -102,6 +127,16 @@ const CommentList = ({
               menuItems={
                 comment.authorUserId === userId ? getMenuItems(comment) : []
               }
+              editSlot={
+                editingId === comment.id ? (
+                  <EditCommentForm
+                    taskId={taskId}
+                    commentId={comment.id}
+                    initialBody={comment.body}
+                    onCancel={onCancel}
+                  />
+                ) : null
+              }
             />
             {!!comment.replies?.length && (
               <CommentList
@@ -109,6 +144,9 @@ const CommentList = ({
                 depth={depth + 1}
                 userId={userId}
                 getMenuItems={getMenuItems}
+                editingId={editingId}
+                taskId={taskId}
+                onCancel={onCancel}
               />
             )}
           </div>

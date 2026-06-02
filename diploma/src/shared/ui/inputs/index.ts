@@ -13,3 +13,4 @@ export { ProfileSocialNetworksInput } from "./profile-inputs/social-inputs/Profi
 export { ProfileEmailInput } from "./profile-inputs/email-input/ProfileEmailInput";
 export { TimeRangePicker } from "./time-range-picker/TimeRangePicker";
 export { TextAreaForm } from "./text-area/form/TextaAreaForm";
+export { InputAction } from "./input-action/InputAction";

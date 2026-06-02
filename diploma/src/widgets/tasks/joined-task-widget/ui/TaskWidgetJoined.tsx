@@ -16,10 +16,7 @@ import {
 } from "@entities/task";
 import { getHttpErrorInfo } from "@shared/libs/error";
 
-import {
-  ParticipationJoinButton,
-  ParticipationLeaveButton,
-} from "@features/participation";
+import { ParticipationLeaveButton } from "@features/participation";
 import { TaskWidgetJoinedSkeleton } from "./TaskWidgetJoinedSkeleton";
 import { taskJoinedMainTabs } from "../config/taskJoinedMainTabs";
 import { useTaskJoinedWidget } from "../model/useTaskJoinedWidget";
@@ -161,7 +158,7 @@ export const TaskWidgetJoined = ({
             </div>
           </div>
         </div>
-        <div className={styles.taskFooterContent}>
+        <div className={styles.taskJoinedFooterContent}>
           <ReadMoreButton collapsedHeight={90}>
             <p>{task?.description}</p>
           </ReadMoreButton>
@@ -188,10 +185,10 @@ export const TaskWidgetJoined = ({
             tabs={taskJoinedMainTabs}
             activeValue={taskMode}
             onChange={handleModeChange}
-            buttonClassName={styles.toggleTaskButton}
-            activeButtonClassName={styles.toggleTaskButtonActive}
-            className={styles.toggleTask}
-            pillClassName={styles.toggleTaskPill}
+            buttonClassName={styles.toggleJoinedTaskButton}
+            activeButtonClassName={styles.toggleJoinedTaskButtonActive}
+            className={styles.toggleJoinedTask}
+            pillClassName={styles.toggleJoinedTaskPill}
           />
         </div>
         <AnimatePresence mode="wait">

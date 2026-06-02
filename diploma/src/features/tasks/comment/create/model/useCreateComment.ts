@@ -41,14 +41,14 @@ export const useCreateComment = (
   const formik = useFormik<CreateCommentFormValues>({
     initialValues: { body: "" },
     validationSchema: createCommentValidationSchema,
-    onSubmit: (values) => {
-      mutation.mutate(values.body);
+    onSubmit: async (values, helpers) => {
+      await mutation.mutateAsync(values.body);
+      helpers.resetForm();
     },
   });
 
   return {
     formik,
     isLoading: mutation.isPending,
-    mutation,
   };
 };

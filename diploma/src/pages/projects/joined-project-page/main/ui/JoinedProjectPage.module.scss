@@ -505,59 +505,72 @@
     height: 26px;
   }
 }
-.skeletonOrgImage {
-  width: 56px;
-  height: 56px;
-  border-radius: 5px;
-  @include respond-to(tablet) {
-    width: 42px;
-    height: 42px;
-  }
-  @include respond-to(mobile) {
-    width: 34px;
-    height: 34px;
-  }
-}
-.skeletonOrgName {
-  width: 120px;
-  height: 24px;
-  border-radius: 6px;
-  @include respond-to(tablet) {
-    width: 90px;
-    height: 20px;
-  }
-  @include respond-to(mobile) {
-    width: 70px;
-    height: 16px;
-  }
-}
-.skeletonLevelBar {
-  width: 100%;
-  height: 40px;
-  border-radius: 10px;
-  @include respond-to(laptop) {
-    height: 34px;
-  }
+
+.skeletonMetaChip {
+  height: 36px;
+  width: 130px;
+  border-radius: 100px;
   @include respond-to(tablet) {
     height: 28px;
+    width: 100px;
   }
   @include respond-to(mobile) {
-    height: 22px;
-  }
-}
-.skeletonRating {
-  width: 80px;
-  height: 60px;
-  border-radius: 10px;
-  @include respond-to(tablet) {
-    width: 60px;
-    height: 48px;
-  }
-  @include respond-to(mobile) {
+    height: 24px;
     width: 80px;
-    height: 60px;
   }
 }
+
+.skeletonOrgPill {
+  width: 190px;
+  height: 56px;
+  border-radius: 100px;
+  @include respond-to(laptop) {
+    width: 160px;
+    height: 50px;
+  }
+  @include respond-to(tablet) {
+    width: 130px;
+    height: 44px;
+  }
+  @include respond-to(mobile) {
+    width: 110px;
+    height: 38px;
+  }
+}
+
+.skeletonChatPill {
+  width: 190px;
+  height: 44px;
+  border-radius: 100px;
+  @include respond-to(laptop) {
+    width: 160px;
+    height: 40px;
+  }
+  @include respond-to(tablet) {
+    width: 130px;
+    height: 36px;
+  }
+  @include respond-to(mobile) {
+    width: 110px;
+    height: 32px;
+  }
+}
+
+.skeletonLevelBar {
+  width: 100%;
+  height: 48px;
+  border-radius: 10px;
+  @include respond-to(laptop) {
+    height: 40px;
+  }
+  @include respond-to(tablet) {
+    height: 34px;
+  }
+  @include respond-to(mobile) {
+    height: 28px;
+  }
+}
+
 .skeletonDescription {
   width: 100%;
   height: 80px;
@@ -569,6 +582,7 @@
     height: 50px;
   }
 }
+
 .skeletonButton {
   width: 100%;
   height: 48px;
@@ -580,6 +594,7 @@
     height: 38px;
   }
 }
+
 .skeletonToggle {
   width: 100%;
   height: 60px;
@@ -591,21 +606,9 @@
     height: 44px;
   }
 }
+
 .skeletonContent {
   width: 100%;
   height: 500px;
   border-radius: 20px;
-}
-.skeletonMetaChip {
-  height: 40px;
-  width: 120px;
-  border-radius: 20px;
-  @include respond-to(tablet) {
-    height: 30px;
-    width: 90px;
-  }
-  @include respond-to(mobile) {
-    height: 26px;
-    width: 76px;
-  }
 }

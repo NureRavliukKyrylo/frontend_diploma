@@ -48,7 +48,7 @@ export const tasksSchema = z.object({
     .optional(),
   taskId: z.string().optional(),
   taskMode: z
-    .enum(["overview", "members", "feedbacks"])
+    .enum(["overview", "comments", "members", "feedbacks"])
     .optional()
     .catch(undefined),
 });

@@ -4,7 +4,6 @@ import { getEntityStatusConfig } from "@shared/libs/entity";
 import { getTaskJoinedMainForms } from "../config/taskJoinedMainForms";
 import { profileQuery } from "@entities/user/profile";
 import { useUserStore } from "@entities/user";
-import { DefaultAvatar } from "@shared/assets/images/user";
 
 interface UseTaskJoinedWidgetProps {
   taskId?: string;
@@ -36,7 +35,7 @@ export const useTaskJoinedWidget = ({
   const forms = task
     ? getTaskJoinedMainForms({
         task,
-        userAvatar: user?.profile?.avatarUrl ?? DefaultAvatar,
+        user,
         search,
       })
     : null;

@@ -1,5 +1,10 @@
 import type { Project } from "@entities/project";
-import type { Coordinates, ParticipationMember } from "@shared/config/types";
+import type {
+  Coordinates,
+  LevelProgress,
+  ParticipationMember,
+  Rating,
+} from "@shared/config/types";
 
 export interface Organization {
   id: string;
@@ -8,10 +13,11 @@ export interface Organization {
   logoUrl: string;
   location: Coordinates;
   projects?: Project[];
-  rating: number;
+  rating: Rating;
   totalActivities: number;
   activeCount: number;
   progressPercent: number;
   maxProgress: number;
   memberPreviews: ParticipationMember[];
+  progress: LevelProgress;
 }

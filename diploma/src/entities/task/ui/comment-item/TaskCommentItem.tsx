@@ -10,12 +10,14 @@ import {
   DropdownTrigger,
 } from "@heroui/react";
 import { ActionsIcon } from "@shared/assets/icons/actions";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface TaskCommentItemProps {
   comment: TaskComment;
   menuItems: MenuItem<"edit" | "delete">[];
   replyButton?: React.ReactNode;
   className?: string;
+  editSlot?: React.ReactNode;
 }
 
 export const TaskCommentItem = ({
@@ -23,15 +25,15 @@ export const TaskCommentItem = ({
   replyButton,
   menuItems,
   className,
+  editSlot,
 }: TaskCommentItemProps) => {
   return (
     <div className={`${styles.commentWrapper} ${className ?? ""}`}>
-      <div className={styles.time}>{formatTimeAgo(comment.updatedAt)}</div>
+      <div className={styles.time}>{formatTimeAgo(comment.createdAt)}</div>
       <Avatar
         className={styles.authorAvatar}
         src={comment.authorAvatarUrl}
         fallback={comment.authorName}
-        variant="initials"
       />
       <div className={styles.bodyWrapper}>
         <div className={styles.initials}>
@@ -65,7 +67,21 @@ export const TaskCommentItem = ({
             </Dropdown>
           )}
         </div>
-        <p>{comment.body}</p>
+        <AnimatePresence mode="wait">
+          {editSlot ? (
+            <motion.div
+              key="edit"
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              {editSlot}
+            </motion.div>
+          ) : (
+            <p>{comment.body}</p>
+          )}
+        </AnimatePresence>
         {replyButton}
       </div>
     </div>

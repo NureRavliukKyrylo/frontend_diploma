@@ -7,6 +7,7 @@ import {
   getPolicyStatusConfig,
 } from "@shared/libs/entity";
 import type { FeedbackSortValues } from "@entities/feedback";
+import { getFullName } from "@entities/user";
 
 interface UseTaskWidgetProps {
   taskId?: string;
@@ -41,6 +42,8 @@ export const useTaskWidget = ({
         task,
         userLocation,
         userId: user?.id,
+        avatarUrl: user?.profile?.avatarUrl,
+        userName: getFullName(user?.firstName, user?.lastName),
         search,
         handleSort,
       })

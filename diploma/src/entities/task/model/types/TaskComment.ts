@@ -2,7 +2,7 @@ export interface TaskComment {
   id: string;
   authorUserId: string;
   body: string;
-  updatedAt: Date;
+  createdAt: Date;
   parentCommentId: string | null;
   replyToUserId?: string | null;
   authorName: string;

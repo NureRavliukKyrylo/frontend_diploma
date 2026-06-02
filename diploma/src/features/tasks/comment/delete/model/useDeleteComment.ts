@@ -33,7 +33,7 @@ export const useDeleteComment = (
   });
 
   return {
-    deleteProfile: mutation.mutate,
+    deleteComment: mutation.mutate,
     isLoading: mutation.isPending,
     errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
   };

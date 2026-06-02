@@ -6,6 +6,7 @@ type ModalType = "edit" | "delete";
 export const useTaskComments = () => {
   const [selectedTaskComment, setSelectedTaskComment] =
     useState<TaskComment | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [modalType, setModalType] = useState<ModalType | null>(null);
 
   const handleOpenModal = (comment: TaskComment, type: ModalType) => {
@@ -22,7 +23,7 @@ export const useTaskComments = () => {
     {
       key: "edit",
       label: "Edit Comment",
-      onClick: () => handleOpenModal(comment, "edit"),
+      onClick: () => setEditingId(comment.id),
       variant: "edit" as const,
     },
     {
@@ -32,11 +33,16 @@ export const useTaskComments = () => {
       variant: "delete" as const,
     },
   ];
+  const handleCancel = () => {
+    setEditingId(null);
+  };
 
   return {
     modalType,
     selectedTaskComment,
     getMenuItems,
     handleCloseModal,
+    editingId,
+    handleCancel,
   };
 };

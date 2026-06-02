@@ -35,10 +35,12 @@ export const OrganizationCardBase = ({
         <div className={styles.headerOrganizationInfo}>
           <h1 className={styles.organizationName}>{organization.name}</h1>
           <div className={styles.organizationProgressBlock}>
-            <h1 className={styles.organizationLevel}>Level 12</h1>
+            <h1 className={styles.organizationLevel}>
+              Level {organization.progress.level}
+            </h1>
             <ProgressBar
-              current={organization.progressPercent}
-              max={organization.maxProgress}
+              current={organization.progress.currentProgress}
+              max={organization.progress.maxProgress}
             />
           </div>
         </div>
