@@ -31,12 +31,14 @@ interface ProfileInventoryTabProps {
 export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
   const { badgeId, ...badgesSearch } = search;
   const navigate = useNavigate({ from: "/profile/" });
+
   const handleOpenBadge = (badgeId: string) => {
     navigate({
-      search: (prev) => ({ ...prev, badgeId: badgeId }),
+      search: (prev) => ({ ...prev, badgeId }),
       resetScroll: false,
     });
   };
+
   const handleCloseBadge = () => {
     navigate({
       search: (prev) => ({ ...prev, badgeId: undefined }),
@@ -47,72 +49,127 @@ export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
   return (
     <div className={styles.inventoryWrapper}>
       <h1 className={styles.achievementsTitle}>Achievements</h1>
+
       <AnimatePresence mode="wait">
         <motion.div {...fadeVariants} transition={fadeDuration}>
           <ErrorBoundary
-            fallbackRender={({ error }) => {
-              return (
-                <div className={styles.errorState}>
-                  <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-                  <p className="errorHint">
-                    Try reloading the page or come back later.
-                  </p>
-                </div>
-              );
-            }}
+            fallbackRender={({ error }) => (
+              <div className={styles.errorState}>
+                <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
+                <p className="errorHint">
+                  Try reloading the page or come back later.
+                </p>
+              </div>
+            )}
           >
-            <Suspense
-              fallback={
-                <ListWidgetSkeleton
-                  renderSkeleton={() => <BadgeCardDetailedSkeleton />}
+            <div className={styles.sectionBlock}>
+              <h2 className={styles.sectionTitle}>Unlocked</h2>
+              <Suspense
+                fallback={
+                  <ListWidgetSkeleton
+                    renderSkeleton={() => <BadgeCardDetailedSkeleton />}
+                    className={styles.badgesProfileList}
+                    items={8}
+                  />
+                }
+              >
+                <BadgesListWidget
+                  useBadgesQuery={useMyBadgesInfiniteQuery({
+                    ...badgesSearch,
+                    Status: "unlocked",
+                  })}
                   className={styles.badgesProfileList}
-                  items={8}
+                  renderCard={(badge, index) => (
+                    <motion.div
+                      custom={index + 1}
+                      variants={staggeredCardVariantsNoHover}
+                      initial="hidden"
+                      animate="visible"
+                    >
+                      <BadgeCardDetailed
+                        key={badge.id}
+                        onClick={() => handleOpenBadge(badge.id)}
+                        classImgName={styles.interactiveBadge}
+                        badge={badge}
+                      />
+                    </motion.div>
+                  )}
+                  renderPagination={({
+                    fetchNextPage,
+                    isFetchingNextPage,
+                    hasNextPage,
+                  }) =>
+                    hasNextPage && (
+                      <LoadMoreButton
+                        onClick={fetchNextPage}
+                        isLoading={isFetchingNextPage}
+                      />
+                    )
+                  }
+                  renderEmpty={(badges) =>
+                    badges.length === 0 ? (
+                      <div className={styles.emptyState}>
+                        <h2>No unlocked badges yet</h2>
+                        <p>Complete activities to earn your first badge</p>
+                      </div>
+                    ) : null
+                  }
                 />
-              }
-            >
-              <BadgesListWidget
-                useBadgesQuery={useMyBadgesInfiniteQuery(badgesSearch)}
-                className={styles.badgesProfileList}
-                renderCard={(badge, index) => (
-                  <motion.div
-                    custom={index + 1}
-                    variants={staggeredCardVariantsNoHover}
-                    initial="hidden"
-                    animate="visible"
-                  >
-                    <BadgeCardDetailed
-                      key={badge.id}
-                      onClick={() => handleOpenBadge(badge.id)}
-                      classImgName={styles.interactiveBadge}
-                      badge={badge}
-                    />
-                  </motion.div>
-                )}
-                renderPagination={({
-                  fetchNextPage,
-                  isFetchingNextPage,
-                  hasNextPage,
-                }) =>
-                  hasNextPage && (
-                    <LoadMoreButton
-                      onClick={fetchNextPage}
-                      isLoading={isFetchingNextPage}
-                    />
-                  )
+              </Suspense>
+            </div>
+
+            <div className={styles.sectionBlock}>
+              <h2 className={styles.sectionTitle}>Locked</h2>
+              <Suspense
+                fallback={
+                  <ListWidgetSkeleton
+                    renderSkeleton={() => <BadgeCardDetailedSkeleton />}
+                    className={styles.badgesProfileList}
+                    items={8}
+                  />
                 }
-                renderEmpty={(badges) =>
-                  badges.length === 0 ? (
-                    <div className={styles.emptyState}>
-                      <h2>No badges yet</h2>
-                      <p>Be the first to join and make a difference</p>
-                    </div>
-                  ) : null
-                }
-              />
-            </Suspense>
+              >
+                <BadgesListWidget
+                  useBadgesQuery={useMyBadgesInfiniteQuery({
+                    ...badgesSearch,
+                    Status: "locked",
+                  })}
+                  className={styles.badgesProfileList}
+                  renderCard={(badge, index) => (
+                    <motion.div
+                      custom={index + 1}
+                      variants={staggeredCardVariantsNoHover}
+                      initial="hidden"
+                      animate="visible"
+                    >
+                      <BadgeCardDetailed
+                        key={badge.id}
+                        classImgName={styles.interactiveBadge}
+                        onClick={() => handleOpenBadge(badge.id)}
+                        badge={badge}
+                      />
+                    </motion.div>
+                  )}
+                  renderPagination={({
+                    fetchNextPage,
+                    isFetchingNextPage,
+                    hasNextPage,
+                  }) =>
+                    hasNextPage && (
+                      <LoadMoreButton
+                        onClick={fetchNextPage}
+                        isLoading={isFetchingNextPage}
+                      />
+                    )
+                  }
+                  renderEmpty={(badges) => (badges.length === 0 ? null : null)}
+                />
+              </Suspense>
+            </div>
           </ErrorBoundary>
         </motion.div>
       </AnimatePresence>
+
       {badgeId && (
         <BaseModal
           isOpen={!!badgeId}
@@ -121,16 +178,14 @@ export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
           showClosed={false}
         >
           <ErrorBoundary
-            fallbackRender={({ error }) => {
-              return (
-                <div className={styles.errorState}>
-                  <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-                  <p className="errorHint">
-                    Try reloading the page or come back later.
-                  </p>
-                </div>
-              );
-            }}
+            fallbackRender={({ error }) => (
+              <div className={styles.errorState}>
+                <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
+                <p className="errorHint">
+                  Try reloading the page or come back later.
+                </p>
+              </div>
+            )}
           >
             <Suspense
               fallback={

@@ -13,7 +13,7 @@ export const getSocialLinksInitial = (user: User | undefined) =>
 
       acc[key] = {
         url: found?.url ?? "",
-        visible: privacy ? privacy.visibility === 0 : false,
+        visible: privacy ? privacy.visibility === "private" : false,
       };
       return acc;
     },

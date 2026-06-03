@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./DisputeAttendanceButton.module.scss";
 import { DisputeAttendanceModal } from "../modal/DisputeAttendanceModal";
@@ -18,12 +19,19 @@ export const DisputeAttendanceButton = ({
 
   return (
     <>
-      <BaseButtonWrapper
-        className={styles.disputeAttendanceButton}
-        onClick={() => setIsOpen(true)}
+      <motion.div
+        initial={{ opacity: 0, y: 4 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
+        whileTap={{ scale: 0.95 }}
       >
-        Dispute
-      </BaseButtonWrapper>
+        <BaseButtonWrapper
+          className={styles.disputeAttendanceButton}
+          onClick={() => setIsOpen(true)}
+        >
+          Dispute
+        </BaseButtonWrapper>
+      </motion.div>
       <DisputeAttendanceModal
         eventId={eventId}
         attendanceId={attendanceId}

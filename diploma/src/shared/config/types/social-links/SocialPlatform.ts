@@ -1,10 +1,10 @@
 export const SocialPlatform = {
-  Telegram: 19,
-  Instagram: 1,
-  Facebook: 0,
-  X: 3,
-  TikTok: 4,
-  LinkedIn: 6,
+  Telegram: "telegram",
+  Instagram: "instagram",
+  Facebook: "facebook",
+  X: "x",
+  TikTok: "tiktok",
+  LinkedIn: "linkedIn",
 } as const;
 
 export type SocialPlatform =

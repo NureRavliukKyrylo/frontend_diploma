@@ -1,1 +1,1 @@
-export type TaskStatus = "Done" | "Planned" | "InProgress" | "Hold";
+export type TaskStatus = "Completed" | "Pending" | "InProgress" | "Cancelled";

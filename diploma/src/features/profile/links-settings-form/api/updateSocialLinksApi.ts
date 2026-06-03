@@ -1,4 +1,4 @@
-import type { PrivacySettings, Profile } from "@entities/user";
+import type { Profile } from "@entities/user";
 import { apiClient } from "@shared/api";
 
 type ProfileSocialLinks = Pick<Profile, "socialLinks">;
@@ -6,7 +6,12 @@ type ProfileSocialLinks = Pick<Profile, "socialLinks">;
 export type UpdateProfileSocialLinksDto = {
   model: {
     profile: ProfileSocialLinks;
-    privacySettings: PrivacySettings;
+    privacySettings: {
+      fields?: {
+        fieldName: string;
+        visibility: number;
+      }[];
+    };
   };
 };
 

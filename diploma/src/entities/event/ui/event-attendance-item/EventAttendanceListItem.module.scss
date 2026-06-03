@@ -39,7 +39,6 @@
 .dateCell {
   @include font-base(14px, 500);
   color: rgba(0, 0, 0, 0.5);
-  white-space: nowrap;
 
   @include respond-to(laptop) {
     font-size: 13px;
@@ -108,7 +107,7 @@
   border-radius: 100px;
   text-transform: capitalize;
   white-space: nowrap;
-  @include font-base(13px, 600);
+  @include font-base(16px, 700);
 
   &.draft {
     background: rgba(148, 163, 184, 0.12);
@@ -144,11 +143,11 @@
   }
 
   @include respond-to(tablet) {
-    font-size: 12px;
+    font-size: 14px;
     padding: 3px 12px;
   }
   @include respond-to(mobile) {
-    font-size: 11px;
+    font-size: 12px;
     padding: 3px 10px;
   }
 }

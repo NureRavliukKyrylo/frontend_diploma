@@ -13,8 +13,8 @@ export interface BoardColumnConfig {
 }
 
 export const boardColumns: BoardColumnConfig[] = [
-  { status: "Planned", title: "PLANNED", icon: PlannedStatus },
   { status: "InProgress", title: "IN PROGRESS", icon: InProgressStatus },
-  { status: "Done", title: "DONE", icon: DoneStatus },
-  { status: "Hold", title: "ON HOLD", icon: OnHoldStatus },
+  { status: "Completed", title: "DONE", icon: DoneStatus },
+  { status: "Pending", title: "ON HOLD", icon: OnHoldStatus },
+  { status: "Cancelled", title: "CANCELLED", icon: PlannedStatus },
 ];

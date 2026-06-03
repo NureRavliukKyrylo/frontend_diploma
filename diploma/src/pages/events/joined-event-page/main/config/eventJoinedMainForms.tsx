@@ -44,6 +44,7 @@ export const getJoinedEventMainForms = (
     <AttendanceTabJoined
       eventId={props.event.id}
       search={props.search as AttendanceEventSearch}
+      eventTitle={props.event.title}
     />
   ),
 });

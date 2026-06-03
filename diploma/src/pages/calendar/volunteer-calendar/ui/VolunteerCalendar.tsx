@@ -15,8 +15,12 @@ import {
   type AvailabilitySlot,
 } from "@entities/user/calendar";
 import { useQuery } from "@tanstack/react-query";
-import { DeleteAvailabilityModal } from "@features/calendar";
+import {
+  DeleteAvailabilityModal,
+  GoogleCalendarExportButton,
+} from "@features/calendar";
 import { getCalendarRange } from "@shared/libs/date";
+import type { CalendarTab, CalendarView } from "@shared/config/types";
 
 interface FormState {
   anchor: Element | { getBoundingClientRect: () => DOMRect };
@@ -24,12 +28,22 @@ interface FormState {
   availability?: AvailabilitySlot;
 }
 
+const tabMapConfig: Record<CalendarTab, CalendarView> = {
+  dayGridMonth: "month",
+  timeGridDay: "day",
+  timeGridWeek: "week",
+};
+
 export const VolunteerCalendar = () => {
   const [formState, setFormState] = useState<FormState | null>(null);
   const [deleteSlot, setDeleteSlot] = useState<AvailabilitySlot | null>(null);
   const search = useSearch({ from: "/_masterLayout/calendar/" });
   const { From, To } = getCalendarRange(
     search.date ? new Date(search.date) : new Date(),
+  );
+  const { From: FromCalendar, To: ToCalendar } = getCalendarRange(
+    search.date ? new Date(search.date) : new Date(),
+    tabMapConfig[search.tab ?? "dayGridMonth"],
   );
   const events = useCalendarMyActivities({ From, To });
   const { data } = useQuery(calendarQuery.availabilitySlots());
@@ -69,8 +83,10 @@ export const VolunteerCalendar = () => {
     },
     onDelete: (slot) => setDeleteSlot(slot),
   });
+
   return (
     <div className={styles.volunteerCalendarWrapper} ref={calendarRef}>
+      <GoogleCalendarExportButton from={FromCalendar} to={ToCalendar} />
       <BaseCalendar
         initialView={initialView}
         initialDate={initialDate}

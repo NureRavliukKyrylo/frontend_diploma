@@ -26,7 +26,7 @@ export const useContactsForm = () => {
 
       acc[key] = {
         url: link?.url ?? "",
-        visible: field ? field.visibility === 0 : false,
+        visible: field ? field.visibility === "private" : false,
       };
 
       return acc;
@@ -49,7 +49,7 @@ export const useContactsForm = () => {
         }
 
         if (visible) {
-          setPrivacyField(fieldName, { fieldName, visibility: 0 });
+          setPrivacyField(fieldName, { fieldName, visibility: "public" });
         } else {
           removePrivacyField(fieldName);
         }

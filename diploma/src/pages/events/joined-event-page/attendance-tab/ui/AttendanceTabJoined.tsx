@@ -10,11 +10,13 @@ import { EventAttendanceWidget } from "@widgets/events";
 interface AttendanceTabJoinedProps {
   search: AttendanceEventSearch;
   eventId: string;
+  eventTitle: string;
 }
 
 export const AttendanceTabJoined = ({
   search,
   eventId,
+  eventTitle,
 }: AttendanceTabJoinedProps) => {
   console.log(search.view, search.date);
   const { From, To } = getCalendarRange(
@@ -38,6 +40,7 @@ export const AttendanceTabJoined = ({
         currentDate={search.date ? new Date(search.date) : new Date()}
         onViewChange={setWeekView}
         onDateChange={setDate}
+        eventTitle={eventTitle}
       />
     </>
   );

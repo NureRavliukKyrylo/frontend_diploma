@@ -7,7 +7,7 @@ export const disputeAttendance = async (
 ) => {
   const result = await apiClient.post(
     `events/${eventId}/attendance/${attendanceId}/dispute`,
-    { data: comment },
+    { comment },
   );
   return result.data;
 };

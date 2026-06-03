@@ -17,3 +17,5 @@ export { default as TimeIcon } from "./time.svg?react";
 export { default as LockedIcon } from "./locked.svg?react";
 export { default as ChatIcon } from "./chat.svg?react";
 export { default as RoleIcon } from "./role.svg?react";
+export { default as VerifiedIcon } from "./verified.svg?react";
+export { default as GoogleCalendarIcon } from "./google-calendar.png";

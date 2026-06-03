@@ -263,13 +263,21 @@ const MasterLayoutProjectsMyIdIndexRoute =
     id: '/projects/my/$id/',
     path: '/projects/my/$id/',
     getParentRoute: () => MasterLayoutRoute,
-  } as any)
+  } as any).lazy(() =>
+    import('./routers/_masterLayout/projects/my/$id/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 const MasterLayoutEventsMyIdIndexRoute =
   MasterLayoutEventsMyIdIndexRouteImport.update({
     id: '/events/my/$id/',
     path: '/events/my/$id/',
     getParentRoute: () => MasterLayoutRoute,
-  } as any)
+  } as any).lazy(() =>
+    import('./routers/_masterLayout/events/my/$id/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute

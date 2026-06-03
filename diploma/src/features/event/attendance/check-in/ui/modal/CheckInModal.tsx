@@ -4,6 +4,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { addToast } from "@heroui/react";
 import styles from "./CheckInModal.module.scss";
 import { TextAreaForm } from "@shared/ui/inputs";
+import { motion } from "framer-motion";
 
 interface CheckInModalProps {
   eventId: string;
@@ -59,7 +60,12 @@ export const CheckInModal = ({
   };
 
   return (
-    <BaseModal isOpen={isOpen} onClose={handleClose} maxWidth="640px">
+    <BaseModal
+      isOpen={isOpen}
+      onClose={handleClose}
+      maxWidth="640px"
+      showClosed={false}
+    >
       <div className={styles.checkInModal}>
         <h2>Check In - {eventTitle}</h2>
         <TextAreaForm
@@ -72,9 +78,39 @@ export const CheckInModal = ({
         {formik.touched.note && formik.errors.note && (
           <p className="errorInput">{formik.errors.note}</p>
         )}
-        <BaseButtonWrapper loading={isLoading} onClick={handleSubmit}>
-          Confirm Check In
-        </BaseButtonWrapper>
+        <div className={styles.actionsBlock}>
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            style={{ flex: 1 }}
+          >
+            <BaseButtonWrapper
+              className={styles.confirmButton}
+              loading={isLoading}
+              onClick={handleSubmit}
+            >
+              Confirm Check In
+            </BaseButtonWrapper>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2, delay: 0.05 }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            style={{ flex: 1 }}
+          >
+            <BaseButtonWrapper
+              className={styles.cancelButton}
+              onClick={handleClose}
+            >
+              Cancel
+            </BaseButtonWrapper>
+          </motion.div>
+        </div>
       </div>
     </BaseModal>
   );

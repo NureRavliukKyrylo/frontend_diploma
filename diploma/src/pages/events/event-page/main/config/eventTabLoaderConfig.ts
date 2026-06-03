@@ -43,7 +43,7 @@ export const eventDetailTabLoaderConfig: {
       queryClient.prefetchInfiniteQuery(
         feedbackQuery.infinite("event", eventId, {
           PageSize: 3,
-          OrderBy: "default",
+          OrderBy: "Default",
         }),
       );
       taskStatuses.forEach((status) =>
@@ -71,7 +71,7 @@ export const eventDetailTabLoaderConfig: {
       queryClient.prefetchInfiniteQuery(
         feedbackQuery.infinite("event", eventId, {
           PageSize: 3,
-          OrderBy: "default",
+          OrderBy: "Default",
         }),
       );
     },
@@ -118,7 +118,7 @@ export const eventDetailTabLoaderConfig: {
       queryClient.prefetchInfiniteQuery(
         feedbackQuery.infinite("event", eventId, {
           PageSize: 3,
-          OrderBy: "default",
+          OrderBy: "Default",
         }),
       );
     },

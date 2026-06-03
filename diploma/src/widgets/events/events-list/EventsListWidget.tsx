@@ -25,6 +25,7 @@ export const EventsListWidget = <TEvent extends Event | EventAttendance>({
   className,
 }: EventsListWidgetProps<TEvent>) => {
   const queryResult = useEventsQuery?.();
+
   const events = readyEvents ?? queryResult?.data ?? [];
   const isLoading = queryResult?.isLoading ?? false;
 

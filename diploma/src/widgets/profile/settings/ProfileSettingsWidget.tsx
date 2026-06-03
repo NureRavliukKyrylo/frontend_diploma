@@ -12,7 +12,6 @@ import {
 } from "@entities/user";
 import { profileRoutes } from "@shared/routes";
 import { useNavigate, useSearch } from "@tanstack/react-router";
-import { useMediaQuery } from "usehooks-ts";
 
 export function ProfileSettingsWidget() {
   const search = useSearch({ from: "/_masterLayout/profile/settings/" });
@@ -25,10 +24,6 @@ export function ProfileSettingsWidget() {
 
   const { component, wrapperProps } = profileSettingsForms[activeTab];
 
-  const isMobile = useMediaQuery("(max-width: 600px)");
-  const isTablet = useMediaQuery("(max-width: 900px)");
-
-  const minHeight = isMobile ? 140 : isTablet ? 180 : 220;
   return (
     <>
       <div className={styles.headerSideBar}>

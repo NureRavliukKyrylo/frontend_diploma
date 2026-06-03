@@ -27,15 +27,13 @@ export const SocialPlatforms = ({
     const privacy = privacySettings?.fields?.find(
       (field) => field.fieldName === fieldName,
     );
-    console.log(privacy);
-    if (found && privacy?.visibility !== 0) {
+
+    if (found && privacy?.visibility !== "private") {
       acc.push({ platform: found.platform, url: found.url });
     }
     console.log(acc);
     return acc;
   }, []);
-
-  console.log("result", privacyLinks);
 
   return (
     <>

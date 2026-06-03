@@ -84,7 +84,11 @@ export const BadgeDetailWidget = ({ id }: { id: string }) => {
                 <h1>First </h1>
                 <h2>Earned on</h2>
               </div>
-              <p>{formatDateToText(badge.firstAwardedAt)}</p>
+              <p>
+                {badge.firstAwardedAt
+                  ? formatDateToText(badge.firstAwardedAt)
+                  : "—"}
+              </p>
             </div>
           </div>
           <div className={styles.rarityBlock}>

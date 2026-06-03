@@ -2,7 +2,7 @@ import { apiClient } from "@shared/api";
 import type { EventAttendance } from "../../model";
 
 type EventAttendanceResponse = {
-  data: EventAttendance[];
+  data: EventAttendance;
 };
 
 export type EventAttendanceSearchParams = {
@@ -14,7 +14,7 @@ export const getEventAttendancesList = async (
   eventId: string,
   params: EventAttendanceSearchParams,
 ): Promise<EventAttendanceResponse> => {
-  const result = await apiClient.get(`events/${eventId}/attendance`, {
+  const result = await apiClient.get(`events/${eventId}/attendance/me`, {
     params,
   });
   return result.data;

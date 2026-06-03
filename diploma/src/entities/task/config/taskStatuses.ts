@@ -1,8 +1,8 @@
 import type { TaskStatus } from "../model/types/TaskStatus";
 
 export const taskStatuses: TaskStatus[] = [
-  "Done",
-  "Planned",
+  "Completed",
+  "Pending",
   "InProgress",
-  "Hold",
+  "Cancelled",
 ];

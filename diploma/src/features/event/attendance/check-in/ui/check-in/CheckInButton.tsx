@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./CheckInButton.module.scss";
 import { CheckInModal } from "../modal/CheckInModal";
@@ -13,12 +14,19 @@ export const CheckInButton = ({ eventId, eventTitle }: CheckInButtonProps) => {
 
   return (
     <>
-      <BaseButtonWrapper
-        className={styles.checkInButton}
-        onClick={() => setIsOpen(true)}
+      <motion.div
+        initial={{ opacity: 0, y: 4 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.2 }}
+        whileTap={{ scale: 0.95 }}
       >
-        Check in
-      </BaseButtonWrapper>
+        <BaseButtonWrapper
+          className={styles.checkInButton}
+          onClick={() => setIsOpen(true)}
+        >
+          Check in
+        </BaseButtonWrapper>
+      </motion.div>
       <CheckInModal
         eventId={eventId}
         eventTitle={eventTitle}

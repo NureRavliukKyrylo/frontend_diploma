@@ -10,6 +10,7 @@ interface MyBadgesRespone {
 export interface MyBadgesSearchParams {
   Page?: number;
   PageSize?: number;
+  Status: "locked" | "unlocked";
 }
 
 export const getMyBadges = async (

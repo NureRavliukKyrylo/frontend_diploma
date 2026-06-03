@@ -63,6 +63,34 @@
   text-align: center;
 }
 
+.sectionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+
+  @include respond-to(tablet) {
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  @include respond-to(mobile) {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+}
+
+.sectionTitle {
+  @include font-base(20px, 700);
+
+  @include respond-to(tablet) {
+    @include font-base(17px, 700);
+  }
+
+  @include respond-to(mobile) {
+    @include font-base(15px, 700);
+  }
+}
 .emptyState {
   display: flex;
   flex-direction: column;

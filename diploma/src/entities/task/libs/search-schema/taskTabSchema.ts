@@ -19,7 +19,10 @@ export const tasksOrderSchema = z.object({
 
 export const tasksTabBaseShape = z.object({
   tab: z.literal("tasks"),
-  Status: z.string().optional(),
+  Status: z
+    .enum(["Completed", "Pending", "InProgress", "Cancelled"])
+    .optional()
+    .catch("Completed"),
   From: z.string().optional(),
   To: z.string().optional(),
   ProjectIds: z.array(z.string()).optional().catch(undefined),

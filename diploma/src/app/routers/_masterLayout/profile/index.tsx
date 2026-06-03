@@ -24,13 +24,22 @@ export const Route = createFileRoute("/_masterLayout/profile/")({
     const config = profileTabLoaderConfig[tab ?? "profile"];
 
     await queryClient.ensureQueryData(profileQuery.all());
+
     if (config.infinite) {
-      await queryClient.ensureInfiniteQueryData(
-        config.query(params as any) as any,
-      );
+      if (config.queryType === "multi") {
+        const queries = config.query(params as any) as any[];
+        await Promise.all(
+          queries.map((q) => queryClient.ensureInfiniteQueryData(q)),
+        );
+      } else {
+        await queryClient.ensureInfiniteQueryData(
+          config.query(params as any) as any,
+        );
+      }
     } else {
       await queryClient.ensureQueryData(config.query(params as any) as any);
     }
+
     config.prefetch(queryClient);
   },
   pendingComponent: MainProfilePageSkeleton,

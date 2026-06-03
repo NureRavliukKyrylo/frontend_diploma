@@ -1,6 +1,6 @@
-import type { EventAttendanceView } from "@entities/event";
+import type { CalendarView } from "@shared/config/types";
 
-export const formatTitle = (date: Date, view: EventAttendanceView): string => {
+export const formatTitle = (date: Date, view: CalendarView): string => {
   const year = date.getFullYear();
   const month = date.toLocaleString("default", { month: "long" });
 

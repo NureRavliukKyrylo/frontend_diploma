@@ -20,7 +20,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 interface JoinedFeedbackTabProps {
   entityId: string;
-  entityType: EntityType;
+  entityType: Exclude<EntityType, "organization">;
   canSubmitFeedback: boolean;
 }
 

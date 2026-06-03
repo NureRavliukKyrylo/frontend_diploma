@@ -7,7 +7,7 @@ import {
 
 export interface PrivacyField {
   fieldName: string;
-  visibility: number;
+  visibility: "public" | "private";
 }
 
 export interface PrivacySettings {

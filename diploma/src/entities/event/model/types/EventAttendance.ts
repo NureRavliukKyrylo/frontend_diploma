@@ -9,11 +9,16 @@ export type AttendanceStatus =
   | "cancelled";
 
 export interface EventAttendance {
-  id: string;
-  dateFrom: Date | string;
-  dateTo: Date | string;
-  description: string;
-  status?: AttendanceStatus;
-  confirmedMinutes?: number;
-  checkInAt: Date | string;
+  canCheckIn: boolean;
+  canCheckOut: boolean;
+  currentAttendance: {
+    id: string;
+    dateFrom: Date | string;
+    dateTo: Date | string;
+    description: string;
+    status?: AttendanceStatus;
+    confirmedMinutes: number | null;
+    checkInAt: Date | string;
+    checkOutAt: Date | string | null;
+  };
 }

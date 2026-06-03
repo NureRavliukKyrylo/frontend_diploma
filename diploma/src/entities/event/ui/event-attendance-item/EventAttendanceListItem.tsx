@@ -18,33 +18,39 @@ export const EventAttendanceListItem = ({
 }: EventAttendanceListItemProps) => {
   const now = new Date();
   const isInRange =
-    now >= new Date(attendance.dateFrom) && now <= new Date(attendance.dateTo);
+    now >= new Date(attendance.currentAttendance.dateFrom) &&
+    now <= new Date(attendance.currentAttendance.dateTo);
 
   const renderAction = () => {
-    if (isInRange && attendance.status === "draft") return checkIn;
-    if (isInRange && attendance.checkInAt) return checkOut;
-    if (!isInRange && attendance.status === "checkedOut")
+    if (attendance.canCheckIn) return checkIn;
+    if (attendance.canCheckOut) return checkOut;
+    if (!isInRange && attendance.currentAttendance.checkOutAt !== null)
       return disputeAttendance;
     return null;
   };
 
   return (
-    <div className={styles.eventAttendancelistItemWrapper}>
+    <div className={styles.eventAttendanceListItemWrapper}>
       <span className={styles.dateCell}>
-        {formatDateRange(attendance.dateFrom, attendance.dateTo)}
+        {formatDateRange(
+          attendance.currentAttendance.dateFrom,
+          attendance.currentAttendance.dateTo,
+        )}
       </span>
-      <span className={styles.descriptionCell}>{attendance.description}</span>
+      <span className={styles.descriptionCell}>
+        {attendance.currentAttendance.description}
+      </span>
       <span className={styles.minutesCell}>
-        {attendance.confirmedMinutes != null
-          ? formatMinutes(attendance.confirmedMinutes)
+        {attendance.currentAttendance.confirmedMinutes != null
+          ? formatMinutes(attendance.currentAttendance.confirmedMinutes)
           : "—"}
       </span>
       <span className={styles.statusCell}>
-        {attendance.status && (
+        {attendance.currentAttendance.status && !renderAction() && (
           <span
-            className={`${styles.statusBadge} ${styles[attendance.status]}`}
+            className={`${styles.statusBadge} ${styles[attendance.currentAttendance.status]}`}
           >
-            {attendance.status}
+            {attendance.currentAttendance.status}
           </span>
         )}
         {renderAction()}

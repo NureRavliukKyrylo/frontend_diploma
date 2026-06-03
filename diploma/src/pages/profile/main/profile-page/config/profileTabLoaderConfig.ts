@@ -21,7 +21,8 @@ type ProfileTabParams =
 
 type ProfileTabConfig<T extends ProfileTabParams> = {
   schema: ZodType<T>;
-  query: (params: T) => unknown;
+  queryType?: "single" | "multi";
+  query: (params: T) => unknown | unknown[];
   prefetch: (queryClient: QueryClient) => void;
   infinite?: boolean;
 };
@@ -41,7 +42,10 @@ export const profileTabLoaderConfig: {
     prefetch: (queryClient) => {
       queryClient.prefetchQuery(skillsQuery.my(skillsDefaults));
       queryClient.prefetchInfiniteQuery(
-        badgesQuery.infiniteMy(inventoryDefaults),
+        badgesQuery.infiniteMy({ ...inventoryDefaults, Status: "unlocked" }),
+      );
+      queryClient.prefetchInfiniteQuery(
+        badgesQuery.infiniteMy({ ...inventoryDefaults, Status: "locked" }),
       );
     },
   },
@@ -51,7 +55,10 @@ export const profileTabLoaderConfig: {
     prefetch: (queryClient) => {
       queryClient.prefetchQuery(skillsQuery.my(skillsDefaults));
       queryClient.prefetchInfiniteQuery(
-        badgesQuery.infiniteMy(inventoryDefaults),
+        badgesQuery.infiniteMy({ ...inventoryDefaults, Status: "unlocked" }),
+      );
+      queryClient.prefetchInfiniteQuery(
+        badgesQuery.infiniteMy({ ...inventoryDefaults, Status: "locked" }),
       );
     },
   },
@@ -60,13 +67,20 @@ export const profileTabLoaderConfig: {
     query: (params) => skillsQuery.my(params),
     prefetch: (queryClient) => {
       queryClient.prefetchInfiniteQuery(
-        badgesQuery.infiniteMy(inventoryDefaults),
+        badgesQuery.infiniteMy({ ...inventoryDefaults, Status: "unlocked" }),
+      );
+      queryClient.prefetchInfiniteQuery(
+        badgesQuery.infiniteMy({ ...inventoryDefaults, Status: "locked" }),
       );
     },
   },
   inventory: {
     schema: inventoryTabSchema,
-    query: (params) => badgesQuery.infiniteMy(params),
+    queryType: "multi",
+    query: (params) => [
+      badgesQuery.infiniteMy({ ...params, Status: "unlocked" }),
+      badgesQuery.infiniteMy({ ...params, Status: "locked" }),
+    ],
     prefetch: (queryClient) => {
       queryClient.prefetchQuery(skillsQuery.my(skillsDefaults));
     },

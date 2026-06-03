@@ -33,7 +33,24 @@
     --card-name-size: 14px;
     border-radius: 12px;
   }
+  .verified {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    color: green;
 
+    @include respond-to(tablet) {
+      width: 30px;
+      height: 30px;
+    }
+
+    @include respond-to(mobile) {
+      width: 22px;
+      height: 22px;
+    }
+  }
   .moreActionsButton {
     align-self: flex-end;
     cursor: pointer;

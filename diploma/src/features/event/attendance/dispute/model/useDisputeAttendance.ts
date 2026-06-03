@@ -53,7 +53,6 @@ export const useDisputeAttendance = (
 
   return {
     formik,
-    handleDispute: (comment: string) => mutation.mutate(comment),
     isLoading: mutation.isPending,
     mutation,
   };

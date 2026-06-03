@@ -1,6 +1,5 @@
 import { type ReactNode } from "react";
 import styles from "./AuthWrapper.module.scss";
-import { AppleIcon } from "@shared/assets/icons/brands";
 import { AnimatePresence, motion } from "framer-motion";
 import { GoogleButton } from "@features/auth";
 import type { TabOption } from "@shared/config/types";

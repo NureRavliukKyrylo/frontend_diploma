@@ -10,6 +10,7 @@ import { ActionsIcon } from "@shared/assets/icons/actions";
 import type { SkillProfile } from "@entities/skill";
 import { SkillCardBase } from "../base/SkillCardBase";
 import type { MenuItem } from "@shared/config/types";
+import { VerifiedIcon } from "@shared/assets/icons/info";
 
 interface SkillControlCardProps<TSkill extends Skill | SkillProfile> {
   skill: TSkill;
@@ -18,6 +19,9 @@ interface SkillControlCardProps<TSkill extends Skill | SkillProfile> {
   bottomSlot?: (skill: TSkill) => React.ReactNode;
 }
 
+const isSkillProfile = (skill: Skill | SkillProfile): skill is SkillProfile =>
+  "verified" in skill;
+
 export const SkillControlCard = <TSkill extends Skill | SkillProfile>({
   skill,
   menuItems,
@@ -25,6 +29,11 @@ export const SkillControlCard = <TSkill extends Skill | SkillProfile>({
   className,
 }: SkillControlCardProps<TSkill>) => (
   <div className={`${styles.skillControlCardWrapper} ${className ?? ""}`}>
+    {isSkillProfile(skill) && skill.verified && (
+      <span title="Verified">
+        <VerifiedIcon className={styles.verified} />
+      </span>
+    )}
     <Dropdown
       placement="top-start"
       shouldBlockScroll={false}

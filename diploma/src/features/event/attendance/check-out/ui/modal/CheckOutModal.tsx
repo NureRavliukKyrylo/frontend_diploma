@@ -1,6 +1,7 @@
 import { BaseModal } from "@shared/ui/modals";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { addToast } from "@heroui/react";
+import { motion } from "framer-motion";
 import styles from "./CheckOutModal.module.scss";
 import { TextAreaForm } from "@shared/ui/inputs";
 import { useCheckOut } from "../../model/useCheckOut";
@@ -59,8 +60,13 @@ export const CheckOutModal = ({
   };
 
   return (
-    <BaseModal isOpen={isOpen} onClose={handleClose} maxWidth="640px">
-      <div className={styles.checkInModal}>
+    <BaseModal
+      isOpen={isOpen}
+      onClose={handleClose}
+      maxWidth="640px"
+      showClosed={false}
+    >
+      <div className={styles.checkOutModal}>
         <h2>Check Out - {eventTitle}</h2>
         <TextAreaForm
           name="note"
@@ -72,9 +78,39 @@ export const CheckOutModal = ({
         {formik.touched.note && formik.errors.note && (
           <p className="errorInput">{formik.errors.note}</p>
         )}
-        <BaseButtonWrapper loading={isLoading} onClick={handleSubmit}>
-          Confirm Check Out
-        </BaseButtonWrapper>
+        <div className={styles.actionsBlock}>
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            style={{ flex: 1 }}
+          >
+            <BaseButtonWrapper
+              className={styles.confirmButton}
+              loading={isLoading}
+              onClick={handleSubmit}
+            >
+              Confirm Check Out
+            </BaseButtonWrapper>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2, delay: 0.05 }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            style={{ flex: 1 }}
+          >
+            <BaseButtonWrapper
+              className={styles.cancelButton}
+              onClick={handleClose}
+            >
+              Cancel
+            </BaseButtonWrapper>
+          </motion.div>
+        </div>
       </div>
     </BaseModal>
   );

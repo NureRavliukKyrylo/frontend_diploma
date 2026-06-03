@@ -10,6 +10,8 @@ export interface MyActivitiesCalendarListSearch {
 export const getMyActivitiesCalendarList = async (
   params: MyActivitiesCalendarListSearch,
 ): Promise<ApiResponse<CalendarEvent[]>> => {
-  const result = await apiClient.get("/calendar/activities", { params });
+  const result = await apiClient.get("/users/me/calendar/activities", {
+    params,
+  });
   return result.data;
 };

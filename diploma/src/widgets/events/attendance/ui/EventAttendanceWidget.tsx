@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import styles from "./EventAttendanceWidget.module.scss";
 import type { CalendarView, TabOption } from "@shared/config/types";
 import { Toggle } from "@shared/ui";
-import { EventsListWidget } from "@widgets/events";
 import {
   EventAttendanceListItem,
   EventAttendanceListItemSkeleton,
@@ -15,7 +14,11 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
-import { filterByDateRange } from "@shared/libs/date";
+import {
+  CheckInButton,
+  CheckOutButton,
+  DisputeAttendanceButton,
+} from "@features/event";
 
 const VIEW_TABS: TabOption<CalendarView>[] = [
   { label: "Month", value: "month" },
@@ -31,7 +34,53 @@ interface EventAttendanceWidgetProps {
   currentDate: Date;
   onViewChange?: (view: CalendarView) => void;
   onDateChange?: (date: string) => void;
+  eventTitle: string;
 }
+
+interface EventAttendanceContentProps {
+  eventId: string;
+  from: Date;
+  to: Date;
+  eventTitle: string;
+}
+
+const EventAttendanceContent = ({
+  eventId,
+  from,
+  to,
+  eventTitle,
+}: EventAttendanceContentProps) => {
+  const { data } = useSuspenseQuery(
+    eventQuery.eventAttendance(eventId, { From: from, To: to }),
+  );
+  const attendance: EventAttendance = data.data;
+
+  if (!attendance) {
+    return (
+      <div className={styles.emptyState}>
+        <h2>No attendance records</h2>
+        <p>There are no records for this period.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.attendanceList}>
+      <EventAttendanceListItem
+        attendance={attendance}
+        checkIn={<CheckInButton eventId={eventId} eventTitle={eventTitle} />}
+        checkOut={<CheckOutButton eventId={eventId} eventTitle={eventTitle} />}
+        disputeAttendance={
+          <DisputeAttendanceButton
+            attendanceId={attendance.currentAttendance.id}
+            eventId={eventId}
+            eventTitle={eventTitle}
+          />
+        }
+      />
+    </div>
+  );
+};
 
 export const EventAttendanceWidget = ({
   from,
@@ -41,6 +90,7 @@ export const EventAttendanceWidget = ({
   currentDate,
   onDateChange,
   onViewChange,
+  eventTitle,
 }: EventAttendanceWidgetProps) => {
   const navigate = (direction: "prev" | "next") => {
     const delta = direction === "next" ? 1 : -1;
@@ -104,6 +154,7 @@ export const EventAttendanceWidget = ({
           <span className={styles.tableHeaderCell}>Minutes</span>
           <span className={styles.tableHeaderCell}>Status</span>
         </div>
+
         <Suspense
           fallback={
             <ListWidgetSkeleton
@@ -112,33 +163,11 @@ export const EventAttendanceWidget = ({
             />
           }
         >
-          <EventsListWidget<EventAttendance>
-            useEventsQuery={() => {
-              const { data } = useSuspenseQuery(
-                eventQuery.eventAttendance(eventId, { From: from, To: to }),
-              );
-              const filtered = filterByDateRange(
-                data.data,
-                activeView,
-                currentDate,
-              );
-              return { data: filtered };
-            }}
-            renderCard={(attendance) => (
-              <EventAttendanceListItem
-                key={attendance.id}
-                attendance={attendance}
-              />
-            )}
-            renderEmpty={(items) =>
-              items.length === 0 ? (
-                <div className={styles.emptyState}>
-                  <h2>No attendance records</h2>
-                  <p>There are no records for this period.</p>
-                </div>
-              ) : null
-            }
-            className={styles.attendanceList}
+          <EventAttendanceContent
+            eventId={eventId}
+            from={from}
+            to={to}
+            eventTitle={eventTitle}
           />
         </Suspense>
       </div>

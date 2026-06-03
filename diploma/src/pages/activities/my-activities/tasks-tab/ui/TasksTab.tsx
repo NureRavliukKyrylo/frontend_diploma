@@ -15,7 +15,10 @@ import {
   useMyTasksListQuery,
   type MyTasksSearchParams,
 } from "@entities/task";
-import type { MyTasksRequestParams } from "@entities/task";
+import type {
+  MyTasksRequestParams,
+  TaskDrawerJoinedSearch,
+} from "@entities/task";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   fadeDuration,
@@ -173,7 +176,7 @@ export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
         <div className={styles.drawerContent}>
           {taskId && (
             <TaskWidgetJoined
-              search={search as TaskDrawerSearch}
+              search={search as TaskDrawerJoinedSearch}
               handleModeChange={handleModeChange}
               taskMode={taskMode}
               taskId={taskId}

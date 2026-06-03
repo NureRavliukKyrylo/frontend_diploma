@@ -4,9 +4,9 @@ import {
   type MyEventsSearchParams,
 } from "@entities/event";
 import {
-  tasksTabSchema,
   taskQuery,
   type MyTasksSearchParams,
+  joinedTaskSearchSchema,
 } from "@entities/task";
 import {
   projectsTabSchema,
@@ -41,7 +41,7 @@ export const tabLoaderConfig: {
     ],
   },
   tasks: {
-    schema: tasksTabSchema,
+    schema: joinedTaskSearchSchema,
     query: taskQuery.my,
     filters: [
       { entityType: "task", facetType: "project" },
