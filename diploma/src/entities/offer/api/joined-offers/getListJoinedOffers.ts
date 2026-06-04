@@ -11,6 +11,6 @@ export interface OfferJoinedResponse {
 export const getListJoinedOffers = async (
   params?: OfferJoinedSearchParams,
 ): Promise<OfferJoinedResponse> => {
-  const response = await apiClient.get("/Offers/joined/list", { params });
+  const response = await apiClient.get("/time-bank/joined/offers", { params });
   return response.data;
 };

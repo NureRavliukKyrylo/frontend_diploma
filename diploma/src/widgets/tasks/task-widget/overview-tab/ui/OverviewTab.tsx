@@ -118,7 +118,10 @@ export const OverviewTab = ({ task, userLocation }: OverviewTabProps) => {
                     >
                       <Popup className={styles.popupContent}>
                         <div className={styles.popupLabel}>Related project</div>
-                        <ProjectPopupContent project={task.project} />
+                        <ProjectPopupContent
+                          project={task.project}
+                          organizationTitle={task.organization.name}
+                        />
                       </Popup>
                     </Marker>
                   )}

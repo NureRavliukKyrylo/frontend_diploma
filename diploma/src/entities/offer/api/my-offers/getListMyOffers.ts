@@ -11,6 +11,6 @@ export interface MyOfferResponse {
 export const getListMyOffers = async (
   params?: OfferMySearchParams,
 ): Promise<MyOfferResponse> => {
-  const response = await apiClient.get("/Offers/my/list", { params });
+  const response = await apiClient.get("/time-bank/my/offers", { params });
   return response.data;
 };

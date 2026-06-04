@@ -2,15 +2,14 @@ import { z } from "zod";
 import { locationSchema, paginationSchema } from "@shared/config/schemas";
 
 export const offerSearchDefaults = {
+  tab: "offers" as const,
   OrderBy: "Default" as const,
   Page: 1,
   PageSize: 9,
-  IncludeArchived: false,
-  ShowJoined: false,
-  IncludeSeriesMasters: false,
 };
 
 export const offersFiltersSchema = z.object({
+  tab: z.literal("offers").default("offers").catch("offers"),
   From: z.string().optional(),
   To: z.string().optional(),
   IncludeArchived: z.boolean().optional(),
@@ -30,4 +29,4 @@ export const offersSearchSchema = offersFiltersSchema
   .extend(paginationSchema.shape)
   .extend({ ShowJoined: z.boolean().optional().catch(false) });
 
-export type OfferSearchParams = z.infer<typeof offersSearchSchema>;
+export type OfferSearchParams = Omit<z.infer<typeof offersSearchSchema>, "tab">;

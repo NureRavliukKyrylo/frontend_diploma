@@ -3,6 +3,7 @@ import type { Skill } from "@entities/skill";
 import type { Coordinates } from "@shared/config/types";
 
 export interface Offer {
+  id: string;
   owner: {
     id: string;
     firstName: string;
@@ -20,8 +21,12 @@ export interface Offer {
   categories: Category[];
   skills: Skill[];
   priceMinutes: number;
+  totalBookings: number;
+  lastBooked: Date;
+  status: "inProgress" | "completed";
 }
 
 export interface OfferJoined extends Offer {
+  bookedAt: Date;
   chatId: string;
 }

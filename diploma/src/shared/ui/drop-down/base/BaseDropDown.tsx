@@ -7,15 +7,22 @@ import styles from "./BaseDropDown.module.scss";
 interface BaseDropDownProps {
   label: React.ReactNode;
   children: React.ReactNode;
+  className?: string;
+  buttonClassName?: string;
 }
 
-export const BaseDropDown = ({ label, children }: BaseDropDownProps) => {
+export const BaseDropDown = ({
+  label,
+  children,
+  buttonClassName,
+  className,
+}: BaseDropDownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={styles.inner}>
+    <div className={`${styles.inner} ${className ?? ""}`}>
       <BaseButtonWrapper
-        className={`${styles.button} ${isOpen ? styles.buttonActive : ""}`}
+        className={`${styles.button} ${isOpen ? styles.buttonActive : ""} ${buttonClassName ?? ""}`}
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <div className={styles.labelBlock}>{label}</div>

@@ -18,4 +18,3 @@ export { AnimatedMarker } from "./map/animated-marker/AnimatedMarker";
 export { Tab } from "./tab/Tab";
 export { ProgressBar } from "./progress/progress-bar/ProgressBar";
 export { ProgressCircle } from "./progress/progress-circle/ProgressCircle";
-export { BaseCalendar } from "./calendar/calendar-component/BaseCalendar";

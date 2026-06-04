@@ -3,6 +3,6 @@ import { apiClient } from "@shared/api";
 import { type ApiResponse } from "@shared/api";
 
 export const getOfferId = async (id: string): Promise<ApiResponse<Offer>> => {
-  const result = await apiClient.get(`/Offers/${id}`);
+  const result = await apiClient.get(`/time-bank/offers/${id}`);
   return result.data;
 };

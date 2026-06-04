@@ -1,0 +1,170 @@
+@use "@shared/assets/styles" as *;
+
+.wrapper {
+  background: #ffffff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 40px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  @include respond-to(laptop) {
+    padding: 32px;
+    border-radius: 34px;
+  }
+  @include respond-to(tablet) {
+    padding: 24px;
+    border-radius: 28px;
+  }
+  @include respond-to(mobile) {
+    padding: 18px;
+    border-radius: 24px;
+  }
+
+  .balance {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5px;
+
+    h1 {
+      @include font-base(20px, 400);
+      color: #a4a4a4;
+      text-transform: uppercase;
+
+      @include respond-to(laptop) {
+        font-size: 18px;
+      }
+      @include respond-to(tablet) {
+        font-size: 16px;
+      }
+      @include respond-to(mobile) {
+        font-size: 14px;
+      }
+    }
+
+    .value {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+
+      .timeBankIcon {
+        width: 40px;
+        height: 46px;
+        color: #8c0000;
+
+        @include respond-to(laptop) {
+          width: 34px;
+          height: 40px;
+        }
+        @include respond-to(tablet) {
+          width: 30px;
+          height: 34px;
+        }
+        @include respond-to(mobile) {
+          width: 26px;
+          height: 30px;
+        }
+      }
+
+      h2 {
+        @include font-base(50px, 800);
+        letter-spacing: -0.01em;
+
+        @include respond-to(laptop) {
+          font-size: 42px;
+        }
+        @include respond-to(tablet) {
+          font-size: 36px;
+        }
+        @include respond-to(mobile) {
+          font-size: 28px;
+        }
+      }
+    }
+  }
+
+  .typeMinutes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .reserved {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h1 {
+        @include font-base(22px, 400);
+        color: #a4a4a4;
+
+        @include respond-to(laptop) {
+          font-size: 19px;
+        }
+        @include respond-to(tablet) {
+          font-size: 16px;
+        }
+        @include respond-to(mobile) {
+          font-size: 14px;
+        }
+      }
+
+      h2 {
+        @include font-base(22px, 700);
+        color: #d06a03;
+
+        @include respond-to(laptop) {
+          font-size: 19px;
+        }
+        @include respond-to(tablet) {
+          font-size: 16px;
+        }
+        @include respond-to(mobile) {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .dividerLine {
+      border: 1px solid rgba(166, 166, 166, 0.2);
+      width: 100%;
+    }
+
+    .available {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h1 {
+        @include font-base(22px, 400);
+        color: #a4a4a4;
+
+        @include respond-to(laptop) {
+          font-size: 19px;
+        }
+        @include respond-to(tablet) {
+          font-size: 16px;
+        }
+        @include respond-to(mobile) {
+          font-size: 14px;
+        }
+      }
+
+      h2 {
+        @include font-base(22px, 700);
+        color: #004a09;
+
+        @include respond-to(laptop) {
+          font-size: 19px;
+        }
+        @include respond-to(tablet) {
+          font-size: 16px;
+        }
+        @include respond-to(mobile) {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

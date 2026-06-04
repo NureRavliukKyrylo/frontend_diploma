@@ -19,3 +19,6 @@ export { default as ChatIcon } from "./chat.svg?react";
 export { default as RoleIcon } from "./role.svg?react";
 export { default as VerifiedIcon } from "./verified.svg?react";
 export { default as GoogleCalendarIcon } from "./google-calendar.png";
+export { default as TimeBankIcon } from "./time-bank.svg?react";
+export { default as OnlineIcon } from "./online.svg?react";
+export { default as GroupPeopleIcon } from "./group-people.svg?react";

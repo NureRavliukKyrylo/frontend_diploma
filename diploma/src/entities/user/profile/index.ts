@@ -17,3 +17,4 @@ export {
   type ConnectedServiceConfig,
   type ConnectedServiceId,
 } from "./config/connected-links/connectedServices";
+export type { TimeBankStats } from "./model/types/profile/Profile";

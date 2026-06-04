@@ -5,9 +5,13 @@ import styles from "./ProjectPopupContent.module.scss";
 
 interface ProjectPopupContentProps {
   project: Project;
+  organizationTitle?: string;
 }
 
-export const ProjectPopupContent = ({ project }: ProjectPopupContentProps) => {
+export const ProjectPopupContent = ({
+  project,
+  organizationTitle,
+}: ProjectPopupContentProps) => {
   return (
     <div className={styles.popupProjectContent}>
       <div className={styles.projectInfo}>
@@ -27,7 +31,9 @@ export const ProjectPopupContent = ({ project }: ProjectPopupContentProps) => {
             src={project.organization?.logoUrl ?? DefaultAvatar}
             alt="organization"
           />
-          <h1>{project.organization?.name}</h1>
+          <h1>
+            {organizationTitle ? organizationTitle : project.organization?.name}
+          </h1>
         </div>
       </div>
     </div>

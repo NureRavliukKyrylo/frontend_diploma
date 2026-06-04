@@ -13,6 +13,11 @@ export interface PrivacyField {
 export interface PrivacySettings {
   fields?: PrivacyField[];
 }
+export interface TimeBankStats {
+  balanceMinutes: number;
+  availableMinutes: number;
+  reservedMinutes: number;
+}
 
 export interface Profile {
   bio?: string;
@@ -25,4 +30,5 @@ export interface Profile {
   completedProjectCount?: number;
   organizations?: Organization[];
   badgesPreview?: Badge[];
+  timeBank: TimeBankStats;
 }

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { GoogleCalendarIcon } from "@shared/assets/icons/info";
 import { useGoogleCalendarExport } from "../model/useGoogleCalendarExport";
 import styles from "./GoogleCalendarExportButton.module.scss";
@@ -15,13 +16,20 @@ export const GoogleCalendarExportButton = ({
   const { exportToGoogleCalendar, isLoading } = useGoogleCalendarExport();
 
   return (
-    <BaseButtonWrapper
-      className={styles.exportButton}
-      loading={isLoading}
-      onClick={() => exportToGoogleCalendar(from, to)}
+    <motion.div
+      style={{ display: "inline-flex" }}
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: "spring", stiffness: 400, damping: 18 }}
     >
-      <img src={GoogleCalendarIcon} className={styles.icon} />
-      Export to Google Calendar
-    </BaseButtonWrapper>
+      <BaseButtonWrapper
+        className={styles.exportButton}
+        loading={isLoading}
+        onClick={() => exportToGoogleCalendar(from, to)}
+      >
+        <img src={GoogleCalendarIcon} className={styles.icon} />
+        Export to Google Calendar
+      </BaseButtonWrapper>
+    </motion.div>
   );
 };

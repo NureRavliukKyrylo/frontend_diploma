@@ -1,0 +1,82 @@
+@use "@shared/assets/styles" as *;
+
+.dropDownLabel {
+  @include font-base(16px, 500);
+
+  @include respond-to(tablet) {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+  @include respond-to(mobile) {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+
+.filterButton {
+  @include respond-to(tablet) {
+    padding: 0px 10px;
+    flex-shrink: unset;
+  }
+
+  @include respond-to(mobile) {
+    padding: 0px 10px;
+    flex-shrink: unset;
+  }
+}
+
+.wrapperItem {
+  &:first-child {
+    padding-top: 4px;
+  }
+  &:last-child {
+    padding-bottom: 4px;
+  }
+
+  .item {
+    margin: 2px 6px;
+    padding: 8px 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-radius: 10px;
+    @include font-base(14px, 400);
+    color: #3c4043;
+    transition: background 0.15s ease;
+
+    &:hover {
+      background: #f1f3f4;
+    }
+
+    @include respond-to(tablet) {
+      font-size: 13px;
+      padding: 6px 12px;
+    }
+    @include respond-to(mobile) {
+      font-size: 12px;
+      padding: 5px 10px;
+    }
+
+    img {
+      width: 14px;
+      height: 14px;
+      opacity: 0.7;
+    }
+
+    &.itemActive {
+      background: #fff0f0;
+      color: #8c0000;
+      font-weight: 600;
+
+      &:hover {
+        background: #ffe0e0;
+      }
+
+      img {
+        opacity: 1;
+      }
+    }
+  }
+}
