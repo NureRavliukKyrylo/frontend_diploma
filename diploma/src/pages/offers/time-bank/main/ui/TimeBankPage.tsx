@@ -4,12 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { TimeBankMode } from "../config/TimeBankMode";
 import { timeBankSearchDefaults } from "../libs/timeBankSearchShema";
 import { ActivitiesContent } from "../config/tabsForms";
-
-const TABS: { label: string; value: TimeBankMode }[] = [
-  { label: "Offers", value: "offers" },
-  { label: "My Booking", value: "bookings" },
-  { label: "My Offers", value: "my-offers" },
-];
+import { timeBankTabs } from "../config/timeBankTabs";
 
 export const TimeBankPage = () => {
   const search = useSearch({ from: "/_masterLayout/time-bank/" });
@@ -23,7 +18,7 @@ export const TimeBankPage = () => {
   return (
     <div className={styles.activitiesWrapper}>
       <nav className={styles.tabs}>
-        {TABS.map((tab) => (
+        {timeBankTabs.map((tab) => (
           <button
             key={tab.value}
             className={`${styles.tab} ${activeTab === tab.value ? styles.activeTab : ""}`}

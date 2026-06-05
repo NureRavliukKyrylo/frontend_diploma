@@ -40,7 +40,9 @@ export const OfferListItem = ({ offer, bottomContent }: OfferListItemProps) => {
           <h2>REWARD</h2>
         </div>
       </div>
-      <h1 className={styles.title}>{offer.title}</h1>
+      <div className={styles.title}>
+        <h1>{offer.title}</h1>
+      </div>
       <div className={styles.description}>
         <p>{offer.description}</p>
       </div>

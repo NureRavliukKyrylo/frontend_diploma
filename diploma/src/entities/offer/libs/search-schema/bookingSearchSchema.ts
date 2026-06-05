@@ -6,10 +6,7 @@ export const bookingsSearchDefaults = {
   tab: "bookings" as const,
   OrderBy: "Default" as const,
   Page: 1,
-  PageSize: 9,
-  IncludeArchived: false,
-  ShowJoined: false,
-  isOnline: false,
+  PageSize: 12,
 };
 
 export const bookingsSearchSchema = offersFiltersSchema
@@ -18,4 +15,7 @@ export const bookingsSearchSchema = offersFiltersSchema
     tab: z.literal("bookings").default("bookings").catch("bookings"),
   });
 
-export type OfferJoinedSearchParams = z.infer<typeof bookingsSearchSchema>;
+export type OfferJoinedSearchParams = Omit<
+  z.infer<typeof bookingsSearchSchema>,
+  "tab"
+>;

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { DateRangeFilter } from "@shared/ui/filters";
+import { DateRangeFilter, SelectFilter } from "@shared/ui/filters";
 import { BaseWrapperFilter } from "../../base-wrapper/BaseWrapperFilter";
 import styles from "./OffersFilter.module.scss";
 import { onlineOptions, type OfferSearchParams } from "@entities/offer";
@@ -9,7 +9,6 @@ import { useCategoriesInfiniteQuery } from "@entities/category";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useSkillsInfiniteQuery } from "@entities/skill";
 import { CategoriesListFilter } from "@features/project";
-import { SelectFilter } from "@shared/ui/filters/select-filter/SelectFilter";
 
 interface OffersFilterProps {
   search: OfferSearchParams;

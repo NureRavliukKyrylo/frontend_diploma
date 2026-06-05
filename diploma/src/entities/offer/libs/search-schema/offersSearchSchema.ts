@@ -5,7 +5,7 @@ export const offerSearchDefaults = {
   tab: "offers" as const,
   OrderBy: "Default" as const,
   Page: 1,
-  PageSize: 9,
+  PageSize: 12,
 };
 
 export const offersFiltersSchema = z.object({
@@ -27,6 +27,7 @@ export const offersFiltersSchema = z.object({
 export const offersSearchSchema = offersFiltersSchema
   .extend(locationSchema.shape)
   .extend(paginationSchema.shape)
+  .extend({ PageSize: z.number().default(12) })
   .extend({ ShowJoined: z.boolean().optional().catch(false) });
 
 export type OfferSearchParams = Omit<z.infer<typeof offersSearchSchema>, "tab">;

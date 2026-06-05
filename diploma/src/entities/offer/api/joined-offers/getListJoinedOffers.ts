@@ -4,7 +4,12 @@ import { apiClient } from "@shared/api";
 import type { PaginationResponse } from "@shared/config/types";
 
 export interface OfferJoinedResponse {
-  data: OfferJoined[];
+  stats: {
+    inProgressBookings: number;
+    completedBookings: number;
+    pendingBookings: number;
+  };
+  items: OfferJoined[];
   pagination: PaginationResponse;
 }
 

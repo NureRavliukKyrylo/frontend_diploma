@@ -85,8 +85,9 @@ export const OffersTab = ({ search }: OffersTabProps) => {
               <Suspense
                 fallback={
                   <ListWidgetSkeleton
+                    items={12}
                     renderSkeleton={() => <OfferListItemSkeleton />}
-                    className={styles.offersListSkeletonWrapper}
+                    className={styles.offersGrid}
                   />
                 }
               >
@@ -95,9 +96,9 @@ export const OffersTab = ({ search }: OffersTabProps) => {
                     key={JSON.stringify(search)}
                     {...fadeVariants}
                     transition={fadeDuration}
-                    className={styles.offersGrid}
                   >
                     <OffersListWidget
+                      className={styles.offersGrid}
                       renderCard={(offer, index) => (
                         <motion.div
                           key={offer.id}

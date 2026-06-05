@@ -1,0 +1,108 @@
+@use "@shared/assets/styles" as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  position: relative;
+  padding-bottom: 20px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      #8c0000 30%,
+      #8c0000 60%,
+      transparent 100%
+    );
+    opacity: 0.8;
+  }
+
+  &.editHeader::after {
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      #c97f00 30%,
+      #c97f00 60%,
+      transparent 100%
+    );
+  }
+}
+
+.title {
+  @include font-base(30px, 700);
+  background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
+  line-height: 110%;
+
+  &.editTitle {
+    background: linear-gradient(180deg, #c97f00 0%, #5a3800 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.subTitle {
+  @include font-base(20px, 800);
+  color: #1a1a1a;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.backButton {
+  @include font-base(16px, 600);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  color: #1a1a1a;
+  border-radius: 50px;
+  height: 100%;
+  padding: 10px 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .arrowIcon {
+    width: 14px;
+    height: 14px;
+    rotate: 180deg;
+    color: #1a1a1a;
+  }
+}
+
+.nextButton {
+  @include font-base(20px, 800);
+  background: #000000;
+  color: #ffffff;
+  border-radius: 50px;
+  height: 100%;
+  padding: 10px 32px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  min-width: 200px;
+}

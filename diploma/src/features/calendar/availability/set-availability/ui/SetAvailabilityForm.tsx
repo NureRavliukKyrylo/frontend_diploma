@@ -7,7 +7,12 @@ import { motion } from "framer-motion";
 import { useAvailabilityForm } from "../model/useAvailabilityForm";
 import type { AvailabilitySlot } from "@entities/user/calendar";
 import { DateRangePicker, type RangeValue } from "@heroui/react";
-import { parseDate, type DateValue } from "@internationalized/date";
+import {
+  getLocalTimeZone,
+  parseDate,
+  today,
+  type DateValue,
+} from "@internationalized/date";
 import dayjs from "dayjs";
 
 interface SetAvailabilityFormProps {
@@ -80,6 +85,7 @@ export const SetAvailabilityForm = ({
             <DateRangePicker
               value={dateRangeValue}
               onChange={handleDateRangeChange}
+              minValue={today(getLocalTimeZone())}
               granularity="day"
               classNames={{
                 base: "w-[70%] rounded-[20px] border border-[#d4d4d8] hover:border-[#3f3f46] data-[focus-within=true]:border-[#18181b] [&_[data-type=literal]]:text-[rgba(0,0,0,0.4)] data-[focus-within=true]:[&_[data-type=literal]]:!text-[rgba(0,0,0,0.87)]",

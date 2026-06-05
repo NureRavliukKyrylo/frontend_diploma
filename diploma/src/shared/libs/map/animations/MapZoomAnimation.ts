@@ -6,7 +6,7 @@ import {
 } from "@shared/config/constants";
 
 interface MapZoomAnimationProps {
-  coordinates: { latitude: number; longitude: number } | null;
+  coordinates?: { latitude: number; longitude: number } | null;
   zoom?: number;
   onAnimationEnd?: () => void;
 }

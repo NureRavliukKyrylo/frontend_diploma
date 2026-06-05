@@ -5,8 +5,8 @@ import type { Offer, OfferJoined } from "@entities/offer";
 
 interface OffersListWidgetProps<TOffer = Offer> {
   useOffersQuery?: () => QueryResult<TOffer>;
-  offers?: Offer[];
-  renderCard: (offer: Offer, index: number) => React.ReactNode;
+  offers?: TOffer[];
+  renderCard: (offer: TOffer, index: number) => React.ReactNode;
   renderSkeleton?: () => React.ReactNode;
   startSlot?: React.ReactNode;
   skeletonItems?: number;
