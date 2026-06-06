@@ -22,6 +22,7 @@ export const formatDateRange = (
   from: Date | string,
   to: Date | string,
   locale: string = navigator.language,
+  withTime: boolean = true,
 ): string => {
   const start = new Date(from);
   const end = new Date(to);
@@ -32,6 +33,13 @@ export const formatDateRange = (
     start.getDate() === end.getDate();
 
   const sameYear = start.getFullYear() === end.getFullYear();
+
+  if (!withTime) {
+    if (sameDay) return formatDayPart(start, locale, true);
+    if (sameYear)
+      return `${formatDayPart(start, locale, false)} - ${formatDayPart(end, locale, true)}`;
+    return `${formatDayPart(start, locale, true)} - ${formatDayPart(end, locale, true)}`;
+  }
 
   const startTime = formatTime(start, locale);
   const endTime = formatTime(end, locale);

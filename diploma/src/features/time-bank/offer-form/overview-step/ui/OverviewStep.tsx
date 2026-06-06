@@ -92,48 +92,55 @@ export const OverviewStep = forwardRef<StepRef, OverviewStepProps>(
         </div>
 
         <div className={styles.priceField}>
-          <span className={styles.label}>Price (minutes)</span>
-          <BaseInput
-            name="priceMinutes"
-            label="Price in minutes"
-            activeLabel="Price in minutes"
-            type="number"
-            min={0}
-            value={formik.values.priceMinutes}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={
-              formik.touched.priceMinutes
-                ? formik.errors.priceMinutes
-                : undefined
-            }
-          />
+          <span className={styles.label}>Reward (minutes)</span>
+          <div>
+            <div className={styles.minutesInputWrapper}>
+              <input
+                className={styles.minutesInput}
+                name="priceMinutes"
+                type="number"
+                min={1}
+                placeholder="minutes"
+                value={formik.values.priceMinutes}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              <span className={styles.minutesSuffix}>m</span>
+            </div>
+            {formik.touched.priceMinutes && formik.errors.priceMinutes && (
+              <div className="errorInput">{formik.errors.priceMinutes}</div>
+            )}
+          </div>
         </div>
 
         <div className={styles.dateRangeField}>
           <span className={styles.label}>Date range</span>
-          <DateRangePicker
-            value={dateRangeValue}
-            onChange={handleRange}
-            granularity="day"
-            minValue={today(getLocalTimeZone())}
-            classNames={{
-              base: "w-full rounded-[20px] border border-[#d4d4d8] hover:border-[#3f3f46] data-[focus-within=true]:border-[#18181b] [&_[data-type=literal]]:text-[rgba(0,0,0,0.4)] data-[focus-within=true]:[&_[data-type=literal]]:!text-[rgba(0,0,0,0.87)]",
-              inputWrapper:
-                "w-full h-full rounded-[20px] shadow-none border-none !bg-white data-[hover=true]:!bg-white data-[focus=true]:!bg-white data-[focus-within=true]:!bg-white",
-              segment:
-                "!text-[rgba(0,0,0,0.87)] data-[placeholder=true]:!text-[rgba(0,0,0,0.4)] data-[type=literal]:!text-[rgba(0,0,0,0.4)] text-[17px] font-[500]",
-              separator: "!text-[rgba(0,0,0,0.4)]",
-              selectorIcon: "text-[#71717a]",
-              calendar: "!overflow-hidden [&>*]:!overflow-hidden",
-            }}
-          />
-          {((formik.touched.startAt && formik.errors.startAt) ||
-            (formik.touched.endAt && formik.errors.endAt)) && (
-            <div className="errorInput">
-              {formik.errors.startAt ?? formik.errors.endAt}
-            </div>
-          )}
+          <div>
+            <DateRangePicker
+              value={dateRangeValue}
+              onChange={handleRange}
+              granularity="day"
+              minValue={data ? undefined : today(getLocalTimeZone())}
+              isInvalid={false}
+              validationBehavior="aria"
+              classNames={{
+                base: "w-full rounded-[20px] border border-[#d4d4d8] hover:border-[#3f3f46] data-[focus-within=true]:border-[#18181b] [&_[data-type=literal]]:text-[rgba(0,0,0,0.4)] data-[focus-within=true]:[&_[data-type=literal]]:!text-[rgba(0,0,0,0.87)]",
+                inputWrapper:
+                  "w-full h-full rounded-[20px] shadow-none border-none !bg-white data-[hover=true]:!bg-white data-[focus=true]:!bg-white data-[focus-within=true]:!bg-white",
+                segment:
+                  "!text-[rgba(0,0,0,0.87)] data-[placeholder=true]:!text-[rgba(0,0,0,0.4)] data-[type=literal]:!text-[rgba(0,0,0,0.4)] text-[17px] font-[500]",
+                separator: "!text-[rgba(0,0,0,0.4)]",
+                selectorIcon: "text-[#71717a]",
+                calendar: "!overflow-hidden [&>*]:!overflow-hidden",
+              }}
+            />
+            {((formik.touched.startAt && formik.errors.startAt) ||
+              (formik.touched.endAt && formik.errors.endAt)) && (
+              <div className="errorInput">
+                {formik.errors.startAt ?? formik.errors.endAt}
+              </div>
+            )}
+          </div>
         </div>
 
         <div className={styles.onlineField}>

@@ -18,6 +18,7 @@ export const FilterDropDown = <T extends string>({
     <BaseDropDown
       className={styles.filterInner}
       buttonClassName={styles.filterButton}
+      dropdownClassName={styles.filterDropdown}
       label={
         <h1 className={styles.dropDownLabel}>
           Filter by

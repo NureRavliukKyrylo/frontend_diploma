@@ -30,11 +30,11 @@ export const Avatar = ({
       .join("")
       .toUpperCase() ?? "";
 
-  const colors = getAvatarColor(initials);
-
   const showImage = !!src;
-  const showInitials = !src && !!fallback;
-  const showDefault = !src && !fallback;
+  const showInitials = !src && !!fallback && !!initials;
+  const showDefault = !src && !initials;
+
+  const colors = getAvatarColor(initials);
 
   return (
     <div

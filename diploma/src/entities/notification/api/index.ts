@@ -1,0 +1,1 @@
+export { getListNotifications } from "./notificationsListApi";

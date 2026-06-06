@@ -11,7 +11,13 @@ export const overviewSchema = Yup.object({
     .typeError("Must be a number")
     .min(0, "Price can't be negative")
     .required("Price is required"),
-  startAt: Yup.string().nullable().required("Start date is required"),
+  startAt: Yup.string()
+    .nullable()
+    .required("Start date is required")
+    .test("not-in-past", "Start date cannot be in the past", (value) => {
+      if (!value) return true;
+      return new Date(value) >= new Date(new Date().setHours(0, 0, 0, 0));
+    }),
   endAt: Yup.string().nullable().required("End date is required"),
   isOnline: Yup.boolean().required(),
 });

@@ -11,6 +11,7 @@ import {
 } from "@heroui/react";
 import { ActionsIcon } from "@shared/assets/icons/actions";
 import { AnimatePresence, motion } from "framer-motion";
+import { getFullName } from "@entities/user";
 
 interface TaskCommentItemProps {
   comment: TaskComment;
@@ -32,13 +33,18 @@ export const TaskCommentItem = ({
       <div className={styles.time}>{formatTimeAgo(comment.createdAt)}</div>
       <Avatar
         className={styles.authorAvatar}
-        src={comment.authorAvatarUrl}
-        fallback={comment.authorName}
+        src={comment.author.avatarUrl}
+        fallback={getFullName(
+          comment.author.firstName,
+          comment.author.lastName,
+        )}
       />
       <div className={styles.bodyWrapper}>
         <div className={styles.initials}>
-          <h1>{comment.authorName}</h1>
-          <h2>{comment.authorRoleName}</h2>
+          <h1>
+            {getFullName(comment.author.firstName, comment.author.lastName)}
+          </h1>
+          <h2>{comment.author.roleName}</h2>
           {menuItems.length > 0 && (
             <Dropdown
               placement="top-start"

@@ -26,6 +26,11 @@ const getLinkProps = (type: EventType, id: string) => {
           taskId: id,
         },
       };
+    case "offer":
+      return {
+        to: "/offers/$id" as const,
+        params: { id },
+      };
   }
 };
 

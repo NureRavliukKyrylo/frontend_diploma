@@ -4,7 +4,7 @@ import { type Profile, type PrivacySettings, type PrivacyField } from "../";
 import { fileToBase64 } from "@shared/libs/file";
 
 export interface UserProfileSlice {
-  profile?: Profile;
+  profile?: Omit<Profile, "timeBank">;
   privacySettings?: PrivacySettings;
   avatarFile?: File | undefined;
   avatarUrl?: string | undefined;

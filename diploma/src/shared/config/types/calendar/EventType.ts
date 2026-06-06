@@ -1,1 +1,1 @@
-export type EventType = "event" | "task";
+export type EventType = "event" | "task" | "offer";

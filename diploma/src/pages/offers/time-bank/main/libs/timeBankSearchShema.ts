@@ -5,6 +5,8 @@ import {
   offerSearchDefaults,
   offersMySearchSchema,
   offersSearchSchema,
+  transactionSearchDefaults,
+  transactionsSearchSchema,
 } from "@entities/offer";
 import z from "zod";
 import type { TimeBankMode } from "../config/TimeBankMode";
@@ -13,6 +15,7 @@ export const timeBankSearchDefaults = {
   offers: offerSearchDefaults,
   "my-offers": myOffersSearchDefaults,
   bookings: bookingsSearchDefaults,
+  transactions: transactionSearchDefaults,
 };
 
 export const timeBankSearchSchema = z
@@ -20,6 +23,7 @@ export const timeBankSearchSchema = z
     offersSearchSchema,
     offersMySearchSchema,
     bookingsSearchSchema,
+    transactionsSearchSchema,
   ])
   .catch((ctx) => {
     const input = ctx.value as any;

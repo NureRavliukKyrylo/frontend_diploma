@@ -24,3 +24,6 @@ export { default as FullSizeIcon } from "./fullSize.svg?react";
 export { default as ShareIcon } from "./share.png";
 export { default as SendMessageIcon } from "./send-message.svg?react";
 export { default as EditIcon } from "./edit.svg?react";
+export { default as GiftIcon } from "./gift.svg?react";
+export { default as RejectIcon } from "./reject.svg?react";
+export { default as ApproveIcon } from "./approve.svg?react";

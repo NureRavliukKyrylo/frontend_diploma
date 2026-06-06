@@ -1,1 +1,1 @@
-export type TimeBankMode = "offers" | "my-offers" | "bookings";
+export type TimeBankMode = "offers" | "my-offers" | "bookings" | "transactions";

@@ -10,7 +10,7 @@ export type UpdateProfileDto = {
   model: {
     firstName: string;
     lastName: string;
-    profile: ProfileMainForm;
+    profile: Omit<ProfileMainForm, "timeBank">;
   };
 
   avatarFile: File | string | undefined;

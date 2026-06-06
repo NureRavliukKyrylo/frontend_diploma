@@ -9,6 +9,7 @@ interface BaseDropDownProps {
   children: React.ReactNode;
   className?: string;
   buttonClassName?: string;
+  dropdownClassName?: string;
 }
 
 export const BaseDropDown = ({
@@ -16,6 +17,7 @@ export const BaseDropDown = ({
   children,
   buttonClassName,
   className,
+  dropdownClassName,
 }: BaseDropDownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -38,7 +40,7 @@ export const BaseDropDown = ({
         {isOpen && (
           <motion.div
             layout
-            className={styles.dropdown}
+            className={`${styles.dropdown} ${dropdownClassName ?? ""}`}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0.2 }}

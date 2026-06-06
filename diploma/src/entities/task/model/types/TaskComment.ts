@@ -5,8 +5,11 @@ export interface TaskComment {
   createdAt: Date;
   parentCommentId: string | null;
   replyToUserId?: string | null;
-  authorName: string;
-  authorRoleName: string;
-  authorAvatarUrl: string;
+  author: {
+    firstName: string;
+    lastName: string;
+    avatarUrl: string;
+    roleName: string;
+  };
   replies: TaskComment[];
 }

@@ -5,14 +5,14 @@ import {
 } from "@features/verification/verification-base-form";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./UnlinkVerificationForm.module.scss";
-import type { ConnectedLinkPlatform } from "@entities/user/profile";
+import type { ConnectedService } from "@entities/user/profile";
 import {
   verificationUnlink,
   type UnlinkDto,
 } from "../api/verificationUnlinkApi";
 
 interface UnlinkVerificationFormProps {
-  verificationLink: ConnectedLinkPlatform;
+  verificationLink: ConnectedService;
   platform: string;
   onSuccess?: () => void;
 }

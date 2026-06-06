@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { EventCalendarDetail, eventQuery } from "@entities/event";
 import { TaskCalendarDetail, taskQuery } from "@entities/task";
+import { OfferCalendarDetail, offerQuery } from "@entities/offer";
 import type { EventType } from "@shared/config/types";
 import { Close, NavigationArrow } from "@shared/assets/icons/actions";
 import styles from "./CalendarEventInfo.module.scss";
@@ -30,6 +31,7 @@ export const CalendarEventInfo = ({
   anchor,
 }: CalendarEventInfoProps) => {
   const isTablet = useMediaQuery("(max-width: 900px)");
+
   const { data: event, isLoading: isEventLoading } = useQuery({
     ...eventQuery.id(activityId),
     enabled: type === "event",
@@ -40,7 +42,12 @@ export const CalendarEventInfo = ({
     enabled: type === "task",
   });
 
-  const isLoading = isEventLoading || isTaskLoading;
+  const { data: offer, isLoading: isOfferLoading } = useQuery({
+    ...offerQuery.id(activityId),
+    enabled: type === "offer",
+  });
+
+  const isLoading = isEventLoading || isTaskLoading || isOfferLoading;
 
   return (
     <BasePopover
@@ -124,7 +131,7 @@ export const CalendarEventInfo = ({
                     </div>
                   </div>
                 </>
-              ) : task ? (
+              ) : type === "task" && task ? (
                 <>
                   <TaskCalendarDetail task={task} />
                   <div className={styles.bottomContent}>
@@ -139,6 +146,8 @@ export const CalendarEventInfo = ({
                     </div>
                   </div>
                 </>
+              ) : type === "offer" && offer ? (
+                <OfferCalendarDetail offer={offer} />
               ) : null}
             </motion.div>
           </AnimatePresence>

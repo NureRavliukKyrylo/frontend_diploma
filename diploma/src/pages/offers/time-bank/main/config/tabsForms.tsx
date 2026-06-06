@@ -3,11 +3,13 @@ import type { TimeBankSearch } from "../libs/timeBankSearchShema";
 import { OffersTab } from "../../offers";
 import { MyOffersTab } from "../../my-offers";
 import { BookingsTab } from "../../bookings";
+import { TransactionsTab } from "../../transactions";
 
 const tabsForms: Record<TimeBankMode, React.FC<{ search: any }>> = {
   offers: OffersTab,
   "my-offers": MyOffersTab,
   bookings: BookingsTab,
+  transactions: TransactionsTab,
 };
 
 export const ActivitiesContent = ({

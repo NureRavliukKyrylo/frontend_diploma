@@ -1,13 +1,13 @@
 import type { StateCreator } from "zustand";
 import type { VerificationModalType } from "../";
-import type { ConnectedLinkPlatform } from "../../config";
+import type { ConnectedServiceId } from "../../config";
 
 export interface ProfileModalVerificationSlice {
   activeVerificationModal: VerificationModalType;
   verificationSteps: Record<Exclude<VerificationModalType, null>, number>;
   newEmail: string | null;
   unlinkTarget: {
-    platform: ConnectedLinkPlatform | null;
+    platform: ConnectedServiceId | null;
   };
   openVerificationModal: (modal: Exclude<VerificationModalType, null>) => void;
   closeVerificationModal: (modal: Exclude<VerificationModalType, null>) => void;
@@ -17,7 +17,7 @@ export interface ProfileModalVerificationSlice {
   ) => void;
   nextVerificationStep: (modal: Exclude<VerificationModalType, null>) => void;
   setNewEmail: (email: string) => void;
-  setUnlinkTarget: (platform: ConnectedLinkPlatform | null) => void;
+  setUnlinkTarget: (platform: ConnectedServiceId | null) => void;
 }
 
 export const createProfileModalVerificationSlice: StateCreator<

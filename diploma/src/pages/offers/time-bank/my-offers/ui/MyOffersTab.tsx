@@ -23,7 +23,11 @@ import { useMyOffersTab } from "../model/useMyOffersTab";
 import { MyOffersFilter, OffersListWidget } from "@widgets/offers";
 import { MyOfferControlCard } from "@entities/offer";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { OfferFormButton } from "@features/time-bank";
+import {
+  BookingButton,
+  GiftMinutesButton,
+  OfferFormButton,
+} from "@features/time-bank";
 
 interface MyOffersTabProps {
   search: OfferMySearchParams;

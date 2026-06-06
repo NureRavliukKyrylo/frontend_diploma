@@ -1,0 +1,21 @@
+@use "@shared/assets/styles" as *;
+
+.approveButton {
+  @include font-base(18px, 600);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: black;
+}

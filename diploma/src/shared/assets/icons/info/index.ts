@@ -22,3 +22,7 @@ export { default as GoogleCalendarIcon } from "./google-calendar.png";
 export { default as TimeBankIcon } from "./time-bank.svg?react";
 export { default as OnlineIcon } from "./online.svg?react";
 export { default as GroupPeopleIcon } from "./group-people.svg?react";
+export { default as AttendanceCalendarIcon } from "./attendance-calendar.svg?react";
+export { default as TimeSpendIcon } from "./time-spend.svg?react";
+export { default as AdminAdjustmentIcon } from "./admin-adjustment.svg?react";
+export { default as LockIcon } from "./lock.svg?react";

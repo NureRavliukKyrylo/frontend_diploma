@@ -4,7 +4,7 @@ import { type Profile, type PrivacySettings } from "@entities/user";
 export type UpdateUserDto = {
   avatarFile: File | undefined;
   model?: {
-    profile?: Profile;
+    profile?: Omit<Profile, "timeBank">;
     privacySettings?: PrivacySettings;
   };
 };

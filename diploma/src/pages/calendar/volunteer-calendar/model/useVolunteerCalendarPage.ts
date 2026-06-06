@@ -6,6 +6,7 @@ import { taskQuery } from "@entities/task";
 import type { CalendarTab, EventType } from "@shared/config/types";
 import type { EventInput } from "@fullcalendar/core";
 import { parseInitialDate, serializeDate } from "../libs/dateSerializers";
+import { offerQuery } from "@entities/offer";
 
 interface ActiveInfo {
   id: string;
@@ -32,8 +33,10 @@ export const useVolunteerCalendarPage = (events: EventInput[]) => {
 
       if (next.type === "event") {
         queryClient.prefetchQuery(eventQuery.id(next.id));
-      } else {
+      } else if (next.type === "task") {
         queryClient.prefetchQuery(taskQuery.id(next.id));
+      } else if (next.type === "offer") {
+        queryClient.prefetchQuery(offerQuery.id(next.id));
       }
     },
     [queryClient],
@@ -136,6 +139,7 @@ export const useVolunteerCalendarPage = (events: EventInput[]) => {
       title: next.title,
       type: next.type,
     });
+
     prefetchNext(activeInfo.cellEvents, currentIndex + 1);
   }, [activeInfo, currentIndex, prefetchNext]);
 

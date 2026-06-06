@@ -13,6 +13,21 @@
   }
 }
 
+.filterInner {
+  display: flex;
+  flex-direction: column;
+  position: static;
+}
+.filterDropdown {
+  position: static;
+  overflow-y: auto;
+  scrollbar-width: none;
+  max-height: 200px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 .filterButton {
   @include respond-to(tablet) {
     padding: 0px 10px;

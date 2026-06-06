@@ -18,6 +18,7 @@ export default defineConfig({
     tailwindcss(),
     svgr(),
   ],
+
   resolve: {
     alias: {
       "@app": path.resolve(__dirname, "src/app"),

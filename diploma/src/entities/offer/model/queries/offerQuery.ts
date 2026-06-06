@@ -2,6 +2,7 @@ import type {
   OfferSearchParams,
   OfferJoinedSearchParams,
   OfferMySearchParams,
+  TransactionsSearchParams,
 } from "../../libs";
 import {
   getListOffers,
@@ -10,6 +11,7 @@ import {
   getOfferId,
   getOfferJoinedId,
   getOfferMyId,
+  getListTransactions,
 } from "../../api";
 import { queryOptions } from "@tanstack/react-query";
 
@@ -25,6 +27,9 @@ export const offerKeys = {
     [...offerKeys.joineds(), params] as const,
   mys: () => [...offerKeys.all(), "my"] as const,
   my: (params: OfferMySearchParams) => [...offerKeys.mys(), params] as const,
+  transactions: () => ["transactions"] as const,
+  listTransactions: (params: TransactionsSearchParams) =>
+    [...offerKeys.transactions(), "list", params] as const,
 };
 
 export const offerQuery = {
@@ -62,6 +67,12 @@ export const offerQuery = {
     queryOptions({
       queryKey: offerKeys.my({ ...params }),
       queryFn: () => getListMyOffers({ ...params }),
+      placeholderData: (prev) => prev,
+    }),
+  listTransactions: (params: TransactionsSearchParams) =>
+    queryOptions({
+      queryKey: offerKeys.listTransactions({ ...params }),
+      queryFn: () => getListTransactions({ ...params }),
       placeholderData: (prev) => prev,
     }),
 };

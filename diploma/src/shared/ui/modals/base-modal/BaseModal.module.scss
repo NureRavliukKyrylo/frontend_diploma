@@ -70,6 +70,12 @@
   overflow-y: auto;
   max-height: 90vh;
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  scrollbar-width: none;
+
   @include respond-to(mobile) {
     max-height: 95vh;
   }
