@@ -21,6 +21,7 @@ import { Route as MasterLayoutTimeBankIndexRouteImport } from './routers/_master
 import { Route as MasterLayoutSkillsIndexRouteImport } from './routers/_masterLayout/skills/index'
 import { Route as MasterLayoutProfileIndexRouteImport } from './routers/_masterLayout/profile/index'
 import { Route as MasterLayoutOrganizationsIndexRouteImport } from './routers/_masterLayout/organizations/index'
+import { Route as MasterLayoutNotificationsIndexRouteImport } from './routers/_masterLayout/notifications/index'
 import { Route as MasterLayoutCategoriesIndexRouteImport } from './routers/_masterLayout/categories/index'
 import { Route as MasterLayoutCalendarIndexRouteImport } from './routers/_masterLayout/calendar/index'
 import { Route as MasterLayoutActivitiesIndexRouteImport } from './routers/_masterLayout/activities/index'
@@ -33,6 +34,7 @@ import { Route as MasterLayoutEventsIdIndexRouteImport } from './routers/_master
 import { Route as MasterLayoutCategoriesIdIndexRouteImport } from './routers/_masterLayout/categories/$id/index'
 import { Route as MasterLayoutActivitiesMyIndexRouteImport } from './routers/_masterLayout/activities/my/index'
 import { Route as MasterLayoutProjectsMyIdIndexRouteImport } from './routers/_masterLayout/projects/my/$id/index'
+import { Route as MasterLayoutOffersMyIdIndexRouteImport } from './routers/_masterLayout/offers/my/$id/index'
 import { Route as MasterLayoutEventsMyIdIndexRouteImport } from './routers/_masterLayout/events/my/$id/index'
 
 const MultiStepFormIndexLazyRouteImport = createFileRoute('/multi-step-form/')()
@@ -128,6 +130,12 @@ const MasterLayoutOrganizationsIndexRoute =
       (d) => d.Route,
     ),
   )
+const MasterLayoutNotificationsIndexRoute =
+  MasterLayoutNotificationsIndexRouteImport.update({
+    id: '/notifications/',
+    path: '/notifications/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
 const MasterLayoutCategoriesIndexRoute =
   MasterLayoutCategoriesIndexRouteImport.update({
     id: '/categories/',
@@ -282,6 +290,12 @@ const MasterLayoutProjectsMyIdIndexRoute =
       (d) => d.Route,
     ),
   )
+const MasterLayoutOffersMyIdIndexRoute =
+  MasterLayoutOffersMyIdIndexRouteImport.update({
+    id: '/offers/my/$id/',
+    path: '/offers/my/$id/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
 const MasterLayoutEventsMyIdIndexRoute =
   MasterLayoutEventsMyIdIndexRouteImport.update({
     id: '/events/my/$id/',
@@ -302,6 +316,7 @@ export interface FileRoutesByFullPath {
   '/activities/': typeof MasterLayoutActivitiesIndexRoute
   '/calendar/': typeof MasterLayoutCalendarIndexRoute
   '/categories/': typeof MasterLayoutCategoriesIndexRoute
+  '/notifications/': typeof MasterLayoutNotificationsIndexRoute
   '/organizations/': typeof MasterLayoutOrganizationsIndexRoute
   '/profile/': typeof MasterLayoutProfileIndexRoute
   '/skills/': typeof MasterLayoutSkillsIndexRoute
@@ -320,6 +335,7 @@ export interface FileRoutesByFullPath {
   '/tasks/$id/': typeof MasterLayoutTasksIdIndexRoute
   '/auth/forgot-password/': typeof AuthLayoutAuthForgotPasswordIndexLazyRoute
   '/events/my/$id/': typeof MasterLayoutEventsMyIdIndexRoute
+  '/offers/my/$id/': typeof MasterLayoutOffersMyIdIndexRoute
   '/projects/my/$id/': typeof MasterLayoutProjectsMyIdIndexRoute
 }
 export interface FileRoutesByTo {
@@ -330,6 +346,7 @@ export interface FileRoutesByTo {
   '/activities': typeof MasterLayoutActivitiesIndexRoute
   '/calendar': typeof MasterLayoutCalendarIndexRoute
   '/categories': typeof MasterLayoutCategoriesIndexRoute
+  '/notifications': typeof MasterLayoutNotificationsIndexRoute
   '/organizations': typeof MasterLayoutOrganizationsIndexRoute
   '/profile': typeof MasterLayoutProfileIndexRoute
   '/skills': typeof MasterLayoutSkillsIndexRoute
@@ -348,6 +365,7 @@ export interface FileRoutesByTo {
   '/tasks/$id': typeof MasterLayoutTasksIdIndexRoute
   '/auth/forgot-password': typeof AuthLayoutAuthForgotPasswordIndexLazyRoute
   '/events/my/$id': typeof MasterLayoutEventsMyIdIndexRoute
+  '/offers/my/$id': typeof MasterLayoutOffersMyIdIndexRoute
   '/projects/my/$id': typeof MasterLayoutProjectsMyIdIndexRoute
 }
 export interface FileRoutesById {
@@ -363,6 +381,7 @@ export interface FileRoutesById {
   '/_masterLayout/activities/': typeof MasterLayoutActivitiesIndexRoute
   '/_masterLayout/calendar/': typeof MasterLayoutCalendarIndexRoute
   '/_masterLayout/categories/': typeof MasterLayoutCategoriesIndexRoute
+  '/_masterLayout/notifications/': typeof MasterLayoutNotificationsIndexRoute
   '/_masterLayout/organizations/': typeof MasterLayoutOrganizationsIndexRoute
   '/_masterLayout/profile/': typeof MasterLayoutProfileIndexRoute
   '/_masterLayout/skills/': typeof MasterLayoutSkillsIndexRoute
@@ -381,6 +400,7 @@ export interface FileRoutesById {
   '/_masterLayout/tasks/$id/': typeof MasterLayoutTasksIdIndexRoute
   '/_authLayout/auth/forgot-password/': typeof AuthLayoutAuthForgotPasswordIndexLazyRoute
   '/_masterLayout/events/my/$id/': typeof MasterLayoutEventsMyIdIndexRoute
+  '/_masterLayout/offers/my/$id/': typeof MasterLayoutOffersMyIdIndexRoute
   '/_masterLayout/projects/my/$id/': typeof MasterLayoutProjectsMyIdIndexRoute
 }
 export interface FileRouteTypes {
@@ -394,6 +414,7 @@ export interface FileRouteTypes {
     | '/activities/'
     | '/calendar/'
     | '/categories/'
+    | '/notifications/'
     | '/organizations/'
     | '/profile/'
     | '/skills/'
@@ -412,6 +433,7 @@ export interface FileRouteTypes {
     | '/tasks/$id/'
     | '/auth/forgot-password/'
     | '/events/my/$id/'
+    | '/offers/my/$id/'
     | '/projects/my/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -422,6 +444,7 @@ export interface FileRouteTypes {
     | '/activities'
     | '/calendar'
     | '/categories'
+    | '/notifications'
     | '/organizations'
     | '/profile'
     | '/skills'
@@ -440,6 +463,7 @@ export interface FileRouteTypes {
     | '/tasks/$id'
     | '/auth/forgot-password'
     | '/events/my/$id'
+    | '/offers/my/$id'
     | '/projects/my/$id'
   id:
     | '__root__'
@@ -454,6 +478,7 @@ export interface FileRouteTypes {
     | '/_masterLayout/activities/'
     | '/_masterLayout/calendar/'
     | '/_masterLayout/categories/'
+    | '/_masterLayout/notifications/'
     | '/_masterLayout/organizations/'
     | '/_masterLayout/profile/'
     | '/_masterLayout/skills/'
@@ -472,6 +497,7 @@ export interface FileRouteTypes {
     | '/_masterLayout/tasks/$id/'
     | '/_authLayout/auth/forgot-password/'
     | '/_masterLayout/events/my/$id/'
+    | '/_masterLayout/offers/my/$id/'
     | '/_masterLayout/projects/my/$id/'
   fileRoutesById: FileRoutesById
 }
@@ -567,6 +593,13 @@ declare module '@tanstack/react-router' {
       path: '/organizations'
       fullPath: '/organizations/'
       preLoaderRoute: typeof MasterLayoutOrganizationsIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/notifications/': {
+      id: '/_masterLayout/notifications/'
+      path: '/notifications'
+      fullPath: '/notifications/'
+      preLoaderRoute: typeof MasterLayoutNotificationsIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
     '/_masterLayout/categories/': {
@@ -688,6 +721,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MasterLayoutProjectsMyIdIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
+    '/_masterLayout/offers/my/$id/': {
+      id: '/_masterLayout/offers/my/$id/'
+      path: '/offers/my/$id'
+      fullPath: '/offers/my/$id/'
+      preLoaderRoute: typeof MasterLayoutOffersMyIdIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
     '/_masterLayout/events/my/$id/': {
       id: '/_masterLayout/events/my/$id/'
       path: '/events/my/$id'
@@ -743,6 +783,7 @@ interface MasterLayoutRouteChildren {
   MasterLayoutActivitiesIndexRoute: typeof MasterLayoutActivitiesIndexRoute
   MasterLayoutCalendarIndexRoute: typeof MasterLayoutCalendarIndexRoute
   MasterLayoutCategoriesIndexRoute: typeof MasterLayoutCategoriesIndexRoute
+  MasterLayoutNotificationsIndexRoute: typeof MasterLayoutNotificationsIndexRoute
   MasterLayoutOrganizationsIndexRoute: typeof MasterLayoutOrganizationsIndexRoute
   MasterLayoutSkillsIndexRoute: typeof MasterLayoutSkillsIndexRoute
   MasterLayoutTimeBankIndexRoute: typeof MasterLayoutTimeBankIndexRoute
@@ -754,6 +795,7 @@ interface MasterLayoutRouteChildren {
   MasterLayoutProjectsIdIndexRoute: typeof MasterLayoutProjectsIdIndexRoute
   MasterLayoutTasksIdIndexRoute: typeof MasterLayoutTasksIdIndexRoute
   MasterLayoutEventsMyIdIndexRoute: typeof MasterLayoutEventsMyIdIndexRoute
+  MasterLayoutOffersMyIdIndexRoute: typeof MasterLayoutOffersMyIdIndexRoute
   MasterLayoutProjectsMyIdIndexRoute: typeof MasterLayoutProjectsMyIdIndexRoute
 }
 
@@ -762,6 +804,7 @@ const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
   MasterLayoutActivitiesIndexRoute: MasterLayoutActivitiesIndexRoute,
   MasterLayoutCalendarIndexRoute: MasterLayoutCalendarIndexRoute,
   MasterLayoutCategoriesIndexRoute: MasterLayoutCategoriesIndexRoute,
+  MasterLayoutNotificationsIndexRoute: MasterLayoutNotificationsIndexRoute,
   MasterLayoutOrganizationsIndexRoute: MasterLayoutOrganizationsIndexRoute,
   MasterLayoutSkillsIndexRoute: MasterLayoutSkillsIndexRoute,
   MasterLayoutTimeBankIndexRoute: MasterLayoutTimeBankIndexRoute,
@@ -773,6 +816,7 @@ const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
   MasterLayoutProjectsIdIndexRoute: MasterLayoutProjectsIdIndexRoute,
   MasterLayoutTasksIdIndexRoute: MasterLayoutTasksIdIndexRoute,
   MasterLayoutEventsMyIdIndexRoute: MasterLayoutEventsMyIdIndexRoute,
+  MasterLayoutOffersMyIdIndexRoute: MasterLayoutOffersMyIdIndexRoute,
   MasterLayoutProjectsMyIdIndexRoute: MasterLayoutProjectsMyIdIndexRoute,
 }
 

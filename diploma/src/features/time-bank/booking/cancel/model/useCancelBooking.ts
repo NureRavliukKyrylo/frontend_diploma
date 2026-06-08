@@ -4,6 +4,8 @@ import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { cancelBooking, type CancelBookingDto } from "../api/cancelBookingApi";
 import { cancelBookingSchema } from "../libs/cancelBookingSchema";
+import { queryClient } from "@shared/api";
+import { offerKeys } from "@entities/offer";
 
 interface UseCancelBookingProps {
   bookingId: string;
@@ -22,6 +24,7 @@ export const useCancelBooking = ({
         description: "The booking has been cancelled",
         color: "success",
       });
+      queryClient.invalidateQueries({ queryKey: offerKeys.all() });
       onSuccess();
     },
     onError: (error: unknown) => {

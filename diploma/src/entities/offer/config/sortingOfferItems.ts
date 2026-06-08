@@ -5,7 +5,9 @@ export type OfferSortValues =
   | "Newest"
   | "TitleAsc"
   | "TitleDesc"
-  | "EndingSoon";
+  | "EndingSoon"
+  | "PriceMinutesAsc"
+  | "PriceMinutesDesc";
 
 export const sortingOfferItems: SortOption<OfferSortValues>[] = [
   { label: "Default", value: "Default" },
@@ -13,4 +15,6 @@ export const sortingOfferItems: SortOption<OfferSortValues>[] = [
   { label: "Title Z-A", value: "TitleDesc" },
   { label: "Newest", value: "Newest" },
   { label: "Ending Soon", value: "EndingSoon" },
+  { label: "Lowest Reward", value: "PriceMinutesAsc" },
+  { label: "Highest Reward", value: "PriceMinutesDesc" },
 ];

@@ -5,6 +5,8 @@ import {
   offerSearchDefaults,
   offersMySearchSchema,
   offersSearchSchema,
+  overviewSearchDefaults,
+  overviewSearchSchema,
   transactionSearchDefaults,
   transactionsSearchSchema,
 } from "@entities/offer";
@@ -16,6 +18,7 @@ export const timeBankSearchDefaults = {
   "my-offers": myOffersSearchDefaults,
   bookings: bookingsSearchDefaults,
   transactions: transactionSearchDefaults,
+  overview: overviewSearchDefaults,
 };
 
 export const timeBankSearchSchema = z
@@ -24,6 +27,7 @@ export const timeBankSearchSchema = z
     offersMySearchSchema,
     bookingsSearchSchema,
     transactionsSearchSchema,
+    overviewSearchSchema,
   ])
   .catch((ctx) => {
     const input = ctx.value as any;

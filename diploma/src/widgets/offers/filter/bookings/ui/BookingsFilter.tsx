@@ -8,10 +8,10 @@ import { BaseWrapperFilter } from "../../base-wrapper/BaseWrapperFilter";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { onlineOptions, type OfferJoinedSearchParams } from "@entities/offer";
 import { useBookingsFilter } from "../model/useBookingsFilter";
-import { useCategoriesInfiniteQuery } from "@entities/category";
-import { useSkillsInfiniteQuery } from "@entities/skill";
 import { CategoriesListFilter } from "@features/project";
 import styles from "./BookingsFilter.module.scss";
+import { useOffersFiltersInfiniteQuery } from "@shared/api/filters";
+import { SkillsListFilter } from "@features/skills";
 
 interface BookingsFilterProps {
   search: OfferJoinedSearchParams;
@@ -46,7 +46,11 @@ export const BookingsFilter = ({ search }: BookingsFilterProps) => {
         <div className={styles.bookingCategories}>
           <h1 className={styles.subHeaderFilter}>Categories</h1>
           <CategoriesListFilter
-            useCategoriesQuery={useCategoriesInfiniteQuery({ PageSize: 7 })}
+            useCategoriesQuery={useOffersFiltersInfiniteQuery({
+              pageSize: 7,
+              facetType: "category",
+              scope: "user",
+            })}
             selectedIds={search.CategoryIds}
             onToggle={onCategoryToggle}
           />
@@ -56,8 +60,12 @@ export const BookingsFilter = ({ search }: BookingsFilterProps) => {
 
         <div className={styles.bookingSkills}>
           <h1 className={styles.subHeaderFilter}>Skills</h1>
-          <CategoriesListFilter
-            useCategoriesQuery={useSkillsInfiniteQuery({ PageSize: 7 })}
+          <SkillsListFilter
+            useSkillsQuery={useOffersFiltersInfiniteQuery({
+              pageSize: 7,
+              facetType: "skill",
+              scope: "user",
+            })}
             selectedIds={search.SkillIds}
             onToggle={onSkillToggle}
           />

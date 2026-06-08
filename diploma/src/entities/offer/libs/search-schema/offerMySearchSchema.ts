@@ -14,8 +14,7 @@ export const offersMySearchSchema = offersFiltersSchema
   .extend({
     tab: z.literal("my-offers").default("my-offers").catch("my-offers"),
   })
-  .extend({ PageSize: z.number().default(12) })
-  .omit({ SkillIds: true, CategoryIds: true });
+  .extend({ PageSize: z.number().default(12) });
 
 export type OfferMySearchParams = Omit<
   z.infer<typeof offersMySearchSchema>,

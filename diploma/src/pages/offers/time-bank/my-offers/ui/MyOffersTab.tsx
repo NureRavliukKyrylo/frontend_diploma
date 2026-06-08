@@ -23,11 +23,7 @@ import { useMyOffersTab } from "../model/useMyOffersTab";
 import { MyOffersFilter, OffersListWidget } from "@widgets/offers";
 import { MyOfferControlCard } from "@entities/offer";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import {
-  BookingButton,
-  GiftMinutesButton,
-  OfferFormButton,
-} from "@features/time-bank";
+import { OfferFormButton } from "@features/time-bank";
 
 interface MyOffersTabProps {
   search: OfferMySearchParams;
@@ -43,23 +39,23 @@ export const MyOffersTab = ({ search }: MyOffersTabProps) => {
         <div className={styles.baseStats}>
           <div className={styles.topContent}>
             <h1>MY OFFERS</h1>
-            <h2>4</h2>
+            <h2>{myOffers?.stats.totalOffers}</h2>
             <div className={styles.lineDivider} />
           </div>
           <div className={styles.bottomContent}>
             <div className={styles.activeBlock}>
               <h1>Active</h1>
-              <h2>4</h2>
+              <h2>{myOffers?.stats.activeOffers}</h2>
             </div>
             <div className={styles.lineDivider} />
             <div className={styles.inActiveBlock}>
               <h1>Inactive</h1>
-              <h2>4</h2>
+              <h2>{myOffers?.stats.inActiveOffers}</h2>
             </div>
             <div className={styles.lineDivider} />
             <div className={styles.totalBookingsBlock}>
               <h1>Total bookings</h1>
-              <h2>4</h2>
+              <h2>{myOffers?.stats.totalBookings}</h2>
             </div>
             <div className={styles.lineDivider} />
           </div>
@@ -130,6 +126,12 @@ export const MyOffersTab = ({ search }: MyOffersTabProps) => {
                           whileHover="hover"
                           animate="visible"
                           className={styles.offerCardMotion}
+                          onClick={() =>
+                            router.navigate({
+                              to: "/offers/my/$id",
+                              params: { id: offer.id },
+                            })
+                          }
                         >
                           <MyOfferControlCard
                             key={offer.id}
@@ -174,6 +176,15 @@ export const MyOffersTab = ({ search }: MyOffersTabProps) => {
               </Suspense>
             )}
           </motion.div>
+          {myOffers && myOffers.pagination.totalPages > 1 && (
+            <div className={styles.paginationWrapper}>
+              <Pagination
+                total={myOffers.pagination.totalPages}
+                page={search.Page}
+                onChange={handlePageChange}
+              />
+            </div>
+          )}
         </ErrorBoundary>
       </div>
     </div>

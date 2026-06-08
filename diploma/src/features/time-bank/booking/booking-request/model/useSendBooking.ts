@@ -4,6 +4,8 @@ import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { sendBooking, type BookingDto } from "../api/bookingApi";
 import { bookingSchema } from "../libs/bookingSchema";
+import { queryClient } from "@shared/api";
+import { offerKeys } from "@entities/offer";
 
 interface UseSendBookingProps {
   offerId: string;
@@ -19,6 +21,7 @@ export const useSendBooking = ({ offerId, onSuccess }: UseSendBookingProps) => {
         description: "Your booking request has been sent",
         color: "success",
       });
+      queryClient.invalidateQueries({ queryKey: offerKeys.id(offerId) });
       onSuccess();
     },
     onError: (error: unknown) => {

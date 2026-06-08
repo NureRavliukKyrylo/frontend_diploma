@@ -9,6 +9,9 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { onlineOptions, type OfferMySearchParams } from "@entities/offer";
 import { useMyOffersFilter } from "../model/useMyOffersFilter";
 import styles from "./MyOffersFilter.module.scss";
+import { CategoriesListFilter } from "@features/project";
+import { SkillsListFilter } from "@features/skills";
+import { useOffersFiltersInfiniteQuery } from "@shared/api/filters";
 
 interface MyOffersFilterProps {
   search: OfferMySearchParams;
@@ -21,6 +24,8 @@ export const MyOffersFilter = ({ search }: MyOffersFilterProps) => {
     onStartDateChange,
     onIncludeArchivedChange,
     onShowOnlineChange,
+    onCategoryToggle,
+    onSkillToggle,
   } = useMyOffersFilter();
 
   return (
@@ -33,6 +38,36 @@ export const MyOffersFilter = ({ search }: MyOffersFilterProps) => {
             endBefore={search.To}
             onStartDateChange={onStartDateChange}
             onEndBeforeChange={onEndBeforeChange}
+          />
+        </div>
+
+        <div className={styles.dividerFilterBlock} />
+
+        <div className={styles.myOfferCategories}>
+          <h1 className={styles.subHeaderFilter}>Categories</h1>
+          <CategoriesListFilter
+            useCategoriesQuery={useOffersFiltersInfiniteQuery({
+              pageSize: 7,
+              facetType: "category",
+              scope: "owner",
+            })}
+            selectedIds={search.CategoryIds}
+            onToggle={onCategoryToggle}
+          />
+        </div>
+
+        <div className={styles.dividerFilterBlock} />
+
+        <div className={styles.myOfferSkills}>
+          <h1 className={styles.subHeaderFilter}>Skills</h1>
+          <SkillsListFilter
+            useSkillsQuery={useOffersFiltersInfiniteQuery({
+              pageSize: 7,
+              facetType: "skill",
+              scope: "owner",
+            })}
+            selectedIds={search.SkillIds}
+            onToggle={onSkillToggle}
           />
         </div>
 

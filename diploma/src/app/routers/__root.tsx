@@ -1,3 +1,4 @@
+import { useNotificationSignalR } from "@entities/notification";
 import { useUserStore } from "@entities/user";
 import { useSignalRStore } from "@shared/config/stores";
 import type { QueryClient } from "@tanstack/react-query";
@@ -16,6 +17,7 @@ function RootComponent() {
   const isAuthenticated = useUserStore((s) => s.isAuthenticated);
   const connect = useSignalRStore((s) => s.connect);
   const disconnectAll = useSignalRStore((s) => s.disconnectAll);
+  useNotificationSignalR();
 
   useEffect(() => {
     if (!isAuthenticated) {

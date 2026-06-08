@@ -43,7 +43,11 @@ export const BookingControlCard = ({
           </span>
           <span className={styles.dot}>·</span>
           <span className={styles.bookedAt}>
-            Booked {formatDateToText(offer.bookedAt.toISOString())}
+            Booked{" "}
+            {formatDateToText(
+              new Date(offer.lastBookedAt).toISOString(),
+              false,
+            )}
           </span>
           <span
             className={`${styles.onlineStatus} ${

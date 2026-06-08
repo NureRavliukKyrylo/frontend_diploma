@@ -4,12 +4,14 @@ import { OffersTab } from "../../offers";
 import { MyOffersTab } from "../../my-offers";
 import { BookingsTab } from "../../bookings";
 import { TransactionsTab } from "../../transactions";
+import { OverviewTab } from "../../overview";
 
 const tabsForms: Record<TimeBankMode, React.FC<{ search: any }>> = {
   offers: OffersTab,
   "my-offers": MyOffersTab,
   bookings: BookingsTab,
   transactions: TransactionsTab,
+  overview: OverviewTab,
 };
 
 export const ActivitiesContent = ({

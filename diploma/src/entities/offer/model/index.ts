@@ -4,3 +4,5 @@ export type {
   TimeTransaction,
   TransactionSourceType,
 } from "./types/TimeTransaction";
+export type { OfferBooking } from "./types/Booking";
+export type { TimeBankUserStats } from "./types/TimeBankStats";

@@ -26,3 +26,8 @@ export { default as AttendanceCalendarIcon } from "./attendance-calendar.svg?rea
 export { default as TimeSpendIcon } from "./time-spend.svg?react";
 export { default as AdminAdjustmentIcon } from "./admin-adjustment.svg?react";
 export { default as LockIcon } from "./lock.svg?react";
+export { default as BadgeIcon } from "./badge.svg?react";
+export { default as ReminderIcon } from "./reminder.svg?react";
+export { default as DeadlineIcon } from "./deadline.svg?react";
+export { default as Report } from "./report.svg?react";
+export { default as CommentIcon } from "./comment-icon.svg?react";

@@ -3,3 +3,4 @@ export {
   timeBankSearchSchema,
   timeBankSearchDefaults,
 } from "./time-bank/main/libs/timeBankSearchShema";
+export { OfferPage } from "./offer-page/ui/OfferPage";

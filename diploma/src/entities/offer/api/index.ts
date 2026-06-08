@@ -5,3 +5,5 @@ export { getOfferId } from "./offer-id/getOfferId";
 export { getOfferJoinedId } from "./offer-id/getOfferJoinedId";
 export { getOfferMyId } from "./offer-id/getOfferMyId";
 export { getListTransactions } from "./transactions/transactionsListApi";
+export { getListBookings } from "./list-bookings/getListBookings";
+export { getTimeBankStats } from "./stats/getTimeBankStats";

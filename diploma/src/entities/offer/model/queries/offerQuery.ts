@@ -12,8 +12,10 @@ import {
   getOfferJoinedId,
   getOfferMyId,
   getListTransactions,
+  getListBookings,
+  getTimeBankStats,
 } from "../../api";
-import { queryOptions } from "@tanstack/react-query";
+import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
 
 export const offerKeys = {
   all: () => ["offers"] as const,
@@ -30,6 +32,13 @@ export const offerKeys = {
   transactions: () => ["transactions"] as const,
   listTransactions: (params: TransactionsSearchParams) =>
     [...offerKeys.transactions(), "list", params] as const,
+  allBookings: (id: string) => ["bookings", id] as const,
+  bookingsList: (id: string, params: { Page?: number; PageSize: number }) => [
+    ...offerKeys.allBookings(id),
+    "list",
+    params,
+  ],
+  timeBankStats: () => [...offerKeys.all(), "stats"],
 };
 
 export const offerQuery = {
@@ -74,5 +83,21 @@ export const offerQuery = {
       queryKey: offerKeys.listTransactions({ ...params }),
       queryFn: () => getListTransactions({ ...params }),
       placeholderData: (prev) => prev,
+    }),
+  listBookings: (id: string, params: { Page?: number; PageSize: number }) =>
+    infiniteQueryOptions({
+      queryKey: offerKeys.bookingsList(id, { ...params }),
+      queryFn: ({ pageParam }) =>
+        getListBookings(id, { ...params, Page: pageParam }),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage) => lastPage.pagination.nextPage ?? undefined,
+      select: (data) => data.pages.flatMap((page) => page.data),
+    }),
+  stats: () =>
+    queryOptions({
+      queryKey: offerKeys.timeBankStats(),
+      queryFn: () => getTimeBankStats(),
+      placeholderData: (prev) => prev,
+      select: (data) => data.data,
     }),
 };

@@ -38,23 +38,27 @@ export const BookingsTab = ({ search }: BookingsTabProps) => {
         <div className={styles.baseStats}>
           <div className={styles.topContent}>
             <h1>MY BOOKINGS</h1>
-            <h2>0</h2>
+            <h2>
+              {(bookings?.stats.inProgressBookings ?? 0) +
+                (bookings?.stats.completedBookings ?? 0) +
+                (bookings?.stats.pendingBookings ?? 0)}
+            </h2>
             <div className={styles.lineDivider} />
           </div>
           <div className={styles.bottomContent}>
             <div className={styles.inProgressBlock}>
               <h1>In progress</h1>
-              <h2>0</h2>
+              <h2>{bookings?.stats.inProgressBookings ?? 0}</h2>
             </div>
             <div className={styles.lineDivider} />
             <div className={styles.pendingBlock}>
               <h1>Pending</h1>
-              <h2>0</h2>
+              <h2>{bookings?.stats.pendingBookings ?? 0}</h2>
             </div>
             <div className={styles.lineDivider} />
             <div className={styles.completedBlock}>
               <h1>Completed</h1>
-              <h2>0</h2>
+              <h2>{bookings?.stats.completedBookings ?? 0}</h2>
             </div>
             <div className={styles.lineDivider} />
           </div>
@@ -145,6 +149,15 @@ export const BookingsTab = ({ search }: BookingsTabProps) => {
               </Suspense>
             )}
           </motion.div>
+          {bookings && bookings.pagination.totalPages > 1 && (
+            <div className={styles.paginationWrapper}>
+              <Pagination
+                total={bookings.pagination.totalPages}
+                page={search.Page}
+                onChange={handlePageChange}
+              />
+            </div>
+          )}
         </ErrorBoundary>
       </div>
     </div>

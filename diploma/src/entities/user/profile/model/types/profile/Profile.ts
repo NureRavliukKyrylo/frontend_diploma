@@ -13,6 +13,7 @@ export interface PrivacyField {
 export interface PrivacySettings {
   fields?: PrivacyField[];
 }
+
 export interface TimeBankStats {
   balanceMinutes: number;
   availableMinutes: number;

@@ -22,7 +22,7 @@ export interface Offer {
   skills: Skill[];
   priceMinutes: number;
   totalBookings: number;
-  lastBooked: Date;
+  lastBookedAt: Date;
   status: "inProgress" | "completed";
 }
 

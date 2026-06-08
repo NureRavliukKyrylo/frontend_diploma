@@ -1,4 +1,3 @@
-// src/shared/libs/signalr/signalRStore.ts
 import { create } from "zustand";
 import * as signalR from "@microsoft/signalr";
 import { API_URL } from "../constants";
