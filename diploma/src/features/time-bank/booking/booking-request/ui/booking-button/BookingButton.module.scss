@@ -1,16 +1,17 @@
 @use "@shared/assets/styles" as *;
 
 .button {
-  @include font-base(18px, 800);
+  @include font-base(18px, 700);
   display: inline-flex;
   align-items: center;
-  padding: 10px 24px;
+  justify-content: center;
+  padding: 12px 28px;
   border-radius: 50px;
   border: none;
-  background: #2e61a5;
+  background: #1a1a1a;
   color: #ffffff;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  box-shadow: 0 4px 12px rgba(54, 141, 255, 0.4);
   width: 100%;
 }

@@ -31,7 +31,7 @@ export const timeBankSearchSchema = z
   ])
   .catch((ctx) => {
     const input = ctx.value as any;
-    const tab = input?.tab ?? "offers";
+    const tab = input?.tab ?? "overview";
     const defaults = timeBankSearchDefaults[tab as TimeBankMode];
     return { ...defaults, ...input };
   });

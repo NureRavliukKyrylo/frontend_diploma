@@ -9,6 +9,7 @@ interface BookingsListWidgetProps {
   renderCard: (booking: OfferBooking, index: number) => React.ReactNode;
   renderSkeleton?: () => React.ReactNode;
   renderPagination?: (props: PaginationRender) => React.ReactNode;
+  renderEmpty?: (bookings: OfferBooking[]) => React.ReactNode;
   startSlot?: React.ReactNode;
   skeletonItems?: number;
   className?: string;
@@ -19,6 +20,7 @@ export const BookingsListWidget = ({
   renderCard,
   bookings: readyBookings,
   renderPagination,
+  renderEmpty,
   className,
   renderSkeleton,
   skeletonItems,
@@ -26,7 +28,7 @@ export const BookingsListWidget = ({
 }: BookingsListWidgetProps) => {
   const queryResult = useBookingsQuery?.();
 
-  const bookings = readyBookings ?? queryResult?.data;
+  const bookings = readyBookings ?? queryResult?.data ?? [];
   const isLoading = queryResult?.isLoading ?? false;
 
   const hasNextPage = queryResult?.hasNextPage ?? false;
@@ -48,15 +50,19 @@ export const BookingsListWidget = ({
 
   return (
     <>
-      <div className={wrapperClass}>
-        {startSlot}
-        {bookings?.map((booking, index) => renderCard(booking, index))}
-      </div>
-      {renderPagination?.({
-        fetchNextPage,
-        isFetchingNextPage,
-        hasNextPage,
-      })}
+      {renderEmpty?.(bookings) ?? (
+        <>
+          <div className={wrapperClass}>
+            {startSlot}
+            {bookings?.map((booking, index) => renderCard(booking, index))}
+          </div>
+          {renderPagination?.({
+            fetchNextPage,
+            isFetchingNextPage,
+            hasNextPage,
+          })}
+        </>
+      )}
     </>
   );
 };

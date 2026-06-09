@@ -22,7 +22,11 @@ import { useIntersectionReveal } from "@shared/libs/hooks";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
 import { getFullName } from "@entities/user";
-import { BookingButton } from "@features/time-bank";
+import {
+  BookingButton,
+  CancelBookingButton,
+  CompleteBookingButton,
+} from "@features/time-bank";
 import { useMapUserLocation } from "@features/map";
 
 export const OfferPage = () => {
@@ -120,9 +124,36 @@ export const OfferPage = () => {
             <p>{offer.description}</p>
           </ReadMoreButton>
         </div>
-        <div className={styles.actionsButton}>
-          <BookingButton offerId={id} offerName={offer.title} />
-        </div>
+        {!offer.canCancel && !offer.canDispute && (
+          <div className={styles.bookingBlock}>
+            <BookingButton offerId={id} offerName={offer.title} />
+          </div>
+        )}
+        {offer.hasMyPendingRequest && offer.canCancel && (
+          <div className={styles.pendingBlock}>
+            <p className={styles.pendingText}>
+              You already have a pending request for this offer.
+            </p>
+            <CancelBookingButton
+              bookingId={offer.myBookingId}
+              variant="prominent"
+            />
+          </div>
+        )}
+        {!offer.hasMyPendingRequest &&
+          (offer.canCancel || offer.canComplete) && (
+            <div className={styles.activeBlock}>
+              {offer.canComplete && (
+                <CompleteBookingButton bookingId={offer.myBookingId} />
+              )}
+              {offer.canCancel && (
+                <CancelBookingButton
+                  bookingId={offer.myBookingId}
+                  variant="prominent"
+                />
+              )}
+            </div>
+          )}
       </motion.div>
 
       {hasCategories && (
@@ -166,57 +197,59 @@ export const OfferPage = () => {
           />
         )}
       </div>
+      {!offer.isOnline && offer.locationInfo?.address && (
+        <div className={styles.mapLocationBlock}>
+          <div className={styles.offerPageMainInfo}>
+            <div className={styles.headerTextInfo}>
+              <div className={styles.offerLocations}>
+                <h2>Offer</h2>
+                <span>Location</span>
+              </div>
 
-      <div className={styles.mapLocationBlock}>
-        <div className={styles.offerPageMainInfo}>
-          <div className={styles.headerTextInfo}>
-            <div className={styles.offerLocations}>
-              <h2>Offer</h2>
-              <span>Location</span>
-            </div>
-            {!offer.isOnline && offer.locationInfo?.address && (
               <div className={styles.wrapperLocation}>
                 <MapLocationInput
                   variant="entity"
                   label={offer.locationInfo.address}
                 />
               </div>
-            )}
-            {offer.isOnline && (
-              <p className={styles.onlineNote}>This offer is held online</p>
+            </div>
+          </div>
+
+          <div className={styles.mapWrapper} ref={ref}>
+            {offer.location && (
+              <BaseMap
+                zoom={6}
+                center={[offer.location.latitude, offer.location.longitude]}
+                classNameWrapper={styles.mapOfferWrapper}
+              >
+                <MapResizer />
+                <>
+                  {isVisible && (
+                    <MapZoomAnimation coordinates={offer.location} />
+                  )}
+                  <Marker
+                    icon={OfferMarker}
+                    position={[
+                      offer.location.latitude,
+                      offer.location.longitude,
+                    ]}
+                  >
+                    <Popup className={styles.popupContent}>
+                      <h3 className={styles.popupOfferTitle}>{offer.title}</h3>
+                      <p className={styles.popupOfferLocation}>
+                        📍 Offer location
+                      </p>
+                    </Popup>
+                  </Marker>
+                </>
+                {userLocation && (
+                  <MapUserLocation coordinates={userLocation} animate={false} />
+                )}
+              </BaseMap>
             )}
           </div>
         </div>
-
-        <div className={styles.mapWrapper} ref={ref}>
-          {offer.location && (
-            <BaseMap
-              zoom={6}
-              center={[offer.location.latitude, offer.location.longitude]}
-              classNameWrapper={styles.mapOfferWrapper}
-            >
-              <MapResizer />
-              <>
-                {isVisible && <MapZoomAnimation coordinates={offer.location} />}
-                <Marker
-                  icon={OfferMarker}
-                  position={[offer.location.latitude, offer.location.longitude]}
-                >
-                  <Popup className={styles.popupContent}>
-                    <h3 className={styles.popupOfferTitle}>{offer.title}</h3>
-                    <p className={styles.popupOfferLocation}>
-                      📍 Offer location
-                    </p>
-                  </Popup>
-                </Marker>
-              </>
-              {userLocation && (
-                <MapUserLocation coordinates={userLocation} animate={false} />
-              )}
-            </BaseMap>
-          )}
-        </div>
-      </div>
+      )}
     </div>
   );
 };

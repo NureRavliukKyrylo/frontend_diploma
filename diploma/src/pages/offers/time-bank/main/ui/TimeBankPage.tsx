@@ -5,15 +5,26 @@ import type { TimeBankMode } from "../config/TimeBankMode";
 import { timeBankSearchDefaults } from "../libs/timeBankSearchShema";
 import { ActivitiesContent } from "../config/tabsForms";
 import { timeBankTabs } from "../config/timeBankTabs";
+import { prefetchTab, TAB_SKELETON } from "../config/skeletonsPrefetch";
+import { useState } from "react";
 
 export const TimeBankPage = () => {
   const search = useSearch({ from: "/_masterLayout/time-bank/" });
   const navigate = useNavigate({ from: "/time-bank/" });
 
   const activeTab = search.tab;
-  const handleTabChange = (tab: TimeBankMode) => {
+
+  const [pendingTab, setPendingTab] = useState<TimeBankMode | null>(null);
+
+  const handleTabChange = async (tab: TimeBankMode) => {
+    if (tab === activeTab || pendingTab) return;
+    setPendingTab(tab);
+    await prefetchTab(tab);
     navigate({ search: timeBankSearchDefaults[tab], resetScroll: false });
+    setPendingTab(null);
   };
+
+  const SkeletonComponent = TAB_SKELETON[pendingTab ?? activeTab];
 
   return (
     <div className={styles.activitiesWrapper}>
@@ -35,20 +46,23 @@ export const TimeBankPage = () => {
           </button>
         ))}
       </nav>
-
-      <div className={styles.activityInfo}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-          >
-            <ActivitiesContent tab={activeTab} search={search} />
-          </motion.div>
-        </AnimatePresence>
-      </div>
+      {pendingTab ? (
+        <SkeletonComponent />
+      ) : (
+        <div className={styles.activityInfo}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+            >
+              <ActivitiesContent tab={activeTab} search={search} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      )}
     </div>
   );
 };

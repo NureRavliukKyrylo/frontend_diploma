@@ -1,0 +1,21 @@
+@use "@shared/assets/styles" as *;
+
+.deleteButton {
+  @include font-base(14px, 600);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  background: #fff0f0;
+  color: #8c0000;
+}
+
+.icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: #8c0000;
+}

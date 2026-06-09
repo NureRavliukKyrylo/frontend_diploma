@@ -32,7 +32,7 @@ export const offerKeys = {
   transactions: () => ["transactions"] as const,
   listTransactions: (params: TransactionsSearchParams) =>
     [...offerKeys.transactions(), "list", params] as const,
-  allBookings: (id: string) => ["bookings", id] as const,
+  allBookings: (id: string) => [...offerKeys.all(), "bookings", id] as const,
   bookingsList: (id: string, params: { Page?: number; PageSize: number }) => [
     ...offerKeys.allBookings(id),
     "list",

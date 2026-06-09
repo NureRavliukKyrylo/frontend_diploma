@@ -27,7 +27,7 @@ function ToastEntry({ notification }: { notification: Notification }) {
       className={styles.toast}
       onClick={() => removeToast(notification.id)}
     >
-      <NotificationItem notification={notification} />
+      <NotificationItem notification={notification} variant="toast" />
     </motion.div>
   );
 }

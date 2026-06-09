@@ -3,41 +3,56 @@ import styles from "./NotificationItem.module.scss";
 import { NOTIFICATION_TYPE_CONFIG } from "../../config";
 import type { Notification } from "../../model";
 import { formatTimeAgo } from "@shared/libs/date";
+import { OnlineIcon } from "@shared/assets/icons/info";
 
 interface NotificationItemProps {
   notification: Notification;
   rightContent?: React.ReactNode;
+  variant?: "default" | "toast";
 }
 
 export const NotificationItem = ({
   notification,
   rightContent,
+  variant = "default",
 }: NotificationItemProps) => {
   const config = NOTIFICATION_TYPE_CONFIG[notification.type];
   const Icon = config.icon;
+  const isUnread = notification.status === "Unread";
+  const isToast = variant === "toast";
 
   return (
     <div
-      className={styles.wrapper}
-      data-unread={notification.status === "Unread"}
+      className={`${styles.wrapper} ${isToast ? styles.toast : styles.default}`}
+      data-unread={!isToast && isUnread}
     >
       <div
         className={styles.iconWrapper}
         style={{ background: config.wrapperColor }}
       >
-        {notification.relatedAvatar ? (
-          <Avatar className={styles.avatar} src={notification.relatedAvatar} />
+        {notification.relatedAvatarUrl ? (
+          <Avatar
+            className={styles.avatar}
+            src={notification.relatedAvatarUrl}
+          />
         ) : (
           <Icon className={styles.icon} style={{ color: config.iconColor }} />
         )}
       </div>
 
       <div className={styles.content}>
-        <span className={styles.title}>{notification.title}</span>
+        <div className={styles.topContent}>
+          <span className={styles.title}>{notification.title}</span>
+          {!isToast && isUnread && <OnlineIcon className={styles.unReadIcon} />}
+        </div>
         <span className={styles.message}>{notification.message}</span>
       </div>
 
-      <div className={styles.time}>{formatTimeAgo(notification.createdAt)}</div>
+      {!isToast && (
+        <div className={styles.time}>
+          {formatTimeAgo(notification.createdAt)}
+        </div>
+      )}
 
       {rightContent && <div className={styles.right}>{rightContent}</div>}
     </div>

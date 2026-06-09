@@ -13,7 +13,8 @@ export const bookingsSearchSchema = offersFiltersSchema
   .extend(paginationSchema.shape)
   .extend({
     tab: z.literal("bookings").default("bookings").catch("bookings"),
-  });
+  })
+  .extend({ PageSize: z.number().default(12) });
 
 export type OfferJoinedSearchParams = Omit<
   z.infer<typeof bookingsSearchSchema>,

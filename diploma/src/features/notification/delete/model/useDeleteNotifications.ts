@@ -24,6 +24,9 @@ export const useDeleteNotifications = ({
         color: "success",
       });
       queryClient.invalidateQueries({ queryKey: notificationKeys.all() });
+      queryClient.invalidateQueries({
+        queryKey: notificationKeys.unreadCount(),
+      });
       onSuccess?.();
     },
     onError: (error: unknown) => {

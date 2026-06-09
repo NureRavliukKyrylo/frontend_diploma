@@ -10,6 +10,7 @@
 .header {
   position: relative;
   padding-bottom: 20px;
+  text-align: center;
 
   &::after {
     content: "";
@@ -21,8 +22,8 @@
     background: linear-gradient(
       to right,
       transparent 0%,
-      #f97316 30%,
-      #f97316 60%,
+      #8c0000 30%,
+      #8c0000 60%,
       transparent 100%
     );
     opacity: 0.8;
@@ -31,7 +32,7 @@
 
 .title {
   @include font-base(30px, 700);
-  background: linear-gradient(180deg, #f97316 0%, #431407 100%);
+  background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

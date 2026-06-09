@@ -2,6 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { completeBooking } from "../api/completeBookingApi";
+import { queryClient } from "@shared/api";
+import { offerKeys } from "@entities/offer";
 
 interface UseCompleteBookingProps {
   bookingId: string;
@@ -20,6 +22,7 @@ export const useCompleteBooking = ({
         description: "The booking has been marked as complete",
         color: "success",
       });
+      queryClient.invalidateQueries({ queryKey: offerKeys.all() });
       onSuccess();
     },
     onError: (error: unknown) => {

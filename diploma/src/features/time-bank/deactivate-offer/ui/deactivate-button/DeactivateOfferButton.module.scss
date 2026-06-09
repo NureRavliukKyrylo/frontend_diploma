@@ -8,6 +8,13 @@
   border-radius: 50px;
   border: none;
   cursor: pointer;
-  background: #f4f4f5;
-  color: #3f3f46;
+  background: #fff0f0;
+  color: #8c0000;
+  border: 1px solid #b97474;
+}
+.icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: #8c0000;
 }

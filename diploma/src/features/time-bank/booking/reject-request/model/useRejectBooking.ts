@@ -4,6 +4,8 @@ import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { rejectSchema } from "../libs/rejectSchema";
 import { rejectBooking, type RejectBookingDto } from "../api/rejectBookingApi";
+import { queryClient } from "@shared/api";
+import { offerKeys } from "@entities/offer";
 
 interface UseRejectBookingProps {
   bookingId: string;
@@ -22,6 +24,7 @@ export const useRejectBooking = ({
         description: "The booking has been rejected",
         color: "success",
       });
+      queryClient.invalidateQueries({ queryKey: offerKeys.all() });
       onSuccess();
     },
     onError: (error: unknown) => {

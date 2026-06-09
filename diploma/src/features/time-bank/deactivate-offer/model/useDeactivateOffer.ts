@@ -2,6 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { deactivateOffer } from "../api/deactivateOfferApi";
+import { offerKeys } from "@entities/offer";
+import { queryClient } from "@shared/api";
 
 interface UseDeactivateOfferProps {
   offerId: string;
@@ -20,6 +22,7 @@ export const useDeactivateOffer = ({
         description: "The offer has been deactivated",
         color: "success",
       });
+      queryClient.invalidateQueries({ queryKey: offerKeys.all() });
       onSuccess();
     },
     onError: (error: unknown) => {

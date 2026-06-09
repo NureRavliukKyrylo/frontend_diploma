@@ -31,6 +31,7 @@ export const SkillsListFilter = ({
       </div>
     );
   }
+  console.log(skills);
 
   if (skills.length === 0) {
     return <p className={styles.emptyText}>No skills found</p>;

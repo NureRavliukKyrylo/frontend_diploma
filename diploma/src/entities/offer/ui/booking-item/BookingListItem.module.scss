@@ -33,6 +33,19 @@
     height: 60px;
     filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.25));
     flex-shrink: 0;
+
+    @include respond-to(laptop) {
+      width: 52px;
+      height: 52px;
+    }
+    @include respond-to(tablet) {
+      width: 46px;
+      height: 46px;
+    }
+    @include respond-to(mobile) {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   .bodyWrapper {
@@ -90,7 +103,7 @@
           background: rgba(245, 158, 11, 0.12);
           color: #b45309;
         }
-        &.approved {
+        &.completed {
           background: rgba(22, 101, 52, 0.1);
           color: #166534;
         }
@@ -106,6 +119,10 @@
           background: rgba(124, 58, 237, 0.1);
           color: #7c3aed;
         }
+        &.reserved {
+          background: rgba(59, 130, 246, 0.1);
+          color: #1d4ed8;
+        }
       }
     }
 
@@ -120,5 +137,122 @@
         font-size: 14px;
       }
     }
+    .resolutionComment {
+      @include font-base(16px, 400);
+      color: #9aa0a6;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background-color: #f5f5f5;
+      border-left: 3px solid #d1d5db;
+      word-break: break-word;
+
+      @include respond-to(tablet) {
+        font-size: 14px;
+      }
+      @include respond-to(mobile) {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.skeletonAvatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  @include respond-to(laptop) {
+    width: 52px;
+    height: 52px;
+  }
+  @include respond-to(tablet) {
+    width: 46px;
+    height: 46px;
+  }
+  @include respond-to(mobile) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.skeletonName {
+  width: 160px;
+  height: 25px;
+  border-radius: 6px;
+
+  @include respond-to(tablet) {
+    width: 130px;
+    height: 18px;
+  }
+  @include respond-to(mobile) {
+    width: 110px;
+    height: 15px;
+  }
+}
+
+.skeletonStatus {
+  width: 80px;
+  height: 26px;
+  border-radius: 100px;
+
+  @include respond-to(tablet) {
+    width: 68px;
+    height: 22px;
+  }
+  @include respond-to(mobile) {
+    width: 58px;
+    height: 18px;
+  }
+}
+
+.skeletonComment {
+  width: 100%;
+  height: 22px;
+  border-radius: 6px;
+
+  @include respond-to(tablet) {
+    height: 17px;
+  }
+  @include respond-to(mobile) {
+    height: 14px;
+  }
+}
+
+.skeletonCommentShort {
+  width: 60%;
+  height: 22px;
+  border-radius: 6px;
+
+  @include respond-to(tablet) {
+    height: 17px;
+  }
+  @include respond-to(mobile) {
+    height: 14px;
+  }
+}
+
+.skeletonTime {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 18px;
+  border-radius: 6px;
+
+  @include respond-to(tablet) {
+    width: 65px;
+    height: 14px;
+  }
+  @include respond-to(mobile) {
+    width: 55px;
+    height: 12px;
   }
 }

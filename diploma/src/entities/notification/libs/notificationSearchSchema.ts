@@ -2,7 +2,12 @@ import { paginationSchema } from "@shared/config/schemas";
 import z from "zod";
 import type { NotificationType } from "../model";
 
-const notificationTypeValues = [
+export const notificationDefaults = {
+  Page: 1,
+  PageSize: 15,
+};
+
+export const notificationTypeValues = [
   "JoinRequestCreated",
   "JoinRequestApproved",
   "JoinRequestRejected",
@@ -45,7 +50,7 @@ export const notificationPaginationSchema = paginationSchema.extend({
 
 export const notificationSearchSchema = notificationPaginationSchema.extend({
   type: z.enum(notificationTypeValues).optional().catch(undefined),
-  status: z.enum(["Read", "Unread"]).optional().catch(undefined),
+  status: z.enum(["All", "Unread"]).optional().catch(undefined),
 });
 
 export type NotificationSearchParams = z.infer<typeof notificationSearchSchema>;

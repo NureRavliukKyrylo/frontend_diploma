@@ -7,5 +7,5 @@ export type Notification = {
   title: string;
   message: string;
   createdAt: Date;
-  relatedAvatar: string | null;
+  relatedAvatarUrl: string | null;
 };

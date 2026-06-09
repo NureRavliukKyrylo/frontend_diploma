@@ -22,6 +22,7 @@ export const TransactionListItem = ({
     "adminAdjustmentPlus",
     "giftIn",
   ].includes(transaction.type);
+  const isNeutral = transaction.type === "reservation";
 
   return (
     <div className={styles.wrapper}>
@@ -44,7 +45,9 @@ export const TransactionListItem = ({
       <div className={styles.rightContent}>
         <span
           className={styles.amount}
-          style={{ color: isPositive ? "#3d995f" : "#a80b0b" }}
+          style={{
+            color: isNeutral ? "#b87c00" : isPositive ? "#3d995f" : "#a80b0b",
+          }}
         >
           {isPositive ? "+" : "-"}
           {Math.abs(transaction.amountMinutes)}m

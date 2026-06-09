@@ -6,6 +6,7 @@ import { useTransactionsTab } from "../model/useTransactionsTab";
 import {
   offerQuery,
   TransactionListItem,
+  TransactionListItemSkeleton,
   type TransactionsSearchParams,
 } from "@entities/offer";
 import {
@@ -97,7 +98,9 @@ export const TransactionsTab = ({ search }: TransactionsTabProps) => {
                     <ListWidgetSkeleton
                       items={12}
                       renderSkeleton={() => (
-                        <div className={styles.skeletonItem} />
+                        <div className={styles.transactionItem}>
+                          <TransactionListItemSkeleton />
+                        </div>
                       )}
                       className={styles.skeletonGrid}
                     />

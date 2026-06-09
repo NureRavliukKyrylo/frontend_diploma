@@ -14,7 +14,7 @@ export interface OfferRelatedFilterItem {
 }
 
 export interface UserRelatedFiltersResponse {
-  items: OfferRelatedFilterItem[];
+  data: OfferRelatedFilterItem[];
   pagination: PaginationResponse;
 }
 

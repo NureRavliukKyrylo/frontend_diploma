@@ -11,7 +11,7 @@ export const useMyOfferPage = () => {
     from: "/_masterLayout/offers/my/$id/",
   });
 
-  const { data: offer } = useSuspenseQuery(offerQuery.id(id));
+  const { data: offer } = useSuspenseQuery(offerQuery.myId(id));
   const { coordinates: userLocation } = useMapUserLocation();
 
   const navigate = useNavigate({ from: "/offers/my/$id/" });

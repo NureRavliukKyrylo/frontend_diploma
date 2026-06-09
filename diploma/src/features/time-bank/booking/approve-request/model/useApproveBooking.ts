@@ -2,14 +2,18 @@ import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { approveBooking } from "../api/approveBookingApi";
+import { queryClient } from "@shared/api";
+import { offerKeys } from "@entities/offer";
 
 interface UseApproveBookingProps {
   bookingId: string;
-  onSuccess: () => void;
+  offerId: string;
+  onSuccess?: () => void;
 }
 
 export const useApproveBooking = ({
   bookingId,
+  offerId,
   onSuccess,
 }: UseApproveBookingProps) => {
   const mutation = useMutation({
@@ -20,7 +24,11 @@ export const useApproveBooking = ({
         description: "The booking has been approved",
         color: "success",
       });
-      onSuccess();
+      queryClient.invalidateQueries({
+        queryKey: offerKeys.allBookings(offerId),
+      });
+      queryClient.invalidateQueries({ queryKey: offerKeys.all() });
+      onSuccess?.();
     },
     onError: (error: unknown) => {
       addToast({

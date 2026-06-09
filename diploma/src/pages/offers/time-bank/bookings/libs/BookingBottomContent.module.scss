@@ -1,0 +1,37 @@
+@use "@shared/assets/styles" as *;
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.bottomContent {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 14px;
+  border-radius: 0px 0px 12px 12px;
+  background-color: #f0f0f0;
+  border: 1px solid #c1b4b4;
+
+  p {
+    @include font-base(14px, 400);
+    color: #5f6368;
+    min-width: 0;
+
+    @include respond-to(tablet) {
+      font-size: 13px;
+    }
+    @include respond-to(mobile) {
+      font-size: 12px;
+    }
+  }
+
+  .address {
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+}

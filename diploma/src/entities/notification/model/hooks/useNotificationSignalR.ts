@@ -11,7 +11,7 @@ export function useNotificationSignalR() {
 
   useSignalREvent(
     "notifications",
-    "NotificationCreated",
+    "notification.created",
     useCallback(
       (notification: Notification) => {
         addNotification(notification);

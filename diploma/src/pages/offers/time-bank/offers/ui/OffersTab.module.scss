@@ -216,3 +216,47 @@
     }
   }
 }
+
+.skeletonStats {
+  width: 100%;
+  height: 180px;
+  border-radius: 16px;
+
+  @include respond-to(tablet) {
+    height: 150px;
+  }
+  @include respond-to(mobile) {
+    height: 120px;
+  }
+}
+
+.skeletonFilter {
+  width: 100%;
+  height: 500px;
+  border-radius: 16px;
+
+  @include respond-to(tablet) {
+    height: 320px;
+  }
+  @include respond-to(mobile) {
+    height: 260px;
+  }
+}
+
+.skeletonSearch {
+  height: 54px;
+  border-radius: 50px;
+
+  @include respond-to(laptop) {
+    height: 48px;
+  }
+}
+
+.skeletonSort {
+  height: 54px;
+  border-radius: 50px;
+
+  @include respond-to(laptop) {
+    height: 48px;
+  }
+}

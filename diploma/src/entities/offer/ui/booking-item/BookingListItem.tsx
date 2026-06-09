@@ -6,9 +6,10 @@ import { getFullName } from "@entities/user";
 
 interface BookingListItemProps {
   booking: OfferBooking;
+  actions?: React.ReactNode;
 }
 
-export const BookingListItem = ({ booking }: BookingListItemProps) => {
+export const BookingListItem = ({ booking, actions }: BookingListItemProps) => {
   return (
     <div className={styles.bookingWrapper}>
       <div className={styles.time}>{formatTimeAgo(booking.createdAt)}</div>
@@ -32,6 +33,13 @@ export const BookingListItem = ({ booking }: BookingListItemProps) => {
           </span>
         </div>
         <p>{booking.comment}</p>
+        {(booking.status === "Cancelled" || booking.status === "Disputed") &&
+          booking.resolutionComment && (
+            <p className={styles.resolutionComment}>
+              Reason: {booking.resolutionComment}
+            </p>
+          )}
+        {actions && <div className={styles.actions}>{actions}</div>}
       </div>
     </div>
   );

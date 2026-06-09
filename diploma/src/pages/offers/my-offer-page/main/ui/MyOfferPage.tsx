@@ -1,11 +1,16 @@
 import styles from "./MyOfferPage.module.scss";
-import { Toggle } from "@shared/ui";
-import { ReadMoreButton } from "@shared/ui/buttons";
+import { Avatar, Toggle } from "@shared/ui";
+import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import { AnimatePresence, motion } from "framer-motion";
 import { formatDateRange } from "@shared/libs/date";
 import { Calendar, OnlineIcon, TimeBankIcon } from "@shared/assets/icons/info";
 import { myOfferMainTabs } from "../config/myOfferTab";
 import { useMyOfferPage } from "../model/useMyOfferPage";
+import {
+  CancelBookingButton,
+  CompleteBookingButton,
+} from "@features/time-bank";
+import { getFullName } from "@entities/user";
 
 export const MyOfferPage = () => {
   const { offer, tab, forms, handleTabChange } = useMyOfferPage();
@@ -22,7 +27,7 @@ export const MyOfferPage = () => {
           <div className={styles.titleHeader}>
             <h1>{offer.title}</h1>
             <div className={styles.offerMetaInfo}>
-              <span className={styles.metaChipOffer}>Offer</span>
+              <span className={styles.metaChipOffer}>My Offer</span>
 
               <span
                 className={`${styles.metaChip} ${offer.isOnline ? styles.online : styles.offline}`}
@@ -42,7 +47,14 @@ export const MyOfferPage = () => {
               {offer.endAt && (
                 <span className={`${styles.metaChip} ${styles.calendar}`}>
                   <Calendar className={styles.calendarImg} />
-                  <span>{formatDateRange(offer.startAt, offer.endAt)}</span>
+                  <span>
+                    {formatDateRange(
+                      offer.startAt,
+                      offer.endAt,
+                      undefined,
+                      false,
+                    )}
+                  </span>
                 </span>
               )}
 
@@ -52,6 +64,31 @@ export const MyOfferPage = () => {
               </span>
             </div>
           </div>
+          {offer.worker && (
+            <motion.div
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 22 }}
+            >
+              <LinkButtonWrapper
+                to="/profile"
+                params={{ id: offer.worker.id }}
+                className={styles.workerInfo}
+              >
+                <Avatar
+                  src={offer.worker.userAvatar}
+                  className={styles.workerAvatar}
+                  fallback={getFullName(
+                    offer.worker.firstName,
+                    offer.worker.lastName,
+                  )}
+                />
+                <p>
+                  {getFullName(offer.worker.firstName, offer.worker.lastName)}
+                </p>
+              </LinkButtonWrapper>
+            </motion.div>
+          )}
         </div>
 
         <div className={styles.offerFooterContent}>
@@ -63,6 +100,19 @@ export const MyOfferPage = () => {
             <p>{offer.description}</p>
           </ReadMoreButton>
         </div>
+        {(offer.canComplete || offer.canCancel) && (
+          <div className={styles.offerActions}>
+            {offer.canComplete && (
+              <CompleteBookingButton bookingId={offer.reservedBookingId} />
+            )}
+            {offer.canCancel && (
+              <CancelBookingButton
+                bookingId={offer.reservedBookingId}
+                variant="prominent"
+              />
+            )}
+          </div>
+        )}
       </motion.div>
 
       <div className={styles.toggleWrapper}>

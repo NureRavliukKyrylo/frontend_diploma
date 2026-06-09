@@ -66,3 +66,35 @@
     text-overflow: ellipsis;
   }
 }
+
+.skeletonIcon {
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+.skeletonTitle {
+  width: 55%;
+  height: 18px;
+  border-radius: 6px;
+}
+
+.skeletonBadge {
+  width: 90px;
+  height: 28px;
+  border-radius: 10px;
+}
+
+.skeletonAmount {
+  width: 70px;
+  height: 30px;
+  border-radius: 6px;
+}
+
+.skeletonBalance {
+  width: 100px;
+  height: 18px;
+  margin-top: 5px;
+  border-radius: 6px;
+}

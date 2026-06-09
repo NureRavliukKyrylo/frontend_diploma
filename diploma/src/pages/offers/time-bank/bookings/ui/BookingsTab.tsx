@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import {
+  BookingControlCardSkeleton,
   offerQuery,
   sortingOfferItems,
   type OfferJoined,
@@ -23,6 +24,7 @@ import { useBookingsTab } from "../model/useBookingsTab";
 import { BookingsFilter, OffersListWidget } from "@widgets/offers";
 import { BookingControlCard } from "@entities/offer";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { getBottomContent } from "../libs/getBottomContent";
 
 interface BookingsTabProps {
   search: OfferJoinedSearchParams;
@@ -104,7 +106,9 @@ export const BookingsTab = ({ search }: BookingsTabProps) => {
                   <ListWidgetSkeleton
                     items={12}
                     renderSkeleton={() => (
-                      <div className={styles.bookingCardMotion}></div>
+                      <div className={styles.bookingCardMotion}>
+                        <BookingControlCardSkeleton />
+                      </div>
                     )}
                     className={styles.bookingsGrid}
                   />
@@ -124,7 +128,6 @@ export const BookingsTab = ({ search }: BookingsTabProps) => {
                           custom={index + 1}
                           variants={staggeredCardVariants}
                           initial="hidden"
-                          whileHover="hover"
                           animate="visible"
                           className={styles.bookingCardMotion}
                           onClick={() =>
@@ -134,7 +137,15 @@ export const BookingsTab = ({ search }: BookingsTabProps) => {
                             })
                           }
                         >
-                          <BookingControlCard offer={offer} />
+                          <BookingControlCard
+                            offer={offer}
+                            bottomContent={
+                              <div onClick={(e) => e.stopPropagation()}>
+                                {getBottomContent(offer)}
+                              </div>
+                            }
+                            className={styles.bookingWrapper}
+                          />
                         </motion.div>
                       )}
                       useOffersQuery={() => {

@@ -34,6 +34,6 @@ export const filtersQuery = {
         getOfferRelatedFilters({ ...params, page: pageParam }),
       initialPageParam: 1,
       getNextPageParam: (lastPage) => lastPage.pagination.nextPage ?? undefined,
-      select: (data) => data.pages.flatMap((page) => page.items),
+      select: (data) => data.pages.flatMap((page) => page.data),
     }),
 };

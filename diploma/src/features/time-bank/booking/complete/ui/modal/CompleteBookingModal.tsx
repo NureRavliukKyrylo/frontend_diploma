@@ -1,5 +1,7 @@
 import { ConfirmationModal } from "@shared/ui/modals";
 import { useCompleteBooking } from "../../model/useCompleteBooking";
+import { DeleteModal } from "@shared/assets/images/actions";
+import styles from "./CompleteBookingModal.module.scss";
 
 interface CompleteBookingModalProps {
   isOpen: boolean;
@@ -21,6 +23,9 @@ export const CompleteBookingModal = ({
     <ConfirmationModal
       isOpen={isOpen}
       onCancel={onClose}
+      image={DeleteModal}
+      confirmButtonClassName={styles.confirmButtonComplete}
+      imageClassName={styles.imageDelete}
       onConfirm={complete}
       title="Complete booking"
       text="Are you sure you want to mark this booking as complete? This action cannot be undone."

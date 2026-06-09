@@ -6,6 +6,8 @@ import { sendGift, type SendGiftDto } from "../api/sendGiftApi";
 import { sendGiftSchema } from "../libs/sendGiftSchema";
 import { useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { queryClient } from "@shared/api";
+import { offerKeys } from "@entities/offer";
 
 interface UseGiftMinutesProps {
   recipientUserId: string;
@@ -31,6 +33,7 @@ export const useSendGiftMinutes = ({
         description: "Minutes have been gifted successfully",
         color: "success",
       });
+      queryClient.invalidateQueries({ queryKey: offerKeys.all() });
       onSuccess();
     },
     onError: (error: unknown) => {

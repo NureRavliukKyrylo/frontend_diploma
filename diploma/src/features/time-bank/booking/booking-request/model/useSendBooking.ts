@@ -21,7 +21,7 @@ export const useSendBooking = ({ offerId, onSuccess }: UseSendBookingProps) => {
         description: "Your booking request has been sent",
         color: "success",
       });
-      queryClient.invalidateQueries({ queryKey: offerKeys.id(offerId) });
+      queryClient.invalidateQueries({ queryKey: offerKeys.all() });
       onSuccess();
     },
     onError: (error: unknown) => {

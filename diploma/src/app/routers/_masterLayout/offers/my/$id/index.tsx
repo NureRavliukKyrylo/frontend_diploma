@@ -1,5 +1,5 @@
 import { myOfferDetailDefaults, myOfferSearchSchema } from "@entities/offer";
-import { MyOfferPage } from "@pages/offers/my-offer-page/overview-tab";
+import { MyOfferPage, MyOfferPageSkeleton } from "@pages/offers";
 import { createTabCleanerMiddleware } from "@shared/libs/search-params";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -11,4 +11,5 @@ export const Route = createFileRoute("/_masterLayout/offers/my/$id/")({
     ],
   },
   component: MyOfferPage,
+  pendingComponent: MyOfferPageSkeleton,
 });

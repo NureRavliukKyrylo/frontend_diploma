@@ -23,7 +23,7 @@ import { useMyOffersTab } from "../model/useMyOffersTab";
 import { MyOffersFilter, OffersListWidget } from "@widgets/offers";
 import { MyOfferControlCard } from "@entities/offer";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { OfferFormButton } from "@features/time-bank";
+import { DeactivateOfferButton, OfferFormButton } from "@features/time-bank";
 
 interface MyOffersTabProps {
   search: OfferMySearchParams;
@@ -123,7 +123,6 @@ export const MyOffersTab = ({ search }: MyOffersTabProps) => {
                           custom={index + 1}
                           variants={staggeredCardVariants}
                           initial="hidden"
-                          whileHover="hover"
                           animate="visible"
                           className={styles.offerCardMotion}
                           onClick={() =>
@@ -136,30 +135,44 @@ export const MyOffersTab = ({ search }: MyOffersTabProps) => {
                           <MyOfferControlCard
                             key={offer.id}
                             offer={offer}
+                            className={styles.myOfferWrapper}
                             bottomContent={
-                              <OfferFormButton
-                                initialValues={{
-                                  id: offer.id,
-                                  title: offer.title,
-                                  categoryIds: offer.categories.map((value) =>
-                                    String(value.id),
-                                  ),
-                                  description: offer.description,
-                                  endAt: offer.endAt
-                                    ? new Date(offer.endAt).toISOString()
-                                    : null,
-                                  startAt: offer.startAt
-                                    ? new Date(offer.startAt).toISOString()
-                                    : null,
-                                  isOnline: offer.isOnline,
-                                  location: offer.location,
-                                  priceMinutes: offer.priceMinutes,
-                                  skillIds: offer.skills.map((value) =>
-                                    String(value.id),
-                                  ),
-                                }}
-                                isEdit={true}
-                              />
+                              <div
+                                className={styles.offerActions}
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <p className={styles.offerActionsText}>
+                                  Manage your offer settings and availability.
+                                </p>
+                                <div className={styles.offerActionsButtons}>
+                                  <OfferFormButton
+                                    initialValues={{
+                                      id: offer.id,
+                                      title: offer.title,
+                                      categoryIds: offer.categories.map(
+                                        (value) => String(value.id),
+                                      ),
+                                      description: offer.description,
+                                      endAt: offer.endAt
+                                        ? new Date(offer.endAt).toISOString()
+                                        : null,
+                                      startAt: offer.startAt
+                                        ? new Date(offer.startAt).toISOString()
+                                        : null,
+                                      isOnline: offer.isOnline,
+                                      location: offer.location,
+                                      priceMinutes: offer.priceMinutes,
+                                      skillIds: offer.skills.map((value) =>
+                                        String(value.id),
+                                      ),
+                                    }}
+                                    isEdit={true}
+                                  />
+                                  {offer.isActive && (
+                                    <DeactivateOfferButton offerId={offer.id} />
+                                  )}
+                                </div>
+                              </div>
                             }
                           />
                         </motion.div>

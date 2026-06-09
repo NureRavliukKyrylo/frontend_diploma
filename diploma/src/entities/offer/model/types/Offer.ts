@@ -10,6 +10,12 @@ export interface Offer {
     lastName: string;
     userAvatar: string;
   };
+  worker?: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    userAvatar: string;
+  };
   startAt: Date;
   endAt: Date;
   title: string;
@@ -24,9 +30,19 @@ export interface Offer {
   totalBookings: number;
   lastBookedAt: Date;
   status: "inProgress" | "completed";
+  progressStatus: "pending" | "inProgress" | "completed" | "cancelled";
+  canApprove: boolean;
+  canReject: boolean;
+  canComplete: boolean;
+  canDispute: boolean;
+  canCancel: boolean;
+  hasMyPendingRequest: boolean;
+  myBookingId: string;
+  reservedBookingId: string;
 }
 
 export interface OfferJoined extends Offer {
   bookedAt: Date;
   chatId: string;
+  myBookingId: string;
 }

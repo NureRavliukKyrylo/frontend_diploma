@@ -18,6 +18,9 @@
   flex-direction: column;
   position: static;
 }
+.filterInnerAbsolute {
+  position: relative;
+}
 .filterDropdown {
   position: static;
   overflow-y: auto;
@@ -27,6 +30,10 @@
   &::-webkit-scrollbar {
     display: none;
   }
+}
+.filterDropdownAbsolute {
+  position: absolute;
+  z-index: 100;
 }
 .filterButton {
   @include respond-to(tablet) {

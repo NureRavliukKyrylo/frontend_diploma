@@ -178,14 +178,20 @@ export const OverviewTab = () => {
       <div className={styles.transactionsCard}>
         <div className={styles.transactionsHeader}>
           <h2>Recent Transactions</h2>
-          <LinkButtonWrapper
-            to="/time-bank"
-            search={{ tab: "transactions" }}
-            className={styles.viewAll}
+          <motion.div
+            whileHover={{ x: 4 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            style={{ display: "inline-flex" }}
           >
-            View all
-            <Arrow />
-          </LinkButtonWrapper>
+            <LinkButtonWrapper
+              to="/time-bank"
+              search={{ tab: "transactions" }}
+              className={styles.viewAll}
+            >
+              View all
+              <Arrow />
+            </LinkButtonWrapper>
+          </motion.div>
         </div>
         {recentTransactions?.length === 0 ? (
           <div className={styles.emptyState}>

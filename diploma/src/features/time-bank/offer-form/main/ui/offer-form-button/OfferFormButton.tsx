@@ -3,6 +3,7 @@ import { useOfferFormStore, type OfferFormData } from "@entities/offer";
 import styles from "./OfferFormButton.module.scss";
 import { EditIcon, PlusIcon } from "@shared/assets/icons/actions";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { motion } from "framer-motion";
 
 interface OfferFormButtonProps {
   isEdit?: boolean;
@@ -19,22 +20,28 @@ export const OfferFormButton = ({
 
   return (
     <>
-      <BaseButtonWrapper
-        className={isEdit ? styles.editButton : styles.createButton}
-        onClick={() => open(initialValues)}
+      <motion.div
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.97 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
-        {isEdit ? (
-          <>
-            <EditIcon className={styles.icon} />
-            Edit
-          </>
-        ) : (
-          <>
-            <img src={PlusIcon} className={styles.icon} />
-            Create new offer
-          </>
-        )}
-      </BaseButtonWrapper>
+        <BaseButtonWrapper
+          className={isEdit ? styles.editButton : styles.createButton}
+          onClick={() => open(initialValues)}
+        >
+          {isEdit ? (
+            <>
+              <EditIcon className={styles.icon} />
+              Edit
+            </>
+          ) : (
+            <>
+              <img src={PlusIcon} className={styles.icon} />
+              Create new offer
+            </>
+          )}
+        </BaseButtonWrapper>
+      </motion.div>
       <OfferFormModal isOpen={isThisOpen} onClose={close} isEdit={isEdit} />
     </>
   );
