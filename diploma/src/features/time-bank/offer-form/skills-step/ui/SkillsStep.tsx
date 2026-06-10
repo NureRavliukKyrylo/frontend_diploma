@@ -35,6 +35,14 @@ export const SkillsStep = forwardRef<StepRef, SkillsStepProps>(
 
     const skillsQuery = useSkillsInfiniteQuery({ PageSize: 12 })();
 
+    const selected = data.skills;
+    const rest =
+      skillsQuery.data?.filter(
+        (skill) => !selected.some((s) => s.id === skill.id),
+      ) ?? [];
+
+    const orderedSkills = [...selected, ...rest];
+
     if (skillsQuery.isError) {
       return (
         <div className={styles.stateMessage}>
@@ -52,7 +60,7 @@ export const SkillsStep = forwardRef<StepRef, SkillsStepProps>(
         <div className={styles.section}>
           <div className={styles.tagsWrapper}>
             <AnimatePresence mode="wait">
-              {skillsQuery.data?.map((skill, index) => (
+              {orderedSkills.map((skill, index) => (
                 <motion.div
                   key={skill.id}
                   initial={{ opacity: 0, y: -10 }}
@@ -63,8 +71,10 @@ export const SkillsStep = forwardRef<StepRef, SkillsStepProps>(
                   <Tab
                     name={skill.name}
                     className={styles.skillTab}
-                    isSelected={formik.values.skillIds.includes(skill.id)}
-                    onClick={() => toggleSkill(skill.id)}
+                    isSelected={formik.values.skills.some(
+                      (c) => c.id === skill.id,
+                    )}
+                    onClick={() => toggleSkill(skill)}
                   />
                 </motion.div>
               ))}
@@ -80,8 +90,8 @@ export const SkillsStep = forwardRef<StepRef, SkillsStepProps>(
               {skillsQuery.isFetchingNextPage ? "Loading..." : "show more"}
             </BaseButtonWrapper>
           )}
-          {formik.touched.skillIds && formik.errors.skillIds && (
-            <div className="errorInput">{formik.errors.skillIds as string}</div>
+          {formik.touched.skills && formik.errors.skills && (
+            <div className="errorInput">{formik.errors.skills as string}</div>
           )}
         </div>
       </form>

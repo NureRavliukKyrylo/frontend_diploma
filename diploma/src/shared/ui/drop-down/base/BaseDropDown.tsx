@@ -24,6 +24,7 @@ export const BaseDropDown = ({
   return (
     <div className={`${styles.inner} ${className ?? ""}`}>
       <BaseButtonWrapper
+        type="button"
         className={`${styles.button} ${isOpen ? styles.buttonActive : ""} ${buttonClassName ?? ""}`}
         onClick={() => setIsOpen((prev) => !prev)}
       >

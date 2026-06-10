@@ -19,6 +19,7 @@ import { Route as MasterLayoutProfileRouteImport } from './routers/_masterLayout
 import { Route as NoFooterLayoutMapIndexRouteImport } from './routers/_noFooterLayout/map/index'
 import { Route as MasterLayoutTimeBankIndexRouteImport } from './routers/_masterLayout/time-bank/index'
 import { Route as MasterLayoutSkillsIndexRouteImport } from './routers/_masterLayout/skills/index'
+import { Route as MasterLayoutReportsIndexRouteImport } from './routers/_masterLayout/reports/index'
 import { Route as MasterLayoutProfileIndexRouteImport } from './routers/_masterLayout/profile/index'
 import { Route as MasterLayoutOrganizationsIndexRouteImport } from './routers/_masterLayout/organizations/index'
 import { Route as MasterLayoutNotificationsIndexRouteImport } from './routers/_masterLayout/notifications/index'
@@ -112,6 +113,12 @@ const MasterLayoutSkillsIndexRoute = MasterLayoutSkillsIndexRouteImport.update({
 } as any).lazy(() =>
   import('./routers/_masterLayout/skills/index.lazy').then((d) => d.Route),
 )
+const MasterLayoutReportsIndexRoute =
+  MasterLayoutReportsIndexRouteImport.update({
+    id: '/reports/',
+    path: '/reports/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
 const MasterLayoutProfileIndexRoute =
   MasterLayoutProfileIndexRouteImport.update({
     id: '/',
@@ -319,6 +326,7 @@ export interface FileRoutesByFullPath {
   '/notifications/': typeof MasterLayoutNotificationsIndexRoute
   '/organizations/': typeof MasterLayoutOrganizationsIndexRoute
   '/profile/': typeof MasterLayoutProfileIndexRoute
+  '/reports/': typeof MasterLayoutReportsIndexRoute
   '/skills/': typeof MasterLayoutSkillsIndexRoute
   '/time-bank/': typeof MasterLayoutTimeBankIndexRoute
   '/map/': typeof NoFooterLayoutMapIndexRoute
@@ -349,6 +357,7 @@ export interface FileRoutesByTo {
   '/notifications': typeof MasterLayoutNotificationsIndexRoute
   '/organizations': typeof MasterLayoutOrganizationsIndexRoute
   '/profile': typeof MasterLayoutProfileIndexRoute
+  '/reports': typeof MasterLayoutReportsIndexRoute
   '/skills': typeof MasterLayoutSkillsIndexRoute
   '/time-bank': typeof MasterLayoutTimeBankIndexRoute
   '/map': typeof NoFooterLayoutMapIndexRoute
@@ -384,6 +393,7 @@ export interface FileRoutesById {
   '/_masterLayout/notifications/': typeof MasterLayoutNotificationsIndexRoute
   '/_masterLayout/organizations/': typeof MasterLayoutOrganizationsIndexRoute
   '/_masterLayout/profile/': typeof MasterLayoutProfileIndexRoute
+  '/_masterLayout/reports/': typeof MasterLayoutReportsIndexRoute
   '/_masterLayout/skills/': typeof MasterLayoutSkillsIndexRoute
   '/_masterLayout/time-bank/': typeof MasterLayoutTimeBankIndexRoute
   '/_noFooterLayout/map/': typeof NoFooterLayoutMapIndexRoute
@@ -417,6 +427,7 @@ export interface FileRouteTypes {
     | '/notifications/'
     | '/organizations/'
     | '/profile/'
+    | '/reports/'
     | '/skills/'
     | '/time-bank/'
     | '/map/'
@@ -447,6 +458,7 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/organizations'
     | '/profile'
+    | '/reports'
     | '/skills'
     | '/time-bank'
     | '/map'
@@ -481,6 +493,7 @@ export interface FileRouteTypes {
     | '/_masterLayout/notifications/'
     | '/_masterLayout/organizations/'
     | '/_masterLayout/profile/'
+    | '/_masterLayout/reports/'
     | '/_masterLayout/skills/'
     | '/_masterLayout/time-bank/'
     | '/_noFooterLayout/map/'
@@ -579,6 +592,13 @@ declare module '@tanstack/react-router' {
       path: '/skills'
       fullPath: '/skills/'
       preLoaderRoute: typeof MasterLayoutSkillsIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/reports/': {
+      id: '/_masterLayout/reports/'
+      path: '/reports'
+      fullPath: '/reports/'
+      preLoaderRoute: typeof MasterLayoutReportsIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
     '/_masterLayout/profile/': {
@@ -785,6 +805,7 @@ interface MasterLayoutRouteChildren {
   MasterLayoutCategoriesIndexRoute: typeof MasterLayoutCategoriesIndexRoute
   MasterLayoutNotificationsIndexRoute: typeof MasterLayoutNotificationsIndexRoute
   MasterLayoutOrganizationsIndexRoute: typeof MasterLayoutOrganizationsIndexRoute
+  MasterLayoutReportsIndexRoute: typeof MasterLayoutReportsIndexRoute
   MasterLayoutSkillsIndexRoute: typeof MasterLayoutSkillsIndexRoute
   MasterLayoutTimeBankIndexRoute: typeof MasterLayoutTimeBankIndexRoute
   MasterLayoutActivitiesMyIndexRoute: typeof MasterLayoutActivitiesMyIndexRoute
@@ -806,6 +827,7 @@ const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
   MasterLayoutCategoriesIndexRoute: MasterLayoutCategoriesIndexRoute,
   MasterLayoutNotificationsIndexRoute: MasterLayoutNotificationsIndexRoute,
   MasterLayoutOrganizationsIndexRoute: MasterLayoutOrganizationsIndexRoute,
+  MasterLayoutReportsIndexRoute: MasterLayoutReportsIndexRoute,
   MasterLayoutSkillsIndexRoute: MasterLayoutSkillsIndexRoute,
   MasterLayoutTimeBankIndexRoute: MasterLayoutTimeBankIndexRoute,
   MasterLayoutActivitiesMyIndexRoute: MasterLayoutActivitiesMyIndexRoute,

@@ -35,6 +35,14 @@ export const CategoriesStep = forwardRef<StepRef, CategoriesStepProps>(
 
     const categoriesQuery = useCategoriesInfiniteQuery({ PageSize: 12 })();
 
+    const selected = data.categories;
+    const rest =
+      categoriesQuery.data?.filter(
+        (category) => !selected.some((c) => c.id === category.id),
+      ) ?? [];
+
+    const orderedCategories = [...selected, ...rest];
+
     if (categoriesQuery.isError) {
       return (
         <div className={styles.stateMessage}>
@@ -52,7 +60,7 @@ export const CategoriesStep = forwardRef<StepRef, CategoriesStepProps>(
         <div className={styles.section}>
           <div className={styles.tagsWrapper}>
             <AnimatePresence mode="wait">
-              {categoriesQuery.data?.map((category, index) => (
+              {orderedCategories.map((category, index) => (
                 <motion.div
                   key={category.id}
                   initial={{ opacity: 0, y: -10 }}
@@ -62,9 +70,11 @@ export const CategoriesStep = forwardRef<StepRef, CategoriesStepProps>(
                 >
                   <Tab
                     name={category.name}
-                    isSelected={formik.values.categoryIds.includes(category.id)}
+                    isSelected={formik.values.categories.some(
+                      (c) => c.id === category.id,
+                    )}
                     className={styles.categoryTab}
-                    onClick={() => toggleCategory(category.id)}
+                    onClick={() => toggleCategory(category)}
                   />
                 </motion.div>
               ))}
@@ -80,9 +90,9 @@ export const CategoriesStep = forwardRef<StepRef, CategoriesStepProps>(
               {categoriesQuery.isFetchingNextPage ? "Loading..." : "show more"}
             </BaseButtonWrapper>
           )}
-          {formik.touched.categoryIds && formik.errors.categoryIds && (
+          {formik.touched.categories && formik.errors.categories && (
             <div className="errorInput">
-              {formik.errors.categoryIds as string}
+              {formik.errors.categories as string}
             </div>
           )}
         </div>

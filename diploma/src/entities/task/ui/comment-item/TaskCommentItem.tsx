@@ -19,6 +19,7 @@ interface TaskCommentItemProps {
   replyButton?: React.ReactNode;
   className?: string;
   editSlot?: React.ReactNode;
+  reportSlot?: React.ReactNode;
 }
 
 export const TaskCommentItem = ({
@@ -27,6 +28,7 @@ export const TaskCommentItem = ({
   menuItems,
   className,
   editSlot,
+  reportSlot,
 }: TaskCommentItemProps) => {
   return (
     <div className={`${styles.commentWrapper} ${className ?? ""}`}>
@@ -45,6 +47,7 @@ export const TaskCommentItem = ({
             {getFullName(comment.author.firstName, comment.author.lastName)}
           </h1>
           <h2>{comment.author.roleName}</h2>
+          {reportSlot}
           {menuItems.length > 0 && (
             <Dropdown
               placement="top-start"

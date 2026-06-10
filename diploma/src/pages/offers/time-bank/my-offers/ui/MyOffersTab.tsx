@@ -149,9 +149,7 @@ export const MyOffersTab = ({ search }: MyOffersTabProps) => {
                                     initialValues={{
                                       id: offer.id,
                                       title: offer.title,
-                                      categoryIds: offer.categories.map(
-                                        (value) => String(value.id),
-                                      ),
+                                      categories: offer.categories,
                                       description: offer.description,
                                       endAt: offer.endAt
                                         ? new Date(offer.endAt).toISOString()
@@ -162,9 +160,7 @@ export const MyOffersTab = ({ search }: MyOffersTabProps) => {
                                       isOnline: offer.isOnline,
                                       location: offer.location,
                                       priceMinutes: offer.priceMinutes,
-                                      skillIds: offer.skills.map((value) =>
-                                        String(value.id),
-                                      ),
+                                      skills: offer.skills,
                                     }}
                                     isEdit={true}
                                   />

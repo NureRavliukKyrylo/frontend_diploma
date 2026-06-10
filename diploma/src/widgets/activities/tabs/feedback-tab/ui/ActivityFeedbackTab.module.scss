@@ -394,3 +394,31 @@
     }
   }
 }
+
+.feedbackReportButton {
+  width: 40px;
+  height: 40px;
+
+  @include respond-to(tablet) {
+    width: 34px;
+    height: 34px;
+  }
+  @include respond-to(mobile) {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.feedbackReportIcon {
+  width: 25px;
+  height: 25px;
+
+  @include respond-to(tablet) {
+    width: 22px;
+    height: 22px;
+  }
+  @include respond-to(mobile) {
+    width: 18px;
+    height: 18px;
+  }
+}

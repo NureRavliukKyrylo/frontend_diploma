@@ -1,6 +1,9 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { offerKeys, useOfferFormStore } from "@entities/offer";
 import { createOffer, updateOffer } from "../api/submitOfferApi";
+import { queryClient } from "@shared/api";
+import { skillsQuery } from "@entities/skill";
+import { categoryQuery } from "@entities/category";
 
 interface UseSubmitOfferFormProps {
   isEdit?: boolean;
@@ -11,8 +14,10 @@ export const useSubmitOfferForm = ({
   isEdit = false,
   onSuccess,
 }: UseSubmitOfferFormProps = {}) => {
-  const queryClient = useQueryClient();
   const { step, data, clear } = useOfferFormStore();
+
+  queryClient.prefetchInfiniteQuery(skillsQuery.infinite({ PageSize: 12 }));
+  queryClient.prefetchInfiniteQuery(categoryQuery.infinite({ PageSize: 12 }));
 
   const { mutate, isPending, error, reset } = useMutation({
     mutationFn: () => (isEdit ? updateOffer(data) : createOffer(data)),

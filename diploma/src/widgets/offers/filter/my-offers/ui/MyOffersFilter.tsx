@@ -4,7 +4,6 @@ import {
   SelectFilter,
   SwitchFilter,
 } from "@shared/ui/filters";
-import { BaseWrapperFilter } from "../../base-wrapper/BaseWrapperFilter";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { onlineOptions, type OfferMySearchParams } from "@entities/offer";
 import { useMyOffersFilter } from "../model/useMyOffersFilter";
@@ -12,6 +11,7 @@ import styles from "./MyOffersFilter.module.scss";
 import { CategoriesListFilter } from "@features/project";
 import { SkillsListFilter } from "@features/skills";
 import { useOffersFiltersInfiniteQuery } from "@shared/api/filters";
+import { BaseWrapperFilter } from "@shared/ui/wrappers";
 
 interface MyOffersFilterProps {
   search: OfferMySearchParams;

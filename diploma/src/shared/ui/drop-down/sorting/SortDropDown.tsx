@@ -7,19 +7,26 @@ interface SortDropDownProps<T extends string> {
   options: SortOption<T>[];
   onSelect: (value: T) => void;
   value: T;
+  variant?: "default" | "report";
+  label?: string;
 }
 
 export const SortDropDown = <T extends string>({
   options,
   onSelect,
   value,
+  label = "Sort by",
+  variant = "default",
 }: SortDropDownProps<T>) => {
   return (
     <BaseDropDown
       label={
         <h1 className={styles.dropDownLabel}>
-          Sort by: {options.find((o) => o.value === value)?.label}
+          {label}: {options.find((o) => o.value === value)?.label}
         </h1>
+      }
+      dropdownClassName={
+        variant === "report" ? styles.dropdownReport : undefined
       }
     >
       {options.map((option) => {

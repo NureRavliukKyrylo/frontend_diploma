@@ -7,6 +7,8 @@ import type { MenuItem } from "@shared/config/types";
 import { useTaskComments } from "../../model/useTaskComments";
 import { useLayoutEffect, useRef } from "react";
 import { DeleteCommentModal, EditCommentForm } from "@features/tasks";
+import { ReportButton } from "@features/moderation";
+import { ModerationSubjectType } from "@entities/report";
 
 interface TaskCommentsProps {
   PageSize: number;
@@ -136,6 +138,16 @@ const CommentList = ({
                     onCancel={onCancel}
                   />
                 ) : null
+              }
+              reportSlot={
+                comment.authorUserId !== userId ? (
+                  <ReportButton
+                    subjectType={ModerationSubjectType.Comment}
+                    subjectId={comment.id}
+                    buttonClassName={styles.reportButton}
+                    iconClassName={styles.reportIcon}
+                  />
+                ) : undefined
               }
             />
             {!!comment.replies?.length && (

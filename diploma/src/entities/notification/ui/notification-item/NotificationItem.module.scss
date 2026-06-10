@@ -158,3 +158,57 @@
 .right {
   flex-shrink: 0;
 }
+
+.skeletonIcon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  @include respond-to(tablet) {
+    width: 40px;
+    height: 40px;
+  }
+  @include respond-to(mobile) {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.skeletonTitle {
+  width: 180px;
+  height: 20px;
+  border-radius: 6px;
+
+  @include respond-to(tablet) {
+    width: 150px;
+    height: 18px;
+  }
+  @include respond-to(mobile) {
+    width: 120px;
+    height: 16px;
+  }
+}
+
+.skeletonMessage {
+  width: 50%;
+  height: 16px;
+  border-radius: 6px;
+  margin-top: 5px;
+
+  @include respond-to(mobile) {
+    height: 14px;
+  }
+}
+
+.skeletonTime {
+  width: 60px;
+  height: 16px;
+  border-radius: 6px;
+  flex-shrink: 0;
+
+  @include respond-to(mobile) {
+    width: 48px;
+    height: 14px;
+  }
+}

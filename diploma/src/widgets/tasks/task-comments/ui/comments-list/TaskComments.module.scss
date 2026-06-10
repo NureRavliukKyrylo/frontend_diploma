@@ -128,3 +128,30 @@
     }
   }
 }
+.reportButton {
+  width: 30px;
+  height: 30px;
+
+  @include respond-to(tablet) {
+    width: 26px;
+    height: 26px;
+  }
+  @include respond-to(mobile) {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.reportIcon {
+  width: 22px;
+  height: 22px;
+
+  @include respond-to(tablet) {
+    width: 18px;
+    height: 18px;
+  }
+  @include respond-to(mobile) {
+    width: 16px;
+    height: 16px;
+  }
+}

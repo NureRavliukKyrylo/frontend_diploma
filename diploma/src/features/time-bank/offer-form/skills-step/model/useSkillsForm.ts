@@ -1,27 +1,28 @@
 import { useOfferFormStore, type OfferFormData } from "@entities/offer";
 import { useFormik } from "formik";
-import { skillsSchema, type SkillsFormValues } from "../libs/skillsSchema";
+import { skillsSchema } from "../libs/skillsSchema";
+import type { Skill } from "@entities/skill";
 
 interface UseCategoriesFormProps {
   data: OfferFormData;
 }
-
 export const useSkillsForm = ({ data }: UseCategoriesFormProps) => {
   const setData = useOfferFormStore((s) => s.setData);
 
-  const formik = useFormik<SkillsFormValues>({
+  const formik = useFormik<{ skills: Skill[] }>({
     initialValues: {
-      skillIds: data.skillIds,
+      skills: data.skills,
     },
     validationSchema: skillsSchema,
     onSubmit: (values) => setData(values),
   });
 
-  const toggleSkill = (id: string) => {
-    const current = formik.values.skillIds;
+  const toggleSkill = (skill: Skill) => {
+    const current = formik.values.skills;
+    const exists = current.some((s) => s.id === skill.id);
     formik.setFieldValue(
-      "skillIds",
-      current.includes(id) ? current.filter((v) => v !== id) : [...current, id],
+      "skills",
+      exists ? current.filter((s) => s.id !== skill.id) : [...current, skill],
     );
   };
 

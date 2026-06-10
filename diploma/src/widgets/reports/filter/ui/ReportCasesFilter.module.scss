@@ -1,0 +1,140 @@
+@use "@shared/assets/styles" as *;
+
+.dividerFilterBlock {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.subHeaderFilter {
+  @include font-base(20px, 400);
+  color: #a4a4a4;
+  text-transform: uppercase;
+
+  @include respond-to(laptop) {
+    font-size: 18px;
+  }
+  @include respond-to(tablet) {
+    font-size: 16px;
+  }
+  @include respond-to(mobile) {
+    font-size: 15px;
+  }
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  @include respond-to(laptop) {
+    gap: 12px;
+  }
+  @include respond-to(tablet) {
+    gap: 10px;
+  }
+  @include respond-to(mobile) {
+    gap: 8px;
+  }
+}
+
+.dateRange {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  @include respond-to(laptop) {
+    gap: 12px;
+  }
+  @include respond-to(tablet) {
+    gap: 10px;
+  }
+  @include respond-to(mobile) {
+    gap: 8px;
+  }
+}
+
+.reasons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  @include respond-to(laptop) {
+    gap: 12px;
+  }
+  @include respond-to(tablet) {
+    gap: 10px;
+  }
+  @include respond-to(mobile) {
+    gap: 8px;
+  }
+}
+
+.subjectTypes {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  @include respond-to(laptop) {
+    gap: 12px;
+  }
+  @include respond-to(tablet) {
+    gap: 10px;
+  }
+  @include respond-to(mobile) {
+    gap: 8px;
+  }
+}
+
+.showMoreButton {
+  @include font-base(16px, 800);
+  color: #8c0000;
+  align-self: flex-end;
+  box-shadow: none;
+  padding: unset;
+}
+.itemsFilter {
+  column-gap: 8px;
+}
+.buttonClear {
+  .animationButtonBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include font-base(20px, 900);
+    color: #000000;
+    background: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+
+    @include respond-to(laptop) {
+      font-size: 17px;
+    }
+    @include respond-to(tablet) {
+      font-size: 15px;
+    }
+    @include respond-to(mobile) {
+      font-size: 14px;
+    }
+
+    .clearFiltersButton {
+      padding: 15px 30px;
+      width: 100%;
+
+      @include respond-to(laptop) {
+        padding: 12px 24px;
+      }
+      @include respond-to(tablet) {
+        padding: 10px 20px;
+      }
+      @include respond-to(mobile) {
+        padding: 8px 16px;
+      }
+    }
+  }
+}

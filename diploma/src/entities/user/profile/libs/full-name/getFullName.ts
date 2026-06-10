@@ -2,5 +2,6 @@ export const getFullName = (
   firstName?: string | null,
   lastName?: string | null,
 ): string => {
-  return [firstName, lastName].filter(Boolean).join(" ").trim();
+  const full = [firstName, lastName].filter(Boolean).join(" ").trim();
+  return full || "Unknown User";
 };

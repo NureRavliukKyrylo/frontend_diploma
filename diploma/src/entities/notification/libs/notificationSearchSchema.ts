@@ -49,8 +49,8 @@ export const notificationPaginationSchema = paginationSchema.extend({
 });
 
 export const notificationSearchSchema = notificationPaginationSchema.extend({
-  type: z.enum(notificationTypeValues).optional().catch(undefined),
-  status: z.enum(["All", "Unread"]).optional().catch(undefined),
+  Type: z.enum(notificationTypeValues).optional().catch(undefined),
+  Status: z.enum(["All", "Unread"]).optional().catch(undefined),
 });
 
 export type NotificationSearchParams = z.infer<typeof notificationSearchSchema>;

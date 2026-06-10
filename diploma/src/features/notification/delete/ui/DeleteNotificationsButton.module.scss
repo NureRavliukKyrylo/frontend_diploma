@@ -11,6 +11,12 @@
   cursor: pointer;
   background: #fff0f0;
   color: #8c0000;
+
+  @include respond-to(mobile) {
+    font-size: 13px;
+    padding: 5px 10px;
+    gap: 4px;
+  }
 }
 
 .icon {
@@ -18,4 +24,9 @@
   height: 14px;
   flex-shrink: 0;
   color: #8c0000;
+
+  @include respond-to(mobile) {
+    width: 12px;
+    height: 12px;
+  }
 }

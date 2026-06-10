@@ -1,9 +1,7 @@
 import { useFormik } from "formik";
-import {
-  categoriesSchema,
-  type CategoriesFormValues,
-} from "../libs/categoriesSchema";
+import { categoriesSchema } from "../libs/categoriesSchema";
 import { useOfferFormStore, type OfferFormData } from "@entities/offer";
+import type { Category } from "@entities/category";
 
 interface UseCategoriesFormProps {
   data: OfferFormData;
@@ -11,19 +9,22 @@ interface UseCategoriesFormProps {
 
 export const useCategoriesForm = ({ data }: UseCategoriesFormProps) => {
   const setData = useOfferFormStore((s) => s.setData);
-  const formik = useFormik<CategoriesFormValues>({
+  const formik = useFormik<{ categories: Category[] }>({
     initialValues: {
-      categoryIds: data.categoryIds,
+      categories: data.categories,
     },
     validationSchema: categoriesSchema,
     onSubmit: (values) => setData(values),
   });
 
-  const toggleCategory = (id: string) => {
-    const current = formik.values.categoryIds;
+  const toggleCategory = (category: Category) => {
+    const current = formik.values.categories;
+    const exists = current.some((c) => c.id === category.id);
     formik.setFieldValue(
-      "categoryIds",
-      current.includes(id) ? current.filter((v) => v !== id) : [...current, id],
+      "categories",
+      exists
+        ? current.filter((c) => c.id !== category.id)
+        : [...current, category],
     );
   };
 

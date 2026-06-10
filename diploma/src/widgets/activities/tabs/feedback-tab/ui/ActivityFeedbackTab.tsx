@@ -24,6 +24,8 @@ import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import { SortDropDown } from "@shared/ui/drop-down";
 import { motion } from "framer-motion";
+import { ReportButton } from "@features/moderation";
+import { ModerationSubjectType } from "@entities/report";
 
 interface ActivityFeedbackTabProps {
   entityId: string;
@@ -159,7 +161,20 @@ export const ActivityFeedbackTab = ({
                   );
                 }
 
-                return <FeedbackCard feedback={feedback} key={feedback.id} />;
+                return (
+                  <FeedbackCard
+                    feedback={feedback}
+                    key={feedback.id}
+                    rightContent={
+                      <ReportButton
+                        subjectId={feedback.id}
+                        subjectType={ModerationSubjectType.Feedback}
+                        buttonClassName={styles.feedbackReportButton}
+                        iconClassName={styles.feedbackReportIcon}
+                      />
+                    }
+                  />
+                );
               }}
               renderPagination={({
                 fetchNextPage,

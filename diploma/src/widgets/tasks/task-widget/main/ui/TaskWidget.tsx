@@ -15,6 +15,8 @@ import {
   ParticipationJoinButton,
   ParticipationLeaveButton,
 } from "@features/participation";
+import { ReportButton } from "@features/moderation";
+import { ModerationSubjectType } from "@entities/report";
 
 interface TaskWidgetProps {
   search: TaskDrawerSearch;
@@ -53,6 +55,14 @@ export const TaskWidget = ({
         transition={{ duration: 0.3 }}
       >
         <div className={styles.headerTaskInfo}>
+          {task && (
+            <div className={styles.reportWrapper}>
+              <ReportButton
+                subjectType={ModerationSubjectType.Task}
+                subjectId={task.id}
+              />
+            </div>
+          )}
           <div
             className={styles.taskStatus}
             style={{

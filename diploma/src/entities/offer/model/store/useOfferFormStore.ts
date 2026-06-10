@@ -1,3 +1,5 @@
+import type { Category } from "@entities/category";
+import type { Skill } from "@entities/skill";
 import type { Coordinates } from "@shared/config/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
@@ -11,8 +13,8 @@ export interface OfferFormData {
   endAt: string | null;
   isOnline: boolean;
   location: Coordinates | null;
-  categoryIds: string[];
-  skillIds: string[];
+  categories: Category[];
+  skills: Skill[];
 }
 
 interface OfferFormStore {
@@ -35,8 +37,8 @@ const defaultData: OfferFormData = {
   endAt: null,
   isOnline: false,
   location: null,
-  categoryIds: [],
-  skillIds: [],
+  categories: [],
+  skills: [],
 };
 
 export const useOfferFormStore = create<OfferFormStore>()(

@@ -5,11 +5,11 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import type { TransactionsSearchParams } from "@entities/offer";
 import styles from "./TransactionsFilter.module.scss";
 import { useTransactionsFilter } from "./model/useTransactionsFilter";
-import { BaseWrapperFilter } from "../base-wrapper/BaseWrapperFilter";
 import {
   TRANSACTION_SOURCE_TYPE_OPTIONS,
   TRANSACTION_TYPE_OPTIONS,
 } from "./config/transactionFilterMaps";
+import { BaseWrapperFilter } from "@shared/ui/wrappers";
 
 interface TransactionsFilterProps {
   search: TransactionsSearchParams;

@@ -11,6 +11,8 @@ import {
   ParticipationJoinButton,
   ParticipationLeaveButton,
 } from "@features/participation";
+import { ReportButton } from "@features/moderation";
+import { ModerationSubjectType } from "@entities/report";
 
 export const EventPage = () => {
   const { tab, event, policyConfig, forms, handleTabChange } = useEventPage();
@@ -24,6 +26,12 @@ export const EventPage = () => {
         transition={{ duration: 0.3 }}
       >
         <div className={styles.headerEventInfo}>
+          <div className={styles.reportWrapper}>
+            <ReportButton
+              subjectType={ModerationSubjectType.Event}
+              subjectId={event.id}
+            />
+          </div>
           <div className={styles.mainEventData}>
             <div className={styles.eventOrganizationInfo}>
               <div className={styles.titleHeader}>

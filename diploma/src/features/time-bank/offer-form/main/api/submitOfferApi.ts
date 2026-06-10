@@ -19,6 +19,6 @@ const buildPayload = (data: OfferFormData) => ({
   endAt: data.endAt,
   isOnline: data.isOnline,
   ...(!data.isOnline ? { location: data.location } : undefined),
-  categoryIds: data.categoryIds,
-  skillIds: data.skillIds,
+  categoryIds: data.categories.map((category) => category.id),
+  skillIds: data.skills.map((skill) => skill.id),
 });

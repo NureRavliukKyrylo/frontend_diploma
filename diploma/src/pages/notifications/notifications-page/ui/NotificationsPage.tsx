@@ -1,6 +1,7 @@
 import { NotificationsListWidget } from "@widgets/notifications";
 import {
   NotificationItem,
+  NotificationItemSkeleton,
   notificationTypeOptions,
 } from "@entities/notification";
 import { Pagination, Toggle } from "@shared/ui";
@@ -78,7 +79,7 @@ export const NotificationsPage = () => {
           </div>
         </div>
         <div className={styles.headerRight}>
-          <ReadAllNotificationsButton />
+          {unreadCount > 0 && <ReadAllNotificationsButton />}
           <AnimatePresence mode="wait">
             {isSelectMode ? (
               <motion.div
@@ -152,7 +153,10 @@ export const NotificationsPage = () => {
         ) : (
           <Suspense
             fallback={
-              <ListWidgetSkeleton renderSkeleton={() => <div />} items={15} />
+              <ListWidgetSkeleton
+                renderSkeleton={() => <NotificationItemSkeleton />}
+                items={15}
+              />
             }
           >
             <AnimatePresence mode="wait">

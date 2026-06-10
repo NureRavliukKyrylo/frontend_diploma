@@ -3,6 +3,7 @@ import styles from "./FeedbackBase.module.scss";
 import { Stars } from "@shared/ui/stars";
 import { formatDateToInput } from "@shared/libs/date";
 import { getFullName } from "@entities/user";
+import { Avatar } from "@shared/ui";
 
 interface FeedbackBaseProps {
   feedback: Feedback;
@@ -20,7 +21,14 @@ export const FeedbackBase = ({
       className={`${styles.feedbackBaseWrapper} ${rightContent ? styles.hasRightContent : ""}`}
     >
       <div className={styles.memberInfo}>
-        <img src={feedback.author.avatarUrl} alt="memberAvatar" />
+        <Avatar
+          src={feedback.author.avatarUrl}
+          className={styles.feedbackAvatar}
+          fallback={getFullName(
+            feedback.author.firstName,
+            feedback.author.lastName,
+          )}
+        />
         <div className={styles.initialsMember}>
           <h1>
             {displayName ??

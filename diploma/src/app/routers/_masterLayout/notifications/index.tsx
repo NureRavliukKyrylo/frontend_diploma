@@ -1,8 +1,12 @@
 import {
   notificationDefaults,
+  notificationQuery,
   notificationSearchSchema,
 } from "@entities/notification";
-import { NotificationsPage } from "@pages/notifications";
+import {
+  NotificationsPage,
+  NotificationsPageSkeleton,
+} from "@pages/notifications";
 import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_masterLayout/notifications/")({
@@ -10,5 +14,13 @@ export const Route = createFileRoute("/_masterLayout/notifications/")({
   validateSearch: notificationSearchSchema,
   search: {
     middlewares: [stripSearchParams(notificationDefaults)],
+  },
+  pendingComponent: NotificationsPageSkeleton,
+  loader: async ({ context: { queryClient }, location }) => {
+    const search = notificationSearchSchema.parse(location.search);
+    await Promise.all([
+      queryClient.ensureQueryData(notificationQuery.list(search)),
+      queryClient.ensureQueryData(notificationQuery.unreadCount()),
+    ]);
   },
 });

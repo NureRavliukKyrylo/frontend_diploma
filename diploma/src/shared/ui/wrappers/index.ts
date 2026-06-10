@@ -5,3 +5,4 @@ export { FillingInfoWrapper } from "./multi-step/filling-info-wrapper/FillingInf
 export { SettingsWrapper } from "./profile/settings-wrapper/SettingsWrapper";
 export { MainProfileWrapper } from "./profile/main-wrapper/MainProfileWrapper";
 export { VerificationWrapper } from "./profile/verification-wrapper/VerificationWrapper";
+export { BaseWrapperFilter } from "./filter/BaseWrapperFilter";

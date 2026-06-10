@@ -5,12 +5,21 @@ import { FeedbackBase } from "../base/FeedbackBase";
 interface FeedbackCardProps {
   feedback: FeedbackType;
   displayName?: string;
+  rightContent?: React.ReactNode;
 }
 
-export const FeedbackCard = ({ feedback, displayName }: FeedbackCardProps) => {
+export const FeedbackCard = ({
+  feedback,
+  displayName,
+  rightContent,
+}: FeedbackCardProps) => {
   return (
     <div className={styles.feedbackWrapper}>
-      <FeedbackBase feedback={feedback} displayName={displayName} />
+      <FeedbackBase
+        feedback={feedback}
+        displayName={displayName}
+        rightContent={rightContent}
+      />
     </div>
   );
 };

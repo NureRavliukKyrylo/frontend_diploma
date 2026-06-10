@@ -15,6 +15,16 @@
   }
 }
 
+.dropdownReport {
+  max-height: 150px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  max-height: 200px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 .wrapperItem {
   &:hover {
     background: rgba(0, 0, 0, 0.05);

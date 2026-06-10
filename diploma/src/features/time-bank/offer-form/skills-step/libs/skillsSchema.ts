@@ -1,8 +1,8 @@
 import * as Yup from "yup";
 
 export const skillsSchema = Yup.object({
-  skillIds: Yup.array()
-    .of(Yup.string().required())
+  skills: Yup.array()
+    .of(Yup.object().required())
     .min(1, "Select at least one skill")
     .required(),
 });

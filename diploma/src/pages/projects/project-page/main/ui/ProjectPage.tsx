@@ -10,6 +10,8 @@ import {
   ParticipationJoinButton,
   ParticipationLeaveButton,
 } from "@features/participation";
+import { ReportButton } from "@features/moderation";
+import { ModerationSubjectType } from "@entities/report";
 
 export const ProjectPage = () => {
   const { tab, project, policyConfig, forms, handleTabChange } =
@@ -23,6 +25,12 @@ export const ProjectPage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
+        <div className={styles.reportWrapper}>
+          <ReportButton
+            subjectType={ModerationSubjectType.Project}
+            subjectId={project.id}
+          />
+        </div>
         <div className={styles.headerProjectInfo}>
           <div className={styles.mainProjectData}>
             <div className={styles.titleHeader}>

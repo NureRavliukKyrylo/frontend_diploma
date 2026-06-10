@@ -14,13 +14,13 @@ export const useNotificationsPage = () => {
   const [isSelectMode, setIsSelectMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-  const activeStatus = search.status ?? "All";
-  const activeType = search.type;
+  const activeStatus = search.Status ?? "All";
+  const activeType = search.Type;
 
   const queryParams = {
     PageSize: 15,
     Page: search.Page ?? 1,
-    ...(activeStatus === "Unread" && { Status: "Unread" }),
+    ...(activeStatus === "Unread" && { Status: "Unread" as const }),
     ...(activeType && { Type: activeType }),
   };
 
@@ -47,7 +47,7 @@ export const useNotificationsPage = () => {
     navigate({
       search: (prev) => ({
         ...prev,
-        type: type === "All" ? undefined : type,
+        Type: type === "All" ? undefined : type,
         Page: undefined,
       }),
     });
@@ -71,7 +71,7 @@ export const useNotificationsPage = () => {
     navigate({
       search: (prev) => ({
         ...prev,
-        status: status === "All" ? undefined : status,
+        Status: status === "All" ? undefined : status,
         Page: undefined,
       }),
     });

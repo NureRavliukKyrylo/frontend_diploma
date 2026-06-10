@@ -63,10 +63,21 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @include respond-to(tablet) {
+    gap: 12px;
+  }
+
+  @include respond-to(mobile) {
+    gap: 10px;
+    width: 100%;
+  }
+
   .topContent {
     display: flex;
     align-items: center;
     gap: 12px;
+
     .title {
       @include font-base(30px, 700);
       background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
@@ -85,6 +96,7 @@
         font-size: 18px;
       }
     }
+
     .unreadBadge {
       @include font-base(13px, 700);
       background: #8c0000;
@@ -102,9 +114,13 @@
 
   .bottomContent {
     display: flex;
-    align-items: center;
-    gap: 12px;
     align-items: stretch;
+    gap: 12px;
+
+    @include respond-to(mobile) {
+      gap: 8px;
+      height: 30px;
+    }
   }
 }
 
@@ -112,6 +128,11 @@
   display: flex;
   align-items: center;
   gap: 12px;
+
+  @include respond-to(mobile) {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
 .paginationWrapper {
@@ -143,6 +164,10 @@
   border: none;
   cursor: pointer;
   padding: 0;
+
+  @include respond-to(mobile) {
+    font-size: 14px;
+  }
 }
 
 .cancelButton {
@@ -153,6 +178,10 @@
   border: none;
   cursor: pointer;
   padding: 0;
+
+  @include respond-to(mobile) {
+    font-size: 14px;
+  }
 }
 
 .notificationWrapper {
@@ -185,6 +214,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @include respond-to(mobile) {
+    width: 18px;
+    height: 18px;
+    top: 8px;
+    right: 8px;
+  }
 }
 
 .checkmarkSelected {
@@ -196,6 +232,11 @@
   width: 12px;
   height: 12px;
   color: #ffffff;
+
+  @include respond-to(mobile) {
+    width: 10px;
+    height: 10px;
+  }
 }
 
 .emptyState {
@@ -211,7 +252,7 @@
       font-size: 25px;
     }
     @include respond-to(mobile) {
-      font-size: 204px;
+      font-size: 20px;
     }
   }
 
@@ -242,12 +283,20 @@
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   padding: 6px;
+  @include respond-to(mobile) {
+    padding: 2px;
+  }
 }
 
 .toggleNotificationButton {
   color: rgba(0, 0, 0, 0.8);
   padding: 4px 14px;
-  @include font-base(13px, 500);
+  @include font-base(16px, 500);
+
+  @include respond-to(mobile) {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
 
   &:hover {
     background: rgba(231, 226, 226, 0.5);
@@ -265,4 +314,67 @@
 
 .toggleNotificationPill {
   background-color: black;
+}
+
+.skeletonTitle {
+  width: 220px;
+  height: 34px;
+  border-radius: 8px;
+
+  @include respond-to(laptop) {
+    width: 190px;
+    height: 30px;
+  }
+  @include respond-to(tablet) {
+    width: 160px;
+    height: 26px;
+  }
+  @include respond-to(mobile) {
+    width: 130px;
+    height: 22px;
+  }
+}
+
+.skeletonBadge {
+  width: 32px;
+  height: 22px;
+  border-radius: 50px;
+
+  @include respond-to(mobile) {
+    width: 26px;
+    height: 18px;
+  }
+}
+
+.skeletonToggle {
+  width: 130px;
+  height: 36px;
+  border-radius: 20px;
+
+  @include respond-to(mobile) {
+    width: 110px;
+    height: 32px;
+  }
+}
+
+.skeletonFilter {
+  width: 80px;
+  height: 36px;
+  border-radius: 20px;
+
+  @include respond-to(mobile) {
+    width: 68px;
+    height: 32px;
+  }
+}
+
+.skeletonAction {
+  width: 110px;
+  height: 32px;
+  border-radius: 50px;
+
+  @include respond-to(mobile) {
+    width: 90px;
+    height: 28px;
+  }
 }

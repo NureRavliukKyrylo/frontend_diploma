@@ -4,7 +4,6 @@ import {
   SelectFilter,
   SwitchFilter,
 } from "@shared/ui/filters";
-import { BaseWrapperFilter } from "../../base-wrapper/BaseWrapperFilter";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { onlineOptions, type OfferJoinedSearchParams } from "@entities/offer";
 import { useBookingsFilter } from "../model/useBookingsFilter";
@@ -12,6 +11,7 @@ import { CategoriesListFilter } from "@features/project";
 import styles from "./BookingsFilter.module.scss";
 import { useOffersFiltersInfiniteQuery } from "@shared/api/filters";
 import { SkillsListFilter } from "@features/skills";
+import { BaseWrapperFilter } from "@shared/ui/wrappers";
 
 interface BookingsFilterProps {
   search: OfferJoinedSearchParams;

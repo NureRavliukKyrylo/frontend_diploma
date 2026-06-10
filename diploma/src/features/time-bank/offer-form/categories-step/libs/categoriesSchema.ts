@@ -1,8 +1,8 @@
 import * as Yup from "yup";
 
 export const categoriesSchema = Yup.object({
-  categoryIds: Yup.array()
-    .of(Yup.string().required())
+  categories: Yup.array()
+    .of(Yup.object().required())
     .min(1, "Select at least one category")
     .required(),
 });

@@ -8,4 +8,8 @@
   cursor: pointer;
   padding: 0;
   white-space: nowrap;
+
+  @include respond-to(mobile) {
+    font-size: 12px;
+  }
 }
