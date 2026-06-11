@@ -66,6 +66,7 @@ export const ChatsListWidget = ({
                 fallback={
                   <ListWidgetSkeleton
                     renderSkeleton={() => <ChatItemSkeleton />}
+                    items={5}
                   />
                 }
               >
