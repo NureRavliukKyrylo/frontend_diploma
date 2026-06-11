@@ -7,12 +7,39 @@ $focus-border-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   height: 100%;
+  width: 100%;
 
   @include respond-to(tablet) {
     height: 40px;
   }
   @include respond-to(mobile) {
     height: 35px;
+  }
+  &.chat {
+    .input {
+      @include font-base(16px, 400);
+      padding: 8px 16px 8px 40px;
+      border-radius: 20px;
+      box-shadow: none;
+      border: 1.5px solid rgba(0, 0, 0, 0.15);
+
+      &::placeholder {
+        color: rgba(0, 0, 0, 0.35);
+        font-weight: 300;
+      }
+
+      &:focus {
+        border-color: rgba(0, 0, 0, 0.35);
+      }
+    }
+
+    .icon {
+      right: unset;
+      left: 12px;
+      width: 18px;
+      height: 18px;
+      opacity: 0.4;
+    }
   }
 }
 

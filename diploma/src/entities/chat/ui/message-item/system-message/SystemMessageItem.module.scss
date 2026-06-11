@@ -1,0 +1,27 @@
+@use "@shared/assets/styles" as *;
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 16px;
+}
+
+.message {
+  @include font-base(12px, 400);
+  color: #9aa0a6;
+  font-style: italic;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timestamp {
+  @include font-base(11px, 300);
+  color: #b0b0b0;
+  flex-shrink: 0;
+}

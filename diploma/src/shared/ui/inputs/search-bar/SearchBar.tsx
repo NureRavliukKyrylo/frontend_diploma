@@ -7,7 +7,7 @@ interface SearchBarProps {
   placeholder?: string;
   value?: string;
   onChange?: (value: string) => void;
-  variant?: "default" | "projects";
+  variant?: "default" | "projects" | "chat";
   debounce?: number;
 }
 
@@ -28,7 +28,7 @@ export const SearchBar = ({
   }, [debouncedValue]);
 
   return (
-    <div className={styles.inputContainer}>
+    <div className={`${styles.inputContainer} ${variantClass}`}>
       <input
         type="text"
         placeholder={placeholder}

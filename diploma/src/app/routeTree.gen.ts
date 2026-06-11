@@ -23,6 +23,7 @@ import { Route as MasterLayoutReportsIndexRouteImport } from './routers/_masterL
 import { Route as MasterLayoutProfileIndexRouteImport } from './routers/_masterLayout/profile/index'
 import { Route as MasterLayoutOrganizationsIndexRouteImport } from './routers/_masterLayout/organizations/index'
 import { Route as MasterLayoutNotificationsIndexRouteImport } from './routers/_masterLayout/notifications/index'
+import { Route as MasterLayoutChatIndexRouteImport } from './routers/_masterLayout/chat/index'
 import { Route as MasterLayoutCategoriesIndexRouteImport } from './routers/_masterLayout/categories/index'
 import { Route as MasterLayoutCalendarIndexRouteImport } from './routers/_masterLayout/calendar/index'
 import { Route as MasterLayoutActivitiesIndexRouteImport } from './routers/_masterLayout/activities/index'
@@ -143,6 +144,11 @@ const MasterLayoutNotificationsIndexRoute =
     path: '/notifications/',
     getParentRoute: () => MasterLayoutRoute,
   } as any)
+const MasterLayoutChatIndexRoute = MasterLayoutChatIndexRouteImport.update({
+  id: '/chat/',
+  path: '/chat/',
+  getParentRoute: () => MasterLayoutRoute,
+} as any)
 const MasterLayoutCategoriesIndexRoute =
   MasterLayoutCategoriesIndexRouteImport.update({
     id: '/categories/',
@@ -323,6 +329,7 @@ export interface FileRoutesByFullPath {
   '/activities/': typeof MasterLayoutActivitiesIndexRoute
   '/calendar/': typeof MasterLayoutCalendarIndexRoute
   '/categories/': typeof MasterLayoutCategoriesIndexRoute
+  '/chat/': typeof MasterLayoutChatIndexRoute
   '/notifications/': typeof MasterLayoutNotificationsIndexRoute
   '/organizations/': typeof MasterLayoutOrganizationsIndexRoute
   '/profile/': typeof MasterLayoutProfileIndexRoute
@@ -354,6 +361,7 @@ export interface FileRoutesByTo {
   '/activities': typeof MasterLayoutActivitiesIndexRoute
   '/calendar': typeof MasterLayoutCalendarIndexRoute
   '/categories': typeof MasterLayoutCategoriesIndexRoute
+  '/chat': typeof MasterLayoutChatIndexRoute
   '/notifications': typeof MasterLayoutNotificationsIndexRoute
   '/organizations': typeof MasterLayoutOrganizationsIndexRoute
   '/profile': typeof MasterLayoutProfileIndexRoute
@@ -390,6 +398,7 @@ export interface FileRoutesById {
   '/_masterLayout/activities/': typeof MasterLayoutActivitiesIndexRoute
   '/_masterLayout/calendar/': typeof MasterLayoutCalendarIndexRoute
   '/_masterLayout/categories/': typeof MasterLayoutCategoriesIndexRoute
+  '/_masterLayout/chat/': typeof MasterLayoutChatIndexRoute
   '/_masterLayout/notifications/': typeof MasterLayoutNotificationsIndexRoute
   '/_masterLayout/organizations/': typeof MasterLayoutOrganizationsIndexRoute
   '/_masterLayout/profile/': typeof MasterLayoutProfileIndexRoute
@@ -424,6 +433,7 @@ export interface FileRouteTypes {
     | '/activities/'
     | '/calendar/'
     | '/categories/'
+    | '/chat/'
     | '/notifications/'
     | '/organizations/'
     | '/profile/'
@@ -455,6 +465,7 @@ export interface FileRouteTypes {
     | '/activities'
     | '/calendar'
     | '/categories'
+    | '/chat'
     | '/notifications'
     | '/organizations'
     | '/profile'
@@ -490,6 +501,7 @@ export interface FileRouteTypes {
     | '/_masterLayout/activities/'
     | '/_masterLayout/calendar/'
     | '/_masterLayout/categories/'
+    | '/_masterLayout/chat/'
     | '/_masterLayout/notifications/'
     | '/_masterLayout/organizations/'
     | '/_masterLayout/profile/'
@@ -620,6 +632,13 @@ declare module '@tanstack/react-router' {
       path: '/notifications'
       fullPath: '/notifications/'
       preLoaderRoute: typeof MasterLayoutNotificationsIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/chat/': {
+      id: '/_masterLayout/chat/'
+      path: '/chat'
+      fullPath: '/chat/'
+      preLoaderRoute: typeof MasterLayoutChatIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
     '/_masterLayout/categories/': {
@@ -803,6 +822,7 @@ interface MasterLayoutRouteChildren {
   MasterLayoutActivitiesIndexRoute: typeof MasterLayoutActivitiesIndexRoute
   MasterLayoutCalendarIndexRoute: typeof MasterLayoutCalendarIndexRoute
   MasterLayoutCategoriesIndexRoute: typeof MasterLayoutCategoriesIndexRoute
+  MasterLayoutChatIndexRoute: typeof MasterLayoutChatIndexRoute
   MasterLayoutNotificationsIndexRoute: typeof MasterLayoutNotificationsIndexRoute
   MasterLayoutOrganizationsIndexRoute: typeof MasterLayoutOrganizationsIndexRoute
   MasterLayoutReportsIndexRoute: typeof MasterLayoutReportsIndexRoute
@@ -825,6 +845,7 @@ const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
   MasterLayoutActivitiesIndexRoute: MasterLayoutActivitiesIndexRoute,
   MasterLayoutCalendarIndexRoute: MasterLayoutCalendarIndexRoute,
   MasterLayoutCategoriesIndexRoute: MasterLayoutCategoriesIndexRoute,
+  MasterLayoutChatIndexRoute: MasterLayoutChatIndexRoute,
   MasterLayoutNotificationsIndexRoute: MasterLayoutNotificationsIndexRoute,
   MasterLayoutOrganizationsIndexRoute: MasterLayoutOrganizationsIndexRoute,
   MasterLayoutReportsIndexRoute: MasterLayoutReportsIndexRoute,

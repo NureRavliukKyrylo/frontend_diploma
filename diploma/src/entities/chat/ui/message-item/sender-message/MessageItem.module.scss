@@ -1,0 +1,157 @@
+@use "@shared/assets/styles" as *;
+
+.messageWrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: 75%;
+
+  @include respond-to(tablet) {
+    max-width: 85%;
+  }
+  @include respond-to(mobile) {
+    max-width: 95%;
+  }
+
+  &.mine {
+    justify-content: flex-end;
+    align-self: flex-end;
+
+    .bubble {
+      background: #fff0f0;
+      border-radius: 20px 20px 4px 20px;
+    }
+
+    .meta {
+      justify-content: flex-end;
+    }
+
+    .replyBlock {
+      background: rgba(140, 0, 0, 0.06);
+    }
+  }
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+
+  @include respond-to(mobile) {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.bubble {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: #f2f2f2;
+  border-radius: 20px 20px 20px 4px;
+  padding: 10px 14px;
+}
+
+.roleName {
+  @include font-base(12px, 400);
+  font-style: italic;
+  color: #8c0000;
+}
+
+.replyBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-left: 3px solid #8c0000;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 0px 8px 8px 0px;
+  margin-bottom: 4px;
+}
+
+.replyName {
+  @include font-base(12px, 600);
+  color: #8c0000;
+}
+
+.replyMessage {
+  @include font-base(13px, 300);
+  color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+
+.mentions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.mention {
+  @include font-base(13px, 500);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.message {
+  @include font-base(15px, 400);
+  line-height: 1.5;
+  word-break: break-word;
+
+  @include respond-to(mobile) {
+    font-size: 14px;
+  }
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.timestamp {
+  @include font-base(11px, 300);
+  color: #9aa0a6;
+}
+
+.edited {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  @include font-base(11px, 300);
+  color: #9aa0a6;
+}
+
+.editIcon {
+  width: 11px;
+  height: 11px;
+  opacity: 0.6;
+}
+
+.readStatus {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 18px;
+  height: 14px;
+}
+
+.checkIcon {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  color: #9aa0a6;
+
+  &:first-child {
+    left: 0;
+  }
+}
+
+.checkRead {
+  left: 4px;
+  color: #8c0000;
+}

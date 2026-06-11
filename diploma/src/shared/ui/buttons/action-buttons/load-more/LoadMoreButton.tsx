@@ -4,8 +4,8 @@ import styles from "./LoadMoreButton.module.scss";
 import clsx from "clsx";
 
 interface LoadMoreButtonProps {
-  onClick: () => void;
-  isLoading: boolean;
+  onClick?: () => void;
+  isLoading?: boolean;
   className?: string;
   label?: string;
 }

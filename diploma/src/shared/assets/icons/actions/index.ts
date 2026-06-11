@@ -28,3 +28,4 @@ export { default as GiftIcon } from "./gift.svg?react";
 export { default as RejectIcon } from "./reject.svg?react";
 export { default as ApproveIcon } from "./approve.svg?react";
 export { default as DeactivateIcon } from "./deactivate.svg?react";
+export { default as FilterIcon } from "./filter.svg?react";

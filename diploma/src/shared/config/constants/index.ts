@@ -11,3 +11,4 @@ export { ENTITY_STATUS_MAP } from "./EntityStatus";
 export { POLICY_STATUS_MAP } from "./PolicyStatus";
 export { EVENT_COLOR } from "./EventTypeColor";
 export { listActivitiesTabs } from "./listActivitiesTabs";
+export { getMentionColor, MENTION_COLORS } from "./mentionColors";
