@@ -4,4 +4,5 @@ export interface PaginationResponse {
   pageSize: number;
   totalPages: number;
   nextPage: number;
+  previousPage: number;
 }

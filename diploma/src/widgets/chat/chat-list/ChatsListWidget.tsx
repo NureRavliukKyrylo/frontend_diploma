@@ -26,8 +26,7 @@ export const ChatsListWidget = ({
   className,
   entityTypes,
 }: ChatsListWidgetProps) => {
-  const wrapperClass =
-    `${styles.categoriesWidgetBlock} ${className ?? ""}`.trim();
+  const wrapperClass = `${styles.chatsWidgetBlock} ${className ?? ""}`.trim();
 
   return (
     <div className={styles.wrapperListChats}>

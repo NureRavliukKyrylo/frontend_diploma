@@ -3,12 +3,13 @@ import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { queryClient } from "@shared/api";
 import { sendMessage, type SendMessageDto } from "../api/sendMessageApi";
-import { messageKeys } from "@entities/chat";
+import { messageKeys, useChatScrollStore } from "@entities/chat";
 
 export const useSendMessage = (chatId: string) => {
   const mutation = useMutation({
     mutationFn: (data: SendMessageDto) => sendMessage(chatId, data),
     onSuccess: () => {
+      useChatScrollStore.getState().requestScrollToBottom(chatId);
       queryClient.invalidateQueries({ queryKey: messageKeys.list(chatId) });
     },
     onError: (error: unknown) => {

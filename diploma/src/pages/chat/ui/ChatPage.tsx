@@ -4,10 +4,12 @@ import {
   MessageItem,
   messageQuery,
   relatedEntityTypeChatValues,
+  SystemMessageItem,
 } from "@entities/chat";
 import { getFullName } from "@entities/user";
 import { profileQuery } from "@entities/user/profile";
 import {
+  useQuery,
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
@@ -19,6 +21,7 @@ import {
 } from "@widgets/chat";
 import styles from "./ChatPage.module.scss";
 import { ChatInput } from "@features/chat";
+import { Suspense } from "react";
 
 export const ChatPage = () => {
   const { chatId, ...search } = useSearch({ from: "/_masterLayout/chat/" });
@@ -69,18 +72,50 @@ export const ChatPage = () => {
       </div>
       <div className={styles.chatWrapper}>
         {chatId && (
-          <>
-            <MessagesListWidget
-              useMessagesQuery={() => {
-                const { data } = useSuspenseInfiniteQuery(
-                  messageQuery.list(chatId, { pageSize: 50 }),
-                );
-                return { data };
-              }}
-              renderCard={(message) => <MessageItem message={message} />}
-            />
-            <ChatInput chatId={chatId} />
-          </>
+          <div className={styles.wrapperExactChat}>
+            <Suspense fallback={<div>Loading..</div>}>
+              <MessagesListWidget
+                useMessagesQuery={() => {
+                  const { data: anchorPage } = useSuspenseQuery(
+                    messageQuery.anchor(chatId, { pageSize: 30 }),
+                  );
+                  const {
+                    data,
+                    hasNextPage,
+                    hasPreviousPage,
+                    isFetchingNextPage,
+                    fetchNextPage,
+                    fetchPreviousPage,
+                  } = useSuspenseInfiniteQuery({
+                    ...messageQuery.list(chatId, {
+                      pageSize: 30,
+                      page: anchorPage?.pagination.page,
+                    }),
+                    initialData: {
+                      pages: [anchorPage],
+                      pageParams: [anchorPage?.pagination.page],
+                    },
+                  });
+                  return {
+                    data,
+                    hasNextPage,
+                    isFetchingNextPage,
+                    fetchNextPage,
+                  };
+                }}
+                renderCard={(message) =>
+                  message.isSystem ? (
+                    <SystemMessageItem message={message} />
+                  ) : (
+                    <MessageItem message={message} />
+                  )
+                }
+                className={styles.wrapperMessages}
+                chatId={chatId}
+              />
+              <ChatInput chatId={chatId} />
+            </Suspense>
+          </div>
         )}
       </div>
     </div>

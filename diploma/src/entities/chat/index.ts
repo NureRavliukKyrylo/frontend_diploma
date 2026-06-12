@@ -8,3 +8,4 @@ export { ChatItemSkeleton } from "./ui/chat-item/ChatItemSkeleton";
 export { messageQuery, messageKeys } from "./model/queries/messageQuery";
 export { MessageItem } from "./ui/message-item/sender-message/MessageItem";
 export { SystemMessageItem } from "./ui/message-item/system-message/SystemMessageItem";
+export { useChatScrollStore } from "./model/store/ChatScrollStore";

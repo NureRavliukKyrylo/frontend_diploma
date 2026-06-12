@@ -18,4 +18,5 @@ export type Message = {
   mentions: { firstName: string; lastName: string }[];
   isMine: boolean;
   isRead: boolean;
+  isSystem: boolean;
 };
