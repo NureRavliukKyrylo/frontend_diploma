@@ -1,18 +1,27 @@
 import { getListCases } from "@entities/report/api";
+import { getCaseId } from "@entities/report/api/case-id/getCaseIdApi";
 import type { ReportCasesSearchParams } from "@entities/report/libs";
 import { queryOptions } from "@tanstack/react-query";
 
 export const reportKeys = {
   all: () => ["reports"] as const,
-  list: (params: ReportCasesSearchParams) =>
-    [...reportKeys.all(), "list", params] as const,
+  list: () => [...reportKeys.all(), "list"] as const,
+  listParams: (params: ReportCasesSearchParams) =>
+    [...reportKeys.list(), params] as const,
+  id: (caseId: string) => [...reportKeys.all(), "id", caseId],
 };
 
 export const reportQuery = {
-  list: (params: ReportCasesSearchParams) =>
+  listParams: (params: ReportCasesSearchParams) =>
     queryOptions({
-      queryKey: reportKeys.list({ ...params }),
+      queryKey: reportKeys.listParams({ ...params }),
       queryFn: () => getListCases({ ...params }),
       placeholderData: (prev) => prev,
+    }),
+  id: (caseId: string) =>
+    queryOptions({
+      queryKey: reportKeys.id(caseId),
+      queryFn: () => getCaseId(caseId),
+      select: (res) => res.data,
     }),
 };

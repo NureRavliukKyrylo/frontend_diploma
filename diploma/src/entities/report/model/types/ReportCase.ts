@@ -11,9 +11,16 @@ export type ReportCase = {
     lastName: string;
     avatarUrl: string;
   };
+  relatedReported: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    avatarUrl: string;
+  };
   createdAt: string;
   reason: ReportReason;
   subjectId: string;
   details: string;
   entityContent?: string;
+  resolvedAt: string;
 };

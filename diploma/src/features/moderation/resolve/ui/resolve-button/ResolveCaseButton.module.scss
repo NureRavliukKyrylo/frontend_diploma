@@ -1,0 +1,19 @@
+@use "@shared/assets/styles" as *;
+
+.resolveButton {
+  @include font-base(15px, 700);
+  background: #1a1a1a;
+  color: #ffffff;
+  border-radius: 50px;
+  padding: 10px 24px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  @include respond-to(mobile) {
+    padding: 8px 18px;
+    font-size: 14px;
+  }
+}

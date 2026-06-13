@@ -5,12 +5,29 @@ import { getFullName } from "@entities/user";
 import type { Message } from "../../../model";
 import styles from "./MessageItem.module.scss";
 import { getMentionColor } from "@shared/config/constants";
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@heroui/react";
+import type { MenuItem } from "@shared/config/types";
 
 interface MessageItemProps {
   message: Message;
+  menuItems: MenuItem<"default" | "edit" | "delete" | "reply" | "report">[];
+  openId: string | null;
+  setOpenId: (id: string | null) => void;
 }
 
-export const MessageItem = ({ message }: MessageItemProps) => {
+export const MessageItem = ({
+  message,
+  menuItems,
+  openId,
+  setOpenId,
+}: MessageItemProps) => {
+  const isOpen = openId === message.id;
+
   const senderName = getFullName(
     message.sender.firstName,
     message.sender.lastName,
@@ -19,6 +36,10 @@ export const MessageItem = ({ message }: MessageItemProps) => {
   return (
     <div
       className={`${styles.messageWrapper} ${message.isMine ? styles.mine : ""}`}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        setOpenId(message.id);
+      }}
     >
       {!message.isMine && (
         <Avatar
@@ -27,7 +48,34 @@ export const MessageItem = ({ message }: MessageItemProps) => {
           src={message.sender.avatarUrl}
         />
       )}
+
       <div className={styles.bubble}>
+        <Dropdown
+          isOpen={isOpen}
+          onOpenChange={(open) => setOpenId(open ? message.id : null)}
+          placement={message.isMine ? "bottom-end" : "bottom-start"}
+          shouldBlockScroll={false}
+          classNames={{ content: styles.dropdownContent }}
+        >
+          <DropdownTrigger>
+            <span className={styles.dropdownAnchor} />
+          </DropdownTrigger>
+          <DropdownMenu>
+            {menuItems.map((item) => (
+              <DropdownItem
+                key={item.key}
+                onClick={item.onClick}
+                classNames={{
+                  base: `${styles.menuItem} ${styles[item.variant ?? "default"]}`,
+                  title: styles.menuItemTitle,
+                }}
+              >
+                {item.label}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </Dropdown>
+
         {!message.isMine && (
           <span className={styles.roleName}>{message.sender.roleName}</span>
         )}

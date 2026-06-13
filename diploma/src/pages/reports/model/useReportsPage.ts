@@ -4,8 +4,10 @@ import { useNavigate, useSearch } from "@tanstack/react-router";
 
 export const useReportsPage = () => {
   const navigate = useNavigate({ from: "/reports/" });
-  const search = useSearch({ from: "/_masterLayout/reports/" });
-  const { data: reports } = useQuery(reportQuery.list(search));
+  const { reportId, ...search } = useSearch({
+    from: "/_masterLayout/reports/",
+  });
+  const { data: reports } = useQuery(reportQuery.listParams(search));
 
   const nav = (
     updater: (prev: ReportCasesSearchParams) => ReportCasesSearchParams,
@@ -28,7 +30,11 @@ export const useReportsPage = () => {
 
     handlePageChange: (page: number) =>
       nav((prev) => ({ ...prev, Page: page })),
+    handleReportClick: (id: string) =>
+      nav((prev) => ({ ...prev, reportId: id })),
+    handleReportClose: () => nav((prev) => ({ ...prev, reportId: undefined })),
     search,
     reports,
+    reportId,
   };
 };

@@ -5,11 +5,11 @@ import {
   messageQuery,
   relatedEntityTypeChatValues,
   SystemMessageItem,
+  type Message,
 } from "@entities/chat";
 import { getFullName } from "@entities/user";
 import { profileQuery } from "@entities/user/profile";
 import {
-  useQuery,
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
@@ -20,13 +20,55 @@ import {
   MessagesListWidget,
 } from "@widgets/chat";
 import styles from "./ChatPage.module.scss";
-import { ChatInput } from "@features/chat";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
+import { MessageForm } from "@features/chat";
+import type { MenuItem } from "@shared/config/types";
 
 export const ChatPage = () => {
   const { chatId, ...search } = useSearch({ from: "/_masterLayout/chat/" });
   const { data: user } = useSuspenseQuery(profileQuery.all());
   const navigate = useNavigate({ from: "/chat/" });
+
+  const [openId, setOpenId] = useState<string | null>(null);
+
+  const getMenuItems = (
+    message: Message,
+  ): MenuItem<"default" | "edit" | "delete" | "reply" | "report">[] =>
+    message.isMine
+      ? [
+          {
+            key: "edit",
+            label: "Edit",
+            onClick: () => console.log(message),
+            variant: "edit" as const,
+          },
+          {
+            key: "delete",
+            label: "Delete",
+            onClick: () => console.log(message),
+            variant: "delete" as const,
+          },
+          {
+            key: "reply",
+            label: "Reply",
+            onClick: () => console.log(message),
+            variant: "default" as const,
+          },
+        ]
+      : [
+          {
+            key: "reply",
+            label: "Reply",
+            onClick: () => console.log(message),
+            variant: "default" as const,
+          },
+          {
+            key: "report",
+            label: "Report",
+            onClick: () => console.log(message),
+            variant: "report" as const,
+          },
+        ];
 
   const handleClickChat = (chatId: string) => {
     navigate({
@@ -107,13 +149,21 @@ export const ChatPage = () => {
                   message.isSystem ? (
                     <SystemMessageItem message={message} />
                   ) : (
-                    <MessageItem message={message} />
+                    <MessageItem
+                      message={message}
+                      menuItems={getMenuItems(message)}
+                      openId={openId}
+                      setOpenId={setOpenId}
+                    />
                   )
                 }
                 className={styles.wrapperMessages}
                 chatId={chatId}
               />
-              <ChatInput chatId={chatId} />
+              <MessageForm
+                replyToMessage={{ id: "asdadas", content: "adadad" }}
+                chatId={chatId}
+              />
             </Suspense>
           </div>
         )}

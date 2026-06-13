@@ -11,6 +11,7 @@ export const reportCasesSearchDefaults = {
 
 export const reportCasesSearchSchema = z
   .object({
+    reportId: z.string().optional(),
     Search: z.string().optional(),
     OrderBy: z
       .enum(["Default", "Newest", "Latest"])

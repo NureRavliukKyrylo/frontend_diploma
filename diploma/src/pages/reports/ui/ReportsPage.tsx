@@ -2,7 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { AnimatePresence, motion } from "framer-motion";
-import { ReportCasesFilter } from "@widgets/reports";
+import { ReportCasesFilter, ReportCaseWidget } from "@widgets/reports";
 import { ReportsListWidget } from "@widgets/reports";
 import { ReportCaseItem } from "@entities/report";
 import { reportQuery } from "@entities/report";
@@ -18,6 +18,7 @@ import {
 } from "@shared/assets/animations";
 import styles from "./ReportsPage.module.scss";
 import { useReportsPage } from "../model/useReportsPage";
+import { BaseModal } from "@shared/ui/modals";
 
 const sortingReportItems = [
   { label: "Newest", value: "Newest" },
@@ -25,8 +26,16 @@ const sortingReportItems = [
 ];
 
 export const ReportsPage = () => {
-  const { handleSearch, handleSort, handlePageChange, reports, search } =
-    useReportsPage();
+  const {
+    handleSearch,
+    handleSort,
+    handlePageChange,
+    handleReportClick,
+    reports,
+    search,
+    reportId,
+    handleReportClose,
+  } = useReportsPage();
 
   return (
     <div className={styles.wrapper}>
@@ -100,7 +109,9 @@ export const ReportsPage = () => {
                 <ReportsListWidget
                   className={styles.reportsList}
                   useReportsQuery={() => {
-                    const { data } = useSuspenseQuery(reportQuery.list(search));
+                    const { data } = useSuspenseQuery(
+                      reportQuery.listParams(search),
+                    );
                     return { data: data.data };
                   }}
                   renderCard={(report, index) => (
@@ -110,6 +121,7 @@ export const ReportsPage = () => {
                       variants={staggeredCardVariants}
                       initial="hidden"
                       animate="visible"
+                      onClick={() => handleReportClick(report.id)}
                     >
                       <ReportCaseItem reportCase={report} />
                     </motion.div>
@@ -138,6 +150,16 @@ export const ReportsPage = () => {
           )}
         </ErrorBoundary>
       </div>
+      {reportId && (
+        <BaseModal
+          isOpen={!!reportId}
+          showClosed={false}
+          maxWidth="900px"
+          onClose={handleReportClose}
+        >
+          <ReportCaseWidget caseId={reportId} />
+        </BaseModal>
+      )}
     </div>
   );
 };

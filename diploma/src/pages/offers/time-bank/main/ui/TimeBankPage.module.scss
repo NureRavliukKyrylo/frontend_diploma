@@ -14,8 +14,7 @@
     gap: 30px;
   }
   @include respond-to(mobile) {
-    width: 100%;
-    padding: 0 16px;
+    width: 95%;
     gap: 24px;
   }
 }
@@ -28,10 +27,11 @@
   display: flex;
   align-items: center;
   gap: 40px;
-  border-bottom: 1px solid #e0e0e0;
   margin-bottom: 24px;
   width: fit-content;
   align-self: center;
+  flex-wrap: wrap;
+  justify-content: center;
 
   @include respond-to(tablet) {
     gap: 24px;

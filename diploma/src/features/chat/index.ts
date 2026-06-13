@@ -1,1 +1,1 @@
-export { ChatInput } from "./send-message/ui/ChatInput";
+export { MessageForm } from "./message-form/ui/MessageForm";

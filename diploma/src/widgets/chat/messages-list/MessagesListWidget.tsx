@@ -21,7 +21,7 @@ export const MessagesListWidget = ({
 }: MessagesListWidgetProps) => {
   const queryResult = useMessagesQuery?.();
   const messages = readyMessages ?? queryResult?.data;
-
+  console.log(messages);
   const hasNextPage = queryResult?.hasNextPage ?? false;
   const isFetchingNextPage = queryResult?.isFetchingNextPage ?? false;
   const fetchNextPage = queryResult?.fetchNextPage ?? (() => {});
@@ -35,7 +35,7 @@ export const MessagesListWidget = ({
   const virtualizer = useVirtualizer({
     count: messages?.length ?? 0,
     getScrollElement: () => messagesWrapperRef.current,
-    estimateSize: () => 80,
+    estimateSize: () => 90,
     getItemKey: (index) => messages![index]!.id,
     anchorTo: "end",
     followOnAppend: true,
