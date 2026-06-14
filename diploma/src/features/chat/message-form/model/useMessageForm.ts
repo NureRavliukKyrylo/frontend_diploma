@@ -8,7 +8,7 @@ interface UseMessageFormProps {
   replyToMessageId?: string;
   mentionedUserIds?: string[];
   editingMessage?: { id: string; content: string } | null;
-  onEditComplete?: () => void;
+  onCancel?: () => void;
 }
 
 export const useMessageForm = ({
@@ -16,12 +16,16 @@ export const useMessageForm = ({
   replyToMessageId = "",
   mentionedUserIds = [],
   editingMessage,
-  onEditComplete,
+  onCancel,
 }: UseMessageFormProps) => {
-  const { sendMessage, isLoading: isSending } = useSendMessage(chatId);
+  const { sendMessage, isLoading: isSending } = useSendMessage(
+    chatId,
+    onCancel,
+  );
   const { editMessage, isLoading: isEditing } = useEditMessage(
     chatId,
     editingMessage?.id ?? "",
+    onCancel,
   );
 
   const formik = useFormik<{ body: string }>({
@@ -32,7 +36,6 @@ export const useMessageForm = ({
       if (!values.body.trim()) return;
       if (editingMessage) {
         editMessage({ newContent: values.body });
-        onEditComplete?.();
       } else {
         sendMessage({
           message: values.body,

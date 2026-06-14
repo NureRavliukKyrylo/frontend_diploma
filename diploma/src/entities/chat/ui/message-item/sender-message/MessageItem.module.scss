@@ -159,6 +159,78 @@
 .dropdownAnchor {
   position: absolute;
   right: 0;
-  bottom: 20px;
+  top: 20px;
   pointer-events: none;
+}
+
+.dropdownContent {
+  @include respond-to(tablet) {
+    min-width: 150px;
+  }
+  @include respond-to(mobile) {
+    min-width: 130px;
+  }
+}
+
+.menuItem {
+  border-radius: 8px;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+  cursor: pointer;
+
+  @include respond-to(tablet) {
+    padding: 2px 5px;
+  }
+  @include respond-to(mobile) {
+    padding: 0 5px;
+  }
+
+  &.delete:hover {
+    background: #fef2f2;
+    transform: translateX(3px);
+    .menuItemTitle {
+      color: #ef4444;
+      font-weight: 600;
+    }
+  }
+
+  &.edit:hover {
+    background: #fefce8;
+    transform: translateX(3px);
+    .menuItemTitle {
+      color: #ca8a04;
+      font-weight: 600;
+    }
+  }
+  &.reply:hover {
+    background: #faf5ff;
+    transform: translateX(3px);
+    .menuItemTitle {
+      color: #7c3aed;
+      font-weight: 600;
+    }
+  }
+
+  &.report:hover {
+    background: #fff7ed;
+    transform: translateX(3px);
+    .menuItemTitle {
+      color: #ea580c;
+      font-weight: 600;
+    }
+  }
+}
+
+.menuItemTitle {
+  @include font-base(15px, 500);
+  color: #374151;
+  transition: color 0.15s ease;
+
+  @include respond-to(tablet) {
+    font-size: 14px;
+  }
+  @include respond-to(mobile) {
+    font-size: 13px;
+  }
 }

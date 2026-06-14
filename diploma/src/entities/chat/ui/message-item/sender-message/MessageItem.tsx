@@ -53,7 +53,7 @@ export const MessageItem = ({
         <Dropdown
           isOpen={isOpen}
           onOpenChange={(open) => setOpenId(open ? message.id : null)}
-          placement={message.isMine ? "bottom-end" : "bottom-start"}
+          placement={message.isMine ? "bottom-end" : "top-start"}
           shouldBlockScroll={false}
           classNames={{ content: styles.dropdownContent }}
         >

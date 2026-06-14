@@ -1,0 +1,136 @@
+@use "@shared/assets/styles" as *;
+
+.wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+
+  &.buttonActive {
+    background: #f0f4ff;
+  }
+
+  .icon {
+    width: 55px;
+    height: 55px;
+    color: #6c8ebf;
+  }
+}
+
+.badge {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4f46e5;
+  color: #fff;
+  @include font-base(15px, 700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popover {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 210px;
+  max-height: 240px;
+  overflow-y: auto;
+  z-index: 100;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+}
+
+.empty {
+  @include font-base(13px, 500);
+  color: #a1a1aa;
+  padding: 8px 12px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1.5px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+
+  &:hover {
+    background: #f0f4ff;
+  }
+
+  &.selected {
+    background: #f0f4ff;
+    border-color: rgba(79, 70, 229, 0.3);
+
+    .name {
+      color: #4f46e5;
+    }
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+    flex: 1;
+
+    .name {
+      @include font-base(13px, 600);
+      color: #1a1a1a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: color 0.15s ease;
+    }
+
+    .role {
+      @include font-base(11px, 500);
+      color: #a1a1aa;
+    }
+  }
+
+  .selectedDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+}

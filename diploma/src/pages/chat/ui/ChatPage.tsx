@@ -5,77 +5,62 @@ import {
   messageQuery,
   relatedEntityTypeChatValues,
   SystemMessageItem,
-  type Message,
 } from "@entities/chat";
 import { getFullName } from "@entities/user";
-import { profileQuery } from "@entities/user/profile";
 import {
   useSuspenseInfiniteQuery,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { useNavigate, useSearch } from "@tanstack/react-router";
 import {
   ChatSidebar,
   ChatsListWidget,
   MessagesListWidget,
 } from "@widgets/chat";
 import styles from "./ChatPage.module.scss";
-import { Suspense, useState } from "react";
-import { MessageForm } from "@features/chat";
-import type { MenuItem } from "@shared/config/types";
+import { Suspense } from "react";
+import { DeleteMessageModal, MessageForm } from "@features/chat";
+import { useChatPage } from "../model/useChatPage";
+import { ReportModal } from "@features/moderation";
+import { ModerationSubjectType } from "@entities/report";
+
+const participants = [
+  {
+    id: "22ce7e4d-63ff-425a-ad2e-40b2faada051",
+    firstName: "Kyrylo",
+    lastName: "Ravliuk",
+    avatarUrl:
+      "https://impactflowstorage2026.blob.core.windows.net/impactflow-public/avatars/22ce7e4d-63ff-425a-ad2e-40b2faada051.jpg",
+    roleName: "Participant",
+  },
+  {
+    id: "11ab2c3d-44ee-55ff-66aa-77bb88cc99dd",
+    firstName: "Anna",
+    lastName: "Kovalenko",
+    avatarUrl: undefined,
+    roleName: "Organizer",
+  },
+  {
+    id: "99ff8e7d-12ab-34cd-56ef-78901234abcd",
+    firstName: "Ivan",
+    lastName: "Petrenko",
+    avatarUrl:
+      "https://impactflowstorage2026.blob.core.windows.net/impactflow-public/avatars/some-other-uuid.jpg",
+    roleName: "Volunteer",
+  },
+];
 
 export const ChatPage = () => {
-  const { chatId, ...search } = useSearch({ from: "/_masterLayout/chat/" });
-  const { data: user } = useSuspenseQuery(profileQuery.all());
-  const navigate = useNavigate({ from: "/chat/" });
-
-  const [openId, setOpenId] = useState<string | null>(null);
-
-  const getMenuItems = (
-    message: Message,
-  ): MenuItem<"default" | "edit" | "delete" | "reply" | "report">[] =>
-    message.isMine
-      ? [
-          {
-            key: "edit",
-            label: "Edit",
-            onClick: () => console.log(message),
-            variant: "edit" as const,
-          },
-          {
-            key: "delete",
-            label: "Delete",
-            onClick: () => console.log(message),
-            variant: "delete" as const,
-          },
-          {
-            key: "reply",
-            label: "Reply",
-            onClick: () => console.log(message),
-            variant: "default" as const,
-          },
-        ]
-      : [
-          {
-            key: "reply",
-            label: "Reply",
-            onClick: () => console.log(message),
-            variant: "default" as const,
-          },
-          {
-            key: "report",
-            label: "Report",
-            onClick: () => console.log(message),
-            variant: "report" as const,
-          },
-        ];
-
-  const handleClickChat = (chatId: string) => {
-    navigate({
-      search: (prev) => ({ ...prev, chatId: chatId }),
-      resetScroll: false,
-    });
-  };
+  const {
+    chatId,
+    getMenuItems,
+    handleClickChat,
+    openId,
+    search,
+    setOpenId,
+    user,
+    clearModeType,
+    mode,
+  } = useChatPage();
 
   return (
     <div className={styles.chatPageWrapper}>
@@ -160,14 +145,54 @@ export const ChatPage = () => {
                 className={styles.wrapperMessages}
                 chatId={chatId}
               />
-              <MessageForm
-                replyToMessage={{ id: "asdadas", content: "adadad" }}
-                chatId={chatId}
-              />
             </Suspense>
+            <MessageForm
+              replyToMessage={
+                mode.reply.isActive
+                  ? {
+                      id: mode.reply.message!.id,
+                      content: mode.reply.message!.message,
+                      sender: getFullName(
+                        mode.reply.message?.sender.firstName,
+                        mode.reply.message?.sender.lastName,
+                      ),
+                    }
+                  : null
+              }
+              editingMessage={
+                mode.edit.isActive
+                  ? {
+                      id: mode.edit.message!.id,
+                      content: mode.edit.message!.message,
+                    }
+                  : null
+              }
+              onCancel={() => {
+                clearModeType("reply");
+                clearModeType("edit");
+              }}
+              participants={participants}
+              chatId={chatId}
+            />
           </div>
         )}
       </div>
+      {mode.report.message && (
+        <ReportModal
+          isOpen={mode.report.isActive}
+          onClose={() => clearModeType("report")}
+          subjectType={ModerationSubjectType.ChatMessage}
+          subjectId={mode.report.message.id}
+        />
+      )}
+      {mode.delete.message && chatId && (
+        <DeleteMessageModal
+          isOpen={mode.delete.isActive}
+          onClose={() => clearModeType("delete")}
+          message={mode.delete.message}
+          chatId={chatId}
+        />
+      )}
     </div>
   );
 };
