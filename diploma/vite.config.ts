@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
@@ -18,7 +19,16 @@ export default defineConfig({
     tailwindcss(),
     svgr(),
   ],
-
+  test: {
+    environment: "jsdom",
+    globals: true,
+    setupFiles: ["./tests/setup.ts"],
+    css: {
+      modules: {
+        classNameStrategy: "non-scoped",
+      },
+    },
+  },
   resolve: {
     alias: {
       "@app": path.resolve(__dirname, "src/app"),
@@ -27,6 +37,7 @@ export default defineConfig({
       "@features": path.resolve(__dirname, "src/features"),
       "@widgets": path.resolve(__dirname, "src/widgets"),
       "@pages": path.resolve(__dirname, "src/pages"),
+      "@tests": path.resolve(__dirname, "tests"),
     },
   },
 });

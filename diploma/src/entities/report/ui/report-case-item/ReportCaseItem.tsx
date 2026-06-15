@@ -1,24 +1,15 @@
-import { Avatar } from "@heroui/react";
 import { OnlineIcon } from "@shared/assets/icons/info";
 import type { ReportCase } from "../../model/types/ReportCase";
 import styles from "./ReportCaseItem.module.scss";
 import { getFullName } from "@entities/user";
+import { capitalize } from "@shared/libs/text";
+import { Avatar } from "@shared/ui";
 
 interface ReportCaseItemProps {
   reportCase: ReportCase;
 }
 
-const statusConfig: Record<
-  ReportCase["status"],
-  { label: string; className: string }
-> = {
-  open: { label: "Open", className: styles.statusOpen },
-  resolved: { label: "Resolved", className: styles.statusResolved },
-  rejected: { label: "Rejected", className: styles.statusRejected },
-};
-
 export const ReportCaseItem = ({ reportCase }: ReportCaseItemProps) => {
-  const config = statusConfig[reportCase.status];
   const fullName = getFullName(
     reportCase.reporterUser.firstName,
     reportCase.reporterUser.lastName,
@@ -44,11 +35,11 @@ export const ReportCaseItem = ({ reportCase }: ReportCaseItemProps) => {
       </div>
 
       <div className={styles.statusCol}>
-        <span className={`${styles.statusPill} ${config.className}`}>
+        <span className={`${styles.statusPill} ${styles[reportCase.status]}`}>
           <OnlineIcon
-            className={`${styles.statusIcon} ${styles[`${reportCase.status}Icon`]}`}
+            className={`${styles.statusIcon} ${styles[reportCase.status]}`}
           />
-          {config.label}
+          {capitalize(reportCase.status)}
         </span>
       </div>
     </div>

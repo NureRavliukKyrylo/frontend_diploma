@@ -30,10 +30,12 @@ export const EventCard = ({ event }: EventCardProps) => (
               <p className={styles.noMembers}>No volunteers joined yet</p>
             )}
             <div className={styles.endContent}>
-              <span className={styles.reccurenceInfo}>
-                <Reccurence className={styles.reccurenceIcon} />
-                <h1>{event.recurrence}</h1>
-              </span>
+              {event.recurrence && (
+                <span className={styles.reccurenceInfo}>
+                  <Reccurence className={styles.reccurenceIcon} />
+                  <h1>{event.recurrence}</h1>
+                </span>
+              )}
               <span className={styles.totalFeedbacksInfo}>
                 <Comment className={styles.feedbackIcon} />
                 <h1>{event.rating.totalVotes}</h1>

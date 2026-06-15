@@ -174,24 +174,23 @@
     font-size: 11px;
     padding: 2px 7px;
   }
-}
+  &.open {
+    background: #fff0f0;
+    color: #8c0000;
+    border: 1.5px solid #e0a0a0;
+  }
 
-.statusOpen {
-  background: #fff0f0;
-  color: #8c0000;
-  border: 1.5px solid #e0a0a0;
-}
+  &.resolved {
+    background: #f0faf1;
+    color: #004a09;
+    border: 1.5px solid #a0d0a8;
+  }
 
-.statusResolved {
-  background: #f0faf1;
-  color: #004a09;
-  border: 1.5px solid #a0d0a8;
-}
-
-.statusRejected {
-  background: #f5f5f5;
-  color: #9aa0a6;
-  border: 1.5px solid #9aa0a6;
+  &.rejected {
+    background: #f5f5f5;
+    color: #9aa0a6;
+    border: 1.5px solid #9aa0a6;
+  }
 }
 
 .statusIcon {
@@ -203,16 +202,15 @@
     width: 7px;
     height: 7px;
   }
-}
+  &.open {
+    color: #8c0000;
+  }
 
-.openIcon {
-  color: #8c0000;
-}
+  &.resolved {
+    color: #004a09;
+  }
 
-.resolvedIcon {
-  color: #004a09;
-}
-
-.rejectedIcon {
-  color: #9aa0a6;
+  &.rejected {
+    color: #9aa0a6;
+  }
 }

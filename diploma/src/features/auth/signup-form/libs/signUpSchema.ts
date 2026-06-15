@@ -1,11 +1,13 @@
 import * as Yup from "yup";
 
 export const registerSchema = Yup.object({
-  agreement: Yup.boolean().oneOf([true], "You must agree to the terms"),
+  agreement: Yup.boolean()
+    .oneOf([true], "You must agree to the terms")
+    .required("You must agree to the terms"),
   firstName: Yup.string()
     .matches(
       /^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ\s'-]+$/,
-      "Please enter a valid full name"
+      "Please enter a valid full name",
     )
     .min(2, "First name is too short")
     .max(50, "First name is too long")
@@ -13,7 +15,7 @@ export const registerSchema = Yup.object({
   lastName: Yup.string()
     .matches(
       /^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ\s'-]+$/,
-      "Please enter a valid full name"
+      "Please enter a valid full name",
     )
     .min(2, "Last name is too short")
     .max(50, "Last name is too long")
@@ -28,7 +30,7 @@ export const registerSchema = Yup.object({
     .matches(/[0-9]/, "Password must contain at least one number")
     .matches(
       /[@$!%*?&]/,
-      "Password must contain at least one special character"
+      "Password must contain at least one special character",
     )
     .required("Password is required"),
 });
