@@ -34,13 +34,17 @@ vi.mock("@entities/offer", async (importOriginal) => {
   const actual = await importOriginal();
   return {
     ...(actual as object),
-    useOfferFormStore: (selector?: (s: any) => any) =>
-      selector ? selector(storeMock) : storeMock,
+    useOfferFormStore: Object.assign(
+      (selector?: (s: any) => any) =>
+        selector ? selector(storeMock) : storeMock,
+      {
+        getState: () => storeMock,
+      },
+    ),
     offerKeys: { all: () => ["offers"] },
   };
 });
-
-vi.mock("@features/offer/api/submitOfferApi", () => ({
+vi.mock("@features/time-bank/offer-form/main/api/submitOfferApi", () => ({
   createOffer: createOfferMock,
   updateOffer: updateOfferMock,
 }));
@@ -140,12 +144,6 @@ describe("useSubmitOfferForm", () => {
   it("nextStep increments step normally", () => {
     storeMock.step = 0;
     storeMock.data.isOnline = false;
-
-    const getStateSpy = vi.spyOn(
-      require("@entities/offer"),
-      "useOfferFormStore",
-    );
-    getStateSpy.mockReturnValue(storeMock);
 
     const { result } = renderHook(() => useSubmitOfferForm(), {
       wrapper: createWrapper(),

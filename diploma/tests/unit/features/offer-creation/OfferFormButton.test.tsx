@@ -22,14 +22,17 @@ vi.mock("@entities/offer", async (importOriginal) => {
   };
 });
 
-vi.mock("@features/offer-form/main/ui/main-form/OfferFormModal", () => ({
-  OfferFormModal: ({ isOpen, isEdit }: any) =>
-    isOpen ? (
-      <div data-testid="offer-modal">
-        {isEdit ? "Edit Modal" : "Create Modal"}
-      </div>
-    ) : null,
-}));
+vi.mock(
+  "@features/time-bank/offer-form/main/ui/main-form/OfferFormModal",
+  () => ({
+    OfferFormModal: ({ isOpen, isEdit }: any) =>
+      isOpen ? (
+        <div data-testid="offer-modal">
+          {isEdit ? "Edit Modal" : "Create Modal"}
+        </div>
+      ) : null,
+  }),
+);
 
 vi.mock("@shared/ui/buttons", () => ({
   BaseButtonWrapper: ({ children, onClick }: any) => (
