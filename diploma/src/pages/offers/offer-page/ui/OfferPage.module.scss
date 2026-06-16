@@ -375,6 +375,7 @@
       display: flex;
       align-items: center;
       align-self: flex-end;
+      gap: 10px;
     }
   }
 
@@ -413,6 +414,7 @@
     justify-content: center;
     gap: 40px;
     row-gap: 30px;
+    align-items: stretch;
 
     @include respond-to(laptop) {
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

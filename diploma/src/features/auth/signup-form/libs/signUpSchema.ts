@@ -1,36 +1,35 @@
 import * as Yup from "yup";
+import type { TFunction } from "i18next";
 
-export const registerSchema = Yup.object({
-  agreement: Yup.boolean()
-    .oneOf([true], "You must agree to the terms")
-    .required("You must agree to the terms"),
-  firstName: Yup.string()
-    .matches(
-      /^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ\s'-]+$/,
-      "Please enter a valid full name",
-    )
-    .min(2, "First name is too short")
-    .max(50, "First name is too long")
-    .required("First name is required"),
-  lastName: Yup.string()
-    .matches(
-      /^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ\s'-]+$/,
-      "Please enter a valid full name",
-    )
-    .min(2, "Last name is too short")
-    .max(50, "Last name is too long")
-    .required("Last name is required"),
-  email: Yup.string()
-    .email("Please enter a valid email address")
-    .required("Email is required"),
-  password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-    .matches(/[0-9]/, "Password must contain at least one number")
-    .matches(
-      /[@$!%*?&]/,
-      "Password must contain at least one special character",
-    )
-    .required("Password is required"),
-});
+export const getRegisterSchema = (t: TFunction) =>
+  Yup.object({
+    agreement: Yup.boolean()
+      .oneOf([true], t("common:validation.agreementRequired"))
+      .required(t("common:validation.agreementRequired")),
+    firstName: Yup.string()
+      .matches(
+        /^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ\s'-]+$/,
+        t("common:validation.invalidName"),
+      )
+      .min(2, t("common:validation.firstNameTooShort"))
+      .max(50, t("common:validation.firstNameTooLong"))
+      .required(t("common:validation.firstNameRequired")),
+    lastName: Yup.string()
+      .matches(
+        /^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ\s'-]+$/,
+        t("common:validation.invalidName"),
+      )
+      .min(2, t("common:validation.lastNameTooShort"))
+      .max(50, t("common:validation.lastNameTooLong"))
+      .required(t("common:validation.lastNameRequired")),
+    email: Yup.string()
+      .email(t("common:validation.invalidEmail"))
+      .required(t("common:validation.emailRequired")),
+    password: Yup.string()
+      .min(8, t("common:validation.passwordTooShort"))
+      .matches(/[A-Z]/, t("common:validation.passwordUppercase"))
+      .matches(/[a-z]/, t("common:validation.passwordLowercase"))
+      .matches(/[0-9]/, t("common:validation.passwordNumber"))
+      .matches(/[@$!%*?&]/, t("common:validation.passwordSpecial"))
+      .required(t("common:validation.passwordRequired")),
+  });

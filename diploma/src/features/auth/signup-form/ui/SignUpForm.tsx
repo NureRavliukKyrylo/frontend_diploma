@@ -3,10 +3,11 @@ import { BaseInput, EmailInput, PasswordInput } from "@shared/ui/inputs";
 import { Checkbox } from "@shared/ui/inputs";
 import { useRegistration } from "../model/useRegistration";
 import { useAuthStore } from "@entities/user";
-
 import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { useTranslation } from "react-i18next";
 
 export const SignUpForm = () => {
+  const { t } = useTranslation("auth");
   const { formik, isLoading, errorMessage } = useRegistration();
   const {
     setSignUpEmail,
@@ -19,7 +20,7 @@ export const SignUpForm = () => {
   return (
     <>
       <div className={styles.headerSignUp}>
-        <h1>Create an account</h1>
+        <h1>{t("register.title")}</h1>
       </div>
       <form onSubmit={formik.handleSubmit} className={styles.signUpForm}>
         <div className={styles.inputsSignUp}>
@@ -28,8 +29,8 @@ export const SignUpForm = () => {
               id="firstName"
               name="firstName"
               type="text"
-              label="Enter first name"
-              activeLabel="First name"
+              label={t("register.firstNamePlaceholder")}
+              activeLabel={t("register.firstNameLabel")}
               onChange={(e) => {
                 formik.handleChange(e);
                 setSignFirstName(e.target.value);
@@ -41,8 +42,8 @@ export const SignUpForm = () => {
               id="lastName"
               name="lastName"
               type="text"
-              label="Enter last name"
-              activeLabel="Last name"
+              label={t("register.lastNamePlaceholder")}
+              activeLabel={t("register.lastNameLabel")}
               onChange={(e) => {
                 formik.handleChange(e);
                 setSignLastName(e.target.value);
@@ -55,8 +56,8 @@ export const SignUpForm = () => {
             id="email"
             name="email"
             type="email"
-            label="Enter email address"
-            activeLabel="Email"
+            label={t("register.emailPlaceholder")}
+            activeLabel={t("register.emailLabel")}
             onChange={(e) => {
               formik.handleChange(e);
               setSignUpEmail(e.target.value);
@@ -67,8 +68,8 @@ export const SignUpForm = () => {
           <PasswordInput
             id="password"
             name="password"
-            label="Enter password"
-            activeLabel="Password"
+            label={t("register.passwordPlaceholder")}
+            activeLabel={t("register.passwordLabel")}
             onChange={(e) => {
               formik.handleChange(e);
               setSignUpPassword(e.target.value);
@@ -87,7 +88,8 @@ export const SignUpForm = () => {
             }}
             error={formik.submitCount > 0 ? formik.errors.agreement : ""}
           >
-            I agree to the <span>Terms of services and privacy policy</span>
+            {t("register.agreementText")}{" "}
+            <span>{t("register.agreementLink")}</span>
           </Checkbox>
         </div>
         <div className={styles.buttonBlock}>
@@ -95,7 +97,7 @@ export const SignUpForm = () => {
             loading={isLoading}
             className={styles.signUpButton}
           >
-            Create an account
+            {t("register.submit")}
           </BaseButtonWrapper>
           {errorMessage && <div className="errorMessage">{errorMessage}</div>}
         </div>

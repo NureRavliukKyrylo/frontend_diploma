@@ -1,11 +1,14 @@
 import { PasswordForm } from "@features/auth";
 import { AdditionalWrapper } from "@shared/ui/wrappers";
+import { useTranslation } from "react-i18next";
 
 export function SetPasswordPage() {
+  const { t } = useTranslation("auth");
+
   return (
     <AdditionalWrapper
-      title="Create your password"
-      description="Choose a secure password to protect your account. Make sure it’s strong and unique"
+      title={t("setPassword.pageTitle")}
+      description={t("setPassword.pageDescription")}
     >
       <PasswordForm />
     </AdditionalWrapper>

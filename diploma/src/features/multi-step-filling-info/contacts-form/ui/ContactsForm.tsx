@@ -1,10 +1,14 @@
 import { SocialNetworksInput } from "@shared/ui/inputs";
 import { useContactsForm } from "../../contacts-form/model/useContactsForm";
 import styles from "./ContactsForm.module.scss";
-import { SOCIAL_PLATFORMS } from "@shared/config/constants";
+import { getSocialPlatforms } from "@shared/config/constants";
+import { useTranslation } from "react-i18next";
 
 export const ContactsForm = () => {
   const { formik } = useContactsForm();
+  const { t } = useTranslation("common");
+  const socialPlatforms = getSocialPlatforms(t);
+
   return (
     <form
       id="contacts-filling-form"
@@ -12,7 +16,7 @@ export const ContactsForm = () => {
       onSubmit={formik.handleSubmit}
     >
       <div className={styles.inputsContactsForm}>
-        {SOCIAL_PLATFORMS.map(({ key, label, activeLabel, icon }) => {
+        {socialPlatforms.map(({ key, label, activeLabel, icon }) => {
           const fieldError = formik.errors[key] as { url?: string } | undefined;
           return (
             <SocialNetworksInput

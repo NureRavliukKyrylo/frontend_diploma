@@ -11,7 +11,7 @@ import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { getHttpErrorInfo } from "@shared/libs/error";
-import { ApproveBookingButton, RejectBookingButton } from "@features/time-bank";
+import { getBookingBottomContent } from "../libs/getBookingBottomContent";
 
 interface BookingsTabProps {
   offerId: string;
@@ -56,21 +56,7 @@ export const BookingsTab = ({ offerId, PageSize }: BookingsTabProps) => {
                 <BookingListItem
                   key={booking.id}
                   booking={booking}
-                  actions={
-                    (booking.canApprove || booking.canReject) && (
-                      <>
-                        {booking.canApprove && (
-                          <ApproveBookingButton
-                            bookingId={booking.id}
-                            offerId={booking.offerId}
-                          />
-                        )}
-                        {booking.canReject && (
-                          <RejectBookingButton bookingId={booking.id} />
-                        )}
-                      </>
-                    )
-                  }
+                  actions={getBookingBottomContent(booking)}
                 />
               )}
               renderPagination={({

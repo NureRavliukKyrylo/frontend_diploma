@@ -6,14 +6,16 @@ import { useAuthStore } from "@entities/user";
 import { AuthRoutes } from "@shared/routes";
 import { Link } from "@tanstack/react-router";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { useTranslation } from "react-i18next";
 
 export const LoginForm = () => {
   const { formik, isLoading, errorMessage } = useLogin();
+  const { t } = useTranslation("auth");
   const { setLoginEmail, setLoginPassword, setRememberMe } = useAuthStore();
   return (
     <>
       <div className={styles.headerLogin}>
-        <h1>Sign in to your account</h1>
+        <h1>{t("login.title")}</h1>
       </div>
       <form onSubmit={formik.handleSubmit} className={styles.loginForm}>
         <div className={styles.inputsLogin}>
@@ -21,8 +23,8 @@ export const LoginForm = () => {
             id="email"
             name="email"
             type="email"
-            label="Enter email adress"
-            activeLabel="Email"
+            label={t("login.emailPlaceholder")}
+            activeLabel={t("login.emailLabel")}
             onChange={(e) => {
               formik.handleChange(e);
               setLoginEmail(e.target.value);
@@ -34,8 +36,8 @@ export const LoginForm = () => {
             id="password"
             name="password"
             type="password"
-            label="Enter your password"
-            activeLabel="Password"
+            label={t("login.passwordPlaceholder")}
+            activeLabel={t("login.passwordLabel")}
             onChange={(e) => {
               formik.handleChange(e);
               setLoginPassword(e.target.value);
@@ -54,14 +56,14 @@ export const LoginForm = () => {
               }}
               checked={formik.values.rememberMe}
             >
-              <span>Remember me</span>
+              <span>{t("login.rememberMe")}</span>
             </Checkbox>
           </div>
           <Link
             to={AuthRoutes.forgotPassword.root}
             className={styles.forgotPassword}
           >
-            Forgot Password
+            {t("login.forgotPassword")}
           </Link>
         </div>
         <div className={styles.buttonBlock}>
@@ -69,7 +71,7 @@ export const LoginForm = () => {
             loading={isLoading}
             className={styles.signInButton}
           >
-            Sign in
+            {t("login.signIn")}
           </BaseButtonWrapper>
           {errorMessage && <div className="errorMessage">{errorMessage}</div>}
         </div>

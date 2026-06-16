@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import {
@@ -8,13 +8,15 @@ import {
 } from "../api/updateSocialLinksApi";
 import { getSocialLinksInitial } from "../libs/getSocialLinksInitial";
 import { buildSocialLinksPayload } from "../libs/buildSocialLinksPayload";
-import { linksProfileSchema } from "../libs/linksProfileSchema";
+import { getLinksProfileSchema } from "../libs/linksProfileSchema";
 import { profileKeys, profileQuery } from "@entities/user/profile";
+import { queryClient } from "@shared/api";
+import { useTranslation } from "react-i18next";
 
 export const useSocialLinksSettingsForm = () => {
   const { data: user } = useQuery(profileQuery.all());
-  const queryClient = useQueryClient();
-
+  const { t } = useTranslation();
+  const validationSchema = getLinksProfileSchema(t);
   const mutation = useMutation({
     mutationFn: (data: UpdateProfileSocialLinksDto) =>
       updateProfileSocialLinks(data),
@@ -27,7 +29,7 @@ export const useSocialLinksSettingsForm = () => {
       });
     },
     onError: (error: unknown) => {
-      const errorMessage = getErrorMessage(error);
+      const errorMessage = getErrorMessage(error, t);
       addToast({
         title: "Update Profile Failed",
         description: errorMessage,
@@ -36,10 +38,10 @@ export const useSocialLinksSettingsForm = () => {
     },
   });
 
-  const socialLinksInitial = getSocialLinksInitial(user);
+  const socialLinksInitial = getSocialLinksInitial(user, t);
 
   const formik = useFormik({
-    validationSchema: linksProfileSchema,
+    validationSchema,
     initialValues: {
       socialLinks: socialLinksInitial,
     },
@@ -47,6 +49,7 @@ export const useSocialLinksSettingsForm = () => {
     onSubmit: (values) => {
       const { links, privacyFields } = buildSocialLinksPayload(
         values.socialLinks,
+        t,
       );
 
       mutation.mutate({
@@ -65,6 +68,6 @@ export const useSocialLinksSettingsForm = () => {
   return {
     formik,
     isLoading: mutation.isPending,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

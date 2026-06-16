@@ -57,6 +57,7 @@ export const CancelBookingModal = ({
           <BaseButtonWrapper
             className={styles.cancelButton}
             onClick={handleClose}
+            type="button"
           >
             Back
           </BaseButtonWrapper>

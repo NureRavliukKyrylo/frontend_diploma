@@ -7,10 +7,12 @@ import { motion } from "framer-motion";
 
 interface CompleteBookingButtonProps {
   bookingId: string;
+  variant?: "default" | "myBooking";
 }
 
 export const CompleteBookingButton = ({
   bookingId,
+  variant = "default",
 }: CompleteBookingButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,7 +24,7 @@ export const CompleteBookingButton = ({
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
         <BaseButtonWrapper
-          className={styles.button}
+          className={`${styles.button} ${variant === "myBooking" ? styles.myBooking : ""}`}
           onClick={(e) => {
             e.stopPropagation();
             setIsOpen(true);

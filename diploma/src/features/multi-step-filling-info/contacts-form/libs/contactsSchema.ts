@@ -1,13 +1,17 @@
 import * as Yup from "yup";
-import { SOCIAL_PLATFORMS } from "@shared/config/constants";
+import { getSocialPlatforms } from "@shared/config/constants";
 import { withPrivacyField } from "@shared/libs/validation";
+import type { TFunction } from "i18next";
 
-export const contactsSchema = Yup.object(
-  SOCIAL_PLATFORMS.reduce(
-    (shape, { key }) => {
-      shape[key] = withPrivacyField("url", "url");
-      return shape;
-    },
-    {} as Record<string, Yup.AnySchema>,
-  ),
-);
+export const getContactsSchema = (t: TFunction) => {
+  const socialPlatforms = getSocialPlatforms(t);
+  return Yup.object(
+    socialPlatforms.reduce(
+      (shape, { key }) => {
+        shape[key] = withPrivacyField("url", "url", t);
+        return shape;
+      },
+      {} as Record<string, Yup.AnySchema>,
+    ),
+  );
+};

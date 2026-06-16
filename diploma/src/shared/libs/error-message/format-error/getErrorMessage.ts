@@ -1,19 +1,18 @@
 import axios from "axios";
+import type { TFunction } from "i18next";
 
 interface ApiErrorResponse {
   error?: string;
 }
 
-export function getErrorMessage(error: unknown): string {
+export function getErrorMessage(error: unknown, t: TFunction): string {
   if (axios.isAxiosError<ApiErrorResponse>(error)) {
-    return (
-      error.response?.data?.error ?? "Something went wrong. Please try again"
-    );
+    return error.response?.data?.error ?? t("errors.somethingWentWrong");
   }
 
   if (error instanceof Error) {
     return error.message;
   }
 
-  return "Something went wrong. Please try again";
+  return t("common:errors.somethingWentWrong");
 }

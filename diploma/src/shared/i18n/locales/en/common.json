@@ -1,0 +1,119 @@
+{
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "confirm": "Confirm",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "search": "Search",
+    "filter": "Filter",
+    "reset": "Reset",
+    "approve": "Approve",
+    "reject": "Reject",
+    "contactUs": "Contact Us",
+    "resendCode": "Resend Code",
+    "didNotReceive": "Didn't receive the code?",
+    "resendIn": "Resend code in ({{time}})"
+  },
+  "status": {
+    "online": "Online",
+    "offline": "Offline",
+    "pending": "Pending",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "inProgress": "In Progress",
+    "completionRequested": "Completion Request",
+    "reserved": "Reserved"
+  },
+  "nav": {
+    "home": "Home",
+    "profile": "Profile",
+    "notifications": "Notifications",
+    "chat": "Chat",
+    "timeBank": "Time Bank",
+    "tasks": "Tasks",
+    "events": "Events",
+    "organizations": "Organizations"
+  },
+  "errors": {
+    "somethingWentWrong": "Something went wrong",
+    "notFound": "Not found",
+    "unauthorized": "Unauthorized",
+    "actionFailed": "{{action}} failed"
+  },
+  "pagination": {
+    "loadMore": "Load more",
+    "noResults": "No results found"
+  },
+  "time": {
+    "minutes": "{{count}}m",
+    "hoursAgo": "{{count}}h ago",
+    "justNow": "Just now"
+  },
+  "socials": {
+    "instagram": {
+      "label": "Enter your Instagram link",
+      "activeLabel": "Instagram link"
+    },
+    "telegram": {
+      "label": "Enter your Telegram link",
+      "activeLabel": "Telegram link"
+    },
+    "x": { "label": "Enter your X link", "activeLabel": "X link" },
+    "tiktok": {
+      "label": "Enter your TikTok link",
+      "activeLabel": "TikTok link"
+    },
+    "facebook": {
+      "label": "Enter your Facebook link",
+      "activeLabel": "Facebook link"
+    },
+    "linkedin": {
+      "label": "Enter your LinkedIn link",
+      "activeLabel": "LinkedIn link"
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required",
+    "invalidEmail": "Please enter a valid email address",
+    "agreementRequired": "You must agree to the terms",
+    "invalidName": "Please enter a valid name",
+    "firstNameRequired": "First name is required",
+    "firstNameTooShort": "First name is too short",
+    "firstNameTooLong": "First name is too long",
+    "lastNameRequired": "Last name is required",
+    "lastNameTooShort": "Last name is too short",
+    "lastNameTooLong": "Last name is too long",
+    "passwordTooShort": "Password must be at least 8 characters",
+    "passwordUppercase": "Password must contain at least one uppercase letter",
+    "passwordLowercase": "Password must contain at least one lowercase letter",
+    "passwordNumber": "Password must contain at least one number",
+    "passwordSpecial": "Password must contain at least one special character",
+    "latitudeRequired": "Latitude is required",
+    "latitudeRange": "Latitude must be between -90 and 90",
+    "longitudeRequired": "Longitude is required",
+    "longitudeRange": "Longitude must be between -180 and 180",
+    "coordinatesRequired": "Coordinates are required",
+    "unsupportedFormat": "Unsupported file format",
+    "fileTooLarge": "File too large (max {{size}}MB)",
+    "requiredWhenEnabled": "This field is required because the switch is enabled",
+    "invalidUrl": "Please enter a valid URL",
+    "invalidDate": "Invalid date",
+    "ageTooYoung": "You must be at least {{count}} years old",
+    "ageTooOld": "Age cannot be more than {{count}} years",
+    "minChars": "Must contain at least {{count}} characters",
+    "maxChars": "Cannot exceed {{count}} characters",
+    "passwordsMatch": "Passwords must match",
+    "confirmPasswordRequired": "Confirm password is required",
+    "newPasswordRequired": "New password is required",
+    "codeMustBe6Digits": "Code must be 6 digits",
+    "codeOnlyDigits": "Code must contain only digits",
+    "codeRequired": "Verification code is required"
+  }
+}

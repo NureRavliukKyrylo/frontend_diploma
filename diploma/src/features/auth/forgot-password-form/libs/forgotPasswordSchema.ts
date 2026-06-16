@@ -1,7 +1,9 @@
 import * as Yup from "yup";
+import type { TFunction } from "i18next";
 
-export const forgotPasswordSchema = Yup.object({
-  email: Yup.string()
-    .email("Please enter a valid email address")
-    .required("Email is required"),
-});
+export const getForgotPasswordSchema = (t: TFunction) =>
+  Yup.object({
+    email: Yup.string()
+      .email(t("common:validation.invalidEmail"))
+      .required(t("common:validation.emailRequired")),
+  });

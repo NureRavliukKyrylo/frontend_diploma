@@ -1,13 +1,15 @@
 import styles from "./LinksForm.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
-import { SOCIAL_PLATFORMS } from "@shared/config/constants";
+import { getSocialPlatforms } from "@shared/config/constants";
 import { ProfileSocialNetworksInput } from "@shared/ui/inputs";
 import { useSocialLinksSettingsForm } from "../model/useSocialLinksSettingsForm";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export function LinksForm({}) {
   const { formik, isLoading, errorMessage } = useSocialLinksSettingsForm();
-
+  const { t } = useTranslation();
+  const socialPlatforms = getSocialPlatforms(t);
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -22,7 +24,7 @@ export function LinksForm({}) {
           </p>
         </div>
         <div className={styles.formInfolinksProfile}>
-          {SOCIAL_PLATFORMS.map(({ key, placeholder, icon }) => {
+          {socialPlatforms.map(({ key, placeholder, icon }) => {
             const fieldError = formik.errors.socialLinks?.[key] as
               | { url?: string }
               | undefined;

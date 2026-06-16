@@ -3,6 +3,7 @@ import type { OfferBooking } from "../../model";
 import styles from "./BookingListItem.module.scss";
 import { formatTimeAgo } from "@shared/libs/date";
 import { getFullName } from "@entities/user";
+import { PROGRESS_STATUS_LABELS } from "@entities/offer/config/progressStatusLabels";
 
 interface BookingListItemProps {
   booking: OfferBooking;
@@ -29,7 +30,7 @@ export const BookingListItem = ({ booking, actions }: BookingListItemProps) => {
           <span
             className={`${styles.status} ${styles[booking.status.toLowerCase()]}`}
           >
-            {booking.status}
+            {PROGRESS_STATUS_LABELS[booking.status] ?? booking.status}
           </span>
         </div>
         <p>{booking.comment}</p>

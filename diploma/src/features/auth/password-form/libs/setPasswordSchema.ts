@@ -1,17 +1,16 @@
 import * as Yup from "yup";
+import type { TFunction } from "i18next";
 
-export const setPasswordSchema = Yup.object().shape({
-  newPassword: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-    .matches(/[0-9]/, "Password must contain at least one number")
-    .matches(
-      /[@$!%*?&]/,
-      "Password must contain at least one special character"
-    )
-    .required("New password is required"),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("newPassword")], "Passwords must match")
-    .required("Confirm password is required"),
-});
+export const getSetPasswordSchema = (t: TFunction) =>
+  Yup.object().shape({
+    newPassword: Yup.string()
+      .min(8, t("common:validation.passwordTooShort"))
+      .matches(/[A-Z]/, t("common:validation.passwordUppercase"))
+      .matches(/[a-z]/, t("common:validation.passwordLowercase"))
+      .matches(/[0-9]/, t("common:validation.passwordNumber"))
+      .matches(/[@$!%*?&]/, t("common:validation.passwordSpecial"))
+      .required(t("common:validation.passwordRequired")),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("newPassword")], t("common:validation.passwordsMatch"))
+      .required(t("common:validation.confirmPasswordRequired")),
+  });

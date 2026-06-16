@@ -4,12 +4,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { GoogleButton } from "@features/auth";
 import type { TabOption } from "@shared/config/types";
 import { Toggle } from "@shared/ui";
+import type { TFunction } from "i18next";
 
 interface AuthWrapperProps<T extends string> {
   tabs: TabOption<T>[];
   activeValue: T;
   onChange: (value: T) => void;
   forms: Record<T, ReactNode>;
+  t: TFunction;
 }
 
 export function AuthWrapper<T extends string>({
@@ -17,6 +19,7 @@ export function AuthWrapper<T extends string>({
   activeValue,
   onChange,
   forms,
+  t,
 }: AuthWrapperProps<T>) {
   return (
     <div className={styles.wrapperAuthContainer}>
@@ -45,7 +48,7 @@ export function AuthWrapper<T extends string>({
 
         <div className={styles.apiAuth}>
           <div className={styles.line}>
-            <span>OR SIGN UP WITH</span>
+            <span>{t("common.thirdService")}</span>
           </div>
           <div className={styles.apiButtons}>
             <GoogleButton />

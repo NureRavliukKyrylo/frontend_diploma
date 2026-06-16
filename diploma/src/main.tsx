@@ -1,7 +1,9 @@
+import "@shared/i18n";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.scss";
 import "./hero.css";
+
 import { AppRouterProvider, ReactQueryProvider } from "./app/providers";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { UIProvider } from "./app/providers";

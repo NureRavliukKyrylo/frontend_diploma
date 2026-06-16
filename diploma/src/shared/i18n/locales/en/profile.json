@@ -1,0 +1,24 @@
+{
+  "tabs": {
+    "profile": "PROFILE",
+    "statistics": "STATISTICS",
+    "skills": "SKILLS",
+    "inventory": "INVENTORY"
+  },
+  "organizations": {
+    "title": "Organizations",
+    "empty": "No organizations joined"
+  },
+  "skills": {
+    "title": "SKILLS",
+    "count": "Skills ({{count}})",
+    "level": "Level: {{level}}"
+  },
+  "inventory": {
+    "title": "Achievements",
+    "unlocked": "Unlocked",
+    "locked": "Locked",
+    "noBadgesTitle": "No unlocked badges yet",
+    "noBadgesDescription": "Complete activities to earn your first badge"
+  }
+}

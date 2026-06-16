@@ -1,12 +1,13 @@
 import { useFormik } from "formik";
 import { useMutation } from "@tanstack/react-query";
 import { login, type LoginDto } from "../api/loginApi";
-import { loginSchema } from "../libs/loginSchema";
+import { getLoginSchema } from "../libs/loginSchema";
 import { useAuthStore, useUserStore } from "@entities/user";
 import { addToast } from "@heroui/react";
 import { useRouter, useSearch } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
 import { getErrorMessage } from "@shared/libs/error-message";
+import { useTranslation } from "react-i18next";
 
 interface LoginResponse {
   userId: string;
@@ -17,6 +18,8 @@ export const useLogin = () => {
   const { loginEmail, loginPassword, rememberMe, clearLoginForm } =
     useAuthStore();
   const { setEmail, setUserId, setIsAuthenticated } = useUserStore();
+  const { t } = useTranslation(["auth", "common"]);
+  const validationSchema = getLoginSchema(t);
 
   const router = useRouter();
 
@@ -26,8 +29,8 @@ export const useLogin = () => {
     mutationFn: (data: LoginDto) => login(data),
     onSuccess: async (data: LoginResponse) => {
       addToast({
-        title: "Login Success",
-        description: "You have logined successfully",
+        title: t("auth:login.successTitle"),
+        description: t("auth:login.successDescription"),
         color: "success",
       });
 
@@ -46,10 +49,10 @@ export const useLogin = () => {
       router.navigate({ to: search.redirect ?? "/projects" });
     },
     onError: (error: unknown) => {
-      const errorMessage = getErrorMessage(error);
+      const errorMessage = getErrorMessage(error, t);
 
       addToast({
-        title: "Login Failed",
+        title: t("common:errors.actionFailed", { action: t("login.signIn") }),
         description: errorMessage,
         color: "danger",
       });
@@ -58,7 +61,7 @@ export const useLogin = () => {
 
   const formik = useFormik({
     initialValues: { email: loginEmail, password: loginPassword, rememberMe },
-    validationSchema: loginSchema,
+    validationSchema,
     onSubmit: (values) => {
       mutation.mutate(values);
       setEmail(values.email);
@@ -69,6 +72,6 @@ export const useLogin = () => {
     formik,
     handleSubmit: formik.handleSubmit,
     isLoading: mutation.isPending,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

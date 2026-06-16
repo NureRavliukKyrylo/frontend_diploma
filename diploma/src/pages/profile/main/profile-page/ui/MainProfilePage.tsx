@@ -6,7 +6,7 @@ import {
 } from "@entities/user";
 import { SocialPlatforms, Toggle } from "@shared/ui";
 export { ProfileMainWidget } from "@widgets/profile";
-import { profileMainTabs } from "../config/profileMainTabs";
+import { getProfileMainTabs } from "../config/profileMainTabs";
 import { MainProfileWrapper } from "@shared/ui/wrappers";
 import { profileMainForms } from "../config/profileMainForms";
 import { LinkButtonWrapper } from "@shared/ui/buttons";
@@ -20,6 +20,7 @@ import { useNavigate, useSearch } from "@tanstack/react-router";
 import { OrganizationsListWidget } from "@widgets/organizations";
 import { OrganizationItem } from "@entities/organization";
 import { DefaultAvatar } from "@shared/assets/images/user";
+import { useTranslation } from "react-i18next";
 
 export function MainProfilePage() {
   const { tab, ...search } = useSearch({ from: "/_masterLayout/profile/" });
@@ -28,6 +29,8 @@ export function MainProfilePage() {
   const handleTabChange = (tab: ProfileMode) => {
     navigate({ search: profileSearchDefaults[tab] });
   };
+  const { t } = useTranslation(["profile", "common"]);
+  const profileMainTabs = getProfileMainTabs(t);
 
   const { data: user } = useSuspenseQuery(profileQuery.all());
 
@@ -46,12 +49,12 @@ export function MainProfilePage() {
         >
           <div className={styles.organizationBlock}>
             <div className={styles.organizationBlockHeader}>
-              <h1>Organizations</h1>
+              <h1>{t("organizations.title")}</h1>
             </div>
             <div className={styles.organizationBlockContent}>
               {user?.profile?.organizations?.length === 0 ? (
                 <div className={styles.emptyState}>
-                  <h2>No organizations joined</h2>
+                  <h2>{t("organizations.empty")}</h2>
                 </div>
               ) : (
                 <OrganizationsListWidget
@@ -72,6 +75,7 @@ export function MainProfilePage() {
             <SocialPlatforms
               links={user?.profile?.socialLinks}
               privacySettings={user?.privacySettings}
+              t={t}
             />
           </div>
         </UserHeaderWidget>

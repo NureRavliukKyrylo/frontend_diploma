@@ -1,20 +1,24 @@
 import { Link } from "@tanstack/react-router";
-import { SOCIAL_PLATFORMS_MAP } from "@shared/config/constants";
+import { getSocialPlatformsMap } from "@shared/config/constants";
 import type { SocialPlatform } from "@shared/config/types/social-links/SocialPlatform";
 import styles from "./SocialPlatforms.module.scss";
+import type { TFunction } from "i18next";
 
 interface SocialPlatformItemProps {
   platform: SocialPlatform;
   url: string;
   size?: number;
+  t: TFunction;
 }
 
 export const SocialPlatformItem = ({
   platform,
   url,
   size = 20,
+  t,
 }: SocialPlatformItemProps) => {
-  const config = SOCIAL_PLATFORMS_MAP.get(platform);
+  const socialPlatformsMap = getSocialPlatformsMap(t);
+  const config = socialPlatformsMap.get(platform);
 
   return (
     <>

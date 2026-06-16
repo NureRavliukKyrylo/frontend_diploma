@@ -1,11 +1,14 @@
 import { FillingInfoWrapper } from "@shared/ui/wrappers";
-import { steps } from "./configs/stepContentConfig";
+import { getSteps } from "./configs/stepContentConfig";
 import { useAuthStore, useUserStore } from "@entities/user";
+import { useTranslation } from "react-i18next";
 
 export function FillingFormWidget() {
   const { activeStep, prevStep, skipStep, isStepCompleted, isLoading } =
     useAuthStore();
   const { firstName, lastName } = useUserStore();
+  const { t } = useTranslation("auth");
+  const steps = getSteps(t);
   return (
     <FillingInfoWrapper
       message={steps[activeStep].message}

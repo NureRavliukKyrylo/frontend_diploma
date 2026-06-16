@@ -40,23 +40,29 @@ export const TransactionsTab = ({ search }: TransactionsTabProps) => {
         <div className={styles.baseStats}>
           <div className={styles.topContent}>
             <h1>MY BALANCE</h1>
-            <h2>0m</h2>
+            <h2>{transactions?.stats.balanceMinutes}</h2>
             <div className={styles.lineDivider} />
           </div>
           <div className={styles.bottomContent}>
             <div className={styles.statBlock}>
               <h1>This month</h1>
-              <h2 className={styles.positive}>+16m</h2>
+              <h2 className={styles.positive}>
+                {transactions?.stats.currentMonthEarnedMinutes}
+              </h2>
             </div>
             <div className={styles.lineDivider} />
             <div className={styles.statBlock}>
               <h1>Reserved</h1>
-              <h2 className={styles.reserved}>16m</h2>
+              <h2 className={styles.reserved}>
+                {transactions?.stats.reservedMinutes}
+              </h2>
             </div>
             <div className={styles.lineDivider} />
             <div className={styles.statBlock}>
               <h1>Lifetime</h1>
-              <h2 className={styles.lifetime}>100m</h2>
+              <h2 className={styles.lifetime}>
+                {transactions?.stats.lifetimeEarnedMinutes}
+              </h2>
             </div>
             <div className={styles.lineDivider} />
           </div>

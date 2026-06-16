@@ -6,8 +6,11 @@ export const createOffer = async (data: OfferFormData) => {
   return res.data;
 };
 
-export const updateOffer = async (data: OfferFormData) => {
-  const res = await apiClient.put("/time-bank/offers", buildPayload(data));
+export const updateOffer = async (offerId: string, data: OfferFormData) => {
+  const res = await apiClient.put(
+    `/time-bank/offers/${offerId}`,
+    buildPayload(data),
+  );
   return res.data;
 };
 

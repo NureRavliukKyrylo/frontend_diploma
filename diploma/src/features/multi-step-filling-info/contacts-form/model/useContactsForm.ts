@@ -1,9 +1,10 @@
 import { useFormik } from "formik";
 import { useAuthStore } from "@entities/user";
-import { contactsSchema } from "../libs/contactsSchema";
+import { getContactsSchema } from "../libs/contactsSchema";
 import { useSubmitFillingForm } from "@features/multi-step-filling-info/submit-form";
 import type { UpdateUserDto } from "../../submit-form";
-import { SOCIAL_PLATFORMS } from "@shared/config/constants";
+import { getSocialPlatforms } from "@shared/config/constants";
+import { useTranslation } from "react-i18next";
 
 export const useContactsForm = () => {
   const {
@@ -17,7 +18,11 @@ export const useContactsForm = () => {
 
   const { handleSubmit, isLoading } = useSubmitFillingForm();
 
-  const initialValues = SOCIAL_PLATFORMS.reduce(
+  const { t } = useTranslation(["common", "auth"]);
+  const socialPlatforms = getSocialPlatforms(t);
+  const validationSchema = getContactsSchema(t);
+
+  const initialValues = socialPlatforms.reduce(
     (acc, { platform, key, fieldName }) => {
       const link = profile?.socialLinks?.find((l) => l.platform === platform);
       const field = privacySettings?.fields?.find(
@@ -36,10 +41,10 @@ export const useContactsForm = () => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: contactsSchema,
+    validationSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
-      SOCIAL_PLATFORMS.forEach(({ platform, key, fieldName }) => {
+      socialPlatforms.forEach(({ platform, key, fieldName }) => {
         const { url, visible } = values[key];
 
         if (url) {

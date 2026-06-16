@@ -10,16 +10,17 @@ import {
   SocialPlatform,
   type SocialPlatformConfig,
 } from "@shared/config/types";
+import type { TFunction } from "i18next";
 
-export const SOCIAL_PLATFORMS: SocialPlatformConfig[] = [
+export const getSocialPlatforms = (t: TFunction): SocialPlatformConfig[] => [
   {
     platform: SocialPlatform.Instagram,
     key: "Instagram",
     name: "Instagram",
     icon: InstagramIcon,
     placeholder: "instagram.com/nick.marlow",
-    label: "Enter your Instagram link",
-    activeLabel: "Instagram link",
+    label: t("common:socials.instagram.label"),
+    activeLabel: t("common:socials.instagram.activeLabel"),
     fieldName: "Profile.SocialLinks[Platform=Instagram]",
   },
   {
@@ -28,8 +29,8 @@ export const SOCIAL_PLATFORMS: SocialPlatformConfig[] = [
     name: "Telegram",
     icon: TelegramIcon,
     placeholder: "t.me/nickmarlow",
-    label: "Enter your Telegram link",
-    activeLabel: "Telegram link",
+    label: t("common:socials.telegram.label"),
+    activeLabel: t("common:socials.telegram.activeLabel"),
     fieldName: "Profile.SocialLinks[Platform=Telegram]",
   },
   {
@@ -38,8 +39,8 @@ export const SOCIAL_PLATFORMS: SocialPlatformConfig[] = [
     name: "X",
     icon: TwitterIcon,
     placeholder: "x.com/nickmarlowdesigns",
-    label: "Enter your X link",
-    activeLabel: "X link",
+    label: t("common:socials.x.label"),
+    activeLabel: t("common:socials.x.activeLabel"),
     fieldName: "Profile.SocialLinks[Platform=X]",
   },
   {
@@ -48,8 +49,8 @@ export const SOCIAL_PLATFORMS: SocialPlatformConfig[] = [
     name: "TikTok",
     icon: TikTok,
     placeholder: "tiktok.com/@itsmarlow",
-    label: "Enter your TikTok link",
-    activeLabel: "TikTok link",
+    label: t("common:socials.tiktok.label"),
+    activeLabel: t("common:socials.tiktok.activeLabel"),
     fieldName: "Profile.SocialLinks[Platform=TikTok]",
   },
   {
@@ -58,8 +59,8 @@ export const SOCIAL_PLATFORMS: SocialPlatformConfig[] = [
     name: "Facebook",
     icon: FacebookIcon,
     placeholder: "facebook.com/nickmarlow.chat",
-    label: "Enter your Facebook link",
-    activeLabel: "Facebook link",
+    label: t("common:socials.facebook.label"),
+    activeLabel: t("common:socials.facebook.activeLabel"),
     fieldName: "Profile.SocialLinks[Platform=Facebook]",
   },
   {
@@ -68,12 +69,11 @@ export const SOCIAL_PLATFORMS: SocialPlatformConfig[] = [
     name: "LinkedIn",
     icon: LinkedIn,
     placeholder: "linkedin.com/in/nick-marlow",
-    label: "Enter your LinkedIn link",
-    activeLabel: "LinkedIn link",
+    label: t("common:socials.linkedin.label"),
+    activeLabel: t("common:socials.linkedin.activeLabel"),
     fieldName: "Profile.SocialLinks[Platform=LinkedIn]",
   },
 ];
 
-export const SOCIAL_PLATFORMS_MAP = new Map(
-  SOCIAL_PLATFORMS.map((p) => [p.platform, p]),
-);
+export const getSocialPlatformsMap = (t: TFunction) =>
+  new Map(getSocialPlatforms(t).map((p) => [p.platform, p]));

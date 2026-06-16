@@ -13,7 +13,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35%;
+  width: fit-content;
   @include animation.button-glow-effect($glow-color: #273646);
 
   @include breakpoints.respond-to(laptop) {

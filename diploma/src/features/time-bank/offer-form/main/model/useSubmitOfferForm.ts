@@ -20,7 +20,8 @@ export const useSubmitOfferForm = ({
   queryClient.prefetchInfiniteQuery(categoryQuery.infinite({ PageSize: 12 }));
 
   const { mutate, isPending, error, reset } = useMutation({
-    mutationFn: () => (isEdit ? updateOffer(data) : createOffer(data)),
+    mutationFn: () =>
+      isEdit ? updateOffer(data.id!, data) : createOffer(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: offerKeys.all() });
 

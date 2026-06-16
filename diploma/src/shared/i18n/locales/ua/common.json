@@ -1,0 +1,119 @@
+{
+  "actions": {
+    "save": "Зберегти",
+    "cancel": "Скасувати",
+    "delete": "Видалити",
+    "edit": "Редагувати",
+    "confirm": "Підтвердити",
+    "close": "Закрити",
+    "back": "Назад",
+    "next": "Далі",
+    "submit": "Надіслати",
+    "search": "Пошук",
+    "filter": "Фільтр",
+    "reset": "Скинути",
+    "approve": "Схвалити",
+    "reject": "Відхилити",
+    "contactUs": "Зв'язатися з нами",
+    "resendCode": "Надіслати код повторно",
+    "didNotReceive": "Не отримали код?",
+    "resendIn": "Надіслати код повторно через ({{time}})"
+  },
+  "status": {
+    "online": "Онлайн",
+    "offline": "Офлайн",
+    "pending": "Очікує",
+    "completed": "Завершено",
+    "cancelled": "Скасовано",
+    "inProgress": "В процесі",
+    "completionRequested": "Запит на завершення",
+    "reserved": "Зарезервовано"
+  },
+  "nav": {
+    "home": "Головна",
+    "profile": "Профіль",
+    "notifications": "Сповіщення",
+    "chat": "Чат",
+    "timeBank": "Банк часу",
+    "tasks": "Завдання",
+    "events": "Події",
+    "organizations": "Організації"
+  },
+  "errors": {
+    "somethingWentWrong": "Щось пішло не так",
+    "notFound": "Не знайдено",
+    "unauthorized": "Немає доступу",
+    "actionFailed": "Помилка: {{action}}"
+  },
+  "pagination": {
+    "loadMore": "Завантажити ще",
+    "noResults": "Результатів не знайдено"
+  },
+  "time": {
+    "minutes": "{{count}}хв",
+    "hoursAgo": "{{count}}г тому",
+    "justNow": "Щойно"
+  },
+  "socials": {
+    "instagram": {
+      "label": "Введіть посилання на Instagram",
+      "activeLabel": "Посилання Instagram"
+    },
+    "telegram": {
+      "label": "Введіть посилання на Telegram",
+      "activeLabel": "Посилання Telegram"
+    },
+    "x": { "label": "Введіть посилання на X", "activeLabel": "Посилання X" },
+    "tiktok": {
+      "label": "Введіть посилання на TikTok",
+      "activeLabel": "Посилання TikTok"
+    },
+    "facebook": {
+      "label": "Введіть посилання на Facebook",
+      "activeLabel": "Посилання Facebook"
+    },
+    "linkedin": {
+      "label": "Введіть посилання на LinkedIn",
+      "activeLabel": "Посилання LinkedIn"
+    }
+  },
+  "validation": {
+    "required": "Це поле є обов'язковим",
+    "emailRequired": "Email є обов'язковим",
+    "passwordRequired": "Пароль є обов'язковим",
+    "invalidEmail": "Введіть коректну email адресу",
+    "agreementRequired": "Ви повинні погодитись з умовами",
+    "invalidName": "Введіть коректне ім'я",
+    "firstNameRequired": "Ім'я є обов'язковим",
+    "firstNameTooShort": "Ім'я занадто коротке",
+    "firstNameTooLong": "Ім'я занадто довге",
+    "lastNameRequired": "Прізвище є обов'язковим",
+    "lastNameTooShort": "Прізвище занадто коротке",
+    "lastNameTooLong": "Прізвище занадто довге",
+    "passwordTooShort": "Пароль має містити щонайменше 8 символів",
+    "passwordUppercase": "Пароль має містити хоча б одну велику літеру",
+    "passwordLowercase": "Пароль має містити хоча б одну малу літеру",
+    "passwordNumber": "Пароль має містити хоча б одну цифру",
+    "passwordSpecial": "Пароль має містити хоча б один спеціальний символ",
+    "latitudeRequired": "Широта є обов'язковою",
+    "latitudeRange": "Широта має бути між -90 та 90",
+    "longitudeRequired": "Довгота є обов'язковою",
+    "longitudeRange": "Довгота має бути між -180 та 180",
+    "coordinatesRequired": "Координати є обов'язковими",
+    "unsupportedFormat": "Непідтримуваний формат файлу",
+    "fileTooLarge": "Файл занадто великий (макс {{size}}МБ)",
+    "requiredWhenEnabled": "Це поле є обов'язковим, оскільки перемикач увімкнено",
+    "invalidUrl": "Введіть коректний URL",
+    "invalidDate": "Невірна дата",
+    "ageTooYoung": "Вам має бути щонайменше {{count}} років",
+    "ageTooOld": "Вік не може перевищувати {{count}} років",
+    "minChars": "Має містити щонайменше {{count}} символів",
+    "maxChars": "Не може перевищувати {{count}} символів",
+    "passwordsMatch": "Паролі повинні співпадати",
+    "confirmPasswordRequired": "Підтвердження пароля є обов'язковим",
+    "newPasswordRequired": "Новий пароль є обов'язковим",
+    "codeMustBe6Digits": "Код має містити 6 цифр",
+    "codeOnlyDigits": "Код має містити лише цифри",
+    "codeRequired": "Код верифікації є обов'язковим"
+  }
+}

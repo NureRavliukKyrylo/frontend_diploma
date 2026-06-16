@@ -6,6 +6,13 @@
   gap: 25px;
   padding: 12px 0;
   border-bottom: 1px solid #f4f4f5;
+
+  @include respond-to(tablet) {
+    gap: 16px;
+  }
+  @include respond-to(mobile) {
+    gap: 10px;
+  }
 }
 
 .iconWrapper {
@@ -16,11 +23,31 @@
   height: 60px;
   border-radius: 20px;
   flex-shrink: 0;
+
+  @include respond-to(tablet) {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+  }
+  @include respond-to(mobile) {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
 }
 
 .icon {
   width: 30px;
   height: 30px;
+
+  @include respond-to(tablet) {
+    width: 24px;
+    height: 24px;
+  }
+  @include respond-to(mobile) {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .content {
@@ -29,17 +56,32 @@
   gap: 4px;
   flex: 1;
   min-width: 0;
+
+  @include respond-to(mobile) {
+    gap: 2px;
+  }
 }
 
 .title {
   @include font-base(18px, 800);
   color: #18181b;
+
+  @include respond-to(tablet) {
+    font-size: 15px;
+  }
+  @include respond-to(mobile) {
+    font-size: 13px;
+  }
 }
 
 .meta {
   display: flex;
   align-items: center;
   gap: 6px;
+
+  @include respond-to(mobile) {
+    gap: 4px;
+  }
 }
 
 .badge {
@@ -47,23 +89,49 @@
   padding: 5px 15px;
   border-radius: 10px;
   white-space: nowrap;
+
+  @include respond-to(tablet) {
+    font-size: 13px;
+    padding: 4px 10px;
+  }
+  @include respond-to(mobile) {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 8px;
+  }
 }
 
 .rightContent {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
   .amount {
     @include font-base(30px, 900);
     white-space: nowrap;
     flex-shrink: 0;
+
+    @include respond-to(tablet) {
+      font-size: 22px;
+    }
+    @include respond-to(mobile) {
+      font-size: 18px;
+    }
   }
+
   .balance {
     @include font-base(18px, 600);
     color: #9d9d9e;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    @include respond-to(tablet) {
+      font-size: 14px;
+    }
+    @include respond-to(mobile) {
+      font-size: 12px;
+    }
   }
 }
 
@@ -72,24 +140,61 @@
   height: 60px;
   border-radius: 20px;
   flex-shrink: 0;
+
+  @include respond-to(tablet) {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+  }
+  @include respond-to(mobile) {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
 }
 
 .skeletonTitle {
   width: 55%;
   height: 18px;
   border-radius: 6px;
+
+  @include respond-to(tablet) {
+    height: 15px;
+  }
+  @include respond-to(mobile) {
+    height: 13px;
+  }
 }
 
 .skeletonBadge {
   width: 90px;
   height: 28px;
   border-radius: 10px;
+
+  @include respond-to(tablet) {
+    width: 72px;
+    height: 23px;
+  }
+  @include respond-to(mobile) {
+    width: 60px;
+    height: 19px;
+    border-radius: 8px;
+  }
 }
 
 .skeletonAmount {
   width: 70px;
   height: 30px;
   border-radius: 6px;
+
+  @include respond-to(tablet) {
+    width: 55px;
+    height: 22px;
+  }
+  @include respond-to(mobile) {
+    width: 45px;
+    height: 18px;
+  }
 }
 
 .skeletonBalance {
@@ -97,4 +202,13 @@
   height: 18px;
   margin-top: 5px;
   border-radius: 6px;
+
+  @include respond-to(tablet) {
+    width: 80px;
+    height: 14px;
+  }
+  @include respond-to(mobile) {
+    width: 65px;
+    height: 12px;
+  }
 }

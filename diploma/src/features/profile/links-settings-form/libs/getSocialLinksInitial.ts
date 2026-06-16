@@ -1,8 +1,10 @@
 import type { User } from "@entities/user/profile";
-import { SOCIAL_PLATFORMS } from "@shared/config/constants";
+import { getSocialPlatforms } from "@shared/config/constants";
+import type { TFunction } from "i18next";
 
-export const getSocialLinksInitial = (user: User | undefined) =>
-  SOCIAL_PLATFORMS.reduce(
+export const getSocialLinksInitial = (user: User | undefined, t: TFunction) => {
+  const socialPlatforms = getSocialPlatforms(t);
+  return socialPlatforms.reduce(
     (acc, { platform, key, fieldName }) => {
       const found = user?.profile?.socialLinks?.find(
         (l) => l.platform === platform,
@@ -19,3 +21,4 @@ export const getSocialLinksInitial = (user: User | undefined) =>
     },
     {} as Record<string, { url: string; visible: boolean }>,
   );
+};

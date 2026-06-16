@@ -4,6 +4,7 @@ import { InfoSign } from "@shared/assets/icons/info";
 import { motion, AnimatePresence } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { Arrow } from "@shared/assets/icons/actions";
+import { useTranslation } from "react-i18next";
 
 interface FillingInfoWrapperProps {
   message: string;
@@ -36,13 +37,13 @@ export function FillingInfoWrapper({
   prevStep,
   skipStep,
 }: FillingInfoWrapperProps) {
+  const { t } = useTranslation("auth");
   const isLastStep = activeStep === totalSteps - 1;
+
   return (
     <div className={styles.fillingInfoFormWrapper}>
-      <h1>
-        Welcome to ImpactFlow, {firstName} {lastName}
-      </h1>
-      <p> Your local action, global change</p>
+      <h1>{t("filling.welcome", { firstName, lastName })}</h1>
+      <p>{t("filling.tagline")}</p>
       <div className={styles.wrapperFillingInfoFormContainer}>
         <div className={styles.fillingInfoFormContainer}>
           <AnimatePresence mode="wait">
@@ -51,10 +52,7 @@ export function FillingInfoWrapper({
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -40 }}
-              transition={{
-                duration: 0.35,
-                ease: "easeInOut",
-              }}
+              transition={{ duration: 0.35, ease: "easeInOut" }}
             >
               <div className={styles.headerTextFillForm}>
                 <h1>{formTitle}</h1>
@@ -75,7 +73,7 @@ export function FillingInfoWrapper({
                   className={styles.skipStepperButton}
                   onClick={skipStep}
                 >
-                  Skip
+                  {t("filling.skip")}
                 </BaseButtonWrapper>
               )}
               <BaseButtonWrapper
@@ -83,7 +81,7 @@ export function FillingInfoWrapper({
                 className={styles.nextStepperButton}
                 form={formId}
               >
-                Save & Next
+                {t("filling.saveAndNext")}
               </BaseButtonWrapper>
             </div>
           </div>

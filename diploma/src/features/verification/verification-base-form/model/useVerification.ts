@@ -3,9 +3,10 @@ import { useFormik } from "formik";
 import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
 import { useUserStore } from "@entities/user";
-import { verifyCodeSchema } from "../libs/verifyCodeSchema";
+import { getVerifyCodeSchema } from "../libs/verifyCodeSchema";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { profileQuery } from "@entities/user/profile";
+import { useTranslation } from "react-i18next";
 
 interface VerificationConfig<TData, TResult> {
   apiFn: (data: TData) => Promise<TResult>;
@@ -19,14 +20,15 @@ interface VerificationConfig<TData, TResult> {
 export const useVerification = <TData, TResult>({
   apiFn,
   successRedirect,
-  successMessage = "Code verified successfully",
+  successMessage,
   onSuccess,
   extraFields = {},
   confirmFn,
 }: VerificationConfig<TData, TResult>) => {
+  const { t } = useTranslation(["auth", "common"]);
   const router = useRouter();
-
   const { userId: storeUserId } = useUserStore();
+  const validationSchema = getVerifyCodeSchema(t);
 
   const { data: user } = useQuery({
     ...profileQuery.all(),
@@ -43,41 +45,33 @@ export const useVerification = <TData, TResult>({
     },
     onSuccess: () => {
       addToast({
-        title: "Success",
-        description: successMessage,
+        title: t("verification.successTitle"),
+        description: successMessage ?? t("verification.successMessage"),
         color: "success",
       });
       if (successRedirect) router.navigate({ to: successRedirect });
       onSuccess?.();
     },
     onError: (error: unknown) => {
-      const errorMessage = getErrorMessage(error);
       addToast({
-        title: "Verification Failed",
-        description: errorMessage,
+        title: t("verification.failedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
   });
 
   const formik = useFormik({
-    initialValues: {
-      code: "",
-      userId,
-      ...extraFields,
-    },
+    initialValues: { code: "", userId, ...extraFields },
     enableReinitialize: true,
-
-    validationSchema: verifyCodeSchema,
-    onSubmit: (values) => {
-      mutation.mutate(values);
-    },
+    validationSchema,
+    onSubmit: (values) => mutation.mutate(values),
   });
 
   return {
     formik,
     handleSubmit: formik.handleSubmit,
     isLoading: mutation.isPending,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

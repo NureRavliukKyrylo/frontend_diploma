@@ -1,6 +1,7 @@
 import type { OtpType } from "@shared/config/types";
 import { useResendCode } from "../model/useResendCode";
 import { ResendButton } from "@shared/ui/buttons";
+import type { TFunction } from "i18next";
 
 interface ResendCodeButton {
   otpType: OtpType;
@@ -10,6 +11,7 @@ interface ResendCodeButton {
   decrementOtpTimer: (type: number) => void;
   userId?: string;
   email?: string;
+  t: TFunction;
 }
 
 export const ResendCodeButton = ({
@@ -20,6 +22,7 @@ export const ResendCodeButton = ({
   decrementOtpTimer,
   userId,
   email,
+  t,
 }: ResendCodeButton) => {
   const { resend, isLoadingResend, resendErrorMessage } = useResendCode({
     type: otpType,
@@ -36,6 +39,7 @@ export const ResendCodeButton = ({
       serverError={resendErrorMessage}
       isLoading={isLoadingResend}
       variant={variant}
+      t={t}
     />
   );
 };

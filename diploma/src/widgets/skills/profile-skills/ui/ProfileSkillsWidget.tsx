@@ -6,6 +6,7 @@ import { Pagination } from "@shared/ui";
 import { useProfileSkills } from "../model/useProfileSkills";
 import type { PaginationResponse } from "@shared/config/types";
 import type { SkillsProfileSearchParams } from "@entities/user";
+import { useTranslation } from "react-i18next";
 
 interface ProfileSkillWidgetProps {
   skills: React.ReactNode;
@@ -20,10 +21,11 @@ export const ProfileSkillsWidget = ({
 }: ProfileSkillWidgetProps) => {
   const { handlePageChange, handleSearchChange, handleSortChange } =
     useProfileSkills();
+  const { t } = useTranslation("profile");
   return (
     <div className={styles.skillsProfileWrapper}>
       <div className={styles.skillsProfileControl}>
-        <h1 className={styles.skillProfileTitle}>SKILLS</h1>
+        <h1 className={styles.skillProfileTitle}>{t("skills.title")}</h1>
         <div className={styles.filtersProfileSkill}>
           <SearchBar
             value={search.Search}

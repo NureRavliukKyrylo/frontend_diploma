@@ -1,13 +1,18 @@
 import { useAuthStore } from "@entities/user";
 import { ForgotPasswordVerificationForm } from "@features/verification";
 import { AdditionalWrapper } from "@shared/ui/wrappers";
+import { useTranslation } from "react-i18next";
 
 export function ForgotPasswordVerificationPage() {
+  const { t } = useTranslation("auth");
   const { emailForgotPassword } = useAuthStore();
+
   return (
     <AdditionalWrapper
-      title="Email Verification"
-      description={`We’ve sent a 6-digit code to your email ${emailForgotPassword}. Please enter it below to continue`}
+      title={t("verification.forgotPassword.title")}
+      description={t("verification.forgotPassword.description", {
+        email: emailForgotPassword,
+      })}
     >
       <ForgotPasswordVerificationForm />
     </AdditionalWrapper>

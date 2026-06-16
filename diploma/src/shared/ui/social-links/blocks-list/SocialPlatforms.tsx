@@ -1,24 +1,25 @@
 import type { SocialPlatform, SocialPlatformLink } from "@shared/config/types";
 import { SocialPlatformItem } from "./SocialPlatformItem";
-import { SOCIAL_PLATFORMS } from "@shared/config/constants";
+import { getSocialPlatforms } from "@shared/config/constants";
 import type { PrivacySettings } from "@entities/user";
+import type { TFunction } from "i18next";
 
 interface SocialPlatformsProps {
   links?: SocialPlatformLink[];
   privacySettings?: PrivacySettings;
   size?: number;
+  t: TFunction;
 }
 
 export const SocialPlatforms = ({
   links,
   privacySettings,
   size = 33,
+  t,
 }: SocialPlatformsProps) => {
-  console.log(
-    "links",
-    links?.map((links) => links.platform),
-  );
-  const privacyLinks = SOCIAL_PLATFORMS.reduce<
+  const socialPlatforms = getSocialPlatforms(t);
+
+  const privacyLinks = socialPlatforms.reduce<
     { platform: SocialPlatform; url: string }[]
   >((acc, { platform, fieldName }) => {
     console.log(platform);
@@ -43,6 +44,7 @@ export const SocialPlatforms = ({
           platform={platform}
           url={url}
           size={size}
+          t={t}
         />
       ))}
     </>

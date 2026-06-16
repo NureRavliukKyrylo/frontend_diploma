@@ -37,6 +37,13 @@ const notificationTypeLabels: Record<NotificationType, string> = {
   TaskOverdue: "Task Overdue",
   TaskCompletedLate: "Task Completed Late",
   System: "System",
+  TimeSpendBookingRequested: "Booking Requested",
+  TimeSpendBookingApproved: "Booking Approved",
+  TimeSpendBookingRejected: "Booking Rejected",
+  TimeSpendBookingCancelled: "Booking Cancelled",
+  TimeSpendCompletionRequested: "Completion Requested",
+  TimeSpendBookingCompleted: "Booking Completed",
+  TimeSpendBookingDisputed: "Booking Disputed",
 };
 
 export const notificationTypeOptions: SortOption<NotificationType | "All">[] = [

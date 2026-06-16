@@ -10,14 +10,16 @@ import { ResendCodeButton } from "@features/verification/resend-code";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./EmailVerificationForm.module.scss";
 import { useAuthStore, useUserStore } from "@entities/user";
+import { useTranslation } from "react-i18next";
 
 export const EmailVerificationForm: React.FC = () => {
+  const { t } = useTranslation(["auth", "common"]);
   const { otpTimers, resetOtpTimer, decrementOtpTimer } = useAuthStore();
   const { userId } = useUserStore();
   const { formik, isLoading, errorMessage } = useVerification({
     apiFn: verificationEmail,
     successRedirect: MultiStepFormRoutes.fillForm,
-    successMessage: "Email verified successfully",
+    successMessage: t("verification.email.successMessage"),
   });
 
   return (
@@ -29,12 +31,13 @@ export const EmailVerificationForm: React.FC = () => {
           decrementOtpTimer={decrementOtpTimer}
           resetOtpTimer={resetOtpTimer}
           userId={userId}
+          t={t}
         />
         <BaseButtonWrapper
           loading={isLoading}
           className={styles.confirmVerificationButton}
         >
-          Confirm
+          {t("verification.confirm")}
         </BaseButtonWrapper>
       </div>
     </VerificationForm>

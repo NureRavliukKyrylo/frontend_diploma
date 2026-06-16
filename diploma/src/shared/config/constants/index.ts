@@ -1,5 +1,5 @@
 export { API_URL } from "./apiConstants";
-export { SOCIAL_PLATFORMS_MAP, SOCIAL_PLATFORMS } from "./socialPlatforms";
+export { getSocialPlatforms, getSocialPlatformsMap } from "./socialPlatforms";
 export {
   DEFAULT_MAP_ZOOM,
   DEFAULT_MAP_COORDINATES,

@@ -23,6 +23,7 @@ import {
 } from "@shared/assets/animations";
 import type { SkillsProfileSearchParams } from "@entities/user";
 import { capitalize } from "@shared/libs/text";
+import { useTranslation } from "react-i18next";
 
 interface ProfileSkillsTabProps {
   search: SkillsProfileSearchParams;
@@ -31,6 +32,7 @@ interface ProfileSkillsTabProps {
 export const ProfileSkillsTab = ({ search }: ProfileSkillsTabProps) => {
   const { data, modalType, selectedSkill, getMenuItems, handleCloseModal } =
     useProfileSkillsTab(search);
+  const { t } = useTranslation("profile");
 
   return (
     <>
@@ -52,7 +54,7 @@ export const ProfileSkillsTab = ({ search }: ProfileSkillsTabProps) => {
           >
             <div className={styles.skillsProfileWrapperList}>
               <h1 className={styles.totalSkills}>
-                Skills ({data?.pagination.totalCount})
+                {t("skills.count", { count: data?.pagination.totalCount })}
               </h1>
               <AnimatePresence mode="wait">
                 <motion.div
@@ -86,7 +88,9 @@ export const ProfileSkillsTab = ({ search }: ProfileSkillsTabProps) => {
                           className={styles.profileSkillControlBlock}
                           bottomSlot={() => (
                             <div className={styles.skillLevel}>
-                              Level: {capitalize(skill.level)}
+                              {t("skills.level", {
+                                level: capitalize(skill.level),
+                              })}
                             </div>
                           )}
                         />

@@ -1,3 +1,4 @@
+import type { TFunction } from "i18next";
 import * as Yup from "yup";
 
 const DEFAULT_IMAGE_FORMATS = [
@@ -17,19 +18,36 @@ interface FileFieldOptions {
   formatMessage?: string;
 }
 
-export const fileField = ({
-  maxSize = DEFAULT_MAX_SIZE,
-  formats = DEFAULT_IMAGE_FORMATS,
-  sizeMessage = `File too large (max ${DEFAULT_MAX_SIZE / 1024 / 1024}MB)`,
-  formatMessage = "Unsupported file format",
-}: FileFieldOptions = {}) =>
+export const fileField = (
+  {
+    maxSize = DEFAULT_MAX_SIZE,
+    formats = DEFAULT_IMAGE_FORMATS,
+    sizeMessage,
+    formatMessage,
+  }: FileFieldOptions = {},
+  t?: TFunction,
+) =>
   Yup.mixed<File | string>()
     .nullable()
-    .test("fileType", formatMessage, (value) => {
-      if (!value || typeof value === "string") return true;
-      return formats.includes((value as File).type);
-    })
-    .test("fileSize", sizeMessage, (value) => {
-      if (!value || typeof value === "string") return true;
-      return (value as File).size <= maxSize;
-    });
+    .test(
+      "fileType",
+      formatMessage ??
+        t?.("common:validation.unsupportedFormat") ??
+        "Unsupported file format",
+      (value) => {
+        if (!value || typeof value === "string") return true;
+        return formats.includes((value as File).type);
+      },
+    )
+    .test(
+      "fileSize",
+      sizeMessage ??
+        t?.("common:validation.fileTooLarge", {
+          size: maxSize / 1024 / 1024,
+        }) ??
+        `File too large (max ${maxSize / 1024 / 1024}MB)`,
+      (value) => {
+        if (!value || typeof value === "string") return true;
+        return (value as File).size <= maxSize;
+      },
+    );

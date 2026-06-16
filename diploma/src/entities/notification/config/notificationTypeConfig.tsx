@@ -11,6 +11,7 @@ import {
   GiftIcon,
   RejectIcon,
   ApproveIcon,
+  RequestIcon,
 } from "@shared/assets/icons/actions";
 import { GroupPeopleIcon } from "@shared/assets/icons/info";
 import type { NotificationType } from "../model";
@@ -194,5 +195,40 @@ export const NOTIFICATION_TYPE_CONFIG: Record<
     icon: AdminAdjustmentIcon,
     iconColor: "#6b7280",
     wrapperColor: "#f9fafb",
+  },
+  TimeSpendBookingRequested: {
+    icon: RequestIcon,
+    iconColor: "#3b82f6",
+    wrapperColor: "#eff6ff",
+  },
+  TimeSpendBookingApproved: {
+    icon: ApproveIcon,
+    iconColor: "#16a34a",
+    wrapperColor: "#f0fdf4",
+  },
+  TimeSpendBookingRejected: {
+    icon: RejectIcon,
+    iconColor: "#e11d48",
+    wrapperColor: "#fff1f2",
+  },
+  TimeSpendBookingCancelled: {
+    icon: RejectIcon,
+    iconColor: "#6b7280",
+    wrapperColor: "#f9fafb",
+  },
+  TimeSpendCompletionRequested: {
+    icon: RequestIcon,
+    iconColor: "#c2410c",
+    wrapperColor: "#fff7f0",
+  },
+  TimeSpendBookingCompleted: {
+    icon: ApproveIcon,
+    iconColor: "#004a09",
+    wrapperColor: "#f0faf1",
+  },
+  TimeSpendBookingDisputed: {
+    icon: AttendanceCalendarIcon,
+    iconColor: "#7c3aed",
+    wrapperColor: "#faf5ff",
   },
 };

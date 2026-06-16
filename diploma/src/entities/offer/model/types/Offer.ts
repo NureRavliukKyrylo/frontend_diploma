@@ -39,6 +39,12 @@ export interface Offer {
   hasMyPendingRequest: boolean;
   myBookingId: string;
   reservedBookingId: string;
+  myBookingStatus:
+    | "Pending"
+    | "Reserved"
+    | "Completed"
+    | "Cancelled"
+    | "CompletionRequested";
 }
 
 export interface OfferJoined extends Offer {

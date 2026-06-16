@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styles from "./ResendButton.module.scss";
+import type { TFunction } from "i18next";
 
 type ResendButtonProps = {
   seconds: number;
@@ -9,6 +10,7 @@ type ResendButtonProps = {
   serverError?: string | null;
   isLoading: boolean;
   variant?: "default" | "profile";
+  t: TFunction;
 };
 
 export const ResendButton: React.FC<ResendButtonProps> = ({
@@ -19,6 +21,7 @@ export const ResendButton: React.FC<ResendButtonProps> = ({
   serverError,
   isLoading,
   variant = "default",
+  t,
 }) => {
   const canResend = seconds === 0;
 
@@ -54,10 +57,11 @@ export const ResendButton: React.FC<ResendButtonProps> = ({
       } ${isLoading ? styles.loading : ""}`}
     >
       {canResend ? (
-        "Resend Code"
+        t("common:actions.resendCode")
       ) : (
         <>
-          Didn’t receive the code? <span>Resend code in ({formattedTime})</span>
+          {t("common:actions.didNotReceive")}{" "}
+          <span>{t("common:actions.resendIn", { time: formattedTime })}</span>
         </>
       )}
     </button>

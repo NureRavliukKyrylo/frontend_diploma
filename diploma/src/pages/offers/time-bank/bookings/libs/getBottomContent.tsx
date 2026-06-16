@@ -7,7 +7,7 @@ import {
 
 export const getBottomContent = (offer: OfferJoined) => {
   const {
-    progressStatus,
+    myBookingStatus,
     canCancel,
     canComplete,
     isOnline,
@@ -15,7 +15,7 @@ export const getBottomContent = (offer: OfferJoined) => {
     myBookingId: id,
   } = offer;
 
-  if (progressStatus === "pending" && canCancel) {
+  if (myBookingStatus === "Pending" && canCancel) {
     return (
       <div className={styles.bottomContent}>
         <p>Your booking is awaiting confirmation.</p>
@@ -24,7 +24,7 @@ export const getBottomContent = (offer: OfferJoined) => {
     );
   }
 
-  if (progressStatus === "inProgress") {
+  if (myBookingStatus === "Reserved") {
     if (!isOnline && locationInfo?.address) {
       return (
         <div className={styles.bottomContent}>
@@ -33,7 +33,9 @@ export const getBottomContent = (offer: OfferJoined) => {
             <span className={styles.address}>{locationInfo.address}</span>
           </p>
           <div className={styles.actions}>
-            {canComplete && <CompleteBookingButton bookingId={id} />}
+            {canComplete && (
+              <CompleteBookingButton variant="myBooking" bookingId={id} />
+            )}
             {canCancel && <CancelBookingButton bookingId={id} />}
           </div>
         </div>
@@ -43,9 +45,11 @@ export const getBottomContent = (offer: OfferJoined) => {
     if (isOnline) {
       return (
         <div className={styles.bottomContent}>
-          <p>When you finish, mark the booking as complete.</p>
+          <p>When you finish, mark the booking as completed.</p>
           <div className={styles.actions}>
-            {canComplete && <CompleteBookingButton bookingId={id} />}
+            {canComplete && (
+              <CompleteBookingButton variant="myBooking" bookingId={id} />
+            )}
             {canCancel && <CancelBookingButton bookingId={id} />}
           </div>
         </div>
@@ -53,10 +57,26 @@ export const getBottomContent = (offer: OfferJoined) => {
     }
   }
 
-  if (progressStatus === "completed") {
+  if (myBookingStatus === "CompletionRequested") {
     return (
       <div className={styles.bottomContent}>
-        <p>You've successfully completed this offer</p>
+        <p>Waiting for the organizer to confirm completion.</p>
+      </div>
+    );
+  }
+
+  if (myBookingStatus === "Completed") {
+    return (
+      <div className={styles.bottomContent}>
+        <p>You've successfully completed this offer.</p>
+      </div>
+    );
+  }
+
+  if (myBookingStatus === "Cancelled") {
+    return (
+      <div className={styles.bottomContent}>
+        <p>This booking has been cancelled.</p>
       </div>
     );
   }

@@ -23,6 +23,7 @@ import { getHttpErrorInfo } from "@shared/libs/error";
 import { ErrorBoundary } from "react-error-boundary";
 import { useNavigate } from "@tanstack/react-router";
 import { BaseModal } from "@shared/ui/modals";
+import { useTranslation } from "react-i18next";
 
 interface ProfileInventoryTabProps {
   search: InventoryProfileSearchParams;
@@ -31,6 +32,7 @@ interface ProfileInventoryTabProps {
 export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
   const { badgeId, ...badgesSearch } = search;
   const navigate = useNavigate({ from: "/profile/" });
+  const { t } = useTranslation("profile");
 
   const handleOpenBadge = (badgeId: string) => {
     navigate({
@@ -48,7 +50,7 @@ export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
 
   return (
     <div className={styles.inventoryWrapper}>
-      <h1 className={styles.achievementsTitle}>Achievements</h1>
+      <h1 className={styles.achievementsTitle}>{t("inventory.title")}</h1>
 
       <AnimatePresence mode="wait">
         <motion.div {...fadeVariants} transition={fadeDuration}>
@@ -63,7 +65,7 @@ export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
             )}
           >
             <div className={styles.sectionBlock}>
-              <h2 className={styles.sectionTitle}>Unlocked</h2>
+              <h2 className={styles.sectionTitle}>{t("inventory.unlocked")}</h2>
               <Suspense
                 fallback={
                   <ListWidgetSkeleton

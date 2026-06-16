@@ -32,4 +32,11 @@ export type NotificationType =
   | "TaskDeadlineSoon"
   | "TaskOverdue"
   | "TaskCompletedLate"
-  | "System";
+  | "System"
+  | "TimeSpendBookingRequested"
+  | "TimeSpendBookingApproved"
+  | "TimeSpendBookingRejected"
+  | "TimeSpendBookingCancelled"
+  | "TimeSpendCompletionRequested"
+  | "TimeSpendBookingCompleted"
+  | "TimeSpendBookingDisputed";

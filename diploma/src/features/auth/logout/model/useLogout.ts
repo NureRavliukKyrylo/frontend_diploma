@@ -6,8 +6,10 @@ import { AuthRoutes } from "@shared/routes";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { queryClient } from "@shared/api";
 import { useUserStore } from "@entities/user";
+import { useTranslation } from "react-i18next";
 
 export const useLogout = (onSuccessCallback?: () => void, showToast = true) => {
+  const { t } = useTranslation(["auth", "common"]);
   const router = useRouter();
   const { clearUserInfo } = useUserStore();
 
@@ -18,13 +20,12 @@ export const useLogout = (onSuccessCallback?: () => void, showToast = true) => {
       queryClient.clear();
       localStorage.clear();
       clearUserInfo();
-
       await router.invalidate();
 
       if (showToast) {
         addToast({
-          title: "Logout Success",
-          description: "You have done logout successfully",
+          title: t("logout.successTitle"),
+          description: t("logout.successDescription"),
           color: "success",
         });
       }
@@ -33,10 +34,9 @@ export const useLogout = (onSuccessCallback?: () => void, showToast = true) => {
       router.navigate({ to: AuthRoutes.root });
     },
     onError: (error: unknown) => {
-      const errorMessage = getErrorMessage(error);
       addToast({
-        title: "Logout Failed",
-        description: errorMessage,
+        title: t("common:errors.actionFailed", { action: t("logout.action") }),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -45,6 +45,6 @@ export const useLogout = (onSuccessCallback?: () => void, showToast = true) => {
   return {
     handleLogout: mutation.mutate,
     isLoading: mutation.isPending,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

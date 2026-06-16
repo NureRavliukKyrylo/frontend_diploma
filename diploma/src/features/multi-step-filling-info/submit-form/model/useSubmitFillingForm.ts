@@ -5,8 +5,10 @@ import { useRouter } from "@tanstack/react-router";
 import { useAuthStore } from "@entities/user";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { isPayloadEmpty } from "@shared/libs/validation";
+import { useTranslation } from "react-i18next";
 
 export const useSubmitFillingForm = () => {
+  const { t } = useTranslation(["auth", "common"]);
   const router = useRouter();
   const { clearFillingForm, setLoading } = useAuthStore();
 
@@ -16,16 +18,19 @@ export const useSubmitFillingForm = () => {
     onSettled: () => setLoading(false),
     onSuccess: () => {
       addToast({
-        title: "Success",
-        description: "The profile was filled out successfully",
+        title: t("filling.successTitle"),
+        description: t("filling.successDescription"),
         color: "success",
       });
       clearFillingForm();
       router.navigate({ to: "/activities" });
     },
     onError: (error: unknown) => {
-      const errorMessage = getErrorMessage(error);
-      addToast({ title: "Error", description: errorMessage, color: "danger" });
+      addToast({
+        title: t("common:errors.somethingWentWrong"),
+        description: getErrorMessage(error, t),
+        color: "danger",
+      });
     },
   });
 

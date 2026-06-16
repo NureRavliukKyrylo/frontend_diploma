@@ -5,40 +5,37 @@ import {
 } from "../api/forgotPasswordApi";
 import { useFormik } from "formik";
 import { addToast } from "@heroui/react";
-
 import { useRouter } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
-import { forgotPasswordSchema } from "../libs/forgotPasswordSchema";
+import { getForgotPasswordSchema } from "../libs/forgotPasswordSchema";
 import { useAuthStore, useUserStore } from "@entities/user";
 import { getErrorMessage } from "@shared/libs/error-message";
+import { useTranslation } from "react-i18next";
 
 export const useForgotPassword = () => {
+  const { t } = useTranslation(["auth", "common"]);
   const router = useRouter();
-
   const { emailForgotPassword, setEmailForgotPassword } = useAuthStore();
   const { setUserId } = useUserStore();
+  const validationSchema = getForgotPasswordSchema(t);
 
   const mutation = useMutation({
     mutationFn: (data: ForgotPasswordDto) => forgotPassword(data),
     onSuccess: (data) => {
       addToast({
-        title: "Password reset email sent",
-        description: "Please check your inbox for further instructions.",
+        title: t("forgotPassword.successTitle"),
+        description: t("forgotPassword.successDescription"),
         color: "success",
       });
-
       setUserId(data.userId);
-
-      router.navigate({
-        to: AuthRoutes.forgotPassword.verification,
-      });
+      router.navigate({ to: AuthRoutes.forgotPassword.verification });
     },
     onError: (error: unknown) => {
-      const errorMessage = getErrorMessage(error);
-
       addToast({
-        title: "Reset Failed",
-        description: errorMessage,
+        title: t("common:errors.actionFailed", {
+          action: t("forgotPassword.submit"),
+        }),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -46,7 +43,7 @@ export const useForgotPassword = () => {
 
   const formik = useFormik({
     initialValues: { email: emailForgotPassword },
-    validationSchema: forgotPasswordSchema,
+    validationSchema,
     onSubmit: (values) => {
       mutation.mutate(values);
       setEmailForgotPassword(values.email);
@@ -57,6 +54,6 @@ export const useForgotPassword = () => {
     formik,
     handleSubmit: formik.handleSubmit,
     isLoading: mutation.isPending,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

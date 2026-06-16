@@ -4,6 +4,7 @@ import styles from "./BookingControlCard.module.scss";
 import { getFullName } from "@entities/user";
 import { OnlineIcon } from "@shared/assets/icons/info";
 import { formatDateToText } from "@shared/libs/date";
+import { PROGRESS_STATUS_LABELS } from "@entities/offer/config/progressStatusLabels";
 
 interface BookingControlCardProps {
   offer: OfferJoined;
@@ -19,7 +20,7 @@ export const BookingControlCard = ({
   return (
     <>
       <div
-        className={`${styles.bookingWrapper} ${className ? className : ""} ${styles[offer.progressStatus]}`}
+        className={`${styles.bookingWrapper} ${className ? className : ""} ${styles[offer.myBookingStatus.toLowerCase()]}`}
       >
         <Avatar
           src={offer.owner.userAvatar}
@@ -58,19 +59,14 @@ export const BookingControlCard = ({
 
         <div className={styles.rightContent}>
           <span
-            className={`${styles.statusOffer} ${styles[offer.progressStatus]}`}
+            className={`${styles.statusOffer} ${styles[offer.myBookingStatus.toLowerCase()]}`}
           >
             <OnlineIcon className={styles.statusIcon} />
-            {
-              {
-                pending: "Pending",
-                inProgress: "In progress",
-                completed: "Completed",
-                cancelled: "Cancelled",
-              }[offer.progressStatus]
-            }
+            {PROGRESS_STATUS_LABELS[offer.myBookingStatus] ?? "unknown"}
           </span>
-          <div className={`${styles.reward} ${styles[offer.progressStatus]}`}>
+          <div
+            className={`${styles.reward} ${styles[offer.myBookingStatus.toLowerCase()]}`}
+          >
             +{offer.priceMinutes}m
           </div>
         </div>

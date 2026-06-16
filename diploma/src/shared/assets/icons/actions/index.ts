@@ -30,3 +30,4 @@ export { default as ApproveIcon } from "./approve.svg?react";
 export { default as DeactivateIcon } from "./deactivate.svg?react";
 export { default as FilterIcon } from "./filter.svg?react";
 export { default as MentionIcon } from "./mention.svg?react";
+export { default as RequestIcon } from "./request.svg?react";

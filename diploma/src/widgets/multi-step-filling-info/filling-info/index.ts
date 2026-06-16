@@ -1,1 +1,1 @@
-export { steps } from "./configs/stepContentConfig";
+export { getSteps } from "./configs/stepContentConfig";

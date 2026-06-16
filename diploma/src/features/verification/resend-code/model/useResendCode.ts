@@ -7,6 +7,7 @@ import {
 import { addToast } from "@heroui/react";
 import { OtpType } from "@shared/config/types";
 import { getErrorMessage } from "@shared/libs/error-message";
+import { useTranslation } from "react-i18next";
 
 interface UseResendCodeProps {
   type: OtpType;
@@ -15,6 +16,8 @@ interface UseResendCodeProps {
 }
 
 export const useResendCode = ({ type, userId, email }: UseResendCodeProps) => {
+  const { t } = useTranslation(["auth", "common"]);
+
   const resendMap: Record<OtpType, () => Promise<unknown>> = {
     [OtpType.EmailVerification]: () => resendEmailVerification(userId ?? ""),
     [OtpType.TwoFactor]: () => resendTwoFactor(),
@@ -25,17 +28,17 @@ export const useResendCode = ({ type, userId, email }: UseResendCodeProps) => {
     mutationFn: resendMap[type],
     onSuccess: () => {
       addToast({
-        title: "Code sent",
-        description: "A new verification code has been sent to your email.",
+        title: t("verification.resend.successTitle"),
+        description: t("verification.resend.successDescription"),
         color: "success",
       });
     },
     onError: (error: unknown) => {
-      const errorMessage = getErrorMessage(error);
-
       addToast({
-        title: "Resend Failed",
-        description: errorMessage,
+        title: t("common:errors.actionFailed", {
+          action: t("common:actions.resendCode"),
+        }),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -44,6 +47,8 @@ export const useResendCode = ({ type, userId, email }: UseResendCodeProps) => {
   return {
     resend: () => mutation.mutateAsync(),
     isLoadingResend: mutation.isPending,
-    resendErrorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    resendErrorMessage: mutation.error
+      ? getErrorMessage(mutation.error, t)
+      : null,
   };
 };

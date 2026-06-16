@@ -3,8 +3,10 @@ import { I18nProvider } from "@react-aria/i18n";
 import { useAboutForm } from "../../about-form/model/useAboutForm";
 import styles from "./AboutForm.module.scss";
 import { DatePickerInput } from "@shared/ui/inputs";
+import { useTranslation } from "react-i18next";
 
 export const AboutForm = () => {
+  const { t } = useTranslation("auth");
   const formik = useAboutForm();
 
   return (
@@ -18,7 +20,7 @@ export const AboutForm = () => {
           <div className={styles.datePickerWrapper}>
             <DatePickerInput
               name="dateOfBirth"
-              label="Date of Birthday"
+              label={t("filling.dateOfBirth")}
               value={formik.values.dateOfBirth}
               error={formik.errors.dateOfBirth}
               submit={formik.submitCount > 0}
@@ -31,12 +33,11 @@ export const AboutForm = () => {
           id="about"
           name="about"
           value={formik.values.about}
-          onChange={(e) => {
-            formik.handleChange(e);
-          }}
+          onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={formik.submitCount > 0 ? formik.errors.about : ""}
           minHeight={250}
+          placeHolder={t("filling.bio")}
         />
       </div>
     </form>

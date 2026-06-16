@@ -4,55 +4,50 @@ import { addToast } from "@heroui/react";
 import { useRouter } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
 import { useFormik } from "formik";
-import { setPasswordSchema } from "../libs/setPasswordSchema";
+import { getSetPasswordSchema } from "../libs/setPasswordSchema";
 import { useAuthStore, useUserStore } from "@entities/user";
 import { getErrorMessage } from "@shared/libs/error-message";
+import { useTranslation } from "react-i18next";
 
 export const useSetPassword = () => {
+  const { t } = useTranslation(["auth", "common"]);
   const router = useRouter();
   const { clearEmailForgotPassword } = useAuthStore();
   const { userId } = useUserStore();
+  const validationSchema = getSetPasswordSchema(t);
 
   const mutation = useMutation({
     mutationFn: (data: setPasswordDto) => setPassword(data),
     onSuccess: () => {
       addToast({
-        title: "Password Updated",
-        description: "Your password has been updated successfully",
+        title: t("setPassword.successTitle"),
+        description: t("setPassword.successDescription"),
         color: "success",
       });
-
       clearEmailForgotPassword();
-
       router.navigate({ to: AuthRoutes.root });
     },
     onError: (error: unknown) => {
-      const errorMessage = getErrorMessage(error);
-
       addToast({
-        title: "Failed to Update Password",
-        description: errorMessage,
+        title: t("common:errors.actionFailed", {
+          action: t("setPassword.submit"),
+        }),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
   });
 
   const formik = useFormik<setPasswordDto>({
-    initialValues: {
-      userId,
-      newPassword: "",
-      confirmPassword: "",
-    },
-    validationSchema: setPasswordSchema,
-    onSubmit: (values) => {
-      mutation.mutate(values);
-    },
+    initialValues: { userId, newPassword: "", confirmPassword: "" },
+    validationSchema,
+    onSubmit: (values) => mutation.mutate(values),
   });
 
   return {
     formik,
     handleSubmit: formik.handleSubmit,
     isLoading: mutation.isPending,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

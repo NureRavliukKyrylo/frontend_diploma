@@ -1,15 +1,18 @@
 import * as Yup from "yup";
 import type { Coordinates } from "@shared/config/types";
 
-export const locationSchema = Yup.object({
-  coordinates: Yup.object<Coordinates>({
-    latitude: Yup.number()
-      .required("Latitude is required")
-      .min(-90, "Latitude must be between -90 and 90")
-      .max(90, "Latitude must be between -90 and 90"),
-    longitude: Yup.number()
-      .required("Longitude is required")
-      .min(-180, "Longitude must be between -180 and 180")
-      .max(180, "Longitude must be between -180 and 180"),
-  }).required("Coordinates are required"),
-});
+import type { TFunction } from "i18next";
+
+export const getLocationSchema = (t: TFunction) =>
+  Yup.object({
+    coordinates: Yup.object<Coordinates>({
+      latitude: Yup.number()
+        .required(t("common:validation.latitudeRequired"))
+        .min(-90, t("common:validation.latitudeRange"))
+        .max(90, t("common:validation.latitudeRange")),
+      longitude: Yup.number()
+        .required(t("common:validation.longitudeRequired"))
+        .min(-180, t("common:validation.longitudeRange"))
+        .max(180, t("common:validation.longitudeRange")),
+    }).required(t("common:validation.coordinatesRequired")),
+  });

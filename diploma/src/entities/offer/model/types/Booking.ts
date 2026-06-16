@@ -7,10 +7,18 @@ export interface OfferBooking {
     lastName: string;
     userAvatar: string;
   };
-  status: "Pending" | "Completed" | "Rejected" | "Cancelled" | "Disputed";
+  status:
+    | "Pending"
+    | "Completed"
+    | "Rejected"
+    | "Cancelled"
+    | "Disputed"
+    | "CompletionRequested";
   comment: string;
   createdAt: string;
   canApprove: boolean;
   canReject: boolean;
+  canComplete: boolean;
+  canCancel: boolean;
   resolutionComment: string;
 }

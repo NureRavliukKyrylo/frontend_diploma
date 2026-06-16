@@ -1,11 +1,14 @@
 import { EmailVerificationForm } from "@features/verification";
 import { AdditionalWrapper } from "@shared/ui/wrappers";
+import { useTranslation } from "react-i18next";
 
 export function EmailVerificationPage() {
+  const { t } = useTranslation("auth");
+
   return (
     <AdditionalWrapper
-      title="Email Verification"
-      description="We’ve sent a 6-digit code to your email. Please enter it below to continue"
+      title={t("verification.email.title")}
+      description={t("verification.email.description")}
     >
       <EmailVerificationForm />
     </AdditionalWrapper>
