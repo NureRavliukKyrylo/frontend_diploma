@@ -6,14 +6,17 @@ import { useFormik } from "formik";
 import { queryClient } from "@shared/api";
 import { profileQuery } from "@entities/user/profile";
 import { skillKeys } from "@entities/skill";
+import { useTranslation } from "react-i18next";
 
 export const useAssignSkill = (skillId: string, onSuccess?: () => void) => {
+  const { t } = useTranslation(["skill", "common"]);
+
   const mutation = useMutation({
     mutationFn: (data: SkillAssignDTO) => assignSkill(data),
     onSuccess: () => {
       addToast({
-        title: "Assigning skill Success",
-        description: "You have assigned skill successfully",
+        title: t("skills.assign.successTitle"),
+        description: t("skills.assign.successDescription"),
         color: "success",
       });
       onSuccess?.();
@@ -21,11 +24,11 @@ export const useAssignSkill = (skillId: string, onSuccess?: () => void) => {
       queryClient.invalidateQueries({ queryKey: skillKeys.myAll() });
     },
     onError: (error: unknown) => {
-      const errorMessage = getErrorMessage(error);
-
       addToast({
-        title: "Assingning Skill Failed",
-        description: errorMessage,
+        title: t("common:errors.actionFailed", {
+          action: t("skills.assign.action"),
+        }),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -34,15 +37,13 @@ export const useAssignSkill = (skillId: string, onSuccess?: () => void) => {
   const formik = useFormik<SkillAssignDTO>({
     initialValues: { level: 0, skillId },
     enableReinitialize: true,
-    onSubmit: (values: SkillAssignDTO) => {
-      mutation.mutate(values);
-    },
+    onSubmit: (values) => mutation.mutate(values),
   });
 
   return {
     formik,
     mutation,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
     handleSubmit: formik.handleSubmit,
     isLoading: mutation.isPending,
   };

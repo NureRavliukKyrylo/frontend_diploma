@@ -18,6 +18,7 @@ import type { EventRequestParams } from "@entities/event/libs";
 import { Link } from "@tanstack/react-router";
 import { useCategoriesInfiniteQuery } from "@entities/category";
 import type { BaseFiltersRoute } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
 
 interface EventFiltersWidgetProps {
   search: EventRequestParams;
@@ -30,6 +31,7 @@ export const EventFiltersWidget = ({
   includeCategories = true,
   from = "/activities/",
 }: EventFiltersWidgetProps) => {
+  const { t } = useTranslation("common");
   const {
     onStartDateChange,
     onEndBeforeChange,
@@ -63,13 +65,17 @@ export const EventFiltersWidget = ({
                 search={{ tab: "events", ...search }}
                 className={styles.showAllEventsButton}
               >
-                SHOW ALL EVENTS
+                {t("actions.showAll", {
+                  subject: t("filters.subjects.events").toUpperCase(),
+                })}
               </Link>
             </motion.div>
           </div>
         )}
         <div className={styles.eventDeadLine}>
-          <h1 className={styles.subHeaderFilter}>Event deadline due</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("filters.deadlineDue", { subject: t("filters.subjects.event") })}
+          </h1>
           <DateRangeFilter
             startDate={search.From}
             endBefore={search.To}
@@ -79,7 +85,9 @@ export const EventFiltersWidget = ({
         </div>
         <div className={styles.dividerFilterBlock} />
         <div className={styles.eventRating}>
-          <h1 className={styles.subHeaderFilter}>Event rating</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("filters.rating", { subject: t("filters.subjects.event") })}
+          </h1>
           <RatingFilter
             rating={search.Rating}
             onRatingChange={onRatingChange}
@@ -89,7 +97,9 @@ export const EventFiltersWidget = ({
           <>
             <div className={styles.dividerFilterBlock} />
             <div className={styles.eventCategories}>
-              <h1 className={styles.subHeaderFilter}>Categories</h1>
+              <h1 className={styles.subHeaderFilter}>
+                {t("filters.categories")}
+              </h1>
               <CategoriesListFilter
                 useCategoriesQuery={useCategoriesInfiniteQuery({ PageSize: 7 })}
                 selectedIds={search.CategoryIds}
@@ -100,7 +110,9 @@ export const EventFiltersWidget = ({
         )}
         <div className={styles.dividerFilterBlock} />
         <div className={styles.eventSkills}>
-          <h1 className={styles.subHeaderFilter}>Required skills</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("filters.requiredSkills")}
+          </h1>
           <SkillsListFilter
             useSkillsQuery={useSkillsInfiniteQuery({ PageSize: 7 })}
             selectedIds={search.SkillIds}
@@ -109,7 +121,7 @@ export const EventFiltersWidget = ({
         </div>
         <div className={styles.dividerFilterBlock} />
         <div className={styles.eventProjects}>
-          <h1 className={styles.subHeaderFilter}>Projects</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.projects")}</h1>
           <ProjectsListFilter
             useProjectsQuery={useProjectsInfiniteQuery({ PageSize: 7 })}
             selectedIds={search.ProjectIds}
@@ -118,7 +130,9 @@ export const EventFiltersWidget = ({
         </div>
         <div className={styles.dividerFilterBlock} />
         <div className={styles.eventOrganizations}>
-          <h1 className={styles.subHeaderFilter}>Organizations</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("filters.organizations")}
+          </h1>
           <OrganizationsListFilter
             useOrganizationsQuery={useOrganizationsInfiniteQuery({
               PageSize: 7,
@@ -129,7 +143,7 @@ export const EventFiltersWidget = ({
         </div>
         <div className={styles.dividerFilterBlock} />
         <div className={styles.eventDistance}>
-          <h1 className={styles.subHeaderFilter}>Distance</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.distance")}</h1>
           <DistanceFilter
             defaultLocation={search.Location}
             defaultRadiusKm={search.RadiusKm}
@@ -140,20 +154,24 @@ export const EventFiltersWidget = ({
         </div>
         <div className={styles.dividerFilterBlock} />
         <div className={styles.moreOptions}>
-          <h1 className={styles.subHeaderFilter}>More options</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.moreOptions")}</h1>
           <div className={styles.moreOptionsBlock}>
             <SwitchFilter
-              label="Show completed projects"
+              label={t("filters.displayCompleted", {
+                subject: t("filters.subjects.projects"),
+              })}
               value={search.IncludeArchived ?? false}
               onChange={onOnlyActiveChange}
             />
             <SwitchFilter
-              label="Display joined projects"
+              label={t("filters.displayJoined", {
+                subject: t("filters.subjects.projects"),
+              })}
               value={search.ShowJoined ?? false}
               onChange={onShowJoinedChange}
             />
             <SwitchFilter
-              label="Display series events"
+              label={t("filters.displaySeries", "Display series events")}
               value={search.IncludeSeriesMasters ?? false}
               onChange={onIncludeSeries}
             />
@@ -172,7 +190,7 @@ export const EventFiltersWidget = ({
             onClick={onClearFilters}
             className={styles.clearFiltersButton}
           >
-            Clear Filters
+            {t("actions.clearFilters")}
           </BaseButtonWrapper>
         </motion.div>
       </div>

@@ -4,6 +4,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { AnimatePresence, motion } from "framer-motion";
 import type { QueryResult } from "@shared/config/types";
 import { Tab } from "@shared/ui";
+import { useTranslation } from "react-i18next";
 
 interface OrganizationsListFilterProps {
   useOrganizationsQuery: () => QueryResult<Pick<Organization, "id" | "name">>;
@@ -16,6 +17,7 @@ export const OrganizationsListFilter = ({
   selectedIds,
   onToggle,
 }: OrganizationsListFilterProps) => {
+  const { t } = useTranslation("common");
   const {
     data: organizations = [],
     fetchNextPage,
@@ -64,7 +66,9 @@ export const OrganizationsListFilter = ({
           disabled={isFetchingNextPage}
           className={styles.showMoreOrganizationsButton}
         >
-          {isFetchingNextPage ? "Loading..." : "show more"}
+          {isFetchingNextPage
+            ? t("loading.title")
+            : t("actions.seeMore").toLowerCase()}
         </BaseButtonWrapper>
       )}
     </div>

@@ -6,12 +6,14 @@ import { useFormik } from "formik";
 import { queryClient } from "@shared/api";
 import { profileQuery } from "@entities/user/profile";
 import { skillKeys, SkillLevelType } from "@entities/skill";
+import { useTranslation } from "react-i18next";
 
 export const useUpdateSkill = (
   skillId: string,
   level: string,
   onSuccess?: () => void,
 ) => {
+  const { t } = useTranslation(["skill", "common"]);
   const levelValue =
     SkillLevelType[level as keyof typeof SkillLevelType] ??
     SkillLevelType.beginner;
@@ -20,8 +22,8 @@ export const useUpdateSkill = (
     mutationFn: (data: SkillUpdateDTO) => updateSkill(data),
     onSuccess: () => {
       addToast({
-        title: "Updating skill Success",
-        description: "You have updated skill level successfully",
+        title: t("skills.update.successTitle"),
+        description: t("skills.update.successDescription"),
         color: "success",
       });
       onSuccess?.();
@@ -29,11 +31,11 @@ export const useUpdateSkill = (
       queryClient.invalidateQueries({ queryKey: skillKeys.myAll() });
     },
     onError: (error: unknown) => {
-      const errorMessage = getErrorMessage(error);
-
       addToast({
-        title: "Updating Skill Failed",
-        description: errorMessage,
+        title: t("common:errors.actionFailed", {
+          action: t("skills.update.action"),
+        }),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -47,7 +49,7 @@ export const useUpdateSkill = (
   return {
     mutation,
     formik,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
     isLoading: mutation.isPending,
   };
 };

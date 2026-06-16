@@ -2,11 +2,12 @@ import styles from "./OffersTab.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { useTranslation } from "react-i18next";
 import {
   OfferListItem,
   OfferListItemSkeleton,
   offerQuery,
-  sortingOfferItems,
+  getSortingOfferItems,
   TimeBankStatistics,
   type OfferSearchParams,
 } from "@entities/offer";
@@ -32,6 +33,7 @@ interface OffersTabProps {
 }
 
 export const OffersTab = ({ search }: OffersTabProps) => {
+  const { t } = useTranslation(["timeBank", "common"]);
   const {
     handleSearch,
     handleSort,
@@ -55,16 +57,14 @@ export const OffersTab = ({ search }: OffersTabProps) => {
           fallbackRender={({ error }) => (
             <div className={styles.errorState}>
               <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-              <p className="errorHint">
-                Try reloading the page or come back later.
-              </p>
+              <p className="errorHint">{t("errors.hint")}</p>
             </div>
           )}
         >
           <div className={styles.searchRow}>
             <SearchBar value={search.Search} onChange={handleSearch} />
             <SortDropDown
-              options={sortingOfferItems}
+              options={getSortingOfferItems(t)}
               onSelect={handleSort}
               value={search.OrderBy ?? "Default"}
             />
@@ -78,8 +78,8 @@ export const OffersTab = ({ search }: OffersTabProps) => {
           >
             {offers?.data?.length === 0 ? (
               <div className={styles.emptyState}>
-                <h2>No offers found</h2>
-                <p>Try adjusting your search query</p>
+                <h2>{t("offers.emptyState.title")}</h2>
+                <p>{t("offers.emptyState.description")}</p>
               </div>
             ) : (
               <Suspense
@@ -139,7 +139,7 @@ export const OffersTab = ({ search }: OffersTabProps) => {
                                       damping: 20,
                                     }}
                                   >
-                                    Take <Arrow />
+                                    {t("offers.actions.take")} <Arrow />
                                   </motion.div>
                                 </BaseButtonWrapper>
                               </motion.div>

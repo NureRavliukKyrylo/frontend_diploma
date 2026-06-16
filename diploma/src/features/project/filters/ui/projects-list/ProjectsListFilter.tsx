@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { QueryResult } from "@shared/config/types";
 import type { Project } from "@entities/project";
 import { Tab } from "@shared/ui";
+import { useTranslation } from "react-i18next";
 
 interface ProjectsListFilterProps {
   useProjectsQuery: () => QueryResult<Pick<Project, "id" | "title">>;
@@ -16,6 +17,7 @@ export const ProjectsListFilter = ({
   selectedIds,
   onToggle,
 }: ProjectsListFilterProps) => {
+  const { t } = useTranslation("common");
   const {
     data: projects = [],
     fetchNextPage,
@@ -64,7 +66,9 @@ export const ProjectsListFilter = ({
           disabled={isFetchingNextPage}
           className={styles.showMoreProjectsButton}
         >
-          {isFetchingNextPage ? "Loading..." : "show more"}
+          {isFetchingNextPage
+            ? t("loading.title")
+            : t("actions.seeMore").toLowerCase()}
         </BaseButtonWrapper>
       )}
     </div>

@@ -17,7 +17,13 @@
     "contactUs": "Contact Us",
     "resendCode": "Resend Code",
     "didNotReceive": "Didn't receive the code?",
-    "resendIn": "Resend code in ({{time}})"
+    "resendIn": "Resend code in ({{time}})",
+    "clearFilters": "Clear Filters",
+    "seeMore": "See more",
+    "showAll": "SHOW ALL {{subject}}"
+  },
+  "loading": {
+    "title": "Loading..."
   },
   "status": {
     "online": "Online",
@@ -28,6 +34,10 @@
     "inProgress": "In Progress",
     "completionRequested": "Completion Request",
     "reserved": "Reserved"
+  },
+  "level": {
+    "current": "Level {{level}}",
+    "next": "Next level"
   },
   "nav": {
     "home": "Home",
@@ -76,6 +86,68 @@
       "label": "Enter your LinkedIn link",
       "activeLabel": "LinkedIn link"
     }
+  },
+  "search": {
+    "title": "Search"
+  },
+
+  "filters": {
+    "title": "Filter",
+    "filterByTitle": "Filter by",
+    "titleList": "List",
+    "rating": "{{subject}} rating",
+    "deadlineDue": "{{subject}} deadline due",
+    "categories": "Categories",
+    "requiredSkills": "Required skills",
+    "skills": "Skills",
+    "projects": "Projects",
+    "organizations": "Organizations",
+    "events": "Events",
+    "offerFormat": "Offer format",
+    "subjectType": "Subject type",
+    "reportStatus": "Report Status",
+    "reportReason": "Report Reason",
+    "dateRange": "Date range",
+    "distance": "Distance",
+    "displayCompleted": "Display completed {{subject}}",
+    "displayJoined": "Display joined {{subject}}",
+    "displaySeries": "Display series events",
+    "startDate": "Start date",
+    "dueDate": "Due date",
+    "moreOptions": "More options",
+    "includeArchived": "Include archived {{subject}}",
+    "onlineOptions": {
+      "all": "All"
+    },
+    "subjects": {
+      "task": "Task",
+      "project": "Project",
+      "organization": "Organization",
+      "offer": "Offer",
+      "event": "Event",
+      "tasks": "tasks",
+      "projects": "projects",
+      "organizations": "organizations",
+      "offers": "offers",
+      "events": "events"
+    }
+  },
+  "reason": {
+    "title": "Reason"
+  },
+  "sorting": {
+    "title": "Sort by",
+    "default": "Default",
+    "newest": "Newest",
+    "titleAsc": "Title A→Z",
+    "titleDesc": "Title Z→A",
+    "endingSoon": "Ending soon",
+    "dateAsc": "Date ascending",
+    "dateDesc": "Date descending",
+    "ratingAsc": "Rating ascending",
+    "ratingDesc": "Rating descending",
+    "priceMinutesAsc": "Price ascending",
+    "priceMinutesDesc": "Price descending"
   },
   "validation": {
     "required": "This field is required",

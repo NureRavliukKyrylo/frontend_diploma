@@ -41,7 +41,7 @@ export const ReportCasesFilter = ({ search }: ReportCasesFilterProps) => {
     <BaseWrapperFilter>
       <div className={styles.wrapper}>
         <div className={styles.block}>
-          <h1 className={styles.subHeader}>Status</h1>
+          <h1 className={styles.subHeader}>Report Status</h1>
           <SelectFilter
             label="Status"
             options={statusOptions}
@@ -65,7 +65,7 @@ export const ReportCasesFilter = ({ search }: ReportCasesFilterProps) => {
         <div className={styles.dividerFilterBlock} />
 
         <div className={styles.block}>
-          <h1 className={styles.subHeader}>Reason</h1>
+          <h1 className={styles.subHeader}>Report Reason</h1>
           <ShowMoreItemsButton
             items={reportReasons.map((reason) => (
               <Tab

@@ -1,6 +1,7 @@
 import { GroupPeopleIcon, OnlineIcon } from "@shared/assets/icons/info";
 import type { Offer } from "../../../../model";
 import styles from "./MyOfferControlCard.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface MyOfferControlCardProps {
   offer: Offer;
@@ -13,6 +14,8 @@ export const MyOfferControlCard = ({
   bottomContent,
   className,
 }: MyOfferControlCardProps) => {
+  const { t } = useTranslation("timeBank");
+
   return (
     <>
       <div
@@ -20,13 +23,18 @@ export const MyOfferControlCard = ({
       >
         <div className={styles.leftContent}>
           <h1>{offer.title}</h1>
-          <h2>{offer.priceMinutes}m cost</h2>
+          <h2>
+            {offer.priceMinutes}
+            {t("units.m")} {t("myOffers.labels.cost")}
+          </h2>
           <p>{offer.description}</p>
           {offer.isOnline ? (
-            <span className={`${styles.status} ${styles.online}`}>Online</span>
+            <span className={`${styles.status} ${styles.online}`}>
+              {t("offers.labels.online")}
+            </span>
           ) : (
             <span className={`${styles.status} ${styles.offline}`}>
-              Offline
+              {t("offers.labels.offline")}
             </span>
           )}
         </div>
@@ -36,19 +44,19 @@ export const MyOfferControlCard = ({
               <OnlineIcon
                 className={`${styles.statusOfferIcon} ${styles.activeIcon}`}
               />
-              Active
+              {t("myOffers.status.activeItem")}
             </span>
           ) : (
             <span className={`${styles.statusOffer} ${styles.inActive}`}>
               <OnlineIcon
                 className={`${styles.statusOfferIcon} ${styles.inActiveIcon}`}
               />
-              Inactive
+              {t("myOffers.status.inactiveItem")}
             </span>
           )}
           <div className={styles.totalBookings}>
             <GroupPeopleIcon className={styles.groupPeople} />
-            {offer.totalBookings ?? 0} bookings
+            {offer.totalBookings ?? 0} {t("myOffers.labels.bookingsCount")}
           </div>
         </div>
       </div>

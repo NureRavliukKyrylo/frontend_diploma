@@ -4,6 +4,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { AnimatePresence, motion } from "framer-motion";
 import type { QueryResult } from "@shared/config/types";
 import { Tab } from "@shared/ui";
+import { useTranslation } from "react-i18next";
 
 interface CategoriesListFilterProps {
   useCategoriesQuery: () => QueryResult<Pick<Category, "id" | "name">>;
@@ -16,6 +17,7 @@ export const CategoriesListFilter = ({
   selectedIds,
   onToggle,
 }: CategoriesListFilterProps) => {
+  const { t } = useTranslation("common");
   const {
     data: categories = [],
     fetchNextPage,
@@ -64,7 +66,9 @@ export const CategoriesListFilter = ({
           disabled={isFetchingNextPage}
           className={styles.showMoreCategoriesButton}
         >
-          {isFetchingNextPage ? "Loading..." : "show more"}
+          {isFetchingNextPage
+            ? t("loading.title")
+            : t("actions.seeMore").toLowerCase()}
         </BaseButtonWrapper>
       )}
     </div>

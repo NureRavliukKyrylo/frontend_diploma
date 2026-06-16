@@ -2,9 +2,9 @@ import { useDebounce } from "@shared/libs/hooks";
 import styles from "./SearchBar.module.scss";
 import { SearchIcon } from "@shared/assets/icons/actions";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface SearchBarProps {
-  placeholder?: string;
   value?: string;
   onChange?: (value: string) => void;
   variant?: "default" | "projects" | "chat";
@@ -12,7 +12,6 @@ interface SearchBarProps {
 }
 
 export const SearchBar = ({
-  placeholder = "Search",
   value,
   onChange,
   variant = "default",
@@ -21,6 +20,7 @@ export const SearchBar = ({
   const variantClass = variant !== "default" ? styles[variant] : "";
   const [inputValue, setInputValue] = useState(value);
   const debouncedValue = useDebounce(inputValue, debounce);
+  const { t } = useTranslation("common");
 
   useEffect(() => {
     if (debouncedValue === undefined) return;
@@ -31,7 +31,7 @@ export const SearchBar = ({
     <div className={`${styles.inputContainer} ${variantClass}`}>
       <input
         type="text"
-        placeholder={placeholder}
+        placeholder={t("search.title")}
         className={`${styles.input} ${variantClass}`}
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}

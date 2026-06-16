@@ -1,0 +1,50 @@
+{
+  "skillLevel": {
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "expert": "Expert"
+  },
+  "skills": {
+    "assignCard": {
+      "title": "NEW SKILL"
+    },
+    "stepConfirmLevel": {
+      "title": "SKILL LEVEL",
+      "description": "Choose how well you know <strong>{{name}}</strong> — from just starting out to fully mastered.",
+      "addButton": "ADD SKILL"
+    },
+    "updateSkillModal": {
+      "updateButton": "UPDATE TO {{level}}"
+    },
+    "profileTab": {
+      "updateLabel": "Update Skill Level",
+      "removeLabel": "Remove Skill",
+      "assignLabel": "Assign Skill"
+    },
+    "page": {
+      "title": "Explore & Assign Skills",
+      "emptyTitle": "No skills found",
+      "emptyHint": "Try adjusting your filters or search query"
+    },
+    "assign": {
+      "action": "Assign Skill",
+      "successTitle": "Skill Assigned",
+      "successDescription": "You have assigned the skill successfully"
+    },
+    "update": {
+      "action": "Update Skill",
+      "successTitle": "Skill Updated",
+      "successDescription": "You have updated the skill level successfully"
+    },
+    "remove": {
+      "action": "Remove Skill",
+      "successTitle": "Skill Removed",
+      "successDescription": "You have removed the skill successfully",
+      "modalTitle": "Remove skill - {{name}}?",
+      "modalText": "Are you sure you want to remove this skill? You can add it again anytime.",
+      "cancel": "Cancel",
+      "confirm": "Delete"
+    }
+  }
+}

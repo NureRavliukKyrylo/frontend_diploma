@@ -1,7 +1,11 @@
-export const PROGRESS_STATUS_LABELS: Record<string, string> = {
-  CompletionRequested: "Completion Request",
-  Reserved: "Reserved",
-  Pending: "Pending",
-  Completed: "Completed",
-  Cancelled: "Cancelled",
-};
+import type { TFunction } from "i18next";
+
+export const getProgressStatusLabels = (
+  t: TFunction,
+): Record<string, string> => ({
+  CompletionRequested: t("bookings.status.completionRequested"),
+  Reserved: t("bookings.status.reserved"),
+  Pending: t("bookings.status.pending"),
+  Completed: t("bookings.status.completed"),
+  Cancelled: t("bookings.status.cancelled"),
+});

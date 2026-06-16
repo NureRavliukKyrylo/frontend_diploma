@@ -121,7 +121,7 @@ export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
             </div>
 
             <div className={styles.sectionBlock}>
-              <h2 className={styles.sectionTitle}>Locked</h2>
+              <h2 className={styles.sectionTitle}>{t("inventory.locked")}</h2>
               <Suspense
                 fallback={
                   <ListWidgetSkeleton

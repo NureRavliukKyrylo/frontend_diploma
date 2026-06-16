@@ -12,7 +12,8 @@
   "skills": {
     "title": "SKILLS",
     "count": "Skills ({{count}})",
-    "level": "Level: {{level}}"
+    "level": "Level: {{level}}",
+    "seeMore": "See more"
   },
   "inventory": {
     "title": "Achievements",
@@ -20,5 +21,24 @@
     "locked": "Locked",
     "noBadgesTitle": "No unlocked badges yet",
     "noBadgesDescription": "Complete activities to earn your first badge"
+  },
+  "rating": {
+    "votes": "({{count}} VOTES)"
+  },
+  "dateOfBirth": {
+    "label": "Date of birthday"
+  },
+  "location": {
+    "empty": "No location added",
+    "userLocation": "{{name}}'s location"
+  },
+  "activity": {
+    "active": "ACTIVE",
+    "completed": "COMPLETED",
+    "projects": "PROJECTS",
+    "seeMore": "SEE MORE"
+  },
+  "badges": {
+    "title": "BADGES"
   }
 }

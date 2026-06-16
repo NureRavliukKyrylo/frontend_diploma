@@ -4,6 +4,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./ToggleDropdownButton.module.scss";
 import { DownArrow } from "@shared/assets/icons/actions";
 import { ListIcon } from "@shared/assets/icons/info";
+import { useTranslation } from "react-i18next";
 
 type ToggleDropdownVariant = "filter" | "list" | "map";
 
@@ -19,6 +20,7 @@ export const ToggleDropdownButton = ({
   onOpenChange,
 }: ToggleDropdownButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation("common");
 
   return (
     <div className={styles.toggleInnerBlock}>
@@ -30,7 +32,9 @@ export const ToggleDropdownButton = ({
           onOpenChange?.(newValue);
         }}
       >
-        <h1>{variant === "list" ? "List" : "Filter"}</h1>
+        <h1>
+          {variant === "list" ? t("filters.titleList") : t("filters.title")}
+        </h1>
         {variant === "list" ? (
           <motion.img
             src={ListIcon}

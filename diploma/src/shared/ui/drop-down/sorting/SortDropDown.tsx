@@ -2,27 +2,28 @@ import type { SortOption } from "@shared/config/types";
 import { BaseDropDown } from "../base/BaseDropDown";
 import styles from "./SortDropDown.module.scss";
 import { CheckMark } from "@shared/assets/icons/info";
+import { useTranslation } from "react-i18next";
 
 interface SortDropDownProps<T extends string> {
   options: SortOption<T>[];
   onSelect: (value: T) => void;
   value: T;
   variant?: "default" | "report";
-  label?: string;
 }
 
 export const SortDropDown = <T extends string>({
   options,
   onSelect,
   value,
-  label = "Sort by",
   variant = "default",
 }: SortDropDownProps<T>) => {
+  const { t } = useTranslation("common");
   return (
     <BaseDropDown
       label={
         <h1 className={styles.dropDownLabel}>
-          {label}: {options.find((o) => o.value === value)?.label}
+          {variant === "report" ? t("reason.title") : t("sorting.title")}:
+          {options.find((o) => o.value === value)?.label}
         </h1>
       }
       dropdownClassName={

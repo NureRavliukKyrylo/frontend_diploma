@@ -5,19 +5,24 @@ import {
   SwitchFilter,
 } from "@shared/ui/filters";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
-import { onlineOptions, type OfferJoinedSearchParams } from "@entities/offer";
+import {
+  getOnlineOptions,
+  type OfferJoinedSearchParams,
+} from "@entities/offer";
 import { useBookingsFilter } from "../model/useBookingsFilter";
 import { CategoriesListFilter } from "@features/project";
 import styles from "./BookingsFilter.module.scss";
 import { useOffersFiltersInfiniteQuery } from "@shared/api/filters";
 import { SkillsListFilter } from "@features/skills";
 import { BaseWrapperFilter } from "@shared/ui/wrappers";
+import { useTranslation } from "react-i18next";
 
 interface BookingsFilterProps {
   search: OfferJoinedSearchParams;
 }
 
 export const BookingsFilter = ({ search }: BookingsFilterProps) => {
+  const { t } = useTranslation("common");
   const {
     onCategoryToggle,
     onClearFilters,
@@ -32,7 +37,9 @@ export const BookingsFilter = ({ search }: BookingsFilterProps) => {
     <BaseWrapperFilter>
       <div className={styles.wrapper}>
         <div className={styles.bookingDeadLine}>
-          <h1 className={styles.subHeaderFilter}>Offer deadline due</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("filters.deadlineDue", { subject: t("filters.subjects.offer") })}
+          </h1>
           <DateRangeFilter
             startDate={search.From}
             endBefore={search.To}
@@ -44,7 +51,7 @@ export const BookingsFilter = ({ search }: BookingsFilterProps) => {
         <div className={styles.dividerFilterBlock} />
 
         <div className={styles.bookingCategories}>
-          <h1 className={styles.subHeaderFilter}>Categories</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.categories")}</h1>
           <CategoriesListFilter
             useCategoriesQuery={useOffersFiltersInfiniteQuery({
               pageSize: 7,
@@ -59,7 +66,7 @@ export const BookingsFilter = ({ search }: BookingsFilterProps) => {
         <div className={styles.dividerFilterBlock} />
 
         <div className={styles.bookingSkills}>
-          <h1 className={styles.subHeaderFilter}>Skills</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.skills")}</h1>
           <SkillsListFilter
             useSkillsQuery={useOffersFiltersInfiniteQuery({
               pageSize: 7,
@@ -74,17 +81,19 @@ export const BookingsFilter = ({ search }: BookingsFilterProps) => {
         <div className={styles.dividerFilterBlock} />
 
         <div className={styles.moreOptions}>
-          <h1 className={styles.subHeaderFilter}>More options</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.moreOptions")}</h1>
           <div className={styles.moreOptionsBlock}>
             <SwitchFilter
-              label="Show completed offers"
+              label={t("filters.displayCompleted", {
+                subject: t("filters.subjects.offers"),
+              })}
               value={search.IncludeArchived ?? false}
               onChange={onIncludeArchivedChange}
             />
           </div>
           <SelectFilter
-            label="Offer format"
-            options={onlineOptions}
+            label={t("filters.offerFormat")}
+            options={getOnlineOptions(t)}
             value={
               search.IsOnline === undefined
                 ? "all"
@@ -111,7 +120,7 @@ export const BookingsFilter = ({ search }: BookingsFilterProps) => {
               onClick={onClearFilters}
               className={styles.clearFiltersButton}
             >
-              Clear Filters
+              {t("actions.clearFilters")}
             </BaseButtonWrapper>
           </motion.div>
         </div>

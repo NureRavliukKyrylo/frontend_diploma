@@ -1,28 +1,45 @@
 import type { TransactionType, TransactionSourceType } from "@entities/offer";
+import type { TFunction } from "i18next";
 
-export const TRANSACTION_TYPE_OPTIONS: {
-  label: string;
-  value: TransactionType | "all";
-}[] = [
-  { label: "All", value: "all" },
-  { label: "Earned", value: "earn" },
-  { label: "Spent", value: "spend" },
-  { label: "Reserved", value: "reservation" },
-  { label: "Reservation released", value: "reservationRelease" },
-  { label: "Admin adjustment +", value: "adminAdjustmentPlus" },
-  { label: "Admin adjustment −", value: "adminAdjustmentMinus" },
-  { label: "Gift received", value: "giftIn" },
-  { label: "Gift sent", value: "giftOut" },
+export const getTransactionTypeOptions = (
+  t: TFunction,
+): { label: string; value: TransactionType | "all" }[] => [
+  { label: t("transactions.filter.options.type.all"), value: "all" },
+  { label: t("transactions.types.earn"), value: "earn" },
+  { label: t("transactions.types.spend"), value: "spend" },
+  { label: t("transactions.types.reservation"), value: "reservation" },
+  {
+    label: t("transactions.types.reservationRelease"),
+    value: "reservationRelease",
+  },
+  {
+    label: t("transactions.types.adminAdjustmentPlus"),
+    value: "adminAdjustmentPlus",
+  },
+  {
+    label: t("transactions.types.adminAdjustmentMinus"),
+    value: "adminAdjustmentMinus",
+  },
+  { label: t("transactions.types.giftIn"), value: "giftIn" },
+  { label: t("transactions.types.giftOut"), value: "giftOut" },
 ];
 
-export const TRANSACTION_SOURCE_TYPE_OPTIONS: {
-  label: string;
-  value: TransactionSourceType | "all";
-}[] = [
-  { label: "All", value: "all" },
-  { label: "Event attendance", value: "eventAttendance" },
-  { label: "Priority reservation", value: "priorityReservation" },
-  { label: "Admin adjustment", value: "adminAdjustment" },
-  { label: "Gift", value: "gift" },
-  { label: "Time spend", value: "timeSpend" },
+export const getTransactionSourceTypeOptions = (
+  t: TFunction,
+): { label: string; value: TransactionSourceType | "all" }[] => [
+  { label: t("transactions.filter.options.source.all"), value: "all" },
+  {
+    label: t("transactions.sources.eventAttendance"),
+    value: "eventAttendance",
+  },
+  {
+    label: t("transactions.sources.priorityReservation"),
+    value: "priorityReservation",
+  },
+  {
+    label: t("transactions.sources.adminAdjustment"),
+    value: "adminAdjustment",
+  },
+  { label: t("transactions.sources.gift"), value: "gift" },
+  { label: t("transactions.sources.timeSpend"), value: "timeSpend" },
 ];

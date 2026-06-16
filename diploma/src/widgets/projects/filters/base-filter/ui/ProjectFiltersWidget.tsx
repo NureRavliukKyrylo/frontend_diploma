@@ -15,6 +15,7 @@ import { OrganizationsListFilter } from "@features/organization";
 import { Link } from "@tanstack/react-router";
 import type { ProjectRequestParams } from "@entities/project/libs";
 import type { BaseFiltersRoute } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
 
 interface ProjectFiltersWidgetProps {
   search: ProjectRequestParams;
@@ -27,6 +28,7 @@ export const ProjectFiltersWidget = ({
   includeCategories = true,
   from = "/activities/",
 }: ProjectFiltersWidgetProps) => {
+  const { t } = useTranslation("common");
   const {
     onStartDateChange,
     onEndBeforeChange,
@@ -57,13 +59,19 @@ export const ProjectFiltersWidget = ({
                 search={{ tab: "projects", ...search }}
                 className={styles.showAllProjectsButton}
               >
-                SHOW ALL PROJECTS
+                {t("actions.showAll", {
+                  subject: t("filters.subjects.projects").toUpperCase(),
+                })}
               </Link>
             </motion.div>
           </div>
         )}
         <div className={styles.projectDeadLine}>
-          <h1 className={styles.subHeaderFilter}>Project deadline due</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("filters.deadlineDue", {
+              subject: t("filters.subjects.project"),
+            })}
+          </h1>
           <DateRangeFilter
             startDate={search.StartDate}
             endBefore={search.EndBefore}
@@ -73,7 +81,9 @@ export const ProjectFiltersWidget = ({
         </div>
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectRating}>
-          <h1 className={styles.subHeaderFilter}>Project rating</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("filters.rating", { subject: t("filters.subjects.project") })}
+          </h1>
           <RatingFilter
             rating={search.Rating}
             onRatingChange={onRatingChange}
@@ -83,7 +93,9 @@ export const ProjectFiltersWidget = ({
           <>
             <div className={styles.dividerFilterBlock} />
             <div className={styles.projectCategories}>
-              <h1 className={styles.subHeaderFilter}>Categories</h1>
+              <h1 className={styles.subHeaderFilter}>
+                {t("filters.categories")}
+              </h1>
               <CategoriesListFilter
                 useCategoriesQuery={useCategoriesInfiniteQuery({ PageSize: 7 })}
                 selectedIds={search.CategoryIds}
@@ -94,7 +106,9 @@ export const ProjectFiltersWidget = ({
         )}
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectOrganizations}>
-          <h1 className={styles.subHeaderFilter}>Organizations</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("filters.organizations")}
+          </h1>
           <OrganizationsListFilter
             useOrganizationsQuery={useOrganizationsInfiniteQuery({
               PageSize: 7,
@@ -105,7 +119,7 @@ export const ProjectFiltersWidget = ({
         </div>
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectDistance}>
-          <h1 className={styles.subHeaderFilter}>Distance</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.distance")}</h1>
           <DistanceFilter
             defaultLocation={search.Location}
             defaultRadiusKm={search.RadiusKm}
@@ -116,15 +130,19 @@ export const ProjectFiltersWidget = ({
         </div>
         <div className={styles.dividerFilterBlock} />
         <div className={styles.moreOptions}>
-          <h1 className={styles.subHeaderFilter}>More options</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.moreOptions")}</h1>
           <div className={styles.moreOptionsBlock}>
             <SwitchFilter
-              label="Show completed projects"
+              label={t("filters.displayCompleted", {
+                subject: t("filters.subjects.projects"),
+              })}
               value={search.ShowJoined ?? false}
               onChange={onShowJoinedChange}
             />
             <SwitchFilter
-              label="Display joined projects"
+              label={t("filters.displayJoined", {
+                subject: t("filters.subjects.projects"),
+              })}
               value={search.OnlyActive ?? false}
               onChange={onOnlyActiveChange}
             />
@@ -143,7 +161,7 @@ export const ProjectFiltersWidget = ({
             onClick={onClearFilters}
             className={styles.clearFiltersButton}
           >
-            Clear Filters
+            {t("actions.clearFilters")}
           </BaseButtonWrapper>
         </motion.div>
       </div>

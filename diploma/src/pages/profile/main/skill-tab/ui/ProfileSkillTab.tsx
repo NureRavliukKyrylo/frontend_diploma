@@ -1,4 +1,5 @@
 import {
+  getSkillLevelTranslations,
   SkillControlCard,
   SkillControlCardSkeleton,
   useMySkillsListQuery,
@@ -22,7 +23,6 @@ import {
   staggeredCardVariantsNoHover,
 } from "@shared/assets/animations";
 import type { SkillsProfileSearchParams } from "@entities/user";
-import { capitalize } from "@shared/libs/text";
 import { useTranslation } from "react-i18next";
 
 interface ProfileSkillsTabProps {
@@ -32,7 +32,7 @@ interface ProfileSkillsTabProps {
 export const ProfileSkillsTab = ({ search }: ProfileSkillsTabProps) => {
   const { data, modalType, selectedSkill, getMenuItems, handleCloseModal } =
     useProfileSkillsTab(search);
-  const { t } = useTranslation("profile");
+  const { t } = useTranslation(["profile", "skill"]);
 
   return (
     <>
@@ -89,7 +89,10 @@ export const ProfileSkillsTab = ({ search }: ProfileSkillsTabProps) => {
                           bottomSlot={() => (
                             <div className={styles.skillLevel}>
                               {t("skills.level", {
-                                level: capitalize(skill.level),
+                                level: getSkillLevelTranslations(
+                                  t,
+                                  skill.level,
+                                ),
                               })}
                             </div>
                           )}

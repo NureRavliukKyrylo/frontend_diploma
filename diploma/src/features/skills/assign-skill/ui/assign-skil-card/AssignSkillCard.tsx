@@ -2,8 +2,10 @@ import { AddingPlus } from "@shared/assets/icons/actions";
 import styles from "./AssignSkillCard.module.scss";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export const AssignSkillCard = () => {
+  const { t } = useTranslation("skill");
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
@@ -16,7 +18,7 @@ export const AssignSkillCard = () => {
           <div className={styles.assignSkillButton}>
             <AddingPlus />
           </div>
-          <h1>NEW SKILL</h1>
+          <h1>{t("skills.assignCard.title")}</h1>
         </div>
       </Link>
     </motion.div>

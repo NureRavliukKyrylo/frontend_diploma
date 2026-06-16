@@ -2,6 +2,7 @@ import { ConfirmationModal } from "@shared/ui/modals";
 import { useRemoveSkill } from "../model/useRemoveSkill";
 import styles from "./RemoveSkillModal.module.scss";
 import { DeleteModal } from "@shared/assets/images/actions";
+import { useTranslation } from "react-i18next";
 
 interface RemoveSkillModalProps {
   skillId: string;
@@ -16,31 +17,28 @@ export const RemoveSkillModal = ({
   skillName,
   onClose,
 }: RemoveSkillModalProps) => {
+  const { t } = useTranslation("skill");
+
   const handleClose = () => {
     mutation.reset();
     onClose();
   };
 
   const { errorMessage, mutation, handleRemoveSkill, isLoading } =
-    useRemoveSkill(() => {
-      handleClose();
-    });
+    useRemoveSkill(() => handleClose());
 
-  const handleRemove = () => {
-    handleRemoveSkill({ skillId });
-  };
   return (
     <ConfirmationModal
       isOpen={isOpen}
       onCancel={handleClose}
-      onConfirm={handleRemove}
-      title={`Remove skill - ${skillName}?`}
-      text="Are you sure you want to remove this skill? You can add it again anytime."
+      onConfirm={() => handleRemoveSkill({ skillId })}
+      title={t("skills.remove.modalTitle", { name: skillName })}
+      text={t("skills.remove.modalText")}
       maxWidth="628px"
       error={errorMessage}
       isLoading={isLoading}
-      cancelText="Cancel"
-      confirmText="Delete"
+      cancelText={t("skills.remove.cancel")}
+      confirmText={t("skills.remove.confirm")}
       confirmButtonClassName={styles.confirmButtonSkill}
       image={DeleteModal}
       imageClassName={styles.imageDelete}

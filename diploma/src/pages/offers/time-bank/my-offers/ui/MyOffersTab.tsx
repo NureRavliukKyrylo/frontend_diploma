@@ -2,10 +2,11 @@ import styles from "./MyOffersTab.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { useTranslation } from "react-i18next";
 import {
   MyOfferControlCardSkeleton,
   offerQuery,
-  sortingOfferItems,
+  getSortingOfferItems,
   type OfferMySearchParams,
 } from "@entities/offer";
 import { SearchBar } from "@shared/ui/inputs";
@@ -30,6 +31,7 @@ interface MyOffersTabProps {
 }
 
 export const MyOffersTab = ({ search }: MyOffersTabProps) => {
+  const { t } = useTranslation(["timeBank", "common"]);
   const { handleSearch, handleSort, handlePageChange, myOffers, router } =
     useMyOffersTab(search);
 
@@ -38,23 +40,23 @@ export const MyOffersTab = ({ search }: MyOffersTabProps) => {
       <aside className={styles.sidebar}>
         <div className={styles.baseStats}>
           <div className={styles.topContent}>
-            <h1>MY OFFERS</h1>
+            <h1>{t("myOffers.title")}</h1>
             <h2>{myOffers?.stats.totalOffers}</h2>
             <div className={styles.lineDivider} />
           </div>
           <div className={styles.bottomContent}>
             <div className={styles.activeBlock}>
-              <h1>Active</h1>
+              <h1>{t("myOffers.status.active")}</h1>
               <h2>{myOffers?.stats.activeOffers}</h2>
             </div>
             <div className={styles.lineDivider} />
             <div className={styles.inActiveBlock}>
-              <h1>Inactive</h1>
+              <h1>{t("myOffers.status.inactive")}</h1>
               <h2>{myOffers?.stats.inActiveOffers}</h2>
             </div>
             <div className={styles.lineDivider} />
             <div className={styles.totalBookingsBlock}>
-              <h1>Total bookings</h1>
+              <h1>{t("myOffers.status.totalBookings")}</h1>
               <h2>{myOffers?.stats.totalBookings}</h2>
             </div>
             <div className={styles.lineDivider} />
@@ -69,16 +71,14 @@ export const MyOffersTab = ({ search }: MyOffersTabProps) => {
           fallbackRender={({ error }) => (
             <div className={styles.errorState}>
               <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-              <p className="errorHint">
-                Try reloading the page or come back later.
-              </p>
+              <p className="errorHint">{t("errors.hint")}</p>
             </div>
           )}
         >
           <div className={styles.searchRow}>
             <SearchBar value={search.Search} onChange={handleSearch} />
             <SortDropDown
-              options={sortingOfferItems}
+              options={getSortingOfferItems(t)}
               onSelect={handleSort}
               value={search.OrderBy ?? "Default"}
             />
@@ -92,8 +92,8 @@ export const MyOffersTab = ({ search }: MyOffersTabProps) => {
           >
             {myOffers?.items?.length === 0 ? (
               <div className={styles.emptyState}>
-                <h2>No offers found</h2>
-                <p>Try adjusting your search query</p>
+                <h2>{t("myOffers.emptyState.title")}</h2>
+                <p>{t("myOffers.emptyState.description")}</p>
               </div>
             ) : (
               <Suspense
@@ -142,7 +142,7 @@ export const MyOffersTab = ({ search }: MyOffersTabProps) => {
                                 onClick={(e) => e.stopPropagation()}
                               >
                                 <p className={styles.offerActionsText}>
-                                  Manage your offer settings and availability.
+                                  {t("myOffers.manageText")}
                                 </p>
                                 <div className={styles.offerActionsButtons}>
                                   <OfferFormButton

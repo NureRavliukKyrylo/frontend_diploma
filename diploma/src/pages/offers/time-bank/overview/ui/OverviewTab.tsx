@@ -8,8 +8,10 @@ import { useQuery } from "@tanstack/react-query";
 import { staggeredCardVariants } from "@shared/assets/animations";
 import { BadgeIcon } from "@shared/assets/icons/info";
 import { Arrow } from "@shared/assets/icons/actions";
+import { useTranslation } from "react-i18next";
 
 export const OverviewTab = () => {
+  const { t } = useTranslation("timeBank");
   const { data: stats } = useQuery(offerQuery.stats());
 
   if (!stats) return null;
@@ -25,37 +27,52 @@ export const OverviewTab = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <span className={styles.balanceLabel}>AVAILABLE BALANCE</span>
+          <span className={styles.balanceLabel}>
+            {t("overview.balance.label").toUpperCase()}
+          </span>
           <div className={styles.balanceAmount}>
             <h1>{stats.balanceHours}</h1>
-            <span className={styles.unit}>h</span>
+            <span className={styles.unit}>{t("units.h")}</span>
           </div>
           <p className={styles.balanceMinutes}>
-            {stats.balanceMinutes} minutes
+            {t("overview.balance.minutes", { count: stats.balanceMinutes })}
           </p>
           <div className={styles.balanceStats}>
             <div className={styles.statItem}>
-              <span className={styles.statValue}>{stats.reservedMinutes}m</span>
-              <span className={styles.statLabel}>Reserved</span>
+              <span className={styles.statValue}>
+                {stats.reservedMinutes}
+                {t("units.m")}
+              </span>
+              <span className={styles.statLabel}>
+                {t("overview.balance.reserved")}
+              </span>
             </div>
             <div className={styles.statItem}>
               <span className={styles.statValue}>
-                {stats.lifetimeEarnedMinutes}m
+                {stats.lifetimeEarnedMinutes}
+                {t("units.m")}
               </span>
-              <span className={styles.statLabel}>Lifetime Earned</span>
+              <span className={styles.statLabel}>
+                {t("overview.balance.lifetimeEarned")}
+              </span>
             </div>
             <div className={styles.statItem}>
               <span className={styles.statValue}>
-                {stats.lifetimeSpentMinutes}m
+                {stats.lifetimeSpentMinutes}
+                {t("units.m")}
               </span>
-              <span className={styles.statLabel}>Lifetime Spent</span>
+              <span className={styles.statLabel}>
+                {t("overview.balance.lifetimeSpent")}
+              </span>
             </div>
           </div>
           <div className={styles.levelProgressBlock}>
             <div className={styles.levelProgressHeader}>
-              <span>Progress to next level</span>
+              <span>{t("overview.level.progressGeneric")}</span>
               <span>
-                {stats.progressMinutes}m / {stats.nextLevelMinMinutes}m
+                {stats.progressMinutes}
+                {t("units.m")} / {stats.nextLevelMinMinutes}
+                {t("units.m")}
               </span>
             </div>
             <ProgressBar
@@ -79,21 +96,27 @@ export const OverviewTab = () => {
                 <span className={styles.currentLevelTitle}>
                   {stats.currentLevel?.title ?? "—"}
                 </span>
-                <span className={styles.currentLevelSub}>Current level</span>
+                <span className={styles.currentLevelSub}>
+                  {t("overview.level.title")}
+                </span>
               </div>
             </div>
             <span className={styles.lvlBadge}>
-              LVL {stats.currentLevel.sortOrder}
+              {t("overview.level.badgeLabel", {
+                order: stats.currentLevel.sortOrder,
+              })}
             </span>
           </div>
 
           <div className={styles.progressToNext}>
             <div className={styles.progressToNextHeader}>
               <span className={styles.nextLevelProgress}>
-                Progress to {stats.nextLevel.title}
+                {t("overview.level.progress", { name: stats.nextLevel.title })}
               </span>
               <span>
-                {stats.progressMinutes}m / {stats.nextLevelMinMinutes}m
+                {stats.progressMinutes}
+                {t("units.m")} / {stats.nextLevelMinMinutes}
+                {t("units.m")}
               </span>
             </div>
             <ProgressBar
@@ -101,27 +124,34 @@ export const OverviewTab = () => {
               className={styles.levelProgressBar}
             />
             <p className={styles.nextLevelHint}>
-              Next: <strong>{stats.nextLevel.title}</strong> -{" "}
-              {stats.nextLevelMinMinutes - stats.progressMinutes}m to go
+              {t("overview.level.hint", {
+                name: stats.nextLevel.title,
+                remaining: stats.nextLevelMinMinutes - stats.progressMinutes,
+              })}
             </p>
           </div>
 
           <div className={styles.monthStats}>
             <div className={styles.monthRow}>
-              <span>This month earned</span>
+              <span>{t("overview.monthly.earned")}</span>
               <span className={styles.positive}>
-                +{stats.currentMonthEarnedMinutes}m
+                +{stats.currentMonthEarnedMinutes}
+                {t("units.m")}
               </span>
             </div>
             <div className={styles.monthRow}>
-              <span>This month spent</span>
+              <span>{t("overview.monthly.spent")}</span>
               <span className={styles.negative}>
-                -{stats.currentMonthSpentMinutes}m
+                -{stats.currentMonthSpentMinutes}
+                {t("units.m")}
               </span>
             </div>
             <div className={styles.monthRow}>
-              <span>Active reservations</span>
-              <span className={styles.highlight}>{stats.reservedMinutes}m</span>
+              <span>{t("overview.monthly.reservations")}</span>
+              <span className={styles.highlight}>
+                {stats.reservedMinutes}
+                {t("units.m")}
+              </span>
             </div>
           </div>
         </motion.div>
@@ -130,27 +160,35 @@ export const OverviewTab = () => {
       <div className={styles.statsRow}>
         {[
           {
-            label: "LIFETIME EARNED",
+            label: t("overview.cards.lifetimeEarned"),
             value: stats.lifetimeEarnedMinutes,
-            delta: `+${stats.currentMonthEarnedMinutes}m this month`,
+            delta: t("overview.cards.monthDeltaPositive", {
+              count: stats.currentMonthEarnedMinutes,
+            }),
             positive: true,
           },
           {
-            label: "LIFETIME SPENT",
+            label: t("overview.cards.lifetimeSpent"),
             value: stats.lifetimeSpentMinutes,
-            delta: `-${stats.currentMonthSpentMinutes}m this month`,
+            delta: t("overview.cards.monthDeltaNegative", {
+              count: stats.currentMonthSpentMinutes,
+            }),
             positive: false,
           },
           {
-            label: "GIFTED IN",
+            label: t("overview.cards.giftedIn"),
             value: stats.lifetimeGiftedInMinutes,
-            delta: `+${stats.currentMonthGiftedInMinutes}m this month`,
+            delta: t("overview.cards.monthDeltaPositive", {
+              count: stats.currentMonthGiftedInMinutes,
+            }),
             positive: true,
           },
           {
-            label: "GIFTED OUT",
+            label: t("overview.cards.giftedOut"),
             value: stats.lifetimeGiftedOutMinutes,
-            delta: `-${stats.currentMonthGiftedOutMinutes}m this month`,
+            delta: t("overview.cards.monthDeltaNegative", {
+              count: stats.currentMonthGiftedOutMinutes,
+            }),
             positive: false,
           },
         ].map((stat, i) => (
@@ -164,7 +202,7 @@ export const OverviewTab = () => {
             <span className={styles.statCardLabel}>{stat.label}</span>
             <div className={styles.statCardValue}>
               <h2>{stat.value}</h2>
-              <span className={styles.statCardUnit}>m</span>
+              <span className={styles.statCardUnit}>{t("units.m")}</span>
             </div>
             <span
               className={`${styles.statCardDelta} ${stat.positive ? styles.positive : styles.negative}`}
@@ -177,7 +215,7 @@ export const OverviewTab = () => {
 
       <div className={styles.transactionsCard}>
         <div className={styles.transactionsHeader}>
-          <h2>Recent Transactions</h2>
+          <h2>{t("overview.transactions.title")}</h2>
           <motion.div
             whileHover={{ x: 4 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -188,15 +226,15 @@ export const OverviewTab = () => {
               search={{ tab: "transactions" }}
               className={styles.viewAll}
             >
-              View all
+              {t("overview.transactions.viewAll")}
               <Arrow />
             </LinkButtonWrapper>
           </motion.div>
         </div>
         {recentTransactions?.length === 0 ? (
           <div className={styles.emptyState}>
-            <h2>No transactions yet</h2>
-            <p>Your time bank activity will appear here</p>
+            <h2>{t("overview.transactions.empty")}</h2>
+            <p>{t("overview.transactions.emptyDescription")}</p>
           </div>
         ) : (
           <TransactionsListWidget

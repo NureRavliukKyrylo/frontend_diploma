@@ -5,6 +5,7 @@ import { CategoriesListFilter } from "@features/project";
 import { motion } from "framer-motion";
 import { useCategoriesInfiniteQuery } from "@entities/category";
 import { useSkillsFilters } from "../model/useSkillsFilter";
+import { useTranslation } from "react-i18next";
 
 interface SkillsFilterWidgetProps {
   search: SkillsSearchParams;
@@ -12,11 +13,12 @@ interface SkillsFilterWidgetProps {
 
 export const SkillsFilterWidget = ({ search }: SkillsFilterWidgetProps) => {
   const { onCategoryToggle, onClearFilters } = useSkillsFilters();
+  const { t } = useTranslation("common");
 
   return (
     <>
       <div className={styles.categoriesFilterBlock}>
-        <h1 className={styles.categoriesTitle}>Categories</h1>
+        <h1 className={styles.categoriesTitle}>{t("filters.categories")}</h1>
         <CategoriesListFilter
           selectedIds={search.CategoryIds}
           onToggle={onCategoryToggle}
@@ -35,7 +37,7 @@ export const SkillsFilterWidget = ({ search }: SkillsFilterWidgetProps) => {
             onClick={onClearFilters}
             className={styles.clearFiltersButton}
           >
-            Clear Filters
+            {t("actions.clearFilters")}
           </BaseButtonWrapper>
         </motion.div>
       </div>

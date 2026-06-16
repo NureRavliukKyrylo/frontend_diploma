@@ -12,7 +12,8 @@
   "skills": {
     "title": "НАВИЧКИ",
     "count": "Навички ({{count}})",
-    "level": "Рівень: {{level}}"
+    "level": "Рівень: {{level}}",
+    "seeMore": "Більше"
   },
   "inventory": {
     "title": "Досягнення",
@@ -20,5 +21,25 @@
     "locked": "Заблоковані",
     "noBadgesTitle": "Ще немає розблокованих бейджів",
     "noBadgesDescription": "Завершуйте активності, щоб отримати перший бейдж"
+  },
+
+  "rating": {
+    "votes": "({{count}} ГОЛОСІВ)"
+  },
+  "dateOfBirth": {
+    "label": "Дата народження"
+  },
+  "location": {
+    "empty": "Місцезнаходження не вказано",
+    "userLocation": "Місцезнаходження {{name}}"
+  },
+  "activity": {
+    "active": "АКТИВНІ",
+    "completed": "ЗАВЕРШЕНІ",
+    "projects": "ПРОЄКТИ",
+    "seeMore": "БІЛЬШЕ"
+  },
+  "badges": {
+    "title": "НАГОРОДИ"
   }
 }

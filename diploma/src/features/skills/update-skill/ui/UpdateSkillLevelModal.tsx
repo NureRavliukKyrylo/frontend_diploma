@@ -1,4 +1,5 @@
 import {
+  getSkillLevelTranslations,
   SkillLevelType,
   type SkillLevel,
   type SkillProfile,
@@ -8,6 +9,7 @@ import { motion } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useUpdateSkill } from "../model/useUpdateSkill";
 import { BaseModal } from "@shared/ui/modals";
+import { useTranslation } from "react-i18next";
 
 interface UpdateSkillLevelModalProps {
   skill: SkillProfile;
@@ -25,6 +27,8 @@ export const UpdateSkillLevelModal = ({
     mutation.reset();
     onClose();
   };
+
+  const { t } = useTranslation("skill");
 
   const { errorMessage, formik, mutation, isLoading } = useUpdateSkill(
     skill.skillId,
@@ -73,7 +77,7 @@ export const UpdateSkillLevelModal = ({
                   whileHover={{ scale: 1.05, y: -2 }}
                   transition={{ type: "spring", stiffness: 400, damping: 20 }}
                 >
-                  {label}
+                  {getSkillLevelTranslations(t, label)}
                 </motion.div>
               ))}
             </div>
@@ -89,7 +93,14 @@ export const UpdateSkillLevelModal = ({
               className={styles.btn}
               loading={isLoading}
             >
-              UPDATE TO {levelLabel?.toUpperCase()}
+              {levelLabel
+                ? t("skills.updateSkillModal.updateButton", {
+                    level: getSkillLevelTranslations(
+                      t,
+                      levelLabel,
+                    ).toUpperCase(),
+                  })
+                : "UPDATE TO"}
             </BaseButtonWrapper>
           </motion.div>
         </motion.div>

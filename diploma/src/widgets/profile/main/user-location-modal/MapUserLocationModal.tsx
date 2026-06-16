@@ -5,6 +5,7 @@ import { BaseMap } from "@shared/ui";
 import { Marker, Popup } from "react-leaflet";
 import { MapZoomAnimation } from "@shared/libs/map";
 import { UserMarker } from "@entities/user/profile";
+import { useTranslation } from "react-i18next";
 
 export interface MapUserLocationModalProps {
   fullName: string;
@@ -19,6 +20,8 @@ export const MapUserLocationModal = ({
   handleModal,
   isOpen,
 }: MapUserLocationModalProps) => {
+  const { t } = useTranslation("profile");
+
   return (
     <BaseModal
       isOpen={isOpen}
@@ -43,7 +46,7 @@ export const MapUserLocationModal = ({
               <Popup className={styles.popupUserLocation}>
                 <div className={styles.popupContent}>
                   <h1 className={styles.userLocationText}>
-                    {fullName}'s location
+                    {t("location.userLocation", { name: fullName })}
                   </h1>
                 </div>
               </Popup>

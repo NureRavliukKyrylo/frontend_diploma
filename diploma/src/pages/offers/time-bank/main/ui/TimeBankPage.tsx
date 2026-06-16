@@ -4,14 +4,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { TimeBankMode } from "../config/TimeBankMode";
 import { timeBankSearchDefaults } from "../libs/timeBankSearchShema";
 import { ActivitiesContent } from "../config/tabsForms";
-import { timeBankTabs } from "../config/timeBankTabs";
+import { getTimeBankTabs } from "../config/timeBankTabs";
 import { prefetchTab, TAB_SKELETON } from "../config/skeletonsPrefetch";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export const TimeBankPage = () => {
   const search = useSearch({ from: "/_masterLayout/time-bank/" });
   const navigate = useNavigate({ from: "/time-bank/" });
-
+  const { t } = useTranslation("timeBank");
+  const timeBankTabs = getTimeBankTabs(t);
   const activeTab = search.tab;
 
   const [pendingTab, setPendingTab] = useState<TimeBankMode | null>(null);

@@ -4,6 +4,7 @@ import {
   TRANSACTION_SOURCE_ICON,
   TRANSACTION_TYPE_CONFIG,
 } from "@entities/offer/config/transactionTypeConfig";
+import { useTranslation } from "react-i18next";
 
 interface TransactionListItemProps {
   transaction: TimeTransaction;
@@ -12,9 +13,11 @@ interface TransactionListItemProps {
 export const TransactionListItem = ({
   transaction,
 }: TransactionListItemProps) => {
-  const { label, wrapperColor, iconColor, fontColor } =
+  const { t } = useTranslation("timeBank");
+  const { wrapperColor, iconColor, fontColor } =
     TRANSACTION_TYPE_CONFIG[transaction.type];
   const Icon = TRANSACTION_SOURCE_ICON[transaction.sourceType];
+  const localizedLabel = t(`transactions.types.${transaction.type}`);
 
   const isPositive = [
     "earn",
@@ -31,13 +34,15 @@ export const TransactionListItem = ({
       </div>
 
       <div className={styles.content}>
-        <span className={styles.title}>{transaction.comment ?? label}</span>
+        <span className={styles.title}>
+          {transaction.comment ?? localizedLabel}
+        </span>
         <div className={styles.meta}>
           <span
             className={styles.badge}
             style={{ background: wrapperColor, color: fontColor }}
           >
-            {label}
+            {localizedLabel}
           </span>
         </div>
       </div>
@@ -50,10 +55,13 @@ export const TransactionListItem = ({
           }}
         >
           {isPositive ? "+" : "-"}
-          {Math.abs(transaction.amountMinutes)}m
+          {Math.abs(transaction.amountMinutes)}
+          {t("units.m")}
         </span>
         <span className={styles.balance}>
-          Balance: {transaction.balanceAfterMinutes}m
+          {t("transactions.labels.balanceAfter")}:{" "}
+          {transaction.balanceAfterMinutes}
+          {t("units.m")}
         </span>
       </div>
     </div>

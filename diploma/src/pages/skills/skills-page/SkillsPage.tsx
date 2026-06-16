@@ -24,6 +24,7 @@ import {
 } from "@shared/assets/animations";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
+import { useTranslation } from "react-i18next";
 
 export const SkillsPage = () => {
   const {
@@ -39,6 +40,7 @@ export const SkillsPage = () => {
     handleAssignSkill,
     handleCloseModal,
   } = useSkillsPage();
+  const { t } = useTranslation(["skill", "common"]);
 
   return (
     <ErrorBoundary
@@ -46,16 +48,14 @@ export const SkillsPage = () => {
         return (
           <div className={styles.errorState}>
             <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-            <p className="errorHint">
-              Try reloading the page or come back later.
-            </p>
+            <p className="errorHint">{t("common:errors.errorHint")}</p>
           </div>
         );
       }}
     >
       <div className={styles.skillsPageWrapper}>
         <div className={styles.skillsPageHeader}>
-          <h1 className={styles.titleSkillsPage}>Explore & Assign Skills</h1>
+          <h1 className={styles.titleSkillsPage}>{t("skills.page.title")}</h1>
         </div>
 
         <div className={styles.mainSkillsSection}>
@@ -84,8 +84,8 @@ export const SkillsPage = () => {
             >
               {data?.data.length === 0 ? (
                 <div className={styles.emptyState}>
-                  <h2>No skills found</h2>
-                  <p>Try adjusting your filters or search query</p>
+                  <h2>{t("skills.page.emptyTitle")}</h2>
+                  <p>{t("skills.page.emptyHint")}</p>
                 </div>
               ) : (
                 <Suspense
@@ -117,7 +117,7 @@ export const SkillsPage = () => {
                               menuItems={[
                                 {
                                   key: "assign",
-                                  label: "Assign skill",
+                                  label: t("skills.profileTab.assignLabel"),
                                   onClick: () => handleAssignSkill(skill),
                                 },
                               ]}

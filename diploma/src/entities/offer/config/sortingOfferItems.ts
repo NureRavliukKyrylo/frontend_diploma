@@ -1,4 +1,5 @@
 import type { SortOption } from "@shared/config/types";
+import type { TFunction } from "i18next";
 
 export type OfferSortValues =
   | "Default"
@@ -9,12 +10,14 @@ export type OfferSortValues =
   | "PriceMinutesAsc"
   | "PriceMinutesDesc";
 
-export const sortingOfferItems: SortOption<OfferSortValues>[] = [
-  { label: "Default", value: "Default" },
-  { label: "Title A-Z", value: "TitleAsc" },
-  { label: "Title Z-A", value: "TitleDesc" },
-  { label: "Newest", value: "Newest" },
-  { label: "Ending Soon", value: "EndingSoon" },
-  { label: "Lowest Reward", value: "PriceMinutesAsc" },
-  { label: "Highest Reward", value: "PriceMinutesDesc" },
+export const getSortingOfferItems = (
+  t: TFunction,
+): SortOption<OfferSortValues>[] => [
+  { label: t("common:sorting.default"), value: "Default" },
+  { label: t("common:sorting.titleAsc"), value: "TitleAsc" },
+  { label: t("common:sorting.titleDesc"), value: "TitleDesc" },
+  { label: t("common:sorting.newest"), value: "Newest" },
+  { label: t("common:sorting.endingSoon"), value: "EndingSoon" },
+  { label: t("common:sorting.priceMinutesAsc"), value: "PriceMinutesAsc" },
+  { label: t("common:sorting.priceMinutesDesc"), value: "PriceMinutesDesc" },
 ];

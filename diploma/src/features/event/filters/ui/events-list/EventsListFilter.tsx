@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { QueryResult } from "@shared/config/types";
 import { Tab } from "@shared/ui";
 import type { Event } from "@entities/event";
+import { useTranslation } from "react-i18next";
 
 interface EventsListFilterProps {
   useEventsQuery: () => QueryResult<Pick<Event, "id" | "title">>;
@@ -16,6 +17,7 @@ export const EventsListFilter = ({
   selectedIds,
   onToggle,
 }: EventsListFilterProps) => {
+  const { t } = useTranslation("common");
   const {
     data: events = [],
     fetchNextPage,
@@ -64,7 +66,9 @@ export const EventsListFilter = ({
           disabled={isFetchingNextPage}
           className={styles.showMoreEventsButton}
         >
-          {isFetchingNextPage ? "Loading..." : "show more"}
+          {isFetchingNextPage
+            ? t("loading.title")
+            : t("actions.seeMore").toLowerCase()}
         </BaseButtonWrapper>
       )}
     </div>

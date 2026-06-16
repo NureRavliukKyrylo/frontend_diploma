@@ -15,6 +15,7 @@ import { useSkillsInfiniteQuery } from "@entities/skill";
 import { Link } from "@tanstack/react-router";
 import { useCategoriesInfiniteQuery } from "@entities/category";
 import type { BaseFiltersRoute } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
 
 interface TaskFiltersWidgetProps {
   search: TasksRequestParams;
@@ -27,6 +28,7 @@ export const TaskFiltersWidget = ({
   includeCategories = true,
   from = "/activities/",
 }: TaskFiltersWidgetProps) => {
+  const { t } = useTranslation("common");
   const {
     onStartDateChange,
     onEndBeforeChange,
@@ -55,13 +57,17 @@ export const TaskFiltersWidget = ({
                 search={{ tab: "tasks", ...search }}
                 className={styles.showAllTasksButton}
               >
-                SHOW ALL TASKS
+                {t("actions.showAll", {
+                  subject: t("filters.subjects.tasks").toUpperCase(),
+                })}
               </Link>
             </motion.div>
           </div>
         )}
         <div className={styles.taskDeadLine}>
-          <h1 className={styles.subHeaderFilter}>Task deadline due</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("filters.deadlineDue", { subject: t("filters.subjects.task") })}
+          </h1>
           <DateRangeFilter
             startDate={search.From}
             endBefore={search.To}
@@ -71,7 +77,9 @@ export const TaskFiltersWidget = ({
         </div>
         <div className={styles.dividerFilterBlock} />
         <div className={styles.taskRating}>
-          <h1 className={styles.subHeaderFilter}>Task rating</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("filters.rating", { subject: t("filters.subjects.task") })}
+          </h1>
           <RatingFilter
             rating={search.Rating}
             onRatingChange={onRatingChange}
@@ -81,7 +89,9 @@ export const TaskFiltersWidget = ({
           <>
             <div className={styles.dividerFilterBlock} />
             <div className={styles.taskCategories}>
-              <h1 className={styles.subHeaderFilter}>Categories</h1>
+              <h1 className={styles.subHeaderFilter}>
+                {t("filters.categories")}
+              </h1>
               <CategoriesListFilter
                 useCategoriesQuery={useCategoriesInfiniteQuery({ PageSize: 7 })}
                 selectedIds={search.CategoryIds}
@@ -90,10 +100,11 @@ export const TaskFiltersWidget = ({
             </div>
           </>
         )}
-
         <div className={styles.dividerFilterBlock} />
         <div className={styles.taskSkills}>
-          <h1 className={styles.subHeaderFilter}>Required skills</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("filters.requiredSkills")}
+          </h1>
           <SkillsListFilter
             useSkillsQuery={useSkillsInfiniteQuery({ PageSize: 7 })}
             selectedIds={search.SkillIds}
@@ -102,7 +113,7 @@ export const TaskFiltersWidget = ({
         </div>
         <div className={styles.dividerFilterBlock} />
         <div className={styles.taskProjects}>
-          <h1 className={styles.subHeaderFilter}>Projects</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.projects")}</h1>
           <ProjectsListFilter
             useProjectsQuery={useProjectsInfiniteQuery({ PageSize: 7 })}
             selectedIds={search.ProjectIds}
@@ -111,7 +122,9 @@ export const TaskFiltersWidget = ({
         </div>
         <div className={styles.dividerFilterBlock} />
         <div className={styles.taskOrganizations}>
-          <h1 className={styles.subHeaderFilter}>Organizations</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("filters.organizations")}
+          </h1>
           <OrganizationsListFilter
             useOrganizationsQuery={useOrganizationsInfiniteQuery({
               PageSize: 7,
@@ -122,11 +135,9 @@ export const TaskFiltersWidget = ({
         </div>
         <div className={styles.dividerFilterBlock} />
         <div className={styles.taskEvents}>
-          <h1 className={styles.subHeaderFilter}>Events</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.events")}</h1>
           <EventsListFilter
-            useEventsQuery={useEventsInfiniteQuery({
-              PageSize: 7,
-            })}
+            useEventsQuery={useEventsInfiniteQuery({ PageSize: 7 })}
             selectedIds={search.EventIds}
             onToggle={onEventToggle}
           />
@@ -144,7 +155,7 @@ export const TaskFiltersWidget = ({
             onClick={onClearFilters}
             className={styles.clearFiltersButton}
           >
-            Clear Filters
+            {t("actions.clearFilters")}
           </BaseButtonWrapper>
         </motion.div>
       </div>

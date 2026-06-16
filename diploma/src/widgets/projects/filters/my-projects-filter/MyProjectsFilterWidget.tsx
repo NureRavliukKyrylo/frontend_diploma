@@ -8,6 +8,7 @@ import { DateRangeFilter, SwitchFilter } from "@shared/ui/filters";
 import { OrganizationsListFilter } from "@features/organization";
 import { mapQueryData } from "@shared/libs/query";
 import type { MyProjectsRequestParams } from "@entities/project";
+import { useTranslation } from "react-i18next";
 
 interface MyProjectsFilterWidgetProps {
   search: MyProjectsRequestParams;
@@ -16,6 +17,7 @@ interface MyProjectsFilterWidgetProps {
 export const MyProjectsFilterWidget = ({
   search,
 }: MyProjectsFilterWidgetProps) => {
+  const { t } = useTranslation("common");
   const {
     onStartDateChange,
     onEndBeforeChange,
@@ -24,11 +26,16 @@ export const MyProjectsFilterWidget = ({
     onClearFilters,
     onOnlyActiveChange,
   } = useMyProjectFilters();
+
   return (
     <>
       <div className={styles.scrollableProjectsFilters}>
         <div className={styles.projectDeadLine}>
-          <h1 className={styles.subHeaderFilter}>Project deadline due</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("filters.deadlineDue", {
+              subject: t("filters.subjects.project"),
+            })}
+          </h1>
           <DateRangeFilter
             startDate={search.StartDate}
             endBefore={search.EndBefore}
@@ -38,7 +45,7 @@ export const MyProjectsFilterWidget = ({
         </div>
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectCategories}>
-          <h1 className={styles.subHeaderFilter}>Categories</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.categories")}</h1>
           <CategoriesListFilter
             useCategoriesQuery={mapQueryData(
               useFiltersInfiniteQuery({
@@ -54,7 +61,9 @@ export const MyProjectsFilterWidget = ({
         </div>
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectOrganizations}>
-          <h1 className={styles.subHeaderFilter}>Organizations</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("filters.organizations")}
+          </h1>
           <OrganizationsListFilter
             useOrganizationsQuery={mapQueryData(
               useFiltersInfiniteQuery({
@@ -70,10 +79,12 @@ export const MyProjectsFilterWidget = ({
         </div>
         <div className={styles.dividerFilterBlock} />
         <div className={styles.moreOptions}>
-          <h1 className={styles.subHeaderFilter}>More options</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.moreOptions")}</h1>
           <div className={styles.moreOptionsBlock}>
             <SwitchFilter
-              label="Display completed projects"
+              label={t("filters.displayCompleted", {
+                subject: t("filters.subjects.projects"),
+              })}
               value={search.OnlyActive ?? false}
               onChange={onOnlyActiveChange}
             />
@@ -92,7 +103,7 @@ export const MyProjectsFilterWidget = ({
             onClick={onClearFilters}
             className={styles.clearFiltersButton}
           >
-            Clear Filters
+            {t("actions.clearFilters")}
           </BaseButtonWrapper>
         </motion.div>
       </div>

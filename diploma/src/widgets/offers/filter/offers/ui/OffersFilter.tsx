@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { DateRangeFilter, SelectFilter } from "@shared/ui/filters";
 import styles from "./OffersFilter.module.scss";
-import { onlineOptions, type OfferSearchParams } from "@entities/offer";
+import { getOnlineOptions, type OfferSearchParams } from "@entities/offer";
 import { useOffersFilter } from "../model/useOffersFilter";
 import { DistanceFilter, SwitchFilter } from "@shared/ui/filters";
 import { useCategoriesInfiniteQuery } from "@entities/category";
@@ -9,12 +9,14 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useSkillsInfiniteQuery } from "@entities/skill";
 import { CategoriesListFilter } from "@features/project";
 import { BaseWrapperFilter } from "@shared/ui/wrappers";
+import { useTranslation } from "react-i18next";
 
 interface OffersFilterProps {
   search: OfferSearchParams;
 }
 
 export const OffersFilter = ({ search }: OffersFilterProps) => {
+  const { t } = useTranslation("common");
   const {
     onCategoryToggle,
     onClearFilters,
@@ -33,7 +35,9 @@ export const OffersFilter = ({ search }: OffersFilterProps) => {
     <BaseWrapperFilter>
       <div className={styles.wrapper}>
         <div className={styles.offerDeadLine}>
-          <h1 className={styles.subHeaderFilter}>Offer deadline due</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("filters.deadlineDue", { subject: t("filters.subjects.offer") })}
+          </h1>
           <DateRangeFilter
             startDate={search.From}
             endBefore={search.To}
@@ -45,7 +49,7 @@ export const OffersFilter = ({ search }: OffersFilterProps) => {
         <div className={styles.dividerFilterBlock} />
 
         <div className={styles.offerCategories}>
-          <h1 className={styles.subHeaderFilter}>Categories</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.categories")}</h1>
           <CategoriesListFilter
             useCategoriesQuery={useCategoriesInfiniteQuery({ PageSize: 7 })}
             selectedIds={search.CategoryIds}
@@ -56,7 +60,7 @@ export const OffersFilter = ({ search }: OffersFilterProps) => {
         <div className={styles.dividerFilterBlock} />
 
         <div className={styles.offerSkills}>
-          <h1 className={styles.subHeaderFilter}>Skills</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.skills")}</h1>
           <CategoriesListFilter
             useCategoriesQuery={useSkillsInfiniteQuery({ PageSize: 7 })}
             selectedIds={search.SkillIds}
@@ -67,7 +71,7 @@ export const OffersFilter = ({ search }: OffersFilterProps) => {
         <div className={styles.dividerFilterBlock} />
 
         <div className={styles.offerDistance}>
-          <h1 className={styles.subHeaderFilter}>Distance</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.distance")}</h1>
           <DistanceFilter
             defaultLocation={search.Location}
             defaultRadiusKm={search.RadiusKm}
@@ -80,23 +84,27 @@ export const OffersFilter = ({ search }: OffersFilterProps) => {
         <div className={styles.dividerFilterBlock} />
 
         <div className={styles.moreOptions}>
-          <h1 className={styles.subHeaderFilter}>More options</h1>
+          <h1 className={styles.subHeaderFilter}>{t("filters.moreOptions")}</h1>
           <div className={styles.moreOptionsBlock}>
             <SwitchFilter
-              label="Show completed offers"
+              label={t("filters.displayCompleted", {
+                subject: t("filters.subjects.offers"),
+              })}
               value={search.IncludeArchived ?? false}
               onChange={onIncludeArchivedChange}
             />
 
             <SwitchFilter
-              label="Display joined offers"
+              label={t("filters.displayJoined", {
+                subject: t("filters.subjects.offers"),
+              })}
               value={search.ShowJoined ?? false}
               onChange={onShowJoinedChange}
             />
           </div>
           <SelectFilter
-            label="Offer format"
-            options={onlineOptions}
+            label={t("filters.offerFormat")}
+            options={getOnlineOptions(t)}
             value={
               search.IsOnline === undefined
                 ? "all"
@@ -123,7 +131,7 @@ export const OffersFilter = ({ search }: OffersFilterProps) => {
               onClick={onClearFilters}
               className={styles.clearFiltersButton}
             >
-              Clear Filters
+              {t("actions.clearFilters")}
             </BaseButtonWrapper>
           </motion.div>
         </div>

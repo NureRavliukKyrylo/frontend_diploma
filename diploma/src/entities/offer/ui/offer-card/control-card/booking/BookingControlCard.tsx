@@ -4,7 +4,8 @@ import styles from "./BookingControlCard.module.scss";
 import { getFullName } from "@entities/user";
 import { OnlineIcon } from "@shared/assets/icons/info";
 import { formatDateToText } from "@shared/libs/date";
-import { PROGRESS_STATUS_LABELS } from "@entities/offer/config/progressStatusLabels";
+import { useTranslation } from "react-i18next";
+import { getProgressStatusLabels } from "@entities/offer/config/progressStatusLabels";
 
 interface BookingControlCardProps {
   offer: OfferJoined;
@@ -17,6 +18,9 @@ export const BookingControlCard = ({
   bottomContent,
   className,
 }: BookingControlCardProps) => {
+  const { t } = useTranslation("timeBank");
+  const statusLabels = getProgressStatusLabels(t);
+
   return (
     <>
       <div
@@ -40,7 +44,7 @@ export const BookingControlCard = ({
               </span>
               <span className={styles.dot}>|</span>
               <span className={styles.bookedAt}>
-                Booked{" "}
+                {t("bookings.labels.booked")}{" "}
                 {formatDateToText(
                   new Date(offer.lastBookedAt).toISOString(),
                   false,
@@ -52,7 +56,9 @@ export const BookingControlCard = ({
                 offer.isOnline ? styles.online : styles.offline
               }`}
             >
-              {offer.isOnline ? "Online" : "Offline"}
+              {offer.isOnline
+                ? t("offers.labels.online")
+                : t("offers.labels.offline")}
             </span>
           </div>
         </div>
@@ -62,12 +68,13 @@ export const BookingControlCard = ({
             className={`${styles.statusOffer} ${styles[offer.myBookingStatus.toLowerCase()]}`}
           >
             <OnlineIcon className={styles.statusIcon} />
-            {PROGRESS_STATUS_LABELS[offer.myBookingStatus] ?? "unknown"}
+            {statusLabels[offer.myBookingStatus] ?? t("offers.labels.unknown")}
           </span>
           <div
             className={`${styles.reward} ${styles[offer.myBookingStatus.toLowerCase()]}`}
           >
-            +{offer.priceMinutes}m
+            +{offer.priceMinutes}
+            {t("units.m")}
           </div>
         </div>
       </div>

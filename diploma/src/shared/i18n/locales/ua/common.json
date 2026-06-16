@@ -9,15 +9,23 @@
     "back": "Назад",
     "next": "Далі",
     "submit": "Надіслати",
-    "search": "Пошук",
-    "filter": "Фільтр",
     "reset": "Скинути",
     "approve": "Схвалити",
     "reject": "Відхилити",
     "contactUs": "Зв'язатися з нами",
     "resendCode": "Надіслати код повторно",
     "didNotReceive": "Не отримали код?",
-    "resendIn": "Надіслати код повторно через ({{time}})"
+    "resendIn": "Надіслати код повторно через ({{time}})",
+    "clearFilters": "Скинути Фільтрацію",
+    "seeMore": "Показати більше",
+    "showAll": "ПОКАЗАТИ ВСІ {{subject}}"
+  },
+  "loading": {
+    "title": "Завантаження..."
+  },
+  "level": {
+    "current": "Рівень {{level}}",
+    "next": "Наступний рівень"
   },
   "status": {
     "online": "Онлайн",
@@ -43,7 +51,8 @@
     "somethingWentWrong": "Щось пішло не так",
     "notFound": "Не знайдено",
     "unauthorized": "Немає доступу",
-    "actionFailed": "Помилка: {{action}}"
+    "actionFailed": "Помилка: {{action}}",
+    "errorHint": "Try reloading the page or come back later."
   },
   "pagination": {
     "loadMore": "Завантажити ще",
@@ -76,6 +85,68 @@
       "label": "Введіть посилання на LinkedIn",
       "activeLabel": "Посилання LinkedIn"
     }
+  },
+  "search": {
+    "title": "Пошук"
+  },
+
+  "filters": {
+    "title": "Фільтрування",
+    "filterByTitle": "Фільтрація за",
+    "titleList": "Список",
+    "rating": "Рейтинг {{subject}}",
+    "deadlineDue": "Дедлайн {{subject}}",
+    "categories": "Категорії",
+    "requiredSkills": "Необхідні навички",
+    "skills": "Навички",
+    "projects": "Проєкти",
+    "organizations": "Організації",
+    "events": "Події",
+    "offerFormat": "Формат пропозиції",
+    "subjectType": "Тип суб'єкта",
+    "reportStatus": "Статус скарги",
+    "reportReason": "Причина скарги",
+    "dateRange": "Діапазон дат",
+    "distance": "Відстань",
+    "displayCompleted": "Показати завершені {{subject}}",
+    "displayJoined": "Показати приєднані {{subject}}",
+    "displaySeries": "Показати серійні події",
+    "moreOptions": "Більше параметрів",
+    "startDate": "Дата початку",
+    "dueDate": "Кінцева дата",
+    "includeArchived": "Показати архівовані {{subject}}",
+    "onlineOptions": {
+      "all": "Усі"
+    },
+    "subjects": {
+      "task": "завдання",
+      "project": "проєкту",
+      "organization": "організації",
+      "offer": "пропозиції",
+      "event": "події",
+      "tasks": "завдання",
+      "projects": "проєкти",
+      "organizations": "організації",
+      "offers": "пропозиції",
+      "events": "події"
+    }
+  },
+  "reason": {
+    "title": "Причина"
+  },
+  "sorting": {
+    "title": "Сортування",
+    "default": "За замовчуванням",
+    "newest": "Найновіші",
+    "titleAsc": "Назва А→Я",
+    "titleDesc": "Назва Я→А",
+    "endingSoon": "Незабаром закінчується",
+    "dateAsc": "Дата за зростанням",
+    "dateDesc": "Дата за спаданням",
+    "ratingAsc": "Рейтинг за зростанням",
+    "ratingDesc": "Рейтинг за спаданням",
+    "priceMinutesAsc": "Ціна за зростанням",
+    "priceMinutesDesc": "Ціна за спаданням"
   },
   "validation": {
     "required": "Це поле є обов'язковим",

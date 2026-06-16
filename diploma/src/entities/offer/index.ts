@@ -22,9 +22,9 @@ export {
 } from "./libs/search-schema/offerMySearchSchema";
 export type { Offer } from "./model";
 export type { OfferJoined } from "./model";
-export { sortingOfferItems } from "./config/sortingOfferItems";
+export { getSortingOfferItems } from "./config/sortingOfferItems";
 export type { OfferSortValues } from "./config/sortingOfferItems";
-export { onlineOptions } from "./config/onlineOptions";
+export { getOnlineOptions } from "./config/onlineOptions";
 export { OfferListItemSkeleton } from "./ui/offer-card/list-item/OfferListItemSkeleton";
 export { MyOfferControlCardSkeleton } from "./ui/offer-card/control-card/my-offer/MyOfferControlCardSkeleton";
 export {

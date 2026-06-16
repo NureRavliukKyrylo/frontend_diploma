@@ -27,8 +27,14 @@ export function MainProfilePage() {
   const navigate = useNavigate({ from: "/profile/" });
 
   const handleTabChange = (tab: ProfileMode) => {
-    navigate({ search: profileSearchDefaults[tab] });
+    navigate({
+      search: (prev) => ({
+        ...profileSearchDefaults[tab],
+        locale: prev.locale,
+      }),
+    });
   };
+
   const { t } = useTranslation(["profile", "common"]);
   const profileMainTabs = getProfileMainTabs(t);
 

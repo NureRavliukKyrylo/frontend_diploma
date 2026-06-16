@@ -20,3 +20,4 @@ export {
   type SortSkillsValues,
 } from "./config/sortingSkillItems";
 export { useSkillsInfiniteQuery } from "./model/hooks/useSkillsInfiniteQuery";
+export { getSkillLevelTranslations } from "./config/getSkillLevelTranslations";

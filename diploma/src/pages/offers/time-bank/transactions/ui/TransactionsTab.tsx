@@ -3,6 +3,7 @@ import styles from "./TransactionsTab.module.scss";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTransactionsTab } from "../model/useTransactionsTab";
+import { useTranslation } from "react-i18next";
 import {
   offerQuery,
   TransactionListItem,
@@ -27,6 +28,7 @@ interface TransactionsTabProps {
 }
 
 export const TransactionsTab = ({ search }: TransactionsTabProps) => {
+  const { t } = useTranslation("timeBank");
   const { transactions, handlePageChange } = useTransactionsTab(search);
   const today = new Date();
   const { From, To } = getCalendarRange(today, "month");
@@ -39,27 +41,30 @@ export const TransactionsTab = ({ search }: TransactionsTabProps) => {
       <aside className={styles.sidebar}>
         <div className={styles.baseStats}>
           <div className={styles.topContent}>
-            <h1>MY BALANCE</h1>
-            <h2>{transactions?.stats.balanceMinutes}</h2>
+            <h1>{t("transactions.sidebar.title")}</h1>
+            <h2>
+              {transactions?.stats.balanceMinutes}
+              {t("units.m")}
+            </h2>
             <div className={styles.lineDivider} />
           </div>
           <div className={styles.bottomContent}>
             <div className={styles.statBlock}>
-              <h1>This month</h1>
+              <h1>{t("transactions.sidebar.stats.month")}</h1>
               <h2 className={styles.positive}>
                 {transactions?.stats.currentMonthEarnedMinutes}
               </h2>
             </div>
             <div className={styles.lineDivider} />
             <div className={styles.statBlock}>
-              <h1>Reserved</h1>
+              <h1>{t("transactions.sidebar.stats.reserved")}</h1>
               <h2 className={styles.reserved}>
                 {transactions?.stats.reservedMinutes}
               </h2>
             </div>
             <div className={styles.lineDivider} />
             <div className={styles.statBlock}>
-              <h1>Lifetime</h1>
+              <h1>{t("transactions.sidebar.stats.lifetime")}</h1>
               <h2 className={styles.lifetime}>
                 {transactions?.stats.lifetimeEarnedMinutes}
               </h2>
@@ -76,9 +81,7 @@ export const TransactionsTab = ({ search }: TransactionsTabProps) => {
           fallbackRender={({ error }) => (
             <div className={styles.errorState}>
               <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-              <p className="errorHint">
-                Try reloading the page or come back later.
-              </p>
+              <p className="errorHint">{t("errors.hint")}</p>
             </div>
           )}
         >
@@ -95,8 +98,8 @@ export const TransactionsTab = ({ search }: TransactionsTabProps) => {
             >
               {transactions?.data?.length === 0 ? (
                 <div className={styles.emptyState}>
-                  <h2>No transactions found</h2>
-                  <p>Try adjusting your filters</p>
+                  <h2>{t("transactions.emptyState.title")}</h2>
+                  <p>{t("transactions.emptyState.description")}</p>
                 </div>
               ) : (
                 <Suspense

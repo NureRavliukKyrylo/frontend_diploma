@@ -16,7 +16,8 @@ export const LangSwitcher = () => {
   const toggle = () => {
     router.navigate({
       to: ".",
-      search: { locale: locale === "en" ? "ua" : "en" } as any,
+      search: (prev) =>
+        ({ ...prev, locale: locale === "en" ? "ua" : "en" }) as any,
       replace: true,
     });
   };

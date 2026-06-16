@@ -20,6 +20,7 @@
 
 .buttonShowAllTasks {
   padding: 30px;
+  text-align: center;
 
   @include respond-to(laptop) {
     padding: 22px;

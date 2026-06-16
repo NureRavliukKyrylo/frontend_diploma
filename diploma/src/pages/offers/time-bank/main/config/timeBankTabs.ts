@@ -1,9 +1,15 @@
+import type { TFunction } from "i18next";
 import type { TimeBankMode } from "./TimeBankMode";
 
-export const timeBankTabs: { label: string; value: TimeBankMode }[] = [
-  { label: "Overview", value: "overview" },
-  { label: "Offers", value: "offers" },
-  { label: "My Booking", value: "bookings" },
-  { label: "My Offers", value: "my-offers" },
-  { label: "Transactions", value: "transactions" },
+export interface TimeBankTabOption {
+  label: string;
+  value: TimeBankMode;
+}
+
+export const getTimeBankTabs = (t: TFunction): TimeBankTabOption[] => [
+  { label: t("tabs.overview"), value: "overview" },
+  { label: t("tabs.offers"), value: "offers" },
+  { label: t("tabs.bookings"), value: "bookings" },
+  { label: t("tabs.myOffers"), value: "my-offers" },
+  { label: t("tabs.transactions"), value: "transactions" },
 ];

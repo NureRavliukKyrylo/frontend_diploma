@@ -1,0 +1,169 @@
+{
+  "units": {
+    "m": "m",
+    "h": "h"
+  },
+  "tabs": {
+    "overview": "Overview",
+    "offers": "Offers",
+    "bookings": "My Booking",
+    "myOffers": "My Offers",
+    "transactions": "Transactions"
+  },
+  "offers": {
+    "labels": {
+      "online": "Online",
+      "offline": "Offline",
+      "reward": "REWARD",
+      "unknown": "unknown"
+    },
+    "actions": {
+      "take": "Take"
+    },
+    "emptyState": {
+      "title": "No offers found",
+      "description": "Try adjusting your search query"
+    }
+  },
+  "bookings": {
+    "title": "MY BOOKINGS",
+    "labels": {
+      "booked": "Booked",
+      "reason": "Reason"
+    },
+    "status": {
+      "inProgress": "In progress",
+      "pending": "Pending",
+      "completed": "Completed",
+      "reserved": "Reserved",
+      "cancelled": "Cancelled",
+      "completionRequested": "Completion Request"
+    },
+    "emptyState": {
+      "title": "No bookings found",
+      "description": "Try adjusting your search query"
+    },
+    "bottomContent": {
+      "pending": "Your booking is awaiting confirmation.",
+      "scheduledAt": "This offer is scheduled at",
+      "onlineFinish": "When you finish, mark the booking as completed.",
+      "completionRequested": "Waiting for the organizer to confirm completion.",
+      "completed": "You've successfully completed this offer.",
+      "cancelled": "This booking has been cancelled."
+    }
+  },
+  "myOffers": {
+    "title": "MY OFFERS",
+    "labels": {
+      "cost": "cost",
+      "bookingsCount": "bookings"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "activeItem": "Active",
+      "inactiveItem": "Inactive",
+      "totalBookings": "Total bookings"
+    },
+    "manageText": "Manage your offer settings and availability.",
+    "emptyState": {
+      "title": "No offers found",
+      "description": "Try adjusting your search query"
+    }
+  },
+  "overview": {
+    "balance": {
+      "label": "Your balance",
+      "minutes": "{{count}} m",
+      "reserved": "Reserved",
+      "available": "Available",
+      "lifetimeEarned": "Lifetime Earned",
+      "lifetimeSpent": "Lifetime Spent"
+    },
+    "level": {
+      "title": "Current level",
+      "progress": "Progress to {{name}}",
+      "progressGeneric": "Progress to next level",
+      "hint": "Next: {{name}} - {{remaining}}m to go",
+      "badgeLabel": "LVL {{order}}"
+    },
+    "monthly": {
+      "earned": "This month earned",
+      "spent": "This month spent",
+      "reservations": "Active reservations"
+    },
+    "cards": {
+      "lifetimeEarned": "LIFETIME EARNED",
+      "lifetimeSpent": "LIFETIME SPENT",
+      "giftedIn": "GIFTED IN",
+      "giftedOut": "GIFTED OUT",
+      "monthDeltaPositive": "+{{count}}m this month",
+      "monthDeltaNegative": "-{{count}}m this month"
+    },
+    "transactions": {
+      "title": "Recent Transactions",
+      "viewAll": "View all",
+      "empty": "No transactions yet",
+      "emptyDescription": "Your time bank activity will appear here"
+    }
+  },
+  "transactions": {
+    "sidebar": {
+      "title": "MY BALANCE",
+      "stats": {
+        "month": "This month",
+        "reserved": "Reserved",
+        "lifetime": "Lifetime"
+      }
+    },
+    "emptyState": {
+      "title": "No transactions found",
+      "description": "Try adjusting your filters"
+    },
+    "labels": {
+      "balanceAfter": "Balance"
+    },
+    "filter": {
+      "sections": {
+        "dateRange": "Date range",
+        "type": "Transaction type",
+        "source": "Source type"
+      },
+      "labels": {
+        "type": "Type",
+        "source": "Source"
+      },
+      "actions": {
+        "clear": "Clear Filters"
+      },
+      "options": {
+        "type": {
+          "all": "All types"
+        },
+        "source": {
+          "all": "All sources"
+        }
+      }
+    },
+    "types": {
+      "earn": "Earned Time",
+      "spend": "Spent Time",
+      "reservation": "Reserved Time",
+      "reservationRelease": "Reservation Release",
+      "adminAdjustmentPlus": "Admin Bonus",
+      "adminAdjustmentMinus": "Admin Correction",
+      "giftIn": "Gift Received",
+      "giftOut": "Gift Sent"
+    },
+    "sources": {
+      "eventAttendance": "Event attendance",
+      "priorityReservation": "Priority reservation",
+      "adminAdjustment": "Admin adjustment",
+      "gift": "Gift",
+      "timeSpend": "Time spend"
+    }
+  },
+  "errors": {
+    "hint": "Try reloading the page or come back later."
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "units": {
+    "m": "хв",
+    "h": "г"
+  },
+  "tabs": {
+    "overview": "Огляд",
+    "offers": "Пропозиції",
+    "bookings": "Мої бронювання",
+    "myOffers": "Мої пропозиції",
+    "transactions": "Транзакції"
+  },
+  "offers": {
+    "labels": {
+      "online": "Онлайн",
+      "offline": "Офлайн",
+      "reward": "ВИНАГОРОДА",
+      "unknown": "невідомо"
+    },
+    "actions": {
+      "take": "Прийняти"
+    },
+    "emptyState": {
+      "title": "Пропозицій не знайдено",
+      "description": "Спробуйте змінити параметри пошуку"
+    }
+  },
+  "bookings": {
+    "title": "МОЇ БРОНЮВАННЯ",
+    "labels": {
+      "booked": "Заброньовано",
+      "reason": "Причина"
+    },
+    "status": {
+      "inProgress": "В процесі",
+      "pending": "В очікуванні",
+      "completed": "Завершено",
+      "reserved": "Зарезервовано",
+      "cancelled": "Скасовано",
+      "completionRequested": "Запит на завершення"
+    },
+    "emptyState": {
+      "title": "Бронювань не знайдено",
+      "description": "Спробуйте змінити параметри пошуку"
+    },
+    "bottomContent": {
+      "pending": "Ваше бронювання очікує на підтвердження.",
+      "scheduledAt": "Ця пропозиція запланована за адресою",
+      "onlineFinish": "Коли закінчите, позначте бронювання як виконане.",
+      "completionRequested": "Очікування підтвердження виконання від організатора.",
+      "completed": "Ви успішно виконали цю пропозицію.",
+      "cancelled": "Це бронювання було скасовано."
+    }
+  },
+  "myOffers": {
+    "title": "МОЇ ПРОПОЗИЦІЇ",
+    "labels": {
+      "cost": "вартість",
+      "bookingsCount": "бронювань"
+    },
+    "status": {
+      "active": "Активні",
+      "activeItem": "Активний",
+      "inactiveItem": "Неактивний",
+      "inactive": "Неактивні",
+      "totalBookings": "Всього бронювань"
+    },
+    "manageText": "Керуйте налаштуваннями та доступністю ваших пропозицій.",
+    "emptyState": {
+      "title": "Пропозицій не знайдено",
+      "description": "Спробуйте змінити параметри пошуку"
+    }
+  },
+  "overview": {
+    "balance": {
+      "label": "Ваш баланс",
+      "minutes": "{{count}} хв",
+      "reserved": "Зарезервовано",
+      "available": "Доступно",
+      "lifetimeEarned": "Заробено за весь час",
+      "lifetimeSpent": "Витрачено за весь час"
+    },
+    "level": {
+      "title": "Поточний рівень",
+      "progress": "Прогрес до {{name}}",
+      "progressGeneric": "Прогрес до наступного рівня",
+      "hint": "Наступний: {{name}} - залишилося {{remaining}}хв",
+      "badgeLabel": "РІВЕНЬ {{order}}"
+    },
+    "monthly": {
+      "earned": "Зароблено цього місяця",
+      "spent": "Витрачено цього місяця",
+      "reservations": "Активні резервації"
+    },
+    "cards": {
+      "lifetimeEarned": "ЗАРОБЛЕНО ЗА ВЕСЬ ЧАС",
+      "lifetimeSpent": "ВИТРАЧЕНО ЗА ВЕСЬ ЧАС",
+      "giftedIn": "ОТРИМАНО В ПОДАРУНОК",
+      "giftedOut": "ПОДАРОВАНО",
+      "monthDeltaPositive": "+{{count}}хв цього місяця",
+      "monthDeltaNegative": "-{{count}}хв цього місяця"
+    },
+    "transactions": {
+      "title": "Останні транзакції",
+      "viewAll": "Переглянути всі",
+      "empty": "Транзакцій ще немає",
+      "emptyDescription": "Тут з'явиться історія активності вашого банку часу"
+    }
+  },
+  "transactions": {
+    "sidebar": {
+      "title": "МІЙ БАЛАНС",
+      "stats": {
+        "month": "Цього місяця",
+        "reserved": "Зарезервовано",
+        "lifetime": "За весь час"
+      }
+    },
+    "emptyState": {
+      "title": "Транзакцій не знайдено",
+      "description": "Спробуйте змінити налаштування фільтрів"
+    },
+    "labels": {
+      "balanceAfter": "Баланс"
+    },
+    "filter": {
+      "sections": {
+        "dateRange": "Діапазон дат",
+        "type": "Тип транзакції",
+        "source": "Тип джерела"
+      },
+      "labels": {
+        "type": "Тип",
+        "source": "Джерело"
+      },
+      "actions": {
+        "clear": "Очистити фільтри"
+      },
+      "options": {
+        "type": {
+          "all": "Всі типи"
+        },
+        "source": {
+          "all": "Всі джерела"
+        }
+      }
+    },
+    "types": {
+      "earn": "Зароблений час",
+      "spend": "Витрачений час",
+      "reservation": "Зарезервований час",
+      "reservationRelease": "Зняття резервації",
+      "adminAdjustmentPlus": "Бонус від адміна",
+      "adminAdjustmentMinus": "Корекція адміном",
+      "giftIn": "Отриманий дарунок",
+      "giftOut": "Надісланий дарунок"
+    },
+    "sources": {
+      "eventAttendance": "Відвідування подій",
+      "priorityReservation": "Пріоритетне бронювання",
+      "adminAdjustment": "Адміністративне коригування",
+      "gift": "Дарунок",
+      "timeSpend": "Витрата часу"
+    }
+  },
+  "errors": {
+    "hint": "Спробуйте оновити сторінку або завітайте пізніше."
+  }
+}

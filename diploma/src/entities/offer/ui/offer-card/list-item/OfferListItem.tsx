@@ -4,6 +4,7 @@ import styles from "./OfferListItem.module.scss";
 import { getFullName } from "@entities/user";
 import { Calendar, OnlineIcon } from "@shared/assets/icons/info";
 import { formatDateToText } from "@shared/libs/date";
+import { useTranslation } from "react-i18next";
 
 interface OfferListItemProps {
   offer: Offer;
@@ -11,6 +12,8 @@ interface OfferListItemProps {
 }
 
 export const OfferListItem = ({ offer, bottomContent }: OfferListItemProps) => {
+  const { t } = useTranslation("timeBank");
+
   return (
     <div className={styles.offerWrapper}>
       <div className={styles.topContent}>
@@ -25,19 +28,22 @@ export const OfferListItem = ({ offer, bottomContent }: OfferListItemProps) => {
             {offer.isOnline ? (
               <span>
                 <OnlineIcon className={`${styles.status} ${styles.online}`} />
-                Online
+                {t("offers.labels.online")}
               </span>
             ) : (
               <span>
                 <OnlineIcon className={`${styles.status} ${styles.offline}`} />
-                Offline
+                {t("offers.labels.offline")}
               </span>
             )}
           </div>
         </div>
         <div className={styles.reward}>
-          <h1>{offer.priceMinutes}m</h1>
-          <h2>REWARD</h2>
+          <h1>
+            {offer.priceMinutes}
+            {t("units.m")}
+          </h1>
+          <h2>{t("offers.labels.reward")}</h2>
         </div>
       </div>
       <div className={styles.title}>

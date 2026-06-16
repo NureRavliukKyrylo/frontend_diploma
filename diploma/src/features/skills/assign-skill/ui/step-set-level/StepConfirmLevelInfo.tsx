@@ -1,8 +1,13 @@
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./StepConfirmLevelInfo.module.scss";
-import { SkillLevelType, type SkillLevel } from "@entities/skill";
+import {
+  getSkillLevelTranslations,
+  SkillLevelType,
+  type SkillLevel,
+} from "@entities/skill";
 import type { StepProps } from "../../config/steps";
 import { motion } from "framer-motion";
+import { Trans, useTranslation } from "react-i18next";
 
 export const StepConfirmLevelInfo = ({
   skill,
@@ -11,6 +16,7 @@ export const StepConfirmLevelInfo = ({
   isLoading,
   error,
 }: StepProps) => {
+  const { t } = useTranslation("skill");
   const skillLevelTabs = Object.entries(SkillLevelType) as [
     string,
     SkillLevel,
@@ -26,11 +32,13 @@ export const StepConfirmLevelInfo = ({
     >
       <form className={styles.formSetLevel} onSubmit={onSubmit}>
         <div className={styles.levelSkillInfo}>
-          <h1>SKILL LEVEL</h1>
-          <p>
-            Choose how well you know <strong>{skill.name}</strong> — from just
-            starting out to fully mastered.
-          </p>
+          <h1>{t("skills.stepConfirmLevel.title")}</h1>
+          <Trans
+            i18nKey="skills.stepConfirmLevel.description"
+            ns="skill"
+            values={{ name: skill.name }}
+            components={{ strong: <strong /> }}
+          />
         </div>
         <div className={styles.skillsLevelbuttonWrapper}>
           <div className={styles.skillsLevelsListWrapper}>
@@ -43,7 +51,7 @@ export const StepConfirmLevelInfo = ({
                 whileHover={{ scale: 1.05, y: -2 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
               >
-                {label}
+                {getSkillLevelTranslations(t, label)}
               </motion.div>
             ))}
           </div>
@@ -58,7 +66,7 @@ export const StepConfirmLevelInfo = ({
               loading={isLoading}
               className={styles.btn}
             >
-              ADD SKILL
+              {t("skills.stepConfirmLevel.addButton")}
             </BaseButtonWrapper>
           </motion.div>
         </div>

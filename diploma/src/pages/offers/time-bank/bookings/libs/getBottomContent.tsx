@@ -1,11 +1,12 @@
 import type { OfferJoined } from "@entities/offer/model";
 import styles from "./BookingBottomContent.module.scss";
+import type { TFunction } from "i18next";
 import {
   CancelBookingButton,
   CompleteBookingButton,
 } from "@features/time-bank";
 
-export const getBottomContent = (offer: OfferJoined) => {
+export const getBottomContent = (offer: OfferJoined, t: TFunction) => {
   const {
     myBookingStatus,
     canCancel,
@@ -18,7 +19,7 @@ export const getBottomContent = (offer: OfferJoined) => {
   if (myBookingStatus === "Pending" && canCancel) {
     return (
       <div className={styles.bottomContent}>
-        <p>Your booking is awaiting confirmation.</p>
+        <p>{t("timeBank:bookings.bottomContent.pending")}</p>
         <CancelBookingButton bookingId={id} />
       </div>
     );
@@ -29,7 +30,7 @@ export const getBottomContent = (offer: OfferJoined) => {
       return (
         <div className={styles.bottomContent}>
           <p>
-            This offer is scheduled at{" "}
+            {t("timeBank:bookings.bottomContent.scheduledAt")}{" "}
             <span className={styles.address}>{locationInfo.address}</span>
           </p>
           <div className={styles.actions}>
@@ -45,7 +46,7 @@ export const getBottomContent = (offer: OfferJoined) => {
     if (isOnline) {
       return (
         <div className={styles.bottomContent}>
-          <p>When you finish, mark the booking as completed.</p>
+          <p>{t("timeBank:bookings.bottomContent.onlineFinish")}</p>
           <div className={styles.actions}>
             {canComplete && (
               <CompleteBookingButton variant="myBooking" bookingId={id} />
@@ -60,7 +61,7 @@ export const getBottomContent = (offer: OfferJoined) => {
   if (myBookingStatus === "CompletionRequested") {
     return (
       <div className={styles.bottomContent}>
-        <p>Waiting for the organizer to confirm completion.</p>
+        <p>{t("timeBank:bookings.bottomContent.completionRequested")}</p>
       </div>
     );
   }
@@ -68,7 +69,7 @@ export const getBottomContent = (offer: OfferJoined) => {
   if (myBookingStatus === "Completed") {
     return (
       <div className={styles.bottomContent}>
-        <p>You've successfully completed this offer.</p>
+        <p>{t("timeBank:bookings.bottomContent.completed")}</p>
       </div>
     );
   }
@@ -76,7 +77,7 @@ export const getBottomContent = (offer: OfferJoined) => {
   if (myBookingStatus === "Cancelled") {
     return (
       <div className={styles.bottomContent}>
-        <p>This booking has been cancelled.</p>
+        <p>{t("timeBank:bookings.bottomContent.cancelled")}</p>
       </div>
     );
   }

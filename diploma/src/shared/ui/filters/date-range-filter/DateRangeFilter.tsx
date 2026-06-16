@@ -1,6 +1,7 @@
 import { DatePickerInput } from "@shared/ui/inputs";
 import styles from "./DateRangeFilter.module.scss";
 import { withDebounce } from "@shared/libs/hocs";
+import { useTranslation } from "react-i18next";
 
 const DebouncedDatePicker = withDebounce(DatePickerInput, 300);
 
@@ -17,10 +18,12 @@ export const DateRangeFilter = ({
   onStartDateChange,
   onEndBeforeChange,
 }: DateRangeFilterProps) => {
+  const { t } = useTranslation("common");
+
   return (
     <div className={styles.deadlineCalendarBlock}>
       <div className={styles.startDate}>
-        <h2>Start date</h2>
+        <h2>{t("filters.startDate")}</h2>
         <div className={styles.dateStartInput}>
           <DebouncedDatePicker
             label=""
@@ -32,7 +35,7 @@ export const DateRangeFilter = ({
         </div>
       </div>
       <div className={styles.dueDate}>
-        <h2>Due date</h2>
+        <h2>{t("filters.dueDate")}</h2>
         <div className={styles.dateDueInput}>
           <DebouncedDatePicker
             label=""

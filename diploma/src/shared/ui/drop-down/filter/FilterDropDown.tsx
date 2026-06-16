@@ -2,6 +2,7 @@ import type { SortOption } from "@shared/config/types";
 import { BaseDropDown } from "../base/BaseDropDown";
 import styles from "./FilterDropDown.module.scss";
 import { CheckMark } from "@shared/assets/icons/info";
+import { useTranslation } from "react-i18next";
 interface FilterDropDownProps<T extends string> {
   options: SortOption<T>[];
   onSelect: (value: T) => void;
@@ -15,6 +16,7 @@ export const FilterDropDown = <T extends string>({
   value,
   variant = "default",
 }: FilterDropDownProps<T>) => {
+  const { t } = useTranslation("common");
   return (
     <BaseDropDown
       className={`${styles.filterInner} ${variant === "absolute" ? styles.filterInnerAbsolute : ""}`}
@@ -22,7 +24,7 @@ export const FilterDropDown = <T extends string>({
       dropdownClassName={`${styles.filterDropdown} ${variant === "absolute" ? styles.filterDropdownAbsolute : ""}`}
       label={
         <h1 className={styles.dropDownLabel}>
-          Filter by
+          {t("filters.filterByTitle")}
           {value ? `: ${options.find((o) => o.value === value)?.label}` : ""}
         </h1>
       }

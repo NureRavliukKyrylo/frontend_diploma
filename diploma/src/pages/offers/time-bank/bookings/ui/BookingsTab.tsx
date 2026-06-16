@@ -2,10 +2,11 @@ import styles from "./BookingsTab.module.scss";
 import { AnimatePresence, motion } from "framer-motion";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { useTranslation } from "react-i18next";
 import {
   BookingControlCardSkeleton,
   offerQuery,
-  sortingOfferItems,
+  getSortingOfferItems,
   type OfferJoined,
   type OfferJoinedSearchParams,
 } from "@entities/offer";
@@ -31,6 +32,7 @@ interface BookingsTabProps {
 }
 
 export const BookingsTab = ({ search }: BookingsTabProps) => {
+  const { t } = useTranslation(["timeBank", "common"]);
   const { handleSearch, handleSort, handlePageChange, bookings, router } =
     useBookingsTab(search);
 
@@ -39,7 +41,7 @@ export const BookingsTab = ({ search }: BookingsTabProps) => {
       <aside className={styles.sidebar}>
         <div className={styles.baseStats}>
           <div className={styles.topContent}>
-            <h1>MY BOOKINGS</h1>
+            <h1>{t("bookings.title")}</h1>
             <h2>
               {(bookings?.stats.inProgressBookings ?? 0) +
                 (bookings?.stats.completedBookings ?? 0) +
@@ -49,17 +51,17 @@ export const BookingsTab = ({ search }: BookingsTabProps) => {
           </div>
           <div className={styles.bottomContent}>
             <div className={styles.inProgressBlock}>
-              <h1>In progress</h1>
+              <h1>{t("bookings.status.inProgress")}</h1>
               <h2>{bookings?.stats.inProgressBookings ?? 0}</h2>
             </div>
             <div className={styles.lineDivider} />
             <div className={styles.pendingBlock}>
-              <h1>Pending</h1>
+              <h1>{t("bookings.status.pending")}</h1>
               <h2>{bookings?.stats.pendingBookings ?? 0}</h2>
             </div>
             <div className={styles.lineDivider} />
             <div className={styles.completedBlock}>
-              <h1>Completed</h1>
+              <h1>{t("bookings.status.completed")}</h1>
               <h2>{bookings?.stats.completedBookings ?? 0}</h2>
             </div>
             <div className={styles.lineDivider} />
@@ -74,16 +76,14 @@ export const BookingsTab = ({ search }: BookingsTabProps) => {
           fallbackRender={({ error }) => (
             <div className={styles.errorState}>
               <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-              <p className="errorHint">
-                Try reloading the page or come back later.
-              </p>
+              <p className="errorHint">{t("errors.hint")}</p>
             </div>
           )}
         >
           <div className={styles.searchRow}>
             <SearchBar value={search.Search} onChange={handleSearch} />
             <SortDropDown
-              options={sortingOfferItems}
+              options={getSortingOfferItems(t)}
               onSelect={handleSort}
               value={search.OrderBy ?? "Default"}
             />
@@ -97,8 +97,8 @@ export const BookingsTab = ({ search }: BookingsTabProps) => {
           >
             {bookings?.items?.length === 0 ? (
               <div className={styles.emptyState}>
-                <h2>No bookings found</h2>
-                <p>Try adjusting your search query</p>
+                <h2>{t("bookings.emptyState.title")}</h2>
+                <p>{t("bookings.emptyState.description")}</p>
               </div>
             ) : (
               <Suspense
@@ -141,7 +141,7 @@ export const BookingsTab = ({ search }: BookingsTabProps) => {
                             offer={offer}
                             bottomContent={
                               <div onClick={(e) => e.stopPropagation()}>
-                                {getBottomContent(offer)}
+                                {getBottomContent(offer, t)}
                               </div>
                             }
                             className={styles.bookingWrapper}

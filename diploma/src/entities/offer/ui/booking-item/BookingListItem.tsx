@@ -3,7 +3,8 @@ import type { OfferBooking } from "../../model";
 import styles from "./BookingListItem.module.scss";
 import { formatTimeAgo } from "@shared/libs/date";
 import { getFullName } from "@entities/user";
-import { PROGRESS_STATUS_LABELS } from "@entities/offer/config/progressStatusLabels";
+import { getProgressStatusLabels } from "@entities/offer/config/progressStatusLabels";
+import { useTranslation } from "react-i18next";
 
 interface BookingListItemProps {
   booking: OfferBooking;
@@ -11,6 +12,9 @@ interface BookingListItemProps {
 }
 
 export const BookingListItem = ({ booking, actions }: BookingListItemProps) => {
+  const { t } = useTranslation("timeBank");
+  const statusLabels = getProgressStatusLabels(t);
+
   return (
     <div className={styles.bookingWrapper}>
       <div className={styles.time}>{formatTimeAgo(booking.createdAt)}</div>
@@ -30,14 +34,14 @@ export const BookingListItem = ({ booking, actions }: BookingListItemProps) => {
           <span
             className={`${styles.status} ${styles[booking.status.toLowerCase()]}`}
           >
-            {PROGRESS_STATUS_LABELS[booking.status] ?? booking.status}
+            {statusLabels[booking.status] ?? booking.status}
           </span>
         </div>
         <p>{booking.comment}</p>
         {(booking.status === "Cancelled" || booking.status === "Disputed") &&
           booking.resolutionComment && (
             <p className={styles.resolutionComment}>
-              Reason: {booking.resolutionComment}
+              {t("bookings.labels.reason")}: {booking.resolutionComment}
             </p>
           )}
         {actions && <div className={styles.actions}>{actions}</div>}

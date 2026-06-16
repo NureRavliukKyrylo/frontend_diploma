@@ -8,6 +8,7 @@ import { MapUserLocationModal } from "../user-location-modal/MapUserLocationModa
 import type { User } from "@entities/user/profile";
 import { getFullName } from "@entities/user";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface ProfileMainWidgetProps {
   skillsChildren?: React.ReactNode;
@@ -21,6 +22,7 @@ export function ProfileMainWidget({
   user,
 }: ProfileMainWidgetProps) {
   const [isLocationMapOpen, setIsLocationMapOpen] = useState(false);
+  const { t } = useTranslation(["profile", "common"]);
 
   const handleModal = () => {
     setIsLocationMapOpen((prev) => !prev);
@@ -31,7 +33,9 @@ export function ProfileMainWidget({
       <div className={styles.levelRateInfo}>
         <div className={styles.levelUserInfo}>
           <div className={styles.headerLevelBar}>
-            <span className={styles.current}>Level {user?.progress.level}</span>
+            <span className={styles.current}>
+              {t("common:level.current", { level: user?.progress.level })}
+            </span>
             <span className={styles.xp}>
               {user?.progress.currentProgress +
                 "/" +
@@ -43,16 +47,18 @@ export function ProfileMainWidget({
             max={user?.progress.maxProgress}
           />
           <div className={styles.footerLevelBar}>
-            <span className={styles.label}>Next level</span>
+            <span className={styles.label}>{t("common:level.next")}</span>
             <span className={styles.next}>
-              Level{" "}
-              {user?.progress?.level == null ? 1 : user?.progress.level + 1}
+              {t("common:level.current", {
+                level:
+                  user?.progress?.level == null ? 1 : user?.progress.level + 1,
+              })}
             </span>
           </div>
         </div>
         <div className={styles.ratingUserInfo}>
           <h1>{user?.rating.value}</h1>
-          <p>({user?.rating.totalVotes} VOTES)</p>
+          <p>{t("profile:rating.votes", { count: user?.rating.totalVotes })}</p>
         </div>
       </div>
       <div className={styles.bioUser}>
@@ -69,7 +75,7 @@ export function ProfileMainWidget({
             name="datePicker"
             value={user?.profile?.dateOfBirth}
             isReadOnly={true}
-            label={"Date of birthday"}
+            label={t("profile:dateOfBirth.label")}
             classNames={{
               base: "border-2 border-[rgba(0,0,0,0.3)] ",
               segment: "!text-[rgba(0,0,0,0.6)]",
@@ -79,7 +85,7 @@ export function ProfileMainWidget({
         <div className={styles.mapLocationUserProfileWrapper}>
           <MapLocationInput
             handleMapOpen={user?.profile?.coordinates ? handleModal : undefined}
-            label={user?.location?.address ?? "No location added"}
+            label={user?.location?.address ?? t("profile:location.empty")}
             variant="profile"
           />
         </div>
@@ -98,15 +104,15 @@ export function ProfileMainWidget({
           <div className={styles.projectsDetailInfoBlock}>
             <div className={styles.projectsUserProfile}>
               <div className={styles.textInfoProjectsUserProfile}>
-                <h1>ACTIVE</h1>
-                <h2>PROJECTS</h2>
+                <h1>{t("profile:activity.active")}</h1>
+                <h2>{t("profile:activity.projects")}</h2>
               </div>
               <p>{user?.profile?.activeProjectCount ?? "0"}</p>
             </div>
             <div className={styles.projectsUserProfile}>
               <div className={styles.textInfoProjectsUserProfile}>
-                <h1>COMPLETED</h1>
-                <h2>PROJECTS</h2>
+                <h1>{t("profile:activity.completed")}</h1>
+                <h2>{t("profile:activity.projects")}</h2>
               </div>
               <p>{user?.profile?.completedProjectCount ?? "0"}</p>
             </div>
@@ -119,7 +125,7 @@ export function ProfileMainWidget({
               className={styles.seeMoreProjectsButton}
             >
               <LinkButtonWrapper to="/activities/my">
-                SEE MORE
+                {t("profile:activity.seeMore")}
               </LinkButtonWrapper>
             </motion.div>
             <img src={LayoutCard} alt="layout" />
@@ -127,7 +133,9 @@ export function ProfileMainWidget({
         </div>
         <div className={styles.skillsBlock}>
           <div className={styles.skillProfileWrapper}>
-            <h1 className={styles.skillsProfileTitle}>SKILLS</h1>
+            <h1 className={styles.skillsProfileTitle}>
+              {t("profile:skills.title")}
+            </h1>
             {skillsChildren}
           </div>
           <div className={styles.buttonSkillsBlock}>
@@ -138,7 +146,7 @@ export function ProfileMainWidget({
               className={styles.seeMoreSkillsButton}
             >
               <LinkButtonWrapper to="/profile" search={{ tab: "skills" }}>
-                See more
+                {t("profile:skills.seeMore")}
               </LinkButtonWrapper>
             </motion.div>
           </div>
@@ -146,7 +154,7 @@ export function ProfileMainWidget({
       </div>
       <div className={styles.lineDividerBadges}>
         <div className={styles.textBadges}>
-          <h1>BADGES</h1>
+          <h1>{t("profile:badges.title")}</h1>
         </div>
       </div>
       {badgesChildren}

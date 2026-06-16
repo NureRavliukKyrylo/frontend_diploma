@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import { DateRangeFilter, SelectFilter } from "@shared/ui/filters";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { useTranslation } from "react-i18next";
 
 import type { TransactionsSearchParams } from "@entities/offer";
 import styles from "./TransactionsFilter.module.scss";
 import { useTransactionsFilter } from "./model/useTransactionsFilter";
 import {
-  TRANSACTION_SOURCE_TYPE_OPTIONS,
-  TRANSACTION_TYPE_OPTIONS,
+  getTransactionSourceTypeOptions,
+  getTransactionTypeOptions,
 } from "./config/transactionFilterMaps";
 import { BaseWrapperFilter } from "@shared/ui/wrappers";
 
@@ -16,6 +17,7 @@ interface TransactionsFilterProps {
 }
 
 export const TransactionsFilter = ({ search }: TransactionsFilterProps) => {
+  const { t } = useTranslation(["timeBank", "common"]);
   const {
     onTypeChange,
     onSourceTypeChange,
@@ -28,7 +30,9 @@ export const TransactionsFilter = ({ search }: TransactionsFilterProps) => {
     <BaseWrapperFilter>
       <div className={styles.wrapper}>
         <div className={styles.dateRange}>
-          <h1 className={styles.subHeaderFilter}>Date range</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("transactions.filter.sections.dateRange")}
+          </h1>
           <DateRangeFilter
             startDate={search.From}
             endBefore={search.To}
@@ -40,10 +44,12 @@ export const TransactionsFilter = ({ search }: TransactionsFilterProps) => {
         <div className={styles.dividerFilterBlock} />
 
         <div className={styles.typeFilter}>
-          <h1 className={styles.subHeaderFilter}>Transaction type</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("transactions.filter.sections.type")}
+          </h1>
           <SelectFilter
-            label="Type"
-            options={TRANSACTION_TYPE_OPTIONS}
+            label={t("transactions.filter.labels.type")}
+            options={getTransactionTypeOptions(t)}
             value={search.Type ?? "all"}
             onChange={onTypeChange}
           />
@@ -52,10 +58,12 @@ export const TransactionsFilter = ({ search }: TransactionsFilterProps) => {
         <div className={styles.dividerFilterBlock} />
 
         <div className={styles.sourceTypeFilter}>
-          <h1 className={styles.subHeaderFilter}>Source type</h1>
+          <h1 className={styles.subHeaderFilter}>
+            {t("transactions.filter.sections.source")}
+          </h1>
           <SelectFilter
-            label="Source"
-            options={TRANSACTION_SOURCE_TYPE_OPTIONS}
+            label={t("transactions.filter.labels.source")}
+            options={getTransactionSourceTypeOptions(t)}
             value={search.SourceType ?? "all"}
             onChange={onSourceTypeChange}
           />
@@ -74,7 +82,7 @@ export const TransactionsFilter = ({ search }: TransactionsFilterProps) => {
               onClick={onClearFilters}
               className={styles.clearFiltersButton}
             >
-              Clear Filters
+              {t("transactions.filter.actions.clear")}
             </BaseButtonWrapper>
           </motion.div>
         </div>

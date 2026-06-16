@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { QueryResult } from "@shared/config/types";
 import { Tab } from "@shared/ui";
 import type { Skill } from "@entities/skill";
+import { useTranslation } from "react-i18next";
 
 interface SkillsListFilterProps {
   useSkillsQuery: () => QueryResult<Pick<Skill, "id" | "name">>;
@@ -16,6 +17,7 @@ export const SkillsListFilter = ({
   selectedIds,
   onToggle,
 }: SkillsListFilterProps) => {
+  const { t } = useTranslation("common");
   const {
     data: skills = [],
     fetchNextPage,
@@ -65,7 +67,9 @@ export const SkillsListFilter = ({
           disabled={isFetchingNextPage}
           className={styles.showMoreSkillsButton}
         >
-          {isFetchingNextPage ? "Loading..." : "show more"}
+          {isFetchingNextPage
+            ? t("loading.title")
+            : t("actions.seeMore").toLowerCase()}
         </BaseButtonWrapper>
       )}
     </div>
