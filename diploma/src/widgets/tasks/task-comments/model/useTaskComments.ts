@@ -1,5 +1,6 @@
 import type { TaskComment } from "@entities/task/model";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 type ModalType = "edit" | "delete";
 
@@ -8,6 +9,7 @@ export const useTaskComments = () => {
     useState<TaskComment | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [modalType, setModalType] = useState<ModalType | null>(null);
+  const { t } = useTranslation(["task"]);
 
   const handleOpenModal = (comment: TaskComment, type: ModalType) => {
     setSelectedTaskComment(comment);
@@ -22,13 +24,13 @@ export const useTaskComments = () => {
   const getMenuItems = (comment: TaskComment) => [
     {
       key: "edit",
-      label: "Edit Comment",
+      label: t("task:comments.actions.editComment"),
       onClick: () => setEditingId(comment.id),
       variant: "edit" as const,
     },
     {
       key: "delete",
-      label: "Delete Comment",
+      label: t("task:comments.actions.deleteComment"),
       onClick: () => handleOpenModal(comment, "delete"),
       variant: "delete" as const,
     },

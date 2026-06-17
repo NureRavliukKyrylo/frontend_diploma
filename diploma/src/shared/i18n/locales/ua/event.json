@@ -16,16 +16,7 @@
     "votes_one": "({{count}} голос)",
     "votes_few": "({{count}} голоси)",
     "votes_many": "({{count}} голосів)",
-    "votes_other": "({{count}} голосу)",
-    "skills": "Навички події",
-    "activities": "Активності",
-    "locations": "Локації",
-    "subtitle": "Досліджуйте всі завдання в межах цієї події та дивіться, де вони розташовані",
-    "completed": "ЗАВЕРШЕНО",
-    "active": "АКТИВНІ",
-    "tasks": "ЗАВДАННЯ",
-    "markerLocation": "Локація події",
-    "relatedProject": "Пов'язаний проєкт"
+    "votes_other": "({{count}} голосу)"
   },
   "tabs": {
     "overview": "ОГЛЯД",
@@ -46,12 +37,27 @@
       "minutes": "Хвилини",
       "status": "Статус"
     },
-    "empty": {
-      "title": "Немає записів про відвідуваність",
-      "description": "Записи за цей період відсутні."
-    },
-    "error": {
-      "hint": "Спробуйте перезавантажити сторінку або поверніться пізніше."
+    "statuses": {
+      "Draft": "Чернетка",
+      "CheckedOut": "Чек-аут",
+      "CheckedIn": "Чек-ін",
+      "Approved": "Схвалено",
+      "Rejected": "Відхилено",
+      "Disputed": "Оскаржується",
+      "Resolved": "Вирішено",
+      "Cancelled": "Скасовано"
     }
+  },
+  "cards": {
+    "noVolunteers": "Волонтери ще не приєдналися",
+    "about": "Про цю подію",
+    "participants": "Учасники",
+    "allTime": "Весь час"
+  },
+  "statuses": {
+    "active": "Активна",
+    "endingSoon": "Скоро закінчується",
+    "completed": "Завершено",
+    "archived": "Архівовано"
   }
 }

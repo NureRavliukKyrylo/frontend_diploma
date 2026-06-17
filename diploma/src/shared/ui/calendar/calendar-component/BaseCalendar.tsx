@@ -1,19 +1,14 @@
 import FullCalendar from "@fullcalendar/react";
 import type { CalendarOptions } from "@fullcalendar/core";
 import styles from "./BaseCalendar.module.scss";
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useCallback, useEffect, useMemo } from "react";
 import type { CalendarTab, TabOption } from "@shared/config/types";
 import { Toggle } from "../../toggle/Toggle";
 import { NavigationArrow } from "@shared/assets/icons/actions";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
-
-const VIEW_TABS: TabOption<CalendarTab>[] = [
-  { label: "Month", value: "dayGridMonth" },
-  { label: "Week", value: "timeGridWeek" },
-  { label: "Day", value: "timeGridDay" },
-];
+import { useTranslation } from "react-i18next";
 
 interface BaseCalendarProps extends CalendarOptions {
   initialView?: CalendarTab;
@@ -29,10 +24,20 @@ export const BaseCalendar = ({
   onNavigate,
   ...props
 }: BaseCalendarProps) => {
+  const { t } = useTranslation(["calendar"]);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const calendarRef = useRef<FullCalendar>(null);
   const [activeView, setActiveView] = useState<CalendarTab>(initialView);
   const [title, setTitle] = useState("");
+
+  const viewTabs: TabOption<CalendarTab>[] = useMemo(
+    () => [
+      { label: t("calendar:views.month"), value: "dayGridMonth" },
+      { label: t("calendar:views.week"), value: "timeGridWeek" },
+      { label: t("calendar:views.day"), value: "timeGridDay" },
+    ],
+    [t],
+  );
 
   useEffect(() => {
     const api = calendarRef.current?.getApi();
@@ -81,13 +86,13 @@ export const BaseCalendar = ({
             className={styles.todayButton}
             onClick={() => navigate("today")}
           >
-            Today
+            {t("calendar:actions.today")}
           </button>
         </div>
         <div className={styles.actionsCalendar}>
           <div className={styles.toggleWrapper}>
             <Toggle
-              tabs={VIEW_TABS}
+              tabs={viewTabs}
               activeValue={activeView}
               onChange={handleViewChange}
               buttonClassName={styles.toggleCalendarButton}

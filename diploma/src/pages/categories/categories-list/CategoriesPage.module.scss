@@ -51,3 +51,39 @@
     row-gap: 14px;
   }
 }
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    @include font-base(60px, 900);
+    line-height: 120%;
+    color: #1a1a2e;
+
+    @include respond-to(laptop) {
+      font-size: 44px;
+    }
+    @include respond-to(tablet) {
+      font-size: 32px;
+    }
+    @include respond-to(mobile) {
+      font-size: 24px;
+    }
+  }
+
+  p {
+    @include font-base(40px, 500);
+    color: #6b7280;
+
+    @include respond-to(laptop) {
+      font-size: 28px;
+    }
+    @include respond-to(tablet) {
+      font-size: 20px;
+    }
+    @include respond-to(mobile) {
+      font-size: 16px;
+    }
+  }
+}

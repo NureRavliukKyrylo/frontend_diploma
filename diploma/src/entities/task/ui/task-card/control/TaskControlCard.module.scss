@@ -30,18 +30,25 @@
     grid-template-columns: 2fr 0.1fr auto;
   }
 
-  &.active {
+  &.Pending {
+    border-left-color: #888780;
+  }
+
+  &.InProgress {
     border-left-color: #639922;
   }
-  &.endingSoon {
-    border-left-color: #ef9f27;
-  }
-  &.completed {
+
+  &.Completed {
     border-left-color: #378add;
   }
-  &.archived {
-    border-left-color: #888780;
+
+  &.Cancelled {
+    border-left-color: #a82216;
     opacity: 0.7;
+  }
+
+  &.Overdue {
+    border-left-color: #ef9f27;
   }
 
   .moreActionsButton {

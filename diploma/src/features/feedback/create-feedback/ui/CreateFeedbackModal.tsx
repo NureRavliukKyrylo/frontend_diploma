@@ -1,5 +1,6 @@
 import { BaseModal } from "@shared/ui/modals";
 import type { EntityType } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
 import {
   FeedbackForm,
   useFeedbackForm,
@@ -18,6 +19,8 @@ export const CreateFeedbackModal = ({
   isOpen,
   onClose,
 }: CreateFeedbackModalProps) => {
+  const { t } = useTranslation(["feedback"]);
+
   const handleClose = () => {
     formik.resetForm();
     mutation.reset();
@@ -35,7 +38,8 @@ export const CreateFeedbackModal = ({
       <FeedbackForm
         formik={formik}
         isLoading={isLoading}
-        buttonText="Submit Feedback"
+        buttonText={t("feedback:actions.submit")}
+        entityType={entityType}
       />
     </BaseModal>
   );

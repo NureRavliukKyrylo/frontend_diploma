@@ -1,17 +1,19 @@
 import styles from "./ListProjectCard.module.scss";
 import type { Project } from "../../model";
 import { Stars } from "@shared/ui/stars";
+import { useTranslation } from "react-i18next";
 
 export interface ListProjectCardProps {
   project: Project;
 }
 
 export const ListProjectCard = ({ project }: ListProjectCardProps) => {
+  const { t } = useTranslation("project");
   return (
     <div className={styles.listCardProjectWrapper}>
       <div className={styles.headerInfo}>
         <h1>{project.title}</h1>
-        <h2>project</h2>
+        <h2>{t("meta.chip").toLowerCase()}</h2>
       </div>
       <div className={styles.bottomContent}>
         <Stars

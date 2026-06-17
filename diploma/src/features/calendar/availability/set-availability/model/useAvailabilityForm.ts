@@ -5,7 +5,8 @@ import { getErrorMessage } from "@shared/libs/error-message";
 import { calendarKeys, type AvailabilitySlot } from "@entities/user/calendar";
 import { addAvailability } from "../api/addAvailabilityApi";
 import { updateAvailability } from "../api/updateAvailabilityApi";
-import { availabilitySchema } from "../libs/availabilitySchema";
+import { getAvailabilitySchema } from "../libs/availabilitySchema";
+import { useTranslation } from "react-i18next";
 
 interface UseAvailabilityFormProps {
   date: Date;
@@ -25,15 +26,17 @@ export const useAvailabilityForm = ({
   availability,
   onClose,
 }: UseAvailabilityFormProps) => {
+  const { t } = useTranslation(["calendar", "common"]);
   const queryClient = useQueryClient();
   const isUpdate = !!availability;
+  const validationSchema = getAvailabilitySchema(t);
 
   const addMutation = useMutation({
     mutationFn: addAvailability,
     onSuccess: () => {
       addToast({
-        title: "Availability added",
-        description: "Time-Availability has been successfully added",
+        title: t("calendar:formNotifications.addSuccessTitle"),
+        description: t("calendar:formNotifications.addSuccessDescription"),
         color: "success",
       });
       queryClient.invalidateQueries({
@@ -43,8 +46,8 @@ export const useAvailabilityForm = ({
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Failed",
-        description: getErrorMessage(error),
+        title: t("calendar:formNotifications.failedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -54,8 +57,8 @@ export const useAvailabilityForm = ({
     mutationFn: updateAvailability,
     onSuccess: () => {
       addToast({
-        title: "Availability updated",
-        description: "Time-Availability has been successfully updated",
+        title: t("calendar:formNotifications.updateSuccessTitle"),
+        description: t("calendar:formNotifications.updateSuccessDescription"),
         color: "success",
       });
       queryClient.invalidateQueries({
@@ -65,8 +68,8 @@ export const useAvailabilityForm = ({
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Failed",
-        description: getErrorMessage(error),
+        title: t("calendar:formNotifications.failedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -83,7 +86,7 @@ export const useAvailabilityForm = ({
       allDay: availability?.allDay ?? false,
     },
     enableReinitialize: true,
-    validationSchema: availabilitySchema,
+    validationSchema,
     onSubmit: (values) => {
       const hasDateRange = !!values.dateRange;
 
@@ -115,7 +118,7 @@ export const useAvailabilityForm = ({
   };
 
   return {
-    mutation: addMutation || updateMutation,
+    mutation: isUpdate ? updateMutation : addMutation,
     formik,
     isUpdate,
     isLoading: addMutation.isPending || updateMutation.isPending,

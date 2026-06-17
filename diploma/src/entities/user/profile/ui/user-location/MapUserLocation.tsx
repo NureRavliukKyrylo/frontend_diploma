@@ -3,6 +3,7 @@ import { Marker, Popup } from "react-leaflet";
 import { UserMarker } from "@entities/user/profile";
 import type { Coordinates } from "@shared/config/types";
 import styles from "./MapUserLocation.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface MapUserLocationProps {
   coordinates: Coordinates | null;
@@ -15,6 +16,7 @@ export const MapUserLocation = ({
   animate = true,
   onAnimationEnd,
 }: MapUserLocationProps) => {
+  const { t } = useTranslation(["common"]);
   const { shouldAnimate, stopAnimation } = useMapZoomOnce(coordinates, animate);
 
   if (!coordinates) return null;
@@ -37,7 +39,9 @@ export const MapUserLocation = ({
       >
         <Popup className={styles.popupUserLocation}>
           <div className={styles.popupContent}>
-            <h1 className={styles.userLocationText}>Your location</h1>
+            <h1 className={styles.userLocationText}>
+              {t("common:map.yourLocation")}
+            </h1>
           </div>
         </Popup>
       </Marker>

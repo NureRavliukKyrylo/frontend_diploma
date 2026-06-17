@@ -2,6 +2,7 @@ import React from "react";
 import type { CircularProgressProps } from "@heroui/react";
 import styles from "./BaseButtonWrapper.module.scss";
 import { BaseSpinner } from "@shared/ui/spinner/BaseSpinner";
+import { useTranslation } from "react-i18next";
 
 interface BaseButtonWrapperProps extends Omit<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -21,6 +22,7 @@ export const BaseButtonWrapper: React.FC<BaseButtonWrapperProps> = ({
   showLoadingText = true,
   ...props
 }) => {
+  const { t } = useTranslation("common");
   return (
     <button
       className={`${styles.buttonWrapper} ${loading ? styles.loading : ""} ${className}`}
@@ -30,7 +32,7 @@ export const BaseButtonWrapper: React.FC<BaseButtonWrapperProps> = ({
       {loading && (
         <BaseSpinner color={spinnerColor} className={styles.spinner} />
       )}
-      {loading ? (showLoadingText ? "Loading..." : null) : children}
+      {loading ? (showLoadingText ? t("loading.title") : null) : children}
     </button>
   );
 };

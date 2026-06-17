@@ -126,6 +126,12 @@
       "organization": "Organization"
     }
   },
+  "timeAgo": {
+    "justNow": "just now",
+    "minutes": "{{count}}m ago",
+    "hours": "{{count}}h ago",
+    "days": "{{count}}d ago"
+  },
   "filters": {
     "title": "Filter",
     "filterByTitle": "Filter by",
@@ -151,6 +157,8 @@
     "dueDate": "Due date",
     "moreOptions": "More options",
     "includeArchived": "Include archived {{subject}}",
+    "setDistanceLocationPlaceholder": "Set location",
+    "kmUnit": "km",
     "onlineOptions": {
       "all": "All"
     },
@@ -166,6 +174,13 @@
       "offers": "offers",
       "events": "events"
     }
+  },
+  "map": {
+    "yourLocation": "Your location"
+  },
+  "mapEmptyState": {
+    "title": "No projects found",
+    "subtitle": "Try adjusting your filters or search query"
   },
   "reason": {
     "title": "Reason"

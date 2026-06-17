@@ -1,0 +1,48 @@
+{
+  "actions": {
+    "today": "Today",
+    "addAvailability": "Add availability",
+    "updateAvailability": "Update availability",
+    "deleteAvailability": "Delete availability",
+    "exportGoogle": "Export to Google Calendar",
+    "setAvailability": "Set availability",
+    "cancel": "Cancel",
+    "allDay": "All Day"
+  },
+  "views": {
+    "month": "Month",
+    "week": "Week",
+    "day": "Day"
+  },
+  "labels": {
+    "dateRangeOptional": "Date range (optional)",
+    "setTimeRangeAvailability": "Set time-range availability"
+  },
+  "export": {
+    "successTitle": "Exported successfully",
+    "successDescription": "Your activities have been exported to Google Calendar.",
+    "failedTitle": "Export failed"
+  },
+  "formNotifications": {
+    "addSuccessTitle": "Availability added",
+    "addSuccessDescription": "Time-Availability has been successfully added",
+    "updateSuccessTitle": "Availability updated",
+    "updateSuccessDescription": "Time-Availability has been successfully updated",
+    "failedTitle": "Failed to export in Google Calendar"
+  },
+  "validation": {
+    "startTimeRequired": "Start time is required",
+    "endTimeRequired": "End time is required"
+  },
+  "deleteModal": {
+    "title": "Delete Availability Slot",
+    "textPattern": "Are you sure you want to remove this availability?\n\n{{description}}\n\nThis action cannot be undone.",
+    "allDay": "All Day",
+    "everyDay": "Every day",
+    "everyWeekDay": "Every {{day}}",
+    "timeRangePattern": "from {{from}} to {{to}}",
+    "removeSuccessTitle": "Availability removed",
+    "removeSuccessDescription": "Time-Availability has been successfully removed",
+    "removeFailedTitle": "Failed remove availability"
+  }
+}

@@ -5,7 +5,8 @@ import { getErrorMessage } from "@shared/libs/error-message";
 import { queryClient } from "@shared/api";
 import { createComment } from "../api/createCommentApi";
 import { taskKeys } from "@entities/task";
-import { createCommentValidationSchema } from "../libs/createCommentValidationSchema";
+import { getCreateCommentValidationSchema } from "../libs/createCommentValidationSchema";
+import { useTranslation } from "react-i18next";
 
 export interface CreateCommentFormValues {
   body: string;
@@ -16,13 +17,16 @@ export const useCreateComment = (
   parentCommentId?: string,
   replyToUserId?: string,
 ) => {
+  const { t } = useTranslation(["task", "common"]);
+  const validationSchema = getCreateCommentValidationSchema(t);
+
   const mutation = useMutation({
     mutationFn: (body: string) =>
       createComment(taskId, { body, parentCommentId, replyToUserId }),
     onSuccess: () => {
       addToast({
-        title: "Create Comment Success",
-        description: "Your comment has been created successfully",
+        title: t("task:comments.notifications.createSuccessTitle"),
+        description: t("task:comments.notifications.createSuccessDescription"),
         color: "success",
       });
       queryClient.invalidateQueries({
@@ -31,8 +35,8 @@ export const useCreateComment = (
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Comment creation Failed",
-        description: getErrorMessage(error),
+        title: t("task:comments.notifications.createFailedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -40,7 +44,7 @@ export const useCreateComment = (
 
   const formik = useFormik<CreateCommentFormValues>({
     initialValues: { body: "" },
-    validationSchema: createCommentValidationSchema,
+    validationSchema,
     onSubmit: async (values, helpers) => {
       await mutation.mutateAsync(values.body);
       helpers.resetForm();

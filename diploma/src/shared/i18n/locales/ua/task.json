@@ -1,16 +1,16 @@
 {
   "states": {
-    "pendingLeave": "Ваш запит на вихід очікує на підтвердження",
-    "pendingJoin": "Ваш запит на приєднання очікує на підтвердження"
+    "pendingLeave": "Ваш запит на вихід очікує підтвердження",
+    "pendingJoin": "Ваш запит на приєднання очікує підтвердження"
   },
   "labels": {
     "task": "Завдання",
-    "joinedChip": "Приєднане завдання",
+    "joinedChip": "Приєднався до завдання",
     "chat": "ЧАТ ЗАВДАННЯ",
     "project": "ПРОЄКТ",
     "event": "ПОДІЯ",
-    "votes": "({{count}} голосів)",
-    "skills": "Навички завдання",
+    "votes": "({{count}} ГОЛОСІВ)",
+    "skills": "Навички для завдання",
     "activities": "Активності",
     "locations": "Локації",
     "subtitle": "Досліджуйте всі пов'язані активності в межах цього завдання та дивіться, де вони розташовані",
@@ -27,10 +27,48 @@
     "feedback": "ВІДГУКИ"
   },
   "statuses": {
-    "Pending": "В очікуванні",
-    "InProgress": "У процесі",
+    "Pending": "Очікується",
+    "InProgress": "В процесі",
     "Completed": "Завершено",
     "Cancelled": "Скасовано",
     "Overdue": "Протерміновано"
+  },
+  "cards": {
+    "noVolunteers": "Жоден волонтер ще не приєднався",
+    "unknownOrganization": "Невідома організація",
+    "imgAltOrganization": "зображення організації",
+    "deadline": "Дедлайн:",
+    "allTime": "Увесь час",
+    "about": "Про це завдання",
+    "participants": "Учасники"
+  },
+  "comments": {
+    "emptyStateTitle": "Коментарів ще немає",
+    "emptyStateSubtitle": "Будьте першим, хто залишить коментар",
+    "inputPlaceholder": "Задайте питання про цю активність...",
+    "actions": {
+      "cancel": "Скасувати",
+      "deleteComment": "Видалити коментар",
+      "editComment": "Редагувати коментар"
+    },
+    "deleteModal": {
+      "title": "Видалити свій коментар",
+      "textPattern": "Ви впевнені, що хочете видалити свій коментар з текстом: {{content}}"
+    },
+    "validation": {
+      "bodyRequired": "Коментар є обов'язковим",
+      "bodyMax": "Коментар має містити не більше 80 символів"
+    },
+    "notifications": {
+      "createSuccessTitle": "Коментар успішно створено",
+      "createSuccessDescription": "Ваш коментар було успішно додано",
+      "createFailedTitle": "Помилка створення коментаря",
+      "editSuccessTitle": "Коментар успішно відредаговано",
+      "editSuccessDescription": "Ваш коментар було успішно змінено",
+      "editFailedTitle": "Помилка редагування коментаря",
+      "deleteSuccessTitle": "Коментар успішно видалено",
+      "deleteSuccessDescription": "Ви успішно видалили свій коментар",
+      "deleteFailedTitle": "Помилка видалення коментаря"
+    }
   }
 }

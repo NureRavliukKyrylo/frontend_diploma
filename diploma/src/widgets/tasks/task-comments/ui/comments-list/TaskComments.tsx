@@ -9,6 +9,7 @@ import { useLayoutEffect, useRef } from "react";
 import { DeleteCommentModal, EditCommentForm } from "@features/tasks";
 import { ReportButton } from "@features/moderation";
 import { ModerationSubjectType } from "@entities/report";
+import { useTranslation } from "react-i18next";
 
 interface TaskCommentsProps {
   PageSize: number;
@@ -31,6 +32,7 @@ export const TaskComments = ({
   PageSize,
   userId,
 }: TaskCommentsProps) => {
+  const { t } = useTranslation(["task"]);
   const {
     getMenuItems,
     modalType,
@@ -50,8 +52,8 @@ export const TaskComments = ({
   if (!comments.length) {
     return (
       <div className={styles.emptyState}>
-        <h2>No comments yet</h2>
-        <p>Be the first one to leave a comment</p>
+        <h2>{t("task:comments.emptyStateTitle")}</h2>
+        <p>{t("task:comments.emptyStateSubtitle")}</p>
       </div>
     );
   }
@@ -127,7 +129,7 @@ const CommentList = ({
             <TaskCommentItem
               comment={comment}
               menuItems={
-                comment.authorUserId === userId ? getMenuItems(comment) : []
+                comment.author.id === userId ? getMenuItems(comment) : []
               }
               editSlot={
                 editingId === comment.id ? (
@@ -140,7 +142,7 @@ const CommentList = ({
                 ) : null
               }
               reportSlot={
-                comment.authorUserId !== userId ? (
+                comment.author.id !== userId ? (
                   <ReportButton
                     subjectType={ModerationSubjectType.Comment}
                     subjectId={comment.id}

@@ -1,7 +1,9 @@
+import type { TFunction } from "i18next";
 import * as Yup from "yup";
 
-export const editCommentValidationSchema = Yup.object({
-  body: Yup.string()
-    .required("Comment is required")
-    .max(50, "Comment must be 50 characters or less"),
-});
+export const getEditCommentValidationSchema = (t: TFunction) =>
+  Yup.object({
+    body: Yup.string()
+      .required(t("task:comments.validation.bodyRequired"))
+      .max(80, t("task:comments.validation.bodyMax")),
+  });

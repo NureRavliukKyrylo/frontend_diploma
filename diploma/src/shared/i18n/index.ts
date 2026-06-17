@@ -21,6 +21,12 @@ import enEvent from "./locales/en/event.json";
 import uaEvent from "./locales/ua/event.json";
 import enTask from "./locales/en/task.json";
 import uaTask from "./locales/ua/task.json";
+import enCategory from "./locales/en/category.json";
+import uaCategory from "./locales/ua/category.json";
+import enBadge from "./locales/en/badge.json";
+import uaBadge from "./locales/ua/badge.json";
+import enCalendar from "./locales/en/calendar.json";
+import uaCalendar from "./locales/ua/calendar.json";
 
 i18n.use(initReactI18next).init({
   fallbackLng: "en",
@@ -37,6 +43,9 @@ i18n.use(initReactI18next).init({
       feedback: enFeedback,
       event: enEvent,
       task: enTask,
+      category: enCategory,
+      badge: enBadge,
+      calendar: enCalendar,
     },
     ua: {
       common: uaCommon,
@@ -49,6 +58,9 @@ i18n.use(initReactI18next).init({
       feedback: uaFeedback,
       event: uaEvent,
       task: uaTask,
+      category: uaCategory,
+      badge: uaBadge,
+      calendar: uaCalendar,
     },
   },
   interpolation: { escapeValue: false },

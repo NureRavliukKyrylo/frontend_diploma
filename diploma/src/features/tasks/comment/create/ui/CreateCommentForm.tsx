@@ -5,6 +5,7 @@ import { useCreateComment } from "../model/useCreateComment";
 import { SendMessageIcon } from "@shared/assets/icons/actions";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { InputAction } from "@shared/ui/inputs";
+import { useTranslation } from "react-i18next";
 
 interface CreateCommentFormProps {
   taskId: string;
@@ -17,7 +18,9 @@ export const CreateCommentForm = ({
   avatarUrl,
   authorName,
 }: CreateCommentFormProps) => {
+  const { t } = useTranslation(["task"]);
   const { formik, isLoading } = useCreateComment(taskId);
+
   return (
     <form
       className={styles.createCommentWrapper}
@@ -35,7 +38,7 @@ export const CreateCommentForm = ({
           name="body"
           type="text"
           value={formik.values.body}
-          placeholder="Ask a question about this activity..."
+          placeholder={t("task:comments.inputPlaceholder")}
           onChange={(e) => formik.setFieldValue("body", e.target.value)}
           error={formik.submitCount > 0 ? formik.errors.body : undefined}
           wrapperClassName={styles.sendMessageWrapper}

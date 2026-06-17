@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { BaseButtonWrapper } from "../../base-buttons/base-wrapper/BaseButtonWrapper";
 import styles from "./LoadMoreButton.module.scss";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 interface LoadMoreButtonProps {
   onClick?: () => void;
@@ -14,8 +15,12 @@ export const LoadMoreButton = ({
   onClick,
   isLoading,
   className,
-  label = "LOAD MORE",
+  label,
 }: LoadMoreButtonProps) => {
+  const { t } = useTranslation(["common"]);
+
+  const buttonLabel = label ?? t("common:pagination.loadMore").toUpperCase();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -31,7 +36,7 @@ export const LoadMoreButton = ({
         loading={isLoading}
         className={clsx(styles.loadMoreButton, className)}
       >
-        {label}
+        {buttonLabel}
       </BaseButtonWrapper>
     </motion.div>
   );

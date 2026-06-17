@@ -2,6 +2,7 @@ import { formatDateRange } from "@shared/libs/date";
 import styles from "./EventAttendanceListItem.module.scss";
 import { type EventAttendance } from "../../model";
 import { formatMinutes } from "@shared/libs/time";
+import { useTranslation } from "react-i18next";
 
 interface EventAttendanceListItemProps {
   attendance: EventAttendance;
@@ -16,6 +17,7 @@ export const EventAttendanceListItem = ({
   checkOut,
   disputeAttendance,
 }: EventAttendanceListItemProps) => {
+  const { t } = useTranslation(["event"]);
   const now = new Date();
   const isInRange =
     now >= new Date(attendance.currentAttendance.dateFrom) &&
@@ -50,7 +52,12 @@ export const EventAttendanceListItem = ({
           <span
             className={`${styles.statusBadge} ${styles[attendance.currentAttendance.status]}`}
           >
-            {attendance.currentAttendance.status}
+            {t(
+              `event:attendance.statuses.${attendance.currentAttendance.status}`,
+              {
+                defaultValue: attendance.currentAttendance.status,
+              },
+            )}
           </span>
         )}
         {renderAction()}

@@ -3,6 +3,7 @@ import { GoogleCalendarIcon } from "@shared/assets/icons/info";
 import { useGoogleCalendarExport } from "../model/useGoogleCalendarExport";
 import styles from "./GoogleCalendarExportButton.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { useTranslation } from "react-i18next";
 
 interface GoogleCalendarExportButtonProps {
   from: Date;
@@ -13,6 +14,7 @@ export const GoogleCalendarExportButton = ({
   from,
   to,
 }: GoogleCalendarExportButtonProps) => {
+  const { t } = useTranslation(["calendar"]);
   const { exportToGoogleCalendar, isLoading } = useGoogleCalendarExport();
 
   return (
@@ -27,8 +29,8 @@ export const GoogleCalendarExportButton = ({
         loading={isLoading}
         onClick={() => exportToGoogleCalendar(from, to)}
       >
-        <img src={GoogleCalendarIcon} className={styles.icon} />
-        Export to Google Calendar
+        <img src={GoogleCalendarIcon} className={styles.icon} alt="" />
+        {t("calendar:actions.exportGoogle")}
       </BaseButtonWrapper>
     </motion.div>
   );

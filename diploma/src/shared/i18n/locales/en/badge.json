@@ -1,0 +1,28 @@
+{
+  "labels": {
+    "rank": "RANK {{rank}}",
+    "rankCapital": "Rank {{rank}}",
+    "rarity": "RARITY",
+    "progress": "Progress",
+    "volunteers": "Volunteers",
+    "received": "received",
+    "first": "First",
+    "earnedOn": "Earned on",
+    "imgAltBadge": "badge-image",
+    "imgAltOrg": "organization-image"
+  },
+  "scopes": {
+    "organization": "organization",
+    "project": "project",
+    "event": "event",
+    "task": "task",
+    "global": "ImpactFlow"
+  },
+  "share": {
+    "message": "I've got the {{title}} badge on ImpactFlow!"
+  },
+  "progressMessages": {
+    "completed": "Your dedication has filled the bar — you've officially earned the <0>{{title}}</0> badge!",
+    "incomplete": "You've got {{remaining}}% to get <0>{{title}}</0> badge in your inventory. Keep it up!"
+  }
+}

@@ -1,7 +1,8 @@
 import { useFormik } from "formik";
 import { useCreateFeedback, useUpdateFeedback } from "@entities/feedback";
 import type { EntityType } from "@shared/config/types";
-import { feedbackSchema } from "../libs/feedbackSchema";
+import { getFeedbackValidationSchema } from "../libs/feedbackSchema";
+import { useTranslation } from "react-i18next";
 
 export interface FeedbackFormValues {
   rating: number;
@@ -21,6 +22,8 @@ export const useFeedbackForm = ({
   initialValues,
   onSuccess,
 }: UseFeedbackFormOptions) => {
+  const { t } = useTranslation("feedback");
+  const validationSchema = getFeedbackValidationSchema(t);
   const {
     handleCreateFeedback,
     isLoading: isCreating,
@@ -47,7 +50,7 @@ export const useFeedbackForm = ({
       rating: initialValues?.rating ?? 0,
       comment: initialValues?.comment ?? "",
     },
-    validationSchema: feedbackSchema,
+    validationSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
       if (initialValues) {

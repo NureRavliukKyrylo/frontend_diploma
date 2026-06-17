@@ -50,6 +50,28 @@
     },
     "error": {
       "hint": "Try reloading the page or come back later."
+    },
+    "statuses": {
+      "Draft": "Draft",
+      "CheckedOut": "Checked out",
+      "CheckedIn": "Checked in",
+      "Approved": "Approved",
+      "Rejected": "Rejected",
+      "Disputed": "Disputed",
+      "Resolved": "Resolved",
+      "Cancelled": "Cancelled"
     }
+  },
+  "cards": {
+    "noVolunteers": "No volunteers joined yet",
+    "about": "About this event",
+    "participants": "Participants",
+    "allTime": "All time"
+  },
+  "statuses": {
+    "active": "Active",
+    "endingSoon": "Ending soon",
+    "completed": "Completed",
+    "archived": "Archived"
   }
 }

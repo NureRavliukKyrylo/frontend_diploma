@@ -1,0 +1,13 @@
+{
+  "labels": {
+    "activities": "Activities",
+    "all": "ALL",
+    "categories": "CATEGORIES",
+    "imgAltRelated": "category-related-item",
+    "imgAltLayout": "layout"
+  },
+  "emptyState": {
+    "title": "No categories found",
+    "subtitle": "Try clearing your filters or refreshing the list."
+  }
+}

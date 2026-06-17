@@ -4,16 +4,22 @@ import styles from "./DeleteAvailabilityModal.module.scss";
 import type { AvailabilitySlot } from "@entities/user/calendar";
 import { useDeleteAvailability } from "../model/useDeleteAvailability";
 import { formatDateToText, formatDayOfWeek } from "@shared/libs/date";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 
-const dayName = (dayOfWeek: number): string => {
+const getDayName = (dayOfWeek: number, locale: string): string => {
   const date = new Date(0);
   date.setDate(date.getDate() - date.getDay() + dayOfWeek);
-  return new Intl.DateTimeFormat("en-GB", { weekday: "long" }).format(date);
+  return new Intl.DateTimeFormat(locale, { weekday: "long" }).format(date);
 };
 
-const buildDescription = (slot: AvailabilitySlot): string => {
+const buildDescription = (
+  slot: AvailabilitySlot,
+  t: TFunction,
+  locale: string,
+): string => {
   const timeLabel = slot.allDay
-    ? "All Day"
+    ? t("calendar:deleteModal.allDay")
     : `${slot.startTime} – ${slot.endTime}`;
 
   if (slot.date) {
@@ -27,10 +33,17 @@ const buildDescription = (slot: AvailabilitySlot): string => {
 
     const recurrence =
       slot.dayOfWeek !== null
-        ? `Every ${dayName(slot.dayOfWeek)}`
-        : "Every day";
+        ? t("calendar:deleteModal.everyWeekDay", {
+            day: getDayName(slot.dayOfWeek, locale),
+          })
+        : t("calendar:deleteModal.everyDay");
 
-    return `${recurrence}, from ${from} to ${to}, ${timeLabel}`;
+    const dateRangeStr = t("calendar:deleteModal.timeRangePattern", {
+      from,
+      to,
+    });
+
+    return `${recurrence}, ${dateRangeStr}, ${timeLabel}`;
   }
 
   return timeLabel;
@@ -47,18 +60,21 @@ export const DeleteAvailabilityModal = ({
   isOpen,
   onClose,
 }: DeleteAvailabilityModalProps) => {
+  const { t, i18n } = useTranslation(["calendar", "common"]);
   const { handleDelete, isLoading, errorMessage } =
     useDeleteAvailability(onClose);
+
+  const description = buildDescription(slot, t, i18n.language);
 
   return (
     <ConfirmationModal
       isOpen={isOpen}
       onCancel={onClose}
       onConfirm={() => handleDelete(slot.id)}
-      confirmText="Delete"
-      title="Delete Availability Slot"
-      text={`Are you sure you want to remove this availability?\n\n${buildDescription(slot)}\n\nThis action cannot be undone.`}
-      cancelText="Cancel"
+      confirmText={t("common:actions.delete")}
+      title={t("calendar:deleteModal.title")}
+      text={t("calendar:deleteModal.textPattern", { description })}
+      cancelText={t("calendar:actions.cancel")}
       error={errorMessage}
       isLoading={isLoading}
       confirmButtonClassName={styles.confirmButton}

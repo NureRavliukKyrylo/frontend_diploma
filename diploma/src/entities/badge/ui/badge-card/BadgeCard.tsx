@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { TierColors, type Badge } from "../../model";
 import styles from "./BadgeCard.module.scss";
 import { LockedIcon } from "@shared/assets/icons/info";
+import { useTranslation } from "react-i18next";
 
 export interface BadgeCardProps {
   badge: Badge;
@@ -10,7 +11,6 @@ export interface BadgeCardProps {
 }
 
 export const BadgeCard = ({ badge }: BadgeCardProps) => {
-  console.log(badge.isUnlocked);
   return (
     <div
       className={styles.badgeImageBlock}
@@ -36,6 +36,7 @@ export const BadgeCardDetailed = ({
   classImgName = "",
   onClick,
 }: BadgeCardProps) => {
+  const { t } = useTranslation(["badge"]);
   const Wrapper = onClick ? motion.div : "div";
 
   return (
@@ -54,7 +55,7 @@ export const BadgeCardDetailed = ({
       <div className={styles.badgeInfo}>
         <h1>{badge.title}</h1>
         <p style={{ color: TierColors[badge.rank.name] }}>
-          RANK {badge.rank.name}
+          {t("badge:labels.rank", { rank: badge.rank.name })}
         </p>
       </div>
     </div>

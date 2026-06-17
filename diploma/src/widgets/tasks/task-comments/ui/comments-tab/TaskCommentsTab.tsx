@@ -6,6 +6,7 @@ import { getHttpErrorInfo } from "@shared/libs/error";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { TaskCommentItemSkeleton } from "@entities/task";
 import { CreateCommentForm } from "@features/tasks";
+import { useTranslation } from "react-i18next";
 
 interface TaskCommentsTabProps {
   PageSize: number;
@@ -22,6 +23,7 @@ export const TaskCommentsTab = ({
   userName,
   avatarUrl,
 }: TaskCommentsTabProps) => {
+  const { t } = useTranslation("common");
   return (
     <div className={styles.wrapperTaskComments}>
       <div className={styles.wrapperSendMessage}>
@@ -36,9 +38,7 @@ export const TaskCommentsTab = ({
           fallbackRender={({ error }) => (
             <div className={styles.errorState}>
               <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-              <p className="errorHint">
-                Try reloading the page or come back later.
-              </p>
+              <p className="errorHint">{t("common.errors.errorHint")}</p>
             </div>
           )}
         >

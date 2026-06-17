@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Feedback } from "../../types/FeedBack";
+import { useTranslation } from "react-i18next";
 
 type ModalType = "create" | "edit" | "delete" | null;
 
@@ -9,6 +10,7 @@ export const useFeedbackTab = () => {
   const [modalType, setModalType] = useState<ModalType>(null);
   const [selectedFeedback, setSelectedFeedback] =
     useState<SelectedFeedback | null>(null);
+  const { t } = useTranslation(["feedback"]);
 
   const handleOpenModal = (feedback: SelectedFeedback, type: ModalType) => {
     setSelectedFeedback(feedback);
@@ -23,13 +25,13 @@ export const useFeedbackTab = () => {
   const getMenuItems = (feedback: SelectedFeedback) => [
     {
       key: "edit",
-      label: "Edit Feedback",
+      label: t("feedback:actions.editFeedback"),
       onClick: () => handleOpenModal(feedback, "edit"),
       variant: "edit" as const,
     },
     {
       key: "delete",
-      label: "Delete Feedback",
+      label: t("feedback:actions.deleteFeedback"),
       onClick: () => handleOpenModal(feedback, "delete"),
       variant: "delete" as const,
     },

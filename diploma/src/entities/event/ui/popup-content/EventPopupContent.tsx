@@ -1,12 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import type { Event } from "../../model";
 import styles from "./EventPopupContent.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface EventPopupContentProps {
   event: Event;
 }
 
 export const EventPopupContent = ({ event }: EventPopupContentProps) => {
+  const { t } = useTranslation("common");
   return (
     <div className={styles.popupEventContent}>
       <div className={styles.eventInfo}>
@@ -17,7 +19,7 @@ export const EventPopupContent = ({ event }: EventPopupContentProps) => {
           params={{ id: event.id }}
           className={styles.seeMoreButtonEvent}
         >
-          see more
+          {t("actions.seeMore")}
         </Link>
       </div>
     </div>

@@ -14,6 +14,7 @@ import styles from "./MapListPanel.module.scss";
 import { ToggleDropdownButton } from "@shared/ui/buttons";
 import { ProjectsListWidget } from "@widgets/projects";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
+import { useTranslation } from "react-i18next";
 
 interface MapListPanelProps {
   listParams: MapProjectRequestParams;
@@ -26,6 +27,7 @@ export const MapListPanel = ({
   page,
   onSelectProject,
 }: MapListPanelProps) => {
+  const { t } = useTranslation(["common"]);
   const navigate = useNavigate({ from: "/map/" });
   const { data: projects } = useQuery(projectQuery.map(listParams));
 
@@ -33,8 +35,8 @@ export const MapListPanel = ({
     <ToggleDropdownButton variant="list">
       {projects?.data?.length === 0 ? (
         <div className={styles.emptyState}>
-          <h2>No projects found</h2>
-          <p>Try adjusting your filters or search query</p>
+          <h2>{t("common:mapEmptyState.title")}</h2>
+          <p>{t("common:mapEmptyState.subtitle")}</p>
         </div>
       ) : (
         <Suspense

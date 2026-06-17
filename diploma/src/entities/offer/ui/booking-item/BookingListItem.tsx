@@ -12,12 +12,12 @@ interface BookingListItemProps {
 }
 
 export const BookingListItem = ({ booking, actions }: BookingListItemProps) => {
-  const { t } = useTranslation("timeBank");
+  const { t } = useTranslation(["timeBank", "common"]);
   const statusLabels = getProgressStatusLabels(t);
 
   return (
     <div className={styles.bookingWrapper}>
-      <div className={styles.time}>{formatTimeAgo(booking.createdAt)}</div>
+      <div className={styles.time}>{formatTimeAgo(booking.createdAt, t)}</div>
       <Avatar
         className={styles.authorAvatar}
         src={booking.worker.userAvatar}

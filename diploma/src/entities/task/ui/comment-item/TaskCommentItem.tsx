@@ -12,6 +12,7 @@ import {
 import { ActionsIcon } from "@shared/assets/icons/actions";
 import { AnimatePresence, motion } from "framer-motion";
 import { getFullName } from "@entities/user";
+import { useTranslation } from "react-i18next";
 
 interface TaskCommentItemProps {
   comment: TaskComment;
@@ -30,9 +31,10 @@ export const TaskCommentItem = ({
   editSlot,
   reportSlot,
 }: TaskCommentItemProps) => {
+  const { t } = useTranslation("common");
   return (
     <div className={`${styles.commentWrapper} ${className ?? ""}`}>
-      <div className={styles.time}>{formatTimeAgo(comment.createdAt)}</div>
+      <div className={styles.time}>{formatTimeAgo(comment.createdAt, t)}</div>
       <Avatar
         className={styles.authorAvatar}
         src={comment.author.avatarUrl}

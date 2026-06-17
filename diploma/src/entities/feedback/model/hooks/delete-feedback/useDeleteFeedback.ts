@@ -6,6 +6,7 @@ import { addToast } from "@heroui/react";
 import type { EntityType } from "@shared/config/types";
 import { queryClient } from "@shared/api";
 import { feedbackQueryKeyMap } from "../../../config";
+import { useTranslation } from "react-i18next";
 
 interface UseDeleteFeedbackOptions {
   entityType: Exclude<EntityType, "organization">;
@@ -18,6 +19,8 @@ export const useDeleteFeedback = ({
   entityId,
   onSuccess,
 }: UseDeleteFeedbackOptions) => {
+  const { t } = useTranslation(["feedback"]);
+
   const mutation = useMutation({
     mutationFn: (id: string) => deleteFeedback(id),
     onSuccess: () => {
@@ -28,16 +31,16 @@ export const useDeleteFeedback = ({
         queryKey: feedbackQueryKeyMap[entityType].id(entityId),
       });
       addToast({
-        title: "Feedback deleted",
-        description: "Your feedback has been removed.",
+        title: t("feedback:notifications.deleteSuccessTitle"),
+        description: t("feedback:notifications.deleteSuccessDescription"),
         color: "success",
       });
       onSuccess?.();
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Failed to delete feedback",
-        description: getErrorMessage(error),
+        title: t("feedback:notifications.deleteFailedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -47,6 +50,6 @@ export const useDeleteFeedback = ({
     handleDeleteFeedback: mutation.mutate,
     mutation,
     isLoading: mutation.isPending,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

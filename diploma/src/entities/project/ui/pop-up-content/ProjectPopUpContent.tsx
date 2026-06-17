@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { DefaultAvatar } from "@shared/assets/images/user";
 import type { Project } from "../../model";
 import styles from "./ProjectPopupContent.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface ProjectPopupContentProps {
   project: Project;
@@ -12,6 +13,7 @@ export const ProjectPopupContent = ({
   project,
   organizationTitle,
 }: ProjectPopupContentProps) => {
+  const { t } = useTranslation("common");
   return (
     <div className={styles.popupProjectContent}>
       <div className={styles.projectInfo}>
@@ -22,7 +24,7 @@ export const ProjectPopupContent = ({
           params={{ id: project.id }}
           className={styles.seeMoreButtonProject}
         >
-          see more
+          {t("actions.seeMore")}
         </Link>
       </div>
       <div className={styles.organizationProjectInfo}>

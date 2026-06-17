@@ -11,6 +11,7 @@ import { getEntityStatusConfig } from "@shared/libs/entity";
 import type { MenuItem } from "@shared/config/types";
 import { EventCardBase } from "../base-card/EventCardBase";
 import { EventDefaultBottomContent } from "../base-card/EventDefaultBottomContent";
+import { useTranslation } from "react-i18next";
 
 interface EventControlCardProps {
   event: Event;
@@ -23,6 +24,7 @@ export const EventControlCard = ({
   menuItems,
   actionButton,
 }: EventControlCardProps) => {
+  const { t } = useTranslation(["event"]);
   const statusConfig = getEntityStatusConfig(event.status);
 
   return (
@@ -65,13 +67,16 @@ export const EventControlCard = ({
             style={{ background: statusConfig.bg, color: statusConfig.color }}
           >
             <span className={styles.statusDot} />
-            {statusConfig.label}
+            {statusConfig.key
+              ? t(`event:statuses.${statusConfig.key}`, {
+                  defaultValue: statusConfig.label,
+                })
+              : statusConfig.label}
           </div>
         }
         bottomContent={
           <div className={styles.bottomEventContent}>
             <EventDefaultBottomContent event={event} />
-
             {actionButton}
           </div>
         }

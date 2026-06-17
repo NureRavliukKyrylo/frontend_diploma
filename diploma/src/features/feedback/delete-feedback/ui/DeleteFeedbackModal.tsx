@@ -3,6 +3,7 @@ import styles from "./DeleteFeedbackModal.module.scss";
 import { DeleteModal } from "@shared/assets/images/actions";
 import type { EntityType } from "@shared/config/types";
 import { useDeleteFeedback } from "@entities/feedback";
+import { useTranslation } from "react-i18next";
 
 interface DeleteFeedbackModalProps {
   entityType: Exclude<EntityType, "organization">;
@@ -19,6 +20,8 @@ export const DeleteFeedbackModal = ({
   isOpen,
   onClose,
 }: DeleteFeedbackModalProps) => {
+  const { t } = useTranslation(["feedback"]);
+
   const handleClose = () => {
     mutation.reset();
     onClose();
@@ -36,13 +39,13 @@ export const DeleteFeedbackModal = ({
       isOpen={isOpen}
       onCancel={handleClose}
       onConfirm={handleDelete}
-      title={`Delete feedback?`}
-      text="Are you sure you want to delete this feedback? You can write new one again anytime."
+      title={t("feedback:deleteModal.title")}
+      text={t("feedback:deleteModal.text")}
       maxWidth="628px"
       error={errorMessage}
       isLoading={isLoading}
-      cancelText="Cancel"
-      confirmText="Delete"
+      cancelText={t("feedback:actions.cancel")}
+      confirmText={t("feedback:actions.delete")}
       confirmButtonClassName={styles.confirmButtonSkill}
       image={DeleteModal}
       imageClassName={styles.imageDelete}

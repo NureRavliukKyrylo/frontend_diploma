@@ -1,0 +1,48 @@
+{
+  "actions": {
+    "today": "Сьогодні",
+    "addAvailability": "Додати доступність",
+    "updateAvailability": "Редагувати доступність",
+    "deleteAvailability": "Видалити доступність",
+    "exportGoogle": "Експорт в Google Календар",
+    "setAvailability": "Встановити доступність",
+    "cancel": "Скасувати",
+    "allDay": "Весь день"
+  },
+  "views": {
+    "month": "Місяць",
+    "week": "Тиждень",
+    "day": "День"
+  },
+  "labels": {
+    "dateRangeOptional": "Діапазон дат (опціонально)",
+    "setTimeRangeAvailability": "Вкажіть часову доступність"
+  },
+  "export": {
+    "successTitle": "Експортовано успішно",
+    "successDescription": "Ваші активності були успішно додані до Google Календаря.",
+    "failedTitle": "Помилка експорту"
+  },
+  "formNotifications": {
+    "addSuccessTitle": "Доступність додано",
+    "addSuccessDescription": "Часову доступність було успішно створено",
+    "updateSuccessTitle": "Доступність оновлено",
+    "updateSuccessDescription": "Часову доступність було успішно оновлено",
+    "failedTitle": "Помилка експортування в Google календар"
+  },
+  "validation": {
+    "startTimeRequired": "Час початку є обов'язковим",
+    "endTimeRequired": "Час закінчення є обов'язковим"
+  },
+  "deleteModal": {
+    "title": "Видалити слот доступності",
+    "textPattern": "Ви впевнені, що хочете видалити цю доступність?\n\n{{description}}\n\nЦю дію не можна буде скасувати.",
+    "allDay": "Весь день",
+    "everyDay": "Щодня",
+    "everyWeekDay": "Щонеділі: {{day}}",
+    "timeRangePattern": "з {{from}} по {{to}}",
+    "removeSuccessTitle": "Доступність видалено",
+    "removeSuccessDescription": "Часову доступність було успішно видалено",
+    "removeFailedTitle": "Помилка видалення доступності"
+  }
+}

@@ -4,14 +4,17 @@ import { addToast } from "@heroui/react";
 import { queryClient } from "@shared/api";
 import { calendarKeys } from "@entities/user/calendar";
 import { getErrorMessage } from "@shared/libs/error-message";
+import { useTranslation } from "react-i18next";
 
 export const useDeleteAvailability = (onSuccess?: () => void) => {
+  const { t } = useTranslation(["calendar", "common"]);
+
   const mutation = useMutation({
     mutationFn: (id: string) => deleteAvailability(id),
     onSuccess: () => {
       addToast({
-        title: "Availability removed",
-        description: "Time-Availability has been successfully removed",
+        title: t("calendar:deleteModal.removeSuccessTitle"),
+        description: t("calendar:deleteModal.removeSuccessDescription"),
         color: "success",
       });
       queryClient.invalidateQueries({
@@ -21,15 +24,16 @@ export const useDeleteAvailability = (onSuccess?: () => void) => {
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Failed",
-        description: getErrorMessage(error),
+        title: t("calendar:deleteModal.removeFailedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
   });
+
   return {
     handleDelete: (id: string) => mutation.mutate(id),
     isLoading: mutation.isPending,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

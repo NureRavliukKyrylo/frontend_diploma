@@ -4,6 +4,7 @@ import { NOTIFICATION_TYPE_CONFIG } from "../../config";
 import type { Notification } from "../../model";
 import { formatTimeAgo } from "@shared/libs/date";
 import { OnlineIcon } from "@shared/assets/icons/info";
+import { useTranslation } from "react-i18next";
 
 interface NotificationItemProps {
   notification: Notification;
@@ -16,6 +17,7 @@ export const NotificationItem = ({
   rightContent,
   variant = "default",
 }: NotificationItemProps) => {
+  const { t } = useTranslation("common");
   const config = NOTIFICATION_TYPE_CONFIG[notification.type];
   const Icon = config.icon;
   const isUnread = notification.status === "Unread";
@@ -50,7 +52,7 @@ export const NotificationItem = ({
 
       {!isToast && (
         <div className={styles.time}>
-          {formatTimeAgo(notification.createdAt)}
+          {formatTimeAgo(notification.createdAt, t)}
         </div>
       )}
 

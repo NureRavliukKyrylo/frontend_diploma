@@ -6,6 +6,7 @@ import { addToast } from "@heroui/react";
 import type { EntityType } from "@shared/config/types";
 import { queryClient } from "@shared/api";
 import { feedbackQueryKeyMap } from "../../../config";
+import { useTranslation } from "react-i18next";
 
 interface UseCreateFeedbackOptions {
   entityType: Exclude<EntityType, "organization">;
@@ -18,6 +19,8 @@ export const useCreateFeedback = ({
   entityId,
   onSuccess,
 }: UseCreateFeedbackOptions) => {
+  const { t } = useTranslation(["feedback"]);
+
   const mutation = useMutation({
     mutationFn: (data: Omit<CreateFeedbackDto, "entityType" | "entityId">) =>
       createFeedback({ ...data, entityType, entityId }),
@@ -29,16 +32,16 @@ export const useCreateFeedback = ({
         queryKey: feedbackQueryKeyMap[entityType].id(entityId),
       });
       addToast({
-        title: "Feedback submitted",
-        description: "Thank you for your feedback!",
+        title: t("feedback:notifications.createSuccessTitle"),
+        description: t("feedback:notifications.createSuccessDescription"),
         color: "success",
       });
       onSuccess?.();
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Failed to submit feedback",
-        description: getErrorMessage(error),
+        title: t("feedback:notifications.createFailedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -48,6 +51,6 @@ export const useCreateFeedback = ({
     handleCreateFeedback: mutation.mutate,
     mutation,
     isLoading: mutation.isPending,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

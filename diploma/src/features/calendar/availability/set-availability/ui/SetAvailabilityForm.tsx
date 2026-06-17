@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { useAvailabilityForm } from "../model/useAvailabilityForm";
 import type { AvailabilitySlot } from "@entities/user/calendar";
 import { DateRangePicker, type RangeValue } from "@heroui/react";
+import { useTranslation } from "react-i18next";
 import {
   getLocalTimeZone,
   parseDate,
@@ -26,6 +27,7 @@ export const SetAvailabilityForm = ({
   availability,
   onClose,
 }: SetAvailabilityFormProps) => {
+  const { t } = useTranslation(["calendar"]);
   const { formik, isUpdate, isLoading, handleAllDayToggle, mutation } =
     useAvailabilityForm({ date, availability, onClose });
 
@@ -81,7 +83,7 @@ export const SetAvailabilityForm = ({
       >
         <div className={styles.setRangeWrapper}>
           <div className={styles.dateRangeBlock}>
-            <h1>Date range (optional)</h1>
+            <h1>{t("calendar:labels.dateRangeOptional")}</h1>
             <DateRangePicker
               value={dateRangeValue}
               onChange={handleDateRangeChange}
@@ -101,7 +103,7 @@ export const SetAvailabilityForm = ({
           </div>
           <div className={styles.timeRangeBlock}>
             <div className={styles.setRange}>
-              <h1>Set time-range availability</h1>
+              <h1>{t("calendar:labels.setTimeRangeAvailability")}</h1>
               <div className={styles.optionsToChose}>
                 <div className={styles.timeRangeWrapper}>
                   <TimeRangePicker
@@ -134,7 +136,7 @@ export const SetAvailabilityForm = ({
                   whileTap={{ scale: 0.97 }}
                   transition={{ duration: 0.15, ease: "easeOut" }}
                 >
-                  All Day
+                  {t("calendar:actions.allDay")}
                 </motion.button>
               </div>
             </div>
@@ -152,7 +154,9 @@ export const SetAvailabilityForm = ({
                 type="submit"
                 loading={isLoading}
               >
-                {isUpdate ? "Update availability" : "Set availability"}
+                {isUpdate
+                  ? t("calendar:actions.updateAvailability")
+                  : t("calendar:actions.setAvailability")}
               </BaseButtonWrapper>
             </motion.div>
             <motion.div
@@ -165,7 +169,7 @@ export const SetAvailabilityForm = ({
                 onClick={handleClose}
                 type="button"
               >
-                Cancel
+                {t("calendar:actions.cancel")}
               </BaseButtonWrapper>
             </motion.div>
           </div>

@@ -32,5 +32,19 @@
       "location": "Локація",
       "markerPopup": "📍 Локація проєкту"
     }
+  },
+  "cards": {
+    "progress": "Прогрес",
+    "noVolunteers": "Волонтери ще не приєдналися",
+    "tasksCount_one": "{{count}} завдання",
+    "tasksCount_few": "{{count}} завдання",
+    "tasksCount_many": "{{count}} завдань",
+    "tasksCount_other": "{{count}} завдання"
+  },
+  "statuses": {
+    "active": "Активний",
+    "endingSoon": "Скоро закінчується",
+    "completed": "Завершено",
+    "archived": "Архівовано"
   }
 }

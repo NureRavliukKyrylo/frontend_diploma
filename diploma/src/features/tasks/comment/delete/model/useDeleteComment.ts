@@ -4,29 +4,30 @@ import { queryClient } from "@shared/api";
 import { addToast } from "@heroui/react";
 import { deleteComment } from "../api/deleteCommentApi";
 import { taskKeys } from "@entities/task";
+import { useTranslation } from "react-i18next";
 
 export const useDeleteComment = (
   taskId: string,
   commentId: string,
   onSuccess: () => void,
 ) => {
+  const { t } = useTranslation(["task", "common"]);
+
   const mutation = useMutation({
     mutationFn: () => deleteComment(commentId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: taskKeys.id(taskId) });
       addToast({
-        title: "Delete Comment Success",
-        description: "You have deleted your comment successfully",
+        title: t("task:comments.notifications.deleteSuccessTitle"),
+        description: t("task:comments.notifications.deleteSuccessDescription"),
         color: "success",
       });
       onSuccess?.();
     },
     onError: (error: unknown) => {
-      const errorMessage = getErrorMessage(error);
-
       addToast({
-        title: "Delete Comment Failed",
-        description: errorMessage,
+        title: t("task:comments.notifications.deleteFailedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -35,6 +36,6 @@ export const useDeleteComment = (
   return {
     deleteComment: mutation.mutate,
     isLoading: mutation.isPending,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

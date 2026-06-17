@@ -3,6 +3,7 @@ import { SendMessageIcon } from "@shared/assets/icons/actions";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { InputAction } from "@shared/ui/inputs";
 import { useEditComment } from "../model/useEditComment";
+import { useTranslation } from "react-i18next";
 
 interface EditCommentFormProps {
   taskId: string;
@@ -17,6 +18,7 @@ export const EditCommentForm = ({
   onCancel,
   initialBody,
 }: EditCommentFormProps) => {
+  const { t } = useTranslation(["task"]);
   const { formik, isLoading, mutation } = useEditComment(
     taskId,
     commentId,
@@ -38,7 +40,7 @@ export const EditCommentForm = ({
           name="body"
           type="text"
           value={formik.values.body}
-          placeholder="Ask a question about this activity..."
+          placeholder={t("tasks:comments.inputPlaceholder")}
           onChange={(e) => formik.setFieldValue("body", e.target.value)}
           error={formik.submitCount > 0 ? formik.errors.body : undefined}
           wrapperClassName={styles.editMessageWrapper}
@@ -50,7 +52,7 @@ export const EditCommentForm = ({
                 className={styles.cancel}
                 type="button"
               >
-                Cancel
+                {t("task:comments.actions.cancel")}
               </BaseButtonWrapper>
               <BaseButtonWrapper
                 className={`${styles.editMessage} ${isLoading ? styles.loading : ""}`}

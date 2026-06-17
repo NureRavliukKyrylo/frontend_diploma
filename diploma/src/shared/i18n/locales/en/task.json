@@ -32,5 +32,43 @@
     "Completed": "Completed",
     "Cancelled": "Cancelled",
     "Overdue": "Overdue"
+  },
+  "cards": {
+    "noVolunteers": "No volunteers joined yet",
+    "unknownOrganization": "Unknown Organization",
+    "imgAltOrganization": "image organization",
+    "deadline": "Deadline:",
+    "allTime": "All time",
+    "about": "About this task",
+    "participants": "Participants"
+  },
+  "comments": {
+    "emptyStateTitle": "No comments yet",
+    "emptyStateSubtitle": "Be the first one to leave a comment",
+    "inputPlaceholder": "Ask a question about this activity...",
+    "actions": {
+      "cancel": "Cancel",
+      "deleteComment": "Delete Comment",
+      "editComment": "Edit Comment"
+    },
+    "deleteModal": {
+      "title": "Delete Your Comment",
+      "textPattern": "Are you sure you want to delete your comment? with content: {{content}}"
+    },
+    "validation": {
+      "bodyRequired": "Comment is required",
+      "bodyMax": "Comment must be 80 characters or less"
+    },
+    "notifications": {
+      "createSuccessTitle": "Create Comment Success",
+      "createSuccessDescription": "Your comment has been created successfully",
+      "createFailedTitle": "Comment creation Failed",
+      "editSuccessTitle": "Comment Edit Success",
+      "editSuccessDescription": "Your comment has been edited successfully",
+      "editFailedTitle": "Comment edition Failed",
+      "deleteSuccessTitle": "Delete Comment Success",
+      "deleteSuccessDescription": "You have deleted your comment successfully",
+      "deleteFailedTitle": "Delete Comment Failed"
+    }
   }
 }

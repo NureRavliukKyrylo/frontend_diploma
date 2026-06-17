@@ -9,6 +9,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { ShareBadgeButton } from "@features/badge";
 import { Link } from "@tanstack/react-router";
 import { LockedIcon } from "@shared/assets/icons/info";
+import { useTranslation, Trans } from "react-i18next";
 
 const entityTypeToRoute = {
   organization: "/organizations/$id",
@@ -18,12 +19,17 @@ const entityTypeToRoute = {
 } as const;
 
 export const BadgeDetailWidget = ({ id }: { id: string }) => {
+  const { t } = useTranslation(["badge"]);
   const { data: badge } = useSuspenseQuery(badgesQuery.id(id));
 
   return (
     <>
       <div className={styles.imageWrapper}>
-        <img className={styles.iconUrl} src={badge.iconUrl} alt="badge-image" />
+        <img
+          className={styles.iconUrl}
+          src={badge.iconUrl}
+          alt={t("badge:labels.imgAltBadge")}
+        />
         {!badge.isUnlocked && (
           <div className={styles.lockedOverlay}>
             <LockedIcon />
@@ -36,14 +42,14 @@ export const BadgeDetailWidget = ({ id }: { id: string }) => {
             <h1>{badge.title}</h1>
             {badge.isUnlocked && (
               <ShareBadgeButton
-                text={`I've got the ${badge.title} badge on ImpactFlow!`}
+                text={t("badge:share.message", { title: badge.title })}
                 pageUrl={`https://impactflow.com/badges/${badge.id}`}
               />
             )}
           </div>
           <div className={styles.rankEntity}>
             <h2 style={{ color: TierColors[badge.rank.name] }}>
-              Rank {badge.rank.name}
+              {t("badge:labels.rankCapital", { rank: badge.rank.name })}
             </h2>
             {badge.scopeEntityType ? (
               <Link
@@ -52,13 +58,13 @@ export const BadgeDetailWidget = ({ id }: { id: string }) => {
                 className={styles.entityInfo}
               >
                 {badge.scopeEntityType === "organization" && (
-                  <img src="" alt="organization-image" />
+                  <img src="" alt={t("badge:labels.imgAltOrg")} />
                 )}
-                <p>{badge.scopeEntityType}</p>
+                <p>{t(`badge:scopes.${badge.scopeEntityType}`)}</p>
               </Link>
             ) : (
               <div className={styles.entityInfo}>
-                <p>ImpactFlow</p>
+                <p>{t("badge:scopes.global")}</p>
               </div>
             )}
           </div>
@@ -74,15 +80,15 @@ export const BadgeDetailWidget = ({ id }: { id: string }) => {
           <div className={styles.metaInfo}>
             <div className={styles.receivedAll}>
               <div className={styles.titleInfo}>
-                <h1>Volunteers </h1>
-                <h2>received</h2>
+                <h1>{t("badge:labels.volunteers")}</h1>
+                <h2>{t("badge:labels.received")}</h2>
               </div>
               <p>{badge.awardedCountTotal}</p>
             </div>
             <div className={styles.earnedOn}>
               <div className={styles.titleInfo}>
-                <h1>First </h1>
-                <h2>Earned on</h2>
+                <h1>{t("badge:labels.first")}</h1>
+                <h2>{t("badge:labels.earnedOn")}</h2>
               </div>
               <p>
                 {badge.firstAwardedAt
@@ -92,7 +98,7 @@ export const BadgeDetailWidget = ({ id }: { id: string }) => {
             </div>
           </div>
           <div className={styles.rarityBlock}>
-            <h1>RARITY</h1>
+            <h1>{t("badge:labels.rarity")}</h1>
             <Stars
               value={TierOrder[badge.rank.name]}
               maxStars={Object.keys(TierOrder).length}
@@ -102,26 +108,30 @@ export const BadgeDetailWidget = ({ id }: { id: string }) => {
         </div>
         <div className={styles.bottomInfo}>
           <div className={styles.progressBlock}>
-            <h1>Progress</h1>
+            <h1>{t("badge:labels.progress")}</h1>
             <ProgressBar current={badge.progressPercent} max={100} />
             <h2>
               {badge.progressPercent === 100 ? (
-                <>
-                  Your dedication has filled the bar — you've officially earned
-                  the <span>{badge.title}</span> badge!
-                </>
+                <Trans
+                  i18nKey="badge:progressMessages.completed"
+                  values={{ title: badge.title }}
+                  components={[<span key="bold" />]}
+                />
               ) : (
-                <>
-                  You've got {100 - badge.progressPercent}% to get{" "}
-                  <span>{badge.title}</span> badge in your inventory. Keep it
-                  up!
-                </>
+                <Trans
+                  i18nKey="badge:progressMessages.incomplete"
+                  values={{
+                    remaining: 100 - badge.progressPercent,
+                    title: badge.title,
+                  }}
+                  components={[<span key="bold" />]}
+                />
               )}
             </h2>
           </div>
           <div className={styles.requirementsBadge}>
-            {badge.ruleProgress.map((value) => (
-              <h1>""{value.label}</h1>
+            {badge.ruleProgress.map((value, idx) => (
+              <h1 key={idx}>{value.label}</h1>
             ))}
           </div>
         </div>

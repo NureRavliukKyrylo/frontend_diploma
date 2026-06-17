@@ -7,6 +7,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useCategoriesInfiniteQuery } from "@entities/category";
 import { useOrganizationsInfiniteQuery } from "@entities/organization";
 import { useMapFilters } from "../model/useMapFilters";
+import { useTranslation } from "react-i18next";
 import {
   DateRangeFilter,
   DistanceFilter,
@@ -20,6 +21,7 @@ interface MapFiltersWidgetProps {
 }
 
 export const MapFiltersWidget = ({ search }: MapFiltersWidgetProps) => {
+  const { t } = useTranslation(["common"]);
   const {
     onStartDateChange,
     onEndBeforeChange,
@@ -33,6 +35,8 @@ export const MapFiltersWidget = ({ search }: MapFiltersWidgetProps) => {
     onShowJoinedChange,
     onClearFilters,
   } = useMapFilters();
+
+  const projectSubject = t("common:filters.subjects.project");
 
   return (
     <>
@@ -53,7 +57,10 @@ export const MapFiltersWidget = ({ search }: MapFiltersWidgetProps) => {
             content: styles.content,
           }}
         >
-          <AccordionItem key="deadline" title="Project deadline due">
+          <AccordionItem
+            key="deadline"
+            title={t("common:filters.deadlineDue", { subject: projectSubject })}
+          >
             <DateRangeFilter
               startDate={search.StartDate}
               endBefore={search.EndBefore}
@@ -61,20 +68,32 @@ export const MapFiltersWidget = ({ search }: MapFiltersWidgetProps) => {
               onEndBeforeChange={onEndBeforeChange}
             />
           </AccordionItem>
-          <AccordionItem key="rating" title="Project rating">
+
+          <AccordionItem
+            key="rating"
+            title={t("common:filters.rating", { subject: projectSubject })}
+          >
             <RatingFilter
               rating={search.Rating}
               onRatingChange={onRatingChange}
             />
           </AccordionItem>
-          <AccordionItem key="categories" title="Categories">
+
+          <AccordionItem
+            key="categories"
+            title={t("common:filters.categories")}
+          >
             <CategoriesListFilter
               useCategoriesQuery={useCategoriesInfiniteQuery({ PageSize: 7 })}
               selectedIds={search.CategoryIds}
               onToggle={onCategoryToggle}
             />
           </AccordionItem>
-          <AccordionItem key="organization" title="Organizations">
+
+          <AccordionItem
+            key="organization"
+            title={t("common:filters.organizations")}
+          >
             <OrganizationsListFilter
               useOrganizationsQuery={useOrganizationsInfiniteQuery({
                 PageSize: 7,
@@ -83,7 +102,8 @@ export const MapFiltersWidget = ({ search }: MapFiltersWidgetProps) => {
               onToggle={onOrganizationToggle}
             />
           </AccordionItem>
-          <AccordionItem key="distance" title="Distance">
+
+          <AccordionItem key="distance" title={t("common:filters.distance")}>
             <DistanceFilter
               defaultLocation={search.Location}
               defaultRadiusKm={search.RadiusKm}
@@ -92,15 +112,23 @@ export const MapFiltersWidget = ({ search }: MapFiltersWidgetProps) => {
               onRadiusChange={onRadiusChange}
             />
           </AccordionItem>
-          <AccordionItem key="moreOptions" title="More options">
+
+          <AccordionItem
+            key="moreOptions"
+            title={t("common:filters.moreOptions")}
+          >
             <div className={styles.moreOptionsBlock}>
               <SwitchFilter
-                label="Show completed projects"
+                label={t("common:filters.displayCompleted", {
+                  subject: t("common:filters.subjects.projects"),
+                })}
                 value={search.ShowJoined ?? false}
                 onChange={onShowJoinedChange}
               />
               <SwitchFilter
-                label="Display joined projects"
+                label={t("common:filters.displayJoined", {
+                  subject: t("common:filters.subjects.projects"),
+                })}
                 value={search.OnlyActive ?? false}
                 onChange={onOnlyActiveChange}
               />
@@ -120,7 +148,7 @@ export const MapFiltersWidget = ({ search }: MapFiltersWidgetProps) => {
             onClick={onClearFilters}
             className={styles.clearFiltersButton}
           >
-            Clear Filters
+            {t("common:actions.clearFilters")}
           </BaseButtonWrapper>
         </motion.div>
       </div>

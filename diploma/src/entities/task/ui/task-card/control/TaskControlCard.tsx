@@ -8,8 +8,9 @@ import { ActionsIcon } from "@shared/assets/icons/actions";
 import type { Task } from "../../../model";
 import { TaskCardBase } from "../base/TaskCardBase";
 import styles from "./TaskControlCard.module.scss";
-import { getEntityStatusConfig } from "@shared/libs/entity";
 import type { MenuItem } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
+import { getTaskStatusConfig } from "@entities/task/config/taskStatusesMap";
 
 interface TaskControlCardProps {
   task: Task;
@@ -22,7 +23,8 @@ export const TaskControlCard = ({
   menuItems,
   actionsButton,
 }: TaskControlCardProps) => {
-  const statusConfig = getEntityStatusConfig(task.status);
+  const { t } = useTranslation(["task"]);
+  const statusConfig = getTaskStatusConfig(task.status, t);
 
   return (
     <div className={`${styles.taskControlCardWrapper} ${styles[task.status]}`}>

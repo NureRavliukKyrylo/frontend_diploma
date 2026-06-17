@@ -18,7 +18,7 @@
     "resendIn": "Надіслати код повторно через ({{time}})",
     "clearFilters": "Скинути Фільтрацію",
     "seeMore": "Показати більше",
-    "showMore": "Показати more",
+    "showMore": "Показати більше",
     "showAll": "ПОКАЗАТИ ВСІ {{subject}}",
     "readMore": "Читати більше",
     "readLess": "Згорнути",
@@ -121,6 +121,19 @@
       "organization": "Організацію"
     }
   },
+  "timeAgo": {
+    "justNow": "щойно",
+    "minutes": "{{count}}хв тому",
+    "hours": "{{count}}г тому",
+    "days": "{{count}}д тому"
+  },
+  "map": {
+    "yourLocation": "Ваше місцезнаходження"
+  },
+  "mapEmptyState": {
+    "title": "Проєктів не знайдено",
+    "subtitle": "Спробуйте змінити налаштування фільтрів або пошуковий запит"
+  },
   "search": {
     "title": "Пошук"
   },
@@ -150,6 +163,8 @@
     "startDate": "Дата початку",
     "dueDate": "Кінцева дата",
     "includeArchived": "Показати архівовані {{subject}}",
+    "setDistanceLocationPlaceholder": "Вкажіть локацію",
+    "kmUnit": "км",
     "onlineOptions": {
       "all": "Усі"
     },

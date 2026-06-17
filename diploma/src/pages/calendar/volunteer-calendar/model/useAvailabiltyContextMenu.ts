@@ -4,6 +4,7 @@ import {
 } from "@entities/user/calendar";
 import { isPast } from "@shared/libs/date";
 import { useState, useCallback, useEffect, useRef, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 type MenuAnchor = Element | { getBoundingClientRect: () => DOMRect };
 
@@ -28,6 +29,7 @@ export function useAvailabilityContextMenu({
 }: UseAvailabilityContextMenuProps) {
   const [menuState, setMenuState] = useState<ContextMenuState | null>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation(["calendar"]);
 
   const handleClose = useCallback(() => setMenuState(null), []);
 
@@ -97,7 +99,7 @@ export function useAvailabilityContextMenu({
       return [
         {
           key: "update" as const,
-          label: "Update availability",
+          label: t("calendar:actions.updateAvailability"),
           variant: "update" as const,
           onClick: () => {
             onUpdate(menuState.existingSlot!, menuState.date);
@@ -106,7 +108,7 @@ export function useAvailabilityContextMenu({
         },
         {
           key: "delete" as const,
-          label: "Delete availability",
+          label: t("calendar:actions.deleteAvailability"),
           variant: "delete" as const,
           onClick: () => {
             onDelete(menuState.existingSlot!);
@@ -118,7 +120,7 @@ export function useAvailabilityContextMenu({
     return [
       {
         key: "assign" as const,
-        label: "Add availability",
+        label: t("calendar:actions.addAvailability"),
         variant: "assign" as const,
         onClick: () => {
           onAdd(menuState.date);
@@ -126,7 +128,7 @@ export function useAvailabilityContextMenu({
         },
       },
     ];
-  }, [menuState, onAdd, onUpdate, onDelete, handleClose]);
+  }, [menuState, onAdd, onUpdate, onDelete, handleClose, t]);
 
   return { calendarRef, menuState, menuItems, handleClose };
 }

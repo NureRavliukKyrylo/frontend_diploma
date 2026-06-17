@@ -23,6 +23,10 @@
     "emptyState": {
       "title": "No offers found",
       "description": "Try adjusting your search query"
+    },
+    "detail": {
+      "allTime": "All time",
+      "about": "About this offer"
     }
   },
   "bookings": {

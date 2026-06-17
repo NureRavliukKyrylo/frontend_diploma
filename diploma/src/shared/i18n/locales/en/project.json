@@ -32,5 +32,17 @@
       "location": "Location",
       "markerPopup": "📍 Project location"
     }
+  },
+  "cards": {
+    "progress": "Progress",
+    "noVolunteers": "No volunteers joined yet",
+    "tasksCount_one": "{{count}} task",
+    "tasksCount_other": "{{count}} tasks"
+  },
+  "statuses": {
+    "active": "Active",
+    "endingSoon": "Ending soon",
+    "completed": "Completed",
+    "archived": "Archived"
   }
 }

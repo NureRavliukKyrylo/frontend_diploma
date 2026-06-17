@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import { useAutocompleteSuggestions } from "@shared/libs/map";
 import type { LocationSuggestion } from "@shared/config/types";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface DistanceFilterProps {
   defaultLocation?: string;
@@ -19,6 +20,7 @@ export const DistanceFilter = ({
   onLocationClear,
   onRadiusChange,
 }: DistanceFilterProps) => {
+  const { t } = useTranslation(["common"]);
   const [inputValue, setInputValue] = useState(defaultLocation ?? "");
   const [query, setQuery] = useState("");
   const [radiusInput, setRadiusInput] = useState(String(defaultRadiusKm));
@@ -32,7 +34,7 @@ export const DistanceFilter = ({
       reset();
       onLocationSelect(suggestion, Number(radiusInput));
     },
-    [onLocationSelect, radiusInput],
+    [onLocationSelect, radiusInput, reset],
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +58,7 @@ export const DistanceFilter = ({
               <path
                 d="M21.3889 0L21.1933 0.035L14.6667 2.45L7.33333 0L0.44 2.21667C0.183333 2.29833 0 2.50833 0 2.77667V20.4167C0 20.7433 0.268889 21 0.611111 21L0.806667 20.965L7.33333 18.55L14.6667 21L21.56 18.7833C21.8167 18.7017 22 18.4917 22 18.2233V0.583333C22 0.256667 21.7311 0 21.3889 0ZM14.6667 18.6667L7.33333 16.205V2.33333L14.6667 4.795V18.6667Z"
                 fill="#727272"
-                fill-opacity="0.8"
+                fillOpacity="0.8"
               />
             </svg>
           </span>
@@ -64,7 +66,7 @@ export const DistanceFilter = ({
             className={styles.locationInput}
             value={inputValue}
             onChange={handleChange}
-            placeholder="Set location"
+            placeholder={t("common:filters.setDistanceLocationPlaceholder")}
           />
         </div>
         <div className={styles.radiusInputWrapper}>
@@ -91,7 +93,9 @@ export const DistanceFilter = ({
                 width: `${radiusInput.length}ch`,
               }}
             />
-            <span className={styles.radiusSuffix}>km</span>
+            <span className={styles.radiusSuffix}>
+              {t("common:filters.kmUnit")}
+            </span>
           </div>
         </div>
       </div>

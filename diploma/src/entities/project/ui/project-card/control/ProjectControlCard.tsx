@@ -11,6 +11,7 @@ import { ProjectDefaultBottomContent } from "../base/ProjectDefaultBottomContent
 import styles from "./ProjectControlCard.module.scss";
 import { getEntityStatusConfig } from "@shared/libs/entity";
 import type { MenuItem } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
 
 interface ProjectControlCardProps {
   project: Project;
@@ -23,6 +24,7 @@ export const ProjectControlCard = ({
   menuItems,
   actionButton,
 }: ProjectControlCardProps) => {
+  const { t } = useTranslation(["project"]);
   const statusConfig = getEntityStatusConfig(project.volunteerProjectState);
 
   return (
@@ -65,7 +67,11 @@ export const ProjectControlCard = ({
             style={{ background: statusConfig.bg, color: statusConfig.color }}
           >
             <span className={styles.statusDot} />
-            {statusConfig.label}
+            {statusConfig.key
+              ? t(`project:statuses.${statusConfig.key}`, {
+                  defaultValue: statusConfig.label,
+                })
+              : statusConfig.label}
           </div>
         }
         bottomContent={
