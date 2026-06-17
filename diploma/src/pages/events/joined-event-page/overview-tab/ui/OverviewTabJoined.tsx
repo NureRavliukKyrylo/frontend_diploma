@@ -9,6 +9,7 @@ import { Activities } from "@shared/assets/images/entity-information";
 import { MapLocationInput } from "@shared/ui/inputs";
 import { useIntersectionReveal } from "@shared/libs/hooks";
 import { useMediaQuery } from "usehooks-ts";
+import { useTranslation } from "react-i18next";
 
 interface OverviewTabJoinedProps {
   event: Event;
@@ -19,6 +20,7 @@ export const OverviewTabJoined = ({
   event,
   userLocation,
 }: OverviewTabJoinedProps) => {
+  const { t } = useTranslation(["event"]);
   const { isVisible, ref } = useIntersectionReveal<HTMLDivElement>();
   const isDesktop = useMediaQuery("(min-width: 1050px)");
 
@@ -28,8 +30,8 @@ export const OverviewTabJoined = ({
         <div className={styles.projectJoinedEventMainInfo}>
           <div className={styles.headerTextInfo}>
             <div className={styles.activityLocation}>
-              <h2>Event</h2>
-              <span>Location</span>
+              <h2>{t("event:labels.event")}</h2>
+              <span>{t("event:labels.locations")}</span>
             </div>
             <div className={styles.wrapperLocation}>
               <MapLocationInput
@@ -42,8 +44,8 @@ export const OverviewTabJoined = ({
             <div className={styles.totalActivities}>
               <div className={styles.totalTasks}>
                 <div className={styles.headerTitle}>
-                  <h1>COMPLETED</h1>
-                  <h2>TASKS</h2>
+                  <h1>{t("event:labels.completed")}</h1>
+                  <h2>{t("event:labels.tasks")}</h2>
                 </div>
                 <p>{event?.tasksTotal ?? "0"}</p>
               </div>
@@ -51,8 +53,8 @@ export const OverviewTabJoined = ({
             <div className={styles.activeActivities}>
               <div className={styles.activeTasks}>
                 <div className={styles.headerTitle}>
-                  <h1>ACTIVE</h1>
-                  <h2>TASKS</h2>
+                  <h1>{t("event:labels.active")}</h1>
+                  <h2>{t("event:labels.tasks")}</h2>
                 </div>
                 <p>{event?.activeTasks ?? "0"}</p>
               </div>
@@ -81,7 +83,7 @@ export const OverviewTabJoined = ({
                   <Popup className={styles.popupContent}>
                     <h3 className={styles.popupEventTitle}>{event.title}</h3>
                     <p className={styles.popupEventLocation}>
-                      📍 Event location
+                      📍 {t("event:labels.markerLocation")}
                     </p>
                   </Popup>
                 </Marker>

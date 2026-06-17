@@ -3,6 +3,7 @@ import { DeleteModal } from "@shared/assets/images/actions";
 import { useLeaveParticipation } from "../../model/useLeaveParticipation";
 import styles from "./LeaveConfirmationModal.module.scss";
 import type { EntityType } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
 
 interface LeaveConfirmationModalProps {
   entityType: Exclude<EntityType, "organization">;
@@ -21,6 +22,7 @@ export const LeaveConfirmationModal = ({
   onClose,
   onSuccess,
 }: LeaveConfirmationModalProps) => {
+  const { t } = useTranslation("common");
   const { handleLeave, resetLeave, isLoading, error } = useLeaveParticipation({
     entityType,
     entityId,
@@ -30,23 +32,21 @@ export const LeaveConfirmationModal = ({
     },
   });
 
-  const handleClose = () => {
-    resetLeave();
-    onClose();
-  };
-
   return (
     <ConfirmationModal
       isOpen={isOpen}
-      onCancel={handleClose}
+      onCancel={() => {
+        resetLeave();
+        onClose();
+      }}
       onConfirm={() => handleLeave()}
-      title={`Leave ${entityName}?`}
-      text="Are you sure you want to leave? You can always rejoin later."
+      title={t("participation.leaveTitle", { name: entityName })}
+      text={t("participation.leaveText")}
       maxWidth="628px"
       error={error}
       isLoading={isLoading}
-      cancelText="Cancel"
-      confirmText="Leave"
+      cancelText={t("actions.cancel")}
+      confirmText={t("participation.leaveConfirm")}
       confirmButtonClassName={styles.confirmButton}
       image={DeleteModal}
       imageClassName={styles.image}

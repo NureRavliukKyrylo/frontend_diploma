@@ -10,24 +10,26 @@ import {
   unlinkGoogleAccount,
 } from "../api/connectedServicesApi";
 import type { ConnectedServiceHooks } from "../config/ServiceHooks";
+import { useTranslation } from "react-i18next";
 
 export const useGoogleAccountService = (): ConnectedServiceHooks => {
   const { setUnlinkTarget, openVerificationModal } = useUserProfileStore();
+  const { t } = useTranslation(["profile", "common"]);
 
   const linkMutation = useMutation({
     mutationFn: linkGoogleAccount,
     onSuccess: () => {
       addToast({
-        title: "Google account connected",
-        description: "Your Google-account has been connected succesfully",
+        title: t("security.google.linkSuccess"),
+        description: t("security.google.linkDescription"),
         color: "success",
       });
       queryClient.invalidateQueries({ queryKey: profileKeys.all() });
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Google link failed",
-        description: getErrorMessage(error),
+        title: t("security.google.linkFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -37,8 +39,8 @@ export const useGoogleAccountService = (): ConnectedServiceHooks => {
     mutationFn: unlinkGoogleAccount,
     onSuccess: () => {
       addToast({
-        title: "Unlink request sent",
-        description: "Check your email to confirm",
+        title: t("security.google.unlinkRequestSuccess"),
+        description: t("security.google.unlinkRequestDescription"),
         color: "success",
       });
       setUnlinkTarget("google");
@@ -46,8 +48,8 @@ export const useGoogleAccountService = (): ConnectedServiceHooks => {
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Google unlink failed",
-        description: getErrorMessage(error),
+        title: t("security.google.unlinkFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -58,8 +60,8 @@ export const useGoogleAccountService = (): ConnectedServiceHooks => {
     onSuccess: ({ code }) => linkMutation.mutate(code),
     onError: (error: unknown) => {
       addToast({
-        title: "Google OAuth failed",
-        description: getErrorMessage(error),
+        title: t("security.google.oauthFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },

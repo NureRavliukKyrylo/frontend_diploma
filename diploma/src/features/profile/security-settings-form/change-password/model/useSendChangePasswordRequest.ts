@@ -3,25 +3,29 @@ import { sendChangePasswordRequest } from "../api/sendChangePasswordRequestApi";
 import { addToast } from "@heroui/react";
 import { useUserProfileStore } from "@entities/user";
 import { getErrorMessage } from "@shared/libs/error-message";
+import { useTranslation } from "react-i18next";
 
 export const useSendChangePasswordRequest = () => {
   const { openVerificationModal } = useUserProfileStore();
+  const { t } = useTranslation(["profile", "common"]);
 
   const mutation = useMutation({
     mutationFn: sendChangePasswordRequest,
     onSuccess: () => {
       addToast({
-        title: "Change password request success",
-        description: "You have sent changing password request successfully",
+        title: t("security.changePassword.requestSuccess"),
+        description: t("security.changePassword.requestDescription"),
         color: "success",
       });
       openVerificationModal("changePassword");
     },
     onError: (error: unknown) => {
-      const errorMessage = getErrorMessage(error);
+      const errorMessage = getErrorMessage(error, t);
 
       addToast({
-        title: "Change password request Failed",
+        title: t("common:errors.actionFailed", {
+          action: t("security.changePassword.action"),
+        }),
         description: errorMessage,
         color: "danger",
       });
@@ -31,6 +35,6 @@ export const useSendChangePasswordRequest = () => {
   return {
     sendPassword: mutation.mutate,
     isLoading: mutation.isPending,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

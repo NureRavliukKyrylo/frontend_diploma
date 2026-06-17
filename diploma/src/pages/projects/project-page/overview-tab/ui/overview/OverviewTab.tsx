@@ -14,6 +14,7 @@ import { RelatedCategoryCard } from "@entities/category";
 import { LinkButtonWrapper, ShowMoreItemsButton } from "@shared/ui/buttons";
 import { Arrow } from "@shared/assets/icons/actions";
 import { useMediaQuery } from "usehooks-ts";
+import { useTranslation } from "react-i18next";
 
 interface OverviewTabProps {
   project: Project;
@@ -26,6 +27,7 @@ export const OverviewTab = ({
   userLocation,
   events,
 }: OverviewTabProps) => {
+  const { t } = useTranslation(["project"]);
   const hasCategories = project?.categories && project?.categories.length > 0;
   const isDesktop = useMediaQuery("(min-width: 1050px)");
   const { isVisible, ref } = useIntersectionReveal<HTMLDivElement>();
@@ -36,7 +38,7 @@ export const OverviewTab = ({
         <ShowMoreItemsButton
           items={
             project?.categories?.map((category) => (
-              <RelatedCategoryCard category={category}>
+              <RelatedCategoryCard key={category.id} category={category}>
                 <LinkButtonWrapper
                   to="/categories/$id"
                   params={{ id: category.id }}
@@ -58,13 +60,10 @@ export const OverviewTab = ({
         <div className={styles.projectPageMainInfo}>
           <div className={styles.headerTextInfo}>
             <div className={styles.activitiesLocations}>
-              <h2>Activities</h2>
-              <span>Locations</span>
+              <h2>{t("project:overview.activities")}</h2>
+              <span>{t("project:overview.locations")}</span>
             </div>
-            <p>
-              Explore all activities within this project and see where they are
-              located
-            </p>
+            <p>{t("project:overview.description")}</p>
             <div className={styles.wrapperLocation}>
               <MapLocationInput
                 variant="entity"
@@ -76,15 +75,15 @@ export const OverviewTab = ({
             <div className={styles.activeActivities}>
               <div className={styles.totalEvents}>
                 <div className={styles.headerTitle}>
-                  <h1>COMPLETED</h1>
-                  <h2>EVENTS</h2>
+                  <h1>{t("project:overview.completed")}</h1>
+                  <h2>{t("project:overview.events")}</h2>
                 </div>
                 <p>{project?.eventsCompleted ?? "0"}</p>
               </div>
               <div className={styles.totalTasks}>
                 <div className={styles.headerTitle}>
-                  <h1>COMPLETED</h1>
-                  <h2>TASKS</h2>
+                  <h1>{t("project:overview.completed")}</h1>
+                  <h2>{t("project:overview.tasks")}</h2>
                 </div>
                 <p>{project?.tasksCompleted ?? "0"}</p>
               </div>
@@ -120,7 +119,7 @@ export const OverviewTab = ({
                       {project.title}
                     </h3>
                     <p className={styles.popupProjectLocation}>
-                      📍 Project location
+                      {t("project:overview.map.markerPopup")}
                     </p>
                   </Popup>
                 </Marker>

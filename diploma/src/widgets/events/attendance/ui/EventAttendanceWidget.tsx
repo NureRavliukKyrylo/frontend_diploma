@@ -14,17 +14,12 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
+import { useTranslation } from "react-i18next";
 import {
   CheckInButton,
   CheckOutButton,
   DisputeAttendanceButton,
 } from "@features/event";
-
-const VIEW_TABS: TabOption<CalendarView>[] = [
-  { label: "Month", value: "month" },
-  { label: "Week", value: "week" },
-  { label: "Day", value: "day" },
-];
 
 interface EventAttendanceWidgetProps {
   from: Date;
@@ -50,6 +45,7 @@ const EventAttendanceContent = ({
   to,
   eventTitle,
 }: EventAttendanceContentProps) => {
+  const { t } = useTranslation(["event"]);
   const { data } = useSuspenseQuery(
     eventQuery.eventAttendance(eventId, { From: from, To: to }),
   );
@@ -58,8 +54,8 @@ const EventAttendanceContent = ({
   if (!attendance) {
     return (
       <div className={styles.emptyState}>
-        <h2>No attendance records</h2>
-        <p>There are no records for this period.</p>
+        <h2>{t("event:attendance.empty.title")}</h2>
+        <p>{t("event:attendance.empty.description")}</p>
       </div>
     );
   }
@@ -92,6 +88,14 @@ export const EventAttendanceWidget = ({
   onViewChange,
   eventTitle,
 }: EventAttendanceWidgetProps) => {
+  const { t } = useTranslation(["event"]);
+
+  const viewTabs: TabOption<CalendarView>[] = [
+    { label: t("event:attendance.views.month"), value: "month" },
+    { label: t("event:attendance.views.week"), value: "week" },
+    { label: t("event:attendance.views.day"), value: "day" },
+  ];
+
   const navigate = (direction: "prev" | "next") => {
     const delta = direction === "next" ? 1 : -1;
     const next = new Date(currentDate);
@@ -107,9 +111,7 @@ export const EventAttendanceWidget = ({
         return (
           <div className={styles.errorState}>
             <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-            <p className="errorHint">
-              Try reloading the page or come back later.
-            </p>
+            <p className="errorHint">{t("event:attendance.error.hint")}</p>
           </div>
         );
       }}
@@ -137,7 +139,7 @@ export const EventAttendanceWidget = ({
           </div>
           <div className={styles.toggleWrapper}>
             <Toggle
-              tabs={VIEW_TABS}
+              tabs={viewTabs}
               activeValue={activeView}
               onChange={(view) => onViewChange?.(view)}
               buttonClassName={styles.toggleCalendarButton}
@@ -149,10 +151,18 @@ export const EventAttendanceWidget = ({
         </div>
 
         <div className={styles.tableHeader}>
-          <span className={styles.tableHeaderCell}>Date</span>
-          <span className={styles.tableHeaderCell}>Description</span>
-          <span className={styles.tableHeaderCell}>Minutes</span>
-          <span className={styles.tableHeaderCell}>Status</span>
+          <span className={styles.tableHeaderCell}>
+            {t("event:attendance.table.date")}
+          </span>
+          <span className={styles.tableHeaderCell}>
+            {t("event:attendance.table.description")}
+          </span>
+          <span className={styles.tableHeaderCell}>
+            {t("event:attendance.table.minutes")}
+          </span>
+          <span className={styles.tableHeaderCell}>
+            {t("event:attendance.table.status")}
+          </span>
         </div>
 
         <Suspense

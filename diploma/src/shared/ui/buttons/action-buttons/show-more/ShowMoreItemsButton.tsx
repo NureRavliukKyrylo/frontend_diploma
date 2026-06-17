@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { motion } from "framer-motion";
 import styles from "./ShowMoreItemsButton.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface ShowMoreItemsButtonProps {
   items: React.ReactNode[];
@@ -17,15 +18,20 @@ export function ShowMoreItemsButton({
   initialVisibleCount = 6,
   className = "",
   classNameButton = "",
-  buttonContent = "Show more",
+  buttonContent,
   buttonPosition = "inline",
   classNameItems = "",
 }: ShowMoreItemsButtonProps) {
+  const { t } = useTranslation(["common"]);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const hasMoreItems = items.length > initialVisibleCount;
   const visibleItems =
     hasMoreItems && !isExpanded ? items.slice(0, initialVisibleCount) : items;
+
+  const resolvedButtonContent =
+    buttonContent ??
+    t("common:actions.showMore", { defaultValue: "Show more" });
 
   const button = hasMoreItems && !isExpanded && (
     <motion.button
@@ -35,7 +41,7 @@ export function ShowMoreItemsButton({
       whileHover={{ scale: 1.02, y: -2 }}
       transition={{ ease: "easeInOut", duration: 0.15 }}
     >
-      {buttonContent}
+      {resolvedButtonContent}
     </motion.button>
   );
 

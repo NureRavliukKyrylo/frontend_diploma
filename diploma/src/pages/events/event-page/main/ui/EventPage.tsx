@@ -4,7 +4,7 @@ import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import { AnimatePresence, motion } from "framer-motion";
 import { formatDateRange } from "@shared/libs/date";
 import { Calendar, Reccurence } from "@shared/assets/icons/info";
-import { eventMainTabs } from "../config/eventMainTabs";
+import { getEventMainTabs } from "../config/eventMainTabs";
 import { Arrow } from "@shared/assets/icons/actions";
 import { useEventPage } from "../model/useEventPage";
 import {
@@ -13,9 +13,12 @@ import {
 } from "@features/participation";
 import { ReportButton } from "@features/moderation";
 import { ModerationSubjectType } from "@entities/report";
+import { useTranslation } from "react-i18next";
 
 export const EventPage = () => {
+  const { t } = useTranslation(["event", "common"]);
   const { tab, event, policyConfig, forms, handleTabChange } = useEventPage();
+  const localizedTabs = getEventMainTabs(t);
 
   return (
     <div className={styles.wrapperEventPage}>
@@ -37,11 +40,17 @@ export const EventPage = () => {
               <div className={styles.titleHeader}>
                 <h1>{event?.title}</h1>
                 <div className={styles.eventMetaInfo}>
-                  <span className={styles.metaChipEvent}>Event</span>
+                  <span className={styles.metaChipEvent}>
+                    {t("event:labels.event")}
+                  </span>
                   {event?.recurrence && (
                     <span className={styles.reccurenceInfo}>
                       <Reccurence className={styles.reccurenceIcon} />
-                      <h1>{event.recurrence}</h1>
+                      <h1>
+                        {t(`event:modes.${event.recurrence}`, {
+                          defaultValue: event.recurrence,
+                        })}
+                      </h1>
                     </span>
                   )}
                   {event?.endAt && (
@@ -70,9 +79,7 @@ export const EventPage = () => {
                 </div>
               </div>
               <motion.div
-                whileHover={{
-                  scale: 1.04,
-                }}
+                whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 22 }}
               >
@@ -91,7 +98,7 @@ export const EventPage = () => {
             </div>
             {event?.project && (
               <div className={styles.projectPill}>
-                <h1>PROJECT</h1>
+                <h1>{t("event:labels.project")}</h1>
                 <motion.div
                   whileHover={{ x: 4 }}
                   transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -112,7 +119,9 @@ export const EventPage = () => {
           <div className={styles.levelEventInfo}>
             <div className={styles.headerLevelBar}>
               <span className={styles.current}>
-                Level {event.progress.level ?? 0}
+                {t("common:level.current", {
+                  level: event.progress.level ?? 0,
+                })}
               </span>
               <span className={styles.xp}>
                 {event?.progress.currentProgress}/{event.progress.maxProgress}
@@ -123,16 +132,20 @@ export const EventPage = () => {
               max={event.progress.maxProgress}
             />
             <div className={styles.footerLevelBar}>
-              <span className={styles.label}>Next level</span>
+              <span className={styles.label}>{t("common:level.next")}</span>
               <span className={styles.next}>
-                Level{" "}
-                {event.progress?.level == null ? 1 : event.progress.level + 1}
+                {t("common:level.current", {
+                  level:
+                    event.progress?.level == null
+                      ? 1
+                      : event.progress.level + 1,
+                })}
               </span>
             </div>
           </div>
           <div className={styles.ratingEventInfo}>
             <h1>{event.rating.value}</h1>
-            <p>({event.rating.totalVotes} votes)</p>
+            <p>{t("event:labels.votes", { count: event.rating.totalVotes })}</p>
           </div>
         </div>
         <div className={styles.eventFooterContent}>
@@ -145,13 +158,13 @@ export const EventPage = () => {
           </ReadMoreButton>
           {event?.id && event.hasPendingLeaveRequest && (
             <p className={`${styles.pendingRequest} ${styles.leave}`}>
-              Your leave request is pending approval
+              {t("event:states.pendingLeave")}
             </p>
           )}
 
           {event?.id && event.hasPendingJoinRequest && (
             <p className={styles.pendingRequest}>
-              Your join request is pending approval
+              {t("event:states.pendingJoin")}
             </p>
           )}
 
@@ -177,7 +190,7 @@ export const EventPage = () => {
       </motion.div>
       <div className={styles.toggleWrapper}>
         <Toggle
-          tabs={eventMainTabs}
+          tabs={localizedTabs}
           activeValue={tab}
           onChange={handleTabChange}
           buttonClassName={styles.toggleEventButton}

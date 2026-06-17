@@ -3,6 +3,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useJoinParticipation } from "../../model/useJoinParticipation";
 import styles from "./ParticipationJoinButton.module.scss";
 import type { EntityType } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
 
 interface ParticipationJoinButtonProps {
   entityType: Exclude<EntityType, "organization">;
@@ -15,6 +16,7 @@ export const ParticipationJoinButton = ({
   entityId,
   onSuccess,
 }: ParticipationJoinButtonProps) => {
+  const { t } = useTranslation("common");
   const { handleJoin, isLoading } = useJoinParticipation({
     entityType,
     entityId,
@@ -38,7 +40,9 @@ export const ParticipationJoinButton = ({
           exit={{ opacity: 0, y: -6 }}
           transition={{ duration: 0.18 }}
         >
-          Join {entityType.toUpperCase()}
+          {t("participation.join", {
+            entity: t(`participation.entities.${entityType}`),
+          })}
         </motion.span>
       </BaseButtonWrapper>
     </motion.div>

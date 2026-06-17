@@ -1,0 +1,55 @@
+{
+  "modes": {
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly"
+  },
+  "states": {
+    "pendingLeave": "Your leave request is pending approval",
+    "pendingJoin": "Your join request is pending approval"
+  },
+  "labels": {
+    "event": "Event",
+    "joinedChip": "Joined Event",
+    "chat": "EVENT CHAT",
+    "project": "PROJECT",
+    "votes_one": "({{count}} vote)",
+    "votes_other": "({{count}} votes)",
+    "skills": "EVENT Skills",
+    "activities": "Activities",
+    "locations": "Locations",
+    "subtitle": "Explore all tasks within this event and see where they are located",
+    "completed": "COMPLETED",
+    "active": "ACTIVE",
+    "tasks": "TASKS",
+    "markerLocation": "Event location",
+    "relatedProject": "Related project"
+  },
+  "tabs": {
+    "overview": "OVERVIEW",
+    "attendance": "ATTENDANCE",
+    "tasks": "TASKS",
+    "members": "MEMBERS",
+    "feedback": "FEEDBACK"
+  },
+  "attendance": {
+    "views": {
+      "month": "Month",
+      "week": "Week",
+      "day": "Day"
+    },
+    "table": {
+      "date": "Date",
+      "description": "Description",
+      "minutes": "Minutes",
+      "status": "Status"
+    },
+    "empty": {
+      "title": "No attendance records",
+      "description": "There are no records for this period."
+    },
+    "error": {
+      "hint": "Try reloading the page or come back later."
+    }
+  }
+}

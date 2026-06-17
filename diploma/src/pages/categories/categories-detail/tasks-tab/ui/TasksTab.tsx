@@ -1,5 +1,5 @@
 import {
-  sortingTaskItems,
+  getSortingTaskItems,
   TaskCard,
   TaskCardSkeleton,
   useTasksListQuery,
@@ -26,6 +26,7 @@ import { getHttpErrorInfo } from "@shared/libs/error";
 import { Pagination } from "@shared/ui";
 import { Drawer } from "@mui/material";
 import { useCategoryDetailTaskDrawer } from "../model/useCategoryDetailTaskDrawer";
+import { useTranslation } from "react-i18next";
 
 interface TasksTabProps {
   search: TaskSearchParams;
@@ -33,6 +34,7 @@ interface TasksTabProps {
 }
 
 export const TasksTab = ({ search, categoryId }: TasksTabProps) => {
+  const { t } = useTranslation(["activities", "common"]);
   const {
     isOpen,
     openTask,
@@ -59,9 +61,7 @@ export const TasksTab = ({ search, categoryId }: TasksTabProps) => {
           return (
             <div className={styles.errorState}>
               <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-              <p className="errorHint">
-                Try reloading the page or come back later.
-              </p>
+              <p className="errorHint">{t("common:errors.errorHint")}</p>
             </div>
           );
         }}
@@ -81,7 +81,7 @@ export const TasksTab = ({ search, categoryId }: TasksTabProps) => {
               variant="projects"
             />
             <SortDropDown
-              options={sortingTaskItems}
+              options={getSortingTaskItems(t)}
               onSelect={handleSort}
               value={search.OrderBy ?? "Default"}
             />
@@ -94,8 +94,12 @@ export const TasksTab = ({ search, categoryId }: TasksTabProps) => {
           >
             {tasks?.data?.length === 0 ? (
               <div className={styles.emptyState}>
-                <h2>No Tasks found</h2>
-                <p>Try adjusting your filters or search query</p>
+                <h2>
+                  {t("activities:categories.detail.emptyStates.tasks.title")}
+                </h2>
+                <p>
+                  {t("activities:categories.detail.emptyStates.tasks.subtitle")}
+                </p>
               </div>
             ) : (
               <Suspense

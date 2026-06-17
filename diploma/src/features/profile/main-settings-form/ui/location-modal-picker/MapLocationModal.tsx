@@ -3,6 +3,7 @@ import { BaseModal } from "@shared/ui/modals";
 import styles from "./MapLocationModal.module.scss";
 import type { Coordinates } from "@shared/config/types";
 import { UserMarker } from "@entities/user/profile";
+import { useTranslation } from "react-i18next";
 
 export interface MapLocationModal {
   isMapOpen: boolean;
@@ -13,6 +14,7 @@ export interface MapLocationModal {
   popUpText: string;
   maxWidth: string;
 }
+
 export const MapLocationModal = ({
   isMapOpen,
   onClose,
@@ -21,6 +23,8 @@ export const MapLocationModal = ({
   setCoordinates,
   maxWidth,
 }: MapLocationModal) => {
+  const { t } = useTranslation("profile");
+
   return (
     <BaseModal
       isOpen={isMapOpen}
@@ -38,7 +42,11 @@ export const MapLocationModal = ({
           popupClassName={styles.popupUserLocation}
           popupContent={
             <div className={styles.popupContent}>
-              <h1 className={styles.userLocationText}>Your location</h1>
+              <h1 className={styles.userLocationText}>
+                {t("settings.location.userLocation", {
+                  name: t("location.you"),
+                })}
+              </h1>
             </div>
           }
         />

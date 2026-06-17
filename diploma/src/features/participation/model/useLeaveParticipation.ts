@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { profileKeys } from "@entities/user/profile";
@@ -6,7 +6,8 @@ import type { EntityType } from "@shared/config/types";
 import { queryKeyMap } from "../config/queryKeyMap";
 import { leaveParticipation } from "../api/participationLeaveApi";
 import { filtersKeys } from "@shared/api/filters";
-import { capitalize } from "@shared/libs/text";
+import { useTranslation } from "react-i18next";
+import { queryClient } from "@shared/api";
 
 interface UseLeaveParticipationOptions {
   entityType: Exclude<EntityType, "organization">;
@@ -19,21 +20,27 @@ export const useLeaveParticipation = ({
   entityId,
   onSuccess,
 }: UseLeaveParticipationOptions) => {
-  const queryClient = useQueryClient();
+  const { t } = useTranslation("common");
 
   const mutation = useMutation({
     mutationFn: () => leaveParticipation({ entityId, entityType }),
     onSuccess: (response) => {
       if (response?.requiresApproval) {
         addToast({
-          title: `${capitalize(entityType)} Approval Required`,
+          title: t("participation.approvalRequired", {
+            entity: t(`participation.entities.${entityType}`),
+          }),
           description: response.message,
           color: "warning",
         });
       } else {
         addToast({
-          title: `Left ${capitalize(entityType)} Successfully`,
-          description: `You have left ${capitalize(entityType)} successfully.`,
+          title: t("participation.leaveSuccess", {
+            entity: t(`participation.entities.${entityType}`),
+          }),
+          description: t("participation.leaveSuccessDescription", {
+            entity: t(`participation.entities.${entityType}`),
+          }),
           color: "success",
         });
       }
@@ -51,8 +58,8 @@ export const useLeaveParticipation = ({
     },
     onError: (error: unknown) => {
       addToast({
-        title: `Failed to Leave ${entityType}`,
-        description: getErrorMessage(error),
+        title: t("participation.leaveFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -62,6 +69,6 @@ export const useLeaveParticipation = ({
     handleLeave: mutation.mutate,
     resetLeave: mutation.reset,
     isLoading: mutation.isPending,
-    error: mutation.error ? getErrorMessage(mutation.error) : null,
+    error: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

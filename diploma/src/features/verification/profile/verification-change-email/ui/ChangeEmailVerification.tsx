@@ -11,6 +11,7 @@ import {
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./ChangeEmailVerification.module.scss";
 import { useUserProfileStore } from "@entities/user";
+import { useTranslation } from "react-i18next";
 
 interface ChangeEmailVerificationProps {
   code?: CodeType;
@@ -21,10 +22,11 @@ export const ChangeEmailVerification: React.FC<
   ChangeEmailVerificationProps
 > = ({ code, onSuccess }) => {
   const { newEmail } = useUserProfileStore();
+  const { t } = useTranslation("profile");
   const { formik, isLoading, errorMessage } = useVerification({
     apiFn: (data: VerificationChangeEmailDto) =>
       verificationChangeEmail(data, code ?? "old-code"),
-    successMessage: "Email verified successfully",
+    successMessage: t("security.changeEmail.verifySuccess"),
     onSuccess,
     extraFields: code === "new-code" ? { newEmail } : {},
   });
@@ -36,7 +38,7 @@ export const ChangeEmailVerification: React.FC<
           loading={isLoading}
           className={styles.confirmVerificationButton}
         >
-          Send Code
+          {t("settings.actions.sendCode")}
         </BaseButtonWrapper>
       </div>
     </VerificationForm>

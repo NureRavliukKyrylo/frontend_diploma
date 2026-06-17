@@ -17,21 +17,24 @@ export const useSocialLinksSettingsForm = () => {
   const { data: user } = useQuery(profileQuery.all());
   const { t } = useTranslation();
   const validationSchema = getLinksProfileSchema(t);
+
   const mutation = useMutation({
     mutationFn: (data: UpdateProfileSocialLinksDto) =>
       updateProfileSocialLinks(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: profileKeys.all() });
       addToast({
-        title: "Update Profile Success",
-        description: "You have updated your profile successfully",
+        title: t("profile:settings.update.successTitle"),
+        description: t("profile:settings.update.successDescription"),
         color: "success",
       });
     },
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error, t);
       addToast({
-        title: "Update Profile Failed",
+        title: t("common:errors.actionFailed", {
+          action: t("profile:settings.update.action"),
+        }),
         description: errorMessage,
         color: "danger",
       });

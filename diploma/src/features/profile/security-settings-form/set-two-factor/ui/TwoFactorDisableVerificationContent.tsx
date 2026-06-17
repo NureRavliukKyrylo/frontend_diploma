@@ -4,13 +4,16 @@ import styles from "./TwoFactor.module.scss";
 import { useUserProfileStore } from "@entities/user";
 import { profileQuery } from "@entities/user/profile";
 import { queryClient } from "@shared/api";
+import { useTranslation } from "react-i18next";
 
 export const TwoFactorDisableVerificationContent = () => {
+  const { t } = useTranslation("profile");
   const { closeVerificationModal } = useUserProfileStore();
+
   return (
     <VerificationWrapper
-      title="Two-step verification"
-      description="Disable two-step verification quickly and securely to protect your account"
+      title={t("security.twoFactor.title")}
+      description={t("security.twoFactor.disableDescription")}
     >
       <div className={styles.verificationBlock}>
         <TwoFactorVerificationProfileForm

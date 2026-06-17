@@ -13,6 +13,7 @@ import { LinkButtonWrapper, ShowMoreItemsButton } from "@shared/ui/buttons";
 import { RelatedCategoryCard } from "@entities/category";
 import { ActionsIcon, Arrow } from "@shared/assets/icons/actions";
 import { useMediaQuery } from "usehooks-ts";
+import { useTranslation } from "react-i18next";
 
 interface OverviewTabProps {
   event: Event;
@@ -20,6 +21,7 @@ interface OverviewTabProps {
 }
 
 export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
+  const { t } = useTranslation(["event"]);
   const { isVisible, ref } = useIntersectionReveal<HTMLDivElement>();
   const hasCategories = event?.categories && event?.categories.length > 0;
   const hasSkills = event?.skills && event?.skills.length > 0;
@@ -31,7 +33,7 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
         <ShowMoreItemsButton
           items={
             event?.categories?.map((category) => (
-              <RelatedCategoryCard category={category}>
+              <RelatedCategoryCard key={category.id} category={category}>
                 <LinkButtonWrapper
                   to="/categories/$id"
                   params={{ id: category.id }}
@@ -51,13 +53,17 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
       )}
       <div className={styles.skillsBlock}>
         <div className={styles.headerSkills}>
-          <h1>EVENT Skills</h1>
+          <h1>{t("event:labels.skills")}</h1>
         </div>
         {hasSkills && (
           <ShowMoreItemsButton
             items={
               event?.skills.map((skill) => (
-                <Tab className={styles.skillWrapper} name={skill.name} />
+                <Tab
+                  key={skill.name}
+                  className={styles.skillWrapper}
+                  name={skill.name}
+                />
               )) ?? []
             }
             classNameItems={styles.skillsTaskList}
@@ -72,12 +78,10 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
         <div className={styles.eventPageMainInfo}>
           <div className={styles.headerTextInfo}>
             <div className={styles.activitiesLocations}>
-              <h2>Activities</h2>
-              <span>Locations</span>
+              <h2>{t("event:labels.activities")}</h2>
+              <span>{t("event:labels.locations")}</span>
             </div>
-            <p>
-              Explore all tasks within this event and see where they are located
-            </p>
+            <p>{t("event:labels.subtitle")}</p>
             <div className={styles.wrapperLocation}>
               <MapLocationInput
                 variant="entity"
@@ -89,8 +93,8 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
             <div className={styles.activeActivities}>
               <div className={styles.totalTasks}>
                 <div className={styles.headerTitle}>
-                  <h1>COMPLETED</h1>
-                  <h2>TASKS</h2>
+                  <h1>{t("event:labels.completed")}</h1>
+                  <h2>{t("event:labels.tasks")}</h2>
                 </div>
                 <p>{event?.activeTasks ?? "0"}</p>
               </div>
@@ -119,7 +123,7 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
                   <Popup className={styles.popupContent}>
                     <h3 className={styles.popupEventTitle}>{event.title}</h3>
                     <p className={styles.popupEventLocation}>
-                      📍 Event location
+                      📍 {t("event:labels.markerLocation")}
                     </p>
                   </Popup>
                 </Marker>
@@ -133,7 +137,9 @@ export const OverviewTab = ({ event, userLocation }: OverviewTabProps) => {
                   ]}
                 >
                   <Popup className={styles.popupContent}>
-                    <div className={styles.popupLabel}>Related project</div>
+                    <div className={styles.popupLabel}>
+                      {t("event:labels.relatedProject")}
+                    </div>
                     <ProjectPopupContent
                       project={event.project}
                       organizationTitle={event.organization?.name}

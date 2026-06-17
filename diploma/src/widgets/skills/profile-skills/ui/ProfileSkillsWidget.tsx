@@ -1,7 +1,7 @@
 import { SearchBar } from "@shared/ui/inputs";
 import styles from "./ProfileSkillsWidget.module.scss";
 import { SortDropDown } from "@shared/ui/drop-down";
-import { sortingSkillItems } from "@entities/skill";
+import { getSortingSkillItems } from "@entities/skill";
 import { Pagination } from "@shared/ui";
 import { useProfileSkills } from "../model/useProfileSkills";
 import type { PaginationResponse } from "@shared/config/types";
@@ -22,6 +22,8 @@ export const ProfileSkillsWidget = ({
   const { handlePageChange, handleSearchChange, handleSortChange } =
     useProfileSkills();
   const { t } = useTranslation("profile");
+  const sortingSkillItems = getSortingSkillItems(t);
+
   return (
     <div className={styles.skillsProfileWrapper}>
       <div className={styles.skillsProfileControl}>

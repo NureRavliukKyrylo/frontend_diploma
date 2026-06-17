@@ -12,7 +12,7 @@ export { useEventsInfiniteQuery } from "./model/hooks/useEventsInfiniteQuery";
 export { useEventsListQuery } from "./model/hooks/useEventsListQuery";
 export {
   type EventSortValues,
-  sortingEventItems,
+  getSortingEventItems,
 } from "./config/sortingEventItems";
 export { EventPopupContent } from "./ui/popup-content/EventPopupContent";
 export { EventCard } from "./ui/event-card/list-item/EventCard";

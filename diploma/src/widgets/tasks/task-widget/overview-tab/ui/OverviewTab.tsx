@@ -12,6 +12,7 @@ import type { Task } from "@entities/task";
 import { LinkButtonWrapper, ShowMoreItemsButton } from "@shared/ui/buttons";
 import { RelatedCategoryCard } from "@entities/category";
 import { ActionsIcon, Arrow } from "@shared/assets/icons/actions";
+import { useTranslation } from "react-i18next";
 
 interface OverviewTabProps {
   task: Task;
@@ -19,6 +20,7 @@ interface OverviewTabProps {
 }
 
 export const OverviewTab = ({ task, userLocation }: OverviewTabProps) => {
+  const { t } = useTranslation(["task"]);
   const { isVisible, ref } = useIntersectionReveal<HTMLDivElement>();
   const mapCenter = task.event?.location ?? task.project?.location;
   const hasLocation = !!(task?.event?.location || task?.project?.location);
@@ -31,7 +33,7 @@ export const OverviewTab = ({ task, userLocation }: OverviewTabProps) => {
         <ShowMoreItemsButton
           items={
             task?.categories?.map((category) => (
-              <RelatedCategoryCard category={category}>
+              <RelatedCategoryCard key={category.id} category={category}>
                 <LinkButtonWrapper
                   to="/categories/$id"
                   params={{ id: category.id }}
@@ -51,13 +53,17 @@ export const OverviewTab = ({ task, userLocation }: OverviewTabProps) => {
       )}
       <div className={styles.skillsBlock}>
         <div className={styles.headerSkills}>
-          <h1>TASK Skills</h1>
+          <h1>{t("task:labels.skills")}</h1>
         </div>
         {hasSkills && (
           <ShowMoreItemsButton
             items={
               task?.skills?.map((skill) => (
-                <Tab className={styles.skillWrapper} name={skill.name} />
+                <Tab
+                  key={skill.name}
+                  className={styles.skillWrapper}
+                  name={skill.name}
+                />
               )) ?? []
             }
             classNameItems={styles.skillsTaskList}
@@ -72,13 +78,10 @@ export const OverviewTab = ({ task, userLocation }: OverviewTabProps) => {
           <div className={styles.projectPageMainInfo}>
             <div className={styles.headerTextInfo}>
               <div className={styles.activitiesLocations}>
-                <h2>Activities</h2>
-                <span>Locations</span>
+                <h2>{t("task:labels.activities")}</h2>
+                <span>{t("task:labels.locations")}</span>
               </div>
-              <p>
-                Explore all related activities within this task and see where
-                they are located
-              </p>
+              <p>{t("task:labels.subtitle")}</p>
             </div>
             <div className={styles.activitiesImageBlock}>
               <img src={Activities} alt="activities-image" />
@@ -102,7 +105,9 @@ export const OverviewTab = ({ task, userLocation }: OverviewTabProps) => {
                       ]}
                     >
                       <Popup className={styles.popupContent}>
-                        <div className={styles.popupLabel}>Related event</div>
+                        <div className={styles.popupLabel}>
+                          {t("task:labels.relatedEvent")}
+                        </div>
                         <EventPopupContent event={task.event} />
                       </Popup>
                     </Marker>
@@ -117,7 +122,9 @@ export const OverviewTab = ({ task, userLocation }: OverviewTabProps) => {
                       ]}
                     >
                       <Popup className={styles.popupContent}>
-                        <div className={styles.popupLabel}>Related project</div>
+                        <div className={styles.popupLabel}>
+                          {t("task:labels.relatedProject")}
+                        </div>
                         <ProjectPopupContent
                           project={task.project}
                           organizationTitle={task.organization.name}

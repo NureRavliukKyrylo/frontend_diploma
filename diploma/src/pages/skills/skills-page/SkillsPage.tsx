@@ -3,7 +3,7 @@ import { SkillsListWidget } from "@widgets/skills";
 import {
   SkillControlCard,
   SkillControlCardSkeleton,
-  sortingSkillItems,
+  getSortingSkillItems,
   useSkillsListQuery,
 } from "@entities/skill";
 import { Pagination } from "@shared/ui";
@@ -41,7 +41,7 @@ export const SkillsPage = () => {
     handleCloseModal,
   } = useSkillsPage();
   const { t } = useTranslation(["skill", "common"]);
-
+  const sortingSkillItems = getSortingSkillItems(t);
   return (
     <ErrorBoundary
       fallbackRender={({ error }) => {

@@ -3,19 +3,18 @@ import { VerificationWrapper } from "@shared/ui/wrappers";
 import styles from "./ChangeEmail.module.scss";
 import { useUserProfileStore } from "@entities/user";
 import { useLogout } from "@features/auth";
+import { useTranslation } from "react-i18next";
 
 export const ChangeEmailVerificationContent = () => {
+  const { t } = useTranslation("profile");
   const { nextVerificationStep, verificationSteps, closeVerificationModal } =
     useUserProfileStore();
   const { handleLogout } = useLogout(undefined, false);
-
   const currentStep = verificationSteps["emailVerification"];
-
   const code: Record<string, CodeType> = {
     oldCode: "old-code",
     newCode: "new-code",
   };
-
   const dataCode = code[currentStep];
 
   const onSuccess = async () => {
@@ -29,11 +28,11 @@ export const ChangeEmailVerificationContent = () => {
 
   return (
     <VerificationWrapper
-      title="Change email"
+      title={t("security.changeEmail.title")}
       description={
         dataCode === "old-code"
-          ? "Verify your current email to continue"
-          : "Verify your new email to complete the change"
+          ? t("security.changeEmail.verifyOld")
+          : t("security.changeEmail.verifyNew")
       }
     >
       <div className={styles.verificationBlock}>

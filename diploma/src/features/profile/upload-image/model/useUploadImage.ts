@@ -1,6 +1,7 @@
 import { useRef, useState, useMemo, useEffect } from "react";
-import { settingsMainFormSchema } from "@features/profile/main-settings-form/libs/settingsMainFormSchema";
+import { getSettingsMainFormSchema } from "@features/profile/main-settings-form/libs/settingsMainFormSchema";
 import * as Yup from "yup";
+import { useTranslation } from "react-i18next";
 
 interface UseUploadImageParams {
   src?: string | File | null;
@@ -9,7 +10,8 @@ interface UseUploadImageParams {
 
 export const useUploadImage = ({ src, onChange }: UseUploadImageParams) => {
   const inputRef = useRef<HTMLInputElement>(null);
-
+  const { t } = useTranslation("profile");
+  const validationSchema = getSettingsMainFormSchema(t);
   const [isModalCropOpen, setIsModalCropOpen] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -25,7 +27,7 @@ export const useUploadImage = ({ src, onChange }: UseUploadImageParams) => {
     try {
       setError(null);
 
-      await settingsMainFormSchema.validateAt("avatar", { avatar: file });
+      await validationSchema.validateAt("avatar", { avatar: file });
 
       const previewUrl = URL.createObjectURL(file);
       setPreview(previewUrl);

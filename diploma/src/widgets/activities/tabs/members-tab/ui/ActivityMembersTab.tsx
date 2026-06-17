@@ -9,6 +9,7 @@ import { getHttpErrorInfo } from "@shared/libs/error";
 import { ErrorBoundary } from "react-error-boundary";
 import { TeamMembers } from "@shared/assets/images/entity-information";
 import type { EntityType } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
 
 interface ActivityMembersTabProps {
   entityId: string;
@@ -23,15 +24,15 @@ export const ActivityMembersTab = ({
   userId,
   PageSize,
 }: ActivityMembersTabProps) => {
+  const { t } = useTranslation(["common"]);
+
   return (
     <ErrorBoundary
       fallbackRender={({ error }) => {
         return (
           <div className={styles.errorState}>
             <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-            <p className="errorHint">
-              Try reloading the page or come back later.
-            </p>
+            <p className="errorHint">{t("common:errors.errorHint")}</p>
           </div>
         );
       }}
@@ -51,7 +52,14 @@ export const ActivityMembersTab = ({
                 userId != null && member.userId === String(userId);
 
               if (isMember) {
-                return <MemberCard member={member} displayName="You" />;
+                return (
+                  <MemberCard
+                    member={member}
+                    displayName={t("common:members.you", {
+                      defaultValue: "You",
+                    })}
+                  />
+                );
               }
               return <MemberCard member={member} />;
             }}
@@ -76,8 +84,8 @@ export const ActivityMembersTab = ({
             startSlot={
               <div className={styles.startMembersSlot}>
                 <div className={styles.textBlock}>
-                  <h1>Team</h1>
-                  <h2>members</h2>
+                  <h1>{t("common:members.team")}</h1>
+                  <h2>{t("common:members.members")}</h2>
                 </div>
                 <img src={TeamMembers} alt="team-members" />
               </div>
@@ -85,8 +93,8 @@ export const ActivityMembersTab = ({
             renderEmpty={(members) =>
               members.length === 0 ? (
                 <div className={styles.emptyState}>
-                  <h2>No members yet</h2>
-                  <p>Be the first to join and make a difference</p>
+                  <h2>{t("common:members.emptyTitle")}</h2>
+                  <p>{t("common:members.emptySubtitle")}</p>
                 </div>
               ) : null
             }

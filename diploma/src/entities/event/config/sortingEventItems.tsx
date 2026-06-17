@@ -1,4 +1,5 @@
 import type { SortOption } from "@shared/config/types";
+import type { TFunction } from "i18next";
 
 export type EventSortValues =
   | "Default"
@@ -7,10 +8,12 @@ export type EventSortValues =
   | "TitleDesc"
   | "EndingSoon";
 
-export const sortingEventItems: SortOption<EventSortValues>[] = [
-  { label: "Default", value: "Default" },
-  { label: "Title A-Z", value: "TitleAsc" },
-  { label: "Title Z-A", value: "TitleDesc" },
-  { label: "Newest", value: "Newest" },
-  { label: "Ending Soon", value: "EndingSoon" },
+export const getSortingEventItems = (
+  t: TFunction,
+): SortOption<EventSortValues>[] => [
+  { label: t("common:sorting.default"), value: "Default" },
+  { label: t("common:sorting.titleAsc"), value: "TitleAsc" },
+  { label: t("common:sorting.titleDesc"), value: "TitleDesc" },
+  { label: t("common:sorting.newest"), value: "Newest" },
+  { label: t("common:sorting.endingSoon"), value: "EndingSoon" },
 ];

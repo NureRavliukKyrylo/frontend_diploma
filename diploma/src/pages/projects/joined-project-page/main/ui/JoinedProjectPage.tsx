@@ -6,10 +6,14 @@ import { formatDateRange } from "@shared/libs/date";
 import { useProjectJoinedPage } from "../model/useProjectJoinedPage";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { ParticipationLeaveButton } from "@features/participation";
-import { joinedProjectMainTabs } from "../config/joinedProjectMainTabs";
+import { getJoinedProjectMainTabs } from "../config/joinedProjectMainTabs";
+import { useTranslation } from "react-i18next";
 
 export const JoinedProjectPage = () => {
+  const { t } = useTranslation(["project", "common"]);
   const { tab, project, forms, handleTabChange } = useProjectJoinedPage();
+
+  const localizedTabs = getJoinedProjectMainTabs(t);
 
   return (
     <div className={styles.wrapperJoinedProjectPage}>
@@ -25,7 +29,7 @@ export const JoinedProjectPage = () => {
               <h1>{project?.title}</h1>
               <div className={styles.projectJoinedMetaInfo}>
                 <span className={styles.metaChipJoinedProject}>
-                  Joined Project
+                  {t("project:meta.joinedChip")}
                 </span>
                 {project?.endAt && (
                   <span className={`${styles.metaChip} ${styles.calendar}`}>
@@ -43,9 +47,7 @@ export const JoinedProjectPage = () => {
             </div>
             <div className={styles.chatOrganizationBlock}>
               <motion.div
-                whileHover={{
-                  scale: 1.04,
-                }}
+                whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 22 }}
               >
@@ -73,7 +75,7 @@ export const JoinedProjectPage = () => {
               >
                 <LinkButtonWrapper className={styles.chatWrapper}>
                   <ChatIcon className={styles.chatIcon} />
-                  <h1>PROJECT CHAT</h1>
+                  <h1>{t("project:meta.chat")}</h1>
                 </LinkButtonWrapper>
               </motion.div>
             </div>
@@ -82,7 +84,10 @@ export const JoinedProjectPage = () => {
         <div className={styles.statsJoinedProjectInfo}>
           <div className={styles.headerLevelBar}>
             <span className={styles.current}>
-              Level {project.progress.level ?? 0}
+              {/* Uses your common level layout now */}
+              {t("common:level.current", {
+                level: project.progress.level ?? 0,
+              })}
             </span>
             <span className={styles.xp}>
               {project?.progress.currentProgress}/{project.progress.maxProgress}
@@ -93,10 +98,14 @@ export const JoinedProjectPage = () => {
             max={project.progress.maxProgress}
           />
           <div className={styles.footerLevelBar}>
-            <span className={styles.label}>Next level</span>
+            <span className={styles.label}>{t("common:level.next")}</span>
             <span className={styles.next}>
-              Level{" "}
-              {project.progress?.level == null ? 1 : project.progress.level + 1}
+              {t("common:level.current", {
+                level:
+                  project.progress?.level == null
+                    ? 1
+                    : project.progress.level + 1,
+              })}
             </span>
           </div>
         </div>
@@ -110,7 +119,7 @@ export const JoinedProjectPage = () => {
           </ReadMoreButton>
           {project?.id && project.hasPendingLeaveRequest && (
             <p className={styles.pendingRequest}>
-              Your leave request is pending approval
+              {t("project:states.pendingLeave")}
             </p>
           )}
 
@@ -127,7 +136,7 @@ export const JoinedProjectPage = () => {
       </motion.div>
       <div className={styles.toggleWrapper}>
         <Toggle
-          tabs={joinedProjectMainTabs}
+          tabs={localizedTabs}
           activeValue={tab}
           onChange={handleTabChange}
           buttonClassName={styles.toggleJoinedProjectButton}

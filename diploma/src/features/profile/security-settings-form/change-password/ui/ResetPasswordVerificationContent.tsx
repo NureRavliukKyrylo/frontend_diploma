@@ -4,18 +4,26 @@ import { ProfilePasswordInput } from "@shared/ui/inputs";
 import { useSendNewPassword } from "../model/useSendNewPassword";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useUserStore } from "@entities/user";
+import { useTranslation } from "react-i18next";
 
 export const ResetPasswordVerificationContent = () => {
+  const { t } = useTranslation("profile");
   const { formik, errorMessage, isLoading } = useSendNewPassword();
   const { isPasswordSet } = useUserStore();
 
-  const title = isPasswordSet ? "Reset Password" : "Set New Password";
-  const description = isPasswordSet
-    ? "Reset your password quickly and securely to regain access"
-    : "Set a new password to secure your account";
-
   return (
-    <VerificationWrapper title={title} description={description}>
+    <VerificationWrapper
+      title={
+        isPasswordSet
+          ? t("security.changePassword.resetTitle")
+          : t("security.changePassword.setTitle")
+      }
+      description={
+        isPasswordSet
+          ? t("security.changePassword.resetDescription")
+          : t("security.changePassword.setDescription")
+      }
+    >
       <form
         className={styles.verificationChangePassword}
         onSubmit={formik.handleSubmit}
@@ -23,27 +31,27 @@ export const ResetPasswordVerificationContent = () => {
         <ProfilePasswordInput
           name="newPassword"
           variant="verification"
-          placeholder="Set new password"
+          placeholder={t("security.changePassword.newPlaceholder")}
           value={formik.values.newPassword}
           onChange={formik.handleChange}
           error={formik.submitCount > 0 ? formik.errors.newPassword : ""}
-          showEyeButton={true}
+          showEyeButton
         />
         <ProfilePasswordInput
           name="confirmPassword"
           variant="verification"
-          placeholder="Repeat password"
+          placeholder={t("security.changePassword.confirmPlaceholder")}
           value={formik.values.confirmPassword}
           onChange={formik.handleChange}
           error={formik.submitCount > 0 ? formik.errors.confirmPassword : ""}
-          showEyeButton={true}
+          showEyeButton
         />
         <BaseButtonWrapper
           loading={isLoading}
           className={styles.setNewPasswordButton}
           type="submit"
         >
-          Save Password
+          {t("security.changePassword.saveButton")}
         </BaseButtonWrapper>
         {errorMessage && <div className="errorMessage">{errorMessage}</div>}
       </form>

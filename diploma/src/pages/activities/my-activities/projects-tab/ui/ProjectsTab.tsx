@@ -1,13 +1,13 @@
 import styles from "./ProjectsTab.module.scss";
 import { LinkButtonWrapper, ToggleDropdownButton } from "@shared/ui/buttons";
-import { MyProjectsFilterWidget, ProjectsListWidget } from "@widgets/projects/";
+import { MyProjectsFilterWidget, ProjectsListWidget } from "@widgets/projects";
 import { useProjectsTab } from "../model/useProjectsTab";
 import { SearchBar } from "@shared/ui/inputs";
 import { SortDropDown } from "@shared/ui/drop-down";
 import {
   ProjectControlCard,
   ProjectControlCardSkeleton,
-  sortingProjectItems,
+  getSortingProjectItems,
   useMyProjectsListQuery,
   type MyProjectsRequestParams,
   type MyProjectsSearchParams,
@@ -23,8 +23,16 @@ import {
   staggeredCardVariantsNoHover,
 } from "@shared/assets/animations";
 import { LeaveConfirmationModal } from "@features/participation";
+import { useTranslation } from "react-i18next";
+import { ErrorBoundary } from "react-error-boundary";
+import { getHttpErrorInfo } from "@shared/libs/error";
 
-export const ProjectsTab = ({ search }: { search: MyProjectsSearchParams }) => {
+interface ProjectsTabProps {
+  search: MyProjectsSearchParams;
+}
+
+export const ProjectsTab = ({ search }: ProjectsTabProps) => {
+  const { t } = useTranslation(["activities", "common"]);
   const {
     isFilterOpen,
     setIsFilterOpen,
@@ -41,8 +49,15 @@ export const ProjectsTab = ({ search }: { search: MyProjectsSearchParams }) => {
   } = useProjectsTab(search);
 
   return (
-    <>
-      <div className={styles.mainMyProjectsSection}>
+    <div className={styles.mainMyProjectsSection}>
+      <ErrorBoundary
+        fallbackRender={({ error }) => (
+          <div className={styles.errorState}>
+            <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
+            <p className="errorHint">{t("common:errors.errorHint")}</p>
+          </div>
+        )}
+      >
         <div className={styles.filtersBlock}>
           <ToggleDropdownButton onOpenChange={setIsFilterOpen}>
             <MyProjectsFilterWidget
@@ -55,7 +70,7 @@ export const ProjectsTab = ({ search }: { search: MyProjectsSearchParams }) => {
             variant="projects"
           />
           <SortDropDown
-            options={sortingProjectItems}
+            options={getSortingProjectItems(t)}
             onSelect={handleSort}
             value={search.OrderBy ?? "Default"}
           />
@@ -71,13 +86,13 @@ export const ProjectsTab = ({ search }: { search: MyProjectsSearchParams }) => {
             <div className={styles.emptyState}>
               {hasActiveFilters ? (
                 <>
-                  <h2>No projects found</h2>
-                  <p>Try adjusting your filters or search query</p>
+                  <h2>{t("activities:my.projects.notFound")}</h2>
+                  <p>{t("activities:my.projects.notFoundHint")}</p>
                 </>
               ) : (
                 <>
-                  <h2>No projects yet</h2>
-                  <p>Join your first project to get started</p>
+                  <h2>{t("activities:my.projects.empty")}</h2>
+                  <p>{t("activities:my.projects.emptyHint")}</p>
                 </>
               )}
             </div>
@@ -112,7 +127,11 @@ export const ProjectsTab = ({ search }: { search: MyProjectsSearchParams }) => {
                           menuItems={[
                             {
                               key: "leave",
-                              label: "Leave Project",
+                              label: t("common:participation.leave", {
+                                entity: t(
+                                  `common:participation.entities.project`,
+                                ),
+                              }),
                               onClick: () => handleLeaveProject(project),
                               variant: "leave",
                             },
@@ -132,7 +151,7 @@ export const ProjectsTab = ({ search }: { search: MyProjectsSearchParams }) => {
                                 params={{ id: project.id }}
                                 className={styles.btnLink}
                               >
-                                Get Started
+                                {t("common:actions.getStarted")}
                               </LinkButtonWrapper>
                             </motion.div>
                           }
@@ -146,27 +165,27 @@ export const ProjectsTab = ({ search }: { search: MyProjectsSearchParams }) => {
             </Suspense>
           )}
         </motion.div>
-      </div>
 
-      {projects && projects.pagination.totalPages > 1 && (
-        <div className={styles.paginationWrapper}>
-          <Pagination
-            total={projects.pagination.totalPages}
-            page={search.Page}
-            onChange={handlePageChange}
+        {projects && projects.pagination.totalPages > 1 && (
+          <div className={styles.paginationWrapper}>
+            <Pagination
+              total={projects.pagination.totalPages}
+              page={search.Page}
+              onChange={handlePageChange}
+            />
+          </div>
+        )}
+
+        {selectedProject && (
+          <LeaveConfirmationModal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            entityId={selectedProject.id}
+            entityType="project"
+            entityName={selectedProject.title}
           />
-        </div>
-      )}
-
-      {selectedProject && (
-        <LeaveConfirmationModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          entityId={selectedProject.id}
-          entityType="project"
-          entityName={selectedProject.title}
-        />
-      )}
-    </>
+        )}
+      </ErrorBoundary>
+    </div>
   );
 };

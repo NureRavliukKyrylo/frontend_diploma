@@ -1,0 +1,36 @@
+{
+  "navigation": {
+    "overview": "OVERVIEW",
+    "events": "EVENTS",
+    "tasks": "TASKS",
+    "members": "MEMBERS",
+    "feedback": "FEEDBACK"
+  },
+  "meta": {
+    "chip": "Project",
+    "joinedChip": "Joined Project",
+    "chat": "PROJECT CHAT"
+  },
+  "rating": {
+    "votes": "VOTES"
+  },
+  "states": {
+    "pendingLeave": "Your leave request is pending approval",
+    "pendingJoin": "Your join request is pending approval",
+    "noEvents": "No Events yet"
+  },
+  "overview": {
+    "activities": "Activities",
+    "locations": "Locations",
+    "description": "Explore all activities within this project and see where they are located",
+    "completed": "COMPLETED",
+    "events": "EVENTS",
+    "tasks": "TASKS",
+    "total": "TOTAL",
+    "map": {
+      "project": "Project",
+      "location": "Location",
+      "markerPopup": "📍 Project location"
+    }
+  }
+}

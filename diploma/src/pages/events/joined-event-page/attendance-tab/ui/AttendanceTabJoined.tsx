@@ -18,7 +18,6 @@ export const AttendanceTabJoined = ({
   eventId,
   eventTitle,
 }: AttendanceTabJoinedProps) => {
-  console.log(search.view, search.date);
   const { From, To } = getCalendarRange(
     search.date ? new Date(search.date) : new Date(),
   );

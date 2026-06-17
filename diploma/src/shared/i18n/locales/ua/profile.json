@@ -20,7 +20,9 @@
     "unlocked": "Розблоковані",
     "locked": "Заблоковані",
     "noBadgesTitle": "Ще немає розблокованих бейджів",
-    "noBadgesDescription": "Завершуйте активності, щоб отримати перший бейдж"
+    "noBadgesDescription": "Завершуйте активності, щоб отримати перший бейдж",
+    "noBadgesTitleMain": "Відзнак ще немає",
+    "noBadgesDescriptionMain": "Виконуйте завдання та розвивайте свої навички — ваша перша відзнака вже зовсім поруч!"
   },
 
   "rating": {
@@ -41,5 +43,149 @@
   },
   "badges": {
     "title": "НАГОРОДИ"
+  },
+  "settings": {
+    "tabs": {
+      "settings": "НАЛАШТУВАННЯ",
+      "links": "ПОСИЛАННЯ",
+      "security": "БЕЗПЕКА"
+    },
+    "forms": {
+      "settings": {
+        "title": "Профіль користувача",
+        "description": "Оновіть ваше фото, посилання та дані акаунту тут."
+      },
+      "links": {
+        "title": "Соціальні мережі",
+        "description": "Додайте посилання на соціальні мережі, щоб об'єднати профілі в одному місці."
+      },
+      "security": {
+        "title": "Безпека",
+        "description": "Керуйте безпекою вашого акаунту"
+      }
+    },
+    "publicProfile": {
+      "title": "Публічний профіль",
+      "description": "Ця інформація буде видима у вашому публічному профілі",
+      "firstName": "Ім'я",
+      "lastName": "Прізвище"
+    },
+    "bio": {
+      "title": "Біографія",
+      "description": "Це буде ваша головна історія. Зробіть її довгою",
+      "input": "Розкажіть нам трохи про себе"
+    },
+    "photo": {
+      "title": "Фото профілю",
+      "description": "Оновіть фото профілю та оберіть де його відображати"
+    },
+    "links": {
+      "socialTitle": "Соціальні профілі",
+      "socialDescription": "Керуйте соціальними посиланнями. Лише обрані посилання будуть видимі у вашому профілі."
+    },
+    "actions": {
+      "reset": "СКИНУТИ",
+      "save": "ЗБЕРЕГТИ",
+      "sendCode": "Відправити код"
+    },
+    "update": {
+      "action": "Оновити профіль",
+      "successTitle": "Профіль оновлено",
+      "successDescription": "Ви успішно оновили свій профіль"
+    },
+    "location": {
+      "you": "Ваше",
+      "userLocation": "{{name}} місцезнаходження"
+    }
+  },
+  "cropper": {
+    "title": "ПОЗИЦІЯ ТА ОБРІЗКА",
+    "description": "Відредагуйте позицію зображення перед надсиланням на перевірку.",
+    "cancel": "Скасувати",
+    "save": "Зберегти"
+  },
+  "upload": {
+    "clickToUpload": "Натисніть для завантаження",
+    "dragAndDrop": "або перетягніть PNG чи JPG"
+  },
+  "security": {
+    "password": {
+      "title": "Пароль",
+      "description": "Встановіть пароль для захисту вашого акаунту"
+    },
+    "twoFactor": {
+      "title": "Двоетапна верифікація",
+      "description": "Ми рекомендуємо вимагати код верифікації на додаток до пароля",
+      "enableDescription": "Увімкніть двоетапну верифікацію для захисту вашого акаунту",
+      "disableDescription": "Вимкніть двоетапну верифікацію для вашого акаунту",
+      "enableAction": "Увімкнути двофакторну",
+      "disableAction": "Вимкнути двофакторну",
+      "enableRequestSuccess": "Запит на увімкнення надіслано",
+      "enableRequestDescription": "Ви успішно надіслали запит на увімкнення двофакторної верифікації",
+      "disableRequestSuccess": "Запит на вимкнення надіслано",
+      "disableRequestDescription": "Ви успішно надіслали запит на вимкнення двофакторної верифікації",
+      "enableVerifySuccess": "Увімкнення двофакторної верифікації підтверджено",
+      "disableVerifySuccess": "Вимкнення двофакторної верифікації підтверджено"
+    },
+    "email": {
+      "title": "Email",
+      "description": "Встановіть email адресу для захисту акаунту та отримання важливих оновлень"
+    },
+    "changeEmail": {
+      "title": "Змінити email",
+      "verifyOld": "Підтвердіть поточний email для продовження",
+      "verifyNew": "Підтвердіть новий email для завершення зміни",
+      "enterNew": "Введіть новий email нижче. Ми надішлемо код для підтвердження",
+      "placeholder": "Встановіть новий email",
+      "saveButton": "Зберегти новий email",
+      "action": "Змінити email",
+      "requestSuccess": "Запит на зміну email надіслано",
+      "requestDescription": "Ви успішно надіслали запит на зміну email",
+      "verifySuccess": "Email успішно підтверджено"
+    },
+    "changePassword": {
+      "resetTitle": "Скинути пароль",
+      "setTitle": "Встановити новий пароль",
+      "resetDescription": "Скиньте пароль швидко та безпечно для відновлення доступу",
+      "setDescription": "Встановіть новий пароль для захисту вашого акаунту",
+      "newPlaceholder": "Встановіть новий пароль",
+      "confirmPlaceholder": "Повторіть пароль",
+      "saveButton": "Зберегти пароль",
+      "action": "Змінити пароль",
+      "requestSuccess": "Запит на зміну пароля надіслано",
+      "requestDescription": "Ви успішно надіслали запит на зміну пароля",
+      "successTitle": "Пароль змінено",
+      "successDescription": "Ви успішно змінили пароль",
+      "codeVerifySuccess": "Код зміни пароля успішно підтверджено",
+      "codeSetSuccess": "Код встановлення пароля успішно підтверджено"
+    },
+    "unlink": {
+      "title": "Від'єднати {{platform}}",
+      "description": "Підтвердіть свою особу для від'єднання акаунту {{platform}}",
+      "verifySuccess": "Від'єднання {{platform}} успішно підтверджено"
+    },
+    "google": {
+      "linkSuccess": "Google акаунт підключено",
+      "linkDescription": "Ваш Google акаунт успішно підключено",
+      "linkFailed": "Помилка підключення Google",
+      "unlinkRequestSuccess": "Запит на від'єднання надіслано",
+      "unlinkRequestDescription": "Перевірте пошту для підтвердження",
+      "unlinkFailed": "Помилка від'єднання Google",
+      "oauthFailed": "Помилка Google OAuth"
+    },
+    "calendar": {
+      "linkSuccess": "Google Calendar підключено",
+      "linkDescription": "Ваш Google Calendar успішно підключено",
+      "linkFailed": "Помилка підключення Calendar",
+      "unlinkSuccess": "Google Calendar від'єднано",
+      "unlinkFailed": "Помилка від'єднання Calendar"
+    }
+  },
+  "deleteProfile": {
+    "button": "ВИДАЛИТИ ПРОФІЛЬ",
+    "title": "Видалити ваш профіль",
+    "text": "Ви впевнені, що хочете видалити свій профіль? Цю дію неможливо скасувати. Всі ваші дані, налаштування та контент будуть безповоротно видалені.",
+    "confirm": "Видалити профіль",
+    "cancel": "Скасувати"
   }
 }

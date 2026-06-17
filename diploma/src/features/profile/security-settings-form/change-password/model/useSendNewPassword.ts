@@ -4,12 +4,15 @@ import { getErrorMessage } from "@shared/libs/error-message";
 import { type SendNewPasswordDto } from "../api/sendNewPasswordApi";
 import { sendNewPassword } from "../api/sendNewPasswordApi";
 import { useFormik } from "formik";
-import { changePasswordSchema } from "../lib/changePasswordSchema";
+import { getChangePasswordSchema } from "../lib/changePasswordSchema";
 import { useLogout } from "@features/auth";
 import { useRouter } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
+import { useTranslation } from "react-i18next";
 
 export const useSendNewPassword = () => {
+  const { t } = useTranslation(["profile", "common"]);
+  const validationSchema = getChangePasswordSchema(t);
   const { handleLogout } = useLogout(undefined, false);
   const router = useRouter();
 
@@ -17,8 +20,8 @@ export const useSendNewPassword = () => {
     mutationFn: (data: SendNewPasswordDto) => sendNewPassword(data),
     onSuccess: async () => {
       addToast({
-        title: "New password request success",
-        description: "You have changed password successfully",
+        title: t("security.changePassword.successTitle"),
+        description: t("security.changePassword.successDescription"),
         color: "success",
       });
       try {
@@ -28,10 +31,12 @@ export const useSendNewPassword = () => {
       }
     },
     onError: (error: unknown) => {
-      const errorMessage = getErrorMessage(error);
+      const errorMessage = getErrorMessage(error, t);
 
       addToast({
-        title: "Change password failed",
+        title: t("common:errors.actionFailed", {
+          action: t("security.changePassword.action"),
+        }),
         description: errorMessage,
         color: "danger",
       });
@@ -43,7 +48,7 @@ export const useSendNewPassword = () => {
       newPassword: "",
       confirmPassword: "",
     },
-    validationSchema: changePasswordSchema,
+    validationSchema,
     onSubmit: (values) => {
       mutation.mutate({ newPassword: values.newPassword });
     },
@@ -52,6 +57,6 @@ export const useSendNewPassword = () => {
   return {
     formik,
     isLoading: mutation.isPending,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

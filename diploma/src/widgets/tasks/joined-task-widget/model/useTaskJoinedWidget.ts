@@ -1,9 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { taskQuery, type TaskDrawerJoinedSearch } from "@entities/task";
-import { getEntityStatusConfig } from "@shared/libs/entity";
+import {
+  getTaskStatusConfig,
+  taskQuery,
+  type TaskDrawerJoinedSearch,
+} from "@entities/task";
 import { getTaskJoinedMainForms } from "../config/taskJoinedMainForms";
 import { profileQuery } from "@entities/user/profile";
 import { useUserStore } from "@entities/user";
+import { useTranslation } from "react-i18next";
 
 interface UseTaskJoinedWidgetProps {
   taskId?: string;
@@ -14,6 +18,7 @@ export const useTaskJoinedWidget = ({
   taskId,
   search,
 }: UseTaskJoinedWidgetProps) => {
+  const { t } = useTranslation("task");
   const isAuthenticated = useUserStore((s) => s.isAuthenticated);
   const {
     data: task,
@@ -30,7 +35,7 @@ export const useTaskJoinedWidget = ({
     enabled: isAuthenticated,
   });
 
-  const statusConfig = task ? getEntityStatusConfig(task.status) : null;
+  const statusConfig = task ? getTaskStatusConfig(task.status, t) : null;
 
   const forms = task
     ? getTaskJoinedMainForms({

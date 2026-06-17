@@ -1,0 +1,36 @@
+{
+  "states": {
+    "pendingLeave": "Your leave request is pending approval",
+    "pendingJoin": "Your join request is pending approval"
+  },
+  "labels": {
+    "task": "Task",
+    "joinedChip": "Joined Task",
+    "chat": "TASK CHAT",
+    "project": "PROJECT",
+    "event": "EVENT",
+    "votes": "({{count}} VOTES)",
+    "skills": "TASK Skills",
+    "activities": "Activities",
+    "locations": "Locations",
+    "subtitle": "Explore all related activities within this task and see where they are located",
+    "relatedEvent": "Related event",
+    "relatedProject": "Related project",
+    "error": {
+      "hint": "Try reloading the page or come back later."
+    }
+  },
+  "tabs": {
+    "overview": "OVERVIEW",
+    "comments": "COMMENTS",
+    "members": "MEMBERS",
+    "feedback": "FEEDBACK"
+  },
+  "statuses": {
+    "Pending": "Pending",
+    "InProgress": "In Progress",
+    "Completed": "Completed",
+    "Cancelled": "Cancelled",
+    "Overdue": "Overdue"
+  }
+}

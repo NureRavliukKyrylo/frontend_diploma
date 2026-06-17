@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { SettingsWrapper } from "@shared/ui/wrappers";
-import { profileSettingsForms } from "./configs/profileSettingForms";
-import { profileSettingsTabs } from "./configs/profileSettingTabs";
+import { getProfileSettingsForms } from "./configs/profileSettingForms";
+import { getProfileSettingsTabs } from "./configs/profileSettingTabs";
 import { Toggle } from "@shared/ui";
 import styles from "./ProfileSettingsWidget.module.scss";
 import { LogoutButton } from "@features/auth";
@@ -12,6 +12,7 @@ import {
 } from "@entities/user";
 import { profileRoutes } from "@shared/routes";
 import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 
 export function ProfileSettingsWidget() {
   const search = useSearch({ from: "/_masterLayout/profile/settings/" });
@@ -21,6 +22,9 @@ export function ProfileSettingsWidget() {
   const handleTabChange = (tab: ProfileSettingsMode) => {
     navigate({ search: { ...profileSettingsSearchDefaults, tab } });
   };
+  const { t } = useTranslation("profile");
+  const profileSettingsTabs = getProfileSettingsTabs(t);
+  const profileSettingsForms = getProfileSettingsForms(t);
 
   const { component, wrapperProps } = profileSettingsForms[activeTab];
 

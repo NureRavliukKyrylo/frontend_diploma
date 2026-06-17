@@ -6,12 +6,16 @@ import { formatDateRange } from "@shared/libs/date";
 import { Calendar, Reccurence, RoleIcon } from "@shared/assets/icons/info";
 import { Arrow } from "@shared/assets/icons/actions";
 import { ParticipationLeaveButton } from "@features/participation";
-import { eventJoinedMainTabs } from "../config/eventJoinedMainTabs";
+import { getEventJoinedMainTabs } from "../config/eventJoinedMainTabs";
 import { useJoinedEventPage } from "../model/useJoinedEventPage";
 import { ChatIcon } from "@shared/assets/icons/info";
+import { useTranslation } from "react-i18next";
 
 export const JoinedEventPage = () => {
+  const { t } = useTranslation(["event", "common"]);
   const { tab, event, forms, handleTabChange } = useJoinedEventPage();
+
+  const localizedTabs = getEventJoinedMainTabs(t);
 
   return (
     <div className={styles.wrapperJoinedEventPage}>
@@ -28,7 +32,7 @@ export const JoinedEventPage = () => {
                 <h1>{event?.title}</h1>
                 <div className={styles.eventJoinedMetaInfo}>
                   <span className={styles.metaChipJoinedEvent}>
-                    Joined Event
+                    {t("event:labels.joinedChip")}
                   </span>
                   {event?.recurrence && (
                     <span className={styles.reccurenceInfo}>
@@ -50,9 +54,7 @@ export const JoinedEventPage = () => {
               </div>
               <div className={styles.chatOrganizationBlock}>
                 <motion.div
-                  whileHover={{
-                    scale: 1.04,
-                  }}
+                  whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
                   transition={{ type: "spring", stiffness: 400, damping: 22 }}
                 >
@@ -80,14 +82,14 @@ export const JoinedEventPage = () => {
                 >
                   <LinkButtonWrapper className={styles.chatWrapper}>
                     <ChatIcon className={styles.chatIcon} />
-                    <h1>EVENT CHAT</h1>
+                    <h1>{t("event:labels.chat")}</h1>
                   </LinkButtonWrapper>
                 </motion.div>
               </div>
             </div>
             {event?.project && (
               <div className={styles.projectPill}>
-                <h1>PROJECT</h1>
+                <h1>{t("event:labels.project")}</h1>
                 <motion.div
                   whileHover={{ x: 4 }}
                   transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -107,7 +109,7 @@ export const JoinedEventPage = () => {
         <div className={styles.statsJoinedEventInfo}>
           <div className={styles.headerLevelBar}>
             <span className={styles.current}>
-              Level {event.progress.level ?? 0}
+              {t("common:level.current", { level: event.progress.level ?? 0 })}
             </span>
             <span className={styles.xp}>
               {event?.progress.currentProgress}/{event.progress.maxProgress}
@@ -118,10 +120,12 @@ export const JoinedEventPage = () => {
             max={event.progress.maxProgress}
           />
           <div className={styles.footerLevelBar}>
-            <span className={styles.label}>Next level</span>
+            <span className={styles.label}>{t("common:level.next")}</span>
             <span className={styles.next}>
-              Level{" "}
-              {event.progress?.level == null ? 1 : event.progress.level + 1}
+              {t("common:level.current", {
+                level:
+                  event.progress?.level == null ? 1 : event.progress.level + 1,
+              })}
             </span>
           </div>
         </div>
@@ -135,7 +139,7 @@ export const JoinedEventPage = () => {
           </ReadMoreButton>
           {event?.id && event.hasPendingLeaveRequest && (
             <p className={styles.pendingRequest}>
-              Your leave request is pending approval
+              {t("event:states.pendingLeave")}
             </p>
           )}
 
@@ -152,7 +156,7 @@ export const JoinedEventPage = () => {
       </motion.div>
       <div className={styles.toggleWrapper}>
         <Toggle
-          tabs={eventJoinedMainTabs}
+          tabs={localizedTabs}
           activeValue={tab}
           onChange={handleTabChange}
           buttonClassName={styles.toggleJoinedEventButton}

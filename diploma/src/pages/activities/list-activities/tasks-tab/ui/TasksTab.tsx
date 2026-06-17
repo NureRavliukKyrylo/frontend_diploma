@@ -1,5 +1,5 @@
 import {
-  sortingTaskItems,
+  getSortingTaskItems,
   TaskCard,
   TaskCardSkeleton,
   useTasksListQuery,
@@ -26,11 +26,14 @@ import { getHttpErrorInfo } from "@shared/libs/error";
 import { Pagination } from "@shared/ui";
 import { useActivitiesTaskDrawer } from "../model/useActivitiesTaskDrawer";
 import { SwipeableDrawer } from "@mui/material";
+import { useTranslation } from "react-i18next";
+
 interface TasksTabProps {
   search: TaskSearchParams;
 }
 
 export const TasksTab = ({ search }: TasksTabProps) => {
+  const { t } = useTranslation(["activities", "common"]);
   const {
     isOpen,
     openTask,
@@ -63,9 +66,7 @@ export const TasksTab = ({ search }: TasksTabProps) => {
           return (
             <div className={styles.errorState}>
               <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-              <p className="errorHint">
-                Try reloading the page or come back later.
-              </p>
+              <p className="errorHint">{t("common:errors.errorHint")}</p>
             </div>
           );
         }}
@@ -81,7 +82,7 @@ export const TasksTab = ({ search }: TasksTabProps) => {
               variant="projects"
             />
             <SortDropDown
-              options={sortingTaskItems}
+              options={getSortingTaskItems(t)}
               onSelect={handleSort}
               value={search.OrderBy ?? "Default"}
             />
@@ -94,8 +95,8 @@ export const TasksTab = ({ search }: TasksTabProps) => {
           >
             {tasks?.data?.length === 0 ? (
               <div className={styles.emptyState}>
-                <h2>No Tasks found</h2>
-                <p>Try adjusting your filters or search query</p>
+                <h2>{t("activities:states.emptyTasks.title")}</h2>
+                <p>{t("activities:states.emptyTasks.subtitle")}</p>
               </div>
             ) : (
               <Suspense

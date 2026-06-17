@@ -18,8 +18,9 @@ import { getHttpErrorInfo } from "@shared/libs/error";
 
 import { ParticipationLeaveButton } from "@features/participation";
 import { TaskWidgetJoinedSkeleton } from "./TaskWidgetJoinedSkeleton";
-import { taskJoinedMainTabs } from "../config/taskJoinedMainTabs";
+import { getTaskJoinedMainTabs } from "../config/taskJoinedMainTabs";
 import { useTaskJoinedWidget } from "../model/useTaskJoinedWidget";
+import { useTranslation } from "react-i18next";
 
 interface TaskWidgetJoinedProps {
   search: TaskDrawerJoinedSearch;
@@ -34,8 +35,11 @@ export const TaskWidgetJoined = ({
   taskMode,
   taskId,
 }: TaskWidgetJoinedProps) => {
+  const { t } = useTranslation(["task"]);
   const { task, isLoading, isError, error, statusConfig, forms } =
     useTaskJoinedWidget({ taskId, search });
+
+  const localizedTabs = getTaskJoinedMainTabs(t);
 
   if (isLoading) return <TaskWidgetJoinedSkeleton />;
 
@@ -43,7 +47,7 @@ export const TaskWidgetJoined = ({
     return (
       <div className={styles.errorState}>
         <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-        <p className="errorHint">Try reloading the page or come back later.</p>
+        <p className="errorHint">{t("task:labels.error.hint")}</p>
       </div>
     );
 
@@ -70,7 +74,9 @@ export const TaskWidgetJoined = ({
               <div className={styles.titleHeader}>
                 <h1>{task?.title}</h1>
                 <div className={styles.taskMetaInfo}>
-                  <span className={styles.metaChipTask}>Joined Task</span>
+                  <span className={styles.metaChipTask}>
+                    {t("task:labels.joinedChip")}
+                  </span>
                   {task?.recurrence && (
                     <span className={styles.reccurenceInfo}>
                       <Reccurence className={styles.reccurenceIcon} />
@@ -115,7 +121,7 @@ export const TaskWidgetJoined = ({
                 >
                   <LinkButtonWrapper className={styles.chatWrapper}>
                     <ChatIcon className={styles.chatIcon} />
-                    <h1>TASK CHAT</h1>
+                    <h1>{t("task:labels.chat")}</h1>
                   </LinkButtonWrapper>
                 </motion.div>
               </div>
@@ -123,7 +129,7 @@ export const TaskWidgetJoined = ({
             <div className={styles.relatedActivities}>
               {task?.project && (
                 <div className={styles.activityPill}>
-                  <h1>PROJECT</h1>
+                  <h1>{t("task:labels.project")}</h1>
                   <motion.div
                     whileHover={{ x: 4 }}
                     transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -140,7 +146,7 @@ export const TaskWidgetJoined = ({
               )}
               {task?.event && (
                 <div className={styles.activityPill}>
-                  <h1>EVENT</h1>
+                  <h1>{t("task:labels.event")}</h1>
                   <motion.div
                     whileHover={{ x: 4 }}
                     transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -164,7 +170,7 @@ export const TaskWidgetJoined = ({
           </ReadMoreButton>
           {task?.id && task.hasPendingLeaveRequest && (
             <p className={styles.pendingRequest}>
-              Your leave request is pending approval
+              {t("task:states.pendingLeave")}
             </p>
           )}
 
@@ -182,7 +188,7 @@ export const TaskWidgetJoined = ({
       <div className={styles.contentBlock}>
         <div className={styles.toggleWrapper}>
           <Toggle
-            tabs={taskJoinedMainTabs}
+            tabs={localizedTabs}
             activeValue={taskMode}
             onChange={handleModeChange}
             buttonClassName={styles.toggleJoinedTaskButton}

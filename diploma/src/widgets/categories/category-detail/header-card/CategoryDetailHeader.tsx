@@ -5,7 +5,8 @@ import type { Category } from "@entities/category";
 import { ReadMoreButton, ShowMoreItemsButton } from "@shared/ui/buttons";
 import { motion } from "framer-motion";
 import type { ListActivitiesMode } from "@shared/config/types";
-import { listActivitiesTabs } from "@shared/config/constants";
+import { getListActivitiesTabs } from "@shared/config/constants";
+import { useTranslation } from "react-i18next";
 
 interface CategoryDetailHeaderProps {
   activeTab: ListActivitiesMode;
@@ -18,13 +19,20 @@ export const CategoryDetailHeader = ({
   onTabChange,
   category,
 }: CategoryDetailHeaderProps) => {
+  const { t } = useTranslation("activities");
+  const tabs = getListActivitiesTabs(t);
+
   return (
     <div className={styles.categoryHeader}>
       <div className={styles.categoryInformation}>
         <div className={styles.textCategoryInformation}>
           <div className={styles.textCategory}>
             <h1>{category.name}</h1>
-            <h2>{category.activitiesTotal} activities</h2>
+            <h2>
+              {t("activities:categories.detail.activitiesCount", {
+                count: category.activitiesTotal,
+              })}
+            </h2>
           </div>
           <div className={styles.categoryDescription}>
             <ReadMoreButton
@@ -39,23 +47,27 @@ export const CategoryDetailHeader = ({
           <div className={styles.projectsBlock}>
             <div className={styles.projectInfo}>
               <h1>{category.activitiesTotal}</h1>
-              <h2>All activities</h2>
+              <h2>{t("activities:categories.detail.allActivities")}</h2>
             </div>
             <div className={styles.lineDividerProject} />
             <div className={styles.projectInfo}>
               <h1>{category.activitiesActive}</h1>
-              <h2>Active activities</h2>
+              <h2>{t("activities:categories.detail.activeActivities")}</h2>
             </div>
             <div className={styles.lineDividerProject} />
             <div className={styles.projectInfo}>
               <h1>{category.activitiesCompleted}</h1>
-              <h2>Completed activities</h2>
+              <h2>{t("activities:categories.detail.completedActivities")}</h2>
             </div>
           </div>
           <div className={styles.categorySkills}>
-            <h1 className={styles.coreSkillsText}>Core skills</h1>
+            <h1 className={styles.coreSkillsText}>
+              {t("activities:categories.detail.coreSkills")}
+            </h1>
             {!category.skills?.length ? (
-              <h1 className={styles.noSkills}>No skills yet</h1>
+              <h1 className={styles.noSkills}>
+                {t("activities:categories.detail.noSkills")}
+              </h1>
             ) : (
               <ShowMoreItemsButton
                 items={category.skills.map((skill) => (
@@ -68,7 +80,7 @@ export const CategoryDetailHeader = ({
                   </motion.div>
                 ))}
                 initialVisibleCount={6}
-                buttonContent="See more"
+                buttonContent={t("activities:categories.detail.seeMore")}
                 classNameItems={styles.skillItems}
                 classNameButton={styles.skillReadMore}
               />
@@ -77,7 +89,7 @@ export const CategoryDetailHeader = ({
         </div>
         <div className={styles.listActivitiesToggle}>
           <Toggle
-            tabs={listActivitiesTabs}
+            tabs={tabs}
             activeValue={activeTab}
             onChange={onTabChange}
             buttonClassName={styles.toggleListActivitiesButton}

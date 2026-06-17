@@ -1,4 +1,4 @@
-import type { ConnectedService } from "@entities/user/profile";
+import type { ConnectedServiceId } from "@entities/user/profile";
 import { apiClient } from "@shared/api";
 
 export interface UnlinkDto {
@@ -7,7 +7,7 @@ export interface UnlinkDto {
 
 export const verificationUnlink = async (
   data: UnlinkDto,
-  link: ConnectedService,
+  link: ConnectedServiceId,
 ) => {
   const response = await apiClient.post(`Auth/${link}/unlink/confirm`, data);
   return response.data;

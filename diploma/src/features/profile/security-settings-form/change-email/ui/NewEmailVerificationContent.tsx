@@ -4,10 +4,11 @@ import { ProfileEmailInput } from "@shared/ui/inputs";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useSendChangeEmailRequest } from "../model/useSendChangeEmailRequest";
 import { useUserProfileStore } from "@entities/user";
+import { useTranslation } from "react-i18next";
 
 export const NewEmailVerificationContent = () => {
+  const { t } = useTranslation("profile");
   const { nextVerificationStep, setNewEmail } = useUserProfileStore();
-
   const { formik, errorMessage, isLoading } = useSendChangeEmailRequest({
     codeType: "new-code",
     onSuccess: () => {
@@ -18,14 +19,14 @@ export const NewEmailVerificationContent = () => {
 
   return (
     <VerificationWrapper
-      title="Change email"
-      description="Enter your new email below. We'll send a code to confirm it"
+      title={t("security.changeEmail.title")}
+      description={t("security.changeEmail.enterNew")}
     >
       <form className={styles.verificationEmail} onSubmit={formik.handleSubmit}>
         <ProfileEmailInput
           name="newEmail"
           variant="verification"
-          placeholder="Set new email"
+          placeholder={t("security.changeEmail.placeholder")}
           value={formik.values.newEmail}
           onChange={formik.handleChange}
           error={formik.submitCount > 0 ? formik.errors.newEmail : ""}
@@ -35,7 +36,7 @@ export const NewEmailVerificationContent = () => {
           className={styles.setNewEmailButton}
           type="submit"
         >
-          Save New Email
+          {t("security.changeEmail.saveButton")}
         </BaseButtonWrapper>
         {errorMessage && <div className="errorMessage">{errorMessage}</div>}
       </form>

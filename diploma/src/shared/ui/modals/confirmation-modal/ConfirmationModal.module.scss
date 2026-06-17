@@ -76,11 +76,13 @@
   }
 
   .actionsConfirmationModal {
+    container-type: inline-size;
     display: flex;
     gap: 20px;
     width: 90%;
     margin-top: 35px;
     justify-content: space-between;
+    flex-wrap: wrap;
 
     @include respond-to(laptop) {
       margin-top: 26px;
@@ -98,16 +100,18 @@
     }
 
     .wrapperConfirmButtonModal {
-      width: 100%;
+      flex: 1 1 calc(50% - 10px);
+      min-width: max-content;
 
       .confirmButtonModal,
       .cancelButtonModal {
         flex: 1;
-        padding: 5px 0;
+        padding: 5px 12px;
         border-radius: 100px;
         display: flex;
         justify-content: center;
         align-items: center;
+        white-space: nowrap;
         @include font-base(30px, 600);
         width: 100%;
 

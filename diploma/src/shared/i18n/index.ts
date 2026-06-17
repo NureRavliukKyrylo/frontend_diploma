@@ -11,6 +11,16 @@ import enSkill from "./locales/en/skill.json";
 import uaSkill from "./locales/ua/skill.json";
 import enTimeBank from "./locales/en/time-bank.json";
 import uaTimeBank from "./locales/ua/time-bank.json";
+import enActivities from "./locales/en/activities.json";
+import uaActivities from "./locales/ua/activities.json";
+import uaProject from "./locales/ua/project.json";
+import enProject from "./locales/en/project.json";
+import uaFeedback from "./locales/ua/feedback.json";
+import enFeedback from "./locales/en/feedback.json";
+import enEvent from "./locales/en/event.json";
+import uaEvent from "./locales/ua/event.json";
+import enTask from "./locales/en/task.json";
+import uaTask from "./locales/ua/task.json";
 
 i18n.use(initReactI18next).init({
   fallbackLng: "en",
@@ -22,6 +32,11 @@ i18n.use(initReactI18next).init({
       profile: enProfile,
       skill: enSkill,
       timeBank: enTimeBank,
+      activities: enActivities,
+      project: enProject,
+      feedback: enFeedback,
+      event: enEvent,
+      task: enTask,
     },
     ua: {
       common: uaCommon,
@@ -29,6 +44,11 @@ i18n.use(initReactI18next).init({
       profile: uaProfile,
       skill: uaSkill,
       timeBank: uaTimeBank,
+      activities: uaActivities,
+      project: uaProject,
+      feedback: uaFeedback,
+      event: uaEvent,
+      task: uaTask,
     },
   },
   interpolation: { escapeValue: false },

@@ -5,14 +5,15 @@ import {
 } from "@features/verification/verification-base-form";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./UnlinkVerificationForm.module.scss";
-import type { ConnectedService } from "@entities/user/profile";
+import type { ConnectedServiceId } from "@entities/user/profile";
 import {
   verificationUnlink,
   type UnlinkDto,
 } from "../api/verificationUnlinkApi";
+import { useTranslation } from "react-i18next";
 
 interface UnlinkVerificationFormProps {
-  verificationLink: ConnectedService;
+  verificationLink: ConnectedServiceId;
   platform: string;
   onSuccess?: () => void;
 }
@@ -22,9 +23,11 @@ export const UnlinkVerificationForm: React.FC<UnlinkVerificationFormProps> = ({
   platform,
   verificationLink,
 }) => {
+  const { t } = useTranslation("profile");
+
   const { formik, isLoading, errorMessage } = useVerification({
     apiFn: (data: UnlinkDto) => verificationUnlink(data, verificationLink),
-    successMessage: `Unlink ${platform} verified successfully`,
+    successMessage: t("security.unlink.verifySuccess", { platform }),
     onSuccess,
   });
 
@@ -35,7 +38,7 @@ export const UnlinkVerificationForm: React.FC<UnlinkVerificationFormProps> = ({
           loading={isLoading}
           className={styles.confirmVerificationButton}
         >
-          Send Code
+          {t("settings.actions.sendCode")}
         </BaseButtonWrapper>
       </div>
     </VerificationForm>

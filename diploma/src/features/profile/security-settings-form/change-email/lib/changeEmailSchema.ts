@@ -1,7 +1,9 @@
 import * as Yup from "yup";
+import type { TFunction } from "i18next";
 
-export const changeEmailSchema = Yup.object({
-  newEmail: Yup.string()
-    .email("Please enter a valid email address")
-    .required("Email is required"),
-});
+export const getChangeEmailSchema = (t: TFunction) =>
+  Yup.object({
+    newEmail: Yup.string()
+      .email(t("common:validation.invalidEmail"))
+      .required(t("common:validation.emailRequired")),
+  });

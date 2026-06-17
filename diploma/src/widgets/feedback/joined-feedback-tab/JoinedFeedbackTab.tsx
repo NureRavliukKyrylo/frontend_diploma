@@ -17,6 +17,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import { motion } from "framer-motion";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 interface JoinedFeedbackTabProps {
   entityId: string;
@@ -31,6 +32,7 @@ const MyFeedback = ({
 }: Pick<JoinedFeedbackTabProps, "entityId" | "entityType"> & {
   getMenuItems: ReturnType<typeof useFeedbackTab>["getMenuItems"];
 }) => {
+  const { t } = useTranslation(["feedback", "common"]);
   const { data: feedback } = useSuspenseQuery(
     feedbackQuery.my(entityType, entityId),
   );
@@ -38,11 +40,8 @@ const MyFeedback = ({
   if (!feedback) {
     return (
       <div className={styles.emptyState}>
-        <h2>No feedback yet</h2>
-        <p>
-          You've joined - now share what you think. Be the first to leave a
-          review.
-        </p>
+        <h2>{t("feedback:states.joinedEmptyTitle")}</h2>
+        <p>{t("feedback:states.joinedEmptySubtitle")}</p>
       </div>
     );
   }
@@ -50,7 +49,7 @@ const MyFeedback = ({
   return (
     <FeedbackControlCard
       feedback={feedback}
-      displayName="You"
+      displayName={t("common:members.you", { defaultValue: "You" })}
       menuItems={getMenuItems(feedback)}
     />
   );
@@ -61,6 +60,7 @@ export const JoinedFeedbackTab = ({
   entityType,
   canSubmitFeedback,
 }: JoinedFeedbackTabProps) => {
+  const { t } = useTranslation(["feedback", "common"]);
   const {
     modalType,
     selectedFeedback,
@@ -74,9 +74,7 @@ export const JoinedFeedbackTab = ({
       fallbackRender={({ error }) => (
         <div className={styles.errorState}>
           <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-          <p className="errorHint">
-            Try reloading the page or come back later.
-          </p>
+          <p className="errorHint">{t("common:errors.errorHint")}</p>
         </div>
       )}
     >
@@ -93,14 +91,16 @@ export const JoinedFeedbackTab = ({
                   className={styles.submitFeedback}
                   onClick={() => setModalType("create")}
                 >
-                  Submit Feedback
+                  {t("feedback:actions.submit")}
                 </BaseButtonWrapper>
               </motion.div>
             )}
           </div>
         </div>
         <div className={styles.mainContent}>
-          <h1 className={styles.reviewTitle}>Your Review</h1>
+          <h1 className={styles.reviewTitle}>
+            {t("feedback:content.yourReview")}
+          </h1>
           <Suspense fallback={<FeedbackCardSkeleton />}>
             <MyFeedback
               entityId={entityId}

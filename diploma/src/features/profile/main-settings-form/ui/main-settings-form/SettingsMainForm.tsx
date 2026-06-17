@@ -12,8 +12,10 @@ import { useSettingsMainForm } from "../../model/useSettingsMainForm";
 import { MapLocationModal } from "../location-modal-picker/MapLocationModal";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "usehooks-ts";
+import { useTranslation } from "react-i18next";
 
 export function SettingsMainForm() {
+  const { t } = useTranslation("profile");
   const {
     formik,
     isLoading,
@@ -21,29 +23,19 @@ export function SettingsMainForm() {
     handleFileChange,
     handleLocationChange,
   } = useSettingsMainForm();
-
   const [isMapOpen, setIsMapOpen] = useState<boolean>(false);
   const [resetKey, setResetKey] = useState(0);
-
-  const handleCloseModal = () => {
-    setIsMapOpen(false);
-  };
-
-  const handleOpenModal = () => {
-    setIsMapOpen(true);
-  };
   const isLaptop = useMediaQuery("(max-width: 1200px)");
   const isMobile = useMediaQuery("(max-width: 600px)");
   const isTablet = useMediaQuery("(max-width: 900px)");
-
   const minHeight = isMobile ? 140 : isTablet ? 180 : 220;
 
   return (
     <form onSubmit={formik.handleSubmit} className={styles.mainInfoProfileForm}>
       <div className={styles.publicProfile}>
         <div className={styles.publicProfileText}>
-          <h1>Public profile</h1>
-          <p>This information will be visible on your public profile</p>
+          <h1>{t("settings.publicProfile.title")}</h1>
+          <p>{t("settings.publicProfile.description")}</p>
         </div>
         <div className={styles.formInfoPublicProfile}>
           <div className={styles.nameInputsWrapper}>
@@ -52,7 +44,7 @@ export function SettingsMainForm() {
               value={formik.values.firstName}
               onChange={formik.handleChange}
               error={formik.submitCount > 0 ? formik.errors.firstName : ""}
-              placeholder="First Name"
+              placeholder={t("settings.publicProfile.firstName")}
               variant="profile"
             />
             <BaseInput
@@ -60,7 +52,7 @@ export function SettingsMainForm() {
               value={formik.values.lastName}
               onChange={formik.handleChange}
               error={formik.submitCount > 0 ? formik.errors.lastName : ""}
-              placeholder="Last Name"
+              placeholder={t("settings.publicProfile.lastName")}
               variant="profile"
             />
           </div>
@@ -82,12 +74,12 @@ export function SettingsMainForm() {
           <div className={styles.mapLocationWrapper}>
             <MapLocationInput
               label={formik.values.location}
-              handleMapOpen={handleOpenModal}
+              handleMapOpen={() => setIsMapOpen(true)}
               variant="editProfile"
             />
             <MapLocationModal
               isMapOpen={isMapOpen}
-              onClose={handleCloseModal}
+              onClose={() => setIsMapOpen(false)}
               coordinates={formik.values.coordinates}
               setCoordinates={handleLocationChange}
               popUpText="nice"
@@ -97,12 +89,12 @@ export function SettingsMainForm() {
         </div>
       </div>
 
-      <div className={styles.lineDividerProfileSettings}></div>
+      <div className={styles.lineDividerProfileSettings} />
 
       <div className={styles.publicProfile}>
         <div className={styles.publicProfileText}>
-          <h1>Bio description</h1>
-          <p>This will be your main story. Keep it very, very long</p>
+          <h1>{t("settings.bio.title")}</h1>
+          <p>{t("settings.bio.description")}</p>
         </div>
         <div className={styles.formInfoPublicProfile}>
           <div className={styles.textAreaProfileSettingsBlock}>
@@ -114,20 +106,18 @@ export function SettingsMainForm() {
               error={formik.submitCount > 0 ? formik.errors.about : ""}
               minHeight={minHeight}
               variant="profile"
+              placeHolder={t("settings.bio.input")}
             />
           </div>
         </div>
       </div>
 
-      <div className={styles.lineDividerProfileSettings}></div>
+      <div className={styles.lineDividerProfileSettings} />
 
       <div className={styles.publicProfile}>
         <div className={styles.publicProfileText}>
-          <h1>Profile photo</h1>
-          <p>
-            Update your profile photo and then choose where you want it to
-            display
-          </p>
+          <h1>{t("settings.photo.title")}</h1>
+          <p>{t("settings.photo.description")}</p>
         </div>
         <div className={styles.formInfoPublicProfile}>
           <UploadImage
@@ -139,7 +129,7 @@ export function SettingsMainForm() {
         </div>
       </div>
 
-      <div className={styles.lineDividerProfileSettings}></div>
+      <div className={styles.lineDividerProfileSettings} />
 
       <div className={styles.blockButtons}>
         <motion.div
@@ -157,7 +147,7 @@ export function SettingsMainForm() {
             }}
             className={styles.resetButton}
           >
-            RESET
+            {t("settings.actions.reset")}
           </BaseButtonWrapper>
         </motion.div>
         <motion.div
@@ -170,7 +160,7 @@ export function SettingsMainForm() {
             type="submit"
             className={styles.saveButton}
           >
-            SAVE
+            {t("settings.actions.save")}
           </BaseButtonWrapper>
         </motion.div>
       </div>

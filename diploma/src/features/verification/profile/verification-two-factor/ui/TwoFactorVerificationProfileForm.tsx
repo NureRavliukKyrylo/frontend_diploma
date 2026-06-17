@@ -11,6 +11,7 @@ import {
 } from "../api/twoFactorVerificationApi";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./TwoFactorVerificationForm.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface TwoFactorVerificationProfileFormProps {
   verificationType: VerificationType;
@@ -19,11 +20,15 @@ interface TwoFactorVerificationProfileFormProps {
 export const TwoFactorVerificationProfileForm: React.FC<
   TwoFactorVerificationProfileFormProps
 > = ({ onSuccess, verificationType }) => {
+  const { t } = useTranslation("profile");
   const { formik, isLoading, errorMessage } = useVerification({
     apiFn: (data: VerificationProfileDto) =>
       twoFactorVerificationProfile(data, verificationType),
     confirmFn: () => confirmTwoFactorVerification(verificationType),
-    successMessage: `Two factor ${verificationType} verified successfully`,
+    successMessage:
+      verificationType === "enable"
+        ? t("security.twoFactor.enableVerifySuccess")
+        : t("security.twoFactor.disableVerifySuccess"),
     onSuccess,
   });
 
@@ -34,7 +39,7 @@ export const TwoFactorVerificationProfileForm: React.FC<
           loading={isLoading}
           className={styles.confirmVerificationButton}
         >
-          Send Code
+          {t("settings.actions.sendCode")}
         </BaseButtonWrapper>
       </div>
     </VerificationForm>

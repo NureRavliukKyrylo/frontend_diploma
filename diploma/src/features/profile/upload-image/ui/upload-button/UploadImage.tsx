@@ -2,6 +2,7 @@ import styles from "./UploadImage.module.scss";
 import { Upload } from "@shared/assets/icons/actions";
 import { ModalCropper } from "../modal-window/ModalCropper";
 import { useUploadImage } from "../../model/useUploadImage";
+import { useTranslation } from "react-i18next";
 
 interface UploadImageProps {
   src?: string | File | null;
@@ -16,6 +17,7 @@ export const UploadImage = ({
   onChange,
   maxWidth = "820px",
 }: UploadImageProps) => {
+  const { t } = useTranslation("profile");
   const {
     inputRef,
     isModalCropOpen,
@@ -32,9 +34,7 @@ export const UploadImage = ({
     <>
       <div className={styles.uploadWrapper}>
         <div
-          className={`${styles.uploadContainer} ${
-            error ? styles.errorBorder : ""
-          }`}
+          className={`${styles.uploadContainer} ${error ? styles.errorBorder : ""}`}
           onClick={handleClick}
         >
           <input
@@ -57,12 +57,10 @@ export const UploadImage = ({
               </div>
             )}
             <p>
-              <span>Click to upload</span> or drag and drop SVG, PNG, JPG, or
-              GIF (max. 800×400px)
+              <span>{t("upload.clickToUpload")}</span> {t("upload.dragAndDrop")}
             </p>
           </div>
         </div>
-
         {error && <div className="errorMessage">{error}</div>}
       </div>
       {preview && (

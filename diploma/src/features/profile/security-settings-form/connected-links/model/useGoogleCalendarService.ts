@@ -9,22 +9,24 @@ import {
   unlinkGoogleCalendar,
 } from "../api/connectedServicesApi";
 import type { ConnectedServiceHooks } from "../config/ServiceHooks";
+import { useTranslation } from "react-i18next";
 
 export const useGoogleCalendarService = (): ConnectedServiceHooks => {
+  const { t } = useTranslation(["profile", "common"]);
   const linkMutation = useMutation({
     mutationFn: linkGoogleCalendar,
     onSuccess: () => {
       addToast({
-        title: "Google Calendar connected",
-        description: "Your Google-account has been connected succesfully",
+        title: t("security.calendar.linkSuccess"),
+        description: t("security.calendar.linkDescription"),
         color: "success",
       });
       queryClient.invalidateQueries({ queryKey: profileKeys.all() });
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Calendar connection failed",
-        description: getErrorMessage(error),
+        title: t("security.calendar.linkFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -33,13 +35,16 @@ export const useGoogleCalendarService = (): ConnectedServiceHooks => {
   const unlinkMutation = useMutation({
     mutationFn: unlinkGoogleCalendar,
     onSuccess: () => {
-      addToast({ title: "Google Calendar disconnected", color: "success" });
+      addToast({
+        title: t("security.calendar.unlinkSuccess"),
+        color: "success",
+      });
       queryClient.invalidateQueries({ queryKey: profileKeys.all() });
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Calendar disconnect failed",
-        description: getErrorMessage(error),
+        title: t("security.calendar.unlinkFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -51,8 +56,8 @@ export const useGoogleCalendarService = (): ConnectedServiceHooks => {
     onSuccess: ({ code }) => linkMutation.mutate(code),
     onError: (error: unknown) => {
       addToast({
-        title: "Google OAuth failed",
-        description: getErrorMessage(error),
+        title: t("security.google.oauthFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },

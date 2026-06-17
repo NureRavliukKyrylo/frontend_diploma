@@ -6,8 +6,10 @@ import styles from "./LogoutButton.module.scss";
 import { Power } from "@shared/assets/icons/actions";
 import { LogOutImage } from "@shared/assets/images/actions";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export const LogoutButton: React.FC = () => {
+  const { t } = useTranslation("auth");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const closeModal = () => setIsModalOpen(false);
@@ -39,10 +41,10 @@ export const LogoutButton: React.FC = () => {
 
       <ConfirmationModal
         isOpen={isModalOpen}
-        title="Are you logging out?"
-        text="Do you want to log out now? You’ll be able to sign in again whenever you need."
-        confirmText="Logout"
-        cancelText="Cancel"
+        title={t("logout.modal.title")}
+        text={t("logout.modal.text")}
+        confirmText={t("logout.modal.confirmText")}
+        cancelText={t("logout.modal.cancelText")}
         onConfirm={confirmLogout}
         onCancel={closeModal}
         isLoading={isLoading}

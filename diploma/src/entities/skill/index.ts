@@ -16,7 +16,7 @@ export { SkillControlCardSkeleton } from "./ui/skill-card/control/SkillControlCa
 export type { SkillProfile } from "./model/types/skill-profile/SkillProfile";
 export { skillKeys } from "./model/queries/skill-query/skillQueries";
 export {
-  sortingSkillItems,
+  getSortingSkillItems,
   type SortSkillsValues,
 } from "./config/sortingSkillItems";
 export { useSkillsInfiniteQuery } from "./model/hooks/useSkillsInfiniteQuery";

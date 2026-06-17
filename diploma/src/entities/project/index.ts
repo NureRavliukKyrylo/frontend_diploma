@@ -22,7 +22,7 @@ export { useProjectsListQuery } from "./model/hooks/useProjectsListQuery";
 export { useProjectsMapQuery } from "./model/hooks/useProjectsMapQuery";
 export { ProjectMarkerAnimated } from "./ui/project-marker/ProjectMarker";
 export {
-  sortingProjectItems,
+  getSortingProjectItems,
   type ProjectSortValues,
 } from "./config/sortingProjectItems";
 export { ProjectCard } from "./ui/project-card/item-list/ProjectCard";

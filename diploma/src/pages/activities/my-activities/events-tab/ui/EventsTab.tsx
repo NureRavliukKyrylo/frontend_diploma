@@ -7,7 +7,7 @@ import { useEventsTab } from "../model/useEventsTab";
 import {
   EventControlCard,
   EventControlCardSkeleton,
-  sortingEventItems,
+  getSortingEventItems,
   useMyEventsListQuery,
   type MyEventsSearchParams,
 } from "@entities/event";
@@ -22,8 +22,16 @@ import {
 import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { LeaveConfirmationModal } from "@features/participation";
+import { useTranslation } from "react-i18next";
+import { ErrorBoundary } from "react-error-boundary";
+import { getHttpErrorInfo } from "@shared/libs/error";
 
-export const EventsTab = ({ search }: { search: MyEventsSearchParams }) => {
+interface EventsTabProps {
+  search: MyEventsSearchParams;
+}
+
+export const EventsTab = ({ search }: EventsTabProps) => {
+  const { t } = useTranslation(["activities", "common"]);
   const {
     setIsFilterOpen,
     handleSearch,
@@ -40,8 +48,15 @@ export const EventsTab = ({ search }: { search: MyEventsSearchParams }) => {
   } = useEventsTab(search);
 
   return (
-    <>
-      <div className={styles.mainMyEventsSection}>
+    <div className={styles.mainMyEventsSection}>
+      <ErrorBoundary
+        fallbackRender={({ error }) => (
+          <div className={styles.errorState}>
+            <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
+            <p className="errorHint">{t("common:errors.errorHint")}</p>
+          </div>
+        )}
+      >
         <div className={styles.filtersBlock}>
           <ToggleDropdownButton onOpenChange={setIsFilterOpen}>
             <MyEventsFilterWidget search={search} />
@@ -52,11 +67,12 @@ export const EventsTab = ({ search }: { search: MyEventsSearchParams }) => {
             variant="projects"
           />
           <SortDropDown
-            options={sortingEventItems}
+            options={getSortingEventItems(t)}
             onSelect={handleSort}
             value={search.OrderBy ?? "Default"}
           />
         </div>
+
         <motion.div
           layout
           initial={false}
@@ -67,13 +83,13 @@ export const EventsTab = ({ search }: { search: MyEventsSearchParams }) => {
             <div className={styles.emptyState}>
               {hasActiveFilters ? (
                 <>
-                  <h2>No events found</h2>
-                  <p>Try adjusting your filters or search query</p>
+                  <h2>{t("activities:my.events.notFound")}</h2>
+                  <p>{t("activities:my.events.notFoundHint")}</p>
                 </>
               ) : (
                 <>
-                  <h2>No Events yet</h2>
-                  <p>Join your first project to get started</p>
+                  <h2>{t("activities:my.events.empty")}</h2>
+                  <p>{t("activities:my.events.emptyHint")}</p>
                 </>
               )}
             </div>
@@ -81,11 +97,7 @@ export const EventsTab = ({ search }: { search: MyEventsSearchParams }) => {
             <Suspense
               fallback={
                 <ListWidgetSkeleton
-                  renderSkeleton={() => (
-                    <div className={styles.motionCard}>
-                      <EventControlCardSkeleton />
-                    </div>
-                  )}
+                  renderSkeleton={EventControlCardSkeleton}
                   className={styles.myEventsListWrapper}
                 />
               }
@@ -113,7 +125,11 @@ export const EventsTab = ({ search }: { search: MyEventsSearchParams }) => {
                           menuItems={[
                             {
                               key: "leave",
-                              label: "Leave Event",
+                              label: t("common:participation.leave", {
+                                entity: t(
+                                  `common:participation.entities.event`,
+                                ),
+                              }),
                               onClick: () => handleLeaveEvent(event),
                               variant: "leave",
                             },
@@ -133,7 +149,7 @@ export const EventsTab = ({ search }: { search: MyEventsSearchParams }) => {
                                 params={{ id: event.id }}
                                 className={styles.btnLink}
                               >
-                                Get Started
+                                {t("common:actions.getStarted")}
                               </LinkButtonWrapper>
                             </motion.div>
                           }
@@ -147,25 +163,27 @@ export const EventsTab = ({ search }: { search: MyEventsSearchParams }) => {
             </Suspense>
           )}
         </motion.div>
-      </div>
-      {events && events.pagination.totalPages > 1 && (
-        <div className={styles.paginationWrapper}>
-          <Pagination
-            total={events.pagination.totalPages}
-            page={search.Page}
-            onChange={handlePageChange}
+
+        {events && events.pagination.totalPages > 1 && (
+          <div className={styles.paginationWrapper}>
+            <Pagination
+              total={events.pagination.totalPages}
+              page={search.Page}
+              onChange={handlePageChange}
+            />
+          </div>
+        )}
+
+        {selectedEvent && (
+          <LeaveConfirmationModal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            entityId={selectedEvent.id}
+            entityType="event"
+            entityName={selectedEvent.title}
           />
-        </div>
-      )}
-      {selectedEvent && (
-        <LeaveConfirmationModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          entityId={selectedEvent.id}
-          entityType="event"
-          entityName={selectedEvent.title}
-        />
-      )}
-    </>
+        )}
+      </ErrorBoundary>
+    </div>
   );
 };

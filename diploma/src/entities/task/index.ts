@@ -8,7 +8,7 @@ export {
 export { useTasksListQuery } from "./model/hooks/useTasksListQuery";
 export type { TaskSearchParams } from "./libs";
 export {
-  sortingTaskItems,
+  getSortingTaskItems,
   type TaskSortValues,
 } from "./config/sortingTaskItems";
 export { TaskCard } from "./ui/task-card/item-list/TaskCard";
@@ -44,3 +44,4 @@ export { TaskBoardControlItem } from "./ui/board-item/control/TaskBoardControlIt
 export { TaskBoardControlItemSkeleton } from "./ui/board-item/control/TaskBoardControlItemSkeleton";
 export { TaskCommentItem } from "./ui/comment-item/TaskCommentItem";
 export { TaskCommentItemSkeleton } from "./ui/comment-item/TaskCommentItemSkeleton";
+export { getTaskStatusConfig } from "./config/taskStatusesMap";

@@ -10,11 +10,12 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { ConnectedLinks } from "../../connected-links";
 import { useUserStore } from "@entities/user";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export function PasswordProfileForm() {
+  const { t } = useTranslation("profile");
   const { data: user } = useSuspenseQuery(profileQuery.all());
   const { isPasswordSet, setIsPasswordSet } = useUserStore();
-
   const isPasswordConnected =
     user.connectedServices.find((s) => s.provider === "password")?.connected ??
     false;
@@ -28,40 +29,32 @@ export function PasswordProfileForm() {
       <form className={styles.passwordInfoProfileForm}>
         <div className={styles.securityProfileSection}>
           <div className={styles.passwordProfileText}>
-            <h1>Password</h1>
-            <p>Set a password to protect your account</p>
+            <h1>{t("security.password.title")}</h1>
+            <p>{t("security.password.description")}</p>
           </div>
           <div className={styles.formInfoPasswordProfile}>
             {isPasswordSet && (
-              <>
-                <ProfilePasswordInput value={"MOCKDATAFORUSER"} disabled />
-              </>
+              <ProfilePasswordInput value={"MOCKDATAFORUSER"} disabled />
             )}
             <ChangePasswordButton />
           </div>
         </div>
-        <div className={styles.lineDividerProfileSettings}></div>
+        <div className={styles.lineDividerProfileSettings} />
         <div className={styles.securityProfileSection}>
           <div className={styles.passwordProfileText}>
-            <h1>Two-step verification</h1>
-            <p>
-              We reconnect requiring a verification code in addition to your
-              password
-            </p>
+            <h1>{t("security.twoFactor.title")}</h1>
+            <p>{t("security.twoFactor.description")}</p>
           </div>
           <div className={styles.formInfoSwitchEnabled}>
             <TwoFactorSwitch />
-            <h1>Two-step verification</h1>
+            <h1>{t("security.twoFactor.title")}</h1>
           </div>
         </div>
-        <div className={styles.lineDividerProfileSettings}></div>
+        <div className={styles.lineDividerProfileSettings} />
         <div className={styles.securityProfileSection}>
           <div className={styles.passwordProfileText}>
-            <h1>Email</h1>
-            <p>
-              Set an email address to secure your account and receive important
-              updates
-            </p>
+            <h1>{t("security.email.title")}</h1>
+            <p>{t("security.email.description")}</p>
           </div>
           <div className={styles.formInfoPasswordProfile}>
             <ProfileEmailInput value={user?.email} disabled />
@@ -74,7 +67,6 @@ export function PasswordProfileForm() {
           </div>
         </div>
       </form>
-
       <VerificationModal />
     </>
   );

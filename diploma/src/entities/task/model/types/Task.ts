@@ -1,10 +1,5 @@
 import type { Organization } from "@entities/organization";
-import type {
-  EntityStatus,
-  ParticipationMember,
-  Policy,
-  Rating,
-} from "@shared/config/types";
+import type { ParticipationMember, Policy, Rating } from "@shared/config/types";
 import type { Event } from "@entities/event";
 import type { Project } from "@entities/project";
 import type { Category } from "@entities/category";
@@ -17,7 +12,7 @@ export interface Task {
   startAt: string;
   endAt: string;
   organization: Organization;
-  status: EntityStatus;
+  status: "Pending" | "InProgress" | "Completed" | "Cancelled" | "Overdue";
   memberPreviews: ParticipationMember[];
   event: Event;
   project: Project;

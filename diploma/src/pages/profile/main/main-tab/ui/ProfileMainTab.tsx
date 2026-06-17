@@ -4,12 +4,14 @@ import { BadgesCarouselWidget } from "@widgets/badges";
 import { ProfileMainWidget } from "@widgets/profile";
 import { SkillsListWidget } from "@widgets/skills";
 import styles from "./ProfileMainTab.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface ProfileMainTab {
   user?: User;
 }
 
 export const ProfileMainTab = ({ user }: ProfileMainTab) => {
+  const { t } = useTranslation("profile");
   return (
     <ProfileMainWidget
       badgesChildren={
@@ -28,10 +30,11 @@ export const ProfileMainTab = ({ user }: ProfileMainTab) => {
           />
         ) : (
           <div className={styles.noBadgesContainer}>
-            <p className={styles.noBadgesTitle}>No badges yet</p>
+            <p className={styles.noBadgesTitle}>
+              {t("inventory.noBadgesTitleMain")}
+            </p>
             <p className={styles.noBadgesSubtitle}>
-              Complete challenges and grow your skills — your first badge is
-              just around the corner!
+              {t("inventory.noBadgesDescriptionMain")}
             </p>
           </div>
         )

@@ -1,0 +1,21 @@
+{
+  "rating": {
+    "votes_one": "{{count}} VOTES",
+    "votes_other": "{{count}} VOTES",
+    "stars_one": "{{count}} STAR",
+    "stars_other": "{{count}} STARS"
+  },
+  "actions": {
+    "submit": "Submit Feedback"
+  },
+  "content": {
+    "title": "Review",
+    "yourReview": "Your Review"
+  },
+  "states": {
+    "emptyTitle": "No Feedbacks yet",
+    "emptySubtitle": "Be the first one to leave a feedback",
+    "joinedEmptyTitle": "No feedback yet",
+    "joinedEmptySubtitle": "You've joined - now share what you think. Be the first to leave a review."
+  }
+}

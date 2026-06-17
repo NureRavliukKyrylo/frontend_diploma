@@ -6,7 +6,7 @@ import { formatDateRange } from "@shared/libs/date";
 import { Calendar, Reccurence } from "@shared/assets/icons/info";
 import { Arrow } from "@shared/assets/icons/actions";
 import { type TaskDrawerSearch, type TaskMode } from "@entities/task";
-import { taskMainTabs } from "../config/taskMainTabs";
+import { getTaskMainTabs } from "../config/taskMainTabs";
 import { TaskWidgetSkeleton } from "./TaskWidgetSkeleton";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import type { FeedbackSortValues } from "@entities/feedback";
@@ -17,6 +17,7 @@ import {
 } from "@features/participation";
 import { ReportButton } from "@features/moderation";
 import { ModerationSubjectType } from "@entities/report";
+import { useTranslation } from "react-i18next";
 
 interface TaskWidgetProps {
   search: TaskDrawerSearch;
@@ -33,8 +34,11 @@ export const TaskWidget = ({
   taskId,
   handleSort,
 }: TaskWidgetProps) => {
+  const { t } = useTranslation(["task", "common"]);
   const { task, isLoading, isError, error, statusConfig, policyConfig, forms } =
     useTaskWidget({ taskId, search, handleSort });
+
+  const localizedTabs = getTaskMainTabs(t);
 
   if (isLoading) return <TaskWidgetSkeleton />;
 
@@ -42,7 +46,7 @@ export const TaskWidget = ({
     return (
       <div className={styles.errorState}>
         <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-        <p className="errorHint">Try reloading the page or come back later.</p>
+        <p className="errorHint">{t("common:errors.errorHint")}</p>
       </div>
     );
 
@@ -66,8 +70,9 @@ export const TaskWidget = ({
           <div
             className={styles.taskStatus}
             style={{
+              backgroundColor: statusConfig?.bg,
               color: statusConfig?.color,
-              boxShadow: `0px 5px 15px  ${statusConfig?.shadow}`,
+              boxShadow: `0px 5px 15px ${statusConfig?.shadow}`,
             }}
           >
             {statusConfig?.label}
@@ -77,11 +82,17 @@ export const TaskWidget = ({
               <div className={styles.titleHeader}>
                 <h1>{task?.title}</h1>
                 <div className={styles.taskMetaInfo}>
-                  <span className={styles.metaChipTask}>Task</span>
+                  <span className={styles.metaChipTask}>
+                    {t("task:labels.task")}
+                  </span>
                   {task?.recurrence && (
                     <span className={styles.reccurenceInfo}>
                       <Reccurence className={styles.reccurenceIcon} />
-                      <h1>{task.recurrence}</h1>
+                      <h1>
+                        {t(`task:modes.${task.recurrence}`, {
+                          defaultValue: task.recurrence,
+                        })}
+                      </h1>
                     </span>
                   )}
                   {task?.endAt && (
@@ -119,14 +130,16 @@ export const TaskWidget = ({
                 </div>
                 <div className={styles.ratingTaskInfo}>
                   <h1>{task?.rating.value}</h1>
-                  <p>({task?.rating.totalVotes} VOTES)</p>
+                  <p>
+                    {t("task:labels.votes", { count: task?.rating.totalVotes })}
+                  </p>
                 </div>
               </div>
             </div>
             <div className={styles.relatedActivities}>
               {task?.project && (
                 <div className={styles.activityPill}>
-                  <h1>PROJECT</h1>
+                  <h1>{t("task:labels.project")}</h1>
                   <motion.div
                     whileHover={{ x: 4 }}
                     transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -143,7 +156,7 @@ export const TaskWidget = ({
               )}
               {task?.event && (
                 <div className={styles.activityPill}>
-                  <h1>EVENT</h1>
+                  <h1>{t("task:labels.event")}</h1>
                   <motion.div
                     whileHover={{ x: 4 }}
                     transition={{ type: "spring", stiffness: 400, damping: 20 }}
@@ -167,13 +180,13 @@ export const TaskWidget = ({
           </ReadMoreButton>
           {task?.id && task.hasPendingLeaveRequest && (
             <p className={`${styles.pendingRequest} ${styles.leave}`}>
-              Your leave request is pending approval
+              {t("task:states.pendingLeave")}
             </p>
           )}
 
           {task?.id && task.hasPendingJoinRequest && (
             <p className={styles.pendingRequest}>
-              Your join request is pending approval
+              {t("task:states.pendingJoin")}
             </p>
           )}
 
@@ -200,7 +213,7 @@ export const TaskWidget = ({
       <div className={styles.contentBlock}>
         <div className={styles.toggleWrapper}>
           <Toggle
-            tabs={taskMainTabs}
+            tabs={localizedTabs}
             activeValue={taskMode}
             onChange={handleModeChange}
             buttonClassName={styles.toggleTaskButton}

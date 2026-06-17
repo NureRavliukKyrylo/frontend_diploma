@@ -11,12 +11,14 @@ import { getPolicyStatusConfig } from "@shared/libs/entity";
 import { getProjectMainForms } from "../config/projectMainForms";
 import type { FeedbackSortValues } from "@entities/feedback";
 import type { TaskDrawerSearch } from "@entities/task";
+import { useTranslation } from "react-i18next";
 
 export const useProjectPage = () => {
   const { id } = useParams({ from: "/_masterLayout/projects/$id/" });
   const { tab, ...search } = useSearch({
     from: "/_masterLayout/projects/$id/",
   });
+  const { t } = useTranslation(["common"]);
 
   const { data: project } = useSuspenseQuery(projectQuery.id(id));
   const { data: events } = useQuery(eventQuery.list({ ProjectIds: [id] }));
@@ -41,7 +43,7 @@ export const useProjectPage = () => {
   };
 
   const policyConfig = project?.joinPolicy
-    ? getPolicyStatusConfig(project.joinPolicy)
+    ? getPolicyStatusConfig(project.joinPolicy, t)
     : null;
 
   const { taskId, taskMode, DrawerPageSize, DrawerOrderBy, ...taskFilters } =

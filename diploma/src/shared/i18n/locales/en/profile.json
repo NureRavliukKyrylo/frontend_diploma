@@ -20,7 +20,9 @@
     "unlocked": "Unlocked",
     "locked": "Locked",
     "noBadgesTitle": "No unlocked badges yet",
-    "noBadgesDescription": "Complete activities to earn your first badge"
+    "noBadgesDescription": "Complete activities to earn your first badge",
+    "noBadgesTitleMain": "No badges yet",
+    "noBadgesDescriptionMain": "Complete challenges and grow your skills — your first badge is just around the corner!"
   },
   "rating": {
     "votes": "({{count}} VOTES)"
@@ -40,5 +42,149 @@
   },
   "badges": {
     "title": "BADGES"
+  },
+  "settings": {
+    "tabs": {
+      "settings": "SETTINGS",
+      "links": "LINKS",
+      "security": "SECURITY"
+    },
+    "forms": {
+      "settings": {
+        "title": "User profile",
+        "description": "Update your personal photo, links, and account details here."
+      },
+      "links": {
+        "title": "Social links",
+        "description": "Add your social media links to connect your profiles in one place."
+      },
+      "security": {
+        "title": "Security",
+        "description": "Manage your account security"
+      }
+    },
+    "publicProfile": {
+      "title": "Public profile",
+      "description": "This information will be visible on your public profile",
+      "firstName": "First Name",
+      "lastName": "Last Name"
+    },
+    "bio": {
+      "title": "Bio description",
+      "description": "This will be your main story. Keep it very, very long",
+      "input": "Tell us a little about yourself"
+    },
+    "photo": {
+      "title": "Profile photo",
+      "description": "Update your profile photo and then choose where you want it to display"
+    },
+    "links": {
+      "socialTitle": "Social profiles",
+      "socialDescription": "Manage your social links. Only selected links will be visible on your public profile."
+    },
+    "actions": {
+      "reset": "RESET",
+      "save": "SAVE",
+      "sendCode": "Send code"
+    },
+    "update": {
+      "action": "Update Profile",
+      "successTitle": "Profile Updated",
+      "successDescription": "You have updated your profile successfully"
+    },
+    "location": {
+      "you": "Your",
+      "userLocation": "{{name}} location"
+    }
+  },
+  "cropper": {
+    "title": "POSITION AND CROP",
+    "description": "Edit the image's position before submitting it for review.",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "upload": {
+    "clickToUpload": "Click to upload",
+    "dragAndDrop": "or drag and drop PNG, or JPG"
+  },
+  "security": {
+    "password": {
+      "title": "Password",
+      "description": "Set a password to protect your account"
+    },
+    "twoFactor": {
+      "title": "Two-step verification",
+      "description": "We recommend requiring a verification code in addition to your password",
+      "enableDescription": "Enable two-step verification quickly and securely to protect your account",
+      "disableDescription": "Disable two-step verification quickly and securely to protect your account",
+      "enableAction": "Enable Two Factor",
+      "disableAction": "Disable Two Factor",
+      "enableRequestSuccess": "Two Factor enable request sent",
+      "enableRequestDescription": "You have sent enabling two factor request successfully",
+      "disableRequestSuccess": "Two Factor disable request sent",
+      "disableRequestDescription": "You have sent disabling two factor request successfully",
+      "enableVerifySuccess": "Two factor enable verified successfully",
+      "disableVerifySuccess": "Two factor disable verified successfully"
+    },
+    "email": {
+      "title": "Email",
+      "description": "Set an email address to secure your account and receive important updates"
+    },
+    "changeEmail": {
+      "title": "Change email",
+      "verifyOld": "Verify your current email to continue",
+      "verifyNew": "Verify your new email to complete the change",
+      "enterNew": "Enter your new email below. We'll send a code to confirm it",
+      "placeholder": "Set new email",
+      "saveButton": "Save New Email",
+      "action": "Change Email",
+      "requestSuccess": "Change email request sent",
+      "requestDescription": "You have sent changing email request successfully",
+      "verifySuccess": "Email verified successfully"
+    },
+    "changePassword": {
+      "resetTitle": "Reset Password",
+      "setTitle": "Set New Password",
+      "resetDescription": "Reset your password quickly and securely to regain access",
+      "setDescription": "Set a new password to secure your account",
+      "newPlaceholder": "Set new password",
+      "confirmPlaceholder": "Repeat password",
+      "saveButton": "Save Password",
+      "action": "Change Password",
+      "requestSuccess": "Change password request sent",
+      "requestDescription": "You have sent changing password request successfully",
+      "successTitle": "Password changed",
+      "successDescription": "You have changed your password successfully",
+      "codeVerifySuccess": "Change password code verified successfully",
+      "codeSetSuccess": "Set new password code verified successfully"
+    },
+    "unlink": {
+      "title": "Unlink {{platform}}",
+      "description": "Verify your identity to unlink your {{platform}} account",
+      "verifySuccess": "{{platform}} unlink verified successfully"
+    },
+    "google": {
+      "linkSuccess": "Google account connected",
+      "linkDescription": "Your Google account has been connected successfully",
+      "linkFailed": "Google link failed",
+      "unlinkRequestSuccess": "Unlink request sent",
+      "unlinkRequestDescription": "Check your email to confirm",
+      "unlinkFailed": "Google unlink failed",
+      "oauthFailed": "Google OAuth failed"
+    },
+    "calendar": {
+      "linkSuccess": "Google Calendar connected",
+      "linkDescription": "Your Google Calendar has been connected successfully",
+      "linkFailed": "Calendar connection failed",
+      "unlinkSuccess": "Google Calendar disconnected",
+      "unlinkFailed": "Calendar disconnect failed"
+    }
+  },
+  "deleteProfile": {
+    "button": "DELETE PROFILE",
+    "title": "Delete Your Profile",
+    "text": "Are you sure you want to delete your profile? This action cannot be undone. All your data, settings, and content will be permanently removed.",
+    "confirm": "Delete Profile",
+    "cancel": "Cancel"
   }
 }

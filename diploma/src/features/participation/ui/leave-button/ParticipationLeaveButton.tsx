@@ -4,6 +4,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { LeaveConfirmationModal } from "../leave-modal/LeaveConfirmationModal";
 import styles from "./ParticipationLeaveButton.module.scss";
 import type { EntityType } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
 
 interface ParticipationLeaveButtonProps {
   entityType: Exclude<EntityType, "organization">;
@@ -18,6 +19,7 @@ export const ParticipationLeaveButton = ({
   entityName,
   onSuccess,
 }: ParticipationLeaveButtonProps) => {
+  const { t } = useTranslation("common");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -37,11 +39,12 @@ export const ParticipationLeaveButton = ({
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18 }}
           >
-            Leave {entityType}
+            {t("participation.leave", {
+              entity: t(`participation.entities.${entityType}`),
+            })}
           </motion.span>
         </BaseButtonWrapper>
       </motion.div>
-
       <LeaveConfirmationModal
         entityType={entityType}
         entityId={entityId}

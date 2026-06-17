@@ -3,13 +3,11 @@ import styles from "./DeleteProfileButton.module.scss";
 import { useState } from "react";
 import { DeleteProfileModal } from "../delete-profile-modal/DeleteProfileModal";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export const DeleteProfileButton = () => {
+  const { t } = useTranslation("profile");
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleCloseModal = () => {
-    setIsModalOpen((prev) => !prev);
-  };
 
   return (
     <>
@@ -23,10 +21,13 @@ export const DeleteProfileButton = () => {
           className={styles.deleteAccountButton}
           onClick={() => setIsModalOpen(!isModalOpen)}
         >
-          DELETE PROFILE
+          {t("deleteProfile.button")}
         </BaseButtonWrapper>
       </motion.div>
-      <DeleteProfileModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      <DeleteProfileModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen((prev) => !prev)}
+      />
     </>
   );
 };

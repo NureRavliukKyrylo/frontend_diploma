@@ -1,13 +1,13 @@
 import type { User } from "@entities/user/profile";
 import styles from "./MyActivitiesHeader.module.scss";
 import { Avatar, Toggle } from "@shared/ui";
-import { DefaultAvatar } from "@shared/assets/images/user";
 import { LinkButtonWrapper } from "@shared/ui/buttons";
 import { Arrow } from "@shared/assets/icons/actions";
 import { Layout } from "@shared/assets/images/layout";
 import { getFullName } from "@entities/user";
 import type { MyActivitiesMode } from "../config/MyActivitiesMode";
-import { myActivitiesTabs } from "../config/myActivitiesTabs";
+import { getMyActivitiesTab } from "../config/myActivitiesTabs";
+import { useTranslation } from "react-i18next";
 
 interface MyActivitiesHeaderProps {
   activeTab: MyActivitiesMode;
@@ -20,15 +20,18 @@ export const MyActivitiesHeader = ({
   onTabChange,
   user,
 }: MyActivitiesHeaderProps) => {
+  const { t } = useTranslation(["activities", "common"]);
+
   return (
     <>
       <Avatar
-        src={user?.profile?.avatarUrl ?? DefaultAvatar}
+        src={user?.profile?.avatarUrl}
+        fallback={getFullName(user?.firstName, user?.lastName)}
         className={styles.myActivitiesAvatar}
       />
       <div className={styles.myActivitiesToggle}>
         <Toggle
-          tabs={myActivitiesTabs}
+          tabs={getMyActivitiesTab(t)}
           activeValue={activeTab}
           onChange={onTabChange}
           buttonClassName={styles.toggleMyActivitiesButton}
@@ -39,7 +42,7 @@ export const MyActivitiesHeader = ({
         />
       </div>
       <div className={styles.baseUserInfo}>
-        <h1>{getFullName(user.firstName, user.lastName)}</h1>
+        <h1>{getFullName(user?.firstName, user?.lastName)}</h1>
         <h2>{user?.email}</h2>
       </div>
       <div
@@ -47,10 +50,10 @@ export const MyActivitiesHeader = ({
         style={{ backgroundImage: `url(${Layout})` }}
       >
         <div className={styles.usersActivitiesTitle}>
-          {user?.firstName}'s Activities
+          {t("my.header.userActivities", { name: user?.firstName || "" })}
         </div>
         <LinkButtonWrapper className={styles.backToProfileButton} to="/profile">
-          BACK <Arrow className={styles.backArrow} />
+          {t("common:actions.back")} <Arrow className={styles.backArrow} />
         </LinkButtonWrapper>
       </div>
     </>

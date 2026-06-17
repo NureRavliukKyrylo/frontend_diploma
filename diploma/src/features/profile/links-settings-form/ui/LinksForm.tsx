@@ -10,6 +10,7 @@ export function LinksForm({}) {
   const { formik, isLoading, errorMessage } = useSocialLinksSettingsForm();
   const { t } = useTranslation();
   const socialPlatforms = getSocialPlatforms(t);
+
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -17,11 +18,8 @@ export function LinksForm({}) {
     >
       <div className={styles.linksProfile}>
         <div className={styles.linksProfileText}>
-          <h1>Social profiles</h1>
-          <p>
-            Manage your social links. Only selected links will be visible on
-            your public profile.
-          </p>
+          <h1>{t("profile:settings.links.socialTitle")}</h1>
+          <p>{t("profile:settings.links.socialDescription")}</p>
         </div>
         <div className={styles.formInfolinksProfile}>
           {socialPlatforms.map(({ key, placeholder, icon }) => {
@@ -62,7 +60,7 @@ export function LinksForm({}) {
             type="button"
             className={styles.resetButton}
           >
-            RESET
+            {t("profile:settings.actions.reset")}
           </BaseButtonWrapper>
         </motion.div>
 
@@ -77,7 +75,7 @@ export function LinksForm({}) {
             type="submit"
             className={styles.saveButton}
           >
-            SAVE
+            {t("profile:settings.actions.save")}
           </BaseButtonWrapper>
         </motion.div>
       </div>

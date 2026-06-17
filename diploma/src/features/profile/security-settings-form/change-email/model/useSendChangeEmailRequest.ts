@@ -7,7 +7,8 @@ import {
 } from "../api/sendChangeEmailRequestApi";
 import type { CodeType } from "@features/verification";
 import { useFormik } from "formik";
-import { changeEmailSchema } from "../lib/changeEmailSchema";
+import { getChangeEmailSchema } from "../lib/changeEmailSchema";
+import { useTranslation } from "react-i18next";
 
 interface UseSendChangeEmailRequestProps {
   codeType?: CodeType;
@@ -18,22 +19,27 @@ export const useSendChangeEmailRequest = ({
   codeType = "old-code",
   onSuccess,
 }: UseSendChangeEmailRequestProps = {}) => {
+  const { t } = useTranslation(["profile", "common"]);
+  const validationSchema = getChangeEmailSchema(t);
+
   const mutation = useMutation({
     mutationFn: (data?: SendChangeEmailRequestDto) =>
       sendChangeEmailRequest(data, codeType),
     onSuccess: () => {
       addToast({
-        title: "Change email request success",
-        description: "You have sent changing email request successfully",
+        title: t("security.changeEmail.requestSuccess"),
+        description: t("security.changeEmail.requestDescription"),
         color: "success",
       });
       onSuccess?.();
     },
     onError: (error: unknown) => {
-      const errorMessage = getErrorMessage(error);
+      const errorMessage = getErrorMessage(error, t);
 
       addToast({
-        title: "Change email request failed",
+        title: t("common:errors.actionFailed", {
+          action: t("security.changeEmail.action"),
+        }),
         description: errorMessage,
         color: "danger",
       });
@@ -44,7 +50,7 @@ export const useSendChangeEmailRequest = ({
     initialValues: {
       newEmail: "",
     },
-    validationSchema: changeEmailSchema,
+    validationSchema,
     onSubmit: (values) => {
       mutation.mutate(values);
     },
@@ -54,6 +60,6 @@ export const useSendChangeEmailRequest = ({
     formik,
     sendEmail: () => mutation.mutate(undefined),
     isLoading: mutation.isPending,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

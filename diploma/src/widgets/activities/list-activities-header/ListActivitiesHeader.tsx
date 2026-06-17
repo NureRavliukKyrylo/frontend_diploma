@@ -3,7 +3,8 @@ import { ActivitiesLogo } from "@shared/assets/images/information";
 import { Link } from "@tanstack/react-router";
 import { Toggle } from "@shared/ui";
 import type { ListActivitiesMode } from "@shared/config/types";
-import { listActivitiesTabs } from "@shared/config/constants";
+import { useTranslation } from "react-i18next";
+import { getListActivitiesTabs } from "@shared/config/constants";
 
 interface ListActivitiesHeaderProps {
   activeTab: ListActivitiesMode;
@@ -14,37 +15,35 @@ export const ListActivitiesHeader = ({
   activeTab,
   onTabChange,
 }: ListActivitiesHeaderProps) => {
+  const { t } = useTranslation("activities");
+  const tabs = getListActivitiesTabs(t);
+
   return (
     <div className={styles.activitiesHeader}>
       <div className={styles.activitiesInformation}>
         <div className={styles.textActivitiesInfotamtion}>
           <div className={styles.textActivities}>
-            <h1>Explore activities that make a difference</h1>
-            <h2>432 activities</h2>
+            <h1>{t("header.title")}</h1>
+            <h2>{t("header.count", { count: 432 })}</h2>
           </div>
           <div className={styles.activitiesDescription}>
             <p>
-              Use our interactive world map to explore active and completed
-              volunteer projects — from rebuilding schools and organizing
-              community events to environmental clean-ups and humanitarian aid.
-              Each pin on the map represents real people, real stories, and real
-              change. Find out where help is needed most, learn more about each
-              project, and get involved — locally or across the globe.
+              {t("header.descriptionMain")}{" "}
               <Link to="/map" className={styles.mapLink}>
-                Map
+                {t("header.mapLinkText")}
               </Link>
             </p>
             <p>
-              Want to see the active projects you’ve already joined?{" "}
+              {t("header.myActivitiesPrompt")}{" "}
               <Link to="/activities/my" className={styles.myActivitiesLink}>
-                Click
+                {t("header.myActivitiesLinkText")}
               </Link>
             </p>
           </div>
         </div>
         <div className={styles.listActivitiesToggle}>
           <Toggle
-            tabs={listActivitiesTabs}
+            tabs={tabs}
             activeValue={activeTab}
             onChange={onTabChange}
             buttonClassName={styles.toggleListActivitiesButton}

@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { profileKeys } from "@entities/user/profile";
@@ -6,7 +6,8 @@ import type { EntityType } from "@shared/config/types";
 import { queryKeyMap } from "../config/queryKeyMap";
 import { joinParticipation } from "../api/participationJoinApi";
 import { filtersKeys } from "@shared/api/filters";
-import { capitalize } from "@shared/libs/text";
+import { useTranslation } from "react-i18next";
+import { queryClient } from "@shared/api";
 
 interface UseJoinParticipationOptions {
   entityType: Exclude<EntityType, "organization">;
@@ -19,21 +20,27 @@ export const useJoinParticipation = ({
   entityId,
   onSuccess,
 }: UseJoinParticipationOptions) => {
-  const queryClient = useQueryClient();
+  const { t } = useTranslation("common");
 
   const mutation = useMutation({
     mutationFn: () => joinParticipation({ entityId, entityType }),
     onSuccess: (response) => {
       if (response?.requiresApproval) {
         addToast({
-          title: `${capitalize(entityType)} Approval Required`,
+          title: t("participation.approvalRequired", {
+            entity: t(`participation.entities.${entityType}`),
+          }),
           description: response.message,
           color: "warning",
         });
       } else {
         addToast({
-          title: `Joined ${capitalize(entityType)} Successfully`,
-          description: `You have joined ${capitalize(entityType)} successfully.`,
+          title: t("participation.joinSuccess", {
+            entity: t(`participation.entities.${entityType}`),
+          }),
+          description: t("participation.joinSuccessDescription", {
+            entity: t(`participation.entities.${entityType}`),
+          }),
           color: "success",
         });
       }
@@ -51,8 +58,8 @@ export const useJoinParticipation = ({
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Failed to Join",
-        description: getErrorMessage(error),
+        title: t("participation.joinFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -61,6 +68,6 @@ export const useJoinParticipation = ({
   return {
     handleJoin: mutation.mutate,
     isLoading: mutation.isPending,
-    error: mutation.error ? getErrorMessage(mutation.error) : null,
+    error: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

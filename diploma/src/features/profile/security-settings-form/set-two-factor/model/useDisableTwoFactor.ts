@@ -3,25 +3,29 @@ import { disableTwoFactor } from "../api/twoFactorApi";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { useUserProfileStore } from "@entities/user";
+import { useTranslation } from "react-i18next";
 
 export const useDisableTwoFactor = () => {
   const { openVerificationModal } = useUserProfileStore();
+  const { t } = useTranslation(["profile", "common"]);
 
   const mutation = useMutation({
     mutationFn: disableTwoFactor,
     onSuccess: () => {
       addToast({
-        title: "Disable Two Factor request success",
-        description: "You have sent disabling two factor request successfully",
+        title: t("security.twoFactor.disableRequestSuccess"),
+        description: t("security.twoFactor.disableRequestDescription"),
         color: "success",
       });
       openVerificationModal("twoFactorDisable");
     },
     onError: (error: unknown) => {
-      const errorMessage = getErrorMessage(error);
+      const errorMessage = getErrorMessage(error, t);
 
       addToast({
-        title: "Disable Two Factor request Failed",
+        title: t("common:errors.actionFailed", {
+          action: t("security.twoFactor.disableAction"),
+        }),
         description: errorMessage,
         color: "danger",
       });
@@ -31,6 +35,6 @@ export const useDisableTwoFactor = () => {
   return {
     disableTwoFactor: mutation.mutate,
     isLoading: mutation.isPending,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

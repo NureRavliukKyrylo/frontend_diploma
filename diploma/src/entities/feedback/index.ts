@@ -11,6 +11,6 @@ export { FeedbackControlCard } from "./ui/feedback-card/control/FeedbackControlC
 export { FeedbackCardSkeleton } from "./ui/feedback-card/list-item/FeedbackCardSkeleton";
 export {
   type FeedbackSortValues,
-  sortingFeedbackItems,
+  getSortingFeedbackItems,
 } from "./config/sortingFeedbackItems";
 export { useFeedbackTab } from "./model/hooks/feedback-tab/useFeedbackTab";

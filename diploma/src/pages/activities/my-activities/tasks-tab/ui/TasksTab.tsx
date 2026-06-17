@@ -10,14 +10,12 @@ import {
   TaskWidgetJoined,
 } from "@widgets/tasks";
 import {
-  sortingTaskItems,
+  getSortingTaskItems,
   TaskControlCardSkeleton,
   useMyTasksListQuery,
   type MyTasksSearchParams,
-} from "@entities/task";
-import type {
-  MyTasksRequestParams,
-  TaskDrawerJoinedSearch,
+  type MyTasksRequestParams,
+  type TaskDrawerJoinedSearch,
 } from "@entities/task";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -32,8 +30,16 @@ import { TaskControlCard } from "@entities/task/ui/task-card/control/TaskControl
 import { LeaveConfirmationModal } from "@features/participation";
 import { SwipeableDrawer } from "@mui/material";
 import { useMyActivitiesTaskDrawer } from "../model/useMyActivitiesTaskDrawer";
+import { useTranslation } from "react-i18next";
+import { ErrorBoundary } from "react-error-boundary";
+import { getHttpErrorInfo } from "@shared/libs/error";
 
-export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
+interface TasksTabProps {
+  search: MyTasksSearchParams;
+}
+
+export const TasksTab = ({ search }: TasksTabProps) => {
+  const { t } = useTranslation(["activities", "common"]);
   const { tab, taskId: _, taskMode: __, ...taskSearch } = search;
   const { isOpen, openTask, closeTask, taskId, handleModeChange, taskMode } =
     useMyActivitiesTaskDrawer();
@@ -53,8 +59,15 @@ export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
   } = useTasksTab(taskSearch);
 
   return (
-    <>
-      <div className={styles.mainMyTasksSection}>
+    <div className={styles.mainMyTasksSection}>
+      <ErrorBoundary
+        fallbackRender={({ error }) => (
+          <div className={styles.errorState}>
+            <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
+            <p className="errorHint">{t("common:errors.errorHint")}</p>
+          </div>
+        )}
+      >
         <div className={styles.filtersBlock}>
           <ToggleDropdownButton onOpenChange={setIsFilterOpen}>
             <MyTasksFilterWidget search={search as MyTasksRequestParams} />
@@ -65,11 +78,12 @@ export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
             variant="projects"
           />
           <SortDropDown
-            options={sortingTaskItems}
+            options={getSortingTaskItems(t)}
             onSelect={handleSort}
             value={search.OrderBy ?? "Default"}
           />
         </div>
+
         <motion.div
           layout
           initial={false}
@@ -80,13 +94,13 @@ export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
             <div className={styles.emptyState}>
               {hasActiveFilters ? (
                 <>
-                  <h2>No tasks found</h2>
-                  <p>Try adjusting your filters or search query</p>
+                  <h2>{t("activities:my.tasks.notFound")}</h2>
+                  <p>{t("activities:my.tasks.notFoundHint")}</p>
                 </>
               ) : (
                 <>
-                  <h2>No Tasks yet</h2>
-                  <p>Join your first project to get started</p>
+                  <h2>{t("activities:my.tasks.empty")}</h2>
+                  <p>{t("activities:my.tasks.emptyHint")}</p>
                 </>
               )}
             </div>
@@ -130,7 +144,9 @@ export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
                           menuItems={[
                             {
                               key: "leave",
-                              label: "Leave Task",
+                              label: t("common:participation.leave", {
+                                entity: t(`common:participation.entities.task`),
+                              }),
                               onClick: () => handleLeaveTask(task),
                               variant: "leave",
                             },
@@ -151,7 +167,7 @@ export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
                                 resetScroll={false}
                                 className={styles.btnLink}
                               >
-                                Get Started
+                                {t("common:actions.getStarted")}
                               </LinkButtonWrapper>
                             </motion.div>
                           }
@@ -165,44 +181,46 @@ export const TasksTab = ({ search }: { search: MyTasksSearchParams }) => {
             </Suspense>
           )}
         </motion.div>
-      </div>
-      <SwipeableDrawer
-        open={isOpen}
-        onClose={closeTask}
-        onOpen={() => {}}
-        anchor="right"
-        className={styles.drawer}
-      >
-        <div className={styles.drawerContent}>
-          {taskId && (
-            <TaskWidgetJoined
-              search={search as TaskDrawerJoinedSearch}
-              handleModeChange={handleModeChange}
-              taskMode={taskMode}
-              taskId={taskId}
-            />
-          )}
-        </div>
-      </SwipeableDrawer>
 
-      {tasks && tasks.pagination.totalPages > 1 && (
-        <div className={styles.paginationWrapper}>
-          <Pagination
-            total={tasks.pagination.totalPages}
-            page={search.Page}
-            onChange={handlePageChange}
+        <SwipeableDrawer
+          open={isOpen}
+          onClose={closeTask}
+          onOpen={() => {}}
+          anchor="right"
+          className={styles.drawer}
+        >
+          <div className={styles.drawerContent}>
+            {taskId && (
+              <TaskWidgetJoined
+                search={search as TaskDrawerJoinedSearch}
+                handleModeChange={handleModeChange}
+                taskMode={taskMode}
+                taskId={taskId}
+              />
+            )}
+          </div>
+        </SwipeableDrawer>
+
+        {tasks && tasks.pagination.totalPages > 1 && (
+          <div className={styles.paginationWrapper}>
+            <Pagination
+              total={tasks.pagination.totalPages}
+              page={search.Page}
+              onChange={handlePageChange}
+            />
+          </div>
+        )}
+
+        {selectedTask && (
+          <LeaveConfirmationModal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            entityId={selectedTask.id}
+            entityType="task"
+            entityName={selectedTask.title}
           />
-        </div>
-      )}
-      {selectedTask && (
-        <LeaveConfirmationModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          entityId={selectedTask.id}
-          entityType="task"
-          entityName={selectedTask.title}
-        />
-      )}
-    </>
+        )}
+      </ErrorBoundary>
+    </div>
   );
 };

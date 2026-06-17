@@ -1,6 +1,6 @@
 import {
   EventCard,
-  sortingEventItems,
+  getSortingEventItems,
   useEventsListQuery,
   type EventSearchParamsNoCategories,
 } from "@entities/event";
@@ -23,6 +23,7 @@ import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ProjectCardSkeleton } from "@entities/project";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
+import { useTranslation } from "react-i18next";
 
 interface EventsTabProps {
   search: EventSearchParamsNoCategories;
@@ -30,6 +31,7 @@ interface EventsTabProps {
 }
 
 export const EventsTab = ({ search, categoryId }: EventsTabProps) => {
+  const { t } = useTranslation(["activities", "common"]);
   const {
     isFilterOpen,
     setIsFilterOpen,
@@ -47,9 +49,7 @@ export const EventsTab = ({ search, categoryId }: EventsTabProps) => {
           return (
             <div className={styles.errorState}>
               <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-              <p className="errorHint">
-                Try reloading the page or come back later.
-              </p>
+              <p className="errorHint">{t("common:errors.errorHint")}</p>
             </div>
           );
         }}
@@ -69,7 +69,7 @@ export const EventsTab = ({ search, categoryId }: EventsTabProps) => {
               variant="projects"
             />
             <SortDropDown
-              options={sortingEventItems}
+              options={getSortingEventItems(t)}
               onSelect={handleSort}
               value={search.OrderBy ?? "Default"}
             />
@@ -82,8 +82,14 @@ export const EventsTab = ({ search, categoryId }: EventsTabProps) => {
           >
             {events?.data?.length === 0 ? (
               <div className={styles.emptyState}>
-                <h2>No events found</h2>
-                <p>Try adjusting your filters or search query</p>
+                <h2>
+                  {t("activities:categories.detail.emptyStates.events.title")}
+                </h2>
+                <p>
+                  {t(
+                    "activities:categories.detail.emptyStates.events.subtitle",
+                  )}
+                </p>
               </div>
             ) : (
               <Suspense

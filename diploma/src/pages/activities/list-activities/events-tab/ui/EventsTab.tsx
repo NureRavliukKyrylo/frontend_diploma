@@ -1,7 +1,7 @@
 import {
   EventCard,
   EventCardSkeleton,
-  sortingEventItems,
+  getSortingEventItems,
   useEventsListQuery,
   type EventSearchParams,
 } from "@entities/event";
@@ -23,12 +23,14 @@ import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
+import { useTranslation } from "react-i18next";
 
 interface EventsTabProps {
   search: EventSearchParams;
 }
 
 export const EventsTab = ({ search }: EventsTabProps) => {
+  const { t } = useTranslation(["activities", "common"]);
   const {
     isFilterOpen,
     setIsFilterOpen,
@@ -46,9 +48,7 @@ export const EventsTab = ({ search }: EventsTabProps) => {
           return (
             <div className={styles.errorState}>
               <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-              <p className="errorHint">
-                Try reloading the page or come back later.
-              </p>
+              <p className="errorHint">{t("common:errors.errorHint")}</p>
             </div>
           );
         }}
@@ -64,7 +64,7 @@ export const EventsTab = ({ search }: EventsTabProps) => {
               variant="projects"
             />
             <SortDropDown
-              options={sortingEventItems}
+              options={getSortingEventItems(t)}
               onSelect={handleSort}
               value={search.OrderBy ?? "Default"}
             />
@@ -77,8 +77,8 @@ export const EventsTab = ({ search }: EventsTabProps) => {
           >
             {events?.data?.length === 0 ? (
               <div className={styles.emptyState}>
-                <h2>No events found</h2>
-                <p>Try adjusting your filters or search query</p>
+                <h2>{t("activities:states.emptyEvents.title")}</h2>
+                <p>{t("activities:states.emptyEvents.subtitle")}</p>
               </div>
             ) : (
               <Suspense

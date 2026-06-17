@@ -20,13 +20,18 @@ import {
 import { useNavigate, useRouter } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Pagination } from "@shared/ui";
+import { useTranslation } from "react-i18next";
 
-interface ProjectEventsTab {
+interface ProjectEventsTabProps {
   projectId: string;
   search: EventsSearch;
 }
 
-export const ProjectEventsTab = ({ search, projectId }: ProjectEventsTab) => {
+export const ProjectEventsTab = ({
+  search,
+  projectId,
+}: ProjectEventsTabProps) => {
+  const { t } = useTranslation(["project", "common"]);
   const router = useRouter();
   const { data: events } = useQuery(
     eventQuery.list({ ProjectIds: [projectId], ...search }),
@@ -44,9 +49,7 @@ export const ProjectEventsTab = ({ search, projectId }: ProjectEventsTab) => {
           return (
             <div className={styles.errorState}>
               <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-              <p className="errorHint">
-                Try reloading the page or come back later.
-              </p>
+              <p className="errorHint">{t("common:errors.errorHint")}</p>
             </div>
           );
         }}
@@ -91,10 +94,10 @@ export const ProjectEventsTab = ({ search, projectId }: ProjectEventsTab) => {
                     ProjectIds: [projectId],
                     ...search,
                   })}
-                  renderEmpty={(events) =>
-                    events && events.length === 0 ? (
+                  renderEmpty={(eventsData) =>
+                    eventsData && eventsData.length === 0 ? (
                       <div className={styles.emptyState}>
-                        <h2>No Events yet</h2>
+                        <h2>{t("project:states.noEvents")}</h2>
                       </div>
                     ) : null
                   }

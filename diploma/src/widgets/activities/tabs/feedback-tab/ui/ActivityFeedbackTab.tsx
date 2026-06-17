@@ -6,7 +6,7 @@ import {
   FeedbackCard,
   FeedbackCardSkeleton,
   FeedbackControlCard,
-  sortingFeedbackItems,
+  getSortingFeedbackItems,
   useFeedbacksInfiniteQuery,
   useFeedbackTab,
   type FeedbackSortValues,
@@ -26,6 +26,7 @@ import { SortDropDown } from "@shared/ui/drop-down";
 import { motion } from "framer-motion";
 import { ReportButton } from "@features/moderation";
 import { ModerationSubjectType } from "@entities/report";
+import { useTranslation } from "react-i18next";
 
 interface ActivityFeedbackTabProps {
   entityId: string;
@@ -48,6 +49,7 @@ export const ActivityFeedbackTab = ({
   handleSort,
   rating,
 }: ActivityFeedbackTabProps) => {
+  const { t } = useTranslation(["feedback", "common"]);
   const {
     modalType,
     selectedFeedback,
@@ -64,9 +66,7 @@ export const ActivityFeedbackTab = ({
         return (
           <div className={styles.errorState}>
             <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-            <p className="errorHint">
-              Try reloading the page or come back later.
-            </p>
+            <p className="errorHint">{t("common:errors.errorHint")}</p>
           </div>
         );
       }}
@@ -81,20 +81,26 @@ export const ActivityFeedbackTab = ({
                 gradient="linear-gradient(180deg, #8C0000 0%, #260000 100%)"
                 classNameStar={styles.starRating}
               />
-              <h1 className={styles.totalVotes}>{rating.totalVotes} VOTES</h1>
+              <h1 className={styles.totalVotes}>
+                {t("feedback:rating.votes", { count: rating.totalVotes })}
+              </h1>
             </div>
             <div className={styles.detailedInfo}>
               {ratingValues.map((value) => {
                 const detail = rating.detailInfo.find((d) => d.value === value);
                 return (
                   <div key={value} className={styles.ratingLine}>
-                    <h1 className={styles.ratingValue}>{value} STARS</h1>
+                    <h1 className={styles.ratingValue}>
+                      {t("feedback:rating.stars", { count: value })}
+                    </h1>
                     <ProgressBar
                       current={detail?.percentOfAll ?? 0}
                       className={styles.progressRating}
                     />
                     <h1 className={styles.votesOfValue}>
-                      {detail?.totalVotes ?? 0} VOTES
+                      {t("feedback:rating.votes", {
+                        count: detail?.totalVotes ?? 0,
+                      })}
                     </h1>
                   </div>
                 );
@@ -113,14 +119,14 @@ export const ActivityFeedbackTab = ({
                     className={styles.submitFeedback}
                     onClick={() => setModalType("create")}
                   >
-                    Submit Feedback
+                    {t("feedback:actions.submit")}
                   </BaseButtonWrapper>
                 </motion.div>
               )}
 
               <div className={styles.sortWrapper}>
                 <SortDropDown
-                  options={sortingFeedbackItems}
+                  options={getSortingFeedbackItems(t)}
                   onSelect={handleSort}
                   value={OrderBy ?? "Default"}
                 />
@@ -129,7 +135,7 @@ export const ActivityFeedbackTab = ({
           </div>
         </div>
         <div className={styles.mainContent}>
-          <h1 className={styles.reviewTitle}>Review</h1>
+          <h1 className={styles.reviewTitle}>{t("feedback:content.title")}</h1>
           <Suspense
             fallback={
               <ListWidgetSkeleton
@@ -154,7 +160,9 @@ export const ActivityFeedbackTab = ({
                   return (
                     <FeedbackControlCard
                       feedback={feedback}
-                      displayName="You"
+                      displayName={t("common:members.you", {
+                        defaultValue: "You",
+                      })}
                       menuItems={getMenuItems(feedback)}
                       key={feedback.id}
                     />
@@ -191,8 +199,8 @@ export const ActivityFeedbackTab = ({
               renderEmpty={(feedbacks) =>
                 feedbacks && feedbacks.length === 0 ? (
                   <div className={styles.emptyState}>
-                    <h2>No Feedbacks yet</h2>
-                    <p>Be the first one to leave a feedback</p>
+                    <h2>{t("feedback:states.emptyTitle")}</h2>
+                    <p>{t("feedback:states.emptySubtitle")}</p>
                   </div>
                 ) : null
               }

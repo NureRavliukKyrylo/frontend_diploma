@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import styles from "./ReadMoreButton.module.scss";
 
 interface ReadMoreButtonProps {
@@ -17,13 +18,18 @@ export function ReadMoreButton({
   collapsedHeight = 80,
   className = "",
   classNameButton = "",
-  buttonText = "Read more",
-  buttonTextCollapsed = "Read less",
+  buttonText,
+  buttonTextCollapsed,
   gradientColor = "255, 255, 255",
 }: ReadMoreButtonProps) {
+  const { t } = useTranslation("common");
   const [isExpanded, setIsExpanded] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  const resolvedButtonText = buttonText ?? t("common:actions.readMore");
+  const resolvedButtonTextCollapsed =
+    buttonTextCollapsed ?? t("common:actions.readLess");
 
   useEffect(() => {
     const checkHeight = () => {
@@ -78,7 +84,7 @@ export function ReadMoreButton({
           }}
           type="button"
         >
-          {isExpanded ? buttonTextCollapsed : buttonText}
+          {isExpanded ? resolvedButtonTextCollapsed : resolvedButtonText}
         </button>
       )}
     </div>

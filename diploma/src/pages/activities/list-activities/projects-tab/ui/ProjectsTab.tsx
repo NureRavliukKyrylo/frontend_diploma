@@ -4,7 +4,7 @@ import { ProjectFiltersWidget, ProjectsListWidget } from "@widgets/projects";
 import {
   ProjectCard,
   ProjectCardSkeleton,
-  sortingProjectItems,
+  getSortingProjectItems,
   useProjectsListQuery,
   type ProjectSearchParams,
 } from "@entities/project";
@@ -23,12 +23,15 @@ import { useProjectsTab } from "../model/useProjectsTab";
 import { Pagination } from "@shared/ui";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
+import { useTranslation } from "react-i18next";
 
 interface ProjectsTabProps {
   search: ProjectSearchParams;
 }
 
 export const ProjectsTab = ({ search }: ProjectsTabProps) => {
+  const { t } = useTranslation(["activities", "common"]);
+
   const {
     isFilterOpen,
     setIsFilterOpen,
@@ -46,9 +49,7 @@ export const ProjectsTab = ({ search }: ProjectsTabProps) => {
           return (
             <div className={styles.errorState}>
               <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-              <p className="errorHint">
-                Try reloading the page or come back later.
-              </p>
+              <p className="errorHint">{t("common:errors.errorHint")}</p>
             </div>
           );
         }}
@@ -64,7 +65,7 @@ export const ProjectsTab = ({ search }: ProjectsTabProps) => {
               variant="projects"
             />
             <SortDropDown
-              options={sortingProjectItems}
+              options={getSortingProjectItems(t)}
               onSelect={handleSort}
               value={search.OrderBy ?? "Default"}
             />
@@ -78,8 +79,8 @@ export const ProjectsTab = ({ search }: ProjectsTabProps) => {
           >
             {projects?.data?.length === 0 ? (
               <div className={styles.emptyState}>
-                <h2>No projects found</h2>
-                <p>Try adjusting your filters or search query</p>
+                <h2>{t("activities:states.emptyProjects.title")}</h2>
+                <p>{t("activities:states.emptyProjects.subtitle")}</p>
               </div>
             ) : (
               <Suspense

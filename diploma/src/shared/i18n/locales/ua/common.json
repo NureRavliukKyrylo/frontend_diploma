@@ -18,7 +18,15 @@
     "resendIn": "Надіслати код повторно через ({{time}})",
     "clearFilters": "Скинути Фільтрацію",
     "seeMore": "Показати більше",
-    "showAll": "ПОКАЗАТИ ВСІ {{subject}}"
+    "showMore": "Показати more",
+    "showAll": "ПОКАЗАТИ ВСІ {{subject}}",
+    "readMore": "Читати більше",
+    "readLess": "Згорнути",
+    "getStarted": "РОЗПОЧАТИ"
+  },
+  "policies": {
+    "open": "Відкритий для вступу",
+    "approval_required": "Потрібне підтвердження"
   },
   "loading": {
     "title": "Завантаження..."
@@ -52,7 +60,14 @@
     "notFound": "Не знайдено",
     "unauthorized": "Немає доступу",
     "actionFailed": "Помилка: {{action}}",
-    "errorHint": "Try reloading the page or come back later."
+    "errorHint": "Спробуйте оновити сторінку або завітайте пізніше."
+  },
+  "members": {
+    "team": "Команда",
+    "members": "учасники",
+    "you": "Ви",
+    "emptyTitle": "Учасників ще немає",
+    "emptySubtitle": "Будьте першим, хто приєднається та змінить ситуацію"
   },
   "pagination": {
     "loadMore": "Завантажити ще",
@@ -84,6 +99,26 @@
     "linkedin": {
       "label": "Введіть посилання на LinkedIn",
       "activeLabel": "Посилання LinkedIn"
+    }
+  },
+  "participation": {
+    "join": "Приєднатись до {{entity}}",
+    "leave": "Покинути {{entity}}",
+    "leaveTitle": "Покинути {{name}}?",
+    "leaveText": "Ви впевнені, що хочете покинути? Ви завжди можете приєднатись знову.",
+    "leaveConfirm": "Покинути",
+    "joinSuccess": "Успішно приєднались до {{entity}}",
+    "joinSuccessDescription": "Ви успішно приєднались до {{entity}}.",
+    "joinFailed": "Не вдалось приєднатись",
+    "leaveSuccess": "Успішно покинули {{entity}}",
+    "leaveSuccessDescription": "Ви успішно покинули {{entity}}.",
+    "leaveFailed": "Не вдалось покинути",
+    "approvalRequired": "Потрібне схвалення для {{entity}}",
+    "entities": {
+      "project": "Проект",
+      "event": "Подію",
+      "task": "Завдання",
+      "organization": "Організацію"
     }
   },
   "search": {

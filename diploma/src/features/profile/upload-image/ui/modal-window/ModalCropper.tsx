@@ -12,6 +12,7 @@ import {
 } from "@shared/assets/icons/actions";
 import { MAX_ZOOM, MIN_ZOOM } from "@shared/config/constants";
 import { useModalCropper } from "../../model/useModalCropper";
+import { useTranslation } from "react-i18next";
 
 interface ModalCropperProps {
   src: string;
@@ -30,6 +31,7 @@ export const ModalCropper = ({
   aspect = 1 / 1,
   maxWidth,
 }: ModalCropperProps) => {
+  const { t } = useTranslation("profile");
   const {
     crop,
     zoom,
@@ -56,9 +58,8 @@ export const ModalCropper = ({
       animation="right"
     >
       <div className={styles.wrapperModalCropper}>
-        <h1>POSITION AND CROP</h1>
-        <h2>Edit the image's position before submitting it for review.</h2>
-
+        <h1>{t("cropper.title")}</h1>
+        <h2>{t("cropper.description")}</h2>
         <div className={styles.imageActionsBlock}>
           <div className={styles.cropContainer}>
             <CropImage
@@ -92,21 +93,20 @@ export const ModalCropper = ({
             />
           </div>
         </div>
-
         <div className={styles.saveButtons}>
           <BaseButtonWrapper
             onClick={onClose}
             className={styles.cancelButtonCropper}
             type="button"
           >
-            Cancel
+            {t("cropper.cancel")}
           </BaseButtonWrapper>
           <BaseButtonWrapper
             className={styles.saveButtonCropper}
             onClick={handleSave}
             type="button"
           >
-            Save
+            {t("cropper.save")}
           </BaseButtonWrapper>
         </div>
       </div>

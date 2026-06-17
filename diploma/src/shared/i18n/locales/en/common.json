@@ -20,7 +20,15 @@
     "resendIn": "Resend code in ({{time}})",
     "clearFilters": "Clear Filters",
     "seeMore": "See more",
-    "showAll": "SHOW ALL {{subject}}"
+    "showMore": "Show more",
+    "showAll": "SHOW ALL {{subject}}",
+    "readMore": "Read more",
+    "readLess": "Read less",
+    "getStarted": "GET STARTED"
+  },
+  "policies": {
+    "open": "Open to join",
+    "approval_required": "Approval required"
   },
   "loading": {
     "title": "Loading..."
@@ -53,7 +61,15 @@
     "somethingWentWrong": "Something went wrong",
     "notFound": "Not found",
     "unauthorized": "Unauthorized",
-    "actionFailed": "{{action}} failed"
+    "actionFailed": "{{action}} failed",
+    "errorHint": "Спробуйте оновити сторінку або завітайте пізніше."
+  },
+  "members": {
+    "team": "Team",
+    "members": "members",
+    "you": "You",
+    "emptyTitle": "No members yet",
+    "emptySubtitle": "Be the first to join and make a difference"
   },
   "pagination": {
     "loadMore": "Load more",
@@ -90,7 +106,26 @@
   "search": {
     "title": "Search"
   },
-
+  "participation": {
+    "join": "Join {{entity}}",
+    "leave": "Leave {{entity}}",
+    "leaveTitle": "Leave {{name}}?",
+    "leaveText": "Are you sure you want to leave? You can always rejoin later.",
+    "leaveConfirm": "Leave",
+    "joinSuccess": "Joined {{entity}} Successfully",
+    "joinSuccessDescription": "You have joined {{entity}} successfully.",
+    "joinFailed": "Failed to Join",
+    "leaveSuccess": "Left {{entity}} Successfully",
+    "leaveSuccessDescription": "You have left {{entity}} successfully.",
+    "leaveFailed": "Failed to Leave",
+    "approvalRequired": "{{entity}} Approval Required",
+    "entities": {
+      "project": "Project",
+      "event": "Event",
+      "task": "Task",
+      "organization": "Organization"
+    }
+  },
   "filters": {
     "title": "Filter",
     "filterByTitle": "Filter by",
