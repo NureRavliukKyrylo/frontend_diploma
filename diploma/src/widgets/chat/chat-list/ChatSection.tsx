@@ -2,6 +2,7 @@ import type { Chat, RelatedEntityTypeChatValue } from "@entities/chat";
 import type { QueryResult } from "@shared/config/types";
 import styles from "./ChatsListWidget.module.scss";
 import { Fragment, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 interface ChatSectionProps {
   useChatsQuery: (entityType: RelatedEntityTypeChatValue) => QueryResult<Chat>;
@@ -16,6 +17,7 @@ export const ChatSection = ({
   renderCard,
   wrapperClass,
 }: ChatSectionProps) => {
+  const { t } = useTranslation(["chat"]);
   const {
     data: chats,
     hasNextPage,
@@ -45,12 +47,18 @@ export const ChatSection = ({
 
   const midIndex = Math.floor((chats?.length ?? 0) / 2);
 
+  const translatedCategory = t(`chat:categories.${entityType}`, {
+    defaultValue: entityType,
+  });
+
   return (
     <div className={wrapperClass}>
       {chats?.length === 0 ? (
         <div className={styles.emptyState}>
-          <h2>No chats yet</h2>
-          <p>No {entityType} chats available</p>
+          <h2>{t("chat:states.emptyTitle")}</h2>
+          <p>
+            {t("chat:states.emptyDescription", { type: translatedCategory })}
+          </p>
         </div>
       ) : (
         chats?.map((chat, index) => (

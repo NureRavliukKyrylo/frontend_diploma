@@ -9,5 +9,8 @@
   "emptyState": {
     "title": "No categories found",
     "subtitle": "Try clearing your filters or refreshing the list."
+  },
+  "filter": {
+    "error": "Failed to load categories"
   }
 }

@@ -51,6 +51,14 @@
     row-gap: 14px;
   }
 }
+.errorState {
+  padding: 40px 0;
+  text-align: center;
+
+  @include respond-to(mobile) {
+    padding: 24px 0;
+  }
+}
 
 .emptyState {
   display: flex;

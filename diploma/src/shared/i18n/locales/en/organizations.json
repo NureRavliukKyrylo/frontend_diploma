@@ -1,0 +1,12 @@
+{
+  "page": {
+    "emptyState": {
+      "title": "No organizations found",
+      "text": "Try adjusting your filters or search query"
+    }
+  },
+  "filter": {
+    "error": "Failed to load organizations",
+    "empty": "No organizations found"
+  }
+}

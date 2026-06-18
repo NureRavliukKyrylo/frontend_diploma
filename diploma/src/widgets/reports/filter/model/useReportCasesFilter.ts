@@ -3,7 +3,7 @@ import { toggleArrayParam } from "@shared/libs/search-params";
 import type {
   ReportCasesSearchParams,
   ModerationSubjectType,
-  ReportReason,
+  ReportReasonType,
 } from "@entities/report";
 
 export const useReportCasesFilter = () => {
@@ -18,7 +18,7 @@ export const useReportCasesFilter = () => {
     });
 
   return {
-    onReasonToggle: (reason: ReportReason) =>
+    onReasonToggle: (reason: keyof typeof ReportReasonType) =>
       nav((prev) => ({
         ...prev,
         Reasons: toggleArrayParam(prev.Reasons, reason),

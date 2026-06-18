@@ -6,7 +6,8 @@ import { getErrorMessage } from "@shared/libs/error-message";
 import { queryClient } from "@shared/api";
 import { eventKeys } from "@entities/event";
 import { getCalendarRange } from "@shared/libs/date";
-import { checkInValidationSchema } from "../libs/checkInValidationSchema";
+import { getCheckInValidationSchema } from "../libs/checkInValidationSchema";
+import { useTranslation } from "react-i18next";
 
 export interface CheckInFormValues {
   note: string;
@@ -17,14 +18,15 @@ export const useCheckIn = (
   date: Date,
   onSuccess?: () => void,
 ) => {
+  const { t } = useTranslation(["event"]);
   const { From, To } = getCalendarRange(date);
 
   const mutation = useMutation({
     mutationFn: (data: CheckInDto) => checkIn(eventId, data),
     onSuccess: () => {
       addToast({
-        title: "Event check-in Success",
-        description: "You have checked in successfully",
+        title: t("event:checkIn.notifications.successTitle"),
+        description: t("event:checkIn.notifications.successDescription"),
         color: "success",
       });
       queryClient.invalidateQueries({
@@ -34,8 +36,8 @@ export const useCheckIn = (
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Event check-in Failed",
-        description: getErrorMessage(error),
+        title: t("event:checkIn.notifications.failedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -43,7 +45,7 @@ export const useCheckIn = (
 
   const formik = useFormik<CheckInFormValues>({
     initialValues: { note: "" },
-    validationSchema: checkInValidationSchema,
+    validationSchema: getCheckInValidationSchema(t),
     onSubmit: () => {},
   });
 

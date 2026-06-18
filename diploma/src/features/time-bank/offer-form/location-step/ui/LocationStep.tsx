@@ -4,6 +4,7 @@ import styles from "./LocationStep.module.scss";
 import { OfferMarker, type OfferFormData } from "@entities/offer";
 import { forwardRef, useImperativeHandle } from "react";
 import type { StepRef } from "../../main";
+import { useTranslation } from "react-i18next";
 
 interface LocationStepProps {
   data: OfferFormData;
@@ -11,6 +12,7 @@ interface LocationStepProps {
 
 export const LocationStep = forwardRef<StepRef, LocationStepProps>(
   ({ data }, ref) => {
+    const { t } = useTranslation(["timeBank"]);
     const { formik, coordinates, handleLocationChange } = useLocationForm({
       data,
     });
@@ -35,7 +37,7 @@ export const LocationStep = forwardRef<StepRef, LocationStepProps>(
     return (
       <form onSubmit={formik.handleSubmit} className={styles.form}>
         <span className={styles.hint}>
-          Click on the map to set the offer location
+          {t("timeBank:forms.labels.mapHint")}
         </span>
 
         <div className={styles.mapWrapper}>
@@ -47,7 +49,9 @@ export const LocationStep = forwardRef<StepRef, LocationStepProps>(
             popupContent={
               <>
                 <h3 className={styles.popupOfferTitle}>{data.title}</h3>
-                <p className={styles.popupOfferLocation}>📍 Offer location</p>
+                <p className={styles.popupOfferLocation}>
+                  {t("timeBank:forms.labels.offerLocationPopup")}
+                </p>
               </>
             }
             zoom={data.location ? 10 : 4}

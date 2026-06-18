@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./CheckInButton.module.scss";
 import { CheckInModal } from "../modal/CheckInModal";
+import { useTranslation } from "react-i18next";
 
 interface CheckInButtonProps {
   eventId: string;
@@ -10,6 +11,7 @@ interface CheckInButtonProps {
 }
 
 export const CheckInButton = ({ eventId, eventTitle }: CheckInButtonProps) => {
+  const { t } = useTranslation(["event"]);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -24,7 +26,7 @@ export const CheckInButton = ({ eventId, eventTitle }: CheckInButtonProps) => {
           className={styles.checkInButton}
           onClick={() => setIsOpen(true)}
         >
-          Check in
+          {t("event:checkIn.button")}
         </BaseButtonWrapper>
       </motion.div>
       <CheckInModal

@@ -3,9 +3,10 @@ import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { hideContent, type HideContentDto } from "../api/hideContentApi";
-import { hideContentSchema } from "../libs/hideContentSchema";
-import type { ReportReason } from "@entities/report/model";
+import { getHideContentSchema } from "../libs/hideContentSchema";
+import { ReportReasonType } from "@entities/report/model";
 import type { EntityType } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
 
 interface UseHideContentProps {
   caseId: string;
@@ -20,33 +21,37 @@ export const useHideContent = ({
   targetEntityId,
   onSuccess,
 }: UseHideContentProps) => {
+  const { t } = useTranslation(["moderation"]);
+
   const mutation = useMutation({
     mutationFn: (data: HideContentDto) => hideContent(caseId, data),
     onSuccess: () => {
       addToast({
-        title: "Content hidden",
-        description: "The content has been hidden successfully.",
+        title: t("moderation:hideContent.notifications.successTitle"),
+        description: t(
+          "moderation:hideContent.notifications.successDescription",
+        ),
         color: "success",
       });
       onSuccess();
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Action failed",
-        description: getErrorMessage(error),
+        title: t("moderation:hideContent.notifications.failedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
   });
 
-  const formik = useFormik<{ reason: ReportReason | "" }>({
-    initialValues: { reason: "Spam" },
-    validationSchema: hideContentSchema,
+  const formik = useFormik<{ reason: ReportReasonType }>({
+    initialValues: { reason: ReportReasonType.Spam },
+    validationSchema: getHideContentSchema(t),
     onSubmit: (values) => {
       mutation.mutate({
         targetEntityType,
         targetEntityId,
-        reason: values.reason as ReportReason,
+        reason: values.reason,
       });
     },
   });

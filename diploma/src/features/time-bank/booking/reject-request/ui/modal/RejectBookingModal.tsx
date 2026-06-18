@@ -3,6 +3,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { TextAreaForm } from "@shared/ui/inputs";
 import styles from "./RejectBookingModal.module.scss";
 import { useRejectBooking } from "../../model/useRejectBooking";
+import { useTranslation } from "react-i18next";
 
 interface RejectBookingModalProps {
   isOpen: boolean;
@@ -15,6 +16,7 @@ export const RejectBookingModal = ({
   onClose,
   bookingId,
 }: RejectBookingModalProps) => {
+  const { t } = useTranslation(["timeBank"]);
   const handleClose = () => {
     formik.resetForm();
     onClose();
@@ -34,14 +36,18 @@ export const RejectBookingModal = ({
     >
       <form onSubmit={formik.handleSubmit} className={styles.wrapper}>
         <div className={styles.header}>
-          <h1 className={styles.title}>Reject booking</h1>
+          <h1 className={styles.title}>
+            {t("timeBank:bookings.labels.rejectTitle")}
+          </h1>
         </div>
 
         <div className={styles.field}>
-          <span className={styles.label}>Reason</span>
+          <span className={styles.label}>
+            {t("timeBank:bookings.labels.reason")}
+          </span>
           <TextAreaForm
             name="reason"
-            placeholder="Provide a reason for rejection..."
+            placeholder={t("timeBank:bookings.labels.reasonPlaceholder")}
             value={formik.values.reason}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -57,15 +63,16 @@ export const RejectBookingModal = ({
           <BaseButtonWrapper
             className={styles.cancelButton}
             onClick={handleClose}
+            type="button"
           >
-            Cancel
+            {t("timeBank:bookings.labels.cancel")}
           </BaseButtonWrapper>
           <BaseButtonWrapper
             loading={isLoading}
             className={styles.submitButton}
             type="submit"
           >
-            Reject
+            {t("timeBank:bookings.labels.reject")}
           </BaseButtonWrapper>
         </div>
       </form>

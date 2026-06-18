@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { queryClient } from "@shared/api";
+import { useTranslation } from "react-i18next";
 import {
   deleteNotifications,
   type DeleteNotificationsDto,
@@ -15,12 +16,14 @@ interface UseDeleteNotificationsProps {
 export const useDeleteNotifications = ({
   onSuccess,
 }: UseDeleteNotificationsProps = {}) => {
+  const { t } = useTranslation(["notification"]);
+
   const mutation = useMutation({
     mutationFn: (data: DeleteNotificationsDto) => deleteNotifications(data),
     onSuccess: () => {
       addToast({
-        title: "Notifications deleted",
-        description: "Selected notifications have been deleted",
+        title: t("notification:notifications.deleteSuccessTitle"),
+        description: t("notification:notifications.deleteSuccessDesc"),
         color: "success",
       });
       queryClient.invalidateQueries({ queryKey: notificationKeys.all() });
@@ -31,8 +34,8 @@ export const useDeleteNotifications = ({
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Failed to delete",
-        description: getErrorMessage(error),
+        title: t("notification:notifications.deleteFailedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },

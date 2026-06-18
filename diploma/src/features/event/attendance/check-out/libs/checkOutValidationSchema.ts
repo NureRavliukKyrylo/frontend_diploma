@@ -1,5 +1,7 @@
 import * as Yup from "yup";
+import type { TFunction } from "i18next";
 
-export const checkOutValidationSchema = Yup.object({
-  note: Yup.string().max(50, "Note must be 50 characters or less"),
-});
+export const getCheckOutValidationSchema = (t: TFunction) =>
+  Yup.object({
+    note: Yup.string().max(50, t("event:checkOut.validation.noteMax")),
+  });

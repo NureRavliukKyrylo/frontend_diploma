@@ -1,7 +1,9 @@
 import * as Yup from "yup";
+import type { TFunction } from "i18next";
 
-export const disputeValidationSchema = Yup.object({
-  comment: Yup.string()
-    .required("Comment is required")
-    .max(50, "Comment must be 50 characters or less"),
-});
+export const getDisputeValidationSchema = (t: TFunction) =>
+  Yup.object({
+    comment: Yup.string()
+      .required(t("event:dispute.validation.commentRequired"))
+      .max(50, t("event:dispute.validation.commentMax")),
+  });

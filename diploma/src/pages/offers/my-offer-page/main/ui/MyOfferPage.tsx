@@ -4,16 +4,20 @@ import { LinkButtonWrapper, ReadMoreButton } from "@shared/ui/buttons";
 import { AnimatePresence, motion } from "framer-motion";
 import { formatDateRange } from "@shared/libs/date";
 import { Calendar, OnlineIcon, TimeBankIcon } from "@shared/assets/icons/info";
-import { myOfferMainTabs } from "../config/myOfferTab";
+import { getMyOfferMainTabs } from "../config/myOfferTab"; // Updated import
 import { useMyOfferPage } from "../model/useMyOfferPage";
 import {
   CancelBookingButton,
   CompleteBookingButton,
 } from "@features/time-bank";
 import { getFullName } from "@entities/user";
+import { useTranslation } from "react-i18next";
 
 export const MyOfferPage = () => {
+  const { t } = useTranslation(["timeBank"]);
   const { offer, tab, forms, handleTabChange } = useMyOfferPage();
+
+  const tabs = getMyOfferMainTabs(t);
 
   return (
     <div className={styles.wrapperOfferPage}>
@@ -27,7 +31,9 @@ export const MyOfferPage = () => {
           <div className={styles.titleHeader}>
             <h1>{offer.title}</h1>
             <div className={styles.offerMetaInfo}>
-              <span className={styles.metaChipOffer}>My Offer</span>
+              <span className={styles.metaChipOffer}>
+                {t("timeBank:myOfferPage.chips.myOffer")}
+              </span>
 
               <span
                 className={`${styles.metaChip} ${offer.isOnline ? styles.online : styles.offline}`}
@@ -35,13 +41,17 @@ export const MyOfferPage = () => {
                 <OnlineIcon
                   className={`${styles.statusIcon} ${offer.isOnline ? styles.onlineIcon : styles.offlineIcon}`}
                 />
-                {offer.isOnline ? "Online" : "Offline"}
+                {offer.isOnline
+                  ? t("timeBank:myOfferPage.chips.online")
+                  : t("timeBank:myOfferPage.chips.offline")}
               </span>
 
               <span
                 className={`${styles.metaChip} ${styles.statusChip} ${offer.isActive ? styles.active : styles.inActive}`}
               >
-                {offer.isActive ? "Active" : "Inactive"}
+                {offer.isActive
+                  ? t("timeBank:myOfferPage.chips.active")
+                  : t("timeBank:myOfferPage.chips.inactive")}
               </span>
 
               {offer.endAt && (
@@ -60,7 +70,10 @@ export const MyOfferPage = () => {
 
               <span className={`${styles.metaChip} ${styles.reward}`}>
                 <TimeBankIcon className={styles.timeBankIcon} />
-                <span>{offer.priceMinutes}m</span>
+                <span>
+                  {offer.priceMinutes}
+                  {t("timeBank:units.m")}
+                </span>
               </span>
             </div>
           </div>
@@ -117,7 +130,7 @@ export const MyOfferPage = () => {
 
       <div className={styles.toggleWrapper}>
         <Toggle
-          tabs={myOfferMainTabs}
+          tabs={tabs}
           activeValue={tab}
           onChange={handleTabChange}
           buttonClassName={styles.toggleOfferButton}

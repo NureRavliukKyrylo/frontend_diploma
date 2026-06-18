@@ -2,10 +2,10 @@ import { BaseModal } from "@shared/ui/modals";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useHideContent } from "../../model/useHideContent";
 import styles from "./HideContentModal.module.scss";
-import { reportReasonOptions } from "@entities/report";
+import { getReportReasonOptions } from "@entities/report";
 import { SortDropDown } from "@shared/ui/drop-down";
-import type { ReportReason } from "@entities/report/model";
 import type { EntityType } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
 
 interface HideContentModalProps {
   isOpen: boolean;
@@ -22,6 +22,8 @@ export const HideContentModal = ({
   targetEntityType,
   targetEntityId,
 }: HideContentModalProps) => {
+  const { t } = useTranslation(["moderation"]);
+
   const handleClose = () => {
     formik.resetForm();
     onClose();
@@ -43,16 +45,17 @@ export const HideContentModal = ({
     >
       <form onSubmit={formik.handleSubmit} className={styles.wrapper}>
         <div className={styles.header}>
-          <h1 className={styles.title}>Hide Content</h1>
+          <h1 className={styles.title}>{t("moderation:hideContent.title")}</h1>
         </div>
 
         <div className={styles.field}>
-          <span className={styles.label}>Reason</span>
+          <span className={styles.label}>
+            {t("moderation:hideContent.labels.reason")}
+          </span>
           <SortDropDown
-            options={reportReasonOptions}
-            value={formik.values.reason as ReportReason}
+            options={getReportReasonOptions(t)}
+            value={formik.values.reason}
             onSelect={(value) => formik.setFieldValue("reason", value)}
-            label="Reason"
             variant="report"
           />
           {formik.submitCount > 0 && formik.errors.reason && (
@@ -64,15 +67,16 @@ export const HideContentModal = ({
           <BaseButtonWrapper
             className={styles.cancelButton}
             onClick={handleClose}
+            type="button"
           >
-            Cancel
+            {t("moderation:hideContent.actions.cancel")}
           </BaseButtonWrapper>
           <BaseButtonWrapper
             loading={isLoading}
             className={styles.submitButton}
             type="submit"
           >
-            Hide Content
+            {t("moderation:hideContent.actions.submit")}
           </BaseButtonWrapper>
         </div>
       </form>

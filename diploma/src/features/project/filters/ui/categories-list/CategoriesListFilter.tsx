@@ -17,7 +17,7 @@ export const CategoriesListFilter = ({
   selectedIds,
   onToggle,
 }: CategoriesListFilterProps) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["common", "category"]);
   const {
     data: categories = [],
     fetchNextPage,
@@ -29,13 +29,13 @@ export const CategoriesListFilter = ({
   if (isError) {
     return (
       <div className={styles.stateMessage}>
-        <p className={styles.errorMessage}>Failed to load categories</p>
+        <p className={styles.errorMessage}>{t("category:filter.error")}</p>
       </div>
     );
   }
 
   if (categories.length === 0) {
-    return <p className={styles.emptyText}>No categories found</p>;
+    return <p className={styles.emptyText}>{t("category:emptyState.title")}</p>;
   }
 
   return (
@@ -67,8 +67,8 @@ export const CategoriesListFilter = ({
           className={styles.showMoreCategoriesButton}
         >
           {isFetchingNextPage
-            ? t("loading.title")
-            : t("actions.seeMore").toLowerCase()}
+            ? t("common:loading.title")
+            : t("common:actions.seeMore").toLowerCase()}
         </BaseButtonWrapper>
       )}
     </div>

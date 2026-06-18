@@ -22,6 +22,7 @@ import { DeleteMessageModal, MessageForm } from "@features/chat";
 import { useChatPage } from "../model/useChatPage";
 import { ReportModal } from "@features/moderation";
 import { ModerationSubjectType } from "@entities/report";
+import { useTranslation } from "react-i18next";
 
 const participants = [
   {
@@ -61,6 +62,7 @@ export const ChatPage = () => {
     clearModeType,
     mode,
   } = useChatPage();
+  const { t } = useTranslation(["chat"]);
 
   return (
     <div className={styles.chatPageWrapper}>
@@ -136,7 +138,7 @@ export const ChatPage = () => {
                   ) : (
                     <MessageItem
                       message={message}
-                      menuItems={getMenuItems(message)}
+                      menuItems={getMenuItems(message, t)}
                       openId={openId}
                       setOpenId={setOpenId}
                     />

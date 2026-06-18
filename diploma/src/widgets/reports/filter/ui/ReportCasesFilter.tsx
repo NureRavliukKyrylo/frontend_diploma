@@ -5,22 +5,19 @@ import { Tab } from "@shared/ui";
 import { useReportCasesFilter } from "../model/useReportCasesFilter";
 import {
   ModerationSubjectType,
-  reportReasonLabels,
-  reportReasons,
+  ReportReasonType,
   type ReportCasesSearchParams,
 } from "@entities/report";
 import styles from "./ReportCasesFilter.module.scss";
 import { BaseWrapperFilter } from "@shared/ui/wrappers";
-
-const statusOptions = [
-  { label: "All", value: "all" },
-  { label: "Open", value: "open" },
-  { label: "Resolved", value: "resolved" },
-  { label: "Rejected", value: "rejected" },
-];
+import { useTranslation } from "react-i18next";
 
 const subjectTypeItems = Object.keys(ModerationSubjectType) as Array<
   keyof typeof ModerationSubjectType
+>;
+
+const reportReasonItems = Object.keys(ReportReasonType) as Array<
+  keyof typeof ReportReasonType
 >;
 
 interface ReportCasesFilterProps {
@@ -28,6 +25,8 @@ interface ReportCasesFilterProps {
 }
 
 export const ReportCasesFilter = ({ search }: ReportCasesFilterProps) => {
+  const { t } = useTranslation(["moderation"]);
+
   const {
     onReasonToggle,
     onSubjectTypeToggle,
@@ -37,13 +36,28 @@ export const ReportCasesFilter = ({ search }: ReportCasesFilterProps) => {
     onClearFilters,
   } = useReportCasesFilter();
 
+  const statusOptions = [
+    { label: t("moderation:filters.status.options.all"), value: "all" },
+    { label: t("moderation:filters.status.options.open"), value: "open" },
+    {
+      label: t("moderation:filters.status.options.resolved"),
+      value: "resolved",
+    },
+    {
+      label: t("moderation:filters.status.options.rejected"),
+      value: "rejected",
+    },
+  ];
+
   return (
     <BaseWrapperFilter>
       <div className={styles.wrapper}>
         <div className={styles.block}>
-          <h1 className={styles.subHeader}>Report Status</h1>
+          <h1 className={styles.subHeader}>
+            {t("moderation:filters.status.title")}
+          </h1>
           <SelectFilter
-            label="Status"
+            label={t("moderation:filters.status.label")}
             options={statusOptions}
             value={search.Status ?? "all"}
             onChange={(val) => onStatusChange(val === "all" ? undefined : val)}
@@ -53,7 +67,9 @@ export const ReportCasesFilter = ({ search }: ReportCasesFilterProps) => {
         <div className={styles.dividerFilterBlock} />
 
         <div className={styles.block}>
-          <h1 className={styles.subHeader}>Date range</h1>
+          <h1 className={styles.subHeader}>
+            {t("moderation:filters.dateRange.title")}
+          </h1>
           <DateRangeFilter
             startDate={search.From}
             endBefore={search.To}
@@ -65,16 +81,20 @@ export const ReportCasesFilter = ({ search }: ReportCasesFilterProps) => {
         <div className={styles.dividerFilterBlock} />
 
         <div className={styles.block}>
-          <h1 className={styles.subHeader}>Report Reason</h1>
+          <h1 className={styles.subHeader}>
+            {t("moderation:filters.reportReason.title")}
+          </h1>
           <ShowMoreItemsButton
-            items={reportReasons.map((reason) => (
+            items={reportReasonItems.map((type) => (
               <Tab
-                key={reason}
-                name={reportReasonLabels[reason]}
+                key={type}
+                name={t(`moderation:report.reasons.${type}`, {
+                  defaultValue: type,
+                })}
                 className={styles.filterTab}
-                isSelected={search.Reasons?.includes(reason) ?? false}
+                isSelected={search.Reasons?.includes(type) ?? false}
                 selectedClassName={styles.filterTabActive}
-                onClick={() => onReasonToggle(reason)}
+                onClick={() => onReasonToggle(type)}
               />
             ))}
             classNameButton={styles.showMoreButton}
@@ -86,12 +106,16 @@ export const ReportCasesFilter = ({ search }: ReportCasesFilterProps) => {
         <div className={styles.dividerFilterBlock} />
 
         <div className={styles.block}>
-          <h1 className={styles.subHeader}>Subject type</h1>
+          <h1 className={styles.subHeader}>
+            {t("moderation:filters.subjectType.title")}
+          </h1>
           <ShowMoreItemsButton
             items={subjectTypeItems.map((type) => (
               <Tab
                 key={type}
-                name={type}
+                name={t(`moderation:report.subjects.${type}`, {
+                  defaultValue: type,
+                })}
                 className={styles.filterTab}
                 isSelected={search.SubjectTypes?.includes(type) ?? false}
                 selectedClassName={styles.filterTabActive}
@@ -117,7 +141,7 @@ export const ReportCasesFilter = ({ search }: ReportCasesFilterProps) => {
               onClick={onClearFilters}
               className={styles.clearFiltersButton}
             >
-              Clear Filters
+              {t("moderation:filters.actions.clear")}
             </BaseButtonWrapper>
           </motion.div>
         </div>

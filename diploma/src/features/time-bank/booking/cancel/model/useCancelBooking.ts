@@ -3,9 +3,10 @@ import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { cancelBooking, type CancelBookingDto } from "../api/cancelBookingApi";
-import { cancelBookingSchema } from "../libs/cancelBookingSchema";
+import { getCancelBookingSchema } from "../libs/cancelBookingSchema";
 import { queryClient } from "@shared/api";
 import { offerKeys } from "@entities/offer";
+import { useTranslation } from "react-i18next";
 
 interface UseCancelBookingProps {
   bookingId: string;
@@ -16,12 +17,14 @@ export const useCancelBooking = ({
   bookingId,
   onSuccess,
 }: UseCancelBookingProps) => {
+  const { t } = useTranslation(["timeBank", "common"]);
+
   const mutation = useMutation({
     mutationFn: (data: CancelBookingDto) => cancelBooking(bookingId, data),
     onSuccess: () => {
       addToast({
-        title: "Booking cancelled",
-        description: "The booking has been cancelled",
+        title: t("timeBank:bookings.toasts.cancelSuccessTitle"),
+        description: t("timeBank:bookings.toasts.cancelSuccessDesc"),
         color: "success",
       });
       queryClient.invalidateQueries({ queryKey: offerKeys.all() });
@@ -29,8 +32,10 @@ export const useCancelBooking = ({
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Failed to cancel",
-        description: getErrorMessage(error),
+        title: t("common:errors.actionFailed", {
+          action: t("timeBank:bookings.actions.cancelName"),
+        }),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -38,7 +43,7 @@ export const useCancelBooking = ({
 
   const formik = useFormik({
     initialValues: { comment: "" },
-    validationSchema: cancelBookingSchema,
+    validationSchema: getCancelBookingSchema(t),
     onSubmit: (values) => {
       mutation.mutate({ comment: values.comment });
     },

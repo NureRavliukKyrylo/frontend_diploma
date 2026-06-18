@@ -12,6 +12,7 @@ import { Arrow, ActionsIcon } from "@shared/assets/icons/actions";
 import { MapLocationInput } from "@shared/ui/inputs";
 import { useIntersectionReveal } from "@shared/libs/hooks";
 import type { Offer } from "@entities/offer";
+import { useTranslation } from "react-i18next";
 
 interface OverviewTabProps {
   offer: Offer;
@@ -19,6 +20,7 @@ interface OverviewTabProps {
 }
 
 export const OverviewTab = ({ offer, userLocation }: OverviewTabProps) => {
+  const { t } = useTranslation(["timeBank"]);
   const { isVisible, ref } = useIntersectionReveal<HTMLDivElement>();
   const hasCategories = offer.categories && offer.categories.length > 0;
   const hasSkills = offer.skills && offer.skills.length > 0;
@@ -28,7 +30,7 @@ export const OverviewTab = ({ offer, userLocation }: OverviewTabProps) => {
       {hasCategories && (
         <ShowMoreItemsButton
           items={offer.categories.map((category) => (
-            <RelatedCategoryCard category={category}>
+            <RelatedCategoryCard key={category.id} category={category}>
               <LinkButtonWrapper
                 to="/categories/$id"
                 params={{ id: category.id }}
@@ -48,12 +50,16 @@ export const OverviewTab = ({ offer, userLocation }: OverviewTabProps) => {
 
       <div className={styles.skillsBlock}>
         <div className={styles.headerSkills}>
-          <h1>Offer Skills</h1>
+          <h1>{t("timeBank:myOfferPage.overview.skillsTitle")}</h1>
         </div>
         {hasSkills && (
           <ShowMoreItemsButton
             items={offer.skills.map((skill) => (
-              <Tab className={styles.skillWrapper} name={skill.name} />
+              <Tab
+                key={skill.name}
+                className={styles.skillWrapper}
+                name={skill.name}
+              />
             ))}
             classNameItems={styles.skillsOfferList}
             classNameButton={styles.buttonShowMoreSkills}
@@ -68,8 +74,10 @@ export const OverviewTab = ({ offer, userLocation }: OverviewTabProps) => {
           <div className={styles.offerPageMainInfo}>
             <div className={styles.headerTextInfo}>
               <div className={styles.offerLocations}>
-                <h2>Offer</h2>
-                <span>Location</span>
+                <h2>{t("timeBank:myOfferPage.overview.locationTitle")}</h2>
+                <span>
+                  {t("timeBank:myOfferPage.overview.locationSubtitle")}
+                </span>
               </div>
               <div className={styles.wrapperLocation}>
                 <MapLocationInput
@@ -96,7 +104,7 @@ export const OverviewTab = ({ offer, userLocation }: OverviewTabProps) => {
                   <Popup className={styles.popupContent}>
                     <h3 className={styles.popupOfferTitle}>{offer.title}</h3>
                     <p className={styles.popupOfferLocation}>
-                      📍 Offer location
+                      {t("timeBank:myOfferPage.overview.popupLabel")}
                     </p>
                   </Popup>
                 </Marker>

@@ -4,12 +4,12 @@ import { TextAreaForm } from "@shared/ui/inputs";
 import { useSendReport } from "../../model/useSendReport";
 import styles from "./ReportModal.module.scss";
 import {
-  reportReasonOptions,
   ModerationSubjectType,
-  getModerationSubjectLabel,
+  getModerationSubjectKey,
+  getReportReasonOptions,
 } from "@entities/report";
 import { SortDropDown } from "@shared/ui/drop-down";
-import type { ReportReason } from "@entities/report/model";
+import { useTranslation } from "react-i18next";
 
 interface ReportModalProps {
   isOpen: boolean;
@@ -24,6 +24,8 @@ export const ReportModal = ({
   subjectType,
   subjectId,
 }: ReportModalProps) => {
+  const { t } = useTranslation(["moderation"]);
+
   const handleClose = () => {
     formik.resetForm();
     onClose();
@@ -33,6 +35,11 @@ export const ReportModal = ({
     subjectType,
     subjectId,
     onSuccess: handleClose,
+  });
+
+  const subjectKey = getModerationSubjectKey(subjectType);
+  const subjectLabel = t(`moderation:report.subjects.${subjectKey}`, {
+    defaultValue: "Content",
   });
 
   return (
@@ -45,17 +52,18 @@ export const ReportModal = ({
       <form onSubmit={formik.handleSubmit} className={styles.wrapper}>
         <div className={styles.header}>
           <h1 className={styles.title}>
-            Report {getModerationSubjectLabel(subjectType)}
+            {t("moderation:report.title", { subject: subjectLabel })}
           </h1>
         </div>
 
         <div className={styles.field}>
-          <span className={styles.label}>Reason</span>
+          <span className={styles.label}>
+            {t("moderation:report.labels.reason")}
+          </span>
           <SortDropDown
-            options={reportReasonOptions}
-            value={formik.values.reason as ReportReason}
+            options={getReportReasonOptions(t)}
+            value={formik.values.reason}
             onSelect={(value) => formik.setFieldValue("reason", value)}
-            label="Reason"
             variant="report"
           />
           {formik.submitCount > 0 && formik.errors.reason && (
@@ -64,10 +72,12 @@ export const ReportModal = ({
         </div>
 
         <div className={styles.field}>
-          <span className={styles.label}>Details</span>
+          <span className={styles.label}>
+            {t("moderation:report.labels.details")}
+          </span>
           <TextAreaForm
             name="details"
-            placeholder="Describe the issue..."
+            placeholder={t("moderation:report.placeholders.details")}
             value={formik.values.details}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -83,15 +93,16 @@ export const ReportModal = ({
           <BaseButtonWrapper
             className={styles.cancelButton}
             onClick={handleClose}
+            type="button"
           >
-            Cancel
+            {t("moderation:report.actions.cancel")}
           </BaseButtonWrapper>
           <BaseButtonWrapper
             loading={isLoading}
             className={styles.submitButton}
             type="submit"
           >
-            Submit Report
+            {t("moderation:report.actions.submit")}
           </BaseButtonWrapper>
         </div>
       </form>

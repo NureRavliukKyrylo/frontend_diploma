@@ -17,7 +17,7 @@ export const EventsListFilter = ({
   selectedIds,
   onToggle,
 }: EventsListFilterProps) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["common", "event"]);
   const {
     data: events = [],
     fetchNextPage,
@@ -29,13 +29,13 @@ export const EventsListFilter = ({
   if (isError) {
     return (
       <div className={styles.stateMessage}>
-        <p className={styles.errorMessage}>Failed to load organizations</p>
+        <p className={styles.errorMessage}>{t("event:labels.failedLoad")}</p>
       </div>
     );
   }
 
   if (events.length === 0) {
-    return <p className={styles.emptyText}>No events found</p>;
+    return <p className={styles.emptyText}>{t("event:labels.noEvents")}</p>;
   }
 
   return (

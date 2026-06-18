@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { paginationSchema } from "@shared/config/schemas";
-import { ModerationSubjectType, type ReportReason } from "../model";
-import { reportReasons } from "../config/reportReasonOptions";
+import { ModerationSubjectType, ReportReasonType } from "../model";
 
 export const reportCasesSearchDefaults = {
   OrderBy: "Default" as const,
@@ -34,7 +33,11 @@ export const reportCasesSearchSchema = z
       .optional()
       .catch(undefined),
     Reasons: z
-      .array(z.enum(reportReasons as ReportReason[]))
+      .array(
+        z.enum(
+          Object.keys(ReportReasonType) as Array<keyof typeof ReportReasonType>,
+        ),
+      )
       .optional()
       .catch(undefined),
   })

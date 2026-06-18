@@ -4,6 +4,7 @@ import styles from "./OfferFormButton.module.scss";
 import { EditIcon, PlusIcon } from "@shared/assets/icons/actions";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface OfferFormButtonProps {
   isEdit?: boolean;
@@ -14,6 +15,7 @@ export const OfferFormButton = ({
   isEdit = false,
   initialValues,
 }: OfferFormButtonProps) => {
+  const { t } = useTranslation(["timeBank"]);
   const { isOpen, data, open, close } = useOfferFormStore();
 
   const isThisOpen = isOpen && data.id === (initialValues?.id ?? null);
@@ -32,12 +34,12 @@ export const OfferFormButton = ({
           {isEdit ? (
             <>
               <EditIcon className={styles.icon} />
-              Edit
+              {t("timeBank:forms.actions.edit")}
             </>
           ) : (
             <>
-              <img src={PlusIcon} className={styles.icon} />
-              Create new offer
+              <img src={PlusIcon} className={styles.icon} alt="" />
+              {t("timeBank:forms.actions.createNewOffer")}
             </>
           )}
         </BaseButtonWrapper>

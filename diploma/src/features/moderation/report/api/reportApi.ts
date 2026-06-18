@@ -1,11 +1,11 @@
 import type { ModerationSubjectType } from "@entities/report";
-import type { ReportReason } from "@entities/report/model";
+import type { ReportReasonType } from "@entities/report/model";
 import { apiClient } from "@shared/api";
 
 export type ReportDto = {
   subjectType: ModerationSubjectType;
   subjectId: string;
-  reason: ReportReason;
+  reason: ReportReasonType;
   details: string;
 };
 

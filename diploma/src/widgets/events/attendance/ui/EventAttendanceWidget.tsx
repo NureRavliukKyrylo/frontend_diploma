@@ -88,7 +88,7 @@ export const EventAttendanceWidget = ({
   onViewChange,
   eventTitle,
 }: EventAttendanceWidgetProps) => {
-  const { t } = useTranslation(["event"]);
+  const { t } = useTranslation(["event", "common"]);
 
   const viewTabs: TabOption<CalendarView>[] = [
     { label: t("event:attendance.views.month"), value: "month" },
@@ -110,8 +110,8 @@ export const EventAttendanceWidget = ({
       fallbackRender={({ error }) => {
         return (
           <div className={styles.errorState}>
-            <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-            <p className="errorHint">{t("event:attendance.error.hint")}</p>
+            <p className="errorHttpMessage">{getHttpErrorInfo(error, t)}</p>
+            <p className="errorHint">{t("common:errors.errorHint")}</p>
           </div>
         );
       }}

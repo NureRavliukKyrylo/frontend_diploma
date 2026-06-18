@@ -4,6 +4,7 @@ import styles from "./RejectBookingButton.module.scss";
 import { RejectBookingModal } from "../modal/RejectBookingModal";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface RejectBookingButtonProps {
   bookingId: string;
@@ -12,6 +13,7 @@ interface RejectBookingButtonProps {
 export const RejectBookingButton = ({
   bookingId,
 }: RejectBookingButtonProps) => {
+  const { t } = useTranslation(["timeBank"]);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -26,7 +28,7 @@ export const RejectBookingButton = ({
           onClick={() => setIsOpen(true)}
         >
           <RejectIcon className={styles.icon} />
-          Reject
+          {t("timeBank:bookings.labels.reject")}
         </BaseButtonWrapper>
       </motion.div>
       <RejectBookingModal

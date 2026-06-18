@@ -17,7 +17,7 @@ export const SkillsListFilter = ({
   selectedIds,
   onToggle,
 }: SkillsListFilterProps) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["common", "skill"]);
   const {
     data: skills = [],
     fetchNextPage,
@@ -29,14 +29,15 @@ export const SkillsListFilter = ({
   if (isError) {
     return (
       <div className={styles.stateMessage}>
-        <p className={styles.errorMessage}>Failed to load skills</p>
+        <p className={styles.errorMessage}>{t("skill:skills.filter.error")}</p>
       </div>
     );
   }
-  console.log(skills);
 
   if (skills.length === 0) {
-    return <p className={styles.emptyText}>No skills found</p>;
+    return (
+      <p className={styles.emptyText}>{t("skill:skills.page.emptyTitle")}</p>
+    );
   }
 
   return (
@@ -68,8 +69,8 @@ export const SkillsListFilter = ({
           className={styles.showMoreSkillsButton}
         >
           {isFetchingNextPage
-            ? t("loading.title")
-            : t("actions.seeMore").toLowerCase()}
+            ? t("common:loading.title")
+            : t("common:actions.seeMore").toLowerCase()}
         </BaseButtonWrapper>
       )}
     </div>

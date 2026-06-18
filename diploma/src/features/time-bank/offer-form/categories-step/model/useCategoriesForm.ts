@@ -1,7 +1,8 @@
 import { useFormik } from "formik";
-import { categoriesSchema } from "../libs/categoriesSchema";
+import { getCategoriesSchema } from "../libs/categoriesSchema";
 import { useOfferFormStore, type OfferFormData } from "@entities/offer";
 import type { Category } from "@entities/category";
+import { useTranslation } from "react-i18next";
 
 interface UseCategoriesFormProps {
   data: OfferFormData;
@@ -9,11 +10,12 @@ interface UseCategoriesFormProps {
 
 export const useCategoriesForm = ({ data }: UseCategoriesFormProps) => {
   const setData = useOfferFormStore((s) => s.setData);
+  const { t } = useTranslation(["timeBank"]);
   const formik = useFormik<{ categories: Category[] }>({
     initialValues: {
       categories: data.categories,
     },
-    validationSchema: categoriesSchema,
+    validationSchema: getCategoriesSchema(t),
     onSubmit: (values) => setData(values),
   });
 

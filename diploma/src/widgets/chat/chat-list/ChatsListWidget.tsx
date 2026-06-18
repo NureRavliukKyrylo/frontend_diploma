@@ -6,12 +6,12 @@ import {
   type RelatedEntityTypeChatValue,
 } from "@entities/chat";
 import { Accordion, AccordionItem } from "@heroui/react";
-import { capitalize } from "@shared/libs/text";
 import { Suspense } from "react";
 import { ChatSection } from "./ChatSection";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
+import { useTranslation } from "react-i18next";
 
 interface ChatsListWidgetProps {
   useChatsQuery: (entityType: RelatedEntityTypeChatValue) => QueryResult<Chat>;
@@ -26,6 +26,7 @@ export const ChatsListWidget = ({
   className,
   entityTypes,
 }: ChatsListWidgetProps) => {
+  const { t } = useTranslation(["chat", "common"]);
   const wrapperClass = `${styles.chatsWidgetBlock} ${className ?? ""}`.trim();
 
   return (
@@ -50,14 +51,19 @@ export const ChatsListWidget = ({
         defaultExpandedKeys={entityTypes}
       >
         {entityTypes.map((entityType) => (
-          <AccordionItem key={entityType} title={capitalize(entityType)}>
+          <AccordionItem
+            key={entityType}
+            title={t(`chat:categories.${entityType}`, {
+              defaultValue: entityType,
+            })}
+          >
             <ErrorBoundary
               fallbackRender={({ error }) => (
                 <div className={styles.errorState}>
-                  <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-                  <p className="errorHint">
-                    Try reloading the page or come back later.
+                  <p className="errorHttpMessage">
+                    {getHttpErrorInfo(error, t)}
                   </p>
+                  <p className="errorHint">{t("common:errors.errorHint")}</p>
                 </div>
               )}
             >

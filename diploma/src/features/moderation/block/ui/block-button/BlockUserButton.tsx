@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./BlockUserButton.module.scss";
 import { BlockUserModal } from "../modal/BlockUserModal";
+import { useTranslation } from "react-i18next";
 
 interface BlockUserButtonProps {
   caseId: string;
@@ -17,6 +18,7 @@ export const BlockUserButton = ({
   entityType,
   entityId,
 }: BlockUserButtonProps) => {
+  const { t } = useTranslation(["moderation"]);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -30,7 +32,7 @@ export const BlockUserButton = ({
           className={styles.blockButton}
           onClick={() => setIsOpen(true)}
         >
-          Block User
+          {t("moderation:blockUser.button")}
         </BaseButtonWrapper>
       </motion.div>
 

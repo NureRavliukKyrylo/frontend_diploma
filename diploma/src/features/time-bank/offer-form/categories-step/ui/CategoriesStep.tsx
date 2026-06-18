@@ -7,6 +7,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { forwardRef, useImperativeHandle } from "react";
 import type { StepRef } from "../../main";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface CategoriesStepProps {
   data: OfferFormData;
@@ -15,6 +16,7 @@ interface CategoriesStepProps {
 export const CategoriesStep = forwardRef<StepRef, CategoriesStepProps>(
   ({ data }, ref) => {
     const { formik, toggleCategory } = useCategoriesForm({ data });
+    const { t } = useTranslation(["common", "timeBank"]);
 
     useImperativeHandle(ref, () => ({
       submitForm: async () => {
@@ -46,13 +48,19 @@ export const CategoriesStep = forwardRef<StepRef, CategoriesStepProps>(
     if (categoriesQuery.isError) {
       return (
         <div className={styles.stateMessage}>
-          <p className={styles.errorMessage}>Failed to load categories</p>
+          <p className={styles.errorMessage}>
+            {t("timeBank:forms.states.failedCategories")}
+          </p>
         </div>
       );
     }
 
     if (categoriesQuery.data?.length === 0) {
-      return <p className={styles.emptyText}>No categories found</p>;
+      return (
+        <p className={styles.emptyText}>
+          {t("timeBank:forms.states.emptyCategories")}
+        </p>
+      );
     }
 
     return (
@@ -87,7 +95,9 @@ export const CategoriesStep = forwardRef<StepRef, CategoriesStepProps>(
               className={styles.showMoreCategoriesButton}
               type="button"
             >
-              {categoriesQuery.isFetchingNextPage ? "Loading..." : "show more"}
+              {categoriesQuery.isFetchingNextPage
+                ? t("common:loading.title")
+                : t("common:actions.seeMore").toLowerCase()}
             </BaseButtonWrapper>
           )}
           {formik.touched.categories && formik.errors.categories && (

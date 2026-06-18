@@ -2,6 +2,7 @@ import { ConfirmationModal } from "@shared/ui/modals";
 import { useCompleteBooking } from "../../model/useCompleteBooking";
 import { DeleteModal } from "@shared/assets/images/actions";
 import styles from "./CompleteBookingModal.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface CompleteBookingModalProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ export const CompleteBookingModal = ({
   onClose,
   bookingId,
 }: CompleteBookingModalProps) => {
+  const { t } = useTranslation(["timeBank"]);
   const { complete, isLoading, errorMessage } = useCompleteBooking({
     bookingId,
     onSuccess: onClose,
@@ -27,10 +29,10 @@ export const CompleteBookingModal = ({
       confirmButtonClassName={styles.confirmButtonComplete}
       imageClassName={styles.imageDelete}
       onConfirm={complete}
-      title="Complete booking"
-      text="Are you sure you want to mark this booking as complete? This action cannot be undone."
-      confirmText="Complete"
-      cancelText="Cancel"
+      title={t("timeBank:bookings.labels.completeTitle")}
+      text={t("timeBank:bookings.labels.completeDescription")}
+      confirmText={t("timeBank:bookings.labels.complete")}
+      cancelText={t("timeBank:bookings.labels.cancel")}
       error={errorMessage}
       isLoading={isLoading}
     />

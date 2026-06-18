@@ -27,6 +27,14 @@ import enBadge from "./locales/en/badge.json";
 import uaBadge from "./locales/ua/badge.json";
 import enCalendar from "./locales/en/calendar.json";
 import uaCalendar from "./locales/ua/calendar.json";
+import enModeration from "./locales/en/moderation.json";
+import uaModeration from "./locales/ua/moderation.json";
+import enNotification from "./locales/en/notification.json";
+import uaNotification from "./locales/ua/notification.json";
+import enOrganizations from "./locales/en/organizations.json";
+import uaOrganizations from "./locales/ua/organizations.json";
+import enChat from "./locales/en/chat.json";
+import uaChat from "./locales/ua/chat.json";
 
 i18n.use(initReactI18next).init({
   fallbackLng: "en",
@@ -46,6 +54,10 @@ i18n.use(initReactI18next).init({
       category: enCategory,
       badge: enBadge,
       calendar: enCalendar,
+      moderation: enModeration,
+      notification: enNotification,
+      organizations: enOrganizations,
+      chat: enChat,
     },
     ua: {
       common: uaCommon,
@@ -61,6 +73,10 @@ i18n.use(initReactI18next).init({
       category: uaCategory,
       badge: uaBadge,
       calendar: uaCalendar,
+      moderation: uaModeration,
+      notification: uaNotification,
+      organizations: uaOrganizations,
+      chat: uaChat,
     },
   },
   interpolation: { escapeValue: false },

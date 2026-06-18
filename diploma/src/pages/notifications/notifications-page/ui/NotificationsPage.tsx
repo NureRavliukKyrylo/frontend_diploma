@@ -2,7 +2,6 @@ import { NotificationsListWidget } from "@widgets/notifications";
 import {
   NotificationItem,
   NotificationItemSkeleton,
-  notificationTypeOptions,
 } from "@entities/notification";
 import { Pagination, Toggle } from "@shared/ui";
 import styles from "./NotificationsPage.module.scss";
@@ -22,13 +21,11 @@ import { getHttpErrorInfo } from "@shared/libs/error";
 import { fadeDuration, fadeVariants } from "@shared/assets/animations";
 import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
-
-const notificationStatusTabs: TabOption<"All" | "Unread">[] = [
-  { label: "All", value: "All" },
-  { label: "Unread", value: "Unread" },
-];
+import { useTranslation } from "react-i18next";
+import { getNotificationTypeOptions } from "@entities/notification";
 
 export const NotificationsPage = () => {
+  const { t } = useTranslation(["notification", "common"]);
   const {
     notifications,
     unreadCount,
@@ -47,12 +44,17 @@ export const NotificationsPage = () => {
     handleTypeChange,
   } = useNotificationsPage();
 
+  const notificationStatusTabs: TabOption<"All" | "Unread">[] = [
+    { label: t("notification:page.statusTabs.all"), value: "All" },
+    { label: t("notification:page.statusTabs.unread"), value: "Unread" },
+  ];
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <div className={styles.headerLeft}>
           <div className={styles.topContent}>
-            <h1 className={styles.title}>NOTIFICATIONS</h1>
+            <h1 className={styles.title}>{t("notification:page.title")}</h1>
             {unreadCount > 0 && (
               <span className={styles.unreadBadge}>{unreadCount}</span>
             )}
@@ -69,8 +71,8 @@ export const NotificationsPage = () => {
               pillClassName={styles.toggleNotificationPill}
             />
             <SelectFilter
-              label="Type"
-              options={notificationTypeOptions}
+              label={t("notification:page.filterLabels.type")}
+              options={getNotificationTypeOptions(t)}
               value={activeType ?? "All"}
               onChange={handleTypeChange}
               hideLabel={true}
@@ -99,7 +101,7 @@ export const NotificationsPage = () => {
                     className={styles.cancelButton}
                     onClick={handleCancel}
                   >
-                    Cancel
+                    {t("notification:page.actions.cancel")}
                   </BaseButtonWrapper>
                 </motion.div>
                 {selectedIds.length > 0 && (
@@ -126,7 +128,7 @@ export const NotificationsPage = () => {
                     className={styles.selectButton}
                     onClick={() => setIsSelectMode(true)}
                   >
-                    Delete Messages
+                    {t("notification:page.actions.deleteMessages")}
                   </BaseButtonWrapper>
                 </motion.div>
               </motion.div>
@@ -138,17 +140,15 @@ export const NotificationsPage = () => {
       <ErrorBoundary
         fallbackRender={({ error }) => (
           <div className={styles.errorState}>
-            <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-            <p className="errorHint">
-              Try reloading the page or come back later.
-            </p>
+            <p className="errorHttpMessage">{getHttpErrorInfo(error, t)}</p>
+            <p className="errorHint">{t("common:errors.errorHint")}</p>
           </div>
         )}
       >
         {notifications?.data?.length === 0 ? (
           <div className={styles.emptyState}>
-            <h2>No notifications found</h2>
-            <p>Try adjusting your filters</p>
+            <h2>{t("notification:page.states.emptyTitle")}</h2>
+            <p>{t("notification:page.states.emptyDesc")}</p>
           </div>
         ) : (
           <Suspense

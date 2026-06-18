@@ -3,6 +3,7 @@ import styles from "./BookingButton.module.scss";
 import { BookingModal } from "../modal/BookingModal";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface BookingButtonProps {
   offerId: string;
@@ -10,6 +11,7 @@ interface BookingButtonProps {
 }
 
 export const BookingButton = ({ offerId, offerName }: BookingButtonProps) => {
+  const { t } = useTranslation(["timeBank"]);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -23,7 +25,7 @@ export const BookingButton = ({ offerId, offerName }: BookingButtonProps) => {
           className={styles.button}
           onClick={() => setIsOpen(true)}
         >
-          Book now
+          {t("timeBank:bookings.labels.bookNow")}
         </BaseButtonWrapper>
       </motion.div>
       <BookingModal

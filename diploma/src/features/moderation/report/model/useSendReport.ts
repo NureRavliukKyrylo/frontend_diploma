@@ -3,9 +3,10 @@ import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { sendReport, type ReportDto } from "../api/reportApi";
-import { reportSchema } from "../libs/reportSchema";
+import { getReportSchema } from "../libs/reportSchema";
 import type { ModerationSubjectType } from "@entities/report";
-import type { ReportReason } from "@entities/report/model";
+import { ReportReasonType } from "@entities/report/model";
+import { useTranslation } from "react-i18next";
 
 interface UseSendReportProps {
   subjectType: ModerationSubjectType;
@@ -18,37 +19,43 @@ export const useSendReport = ({
   subjectId,
   onSuccess,
 }: UseSendReportProps) => {
+  const { t } = useTranslation(["moderation"]);
+
   const mutation = useMutation({
     mutationFn: (data: ReportDto) => sendReport(data),
     onSuccess: () => {
       addToast({
-        title: "Report submitted",
-        description: "Thank you for your report. We will review it shortly.",
+        title: t("moderation:report.notifications.successTitle"),
+        description: t("moderation:report.notifications.successDescription"),
         color: "success",
       });
       onSuccess();
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Report failed",
-        description: getErrorMessage(error),
+        title: t("moderation:report.notifications.failedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
   });
 
-  const formik = useFormik<{ reason: ReportReason | ""; details: string }>({
-    initialValues: { reason: "Spam", details: "" },
-    validationSchema: reportSchema,
+  const formik = useFormik<{ reason: ReportReasonType; details: string }>({
+    initialValues: { reason: ReportReasonType.Spam, details: "" },
+    validationSchema: getReportSchema(t),
     onSubmit: (values) => {
       mutation.mutate({
         subjectType,
         subjectId,
-        reason: values.reason as ReportReason,
+        reason: values.reason,
         details: values.details,
       });
     },
   });
 
-  return { formik, isLoading: mutation.isPending };
+  return {
+    formik,
+    handleSendReport: formik.handleSubmit,
+    isLoading: mutation.isPending,
+  };
 };

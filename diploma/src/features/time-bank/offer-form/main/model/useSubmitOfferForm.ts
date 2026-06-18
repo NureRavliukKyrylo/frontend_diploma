@@ -4,6 +4,9 @@ import { createOffer, updateOffer } from "../api/submitOfferApi";
 import { queryClient } from "@shared/api";
 import { skillsQuery } from "@entities/skill";
 import { categoryQuery } from "@entities/category";
+import { getErrorMessage } from "@shared/libs/error-message";
+import { useTranslation } from "react-i18next";
+import { addToast } from "@heroui/react";
 
 interface UseSubmitOfferFormProps {
   isEdit?: boolean;
@@ -14,6 +17,7 @@ export const useSubmitOfferForm = ({
   isEdit = false,
   onSuccess,
 }: UseSubmitOfferFormProps = {}) => {
+  const { t } = useTranslation(["timeBank"]);
   const { step, data, clear } = useOfferFormStore();
 
   queryClient.prefetchInfiniteQuery(skillsQuery.infinite({ PageSize: 12 }));
@@ -23,10 +27,28 @@ export const useSubmitOfferForm = ({
     mutationFn: () =>
       isEdit ? updateOffer(data.id!, data) : createOffer(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: offerKeys.all() });
+      const keyScope = isEdit ? "update" : "create";
 
+      addToast({
+        title: t(`timeBank:toasts.${keyScope}.successTitle`),
+        description: t(`timeBank:toasts.${keyScope}.successDescription`),
+        color: "success",
+      });
+
+      queryClient.invalidateQueries({ queryKey: offerKeys.all() });
       clear();
       onSuccess?.();
+    },
+    onError: (error: unknown) => {
+      const keyScope = isEdit ? "update" : "create";
+
+      addToast({
+        title: t("common:errors.actionFailed", {
+          action: t(`timeBank:toasts.${keyScope}.action`),
+        }),
+        description: getErrorMessage(error, t),
+        color: "danger",
+      });
     },
   });
 
@@ -51,8 +73,17 @@ export const useSubmitOfferForm = ({
   const submit = () => mutate();
 
   const stepLabels = data.isOnline
-    ? ["Overview", "Categories", "Skills"]
-    : ["Overview", "Location", "Categories", "Skills"];
+    ? [
+        t("timeBank:forms.steps.overview"),
+        t("timeBank:forms.steps.categories"),
+        t("timeBank:forms.steps.skills"),
+      ]
+    : [
+        t("timeBank:forms.steps.overview"),
+        t("timeBank:forms.steps.location"),
+        t("timeBank:forms.steps.categories"),
+        t("timeBank:forms.steps.skills"),
+      ];
 
   const labelIndex = data.isOnline && step >= 2 ? step - 1 : step;
 
@@ -60,7 +91,7 @@ export const useSubmitOfferForm = ({
     step,
     data,
     isPending,
-    error,
+    error: error ? getErrorMessage(error, t) : null,
     stepLabels,
     labelIndex,
     isEdit,

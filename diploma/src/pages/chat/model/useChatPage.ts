@@ -3,6 +3,7 @@ import { profileQuery } from "@entities/user/profile";
 import type { MenuItem } from "@shared/config/types";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useNavigate, useSearch } from "@tanstack/react-router";
+import type { TFunction } from "i18next";
 import { useState } from "react";
 
 type ModeType = "edit" | "reply" | "report" | "delete";
@@ -44,24 +45,27 @@ export const useChatPage = () => {
       [type]: { isActive: false, message: null },
     }));
 
-  const getMenuItems = (message: Message): MenuItem<ModeType>[] =>
+  const getMenuItems = (
+    message: Message,
+    t: TFunction,
+  ): MenuItem<ModeType>[] =>
     message.isMine
       ? [
           {
             key: "edit",
-            label: "Edit",
+            label: t("chat:actions.edit"),
             onClick: () => setModeType("edit", message),
             variant: "edit" as const,
           },
           {
             key: "delete",
-            label: "Delete",
+            label: t("chat:actions.delete"),
             onClick: () => setModeType("delete", message),
             variant: "delete" as const,
           },
           {
             key: "reply",
-            label: "Reply",
+            label: t("chat:actions.reply"),
             onClick: () => setModeType("reply", message),
             variant: "reply" as const,
           },
@@ -69,13 +73,13 @@ export const useChatPage = () => {
       : [
           {
             key: "reply",
-            label: "Reply",
+            label: t("chat:actions.reply"),
             onClick: () => setModeType("reply", message),
             variant: "reply" as const,
           },
           {
             key: "report",
-            label: "Report",
+            label: t("chat:actions.report"),
             onClick: () => setModeType("report", message),
             variant: "report" as const,
           },

@@ -17,7 +17,7 @@ export const OrganizationsListFilter = ({
   selectedIds,
   onToggle,
 }: OrganizationsListFilterProps) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["common", "organizations"]);
   const {
     data: organizations = [],
     fetchNextPage,
@@ -29,13 +29,15 @@ export const OrganizationsListFilter = ({
   if (isError) {
     return (
       <div className={styles.stateMessage}>
-        <p className={styles.errorMessage}>Failed to load organizations</p>
+        <p className={styles.errorMessage}>{t("organizations:filter.error")}</p>
       </div>
     );
   }
 
   if (organizations.length === 0) {
-    return <p className={styles.emptyText}>No organizations found</p>;
+    return (
+      <p className={styles.emptyText}>{t("organizations:filter.empty")}</p>
+    );
   }
 
   return (
@@ -67,8 +69,8 @@ export const OrganizationsListFilter = ({
           className={styles.showMoreOrganizationsButton}
         >
           {isFetchingNextPage
-            ? t("loading.title")
-            : t("actions.seeMore").toLowerCase()}
+            ? t("common:loading.title")
+            : t("common:actions.seeMore").toLowerCase()}
         </BaseButtonWrapper>
       )}
     </div>

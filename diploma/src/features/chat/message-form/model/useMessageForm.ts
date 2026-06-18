@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
-import { messageSchema } from "../libs/messageSchema";
+import { useTranslation } from "react-i18next";
+import { getMessageSchema } from "../libs/messageSchema";
 import { useEditMessage } from "../../edit-message";
 import { useSendMessage } from "../../send-message";
 
@@ -18,6 +19,7 @@ export const useMessageForm = ({
   editingMessage,
   onCancel,
 }: UseMessageFormProps) => {
+  const { t } = useTranslation(["chat"]);
   const { sendMessage, isLoading: isSending } = useSendMessage(
     chatId,
     onCancel,
@@ -30,7 +32,7 @@ export const useMessageForm = ({
 
   const formik = useFormik<{ body: string }>({
     initialValues: { body: editingMessage ? editingMessage.content : "" },
-    validationSchema: messageSchema,
+    validationSchema: getMessageSchema(t),
     enableReinitialize: true,
     onSubmit: (values, { resetForm }) => {
       if (!values.body.trim()) return;

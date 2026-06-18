@@ -4,6 +4,7 @@ import { BaseSpinner } from "@shared/ui";
 import { queryClient } from "@shared/api";
 import "@entities/user/auth/api/refreshToken";
 import { getHttpErrorInfo } from "@shared/libs/error";
+import { useTranslation } from "react-i18next";
 
 const router = createRouter({
   routeTree,
@@ -19,17 +20,20 @@ const router = createRouter({
       />
     </div>
   ),
-  defaultErrorComponent: ({ error }) => (
-    <div className="flex flex-col justify-center items-center w-full min-h-screen gap-4">
-      <p className="text-[#dc2626] font-extrabold text-4xl md:text-3xl sm:text-2xl leading-tight">
-        {getHttpErrorInfo(error)}
-      </p>
+  defaultErrorComponent: ({ error }) => {
+    const { t } = useTranslation("common");
+    return (
+      <div className="flex flex-col justify-center items-center w-full min-h-screen gap-4">
+        <p className="text-[#dc2626] font-extrabold text-4xl md:text-3xl sm:text-2xl leading-tight">
+          {getHttpErrorInfo(error, t)}
+        </p>
 
-      <p className="text-gray-500 font-medium text-lg md:text-base max-w-md">
-        Try reloading the page or come back later.
-      </p>
-    </div>
-  ),
+        <p className="text-gray-500 font-medium text-lg md:text-base max-w-md">
+          {t("common:errors.errorHint")}
+        </p>
+      </div>
+    );
+  },
   context: {
     queryClient: queryClient,
     auth: undefined!,

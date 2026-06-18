@@ -29,11 +29,70 @@
       "about": "About this offer"
     }
   },
+  "offerPage": {
+    "chips": {
+      "offer": "Offer",
+      "online": "Online",
+      "offline": "Offline",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "blocks": {
+      "pendingText": "You already have a pending request for this offer.",
+      "skillsTitle": "Offer Skills",
+      "locationTitle": "Offer",
+      "locationSubtitle": "Location"
+    },
+    "map": {
+      "popupLabel": "📍 Offer location"
+    }
+  },
+  "myOfferPage": {
+    "chips": {
+      "myOffer": "My Offer",
+      "online": "Online",
+      "offline": "Offline",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "tabs": {
+      "overview": "OVERVIEW",
+      "bookings": "BOOKINGS"
+    },
+    "overview": {
+      "skillsTitle": "Offer Skills",
+      "locationTitle": "Offer",
+      "locationSubtitle": "Location",
+      "popupLabel": "📍 Offer location"
+    },
+    "bookings": {
+      "title": "Bookings",
+      "errorHint": "Try reloading the page or come back later.",
+      "emptyTitle": "No bookings yet",
+      "emptyText": "Wait for the first booking to your offer"
+    }
+  },
   "bookings": {
     "title": "MY BOOKINGS",
     "labels": {
       "booked": "Booked",
-      "reason": "Reason"
+      "reason": "Reason",
+      "rejectTitle": "Reject booking",
+      "reasonPlaceholder": "Provide a reason for rejection...",
+      "completeTitle": "Complete booking",
+      "completeDescription": "Are you sure you want to mark this booking as complete? This action cannot be undone.",
+      "cancelTitle": "Cancel booking",
+      "comment": "Comment",
+      "cancelPlaceholder": "Provide a reason for cancellation...",
+      "requestTitle": "Request to book — {{offerName}}",
+      "requestPlaceholder": "Leave a comment...",
+      "reject": "Reject",
+      "complete": "Complete",
+      "cancel": "Cancel",
+      "cancelBooking": "Cancel booking",
+      "bookNow": "Book now",
+      "approve": "Approve",
+      "back": "Back"
     },
     "status": {
       "inProgress": "In progress",
@@ -54,6 +113,31 @@
       "completionRequested": "Waiting for the organizer to confirm completion.",
       "completed": "You've successfully completed this offer.",
       "cancelled": "This booking has been cancelled."
+    },
+    "actions": {
+      "rejectName": "rejecting the booking",
+      "completeName": "completing the booking",
+      "cancelName": "cancelling the booking",
+      "sendName": "sending the booking request",
+      "approveName": "approving the booking"
+    },
+    "validation": {
+      "reasonMax": "Reason must be at most 100 characters",
+      "reasonRequired": "Reason is required",
+      "commentMax": "Comment must be at most {{max}} characters",
+      "commentRequired": "Comment is required"
+    },
+    "toasts": {
+      "rejectSuccessTitle": "Booking rejected",
+      "rejectSuccessDesc": "The booking has been rejected",
+      "completeSuccessTitle": "Booking completed",
+      "completeSuccessDesc": "The booking has been marked as complete",
+      "cancelSuccessTitle": "Booking cancelled",
+      "cancelSuccessDesc": "The booking has been cancelled",
+      "sendSuccessTitle": "Booking sent",
+      "sendSuccessDesc": "Your booking request has been sent",
+      "approveSuccessTitle": "Booking approved",
+      "approveSuccessDesc": "The booking has been approved"
     }
   },
   "myOffers": {
@@ -169,5 +253,105 @@
   },
   "errors": {
     "hint": "Try reloading the page or come back later."
+  },
+  "forms": {
+    "steps": {
+      "overview": "Overview",
+      "location": "Location",
+      "categories": "Categories",
+      "skills": "Skills"
+    },
+    "labels": {
+      "title": "Title",
+      "description": "Description",
+      "reward": "Reward (minutes)",
+      "dateRange": "Date range",
+      "setOnline": "Set online",
+      "mapHint": "Click on the map to set the offer location",
+      "offerLocationPopup": "📍 Offer location"
+    },
+    "actions": {
+      "edit": "Edit",
+      "createNewOffer": "Create new offer",
+      "editOffer": "Edit Offer",
+      "createOffer": "Create Offer",
+      "back": "Back",
+      "next": "Next",
+      "submit": "Submit"
+    },
+    "states": {
+      "failedSkills": "Failed to load skills",
+      "emptySkills": "No skills found",
+      "failedCategories": "Failed to load categories",
+      "emptyCategories": "No categories found"
+    }
+  },
+  "validation": {
+    "titleRequired": "Title is required",
+    "titleMax": "Max 30 characters",
+    "descriptionRequired": "Description is required",
+    "descriptionMax": "Max 150 characters",
+    "priceTypeError": "Must be a number",
+    "priceNegative": "Price can't be negative",
+    "priceRequired": "Price is required",
+    "startDateRequired": "Start date is required",
+    "startDateInPast": "Start date cannot be in the past",
+    "endDateRequired": "End date is required",
+    "minOneSkill": "Select at least one skill",
+    "minOneCategory": "Select at least one category",
+    "locationRequired": "Please pick a location on the map"
+  },
+  "toasts": {
+    "create": {
+      "action": "creating the offer",
+      "successTitle": "Offer Created",
+      "successDescription": "Your offer has been successfully published to the marketplace."
+    },
+    "update": {
+      "action": "updating the offer",
+      "successTitle": "Offer Updated",
+      "successDescription": "All your changes have been successfully saved."
+    }
+  },
+  "gifts": {
+    "labels": {
+      "giftMinutes": "Gift minutes",
+      "amount": "Amount",
+      "minutesPlaceholder": "minutes",
+      "message": "Message",
+      "messagePlaceholder": "Add a personal note..."
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "sendGift": "Send gift",
+      "actionName": "gifting minutes"
+    },
+    "validation": {
+      "amountTypeError": "Amount must be a number",
+      "amountPositive": "Amount must be positive",
+      "amountInteger": "Amount must be a whole number",
+      "amountRequired": "Amount is required",
+      "messageMax": "Message must be at most 70 characters",
+      "messageRequired": "Message is required"
+    },
+    "toasts": {
+      "successTitle": "Gift sent",
+      "successDescription": "Minutes have been gifted successfully"
+    }
+  },
+  "deactivateOffer": {
+    "labels": {
+      "title": "Deactivate offer",
+      "description": "Are you sure you want to deactivate this offer? It will no longer be visible to other users."
+    },
+    "actions": {
+      "confirm": "Deactivate",
+      "cancel": "Cancel",
+      "actionName": "deactivating the offer"
+    },
+    "toasts": {
+      "successTitle": "Offer deactivated",
+      "successDescription": "The offer has been deactivated"
+    }
   }
 }

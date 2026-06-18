@@ -1,0 +1,81 @@
+{
+  "actions": {
+    "delete": "Видалити ({{count}})",
+    "deleting": "Видалення...",
+    "markAsRead": "Позначити як прочитане",
+    "markAllAsRead": "Позначити всі як прочитані"
+  },
+  "notifications": {
+    "deleteSuccessTitle": "Сповіщення видалено",
+    "deleteSuccessDesc": "Вибрані сповіщення були успішно видалені",
+    "deleteFailedTitle": "Не вдалося видалити",
+    "readSuccessTitle": "Сповіщення прочитано",
+    "readSuccessDesc": "Сповіщення було позначено як прочитане",
+    "readFailedTitle": "Не вдалося позначити як прочитане",
+    "readAllSuccessTitle": "Всі сповіщення прочитано",
+    "readAllSuccessDesc": "Усі сповіщення були позначені як прочитані",
+    "readAllFailedTitle": "Не вдалося позначити всі як прочитані"
+  },
+  "page": {
+    "title": "СПОВІЩЕННЯ",
+    "statusTabs": {
+      "all": "Усі",
+      "unread": "Непрочитані"
+    },
+    "filterLabels": {
+      "type": "Тип"
+    },
+    "actions": {
+      "cancel": "Скасувати",
+      "deleteMessages": "Видалити повідомлення"
+    },
+    "states": {
+      "emptyTitle": "Сповіщень не знайдено",
+      "emptyDesc": "Спробуйте змінити налаштування фільтрів"
+    }
+  },
+  "types": {
+    "All": "Усі",
+    "JoinRequestCreated": "Запит на приєднання створено",
+    "JoinRequestApproved": "Запит на приєднання підтверджено",
+    "JoinRequestRejected": "Запит на приєднання відхилено",
+    "LeaveRequestCreated": "Запит на вихід створено",
+    "LeaveRequestApproved": "Запит на вихід підтверджено",
+    "LeaveRequestRejected": "Запит на вихід відхилено",
+    "RequestCreated": "Запит створено",
+    "ReportCreated": "Скарга створена",
+    "SkillRequestApproved": "Запит на навичку підтверджено",
+    "SkillRequestRejected": "Запит на навичку відхилено",
+    "CategoryRequestApproved": "Запит на категорію підтверджено",
+    "CategoryRequestRejected": "Запит на категорію відхилено",
+    "BadgeAwarded": "Нагороджено відзнакою",
+    "ChatMessage": "Повідомлення в чаті",
+    "ChatMention": "Згадка в чаті",
+    "CommentReply": "Відповідь на коментар",
+    "CommentMention": "Згадка в коментарі",
+    "AttendanceApproved": "Відвідуваність підтверджено",
+    "AttendanceRejected": "Відвідуваність відхилено",
+    "AttendanceDisputeCreated": "Створено спір щодо відвідуваності",
+    "AttendanceDisputeResolved": "Вирішено спір щодо відвідуваності",
+    "WorkLogApproved": "Журнал роботи підтверджено",
+    "PriorityReserved": "Пріоритет зарезервовано",
+    "PrioritySpent": "Пріоритет витрачено",
+    "PriorityReleased": "Пріоритет звільнено",
+    "TimeBankBalanceChanged": "Баланс банку часу змінено",
+    "TimeLevelUp": "Новий рівень",
+    "TimeGiftReceived": "Отримано подарунок",
+    "TimeGiftSent": "Надіслано подарунок",
+    "TaskReminder": "Нагадування про завдання",
+    "TaskDeadlineSoon": "Наближається дедлайн завдання",
+    "TaskOverdue": "Протерміноване завдання",
+    "TaskCompletedLate": "Завдання виконано із запізненням",
+    "System": "Системне",
+    "TimeSpendBookingRequested": "Запит на бронювання",
+    "TimeSpendBookingApproved": "Бронювання підтверджено",
+    "TimeSpendBookingRejected": "Бронювання відхилено",
+    "TimeSpendBookingCancelled": "Бронювання скасовано",
+    "TimeSpendCompletionRequested": "Надіслано запит на завершення",
+    "TimeSpendBookingCompleted": "Бронювання завершено",
+    "TimeSpendBookingDisputed": "Відкрито спір щодо бронювання"
+  }
+}

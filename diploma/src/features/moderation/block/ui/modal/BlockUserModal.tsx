@@ -2,9 +2,9 @@ import { BaseModal } from "@shared/ui/modals";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useBlockUser } from "../../model/useBlockUser";
 import styles from "./BlockUserModal.module.scss";
-import { reportReasonOptions } from "@entities/report";
+import { getReportReasonOptions } from "@entities/report";
 import { SortDropDown } from "@shared/ui/drop-down";
-import type { ReportReason } from "@entities/report/model";
+import { useTranslation } from "react-i18next";
 
 interface BlockUserModalProps {
   isOpen: boolean;
@@ -23,6 +23,8 @@ export const BlockUserModal = ({
   entityType,
   entityId,
 }: BlockUserModalProps) => {
+  const { t } = useTranslation(["moderation"]);
+
   const handleClose = () => {
     formik.resetForm();
     onClose();
@@ -45,16 +47,17 @@ export const BlockUserModal = ({
     >
       <form onSubmit={formik.handleSubmit} className={styles.wrapper}>
         <div className={styles.header}>
-          <h1 className={styles.title}>Block User</h1>
+          <h1 className={styles.title}>{t("moderation:blockUser.title")}</h1>
         </div>
 
         <div className={styles.field}>
-          <span className={styles.label}>Reason</span>
+          <span className={styles.label}>
+            {t("moderation:blockUser.labels.reason")}
+          </span>
           <SortDropDown
-            options={reportReasonOptions}
-            value={formik.values.reason as ReportReason}
+            options={getReportReasonOptions(t)}
+            value={formik.values.reason}
             onSelect={(value) => formik.setFieldValue("reason", value)}
-            label="Reason"
             variant="report"
           />
           {formik.submitCount > 0 && formik.errors.reason && (
@@ -66,15 +69,16 @@ export const BlockUserModal = ({
           <BaseButtonWrapper
             className={styles.cancelButton}
             onClick={handleClose}
+            type="button"
           >
-            Cancel
+            {t("moderation:blockUser.actions.cancel")}
           </BaseButtonWrapper>
           <BaseButtonWrapper
             loading={isLoading}
             className={styles.submitButton}
             type="submit"
           >
-            Block User
+            {t("moderation:blockUser.actions.submit")}
           </BaseButtonWrapper>
         </div>
       </form>

@@ -3,9 +3,11 @@ import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { useRouter } from "@tanstack/react-router";
 import { createPrivateChat } from "../api/createPrivateChat";
+import { useTranslation } from "react-i18next";
 
 export const useCreatePrivateChat = () => {
   const router = useRouter();
+  const { t } = useTranslation(["chat", "common"]);
 
   const mutation = useMutation({
     mutationFn: (userId: string) => createPrivateChat(userId),
@@ -17,8 +19,8 @@ export const useCreatePrivateChat = () => {
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Failed to open chat",
-        description: getErrorMessage(error),
+        title: t("chat:toasts.openError"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },

@@ -3,6 +3,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { TextAreaForm } from "@shared/ui/inputs";
 import styles from "./CancelBookingModal.module.scss";
 import { useCancelBooking } from "../../model/useCancelBooking";
+import { useTranslation } from "react-i18next";
 
 interface CancelBookingModalProps {
   isOpen: boolean;
@@ -15,6 +16,7 @@ export const CancelBookingModal = ({
   onClose,
   bookingId,
 }: CancelBookingModalProps) => {
+  const { t } = useTranslation(["timeBank"]);
   const handleClose = () => {
     formik.resetForm();
     onClose();
@@ -34,14 +36,18 @@ export const CancelBookingModal = ({
     >
       <form onSubmit={formik.handleSubmit} className={styles.wrapper}>
         <div className={styles.header}>
-          <h1 className={styles.title}>Cancel booking</h1>
+          <h1 className={styles.title}>
+            {t("timeBank:bookings.labels.cancelTitle")}
+          </h1>
         </div>
 
         <div className={styles.field}>
-          <span className={styles.label}>Comment</span>
+          <span className={styles.label}>
+            {t("timeBank:bookings.labels.comment")}
+          </span>
           <TextAreaForm
             name="comment"
-            placeholder="Provide a reason for cancellation..."
+            placeholder={t("timeBank:bookings.labels.cancelPlaceholder")}
             value={formik.values.comment}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -59,14 +65,14 @@ export const CancelBookingModal = ({
             onClick={handleClose}
             type="button"
           >
-            Back
+            {t("timeBank:bookings.labels.back")}
           </BaseButtonWrapper>
           <BaseButtonWrapper
             loading={isLoading}
             className={styles.submitButton}
             type="submit"
           >
-            Cancel booking
+            {t("timeBank:bookings.labels.cancelBooking")}
           </BaseButtonWrapper>
         </div>
       </form>

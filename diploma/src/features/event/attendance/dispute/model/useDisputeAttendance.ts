@@ -6,7 +6,8 @@ import { queryClient } from "@shared/api";
 import { eventKeys } from "@entities/event";
 import { getCalendarRange } from "@shared/libs/date";
 import { disputeAttendance } from "../api/disputeAttendanceApi";
-import { disputeValidationSchema } from "../libs/disputeValidationsSchema";
+import { useTranslation } from "react-i18next";
+import { getDisputeValidationSchema } from "../libs/disputeValidationsSchema";
 
 export interface DisputeFormValues {
   comment: string;
@@ -18,6 +19,7 @@ export const useDisputeAttendance = (
   date: Date,
   onSuccess?: () => void,
 ) => {
+  const { t } = useTranslation(["event"]);
   const { From, To } = getCalendarRange(date);
 
   const mutation = useMutation({
@@ -25,8 +27,8 @@ export const useDisputeAttendance = (
       disputeAttendance(eventId, attendanceId, comment),
     onSuccess: () => {
       addToast({
-        title: "Dispute Submitted",
-        description: "Your dispute has been submitted successfully",
+        title: t("event:dispute.notifications.successTitle"),
+        description: t("event:dispute.notifications.successDescription"),
         color: "success",
       });
       queryClient.invalidateQueries({
@@ -36,8 +38,8 @@ export const useDisputeAttendance = (
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Dispute Failed",
-        description: getErrorMessage(error),
+        title: t("event:dispute.notifications.failedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -45,7 +47,7 @@ export const useDisputeAttendance = (
 
   const formik = useFormik<DisputeFormValues>({
     initialValues: { comment: "" },
-    validationSchema: disputeValidationSchema,
+    validationSchema: getDisputeValidationSchema(t),
     onSubmit: (values) => {
       mutation.mutate(values.comment);
     },

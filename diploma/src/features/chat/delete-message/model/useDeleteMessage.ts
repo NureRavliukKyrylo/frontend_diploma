@@ -4,8 +4,11 @@ import { getErrorMessage } from "@shared/libs/error-message";
 import { queryClient } from "@shared/api";
 import { messageKeys } from "@entities/chat";
 import { deleteMessage } from "../api/deleteMessageApi";
+import { useTranslation } from "react-i18next";
 
 export const useDeleteMessage = (chatId: string, onSuccess?: () => void) => {
+  const { t } = useTranslation(["chat", "common"]);
+
   const mutation = useMutation({
     mutationFn: (messageId: string) => deleteMessage(chatId, messageId),
     onSuccess: () => {
@@ -14,8 +17,8 @@ export const useDeleteMessage = (chatId: string, onSuccess?: () => void) => {
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Failed to delete message",
-        description: getErrorMessage(error),
+        title: t("chat:toasts.deleteError"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },

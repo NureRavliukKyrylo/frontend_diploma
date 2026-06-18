@@ -1,13 +1,20 @@
 import { ModerationSubjectType } from "../model";
 
-export const getModerationSubjectLabel = (
+const subjectTranslationKeys: Record<ModerationSubjectType, string> = {
+  [ModerationSubjectType.User]: "User",
+  [ModerationSubjectType.Organization]: "Organization",
+  [ModerationSubjectType.Project]: "Project",
+  [ModerationSubjectType.Event]: "Event",
+  [ModerationSubjectType.Task]: "Task",
+  [ModerationSubjectType.Offer]: "Offer",
+  [ModerationSubjectType.ChatMessage]: "ChatMessage",
+  [ModerationSubjectType.Comment]: "Comment",
+  [ModerationSubjectType.Feedback]: "Feedback",
+  [ModerationSubjectType.Other]: "Other",
+};
+
+export const getModerationSubjectKey = (
   type: ModerationSubjectType,
 ): string => {
-  return (
-    Object.keys(ModerationSubjectType).find(
-      (key) =>
-        ModerationSubjectType[key as keyof typeof ModerationSubjectType] ===
-        type,
-    ) ?? "Content"
-  );
+  return subjectTranslationKeys[type] ?? "Other";
 };

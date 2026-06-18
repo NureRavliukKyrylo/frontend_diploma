@@ -1,0 +1,160 @@
+{
+  "report": {
+    "title": "Report {{subject}}",
+    "labels": {
+      "reason": "Reason",
+      "details": "Details"
+    },
+    "placeholders": {
+      "details": "Describe the issue..."
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "submit": "Submit Report"
+    },
+    "validation": {
+      "reasonRequired": "Please select a reason",
+      "detailsRequired": "Details are required",
+      "detailsMax": "Details must be at most 200 characters"
+    },
+    "subjects": {
+      "User": "User",
+      "Organization": "Organization",
+      "Project": "Project",
+      "Event": "Event",
+      "Task": "Task",
+      "Offer": "Offer",
+      "ChatMessage": "Message",
+      "Comment": "Comment",
+      "Feedback": "Feedback",
+      "Other": "Content"
+    },
+    "reasons": {
+      "Spam": "Spam",
+      "Harassment": "Harassment or Bullying",
+      "HateSpeech": "Hate Speech",
+      "Misinformation": "Misinformation",
+      "InappropriateContent": "Inappropriate Content",
+      "Violence": "Violence or Threats",
+      "Copyright": "Copyright Violation",
+      "Fraud": "Fraud or Scam",
+      "PrivacyViolation": "Privacy Violation",
+      "Other": "Other"
+    },
+    "notifications": {
+      "successTitle": "Report submitted",
+      "successDescription": "Thank you for your report. We will review it shortly.",
+      "failedTitle": "Report failed"
+    }
+  },
+  "hideContent": {
+    "button": "Hide Content",
+    "title": "Hide Content",
+    "actions": {
+      "cancel": "Cancel",
+      "submit": "Hide Content"
+    },
+    "validation": {
+      "reasonRequired": "Please select a reason"
+    },
+    "notifications": {
+      "successTitle": "Content hidden",
+      "successDescription": "The content has been hidden successfully.",
+      "failedTitle": "Action failed"
+    }
+  },
+  "blockUser": {
+    "button": "Block User",
+    "title": "Block User",
+    "labels": {
+      "reason": "Reason"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "submit": "Block User"
+    },
+    "validation": {
+      "reasonRequired": "Please select a reason"
+    },
+    "notifications": {
+      "successTitle": "User blocked",
+      "successDescription": "The user has been blocked successfully.",
+      "failedTitle": "Action failed"
+    }
+  },
+  "banUser": {
+    "button": "Ban User",
+    "title": "Ban User",
+    "labels": {
+      "reason": "Reason",
+      "expiresAt": "Ban until"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "submit": "Ban User"
+    },
+    "validation": {
+      "reasonRequired": "Please select a reason",
+      "expiresAtRequired": "Please select an expiration date"
+    },
+    "notifications": {
+      "successTitle": "User banned",
+      "successDescription": "The user has been banned successfully.",
+      "failedTitle": "Action failed"
+    }
+  },
+  "resolveCase": {
+    "button": "Resolve",
+    "title": "Resolve Report",
+    "decisions": {
+      "reject": "Reject",
+      "approve": "Approve"
+    },
+    "labels": {
+      "comment": "Comment"
+    },
+    "placeholders": {
+      "rejectedComment": "Why is this report being rejected?",
+      "approvedComment": "Describe the resolution..."
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "submit": "Confirm"
+    },
+    "validation": {
+      "commentRequired": "Comment is required",
+      "commentMaxLength": "Comment must be at most 150 characters"
+    },
+    "notifications": {
+      "successTitleResolve": "Report resolved",
+      "successDescriptionResolve": "The report has been resolved successfully.",
+      "successTitleReject": "Report rejected",
+      "successDescriptionReject": "The report has been rejected.",
+      "failedTitle": "Action failed"
+    }
+  },
+  "filters": {
+    "status": {
+      "title": "Report Status",
+      "label": "Status",
+      "options": {
+        "all": "All",
+        "open": "Open",
+        "resolved": "Resolved",
+        "rejected": "Rejected"
+      }
+    },
+    "dateRange": {
+      "title": "Date range"
+    },
+    "reportReason": {
+      "title": "Report Reason"
+    },
+    "subjectType": {
+      "title": "Subject type"
+    },
+    "actions": {
+      "clear": "Clear Filters"
+    }
+  }
+}

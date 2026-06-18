@@ -4,6 +4,7 @@ import { getErrorMessage } from "@shared/libs/error-message";
 import { approveBooking } from "../api/approveBookingApi";
 import { queryClient } from "@shared/api";
 import { offerKeys } from "@entities/offer";
+import { useTranslation } from "react-i18next";
 
 interface UseApproveBookingProps {
   bookingId: string;
@@ -16,12 +17,14 @@ export const useApproveBooking = ({
   offerId,
   onSuccess,
 }: UseApproveBookingProps) => {
+  const { t } = useTranslation(["timeBank", "common"]);
+
   const mutation = useMutation({
     mutationFn: () => approveBooking(bookingId),
     onSuccess: () => {
       addToast({
-        title: "Booking approved",
-        description: "The booking has been approved",
+        title: t("timeBank:bookings.toasts.approveSuccessTitle"),
+        description: t("timeBank:bookings.toasts.approveSuccessDesc"),
         color: "success",
       });
       queryClient.invalidateQueries({
@@ -32,8 +35,10 @@ export const useApproveBooking = ({
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Failed to approve",
-        description: getErrorMessage(error),
+        title: t("common:errors.actionFailed", {
+          action: t("timeBank:bookings.actions.approveName"),
+        }),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },

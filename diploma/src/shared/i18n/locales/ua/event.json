@@ -16,7 +16,9 @@
     "votes_one": "({{count}} голос)",
     "votes_few": "({{count}} голоси)",
     "votes_many": "({{count}} голосів)",
-    "votes_other": "({{count}} голосу)"
+    "votes_other": "({{count}} голосу)",
+    "failedLoad": "Не вдалося завантажити події",
+    "noEvents": "Подій не знайдено"
   },
   "tabs": {
     "overview": "ОГЛЯД",
@@ -59,5 +61,38 @@
     "endingSoon": "Скоро закінчується",
     "completed": "Завершено",
     "archived": "Архівовано"
+  },
+  "checkIn": {
+    "button": "Відмітити присутність",
+    "title": "Реєстрація присутности - {{title}}",
+    "placeholder": "Залишити нотатку... (опціонально)",
+    "confirmButton": "Підтвердити присутність",
+    "cancel": "Скасувати",
+    "validation": {
+      "noteMax": "Нотатка повинна містити не більше 50 символів"
+    },
+    "notifications": {
+      "geoNotSupported": "Геолокація не підтримується вашим браузером",
+      "geoRequired": "Для реєстрації необхідний доступ до геопозиції",
+      "successTitle": "Реєстрація успішна",
+      "successDescription": "Вашу присутність успішно зафіксовано",
+      "failedTitle": "Помилка реєстрації"
+    }
+  },
+  "dispute": {
+    "button": "Оскаржити",
+    "title": "Оскарження — {{title}}",
+    "placeholder": "Опишіть причину вашого оскарження...",
+    "confirmButton": "Надіслати оскарження",
+    "cancel": "Скасувати",
+    "validation": {
+      "commentRequired": "Коментар є обов'язковим",
+      "commentMax": "Коментар повинен містити не більше 50 символів"
+    },
+    "notifications": {
+      "successTitle": "Оскарження надіслано",
+      "successDescription": "Ваше оскарження було успішно надіслано",
+      "failedTitle": "Помилка відправки оскарження"
+    }
   }
 }

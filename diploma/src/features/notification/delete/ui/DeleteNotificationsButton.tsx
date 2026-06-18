@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useDeleteNotifications } from "../model/useDeleteNotifications";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { RejectIcon } from "@shared/assets/icons/actions";
+import { useTranslation } from "react-i18next";
 import styles from "./DeleteNotificationsButton.module.scss";
 
 interface DeleteNotificationsButtonProps {
@@ -15,6 +16,7 @@ export const DeleteNotificationsButton = ({
   onSuccess,
   onDeleteTrigger,
 }: DeleteNotificationsButtonProps) => {
+  const { t } = useTranslation(["notification"]);
   const { deleteNotifications, isLoading } = useDeleteNotifications({
     onSuccess,
   });
@@ -36,7 +38,9 @@ export const DeleteNotificationsButton = ({
         disabled={isLoading}
       >
         <RejectIcon className={styles.icon} />
-        {isLoading ? "Deleting..." : `Delete (${ids.length})`}
+        {isLoading
+          ? t("notification:actions.deleting")
+          : t("notification:actions.delete", { count: ids.length })}
       </BaseButtonWrapper>
     </motion.div>
   );

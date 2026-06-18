@@ -1,19 +1,21 @@
 import { useOfferFormStore, type OfferFormData } from "@entities/offer";
 import { useFormik } from "formik";
-import { skillsSchema } from "../libs/skillsSchema";
+import { getSkillsSchema } from "../libs/skillsSchema";
 import type { Skill } from "@entities/skill";
+import { useTranslation } from "react-i18next";
 
 interface UseCategoriesFormProps {
   data: OfferFormData;
 }
 export const useSkillsForm = ({ data }: UseCategoriesFormProps) => {
   const setData = useOfferFormStore((s) => s.setData);
+  const { t } = useTranslation(["timeBank"]);
 
   const formik = useFormik<{ skills: Skill[] }>({
     initialValues: {
       skills: data.skills,
     },
-    validationSchema: skillsSchema,
+    validationSchema: getSkillsSchema(t),
     onSubmit: (values) => setData(values),
   });
 

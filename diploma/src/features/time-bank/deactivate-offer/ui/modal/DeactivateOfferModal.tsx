@@ -2,6 +2,7 @@ import { ConfirmationModal } from "@shared/ui/modals";
 import { useDeactivateOffer } from "../../model/useDeactivateOffer";
 import { DeleteModal } from "@shared/assets/images/actions";
 import styles from "./DeactivateOfferModal.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface DeactivateOfferModalProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ export const DeactivateOfferModal = ({
   onClose,
   offerId,
 }: DeactivateOfferModalProps) => {
+  const { t } = useTranslation(["timeBank"]);
   const { deactivate, isLoading, errorMessage } = useDeactivateOffer({
     offerId,
     onSuccess: onClose,
@@ -27,10 +29,10 @@ export const DeactivateOfferModal = ({
       confirmButtonClassName={styles.confirmButtonDeactivate}
       imageClassName={styles.imageDelete}
       onConfirm={deactivate}
-      title="Deactivate offer"
-      text="Are you sure you want to deactivate this offer? It will no longer be visible to other users."
-      confirmText="Deactivate"
-      cancelText="Cancel"
+      title={t("timeBank:deactivateOffer.labels.title")}
+      text={t("timeBank:deactivateOffer.labels.description")}
+      confirmText={t("timeBank:deactivateOffer.actions.confirm")}
+      cancelText={t("timeBank:deactivateOffer.actions.cancel")}
       error={errorMessage}
       isLoading={isLoading}
     />

@@ -8,6 +8,7 @@ import { LoadMoreButton } from "@shared/ui/buttons";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import type { QueryResult } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
 
 interface TaskBoardColumnProps {
   status: TaskStatus;
@@ -23,6 +24,7 @@ export const TaskBoardColumn = ({
 }: TaskBoardColumnProps) => {
   const { renderCard, renderSkeleton, onAddTask, useTasksQuery } =
     useTaskBoardContext();
+  const { t } = useTranslation(["task", "common"]);
 
   return (
     <div className={styles.column}>
@@ -42,10 +44,8 @@ export const TaskBoardColumn = ({
         fallbackRender={({ error }) => {
           return (
             <div className={styles.errorState}>
-              <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-              <p className="errorHint">
-                Try reloading the page or come back later.
-              </p>
+              <p className="errorHttpMessage">{getHttpErrorInfo(error, t)}</p>
+              <p className="errorHint">{t("common:errors.errorHint")}</p>
             </div>
           );
         }}

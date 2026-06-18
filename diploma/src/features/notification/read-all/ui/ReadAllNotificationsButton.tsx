@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
 import { useReadAllNotifications } from "../model/useReadAllNotifications";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { useTranslation } from "react-i18next";
 import styles from "./ReadAllNotificationsButton.module.scss";
 
 export const ReadAllNotificationsButton = () => {
+  const { t } = useTranslation(["notification"]);
   const { readAllNotifications, isLoading } = useReadAllNotifications();
 
   return (
@@ -17,7 +19,7 @@ export const ReadAllNotificationsButton = () => {
         onClick={readAllNotifications}
         disabled={isLoading}
       >
-        Mark all as read
+        {t("notification:actions.markAllAsRead")}
       </BaseButtonWrapper>
     </motion.div>
   );

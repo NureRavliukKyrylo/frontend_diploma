@@ -4,6 +4,7 @@ import { getErrorMessage } from "@shared/libs/error-message";
 import { deactivateOffer } from "../api/deactivateOfferApi";
 import { offerKeys } from "@entities/offer";
 import { queryClient } from "@shared/api";
+import { useTranslation } from "react-i18next";
 
 interface UseDeactivateOfferProps {
   offerId: string;
@@ -14,12 +15,14 @@ export const useDeactivateOffer = ({
   offerId,
   onSuccess,
 }: UseDeactivateOfferProps) => {
+  const { t } = useTranslation(["timeBank", "common"]);
+
   const mutation = useMutation({
     mutationFn: () => deactivateOffer(offerId),
     onSuccess: () => {
       addToast({
-        title: "Offer deactivated",
-        description: "The offer has been deactivated",
+        title: t("timeBank:deactivateOffer.toasts.successTitle"),
+        description: t("timeBank:deactivateOffer.toasts.successDescription"),
         color: "success",
       });
       queryClient.invalidateQueries({ queryKey: offerKeys.all() });
@@ -27,8 +30,10 @@ export const useDeactivateOffer = ({
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Failed to deactivate",
-        description: getErrorMessage(error),
+        title: t("common:errors.actionFailed", {
+          action: t("timeBank:deactivateOffer.actions.actionName"),
+        }),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -37,6 +42,6 @@ export const useDeactivateOffer = ({
   return {
     deactivate: mutation.mutate,
     isLoading: mutation.isPending,
-    errorMessage: mutation.error ? getErrorMessage(mutation.error) : null,
+    errorMessage: mutation.error ? getErrorMessage(mutation.error, t) : null,
   };
 };

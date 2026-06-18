@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { getFullName } from "@entities/user";
 import { getMentionColor } from "@shared/config/constants";
 import { useMessageForm } from "../../model/useMessageForm";
+import { useTranslation } from "react-i18next";
 import {
   MentionButton,
   type Participant,
@@ -27,6 +28,7 @@ export const MessageForm = ({
   editingMessage,
   onCancel,
 }: MessageFormProps) => {
+  const { t } = useTranslation(["chat"]);
   const isEditing = Boolean(editingMessage);
   const isReplying = Boolean(replyToMessage) && !isEditing;
   const showBanner = isEditing || isReplying;
@@ -97,8 +99,10 @@ export const MessageForm = ({
             <div className={styles.bannerContent}>
               <span className={styles.bannerLabel}>
                 {isEditing
-                  ? "Editing message"
-                  : `Replying to ${replyToMessage?.sender}`}
+                  ? t("chat:banners.editing")
+                  : t("chat:banners.replying", {
+                      sender: replyToMessage?.sender,
+                    })}
               </span>
               <p className={styles.bannerText}>
                 {isEditing ? editingMessage?.content : replyToMessage?.content}
@@ -165,7 +169,11 @@ export const MessageForm = ({
               name="body"
               rows={1}
               value={formik.values.body}
-              placeholder={isEditing ? "Edit message..." : "Send Message..."}
+              placeholder={
+                isEditing
+                  ? t("chat:form.placeholderEdit")
+                  : t("chat:form.placeholderSend")
+              }
               onChange={(e) => {
                 formik.handleChange(e);
                 autoResize();

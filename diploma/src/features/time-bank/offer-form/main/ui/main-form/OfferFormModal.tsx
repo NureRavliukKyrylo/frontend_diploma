@@ -11,6 +11,7 @@ import styles from "./OfferFormModal.module.scss";
 import { useRef } from "react";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { Arrow } from "@shared/assets/icons/actions";
+import { useTranslation } from "react-i18next";
 
 interface OfferFormModalProps {
   isOpen: boolean;
@@ -23,7 +24,9 @@ export const OfferFormModal = ({
   onClose,
   isEdit = false,
 }: OfferFormModalProps) => {
+  const { t } = useTranslation(["timeBank"]);
   const stepRef = useRef<StepRef>(null);
+
   const {
     step,
     data,
@@ -55,12 +58,14 @@ export const OfferFormModal = ({
       onClose={handleClose}
       maxWidth="900px"
       showClosed={false}
-      error={error ? "Something went wrong, please try again" : null}
+      error={error}
     >
       <div className={styles.wrapper}>
         <div className={`${styles.header} ${isEdit ? styles.editHeader : ""}`}>
           <h1 className={`${styles.title} ${isEdit ? styles.editTitle : ""}`}>
-            {isEdit ? "Edit Offer" : "Create Offer"}
+            {isEdit
+              ? t("timeBank:forms.actions.editOffer")
+              : t("timeBank:forms.actions.createOffer")}
           </h1>
           <h2 className={styles.subTitle}>{stepLabels[labelIndex]}</h2>
         </div>
@@ -76,11 +81,12 @@ export const OfferFormModal = ({
             {steps[step as OfferStepKey]}
           </motion.div>
         </AnimatePresence>
+
         <div className={styles.footer}>
           {step > 0 && (
             <BaseButtonWrapper className={styles.backButton} onClick={prevStep}>
               <Arrow className={styles.arrowIcon} />
-              Back
+              {t("timeBank:forms.actions.back")}
             </BaseButtonWrapper>
           )}
           <BaseButtonWrapper
@@ -93,7 +99,9 @@ export const OfferFormModal = ({
               }
             }}
           >
-            {isLastStep ? "Submit" : "Next"}{" "}
+            {isLastStep
+              ? t("timeBank:forms.actions.submit")
+              : t("timeBank:forms.actions.next")}
           </BaseButtonWrapper>
         </div>
       </div>

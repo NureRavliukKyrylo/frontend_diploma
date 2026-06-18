@@ -4,6 +4,7 @@ import { DeactivateOfferModal } from "../modal/DeactivateOfferModal";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { DeactivateIcon } from "@shared/assets/icons/actions";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface DeactivateOfferButtonProps {
   offerId: string;
@@ -12,6 +13,7 @@ interface DeactivateOfferButtonProps {
 export const DeactivateOfferButton = ({
   offerId,
 }: DeactivateOfferButtonProps) => {
+  const { t } = useTranslation(["timeBank"]);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -26,7 +28,7 @@ export const DeactivateOfferButton = ({
           onClick={() => setIsOpen(true)}
         >
           <DeactivateIcon className={styles.icon} />
-          Deactivate
+          {t("timeBank:deactivateOffer.actions.confirm")}
         </BaseButtonWrapper>
       </motion.div>
       <DeactivateOfferModal

@@ -30,8 +30,10 @@ import {
 import { useMapUserLocation } from "@features/map";
 import { ReportButton } from "@features/moderation";
 import { ModerationSubjectType } from "@entities/report";
+import { useTranslation } from "react-i18next";
 
 export const OfferPage = () => {
+  const { t } = useTranslation(["timeBank"]);
   const { id } = useParams({ from: "/_masterLayout/offers/$id/" });
   const { data: offer } = useSuspenseQuery(offerQuery.id(id));
   const { isVisible, ref } = useIntersectionReveal<HTMLDivElement>();
@@ -58,7 +60,9 @@ export const OfferPage = () => {
           <div className={styles.titleHeader}>
             <h1>{offer.title}</h1>
             <div className={styles.offerMetaInfo}>
-              <span className={styles.metaChipOffer}>Offer</span>
+              <span className={styles.metaChipOffer}>
+                {t("timeBank:offerPage.chips.offer")}
+              </span>
 
               <span
                 className={`${styles.metaChip} ${
@@ -70,13 +74,17 @@ export const OfferPage = () => {
                     offer.isOnline ? styles.onlineIcon : styles.offlineIcon
                   }`}
                 />
-                {offer.isOnline ? "Online" : "Offline"}
+                {offer.isOnline
+                  ? t("timeBank:offerPage.chips.online")
+                  : t("timeBank:offerPage.chips.offline")}
               </span>
 
               <span
                 className={`${styles.metaChip} ${styles.statusChip} ${offer.isActive ? styles.active : styles.inActive}`}
               >
-                {offer.isActive ? "Active" : "Inactive"}
+                {offer.isActive
+                  ? t("timeBank:offerPage.chips.active")
+                  : t("timeBank:offerPage.chips.inactive")}
               </span>
 
               {offer.endAt && (
@@ -95,7 +103,10 @@ export const OfferPage = () => {
 
               <span className={`${styles.metaChip} ${styles.reward}`}>
                 <TimeBankIcon className={styles.timeBankIcon} />
-                <span>{offer.priceMinutes}m</span>
+                <span>
+                  {offer.priceMinutes}
+                  {t("timeBank:units.m")}
+                </span>
               </span>
             </div>
           </div>
@@ -140,7 +151,7 @@ export const OfferPage = () => {
         {offer.hasMyPendingRequest && offer.canCancel && (
           <div className={styles.pendingBlock}>
             <p className={styles.pendingText}>
-              You already have a pending request for this offer.
+              {t("timeBank:offerPage.blocks.pendingText")}
             </p>
             <CancelBookingButton
               bookingId={offer.myBookingId}
@@ -168,7 +179,7 @@ export const OfferPage = () => {
         <ShowMoreItemsButton
           items={
             offer.categories.map((category) => (
-              <RelatedCategoryCard category={category}>
+              <RelatedCategoryCard key={category.id} category={category}>
                 <LinkButtonWrapper
                   to="/categories/$id"
                   params={{ id: category.id }}
@@ -189,13 +200,17 @@ export const OfferPage = () => {
 
       <div className={styles.skillsBlock}>
         <div className={styles.headerSkills}>
-          <h1>Offer Skills</h1>
+          <h1>{t("timeBank:offerPage.blocks.skillsTitle")}</h1>
         </div>
         {hasSkills && (
           <ShowMoreItemsButton
             items={
               offer.skills.map((skill) => (
-                <Tab className={styles.skillWrapper} name={skill.name} />
+                <Tab
+                  key={skill.name}
+                  className={styles.skillWrapper}
+                  name={skill.name}
+                />
               )) ?? []
             }
             classNameItems={styles.skillsOfferList}
@@ -210,8 +225,8 @@ export const OfferPage = () => {
           <div className={styles.offerPageMainInfo}>
             <div className={styles.headerTextInfo}>
               <div className={styles.offerLocations}>
-                <h2>Offer</h2>
-                <span>Location</span>
+                <h2>{t("timeBank:offerPage.blocks.locationTitle")}</h2>
+                <span>{t("timeBank:offerPage.blocks.locationSubtitle")}</span>
               </div>
 
               <div className={styles.wrapperLocation}>
@@ -245,7 +260,7 @@ export const OfferPage = () => {
                     <Popup className={styles.popupContent}>
                       <h3 className={styles.popupOfferTitle}>{offer.title}</h3>
                       <p className={styles.popupOfferLocation}>
-                        📍 Offer location
+                        {t("timeBank:offerPage.map.popupLabel")}
                       </p>
                     </Popup>
                   </Marker>

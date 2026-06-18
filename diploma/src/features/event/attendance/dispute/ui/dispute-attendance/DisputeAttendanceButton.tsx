@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./DisputeAttendanceButton.module.scss";
 import { DisputeAttendanceModal } from "../modal/DisputeAttendanceModal";
+import { useTranslation } from "react-i18next";
 
 interface DisputeButtonProps {
   eventId: string;
@@ -15,6 +16,7 @@ export const DisputeAttendanceButton = ({
   attendanceId,
   eventTitle,
 }: DisputeButtonProps) => {
+  const { t } = useTranslation(["event"]);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -29,7 +31,7 @@ export const DisputeAttendanceButton = ({
           className={styles.disputeAttendanceButton}
           onClick={() => setIsOpen(true)}
         >
-          Dispute
+          {t("event:dispute.button")}
         </BaseButtonWrapper>
       </motion.div>
       <DisputeAttendanceModal

@@ -47,7 +47,7 @@ export const SkillsPage = () => {
       fallbackRender={({ error }) => {
         return (
           <div className={styles.errorState}>
-            <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
+            <p className="errorHttpMessage">{getHttpErrorInfo(error, t)}</p>
             <p className="errorHint">{t("common:errors.errorHint")}</p>
           </div>
         );

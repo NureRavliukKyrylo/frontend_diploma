@@ -12,6 +12,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import { getBookingBottomContent } from "../libs/getBookingBottomContent";
+import { useTranslation } from "react-i18next";
 
 interface BookingsTabProps {
   offerId: string;
@@ -19,19 +20,21 @@ interface BookingsTabProps {
 }
 
 export const BookingsTab = ({ offerId, PageSize }: BookingsTabProps) => {
+  const { t } = useTranslation(["timeBank", "common"]);
+
   return (
     <div className={styles.bookingsTabWrapper}>
       <div className={styles.mainContent}>
-        <h1 className={styles.bookingsTitle}>Bookings</h1>
+        <h1 className={styles.bookingsTitle}>
+          {t("timeBank:myOfferPage.bookings.title")}
+        </h1>
         <ErrorBoundary
           fallbackRender={({ error }) => (
             <div className={styles.errorState}>
               <p className={styles.errorHttpMessage}>
-                {getHttpErrorInfo(error)}
+                {getHttpErrorInfo(error, t)}
               </p>
-              <p className={styles.errorHint}>
-                Try reloading the page or come back later.
-              </p>
+              <p className={styles.errorHint}>{t("common:errors.errorHint")}</p>
             </div>
           )}
         >
@@ -74,8 +77,8 @@ export const BookingsTab = ({ offerId, PageSize }: BookingsTabProps) => {
               renderEmpty={(bookings) =>
                 bookings && bookings.length === 0 ? (
                   <div className={styles.emptyState}>
-                    <h2>No bookings yet</h2>
-                    <p>Wait for the first booking to your offer</p>
+                    <h2>{t("timeBank:myOfferPage.bookings.emptyTitle")}</h2>
+                    <p>{t("timeBank:myOfferPage.bookings.emptyText")}</p>
                   </div>
                 ) : null
               }

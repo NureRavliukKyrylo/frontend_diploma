@@ -4,14 +4,14 @@ import styles from "./SortDropDown.module.scss";
 import { CheckMark } from "@shared/assets/icons/info";
 import { useTranslation } from "react-i18next";
 
-interface SortDropDownProps<T extends string> {
+interface SortDropDownProps<T extends string | number> {
   options: SortOption<T>[];
   onSelect: (value: T) => void;
   value: T;
   variant?: "default" | "report";
 }
 
-export const SortDropDown = <T extends string>({
+export const SortDropDown = <T extends string | number>({
   options,
   onSelect,
   value,
@@ -31,7 +31,7 @@ export const SortDropDown = <T extends string>({
       }
     >
       {options.map((option) => {
-        const isActive = value.includes(option.value);
+        const isActive = String(value).includes(String(option.value));
         return (
           <div className={styles.wrapperItem}>
             <div

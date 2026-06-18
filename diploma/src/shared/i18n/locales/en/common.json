@@ -59,10 +59,15 @@
   },
   "errors": {
     "somethingWentWrong": "Something went wrong",
-    "notFound": "Not found",
-    "unauthorized": "Unauthorized",
     "actionFailed": "{{action}} failed",
-    "errorHint": "Спробуйте оновити сторінку або завітайте пізніше."
+    "errorHint": "Спробуйте оновити сторінку або завітайте пізніше.",
+    "unexpected": "An unexpected error occurred",
+    "unauthorized": "You need to be logged in to view this content.",
+    "forbidden": "You don't have permission to view this content.",
+    "notFound": "This resource could not be found.",
+    "tooManyRequests": "Too many requests. Please slow down.",
+    "internalServer": "Server error. Please try again later.",
+    "serviceUnavailable": "Service is temporarily unavailable."
   },
   "members": {
     "team": "Team",

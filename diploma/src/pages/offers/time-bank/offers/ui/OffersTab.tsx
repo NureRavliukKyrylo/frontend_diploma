@@ -56,8 +56,8 @@ export const OffersTab = ({ search }: OffersTabProps) => {
         <ErrorBoundary
           fallbackRender={({ error }) => (
             <div className={styles.errorState}>
-              <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-              <p className="errorHint">{t("errors.hint")}</p>
+              <p className="errorHttpMessage">{getHttpErrorInfo(error, t)}</p>
+              <p className="errorHint">{t("common:errors.hint")}</p>
             </div>
           )}
         >

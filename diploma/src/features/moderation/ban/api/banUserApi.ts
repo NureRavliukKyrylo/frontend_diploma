@@ -1,9 +1,9 @@
 import { apiClient } from "@shared/api";
-import type { ReportReason } from "@entities/report/model";
+import type { ReportReasonType } from "@entities/report/model";
 
 export type BanUserDto = {
   targetUserId: string;
-  reason: ReportReason;
+  reason: ReportReasonType;
   expiresAt: string;
 };
 

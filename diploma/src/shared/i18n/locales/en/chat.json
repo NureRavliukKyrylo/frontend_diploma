@@ -1,0 +1,48 @@
+{
+  "categories": {
+    "event": "Events",
+    "private": "Private Chats",
+    "task": "Tasks",
+    "project": "Projects",
+    "organization": "Organizations"
+  },
+  "states": {
+    "emptyTitle": "No chats yet",
+    "emptyDescription": "No {{type}} chats available",
+    "errorHint": "Try reloading the page or come back later.",
+    "noMessages": "No messages yet",
+    "typing": "typing...",
+    "noParticipants": "No participants"
+  },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "reply": "Reply",
+    "report": "Report",
+    "cancel": "Cancel",
+    "sendMessage": "Send message"
+  },
+  "banners": {
+    "editing": "Editing message",
+    "replying": "Replying to {{sender}}"
+  },
+  "form": {
+    "placeholderSend": "Send Message...",
+    "placeholderEdit": "Edit message..."
+  },
+  "validation": {
+    "maxCharacters": "Message must be at most 500 characters"
+  },
+  "modals": {
+    "delete": {
+      "title": "Delete Message",
+      "text": "Are you sure you want to delete \"{{preview}}\"? This action cannot be undone."
+    }
+  },
+  "toasts": {
+    "sendError": "Failed to send message",
+    "openError": "Failed to open chat",
+    "editError": "Failed to edit message",
+    "deleteError": "Failed to delete message"
+  }
+}

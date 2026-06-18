@@ -1,6 +1,12 @@
 import * as Yup from "yup";
+import type { TFunction } from "i18next";
 
-export const banUserSchema = Yup.object({
-  reason: Yup.string().required("Please select a reason"),
-  expiresAt: Yup.string().required("Please select an expiration date"),
-});
+export const getBanUserSchema = (t: TFunction) =>
+  Yup.object({
+    reason: Yup.mixed().required(
+      t("moderation:banUser.validation.reasonRequired"),
+    ),
+    expiresAt: Yup.string().required(
+      t("moderation:banUser.validation.expiresAtRequired"),
+    ),
+  });

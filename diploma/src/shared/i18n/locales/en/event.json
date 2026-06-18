@@ -23,7 +23,9 @@
     "active": "ACTIVE",
     "tasks": "TASKS",
     "markerLocation": "Event location",
-    "relatedProject": "Related project"
+    "relatedProject": "Related project",
+    "failedLoad": "Failed to load events",
+    "noEvents": "No events found"
   },
   "tabs": {
     "overview": "OVERVIEW",
@@ -73,5 +75,38 @@
     "endingSoon": "Ending soon",
     "completed": "Completed",
     "archived": "Archived"
+  },
+  "checkIn": {
+    "button": "Check in",
+    "title": "Check In - {{title}}",
+    "placeholder": "Leave a note... (optional)",
+    "confirmButton": "Confirm Check In",
+    "cancel": "Cancel",
+    "validation": {
+      "noteMax": "Note must be 50 characters or less"
+    },
+    "notifications": {
+      "geoNotSupported": "Geolocation not supported",
+      "geoRequired": "Location access is required to check in",
+      "successTitle": "Event check-in Success",
+      "successDescription": "You have checked in successfully",
+      "failedTitle": "Event check-in Failed"
+    }
+  },
+  "dispute": {
+    "button": "Dispute",
+    "title": "Dispute — {{title}}",
+    "placeholder": "Describe the reason for your dispute...",
+    "confirmButton": "Submit Dispute",
+    "cancel": "Cancel",
+    "validation": {
+      "commentRequired": "Comment is required",
+      "commentMax": "Comment must be 50 characters or less"
+    },
+    "notifications": {
+      "successTitle": "Dispute Submitted",
+      "successDescription": "Your dispute has been submitted successfully",
+      "failedTitle": "Dispute Failed"
+    }
   }
 }

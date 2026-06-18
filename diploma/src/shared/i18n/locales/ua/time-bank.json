@@ -29,11 +29,70 @@
       "about": "Про цю пропозицію"
     }
   },
+  "offerPage": {
+    "chips": {
+      "offer": "Пропозиція",
+      "online": "Онлайн",
+      "offline": "Офлайн",
+      "active": "Активна",
+      "inactive": "Неактивна"
+    },
+    "blocks": {
+      "pendingText": "Ви вже маєте активний запит на цю пропозицію.",
+      "skillsTitle": "Навички пропозиції",
+      "locationTitle": "Пропозиція",
+      "locationSubtitle": "Локація"
+    },
+    "map": {
+      "popupLabel": "📍 Локація пропозиції"
+    }
+  },
+  "myOfferPage": {
+    "chips": {
+      "myOffer": "Моя пропозиція",
+      "online": "Онлайн",
+      "offline": "Офлайн",
+      "active": "Активна",
+      "inactive": "Неактивна"
+    },
+    "tabs": {
+      "overview": "ОГЛЯД",
+      "bookings": "БРОНЮВАННЯ"
+    },
+    "overview": {
+      "skillsTitle": "Навички пропозиції",
+      "locationTitle": "Пропозиція",
+      "locationSubtitle": "Локація",
+      "popupLabel": "📍 Локація пропозиції"
+    },
+    "bookings": {
+      "title": "Бронювання",
+      "errorHint": "Спробуйте оновити сторінку або поверніться пізніше.",
+      "emptyTitle": "Бронювань ще немає",
+      "emptyText": "Зачекайте на перше бронювання вашої пропозиції"
+    }
+  },
   "bookings": {
     "title": "МОЇ БРОНЮВАННЯ",
     "labels": {
       "booked": "Заброньовано",
-      "reason": "Причина"
+      "reason": "Причина",
+      "rejectTitle": "Відхилити бронювання",
+      "reasonPlaceholder": "Вкажіть причину відхилення...",
+      "completeTitle": "Завершити бронювання",
+      "completeDescription": "Ви впевнені, що хочете позначити це бронювання як завершене? Цю дію не можна скасувати.",
+      "cancelTitle": "Скасувати бронювання",
+      "comment": "Коментар",
+      "cancelPlaceholder": "Вкажіть причину скасування...",
+      "requestTitle": "Запит на бронювання — {{offerName}}",
+      "requestPlaceholder": "Залиште коментар...",
+      "reject": "Відхилити",
+      "complete": "Завершити",
+      "cancel": "Скасувати",
+      "cancelBooking": "Скасувати бронювання",
+      "bookNow": "Забронювати",
+      "approve": "Підтвердити",
+      "back": "Назад"
     },
     "status": {
       "inProgress": "В процесі",
@@ -54,6 +113,31 @@
       "completionRequested": "Очікування підтвердження виконання від організатора.",
       "completed": "Ви успішно виконали цю пропозицію.",
       "cancelled": "Це бронювання було скасовано."
+    },
+    "actions": {
+      "rejectName": "відхилення бронювання",
+      "completeName": "завершення бронювання",
+      "cancelName": "скасування бронювання",
+      "sendName": "відправки запиту на бронювання",
+      "approveName": "підтвердження бронювання"
+    },
+    "validation": {
+      "reasonMax": "Причина повинна містити не більше 100 символів",
+      "reasonRequired": "Причина обов'язкова",
+      "commentMax": "Коментар повинен містити не більше {{max}} символів",
+      "commentRequired": "Коментар обов'язковий"
+    },
+    "toasts": {
+      "rejectSuccessTitle": "Бронювання відхилено",
+      "rejectSuccessDesc": "Бронювання було успішно відхилено",
+      "completeSuccessTitle": "Бронювання завершено",
+      "completeSuccessDesc": "Бронювання було позначено як завершене",
+      "cancelSuccessTitle": "Бронювання скасовано",
+      "cancelSuccessDesc": "Бронювання було скасовано",
+      "sendSuccessTitle": "Запит надіслано",
+      "sendSuccessDesc": "Ваш запит на бронювання був успішно надісланий",
+      "approveSuccessTitle": "Бронювання підтверджено",
+      "approveSuccessDesc": "Бронювання було підтверджено"
     }
   },
   "myOffers": {
@@ -169,5 +253,105 @@
   },
   "errors": {
     "hint": "Спробуйте оновити сторінку або завітайте пізніше."
+  },
+  "forms": {
+    "steps": {
+      "overview": "Огляд",
+      "location": "Місцезнаходження",
+      "categories": "Категорії",
+      "skills": "Навички"
+    },
+    "labels": {
+      "title": "Назва",
+      "description": "Опис",
+      "reward": "Винагорода (хвилини)",
+      "dateRange": "Діапазон дат",
+      "setOnline": "Зробити онлайн",
+      "mapHint": "Клікніть на карті, щоб встановити локацію пропозиції",
+      "offerLocationPopup": "📍 Локація пропозиції"
+    },
+    "actions": {
+      "edit": "Редагувати",
+      "createNewOffer": "Створити пропозицію",
+      "editOffer": "Редагувати пропозицію",
+      "createOffer": "Створити пропозицію",
+      "back": "Назад",
+      "next": "Далі",
+      "submit": "Створити"
+    },
+    "states": {
+      "failedSkills": "Не вдалося завантажити навички",
+      "emptySkills": "Навичок не знайдено",
+      "failedCategories": "Не вдалося завантажити категорії",
+      "emptyCategories": "Категорій не знайдено"
+    }
+  },
+  "validation": {
+    "titleRequired": "Назва обов'язкова",
+    "titleMax": "Максимум 30 символів",
+    "descriptionRequired": "Опис обов'язковий",
+    "descriptionMax": "Максимум 150 символів",
+    "priceTypeError": "Повинно бути числом",
+    "priceNegative": "Ціна не може бути від'ємною",
+    "priceRequired": "Ціна обов'язкова",
+    "startDateRequired": "Дата початку обов'язкова",
+    "startDateInPast": "Дата початку не може бути в минулому",
+    "endDateRequired": "Дата завершення обов'язкова",
+    "minOneSkill": "Виберіть хоча б одну навичку",
+    "minOneCategory": "Виберіть хоча б одну категорію",
+    "locationRequired": "Будь ласка, оберіть локацію на карті"
+  },
+  "toasts": {
+    "create": {
+      "action": "створення пропозиції",
+      "successTitle": "Пропозицію створено",
+      "successDescription": "Вашу пропозицію було успішно опубліковано на маркетплейсі."
+    },
+    "update": {
+      "action": "оновлення пропозиції",
+      "successTitle": "Пропозицію оновлено",
+      "successDescription": "Всі ваші зміни були успішно збережені."
+    }
+  },
+  "gifts": {
+    "labels": {
+      "giftMinutes": "Подарувати хвилини",
+      "amount": "Кількість",
+      "minutesPlaceholder": "хвилини",
+      "message": "Повідомлення",
+      "messagePlaceholder": "Додайте особисте нотатку..."
+    },
+    "actions": {
+      "cancel": "Скасувати",
+      "sendGift": "Надіслати подарунок",
+      "actionName": "дарування хвилин"
+    },
+    "validation": {
+      "amountTypeError": "Кількість повинна бути числом",
+      "amountPositive": "Кількість повинна бути додатною",
+      "amountInteger": "Кількість повинна бути цілим числом",
+      "amountRequired": "Кількість обов'язкова",
+      "messageMax": "Повідомлення повинно містити не більше 70 символів",
+      "messageRequired": "Повідомлення обов'язкове"
+    },
+    "toasts": {
+      "successTitle": "Подарунок надіслано",
+      "successDescription": "Хвилини були успішно подаровані"
+    }
+  },
+  "deactivateOffer": {
+    "labels": {
+      "title": "Деактивувати пропозицію",
+      "description": "Ви впевнені, що хочете деактивувати цю пропозицію? Вона більше не буде відображатися для інших користувачів."
+    },
+    "actions": {
+      "confirm": "Деактивувати",
+      "cancel": "Скасувати",
+      "actionName": "деактивації пропозиції"
+    },
+    "toasts": {
+      "successTitle": "Пропозицію деактивовано",
+      "successDescription": "Пропозицію було успішно деактивовано"
+    }
   }
 }

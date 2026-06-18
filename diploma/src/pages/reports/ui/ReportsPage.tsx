@@ -19,6 +19,7 @@ import {
 import styles from "./ReportsPage.module.scss";
 import { useReportsPage } from "../model/useReportsPage";
 import { BaseModal } from "@shared/ui/modals";
+import { useTranslation } from "react-i18next";
 
 const sortingReportItems = [
   { label: "Newest", value: "Newest" },
@@ -36,6 +37,7 @@ export const ReportsPage = () => {
     reportId,
     handleReportClose,
   } = useReportsPage();
+  const { t } = useTranslation(["moderation", "common"]);
 
   return (
     <div className={styles.wrapper}>
@@ -75,10 +77,8 @@ export const ReportsPage = () => {
         <ErrorBoundary
           fallbackRender={({ error }) => (
             <div className={styles.errorState}>
-              <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-              <p className="errorHint">
-                Try reloading the page or come back later.
-              </p>
+              <p className="errorHttpMessage">{getHttpErrorInfo(error, t)}</p>
+              <p className="errorHint">{t("common:errors.errorHint")}</p>
             </div>
           )}
         >

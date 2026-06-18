@@ -3,6 +3,7 @@ import { ApproveIcon } from "@shared/assets/icons/actions";
 import styles from "./ApproveBookingButton.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface ApproveBookingButtonProps {
   bookingId: string;
@@ -15,6 +16,7 @@ export const ApproveBookingButton = ({
   offerId,
   onSuccess,
 }: ApproveBookingButtonProps) => {
+  const { t } = useTranslation(["timeBank"]);
   const { approve, isLoading } = useApproveBooking({
     bookingId,
     onSuccess,
@@ -33,7 +35,7 @@ export const ApproveBookingButton = ({
         disabled={isLoading}
       >
         <ApproveIcon className={styles.icon} />
-        Approve
+        {t("timeBank:bookings.labels.approve")}
       </BaseButtonWrapper>
     </motion.div>
   );

@@ -1,5 +1,5 @@
 import type { ModerationSubjectType } from "./ModerationSubjectType";
-import type { ReportReason } from "./ReportReason";
+import type { ReportReasonType } from "./ReportReason";
 
 export type ReportCase = {
   id: string;
@@ -18,7 +18,7 @@ export type ReportCase = {
     avatarUrl: string;
   };
   createdAt: string;
-  reason: ReportReason;
+  reason: Lowercase<keyof typeof ReportReasonType>;
   subjectId: string;
   details: string;
   entityContent?: string;

@@ -63,7 +63,7 @@ export const TasksTab = ({ search }: TasksTabProps) => {
       <ErrorBoundary
         fallbackRender={({ error }) => (
           <div className={styles.errorState}>
-            <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
+            <p className="errorHttpMessage">{getHttpErrorInfo(error, t)}</p>
             <p className="errorHint">{t("common:errors.errorHint")}</p>
           </div>
         )}

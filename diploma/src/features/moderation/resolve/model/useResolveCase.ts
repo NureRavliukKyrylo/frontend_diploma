@@ -2,10 +2,11 @@ import { useFormik } from "formik";
 import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
-import { resolveCaseSchema } from "../libs/resolveCaseSchema";
+import { getResolveCaseSchema } from "../libs/resolveCaseSchema";
 import { resolveCase, type ResolveCaseDto } from "../api/resolveCase";
 import { queryClient } from "@shared/api";
 import { reportKeys } from "@entities/report";
+import { useTranslation } from "react-i18next";
 
 interface UseResolveCaseProps {
   caseId: string;
@@ -18,14 +19,18 @@ export const useResolveCase = ({
   rejected,
   onSuccess,
 }: UseResolveCaseProps) => {
+  const { t } = useTranslation(["moderation"]);
+
   const mutation = useMutation({
     mutationFn: (data: ResolveCaseDto) => resolveCase(caseId, data),
     onSuccess: () => {
       addToast({
-        title: rejected ? "Report rejected" : "Report resolved",
+        title: rejected
+          ? t("moderation:resolveCase.notifications.successTitleReject")
+          : t("moderation:resolveCase.notifications.successTitleResolve"),
         description: rejected
-          ? "The report has been rejected."
-          : "The report has been resolved successfully.",
+          ? t("moderation:resolveCase.notifications.successDescriptionReject")
+          : t("moderation:resolveCase.notifications.successDescriptionResolve"),
         color: rejected ? "danger" : "success",
       });
       queryClient.invalidateQueries({ queryKey: reportKeys.list() });
@@ -33,8 +38,8 @@ export const useResolveCase = ({
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Action failed",
-        description: getErrorMessage(error),
+        title: t("moderation:resolveCase.notifications.failedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -42,7 +47,7 @@ export const useResolveCase = ({
 
   const formik = useFormik<{ comment: string }>({
     initialValues: { comment: "" },
-    validationSchema: resolveCaseSchema,
+    validationSchema: getResolveCaseSchema(t),
     onSubmit: (values) => {
       mutation.mutate({ comment: values.comment, rejected });
     },

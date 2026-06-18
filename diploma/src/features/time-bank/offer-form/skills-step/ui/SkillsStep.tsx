@@ -7,6 +7,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { forwardRef, useImperativeHandle } from "react";
 import type { StepRef } from "../../main";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface SkillsStepProps {
   data: OfferFormData;
@@ -15,6 +16,7 @@ interface SkillsStepProps {
 export const SkillsStep = forwardRef<StepRef, SkillsStepProps>(
   ({ data }, ref) => {
     const { formik, toggleSkill } = useSkillsForm({ data });
+    const { t } = useTranslation(["common", "timeBank"]);
 
     useImperativeHandle(ref, () => ({
       submitForm: async () => {
@@ -46,13 +48,19 @@ export const SkillsStep = forwardRef<StepRef, SkillsStepProps>(
     if (skillsQuery.isError) {
       return (
         <div className={styles.stateMessage}>
-          <p className={styles.errorMessage}>Failed to load skills</p>
+          <p className={styles.errorMessage}>
+            {t("timeBank:forms.states.failedSkills")}
+          </p>
         </div>
       );
     }
 
     if (skillsQuery.data?.length === 0) {
-      return <p className={styles.emptyText}>No skills found</p>;
+      return (
+        <p className={styles.emptyText}>
+          {t("timeBank:forms.states.emptySkills")}
+        </p>
+      );
     }
 
     return (
@@ -87,7 +95,9 @@ export const SkillsStep = forwardRef<StepRef, SkillsStepProps>(
               className={styles.showMoreSkillsButton}
               type="button"
             >
-              {skillsQuery.isFetchingNextPage ? "Loading..." : "show more"}
+              {skillsQuery.isFetchingNextPage
+                ? t("common:loading.title")
+                : t("common:actions.seeMore").toLowerCase()}
             </BaseButtonWrapper>
           )}
           {formik.touched.skills && formik.errors.skills && (

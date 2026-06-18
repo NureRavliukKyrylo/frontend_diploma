@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useResolveCase } from "../../model/useResolveCase";
 import styles from "./ResolveCaseModal.module.scss";
 import { ApproveIcon, RejectIcon } from "@shared/assets/icons/actions";
+import { useTranslation } from "react-i18next";
 
 interface ResolveCaseModalProps {
   isOpen: boolean;
@@ -21,6 +22,8 @@ export const ResolveCaseModal = ({
   rejected,
   onChangeDecision,
 }: ResolveCaseModalProps) => {
+  const { t } = useTranslation(["moderation"]);
+
   const handleClose = () => {
     formik.resetForm();
     onClose();
@@ -41,7 +44,7 @@ export const ResolveCaseModal = ({
     >
       <form onSubmit={formik.handleSubmit} className={styles.wrapper}>
         <div className={styles.header}>
-          <h1 className={styles.title}>Resolve Report</h1>
+          <h1 className={styles.title}>{t("moderation:resolveCase.title")}</h1>
         </div>
 
         <div className={styles.decisionGroup}>
@@ -59,7 +62,7 @@ export const ResolveCaseModal = ({
               onClick={() => onChangeDecision(true)}
             >
               <RejectIcon className={styles.decisionIcon} />
-              <span>Reject</span>
+              <span>{t("moderation:resolveCase.decisions.reject")}</span>
             </BaseButtonWrapper>
           </motion.div>
 
@@ -77,19 +80,21 @@ export const ResolveCaseModal = ({
               onClick={() => onChangeDecision(false)}
             >
               <ApproveIcon className={styles.decisionIcon} />
-              <span>Approve</span>
+              <span>{t("moderation:resolveCase.decisions.approve")}</span>
             </BaseButtonWrapper>
           </motion.div>
         </div>
 
         <div className={styles.field}>
-          <span className={styles.label}>Comment</span>
+          <span className={styles.label}>
+            {t("moderation:resolveCase.labels.comment")}
+          </span>
           <TextAreaForm
             name="comment"
             placeholder={
               rejected
-                ? "Why is this report being rejected?"
-                : "Describe the resolution..."
+                ? t("moderation:resolveCase.placeholders.rejectedComment")
+                : t("moderation:resolveCase.placeholders.approvedComment")
             }
             value={formik.values.comment}
             onChange={formik.handleChange}
@@ -111,8 +116,9 @@ export const ResolveCaseModal = ({
             <BaseButtonWrapper
               className={styles.cancelButton}
               onClick={handleClose}
+              type="button"
             >
-              Cancel
+              {t("moderation:resolveCase.actions.cancel")}
             </BaseButtonWrapper>
           </motion.div>
 
@@ -126,7 +132,7 @@ export const ResolveCaseModal = ({
               className={styles.submitButton}
               type="submit"
             >
-              Confirm
+              {t("moderation:resolveCase.actions.submit")}
             </BaseButtonWrapper>
           </motion.div>
         </div>

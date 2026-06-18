@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useReadNotification } from "../model/useReadNotification";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { useTranslation } from "react-i18next";
 import styles from "./ReadNotificationButton.module.scss";
 
 interface ReadNotificationButtonProps {
@@ -10,6 +11,7 @@ interface ReadNotificationButtonProps {
 export const ReadNotificationButton = ({
   notificationId,
 }: ReadNotificationButtonProps) => {
+  const { t } = useTranslation(["notification"]);
   const { readNotification, isLoading } = useReadNotification();
 
   return (
@@ -23,7 +25,7 @@ export const ReadNotificationButton = ({
         onClick={() => readNotification(notificationId)}
         disabled={isLoading}
       >
-        Mark as read
+        {t("notification:actions.markAsRead")}
       </BaseButtonWrapper>
     </motion.div>
   );

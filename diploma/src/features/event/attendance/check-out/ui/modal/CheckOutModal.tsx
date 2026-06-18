@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import styles from "./CheckOutModal.module.scss";
 import { TextAreaForm } from "@shared/ui/inputs";
 import { useCheckOut } from "../../model/useCheckOut";
+import { useTranslation } from "react-i18next";
 
 interface CheckOutModalProps {
   eventId: string;
@@ -19,6 +20,7 @@ export const CheckOutModal = ({
   onClose,
   eventTitle,
 }: CheckOutModalProps) => {
+  const { t } = useTranslation(["event"]);
   const date = new Date();
 
   const handleClose = () => {
@@ -35,7 +37,10 @@ export const CheckOutModal = ({
 
   const handleSubmit = () => {
     if (!navigator.geolocation) {
-      addToast({ title: "Geolocation not supported", color: "danger" });
+      addToast({
+        title: t("event:checkOut.notifications.geoNotSupported"),
+        color: "danger",
+      });
       return;
     }
 
@@ -52,7 +57,7 @@ export const CheckOutModal = ({
       },
       () => {
         addToast({
-          title: "Location access is required to check in",
+          title: t("event:checkOut.notifications.geoRequired"),
           color: "danger",
         });
       },
@@ -67,13 +72,13 @@ export const CheckOutModal = ({
       showClosed={false}
     >
       <div className={styles.checkOutModal}>
-        <h2>Check Out - {eventTitle}</h2>
+        <h2>{t("event:checkOut.title", { title: eventTitle })}</h2>
         <TextAreaForm
           name="note"
           value={formik.values.note}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          placeholder="Leave a note... (optional)"
+          placeholder={t("event:checkOut.placeholder")}
         />
         {formik.touched.note && formik.errors.note && (
           <p className="errorInput">{formik.errors.note}</p>
@@ -92,7 +97,7 @@ export const CheckOutModal = ({
               loading={isLoading}
               onClick={handleSubmit}
             >
-              Confirm Check Out
+              {t("event:checkOut.confirmButton")}
             </BaseButtonWrapper>
           </motion.div>
           <motion.div
@@ -107,7 +112,7 @@ export const CheckOutModal = ({
               className={styles.cancelButton}
               onClick={handleClose}
             >
-              Cancel
+              {t("event:checkOut.cancel")}
             </BaseButtonWrapper>
           </motion.div>
         </div>

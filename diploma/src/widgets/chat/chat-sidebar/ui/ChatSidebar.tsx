@@ -8,6 +8,7 @@ import { relatedEntityTypeChatValues } from "@entities/chat";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useOutsideClick } from "@shared/libs/hooks";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface ChatSidebarProps {
   avatarUrl?: string;
@@ -20,6 +21,7 @@ export const ChatSidebar = ({
   initials,
   avatarUrl,
 }: ChatSidebarProps) => {
+  const { t } = useTranslation(["chat"]);
   const { search, onSearchChange, onChatTypeChange } = useChatSidebar();
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -95,7 +97,7 @@ export const ChatSidebar = ({
                         className={`${styles.popoverItem} ${selectedTypes.includes(type) ? styles.selected : ""}`}
                         onClick={() => onChatTypeChange(type)}
                       >
-                        {type}
+                        {t(`chat:categories.${type}`, { defaultValue: type })}
                       </BaseButtonWrapper>
                     </motion.div>
                   ))}

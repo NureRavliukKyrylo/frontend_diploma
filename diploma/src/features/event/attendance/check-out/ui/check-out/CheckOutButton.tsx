@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./CheckOutButton.module.scss";
 import { CheckOutModal } from "../modal/CheckOutModal";
+import { useTranslation } from "react-i18next";
 
 interface CheckOutButtonProps {
   eventId: string;
@@ -13,6 +14,7 @@ export const CheckOutButton = ({
   eventId,
   eventTitle,
 }: CheckOutButtonProps) => {
+  const { t } = useTranslation(["event"]);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -27,7 +29,7 @@ export const CheckOutButton = ({
           className={styles.checkOutButton}
           onClick={() => setIsOpen(true)}
         >
-          Check out
+          {t("event:checkOut.button")}
         </BaseButtonWrapper>
       </motion.div>
       <CheckOutModal

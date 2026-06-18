@@ -1,7 +1,8 @@
 import { useFormik } from "formik";
-import { locationSchema } from "../libs/locationSchema";
+import { getLocationSchema } from "../libs/locationSchema";
 import type { Coordinates } from "@shared/config/types";
 import { useOfferFormStore, type OfferFormData } from "@entities/offer";
+import { useTranslation } from "react-i18next";
 
 interface UseLocationFormProps {
   data: OfferFormData;
@@ -9,11 +10,12 @@ interface UseLocationFormProps {
 
 export const useLocationForm = ({ data }: UseLocationFormProps) => {
   const setData = useOfferFormStore((s) => s.setData);
+  const { t } = useTranslation(["timeBank"]);
   const formik = useFormik<{ location: Coordinates | null }>({
     initialValues: {
       location: data.location,
     },
-    validationSchema: locationSchema,
+    validationSchema: getLocationSchema(t),
     onSubmit: (values) => setData(values),
   });
 

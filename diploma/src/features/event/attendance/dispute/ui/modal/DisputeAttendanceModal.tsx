@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import styles from "./DisputeAttendanceModal.module.scss";
 import { TextAreaForm } from "@shared/ui/inputs";
 import { useDisputeAttendance } from "../../model/useDisputeAttendance";
+import { useTranslation } from "react-i18next";
 
 interface DisputeModalProps {
   eventId: string;
@@ -20,6 +21,7 @@ export const DisputeAttendanceModal = ({
   isOpen,
   onClose,
 }: DisputeModalProps) => {
+  const { t } = useTranslation(["event"]);
   const date = new Date();
 
   const handleClose = () => {
@@ -46,13 +48,13 @@ export const DisputeAttendanceModal = ({
         onSubmit={formik.handleSubmit}
         className={styles.disputeAttendanceModal}
       >
-        <h2>Dispute — {eventTitle}</h2>
+        <h2>{t("event:dispute.title", { title: eventTitle })}</h2>
         <TextAreaForm
           name="comment"
           value={formik.values.comment}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          placeholder="Describe the reason for your dispute..."
+          placeholder={t("event:dispute.placeholder")}
         />
         {formik.touched.comment && formik.errors.comment && (
           <p className="errorInput">{formik.errors.comment}</p>
@@ -71,7 +73,7 @@ export const DisputeAttendanceModal = ({
               loading={isLoading}
               type="submit"
             >
-              Submit Dispute
+              {t("event:dispute.confirmButton")}
             </BaseButtonWrapper>
           </motion.div>
           <motion.div
@@ -86,7 +88,7 @@ export const DisputeAttendanceModal = ({
               className={styles.cancelButton}
               onClick={handleClose}
             >
-              Cancel
+              {t("event:dispute.cancel")}
             </BaseButtonWrapper>
           </motion.div>
         </div>

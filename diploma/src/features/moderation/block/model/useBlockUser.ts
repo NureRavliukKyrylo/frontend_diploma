@@ -3,8 +3,9 @@ import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { blockUser, type BlockUserDto } from "../api/blockUserApi";
-import { blockUserSchema } from "../libs/blockUserSchema";
-import type { ReportReason } from "@entities/report/model";
+import { getBlockUserSchema } from "../libs/blockUserSchema";
+import { ReportReasonType } from "@entities/report/model";
+import { useTranslation } from "react-i18next";
 
 interface UseBlockUserProps {
   caseId: string;
@@ -21,34 +22,36 @@ export const useBlockUser = ({
   entityId,
   onSuccess,
 }: UseBlockUserProps) => {
+  const { t } = useTranslation(["moderation"]);
+
   const mutation = useMutation({
     mutationFn: (data: BlockUserDto) => blockUser(caseId, data),
     onSuccess: () => {
       addToast({
-        title: "User blocked",
-        description: "The user has been blocked successfully.",
+        title: t("moderation:blockUser.notifications.successTitle"),
+        description: t("moderation:blockUser.notifications.successDescription"),
         color: "success",
       });
       onSuccess();
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Action failed",
-        description: getErrorMessage(error),
+        title: t("moderation:blockUser.notifications.failedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
   });
 
-  const formik = useFormik<{ reason: ReportReason | "" }>({
-    initialValues: { reason: "Spam" },
-    validationSchema: blockUserSchema,
+  const formik = useFormik<{ reason: ReportReasonType }>({
+    initialValues: { reason: ReportReasonType.Spam },
+    validationSchema: getBlockUserSchema(t),
     onSubmit: (values) => {
       mutation.mutate({
         targetUserId,
         entityType,
         entityId,
-        reason: values.reason as ReportReason,
+        reason: values.reason,
       });
     },
   });

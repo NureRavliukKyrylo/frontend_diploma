@@ -1,9 +1,10 @@
 import { useFormik } from "formik";
 import {
-  overviewSchema,
+  getOverviewSchema,
   type OverviewFormValues,
 } from "../libs/overviewSchema";
 import { useOfferFormStore, type OfferFormData } from "@entities/offer";
+import { useTranslation } from "react-i18next";
 
 interface UseOverviewFormProps {
   data: OfferFormData;
@@ -11,6 +12,7 @@ interface UseOverviewFormProps {
 
 export const useOverviewForm = ({ data }: UseOverviewFormProps) => {
   const setData = useOfferFormStore((s) => s.setData);
+  const { t } = useTranslation(["timeBank"]);
   const formik = useFormik<
     Omit<OverviewFormValues, "startAt" | "endAt"> & {
       startAt: string | null;
@@ -25,7 +27,7 @@ export const useOverviewForm = ({ data }: UseOverviewFormProps) => {
       endAt: data.endAt,
       isOnline: data.isOnline,
     },
-    validationSchema: overviewSchema,
+    validationSchema: getOverviewSchema(t),
     onSubmit: (values) => setData(values),
   });
 

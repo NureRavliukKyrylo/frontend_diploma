@@ -5,7 +5,6 @@ import { removeSkill, type RemoveSkillDTO } from "../api/removeSkillApi";
 import { queryClient } from "@shared/api";
 import { profileQuery } from "@entities/user/profile";
 import { skillKeys } from "@entities/skill";
-
 import { useTranslation } from "react-i18next";
 
 export const useRemoveSkill = (onSuccess?: () => void) => {

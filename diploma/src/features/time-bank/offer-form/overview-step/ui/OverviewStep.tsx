@@ -1,19 +1,19 @@
-import { BaseInput } from "@shared/ui/inputs";
-import { TextAreaForm } from "@shared/ui/inputs";
+import { BaseInput, TextAreaForm } from "@shared/ui/inputs";
 import { Switch } from "@shared/ui";
 import { DateRangePicker } from "@heroui/date-picker";
 import {
   today,
   getLocalTimeZone,
-  type DateValue,
   parseAbsoluteToLocal,
 } from "@internationalized/date";
+import type { DateValue } from "@internationalized/date";
 import type { RangeValue } from "@react-types/shared";
 import { useOverviewForm } from "../model/useOverviewForm";
 import styles from "./OverviewStep.module.scss";
 import type { OfferFormData } from "@entities/offer";
 import type { StepRef } from "../../main";
 import { forwardRef, useImperativeHandle } from "react";
+import { useTranslation } from "react-i18next";
 
 interface OverviewStepProps {
   data: OfferFormData;
@@ -21,6 +21,7 @@ interface OverviewStepProps {
 
 export const OverviewStep = forwardRef<StepRef, OverviewStepProps>(
   ({ data }, ref) => {
+    const { t } = useTranslation(["timeBank"]);
     const { formik, handleDateRangeChange } = useOverviewForm({ data });
 
     useImperativeHandle(ref, () => ({
@@ -60,12 +61,14 @@ export const OverviewStep = forwardRef<StepRef, OverviewStepProps>(
       <form onSubmit={formik.handleSubmit} className={styles.form}>
         <div className={styles.field}>
           <div className={styles.labelRow}>
-            <span className={styles.label}>Title</span>
+            <span className={styles.label}>
+              {t("timeBank:forms.labels.title")}
+            </span>
           </div>
           <BaseInput
             name="title"
-            label="Title"
-            activeLabel="Title"
+            label={t("timeBank:forms.labels.title")}
+            activeLabel={t("timeBank:forms.labels.title")}
             value={formik.values.title}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -75,11 +78,13 @@ export const OverviewStep = forwardRef<StepRef, OverviewStepProps>(
 
         <div className={styles.field}>
           <div className={styles.labelRow}>
-            <span className={styles.label}>Description</span>
+            <span className={styles.label}>
+              {t("timeBank:forms.labels.description")}
+            </span>
           </div>
           <TextAreaForm
             name="description"
-            placeholder="Description"
+            placeholder={t("timeBank:forms.labels.description")}
             value={formik.values.description}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -92,7 +97,9 @@ export const OverviewStep = forwardRef<StepRef, OverviewStepProps>(
         </div>
 
         <div className={styles.priceField}>
-          <span className={styles.label}>Reward (minutes)</span>
+          <span className={styles.label}>
+            {t("timeBank:forms.labels.reward")}
+          </span>
           <div>
             <div className={styles.minutesInputWrapper}>
               <input
@@ -100,12 +107,14 @@ export const OverviewStep = forwardRef<StepRef, OverviewStepProps>(
                 name="priceMinutes"
                 type="number"
                 min={1}
-                placeholder="minutes"
+                placeholder={t("timeBank:units.m")}
                 value={formik.values.priceMinutes}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              <span className={styles.minutesSuffix}>m</span>
+              <span className={styles.minutesSuffix}>
+                {t("timeBank:units.m")}
+              </span>
             </div>
             {formik.touched.priceMinutes && formik.errors.priceMinutes && (
               <div className="errorInput">{formik.errors.priceMinutes}</div>
@@ -114,7 +123,9 @@ export const OverviewStep = forwardRef<StepRef, OverviewStepProps>(
         </div>
 
         <div className={styles.dateRangeField}>
-          <span className={styles.label}>Date range</span>
+          <span className={styles.label}>
+            {t("timeBank:forms.labels.dateRange")}
+          </span>
           <div>
             <DateRangePicker
               value={dateRangeValue}
@@ -144,7 +155,7 @@ export const OverviewStep = forwardRef<StepRef, OverviewStepProps>(
         </div>
 
         <div className={styles.onlineField}>
-          <h1>Set online</h1>
+          <h1>{t("timeBank:forms.labels.setOnline")}</h1>
           <Switch
             isSelected={formik.values.isOnline}
             onChange={(e) => formik.setFieldValue("isOnline", e.target.checked)}

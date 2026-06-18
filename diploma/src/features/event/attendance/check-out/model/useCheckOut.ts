@@ -5,8 +5,9 @@ import { getErrorMessage } from "@shared/libs/error-message";
 import { queryClient } from "@shared/api";
 import { eventKeys } from "@entities/event";
 import { getCalendarRange } from "@shared/libs/date";
-import { checkOutValidationSchema } from "../libs/checkOutValidationSchema";
+import { getCheckOutValidationSchema } from "../libs/checkOutValidationSchema";
 import { checkOut, type CheckOutDto } from "../api/checkOutApi";
+import { useTranslation } from "react-i18next";
 
 export interface CheckOutFormValues {
   note: string;
@@ -17,14 +18,15 @@ export const useCheckOut = (
   date: Date,
   onSuccess?: () => void,
 ) => {
+  const { t } = useTranslation(["event"]);
   const { From, To } = getCalendarRange(date);
 
   const mutation = useMutation({
     mutationFn: (data: CheckOutDto) => checkOut(eventId, data),
     onSuccess: () => {
       addToast({
-        title: "Event check-out Success",
-        description: "You have checked in successfully",
+        title: t("event:checkOut.notifications.successTitle"),
+        description: t("event:checkOut.notifications.successDescription"),
         color: "success",
       });
       queryClient.invalidateQueries({
@@ -34,8 +36,8 @@ export const useCheckOut = (
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Event check-out Failed",
-        description: getErrorMessage(error),
+        title: t("event:checkOut.notifications.failedTitle"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -43,7 +45,7 @@ export const useCheckOut = (
 
   const formik = useFormik<CheckOutFormValues>({
     initialValues: { note: "" },
-    validationSchema: checkOutValidationSchema,
+    validationSchema: getCheckOutValidationSchema(t),
     onSubmit: () => {},
   });
 

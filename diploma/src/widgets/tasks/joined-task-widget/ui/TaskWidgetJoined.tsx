@@ -35,7 +35,7 @@ export const TaskWidgetJoined = ({
   taskMode,
   taskId,
 }: TaskWidgetJoinedProps) => {
-  const { t } = useTranslation(["task"]);
+  const { t } = useTranslation(["task", "common"]);
   const { task, isLoading, isError, error, statusConfig, forms } =
     useTaskJoinedWidget({ taskId, search });
 
@@ -46,8 +46,8 @@ export const TaskWidgetJoined = ({
   if (isError)
     return (
       <div className={styles.errorState}>
-        <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-        <p className="errorHint">{t("task:labels.error.hint")}</p>
+        <p className="errorHttpMessage">{getHttpErrorInfo(error, t)}</p>
+        <p className="errorHint">{t("common:errors.errorHint")}</p>
       </div>
     );
 

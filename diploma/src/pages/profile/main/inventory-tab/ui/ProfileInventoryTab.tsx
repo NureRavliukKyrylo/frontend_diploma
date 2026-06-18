@@ -32,7 +32,7 @@ interface ProfileInventoryTabProps {
 export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
   const { badgeId, ...badgesSearch } = search;
   const navigate = useNavigate({ from: "/profile/" });
-  const { t } = useTranslation("profile");
+  const { t } = useTranslation(["profile", "common"]);
 
   const handleOpenBadge = (badgeId: string) => {
     navigate({
@@ -57,10 +57,8 @@ export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
           <ErrorBoundary
             fallbackRender={({ error }) => (
               <div className={styles.errorState}>
-                <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-                <p className="errorHint">
-                  Try reloading the page or come back later.
-                </p>
+                <p className="errorHttpMessage">{getHttpErrorInfo(error, t)}</p>
+                <p className="errorHint">{t("common:errors.errorHint")}</p>
               </div>
             )}
           >
@@ -182,10 +180,8 @@ export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
           <ErrorBoundary
             fallbackRender={({ error }) => (
               <div className={styles.errorState}>
-                <p className="errorHttpMessage">{getHttpErrorInfo(error)}</p>
-                <p className="errorHint">
-                  Try reloading the page or come back later.
-                </p>
+                <p className="errorHttpMessage">{getHttpErrorInfo(error, t)}</p>
+                <p className="errorHint">{t("common:errors.errorHint")}</p>
               </div>
             )}
           >

@@ -1,12 +1,16 @@
 import * as Yup from "yup";
+import type { TFunction } from "i18next";
 
-export const locationSchema = Yup.object({
-  location: Yup.object({
-    latitude: Yup.number()
+export const getLocationSchema = (t: TFunction) =>
+  Yup.object({
+    location: Yup.object({
+      latitude: Yup.number()
+        .nullable()
+        .required(t("timeBank:validation.locationRequired")),
+      longitude: Yup.number()
+        .nullable()
+        .required(t("timeBank:validation.locationRequired")),
+    })
       .nullable()
-      .required("Please pick a location on the map"),
-    longitude: Yup.number()
-      .nullable()
-      .required("Please pick a location on the map"),
-  }),
-});
+      .required(t("timeBank:validation.locationRequired")),
+  });

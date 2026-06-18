@@ -4,12 +4,15 @@ import { getErrorMessage } from "@shared/libs/error-message";
 import { queryClient } from "@shared/api";
 import { editMessage, type EditMessageDto } from "../api/editMessageApi";
 import { messageKeys } from "@entities/chat";
+import { useTranslation } from "react-i18next";
 
 export const useEditMessage = (
   chatId: string,
   messageId: string,
   onSuccess?: () => void,
 ) => {
+  const { t } = useTranslation(["chat", "common"]);
+
   const mutation = useMutation({
     mutationFn: (data: EditMessageDto) => editMessage(chatId, messageId, data),
     onSuccess: () => {
@@ -18,8 +21,8 @@ export const useEditMessage = (
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Failed to edit message",
-        description: getErrorMessage(error),
+        title: t("chat:toasts.editError"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },

@@ -3,11 +3,12 @@ import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { sendGift, type SendGiftDto } from "../api/sendGiftApi";
-import { sendGiftSchema } from "../libs/sendGiftSchema";
+import { getSendGiftSchema } from "../libs/sendGiftSchema";
 import { useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { queryClient } from "@shared/api";
 import { offerKeys } from "@entities/offer";
+import { useTranslation } from "react-i18next";
 
 interface UseGiftMinutesProps {
   recipientUserId: string;
@@ -18,7 +19,9 @@ export const useSendGiftMinutes = ({
   recipientUserId,
   onSuccess,
 }: UseGiftMinutesProps) => {
+  const { t } = useTranslation(["timeBank", "common"]);
   const idempotencyKey = useRef(uuidv4());
+
   const mutation = useMutation({
     mutationFn: (data: SendGiftDto) =>
       sendGift({
@@ -29,8 +32,8 @@ export const useSendGiftMinutes = ({
     onSuccess: () => {
       idempotencyKey.current = uuidv4();
       addToast({
-        title: "Gift sent",
-        description: "Minutes have been gifted successfully",
+        title: t("timeBank:gifts.toasts.successTitle"),
+        description: t("timeBank:gifts.toasts.successDescription"),
         color: "success",
       });
       queryClient.invalidateQueries({ queryKey: offerKeys.all() });
@@ -38,8 +41,10 @@ export const useSendGiftMinutes = ({
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Failed to send gift",
-        description: getErrorMessage(error),
+        title: t("common:errors.actionFailed", {
+          action: t("timeBank:gifts.actions.actionName"),
+        }),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -50,7 +55,7 @@ export const useSendGiftMinutes = ({
       amountMinutes: "",
       message: "",
     },
-    validationSchema: sendGiftSchema,
+    validationSchema: getSendGiftSchema(t),
     onSubmit: (values) => {
       mutation.mutate({
         ...values,

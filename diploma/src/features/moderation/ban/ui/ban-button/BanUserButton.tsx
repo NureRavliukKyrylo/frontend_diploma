@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./BanUserButton.module.scss";
 import { BanUserModal } from "../modal/BanUserModal";
+import { useTranslation } from "react-i18next";
 
 interface BanUserButtonProps {
   caseId: string;
@@ -10,6 +11,7 @@ interface BanUserButtonProps {
 }
 
 export const BanUserButton = ({ caseId, targetUserId }: BanUserButtonProps) => {
+  const { t } = useTranslation(["moderation"]);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -23,7 +25,7 @@ export const BanUserButton = ({ caseId, targetUserId }: BanUserButtonProps) => {
           className={styles.banButton}
           onClick={() => setIsOpen(true)}
         >
-          Ban User
+          {t("moderation:banUser.button")}
         </BaseButtonWrapper>
       </motion.div>
 

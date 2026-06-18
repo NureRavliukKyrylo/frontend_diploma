@@ -45,6 +45,9 @@
       "modalText": "Are you sure you want to remove this skill? You can add it again anytime.",
       "cancel": "Cancel",
       "confirm": "Delete"
+    },
+    "filter": {
+      "error": "Failed to load skills"
     }
   }
 }

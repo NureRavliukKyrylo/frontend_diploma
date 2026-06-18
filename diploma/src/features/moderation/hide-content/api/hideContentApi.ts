@@ -1,11 +1,11 @@
 import { apiClient } from "@shared/api";
-import type { ReportReason } from "@entities/report/model";
+import type { ReportReasonType } from "@entities/report/model";
 import type { EntityType } from "@shared/config/types";
 
 export type HideContentDto = {
   targetEntityType: EntityType | "offer";
   targetEntityId: string;
-  reason: ReportReason;
+  reason: ReportReasonType;
 };
 
 export const hideContent = async (caseId: string, data: HideContentDto) => {

@@ -3,12 +3,14 @@ import { motion } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./ResolveCaseButton.module.scss";
 import { ResolveCaseModal } from "../modal/ResolveCaseModal";
+import { useTranslation } from "react-i18next";
 
 interface ResolveCaseButtonProps {
   caseId: string;
 }
 
 export const ResolveCaseButton = ({ caseId }: ResolveCaseButtonProps) => {
+  const { t } = useTranslation(["moderation"]);
   const [isOpen, setIsOpen] = useState(false);
   const [rejected, setRejected] = useState(false);
 
@@ -23,7 +25,7 @@ export const ResolveCaseButton = ({ caseId }: ResolveCaseButtonProps) => {
           className={styles.resolveButton}
           onClick={() => setIsOpen(true)}
         >
-          Resolve
+          {t("moderation:resolveCase.button")}
         </BaseButtonWrapper>
       </motion.div>
 

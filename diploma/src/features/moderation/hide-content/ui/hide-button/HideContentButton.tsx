@@ -4,6 +4,7 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./HideContentButton.module.scss";
 import { HideContentModal } from "../modal/HideContentModal";
 import type { EntityType } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
 
 interface HideContentButtonProps {
   caseId: string;
@@ -16,6 +17,7 @@ export const HideContentButton = ({
   targetEntityType,
   targetEntityId,
 }: HideContentButtonProps) => {
+  const { t } = useTranslation(["moderation"]);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -29,7 +31,7 @@ export const HideContentButton = ({
           className={styles.hideButton}
           onClick={() => setIsOpen(true)}
         >
-          Hide Content
+          {t("moderation:hideContent.button")}
         </BaseButtonWrapper>
       </motion.div>
 

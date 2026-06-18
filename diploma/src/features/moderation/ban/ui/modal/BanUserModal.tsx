@@ -3,10 +3,10 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { DatePickerInput } from "@shared/ui/inputs";
 import { useBanUser } from "../../model/useBanUser";
 import styles from "./BanUserModal.module.scss";
-import { reportReasonOptions } from "@entities/report";
+import { getReportReasonOptions } from "@entities/report";
 import { SortDropDown } from "@shared/ui/drop-down";
-import type { ReportReason } from "@entities/report/model";
 import { today, getLocalTimeZone } from "@internationalized/date";
+import { useTranslation } from "react-i18next";
 
 interface BanUserModalProps {
   isOpen: boolean;
@@ -21,6 +21,8 @@ export const BanUserModal = ({
   caseId,
   targetUserId,
 }: BanUserModalProps) => {
+  const { t } = useTranslation(["moderation"]);
+
   const handleClose = () => {
     formik.resetForm();
     onClose();
@@ -41,16 +43,17 @@ export const BanUserModal = ({
     >
       <form onSubmit={formik.handleSubmit} className={styles.wrapper}>
         <div className={styles.header}>
-          <h1 className={styles.title}>Ban User</h1>
+          <h1 className={styles.title}>{t("moderation:banUser.title")}</h1>
         </div>
 
         <div className={styles.field}>
-          <span className={styles.label}>Reason</span>
+          <span className={styles.label}>
+            {t("moderation:banUser.labels.reason")}
+          </span>
           <SortDropDown
-            options={reportReasonOptions}
-            value={formik.values.reason as ReportReason}
+            options={getReportReasonOptions(t)}
+            value={formik.values.reason}
             onSelect={(value) => formik.setFieldValue("reason", value)}
-            label="Reason"
             variant="report"
           />
           {formik.submitCount > 0 && formik.errors.reason && (
@@ -59,7 +62,9 @@ export const BanUserModal = ({
         </div>
 
         <div className={styles.field}>
-          <span className={styles.label}>Ban until</span>
+          <span className={styles.label}>
+            {t("moderation:banUser.labels.expiresAt")}
+          </span>
           <DatePickerInput
             value={formik.values.expiresAt}
             onChange={(value) => formik.setFieldValue("expiresAt", value)}
@@ -73,15 +78,16 @@ export const BanUserModal = ({
           <BaseButtonWrapper
             className={styles.cancelButton}
             onClick={handleClose}
+            type="button"
           >
-            Cancel
+            {t("moderation:banUser.actions.cancel")}
           </BaseButtonWrapper>
           <BaseButtonWrapper
             loading={isLoading}
             className={styles.submitButton}
             type="submit"
           >
-            Ban User
+            {t("moderation:banUser.actions.submit")}
           </BaseButtonWrapper>
         </div>
       </form>

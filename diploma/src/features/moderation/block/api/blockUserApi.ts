@@ -1,11 +1,11 @@
 import { apiClient } from "@shared/api";
-import type { ReportReason } from "@entities/report/model";
+import type { ReportReasonType } from "@entities/report/model";
 
 export type BlockUserDto = {
   targetUserId: string;
   entityType: string;
   entityId: string;
-  reason: ReportReason;
+  reason: ReportReasonType;
 };
 
 export const blockUser = async (caseId: string, data: BlockUserDto) => {

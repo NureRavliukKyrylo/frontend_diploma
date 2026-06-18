@@ -6,6 +6,7 @@ import { getMentionColor } from "@shared/config/constants";
 import styles from "./MentionButton.module.scss";
 import { useRef, useState } from "react";
 import { useOutsideClick } from "@shared/libs/hooks";
+import { useTranslation } from "react-i18next";
 
 export interface Participant {
   id: string;
@@ -26,6 +27,7 @@ export const MentionButton = ({
   mentionIds,
   onToggle,
 }: MentionButtonProps) => {
+  const { t } = useTranslation(["chat"]);
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -68,7 +70,9 @@ export const MentionButton = ({
             style={{ originX: 0, originY: 1 }}
           >
             {participants.length === 0 && (
-              <span className={styles.empty}>No participants</span>
+              <span className={styles.empty}>
+                {t("chat:states.noParticipants")}
+              </span>
             )}
             {participants.map((p, i) => {
               const fullName = getFullName(p.firstName, p.lastName);

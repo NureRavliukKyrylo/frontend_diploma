@@ -1,0 +1,165 @@
+{
+  "report": {
+    "title": "Поскаржитися на {{subject}}",
+    "labels": {
+      "reason": "Причина",
+      "details": "Деталі"
+    },
+    "placeholders": {
+      "details": "Опишіть проблему..."
+    },
+    "actions": {
+      "cancel": "Скасувати",
+      "submit": "Надіслати скаргу"
+    },
+    "validation": {
+      "reasonRequired": "Будь ласка, оберіть причину",
+      "detailsRequired": "Деталі є обов'язковими",
+      "detailsMax": "Опис повинен містити не більше 200 символів"
+    },
+    "subjects": {
+      "User": "Користувача",
+      "Organization": "Організацію",
+      "Project": "Проєкт",
+      "Event": "Подію",
+      "Task": "Завдання",
+      "Offer": "Пропозицію",
+      "ChatMessage": "Повідомлення",
+      "Comment": "Коментар",
+      "Feedback": "Відгук",
+      "Other": "Вміст"
+    },
+    "reasons": {
+      "Spam": "Спам",
+      "Harassment": "Образи або цькування",
+      "HateSpeech": "Мова ворожнечі",
+      "Misinformation": "Дезінформація",
+      "InappropriateContent": "Неприйнятний вміст",
+      "Violence": "Насильство або погрози",
+      "Copyright": "Порушення авторських прав",
+      "Fraud": "Шахрайство",
+      "PrivacyViolation": "Порушення конфіденційності",
+      "Other": "Інше"
+    },
+    "notifications": {
+      "successTitle": "Скарга надіслана",
+      "successDescription": "Дякуємо за ваше повідомлення. Ми розглянемо його найближчим часом.",
+      "failedTitle": "Не вдалося надіслати скаргу"
+    }
+  },
+  "hideContent": {
+    "button": "Приховати вміст",
+    "title": "Приховати вміст",
+    "actions": {
+      "cancel": "Скасувати",
+      "submit": "Приховати вміст"
+    },
+    "validation": {
+      "reasonRequired": "Будь ласка, оберіть причину"
+    },
+    "notifications": {
+      "successTitle": "Вміст приховано",
+      "successDescription": "Вміст було успішно приховано.",
+      "failedTitle": "Помилка дії"
+    }
+  },
+  "blockUser": {
+    "button": "Заблокувати користувача",
+    "title": "Заблокувати користувача",
+    "labels": {
+      "reason": "Причина"
+    },
+    "actions": {
+      "cancel": "Скасувати",
+      "submit": "Заблокувати"
+    },
+    "validation": {
+      "reasonRequired": "Будь ласка, оберіть причину"
+    },
+    "notifications": {
+      "successTitle": "Користувача заблоковано",
+      "successDescription": "Користувача було успішно заблоковано.",
+      "failedTitle": "Помилка дії"
+    }
+  },
+  "banUser": {
+    "button": "Забанити користувача",
+    "title": "Забанити користувача",
+    "labels": {
+      "reason": "Причина",
+      "expiresAt": "Бан до"
+    },
+    "actions": {
+      "cancel": "Скасувати",
+      "submit": "Забанити"
+    },
+    "validation": {
+      "reasonRequired": "Будь ласка, оберіть причину",
+      "expiresAtRequired": "Будь ласка, оберіть дату закінчення"
+    },
+    "notifications": {
+      "successTitle": "Користувача забанено",
+      "successDescription": "Користувача було успішно забанено.",
+      "failedTitle": "Помилка дії"
+    }
+  },
+  "resolveCase": {
+    "button": "Вирішити",
+    "title": "Вирішити скаргу",
+    "decisions": {
+      "reject": "Відхилити",
+      "approve": "Затвердити"
+    },
+    "labels": {
+      "comment": "Коментар"
+    },
+    "placeholders": {
+      "rejectedComment": "Чому цю скаргу відхилено?",
+      "approvedComment": "Опишіть рішення..."
+    },
+    "actions": {
+      "cancel": "Скасувати",
+      "submit": "Підтвердити"
+    },
+    "validation": {
+      "commentRequired": "Коментар є обов'язковим",
+      "commentMaxLength": "Коментар повинен містити не більше 150 символів"
+    },
+    "notifications": {
+      "successTitleResolve": "Скаргу вирішено",
+      "successDescriptionResolve": "Скаргу було успішно вирішено.",
+      "successTitleReject": "Скаргу відхилено",
+      "successDescriptionReject": "Скаргу було відхилено.",
+      "failedTitle": "Помилка дії"
+    }
+  },
+  "filters": {
+    "status": {
+      "title": "Статус скарги",
+      "label": "Статус",
+      "options": {
+        "all": "Усі",
+        "open": "Відкриті",
+        "resolved": "Вирішені",
+        "rejected": "Відхилені"
+      }
+    },
+    "dateRange": {
+      "title": "Часовий проміжок"
+    },
+    "reportReason": {
+      "title": "Причина скарги"
+    },
+    "subjectType": {
+      "title": "Тип об'єкта",
+      "types": {
+        "User": "Користувач",
+        "Post": "Публікація",
+        "Comment": "Коментар"
+      }
+    },
+    "actions": {
+      "clear": "Очистити фільтри"
+    }
+  }
+}

@@ -3,6 +3,7 @@ import type { Message } from "@entities/chat";
 import { useDeleteMessage } from "../model/useDeleteMessage";
 import styles from "./DeleteMessageModal.module.scss";
 import { DeleteModal } from "@shared/assets/images/actions";
+import { useTranslation } from "react-i18next";
 
 interface DeleteMessageModalProps {
   isOpen: boolean;
@@ -17,6 +18,7 @@ export const DeleteMessageModal = ({
   message,
   chatId,
 }: DeleteMessageModalProps) => {
+  const { t } = useTranslation(["chat"]);
   const { deleteMessage, isLoading } = useDeleteMessage(chatId, onClose);
 
   const preview =
@@ -29,10 +31,10 @@ export const DeleteMessageModal = ({
       isOpen={isOpen}
       onCancel={onClose}
       onConfirm={() => deleteMessage(message.id)}
-      confirmText="Delete"
-      title="Delete Message"
-      text={`Are you sure you want to delete "${preview}"? This action cannot be undone.`}
-      cancelText="Cancel"
+      confirmText={t("chat:actions.delete")}
+      title={t("chat:modals.delete.title")}
+      text={t("chat:modals.delete.text", { preview })}
+      cancelText={t("chat:actions.cancel")}
       confirmButtonClassName={styles.confirmButtonMessage}
       image={DeleteModal}
       imageClassName={styles.imageDelete}

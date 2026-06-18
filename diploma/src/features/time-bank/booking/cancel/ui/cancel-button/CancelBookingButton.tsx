@@ -4,6 +4,7 @@ import { CancelBookingModal } from "../modal/CancelBookingModal";
 import { RejectIcon } from "@shared/assets/icons/actions";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface CancelBookingButtonProps {
   bookingId: string;
@@ -14,6 +15,7 @@ export const CancelBookingButton = ({
   bookingId,
   variant = "default",
 }: CancelBookingButtonProps) => {
+  const { t } = useTranslation(["timeBank"]);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -31,7 +33,9 @@ export const CancelBookingButton = ({
           }}
         >
           <RejectIcon className={styles.icon} />
-          {variant === "default" ? "Cancel booking" : "Cancel"}
+          {variant === "default"
+            ? t("timeBank:bookings.labels.cancelBooking")
+            : t("timeBank:bookings.labels.cancel")}
         </BaseButtonWrapper>
       </motion.div>
       <CancelBookingModal
