@@ -1,3 +1,5 @@
+@use "@shared/assets/styles" as *;
+
 .backdrop {
   position: fixed;
   inset: 0;
@@ -14,4 +16,7 @@
   max-width: calc(100vw - 32px);
   max-height: calc(100vh - 32px);
   overflow-y: auto;
+  @include respond-to(mobile) {
+    width: 95%;
+  }
 }

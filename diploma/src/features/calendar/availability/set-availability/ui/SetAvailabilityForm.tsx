@@ -91,7 +91,7 @@ export const SetAvailabilityForm = ({
               minValue={today(getLocalTimeZone())}
               granularity="day"
               classNames={{
-                base: "w-[70%] rounded-[20px] border border-[#d4d4d8] hover:border-[#3f3f46] data-[focus-within=true]:border-[#18181b] [&_[data-type=literal]]:text-[rgba(0,0,0,0.4)] data-[focus-within=true]:[&_[data-type=literal]]:!text-[rgba(0,0,0,0.87)]",
+                base: "w-[100%] md:w-[85%] lg:w-[70%] rounded-[20px] border border-[#d4d4d8] hover:border-[#3f3f46] data-[focus-within=true]:border-[#18181b] [&_[data-type=literal]]:text-[rgba(0,0,0,0.4)] data-[focus-within=true]:[&_[data-type=literal]]:!text-[rgba(0,0,0,0.87)]",
                 inputWrapper:
                   "w-full h-full rounded-[20px] shadow-none border-none !bg-white data-[hover=true]:!bg-white data-[focus=true]:!bg-white data-[focus-within=true]:!bg-white ",
                 segment:

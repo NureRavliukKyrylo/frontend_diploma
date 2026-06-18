@@ -33,7 +33,6 @@ export const DatePickerInput = ({
   })();
 
   const isInvalid = submit && Boolean(error);
-
   return (
     <>
       <DatePicker

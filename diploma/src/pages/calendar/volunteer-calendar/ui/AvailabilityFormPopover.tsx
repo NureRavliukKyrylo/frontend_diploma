@@ -1,6 +1,7 @@
 import type { AvailabilitySlot } from "@entities/user/calendar";
 import { SetAvailabilityForm } from "@features/calendar";
 import { BasePopover } from "@shared/ui/modals";
+import { useMediaQuery } from "usehooks-ts";
 
 interface AvailabilityFormPopoverProps {
   anchor: Element | { getBoundingClientRect: () => DOMRect };
@@ -14,12 +15,20 @@ export const AvailabilityFormPopover = ({
   date,
   availability,
   onClose,
-}: AvailabilityFormPopoverProps) => (
-  <BasePopover anchor={anchor} onClose={onClose}>
-    <SetAvailabilityForm
-      date={date}
-      availability={availability}
+}: AvailabilityFormPopoverProps) => {
+  const isTablet = useMediaQuery("(max-width: 900px)");
+  return (
+    <BasePopover
+      anchor={anchor}
       onClose={onClose}
-    />
-  </BasePopover>
-);
+      placement={isTablet ? "bottom-start" : "right"}
+      center={isTablet}
+    >
+      <SetAvailabilityForm
+        date={date}
+        availability={availability}
+        onClose={onClose}
+      />
+    </BasePopover>
+  );
+};

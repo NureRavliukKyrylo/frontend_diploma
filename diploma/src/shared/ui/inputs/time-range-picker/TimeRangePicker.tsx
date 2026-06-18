@@ -14,10 +14,7 @@ export const TimeRangePicker = (props: SingleInputTimeRangeFieldProps) => {
       adapterLocale={i18n.language === "ua" ? "uk" : "en"}
     >
       <div className={styles.timeRangePicker}>
-        <SingleInputTimeRangeField
-          format={i18n.language === "ua" ? "гг:мм" : "hh:mm"}
-          {...props}
-        />
+        <SingleInputTimeRangeField {...props} />
       </div>
     </LocalizationProvider>
   );

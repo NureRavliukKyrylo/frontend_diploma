@@ -9,10 +9,40 @@
   flex-direction: column;
   gap: 30px;
   min-width: 550px;
+
+  @include respond-to(laptop) {
+    padding: 32px;
+    gap: 24px;
+    min-width: 480px;
+  }
+  @include respond-to(tablet) {
+    padding: 24px;
+    gap: 20px;
+    min-width: 480px;
+    border-radius: 36px;
+    box-shadow: none;
+  }
+  @include respond-to(mobile) {
+    padding: 16px;
+    gap: 16px;
+    min-width: unset;
+    width: 100%;
+    border-radius: 24px;
+    box-shadow: none;
+  }
+
   .closeWindow {
     width: 25px;
     cursor: pointer;
+
+    @include respond-to(mobile) {
+      width: 20px;
+    }
+    svg {
+      width: 100%;
+    }
   }
+
   .headerForm {
     display: flex;
     align-items: center;
@@ -20,6 +50,15 @@
     gap: 40px;
     position: relative;
     padding-bottom: 25px;
+
+    @include respond-to(tablet) {
+      gap: 24px;
+      padding-bottom: 20px;
+    }
+    @include respond-to(mobile) {
+      gap: 16px;
+      padding-bottom: 16px;
+    }
 
     &::after {
       content: "";
@@ -37,6 +76,7 @@
       );
       opacity: 0.8;
     }
+
     span {
       @include font-base(30px, 700);
       background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
@@ -45,45 +85,110 @@
       background-clip: text;
       text-transform: uppercase;
       line-height: 110%;
+
+      @include respond-to(laptop) {
+        font-size: 26px;
+      }
+      @include respond-to(tablet) {
+        font-size: 22px;
+      }
+      @include respond-to(mobile) {
+        font-size: 18px;
+      }
     }
   }
+
   .formSetAvailability {
     display: flex;
     flex-direction: column;
     gap: 30px;
+
+    @include respond-to(tablet) {
+      gap: 22px;
+    }
+    @include respond-to(mobile) {
+      gap: 16px;
+    }
+
     .setRangeWrapper {
       display: flex;
       flex-direction: column;
       gap: 15px;
+
+      @include respond-to(mobile) {
+        gap: 12px;
+      }
+
       .dateRangeBlock {
         display: flex;
         flex-direction: column;
         gap: 15px;
+
+        @include respond-to(mobile) {
+          gap: 10px;
+        }
+
         h1 {
           @include font-base(18px, 800);
           line-height: 120%;
           text-transform: uppercase;
+
+          @include respond-to(tablet) {
+            font-size: 16px;
+          }
+          @include respond-to(mobile) {
+            font-size: 14px;
+          }
         }
       }
+
       .timeRangeBlock {
         display: flex;
         flex-direction: column;
         gap: 15px;
+
+        @include respond-to(mobile) {
+          gap: 10px;
+        }
+
         .setRange {
           display: flex;
           flex-direction: column;
           gap: 15px;
+
+          @include respond-to(mobile) {
+            gap: 10px;
+          }
+
           h1 {
             @include font-base(18px, 800);
             line-height: 120%;
             text-transform: uppercase;
+
+            @include respond-to(tablet) {
+              font-size: 16px;
+            }
+            @include respond-to(mobile) {
+              font-size: 14px;
+            }
           }
+
           .timeRangeWrapper {
             height: 40px;
+
+            @include respond-to(mobile) {
+              height: 36px;
+            }
           }
+
           .optionsToChose {
             display: flex;
             gap: 15px;
+
+            @include respond-to(mobile) {
+              gap: 10px;
+            }
+
             .allDay {
               background: #ffffff;
               box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
@@ -92,6 +197,16 @@
               @include font-base(17px, 600);
               width: 120px;
               transition: all 0.2s ease;
+
+              @include respond-to(tablet) {
+                font-size: 15px;
+                width: 105px;
+              }
+              @include respond-to(mobile) {
+                font-size: 13px;
+                width: 90px;
+              }
+
               &.allDayActive {
                 background: #2a2a2a;
                 color: #ffffff;
@@ -101,11 +216,20 @@
             }
           }
         }
+
         .setRecurrence {
           display: flex;
           gap: 10px;
+
           h1 {
             @include font-base(18px, 500);
+
+            @include respond-to(tablet) {
+              font-size: 16px;
+            }
+            @include respond-to(mobile) {
+              font-size: 14px;
+            }
           }
         }
       }
@@ -115,10 +239,27 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+
       .actionsBlock {
         display: flex;
         align-items: center;
         gap: 15px;
+
+        @include respond-to(tablet) {
+          flex-direction: column;
+          > * {
+            width: 100%;
+          }
+        }
+
+        @include respond-to(mobile) {
+          gap: 10px;
+          flex-direction: column;
+          > * {
+            width: 100%;
+          }
+        }
+
         .setAvailability {
           background: #000000;
           box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
@@ -127,7 +268,22 @@
           width: fit-content;
           padding: 5px 20px;
           color: white;
+
+          @include respond-to(laptop) {
+            font-size: 18px;
+          }
+          @include respond-to(tablet) {
+            font-size: 16px;
+            padding: 4px 16px;
+            width: 100%;
+          }
+          @include respond-to(mobile) {
+            font-size: 14px;
+            padding: 4px 14px;
+            width: 100%;
+          }
         }
+
         .cancelButton {
           @extend .setAvailability;
           background: #f5f5f5;
