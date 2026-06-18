@@ -12,13 +12,15 @@ interface ProjectDefaultBottomContentProps {
 export const ProjectDefaultBottomContent = ({
   project,
 }: ProjectDefaultBottomContentProps) => {
-  const { t } = useTranslation(["project"]);
+  const { t, i18n } = useTranslation(["project"]);
 
   return (
     <>
       <div className={styles.deadlineBlock}>
         <Calendar className={styles.calendarProject} />
-        <span>{formatDateToText(project.endAt)}</span>
+        <span>
+          {formatDateToText(project.endAt, i18n.language as "en" | "ua")}
+        </span>
       </div>
       <div className={styles.progressBlock}>
         <div className={styles.progressInfo}>

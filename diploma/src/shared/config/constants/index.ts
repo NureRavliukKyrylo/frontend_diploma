@@ -12,3 +12,4 @@ export { POLICY_STATUS_MAP } from "./PolicyStatus";
 export { EVENT_COLOR } from "./EventTypeColor";
 export { getListActivitiesTabs } from "./listActivitiesTabs";
 export { getMentionColor, MENTION_COLORS } from "./mentionColors";
+export { LOCALE_MAP } from "./localeMap";

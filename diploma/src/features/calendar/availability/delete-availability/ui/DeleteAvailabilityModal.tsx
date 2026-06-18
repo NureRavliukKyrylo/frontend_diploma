@@ -6,17 +6,20 @@ import { useDeleteAvailability } from "../model/useDeleteAvailability";
 import { formatDateToText, formatDayOfWeek } from "@shared/libs/date";
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
+import { LOCALE_MAP } from "@shared/config/constants";
 
-const getDayName = (dayOfWeek: number, locale: string): string => {
+const getDayName = (dayOfWeek: number, locale: "en" | "ua"): string => {
   const date = new Date(0);
   date.setDate(date.getDate() - date.getDay() + dayOfWeek);
-  return new Intl.DateTimeFormat(locale, { weekday: "long" }).format(date);
+  return new Intl.DateTimeFormat(LOCALE_MAP[locale], {
+    weekday: "long",
+  }).format(date);
 };
 
 const buildDescription = (
   slot: AvailabilitySlot,
   t: TFunction,
-  locale: string,
+  locale: "en" | "ua",
 ): string => {
   const timeLabel = slot.allDay
     ? t("calendar:deleteModal.allDay")
@@ -24,12 +27,12 @@ const buildDescription = (
 
   if (slot.date) {
     const date = new Date(slot.date);
-    return `${formatDayOfWeek(date)}, ${formatDateToText(date.toISOString())}, ${timeLabel}`;
+    return `${formatDayOfWeek(date)}, ${formatDateToText(date.toISOString(), locale)}, ${timeLabel}`;
   }
 
   if (slot.startDate && slot.endDate) {
-    const from = formatDateToText(slot.startDate);
-    const to = formatDateToText(slot.endDate);
+    const from = formatDateToText(slot.startDate, locale);
+    const to = formatDateToText(slot.endDate, locale);
 
     const recurrence =
       slot.dayOfWeek !== null
@@ -64,7 +67,7 @@ export const DeleteAvailabilityModal = ({
   const { handleDelete, isLoading, errorMessage } =
     useDeleteAvailability(onClose);
 
-  const description = buildDescription(slot, t, i18n.language);
+  const description = buildDescription(slot, t, i18n.language as "en" | "ua");
 
   return (
     <ConfirmationModal

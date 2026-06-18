@@ -23,17 +23,14 @@ import { DefaultAvatar } from "@shared/assets/images/user";
 import { useTranslation } from "react-i18next";
 
 export function MainProfilePage() {
-  const { tab, locale, ...search } = useSearch({
+  const { tab, ...search } = useSearch({
     from: "/_masterLayout/profile/",
   });
   const navigate = useNavigate({ from: "/profile/" });
 
   const handleTabChange = (tab: ProfileMode) => {
     navigate({
-      search: (prev) => ({
-        ...profileSearchDefaults[tab],
-        locale: prev.locale,
-      }),
+      search: profileSearchDefaults[tab],
     });
   };
 

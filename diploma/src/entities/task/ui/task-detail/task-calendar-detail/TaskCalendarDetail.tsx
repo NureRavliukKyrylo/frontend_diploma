@@ -11,7 +11,7 @@ interface TaskCalendarDetailProps {
 }
 
 export const TaskCalendarDetail = ({ task }: TaskCalendarDetailProps) => {
-  const { t } = useTranslation(["task"]);
+  const { t, i18n } = useTranslation(["task"]);
 
   return (
     <>
@@ -21,7 +21,7 @@ export const TaskCalendarDetail = ({ task }: TaskCalendarDetailProps) => {
             <Calendar />
             <div className={styles.calendarDivider} />
             <span className={styles.calendarInfo}>
-              {formatDateToText(task.startAt)}
+              {formatDateToText(task.startAt, i18n.language as "en" | "ua")}
             </span>
           </div>
           <div className={styles.subBaseInfoBlock}>

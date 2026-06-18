@@ -27,7 +27,7 @@ export const SetAvailabilityForm = ({
   availability,
   onClose,
 }: SetAvailabilityFormProps) => {
-  const { t } = useTranslation(["calendar"]);
+  const { t, i18n } = useTranslation(["calendar"]);
   const { formik, isUpdate, isLoading, handleAllDayToggle, mutation } =
     useAvailabilityForm({ date, availability, onClose });
 
@@ -65,7 +65,8 @@ export const SetAvailabilityForm = ({
     >
       <div className={styles.headerForm}>
         <span>
-          {formatDayOfWeek(date)}, {formatDateToText(date.toISOString())}
+          {formatDayOfWeek(date)},{" "}
+          {formatDateToText(date.toISOString(), i18n.language as "en" | "ua")}
         </span>
         <motion.div
           className={styles.closeWindow}

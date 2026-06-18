@@ -18,7 +18,7 @@ export const BookingControlCard = ({
   bottomContent,
   className,
 }: BookingControlCardProps) => {
-  const { t } = useTranslation("timeBank");
+  const { t, i18n } = useTranslation("timeBank");
   const statusLabels = getProgressStatusLabels(t);
 
   return (
@@ -47,6 +47,7 @@ export const BookingControlCard = ({
                 {t("bookings.labels.booked")}{" "}
                 {formatDateToText(
                   new Date(offer.lastBookedAt).toISOString(),
+                  i18n.language as "en" | "ua",
                   false,
                 )}
               </span>

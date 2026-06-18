@@ -12,7 +12,7 @@ interface ChatItemProps {
 }
 
 export const ChatItem = ({ chat, typing, isOnline }: ChatItemProps) => {
-  const { t } = useTranslation(["chat"]);
+  const { t, i18n } = useTranslation(["chat"]);
 
   return (
     <div className={styles.chatWrapper}>
@@ -21,7 +21,13 @@ export const ChatItem = ({ chat, typing, isOnline }: ChatItemProps) => {
       <div className={styles.rightContent}>
         <div className={styles.topContent}>
           <h1> {chat.name}</h1>
-          <h2>{formatDateToText(chat.lastMessageAt, true)}</h2>
+          <h2>
+            {formatDateToText(
+              chat.lastMessageAt,
+              i18n.language as "en" | "ua",
+              true,
+            )}
+          </h2>
         </div>
         <div className={styles.bottomContent}>
           <p className={`${styles.lastMessage} ${typing ? styles.typing : ""}`}>

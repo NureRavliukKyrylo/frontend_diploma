@@ -35,10 +35,17 @@ import enOrganizations from "./locales/en/organizations.json";
 import uaOrganizations from "./locales/ua/organizations.json";
 import enChat from "./locales/en/chat.json";
 import uaChat from "./locales/ua/chat.json";
+import { useLocaleStore } from "@shared/config/stores";
+
+const savedLocale =
+  useLocaleStore.getState().locale ??
+  (["uk", "ru"].some((lang) => navigator.language.startsWith(lang))
+    ? "ua"
+    : "en");
 
 i18n.use(initReactI18next).init({
   fallbackLng: "en",
-  lng: "en",
+  lng: savedLocale,
   resources: {
     en: {
       common: enCommon,

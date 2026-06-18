@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import {
-  CONNECTED_SERVICES_CONFIG,
+  getConnectedServicesConfig,
   profileQuery,
   type ConnectedServiceId,
 } from "@entities/user/profile";
@@ -8,16 +8,19 @@ import {
 import { useGoogleCalendarService } from "./useGoogleCalendarService";
 import type { ConnectedServiceHooks } from "../config/ServiceHooks";
 import { useGoogleAccountService } from "./useGoogleAcountService";
+import { useTranslation } from "react-i18next";
 
 export const useConnectedServices = () => {
   const { data: user } = useSuspenseQuery(profileQuery.all());
-
+  const { t } = useTranslation("profile");
   const serviceHooks: Record<ConnectedServiceId, ConnectedServiceHooks> = {
     google: useGoogleAccountService(),
     googleCalendar: useGoogleCalendarService(),
   };
 
-  const services = CONNECTED_SERVICES_CONFIG.map((config) => {
+  const connectedServices = getConnectedServicesConfig(t);
+
+  const services = connectedServices.map((config) => {
     const connected =
       user.connectedServices.find((s) => s.provider === config.id)?.connected ??
       false;

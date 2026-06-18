@@ -1,5 +1,8 @@
+import { LOCALE_MAP } from "@shared/config/constants";
+
 export const formatDateToText = (
   iso: string,
+  locale: "en" | "ua",
   includeTime: boolean = false,
 ): string => {
   const date = new Date(iso);
@@ -14,5 +17,5 @@ export const formatDateToText = (
     }),
   };
 
-  return date.toLocaleString(navigator.language, options);
+  return date.toLocaleString(LOCALE_MAP[locale], options);
 };

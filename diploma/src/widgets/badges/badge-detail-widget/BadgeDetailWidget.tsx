@@ -19,7 +19,7 @@ const entityTypeToRoute = {
 } as const;
 
 export const BadgeDetailWidget = ({ id }: { id: string }) => {
-  const { t } = useTranslation(["badge"]);
+  const { t, i18n } = useTranslation(["badge"]);
   const { data: badge } = useSuspenseQuery(badgesQuery.id(id));
 
   return (
@@ -92,7 +92,10 @@ export const BadgeDetailWidget = ({ id }: { id: string }) => {
               </div>
               <p>
                 {badge.firstAwardedAt
-                  ? formatDateToText(badge.firstAwardedAt)
+                  ? formatDateToText(
+                      badge.firstAwardedAt,
+                      i18n.language as "en" | "ua",
+                    )
                   : "—"}
               </p>
             </div>

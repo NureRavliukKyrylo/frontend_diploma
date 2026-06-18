@@ -1,6 +1,7 @@
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./ConnectedLink.module.scss";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface ConnectedLinkProps {
   isConnected?: boolean;
@@ -19,6 +20,7 @@ export const ConnectedLink = ({
   isPending,
   handleMutation,
 }: ConnectedLinkProps) => {
+  const { t } = useTranslation(["profile"]);
   return (
     <div className={styles.connectedLinkBlock}>
       <div className={styles.connectedLinkPlatform}>
@@ -40,7 +42,11 @@ export const ConnectedLink = ({
           onClick={handleMutation}
           className={`${styles.connectButton} ${isConnected ? styles.active : styles.disabled}`}
         >
-          <h1>{isConnected ? "Connected" : "Disabled"}</h1>
+          <h1>
+            {isConnected
+              ? t("profile:connections.states.connected")
+              : t("profile:connections.states.disabled")}
+          </h1>
         </BaseButtonWrapper>
       </motion.div>
     </div>

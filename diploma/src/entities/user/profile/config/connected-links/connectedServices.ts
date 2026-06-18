@@ -1,5 +1,6 @@
 import { GoogleIcon } from "@shared/assets/icons/brands";
 import { GoogleCalendarIcon } from "@shared/assets/icons/info";
+import type { TFunction } from "i18next";
 
 export type ConnectedServiceId = "google" | "googleCalendar";
 
@@ -11,19 +12,21 @@ export interface ConnectedServiceConfig {
   description: string;
 }
 
-export const CONNECTED_SERVICES_CONFIG: ConnectedServiceConfig[] = [
+export const getConnectedServicesConfig = (
+  t: TFunction,
+): ConnectedServiceConfig[] => [
   {
     id: "google",
     category: "account",
     imageLink: GoogleIcon,
-    title: "Google account",
-    description: "Stay in sync with Google",
+    title: t("profile:connections.google.title"),
+    description: t("profile:connections.google.description"),
   },
   {
     id: "googleCalendar",
     category: "integration",
     imageLink: GoogleCalendarIcon,
-    title: "Google Calendar",
-    description: "Sync your calendar events",
+    title: t("profile:connections.googleCalendar.title"),
+    description: t("profile:connections.googleCalendar.description"),
   },
-] as const;
+];

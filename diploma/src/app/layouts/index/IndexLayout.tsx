@@ -2,25 +2,18 @@ import { Footer, Header } from "@widgets/common";
 import styles from "./indexLayout.module.scss";
 import type { ReactNode } from "react";
 import { NotificationToast } from "@entities/notification";
+import { useLocaleStore } from "@shared/config/stores";
 
 interface IndexLayoutProps {
   children: ReactNode;
   showFooter?: boolean;
 }
-import { useRouter, useSearch } from "@tanstack/react-router";
 
 export const LangSwitcher = () => {
-  const { locale } = useSearch({ strict: false });
-  const router = useRouter();
+  const locale = useLocaleStore((s) => s.locale);
+  const setLocale = useLocaleStore((s) => s.setLocale);
 
-  const toggle = () => {
-    router.navigate({
-      to: ".",
-      search: (prev) =>
-        ({ ...prev, locale: locale === "en" ? "ua" : "en" }) as any,
-      replace: true,
-    });
-  };
+  const toggle = () => setLocale(locale === "en" ? "ua" : "en");
 
   return <button onClick={toggle}>{locale === "en" ? "UA" : "EN"}</button>;
 };

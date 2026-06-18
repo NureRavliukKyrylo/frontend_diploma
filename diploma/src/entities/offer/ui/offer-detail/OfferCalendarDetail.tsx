@@ -9,7 +9,7 @@ interface OfferCalendarDetailProps {
 }
 
 export const OfferCalendarDetail = ({ offer }: OfferCalendarDetailProps) => {
-  const { t } = useTranslation(["timeBank"]);
+  const { t, i18n } = useTranslation(["timeBank"]);
 
   return (
     <>
@@ -19,7 +19,10 @@ export const OfferCalendarDetail = ({ offer }: OfferCalendarDetailProps) => {
             <Calendar />
             <div className={styles.calendarDivider} />
             <span className={styles.calendarInfo}>
-              {formatDateToText(new Date(offer.startAt).toISOString())}
+              {formatDateToText(
+                new Date(offer.startAt).toISOString(),
+                i18n.language as "en" | "ua",
+              )}
             </span>
           </div>
           <div className={styles.subBaseInfoBlock}>

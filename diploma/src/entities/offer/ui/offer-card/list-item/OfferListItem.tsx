@@ -12,7 +12,7 @@ interface OfferListItemProps {
 }
 
 export const OfferListItem = ({ offer, bottomContent }: OfferListItemProps) => {
-  const { t } = useTranslation("timeBank");
+  const { t, i18n } = useTranslation("timeBank");
 
   return (
     <div className={styles.offerWrapper}>
@@ -54,7 +54,12 @@ export const OfferListItem = ({ offer, bottomContent }: OfferListItemProps) => {
       </div>
       <div className={styles.deadlineBlock}>
         <Calendar className={styles.calendarOffer} />
-        <span>{formatDateToText(new Date(offer.endAt).toISOString())}</span>
+        <span>
+          {formatDateToText(
+            new Date(offer.endAt).toISOString(),
+            i18n.language as "en" | "ua",
+          )}
+        </span>
       </div>
       <div className={styles.dividerLine} />
       {bottomContent}

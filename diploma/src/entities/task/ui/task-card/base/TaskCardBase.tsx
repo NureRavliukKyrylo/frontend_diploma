@@ -21,7 +21,7 @@ export const TaskCardBase = ({
   endContent,
   topContent,
 }: TaskCardBaseProps) => {
-  const { t } = useTranslation(["task"]);
+  const { t, i18n } = useTranslation(["task"]);
 
   return (
     <>
@@ -55,7 +55,9 @@ export const TaskCardBase = ({
             <Calendar className={styles.calendarTask} />
             <div className={styles.deadlineTextInfo}>
               <h1>{t("task:cards.deadline")}</h1>
-              <span>{formatDateToText(task.endAt)}</span>
+              <span>
+                {formatDateToText(task.endAt, i18n.language as "en" | "ua")}
+              </span>
             </div>
           </div>
         </div>

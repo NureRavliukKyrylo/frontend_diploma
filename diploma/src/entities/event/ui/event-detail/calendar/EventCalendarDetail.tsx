@@ -11,7 +11,7 @@ interface EventCalendarDetailProps {
 }
 
 export const EventCalendarDetail = ({ event }: EventCalendarDetailProps) => {
-  const { t } = useTranslation(["event"]);
+  const { t, i18n } = useTranslation(["event"]);
 
   return (
     <>
@@ -21,7 +21,7 @@ export const EventCalendarDetail = ({ event }: EventCalendarDetailProps) => {
             <Calendar />
             <div className={styles.calendarDivider} />
             <span className={styles.calendarInfo}>
-              {formatDateToText(event.startAt)}
+              {formatDateToText(event.startAt, i18n.language as "en" | "ua")}
             </span>
           </div>
           <div className={styles.subBaseInfoBlock}>

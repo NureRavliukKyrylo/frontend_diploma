@@ -13,7 +13,7 @@ export { MapUserLocation } from "./ui/user-location/MapUserLocation";
 export { MemberCard } from "./ui/member-card/MemberCard";
 export { MemberCardSkeleton } from "./ui/member-card/MemberCardSkeleton";
 export {
-  CONNECTED_SERVICES_CONFIG,
+  getConnectedServicesConfig,
   type ConnectedServiceConfig,
   type ConnectedServiceId,
 } from "./config/connected-links/connectedServices";

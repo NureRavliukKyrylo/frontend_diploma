@@ -12,6 +12,7 @@ import {
   DropdownTrigger,
 } from "@heroui/react";
 import type { MenuItem } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
 
 interface MessageItemProps {
   message: Message;
@@ -33,6 +34,7 @@ export const MessageItem = ({
     message.sender.lastName,
   );
 
+  const { i18n } = useTranslation();
   return (
     <div
       className={`${styles.messageWrapper} ${message.isMine ? styles.mine : ""}`}
@@ -108,11 +110,19 @@ export const MessageItem = ({
           {message.editedAt ? (
             <span className={styles.edited}>
               <EditIcon className={styles.editIcon} />
-              {formatDateToText(message.editedAt, true)}
+              {formatDateToText(
+                message.editedAt,
+                i18n.language as "en" | "ua",
+                true,
+              )}
             </span>
           ) : (
             <span className={styles.timestamp}>
-              {formatDateToText(message.timestamp, true)}
+              {formatDateToText(
+                message.timestamp,
+                i18n.language as "en" | "ua",
+                true,
+              )}
             </span>
           )}
           {message.isMine && (

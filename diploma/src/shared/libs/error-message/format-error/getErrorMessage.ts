@@ -7,7 +7,7 @@ interface ApiErrorResponse {
 
 export function getErrorMessage(error: unknown, t: TFunction): string {
   if (axios.isAxiosError<ApiErrorResponse>(error)) {
-    return error.response?.data?.error ?? t("errors.somethingWentWrong");
+    return error.response?.data?.error ?? t("common:errors.somethingWentWrong");
   }
 
   if (error instanceof Error) {

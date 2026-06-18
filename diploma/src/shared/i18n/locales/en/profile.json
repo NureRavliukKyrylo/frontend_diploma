@@ -186,5 +186,19 @@
     "text": "Are you sure you want to delete your profile? This action cannot be undone. All your data, settings, and content will be permanently removed.",
     "confirm": "Delete Profile",
     "cancel": "Cancel"
+  },
+  "connections": {
+    "states": {
+      "connected": "Connected",
+      "disabled": "Disabled"
+    },
+    "google": {
+      "title": "Google account",
+      "description": "Stay in sync with Google"
+    },
+    "googleCalendar": {
+      "title": "Google Calendar",
+      "description": "Sync your calendar events"
+    }
   }
 }
