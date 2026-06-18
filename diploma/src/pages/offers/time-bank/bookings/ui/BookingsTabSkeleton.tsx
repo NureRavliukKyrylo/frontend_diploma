@@ -1,4 +1,4 @@
-import { Skeleton } from "@heroui/skeleton";
+import { Skeleton } from "@heroui/react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { BookingControlCardSkeleton } from "@entities/offer";
 import styles from "./BookingsTab.module.scss";

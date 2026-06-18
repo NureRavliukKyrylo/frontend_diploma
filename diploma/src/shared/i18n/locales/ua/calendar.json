@@ -28,6 +28,8 @@
     "addSuccessDescription": "Часову доступність було успішно створено",
     "updateSuccessTitle": "Доступність оновлено",
     "updateSuccessDescription": "Часову доступність було успішно оновлено",
+    "failedCreateTitle": "Помилка додавання часової доступності",
+    "failedUpdateTitle": "Помилка оновлення часової доступності",
     "failedTitle": "Помилка експортування в Google календар"
   },
   "validation": {

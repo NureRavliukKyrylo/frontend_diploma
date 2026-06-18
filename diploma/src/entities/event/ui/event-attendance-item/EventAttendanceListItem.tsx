@@ -17,7 +17,7 @@ export const EventAttendanceListItem = ({
   checkOut,
   disputeAttendance,
 }: EventAttendanceListItemProps) => {
-  const { t } = useTranslation(["event"]);
+  const { t, i18n } = useTranslation(["event"]);
   const now = new Date();
   const isInRange =
     now >= new Date(attendance.currentAttendance.dateFrom) &&
@@ -37,6 +37,7 @@ export const EventAttendanceListItem = ({
         {formatDateRange(
           attendance.currentAttendance.dateFrom,
           attendance.currentAttendance.dateTo,
+          i18n.language as "en" | "ua",
         )}
       </span>
       <span className={styles.descriptionCell}>

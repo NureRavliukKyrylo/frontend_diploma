@@ -33,7 +33,7 @@ import { ModerationSubjectType } from "@entities/report";
 import { useTranslation } from "react-i18next";
 
 export const OfferPage = () => {
-  const { t } = useTranslation(["timeBank"]);
+  const { t, i18n } = useTranslation(["timeBank"]);
   const { id } = useParams({ from: "/_masterLayout/offers/$id/" });
   const { data: offer } = useSuspenseQuery(offerQuery.id(id));
   const { isVisible, ref } = useIntersectionReveal<HTMLDivElement>();
@@ -94,8 +94,8 @@ export const OfferPage = () => {
                     {formatDateRange(
                       offer.startAt,
                       offer.endAt,
-                      undefined,
-                      false,
+                      i18n.language as "en" | "ua",
+                      true,
                     )}
                   </span>
                 </span>

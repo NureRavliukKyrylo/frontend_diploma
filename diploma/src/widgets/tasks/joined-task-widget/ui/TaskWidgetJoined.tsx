@@ -35,7 +35,7 @@ export const TaskWidgetJoined = ({
   taskMode,
   taskId,
 }: TaskWidgetJoinedProps) => {
-  const { t } = useTranslation(["task", "common"]);
+  const { t, i18n } = useTranslation(["task", "common"]);
   const { task, isLoading, isError, error, statusConfig, forms } =
     useTaskJoinedWidget({ taskId, search });
 
@@ -86,7 +86,13 @@ export const TaskWidgetJoined = ({
                   {task?.endAt && (
                     <span className={`${styles.metaChip} ${styles.calendar}`}>
                       <Calendar className={styles.calendarImg} />
-                      <span>{formatDateRange(task.startAt, task.endAt)}</span>
+                      <span>
+                        {formatDateRange(
+                          task.startAt,
+                          task.endAt,
+                          i18n.language as "en" | "ua",
+                        )}
+                      </span>
                     </span>
                   )}
                   <span className={`${styles.metaChip} ${styles.roleChip}`}>

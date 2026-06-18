@@ -1,9 +1,12 @@
-export const formatHourTime = (date: Date | string | null): string | null => {
+export const formatHourTime = (
+  date: Date | string | null,
+  locale: "en" | "ua",
+): string | null => {
   if (!date) return null;
 
   return new Date(date).toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
-    hour12: true,
+    hour12: locale === "en",
   });
 };

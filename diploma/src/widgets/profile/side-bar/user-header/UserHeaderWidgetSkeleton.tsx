@@ -1,4 +1,4 @@
-import { Skeleton } from "@heroui/skeleton";
+import { Skeleton } from "@heroui/react";
 import styles from "./UserHeaderWidget.module.scss";
 
 export const UserHeaderWidgetSkeleton = () => {

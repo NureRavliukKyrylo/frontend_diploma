@@ -31,7 +31,7 @@ export const RejectBookingModal = ({
     <BaseModal
       isOpen={isOpen}
       onClose={handleClose}
-      maxWidth="520px"
+      maxWidth="620px"
       showClosed={false}
     >
       <form onSubmit={formik.handleSubmit} className={styles.wrapper}>

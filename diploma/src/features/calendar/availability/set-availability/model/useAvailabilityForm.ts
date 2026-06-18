@@ -46,7 +46,7 @@ export const useAvailabilityForm = ({
     },
     onError: (error: unknown) => {
       addToast({
-        title: t("calendar:formNotifications.failedTitle"),
+        title: t("calendar:formNotifications.failedCreateTitle"),
         description: getErrorMessage(error, t),
         color: "danger",
       });
@@ -68,7 +68,7 @@ export const useAvailabilityForm = ({
     },
     onError: (error: unknown) => {
       addToast({
-        title: t("calendar:formNotifications.failedTitle"),
+        title: t("calendar:formNotifications.failedUpdateTitle"),
         description: getErrorMessage(error, t),
         color: "danger",
       });

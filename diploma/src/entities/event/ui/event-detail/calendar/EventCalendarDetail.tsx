@@ -33,7 +33,8 @@ export const EventCalendarDetail = ({ event }: EventCalendarDetailProps) => {
             <TimeIcon className={styles.timeIcon} />
             <div className={styles.divider} />
             <span className={styles.info}>
-              {formatHourTime(event.startAt) ?? t("event:cards.allTime")}
+              {formatHourTime(event.startAt, i18n.language as "en" | "ua") ??
+                t("event:cards.allTime")}
             </span>
           </div>
         </div>

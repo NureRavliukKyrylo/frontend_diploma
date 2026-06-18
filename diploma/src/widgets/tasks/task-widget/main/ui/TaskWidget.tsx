@@ -34,7 +34,7 @@ export const TaskWidget = ({
   taskId,
   handleSort,
 }: TaskWidgetProps) => {
-  const { t } = useTranslation(["task", "common"]);
+  const { t, i18n } = useTranslation(["task", "common"]);
   const { task, isLoading, isError, error, statusConfig, policyConfig, forms } =
     useTaskWidget({ taskId, search, handleSort });
 
@@ -98,7 +98,13 @@ export const TaskWidget = ({
                   {task?.endAt && (
                     <span className={`${styles.metaChip} ${styles.calendar}`}>
                       <Calendar className={styles.calendarImg} />
-                      <span>{formatDateRange(task.startAt, task.endAt)}</span>
+                      <span>
+                        {formatDateRange(
+                          task.startAt,
+                          task.endAt,
+                          i18n.language as "en" | "ua",
+                        )}
+                      </span>
                     </span>
                   )}
                   {policyConfig && (

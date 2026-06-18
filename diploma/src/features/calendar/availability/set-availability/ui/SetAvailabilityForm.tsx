@@ -65,7 +65,7 @@ export const SetAvailabilityForm = ({
     >
       <div className={styles.headerForm}>
         <span>
-          {formatDayOfWeek(date)},{" "}
+          {formatDayOfWeek(date, i18n.language as "en" | "ua")},{" "}
           {formatDateToText(date.toISOString(), i18n.language as "en" | "ua")}
         </span>
         <motion.div

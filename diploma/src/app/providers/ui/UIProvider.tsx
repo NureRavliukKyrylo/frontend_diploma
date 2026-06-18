@@ -1,14 +1,16 @@
 import { type ReactNode } from "react";
-import { HeroUIProvider } from "@heroui/react";
-import { ToastProvider } from "@heroui/toast";
+import { HeroUIProvider, ToastProvider } from "@heroui/react";
+import { LOCALE_MAP } from "@shared/config/constants";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   children: ReactNode;
 };
 
 export const UIProvider = ({ children }: Props) => {
+  const { i18n } = useTranslation();
   return (
-    <HeroUIProvider>
+    <HeroUIProvider locale={LOCALE_MAP[i18n.language as "en" | "ua"]}>
       <ToastProvider
         placement="top-right"
         maxVisibleToasts={3}
@@ -20,7 +22,7 @@ export const UIProvider = ({ children }: Props) => {
         }}
         regionProps={{
           classNames: {
-            base: "z-[10001]",
+            base: "z-[12001]",
           },
         }}
       />

@@ -92,7 +92,8 @@
       "cancelBooking": "Скасувати бронювання",
       "bookNow": "Забронювати",
       "approve": "Підтвердити",
-      "back": "Назад"
+      "back": "Назад",
+      "sendRequest": "Надіслати запит"
     },
     "status": {
       "inProgress": "В процесі",

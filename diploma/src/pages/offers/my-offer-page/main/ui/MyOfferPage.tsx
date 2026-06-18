@@ -14,7 +14,7 @@ import { getFullName } from "@entities/user";
 import { useTranslation } from "react-i18next";
 
 export const MyOfferPage = () => {
-  const { t } = useTranslation(["timeBank"]);
+  const { t, i18n } = useTranslation(["timeBank"]);
   const { offer, tab, forms, handleTabChange } = useMyOfferPage();
 
   const tabs = getMyOfferMainTabs(t);
@@ -61,8 +61,8 @@ export const MyOfferPage = () => {
                     {formatDateRange(
                       offer.startAt,
                       offer.endAt,
-                      undefined,
-                      false,
+                      i18n.language as "en" | "ua",
+                      true,
                     )}
                   </span>
                 </span>

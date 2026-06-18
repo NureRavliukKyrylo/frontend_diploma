@@ -28,7 +28,7 @@ interface TransactionsTabProps {
 }
 
 export const TransactionsTab = ({ search }: TransactionsTabProps) => {
-  const { t } = useTranslation("timeBank");
+  const { t, i18n } = useTranslation("timeBank");
   const { transactions, handlePageChange } = useTransactionsTab(search);
   const today = new Date();
   const { From, To } = getCalendarRange(today, "month");
@@ -88,7 +88,7 @@ export const TransactionsTab = ({ search }: TransactionsTabProps) => {
           <div className={styles.transactionsWrapper}>
             {(search.From ?? from) && (search.To ?? to) && (
               <span className={styles.dateRange}>
-                {formatDateRange(from, to, undefined, false)}
+                {formatDateRange(from, to, i18n.language as "en" | "ua", false)}
               </span>
             )}
             <motion.div

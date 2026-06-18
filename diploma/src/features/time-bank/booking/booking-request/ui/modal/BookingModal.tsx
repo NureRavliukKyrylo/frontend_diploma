@@ -33,7 +33,7 @@ export const BookingModal = ({
     <BaseModal
       isOpen={isOpen}
       onClose={handleClose}
-      maxWidth="520px"
+      maxWidth="620px"
       showClosed={false}
     >
       <form onSubmit={formik.handleSubmit} className={styles.wrapper}>
@@ -74,7 +74,7 @@ export const BookingModal = ({
             className={styles.submitButton}
             type="submit"
           >
-            {t("timeBank:bookings.labels.cancelBooking")}
+            {t("timeBank:bookings.labels.sendRequest")}
           </BaseButtonWrapper>
         </div>
       </form>

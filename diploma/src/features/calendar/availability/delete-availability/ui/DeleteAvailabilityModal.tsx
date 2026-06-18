@@ -27,7 +27,7 @@ const buildDescription = (
 
   if (slot.date) {
     const date = new Date(slot.date);
-    return `${formatDayOfWeek(date)}, ${formatDateToText(date.toISOString(), locale)}, ${timeLabel}`;
+    return `${formatDayOfWeek(date, locale)}, ${formatDateToText(date.toISOString(), locale)}, ${timeLabel}`;
   }
 
   if (slot.startDate && slot.endDate) {

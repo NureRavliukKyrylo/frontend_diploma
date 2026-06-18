@@ -9,6 +9,12 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { useTranslation } from "react-i18next";
+import ukLocale from "@fullcalendar/core/locales/uk";
+
+const FC_LOCALE_MAP: Record<"en" | "ua", typeof ukLocale | string> = {
+  en: "en",
+  ua: ukLocale,
+};
 
 interface BaseCalendarProps extends CalendarOptions {
   initialView?: CalendarTab;
@@ -24,7 +30,7 @@ export const BaseCalendar = ({
   onNavigate,
   ...props
 }: BaseCalendarProps) => {
-  const { t } = useTranslation(["calendar"]);
+  const { t, i18n } = useTranslation(["calendar"]);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const calendarRef = useRef<FullCalendar>(null);
   const [activeView, setActiveView] = useState<CalendarTab>(initialView);
@@ -46,7 +52,7 @@ export const BaseCalendar = ({
     if (initialView) api.changeView(initialView);
     if (initialDate) api.gotoDate(initialDate);
     syncTitle();
-  }, [initialView, initialDate]);
+  }, [initialView, initialDate, i18n.language]);
 
   const syncTitle = useCallback(() => {
     const api = calendarRef.current?.getApi();
@@ -133,6 +139,7 @@ export const BaseCalendar = ({
         eventBorderColor="transparent"
         eventTextColor="transparent"
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
+        locale={FC_LOCALE_MAP[i18n.language as "en" | "ua"]}
         {...props}
       />
     </div>

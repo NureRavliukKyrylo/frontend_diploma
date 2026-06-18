@@ -4,6 +4,7 @@ import type { EventType } from "@shared/config/types";
 import { EVENT_COLOR } from "@shared/config/constants";
 import { formatHourTime } from "@shared/libs/date";
 import { Link } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 
 interface CalendarEventItemProps {
   info: EventContentArg;
@@ -40,6 +41,7 @@ export const CalendarEventItem = ({ info }: CalendarEventItemProps) => {
   const view = info.view.type;
   const isMonthView = view === "dayGridMonth";
   const linkProps = getLinkProps(type, info.event.id);
+  const { i18n } = useTranslation();
 
   return (
     <Link {...linkProps} className={styles.eventCard} data-view={view}>
@@ -53,7 +55,7 @@ export const CalendarEventItem = ({ info }: CalendarEventItemProps) => {
           />
           <span className={styles.titleMonth}>
             {info.event.start && !info.event.allDay
-              ? formatHourTime(info.event.start)
+              ? formatHourTime(info.event.start, i18n.language as "en" | "ua")
               : null}{" "}
             <span className={styles.eventTitle}>{info.event.title}</span>
           </span>

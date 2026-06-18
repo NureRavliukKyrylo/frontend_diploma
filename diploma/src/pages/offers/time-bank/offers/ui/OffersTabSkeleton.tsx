@@ -1,4 +1,4 @@
-import { Skeleton } from "@heroui/skeleton";
+import { Skeleton } from "@heroui/react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { OfferListItemSkeleton } from "@entities/offer";
 import styles from "./OffersTab.module.scss";

@@ -3,9 +3,9 @@ import { LinkButtonWrapper } from "@shared/ui/buttons";
 import styles from "./ReportCaseWidget.module.scss";
 import { getSubjectLink } from "../libs/getSubjectLink";
 import { reportQuery } from "@entities/report";
-import { Avatar } from "@heroui/react";
 import { ResolveCaseButton } from "@features/moderation";
 import { getFullName } from "@entities/user";
+import { Avatar } from "@shared/ui";
 
 interface ReportCaseWidgetProps {
   caseId: string;

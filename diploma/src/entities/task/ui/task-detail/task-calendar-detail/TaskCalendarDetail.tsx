@@ -28,7 +28,8 @@ export const TaskCalendarDetail = ({ task }: TaskCalendarDetailProps) => {
             <TimeIcon className={styles.timeIcon} />
             <div className={styles.divider} />
             <span className={styles.info}>
-              {formatHourTime(task.startAt) ?? t("task:cards.allTime")}
+              {formatHourTime(task.startAt, i18n.language as "en" | "ua") ??
+                t("task:cards.allTime")}
             </span>
           </div>
         </div>

@@ -12,7 +12,7 @@ import { ChatIcon } from "@shared/assets/icons/info";
 import { useTranslation } from "react-i18next";
 
 export const JoinedEventPage = () => {
-  const { t } = useTranslation(["event", "common"]);
+  const { t, i18n } = useTranslation(["event", "common"]);
   const { tab, event, forms, handleTabChange } = useJoinedEventPage();
 
   const localizedTabs = getEventJoinedMainTabs(t);
@@ -43,7 +43,13 @@ export const JoinedEventPage = () => {
                   {event?.endAt && (
                     <span className={`${styles.metaChip} ${styles.calendar}`}>
                       <Calendar className={styles.calendarImg} />
-                      <span>{formatDateRange(event.startAt, event.endAt)}</span>
+                      <span>
+                        {formatDateRange(
+                          event.startAt,
+                          event.endAt,
+                          i18n.language as "en" | "ua",
+                        )}
+                      </span>
                     </span>
                   )}
                   <span className={`${styles.metaChip} ${styles.roleChip}`}>

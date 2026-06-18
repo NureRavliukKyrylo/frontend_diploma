@@ -15,7 +15,7 @@ import { ModerationSubjectType } from "@entities/report";
 import { useTranslation } from "react-i18next";
 
 export const ProjectPage = () => {
-  const { t } = useTranslation(["project", "common"]);
+  const { t, i18n } = useTranslation(["project", "common"]);
   const { tab, project, policyConfig, forms, handleTabChange } =
     useProjectPage();
 
@@ -45,7 +45,11 @@ export const ProjectPage = () => {
                   <span className={`${styles.metaChip} ${styles.calendar}`}>
                     <Calendar className={styles.calendarImg} />
                     <span>
-                      {formatDateRange(project.startAt, project.endAt)}
+                      {formatDateRange(
+                        project.startAt,
+                        project.endAt,
+                        i18n.language as "en" | "ua",
+                      )}
                     </span>
                   </span>
                 )}

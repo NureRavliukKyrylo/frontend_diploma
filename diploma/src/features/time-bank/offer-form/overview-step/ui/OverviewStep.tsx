@@ -1,6 +1,6 @@
 import { BaseInput, TextAreaForm } from "@shared/ui/inputs";
 import { Switch } from "@shared/ui";
-import { DateRangePicker } from "@heroui/date-picker";
+import { DateRangePicker } from "@heroui/react";
 import {
   today,
   getLocalTimeZone,
@@ -130,7 +130,7 @@ export const OverviewStep = forwardRef<StepRef, OverviewStepProps>(
             <DateRangePicker
               value={dateRangeValue}
               onChange={handleRange}
-              granularity="day"
+              granularity="hour"
               minValue={data ? undefined : today(getLocalTimeZone())}
               isInvalid={false}
               validationBehavior="aria"

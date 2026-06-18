@@ -1,4 +1,4 @@
-import { Skeleton } from "@heroui/skeleton";
+import { Skeleton } from "@heroui/react";
 import baseStyles from "../base/ProjectCardBase.module.scss";
 import styles from "./ProjectControlCard.module.scss";
 

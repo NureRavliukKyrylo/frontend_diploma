@@ -1,4 +1,4 @@
-import { Skeleton } from "@heroui/skeleton";
+import { Skeleton } from "@heroui/react";
 import { UserHeaderWidgetSkeleton } from "@widgets/profile";
 import styles from "./SettingsProfilePage.module.scss";
 

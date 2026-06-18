@@ -1,3 +1,5 @@
+import { LOCALE_MAP } from "@shared/config/constants";
+
 const formatTime = (date: Date, locale: string): string => {
   return new Intl.DateTimeFormat(locale, {
     hour: "numeric",
@@ -21,12 +23,12 @@ const formatDayPart = (
 export const formatDateRange = (
   from: Date | string,
   to: Date | string,
-  locale: string = navigator.language,
+  locale: "en" | "ua",
   withTime: boolean = true,
 ): string => {
   const start = new Date(from);
   const end = new Date(to);
-
+  const localeDate = LOCALE_MAP[locale];
   const sameDay =
     start.getFullYear() === end.getFullYear() &&
     start.getMonth() === end.getMonth() &&
@@ -35,22 +37,22 @@ export const formatDateRange = (
   const sameYear = start.getFullYear() === end.getFullYear();
 
   if (!withTime) {
-    if (sameDay) return formatDayPart(start, locale, true);
+    if (sameDay) return formatDayPart(start, localeDate, true);
     if (sameYear)
-      return `${formatDayPart(start, locale, false)} - ${formatDayPart(end, locale, true)}`;
-    return `${formatDayPart(start, locale, true)} - ${formatDayPart(end, locale, true)}`;
+      return `${formatDayPart(start, localeDate, false)} - ${formatDayPart(end, localeDate, true)}`;
+    return `${formatDayPart(start, localeDate, true)} - ${formatDayPart(end, localeDate, true)}`;
   }
 
-  const startTime = formatTime(start, locale);
-  const endTime = formatTime(end, locale);
+  const startTime = formatTime(start, localeDate);
+  const endTime = formatTime(end, localeDate);
 
   if (sameDay) {
-    return `${formatDayPart(start, locale, true)} ${startTime} - ${endTime}`;
+    return `${formatDayPart(start, localeDate, true)} ${startTime} - ${endTime}`;
   }
 
   if (sameYear) {
-    return `${formatDayPart(start, locale, true)} ${startTime} - ${formatDayPart(end, locale, false)} ${endTime}`;
+    return `${formatDayPart(start, localeDate, true)} ${startTime} - ${formatDayPart(end, localeDate, false)} ${endTime}`;
   }
 
-  return `${formatDayPart(start, locale, true)} ${startTime} - ${formatDayPart(end, locale, true)} ${endTime}`;
+  return `${formatDayPart(start, localeDate, true)} ${startTime} - ${formatDayPart(end, localeDate, true)} ${endTime}`;
 };

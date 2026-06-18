@@ -1,4 +1,4 @@
-import { Skeleton } from "@heroui/skeleton";
+import { Skeleton } from "@heroui/react";
 import styles from "./TaskWidgetJoined.module.scss";
 
 export const TaskWidgetJoinedSkeleton = () => {

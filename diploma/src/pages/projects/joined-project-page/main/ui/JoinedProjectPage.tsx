@@ -10,7 +10,7 @@ import { getJoinedProjectMainTabs } from "../config/joinedProjectMainTabs";
 import { useTranslation } from "react-i18next";
 
 export const JoinedProjectPage = () => {
-  const { t } = useTranslation(["project", "common"]);
+  const { t, i18n } = useTranslation(["project", "common"]);
   const { tab, project, forms, handleTabChange } = useProjectJoinedPage();
 
   const localizedTabs = getJoinedProjectMainTabs(t);
@@ -35,7 +35,11 @@ export const JoinedProjectPage = () => {
                   <span className={`${styles.metaChip} ${styles.calendar}`}>
                     <Calendar className={styles.calendarImg} />
                     <span>
-                      {formatDateRange(project.startAt, project.endAt)}
+                      {formatDateRange(
+                        project.startAt,
+                        project.endAt,
+                        i18n.language as "en" | "ua",
+                      )}
                     </span>
                   </span>
                 )}

@@ -1,10 +1,10 @@
-import { Avatar } from "@heroui/react";
 import styles from "./NotificationItem.module.scss";
 import { NOTIFICATION_TYPE_CONFIG } from "../../config";
 import type { Notification } from "../../model";
 import { formatTimeAgo } from "@shared/libs/date";
 import { OnlineIcon } from "@shared/assets/icons/info";
 import { useTranslation } from "react-i18next";
+import { Avatar } from "@shared/ui";
 
 interface NotificationItemProps {
   notification: Notification;

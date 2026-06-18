@@ -1,4 +1,4 @@
-import { Skeleton } from "@heroui/skeleton";
+import { Skeleton } from "@heroui/react";
 import baseStyles from "../base/FeedbackBase.module.scss";
 import styles from "./FeedbackCard.module.scss";
 
