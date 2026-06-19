@@ -136,6 +136,7 @@
     "leaveSuccessDescription": "You have left {{entity}} successfully.",
     "leaveFailed": "Failed to Leave",
     "approvalRequired": "{{entity}} Approval Required",
+
     "entities": {
       "project": "Project",
       "event": "Event",

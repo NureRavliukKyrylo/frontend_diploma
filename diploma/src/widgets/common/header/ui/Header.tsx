@@ -1,7 +1,6 @@
 import { useLogout } from "@features/auth";
 import { LogOutImage } from "@shared/assets/images/actions";
 import { ConfirmationModal } from "@shared/ui/modals";
-import type { LanguageMenuValue } from "@shared/ui";
 import clsx from "clsx";
 import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -13,16 +12,20 @@ import { HeaderNav } from "./header-nav/HeaderNav";
 import { HeaderNotifications } from "./header-notifications/HeaderNotifications";
 import { HeaderSearch } from "./header-search/HeaderSearch";
 import styles from "./Header.module.scss";
+import { useTranslation } from "react-i18next";
+import { useLocaleStore } from "@shared/config/stores";
 
 export const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [language, setLanguage] = useState<LanguageMenuValue>("en");
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const { handleLogout, isLoading, errorMessage } = useLogout(
     () => setIsLogoutModalOpen(false),
     false,
   );
+  const { i18n } = useTranslation();
+  const locale = useLocaleStore((s) => s.locale);
+  const setLocale = useLocaleStore((s) => s.setLocale);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1023px)");
@@ -89,7 +92,10 @@ export const Header = () => {
           )}
         >
           <HeaderActions />
-          <HeaderLanguageMenu value={language} onChange={setLanguage} />
+          <HeaderLanguageMenu
+            value={locale ?? (i18n.language as "en" | "uk")}
+            onChange={(locale) => setLocale(locale)}
+          />
           <HeaderAccountMenu />
         </div>
         <div className={clsx(styles.mobileRight, "!flex lg:!hidden")}>
@@ -100,9 +106,9 @@ export const Header = () => {
       <HeaderMobileDrawer
         isOpen={isDrawerOpen}
         search={search}
-        language={language}
+        language={locale ?? (i18n.language as "en" | "uk")}
         onSearchChange={setSearch}
-        onLanguageChange={setLanguage}
+        onLanguageChange={(locale) => setLocale(locale)}
         onLogout={() => setIsLogoutModalOpen(true)}
         onClose={() => {
           setIsDrawerOpen(false);

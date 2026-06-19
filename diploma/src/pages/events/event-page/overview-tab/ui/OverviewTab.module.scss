@@ -41,6 +41,14 @@
 
     .goToCategory {
       color: #8c0000;
+      @include respond-to(tablet) {
+        width: 20px;
+        height: 20px;
+      }
+      @include respond-to(mobile) {
+        width: 17px;
+        height: 17px;
+      }
     }
   }
 

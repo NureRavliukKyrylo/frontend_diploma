@@ -21,7 +21,7 @@ export const ParticipationLeaveButton = ({
 }: ParticipationLeaveButtonProps) => {
   const { t, i18n } = useTranslation("common");
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  console.log(i18n.language);
   return (
     <>
       <motion.div
@@ -41,7 +41,7 @@ export const ParticipationLeaveButton = ({
           >
             {t("participation.leave", {
               entity:
-                i18n.language === "ua"
+                i18n.language === "uk"
                   ? t(`participation.entitiesAccusative.${entityType}`)
                   : t(`participation.entities.${entityType}`),
             })}

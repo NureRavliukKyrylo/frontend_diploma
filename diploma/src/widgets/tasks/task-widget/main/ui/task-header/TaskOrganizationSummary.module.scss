@@ -85,15 +85,8 @@
 .ratingTaskInfo {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  gap: 10px;
-
-  @include respond-to(mobile) {
-    gap: 6px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+  align-items: center;
+  flex-direction: column;
 
   h1 {
     color: #8c0000;

@@ -36,7 +36,7 @@ export const EventMetaChips = ({
             {formatDateRange(
               event.startAt,
               event.endAt,
-              i18n.language as "en" | "ua",
+              i18n.language as "en" | "uk",
             )}
           </span>
         </span>

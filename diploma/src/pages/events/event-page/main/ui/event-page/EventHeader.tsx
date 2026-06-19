@@ -10,6 +10,7 @@ import { EventMetaChips } from "./EventMetaChips";
 import { EventParticipation } from "./EventParticipation";
 import { EventStats } from "./EventStats";
 import styles from "../EventPage.module.scss";
+import { ParticipationJoinButton } from "@features/participation";
 
 interface EventHeaderProps {
   event: Event;
@@ -77,7 +78,7 @@ export const EventHeader = ({ event, policyConfig }: EventHeaderProps) => {
         </div>
       </div>
       <EventStats event={event} />
-      <EventParticipation event={event} />
+      <ParticipationJoinButton entityId={event.id} entityType="event" />
     </motion.div>
   );
 };

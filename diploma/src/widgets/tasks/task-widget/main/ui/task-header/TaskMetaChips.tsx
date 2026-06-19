@@ -33,7 +33,7 @@ export const TaskMetaChips = ({ task, policyConfig }: TaskMetaChipsProps) => {
             {formatDateRange(
               task.startAt,
               task.endAt,
-              i18n.language as "en" | "ua",
+              i18n.language as "en" | "uk",
             )}
           </span>
         </span>

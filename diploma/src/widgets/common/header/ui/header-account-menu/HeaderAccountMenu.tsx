@@ -1,4 +1,3 @@
-import { timeBankSummaryQuery } from "@entities/time-bank";
 import { getFullName, useUserStore } from "@entities/user";
 import { profileQuery } from "@entities/user/profile";
 import { useLogout } from "@features/auth";
@@ -29,17 +28,10 @@ export const HeaderAccountMenu = ({
     ...profileQuery.all(),
     enabled: isAuthenticated === true,
   });
-  const { data: timeBankSummary } = useQuery({
-    ...timeBankSummaryQuery.me(),
-    enabled: isAuthenticated === true && isOpen,
-  });
-  const { handleLogout, isLoading, errorMessage } = useLogout(
-    () => {
-      setIsOpen(false);
-      setIsLogoutModalOpen(false);
-    },
-    false,
-  );
+  const { handleLogout, isLoading, errorMessage } = useLogout(() => {
+    setIsOpen(false);
+    setIsLogoutModalOpen(false);
+  }, false);
   const fullName =
     getFullName(user?.firstName, user?.lastName) || user?.email || "Profile";
   const avatarSrc = user?.profile?.avatarUrl ?? DefaultAvatar;
@@ -96,7 +88,7 @@ export const HeaderAccountMenu = ({
           avatarSrc={avatarSrc}
           fullName={fullName}
           email={user?.email ?? "Loading..."}
-          availableMinutes={timeBankSummary?.availableMinutes}
+          availableMinutes={user?.profile?.timeBank.availableMinutes}
           isLogoutLoading={isLoading}
           onProfileClick={() => {
             setIsOpen(false);

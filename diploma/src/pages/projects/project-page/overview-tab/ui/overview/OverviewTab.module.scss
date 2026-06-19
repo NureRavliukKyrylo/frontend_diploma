@@ -46,17 +46,13 @@
       width: 24px;
       height: 24px;
 
-      @include respond-to(laptop) {
+      @include respond-to(tablet) {
         width: 20px;
         height: 20px;
       }
-      @include respond-to(tablet) {
-        width: 16px;
-        height: 16px;
-      }
       @include respond-to(mobile) {
-        width: 14px;
-        height: 14px;
+        width: 17px;
+        height: 17px;
       }
     }
   }

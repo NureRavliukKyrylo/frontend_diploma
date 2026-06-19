@@ -1,4 +1,4 @@
-import { Skeleton } from "@heroui/skeleton";
+import { Skeleton } from "@heroui/react";
 import rootStyles from "./TaskWidget.module.scss";
 import contentStyles from "./TaskWidgetContent.module.scss";
 import skeletonStyles from "./TaskWidgetSkeleton.module.scss";

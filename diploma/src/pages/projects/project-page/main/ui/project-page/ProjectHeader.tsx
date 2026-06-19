@@ -5,9 +5,9 @@ import { ReportButton } from "@features/moderation";
 import { LinkButtonWrapper } from "@shared/ui/buttons";
 import type { useProjectPage } from "../../model/useProjectPage";
 import { ProjectMetaChips } from "./ProjectMetaChips";
-import { ProjectParticipation } from "./ProjectParticipation";
 import { ProjectStats } from "./ProjectStats";
 import styles from "../ProjectPage.module.scss";
+import { ParticipationJoinButton } from "@features/participation";
 
 interface ProjectHeaderProps {
   project: Project;
@@ -56,6 +56,6 @@ export const ProjectHeader = ({
       </div>
     </div>
     <ProjectStats project={project} />
-    <ProjectParticipation project={project} />
+    <ParticipationJoinButton entityId={project.id} entityType="project" />
   </motion.div>
 );

@@ -6,7 +6,8 @@
   },
   "header": {
     "title": "Explore activities that make a difference",
-    "count": "{{count}} activities",
+    "count_one": "{{count}} activity",
+    "count_other": "{{count}} activities",
     "descriptionMain": "Use our interactive world map to explore active and completed volunteer projects — from rebuilding schools and organizing community events to environmental clean-ups and humanitarian aid. Each pin on the map represents real people, real stories, and real change. Find out where help is needed most, learn more about each project, and get involved — locally or across the globe.",
     "mapLinkText": "Map",
     "myActivitiesPrompt": "Want to see the active projects you’ve already joined?",
@@ -28,6 +29,7 @@
   },
   "categories": {
     "detail": {
+      "activitiesCount_one": "{{count}} activity",
       "activitiesCount": "{{count}} activities",
       "allActivities": "All activities",
       "activeActivities": "Active activities",

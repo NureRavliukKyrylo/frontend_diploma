@@ -42,7 +42,7 @@ export const ParticipationJoinButton = ({
         >
           {t("participation.join", {
             entity:
-              i18n.language === "ua"
+              i18n.language === "uk"
                 ? t(`participation.entitiesGenitive.${entityType}`)
                 : t(`participation.entities.${entityType}`),
           })}

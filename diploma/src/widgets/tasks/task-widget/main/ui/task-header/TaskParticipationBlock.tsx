@@ -31,7 +31,9 @@ export const TaskParticipationBlock = ({
         <p className={styles.pendingRequest}>{t("task:states.pendingJoin")}</p>
       ) : null}
 
-      {task.id && !task.hasPendingJoinRequest && !task.hasPendingLeaveRequest ? (
+      {task.id &&
+      !task.hasPendingJoinRequest &&
+      !task.hasPendingLeaveRequest ? (
         <div className={styles.joinTaskBlockButton}>
           {task.isJoined ? (
             <ParticipationLeaveButton
