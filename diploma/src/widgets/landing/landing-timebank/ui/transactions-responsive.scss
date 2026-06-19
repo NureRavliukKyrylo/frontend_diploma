@@ -1,0 +1,81 @@
+
+.progressFill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #6a0000, #840000, #b20000);
+  box-shadow: 0 0 18px rgba(132, 0, 0, 0.35);
+}
+
+.transactions {
+  display: grid;
+  gap: 0;
+  margin-top: 32px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.transactionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 17px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 14px;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.9);
+    transform: translateX(4px);
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  strong {
+    font-weight: 900;
+  }
+}
+
+.positive {
+  color: #34d399;
+}
+
+.negative {
+  color: #ef4444;
+}
+
+@media (max-width: 1023px) {
+  .timeBankSection {
+    padding-right: var(--landing-pad);
+    padding-left: var(--landing-pad);
+  }
+
+  .timeBankInner {
+    grid-template-columns: 1fr;
+    gap: 42px;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .timeBankSection {
+    padding: 72px var(--landing-pad);
+  }
+
+  .balanceCard {
+    padding: 26px 22px;
+  }
+
+  .balanceValue {
+    font-size: 58px;
+  }
+}

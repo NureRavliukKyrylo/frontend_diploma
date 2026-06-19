@@ -110,7 +110,7 @@ export const TaskWidgetJoined = ({
                   transition={{ type: "spring", stiffness: 400, damping: 22 }}
                 >
                   <img
-                    src={task?.organization?.logoUrl}
+                    src={task?.organization?.logoUrl ?? undefined}
                     alt="organization-image"
                   />
                   <p>{task?.organization?.name}</p>

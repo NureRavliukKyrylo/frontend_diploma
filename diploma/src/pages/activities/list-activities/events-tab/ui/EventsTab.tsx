@@ -24,13 +24,25 @@ import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import { useTranslation } from "react-i18next";
+import type { BaseFiltersRoute } from "@shared/config/types";
 
 interface EventsTabProps {
   search: EventSearchParams;
+  from?: BaseFiltersRoute;
+  joinedOnly?: boolean;
+  hideOrganizationFilter?: boolean;
 }
 
-export const EventsTab = ({ search }: EventsTabProps) => {
+export const EventsTab = ({
+  search,
+  from = "/activities/",
+  joinedOnly = false,
+  hideOrganizationFilter = false,
+}: EventsTabProps) => {
   const { t } = useTranslation(["activities", "common"]);
+  const effectiveSearch = joinedOnly
+    ? { ...search, ShowJoined: true }
+    : search;
   const {
     isFilterOpen,
     setIsFilterOpen,
@@ -39,7 +51,7 @@ export const EventsTab = ({ search }: EventsTabProps) => {
     handlePageChange,
     events,
     router,
-  } = useEventsTab(search);
+  } = useEventsTab(effectiveSearch, from, joinedOnly);
 
   return (
     <div className={styles.mainEventsSection}>
@@ -56,17 +68,21 @@ export const EventsTab = ({ search }: EventsTabProps) => {
         <div className={styles.filterEventsWrapper}>
           <div className={styles.filtersInteractions}>
             <ToggleDropdownButton onOpenChange={setIsFilterOpen}>
-              <EventFiltersWidget search={search} />
+              <EventFiltersWidget
+                search={effectiveSearch}
+                from={from}
+                hideOrganizationFilter={hideOrganizationFilter}
+              />
             </ToggleDropdownButton>
             <SearchBar
-              value={search.Search}
+              value={effectiveSearch.Search}
               onChange={handleSearch}
               variant="projects"
             />
             <SortDropDown
               options={getSortingEventItems(t)}
               onSelect={handleSort}
-              value={search.OrderBy ?? "Default"}
+              value={effectiveSearch.OrderBy ?? "Default"}
             />
           </div>
           <motion.div
@@ -91,7 +107,7 @@ export const EventsTab = ({ search }: EventsTabProps) => {
               >
                 <AnimatePresence mode="wait">
                   <motion.div
-                    key={JSON.stringify(search)}
+                    key={JSON.stringify(effectiveSearch)}
                     {...fadeVariants}
                     transition={fadeDuration}
                   >
@@ -116,8 +132,8 @@ export const EventsTab = ({ search }: EventsTabProps) => {
                           <EventCard event={event} />
                         </motion.div>
                       )}
-                      useEventsQuery={useEventsListQuery(search)}
-                    />
+                    useEventsQuery={useEventsListQuery(effectiveSearch)}
+                  />
                   </motion.div>
                 </AnimatePresence>
               </Suspense>
@@ -129,7 +145,7 @@ export const EventsTab = ({ search }: EventsTabProps) => {
           <div className={styles.paginationWrapper}>
             <Pagination
               total={events.pagination.totalPages}
-              page={search.Page}
+              page={effectiveSearch.Page}
               onChange={handlePageChange}
             />
           </div>

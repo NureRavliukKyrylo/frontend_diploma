@@ -1,1 +1,4 @@
-export type BaseFiltersRoute = "/activities/" | "/categories/$id/";
+export type BaseFiltersRoute =
+  | "/activities/"
+  | "/bookmarks/"
+  | "/categories/$id/";

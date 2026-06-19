@@ -1,0 +1,375 @@
+@use "@shared/assets/styles" as *;
+
+.dividerFilterBlock {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.subHeaderFilter {
+  @include font-base(20px, 700);
+}
+
+.sectionHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.activeBadge {
+  @include font-base(12px, 700);
+  color: #8c0000;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(140, 0, 0, 0.16);
+  background: rgba(140, 0, 0, 0.08);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.filterSectionActive {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(140, 0, 0, 0.045) 0%,
+      rgba(140, 0, 0, 0.012) 100%
+    );
+  box-shadow: inset 3px 0 0 rgba(140, 0, 0, 0.65);
+}
+
+.projectDeadLine {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 25px 20px 20px 20px;
+}
+
+.projectRating {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px 20px 30px 20px;
+}
+
+.projectCategories {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 30px 20px;
+  gap: 15px;
+}
+
+.projectOrganizations {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 30px 20px;
+  gap: 15px;
+}
+
+.projectDistance {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 30px 20px;
+  gap: 15px;
+}
+
+.moreOptions {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 30px 20px;
+  gap: 15px;
+}
+
+.buttonClear {
+  padding: 30px;
+
+  .animationButtonBlock {
+    display: flex;
+    justify-content: center;
+    @include font-base(20px, 900);
+    color: #000000;
+    background: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    align-items: center;
+
+    .clearFiltersButton {
+      padding: 15px 30px;
+      width: 100%;
+    }
+  }
+}
+
+.scrollableProjectsFilters {
+  max-height: 730px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+  }
+}
+
+.deadlineCalendarBlock {
+  display: flex;
+  justify-content: space-between;
+
+  > :first-child {
+    width: 48%;
+  }
+
+  > :last-child {
+    width: 48%;
+  }
+}
+
+.singleDateField {
+  width: 100% !important;
+}
+
+.startDate,
+.dueDate {
+  h4 {
+    color: rgba(0, 0, 0, 0.5);
+    @include font-base(15px, 500);
+  }
+}
+
+.dateStartInput,
+.dateDueInput {
+  border-radius: 10px;
+}
+
+.ratingBlock {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .valueRating {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    padding: 5px 8px;
+    width: 100%;
+
+    .starReview {
+      width: 20px;
+      height: 20px;
+    }
+
+    .starReviewValue {
+      @include font-base(20px, 900);
+    }
+  }
+}
+
+.categoriesInfinite {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .categoriesListFilter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .categoryTabWrapper {
+      display: flex;
+    }
+  }
+}
+
+.taskStateButton {
+  border-radius: 999px;
+  padding: 10px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  background: rgba(255, 255, 255, 0.96);
+  color: rgba(0, 0, 0, 0.72);
+  @include font-base(16px, 700);
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    border-color: rgba(140, 0, 0, 0.22);
+  }
+}
+
+.taskStateButtonActive {
+  color: #000000;
+  background: rgba(140, 0, 0, 0.08);
+  border-color: rgba(140, 0, 0, 0.2);
+}
+
+.organizationsInfinite {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .organizationsListFilter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .organizationTabWrapper {
+      display: flex;
+    }
+  }
+}
+
+.showMoreButton {
+  @include font-base(16px, 600);
+  color: #8c0000;
+  align-self: flex-end;
+}
+
+.locationSuggestionsWrapper {
+  .locationWrapper {
+    background: #f0f0f0;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 40px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &.open {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px 10px 0px 0px;
+    }
+
+    .locationInputWrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+
+      .mapIcon {
+        svg {
+          width: 22px;
+          height: 22px;
+        }
+      }
+
+      .locationInput {
+        @include font-base(18px, 500);
+        color: #000000;
+        outline: none;
+        width: 100%;
+
+        &::placeholder {
+          @include font-base(18px, 500);
+        }
+      }
+    }
+
+    .radiusInputWrapper {
+      display: flex;
+      gap: 10px;
+
+      .dividerLocationInput {
+        border-left: 1px solid rgba(0, 0, 0, 0.2);
+        transform: scaleX(1.5);
+      }
+
+      .kmInfoRadius {
+        display: flex;
+
+        .radiusPrefix,
+        .radiusSuffix {
+          @include font-base(18px, 700);
+          color: #8c0000;
+          pointer-events: none;
+        }
+
+        .radiusInput {
+          outline: none;
+          -moz-appearance: textfield;
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+
+          @include font-base(18px, 700);
+          color: #8c0000;
+        }
+      }
+    }
+  }
+
+  .locationDropdown {
+    background: #f0f0f0;
+    border-radius: 0 0 10px 10px;
+    overflow-y: auto;
+    max-height: 200px;
+
+    .locationDropdownInfo {
+      @include font-base(15px, 700);
+      padding: 10px;
+    }
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 4px;
+    }
+
+    li {
+      @include font-base(15px, 700);
+      color: #000;
+      padding: 10px;
+      cursor: pointer;
+      list-style: none;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+}
+
+.wrapperMoreOptionsFilter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .completedProject,
+  .joinedProject {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .titleFilterMoreOptions {
+    @include font-base(18px, 500);
+    color: rgba(0, 0, 0, 0.7);
+  }
+}

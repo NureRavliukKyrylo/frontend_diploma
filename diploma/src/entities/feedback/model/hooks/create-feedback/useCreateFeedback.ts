@@ -9,7 +9,7 @@ import { feedbackQueryKeyMap } from "../../../config";
 import { useTranslation } from "react-i18next";
 
 interface UseCreateFeedbackOptions {
-  entityType: Exclude<EntityType, "organization">;
+  entityType: EntityType;
   entityId: string;
   onSuccess?: () => void;
 }

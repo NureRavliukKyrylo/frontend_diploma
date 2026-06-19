@@ -1,0 +1,115 @@
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid #ebebeb;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  padding: 20px 28px;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.backButton {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: #f5f5f5;
+  color: #555555;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.orgLogo {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #1a1a1a;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+  font-size: 13px;
+  font-weight: 900;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.verticalLine {
+  width: 1px;
+  height: 32px;
+  flex-shrink: 0;
+  background: #ebebeb;
+}
+
+.titleCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.organizationCaption {
+  color: #aaaaaa;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pageTitle {
+  margin: 0;
+  color: #8b0000;
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.newRoleButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  border-radius: 999px;
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 12px 18px;
+  font-family: "Exo 2", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #8b0000;
+  }
+}
+
+@media (max-width: 980px) {
+  .topBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 720px) {
+  .titleGroup {
+    width: 100%;
+  }
+}

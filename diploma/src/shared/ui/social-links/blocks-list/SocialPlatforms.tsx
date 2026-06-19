@@ -22,9 +22,7 @@ export const SocialPlatforms = ({
   const privacyLinks = socialPlatforms.reduce<
     { platform: SocialPlatform; url: string }[]
   >((acc, { platform, fieldName }) => {
-    console.log(platform);
     const found = links?.find((field) => field.platform == platform);
-    console.log("found", found);
     const privacy = privacySettings?.fields?.find(
       (field) => field.fieldName === fieldName,
     );
@@ -32,7 +30,6 @@ export const SocialPlatforms = ({
     if (found && privacy?.visibility !== "private") {
       acc.push({ platform: found.platform, url: found.url });
     }
-    console.log(acc);
     return acc;
   }, []);
 

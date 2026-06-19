@@ -3,30 +3,20 @@
 @use "@shared/assets/styles" as animation;
 
 .headerSignUp {
-  margin-bottom: 10px;
-
-  h1 {
+  .title {
     all: unset;
-    @include font-base(30px, 900);
+    display: block;
+    @include font-base(26px, 900);
     color: #000000;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
   }
 
-  @include adaptive.respond-to(laptop) {
-    h1 {
-      @include font-base(28px, 900);
-    }
-  }
-
-  @include adaptive.respond-to(tablet) {
-    h1 {
-      @include font-base(26px, 900);
-    }
-  }
-
-  @include adaptive.respond-to(mobile) {
-    h1 {
-      @include font-base(22px, 800);
-    }
+  .subtitle {
+    margin: 0 0 20px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #999;
   }
 }
 
@@ -58,10 +48,15 @@
     color: rgba(0, 0, 0, 0.6);
     @include font-base(15px, 500);
 
-    span {
+    .termsLink {
+      color: #840000;
       text-decoration: underline;
-      @include font-base(15px, 900);
+      @include font-base(15px, 700);
       text-underline-offset: 3px;
+
+      &:hover {
+        color: #6a0000;
+      }
     }
   }
 
@@ -85,17 +80,13 @@
       gap: 3px;
       @include font-base(11px, 500);
 
-      span {
+      .termsLink {
         @include font-base(12px, 700);
       }
     }
 
     .buttonBlock {
       margin-bottom: 10px;
-    }
-
-    .headerSignUp h1 {
-      @include font-base(22px, 800);
     }
   }
 
@@ -113,19 +104,9 @@
     .agreement {
       @include font-base(14px, 500);
 
-      span {
-        @include font-base(15px, 900);
+      .termsLink {
+        @include font-base(15px, 700);
       }
-    }
-
-    .headerSignUp h1 {
-      @include font-base(26px, 900);
-    }
-  }
-
-  @include adaptive.respond-to(laptop) {
-    .headerSignUp h1 {
-      @include font-base(28px, 900);
     }
   }
 }

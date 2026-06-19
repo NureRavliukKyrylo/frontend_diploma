@@ -1,0 +1,17 @@
+@import "../../../projects/create/ui/CreateProjectPage.module.scss";
+
+.stepItemDone {
+  .stepCircle {
+    background: linear-gradient(135deg, #2a2a2a 0%, #888888 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+
+    svg {
+      filter: none;
+    }
+  }
+
+  .stepConnector {
+    background: linear-gradient(180deg, #2a2a2a, #bbbbbb);
+  }
+}

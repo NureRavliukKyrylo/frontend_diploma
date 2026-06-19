@@ -1,5 +1,6 @@
 import { DatePicker } from "@heroui/react";
-import { parseDate } from "@internationalized/date";
+import { I18nProvider } from "@react-aria/i18n";
+import { parseDate, parseDateTime } from "@internationalized/date";
 import type { ComponentProps } from "react";
 
 interface DatePickerInputProps extends Omit<
@@ -25,7 +26,7 @@ export const DatePickerInput = ({
   const parsedValue = (() => {
     if (!value) return undefined;
     try {
-      return parseDate(value);
+      return value.includes("T") ? parseDateTime(value) : parseDate(value);
     } catch (e) {
       console.error("Invalid date format:", e);
       return undefined;
@@ -36,40 +37,42 @@ export const DatePickerInput = ({
 
   return (
     <>
-      <DatePicker
-        aria-label="date-picker"
-        label={label}
-        value={parsedValue}
-        isInvalid={isInvalid}
-        showMonthAndYearPickers={showMonthAndYearPickers}
-        onChange={(val) => onChange?.(val ? val.toString() : undefined)}
-        classNames={{
-          base: `h-full rounded-[inherit] border ${
-            isInvalid ? "border-[#DC2626]" : "border-[#ccc]"
-          } ${externalClassNames?.base ?? ""}`,
+      <I18nProvider>
+        <DatePicker
+          aria-label="date-picker"
+          label={label}
+          value={parsedValue}
+          isInvalid={isInvalid}
+          showMonthAndYearPickers={showMonthAndYearPickers}
+          onChange={(val) => onChange?.(val ? val.toString() : undefined)}
+          classNames={{
+            base: `h-full rounded-[inherit] border ${
+              isInvalid ? "border-[#DC2626]" : "border-[#ccc]"
+            } ${externalClassNames?.base ?? ""}`,
 
-          inputWrapper: `w-full h-full rounded-[inherit] shadow-none border-none ${
-            isInvalid
-              ? "!bg-red-50 data-[hover=true]:!bg-red-50 data-[focus=true]:!bg-red-50 data-[focus-within=true]:!bg-red-50"
-              : parsedValue
-                ? "!bg-white data-[hover=true]:!bg-white data-[focus=true]:!bg-white data-[focus-within=true]:!bg-white"
-                : "!bg-[#f9f9f9] data-[hover=true]:!bg-[#f9f9f9] data-[focus=true]:!bg-[#f9f9f9]"
-          } ${externalClassNames?.inputWrapper ?? ""}`,
-          input: `${isInvalid ? "!text-[#DC2626]" : "text-gray-800"} text-[14px] sm:text-[15px] md:text-[16px] lp:text-[18px] font-[500] ${externalClassNames?.input ?? ""}`,
-          segment: `${isInvalid ? "!text-[#DC2626]" : ""} ${externalClassNames?.segment ?? ""}`,
-          selectorIcon: `${
-            isInvalid ? "text-[#DC2626]" : "text-gray-600"
-          } text-base sm:text-lg md:text-xl ${externalClassNames?.selectorIcon ?? ""}`,
-          errorMessage: `text-[#DC2626] ${externalClassNames?.errorMessage ?? ""}`,
-          calendar: "!overflow-hidden [&>*]:!overflow-hidden",
-        }}
-        calendarProps={{
-          classNames: {
-            base: "!overflow-hidden border-[#ccc]",
-          },
-        }}
-        {...rest}
-      />
+            inputWrapper: `w-full h-full rounded-[inherit] shadow-none border-none ${
+              isInvalid
+                ? "!bg-red-50 data-[hover=true]:!bg-red-50 data-[focus=true]:!bg-red-50 data-[focus-within=true]:!bg-red-50"
+                : parsedValue
+                  ? "!bg-white data-[hover=true]:!bg-white data-[focus=true]:!bg-white data-[focus-within=true]:!bg-white"
+                  : "!bg-[#f9f9f9] data-[hover=true]:!bg-[#f9f9f9] data-[focus=true]:!bg-[#f9f9f9]"
+            } ${externalClassNames?.inputWrapper ?? ""}`,
+            input: `${isInvalid ? "!text-[#DC2626]" : "text-gray-800"} text-[14px] sm:text-[15px] md:text-[16px] lp:text-[18px] font-[500] ${externalClassNames?.input ?? ""}`,
+            segment: `${isInvalid ? "!text-[#DC2626]" : ""} ${externalClassNames?.segment ?? ""}`,
+            selectorIcon: `${
+              isInvalid ? "text-[#DC2626]" : "text-gray-600"
+            } text-base sm:text-lg md:text-xl ${externalClassNames?.selectorIcon ?? ""}`,
+            errorMessage: `text-[#DC2626] ${externalClassNames?.errorMessage ?? ""}`,
+            calendar: "!overflow-hidden [&>*]:!overflow-hidden",
+          }}
+          calendarProps={{
+            classNames: {
+              base: "!overflow-hidden border-[#ccc]",
+            },
+          }}
+          {...rest}
+        />
+      </I18nProvider>
       {submit && error && <div className="errorInput">{error}</div>}
     </>
   );

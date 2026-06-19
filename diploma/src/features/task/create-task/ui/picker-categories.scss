@@ -1,0 +1,125 @@
+
+.datePickerText,
+.datePickerSegment {
+  color: #1a1a1a !important;
+  font-family: "Exo 2", sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+.datePickerSegment[data-placeholder="true"] {
+  color: #c5c5c5 !important;
+  font-weight: 500 !important;
+}
+
+.datePickerIcon {
+  width: 18px !important;
+  height: 18px !important;
+  color: #1a1a1a !important;
+}
+
+.datePickerCalendar,
+.dateTimePopover {
+  overflow: hidden;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+}
+
+.datePickerCalendar {
+  :global([data-selected="true"]) {
+    background: #840000 !important;
+    color: #ffffff !important;
+  }
+
+  :global([data-today="true"]) {
+    border-color: #840000 !important;
+  }
+}
+
+.dateTimePopover {
+  :global([data-slot="time-input"]) {
+    padding: 12px 16px 16px;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  :global([data-slot="input-wrapper"]) {
+    border-radius: 10px;
+    background: #f4f4f4;
+  }
+
+  :global([data-segment]) {
+    color: #1a1a1a;
+    font-family: "Exo 2", sans-serif;
+    font-weight: 600;
+  }
+}
+
+.categoriesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.categoryChip {
+  border: 1.8px solid #ededed;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #1a1a1a;
+  padding: 9px 16px;
+  font-family: "Exo 2", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    border-color: #dddddd;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.42;
+  }
+}
+
+.categoryChipSelected {
+  border-color: #840000;
+  background: #840000;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(132, 0, 0, 0.22);
+}
+
+.categoryLoading,
+.categoryError {
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999999;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.categoryError {
+  color: #c0392b;
+}
+
+.policyCard {
+  min-width: 0;
+  border: 2px solid #ededed;
+  border-radius: 16px;
+  background: #ffffff;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #dddddd;
+  }
+}

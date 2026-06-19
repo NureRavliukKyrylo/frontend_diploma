@@ -1,4 +1,15 @@
-import { locationSchema } from "@features/time-bank/offer-form/location-step/libs/locationSchema";
+import type { TFunction } from "i18next";
+import { getLocationSchema } from "@features/time-bank/offer-form/location-step/libs/locationSchema";
+
+const t = ((key: string) => {
+  const messages: Record<string, string> = {
+    "timeBank:validation.locationRequired": "Please pick a location on the map",
+  };
+
+  return messages[key] ?? key;
+}) as TFunction;
+
+const locationSchema = getLocationSchema(t);
 
 describe("locationSchema", () => {
   it("passes with valid coordinates", async () => {

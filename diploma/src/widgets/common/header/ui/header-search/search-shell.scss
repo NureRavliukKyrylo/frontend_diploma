@@ -1,0 +1,130 @@
+@use "@shared/assets/styles" as *;
+
+.searchBarBlock,
+.drawerSearchForm {
+  position: relative;
+  z-index: 9999;
+}
+
+.searchBarBlock {
+  flex: 0 0 239px;
+  height: 42px;
+  transition: flex-basis 0.18s ease;
+}
+
+.searchInput,
+.drawerSearchInput {
+  @include font-base(15px, 500, "Exo 2");
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #000000;
+  box-sizing: border-box;
+  outline: none;
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.55);
+  }
+}
+
+.searchInput {
+  padding: 0 42px 0 16px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.searchButton,
+.drawerSearchButton {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #000000;
+  transform: translateY(-50%);
+  cursor: pointer;
+  outline: none;
+}
+
+.searchIcon {
+  width: 18px;
+  height: 18px;
+  color: #000000;
+  opacity: 0.72;
+}
+
+.searchDropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  z-index: 9999;
+  width: 430px;
+  max-width: calc(100vw - 32px);
+  max-height: 540px;
+  padding: 17px 0 11px;
+  border: 1px solid #f5f5f5;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.14),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  overflow: hidden;
+  transform-origin: top left;
+  font-family: "Exo 2", sans-serif;
+}
+
+.searchDropdownHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 24px 13px;
+
+  span {
+    font-family: "Exo 2", sans-serif;
+    letter-spacing: 0.08em;
+  }
+
+  & > span:first-child {
+    @include font-base(11px, 400);
+    color: #666666;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+}
+
+.searchCount {
+  @include font-base(12px, 500);
+  color: #666666;
+  line-height: 1;
+}
+
+.searchResultsList {
+  display: flex;
+  flex-direction: column;
+  max-height: 470px;
+  overflow-y: auto;
+  padding: 0 10px 6px 0;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: #d6d6d6;
+  }
+}

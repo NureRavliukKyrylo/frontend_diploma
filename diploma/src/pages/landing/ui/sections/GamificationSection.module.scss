@@ -1,0 +1,121 @@
+.gamificationSection {
+  position: relative;
+  z-index: 2;
+  padding: 96px var(--landing-pad);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: #ffffff;
+}
+
+.sectionHeader {
+  width: min(100%, 860px);
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.sectionTag {
+  margin: 0 0 14px;
+  color: #840000;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+.sectionHeader h2 {
+  margin: 0;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -1.2px;
+}
+
+.gamificationGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+  width: min(100%, 1080px);
+  margin: 0 auto;
+}
+
+.gamificationCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 230px;
+  padding: 34px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.gamificationCard::after {
+  position: absolute;
+  right: 28px;
+  bottom: 0;
+  left: 28px;
+  height: 2px;
+  border-radius: 999px 999px 0 0;
+  background: #840000;
+  content: "";
+  opacity: 0;
+  transform: scaleX(0.35);
+  transform-origin: center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.gamificationCard:hover {
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.gamificationCard:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.gamificationCard svg {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 24px;
+  color: #840000;
+}
+
+.gamificationCard h3 {
+  position: relative;
+  margin: 0;
+  color: #000000;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.gamificationCard p {
+  position: relative;
+  margin: 16px 0 0;
+  color: #666666;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 1023px) {
+  .gamificationGrid {
+    grid-template-columns: 1fr;
+    max-width: 620px;
+  }
+}
+
+@media (max-width: 767px) {
+  .gamificationSection {
+    padding: 72px var(--landing-pad);
+  }
+
+  .sectionHeader {
+    margin-bottom: 30px;
+  }
+}

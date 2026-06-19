@@ -1,0 +1,1 @@
+export { OrganizationDetailsProjectsPanel } from "./Panel";

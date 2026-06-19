@@ -20,7 +20,8 @@ export const SignUpForm = () => {
   return (
     <>
       <div className={styles.headerSignUp}>
-        <h1>{t("register.title")}</h1>
+        <h1 className={styles.title}>{t("register.title")}</h1>
+        <p className={styles.subtitle}>{t("register.subtitle")}</p>
       </div>
       <form onSubmit={formik.handleSubmit} className={styles.signUpForm}>
         <div className={styles.inputsSignUp}>
@@ -89,7 +90,9 @@ export const SignUpForm = () => {
             error={formik.submitCount > 0 ? formik.errors.agreement : ""}
           >
             {t("register.agreementText")}{" "}
-            <span>{t("register.agreementLink")}</span>
+            <span className={styles.termsLink}>
+              {t("register.agreementLink")}
+            </span>
           </Checkbox>
         </div>
         <div className={styles.buttonBlock}>

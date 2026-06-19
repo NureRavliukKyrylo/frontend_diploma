@@ -1,0 +1,116 @@
+.stepperContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding-top: 10px;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 0;
+}
+
+.stepperWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  max-width: 320px;
+  text-align: center;
+}
+
+.step {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 900;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  font-family: "Exo 2", sans-serif;
+}
+
+.step svg {
+  width: 24px;
+  height: 24px;
+}
+
+.stepActive {
+  background: linear-gradient(135deg, #840000, #1a0000);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(132, 0, 0, 0.3);
+}
+
+.stepDone {
+  background: linear-gradient(135deg, #2a2a2a 0%, #888888 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.stepPending {
+  background: #ffffff;
+  color: #bbbbbb;
+  border: 2px solid #eeeeee;
+}
+
+.stepLine {
+  width: 58px;
+  height: 3px;
+  background: #eeeeee;
+}
+
+.stepLineDone {
+  background: linear-gradient(90deg, #2a2a2a, #bbbbbb);
+}
+
+.stepLineActive {
+  background: linear-gradient(90deg, #840000, #eeeeee);
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.eyebrowText {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #840000, #b33a3a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  white-space: nowrap;
+}
+
+.stepperSub {
+  font-size: 17px;
+  color: #999999;
+  line-height: 1.4;
+  max-width: 280px;
+  text-align: center;
+  margin-top: 0;
+}
+
+@media (max-width: 600px) {
+  .step {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .stepLine {
+    width: clamp(28px, 10vw, 48px);
+  }
+}

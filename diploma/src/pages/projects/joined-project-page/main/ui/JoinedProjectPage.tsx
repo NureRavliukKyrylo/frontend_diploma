@@ -61,7 +61,7 @@ export const JoinedProjectPage = () => {
                   className={styles.organizationInfo}
                 >
                   <img
-                    src={project?.organization?.logoUrl}
+                    src={project?.organization?.logoUrl ?? undefined}
                     alt="organization-image"
                   />
                   <p>{project?.organization?.name}</p>
@@ -88,7 +88,6 @@ export const JoinedProjectPage = () => {
         <div className={styles.statsJoinedProjectInfo}>
           <div className={styles.headerLevelBar}>
             <span className={styles.current}>
-              {/* Uses your common level layout now */}
               {t("common:level.current", {
                 level: project.progress.level ?? 0,
               })}

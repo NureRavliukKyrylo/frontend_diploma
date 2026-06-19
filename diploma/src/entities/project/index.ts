@@ -18,6 +18,15 @@ export { ListProjectCardSkeleton } from "./ui/list-card/ListProjectCardSkeleton"
 export { ProjectClusterIcon } from "./ui/project-marker/ProjectCluster";
 export { ProjectPopupContent } from "./ui/pop-up-content/ProjectPopUpContent";
 export type { ProjectsResponse } from "./api/list-projects/projectsApi";
+export {
+  archiveProject,
+  recoverProject,
+  updateProject,
+  type ProjectActionResponse,
+  type UpdateProjectLocation,
+  type UpdateProjectPayload,
+  type UpdateProjectResponse,
+} from "./api";
 export { useProjectsListQuery } from "./model/hooks/useProjectsListQuery";
 export { useProjectsMapQuery } from "./model/hooks/useProjectsMapQuery";
 export { ProjectMarkerAnimated } from "./ui/project-marker/ProjectMarker";

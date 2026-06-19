@@ -1,0 +1,1 @@
+export { OrganizationDetailsInfoPanel } from "./Panel";

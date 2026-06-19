@@ -1,14 +1,26 @@
-import type { SocialLink } from "@shared/config/types";
-import {
-  LinkedIn,
-  GitHub,
-  TwitterIcon,
-  InstagramIcon,
-} from "@shared/assets/icons/brands";
+import type { ElementType } from "react";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import XIcon from "@mui/icons-material/X";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
-export const socialLinks: SocialLink[] = [
-  { logo: GitHub, href: "https://github.com/yourname" },
-  { logo: TwitterIcon, href: "https://twitter.com/yourname" },
-  { logo: LinkedIn, href: "https://linkedin.com/in/yourname" },
-  { logo: InstagramIcon, href: "https://instagram.com/yourname" },
+export interface FooterSocialLink {
+  Icon: ElementType;
+  href: string;
+  label: string;
+}
+
+export const socialLinks: FooterSocialLink[] = [
+  { Icon: GitHubIcon, href: "https://github.com/yourname", label: "GitHub" },
+  { Icon: XIcon, href: "https://twitter.com/yourname", label: "X" },
+  {
+    Icon: LinkedInIcon,
+    href: "https://linkedin.com/in/yourname",
+    label: "LinkedIn",
+  },
+  {
+    Icon: InstagramIcon,
+    href: "https://instagram.com/yourname",
+    label: "Instagram",
+  },
 ];

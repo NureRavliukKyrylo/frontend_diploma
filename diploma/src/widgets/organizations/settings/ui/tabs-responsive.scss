@@ -1,0 +1,87 @@
+
+.tabSwitcher {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 5px;
+  margin-bottom: 20px;
+  border-radius: 999px;
+  border: 1px solid #e8e8e8;
+  background: #ffffff;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.06);
+}
+
+.tabButton {
+  position: relative;
+  min-height: 38px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: #888888;
+  padding: 9px 22px;
+  font-family: "Exo 2", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s ease;
+
+  > span:not(.tabPill) {
+    position: relative;
+    z-index: 1;
+  }
+
+  &:hover {
+    color: #1a1a1a;
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.tabButtonActive {
+  color: #ffffff;
+
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.tabPill {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: #1a1a1a;
+}
+
+@media (max-width: 1180px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .orgCard {
+    max-width: 344px;
+  }
+}
+
+@media (max-width: 680px) {
+  .topBar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .topActions {
+    width: 100%;
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .tabSwitcher {
+    width: 100%;
+    overflow-x: auto;
+  }
+}

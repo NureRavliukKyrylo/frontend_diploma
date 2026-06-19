@@ -1,0 +1,17 @@
+.page {
+  background: #f4f4f4;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px 24px 40px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 76px 16px 28px;
+  }
+}

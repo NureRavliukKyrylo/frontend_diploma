@@ -6,7 +6,9 @@ import { useLocaleStore } from "@shared/config/stores";
 
 interface IndexLayoutProps {
   children: ReactNode;
+  showHeader?: boolean;
   showFooter?: boolean;
+  noFooterVariant?: "content" | "fullscreen";
 }
 
 export const LangSwitcher = () => {
@@ -15,14 +17,36 @@ export const LangSwitcher = () => {
 
   const toggle = () => setLocale(locale === "en" ? "ua" : "en");
 
-  return <button onClick={toggle}>{locale === "en" ? "UA" : "EN"}</button>;
+  return (
+    <button className={styles.langSwitcher} onClick={toggle}>
+      {locale === "en" ? "UA" : "EN"}
+    </button>
+  );
 };
 
-export function IndexLayout({ children, showFooter = true }: IndexLayoutProps) {
+export function IndexLayout({
+  children,
+  showHeader = true,
+  showFooter = true,
+  noFooterVariant = "content",
+}: IndexLayoutProps) {
+  const isChromeless = !showHeader && !showFooter;
+  const isFooterless = showHeader && !showFooter;
+  const noFooterMode = isFooterless ? noFooterVariant : undefined;
+
   return (
-    <div className={styles.pageHeaderWrapper}>
+    <div className={styles.pageHeaderWrapper} data-no-footer-mode={noFooterMode}>
       <LangSwitcher />
-      <main className={styles.layoutMain}>{children}</main>
+      {showHeader ? <Header /> : null}
+      <main
+        className={styles.layoutMain}
+        data-chromeless={isChromeless}
+        data-no-footer={isFooterless}
+        data-no-footer-mode={noFooterMode}
+      >
+        {children}
+      </main>
+      {showFooter ? <Footer /> : null}
       <NotificationToast />
     </div>
   );

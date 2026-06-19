@@ -19,9 +19,11 @@ import { motion } from "framer-motion";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
+type FeedbackEntityType = Exclude<EntityType, "organization">;
+
 interface JoinedFeedbackTabProps {
   entityId: string;
-  entityType: Exclude<EntityType, "organization">;
+  entityType: FeedbackEntityType;
   canSubmitFeedback: boolean;
 }
 

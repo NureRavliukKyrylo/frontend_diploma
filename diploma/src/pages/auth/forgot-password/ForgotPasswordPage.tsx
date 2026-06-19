@@ -7,6 +7,7 @@ export function ForgotPasswordPage() {
 
   return (
     <AdditionalWrapper
+      eyebrow={t("forgotPassword.eyebrow")}
       title={t("forgotPassword.pageTitle")}
       description={t("forgotPassword.pageDescription")}
     >

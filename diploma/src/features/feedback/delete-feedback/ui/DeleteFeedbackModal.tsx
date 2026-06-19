@@ -6,7 +6,7 @@ import { useDeleteFeedback } from "@entities/feedback";
 import { useTranslation } from "react-i18next";
 
 interface DeleteFeedbackModalProps {
-  entityType: Exclude<EntityType, "organization">;
+  entityType: EntityType;
   entityId: string;
   feedbackId: string;
   isOpen: boolean;

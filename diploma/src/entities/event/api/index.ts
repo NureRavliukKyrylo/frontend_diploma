@@ -6,3 +6,14 @@ export {
   type EventAttendanceSearchParams,
 } from "./list-attendances/eventAttendancesListApi";
 export { getEventJoinedId } from "./event-id/eventJoinedApi";
+export {
+  updateEvent,
+  type UpdateEventLocation,
+  type UpdateEventPayload,
+  type UpdateEventResponse,
+  type UpdateEventSkillRequirement,
+} from "./update-event/updateEventApi";
+export {
+  cancelEvent,
+  type CancelEventResponse,
+} from "./cancel-event/cancelEventApi";

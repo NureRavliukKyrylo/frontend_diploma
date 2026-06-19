@@ -24,14 +24,25 @@ import { Pagination } from "@shared/ui";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import { useTranslation } from "react-i18next";
+import type { BaseFiltersRoute } from "@shared/config/types";
 
 interface ProjectsTabProps {
   search: ProjectSearchParams;
+  from?: BaseFiltersRoute;
+  joinedOnly?: boolean;
+  hideOrganizationFilter?: boolean;
 }
 
-export const ProjectsTab = ({ search }: ProjectsTabProps) => {
+export const ProjectsTab = ({
+  search,
+  from = "/activities/",
+  joinedOnly = false,
+  hideOrganizationFilter = false,
+}: ProjectsTabProps) => {
   const { t } = useTranslation(["activities", "common"]);
-
+  const effectiveSearch = joinedOnly
+    ? { ...search, ShowJoined: true }
+    : search;
   const {
     isFilterOpen,
     setIsFilterOpen,
@@ -40,7 +51,7 @@ export const ProjectsTab = ({ search }: ProjectsTabProps) => {
     handlePageChange,
     projects,
     router,
-  } = useProjectsTab(search);
+  } = useProjectsTab(effectiveSearch, from, joinedOnly);
 
   return (
     <div className={styles.mainProjectsSection}>
@@ -57,17 +68,21 @@ export const ProjectsTab = ({ search }: ProjectsTabProps) => {
         <div className={styles.filterProjectsWrapper}>
           <div className={styles.filtersInteractions}>
             <ToggleDropdownButton onOpenChange={setIsFilterOpen}>
-              <ProjectFiltersWidget search={search} />
+              <ProjectFiltersWidget
+                search={effectiveSearch}
+                from={from}
+                hideOrganizationFilter={hideOrganizationFilter}
+              />
             </ToggleDropdownButton>
             <SearchBar
-              value={search.Search}
+              value={effectiveSearch.Search}
               onChange={handleSearch}
               variant="projects"
             />
             <SortDropDown
               options={getSortingProjectItems(t)}
               onSelect={handleSort}
-              value={search.OrderBy ?? "Default"}
+              value={effectiveSearch.OrderBy ?? "Default"}
             />
           </div>
 
@@ -93,7 +108,7 @@ export const ProjectsTab = ({ search }: ProjectsTabProps) => {
               >
                 <AnimatePresence mode="wait">
                   <motion.div
-                    key={JSON.stringify(search)}
+                    key={JSON.stringify(effectiveSearch)}
                     {...fadeVariants}
                     transition={fadeDuration}
                   >
@@ -117,7 +132,7 @@ export const ProjectsTab = ({ search }: ProjectsTabProps) => {
                           <ProjectCard project={project} />
                         </motion.div>
                       )}
-                      useProjectsQuery={useProjectsListQuery(search)}
+                      useProjectsQuery={useProjectsListQuery(effectiveSearch)}
                     />
                   </motion.div>
                 </AnimatePresence>
@@ -130,7 +145,7 @@ export const ProjectsTab = ({ search }: ProjectsTabProps) => {
           <div className={styles.paginationWrapper}>
             <Pagination
               total={projects.pagination.totalPages}
-              page={search.Page}
+              page={effectiveSearch.Page}
               onChange={handlePageChange}
             />
           </div>

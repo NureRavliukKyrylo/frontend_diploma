@@ -68,6 +68,7 @@ export const ActivityTasksTab = ({
             taskMode={taskMode}
             handleModeChange={handleModeChange}
             handleSort={handleSortChange}
+            onClose={closeTask}
           />
         )}
       </div>

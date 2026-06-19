@@ -31,3 +31,5 @@ export { default as DeactivateIcon } from "./deactivate.svg?react";
 export { default as FilterIcon } from "./filter.svg?react";
 export { default as MentionIcon } from "./mention.svg?react";
 export { default as RequestIcon } from "./request.svg?react";
+export { default as ShareVariant } from "./share-variant.png";
+export { default as CompanyIcon } from "./free-icon-company-5355565.png";

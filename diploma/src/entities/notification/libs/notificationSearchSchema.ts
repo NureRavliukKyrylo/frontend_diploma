@@ -41,6 +41,13 @@ export const notificationTypeValues = [
   "TaskDeadlineSoon",
   "TaskOverdue",
   "TaskCompletedLate",
+  "TimeSpendBookingRequested",
+  "TimeSpendBookingApproved",
+  "TimeSpendBookingRejected",
+  "TimeSpendBookingCancelled",
+  "TimeSpendCompletionRequested",
+  "TimeSpendBookingCompleted",
+  "TimeSpendBookingDisputed",
   "System",
 ] as const satisfies NotificationType[];
 

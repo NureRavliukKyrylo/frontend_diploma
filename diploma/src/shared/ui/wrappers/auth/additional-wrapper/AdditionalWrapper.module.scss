@@ -3,15 +3,44 @@
 
 .additionalContainerWrapper {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   width: 80%;
 
   .additionalContainer {
-    border-radius: 40px;
+    border-radius: 48px 24px 48px 24px;
     width: 538px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
     padding: 40px;
     background: #ffffff;
+    overflow: hidden;
+    position: relative;
+
+    .cardContent {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .eyebrowLine {
+      width: 20px;
+      height: 2px;
+      background: #840000;
+      border-radius: 2px;
+    }
+
+    .eyebrowText {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #840000;
+      text-transform: uppercase;
+    }
 
     .headerAdditional {
       display: flex;
@@ -19,22 +48,26 @@
       align-items: flex-start;
       flex-direction: column;
 
-      h1 {
+      .title {
         all: unset;
+        display: block;
         color: black;
-        @include font-base(1.875rem, 900);
+        @include font-base(26px, 900);
+        letter-spacing: -0.5px;
+        margin-bottom: 4px;
         white-space: nowrap;
       }
 
-      p {
+      .subtitle {
         all: unset;
-        color: rgba(0, 0, 0, 0.6);
-        @include font-base(1.125rem, 500);
         display: block;
+        font-size: 15px;
+        line-height: 1.5;
+        color: #999;
         white-space: normal;
         overflow-wrap: break-word;
         max-width: 100%;
-        margin-bottom: 25px;
+        margin-bottom: 20px;
       }
     }
   }
@@ -46,15 +79,11 @@
     .additionalContainer {
       width: 100%;
       padding: 20px;
-      border-radius: 20px;
+      border-radius: 48px 24px 48px 24px;
 
       .headerAdditional {
-        h1 {
-          @include font-base(1.25rem, 800);
-        }
-        p {
-          @include font-base(0.875rem, 500);
-          margin-bottom: 15px;
+        .subtitle {
+          margin-bottom: 20px;
         }
       }
     }
@@ -64,14 +93,10 @@
     justify-content: center;
     .additionalContainer {
       padding: 30px;
-      border-radius: 30px;
+      border-radius: 48px 24px 48px 24px;
 
       .headerAdditional {
-        h1 {
-          @include font-base(1.625rem, 900);
-        }
-        p {
-          @include font-base(1rem, 500);
+        .subtitle {
           margin-bottom: 20px;
         }
       }
@@ -84,14 +109,11 @@
 
     .additionalContainer {
       padding: 35px;
-      border-radius: 35px;
+      border-radius: 48px 24px 48px 24px;
 
       .headerAdditional {
-        h1 {
-          @include font-base(1.75rem, 900);
-        }
-        p {
-          @include font-base(1.0625rem, 500);
+        .subtitle {
+          margin-bottom: 20px;
         }
       }
     }
@@ -100,14 +122,11 @@
   @include adaptive.respond-to(desktop) {
     .additionalContainer {
       padding: 40px;
-      border-radius: 40px;
+      border-radius: 48px 24px 48px 24px;
 
       .headerAdditional {
-        h1 {
-          @include font-base(1.875rem, 900);
-        }
-        p {
-          @include font-base(1.125rem, 500);
+        .subtitle {
+          margin-bottom: 20px;
         }
       }
     }

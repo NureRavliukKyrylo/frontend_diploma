@@ -14,40 +14,102 @@ import { OrganizationsListFilter } from "@features/organization";
 import { CategoriesListFilter, ProjectsListFilter } from "@features/project";
 import { SkillsListFilter } from "@features/skills";
 import { useSkillsInfiniteQuery } from "@entities/skill";
-import type { EventRequestParams } from "@entities/event/libs";
+import type { EventRequestParams, EventSearchParams } from "@entities/event/libs";
 import { Link } from "@tanstack/react-router";
 import { useCategoriesInfiniteQuery } from "@entities/category";
 import type { BaseFiltersRoute } from "@shared/config/types";
 import { useTranslation } from "react-i18next";
+import { toggleArrayParam } from "@shared/libs/search-params";
 
 interface EventFiltersWidgetProps {
   search: EventRequestParams;
   includeCategories?: boolean;
+  hideOrganizationFilter?: boolean;
   from?: BaseFiltersRoute;
+  onChange?: (patch: Partial<EventSearchParams>) => void;
+  onClearFilters?: () => void;
 }
 
 export const EventFiltersWidget = ({
   search,
   includeCategories = true,
+  hideOrganizationFilter = false,
   from = "/activities/",
+  onChange,
+  onClearFilters: onClearFiltersProp,
 }: EventFiltersWidgetProps) => {
   const { t } = useTranslation("common");
-  const {
-    onStartDateChange,
-    onEndBeforeChange,
-    onRatingChange,
-    onProjectToggle,
-    onOrganizationToggle,
-    onLocationSelect,
-    onLocationClear,
-    onRadiusChange,
-    onOnlyActiveChange,
-    onShowJoinedChange,
-    onClearFilters,
-    onIncludeSeries,
-    onSkillToggle,
-    onCategoryToggle,
-  } = useEventFilters(from);
+  const routeFilters = useEventFilters(from);
+
+  const onStartDateChange = onChange
+    ? (date: string | undefined) => onChange({ From: date, Page: 1 })
+    : routeFilters.onStartDateChange;
+  const onEndBeforeChange = onChange
+    ? (date: string | undefined) => onChange({ To: date, Page: 1 })
+    : routeFilters.onEndBeforeChange;
+  const onRatingChange = onChange
+    ? (rating: number | undefined) => onChange({ Rating: rating, Page: 1 })
+    : routeFilters.onRatingChange;
+  const onProjectToggle = onChange
+    ? (id: string) =>
+        onChange({
+          ProjectIds: toggleArrayParam(search.ProjectIds, id),
+          Page: 1,
+        })
+    : routeFilters.onProjectToggle;
+  const onOrganizationToggle = onChange
+    ? (id: string) =>
+        onChange({
+          OrganizationIds: toggleArrayParam(search.OrganizationIds, id),
+          Page: 1,
+        })
+    : routeFilters.onOrganizationToggle;
+  const onLocationSelect = onChange
+    ? (location: { lat: number; lng: number; displayName: string }, radiusKm: number) =>
+        onChange({
+          Lat: location.lat,
+          Lng: location.lng,
+          Location: location.displayName,
+          RadiusKm: radiusKm,
+          Page: 1,
+        })
+    : routeFilters.onLocationSelect;
+  const onLocationClear = onChange
+    ? () =>
+        onChange({
+          Lat: undefined,
+          Lng: undefined,
+          Location: undefined,
+          RadiusKm: undefined,
+        })
+    : routeFilters.onLocationClear;
+  const onRadiusChange = onChange
+    ? (radiusKm: number) => onChange({ RadiusKm: radiusKm, Page: 1 })
+    : routeFilters.onRadiusChange;
+  const onOnlyActiveChange = onChange
+    ? (value: boolean) => onChange({ IncludeArchived: value, Page: 1 })
+    : routeFilters.onOnlyActiveChange;
+  const onShowJoinedChange = onChange
+    ? (value: boolean) => onChange({ ShowJoined: value, Page: 1 })
+    : routeFilters.onShowJoinedChange;
+  const onClearFilters = onClearFiltersProp ?? routeFilters.onClearFilters;
+  const onIncludeSeries = onChange
+    ? (value: boolean) => onChange({ IncludeSeriesMasters: value, Page: 1 })
+    : routeFilters.onIncludeSeries;
+  const onSkillToggle = onChange
+    ? (id: string) =>
+        onChange({
+          SkillIds: toggleArrayParam(search.SkillIds, id),
+          Page: 1,
+        })
+    : routeFilters.onSkillToggle;
+  const onCategoryToggle = onChange
+    ? (id: string) =>
+        onChange({
+          CategoryIds: toggleArrayParam(search.CategoryIds, id),
+          Page: 1,
+        })
+    : routeFilters.onCategoryToggle;
 
   return (
     <>
@@ -128,19 +190,23 @@ export const EventFiltersWidget = ({
             onToggle={onProjectToggle}
           />
         </div>
-        <div className={styles.dividerFilterBlock} />
-        <div className={styles.eventOrganizations}>
-          <h1 className={styles.subHeaderFilter}>
-            {t("filters.organizations")}
-          </h1>
-          <OrganizationsListFilter
-            useOrganizationsQuery={useOrganizationsInfiniteQuery({
-              PageSize: 7,
-            })}
-            selectedIds={search.OrganizationIds}
-            onToggle={onOrganizationToggle}
-          />
-        </div>
+        {!hideOrganizationFilter && (
+          <>
+            <div className={styles.dividerFilterBlock} />
+            <div className={styles.eventOrganizations}>
+              <h1 className={styles.subHeaderFilter}>
+                {t("filters.organizations")}
+              </h1>
+              <OrganizationsListFilter
+                useOrganizationsQuery={useOrganizationsInfiniteQuery({
+                  PageSize: 7,
+                })}
+                selectedIds={search.OrganizationIds}
+                onToggle={onOrganizationToggle}
+              />
+            </div>
+          </>
+        )}
         <div className={styles.dividerFilterBlock} />
         <div className={styles.eventDistance}>
           <h1 className={styles.subHeaderFilter}>{t("filters.distance")}</h1>

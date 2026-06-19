@@ -1,0 +1,41 @@
+.section {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.backButton {
+  position: absolute;
+  top: 29px;
+  left: 29px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #ececec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  border: none;
+  z-index: 10;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #d8d8d8;
+    color: #555;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .backButton {
+    top: 16px;
+    left: 16px;
+    width: 42px;
+    height: 42px;
+  }
+}

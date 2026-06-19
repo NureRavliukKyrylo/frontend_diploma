@@ -1,16 +1,14 @@
 import { apiClient } from "@shared/api";
-import type { Organization } from "../../model";
-import type { PaginationResponse } from "@shared/config/types";
-import type { OrganizationSearchParams } from "../../libs";
-
-export interface OrganizationResponse {
-  data: Organization[];
-  pagination: PaginationResponse;
-}
+import type { OrganizationSearchParams } from "../../lib/search-schema/organizationSearchSchema";
+import { normalizeOrganizationsResponse } from "../../lib/normalizeOrganizationResponse";
+import type { OrganizationResponse } from "../../model/types/OrganizationResponse";
 
 export const getOrganizationsList = async (
   params: OrganizationSearchParams,
 ): Promise<OrganizationResponse> => {
-  const result = await apiClient.get("/Organization/list", { params });
-  return result.data;
+  const response = await apiClient.get<unknown>("/Organization/list", {
+    params,
+  });
+
+  return normalizeOrganizationsResponse(response.data);
 };

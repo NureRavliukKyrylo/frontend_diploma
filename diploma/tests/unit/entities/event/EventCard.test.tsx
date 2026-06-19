@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import type {
   LevelProgress,
-  ParticipationMember,
   Rating,
 } from "@shared/config/types";
+import type { ParticipationMember } from "@entities/participation";
 import { EventCard, type Event } from "@entities/event";
 
 vi.mock("@shared/ui", async (importOriginal) => {

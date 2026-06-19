@@ -9,9 +9,17 @@ interface BackButtonProps {
   className?: string;
   from?: LinkProps["from"];
   to?: LinkProps["to"];
+  params?: LinkProps["params"];
+  search?: LinkProps["search"];
 }
 
-export const BackButton = ({ className, from, to = ".." }: BackButtonProps) => {
+export const BackButton = ({
+  className,
+  from,
+  to = "..",
+  params,
+  search,
+}: BackButtonProps) => {
   return (
     <motion.div
       whileTap={{ scale: 0.95 }}
@@ -22,6 +30,8 @@ export const BackButton = ({ className, from, to = ".." }: BackButtonProps) => {
         className={`${styles.prevStepperButton} ${className || ""}`}
         from={from}
         to={to}
+        params={params}
+        search={search}
       >
         <Arrow className={styles.arrowIcon} />
       </LinkButtonWrapper>

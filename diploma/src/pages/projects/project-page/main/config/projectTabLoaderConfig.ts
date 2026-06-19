@@ -14,7 +14,7 @@ import {
   type TasksSearch,
 } from "@entities/project";
 import { taskQuery, taskStatuses } from "@entities/task";
-import { participationQuery } from "@shared/api/participation";
+import { participationQuery } from "@entities/participation";
 import type { QueryClient } from "@tanstack/react-query";
 import type { ZodType } from "zod";
 

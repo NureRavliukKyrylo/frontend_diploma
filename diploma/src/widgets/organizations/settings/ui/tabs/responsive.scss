@@ -1,0 +1,17 @@
+
+@media (max-width: 720px) {
+  .section {
+    padding: 24px 20px;
+  }
+
+  .logoSection,
+  .logoActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .fieldsGrid,
+  .contactGrid {
+    grid-template-columns: 1fr;
+  }
+}

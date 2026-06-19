@@ -1,0 +1,35 @@
+import type { Variants } from "framer-motion";
+import type { OrganizationFabActionId } from "./fabActionsConfig";
+import styles from "../OrganizationFab.module.scss";
+
+export const menuVariants: Variants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
+export const itemVariants: Variants = {
+  initial: { opacity: 0, y: 16, scale: 0.88 },
+  animate: (index: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 24,
+      delay: index * 0.05,
+    },
+  }),
+  exit: { opacity: 0, y: 12, scale: 0.85 },
+};
+
+export const actionClassNames: Record<OrganizationFabActionId, string> = {
+  dashboard: styles.dashboardAction,
+  settings: styles.settingsAction,
+  members: styles.membersAction,
+  "new-project": styles.projectAction,
+  "new-event": styles.eventAction,
+  "new-task": styles.taskAction,
+  roles: styles.rolesAction,
+};

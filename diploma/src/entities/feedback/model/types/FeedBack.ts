@@ -1,4 +1,4 @@
-import type { ParticipationMember } from "@shared/config/types";
+import type { ParticipationMember } from "@entities/participation";
 
 export interface Feedback {
   id: string;

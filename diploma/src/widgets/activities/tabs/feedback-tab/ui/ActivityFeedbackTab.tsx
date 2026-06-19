@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 interface ActivityFeedbackTabProps {
   entityId: string;
   userId?: string;
-  entityType: Exclude<EntityType, "organization">;
+  entityType: EntityType;
   PageSize?: number;
   OrderBy: FeedbackSortValues;
   canSubmitFeedback: boolean;

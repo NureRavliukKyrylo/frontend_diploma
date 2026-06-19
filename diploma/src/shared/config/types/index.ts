@@ -14,7 +14,6 @@ export type { LocationSuggestion } from "./map/LocationSuggestion";
 export type { QueryResult } from "./query-result/QueryResult";
 export type { EntityType } from "./entity/EntityType";
 export type { FacetType } from "./entity/FacetType";
-export type { ParticipationMember } from "./participation/ParticipationMember";
 export type { PaginationRender } from "./pagination/PaginationRender";
 export type { Policy, PolicyConfig } from "./entity/Policy";
 export type { EntityStatus, StatusConfig } from "./entity/EntityStatus";

@@ -1,4 +1,4 @@
-import type { Organization } from "../../../model";
+import type { Organization } from "../../../model/types";
 import { AvatarGroup } from "@shared/ui";
 import styles from "./OrganizationCard.module.scss";
 import { OrganizationCardBase } from "../base/OrganizationCardBase";

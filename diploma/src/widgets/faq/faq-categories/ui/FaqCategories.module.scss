@@ -1,0 +1,34 @@
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.catBtn {
+  padding: 9px 20px;
+  color: #666;
+  background: #fff;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+  font-family: "Exo 2", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.18s ease;
+
+  &:hover:not(.active) {
+    color: #000;
+    border-color: #000;
+  }
+
+  &.active {
+    color: #fff;
+    background: #000;
+    border-color: #000;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  }
+}

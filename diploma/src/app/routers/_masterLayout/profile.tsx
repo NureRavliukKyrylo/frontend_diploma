@@ -6,7 +6,7 @@ export const Route = createFileRoute("/_masterLayout/profile")({
   beforeLoad: () => {
     const isAuthenticated = useUserStore.getState().isAuthenticated;
     if (!isAuthenticated) {
-      throw redirect({ to: "/auth", search: { redirect: location.pathname } });
+      throw redirect({ to: "/auth" });
     }
   },
   component: () => <Outlet />,

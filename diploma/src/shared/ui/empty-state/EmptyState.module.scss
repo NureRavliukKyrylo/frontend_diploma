@@ -1,0 +1,111 @@
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  gap: 0;
+  font-family: "Exo 2", sans-serif;
+
+  h3 {
+    margin: 18px 0 10px;
+    color: #1a1a1a;
+    font-family: "Exo 2", sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  p {
+    max-width: 340px;
+    margin: 0;
+    color: #aaaaaa;
+    font-family: "Exo 2", sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.65;
+    text-align: center;
+  }
+}
+
+.emptyIllustration {
+  width: 220px;
+  height: 220px;
+  display: block;
+  overflow: visible;
+}
+
+.outerOrbit,
+.middleOrbit,
+.innerOrbit {
+  transform-box: view-box;
+  transform-origin: 110px 110px;
+}
+
+.outerOrbit {
+  animation: orbitClockwise 16s linear infinite;
+}
+
+.middleOrbit {
+  animation: orbitClockwise 12s linear infinite;
+}
+
+.innerOrbit {
+  animation: orbitCounterClockwise 8s linear infinite;
+}
+
+.coreGlow {
+  opacity: 0.08;
+  animation: corePulse 3s ease-in-out infinite;
+}
+
+.sparkleDot {
+  opacity: 0;
+  animation: spark 2.4s ease-in-out infinite;
+}
+
+.sparkleDotTwo {
+  animation-delay: 0.8s;
+}
+
+.sparkleDotThree {
+  animation-delay: 1.6s;
+}
+
+@keyframes orbitClockwise {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbitCounterClockwise {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes corePulse {
+  0%,
+  100% {
+    opacity: 0.08;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
+}
+
+@keyframes spark {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -1,4 +1,20 @@
-import { sendGiftSchema } from "@features/time-bank/gift/libs/sendGiftSchema";
+import type { TFunction } from "i18next";
+import { getSendGiftSchema } from "@features/time-bank/gift/libs/sendGiftSchema";
+
+const t = ((key: string) => {
+  const messages: Record<string, string> = {
+    "timeBank:gifts.validation.amountRequired": "Amount is required",
+    "timeBank:gifts.validation.amountTypeError": "Amount must be a number",
+    "timeBank:gifts.validation.amountPositive": "Amount must be positive",
+    "timeBank:gifts.validation.amountInteger": "Amount must be a whole number",
+    "timeBank:gifts.validation.messageRequired": "Message is required",
+    "timeBank:gifts.validation.messageMax": "Message must be at most 70 characters",
+  };
+
+  return messages[key] ?? key;
+}) as TFunction;
+
+const sendGiftSchema = getSendGiftSchema(t);
 
 const validData = {
   amountMinutes: 10,
@@ -41,7 +57,6 @@ describe("sendGiftSchema", () => {
     ).rejects.toThrow("Amount must be a whole number");
   });
 
-  // message
   it("fails when message is missing", async () => {
     const { message, ...rest } = validData;
     await expect(sendGiftSchema.validate(rest)).rejects.toThrow(

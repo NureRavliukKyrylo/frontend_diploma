@@ -1,1 +1,4 @@
-export type { ConnectedServiceId } from "./connected-links/connectedServices";
+export type {
+  ConnectedServiceId,
+  ConnectedServiceId as ConnectedLinkPlatform,
+} from "./connected-links/connectedServices";

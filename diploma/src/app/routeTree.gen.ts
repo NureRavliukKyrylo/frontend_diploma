@@ -11,33 +11,54 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routers/__root'
+import { Route as BannedRouteImport } from './routers/banned'
 import { Route as NoFooterLayoutRouteImport } from './routers/_noFooterLayout'
 import { Route as MasterLayoutRouteImport } from './routers/_masterLayout'
 import { Route as AuthLayoutRouteImport } from './routers/_authLayout'
+import { Route as R403RouteImport } from './routers/403'
+import { Route as SplatRouteImport } from './routers/$'
 import { Route as IndexRouteImport } from './routers/index'
 import { Route as MasterLayoutProfileRouteImport } from './routers/_masterLayout/profile'
 import { Route as NoFooterLayoutMapIndexRouteImport } from './routers/_noFooterLayout/map/index'
 import { Route as MasterLayoutTimeBankIndexRouteImport } from './routers/_masterLayout/time-bank/index'
+import { Route as MasterLayoutTermsIndexRouteImport } from './routers/_masterLayout/terms/index'
+import { Route as MasterLayoutTermsOfServiceIndexRouteImport } from './routers/_masterLayout/terms-of-service/index'
 import { Route as MasterLayoutSkillsIndexRouteImport } from './routers/_masterLayout/skills/index'
 import { Route as MasterLayoutReportsIndexRouteImport } from './routers/_masterLayout/reports/index'
 import { Route as MasterLayoutProfileIndexRouteImport } from './routers/_masterLayout/profile/index'
+import { Route as MasterLayoutPrivacyIndexRouteImport } from './routers/_masterLayout/privacy/index'
 import { Route as MasterLayoutOrganizationsIndexRouteImport } from './routers/_masterLayout/organizations/index'
 import { Route as MasterLayoutNotificationsIndexRouteImport } from './routers/_masterLayout/notifications/index'
+import { Route as MasterLayoutFaqIndexRouteImport } from './routers/_masterLayout/faq/index'
 import { Route as MasterLayoutChatIndexRouteImport } from './routers/_masterLayout/chat/index'
 import { Route as MasterLayoutCategoriesIndexRouteImport } from './routers/_masterLayout/categories/index'
 import { Route as MasterLayoutCalendarIndexRouteImport } from './routers/_masterLayout/calendar/index'
+import { Route as MasterLayoutBookmarksIndexRouteImport } from './routers/_masterLayout/bookmarks/index'
 import { Route as MasterLayoutActivitiesIndexRouteImport } from './routers/_masterLayout/activities/index'
+import { Route as MasterLayoutOrganizationsIdRouteImport } from './routers/_masterLayout/organizations/$id'
 import { Route as MasterLayoutTasksIdIndexRouteImport } from './routers/_masterLayout/tasks/$id/index'
 import { Route as MasterLayoutProjectsIdIndexRouteImport } from './routers/_masterLayout/projects/$id/index'
 import { Route as MasterLayoutProfileSettingsIndexRouteImport } from './routers/_masterLayout/profile/settings/index'
+import { Route as MasterLayoutOrganizationsMyIndexRouteImport } from './routers/_masterLayout/organizations/my/index'
+import { Route as MasterLayoutOrganizationsCreateIndexRouteImport } from './routers/_masterLayout/organizations/create/index'
+import { Route as MasterLayoutOrganizationsArchivedIndexRouteImport } from './routers/_masterLayout/organizations/archived/index'
 import { Route as MasterLayoutOrganizationsIdIndexRouteImport } from './routers/_masterLayout/organizations/$id/index'
 import { Route as MasterLayoutOffersIdIndexRouteImport } from './routers/_masterLayout/offers/$id/index'
 import { Route as MasterLayoutEventsIdIndexRouteImport } from './routers/_masterLayout/events/$id/index'
 import { Route as MasterLayoutCategoriesIdIndexRouteImport } from './routers/_masterLayout/categories/$id/index'
 import { Route as MasterLayoutActivitiesMyIndexRouteImport } from './routers/_masterLayout/activities/my/index'
 import { Route as MasterLayoutProjectsMyIdIndexRouteImport } from './routers/_masterLayout/projects/my/$id/index'
+import { Route as MasterLayoutProjectsIdSettingsIndexRouteImport } from './routers/_masterLayout/projects/$id/settings/index'
+import { Route as MasterLayoutOrganizationsIdSettingsIndexRouteImport } from './routers/_masterLayout/organizations/$id/settings/index'
+import { Route as MasterLayoutOrganizationsIdRolesIndexRouteImport } from './routers/_masterLayout/organizations/$id/roles/index'
+import { Route as MasterLayoutOrganizationsIdProjectsIndexRouteImport } from './routers/_masterLayout/organizations/$id/projects/index'
+import { Route as MasterLayoutOrganizationsIdMembersIndexRouteImport } from './routers/_masterLayout/organizations/$id/members/index'
+import { Route as MasterLayoutOrganizationsIdEventsIndexRouteImport } from './routers/_masterLayout/organizations/$id/events/index'
 import { Route as MasterLayoutOffersMyIdIndexRouteImport } from './routers/_masterLayout/offers/my/$id/index'
 import { Route as MasterLayoutEventsMyIdIndexRouteImport } from './routers/_masterLayout/events/my/$id/index'
+import { Route as MasterLayoutEventsIdSettingsIndexRouteImport } from './routers/_masterLayout/events/$id/settings/index'
+import { Route as MasterLayoutOrganizationsIdProjectsCreateIndexRouteImport } from './routers/_masterLayout/organizations/$id/projects/create/index'
+import { Route as MasterLayoutOrganizationsIdEventsCreateIndexRouteImport } from './routers/_masterLayout/organizations/$id/events/create/index'
 
 const MultiStepFormIndexLazyRouteImport = createFileRoute('/multi-step-form/')()
 const AuthLayoutAuthIndexLazyRouteImport =
@@ -58,6 +79,11 @@ const AuthLayoutAuthForgotPasswordSetPasswordLazyRouteImport = createFileRoute(
   '/_authLayout/auth/forgot-password/set-password',
 )()
 
+const BannedRoute = BannedRouteImport.update({
+  id: '/banned',
+  path: '/banned',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NoFooterLayoutRoute = NoFooterLayoutRouteImport.update({
   id: '/_noFooterLayout',
   getParentRoute: () => rootRouteImport,
@@ -68,6 +94,16 @@ const MasterLayoutRoute = MasterLayoutRouteImport.update({
 } as any)
 const AuthLayoutRoute = AuthLayoutRouteImport.update({
   id: '/_authLayout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const R403Route = R403RouteImport.update({
+  id: '/403',
+  path: '/403',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SplatRoute = SplatRouteImport.update({
+  id: '/$',
+  path: '/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -107,6 +143,17 @@ const MasterLayoutTimeBankIndexRoute =
     path: '/time-bank/',
     getParentRoute: () => MasterLayoutRoute,
   } as any)
+const MasterLayoutTermsIndexRoute = MasterLayoutTermsIndexRouteImport.update({
+  id: '/terms/',
+  path: '/terms/',
+  getParentRoute: () => MasterLayoutRoute,
+} as any)
+const MasterLayoutTermsOfServiceIndexRoute =
+  MasterLayoutTermsOfServiceIndexRouteImport.update({
+    id: '/terms-of-service/',
+    path: '/terms-of-service/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
 const MasterLayoutSkillsIndexRoute = MasterLayoutSkillsIndexRouteImport.update({
   id: '/skills/',
   path: '/skills/',
@@ -128,6 +175,12 @@ const MasterLayoutProfileIndexRoute =
   } as any).lazy(() =>
     import('./routers/_masterLayout/profile/index.lazy').then((d) => d.Route),
   )
+const MasterLayoutPrivacyIndexRoute =
+  MasterLayoutPrivacyIndexRouteImport.update({
+    id: '/privacy/',
+    path: '/privacy/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
 const MasterLayoutOrganizationsIndexRoute =
   MasterLayoutOrganizationsIndexRouteImport.update({
     id: '/organizations/',
@@ -144,6 +197,11 @@ const MasterLayoutNotificationsIndexRoute =
     path: '/notifications/',
     getParentRoute: () => MasterLayoutRoute,
   } as any)
+const MasterLayoutFaqIndexRoute = MasterLayoutFaqIndexRouteImport.update({
+  id: '/faq/',
+  path: '/faq/',
+  getParentRoute: () => MasterLayoutRoute,
+} as any)
 const MasterLayoutChatIndexRoute = MasterLayoutChatIndexRouteImport.update({
   id: '/chat/',
   path: '/chat/',
@@ -163,6 +221,12 @@ const MasterLayoutCalendarIndexRoute =
   MasterLayoutCalendarIndexRouteImport.update({
     id: '/calendar/',
     path: '/calendar/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
+const MasterLayoutBookmarksIndexRoute =
+  MasterLayoutBookmarksIndexRouteImport.update({
+    id: '/bookmarks/',
+    path: '/bookmarks/',
     getParentRoute: () => MasterLayoutRoute,
   } as any)
 const MasterLayoutActivitiesIndexRoute =
@@ -195,6 +259,12 @@ const AuthLayoutAuthVerificationEmailLazyRoute =
       (d) => d.Route,
     ),
   )
+const MasterLayoutOrganizationsIdRoute =
+  MasterLayoutOrganizationsIdRouteImport.update({
+    id: '/organizations/$id',
+    path: '/organizations/$id',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
 const AuthLayoutAuthForgotPasswordIndexLazyRoute =
   AuthLayoutAuthForgotPasswordIndexLazyRouteImport.update({
     id: '/auth/forgot-password/',
@@ -231,11 +301,29 @@ const MasterLayoutProfileSettingsIndexRoute =
       (d) => d.Route,
     ),
   )
+const MasterLayoutOrganizationsMyIndexRoute =
+  MasterLayoutOrganizationsMyIndexRouteImport.update({
+    id: '/organizations/my/',
+    path: '/organizations/my/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
+const MasterLayoutOrganizationsCreateIndexRoute =
+  MasterLayoutOrganizationsCreateIndexRouteImport.update({
+    id: '/organizations/create/',
+    path: '/organizations/create/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
+const MasterLayoutOrganizationsArchivedIndexRoute =
+  MasterLayoutOrganizationsArchivedIndexRouteImport.update({
+    id: '/organizations/archived/',
+    path: '/organizations/archived/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
 const MasterLayoutOrganizationsIdIndexRoute =
   MasterLayoutOrganizationsIdIndexRouteImport.update({
-    id: '/organizations/$id/',
-    path: '/organizations/$id/',
-    getParentRoute: () => MasterLayoutRoute,
+    id: '/',
+    path: '/',
+    getParentRoute: () => MasterLayoutOrganizationsIdRoute,
   } as any)
 const MasterLayoutOffersIdIndexRoute =
   MasterLayoutOffersIdIndexRouteImport.update({
@@ -303,6 +391,42 @@ const MasterLayoutProjectsMyIdIndexRoute =
       (d) => d.Route,
     ),
   )
+const MasterLayoutProjectsIdSettingsIndexRoute =
+  MasterLayoutProjectsIdSettingsIndexRouteImport.update({
+    id: '/projects/$id/settings/',
+    path: '/projects/$id/settings/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
+const MasterLayoutOrganizationsIdSettingsIndexRoute =
+  MasterLayoutOrganizationsIdSettingsIndexRouteImport.update({
+    id: '/settings/',
+    path: '/settings/',
+    getParentRoute: () => MasterLayoutOrganizationsIdRoute,
+  } as any)
+const MasterLayoutOrganizationsIdRolesIndexRoute =
+  MasterLayoutOrganizationsIdRolesIndexRouteImport.update({
+    id: '/roles/',
+    path: '/roles/',
+    getParentRoute: () => MasterLayoutOrganizationsIdRoute,
+  } as any)
+const MasterLayoutOrganizationsIdProjectsIndexRoute =
+  MasterLayoutOrganizationsIdProjectsIndexRouteImport.update({
+    id: '/projects/',
+    path: '/projects/',
+    getParentRoute: () => MasterLayoutOrganizationsIdRoute,
+  } as any)
+const MasterLayoutOrganizationsIdMembersIndexRoute =
+  MasterLayoutOrganizationsIdMembersIndexRouteImport.update({
+    id: '/members/',
+    path: '/members/',
+    getParentRoute: () => MasterLayoutOrganizationsIdRoute,
+  } as any)
+const MasterLayoutOrganizationsIdEventsIndexRoute =
+  MasterLayoutOrganizationsIdEventsIndexRouteImport.update({
+    id: '/events/',
+    path: '/events/',
+    getParentRoute: () => MasterLayoutOrganizationsIdRoute,
+  } as any)
 const MasterLayoutOffersMyIdIndexRoute =
   MasterLayoutOffersMyIdIndexRouteImport.update({
     id: '/offers/my/$id/',
@@ -319,22 +443,49 @@ const MasterLayoutEventsMyIdIndexRoute =
       (d) => d.Route,
     ),
   )
+const MasterLayoutEventsIdSettingsIndexRoute =
+  MasterLayoutEventsIdSettingsIndexRouteImport.update({
+    id: '/events/$id/settings/',
+    path: '/events/$id/settings/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
+const MasterLayoutOrganizationsIdProjectsCreateIndexRoute =
+  MasterLayoutOrganizationsIdProjectsCreateIndexRouteImport.update({
+    id: '/projects/create/',
+    path: '/projects/create/',
+    getParentRoute: () => MasterLayoutOrganizationsIdRoute,
+  } as any)
+const MasterLayoutOrganizationsIdEventsCreateIndexRoute =
+  MasterLayoutOrganizationsIdEventsCreateIndexRouteImport.update({
+    id: '/events/create/',
+    path: '/events/create/',
+    getParentRoute: () => MasterLayoutOrganizationsIdRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
+  '/403': typeof R403Route
+  '/banned': typeof BannedRoute
   '/profile': typeof MasterLayoutProfileRouteWithChildren
   '/multi-step-form/': typeof MultiStepFormIndexLazyRoute
+  '/organizations/$id': typeof MasterLayoutOrganizationsIdRouteWithChildren
   '/auth/verification-email': typeof AuthLayoutAuthVerificationEmailLazyRoute
   '/auth/verification-two-factor': typeof AuthLayoutAuthVerificationTwoFactorLazyRoute
   '/activities/': typeof MasterLayoutActivitiesIndexRoute
+  '/bookmarks/': typeof MasterLayoutBookmarksIndexRoute
   '/calendar/': typeof MasterLayoutCalendarIndexRoute
   '/categories/': typeof MasterLayoutCategoriesIndexRoute
   '/chat/': typeof MasterLayoutChatIndexRoute
+  '/faq/': typeof MasterLayoutFaqIndexRoute
   '/notifications/': typeof MasterLayoutNotificationsIndexRoute
   '/organizations/': typeof MasterLayoutOrganizationsIndexRoute
+  '/privacy/': typeof MasterLayoutPrivacyIndexRoute
   '/profile/': typeof MasterLayoutProfileIndexRoute
   '/reports/': typeof MasterLayoutReportsIndexRoute
   '/skills/': typeof MasterLayoutSkillsIndexRoute
+  '/terms-of-service/': typeof MasterLayoutTermsOfServiceIndexRoute
+  '/terms/': typeof MasterLayoutTermsIndexRoute
   '/time-bank/': typeof MasterLayoutTimeBankIndexRoute
   '/map/': typeof NoFooterLayoutMapIndexRoute
   '/auth/': typeof AuthLayoutAuthIndexLazyRoute
@@ -345,28 +496,48 @@ export interface FileRoutesByFullPath {
   '/events/$id/': typeof MasterLayoutEventsIdIndexRoute
   '/offers/$id/': typeof MasterLayoutOffersIdIndexRoute
   '/organizations/$id/': typeof MasterLayoutOrganizationsIdIndexRoute
+  '/organizations/archived/': typeof MasterLayoutOrganizationsArchivedIndexRoute
+  '/organizations/create/': typeof MasterLayoutOrganizationsCreateIndexRoute
+  '/organizations/my/': typeof MasterLayoutOrganizationsMyIndexRoute
   '/profile/settings/': typeof MasterLayoutProfileSettingsIndexRoute
   '/projects/$id/': typeof MasterLayoutProjectsIdIndexRoute
   '/tasks/$id/': typeof MasterLayoutTasksIdIndexRoute
   '/auth/forgot-password/': typeof AuthLayoutAuthForgotPasswordIndexLazyRoute
+  '/events/$id/settings/': typeof MasterLayoutEventsIdSettingsIndexRoute
   '/events/my/$id/': typeof MasterLayoutEventsMyIdIndexRoute
   '/offers/my/$id/': typeof MasterLayoutOffersMyIdIndexRoute
+  '/organizations/$id/events/': typeof MasterLayoutOrganizationsIdEventsIndexRoute
+  '/organizations/$id/members/': typeof MasterLayoutOrganizationsIdMembersIndexRoute
+  '/organizations/$id/projects/': typeof MasterLayoutOrganizationsIdProjectsIndexRoute
+  '/organizations/$id/roles/': typeof MasterLayoutOrganizationsIdRolesIndexRoute
+  '/organizations/$id/settings/': typeof MasterLayoutOrganizationsIdSettingsIndexRoute
+  '/projects/$id/settings/': typeof MasterLayoutProjectsIdSettingsIndexRoute
   '/projects/my/$id/': typeof MasterLayoutProjectsMyIdIndexRoute
+  '/organizations/$id/events/create/': typeof MasterLayoutOrganizationsIdEventsCreateIndexRoute
+  '/organizations/$id/projects/create/': typeof MasterLayoutOrganizationsIdProjectsCreateIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
+  '/403': typeof R403Route
+  '/banned': typeof BannedRoute
   '/multi-step-form': typeof MultiStepFormIndexLazyRoute
   '/auth/verification-email': typeof AuthLayoutAuthVerificationEmailLazyRoute
   '/auth/verification-two-factor': typeof AuthLayoutAuthVerificationTwoFactorLazyRoute
   '/activities': typeof MasterLayoutActivitiesIndexRoute
+  '/bookmarks': typeof MasterLayoutBookmarksIndexRoute
   '/calendar': typeof MasterLayoutCalendarIndexRoute
   '/categories': typeof MasterLayoutCategoriesIndexRoute
   '/chat': typeof MasterLayoutChatIndexRoute
+  '/faq': typeof MasterLayoutFaqIndexRoute
   '/notifications': typeof MasterLayoutNotificationsIndexRoute
   '/organizations': typeof MasterLayoutOrganizationsIndexRoute
+  '/privacy': typeof MasterLayoutPrivacyIndexRoute
   '/profile': typeof MasterLayoutProfileIndexRoute
   '/reports': typeof MasterLayoutReportsIndexRoute
   '/skills': typeof MasterLayoutSkillsIndexRoute
+  '/terms-of-service': typeof MasterLayoutTermsOfServiceIndexRoute
+  '/terms': typeof MasterLayoutTermsIndexRoute
   '/time-bank': typeof MasterLayoutTimeBankIndexRoute
   '/map': typeof NoFooterLayoutMapIndexRoute
   '/auth': typeof AuthLayoutAuthIndexLazyRoute
@@ -377,33 +548,54 @@ export interface FileRoutesByTo {
   '/events/$id': typeof MasterLayoutEventsIdIndexRoute
   '/offers/$id': typeof MasterLayoutOffersIdIndexRoute
   '/organizations/$id': typeof MasterLayoutOrganizationsIdIndexRoute
+  '/organizations/archived': typeof MasterLayoutOrganizationsArchivedIndexRoute
+  '/organizations/create': typeof MasterLayoutOrganizationsCreateIndexRoute
+  '/organizations/my': typeof MasterLayoutOrganizationsMyIndexRoute
   '/profile/settings': typeof MasterLayoutProfileSettingsIndexRoute
   '/projects/$id': typeof MasterLayoutProjectsIdIndexRoute
   '/tasks/$id': typeof MasterLayoutTasksIdIndexRoute
   '/auth/forgot-password': typeof AuthLayoutAuthForgotPasswordIndexLazyRoute
+  '/events/$id/settings': typeof MasterLayoutEventsIdSettingsIndexRoute
   '/events/my/$id': typeof MasterLayoutEventsMyIdIndexRoute
   '/offers/my/$id': typeof MasterLayoutOffersMyIdIndexRoute
+  '/organizations/$id/events': typeof MasterLayoutOrganizationsIdEventsIndexRoute
+  '/organizations/$id/members': typeof MasterLayoutOrganizationsIdMembersIndexRoute
+  '/organizations/$id/projects': typeof MasterLayoutOrganizationsIdProjectsIndexRoute
+  '/organizations/$id/roles': typeof MasterLayoutOrganizationsIdRolesIndexRoute
+  '/organizations/$id/settings': typeof MasterLayoutOrganizationsIdSettingsIndexRoute
+  '/projects/$id/settings': typeof MasterLayoutProjectsIdSettingsIndexRoute
   '/projects/my/$id': typeof MasterLayoutProjectsMyIdIndexRoute
+  '/organizations/$id/events/create': typeof MasterLayoutOrganizationsIdEventsCreateIndexRoute
+  '/organizations/$id/projects/create': typeof MasterLayoutOrganizationsIdProjectsCreateIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$': typeof SplatRoute
+  '/403': typeof R403Route
   '/_authLayout': typeof AuthLayoutRouteWithChildren
   '/_masterLayout': typeof MasterLayoutRouteWithChildren
   '/_noFooterLayout': typeof NoFooterLayoutRouteWithChildren
+  '/banned': typeof BannedRoute
   '/_masterLayout/profile': typeof MasterLayoutProfileRouteWithChildren
   '/multi-step-form/': typeof MultiStepFormIndexLazyRoute
+  '/_masterLayout/organizations/$id': typeof MasterLayoutOrganizationsIdRouteWithChildren
   '/_authLayout/auth/verification-email': typeof AuthLayoutAuthVerificationEmailLazyRoute
   '/_authLayout/auth/verification-two-factor': typeof AuthLayoutAuthVerificationTwoFactorLazyRoute
   '/_masterLayout/activities/': typeof MasterLayoutActivitiesIndexRoute
+  '/_masterLayout/bookmarks/': typeof MasterLayoutBookmarksIndexRoute
   '/_masterLayout/calendar/': typeof MasterLayoutCalendarIndexRoute
   '/_masterLayout/categories/': typeof MasterLayoutCategoriesIndexRoute
   '/_masterLayout/chat/': typeof MasterLayoutChatIndexRoute
+  '/_masterLayout/faq/': typeof MasterLayoutFaqIndexRoute
   '/_masterLayout/notifications/': typeof MasterLayoutNotificationsIndexRoute
   '/_masterLayout/organizations/': typeof MasterLayoutOrganizationsIndexRoute
+  '/_masterLayout/privacy/': typeof MasterLayoutPrivacyIndexRoute
   '/_masterLayout/profile/': typeof MasterLayoutProfileIndexRoute
   '/_masterLayout/reports/': typeof MasterLayoutReportsIndexRoute
   '/_masterLayout/skills/': typeof MasterLayoutSkillsIndexRoute
+  '/_masterLayout/terms-of-service/': typeof MasterLayoutTermsOfServiceIndexRoute
+  '/_masterLayout/terms/': typeof MasterLayoutTermsIndexRoute
   '/_masterLayout/time-bank/': typeof MasterLayoutTimeBankIndexRoute
   '/_noFooterLayout/map/': typeof NoFooterLayoutMapIndexRoute
   '/_authLayout/auth/': typeof AuthLayoutAuthIndexLazyRoute
@@ -414,31 +606,52 @@ export interface FileRoutesById {
   '/_masterLayout/events/$id/': typeof MasterLayoutEventsIdIndexRoute
   '/_masterLayout/offers/$id/': typeof MasterLayoutOffersIdIndexRoute
   '/_masterLayout/organizations/$id/': typeof MasterLayoutOrganizationsIdIndexRoute
+  '/_masterLayout/organizations/archived/': typeof MasterLayoutOrganizationsArchivedIndexRoute
+  '/_masterLayout/organizations/create/': typeof MasterLayoutOrganizationsCreateIndexRoute
+  '/_masterLayout/organizations/my/': typeof MasterLayoutOrganizationsMyIndexRoute
   '/_masterLayout/profile/settings/': typeof MasterLayoutProfileSettingsIndexRoute
   '/_masterLayout/projects/$id/': typeof MasterLayoutProjectsIdIndexRoute
   '/_masterLayout/tasks/$id/': typeof MasterLayoutTasksIdIndexRoute
   '/_authLayout/auth/forgot-password/': typeof AuthLayoutAuthForgotPasswordIndexLazyRoute
+  '/_masterLayout/events/$id/settings/': typeof MasterLayoutEventsIdSettingsIndexRoute
   '/_masterLayout/events/my/$id/': typeof MasterLayoutEventsMyIdIndexRoute
   '/_masterLayout/offers/my/$id/': typeof MasterLayoutOffersMyIdIndexRoute
+  '/_masterLayout/organizations/$id/events/': typeof MasterLayoutOrganizationsIdEventsIndexRoute
+  '/_masterLayout/organizations/$id/members/': typeof MasterLayoutOrganizationsIdMembersIndexRoute
+  '/_masterLayout/organizations/$id/projects/': typeof MasterLayoutOrganizationsIdProjectsIndexRoute
+  '/_masterLayout/organizations/$id/roles/': typeof MasterLayoutOrganizationsIdRolesIndexRoute
+  '/_masterLayout/organizations/$id/settings/': typeof MasterLayoutOrganizationsIdSettingsIndexRoute
+  '/_masterLayout/projects/$id/settings/': typeof MasterLayoutProjectsIdSettingsIndexRoute
   '/_masterLayout/projects/my/$id/': typeof MasterLayoutProjectsMyIdIndexRoute
+  '/_masterLayout/organizations/$id/events/create/': typeof MasterLayoutOrganizationsIdEventsCreateIndexRoute
+  '/_masterLayout/organizations/$id/projects/create/': typeof MasterLayoutOrganizationsIdProjectsCreateIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$'
+    | '/403'
+    | '/banned'
     | '/profile'
     | '/multi-step-form/'
+    | '/organizations/$id'
     | '/auth/verification-email'
     | '/auth/verification-two-factor'
     | '/activities/'
+    | '/bookmarks/'
     | '/calendar/'
     | '/categories/'
     | '/chat/'
+    | '/faq/'
     | '/notifications/'
     | '/organizations/'
+    | '/privacy/'
     | '/profile/'
     | '/reports/'
     | '/skills/'
+    | '/terms-of-service/'
+    | '/terms/'
     | '/time-bank/'
     | '/map/'
     | '/auth/'
@@ -449,28 +662,48 @@ export interface FileRouteTypes {
     | '/events/$id/'
     | '/offers/$id/'
     | '/organizations/$id/'
+    | '/organizations/archived/'
+    | '/organizations/create/'
+    | '/organizations/my/'
     | '/profile/settings/'
     | '/projects/$id/'
     | '/tasks/$id/'
     | '/auth/forgot-password/'
+    | '/events/$id/settings/'
     | '/events/my/$id/'
     | '/offers/my/$id/'
+    | '/organizations/$id/events/'
+    | '/organizations/$id/members/'
+    | '/organizations/$id/projects/'
+    | '/organizations/$id/roles/'
+    | '/organizations/$id/settings/'
+    | '/projects/$id/settings/'
     | '/projects/my/$id/'
+    | '/organizations/$id/events/create/'
+    | '/organizations/$id/projects/create/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$'
+    | '/403'
+    | '/banned'
     | '/multi-step-form'
     | '/auth/verification-email'
     | '/auth/verification-two-factor'
     | '/activities'
+    | '/bookmarks'
     | '/calendar'
     | '/categories'
     | '/chat'
+    | '/faq'
     | '/notifications'
     | '/organizations'
+    | '/privacy'
     | '/profile'
     | '/reports'
     | '/skills'
+    | '/terms-of-service'
+    | '/terms'
     | '/time-bank'
     | '/map'
     | '/auth'
@@ -481,32 +714,53 @@ export interface FileRouteTypes {
     | '/events/$id'
     | '/offers/$id'
     | '/organizations/$id'
+    | '/organizations/archived'
+    | '/organizations/create'
+    | '/organizations/my'
     | '/profile/settings'
     | '/projects/$id'
     | '/tasks/$id'
     | '/auth/forgot-password'
+    | '/events/$id/settings'
     | '/events/my/$id'
     | '/offers/my/$id'
+    | '/organizations/$id/events'
+    | '/organizations/$id/members'
+    | '/organizations/$id/projects'
+    | '/organizations/$id/roles'
+    | '/organizations/$id/settings'
+    | '/projects/$id/settings'
     | '/projects/my/$id'
+    | '/organizations/$id/events/create'
+    | '/organizations/$id/projects/create'
   id:
     | '__root__'
     | '/'
+    | '/$'
+    | '/403'
     | '/_authLayout'
     | '/_masterLayout'
     | '/_noFooterLayout'
+    | '/banned'
     | '/_masterLayout/profile'
     | '/multi-step-form/'
+    | '/_masterLayout/organizations/$id'
     | '/_authLayout/auth/verification-email'
     | '/_authLayout/auth/verification-two-factor'
     | '/_masterLayout/activities/'
+    | '/_masterLayout/bookmarks/'
     | '/_masterLayout/calendar/'
     | '/_masterLayout/categories/'
     | '/_masterLayout/chat/'
+    | '/_masterLayout/faq/'
     | '/_masterLayout/notifications/'
     | '/_masterLayout/organizations/'
+    | '/_masterLayout/privacy/'
     | '/_masterLayout/profile/'
     | '/_masterLayout/reports/'
     | '/_masterLayout/skills/'
+    | '/_masterLayout/terms-of-service/'
+    | '/_masterLayout/terms/'
     | '/_masterLayout/time-bank/'
     | '/_noFooterLayout/map/'
     | '/_authLayout/auth/'
@@ -517,25 +771,47 @@ export interface FileRouteTypes {
     | '/_masterLayout/events/$id/'
     | '/_masterLayout/offers/$id/'
     | '/_masterLayout/organizations/$id/'
+    | '/_masterLayout/organizations/archived/'
+    | '/_masterLayout/organizations/create/'
+    | '/_masterLayout/organizations/my/'
     | '/_masterLayout/profile/settings/'
     | '/_masterLayout/projects/$id/'
     | '/_masterLayout/tasks/$id/'
     | '/_authLayout/auth/forgot-password/'
+    | '/_masterLayout/events/$id/settings/'
     | '/_masterLayout/events/my/$id/'
     | '/_masterLayout/offers/my/$id/'
+    | '/_masterLayout/organizations/$id/events/'
+    | '/_masterLayout/organizations/$id/members/'
+    | '/_masterLayout/organizations/$id/projects/'
+    | '/_masterLayout/organizations/$id/roles/'
+    | '/_masterLayout/organizations/$id/settings/'
+    | '/_masterLayout/projects/$id/settings/'
     | '/_masterLayout/projects/my/$id/'
+    | '/_masterLayout/organizations/$id/events/create/'
+    | '/_masterLayout/organizations/$id/projects/create/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SplatRoute: typeof SplatRoute
+  R403Route: typeof R403Route
   AuthLayoutRoute: typeof AuthLayoutRouteWithChildren
   MasterLayoutRoute: typeof MasterLayoutRouteWithChildren
   NoFooterLayoutRoute: typeof NoFooterLayoutRouteWithChildren
+  BannedRoute: typeof BannedRoute
   MultiStepFormIndexLazyRoute: typeof MultiStepFormIndexLazyRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/banned': {
+      id: '/banned'
+      path: '/banned'
+      fullPath: '/banned'
+      preLoaderRoute: typeof BannedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_noFooterLayout': {
       id: '/_noFooterLayout'
       path: ''
@@ -555,6 +831,20 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AuthLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/403': {
+      id: '/403'
+      path: '/403'
+      fullPath: '/403'
+      preLoaderRoute: typeof R403RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$': {
+      id: '/$'
+      path: '/$'
+      fullPath: '/$'
+      preLoaderRoute: typeof SplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -599,6 +889,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MasterLayoutTimeBankIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
+    '/_masterLayout/terms/': {
+      id: '/_masterLayout/terms/'
+      path: '/terms'
+      fullPath: '/terms/'
+      preLoaderRoute: typeof MasterLayoutTermsIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/terms-of-service/': {
+      id: '/_masterLayout/terms-of-service/'
+      path: '/terms-of-service'
+      fullPath: '/terms-of-service/'
+      preLoaderRoute: typeof MasterLayoutTermsOfServiceIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
     '/_masterLayout/skills/': {
       id: '/_masterLayout/skills/'
       path: '/skills'
@@ -620,6 +924,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MasterLayoutProfileIndexRouteImport
       parentRoute: typeof MasterLayoutProfileRoute
     }
+    '/_masterLayout/privacy/': {
+      id: '/_masterLayout/privacy/'
+      path: '/privacy'
+      fullPath: '/privacy/'
+      preLoaderRoute: typeof MasterLayoutPrivacyIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
     '/_masterLayout/organizations/': {
       id: '/_masterLayout/organizations/'
       path: '/organizations'
@@ -632,6 +943,13 @@ declare module '@tanstack/react-router' {
       path: '/notifications'
       fullPath: '/notifications/'
       preLoaderRoute: typeof MasterLayoutNotificationsIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/faq/': {
+      id: '/_masterLayout/faq/'
+      path: '/faq'
+      fullPath: '/faq/'
+      preLoaderRoute: typeof MasterLayoutFaqIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
     '/_masterLayout/chat/': {
@@ -655,6 +973,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MasterLayoutCalendarIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
+    '/_masterLayout/bookmarks/': {
+      id: '/_masterLayout/bookmarks/'
+      path: '/bookmarks'
+      fullPath: '/bookmarks/'
+      preLoaderRoute: typeof MasterLayoutBookmarksIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
     '/_masterLayout/activities/': {
       id: '/_masterLayout/activities/'
       path: '/activities'
@@ -675,6 +1000,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/auth/verification-email'
       preLoaderRoute: typeof AuthLayoutAuthVerificationEmailLazyRouteImport
       parentRoute: typeof AuthLayoutRoute
+    }
+    '/_masterLayout/organizations/$id': {
+      id: '/_masterLayout/organizations/$id'
+      path: '/organizations/$id'
+      fullPath: '/organizations/$id'
+      preLoaderRoute: typeof MasterLayoutOrganizationsIdRouteImport
+      parentRoute: typeof MasterLayoutRoute
     }
     '/_authLayout/auth/forgot-password/': {
       id: '/_authLayout/auth/forgot-password/'
@@ -704,12 +1036,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MasterLayoutProfileSettingsIndexRouteImport
       parentRoute: typeof MasterLayoutProfileRoute
     }
+    '/_masterLayout/organizations/my/': {
+      id: '/_masterLayout/organizations/my/'
+      path: '/organizations/my'
+      fullPath: '/organizations/my/'
+      preLoaderRoute: typeof MasterLayoutOrganizationsMyIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/organizations/create/': {
+      id: '/_masterLayout/organizations/create/'
+      path: '/organizations/create'
+      fullPath: '/organizations/create/'
+      preLoaderRoute: typeof MasterLayoutOrganizationsCreateIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/organizations/archived/': {
+      id: '/_masterLayout/organizations/archived/'
+      path: '/organizations/archived'
+      fullPath: '/organizations/archived/'
+      preLoaderRoute: typeof MasterLayoutOrganizationsArchivedIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
     '/_masterLayout/organizations/$id/': {
       id: '/_masterLayout/organizations/$id/'
-      path: '/organizations/$id'
+      path: '/'
       fullPath: '/organizations/$id/'
       preLoaderRoute: typeof MasterLayoutOrganizationsIdIndexRouteImport
-      parentRoute: typeof MasterLayoutRoute
+      parentRoute: typeof MasterLayoutOrganizationsIdRoute
     }
     '/_masterLayout/offers/$id/': {
       id: '/_masterLayout/offers/$id/'
@@ -760,6 +1113,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MasterLayoutProjectsMyIdIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
+    '/_masterLayout/projects/$id/settings/': {
+      id: '/_masterLayout/projects/$id/settings/'
+      path: '/projects/$id/settings'
+      fullPath: '/projects/$id/settings/'
+      preLoaderRoute: typeof MasterLayoutProjectsIdSettingsIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/organizations/$id/settings/': {
+      id: '/_masterLayout/organizations/$id/settings/'
+      path: '/settings'
+      fullPath: '/organizations/$id/settings/'
+      preLoaderRoute: typeof MasterLayoutOrganizationsIdSettingsIndexRouteImport
+      parentRoute: typeof MasterLayoutOrganizationsIdRoute
+    }
+    '/_masterLayout/organizations/$id/roles/': {
+      id: '/_masterLayout/organizations/$id/roles/'
+      path: '/roles'
+      fullPath: '/organizations/$id/roles/'
+      preLoaderRoute: typeof MasterLayoutOrganizationsIdRolesIndexRouteImport
+      parentRoute: typeof MasterLayoutOrganizationsIdRoute
+    }
+    '/_masterLayout/organizations/$id/projects/': {
+      id: '/_masterLayout/organizations/$id/projects/'
+      path: '/projects'
+      fullPath: '/organizations/$id/projects/'
+      preLoaderRoute: typeof MasterLayoutOrganizationsIdProjectsIndexRouteImport
+      parentRoute: typeof MasterLayoutOrganizationsIdRoute
+    }
+    '/_masterLayout/organizations/$id/members/': {
+      id: '/_masterLayout/organizations/$id/members/'
+      path: '/members'
+      fullPath: '/organizations/$id/members/'
+      preLoaderRoute: typeof MasterLayoutOrganizationsIdMembersIndexRouteImport
+      parentRoute: typeof MasterLayoutOrganizationsIdRoute
+    }
+    '/_masterLayout/organizations/$id/events/': {
+      id: '/_masterLayout/organizations/$id/events/'
+      path: '/events'
+      fullPath: '/organizations/$id/events/'
+      preLoaderRoute: typeof MasterLayoutOrganizationsIdEventsIndexRouteImport
+      parentRoute: typeof MasterLayoutOrganizationsIdRoute
+    }
     '/_masterLayout/offers/my/$id/': {
       id: '/_masterLayout/offers/my/$id/'
       path: '/offers/my/$id'
@@ -773,6 +1168,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/events/my/$id/'
       preLoaderRoute: typeof MasterLayoutEventsMyIdIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/events/$id/settings/': {
+      id: '/_masterLayout/events/$id/settings/'
+      path: '/events/$id/settings'
+      fullPath: '/events/$id/settings/'
+      preLoaderRoute: typeof MasterLayoutEventsIdSettingsIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/organizations/$id/projects/create/': {
+      id: '/_masterLayout/organizations/$id/projects/create/'
+      path: '/projects/create'
+      fullPath: '/organizations/$id/projects/create/'
+      preLoaderRoute: typeof MasterLayoutOrganizationsIdProjectsCreateIndexRouteImport
+      parentRoute: typeof MasterLayoutOrganizationsIdRoute
+    }
+    '/_masterLayout/organizations/$id/events/create/': {
+      id: '/_masterLayout/organizations/$id/events/create/'
+      path: '/events/create'
+      fullPath: '/organizations/$id/events/create/'
+      preLoaderRoute: typeof MasterLayoutOrganizationsIdEventsCreateIndexRouteImport
+      parentRoute: typeof MasterLayoutOrganizationsIdRoute
     }
   }
 }
@@ -817,49 +1233,110 @@ const MasterLayoutProfileRouteChildren: MasterLayoutProfileRouteChildren = {
 const MasterLayoutProfileRouteWithChildren =
   MasterLayoutProfileRoute._addFileChildren(MasterLayoutProfileRouteChildren)
 
+interface MasterLayoutOrganizationsIdRouteChildren {
+  MasterLayoutOrganizationsIdIndexRoute: typeof MasterLayoutOrganizationsIdIndexRoute
+  MasterLayoutOrganizationsIdEventsIndexRoute: typeof MasterLayoutOrganizationsIdEventsIndexRoute
+  MasterLayoutOrganizationsIdMembersIndexRoute: typeof MasterLayoutOrganizationsIdMembersIndexRoute
+  MasterLayoutOrganizationsIdProjectsIndexRoute: typeof MasterLayoutOrganizationsIdProjectsIndexRoute
+  MasterLayoutOrganizationsIdRolesIndexRoute: typeof MasterLayoutOrganizationsIdRolesIndexRoute
+  MasterLayoutOrganizationsIdSettingsIndexRoute: typeof MasterLayoutOrganizationsIdSettingsIndexRoute
+  MasterLayoutOrganizationsIdEventsCreateIndexRoute: typeof MasterLayoutOrganizationsIdEventsCreateIndexRoute
+  MasterLayoutOrganizationsIdProjectsCreateIndexRoute: typeof MasterLayoutOrganizationsIdProjectsCreateIndexRoute
+}
+
+const MasterLayoutOrganizationsIdRouteChildren: MasterLayoutOrganizationsIdRouteChildren =
+  {
+    MasterLayoutOrganizationsIdIndexRoute:
+      MasterLayoutOrganizationsIdIndexRoute,
+    MasterLayoutOrganizationsIdEventsIndexRoute:
+      MasterLayoutOrganizationsIdEventsIndexRoute,
+    MasterLayoutOrganizationsIdMembersIndexRoute:
+      MasterLayoutOrganizationsIdMembersIndexRoute,
+    MasterLayoutOrganizationsIdProjectsIndexRoute:
+      MasterLayoutOrganizationsIdProjectsIndexRoute,
+    MasterLayoutOrganizationsIdRolesIndexRoute:
+      MasterLayoutOrganizationsIdRolesIndexRoute,
+    MasterLayoutOrganizationsIdSettingsIndexRoute:
+      MasterLayoutOrganizationsIdSettingsIndexRoute,
+    MasterLayoutOrganizationsIdEventsCreateIndexRoute:
+      MasterLayoutOrganizationsIdEventsCreateIndexRoute,
+    MasterLayoutOrganizationsIdProjectsCreateIndexRoute:
+      MasterLayoutOrganizationsIdProjectsCreateIndexRoute,
+  }
+
+const MasterLayoutOrganizationsIdRouteWithChildren =
+  MasterLayoutOrganizationsIdRoute._addFileChildren(
+    MasterLayoutOrganizationsIdRouteChildren,
+  )
+
 interface MasterLayoutRouteChildren {
   MasterLayoutProfileRoute: typeof MasterLayoutProfileRouteWithChildren
+  MasterLayoutOrganizationsIdRoute: typeof MasterLayoutOrganizationsIdRouteWithChildren
   MasterLayoutActivitiesIndexRoute: typeof MasterLayoutActivitiesIndexRoute
+  MasterLayoutBookmarksIndexRoute: typeof MasterLayoutBookmarksIndexRoute
   MasterLayoutCalendarIndexRoute: typeof MasterLayoutCalendarIndexRoute
   MasterLayoutCategoriesIndexRoute: typeof MasterLayoutCategoriesIndexRoute
   MasterLayoutChatIndexRoute: typeof MasterLayoutChatIndexRoute
+  MasterLayoutFaqIndexRoute: typeof MasterLayoutFaqIndexRoute
   MasterLayoutNotificationsIndexRoute: typeof MasterLayoutNotificationsIndexRoute
   MasterLayoutOrganizationsIndexRoute: typeof MasterLayoutOrganizationsIndexRoute
+  MasterLayoutPrivacyIndexRoute: typeof MasterLayoutPrivacyIndexRoute
   MasterLayoutReportsIndexRoute: typeof MasterLayoutReportsIndexRoute
   MasterLayoutSkillsIndexRoute: typeof MasterLayoutSkillsIndexRoute
+  MasterLayoutTermsOfServiceIndexRoute: typeof MasterLayoutTermsOfServiceIndexRoute
+  MasterLayoutTermsIndexRoute: typeof MasterLayoutTermsIndexRoute
   MasterLayoutTimeBankIndexRoute: typeof MasterLayoutTimeBankIndexRoute
   MasterLayoutActivitiesMyIndexRoute: typeof MasterLayoutActivitiesMyIndexRoute
   MasterLayoutCategoriesIdIndexRoute: typeof MasterLayoutCategoriesIdIndexRoute
   MasterLayoutEventsIdIndexRoute: typeof MasterLayoutEventsIdIndexRoute
   MasterLayoutOffersIdIndexRoute: typeof MasterLayoutOffersIdIndexRoute
-  MasterLayoutOrganizationsIdIndexRoute: typeof MasterLayoutOrganizationsIdIndexRoute
+  MasterLayoutOrganizationsArchivedIndexRoute: typeof MasterLayoutOrganizationsArchivedIndexRoute
+  MasterLayoutOrganizationsCreateIndexRoute: typeof MasterLayoutOrganizationsCreateIndexRoute
+  MasterLayoutOrganizationsMyIndexRoute: typeof MasterLayoutOrganizationsMyIndexRoute
   MasterLayoutProjectsIdIndexRoute: typeof MasterLayoutProjectsIdIndexRoute
   MasterLayoutTasksIdIndexRoute: typeof MasterLayoutTasksIdIndexRoute
+  MasterLayoutEventsIdSettingsIndexRoute: typeof MasterLayoutEventsIdSettingsIndexRoute
   MasterLayoutEventsMyIdIndexRoute: typeof MasterLayoutEventsMyIdIndexRoute
   MasterLayoutOffersMyIdIndexRoute: typeof MasterLayoutOffersMyIdIndexRoute
+  MasterLayoutProjectsIdSettingsIndexRoute: typeof MasterLayoutProjectsIdSettingsIndexRoute
   MasterLayoutProjectsMyIdIndexRoute: typeof MasterLayoutProjectsMyIdIndexRoute
 }
 
 const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
   MasterLayoutProfileRoute: MasterLayoutProfileRouteWithChildren,
+  MasterLayoutOrganizationsIdRoute:
+    MasterLayoutOrganizationsIdRouteWithChildren,
   MasterLayoutActivitiesIndexRoute: MasterLayoutActivitiesIndexRoute,
+  MasterLayoutBookmarksIndexRoute: MasterLayoutBookmarksIndexRoute,
   MasterLayoutCalendarIndexRoute: MasterLayoutCalendarIndexRoute,
   MasterLayoutCategoriesIndexRoute: MasterLayoutCategoriesIndexRoute,
   MasterLayoutChatIndexRoute: MasterLayoutChatIndexRoute,
+  MasterLayoutFaqIndexRoute: MasterLayoutFaqIndexRoute,
   MasterLayoutNotificationsIndexRoute: MasterLayoutNotificationsIndexRoute,
   MasterLayoutOrganizationsIndexRoute: MasterLayoutOrganizationsIndexRoute,
+  MasterLayoutPrivacyIndexRoute: MasterLayoutPrivacyIndexRoute,
   MasterLayoutReportsIndexRoute: MasterLayoutReportsIndexRoute,
   MasterLayoutSkillsIndexRoute: MasterLayoutSkillsIndexRoute,
+  MasterLayoutTermsOfServiceIndexRoute: MasterLayoutTermsOfServiceIndexRoute,
+  MasterLayoutTermsIndexRoute: MasterLayoutTermsIndexRoute,
   MasterLayoutTimeBankIndexRoute: MasterLayoutTimeBankIndexRoute,
   MasterLayoutActivitiesMyIndexRoute: MasterLayoutActivitiesMyIndexRoute,
   MasterLayoutCategoriesIdIndexRoute: MasterLayoutCategoriesIdIndexRoute,
   MasterLayoutEventsIdIndexRoute: MasterLayoutEventsIdIndexRoute,
   MasterLayoutOffersIdIndexRoute: MasterLayoutOffersIdIndexRoute,
-  MasterLayoutOrganizationsIdIndexRoute: MasterLayoutOrganizationsIdIndexRoute,
+  MasterLayoutOrganizationsArchivedIndexRoute:
+    MasterLayoutOrganizationsArchivedIndexRoute,
+  MasterLayoutOrganizationsCreateIndexRoute:
+    MasterLayoutOrganizationsCreateIndexRoute,
+  MasterLayoutOrganizationsMyIndexRoute: MasterLayoutOrganizationsMyIndexRoute,
   MasterLayoutProjectsIdIndexRoute: MasterLayoutProjectsIdIndexRoute,
   MasterLayoutTasksIdIndexRoute: MasterLayoutTasksIdIndexRoute,
+  MasterLayoutEventsIdSettingsIndexRoute:
+    MasterLayoutEventsIdSettingsIndexRoute,
   MasterLayoutEventsMyIdIndexRoute: MasterLayoutEventsMyIdIndexRoute,
   MasterLayoutOffersMyIdIndexRoute: MasterLayoutOffersMyIdIndexRoute,
+  MasterLayoutProjectsIdSettingsIndexRoute:
+    MasterLayoutProjectsIdSettingsIndexRoute,
   MasterLayoutProjectsMyIdIndexRoute: MasterLayoutProjectsMyIdIndexRoute,
 }
 
@@ -881,9 +1358,12 @@ const NoFooterLayoutRouteWithChildren = NoFooterLayoutRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SplatRoute: SplatRoute,
+  R403Route: R403Route,
   AuthLayoutRoute: AuthLayoutRouteWithChildren,
   MasterLayoutRoute: MasterLayoutRouteWithChildren,
   NoFooterLayoutRoute: NoFooterLayoutRouteWithChildren,
+  BannedRoute: BannedRoute,
   MultiStepFormIndexLazyRoute: MultiStepFormIndexLazyRoute,
 }
 export const routeTree = rootRouteImport

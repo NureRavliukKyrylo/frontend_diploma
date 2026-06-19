@@ -1,0 +1,46 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #f4f4f4;
+  font-family: "Exo 2", sans-serif;
+}
+
+.content {
+  width: 100%;
+  max-width: 1400px;
+  flex: 1;
+  padding: 0 40px 80px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.sections {
+  min-width: 0;
+}
+
+.ctaWrapper {
+  width: 100%;
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .content {
+    padding-inline: 16px;
+  }
+}

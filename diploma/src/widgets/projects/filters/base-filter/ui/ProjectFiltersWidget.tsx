@@ -20,12 +20,14 @@ import { useTranslation } from "react-i18next";
 interface ProjectFiltersWidgetProps {
   search: ProjectRequestParams;
   includeCategories?: boolean;
+  hideOrganizationFilter?: boolean;
   from?: BaseFiltersRoute;
 }
 
 export const ProjectFiltersWidget = ({
   search,
   includeCategories = true,
+  hideOrganizationFilter = false,
   from = "/activities/",
 }: ProjectFiltersWidgetProps) => {
   const { t } = useTranslation("common");
@@ -104,19 +106,23 @@ export const ProjectFiltersWidget = ({
             </div>
           </>
         )}
-        <div className={styles.dividerFilterBlock} />
-        <div className={styles.projectOrganizations}>
-          <h1 className={styles.subHeaderFilter}>
-            {t("filters.organizations")}
-          </h1>
-          <OrganizationsListFilter
-            useOrganizationsQuery={useOrganizationsInfiniteQuery({
-              PageSize: 7,
-            })}
-            selectedIds={search.OrganizationIds}
-            onToggle={onOrganizationToggle}
-          />
-        </div>
+        {!hideOrganizationFilter && (
+          <>
+            <div className={styles.dividerFilterBlock} />
+            <div className={styles.projectOrganizations}>
+              <h1 className={styles.subHeaderFilter}>
+                {t("filters.organizations")}
+              </h1>
+              <OrganizationsListFilter
+                useOrganizationsQuery={useOrganizationsInfiniteQuery({
+                  PageSize: 7,
+                })}
+                selectedIds={search.OrganizationIds}
+                onToggle={onOrganizationToggle}
+              />
+            </div>
+          </>
+        )}
         <div className={styles.dividerFilterBlock} />
         <div className={styles.projectDistance}>
           <h1 className={styles.subHeaderFilter}>{t("filters.distance")}</h1>

@@ -2,7 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { organizationQuery } from "../queries";
 import type { QueryResult } from "@shared/config/types";
 import type { Organization } from "../types";
-import type { OrganizationPaginationParams } from "../../libs";
+import type { OrganizationPaginationParams } from "../../lib/search-schema/organizationSearchSchema";
 
 export const useOrganizationsInfiniteQuery =
   (params: OrganizationPaginationParams) => (): QueryResult<Organization> => {

@@ -33,11 +33,7 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
     <div className={styles.wrapper}>
       <h2 className={styles.title}>Report Case</h2>
 
-      <LinkButtonWrapper
-        to="/users/$id"
-        params={{ id: reportCase.reporterUser.id }}
-        className={styles.reporterWrapper}
-      >
+      <div className={styles.reporterWrapper}>
         <Avatar
           src={reportCase.reporterUser.avatarUrl}
           fallback={reporterInitials}
@@ -47,7 +43,7 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
           <span className={styles.reporterName}>{reporterInitials}</span>
           <span className={styles.reporterLabel}>Reporter</span>
         </div>
-      </LinkButtonWrapper>
+      </div>
 
       <div className={styles.detailsBlock}>
         <div className={styles.pills}>
@@ -68,11 +64,7 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
       </div>
 
       {reportCase.relatedReported && (
-        <LinkButtonWrapper
-          to="/users/$id"
-          params={{ id: reportCase.relatedReported.id }}
-          className={styles.relatedWrapper}
-        >
+        <div className={styles.relatedWrapper}>
           <Avatar
             src={reportCase.relatedReported.avatarUrl}
             fallback={relatedReported}
@@ -82,7 +74,7 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
             <span className={styles.reporterName}>{relatedReported}</span>
             <span className={styles.reporterLabel}>Reported user</span>
           </div>
-        </LinkButtonWrapper>
+        </div>
       )}
 
       <div className={styles.actions}>

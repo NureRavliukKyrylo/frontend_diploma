@@ -1,16 +1,19 @@
 import type { ReactNode } from "react";
 import styles from "./Avatar.module.scss";
-import { getAvatarColor } from "@shared/libs/avatar";
 import { DefaultAvatar } from "@shared/assets/images/user";
+import { getAvatarColor } from "@shared/libs/avatar";
 
 type AvatarShape = "circle" | "rounded" | "square";
+type AvatarVariant = "default" | "initials";
 
 interface AvatarProps {
   src?: string;
   fallback?: string;
   shape?: AvatarShape;
+  variant?: AvatarVariant;
   size?: number;
   className?: string;
+  initialsClassName?: string;
   children?: ReactNode;
 }
 
@@ -18,7 +21,9 @@ export const Avatar = ({
   src,
   fallback,
   shape = "circle",
+  variant,
   className,
+  initialsClassName,
   children,
 }: AvatarProps) => {
   const initials =
@@ -28,12 +33,14 @@ export const Avatar = ({
       .map((w) => w[0])
       .slice(0, 2)
       .join("")
-      .toUpperCase() ?? "";
+      .toUpperCase() || "?";
 
   const showImage = !!src;
-  const showInitials = !src && !!fallback && !!initials;
-  const showDefault = !src && !initials;
-
+  const showInitials =
+    !src &&
+    (variant === "initials" ||
+      (variant === undefined && !!fallback && !!initials));
+  const showDefault = !src && !showInitials;
   const colors = getAvatarColor(initials);
 
   return (
@@ -55,7 +62,10 @@ export const Avatar = ({
         <img src={DefaultAvatar} alt="avatar" className={styles.image} />
       )}
       {showInitials && (
-        <h1 className={styles.initials} style={{ color: colors.text }}>
+        <h1
+          className={[styles.initials, initialsClassName].filter(Boolean).join(" ")}
+          style={{ color: colors.text }}
+        >
           {initials}
         </h1>
       )}

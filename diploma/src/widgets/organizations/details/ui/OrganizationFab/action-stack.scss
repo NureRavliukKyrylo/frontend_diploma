@@ -1,0 +1,129 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  border: none;
+  background: rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(3px);
+  cursor: pointer;
+}
+
+.fabRoot {
+  position: fixed;
+  right: 36px;
+  bottom: 36px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  font-family: "Exo 2", sans-serif;
+}
+
+.actionsStack {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  width: 260px;
+}
+
+.actionRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.contextBlock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border: 2px solid #8b0000;
+  border-radius: 999px;
+  background: #ffffff;
+  padding: 8px 16px 8px 8px;
+  box-shadow: 0 4px 20px rgba(139, 0, 0, 0.15);
+  cursor: pointer;
+  font-family: "Exo 2", sans-serif;
+  transition: box-shadow 0.15s ease;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.contextAvatar {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #1a1a1a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 900;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.contextText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.contextHint {
+  margin-bottom: 2px;
+  color: #bbbbbb;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.contextName {
+  max-width: 100%;
+  overflow: hidden;
+  color: #1a1a1a;
+  font-size: 13px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contextDivider {
+  height: 1px;
+  margin: 2px 0;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.actionPill,
+.actionCircle {
+  border: none;
+  cursor: pointer;
+  font-family: "Exo 2", sans-serif;
+}
+
+.actionPill {
+  height: 38px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}

@@ -10,8 +10,18 @@ type ResendButtonProps = {
   serverError?: string | null;
   isLoading: boolean;
   variant?: "default" | "profile";
-  t: TFunction;
+  t?: TFunction;
 };
+
+const fallbackT = ((
+  key: string,
+  options?: { time?: string },
+) => {
+  if (key === "common:actions.resendCode") return "Resend Code";
+  if (key === "common:actions.didNotReceive") return "Resend code in";
+  if (key === "common:actions.resendIn") return options?.time ?? "";
+  return key;
+}) as TFunction;
 
 export const ResendButton: React.FC<ResendButtonProps> = ({
   seconds,
@@ -24,6 +34,7 @@ export const ResendButton: React.FC<ResendButtonProps> = ({
   t,
 }) => {
   const canResend = seconds === 0;
+  const translate = t ?? fallbackT;
 
   useEffect(() => {
     if (seconds === 0) return;
@@ -36,8 +47,7 @@ export const ResendButton: React.FC<ResendButtonProps> = ({
     try {
       await onResend();
       if (!serverError) resetTimer();
-    } catch (err) {
-      console.log("Resend failed:", err);
+    } catch {
     }
   };
 
@@ -57,11 +67,13 @@ export const ResendButton: React.FC<ResendButtonProps> = ({
       } ${isLoading ? styles.loading : ""}`}
     >
       {canResend ? (
-        t("common:actions.resendCode")
+        translate("common:actions.resendCode")
       ) : (
         <>
-          {t("common:actions.didNotReceive")}{" "}
-          <span>{t("common:actions.resendIn", { time: formattedTime })}</span>
+          {translate("common:actions.didNotReceive")}{" "}
+          <span>
+            {translate("common:actions.resendIn", { time: formattedTime })}
+          </span>
         </>
       )}
     </button>

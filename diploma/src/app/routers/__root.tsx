@@ -1,4 +1,5 @@
 import { useNotificationSignalR } from "@entities/notification";
+import { NotFoundPage } from "@pages/not-found";
 import { useUserStore } from "@entities/user";
 import { useLocaleStore, useSignalRStore } from "@shared/config/stores";
 import type { QueryClient } from "@tanstack/react-query";
@@ -46,5 +47,6 @@ function RootComponent() {
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({
+  notFoundComponent: NotFoundPage,
   component: RootComponent,
 });

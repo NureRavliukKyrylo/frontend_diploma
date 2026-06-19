@@ -1,8 +1,8 @@
 import type { NavLink } from "@shared/config/types";
 
 export const headerLinks: NavLink[] = [
-  { title: "PROJECTS", href: "/projects" },
+  { title: "ACTIVITIES", href: "/activities" },
   { title: "MAP", href: "/map" },
-  { title: "CATEGORIES", href: "/categories" },
+  { title: "ORGANIZATION", href: "/organizations" },
   { title: "CALENDAR", href: "/calendar" },
 ];

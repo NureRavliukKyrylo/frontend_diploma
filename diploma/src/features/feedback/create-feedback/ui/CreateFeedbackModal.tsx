@@ -7,7 +7,7 @@ import {
 } from "@features/feedback/modal-feedback";
 
 interface CreateFeedbackModalProps {
-  entityType: Exclude<EntityType, "organization">;
+  entityType: EntityType;
   entityId: string;
   isOpen: boolean;
   onClose: () => void;

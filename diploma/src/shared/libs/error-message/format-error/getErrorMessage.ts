@@ -5,14 +5,18 @@ interface ApiErrorResponse {
   error?: string;
 }
 
-export function getErrorMessage(error: unknown, t: TFunction): string {
+export function getErrorMessage(error: unknown, t?: TFunction): string {
   if (axios.isAxiosError<ApiErrorResponse>(error)) {
-    return error.response?.data?.error ?? t("common:errors.somethingWentWrong");
+    return (
+      error.response?.data?.error ??
+      t?.("common:errors.somethingWentWrong") ??
+      "Something went wrong"
+    );
   }
 
   if (error instanceof Error) {
     return error.message;
   }
 
-  return t("common:errors.somethingWentWrong");
+  return t?.("common:errors.somethingWentWrong") ?? "Something went wrong";
 }

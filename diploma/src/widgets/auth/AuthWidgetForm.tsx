@@ -1,4 +1,4 @@
-import { AuthWrapper } from "@shared/ui/wrappers";
+import { AuthWrapper } from "@features/auth";
 import { useAuthStore } from "@entities/user";
 import { getAuthTabs } from "./configs/authTabs";
 import { authForms } from "./configs/authForms";

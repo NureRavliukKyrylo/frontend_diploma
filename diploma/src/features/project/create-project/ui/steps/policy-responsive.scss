@@ -1,0 +1,65 @@
+
+.policyRadioSelected {
+  border-color: #840000;
+  background: transparent;
+
+  &::after {
+    opacity: 1;
+  }
+}
+
+.policyTitle,
+.policyName {
+  display: block;
+  margin: 0 0 4px;
+  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.policyDescription,
+.policyDesc {
+  display: block;
+  margin: 0;
+  color: #aaaaaa;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .fieldBlock {
+    padding: 26px 22px;
+  }
+
+  .section {
+    padding: 24px 20px;
+  }
+
+  .datesGrid,
+  .dateRow,
+  .policyGrid,
+  .accessPolicyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formCard {
+    border-radius: 32px 20px 32px 20px;
+  }
+
+  .accessCard {
+    padding: 32px 22px;
+  }
+}

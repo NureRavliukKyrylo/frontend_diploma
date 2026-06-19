@@ -1,0 +1,59 @@
+@use "@shared/assets/styles" as *;
+
+.taskFooterContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include respond-to(mobile) {
+    gap: 14px;
+  }
+
+  p {
+    @include font-base(20px, 400);
+
+    @include respond-to(tablet) {
+      font-size: 16px;
+    }
+
+    @include respond-to(mobile) {
+      font-size: 14px;
+    }
+  }
+}
+
+.pendingRequest {
+  background: linear-gradient(360deg, #f59e0b 0%, #b45309 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  @include font-base(25px, 800);
+
+  @include respond-to(tablet) {
+    font-size: 20px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 17px;
+  }
+}
+
+.leave {
+  background: linear-gradient(180deg, #8c0000 0%, #b91515 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.joinTaskBlockButton {
+  width: 40%;
+  margin: 0 auto;
+
+  @include respond-to(tablet) {
+    width: 60%;
+  }
+
+  @include respond-to(mobile) {
+    width: 100%;
+  }
+}

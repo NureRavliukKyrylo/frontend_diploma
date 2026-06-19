@@ -1,0 +1,101 @@
+
+.backStepBtn {
+  border: 1.5px solid #eeeeee;
+  background: #ffffff;
+  color: #888888;
+  padding: 20px 53px;
+  font-weight: 700;
+
+  &:hover {
+    border-color: #cccccc;
+    color: #666666;
+  }
+}
+
+.mapModal {
+  width: 100%;
+  height: min(70vh, 620px);
+  min-height: 420px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.mapPopup {
+  font-family: "Exo 2", sans-serif;
+}
+
+.mapPopupContent {
+  margin: 0;
+  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(0.6);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .drawerHeader {
+    margin: 10px 10px 0;
+  }
+
+  .stepCard {
+    margin: 10px 10px 0;
+    padding: 12px 10px;
+  }
+
+  .stepRow {
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .stepGroup {
+    min-width: 58px;
+  }
+
+  .stepLine {
+    flex-basis: 32px;
+    max-width: 32px;
+  }
+
+  .drawerScroll {
+    padding: 16px 10px 0;
+  }
+
+  .dateRow,
+  .estimateRow,
+  .policyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .continueWrap {
+    flex-direction: column-reverse;
+  }
+
+  .continueBtn,
+  .backStepBtn {
+    width: 100%;
+    padding: 16px 28px;
+  }
+}

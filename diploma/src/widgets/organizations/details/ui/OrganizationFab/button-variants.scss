@@ -1,0 +1,120 @@
+
+.actionCircle {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  overflow: hidden;
+}
+
+.dashboardAction {
+  background: #0f3460;
+  color: #ffffff;
+  box-shadow: 0 3px 14px rgba(15, 52, 96, 0.3);
+}
+
+.settingsAction {
+  border: 1px solid #e8e8e8;
+  background: #ffffff;
+  color: #333333;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.12);
+}
+
+.projectAction {
+  background: #1a1a1a;
+  color: #ffffff;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.22);
+}
+
+.eventAction {
+  background: #8b0000;
+  color: #ffffff;
+  box-shadow: 0 3px 14px rgba(139, 0, 0, 0.3);
+}
+
+.taskAction {
+  background: #1a5c3a;
+  color: #ffffff;
+  box-shadow: 0 3px 14px rgba(26, 92, 58, 0.3);
+}
+
+.membersAction {
+  background: #3d2b6e;
+  color: #ffffff;
+  box-shadow: 0 3px 14px rgba(61, 43, 110, 0.3);
+}
+
+.rolesAction {
+  background: #5a3090;
+  color: #ffffff;
+  box-shadow: 0 3px 14px rgba(90, 48, 144, 0.3);
+}
+
+.mainButton {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border: none;
+  border-radius: 50%;
+  background: #8b0000;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(132, 0, 0, 0.35);
+  cursor: pointer;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.mainButtonOpen {
+  background: #1a1a1a;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+
+.mainIcon {
+  position: absolute;
+  inset: auto;
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+  transition:
+    opacity 0.2s ease,
+    transform 0.24s ease;
+}
+
+.mainIconHidden {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.72);
+}
+
+.closeIcon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.72);
+}
+
+.closeIconVisible {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.pulseRing,
+.pulseRingDelayed {
+  position: absolute;
+  inset: -8px;
+  border: 2px solid rgba(139, 0, 0, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: pulse-out 2.4s ease-out infinite;
+}
+
+.pulseRingDelayed {
+  animation-delay: 0.9s;
+}
+

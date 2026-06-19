@@ -6,6 +6,7 @@ interface LinkButtonWrapperProps extends LinkProps {
   children: React.ReactNode;
   className?: string;
   disabled?: boolean;
+  style?: React.CSSProperties;
 }
 
 export const LinkButtonWrapper: React.FC<LinkButtonWrapperProps> = ({

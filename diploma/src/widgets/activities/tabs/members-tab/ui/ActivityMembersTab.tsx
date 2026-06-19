@@ -1,7 +1,7 @@
 import { MemberCard, MemberCardSkeleton } from "@entities/user/profile";
 import { MembersListWidget } from "@widgets/users";
 import styles from "./ActivityMembersTab.module.scss";
-import { useMembersInfiniteQuery } from "@shared/api/participation";
+import { useMembersInfiniteQuery } from "@entities/participation";
 import { LoadMoreButton } from "@shared/ui/buttons";
 import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";

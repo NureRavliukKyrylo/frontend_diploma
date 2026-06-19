@@ -11,7 +11,7 @@ import type { EntityType } from "@shared/config/types";
 
 interface FeedbackFormProps {
   formik: FormikProps<FeedbackFormValues>;
-  entityType: Exclude<EntityType, "organization">;
+  entityType: EntityType;
   isLoading: boolean;
   buttonText: string;
   title?: string;

@@ -24,9 +24,7 @@ export const useGeolocation = ({
 
         onLocationChange(coords);
       },
-      () => {
-        console.log("Location access denied or unavailable");
-      },
+      () => undefined,
     );
   }, []);
 };

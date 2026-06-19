@@ -1,0 +1,86 @@
+.topRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  border-radius: 20px;
+  background: #ffffff;
+  padding: 16px 24px;
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.backBtn {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border: none;
+  border-radius: 50%;
+  background: #ececec;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    background: #d8d8d8;
+    color: #555;
+    transform: translateX(-1px);
+  }
+}
+
+.crumb {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: "Exo 2", sans-serif;
+  font-size: 18px;
+}
+
+.crumbOrg {
+  max-width: min(380px, 34vw);
+  overflow: hidden;
+  color: #cccccc;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.crumbSep {
+  color: #e5e5e5;
+  font-weight: 700;
+}
+
+.crumbTitle {
+  color: #1a1a1a;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .topRow {
+    gap: 12px;
+  }
+
+  .backBtn {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+  }
+
+  .crumb {
+    font-size: 16px;
+  }
+
+  .crumbOrg,
+  .crumbSep {
+    display: none;
+  }
+}

@@ -1,0 +1,27 @@
+
+@media (max-width: 720px) {
+  .topBar {
+    padding: 18px;
+  }
+
+  .eventName {
+    max-width: 58vw;
+    font-size: 24px;
+  }
+
+  .settingsLabel {
+    font-size: 18px;
+  }
+
+  .tabSwitcher {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .tabButton {
+    flex: 1;
+    justify-content: center;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+}

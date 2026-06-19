@@ -11,6 +11,7 @@ interface BaseModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  className?: string;
   error?: string | null;
   maxWidth?: string;
   showClosed?: boolean;
@@ -23,6 +24,7 @@ export const BaseModal: React.FC<BaseModalProps> = ({
   isOpen,
   onClose,
   children,
+  className,
   error,
   maxWidth = "700px",
   showClosed = true,
@@ -49,7 +51,7 @@ export const BaseModal: React.FC<BaseModalProps> = ({
           transition={{ duration: 0.2 }}
         >
           <motion.div
-            className={styles.modalWrapper}
+            className={`${styles.modalWrapper} ${className ?? ""}`}
             onClick={(e) => e.stopPropagation()}
             variants={modal}
             initial="initial"

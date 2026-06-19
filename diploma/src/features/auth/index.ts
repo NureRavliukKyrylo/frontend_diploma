@@ -5,3 +5,4 @@ export { PasswordForm } from "./password-form/ui/PasswordForm";
 export { ForgotPasswordForm } from "./forgot-password-form/ui/ForgotPasswordForm";
 export { LogoutButton } from "./logout/ui/LogoutButton";
 export { useLogout } from "./logout/model/useLogout";
+export { AuthWrapper } from "./ui/auth-wrapper/AuthWrapper";

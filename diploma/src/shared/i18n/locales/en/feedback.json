@@ -33,6 +33,7 @@
     "placeholder": "Tell us more about your experience..."
   },
   "entities": {
+    "organization": "organization",
     "project": "project",
     "task": "task",
     "event": "event"

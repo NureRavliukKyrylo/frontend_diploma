@@ -1,0 +1,149 @@
+.sectionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: #e8e8e8;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+}
+
+.section {
+  background: #ffffff;
+  padding: 32px 36px;
+
+  &:first-child {
+    border-radius: 20px 20px 0 0;
+  }
+
+  &:last-child {
+    border-radius: 0 0 20px 20px;
+  }
+}
+
+.sectionLabel {
+  margin: 0 0 6px;
+  color: #8b0000;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.sectionDescription {
+  margin: 0 0 24px;
+  color: #aaaaaa;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.policyGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.policyCard {
+  width: 100%;
+  border: 2px solid #ebebeb;
+  border-radius: 16px;
+  background: #ffffff;
+  min-height: 130px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+  font-family: "Exo 2", sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    border-color: #d8d8d8;
+  }
+
+  strong {
+    color: #1a1a1a;
+    font-size: 20px;
+    font-weight: 900;
+    margin: 10px 0 4px;
+  }
+
+  small {
+    color: #aaaaaa;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+}
+
+.policyTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.policyIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #f5f5f5;
+  color: #888888;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.radioDot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #dddddd;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ffffff;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+}
+
+.policyCardSelected {
+  border-color: #8b0000;
+  background: #fff9f9;
+
+  .policyIcon {
+    background: #fff0f0;
+    color: #8b0000;
+  }
+
+  .radioDot {
+    border-color: #8b0000;
+    background: #8b0000;
+
+    span {
+      opacity: 1;
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  .section {
+    padding: 24px 20px;
+  }
+
+  .policyGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,4 +1,24 @@
-import { overviewSchema } from "@features/time-bank/offer-form/overview-step/libs/overviewSchema";
+import type { TFunction } from "i18next";
+import { getOverviewSchema } from "@features/time-bank/offer-form/overview-step/libs/overviewSchema";
+
+const t = ((key: string) => {
+  const messages: Record<string, string> = {
+    "timeBank:validation.titleRequired": "Title is required",
+    "timeBank:validation.titleMax": "Max 30 characters",
+    "timeBank:validation.descriptionRequired": "Description is required",
+    "timeBank:validation.descriptionMax": "Max 150 characters",
+    "timeBank:validation.priceRequired": "Price is required",
+    "timeBank:validation.priceTypeError": "Must be a number",
+    "timeBank:validation.priceNegative": "Price can't be negative",
+    "timeBank:validation.startDateRequired": "Start date is required",
+    "timeBank:validation.startDateInPast": "Start date cannot be in the past",
+    "timeBank:validation.endDateRequired": "End date is required",
+  };
+
+  return messages[key] ?? key;
+}) as TFunction;
+
+const overviewSchema = getOverviewSchema(t);
 
 const validData = {
   title: "Help with moving",

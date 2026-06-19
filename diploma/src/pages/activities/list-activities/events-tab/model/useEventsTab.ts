@@ -6,16 +6,24 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
+import type { BaseFiltersRoute } from "@shared/config/types";
 
-export const useEventsTab = (search: EventSearchParams) => {
-  const navigate = useNavigate({ from: "/activities/" });
+export const useEventsTab = (
+  search: EventSearchParams,
+  from: BaseFiltersRoute = "/activities/",
+  joinedOnly = false,
+) => {
+  const navigate = useNavigate({ from });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const { data: events } = useQuery(eventQuery.list(search));
   const router = useRouter();
 
+  const withJoinedOnly = (params: EventSearchParams) =>
+    joinedOnly ? { ...params, ShowJoined: true } : params;
+
   const nav = (updater: (prev: EventSearchParams) => EventSearchParams) =>
     navigate({
-      search: (prev) => updater(prev as EventSearchParams),
+      search: (prev) => withJoinedOnly(updater(prev as EventSearchParams)),
       resetScroll: false,
     });
 
@@ -27,7 +35,8 @@ export const useEventsTab = (search: EventSearchParams) => {
 
   const handlePageChange = (page: number) =>
     navigate({
-      search: (prev) => ({ ...prev, Page: page }),
+      search: (prev) =>
+        withJoinedOnly({ ...(prev as EventSearchParams), Page: page }),
     });
 
   return {

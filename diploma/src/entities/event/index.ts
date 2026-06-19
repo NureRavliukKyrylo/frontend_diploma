@@ -54,3 +54,12 @@ export {
 export { type EventAttendance } from "./model/types/EventAttendance";
 export { EventAttendanceListItem } from "./ui/event-attendance-item/EventAttendanceListItem";
 export { EventAttendanceListItemSkeleton } from "./ui/event-attendance-item/EventAttendanceListItemSkeleton";
+export {
+  cancelEvent,
+  updateEvent,
+  type CancelEventResponse,
+  type UpdateEventLocation,
+  type UpdateEventPayload,
+  type UpdateEventResponse,
+  type UpdateEventSkillRequirement,
+} from "./api";

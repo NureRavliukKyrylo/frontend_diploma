@@ -113,6 +113,7 @@ export const ChatPage = () => {
                     hasNextPage,
                     hasPreviousPage,
                     isFetchingNextPage,
+                    isFetchingPreviousPage,
                     fetchNextPage,
                     fetchPreviousPage,
                   } = useSuspenseInfiniteQuery({
@@ -128,8 +129,11 @@ export const ChatPage = () => {
                   return {
                     data,
                     hasNextPage,
+                    hasPreviousPage,
                     isFetchingNextPage,
+                    isFetchingPreviousPage,
                     fetchNextPage,
+                    fetchPreviousPage,
                   };
                 }}
                 renderCard={(message) =>

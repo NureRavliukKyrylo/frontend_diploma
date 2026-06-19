@@ -1,0 +1,119 @@
+.checklist {
+  position: relative;
+  z-index: 1;
+}
+
+.checklistItem {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 19px;
+  border-radius: 19px;
+  background: #fafafa;
+  margin-bottom: 12px;
+  border: 1.8px solid transparent;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    border-color: #840000;
+    background: #ffffff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.checklistIcon {
+  width: 53px;
+  height: 53px;
+  border-radius: 16px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.checklistIcon svg {
+  width: 23px;
+  height: 23px;
+}
+
+.checklistText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.checklistTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 2px;
+}
+
+.checklistDesc {
+  font-size: 14px;
+  color: #999999;
+}
+
+.checklistArrow {
+  color: #bbbbbb;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.checklistItem:hover .checklistArrow {
+  color: #840000;
+  transform: translateX(3px);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 29px 0 19px;
+  position: relative;
+  z-index: 1;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.dividerText {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  color: #cccccc;
+  text-transform: uppercase;
+}
+
+.organizationLink {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .checklistItem {
+    align-items: flex-start;
+    padding: 14px;
+  }
+
+  .checklistArrow {
+    margin-top: 13px;
+  }
+}

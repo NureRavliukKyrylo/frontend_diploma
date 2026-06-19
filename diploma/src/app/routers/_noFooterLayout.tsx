@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_noFooterLayout")({
 
 function NoFooterLayoutComponent() {
   return (
-    <IndexLayout showFooter={false}>
+    <IndexLayout showFooter={false} noFooterVariant="fullscreen">
       <Outlet />
     </IndexLayout>
   );

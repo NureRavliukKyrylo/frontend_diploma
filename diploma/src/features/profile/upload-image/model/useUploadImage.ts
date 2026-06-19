@@ -1,17 +1,27 @@
 import { useRef, useState, useMemo, useEffect } from "react";
-import { getSettingsMainFormSchema } from "@features/profile/main-settings-form/libs/settingsMainFormSchema";
+import { fileField } from "@shared/libs/validation";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
 
 interface UseUploadImageParams {
   src?: string | File | null;
   onChange: (file: File | null) => void;
+  maxSize?: number;
+  formats?: string[];
+  sizeMessage?: string;
+  formatMessage?: string;
 }
 
-export const useUploadImage = ({ src, onChange }: UseUploadImageParams) => {
+export const useUploadImage = ({
+  src,
+  onChange,
+  maxSize,
+  formats,
+  sizeMessage,
+  formatMessage,
+}: UseUploadImageParams) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { t } = useTranslation("profile");
-  const validationSchema = getSettingsMainFormSchema(t);
   const [isModalCropOpen, setIsModalCropOpen] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -20,14 +30,16 @@ export const useUploadImage = ({ src, onChange }: UseUploadImageParams) => {
     inputRef.current?.click();
   };
 
-  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    if (!file) return;
-
+  const handleFile = async (file: File) => {
     try {
       setError(null);
 
-      await validationSchema.validateAt("avatar", { avatar: file });
+      await fileField({
+        maxSize,
+        formats,
+        sizeMessage,
+        formatMessage,
+      }, t).validate(file);
 
       const previewUrl = URL.createObjectURL(file);
       setPreview(previewUrl);
@@ -37,6 +49,13 @@ export const useUploadImage = ({ src, onChange }: UseUploadImageParams) => {
         setError(err.message);
       }
     }
+  };
+
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    if (!file) return;
+
+    await handleFile(file);
 
     e.target.value = "";
   };
@@ -72,6 +91,7 @@ export const useUploadImage = ({ src, onChange }: UseUploadImageParams) => {
     preview,
     displaySrc,
     handleClick,
+    handleFile,
     handleChange,
     handleSave,
     handleClose,

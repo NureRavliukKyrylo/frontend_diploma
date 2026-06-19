@@ -16,6 +16,7 @@ export {
   getConnectedServicesConfig,
   type ConnectedServiceConfig,
   type ConnectedServiceId,
+  type ConnectedServiceId as ConnectedLinkPlatform,
 } from "./config/connected-links/connectedServices";
 export type { TimeBankStats } from "./model/types/profile/Profile";
 export type { ConnectedService } from "./model/types/services/ConnectedService";

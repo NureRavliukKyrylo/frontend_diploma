@@ -1,0 +1,35 @@
+@use "@shared/assets/styles" as *;
+
+.metaStrip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+
+  article {
+    padding: 14px 16px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.76);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  span {
+    @include font-base(12px, 800);
+    color: rgba(0, 0, 0, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  strong {
+    @include font-base(16px, 700);
+    color: rgba(0, 0, 0, 0.82);
+  }
+}
+
+@include respond-to(custom, 1180px) {
+  .metaStrip {
+    grid-template-columns: 1fr;
+  }
+}

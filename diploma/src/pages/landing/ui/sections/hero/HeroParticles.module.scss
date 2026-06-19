@@ -1,0 +1,21 @@
+.heroParticles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  display: block;
+  background: #840000;
+}
+
+.particleCircle {
+  border-radius: 50%;
+}
+
+.particleSquare {
+  border-radius: 4px;
+}

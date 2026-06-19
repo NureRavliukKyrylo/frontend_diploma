@@ -9,6 +9,7 @@ interface SortDropDownProps<T extends string | number> {
   onSelect: (value: T) => void;
   value: T;
   variant?: "default" | "report";
+  label?: string;
 }
 
 export const SortDropDown = <T extends string | number>({
@@ -16,13 +17,14 @@ export const SortDropDown = <T extends string | number>({
   onSelect,
   value,
   variant = "default",
+  label,
 }: SortDropDownProps<T>) => {
   const { t } = useTranslation("common");
   return (
     <BaseDropDown
       label={
         <h1 className={styles.dropDownLabel}>
-          {variant === "report" ? t("reason.title") : t("sorting.title")}:
+          {label ?? (variant === "report" ? t("reason.title") : t("sorting.title"))}:
           {options.find((o) => o.value === value)?.label}
         </h1>
       }

@@ -32,7 +32,6 @@ export function Carousel<T>({
 
       const parentWidth = parent.clientWidth;
       let count = Math.floor(parentWidth / minItemWidth);
-      console.log(count);
       count = Math.max(1, Math.min(count, items.length));
 
       const gap = parentWidth < 600 ? 8 : parentWidth < 900 ? 12 : 16;

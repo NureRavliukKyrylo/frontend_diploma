@@ -15,7 +15,8 @@ export const LoginForm = () => {
   return (
     <>
       <div className={styles.headerLogin}>
-        <h1>{t("login.title")}</h1>
+        <h1 className={styles.title}>{t("login.title")}</h1>
+        <p className={styles.subtitle}>{t("login.subtitle")}</p>
       </div>
       <form onSubmit={formik.handleSubmit} className={styles.loginForm}>
         <div className={styles.inputsLogin}>
@@ -61,7 +62,7 @@ export const LoginForm = () => {
           </div>
           <Link
             to={AuthRoutes.forgotPassword.root}
-            className={styles.forgotPassword}
+            className={styles.forgotLink}
           >
             {t("login.forgotPassword")}
           </Link>

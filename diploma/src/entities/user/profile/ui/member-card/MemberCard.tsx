@@ -1,6 +1,6 @@
 import { Avatar } from "@shared/ui";
 import styles from "./MemberCard.module.scss";
-import type { ParticipationMember } from "@shared/config/types";
+import type { ParticipationMember } from "@entities/participation";
 import { getFullName } from "../../libs/full-name/getFullName";
 
 interface MemberCardProps {

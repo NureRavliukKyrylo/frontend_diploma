@@ -10,6 +10,12 @@ interface UploadImageProps {
   error?: string | null;
   inputName?: string;
   maxWidth?: string;
+  accept?: string;
+  helperText?: string;
+  maxSize?: number;
+  formats?: string[];
+  sizeMessage?: string;
+  formatMessage?: string;
 }
 
 export const UploadImage = ({

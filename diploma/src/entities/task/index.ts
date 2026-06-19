@@ -45,3 +45,21 @@ export { TaskBoardControlItemSkeleton } from "./ui/board-item/control/TaskBoardC
 export { TaskCommentItem } from "./ui/comment-item/TaskCommentItem";
 export { TaskCommentItemSkeleton } from "./ui/comment-item/TaskCommentItemSkeleton";
 export { getTaskStatusConfig } from "./config/taskStatusesMap";
+export {
+  organizationTaskKeys,
+  organizationTaskQuery,
+} from "./model/queries/organizationTaskQuery";
+export { useOrganizationTasksQuery } from "./model/hooks/useOrganizationTasksQuery";
+export type {
+  OrganizationTaskRecord,
+  OrganizationTaskStatus,
+} from "./model/types/OrganizationTask";
+export {
+  updateTask,
+  updateTaskStatus,
+  deleteTask,
+  type UpdateTaskLocation,
+  type UpdateTaskPayload,
+  type UpdateTaskStatusPayload,
+  type DeleteTaskResponse,
+} from "./api";

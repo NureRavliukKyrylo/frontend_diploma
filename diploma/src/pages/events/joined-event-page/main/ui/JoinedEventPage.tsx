@@ -70,7 +70,7 @@ export const JoinedEventPage = () => {
                     className={styles.organizationInfo}
                   >
                     <img
-                      src={event?.organization?.logoUrl}
+                      src={event?.organization?.logoUrl ?? undefined}
                       alt="organization-image"
                     />
                     <p>{event?.organization?.name}</p>

@@ -1,51 +1,58 @@
-import { Skeleton } from "@heroui/react";
-import styles from "./TaskWidget.module.scss";
+import { Skeleton } from "@heroui/skeleton";
+import rootStyles from "./TaskWidget.module.scss";
+import contentStyles from "./TaskWidgetContent.module.scss";
+import skeletonStyles from "./TaskWidgetSkeleton.module.scss";
+import headerStyles from "./task-header/TaskWidgetHeader.module.scss";
+import metaStyles from "./task-header/TaskMetaChips.module.scss";
+import orgStyles from "./task-header/TaskOrganizationSummary.module.scss";
+import participationStyles from "./task-header/TaskParticipationBlock.module.scss";
+import relatedStyles from "./task-header/TaskRelatedActivities.module.scss";
 
 export const TaskWidgetSkeleton = () => {
   return (
-    <div className={styles.wrapperTaskWidget}>
-      <div className={styles.taskWidgetHeader}>
-        <div className={styles.headerTaskInfo}>
-          <Skeleton className={styles.skeletonMetaChip} />
+    <div className={rootStyles.wrapperTaskWidget}>
+      <div className={headerStyles.taskWidgetHeader}>
+        <div className={headerStyles.headerTaskInfo}>
+          <Skeleton className={skeletonStyles.skeletonMetaChip} />
 
-          <div className={styles.mainTaskData}>
-            <div className={styles.taskOrganizationInfo}>
-              <div className={styles.titleHeader}>
-                <Skeleton className={styles.skeletonTitle} />
-                <div className={styles.taskMetaInfo}>
-                  <Skeleton className={styles.skeletonMetaChip} />
-                  <Skeleton className={styles.skeletonMetaChip} />
-                  <Skeleton className={styles.skeletonMetaChip} />
+          <div className={headerStyles.mainTaskData}>
+            <div className={headerStyles.taskOrganizationInfo}>
+              <div className={headerStyles.titleHeader}>
+                <Skeleton className={skeletonStyles.skeletonTitle} />
+                <div className={metaStyles.taskMetaInfo}>
+                  <Skeleton className={skeletonStyles.skeletonMetaChip} />
+                  <Skeleton className={skeletonStyles.skeletonMetaChip} />
+                  <Skeleton className={skeletonStyles.skeletonMetaChip} />
                 </div>
               </div>
 
-              <div className={styles.rightBlockInfo}>
-                <div className={styles.organizationInfo}>
-                  <Skeleton className={styles.skeletonOrgImage} />
-                  <Skeleton className={styles.skeletonOrgName} />
+              <div className={orgStyles.rightBlockInfo}>
+                <div className={orgStyles.organizationInfo}>
+                  <Skeleton className={skeletonStyles.skeletonOrgImage} />
+                  <Skeleton className={skeletonStyles.skeletonOrgName} />
                 </div>
-                <Skeleton className={styles.skeletonRating} />
+                <Skeleton className={skeletonStyles.skeletonRating} />
               </div>
             </div>
 
-            <div className={styles.relatedActivities}>
-              <Skeleton className={styles.skeletonActivityPill} />
-              <Skeleton className={styles.skeletonActivityPill} />
+            <div className={relatedStyles.relatedActivities}>
+              <Skeleton className={skeletonStyles.skeletonActivityPill} />
+              <Skeleton className={skeletonStyles.skeletonActivityPill} />
             </div>
           </div>
         </div>
 
-        <div className={styles.taskFooterContent}>
-          <Skeleton className={styles.skeletonDescription} />
-          <div className={styles.joinTaskBlockButton}>
-            <Skeleton className={styles.skeletonButton} />
+        <div className={participationStyles.taskFooterContent}>
+          <Skeleton className={skeletonStyles.skeletonDescription} />
+          <div className={participationStyles.joinTaskBlockButton}>
+            <Skeleton className={skeletonStyles.skeletonButton} />
           </div>
         </div>
       </div>
 
-      <div className={styles.contentBlock}>
-        <Skeleton className={styles.skeletonToggle} />
-        <Skeleton className={styles.skeletonContent} />
+      <div className={contentStyles.contentBlock}>
+        <Skeleton className={skeletonStyles.skeletonToggle} />
+        <Skeleton className={skeletonStyles.skeletonContent} />
       </div>
     </div>
   );

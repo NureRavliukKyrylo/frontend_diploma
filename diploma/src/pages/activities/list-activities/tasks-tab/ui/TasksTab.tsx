@@ -27,12 +27,28 @@ import { Pagination } from "@shared/ui";
 import { useActivitiesTaskDrawer } from "../model/useActivitiesTaskDrawer";
 import { SwipeableDrawer } from "@mui/material";
 import { useTranslation } from "react-i18next";
-
+import type { BaseFiltersRoute } from "@shared/config/types";
 interface TasksTabProps {
   search: TaskSearchParams;
+  from?: BaseFiltersRoute;
+  joinedOnly?: boolean;
+  hideOrganizationFilter?: boolean;
 }
 
-export const TasksTab = ({ search }: TasksTabProps) => {
+const getRouteFrom = (from: BaseFiltersRoute) =>
+  from === "/bookmarks/"
+    ? "/_masterLayout/bookmarks/"
+    : "/_masterLayout/activities/";
+
+export const TasksTab = ({
+  search,
+  from = "/activities/",
+  joinedOnly = false,
+  hideOrganizationFilter = false,
+}: TasksTabProps) => {
+  const effectiveSearch = joinedOnly
+    ? { ...search, ShowJoined: true }
+    : search;
   const { t } = useTranslation(["activities", "common"]);
   const {
     isOpen,
@@ -42,14 +58,14 @@ export const TasksTab = ({ search }: TasksTabProps) => {
     handleModeChange,
     taskMode,
     handleSortChange,
-  } = useActivitiesTaskDrawer();
+  } = useActivitiesTaskDrawer(getRouteFrom(from), from, joinedOnly);
   const {
     taskId: _,
     taskMode: __,
     DrawerOrderBy,
     DrawerPageSize,
     ...tasksSearch
-  } = search;
+  } = effectiveSearch;
   const {
     isFilterOpen,
     setIsFilterOpen,
@@ -57,7 +73,7 @@ export const TasksTab = ({ search }: TasksTabProps) => {
     handleSort,
     handlePageChange,
     tasks,
-  } = useTasksTab(tasksSearch);
+  } = useTasksTab(tasksSearch, from, joinedOnly);
 
   return (
     <div className={styles.mainTasksSection}>
@@ -74,17 +90,21 @@ export const TasksTab = ({ search }: TasksTabProps) => {
         <div className={styles.filterTasksWrapper}>
           <div className={styles.filtersInteractions}>
             <ToggleDropdownButton onOpenChange={setIsFilterOpen}>
-              <TaskFiltersWidget search={search} />
+              <TaskFiltersWidget
+                search={effectiveSearch}
+                from={from}
+                hideOrganizationFilter={hideOrganizationFilter}
+              />
             </ToggleDropdownButton>
             <SearchBar
-              value={search.Search}
+              value={effectiveSearch.Search}
               onChange={handleSearch}
               variant="projects"
             />
             <SortDropDown
               options={getSortingTaskItems(t)}
               onSelect={handleSort}
-              value={search.OrderBy ?? "Default"}
+              value={effectiveSearch.OrderBy ?? "Default"}
             />
           </div>
           <motion.div
@@ -152,11 +172,12 @@ export const TasksTab = ({ search }: TasksTabProps) => {
             <div className={styles.drawerContent}>
               {taskId && (
                 <TaskWidget
-                  search={search as TaskDrawerSearch}
+                  search={effectiveSearch as TaskDrawerSearch}
                   handleModeChange={handleModeChange}
                   taskMode={taskMode}
                   taskId={taskId}
                   handleSort={handleSortChange}
+                  onClose={closeTask}
                 />
               )}
             </div>
@@ -167,7 +188,7 @@ export const TasksTab = ({ search }: TasksTabProps) => {
           <div className={styles.paginationWrapper}>
             <Pagination
               total={tasks.pagination.totalPages}
-              page={search.Page}
+              page={effectiveSearch.Page}
               onChange={handlePageChange}
             />
           </div>

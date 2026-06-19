@@ -7,6 +7,7 @@ export function SetPasswordPage() {
 
   return (
     <AdditionalWrapper
+      eyebrow={t("setPassword.eyebrow")}
       title={t("setPassword.pageTitle")}
       description={t("setPassword.pageDescription")}
     >

@@ -7,11 +7,13 @@ export const GoogleButton = () => {
 
   return (
     <button
-      className={styles.googleSign}
+      type="button"
+      className={styles.googleBtn}
       onClick={loginWithGoogle}
       disabled={isLoading}
     >
       <img src={GoogleIcon} alt="google" />
+      <span>Continue with Google</span>
     </button>
   );
 };

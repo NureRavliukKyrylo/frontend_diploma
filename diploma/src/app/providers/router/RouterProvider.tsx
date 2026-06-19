@@ -5,6 +5,11 @@ import { queryClient } from "@shared/api";
 import "@entities/user/auth/api/refreshToken";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import { useTranslation } from "react-i18next";
+import { ForbiddenPage } from "@pages/forbidden";
+import axios from "axios";
+
+const isForbiddenError = (error: unknown) =>
+  axios.isAxiosError(error) && error.response?.status === 403;
 
 const router = createRouter({
   routeTree,
@@ -22,6 +27,10 @@ const router = createRouter({
   ),
   defaultErrorComponent: ({ error }) => {
     const { t } = useTranslation("common");
+    if (isForbiddenError(error)) {
+      return <ForbiddenPage />;
+    }
+
     return (
       <div className="flex flex-col justify-center items-center w-full min-h-screen gap-4">
         <p className="text-[#dc2626] font-extrabold text-4xl md:text-3xl sm:text-2xl leading-tight">

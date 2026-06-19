@@ -3,30 +3,20 @@
 @use "@shared/assets/styles" as animation;
 
 .headerLogin {
-  margin-bottom: 10px;
-
-  h1 {
-    @include font-base(1.875rem, 900);
+  .title {
+    all: unset;
+    display: block;
+    @include font-base(26px, 900);
     color: #000000;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
   }
 
-  @include adaptive.respond-to(laptop) {
-    h1 {
-      @include font-base(1.75rem, 900);
-    }
-  }
-
-  @include adaptive.respond-to(tablet) {
-    h1 {
-      @include font-base(1.625rem, 900);
-    }
-  }
-
-  @include adaptive.respond-to(mobile) {
-    h1 {
-      @include font-base(1.3rem, 800);
-      line-height: 120%;
-    }
+  .subtitle {
+    margin: 0 0 20px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #999;
   }
 }
 
@@ -59,15 +49,18 @@
       }
     }
 
-    .forgotPassword {
-      @include font-base(15px, 500);
-      color: rgba(0, 0, 0, 0.6);
-      text-decoration-line: underline;
+    .forgotLink {
+      @include font-base(13px, 700);
+      color: #840000;
+      text-decoration: none;
       cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
-      display: flex;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -85,18 +78,13 @@
       gap: 10px;
 
       .rememberMe span,
-      .forgotPassword {
-        @include font-base(11px, 500);
+      .forgotLink {
         display: flex;
       }
     }
 
     .buttonBlock {
       margin-bottom: 10px;
-    }
-
-    .headerLogin h1 {
-      @include font-base(22px, 800);
     }
   }
 
@@ -109,20 +97,9 @@
 
     .additional {
       .rememberMe span,
-      .forgotPassword {
-        @include font-base(14px, 500);
+      .forgotLink {
         display: flex;
       }
-    }
-
-    .headerLogin h1 {
-      @include font-base(26px, 900);
-    }
-  }
-
-  @include adaptive.respond-to(laptop) {
-    .headerLogin h1 {
-      @include font-base(28px, 900);
     }
   }
 }

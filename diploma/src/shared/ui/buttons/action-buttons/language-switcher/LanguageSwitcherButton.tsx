@@ -4,7 +4,15 @@ import styles from "./LanguageSwitcherButton.module.scss";
 import { GreatBritain, UkraineLogo } from "@shared/assets/icons/flags";
 import { Globe } from "@shared/assets/icons/info";
 
-export const LanguageSwitcherButton = () => {
+interface LanguageSwitcherButtonProps {
+  triggerClassName?: string;
+  triggerIcon?: React.ReactNode;
+}
+
+export const LanguageSwitcherButton = ({
+  triggerClassName,
+  triggerIcon,
+}: LanguageSwitcherButtonProps = {}) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -29,12 +37,12 @@ export const LanguageSwitcherButton = () => {
       </AnimatePresence>
 
       <button
-        className={styles.globeButton}
+        className={`${styles.globeButton} ${triggerClassName ?? ""}`.trim()}
         onClick={() => setOpen((p) => !p)}
         aria-expanded={open}
         aria-label="Open language switcher"
       >
-        <img src={Globe} alt="ua" />
+        {triggerIcon ?? <img src={Globe} alt="" />}
       </button>
     </div>
   );

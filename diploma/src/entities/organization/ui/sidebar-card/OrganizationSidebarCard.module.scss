@@ -1,0 +1,230 @@
+@use "@shared/assets/styles" as *;
+
+.sideProfileCard {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  h1 {
+    @include font-base(58px, 900);
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+  }
+}
+
+.logoFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 4px solid #111111;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.85), transparent 38%),
+    linear-gradient(160deg, #ffffff 0%, #f0f0f0 100%);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.12);
+}
+
+.logoImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.levelBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 72px;
+  min-height: 68px;
+  padding: 8px 14px;
+  border-left: 4px solid #111111;
+  border-bottom: 4px solid #111111;
+  border-radius: 0 0 0 16px;
+  background: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  @include font-base(32px, 900);
+  line-height: 1;
+}
+
+.identityBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.emailRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.email {
+  @include font-base(19px, 700);
+  color: rgba(0, 0, 0, 0.56);
+  line-height: 1.25;
+  text-decoration: none;
+  word-break: break-word;
+
+  &[href] {
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #8c0000;
+    }
+  }
+}
+
+.websiteButton,
+.subscribeButton {
+  min-height: 62px;
+  border-radius: 999px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.16);
+  }
+}
+
+.subscriptionControls {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(88px, 3fr);
+  gap: 12px;
+  min-height: 62px;
+}
+
+.websiteButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #111111;
+  padding: 0 24px;
+
+  img {
+    width: 24px;
+    height: 24px;
+    opacity: 0.82;
+  }
+
+  span {
+    @include font-base(19px, 900);
+    letter-spacing: 0.08em;
+  }
+}
+
+.websiteDisabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+
+  &:hover {
+    transform: none;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.subscribeButton {
+  background: linear-gradient(180deg, #666666 0%, #000000 100%);
+  color: #ffffff;
+  border: none;
+  @include font-base(20px, 900);
+  letter-spacing: 0.04em;
+
+  &:hover {
+    background: linear-gradient(180deg, #444444 0%, #1a1a1a 100%);
+  }
+}
+
+.unsubscribeButton,
+.notificationButton {
+  min-height: 62px;
+  border-radius: 999px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.16);
+  }
+}
+
+.unsubscribeButton {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.995) 0%,
+    rgba(252, 247, 247, 0.985) 100%
+  );
+  color: #9f1414;
+  border: 1px solid rgba(159, 20, 20, 0.16);
+  box-shadow:
+    0 14px 28px rgba(159, 20, 20, 0.16),
+    0 4px 12px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  @include font-base(18px, 900);
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.78);
+
+  &:hover {
+    box-shadow:
+      0 18px 34px rgba(159, 20, 20, 0.22),
+      0 6px 14px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.94);
+    border-color: rgba(159, 20, 20, 0.26);
+    color: #8c0000;
+  }
+}
+
+.notificationButton {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #111111;
+  padding: 0;
+}
+
+.notificationButtonActive {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.995) 0%,
+    rgba(247, 238, 238, 0.98) 100%
+  );
+  border-color: rgba(140, 0, 0, 0.22);
+}
+
+@include respond-to(mobile) {
+  .sideProfileCard h1 {
+    @include font-base(44px, 900);
+  }
+
+  .email {
+    @include font-base(16px, 700);
+  }
+
+  .websiteButton span,
+  .subscribeButton,
+  .unsubscribeButton {
+    @include font-base(16px, 900);
+  }
+
+  .subscriptionControls {
+    grid-template-columns: minmax(0, 1fr) 84px;
+    gap: 10px;
+  }
+}

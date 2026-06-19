@@ -41,7 +41,7 @@ const makeReportCase = (overrides: Partial<ReportCase> = {}): ReportCase => ({
     avatarUrl: "https://example.com/avatar2.png",
   },
   createdAt: "2024-01-01T10:00:00Z",
-  reason: "Spam",
+  reason: "spam",
   subjectId: "subject-1",
   details: "This is spam content",
   resolvedAt: "",
@@ -62,7 +62,7 @@ describe("ReportCaseItem", () => {
 
   it("renders reason pill", () => {
     render(
-      <ReportCaseItem reportCase={makeReportCase({ reason: "Harassment" })} />,
+      <ReportCaseItem reportCase={makeReportCase({ reason: "harassment" })} />,
     );
     expect(screen.getByText("Harassment")).toBeInTheDocument();
   });

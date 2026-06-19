@@ -1,0 +1,76 @@
+.cardsGrid,
+.requestCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  align-items: stretch;
+  gap: 14px;
+  background: transparent;
+}
+
+.requestTabsContainer {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 16px;
+  border: 1px solid #e8e8e8;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.08),
+    0 1px 4px rgba(0, 0, 0, 0.04);
+  padding: 5px;
+}
+
+.requestTab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: #666666;
+  cursor: pointer;
+  font-family: "Exo 2", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 6px 16px;
+  text-transform: uppercase;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.requestTabActive {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.requestTabBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  border-radius: 999px;
+  background: #8b0000;
+  color: #ffffff;
+  padding: 1px 7px;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+@media (max-width: 1024px) {
+  .cardsGrid,
+  .requestCardsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .requestTabsContainer {
+    width: 100%;
+    overflow-x: auto;
+  }
+}

@@ -7,6 +7,7 @@ export function EmailVerificationPage() {
 
   return (
     <AdditionalWrapper
+      eyebrow={t("verification.email.eyebrow")}
       title={t("verification.email.title")}
       description={t("verification.email.description")}
     >

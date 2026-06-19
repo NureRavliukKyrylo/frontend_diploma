@@ -162,6 +162,7 @@ export const TasksTab = ({ search, categoryId }: TasksTabProps) => {
                   taskMode={taskMode}
                   taskId={taskId}
                   handleSort={handleSortChange}
+                  onClose={closeTask}
                 />
               )}
             </div>

@@ -1,0 +1,125 @@
+
+.policyTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.policyIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #f5f5f5;
+  color: #888888;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.radioDot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #dddddd;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ffffff;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+}
+
+.policyCardSelected {
+  border-color: #8b0000;
+  background: #fff9f9;
+
+  .policyIcon {
+    background: #fff0f0;
+    color: #8b0000;
+  }
+
+  .radioDot {
+    border-color: #8b0000;
+    background: #8b0000;
+
+    span {
+      opacity: 1;
+    }
+  }
+}
+
+.statusDisplay {
+  border: 1.5px solid #eeeeee;
+  border-radius: 16px;
+  background: #ffffff;
+  padding: 18px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  span {
+    color: #aaaaaa;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+}
+
+.taskStatusPill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.taskStatusPending {
+  background: #fff7e6;
+  color: #9a6500;
+}
+
+.taskStatusInProgress {
+  background: #edf4ff;
+  color: #1f5fa8;
+}
+
+.taskStatusCompleted {
+  background: #edfbf3;
+  color: #1a7a45;
+}
+
+.taskStatusCancelled,
+.taskStatusOverdue {
+  background: #fff1f1;
+  color: #8b0000;
+}
+
+.dangerRows {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dangerRow {
+  border: 1.5px solid rgba(139, 0, 0, 0.12);
+  border-radius: 16px;
+  background: #ffffff;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}

@@ -9,37 +9,80 @@ import { OrganizationsListFilter } from "@features/organization";
 import { useEventsInfiniteQuery } from "@entities/event";
 import { CategoriesListFilter, ProjectsListFilter } from "@features/project";
 import { EventsListFilter } from "@features/event";
-import type { TasksRequestParams } from "@entities/task";
+import type { TaskSearchParams, TasksRequestParams } from "@entities/task";
 import { SkillsListFilter } from "@features/skills";
 import { useSkillsInfiniteQuery } from "@entities/skill";
 import { Link } from "@tanstack/react-router";
 import { useCategoriesInfiniteQuery } from "@entities/category";
 import type { BaseFiltersRoute } from "@shared/config/types";
 import { useTranslation } from "react-i18next";
+import { toggleArrayParam } from "@shared/libs/search-params";
 
 interface TaskFiltersWidgetProps {
   search: TasksRequestParams;
   includeCategories?: boolean;
+  hideOrganizationFilter?: boolean;
   from?: BaseFiltersRoute;
+  onChange?: (patch: Partial<TaskSearchParams>) => void;
+  onClearFilters?: () => void;
 }
 
 export const TaskFiltersWidget = ({
   search,
   includeCategories = true,
+  hideOrganizationFilter = false,
   from = "/activities/",
+  onChange,
+  onClearFilters: onClearFiltersProp,
 }: TaskFiltersWidgetProps) => {
   const { t } = useTranslation("common");
-  const {
-    onStartDateChange,
-    onEndBeforeChange,
-    onRatingChange,
-    onProjectToggle,
-    onOrganizationToggle,
-    onClearFilters,
-    onEventToggle,
-    onSkillToggle,
-    onCategoryToggle,
-  } = useTaskFilters(from);
+  const routeFilters = useTaskFilters(from);
+
+  const onStartDateChange = onChange
+    ? (date: string | undefined) => onChange({ From: date, Page: 1 })
+    : routeFilters.onStartDateChange;
+  const onEndBeforeChange = onChange
+    ? (date: string | undefined) => onChange({ To: date, Page: 1 })
+    : routeFilters.onEndBeforeChange;
+  const onRatingChange = onChange
+    ? (rating: number | undefined) => onChange({ Rating: rating, Page: 1 })
+    : routeFilters.onRatingChange;
+  const onProjectToggle = onChange
+    ? (id: string) =>
+        onChange({
+          ProjectIds: toggleArrayParam(search.ProjectIds, id),
+          Page: 1,
+        })
+    : routeFilters.onProjectToggle;
+  const onOrganizationToggle = onChange
+    ? (id: string) =>
+        onChange({
+          OrganizationIds: toggleArrayParam(search.OrganizationIds, id),
+          Page: 1,
+        })
+    : routeFilters.onOrganizationToggle;
+  const onClearFilters = onClearFiltersProp ?? routeFilters.onClearFilters;
+  const onEventToggle = onChange
+    ? (id: string) =>
+        onChange({
+          EventIds: toggleArrayParam(search.EventIds, id),
+          Page: 1,
+        })
+    : routeFilters.onEventToggle;
+  const onSkillToggle = onChange
+    ? (id: string) =>
+        onChange({
+          SkillIds: toggleArrayParam(search.SkillIds, id),
+          Page: 1,
+        })
+    : routeFilters.onSkillToggle;
+  const onCategoryToggle = onChange
+    ? (id: string) =>
+        onChange({
+          CategoryIds: toggleArrayParam(search.CategoryIds, id),
+          Page: 1,
+        })
+    : routeFilters.onCategoryToggle;
 
   return (
     <>
@@ -120,19 +163,23 @@ export const TaskFiltersWidget = ({
             onToggle={onProjectToggle}
           />
         </div>
-        <div className={styles.dividerFilterBlock} />
-        <div className={styles.taskOrganizations}>
-          <h1 className={styles.subHeaderFilter}>
-            {t("filters.organizations")}
-          </h1>
-          <OrganizationsListFilter
-            useOrganizationsQuery={useOrganizationsInfiniteQuery({
-              PageSize: 7,
-            })}
-            selectedIds={search.OrganizationIds}
-            onToggle={onOrganizationToggle}
-          />
-        </div>
+        {!hideOrganizationFilter && (
+          <>
+            <div className={styles.dividerFilterBlock} />
+            <div className={styles.taskOrganizations}>
+              <h1 className={styles.subHeaderFilter}>
+                {t("filters.organizations")}
+              </h1>
+              <OrganizationsListFilter
+                useOrganizationsQuery={useOrganizationsInfiniteQuery({
+                  PageSize: 7,
+                })}
+                selectedIds={search.OrganizationIds}
+                onToggle={onOrganizationToggle}
+              />
+            </div>
+          </>
+        )}
         <div className={styles.dividerFilterBlock} />
         <div className={styles.taskEvents}>
           <h1 className={styles.subHeaderFilter}>{t("filters.events")}</h1>

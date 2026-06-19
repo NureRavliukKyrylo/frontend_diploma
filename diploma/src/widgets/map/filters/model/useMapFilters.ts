@@ -8,7 +8,7 @@ export const useMapFilters = () => {
 
   const nav = (updater: (prev: ProjectSearchParams) => ProjectSearchParams) =>
     navigate({
-      search: (prev) => updater(prev as ProjectSearchParams),
+      search: (prev) => updater(prev as unknown as ProjectSearchParams),
       resetScroll: false,
     });
 

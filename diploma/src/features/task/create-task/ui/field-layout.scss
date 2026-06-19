@@ -1,0 +1,121 @@
+
+.textarea {
+  height: 118px;
+  resize: none;
+  line-height: 1.7;
+}
+
+.charCount {
+  margin-top: 8px;
+  color: #d5d5d5;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.helperText {
+  margin-top: 6px;
+  color: #cccccc;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.fieldError {
+  margin-top: 6px;
+  color: #c0392b;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.mapLocationWrapper {
+  overflow: hidden;
+  border: 1.8px solid transparent;
+  border-radius: 14px;
+  background: #ededed;
+  transition: all 0.2s ease;
+
+  &:focus-within {
+    border-color: #840000;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(132, 0, 0, 0.08);
+  }
+
+  > div {
+    min-height: 58px;
+    border-radius: 14px;
+    background: transparent;
+    padding: 0 8px 0 18px;
+    box-shadow: none;
+  }
+
+  h1 {
+    color: #1a1a1a !important;
+    font-family: "Exo 2", sans-serif;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+  }
+
+  button {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    border: none;
+    border-radius: 10px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  svg {
+    color: #1a1a1a !important;
+  }
+}
+
+.dateRow,
+.estimateRow,
+.policyGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.dateField {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dateFieldLabel {
+  margin-bottom: 8px;
+  color: #cccccc;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.datePickerBase {
+  min-height: 58px;
+  overflow: visible;
+  border: none !important;
+  border-radius: 14px !important;
+}
+
+.datePickerInput {
+  min-height: 58px !important;
+  border: 1.8px solid transparent !important;
+  border-radius: 14px !important;
+  background: #ededed !important;
+  padding: 0 16px !important;
+  box-shadow: none !important;
+  transition: all 0.2s ease !important;
+
+  &:focus-within {
+    border-color: #840000 !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 0 4px rgba(132, 0, 0, 0.08) !important;
+  }
+}

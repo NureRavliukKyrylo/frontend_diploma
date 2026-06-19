@@ -1,0 +1,55 @@
+
+@media (max-width: 1280px) {
+  .layout {
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 960px) {
+  .topBar {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .topActions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .projectCard {
+    position: relative;
+    top: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .topBar {
+    padding: 18px;
+  }
+
+  .projectName {
+    max-width: 58vw;
+    font-size: 24px;
+  }
+
+  .settingsLabel {
+    font-size: 18px;
+  }
+
+  .tabSwitcher {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .tabButton {
+    flex: 1;
+    justify-content: center;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+}

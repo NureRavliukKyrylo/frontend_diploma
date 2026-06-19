@@ -1,4 +1,4 @@
-import type { ParticipationMember } from "@shared/config/types";
+import type { ParticipationMember } from "@entities/participation";
 import type { QueryResult } from "@shared/config/types";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import styles from "./MembersListWidget.module.scss";

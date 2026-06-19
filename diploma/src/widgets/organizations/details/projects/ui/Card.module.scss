@@ -1,0 +1,240 @@
+@use "@shared/assets/styles" as *;
+
+.projectCard {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  min-height: 372px;
+  border-radius: 30px;
+  padding: 22px 26px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background:
+    radial-gradient(circle at top right, rgba(140, 0, 0, 0.04) 0%, transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.995) 0%, rgba(250, 248, 245, 0.99) 100%);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.11),
+    0 8px 18px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      rgba(162, 18, 18, 0.75) 0%,
+      rgba(162, 18, 18, 0) 100%
+    );
+    opacity: 0.65;
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 24px 56px rgba(0, 0, 0, 0.14),
+      0 10px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  &:focus-visible {
+    outline: 3px solid rgba(162, 18, 18, 0.22);
+    outline-offset: 4px;
+  }
+}
+
+.projectCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.projectOrganizationBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+
+  span {
+    min-width: 0;
+    color: rgba(0, 0, 0, 0.56);
+    @include font-base(20px, 800);
+    line-height: 1;
+    text-transform: lowercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.projectOrganizationLogo {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+}
+
+.projectCardMenu {
+  border: none;
+  background: transparent;
+  color: #111111;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.projectCardBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.projectCopy {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h3 {
+    @include font-base(36px, 900);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  p {
+    color: rgba(0, 0, 0, 0.56);
+    @include font-base(18px, 500);
+    line-height: 1.32;
+    min-height: 96px;
+  }
+}
+
+.projectDeadlineRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.projectDeadlineInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+
+  img {
+    width: 24px;
+    height: 24px;
+    opacity: 0.34;
+    flex: 0 0 auto;
+  }
+
+  span,
+  strong {
+    @include font-base(16px, 600);
+    line-height: 1.2;
+  }
+
+  span {
+    color: rgba(0, 0, 0, 0.38);
+  }
+
+  strong {
+    color: rgba(0, 0, 0, 0.84);
+  }
+}
+
+.projectProgressBlock {
+  margin-top: auto;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.04),
+    0 10px 24px rgba(0, 0, 0, 0.06);
+  padding: 16px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.projectProgressMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  span,
+  strong {
+    @include font-base(18px, 800);
+  }
+
+  span {
+    color: rgba(0, 0, 0, 0.84);
+  }
+
+  strong {
+    color: rgba(0, 0, 0, 0.9);
+  }
+}
+
+.projectCardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.projectAvatarGroup {
+  display: flex;
+  align-items: center;
+}
+
+.projectAvatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  margin-left: -9px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.projectAvatarPlaceholder,
+.projectTasksLabel {
+  color: rgba(0, 0, 0, 0.4);
+  @include font-base(18px, 500);
+}
+
+@include respond-to(mobile) {
+  .projectCard {
+    min-height: 350px;
+    padding: 20px 20px 18px;
+  }
+
+  .projectCopy h3 {
+    @include font-base(32px, 900);
+  }
+
+  .projectCopy p {
+    @include font-base(17px, 500);
+    min-height: 88px;
+  }
+}

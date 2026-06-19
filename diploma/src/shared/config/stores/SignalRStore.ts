@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import * as signalR from "@microsoft/signalr";
-import { API_URL } from "../constants";
 
 export type HubName = "notifications" | "chats";
 type SignalRStatus = "disconnected" | "connecting" | "connected" | "failed";
@@ -29,7 +28,6 @@ export const useSignalRStore = create<SignalRStore>((set, get) => ({
   },
 
   connect: async (hub) => {
-    console.log(`[SignalR] Connecting to: ${API_URL}/hubs/${hub}`);
     const current = get().hubs[hub];
     if (current.status === "connected" || current.status === "connecting")
       return;

@@ -7,6 +7,7 @@ export function TwoFactorVerificationPage() {
 
   return (
     <AdditionalWrapper
+      eyebrow={t("verification.twoFactor.eyebrow")}
       title={t("verification.twoFactor.title")}
       description={t("verification.twoFactor.description")}
     >

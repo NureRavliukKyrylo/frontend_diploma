@@ -7,6 +7,8 @@ interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
   placeHolder?: string;
   minHeight?: number;
   variant?: "default" | "profile";
+  textareaClassName?: string;
+  charCountClassName?: string;
 }
 
 export const TextArea: React.FC<TextAreaProps> = ({
@@ -18,6 +20,8 @@ export const TextArea: React.FC<TextAreaProps> = ({
   placeHolder = "Tell us a little about yourself.",
   minHeight = 120,
   variant = "default",
+  textareaClassName = "",
+  charCountClassName = "",
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -84,7 +88,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
       >
         <textarea
           ref={textareaRef}
-          className={`${styles.textarea} ${variantClass} ${isActive ? styles.focused : ""}`}
+          className={`${styles.textarea} ${variantClass} ${textareaClassName} ${isActive ? styles.focused : ""}`}
           value={value}
           defaultValue={defaultValue}
           onChange={handleChange}
@@ -97,7 +101,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
-        <div className={`${styles.charCount} ${variantClass}`}>
+        <div className={`${styles.charCount} ${variantClass} ${charCountClassName}`}>
           {textLength}/{maxLength}
         </div>
       </div>

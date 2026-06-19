@@ -1,0 +1,50 @@
+@use "@shared/assets/styles" as *;
+
+.page {
+  width: 70%;
+  min-height: calc(100vh - 180px);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  background: #f0f0f0;
+  box-shadow: 0 0 0 100vmax #f0f0f0;
+  clip-path: inset(0 -100vmax);
+}
+
+.infoPanel {
+  min-height: 320px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include font-base(32px, 600);
+  color: rgba(0, 0, 0, 0.75);
+  text-align: center;
+  padding: 24px;
+}
+
+@include respond-to(custom, 1280px) {
+  .page {
+    width: 78%;
+  }
+}
+
+@include respond-to(custom, 980px) {
+  .page {
+    width: 88%;
+  }
+}
+
+@include respond-to(mobile) {
+  .page {
+    width: 94%;
+    gap: 24px;
+  }
+
+  .infoPanel {
+    min-height: 260px;
+    @include font-base(24px, 600);
+  }
+}

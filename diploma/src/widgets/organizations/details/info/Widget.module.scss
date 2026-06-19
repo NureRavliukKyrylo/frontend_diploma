@@ -1,0 +1,49 @@
+@use "@shared/assets/styles" as *;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.topLayout {
+  display: grid;
+  grid-template-columns: minmax(320px, 344px) minmax(0, 1fr);
+  gap: 32px;
+  align-items: stretch;
+}
+
+.mainColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-height: 100%;
+}
+
+.tabContent {
+  width: 100%;
+  min-height: 0;
+}
+
+.placeholderPanel {
+  width: 100%;
+  min-height: 260px;
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+@include respond-to(custom, 1180px) {
+  .topLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@include respond-to(mobile) {
+  .section {
+    gap: 20px;
+  }
+
+  .topLayout {
+    gap: 22px;
+  }
+}

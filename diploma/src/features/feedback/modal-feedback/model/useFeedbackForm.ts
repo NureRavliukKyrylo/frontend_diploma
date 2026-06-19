@@ -10,7 +10,7 @@ export interface FeedbackFormValues {
 }
 
 interface UseFeedbackFormOptions {
-  entityType: Exclude<EntityType, "organization">;
+  entityType: EntityType;
   entityId: string;
   initialValues?: FeedbackFormValues & { id: string };
   onSuccess?: () => void;

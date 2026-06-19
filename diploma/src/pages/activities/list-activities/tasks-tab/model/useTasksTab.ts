@@ -6,15 +6,23 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import type { BaseFiltersRoute } from "@shared/config/types";
 
-export const useTasksTab = (search: TasksRequestParams) => {
-  const navigate = useNavigate({ from: "/activities/" });
+export const useTasksTab = (
+  search: TasksRequestParams,
+  from: BaseFiltersRoute = "/activities/",
+  joinedOnly = false,
+) => {
+  const navigate = useNavigate({ from });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const { data: tasks } = useQuery(taskQuery.list(search));
 
+  const withJoinedOnly = (params: TasksRequestParams) =>
+    joinedOnly ? { ...params, ShowJoined: true } : params;
+
   const nav = (updater: (prev: TasksRequestParams) => TasksRequestParams) =>
     navigate({
-      search: (prev) => updater(prev as TasksRequestParams),
+      search: (prev) => withJoinedOnly(updater(prev as TasksRequestParams)),
       resetScroll: false,
     });
 
@@ -26,7 +34,8 @@ export const useTasksTab = (search: TasksRequestParams) => {
 
   const handlePageChange = (page: number) =>
     navigate({
-      search: (prev) => ({ ...prev, Page: page }),
+      search: (prev) =>
+        withJoinedOnly({ ...(prev as TasksRequestParams), Page: page }),
     });
 
   return {

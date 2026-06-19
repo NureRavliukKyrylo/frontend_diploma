@@ -1,0 +1,105 @@
+
+.radiusBlock {
+  margin-top: 18px;
+  border: 1.5px solid #eeeeee;
+  border-radius: 16px;
+  background: #fafafa;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: opacity 0.2s ease;
+
+  input {
+    width: 100%;
+    min-height: 54px;
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #1a1a1a;
+    outline: none;
+    padding: 14px 18px;
+    font-family: "Exo 2", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+
+    &:focus {
+      border-color: #8b0000;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      background: #eeeeee;
+      color: #999999;
+    }
+
+    &[aria-invalid="true"] {
+      border-color: #c0392b;
+      background: #fff8f7;
+    }
+  }
+
+  small {
+    color: #c0392b;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  em {
+    color: #aaaaaa;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+  }
+}
+
+.radiusBlockDisabled {
+  opacity: 0.48;
+}
+
+.radiusLabelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  span {
+    color: #888888;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  button {
+    border: none;
+    background: transparent;
+    color: #8b0000;
+    font-family: "Exo 2", sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+      color: #bbbbbb;
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  .section {
+    padding: 24px 20px;
+  }
+
+  .toggleRow {
+    grid-template-columns: 44px minmax(0, 1fr);
+  }
+
+  .switchTrack {
+    grid-column: 2;
+  }
+}
