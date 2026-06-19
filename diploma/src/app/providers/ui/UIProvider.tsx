@@ -10,7 +10,7 @@ type Props = {
 export const UIProvider = ({ children }: Props) => {
   const { i18n } = useTranslation();
   return (
-    <HeroUIProvider locale={LOCALE_MAP[i18n.language as "en" | "ua"]}>
+    <HeroUIProvider locale={LOCALE_MAP[i18n.language as "en" | "uk"]}>
       <ToastProvider
         placement="top-right"
         maxVisibleToasts={3}

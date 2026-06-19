@@ -1,6 +1,6 @@
 {
   "rating": {
-    "votes_one": "{{count}} VOTES",
+    "votes_one": "{{count}} VOTE",
     "votes_other": "{{count}} VOTES",
     "stars_one": "{{count}} STAR",
     "stars_other": "{{count}} STARS"

@@ -28,6 +28,18 @@
     "open": "Відкритий для вступу",
     "approval_required": "Потрібне підтвердження"
   },
+  "requests": {
+    "actions": {
+      "acceptName": "Прийняти",
+      "declineName": "Відхилити"
+    },
+    "toasts": {
+      "acceptSuccessTitle": "Запрошення прийнято",
+      "acceptSuccessDesc": "Ви успішно прийняли запрошення.",
+      "declineSuccessTitle": "Запрошення відхилено",
+      "declineSuccessDesc": "Ви успішно відхилили запрошення."
+    }
+  },
   "loading": {
     "title": "Завантаження..."
   },
@@ -119,8 +131,14 @@
     "leaveSuccessDescription": "Ви успішно покинули {{entity}}.",
     "leaveFailed": "Не вдалось покинути",
     "approvalRequired": "Потрібне схвалення для {{entity}}",
-    "entities": {
-      "project": "Проект",
+    "entitiesGenitive": {
+      "project": "Проєкту",
+      "event": "Події",
+      "task": "Завдання",
+      "organization": "Організації"
+    },
+    "entitiesAccusative": {
+      "project": "Проєкт",
       "event": "Подію",
       "task": "Завдання",
       "organization": "Організацію"

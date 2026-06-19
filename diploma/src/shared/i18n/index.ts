@@ -40,7 +40,7 @@ import { useLocaleStore } from "@shared/config/stores";
 const savedLocale =
   useLocaleStore.getState().locale ??
   (["uk", "ru"].some((lang) => navigator.language.startsWith(lang))
-    ? "ua"
+    ? "uk"
     : "en");
 
 i18n.use(initReactI18next).init({
@@ -66,7 +66,7 @@ i18n.use(initReactI18next).init({
       organizations: enOrganizations,
       chat: enChat,
     },
-    ua: {
+    uk: {
       common: uaCommon,
       auth: uaAuth,
       profile: uaProfile,

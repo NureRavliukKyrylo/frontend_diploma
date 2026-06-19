@@ -1,4 +1,4 @@
-export const LOCALE_MAP: Record<"en" | "ua", string> = {
+export const LOCALE_MAP: Record<"en" | "uk", string> = {
   en: "en-US",
-  ua: "uk-UA",
+  uk: "uk-UA",
 };

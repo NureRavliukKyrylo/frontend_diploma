@@ -34,7 +34,6 @@ export const DatePickerInput = ({
   })();
 
   const isInvalid = submit && Boolean(error);
-
   return (
     <>
       <I18nProvider>

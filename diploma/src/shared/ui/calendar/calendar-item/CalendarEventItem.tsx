@@ -55,7 +55,7 @@ export const CalendarEventItem = ({ info }: CalendarEventItemProps) => {
           />
           <span className={styles.titleMonth}>
             {info.event.start && !info.event.allDay
-              ? formatHourTime(info.event.start, i18n.language as "en" | "ua")
+              ? formatHourTime(info.event.start, i18n.language as "en" | "uk")
               : null}{" "}
             <span className={styles.eventTitle}>{info.event.title}</span>
           </span>

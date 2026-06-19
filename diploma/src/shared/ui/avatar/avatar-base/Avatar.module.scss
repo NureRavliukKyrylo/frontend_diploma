@@ -23,15 +23,8 @@
 }
 
 .initials {
-  @include font-base(25px, 800);
-
-  @container (max-width: 60px) {
-    font-size: 18px;
-  }
-
-  @container (max-width: 40px) {
-    font-size: 14px;
-  }
+  font-size: clamp(14px, 40cqi, 68px);
+  font-weight: 800;
 }
 
 .image {

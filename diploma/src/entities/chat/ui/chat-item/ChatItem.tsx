@@ -24,7 +24,7 @@ export const ChatItem = ({ chat, typing, isOnline }: ChatItemProps) => {
           <h2>
             {formatDateToText(
               chat.lastMessageAt,
-              i18n.language as "en" | "ua",
+              i18n.language as "en" | "uk",
               true,
             )}
           </h2>

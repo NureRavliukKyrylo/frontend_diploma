@@ -94,7 +94,7 @@ export const BadgeDetailWidget = ({ id }: { id: string }) => {
                 {badge.firstAwardedAt
                   ? formatDateToText(
                       badge.firstAwardedAt,
-                      i18n.language as "en" | "ua",
+                      i18n.language as "en" | "uk",
                     )
                   : "—"}
               </p>

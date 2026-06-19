@@ -18,13 +18,15 @@
     border-radius: 32px;
     max-height: 60vh;
     overflow-y: auto;
+    box-shadow: none;
   }
   @include respond-to(mobile) {
-    width: calc(100vw - 32px);
+    width: 100%;
     padding: 14px;
     border-radius: 20px;
     max-height: 75vh;
     overflow-y: auto;
+    box-shadow: none;
   }
 
   .closeWindow {

@@ -1,6 +1,6 @@
 export const formatHourTime = (
   date: Date | string | null,
-  locale: "en" | "ua",
+  locale: "en" | "uk",
 ): string | null => {
   if (!date) return null;
 

@@ -2,7 +2,7 @@ import { LOCALE_MAP } from "@shared/config/constants";
 
 export const formatDateToText = (
   iso: string,
-  locale: "en" | "ua",
+  locale: "en" | "uk",
   includeTime: boolean = false,
 ): string => {
   const date = new Date(iso);

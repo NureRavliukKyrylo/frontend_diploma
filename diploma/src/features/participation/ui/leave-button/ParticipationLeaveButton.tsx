@@ -19,7 +19,7 @@ export const ParticipationLeaveButton = ({
   entityName,
   onSuccess,
 }: ParticipationLeaveButtonProps) => {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -40,7 +40,10 @@ export const ParticipationLeaveButton = ({
             transition={{ duration: 0.18 }}
           >
             {t("participation.leave", {
-              entity: t(`participation.entities.${entityType}`),
+              entity:
+                i18n.language === "ua"
+                  ? t(`participation.entitiesAccusative.${entityType}`)
+                  : t(`participation.entities.${entityType}`),
             })}
           </motion.span>
         </BaseButtonWrapper>

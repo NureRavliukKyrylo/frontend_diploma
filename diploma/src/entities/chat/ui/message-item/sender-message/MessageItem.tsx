@@ -112,7 +112,7 @@ export const MessageItem = ({
               <EditIcon className={styles.editIcon} />
               {formatDateToText(
                 message.editedAt,
-                i18n.language as "en" | "ua",
+                i18n.language as "en" | "uk",
                 true,
               )}
             </span>
@@ -120,7 +120,7 @@ export const MessageItem = ({
             <span className={styles.timestamp}>
               {formatDateToText(
                 message.timestamp,
-                i18n.language as "en" | "ua",
+                i18n.language as "en" | "uk",
                 true,
               )}
             </span>

@@ -11,9 +11,9 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import { useTranslation } from "react-i18next";
 import ukLocale from "@fullcalendar/core/locales/uk";
 
-const FC_LOCALE_MAP: Record<"en" | "ua", typeof ukLocale | string> = {
+const FC_LOCALE_MAP: Record<"en" | "uk", typeof ukLocale | string> = {
   en: "en",
-  ua: ukLocale,
+  uk: ukLocale,
 };
 
 interface BaseCalendarProps extends CalendarOptions {
@@ -139,7 +139,7 @@ export const BaseCalendar = ({
         eventBorderColor="transparent"
         eventTextColor="transparent"
         plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
-        locale={FC_LOCALE_MAP[i18n.language as "en" | "ua"]}
+        locale={FC_LOCALE_MAP[i18n.language as "en" | "uk"]}
         {...props}
       />
     </div>

@@ -16,7 +16,7 @@ export const ParticipationJoinButton = ({
   entityId,
   onSuccess,
 }: ParticipationJoinButtonProps) => {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common");
   const { handleJoin, isLoading } = useJoinParticipation({
     entityType,
     entityId,
@@ -41,7 +41,10 @@ export const ParticipationJoinButton = ({
           transition={{ duration: 0.18 }}
         >
           {t("participation.join", {
-            entity: t(`participation.entities.${entityType}`),
+            entity:
+              i18n.language === "ua"
+                ? t(`participation.entitiesGenitive.${entityType}`)
+                : t(`participation.entities.${entityType}`),
           })}
         </motion.span>
       </BaseButtonWrapper>

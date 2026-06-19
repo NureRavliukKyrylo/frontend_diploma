@@ -22,7 +22,7 @@ export const TaskBoardItemBase = ({
       <div className={styles.deadlineBlock}>
         <Calendar className={styles.calendarTask} />
         <span>
-          {formatDateToText(task.endAt, i18n.language as "en" | "ua", true)}
+          {formatDateToText(task.endAt, i18n.language as "en" | "uk", true)}
         </span>
       </div>
       <div className={styles.dividerLine} />

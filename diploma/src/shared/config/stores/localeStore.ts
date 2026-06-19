@@ -2,8 +2,8 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 interface LocaleStore {
-  locale: "en" | "ua" | null;
-  setLocale: (locale: "en" | "ua") => void;
+  locale: "en" | "uk" | null;
+  setLocale: (locale: "en" | "uk") => void;
 }
 
 export const useLocaleStore = create<LocaleStore>()(
