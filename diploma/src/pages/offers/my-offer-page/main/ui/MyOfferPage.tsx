@@ -61,7 +61,7 @@ export const MyOfferPage = () => {
                     {formatDateRange(
                       offer.startAt,
                       offer.endAt,
-                      i18n.language as "en" | "ua",
+                      i18n.language as "en" | "uk",
                       true,
                     )}
                   </span>

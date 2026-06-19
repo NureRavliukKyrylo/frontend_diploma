@@ -30,6 +30,18 @@
     "open": "Open to join",
     "approval_required": "Approval required"
   },
+  "requests": {
+    "actions": {
+      "acceptName": "Accept",
+      "declineName": "Decline"
+    },
+    "toasts": {
+      "acceptSuccessTitle": "Invitation Accepted",
+      "acceptSuccessDesc": "You have successfully accepted the invitation.",
+      "declineSuccessTitle": "Invitation Declined",
+      "declineSuccessDesc": "You have successfully declined the invitation."
+    }
+  },
   "loading": {
     "title": "Loading..."
   },

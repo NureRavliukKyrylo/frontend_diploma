@@ -57,7 +57,7 @@ export const OfferListItem = ({ offer, bottomContent }: OfferListItemProps) => {
         <span>
           {formatDateToText(
             new Date(offer.endAt).toISOString(),
-            i18n.language as "en" | "ua",
+            i18n.language as "en" | "uk",
           )}
         </span>
       </div>

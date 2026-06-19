@@ -19,7 +19,7 @@ export const EventDefaultBottomContent = ({
         <div className={styles.deadlineBlock}>
           <Calendar className={styles.calendarEvent} />
           <span>
-            {formatDateToText(event.endAt, i18n.language as "en" | "ua")}
+            {formatDateToText(event.endAt, i18n.language as "en" | "uk")}
           </span>
         </div>
         <div className={styles.progressBlock}>

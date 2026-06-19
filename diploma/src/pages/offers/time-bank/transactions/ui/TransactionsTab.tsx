@@ -88,7 +88,7 @@ export const TransactionsTab = ({ search }: TransactionsTabProps) => {
           <div className={styles.transactionsWrapper}>
             {(search.From ?? from) && (search.To ?? to) && (
               <span className={styles.dateRange}>
-                {formatDateRange(from, to, i18n.language as "en" | "ua", false)}
+                {formatDateRange(from, to, i18n.language as "en" | "uk", false)}
               </span>
             )}
             <motion.div

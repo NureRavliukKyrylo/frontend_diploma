@@ -102,7 +102,7 @@ export const TaskWidget = ({
                         {formatDateRange(
                           task.startAt,
                           task.endAt,
-                          i18n.language as "en" | "ua",
+                          i18n.language as "en" | "uk",
                         )}
                       </span>
                     </span>
@@ -137,7 +137,9 @@ export const TaskWidget = ({
                 <div className={styles.ratingTaskInfo}>
                   <h1>{task?.rating.value}</h1>
                   <p>
+                    (
                     {t("task:labels.votes", { count: task?.rating.totalVotes })}
+                    )
                   </p>
                 </div>
               </div>

@@ -23,7 +23,7 @@ const formatDayPart = (
 export const formatDateRange = (
   from: Date | string,
   to: Date | string,
-  locale: "en" | "ua",
+  locale: "en" | "uk",
   withTime: boolean = true,
 ): string => {
   const start = new Date(from);

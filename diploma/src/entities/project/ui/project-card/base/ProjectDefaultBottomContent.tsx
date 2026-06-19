@@ -19,7 +19,7 @@ export const ProjectDefaultBottomContent = ({
       <div className={styles.deadlineBlock}>
         <Calendar className={styles.calendarProject} />
         <span>
-          {formatDateToText(project.endAt, i18n.language as "en" | "ua")}
+          {formatDateToText(project.endAt, i18n.language as "en" | "uk")}
         </span>
       </div>
       <div className={styles.progressBlock}>

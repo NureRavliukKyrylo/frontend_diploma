@@ -56,7 +56,7 @@ export const TaskCardBase = ({
             <div className={styles.deadlineTextInfo}>
               <h1>{t("task:cards.deadline")}</h1>
               <span>
-                {formatDateToText(task.endAt, i18n.language as "en" | "ua")}
+                {formatDateToText(task.endAt, i18n.language as "en" | "uk")}
               </span>
             </div>
           </div>

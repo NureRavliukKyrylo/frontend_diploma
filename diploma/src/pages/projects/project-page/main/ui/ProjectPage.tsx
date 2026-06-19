@@ -48,7 +48,7 @@ export const ProjectPage = () => {
                       {formatDateRange(
                         project.startAt,
                         project.endAt,
-                        i18n.language as "en" | "ua",
+                        i18n.language as "en" | "uk",
                       )}
                     </span>
                   </span>
@@ -123,8 +123,12 @@ export const ProjectPage = () => {
           <div className={styles.ratingProjectInfo}>
             <h1>{project.rating.value}</h1>
             <p>
-              ({project.rating.totalVotes}{" "}
-              {t("project:rating.votes", { defaultValue: "VOTES" })})
+              (
+              {t("project:rating.votes", {
+                count: project.rating.totalVotes,
+                defaultValue: "VOTES",
+              })}
+              )
             </p>
           </div>
         </div>

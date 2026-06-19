@@ -10,7 +10,7 @@ type Props = {
 export const DateLocalProvider = ({ children }: Props) => {
   const { i18n } = useTranslation();
   return (
-    <I18nProvider locale={LOCALE_MAP[i18n.language as "en" | "ua"]}>
+    <I18nProvider locale={LOCALE_MAP[i18n.language as "en" | "uk"]}>
       {children}
     </I18nProvider>
   );

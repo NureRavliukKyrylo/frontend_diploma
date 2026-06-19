@@ -37,7 +37,7 @@ export const EventAttendanceListItem = ({
         {formatDateRange(
           attendance.currentAttendance.dateFrom,
           attendance.currentAttendance.dateTo,
-          i18n.language as "en" | "ua",
+          i18n.language as "en" | "uk",
         )}
       </span>
       <span className={styles.descriptionCell}>

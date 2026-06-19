@@ -13,7 +13,7 @@ export const LangSwitcher = () => {
   const locale = useLocaleStore((s) => s.locale);
   const setLocale = useLocaleStore((s) => s.setLocale);
 
-  const toggle = () => setLocale(locale === "en" ? "ua" : "en");
+  const toggle = () => setLocale(locale === "en" ? "uk" : "en");
 
   return <button onClick={toggle}>{locale === "en" ? "UA" : "EN"}</button>;
 };

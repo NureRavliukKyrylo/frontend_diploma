@@ -12,7 +12,8 @@
     "chat": "PROJECT CHAT"
   },
   "rating": {
-    "votes": "VOTES"
+    "votes_one": "{{count}} VOTE",
+    "votes_other": "{{count}} VOTES"
   },
   "states": {
     "pendingLeave": "Your leave request is pending approval",

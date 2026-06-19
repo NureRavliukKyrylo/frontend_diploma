@@ -8,4 +8,7 @@ export type Notification = {
   message: string;
   createdAt: Date;
   relatedAvatarUrl: string | null;
+  metadata: {
+    requestId?: string;
+  };
 };

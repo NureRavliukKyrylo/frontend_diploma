@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
 import { LOCALE_MAP } from "@shared/config/constants";
 
-const getDayName = (dayOfWeek: number, locale: "en" | "ua"): string => {
+const getDayName = (dayOfWeek: number, locale: "en" | "uk"): string => {
   const date = new Date(0);
   date.setDate(date.getDate() - date.getDay() + dayOfWeek);
   return new Intl.DateTimeFormat(LOCALE_MAP[locale], {
@@ -19,7 +19,7 @@ const getDayName = (dayOfWeek: number, locale: "en" | "ua"): string => {
 const buildDescription = (
   slot: AvailabilitySlot,
   t: TFunction,
-  locale: "en" | "ua",
+  locale: "en" | "uk",
 ): string => {
   const timeLabel = slot.allDay
     ? t("calendar:deleteModal.allDay")
@@ -67,7 +67,7 @@ export const DeleteAvailabilityModal = ({
   const { handleDelete, isLoading, errorMessage } =
     useDeleteAvailability(onClose);
 
-  const description = buildDescription(slot, t, i18n.language as "en" | "ua");
+  const description = buildDescription(slot, t, i18n.language as "en" | "uk");
 
   return (
     <ConfirmationModal

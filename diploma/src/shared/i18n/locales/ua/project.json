@@ -12,7 +12,10 @@
     "chat": "ЧАТ ПРОЄКТУ"
   },
   "rating": {
-    "votes": "ГОЛОСІВ"
+    "votes_one": "{{count}} ГОЛОС",
+    "votes_few": "{{count}} ГОЛОСИ",
+    "votes_many": "{{count}} ГОЛОСІВ",
+    "votes_other": "{{count}} ГОЛОСУ"
   },
   "states": {
     "pendingLeave": "Ваш запит на вихід очікує на підтвердження",
@@ -39,7 +42,7 @@
     "tasksCount_one": "{{count}} завдання",
     "tasksCount_few": "{{count}} завдання",
     "tasksCount_many": "{{count}} завдань",
-    "tasksCount_other": "{{count}} завдання"
+    "tasksCount_other": "{{count}} завдань"
   },
   "statuses": {
     "active": "Активний",

@@ -9,6 +9,7 @@ import { Avatar } from "@shared/ui";
 interface NotificationItemProps {
   notification: Notification;
   rightContent?: React.ReactNode;
+  actionsContent?: React.ReactNode;
   variant?: "default" | "toast";
 }
 
@@ -16,6 +17,7 @@ export const NotificationItem = ({
   notification,
   rightContent,
   variant = "default",
+  actionsContent,
 }: NotificationItemProps) => {
   const { t } = useTranslation("common");
   const config = NOTIFICATION_TYPE_CONFIG[notification.type];
@@ -48,6 +50,7 @@ export const NotificationItem = ({
           {!isToast && isUnread && <OnlineIcon className={styles.unReadIcon} />}
         </div>
         <span className={styles.message}>{notification.message}</span>
+        {actionsContent}
       </div>
 
       {!isToast && (

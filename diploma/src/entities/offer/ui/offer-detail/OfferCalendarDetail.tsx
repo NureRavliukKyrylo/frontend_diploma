@@ -21,7 +21,7 @@ export const OfferCalendarDetail = ({ offer }: OfferCalendarDetailProps) => {
             <span className={styles.calendarInfo}>
               {formatDateToText(
                 new Date(offer.startAt).toISOString(),
-                i18n.language as "en" | "ua",
+                i18n.language as "en" | "uk",
               )}
             </span>
           </div>
@@ -34,7 +34,7 @@ export const OfferCalendarDetail = ({ offer }: OfferCalendarDetailProps) => {
             <TimeIcon className={styles.timeIcon} />
             <div className={styles.divider} />
             <span className={styles.info}>
-              {formatHourTime(offer.startAt, i18n.language as "en" | "ua") ??
+              {formatHourTime(offer.startAt, i18n.language as "en" | "uk") ??
                 t("timeBank:offers.detail.allTime")}
             </span>
           </div>

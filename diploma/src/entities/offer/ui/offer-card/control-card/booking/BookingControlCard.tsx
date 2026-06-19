@@ -47,7 +47,7 @@ export const BookingControlCard = ({
                 {t("bookings.labels.booked")}{" "}
                 {formatDateToText(
                   new Date(offer.lastBookedAt).toISOString(),
-                  i18n.language as "en" | "ua",
+                  i18n.language as "en" | "uk",
                   false,
                 )}
               </span>

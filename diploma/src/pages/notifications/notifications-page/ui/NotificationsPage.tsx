@@ -9,6 +9,7 @@ import {
   ReadAllNotificationsButton,
   ReadNotificationButton,
   DeleteNotificationsButton,
+  useReadNotification,
 } from "@features/notification";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { ApproveIcon } from "@shared/assets/icons/actions";
@@ -23,6 +24,10 @@ import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { useTranslation } from "react-i18next";
 import { getNotificationTypeOptions } from "@entities/notification";
+import {
+  AcceptInvitationButton,
+  DeclineInvitationButton,
+} from "@features/request";
 
 export const NotificationsPage = () => {
   const { t } = useTranslation(["notification", "common"]);
@@ -43,6 +48,8 @@ export const NotificationsPage = () => {
     activeType,
     handleTypeChange,
   } = useNotificationsPage();
+
+  const { readNotification } = useReadNotification();
 
   const notificationStatusTabs: TabOption<"All" | "Unread">[] = [
     { label: t("notification:page.statusTabs.all"), value: "All" },
@@ -182,6 +189,25 @@ export const NotificationsPage = () => {
                             <ReadNotificationButton
                               notificationId={notification.id}
                             />
+                          )
+                        }
+                        actionsContent={
+                          notification.type === "JoinRequestCreated" &&
+                          notification.metadata?.requestId && (
+                            <div className={styles.actionsBlock}>
+                              <AcceptInvitationButton
+                                requestId={notification.metadata.requestId}
+                                onSuccess={() =>
+                                  readNotification(notification.id)
+                                }
+                              />
+                              <DeclineInvitationButton
+                                requestId={notification.metadata.requestId}
+                                onSuccess={() =>
+                                  readNotification(notification.id)
+                                }
+                              />
+                            </div>
                           )
                         }
                       />

@@ -21,14 +21,14 @@ export const TaskCalendarDetail = ({ task }: TaskCalendarDetailProps) => {
             <Calendar />
             <div className={styles.calendarDivider} />
             <span className={styles.calendarInfo}>
-              {formatDateToText(task.startAt, i18n.language as "en" | "ua")}
+              {formatDateToText(task.startAt, i18n.language as "en" | "uk")}
             </span>
           </div>
           <div className={styles.subBaseInfoBlock}>
             <TimeIcon className={styles.timeIcon} />
             <div className={styles.divider} />
             <span className={styles.info}>
-              {formatHourTime(task.startAt, i18n.language as "en" | "ua") ??
+              {formatHourTime(task.startAt, i18n.language as "en" | "uk") ??
                 t("task:cards.allTime")}
             </span>
           </div>
