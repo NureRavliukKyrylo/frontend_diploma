@@ -12,7 +12,11 @@ export const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
-  const { locale } = useLocaleStore.getState();
-  config.headers["Accept-Language"] = LOCALE_MAP[locale!];
+  const savedLocale =
+    useLocaleStore.getState().locale ??
+    (["uk", "ru"].some((lang) => navigator.language.startsWith(lang))
+      ? "uk"
+      : "en");
+  config.headers["Accept-Language"] = LOCALE_MAP[savedLocale];
   return config;
 });

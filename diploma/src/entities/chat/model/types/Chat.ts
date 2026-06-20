@@ -8,6 +8,7 @@ export type RelatedEntityTypeChatValue =
 export type Chat = {
   id: string;
   participants: {
+    id: string;
     firstName: string;
     lastName: string;
     avatarUrl: string;

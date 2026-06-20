@@ -16,6 +16,8 @@
     "subtitle": "Explore all related activities within this task and see where they are located",
     "relatedEvent": "Related event",
     "relatedProject": "Related project",
+    "points_one": "{{count}} POINT",
+    "points_other": "{{count}} POINTS",
     "error": {
       "hint": "Try reloading the page or come back later."
     }

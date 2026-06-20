@@ -143,7 +143,15 @@
     text-transform: uppercase;
   }
 }
-
+.points {
+  span {
+    background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+}
 .calendar {
   display: flex;
   align-items: center;

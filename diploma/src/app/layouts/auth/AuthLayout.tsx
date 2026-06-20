@@ -7,12 +7,17 @@ import {
   IconShieldCheck,
   IconWorld,
 } from "@tabler/icons-react";
+import { useTranslation } from "react-i18next";
+import { useLocaleStore } from "@shared/config/stores";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
 }
 
 export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
+  const { i18n } = useTranslation();
+  const locale = useLocaleStore((s) => s.locale);
+  const setLocale = useLocaleStore((s) => s.setLocale);
   return (
     <div className={styles.authWrapper}>
       <div className={styles.cornerTopRight}>
@@ -36,6 +41,8 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
           <LanguageMenu
             triggerClassName={styles.iconBtn}
             triggerIcon={<IconWorld />}
+            value={locale ?? (i18n.language as "en" | "uk")}
+            onChange={(value) => setLocale(value)}
           />
           <span className={styles.tooltip}>Language</span>
         </div>

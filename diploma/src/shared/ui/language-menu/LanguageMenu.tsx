@@ -29,7 +29,7 @@ interface LanguageMenuProps {
   value?: LanguageMenuValue;
   open?: boolean;
   tooltip?: string;
-  onChange?: (language: LanguageMenuValue) => void;
+  onChange: (language: LanguageMenuValue) => void;
   onOpenChange?: (open: boolean) => void;
 }
 
@@ -45,10 +45,7 @@ export const LanguageMenu = ({
 }: LanguageMenuProps) => {
   const rootRef = useRef<HTMLDivElement>(null);
   const [internalOpen, setInternalOpen] = useState(false);
-  const [internalValue, setInternalValue] =
-    useState<LanguageMenuValue>("en");
   const isOpen = open ?? internalOpen;
-  const selectedLanguage = value ?? internalValue;
 
   const setOpen = (nextOpen: boolean) => {
     if (open === undefined) {
@@ -79,14 +76,6 @@ export const LanguageMenu = ({
     };
   });
 
-  const handleSelect = (language: LanguageMenuValue) => {
-    if (value === undefined) {
-      setInternalValue(language);
-    }
-    onChange?.(language);
-    setOpen(false);
-  };
-
   return (
     <div
       ref={rootRef}
@@ -115,7 +104,7 @@ export const LanguageMenu = ({
             transition={{ duration: 0.16, ease: "easeOut" }}
           >
             {languageOptions.map((language) => {
-              const isSelected = selectedLanguage === language.value;
+              const isSelected = value === language.value;
 
               return (
                 <button
@@ -127,7 +116,7 @@ export const LanguageMenu = ({
                   )}
                   role="menuitemradio"
                   aria-checked={isSelected}
-                  onClick={() => handleSelect(language.value)}
+                  onClick={() => onChange(language.value)}
                 >
                   <span className={styles.optionMain}>
                     <span className={styles.flag}>{language.flag}</span>

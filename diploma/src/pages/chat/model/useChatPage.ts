@@ -1,12 +1,10 @@
-import type { Message } from "@entities/chat";
+import type { Message, MessageModeType } from "@entities/chat";
 import { profileQuery } from "@entities/user/profile";
 import type { MenuItem } from "@shared/config/types";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import type { TFunction } from "i18next";
 import { useState } from "react";
-
-type ModeType = "edit" | "reply" | "report" | "delete";
 
 export const useChatPage = () => {
   const { chatId, ...search } = useSearch({ from: "/_masterLayout/chat/" });
@@ -16,7 +14,7 @@ export const useChatPage = () => {
   const [openId, setOpenId] = useState<string | null>(null);
   const [mode, setMode] = useState<
     Record<
-      ModeType,
+      MessageModeType,
       {
         isActive: boolean;
         message: Message | null;
@@ -36,10 +34,10 @@ export const useChatPage = () => {
     });
   };
 
-  const setModeType = (type: ModeType, message: Message) =>
+  const setModeType = (type: MessageModeType, message: Message) =>
     setMode((prev) => ({ ...prev, [type]: { isActive: true, message } }));
 
-  const clearModeType = (type: ModeType) =>
+  const clearModeType = (type: MessageModeType) =>
     setMode((prev) => ({
       ...prev,
       [type]: { isActive: false, message: null },
@@ -48,7 +46,7 @@ export const useChatPage = () => {
   const getMenuItems = (
     message: Message,
     t: TFunction,
-  ): MenuItem<ModeType>[] =>
+  ): MenuItem<MessageModeType>[] =>
     message.isMine
       ? [
           {

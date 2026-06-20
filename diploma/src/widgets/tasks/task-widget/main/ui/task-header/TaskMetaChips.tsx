@@ -38,6 +38,11 @@ export const TaskMetaChips = ({ task, policyConfig }: TaskMetaChipsProps) => {
           </span>
         </span>
       ) : null}
+      {task.points ? (
+        <span className={`${styles.metaChip} ${styles.points}`}>
+          <span>{t("task:labels.points", { count: task.points })}</span>
+        </span>
+      ) : null}
       {policyConfig ? (
         <span
           className={`${styles.metaChip} ${styles.policy}`}

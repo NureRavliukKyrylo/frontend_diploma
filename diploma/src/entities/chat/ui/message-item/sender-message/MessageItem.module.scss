@@ -5,6 +5,7 @@
   align-items: flex-end;
   gap: 8px;
   max-width: 75%;
+  width: fit-content;
 
   @include respond-to(tablet) {
     max-width: 85%;

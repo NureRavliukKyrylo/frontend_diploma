@@ -27,7 +27,7 @@ export const useGoogleAuth = () => {
         router.navigate({ to: MultiStepFormRoutes.fillForm });
       } else {
         await router.invalidate();
-        router.navigate({ to: search.redirect ?? "/projects" });
+        router.navigate({ to: search.redirect ?? "/activities" });
       }
     },
     onError: (error: unknown) => {

@@ -7,6 +7,11 @@
   border-top: 1px solid #cbc9c9;
   padding: 10px;
   width: 100%;
+
+  @include respond-to(mobile) {
+    padding: 8px;
+    gap: 6px;
+  }
 }
 
 .banner {
@@ -87,12 +92,39 @@
       height: 14px;
     }
   }
+
+  @include respond-to(mobile) {
+    padding: 6px 10px;
+
+    .bannerContent {
+      .bannerLabel {
+        font-size: 10px;
+      }
+      .bannerText {
+        font-size: 12px;
+      }
+    }
+
+    .bannerClose {
+      width: 16px;
+      height: 16px;
+
+      .bannerCloseIcon {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
 }
 
 .sendMessageWrapper {
   display: flex;
-  align-items: flex-end;
+  align-items: baseline;
   gap: 10px;
+
+  @include respond-to(mobile) {
+    gap: 6px;
+  }
 
   .mentionButton {
     display: flex;
@@ -109,6 +141,36 @@
       width: 55px;
       height: 55px;
       color: #6c8ebf;
+    }
+
+    @include respond-to(laptop) {
+      width: 48px;
+      height: 48px;
+
+      .mentionIcon {
+        width: 48px;
+        height: 48px;
+      }
+    }
+
+    @include respond-to(tablet) {
+      width: 42px;
+      height: 42px;
+
+      .mentionIcon {
+        width: 42px;
+        height: 42px;
+      }
+    }
+
+    @include respond-to(mobile) {
+      width: 36px;
+      height: 36px;
+
+      .mentionIcon {
+        width: 36px;
+        height: 36px;
+      }
     }
   }
 
@@ -155,8 +217,15 @@
         &::placeholder {
           @include font-base(15px, 600);
           color: #a1a1aa;
-        }
 
+          @include respond-to(tablet) {
+            font-size: 14px;
+          }
+
+          @include respond-to(mobile) {
+            font-size: 13px;
+          }
+        }
         &.inputError {
           border-color: #8c0000;
           background: #fff0f0;
@@ -170,6 +239,7 @@
         @include respond-to(mobile) {
           padding: 10px 42px 10px 16px;
           font-size: 14px;
+          min-height: 42px;
         }
       }
 
@@ -196,10 +266,25 @@
             width: 36px;
             height: 36px;
             color: black;
+          }
 
-            @include respond-to(mobile) {
-              width: 14px;
-              height: 14px;
+          @include respond-to(tablet) {
+            width: 32px;
+            height: 32px;
+
+            .icon {
+              width: 32px;
+              height: 32px;
+            }
+          }
+
+          @include respond-to(mobile) {
+            width: 28px;
+            height: 28px;
+
+            .icon {
+              width: 26px;
+              height: 26px;
             }
           }
         }
@@ -210,6 +295,11 @@
       @include font-base(11px, 600);
       color: #8c0000;
       padding-left: 20px;
+
+      @include respond-to(mobile) {
+        font-size: 10px;
+        padding-left: 16px;
+      }
     }
   }
 }
@@ -241,6 +331,20 @@
       .mentionTagRemoveIcon {
         width: 12px;
         height: 12px;
+      }
+    }
+  }
+
+  @include respond-to(mobile) {
+    gap: 4px;
+
+    .mentionTag {
+      padding: 2px 6px 2px 8px;
+      font-size: 11px;
+
+      .mentionTagRemoveIcon {
+        width: 10px;
+        height: 10px;
       }
     }
   }

@@ -17,6 +17,7 @@ interface MessageFormProps {
   replyToMessage?: { id: string; content: string; sender: string } | null;
   mentionedUserIds?: string[];
   editingMessage?: { id: string; content: string } | null;
+  hideMentionButton: boolean;
   onCancel?: () => void;
 }
 
@@ -27,6 +28,7 @@ export const MessageForm = ({
   mentionedUserIds = [],
   editingMessage,
   onCancel,
+  hideMentionButton,
 }: MessageFormProps) => {
   const { t } = useTranslation(["chat"]);
   const isEditing = Boolean(editingMessage);
@@ -155,11 +157,13 @@ export const MessageForm = ({
       </AnimatePresence>
 
       <div className={styles.sendMessageWrapper}>
-        <MentionButton
-          participants={participants}
-          mentionIds={mentionIds}
-          onToggle={toggleMention}
-        />
+        {!hideMentionButton && (
+          <MentionButton
+            participants={participants}
+            mentionIds={mentionIds}
+            onToggle={toggleMention}
+          />
+        )}
 
         <div className={styles.wrapperInputResult}>
           <div className={styles.inputWrapper}>

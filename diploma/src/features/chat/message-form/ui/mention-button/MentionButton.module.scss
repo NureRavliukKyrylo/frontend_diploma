@@ -26,6 +26,36 @@
     height: 55px;
     color: #6c8ebf;
   }
+
+  @include respond-to(laptop) {
+    width: 48px;
+    height: 48px;
+
+    .icon {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  @include respond-to(tablet) {
+    width: 42px;
+    height: 42px;
+
+    .icon {
+      width: 42px;
+      height: 42px;
+    }
+  }
+
+  @include respond-to(mobile) {
+    width: 42px;
+    height: 42px;
+
+    .icon {
+      width: 42px;
+      height: 42px;
+    }
+  }
 }
 
 .badge {
@@ -41,6 +71,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @include respond-to(laptop) {
+    width: 22px;
+    height: 22px;
+    font-size: 13px;
+  }
+
+  @include respond-to(tablet) {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+
+  @include respond-to(mobile) {
+    width: 17px;
+    height: 17px;
+    font-size: 10px;
+  }
 }
 
 .popover {
@@ -64,12 +112,28 @@
     display: none;
   }
   scrollbar-width: none;
+
+  @include respond-to(tablet) {
+    min-width: 190px;
+    max-height: 220px;
+  }
+
+  @include respond-to(mobile) {
+    min-width: 160px;
+    max-height: 200px;
+    padding: 4px;
+  }
 }
 
 .empty {
   @include font-base(13px, 500);
   color: #a1a1aa;
   padding: 8px 12px;
+
+  @include respond-to(mobile) {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
 }
 
 .item {
@@ -132,5 +196,40 @@
     height: 8px;
     border-radius: 50%;
     flex-shrink: 0;
+  }
+
+  @include respond-to(tablet) {
+    padding: 6px 8px;
+    gap: 8px;
+
+    .avatar {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  @include respond-to(mobile) {
+    padding: 6px 8px;
+    gap: 6px;
+
+    .avatar {
+      width: 26px;
+      height: 26px;
+    }
+
+    .info {
+      .name {
+        font-size: 12px;
+      }
+
+      .role {
+        font-size: 10px;
+      }
+    }
+
+    .selectedDot {
+      width: 6px;
+      height: 6px;
+    }
   }
 }

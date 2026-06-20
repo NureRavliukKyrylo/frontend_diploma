@@ -46,7 +46,7 @@ export const useLogin = () => {
 
       setIsAuthenticated(true);
 
-      router.navigate({ to: search.redirect ?? "/projects" });
+      router.navigate({ to: search.redirect ?? "/activities" });
     },
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error, t);

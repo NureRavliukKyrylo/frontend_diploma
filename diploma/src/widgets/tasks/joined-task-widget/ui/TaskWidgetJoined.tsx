@@ -83,6 +83,13 @@ export const TaskWidgetJoined = ({
                       <h1>{task.recurrence}</h1>
                     </span>
                   )}
+                  {task?.points && (
+                    <span className={`${styles.metaChip} ${styles.points}`}>
+                      <span>
+                        {t("task:labels.points", { count: task.points })}
+                      </span>
+                    </span>
+                  )}
                   {task?.endAt && (
                     <span className={`${styles.metaChip} ${styles.calendar}`}>
                       <Calendar className={styles.calendarImg} />

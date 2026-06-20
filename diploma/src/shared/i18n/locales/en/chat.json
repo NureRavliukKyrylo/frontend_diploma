@@ -1,4 +1,8 @@
 {
+  "labels": {
+    "membersCount_one": "{{count}} member",
+    "membersCount_other": "{{count}} members"
+  },
   "categories": {
     "event": "Events",
     "private": "Private Chats",

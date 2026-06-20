@@ -1,4 +1,10 @@
 {
+  "labels": {
+    "membersCount_one": "{{count}} учасник",
+    "membersCount_few": "{{count}} учасники",
+    "membersCount_many": "{{count}} учасників",
+    "membersCount_other": "{{count}} учасника"
+  },
   "categories": {
     "event": "Події",
     "private": "Особисті чати",
