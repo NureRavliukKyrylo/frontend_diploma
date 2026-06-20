@@ -72,7 +72,13 @@ export const useContactsForm = () => {
             coordinates: profile?.coordinates,
             socialLinks: profile?.socialLinks,
           },
-          privacySettings: { fields: privacySettings?.fields },
+          privacySettings: {
+            fields:
+              privacySettings?.fields?.map((field) => ({
+                fieldName: field.fieldName,
+                visibility: field.visibility === "private" ? 1 : 0,
+              })) ?? [],
+          },
         },
       };
 

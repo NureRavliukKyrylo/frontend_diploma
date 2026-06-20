@@ -1,11 +1,16 @@
 import { apiClient } from "@shared/api";
-import { type Profile, type PrivacySettings } from "@entities/user";
+import { type Profile } from "@entities/user";
 
 export type UpdateUserDto = {
   avatarFile: File | undefined;
   model?: {
     profile?: Omit<Profile, "timeBank">;
-    privacySettings?: PrivacySettings;
+    privacySettings?: {
+      fields: {
+        fieldName: string;
+        visibility: 0 | 1;
+      }[];
+    };
   };
 };
 

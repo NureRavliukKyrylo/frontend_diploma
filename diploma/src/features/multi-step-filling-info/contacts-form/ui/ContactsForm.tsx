@@ -8,7 +8,7 @@ export const ContactsForm = () => {
   const { formik } = useContactsForm();
   const { t } = useTranslation("common");
   const socialPlatforms = getSocialPlatforms(t);
-
+  console.log(formik.values["Instagram"]);
   return (
     <form
       id="contacts-filling-form"

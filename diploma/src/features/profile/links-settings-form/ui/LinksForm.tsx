@@ -10,7 +10,8 @@ export function LinksForm({}) {
   const { formik, isLoading, errorMessage } = useSocialLinksSettingsForm();
   const { t } = useTranslation();
   const socialPlatforms = getSocialPlatforms(t);
-
+  console.log(formik.values);
+  console.log(formik.errors);
   return (
     <form
       onSubmit={formik.handleSubmit}

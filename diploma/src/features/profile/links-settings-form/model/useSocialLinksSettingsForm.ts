@@ -54,7 +54,6 @@ export const useSocialLinksSettingsForm = () => {
         values.socialLinks,
         t,
       );
-
       mutation.mutate({
         model: {
           profile: {
