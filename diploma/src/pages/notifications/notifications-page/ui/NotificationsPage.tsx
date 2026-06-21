@@ -24,10 +24,7 @@ import { Suspense } from "react";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { useTranslation } from "react-i18next";
 import { getNotificationTypeOptions } from "@entities/notification";
-import {
-  AcceptInvitationButton,
-  DeclineInvitationButton,
-} from "@features/request";
+import { getNotificationActionsButton } from "../libs/getNotificationsActionsButton";
 
 export const NotificationsPage = () => {
   const { t } = useTranslation(["notification", "common"]);
@@ -192,23 +189,13 @@ export const NotificationsPage = () => {
                           )
                         }
                         actionsContent={
-                          notification.type === "JoinRequestCreated" &&
-                          notification.metadata?.requestId && (
-                            <div className={styles.actionsBlock}>
-                              <AcceptInvitationButton
-                                requestId={notification.metadata.requestId}
-                                onSuccess={() =>
-                                  readNotification(notification.id)
-                                }
-                              />
-                              <DeclineInvitationButton
-                                requestId={notification.metadata.requestId}
-                                onSuccess={() =>
-                                  readNotification(notification.id)
-                                }
-                              />
-                            </div>
-                          )
+                          <div className={styles.actionsBlock}>
+                            {getNotificationActionsButton({
+                              notification,
+                              onSuccess: () =>
+                                readNotification(notification.id),
+                            })}
+                          </div>
                         }
                       />
                       <AnimatePresence>

@@ -6,4 +6,5 @@ export interface Feedback {
   comment?: string;
   createdAt: string;
   author: ParticipationMember;
+  canSubmitReport: boolean;
 }

@@ -79,7 +79,10 @@ export const MessageItem = ({
         </Dropdown>
 
         {!message.isMine && (
-          <span className={styles.roleName}>{message.sender.roleName}</span>
+          <div className={styles.initialsBlock}>
+            <span className={styles.name}>{senderName}</span>
+            <span className={styles.roleName}>{message.sender.roleName}</span>
+          </div>
         )}
         {message.replyTo && (
           <div className={styles.replyBlock}>

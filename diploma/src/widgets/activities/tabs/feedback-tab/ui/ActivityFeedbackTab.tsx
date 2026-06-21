@@ -174,12 +174,14 @@ export const ActivityFeedbackTab = ({
                     feedback={feedback}
                     key={feedback.id}
                     rightContent={
-                      <ReportButton
-                        subjectId={feedback.id}
-                        subjectType={ModerationSubjectType.Feedback}
-                        buttonClassName={styles.feedbackReportButton}
-                        iconClassName={styles.feedbackReportIcon}
-                      />
+                      feedback.canSubmitReport && (
+                        <ReportButton
+                          subjectId={feedback.id}
+                          subjectType={ModerationSubjectType.feedback}
+                          buttonClassName={styles.feedbackReportButton}
+                          iconClassName={styles.feedbackReportIcon}
+                        />
+                      )
                     }
                   />
                 );

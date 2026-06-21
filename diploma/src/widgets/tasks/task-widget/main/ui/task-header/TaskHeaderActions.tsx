@@ -21,15 +21,21 @@ export const TaskHeaderActions = ({
   return (
     <div className={styles.headerActions}>
       {showEditAction ? (
-        <button type="button" className={styles.editTaskButton} onClick={onEdit}>
+        <button
+          type="button"
+          className={styles.editTaskButton}
+          onClick={onEdit}
+        >
           <Pencil size={15} strokeWidth={2.4} />
           {t("common:actions.edit")}
         </button>
       ) : null}
-      <ReportButton
-        subjectType={ModerationSubjectType.Task}
-        subjectId={task.id}
-      />
+      {task.canSubmitReport && (
+        <ReportButton
+          subjectType={ModerationSubjectType.task}
+          subjectId={task.id}
+        />
+      )}
     </div>
   );
 };

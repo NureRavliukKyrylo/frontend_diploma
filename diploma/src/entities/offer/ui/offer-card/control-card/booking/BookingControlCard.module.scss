@@ -26,6 +26,9 @@
   &.completionrequested {
     border-left: 4px solid #c2410c;
   }
+  &.disputed {
+    border-left: 4px solid #7c3aed;
+  }
 
   @include respond-to(laptop) {
     padding: 14px 28px 14px 18px;
@@ -224,7 +227,11 @@
         background-color: #fff7f0;
         border: 1.5px solid #f0b090;
       }
-
+      &.disputed {
+        background: rgba(124, 58, 237, 0.1);
+        color: #7c3aed;
+        border: 1.5px solid rgba(124, 58, 237, 0.35);
+      }
       .statusIcon {
         width: 8px;
         height: 8px;
@@ -254,6 +261,9 @@
       }
       &.completionrequested {
         color: #c2410c;
+      }
+      &.disputed {
+        color: #7c3aed;
       }
 
       @include respond-to(laptop) {

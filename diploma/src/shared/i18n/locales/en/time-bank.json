@@ -93,7 +93,15 @@
       "sendRequest": "Send request",
       "bookNow": "Book now",
       "approve": "Approve",
-      "back": "Back"
+      "back": "Back",
+      "disputeTitle": "Dispute booking",
+      "disputeBooking": "Dispute booking",
+      "dispute": "Dispute",
+      "disputePlaceholder": "Explain why you're disputing this booking...",
+      "acceptOfferChangeTitle": "Accept offer change",
+      "rejectOfferChangeTitle": "Reject offer change",
+      "acceptOfferChangePlaceholder": "Add an optional note...",
+      "rejectOfferChangePlaceholder": "Explain why you're rejecting this change..."
     },
     "status": {
       "inProgress": "In progress",
@@ -101,6 +109,7 @@
       "completed": "Completed",
       "reserved": "Reserved",
       "cancelled": "Cancelled",
+      "disputed": "Disputed",
       "completionRequested": "Completion Request"
     },
     "emptyState": {
@@ -113,14 +122,18 @@
       "onlineFinish": "When you finish, mark the booking as completed.",
       "completionRequested": "Waiting for the organizer to confirm completion.",
       "completed": "You've successfully completed this offer.",
-      "cancelled": "This booking has been cancelled."
+      "cancelled": "This booking has been cancelled.",
+      "disputed": "This booking is under dispute and is being reviewed."
     },
     "actions": {
       "rejectName": "rejecting the booking",
       "completeName": "completing the booking",
       "cancelName": "cancelling the booking",
       "sendName": "sending the booking request",
-      "approveName": "approving the booking"
+      "approveName": "approving the booking",
+      "disputeName": "disputing the booking",
+      "offerChangeAcceptName": "accepting the offer change",
+      "offerChangeRejectName": "rejecting the offer change"
     },
     "validation": {
       "reasonMax": "Reason must be at most 100 characters",
@@ -138,7 +151,13 @@
       "sendSuccessTitle": "Booking sent",
       "sendSuccessDesc": "Your booking request has been sent",
       "approveSuccessTitle": "Booking approved",
-      "approveSuccessDesc": "The booking has been approved"
+      "approveSuccessDesc": "The booking has been approved",
+      "disputeSuccessTitle": "Dispute submitted",
+      "disputeSuccessDesc": "Your dispute has been submitted and will be reviewed.",
+      "offerChangeAcceptSuccessTitle": "Offer change accepted",
+      "offerChangeAcceptSuccessDesc": "The updated offer terms have been accepted.",
+      "offerChangeRejectSuccessTitle": "Offer change rejected",
+      "offerChangeRejectSuccessDesc": "The updated offer terms have been rejected."
     }
   },
   "myOffers": {

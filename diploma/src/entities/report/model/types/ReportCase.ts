@@ -4,23 +4,21 @@ import type { ReportReasonType } from "./ReportReason";
 export type ReportCase = {
   id: string;
   status: "open" | "resolved" | "rejected";
-  subjectType: Lowercase<keyof typeof ModerationSubjectType>;
-  reporterUser: {
+  subjectType: keyof typeof ModerationSubjectType;
+  reporter: {
     id: string;
     firstName: string;
     lastName: string;
     avatarUrl: string;
   };
-  relatedReported: {
+  subject: {
     id: string;
-    firstName: string;
-    lastName: string;
-    avatarUrl: string;
+    type: keyof typeof ModerationSubjectType;
+    content: string | null;
+    title: string;
   };
   createdAt: string;
-  reason: Lowercase<keyof typeof ReportReasonType>;
-  subjectId: string;
+  reason: keyof typeof ReportReasonType;
   details: string;
-  entityContent?: string;
   resolvedAt: string;
 };

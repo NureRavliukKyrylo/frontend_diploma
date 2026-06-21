@@ -1,14 +1,14 @@
 export const ModerationSubjectType = {
-  User: 0,
-  Organization: 1,
-  Project: 2,
-  Event: 3,
-  Task: 4,
-  Offer: 5,
-  ChatMessage: 6,
-  Comment: 7,
-  Feedback: 8,
-  Other: 9,
+  user: 0,
+  organization: 1,
+  project: 2,
+  event: 3,
+  task: 4,
+  offer: 5,
+  chatMessage: 6,
+  comment: 7,
+  feedback: 8,
+  other: 9,
 } as const;
 
 export type ModerationSubjectType =

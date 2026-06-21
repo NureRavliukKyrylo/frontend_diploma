@@ -61,6 +61,7 @@ export const ReportCasesFilter = ({ search }: ReportCasesFilterProps) => {
             options={statusOptions}
             value={search.Status ?? "all"}
             onChange={(val) => onStatusChange(val === "all" ? undefined : val)}
+            hideLabel
           />
         </div>
 

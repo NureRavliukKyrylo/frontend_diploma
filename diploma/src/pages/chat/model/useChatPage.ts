@@ -68,20 +68,29 @@ export const useChatPage = () => {
             variant: "reply" as const,
           },
         ]
-      : [
-          {
-            key: "reply",
-            label: t("chat:actions.reply"),
-            onClick: () => setModeType("reply", message),
-            variant: "reply" as const,
-          },
-          {
-            key: "report",
-            label: t("chat:actions.report"),
-            onClick: () => setModeType("report", message),
-            variant: "report" as const,
-          },
-        ];
+      : message.canSubmitReport
+        ? [
+            {
+              key: "reply",
+              label: t("chat:actions.reply"),
+              onClick: () => setModeType("reply", message),
+              variant: "reply" as const,
+            },
+            {
+              key: "report",
+              label: t("chat:actions.report"),
+              onClick: () => setModeType("report", message),
+              variant: "report" as const,
+            },
+          ]
+        : [
+            {
+              key: "reply",
+              label: t("chat:actions.reply"),
+              onClick: () => setModeType("reply", message),
+              variant: "reply" as const,
+            },
+          ];
 
   return {
     chatId,

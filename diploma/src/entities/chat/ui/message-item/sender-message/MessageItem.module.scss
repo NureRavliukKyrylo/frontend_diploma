@@ -16,10 +16,10 @@
 
   &.mine {
     justify-content: flex-end;
-    align-self: flex-end;
+    margin-left: auto;
 
     .bubble {
-      background: #fff0f0;
+      background: #eff6ff;
       border-radius: 20px 20px 4px 20px;
     }
 
@@ -28,7 +28,7 @@
     }
 
     .replyBlock {
-      background: rgba(140, 0, 0, 0.06);
+      background: rgba(59, 130, 246, 0.08);
     }
   }
 }
@@ -54,10 +54,34 @@
   position: relative;
 }
 
-.roleName {
-  @include font-base(12px, 400);
-  font-style: italic;
-  color: #8c0000;
+.initialsBlock {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+
+  @include respond-to(mobile) {
+    gap: 4px;
+  }
+
+  .name {
+    @include font-base(13px, 600);
+    line-height: 120%;
+    color: #1a1a1a;
+
+    @include respond-to(mobile) {
+      font-size: 12px;
+    }
+  }
+
+  .roleName {
+    @include font-base(14px, 400);
+    font-style: italic;
+    color: #8c0000;
+
+    @include respond-to(mobile) {
+      font-size: 11px;
+    }
+  }
 }
 
 .replyBlock {

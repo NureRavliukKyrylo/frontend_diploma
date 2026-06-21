@@ -93,7 +93,15 @@
       "bookNow": "Забронювати",
       "approve": "Підтвердити",
       "back": "Назад",
-      "sendRequest": "Надіслати запит"
+      "sendRequest": "Надіслати запит",
+      "disputeTitle": "Оскарження бронювання",
+      "disputeBooking": "Оскаржити бронювання",
+      "dispute": "Оскаржити",
+      "disputePlaceholder": "Поясніть, чому ви оскаржуєте це бронювання...",
+      "acceptOfferChangeTitle": "Прийняти зміну пропозиції",
+      "rejectOfferChangeTitle": "Відхилити зміну пропозиції",
+      "acceptOfferChangePlaceholder": "Додайте необов'язковий коментар...",
+      "rejectOfferChangePlaceholder": "Поясніть, чому ви відхиляєте цю зміну..."
     },
     "status": {
       "inProgress": "В процесі",
@@ -101,6 +109,7 @@
       "completed": "Завершено",
       "reserved": "Зарезервовано",
       "cancelled": "Скасовано",
+      "disputed": "Оскаржено",
       "completionRequested": "Запит на завершення"
     },
     "emptyState": {
@@ -113,14 +122,18 @@
       "onlineFinish": "Коли закінчите, позначте бронювання як виконане.",
       "completionRequested": "Очікування підтвердження виконання від організатора.",
       "completed": "Ви успішно виконали цю пропозицію.",
-      "cancelled": "Це бронювання було скасовано."
+      "cancelled": "Це бронювання було скасовано.",
+      "disputed": "Це бронювання оскаржується і перебуває на розгляді."
     },
     "actions": {
       "rejectName": "відхилення бронювання",
       "completeName": "завершення бронювання",
       "cancelName": "скасування бронювання",
       "sendName": "відправки запиту на бронювання",
-      "approveName": "підтвердження бронювання"
+      "approveName": "підтвердження бронювання",
+      "disputeName": "оскарження бронювання",
+      "offerChangeAcceptName": "прийняття зміни пропозиції",
+      "offerChangeRejectName": "відхилення зміни пропозиції"
     },
     "validation": {
       "reasonMax": "Причина повинна містити не більше 100 символів",
@@ -138,7 +151,13 @@
       "sendSuccessTitle": "Запит надіслано",
       "sendSuccessDesc": "Ваш запит на бронювання був успішно надісланий",
       "approveSuccessTitle": "Бронювання підтверджено",
-      "approveSuccessDesc": "Бронювання було підтверджено"
+      "approveSuccessDesc": "Бронювання було підтверджено",
+      "disputeSuccessTitle": "Скаргу подано",
+      "disputeSuccessDesc": "Вашу скаргу подано на розгляд.",
+      "offerChangeAcceptSuccessTitle": "Зміну пропозиції прийнято",
+      "offerChangeAcceptSuccessDesc": "Оновлені умови пропозиції прийнято.",
+      "offerChangeRejectSuccessTitle": "Зміну пропозиції відхилено",
+      "offerChangeRejectSuccessDesc": "Оновлені умови пропозиції відхилено."
     }
   },
   "myOffers": {

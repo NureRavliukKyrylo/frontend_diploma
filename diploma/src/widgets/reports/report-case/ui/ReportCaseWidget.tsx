@@ -14,19 +14,14 @@ interface ReportCaseWidgetProps {
 export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
   const { data: reportCase } = useSuspenseQuery(reportQuery.id(caseId));
 
-  const reporterInitials = getFullName(
-    reportCase.reporterUser.firstName,
-    reportCase.reporterUser.lastName,
-  );
-
-  const relatedReported = getFullName(
-    reportCase.relatedReported.firstName,
-    reportCase.relatedReported.lastName,
+  const reporterFullName = getFullName(
+    reportCase.reporter.firstName,
+    reportCase.reporter.lastName,
   );
 
   const linkProps = getSubjectLink(
-    reportCase.subjectType,
-    reportCase.subjectId,
+    reportCase.subject.type,
+    reportCase.subject.id,
   );
 
   return (
@@ -35,12 +30,12 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
 
       <div className={styles.reporterWrapper}>
         <Avatar
-          src={reportCase.reporterUser.avatarUrl}
-          fallback={reporterInitials}
+          src={reportCase.reporter.avatarUrl}
+          fallback={reporterFullName}
           className={styles.avatar}
         />
         <div className={styles.reporterInfo}>
-          <span className={styles.reporterName}>{reporterInitials}</span>
+          <span className={styles.reporterName}>{reporterFullName}</span>
           <span className={styles.reporterLabel}>Reporter</span>
         </div>
       </div>
@@ -51,31 +46,21 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
           <span className={styles.pill}>{reportCase.reason}</span>
         </div>
 
+        {reportCase.subject.title && (
+          <p className={styles.subjectTitle}>{reportCase.subject.title}</p>
+        )}
+
         <p className={styles.detailsText}>{reportCase.details}</p>
 
-        {reportCase.entityContent && (
+        {reportCase.subject.content && (
           <div className={styles.entityContent}>
             <span className={styles.entityContentLabel}>Reported content</span>
             <p className={styles.entityContentText}>
-              {reportCase.entityContent}
+              {reportCase.subject.content}
             </p>
           </div>
         )}
       </div>
-
-      {reportCase.relatedReported && (
-        <div className={styles.relatedWrapper}>
-          <Avatar
-            src={reportCase.relatedReported.avatarUrl}
-            fallback={relatedReported}
-            className={styles.avatar}
-          />
-          <div className={styles.reporterInfo}>
-            <span className={styles.reporterName}>{relatedReported}</span>
-            <span className={styles.reporterLabel}>Reported user</span>
-          </div>
-        </div>
-      )}
 
       <div className={styles.actions}>
         {linkProps && (

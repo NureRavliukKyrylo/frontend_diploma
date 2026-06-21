@@ -11,6 +11,11 @@
   gap: 15px;
 }
 
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .subHeaderFilter {
   @include font-base(20px, 400);
   color: #a4a4a4;

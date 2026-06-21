@@ -8,4 +8,5 @@ export const getProgressStatusLabels = (
   Pending: t("bookings.status.pending"),
   Completed: t("bookings.status.completed"),
   Cancelled: t("bookings.status.cancelled"),
+  Disputed: t("bookings.status.disputed"),
 });

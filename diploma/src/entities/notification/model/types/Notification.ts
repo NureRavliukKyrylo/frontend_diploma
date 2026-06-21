@@ -10,5 +10,6 @@ export type Notification = {
   relatedAvatarUrl: string | null;
   metadata: {
     requestId?: string;
+    bookingId: string;
   };
 };

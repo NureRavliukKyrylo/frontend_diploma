@@ -11,5 +11,6 @@ export interface TaskComment {
     avatarUrl: string;
     roleName: string;
   };
+  canSubmitReport: boolean;
   replies: TaskComment[];
 }

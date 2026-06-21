@@ -7,7 +7,6 @@ import { Arrow } from "@shared/assets/icons/actions";
 import { LinkButtonWrapper } from "@shared/ui/buttons";
 import type { useEventPage } from "../../model/useEventPage";
 import { EventMetaChips } from "./EventMetaChips";
-import { EventParticipation } from "./EventParticipation";
 import { EventStats } from "./EventStats";
 import styles from "../EventPage.module.scss";
 import { ParticipationJoinButton } from "@features/participation";
@@ -28,12 +27,14 @@ export const EventHeader = ({ event, policyConfig }: EventHeaderProps) => {
       transition={{ duration: 0.3 }}
     >
       <div className={styles.headerEventInfo}>
-        <div className={styles.reportWrapper}>
-          <ReportButton
-            subjectType={ModerationSubjectType.Event}
-            subjectId={event.id}
-          />
-        </div>
+        {event.canSubmitReport && (
+          <div className={styles.reportWrapper}>
+            <ReportButton
+              subjectType={ModerationSubjectType.event}
+              subjectId={event.id}
+            />
+          </div>
+        )}
         <div className={styles.mainEventData}>
           <div className={styles.eventOrganizationInfo}>
             <div className={styles.titleHeader}>

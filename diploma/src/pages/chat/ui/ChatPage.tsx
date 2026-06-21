@@ -25,7 +25,7 @@ import { ReportModal } from "@features/moderation";
 import { ModerationSubjectType } from "@entities/report";
 import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "usehooks-ts";
-import { BackButton, LinkButtonWrapper } from "@shared/ui/buttons";
+import { LinkButtonWrapper } from "@shared/ui/buttons";
 import { Arrow } from "@shared/assets/icons/actions";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -145,7 +145,7 @@ export const ChatPage = () => {
                   <MessagesListWidget
                     useMessagesQuery={() => {
                       const { data: anchorPage } = useSuspenseQuery(
-                        messageQuery.anchor(chatId, { pageSize: 30 }),
+                        messageQuery.anchor(chatId, { pageSize: 40 }),
                       );
                       const {
                         data,
@@ -157,13 +157,11 @@ export const ChatPage = () => {
                         fetchPreviousPage,
                       } = useSuspenseInfiniteQuery({
                         ...messageQuery.list(chatId, {
-                          pageSize: 30,
-                          page: anchorPage?.pagination.page,
+                          pageSize: 40,
+                          page:
+                            anchorPage?.pagination.firstUnreadPage ??
+                            anchorPage?.pagination.totalPages,
                         }),
-                        initialData: {
-                          pages: [anchorPage],
-                          pageParams: [anchorPage?.pagination.page],
-                        },
                       });
                       return {
                         data,
@@ -173,6 +171,8 @@ export const ChatPage = () => {
                         isFetchingPreviousPage,
                         fetchNextPage,
                         fetchPreviousPage,
+                        targetMessageId:
+                          anchorPage?.pagination.firstUnreadMessageId,
                       };
                     }}
                     renderCard={(message) =>
@@ -201,7 +201,7 @@ export const ChatPage = () => {
         <ReportModal
           isOpen={mode.report.isActive}
           onClose={() => clearModeType("report")}
-          subjectType={ModerationSubjectType.ChatMessage}
+          subjectType={ModerationSubjectType.chatMessage}
           subjectId={mode.report.message.id}
         />
       )}

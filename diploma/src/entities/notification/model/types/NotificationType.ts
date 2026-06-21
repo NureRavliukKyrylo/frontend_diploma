@@ -39,4 +39,8 @@ export type NotificationType =
   | "TimeSpendBookingCancelled"
   | "TimeSpendCompletionRequested"
   | "TimeSpendBookingCompleted"
-  | "TimeSpendBookingDisputed";
+  | "TimeSpendBookingDisputed"
+  | "TimeSpendOfferUpdated"
+  | "TimeSpendOfferChangeAccepted"
+  | "TimeSpendOfferChangeRejected"
+  | "SkillVerified";

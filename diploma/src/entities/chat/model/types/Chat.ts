@@ -16,8 +16,7 @@ export type Chat = {
   }[];
   name: string;
   avatarUrl: string | null;
-  lastMessageAt: string;
-  lastMessage: { message: string; type: "text" | "url" } | null;
+  lastMessage: { message: string; timestamp: string } | null;
   relatedEntityType: RelatedEntityTypeChatValue;
   relatedEntityId: string;
   unreadCount: number;

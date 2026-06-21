@@ -82,5 +82,13 @@ export const getBottomContent = (offer: OfferJoined, t: TFunction) => {
     );
   }
 
+  if (myBookingStatus === "Disputed") {
+    return (
+      <div className={styles.bottomContent}>
+        <p>{t("timeBank:bookings.bottomContent.disputed")}</p>
+      </div>
+    );
+  }
+
   return null;
 };

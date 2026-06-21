@@ -4,7 +4,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { AnimatePresence, motion } from "framer-motion";
 import { ReportCasesFilter, ReportCaseWidget } from "@widgets/reports";
 import { ReportsListWidget } from "@widgets/reports";
-import { ReportCaseItem } from "@entities/report";
+import { ReportCaseItem, ReportCaseItemSkeleton } from "@entities/report";
 import { reportQuery } from "@entities/report";
 import { SearchBar } from "@shared/ui/inputs";
 import { SortDropDown } from "@shared/ui/drop-down";
@@ -21,11 +21,6 @@ import { useReportsPage } from "../model/useReportsPage";
 import { BaseModal } from "@shared/ui/modals";
 import { useTranslation } from "react-i18next";
 
-const sortingReportItems = [
-  { label: "Newest", value: "Newest" },
-  { label: "Latest", value: "Latest" },
-];
-
 export const ReportsPage = () => {
   const {
     handleSearch,
@@ -39,30 +34,36 @@ export const ReportsPage = () => {
   } = useReportsPage();
   const { t } = useTranslation(["moderation", "common"]);
 
+  const sortingReportItems = [
+    { label: t("moderation:page.sorting.default"), value: "Default" },
+    { label: t("moderation:page.sorting.newest"), value: "Newest" },
+    { label: t("moderation:page.sorting.latest"), value: "Latest" },
+  ];
+
   return (
     <div className={styles.wrapper}>
       <aside className={styles.sidebar}>
         <div className={styles.baseStats}>
           <div className={styles.topContent}>
-            <h1>REPORTS</h1>
+            <h1>{t("moderation:page.stats.total")}</h1>
             <h2>{reports?.pagination.totalCount}</h2>
             <div className={styles.lineDivider} />
           </div>
           <div className={styles.bottomContent}>
             <div className={styles.statBlock}>
-              <h1>Open</h1>
+              <h1>{t("moderation:page.stats.open")}</h1>
               <h2 className={styles.openStat}>{reports?.stats.openCount}</h2>
             </div>
             <div className={styles.lineDivider} />
             <div className={styles.statBlock}>
-              <h1>Resolved</h1>
+              <h1>{t("moderation:page.stats.resolved")}</h1>
               <h2 className={styles.resolvedStat}>
                 {reports?.stats.resolvedCount}
               </h2>
             </div>
             <div className={styles.lineDivider} />
             <div className={styles.statBlock}>
-              <h1>Rejected</h1>
+              <h1>{t("moderation:page.stats.rejected")}</h1>
               <h2 className={styles.rejectedStat}>
                 {reports?.stats.rejectedCount}
               </h2>
@@ -87,7 +88,7 @@ export const ReportsPage = () => {
             <SortDropDown
               options={sortingReportItems}
               onSelect={handleSort}
-              value={search.OrderBy ?? "Newest"}
+              value={search.OrderBy ?? "Default"}
             />
           </div>
 
@@ -95,7 +96,7 @@ export const ReportsPage = () => {
             fallback={
               <ListWidgetSkeleton
                 items={12}
-                renderSkeleton={() => <div />}
+                renderSkeleton={() => <ReportCaseItemSkeleton />}
                 className={styles.reportsList}
               />
             }
@@ -121,7 +122,9 @@ export const ReportsPage = () => {
                       variants={staggeredCardVariants}
                       initial="hidden"
                       animate="visible"
+                      whileHover="hover"
                       onClick={() => handleReportClick(report.id)}
+                      className={styles.reportWrapper}
                     >
                       <ReportCaseItem reportCase={report} />
                     </motion.div>

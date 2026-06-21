@@ -2,17 +2,18 @@ import { OnlineIcon } from "@shared/assets/icons/info";
 import type { ReportCase } from "../../model/types/ReportCase";
 import styles from "./ReportCaseItem.module.scss";
 import { getFullName } from "@entities/user";
-import { capitalize } from "@shared/libs/text";
 import { Avatar } from "@shared/ui";
+import { useTranslation } from "react-i18next";
 
 interface ReportCaseItemProps {
   reportCase: ReportCase;
 }
 
 export const ReportCaseItem = ({ reportCase }: ReportCaseItemProps) => {
+  const { t } = useTranslation("moderation");
   const fullName = getFullName(
-    reportCase.reporterUser.firstName,
-    reportCase.reporterUser.lastName,
+    reportCase.reporter.firstName,
+    reportCase.reporter.lastName,
   );
 
   return (
@@ -20,16 +21,27 @@ export const ReportCaseItem = ({ reportCase }: ReportCaseItemProps) => {
       <div className={styles.avatarCol}>
         <Avatar
           className={styles.avatar}
-          src={reportCase.reporterUser.avatarUrl}
+          src={reportCase.reporter.avatarUrl}
           fallback={fullName}
         />
       </div>
 
       <div className={styles.mainContent}>
         <span className={styles.userName}>{fullName}</span>
+        <p className={styles.details}>
+          asdasdadsadasdasdasdasdadasdasdasdasdasdadadadadadadadadasdasdasdasassssssssssssssssssssssssssssssssssssssssssssdad
+        </p>
         <div className={styles.pills}>
-          <span className={styles.reasonPill}>{reportCase.reason}</span>
-          <span className={styles.subjectPill}>{reportCase.subjectType}</span>
+          <span className={styles.reasonPill}>
+            {t(`moderation:report.reasons.${reportCase.reason}`, {
+              defaultValue: reportCase.reason,
+            })}
+          </span>
+          <span className={styles.subjectPill}>
+            {t(`moderation:report.subjects.${reportCase.subjectType}`, {
+              defaultValue: reportCase.subjectType,
+            })}
+          </span>
         </div>
         <p className={styles.details}>{reportCase.details}</p>
       </div>
@@ -39,7 +51,9 @@ export const ReportCaseItem = ({ reportCase }: ReportCaseItemProps) => {
           <OnlineIcon
             className={`${styles.statusIcon} ${styles[reportCase.status]}`}
           />
-          {capitalize(reportCase.status)}
+          {t(`moderation:report.statuses.${reportCase.status}`, {
+            defaultValue: reportCase.status,
+          })}
         </span>
       </div>
     </div>

@@ -24,12 +24,14 @@ export const ProjectHeader = ({
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.3 }}
   >
-    <div className={styles.reportWrapper}>
-      <ReportButton
-        subjectType={ModerationSubjectType.Project}
-        subjectId={project.id}
-      />
-    </div>
+    {project.canSubmitReport && (
+      <div className={styles.reportWrapper}>
+        <ReportButton
+          subjectType={ModerationSubjectType.project}
+          subjectId={project.id}
+        />
+      </div>
+    )}
     <div className={styles.headerProjectInfo}>
       <div className={styles.mainProjectData}>
         <div className={styles.titleHeader}>

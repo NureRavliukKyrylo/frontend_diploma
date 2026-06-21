@@ -6,12 +6,14 @@ import {
   Report,
   ChatIcon,
   CommentIcon,
+  VerifiedIcon,
 } from "@shared/assets/icons/info";
 import {
   GiftIcon,
   RejectIcon,
   ApproveIcon,
   RequestIcon,
+  DisputeIcon,
 } from "@shared/assets/icons/actions";
 import { GroupPeopleIcon } from "@shared/assets/icons/info";
 import type { NotificationType } from "../model";
@@ -227,8 +229,28 @@ export const NOTIFICATION_TYPE_CONFIG: Record<
     wrapperColor: "#f0faf1",
   },
   TimeSpendBookingDisputed: {
-    icon: AttendanceCalendarIcon,
+    icon: DisputeIcon,
     iconColor: "#7c3aed",
     wrapperColor: "#faf5ff",
+  },
+  TimeSpendOfferUpdated: {
+    icon: AdminAdjustmentIcon,
+    iconColor: "#3b82f6",
+    wrapperColor: "#eff6ff",
+  },
+  TimeSpendOfferChangeAccepted: {
+    icon: ApproveIcon,
+    iconColor: "#16a34a",
+    wrapperColor: "#f0fdf4",
+  },
+  TimeSpendOfferChangeRejected: {
+    icon: RejectIcon,
+    iconColor: "#e11d48",
+    wrapperColor: "#fff1f2",
+  },
+  SkillVerified: {
+    icon: VerifiedIcon,
+    iconColor: "#004a09",
+    wrapperColor: "#f0faf1",
   },
 };

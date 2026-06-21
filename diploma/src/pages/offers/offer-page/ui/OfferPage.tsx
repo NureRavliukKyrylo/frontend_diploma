@@ -51,12 +51,14 @@ export const OfferPage = () => {
         transition={{ duration: 0.3 }}
       >
         <div className={styles.offerOwnerInfo}>
-          <div className={styles.reportWrapper}>
-            <ReportButton
-              subjectType={ModerationSubjectType.Offer}
-              subjectId={offer.id}
-            />
-          </div>
+          {offer.canSubmitReport && (
+            <div className={styles.reportWrapper}>
+              <ReportButton
+                subjectType={ModerationSubjectType.offer}
+                subjectId={offer.id}
+              />
+            </div>
+          )}
           <div className={styles.titleHeader}>
             <h1>{offer.title}</h1>
             <div className={styles.offerMetaInfo}>

@@ -142,14 +142,15 @@ const CommentList = ({
                 ) : null
               }
               reportSlot={
-                comment.author.id !== userId ? (
+                comment.author.id !== userId &&
+                comment.canSubmitReport && (
                   <ReportButton
-                    subjectType={ModerationSubjectType.Comment}
+                    subjectType={ModerationSubjectType.comment}
                     subjectId={comment.id}
                     buttonClassName={styles.reportButton}
                     iconClassName={styles.reportIcon}
                   />
-                ) : undefined
+                )
               }
             />
             {!!comment.replies?.length && (

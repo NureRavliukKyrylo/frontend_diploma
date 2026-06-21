@@ -17,34 +17,52 @@
       "detailsRequired": "Деталі є обов'язковими",
       "detailsMax": "Опис повинен містити не більше 200 символів"
     },
+    "statuses": {
+      "open": "Відкрито",
+      "resolved": "Вирішено",
+      "rejected": "Відхилено"
+    },
     "subjects": {
-      "User": "Користувача",
-      "Organization": "Організацію",
-      "Project": "Проєкт",
-      "Event": "Подію",
-      "Task": "Завдання",
-      "Offer": "Пропозицію",
-      "ChatMessage": "Повідомлення",
-      "Comment": "Коментар",
-      "Feedback": "Відгук",
-      "Other": "Вміст"
+      "user": "Користувач",
+      "organization": "Організація",
+      "project": "Проєкт",
+      "event": "Подія",
+      "task": "Завдання",
+      "offer": "Пропозиція",
+      "chatMessage": "Повідомлення",
+      "comment": "Коментар",
+      "feedback": "Відгук",
+      "other": "Вміст"
     },
     "reasons": {
-      "Spam": "Спам",
-      "Harassment": "Образи або цькування",
-      "HateSpeech": "Мова ворожнечі",
-      "Misinformation": "Дезінформація",
-      "InappropriateContent": "Неприйнятний вміст",
-      "Violence": "Насильство або погрози",
-      "Copyright": "Порушення авторських прав",
-      "Fraud": "Шахрайство",
-      "PrivacyViolation": "Порушення конфіденційності",
-      "Other": "Інше"
+      "spam": "Спам",
+      "harassment": "Образи або цькування",
+      "hateSpeech": "Мова ворожнечі",
+      "misinformation": "Дезінформація",
+      "inappropriateContent": "Неприйнятний вміст",
+      "violence": "Насильство або погрози",
+      "copyright": "Порушення авторських прав",
+      "fraud": "Шахрайство",
+      "privacyViolation": "Порушення конфіденційності",
+      "other": "Інше"
     },
     "notifications": {
       "successTitle": "Скарга надіслана",
       "successDescription": "Дякуємо за ваше повідомлення. Ми розглянемо його найближчим часом.",
       "failedTitle": "Не вдалося надіслати скаргу"
+    }
+  },
+  "page": {
+    "stats": {
+      "total": "Скарги",
+      "open": "Відкриті",
+      "resolved": "Вирішені",
+      "rejected": "Відхилені"
+    },
+    "sorting": {
+      "default": "За замовчуванням",
+      "newest": "Найновіші",
+      "latest": "Останні"
     }
   },
   "hideContent": {

@@ -44,7 +44,9 @@ export interface Offer {
     | "Reserved"
     | "Completed"
     | "Cancelled"
-    | "CompletionRequested";
+    | "CompletionRequested"
+    | "Disputed";
+  canSubmitReport: boolean;
 }
 
 export interface OfferJoined extends Offer {

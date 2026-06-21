@@ -49,6 +49,10 @@ export const notificationTypeValues = [
   "TimeSpendBookingCompleted",
   "TimeSpendBookingDisputed",
   "System",
+  "TimeSpendOfferUpdated",
+  "TimeSpendOfferChangeAccepted",
+  "TimeSpendOfferChangeRejected",
+  "SkillVerified",
 ] as const satisfies NotificationType[];
 
 export const notificationPaginationSchema = paginationSchema.extend({

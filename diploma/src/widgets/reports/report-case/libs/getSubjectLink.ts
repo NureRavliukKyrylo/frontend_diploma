@@ -1,8 +1,9 @@
 import type { ModerationSubjectType } from "@entities/report";
 
-type SubjectTypeKey = Lowercase<keyof typeof ModerationSubjectType>;
-
-export const getSubjectLink = (type: SubjectTypeKey, id: string) => {
+export const getSubjectLink = (
+  type: keyof typeof ModerationSubjectType,
+  id: string,
+) => {
   switch (type) {
     case "user":
     case "organization":
@@ -18,7 +19,7 @@ export const getSubjectLink = (type: SubjectTypeKey, id: string) => {
       };
     case "offer":
       return { to: "/offers/$id" as const, params: { id } };
-    case "chatmessage":
+    case "chatMessage":
     case "comment":
     case "feedback":
     case "other":

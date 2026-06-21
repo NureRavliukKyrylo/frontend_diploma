@@ -17,34 +17,52 @@
       "detailsRequired": "Details are required",
       "detailsMax": "Details must be at most 200 characters"
     },
+    "statuses": {
+      "open": "Open",
+      "resolved": "Resolved",
+      "rejected": "Rejected"
+    },
     "subjects": {
-      "User": "User",
-      "Organization": "Organization",
-      "Project": "Project",
-      "Event": "Event",
-      "Task": "Task",
-      "Offer": "Offer",
-      "ChatMessage": "Message",
-      "Comment": "Comment",
-      "Feedback": "Feedback",
-      "Other": "Content"
+      "user": "User",
+      "organization": "Organization",
+      "project": "Project",
+      "event": "Event",
+      "task": "Task",
+      "offer": "Offer",
+      "chatMessage": "Message",
+      "comment": "Comment",
+      "feedback": "Feedback",
+      "other": "Content"
     },
     "reasons": {
-      "Spam": "Spam",
-      "Harassment": "Harassment or Bullying",
-      "HateSpeech": "Hate Speech",
-      "Misinformation": "Misinformation",
-      "InappropriateContent": "Inappropriate Content",
-      "Violence": "Violence or Threats",
-      "Copyright": "Copyright Violation",
-      "Fraud": "Fraud or Scam",
-      "PrivacyViolation": "Privacy Violation",
-      "Other": "Other"
+      "spam": "Spam",
+      "harassment": "Harassment or Bullying",
+      "hateSpeech": "Hate Speech",
+      "misinformation": "Misinformation",
+      "inappropriateContent": "Inappropriate Content",
+      "violence": "Violence or Threats",
+      "copyright": "Copyright Violation",
+      "fraud": "Fraud or Scam",
+      "privacyViolation": "Privacy Violation",
+      "other": "Other"
     },
     "notifications": {
       "successTitle": "Report submitted",
       "successDescription": "Thank you for your report. We will review it shortly.",
       "failedTitle": "Report failed"
+    }
+  },
+  "page": {
+    "stats": {
+      "total": "Reports",
+      "open": "Open",
+      "resolved": "Resolved",
+      "rejected": "Rejected"
+    },
+    "sorting": {
+      "default": "Default",
+      "newest": "Newest",
+      "latest": "Latest"
     }
   },
   "hideContent": {

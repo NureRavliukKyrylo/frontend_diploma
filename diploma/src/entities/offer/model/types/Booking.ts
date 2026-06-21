@@ -20,5 +20,6 @@ export interface OfferBooking {
   canReject: boolean;
   canComplete: boolean;
   canCancel: boolean;
+  canDispute: boolean;
   resolutionComment: string;
 }

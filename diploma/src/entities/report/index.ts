@@ -11,3 +11,4 @@ export type { ReportCase } from "./model";
 export { ReportReasonType } from "./model";
 export type { ReportCasesSearchParams } from "./libs";
 export { reportReasons } from "./config/reportReasonOptions";
+export { ReportCaseItemSkeleton } from "./ui/report-case-item/ReportCaseItemSkeleton";

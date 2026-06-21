@@ -1,14 +1,14 @@
 export const ReportReasonType = {
-  Spam: 0,
-  Harassment: 1,
-  HateSpeech: 2,
-  Misinformation: 3,
-  InappropriateContent: 4,
-  Violence: 5,
-  Copyright: 6,
-  Fraud: 7,
-  PrivacyViolation: 8,
-  Other: 9,
+  spam: 0,
+  harassment: 1,
+  hateSpeech: 2,
+  misinformation: 3,
+  inappropriateContent: 4,
+  violence: 5,
+  copyright: 6,
+  fraud: 7,
+  privacyViolation: 8,
+  other: 9,
 } as const;
 
 export type ReportReasonType =

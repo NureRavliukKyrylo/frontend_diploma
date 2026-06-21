@@ -6,3 +6,6 @@ export { RejectBookingButton } from "./booking/reject-request/ui/reject-button/R
 export { CompleteBookingButton } from "./booking/complete/ui/complete-button/CompleteBookingButton";
 export { CancelBookingButton } from "./booking/cancel/ui/cancel-button/CancelBookingButton";
 export { DeactivateOfferButton } from "./deactivate-offer/ui/deactivate-button/DeactivateOfferButton";
+export { DisputeBookingButton } from "./booking/dispute/ui/dispute-button/DisputeBookingButton";
+export { ApproveOfferChangeButton } from "./booking/offer-change-approve/ui/approve-button/ApproveOfferChangeButton";
+export { RejectOfferChangeButton } from "./booking/offer-change-reject/ui/reject-button/RejectOfferChangeButton";

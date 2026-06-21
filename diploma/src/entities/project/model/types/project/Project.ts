@@ -49,6 +49,7 @@ export interface Project {
   } | null;
   isJoined: boolean;
   canSubmitFeedback: boolean;
+  canSubmitReport: boolean;
   hasPendingJoinRequest: boolean;
   hasPendingLeaveRequest: boolean;
 }

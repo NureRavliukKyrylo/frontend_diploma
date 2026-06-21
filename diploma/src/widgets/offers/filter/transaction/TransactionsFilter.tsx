@@ -51,6 +51,7 @@ export const TransactionsFilter = ({ search }: TransactionsFilterProps) => {
             label={t("transactions.filter.labels.type")}
             options={getTransactionTypeOptions(t)}
             value={search.Type ?? "all"}
+            hideLabel
             onChange={onTypeChange}
           />
         </div>
@@ -66,6 +67,7 @@ export const TransactionsFilter = ({ search }: TransactionsFilterProps) => {
             options={getTransactionSourceTypeOptions(t)}
             value={search.SourceType ?? "all"}
             onChange={onSourceTypeChange}
+            hideLabel
           />
         </div>
 

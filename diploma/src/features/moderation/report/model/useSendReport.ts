@@ -41,7 +41,7 @@ export const useSendReport = ({
   });
 
   const formik = useFormik<{ reason: ReportReasonType; details: string }>({
-    initialValues: { reason: ReportReasonType.Spam, details: "" },
+    initialValues: { reason: ReportReasonType.spam, details: "" },
     validationSchema: getReportSchema(t),
     onSubmit: (values) => {
       mutation.mutate({

@@ -1,10 +1,6 @@
 import type { Organization } from "@entities/organization";
 import type { ParticipationMember } from "@entities/participation";
-import type {
-  Coordinates,
-  Policy,
-  Rating,
-} from "@shared/config/types";
+import type { Coordinates, Policy, Rating } from "@shared/config/types";
 import type { Event } from "@entities/event";
 import type { Project } from "@entities/project";
 import type { Category } from "@entities/category";
@@ -18,10 +14,12 @@ export interface Task {
   eventId?: string | null;
   title: string;
   description: string;
-  location?: (Coordinates & {
-    regionKey?: string | null;
-    regionLabel?: string | null;
-  }) | null;
+  location?:
+    | (Coordinates & {
+        regionKey?: string | null;
+        regionLabel?: string | null;
+      })
+    | null;
   locationInfo?: {
     address?: string;
     region?: string;
@@ -63,6 +61,7 @@ export interface Task {
   canSubmitFeedback: boolean;
   hasPendingJoinRequest: boolean;
   hasPendingLeaveRequest: boolean;
+  canSubmitReport: boolean;
 }
 
 export interface TaskJoined extends Task {

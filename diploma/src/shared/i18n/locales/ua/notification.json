@@ -76,6 +76,10 @@
     "TimeSpendBookingCancelled": "Бронювання скасовано",
     "TimeSpendCompletionRequested": "Надіслано запит на завершення",
     "TimeSpendBookingCompleted": "Бронювання завершено",
-    "TimeSpendBookingDisputed": "Відкрито спір щодо бронювання"
+    "TimeSpendBookingDisputed": "Бронювання оскаржено",
+    "TimeSpendOfferUpdated": "Пропозицію оновлено",
+    "TimeSpendOfferChangeAccepted": "Зміну пропозиції прийнято",
+    "TimeSpendOfferChangeRejected": "Зміну пропозиції відхилено",
+    "SkillVerified": "Навичку підтверджено"
   }
 }

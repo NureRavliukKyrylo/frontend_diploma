@@ -19,4 +19,5 @@ export type Message = {
   isMine: boolean;
   isRead: boolean;
   isSystem: boolean;
+  canSubmitReport: boolean;
 };

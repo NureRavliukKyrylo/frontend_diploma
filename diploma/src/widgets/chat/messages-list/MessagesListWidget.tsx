@@ -29,6 +29,7 @@ export const MessagesListWidget = ({
   const isFetchingPreviousPage = queryResult?.isFetchingPreviousPage ?? false;
   const fetchPreviousPage = queryResult?.fetchPreviousPage ?? (() => {});
 
+  const targetMessageId = queryResult?.targetMessageId;
   const messagesWrapperRef = useRef<HTMLDivElement>(null);
 
   const virtualizer = useVirtualizer({
@@ -37,7 +38,6 @@ export const MessagesListWidget = ({
     estimateSize: () => 90,
     getItemKey: (index) => messages![index]!.id,
     anchorTo: "end",
-    followOnAppend: true,
     overscan: 6,
     gap: 12,
     directDomUpdates: true,
@@ -69,27 +69,55 @@ export const MessagesListWidget = ({
   }, [messages?.length]);
 
   useLayoutEffect(() => {
-    virtualizer.scrollToEnd();
+    const targetIndex = targetMessageId
+      ? (messages?.findIndex((m) => m.id === targetMessageId) ?? -1)
+      : -1;
+
+    if (targetIndex !== -1) {
+      virtualizer.scrollToIndex(targetIndex, { align: "start" });
+    } else {
+      virtualizer.scrollToEnd();
+    }
   }, [chatId, virtualizer]);
 
+  useEffect(() => {
+    const [lastItem] = [...virtualItems].reverse();
+
+    if (!lastItem) return;
+
+    if (
+      lastItem.index >= (messages?.length ?? 0) - 1 &&
+      hasNextPage &&
+      !isFetchingNextPage
+    ) {
+      fetchNextPage();
+    }
+  }, [
+    hasNextPage,
+    fetchNextPage,
+    messages?.length,
+    isFetchingNextPage,
+    virtualItems,
+  ]);
+
+  useEffect(() => {
+    const [firstItem] = virtualItems;
+
+    if (!firstItem) return;
+
+    if (firstItem.index <= 0 && hasPreviousPage && !isFetchingPreviousPage) {
+      fetchPreviousPage();
+    }
+  }, [
+    hasPreviousPage,
+    fetchPreviousPage,
+    messages?.length,
+    isFetchingPreviousPage,
+    virtualItems,
+  ]);
+
   return (
-    <div
-      className={wrapperClass}
-      ref={messagesWrapperRef}
-      onScroll={(e) => {
-        const el = e.currentTarget;
-
-        if (el.scrollTop < 120 && hasPreviousPage && !isFetchingPreviousPage) {
-          fetchPreviousPage();
-        }
-
-        const distanceFromBottom =
-          el.scrollHeight - el.scrollTop - el.clientHeight;
-        if (distanceFromBottom < 120 && hasNextPage && !isFetchingNextPage) {
-          fetchNextPage();
-        }
-      }}
-    >
+    <div className={wrapperClass} ref={messagesWrapperRef}>
       <div
         ref={virtualizer.containerRef}
         style={{ position: "relative", width: "100%" }}

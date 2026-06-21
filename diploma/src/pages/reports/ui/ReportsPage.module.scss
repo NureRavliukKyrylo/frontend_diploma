@@ -4,6 +4,7 @@
   display: flex;
   gap: 40px;
   align-items: flex-start;
+  width: 90%;
 
   @include respond-to(laptop) {
     gap: 28px;
@@ -11,10 +12,12 @@
   @include respond-to(null, 1200px) {
     flex-direction: column;
     gap: 24px;
+    width: 95%;
   }
   @include respond-to(mobile) {
     flex-direction: column;
     gap: 16px;
+    width: 95%;
   }
 }
 
@@ -201,8 +204,8 @@
 }
 
 .reportsList {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 12px;
 
   @include respond-to(tablet) {
@@ -211,6 +214,9 @@
   @include respond-to(mobile) {
     gap: 8px;
   }
+}
+.reportWrapper {
+  cursor: pointer;
 }
 
 .emptyState {

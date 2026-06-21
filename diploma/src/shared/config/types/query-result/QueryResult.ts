@@ -16,6 +16,7 @@ export interface QueryResult<T> {
   hasPreviousPage?: boolean;
   isFetchingNextPage?: boolean;
   isFetchingPreviousPage?: boolean;
+  targetMessageId?: string | null;
 
   refetch?: () => void;
 }

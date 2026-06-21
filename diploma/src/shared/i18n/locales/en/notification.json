@@ -76,6 +76,10 @@
     "TimeSpendBookingCancelled": "Booking Cancelled",
     "TimeSpendCompletionRequested": "Completion Requested",
     "TimeSpendBookingCompleted": "Booking Completed",
-    "TimeSpendBookingDisputed": "Booking Disputed"
+    "TimeSpendBookingDisputed": "Booking Disputed",
+    "TimeSpendOfferUpdated": "Offer Updated",
+    "TimeSpendOfferChangeAccepted": "Offer Change Accepted",
+    "TimeSpendOfferChangeRejected": "Offer Change Rejected",
+    "SkillVerified": "Skill Verified"
   }
 }
