@@ -2,7 +2,6 @@ import { getFullName, useUserStore } from "@entities/user";
 import { profileQuery } from "@entities/user/profile";
 import { useLogout } from "@features/auth";
 import { LogOutImage } from "@shared/assets/images/actions";
-import { DefaultAvatar } from "@shared/assets/images/user";
 import { Avatar } from "@shared/ui";
 import { ConfirmationModal } from "@shared/ui/modals";
 import { useQuery } from "@tanstack/react-query";
@@ -34,7 +33,7 @@ export const HeaderAccountMenu = ({
   }, false);
   const fullName =
     getFullName(user?.firstName, user?.lastName) || user?.email || "Profile";
-  const avatarSrc = user?.profile?.avatarUrl ?? DefaultAvatar;
+  const avatarSrc = user?.profile?.avatarUrl;
 
   useEffect(() => {
     const handlePointerDown = (event: PointerEvent) => {

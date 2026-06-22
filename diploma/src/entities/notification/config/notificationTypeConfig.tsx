@@ -253,4 +253,19 @@ export const NOTIFICATION_TYPE_CONFIG: Record<
     iconColor: "#004a09",
     wrapperColor: "#f0faf1",
   },
+  InvitationCreated: {
+    icon: RequestIcon,
+    iconColor: "#3b82f6",
+    wrapperColor: "#eff6ff",
+  },
+  InvitationAccepted: {
+    icon: ApproveIcon,
+    iconColor: "#16a34a",
+    wrapperColor: "#f0fdf4",
+  },
+  InvitationDeclined: {
+    icon: RejectIcon,
+    iconColor: "#e11d48",
+    wrapperColor: "#fff1f2",
+  },
 };

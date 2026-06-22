@@ -1,3 +1,4 @@
+import type { QueryKey } from "@tanstack/react-query";
 import type { PaginationResponse } from "../pagination/PaginationResponse";
 
 export interface QueryResult<T> {
@@ -17,6 +18,7 @@ export interface QueryResult<T> {
   isFetchingNextPage?: boolean;
   isFetchingPreviousPage?: boolean;
   targetMessageId?: string | null;
+  queryKey?: QueryKey;
 
   refetch?: () => void;
 }

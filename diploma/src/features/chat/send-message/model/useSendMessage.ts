@@ -1,19 +1,24 @@
 import { useMutation } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
-import { queryClient } from "@shared/api";
 import { sendMessage, type SendMessageDto } from "../api/sendMessageApi";
-import { messageKeys, useChatScrollStore } from "@entities/chat";
+import {
+  appendMessage,
+  useChatMessagesQuery,
+  useChatScrollStore,
+  type Message,
+} from "@entities/chat";
 import { useTranslation } from "react-i18next";
 
 export const useSendMessage = (chatId: string, onSuccess?: () => void) => {
-  const { t } = useTranslation(["chat", "commob"]);
-
+  const { t } = useTranslation(["chat", "common"]);
+  const { queryKey } = useChatMessagesQuery(chatId);
   const mutation = useMutation({
     mutationFn: (data: SendMessageDto) => sendMessage(chatId, data),
-    onSuccess: () => {
+    onSuccess: (newMessage: Message) => {
+      console.log(newMessage);
+      appendMessage(queryKey, newMessage);
       useChatScrollStore.getState().requestScrollToBottom(chatId);
-      queryClient.invalidateQueries({ queryKey: messageKeys.list(chatId) });
       onSuccess?.();
     },
     onError: (error: unknown) => {

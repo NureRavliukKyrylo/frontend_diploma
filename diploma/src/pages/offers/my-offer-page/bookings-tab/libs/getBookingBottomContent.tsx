@@ -1,14 +1,22 @@
 import type { OfferBooking } from "@entities/offer";
 import {
   ApproveBookingButton,
+  CancelBookingButton,
   CompleteBookingButton,
   DisputeBookingButton,
   RejectBookingButton,
 } from "@features/time-bank";
 
 export const getBookingBottomContent = (booking: OfferBooking) => {
-  const { canComplete, canDispute, canApprove, canReject, id, offerId } =
-    booking;
+  const {
+    canComplete,
+    canDispute,
+    canCancel,
+    canApprove,
+    canReject,
+    id,
+    offerId,
+  } = booking;
 
   return (
     <>
@@ -24,6 +32,9 @@ export const getBookingBottomContent = (booking: OfferBooking) => {
         <CompleteBookingButton bookingId={id} variant="myBooking" />
       )}
       {canDispute && <DisputeBookingButton bookingId={id} />}
+      {canCancel && !canDispute && !(canApprove || canReject) && (
+        <CancelBookingButton bookingId={id} />
+      )}
     </>
   );
 };

@@ -8,7 +8,7 @@ import styles from "./HeaderAccountMenu.module.scss";
 interface HeaderAccountDropdownProps {
   isOpen: boolean;
   responsive: boolean;
-  avatarSrc: string;
+  avatarSrc?: string;
   fullName: string;
   email: string;
   availableMinutes?: number | null;

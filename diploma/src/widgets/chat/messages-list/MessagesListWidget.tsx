@@ -40,7 +40,6 @@ export const MessagesListWidget = ({
     anchorTo: "end",
     overscan: 6,
     gap: 12,
-    directDomUpdates: true,
   });
 
   const wrapperClass =
@@ -76,6 +75,7 @@ export const MessagesListWidget = ({
     if (targetIndex !== -1) {
       virtualizer.scrollToIndex(targetIndex, { align: "start" });
     } else {
+      console.log("scroll to end");
       virtualizer.scrollToEnd();
     }
   }, [chatId, virtualizer]);
@@ -102,10 +102,14 @@ export const MessagesListWidget = ({
 
   useEffect(() => {
     const [firstItem] = virtualItems;
-
     if (!firstItem) return;
 
-    if (firstItem.index <= 0 && hasPreviousPage && !isFetchingPreviousPage) {
+    const scrollEl = messagesWrapperRef.current;
+    if (!scrollEl) return;
+
+    if (scrollEl.scrollTop > 300) return;
+
+    if (firstItem.index <= 5 && hasPreviousPage && !isFetchingPreviousPage) {
       fetchPreviousPage();
     }
   }, [
@@ -119,8 +123,11 @@ export const MessagesListWidget = ({
   return (
     <div className={wrapperClass} ref={messagesWrapperRef}>
       <div
-        ref={virtualizer.containerRef}
-        style={{ position: "relative", width: "100%" }}
+        style={{
+          height: virtualizer.getTotalSize(),
+          position: "relative",
+          width: "100%",
+        }}
       >
         {virtualItems.map((virtualRow) => {
           const message = messages![virtualRow.index];
@@ -134,6 +141,7 @@ export const MessagesListWidget = ({
                 top: 0,
                 left: 0,
                 width: "100%",
+                transform: `translateY(${virtualRow.start}px)`,
               }}
             >
               {renderCard(message, virtualRow.index)}

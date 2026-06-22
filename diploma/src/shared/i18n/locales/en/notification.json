@@ -80,6 +80,9 @@
     "TimeSpendOfferUpdated": "Offer Updated",
     "TimeSpendOfferChangeAccepted": "Offer Change Accepted",
     "TimeSpendOfferChangeRejected": "Offer Change Rejected",
-    "SkillVerified": "Skill Verified"
+    "SkillVerified": "Skill Verified",
+    "InvitationCreated": "Invitation created",
+    "InvitationAccepted": "Invitation accepted",
+    "InvitationDeclined": "Invitation declined"
   }
 }

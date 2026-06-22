@@ -4,11 +4,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./ChatContentWidget.module.scss";
 import { useChatHeaderData } from "../model/useChatHeaderData";
 import { MessageForm } from "@features/chat";
-import type {
-  Message,
-  MessageModeType,
-  RelatedEntityTypeChatValue,
-} from "@entities/chat";
+import type { Message, MessageModeType } from "@entities/chat";
 import { getFullName } from "@entities/user";
 import { useQuery } from "@tanstack/react-query";
 import { profileQuery } from "@entities/user/profile";
@@ -49,7 +45,7 @@ export const ChatContentWidget = ({
 
   const isPrivate = chat.relatedEntityType === "private";
   const chipClassName = `${styles.chatTypeChip} ${styles[chat.relatedEntityType]}`;
-
+  console.log("conten", mode);
   return (
     <div className={styles.chatContentWrapper}>
       <div className={styles.chatHeader}>

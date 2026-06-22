@@ -1,49 +1,36 @@
 import {
   ChatItem,
   chatQuery,
-  MessageItem,
-  messageQuery,
   relatedEntityTypeChatValues,
-  SystemMessageItem,
 } from "@entities/chat";
 import { getFullName } from "@entities/user";
-import {
-  useSuspenseInfiniteQuery,
-  useSuspenseQuery,
-} from "@tanstack/react-query";
-import {
-  ChatContentWidget,
-  ChatSidebar,
-  ChatsListWidget,
-  MessagesListWidget,
-} from "@widgets/chat";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
+import { ChatContentWidget, ChatSidebar, ChatsListWidget } from "@widgets/chat";
 import styles from "./ChatPage.module.scss";
-import { Suspense } from "react";
 import { DeleteMessageModal } from "@features/chat";
 import { useChatPage } from "../model/useChatPage";
 import { ReportModal } from "@features/moderation";
 import { ModerationSubjectType } from "@entities/report";
-import { useTranslation } from "react-i18next";
 import { useMediaQuery } from "usehooks-ts";
 import { LinkButtonWrapper } from "@shared/ui/buttons";
 import { Arrow } from "@shared/assets/icons/actions";
 import { AnimatePresence, motion } from "framer-motion";
+import { ChatMessagesSection } from "./ChatMessagesSection";
 
 export const ChatPage = () => {
   const {
     chatId,
-    getMenuItems,
     handleClickChat,
-    openId,
     search,
-    setOpenId,
     user,
     clearModeType,
     mode,
+    getMenuItems,
+    openId,
+    setOpenId,
   } = useChatPage();
-  const { t } = useTranslation(["chat"]);
   const isMobile = useMediaQuery("(max-width: 850px)");
-
+  console.log("page", mode);
   const showList = !isMobile || !chatId;
   const showChat = !isMobile || !!chatId;
 
@@ -141,56 +128,12 @@ export const ChatPage = () => {
                   )
                 }
               >
-                <Suspense fallback={<div>Loading..</div>}>
-                  <MessagesListWidget
-                    useMessagesQuery={() => {
-                      const { data: anchorPage } = useSuspenseQuery(
-                        messageQuery.anchor(chatId, { pageSize: 40 }),
-                      );
-                      const {
-                        data,
-                        hasNextPage,
-                        hasPreviousPage,
-                        isFetchingNextPage,
-                        isFetchingPreviousPage,
-                        fetchNextPage,
-                        fetchPreviousPage,
-                      } = useSuspenseInfiniteQuery({
-                        ...messageQuery.list(chatId, {
-                          pageSize: 40,
-                          page:
-                            anchorPage?.pagination.firstUnreadPage ??
-                            anchorPage?.pagination.totalPages,
-                        }),
-                      });
-                      return {
-                        data,
-                        hasNextPage,
-                        hasPreviousPage,
-                        isFetchingNextPage,
-                        isFetchingPreviousPage,
-                        fetchNextPage,
-                        fetchPreviousPage,
-                        targetMessageId:
-                          anchorPage?.pagination.firstUnreadMessageId,
-                      };
-                    }}
-                    renderCard={(message) =>
-                      message.isSystem ? (
-                        <SystemMessageItem message={message} />
-                      ) : (
-                        <MessageItem
-                          message={message}
-                          menuItems={getMenuItems(message, t)}
-                          openId={openId}
-                          setOpenId={setOpenId}
-                        />
-                      )
-                    }
-                    className={styles.wrapperMessages}
-                    chatId={chatId}
-                  />
-                </Suspense>
+                <ChatMessagesSection
+                  chatId={chatId}
+                  getMenuItems={getMenuItems}
+                  openId={openId}
+                  setOpenId={setOpenId}
+                />
               </ChatContentWidget>
             )}
           </motion.div>

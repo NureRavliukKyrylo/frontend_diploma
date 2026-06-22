@@ -10,6 +10,7 @@ import {
   MentionButton,
   type Participant,
 } from "../mention-button/MentionButton";
+import { useTypingMessage } from "@entities/chat";
 
 interface MessageFormProps {
   chatId: string;
@@ -44,6 +45,8 @@ export const MessageForm = ({
     editingMessage,
     onCancel,
   });
+
+  const sendTyping = useTypingMessage(chatId);
 
   const hasError = formik.submitCount > 0 && Boolean(formik.errors.body);
   const isBlank = !formik.values.body.trim();
@@ -181,8 +184,12 @@ export const MessageForm = ({
               onChange={(e) => {
                 formik.handleChange(e);
                 autoResize();
+                sendTyping(true);
               }}
-              onBlur={formik.handleBlur}
+              onBlur={() => {
+                formik.handleBlur;
+                sendTyping(false);
+              }}
               onKeyDown={handleKeyDown}
               className={`${styles.input} ${hasError ? styles.inputError : ""}`}
               animate={hasError ? { x: [0, -6, 6, -4, 4, 0] } : { x: 0 }}

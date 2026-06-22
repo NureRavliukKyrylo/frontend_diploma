@@ -80,6 +80,9 @@
     "TimeSpendOfferUpdated": "Пропозицію оновлено",
     "TimeSpendOfferChangeAccepted": "Зміну пропозиції прийнято",
     "TimeSpendOfferChangeRejected": "Зміну пропозиції відхилено",
-    "SkillVerified": "Навичку підтверджено"
+    "SkillVerified": "Навичку підтверджено",
+    "InvitationCreated": "Запрошення створено",
+    "InvitationAccepted": "Запрошення прийнято",
+    "InvitationDeclined": "Запрошення відхилено"
   }
 }

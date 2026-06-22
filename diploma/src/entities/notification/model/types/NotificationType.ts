@@ -43,4 +43,7 @@ export type NotificationType =
   | "TimeSpendOfferUpdated"
   | "TimeSpendOfferChangeAccepted"
   | "TimeSpendOfferChangeRejected"
-  | "SkillVerified";
+  | "SkillVerified"
+  | "InvitationCreated"
+  | "InvitationAccepted"
+  | "InvitationDeclined";
