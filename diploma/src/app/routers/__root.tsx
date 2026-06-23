@@ -14,6 +14,7 @@ import { queryClient } from "@shared/api";
 import { categoryKeys } from "@entities/category/model/queries/category-query/categoryQuery";
 import { skillKeys } from "@entities/skill";
 import { badgesKeys } from "@entities/badge";
+import { filtersKeys } from "@shared/api/filters";
 
 export interface RouterContext {
   queryClient: QueryClient;
@@ -38,6 +39,7 @@ function RootComponent() {
         queryClient.invalidateQueries({ queryKey: categoryKeys.all() }),
         queryClient.invalidateQueries({ queryKey: skillKeys.all() }),
         queryClient.invalidateQueries({ queryKey: badgesKeys.all() }),
+        queryClient.invalidateQueries({ queryKey: filtersKeys.all() }),
       ]);
     }
   }, [locale]);

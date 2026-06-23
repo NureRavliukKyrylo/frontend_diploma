@@ -4,10 +4,16 @@ import { useTranslation } from "react-i18next";
 import styles from "./ChatContentWidget.module.scss";
 import { useChatHeaderData } from "../model/useChatHeaderData";
 import { MessageForm } from "@features/chat";
-import type { Message, MessageModeType } from "@entities/chat";
+import {
+  useChatScrollStore,
+  type Message,
+  type MessageModeType,
+} from "@entities/chat";
 import { getFullName } from "@entities/user";
 import { useQuery } from "@tanstack/react-query";
 import { profileQuery } from "@entities/user/profile";
+import { AnimatePresence, motion } from "framer-motion";
+import { NavigationArrow } from "@shared/assets/icons/actions";
 
 interface ChatContentWidgetProps {
   chatId: string;
@@ -36,16 +42,16 @@ export const ChatContentWidget = ({
   const participantsNotUser = chat.participants.filter(
     (participant) => participant.id != user?.id,
   );
-  const initials =
-    chat.name
-      ?.split(" ")
-      .slice(0, 2)
-      .map((part) => part[0])
-      .join("") ?? "nothing";
+  const initials = chat.name?.split(" ").slice(0, 2).join(" ") ?? "nothing";
 
   const isPrivate = chat.relatedEntityType === "private";
   const chipClassName = `${styles.chatTypeChip} ${styles[chat.relatedEntityType]}`;
-  console.log("conten", mode);
+
+  const notAtBottom = useChatScrollStore((s) => s.notAtBottom[chatId] ?? false);
+  const requestScrollToBottom = useChatScrollStore(
+    (s) => s.requestScrollToBottom,
+  );
+
   return (
     <div className={styles.chatContentWrapper}>
       <div className={styles.chatHeader}>
@@ -75,7 +81,28 @@ export const ChatContentWidget = ({
           </div>
         </div>
       </div>
-      <div className={styles.chatBody}>{children}</div>
+      <div className={styles.chatBody}>
+        {children}
+        <AnimatePresence>
+          {notAtBottom && (
+            <motion.button
+              className={styles.scrollToBottom}
+              onClick={() => requestScrollToBottom(chatId)}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.15 }}
+            >
+              <NavigationArrow />
+              {chat.unreadCount > 0 && (
+                <div className={styles.unreadCount}>
+                  {chat.unreadCount >= 100 ? "99+" : chat.unreadCount}
+                </div>
+              )}
+            </motion.button>
+          )}
+        </AnimatePresence>
+      </div>
       <MessageForm
         replyToMessage={
           mode.reply.isActive

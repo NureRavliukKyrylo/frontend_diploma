@@ -16,7 +16,11 @@
     "errorHint": "Try reloading the page or come back later.",
     "noMessages": "No messages yet",
     "typing": "typing...",
-    "noParticipants": "No participants"
+    "noParticipants": "No participants",
+    "empty": {
+      "title": "No messages yet",
+      "subtitle": "Be the first to say something!"
+    }
   },
   "actions": {
     "edit": "Edit",

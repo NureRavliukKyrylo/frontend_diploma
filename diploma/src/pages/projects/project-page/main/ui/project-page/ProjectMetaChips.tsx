@@ -26,7 +26,7 @@ export const ProjectMetaChips = ({
             {formatDateRange(
               project.startAt,
               project.endAt,
-              i18n.language as "en" | "ua",
+              i18n.language as "en" | "uk",
             )}
           </span>
         </span>

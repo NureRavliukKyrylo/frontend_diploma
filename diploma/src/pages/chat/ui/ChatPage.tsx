@@ -30,7 +30,6 @@ export const ChatPage = () => {
     setOpenId,
   } = useChatPage();
   const isMobile = useMediaQuery("(max-width: 850px)");
-  console.log("page", mode);
   const showList = !isMobile || !chatId;
   const showChat = !isMobile || !!chatId;
 

@@ -32,7 +32,9 @@ export const ProjectStats = ({ project }: ProjectStatsProps) => {
           <span className={styles.next}>
             {t("common:level.current", {
               level:
-                project.progress?.level == null ? 1 : project.progress.level + 1,
+                project.progress?.level == null
+                  ? 1
+                  : project.progress.level + 1,
             })}
           </span>
         </div>
@@ -40,8 +42,7 @@ export const ProjectStats = ({ project }: ProjectStatsProps) => {
       <div className={styles.ratingProjectInfo}>
         <h1>{project.rating.value}</h1>
         <p>
-          ({project.rating.totalVotes}{" "}
-          {t("project:rating.votes", { defaultValue: "VOTES" })})
+          ({t("project:rating.votes", { count: project.rating.totalVotes })})
         </p>
       </div>
     </div>

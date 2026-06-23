@@ -13,10 +13,15 @@ interface ChatItemProps {
 
 export const ChatItem = ({ chat, typing, isOnline }: ChatItemProps) => {
   const { t, i18n } = useTranslation(["chat"]);
+  const initials = chat.name?.split(" ").slice(0, 2).join(" ") ?? "nothing";
 
   return (
     <div className={styles.chatWrapper}>
-      <Avatar className={styles.chatAvatar} src={chat.avatarUrl ?? undefined} />
+      <Avatar
+        className={styles.chatAvatar}
+        src={chat.avatarUrl ?? undefined}
+        fallback={initials}
+      />
       {isOnline && <OnlineIcon className={styles.onlineIcon} />}
       <div className={styles.rightContent}>
         <div className={styles.topContent}>

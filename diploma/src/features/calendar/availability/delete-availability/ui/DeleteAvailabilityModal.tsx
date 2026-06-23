@@ -3,54 +3,8 @@ import { DeleteModal } from "@shared/assets/images/actions";
 import styles from "./DeleteAvailabilityModal.module.scss";
 import type { AvailabilitySlot } from "@entities/user/calendar";
 import { useDeleteAvailability } from "../model/useDeleteAvailability";
-import { formatDateToText, formatDayOfWeek } from "@shared/libs/date";
 import { useTranslation } from "react-i18next";
-import type { TFunction } from "i18next";
-import { LOCALE_MAP } from "@shared/config/constants";
-
-const getDayName = (dayOfWeek: number, locale: "en" | "uk"): string => {
-  const date = new Date(0);
-  date.setDate(date.getDate() - date.getDay() + dayOfWeek);
-  return new Intl.DateTimeFormat(LOCALE_MAP[locale], {
-    weekday: "long",
-  }).format(date);
-};
-
-const buildDescription = (
-  slot: AvailabilitySlot,
-  t: TFunction,
-  locale: "en" | "uk",
-): string => {
-  const timeLabel = slot.allDay
-    ? t("calendar:deleteModal.allDay")
-    : `${slot.startTime} – ${slot.endTime}`;
-
-  if (slot.date) {
-    const date = new Date(slot.date);
-    return `${formatDayOfWeek(date, locale)}, ${formatDateToText(date.toISOString(), locale)}, ${timeLabel}`;
-  }
-
-  if (slot.startDate && slot.endDate) {
-    const from = formatDateToText(slot.startDate, locale);
-    const to = formatDateToText(slot.endDate, locale);
-
-    const recurrence =
-      slot.dayOfWeek !== null
-        ? t("calendar:deleteModal.everyWeekDay", {
-            day: getDayName(slot.dayOfWeek, locale),
-          })
-        : t("calendar:deleteModal.everyDay");
-
-    const dateRangeStr = t("calendar:deleteModal.timeRangePattern", {
-      from,
-      to,
-    });
-
-    return `${recurrence}, ${dateRangeStr}, ${timeLabel}`;
-  }
-
-  return timeLabel;
-};
+import { buildDescription } from "../libs/buildDescription";
 
 interface DeleteAvailabilityModalProps {
   slot: AvailabilitySlot;
@@ -63,6 +17,7 @@ export const DeleteAvailabilityModal = ({
   isOpen,
   onClose,
 }: DeleteAvailabilityModalProps) => {
+  console.log(slot);
   const { t, i18n } = useTranslation(["calendar", "common"]);
   const { handleDelete, isLoading, errorMessage } =
     useDeleteAvailability(onClose);

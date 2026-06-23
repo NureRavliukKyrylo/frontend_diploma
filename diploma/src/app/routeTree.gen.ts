@@ -166,7 +166,9 @@ const MasterLayoutReportsIndexRoute =
     id: '/reports/',
     path: '/reports/',
     getParentRoute: () => MasterLayoutRoute,
-  } as any)
+  } as any).lazy(() =>
+    import('./routers/_masterLayout/reports/index.lazy').then((d) => d.Route),
+  )
 const MasterLayoutProfileIndexRoute =
   MasterLayoutProfileIndexRouteImport.update({
     id: '/',
@@ -206,7 +208,9 @@ const MasterLayoutChatIndexRoute = MasterLayoutChatIndexRouteImport.update({
   id: '/chat/',
   path: '/chat/',
   getParentRoute: () => MasterLayoutRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routers/_masterLayout/chat/index.lazy').then((d) => d.Route),
+)
 const MasterLayoutCategoriesIndexRoute =
   MasterLayoutCategoriesIndexRouteImport.update({
     id: '/categories/',
@@ -222,7 +226,9 @@ const MasterLayoutCalendarIndexRoute =
     id: '/calendar/',
     path: '/calendar/',
     getParentRoute: () => MasterLayoutRoute,
-  } as any)
+  } as any).lazy(() =>
+    import('./routers/_masterLayout/calendar/index.lazy').then((d) => d.Route),
+  )
 const MasterLayoutBookmarksIndexRoute =
   MasterLayoutBookmarksIndexRouteImport.update({
     id: '/bookmarks/',
@@ -330,7 +336,11 @@ const MasterLayoutOffersIdIndexRoute =
     id: '/offers/$id/',
     path: '/offers/$id/',
     getParentRoute: () => MasterLayoutRoute,
-  } as any)
+  } as any).lazy(() =>
+    import('./routers/_masterLayout/offers/$id/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 const MasterLayoutEventsIdIndexRoute =
   MasterLayoutEventsIdIndexRouteImport.update({
     id: '/events/$id/',
@@ -432,7 +442,11 @@ const MasterLayoutOffersMyIdIndexRoute =
     id: '/offers/my/$id/',
     path: '/offers/my/$id/',
     getParentRoute: () => MasterLayoutRoute,
-  } as any)
+  } as any).lazy(() =>
+    import('./routers/_masterLayout/offers/my/$id/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 const MasterLayoutEventsMyIdIndexRoute =
   MasterLayoutEventsMyIdIndexRouteImport.update({
     id: '/events/my/$id/',

@@ -1,0 +1,43 @@
+@use "@shared/assets/styles" as *;
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+
+  h2 {
+    @include font-base(40px, 900);
+    line-height: 120%;
+    color: #1a1a2e;
+    text-align: center;
+
+    @include respond-to(laptop) {
+      font-size: 34px;
+    }
+    @include respond-to(tablet) {
+      font-size: 28px;
+    }
+    @include respond-to(mobile) {
+      font-size: 24px;
+    }
+  }
+
+  p {
+    @include font-base(30px, 500);
+    color: #6b7280;
+    text-align: center;
+
+    @include respond-to(laptop) {
+      font-size: 26px;
+    }
+    @include respond-to(tablet) {
+      font-size: 20px;
+    }
+    @include respond-to(mobile) {
+      font-size: 16px;
+    }
+  }
+}

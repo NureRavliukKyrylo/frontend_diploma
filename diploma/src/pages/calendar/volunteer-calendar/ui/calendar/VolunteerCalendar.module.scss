@@ -1,0 +1,171 @@
+@use "@shared/assets/styles" as *;
+
+.volunteerCalendarWrapper {
+  width: 85%;
+
+  @include respond-to(null, 1500px) {
+    width: 92%;
+  }
+  @include respond-to(null, 1200px) {
+    width: 100%;
+  }
+  @include respond-to(mobile) {
+    width: 100%;
+  }
+}
+
+.eventCard {
+  cursor: pointer;
+  width: 100%;
+}
+
+.wrapper {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include respond-to(null, 1500px) {
+    width: 92%;
+  }
+  @include respond-to(null, 1200px) {
+    width: 100%;
+  }
+  @include respond-to(mobile) {
+    width: 100%;
+  }
+}
+
+.exportButton {
+  width: 180px;
+  height: 38px;
+  border-radius: 20px;
+}
+
+.calendarWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  @include respond-to(mobile) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.headerStart {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.headerEnd {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  @include respond-to(tablet) {
+    gap: 16px;
+  }
+}
+
+.title {
+  width: 200px;
+  height: 36px;
+  border-radius: 8px;
+
+  @include respond-to(tablet) {
+    width: 140px;
+    height: 28px;
+  }
+  @include respond-to(mobile) {
+    width: 110px;
+    height: 22px;
+  }
+}
+
+.todayButton {
+  width: 90px;
+  height: 34px;
+  border-radius: 20px;
+
+  @include respond-to(mobile) {
+    width: 70px;
+    height: 28px;
+  }
+}
+
+.toggle {
+  width: 280px;
+  height: 46px;
+  border-radius: 20px;
+
+  @include respond-to(tablet) {
+    width: 220px;
+    height: 40px;
+  }
+  @include respond-to(mobile) {
+    width: 100%;
+    height: 36px;
+  }
+}
+
+.navButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.navButton {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+
+  @include respond-to(laptop) {
+    width: 46px;
+    height: 46px;
+  }
+  @include respond-to(tablet) {
+    width: 40px;
+    height: 40px;
+  }
+  @include respond-to(mobile) {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.weekRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.weekDay {
+  height: 32px;
+  border-radius: 20px;
+}
+
+.cell {
+  height: 120px;
+  border-radius: 20px;
+
+  @include respond-to(tablet) {
+    height: 90px;
+  }
+  @include respond-to(mobile) {
+    height: 60px;
+  }
+}

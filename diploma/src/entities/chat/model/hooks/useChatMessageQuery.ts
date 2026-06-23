@@ -5,7 +5,6 @@ import {
 import { messageQuery } from "../queries/messageQuery";
 import type { QueryResult } from "@shared/config/types";
 import type { Message } from "../types/Message";
-import { queryClient } from "@shared/api";
 
 export const useChatMessagesQuery = (chatId: string) => {
   const hook = (): QueryResult<Message> => {
@@ -21,22 +20,10 @@ export const useChatMessagesQuery = (chatId: string) => {
     const messages = result.data ?? [];
 
     if (messages.length < 15 && result.hasPreviousPage) {
-      if (!result.isFetchingPreviousPage) {
-        result.fetchPreviousPage();
-      }
       throw new Promise<void>((resolve) => {
-        const unsub = queryClient.getQueryCache().subscribe((event) => {
-          if (
-            event.type === "updated" &&
-            queryClient
-              .getQueryCache()
-              .find({ queryKey: queryOptions.queryKey })?.queryHash ===
-              event.query.queryHash
-          ) {
-            unsub();
-            resolve();
-          }
-        });
+        if (!result.isFetchingPreviousPage) {
+          result.fetchPreviousPage().then(() => resolve());
+        }
       });
     }
 

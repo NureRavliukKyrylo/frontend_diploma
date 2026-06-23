@@ -27,6 +27,7 @@ export const ChatMessagesSection = ({
 
   return (
     <Suspense
+      key={chatId}
       fallback={
         <MessagesListSkeleton className={styles.wrapperMessagesSkeleton} />
       }

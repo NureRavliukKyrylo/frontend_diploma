@@ -1,12 +1,12 @@
 import styles from "./VolunteerCalendar.module.scss";
 import { BaseCalendar, CalendarEventItem } from "@shared/ui/calendar";
-import { useVolunteerCalendarPage } from "../model/useVolunteerCalendarPage";
+import { useVolunteerCalendarPage } from "../../model/useVolunteerCalendarPage";
 import { CalendarEventInfo } from "@widgets/calendar";
 import { AnimatePresence } from "framer-motion";
-import { useAvailabilityContextMenu } from "../model/useAvailabiltyContextMenu";
-import { AvailabilityContextMenu } from "./AvailabilityContextMenu";
+import { useAvailabilityContextMenu } from "../../model/useAvailabiltyContextMenu";
+import { AvailabilityContextMenu } from "../context-menu/AvailabilityContextMenu";
 import { useState } from "react";
-import { AvailabilityFormPopover } from "./AvailabilityFormPopover";
+import { AvailabilityFormPopover } from "../context-menu/AvailabilityFormPopover";
 import { useSearch } from "@tanstack/react-router";
 import {
   calendarQuery,
