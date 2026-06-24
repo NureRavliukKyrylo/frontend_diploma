@@ -67,12 +67,6 @@ export const useReadMessages = (chatId: string) => {
         };
       },
     );
-    console.log(
-      queryClient.getQueriesData({
-        queryKey: [...chatKeys.all(), "list"],
-        exact: false,
-      }),
-    );
   };
 
   const throttledRequest = useMemo(

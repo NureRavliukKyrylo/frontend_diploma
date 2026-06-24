@@ -19,6 +19,7 @@
       "detailsMax": "Details must be at most 200 characters"
     },
     "statuses": {
+      "opened": "Open",
       "open": "Open",
       "resolved": "Resolved",
       "rejected": "Rejected"
@@ -69,6 +70,9 @@
   "hideContent": {
     "button": "Hide Content",
     "title": "Hide Content",
+    "labels": {
+      "reason": "Reason"
+    },
     "actions": {
       "cancel": "Cancel",
       "submit": "Hide Content"
@@ -175,5 +179,13 @@
     "actions": {
       "clear": "Clear Filters"
     }
+  },
+  "reportCase": {
+    "title": "Report Case",
+    "reporter": "Reporter",
+    "contentAuthor": "Content Author",
+    "reportedContent": "Reported content",
+    "details": "Details",
+    "goToActivity": "Go to Activity"
   }
 }

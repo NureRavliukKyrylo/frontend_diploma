@@ -4,13 +4,15 @@ import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { hideContent, type HideContentDto } from "../api/hideContentApi";
 import { getHideContentSchema } from "../libs/hideContentSchema";
-import { ReportReasonType } from "@entities/report/model";
-import type { EntityType } from "@shared/config/types";
+import {
+  ModerationSubjectType,
+  ReportReasonType,
+} from "@entities/report/model";
 import { useTranslation } from "react-i18next";
 
 interface UseHideContentProps {
   caseId: string;
-  targetEntityType: EntityType;
+  targetEntityType: keyof typeof ModerationSubjectType;
   targetEntityId: string;
   onSuccess: () => void;
 }
@@ -45,7 +47,7 @@ export const useHideContent = ({
   });
 
   const formik = useFormik<{ reason: ReportReasonType }>({
-    initialValues: { reason: ReportReasonType.Spam },
+    initialValues: { reason: ReportReasonType.spam },
     validationSchema: getHideContentSchema(t),
     onSubmit: (values) => {
       mutation.mutate({

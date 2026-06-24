@@ -1,9 +1,12 @@
 import { apiClient } from "@shared/api";
-import type { ReportReasonType } from "@entities/report/model";
+import type {
+  ModerationSubjectType,
+  ReportReasonType,
+} from "@entities/report/model";
 
 export type BlockUserDto = {
   targetUserId: string;
-  entityType: string;
+  entityType: keyof typeof ModerationSubjectType;
   entityId: string;
   reason: ReportReasonType;
 };

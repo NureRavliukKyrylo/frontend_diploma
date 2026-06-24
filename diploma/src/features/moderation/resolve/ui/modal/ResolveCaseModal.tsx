@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 
 interface ResolveCaseModalProps {
   isOpen: boolean;
+  reportId: string;
   onClose: () => void;
   caseId: string;
   rejected: boolean;
@@ -20,6 +21,7 @@ export const ResolveCaseModal = ({
   onClose,
   caseId,
   rejected,
+  reportId,
   onChangeDecision,
 }: ResolveCaseModalProps) => {
   const { t } = useTranslation(["moderation"]);
@@ -33,6 +35,7 @@ export const ResolveCaseModal = ({
     caseId,
     rejected,
     onSuccess: handleClose,
+    reportId,
   });
 
   return (

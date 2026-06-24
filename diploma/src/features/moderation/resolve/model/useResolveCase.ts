@@ -11,11 +11,13 @@ import { useTranslation } from "react-i18next";
 interface UseResolveCaseProps {
   caseId: string;
   rejected: boolean;
+  reportId: string;
   onSuccess: () => void;
 }
 
 export const useResolveCase = ({
   caseId,
+  reportId,
   rejected,
   onSuccess,
 }: UseResolveCaseProps) => {
@@ -23,7 +25,7 @@ export const useResolveCase = ({
 
   const mutation = useMutation({
     mutationFn: (data: ResolveCaseDto) => resolveCase(caseId, data),
-    onSuccess: () => {
+    onSuccess: async () => {
       addToast({
         title: rejected
           ? t("moderation:resolveCase.notifications.successTitleReject")
@@ -31,9 +33,12 @@ export const useResolveCase = ({
         description: rejected
           ? t("moderation:resolveCase.notifications.successDescriptionReject")
           : t("moderation:resolveCase.notifications.successDescriptionResolve"),
-        color: rejected ? "danger" : "success",
+        color: "success",
       });
-      queryClient.invalidateQueries({ queryKey: reportKeys.list() });
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: reportKeys.list() }),
+        queryClient.invalidateQueries({ queryKey: reportKeys.id(reportId) }),
+      ]);
       onSuccess();
     },
     onError: (error: unknown) => {

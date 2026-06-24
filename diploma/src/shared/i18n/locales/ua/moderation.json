@@ -19,6 +19,7 @@
       "detailsMax": "Опис повинен містити не більше 200 символів"
     },
     "statuses": {
+      "opened": "Відкрито",
       "open": "Відкрито",
       "resolved": "Вирішено",
       "rejected": "Відхилено"
@@ -72,6 +73,9 @@
     "actions": {
       "cancel": "Скасувати",
       "submit": "Приховати вміст"
+    },
+    "labels": {
+      "reason": "Причина"
     },
     "validation": {
       "reasonRequired": "Будь ласка, оберіть причину"
@@ -175,5 +179,13 @@
     "actions": {
       "clear": "Очистити фільтри"
     }
+  },
+  "reportCase": {
+    "title": "Скарга",
+    "reporter": "Скаржник",
+    "contentAuthor": "Автор контенту",
+    "reportedContent": "Повідомлений вміст",
+    "details": "Деталі",
+    "goToActivity": "Перейти до активності"
   }
 }

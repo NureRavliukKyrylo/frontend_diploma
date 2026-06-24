@@ -7,9 +7,13 @@ import { useTranslation } from "react-i18next";
 
 interface ResolveCaseButtonProps {
   caseId: string;
+  reportId: string;
 }
 
-export const ResolveCaseButton = ({ caseId }: ResolveCaseButtonProps) => {
+export const ResolveCaseButton = ({
+  caseId,
+  reportId,
+}: ResolveCaseButtonProps) => {
   const { t } = useTranslation(["moderation"]);
   const [isOpen, setIsOpen] = useState(false);
   const [rejected, setRejected] = useState(false);
@@ -35,6 +39,7 @@ export const ResolveCaseButton = ({ caseId }: ResolveCaseButtonProps) => {
         caseId={caseId}
         rejected={rejected}
         onChangeDecision={setRejected}
+        reportId={reportId}
       />
     </>
   );

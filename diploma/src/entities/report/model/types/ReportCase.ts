@@ -16,6 +16,16 @@ export type ReportCase = {
     type: keyof typeof ModerationSubjectType;
     content: string | null;
     title: string;
+    author: {
+      id: string;
+      firstName: string;
+      lastName: string;
+      avatarUrl: string;
+    } | null;
+  };
+  case: {
+    id: string;
+    status: "opened" | "resolved" | "rejected";
   };
   createdAt: string;
   reason: keyof typeof ReportReasonType;

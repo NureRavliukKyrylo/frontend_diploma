@@ -32,7 +32,6 @@ export function useMessageEvents(chatId: string, queryKey: QueryKey) {
     "chat.message.created",
     useCallback(
       (payload: MessageCreatedPayload) => {
-        if (payload.chatId !== chatId) return;
         appendMessage(queryKey, payload.message);
       },
       [chatId],

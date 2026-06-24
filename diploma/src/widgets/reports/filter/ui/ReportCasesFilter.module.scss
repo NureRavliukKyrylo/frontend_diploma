@@ -102,9 +102,21 @@
   align-self: flex-end;
   box-shadow: none;
   padding: unset;
+  @include respond-to(laptop) {
+    font-size: 15px;
+  }
+  @include respond-to(tablet) {
+    font-size: 14px;
+  }
+  @include respond-to(mobile) {
+    font-size: 13px;
+  }
 }
 .itemsFilter {
   column-gap: 8px;
+  @include respond-to(mobile) {
+    row-gap: 10px;
+  }
 }
 .buttonClear {
   .animationButtonBlock {

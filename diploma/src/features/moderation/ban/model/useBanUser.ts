@@ -44,7 +44,7 @@ export const useBanUser = ({
     reason: ReportReasonType;
     expiresAt: string | undefined;
   }>({
-    initialValues: { reason: ReportReasonType.Spam, expiresAt: undefined },
+    initialValues: { reason: ReportReasonType.spam, expiresAt: undefined },
     validationSchema: getBanUserSchema(t),
     onSubmit: (values) => {
       mutation.mutate({

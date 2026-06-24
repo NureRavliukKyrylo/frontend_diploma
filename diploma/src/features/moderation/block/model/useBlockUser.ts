@@ -4,13 +4,16 @@ import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { blockUser, type BlockUserDto } from "../api/blockUserApi";
 import { getBlockUserSchema } from "../libs/blockUserSchema";
-import { ReportReasonType } from "@entities/report/model";
+import {
+  ModerationSubjectType,
+  ReportReasonType,
+} from "@entities/report/model";
 import { useTranslation } from "react-i18next";
 
 interface UseBlockUserProps {
   caseId: string;
   targetUserId: string;
-  entityType: string;
+  entityType: keyof typeof ModerationSubjectType;
   entityId: string;
   onSuccess: () => void;
 }
@@ -44,7 +47,7 @@ export const useBlockUser = ({
   });
 
   const formik = useFormik<{ reason: ReportReasonType }>({
-    initialValues: { reason: ReportReasonType.Spam },
+    initialValues: { reason: ReportReasonType.spam },
     validationSchema: getBlockUserSchema(t),
     onSubmit: (values) => {
       mutation.mutate({

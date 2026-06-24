@@ -4,11 +4,12 @@ import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./BlockUserButton.module.scss";
 import { BlockUserModal } from "../modal/BlockUserModal";
 import { useTranslation } from "react-i18next";
+import type { ModerationSubjectType } from "@entities/report";
 
 interface BlockUserButtonProps {
   caseId: string;
   targetUserId: string;
-  entityType: string;
+  entityType: keyof typeof ModerationSubjectType;
   entityId: string;
 }
 

@@ -2,7 +2,11 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { AnimatePresence, motion } from "framer-motion";
-import { ReportCasesFilter, ReportCaseWidget } from "@widgets/reports";
+import {
+  ReportCasesFilter,
+  ReportCaseWidget,
+  ReportCaseWidgetSkeleton,
+} from "@widgets/reports";
 import { ReportsListWidget } from "@widgets/reports";
 import { ReportCaseItem, ReportCaseItemSkeleton } from "@entities/report";
 import { reportQuery } from "@entities/report";
@@ -160,7 +164,9 @@ export const ReportsPage = () => {
           maxWidth="900px"
           onClose={handleReportClose}
         >
-          <ReportCaseWidget caseId={reportId} />
+          <Suspense fallback={<ReportCaseWidgetSkeleton />}>
+            <ReportCaseWidget caseId={reportId} />
+          </Suspense>
         </BaseModal>
       )}
     </div>

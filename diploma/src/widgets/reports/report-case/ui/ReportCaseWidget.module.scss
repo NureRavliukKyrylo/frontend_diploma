@@ -20,9 +20,19 @@
   background-clip: text;
   text-transform: uppercase;
   line-height: 110%;
-  padding-bottom: 20px;
-  position: relative;
 
+  @include respond-to(mobile) {
+    font-size: 22px;
+  }
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: relative;
+  padding-bottom: 20px;
   &::after {
     content: "";
     position: absolute;
@@ -39,12 +49,35 @@
     );
     opacity: 0.8;
   }
-
-  @include respond-to(mobile) {
-    font-size: 22px;
-  }
 }
 
+.statusPill {
+  @include font-base(12px, 700);
+  padding: 4px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+
+  &.opened {
+    background: #fff8e1;
+    color: #b45309;
+    border: 1px solid #fcd34d;
+  }
+
+  &.resolved {
+    background: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #86efac;
+  }
+
+  &.rejected {
+    background: #fff0f0;
+    color: #8c0000;
+    border: 1px solid #e0a0a0;
+  }
+}
 .reporterWrapper {
   display: flex;
   flex-direction: column;
@@ -105,19 +138,29 @@
   &:first-child {
     background: #f5f5f5;
     color: #5f6368;
-    border: 1.5px solid #e0e0e0;
+    border: 1px solid #e0e0e0;
   }
 
   &:last-child {
     background: #fff0f0;
     color: #8c0000;
-    border: 1.5px solid #e0a0a0;
+    border: 1px solid #e0a0a0;
   }
 
   @include respond-to(mobile) {
     font-size: 12px;
     padding: 2px 8px;
   }
+}
+
+.authorWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f9f9f9;
+  border: 1px solid #ebebeb;
 }
 
 .subjectTitle {
@@ -161,12 +204,19 @@
 
 .actions {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  padding-top: 4px;
-
+  flex-direction: column;
+  gap: 10px;
   & > * {
     flex: 1;
+  }
+  .actionMainButtons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 4px;
+    & > * {
+      flex: 1;
+    }
   }
 }
 
@@ -194,4 +244,97 @@
       0 4px 16px rgba(0, 0, 0, 0.08);
     border-color: #c8c8c8;
   }
+}
+
+.skeletonTitle {
+  width: 200px;
+  height: 30px;
+  border-radius: 6px;
+
+  @include respond-to(mobile) {
+    width: 140px;
+    height: 24px;
+  }
+}
+
+.skeletonStatusPill {
+  width: 80px;
+  height: 24px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+.skeletonAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeletonReporterName {
+  width: 130px;
+  height: 15px;
+  border-radius: 6px;
+
+  @include respond-to(mobile) {
+    width: 100px;
+  }
+}
+
+.skeletonReporterLabel {
+  width: 70px;
+  height: 12px;
+  border-radius: 6px;
+}
+
+.skeletonDetailsText {
+  width: 100%;
+  height: 14px;
+  border-radius: 6px;
+}
+
+.skeletonDetailsTextShort {
+  width: 60%;
+  height: 14px;
+  border-radius: 6px;
+}
+
+.skeletonPill {
+  width: 90px;
+  height: 24px;
+  border-radius: 20px;
+
+  @include respond-to(mobile) {
+    width: 72px;
+    height: 22px;
+  }
+}
+
+.skeletonSubjectTitle {
+  width: 55%;
+  height: 15px;
+  border-radius: 6px;
+}
+
+.skeletonEntityLabel {
+  width: 120px;
+  height: 11px;
+  border-radius: 4px;
+}
+
+.skeletonEntityText {
+  width: 100%;
+  height: 14px;
+  border-radius: 6px;
+}
+
+.skeletonEntityTextShort {
+  width: 70%;
+  height: 14px;
+  border-radius: 6px;
+}
+
+.skeletonButton {
+  height: 44px;
+  border-radius: 50px;
 }

@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "./HideContentButton.module.scss";
 import { HideContentModal } from "../modal/HideContentModal";
-import type { EntityType } from "@shared/config/types";
 import { useTranslation } from "react-i18next";
+import type { ModerationSubjectType } from "@entities/report";
 
 interface HideContentButtonProps {
   caseId: string;
-  targetEntityType: EntityType;
+  targetEntityType: keyof typeof ModerationSubjectType;
   targetEntityId: string;
 }
 

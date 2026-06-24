@@ -1,9 +1,11 @@
 import { apiClient } from "@shared/api";
-import type { ReportReasonType } from "@entities/report/model";
-import type { EntityType } from "@shared/config/types";
+import type {
+  ModerationSubjectType,
+  ReportReasonType,
+} from "@entities/report/model";
 
 export type HideContentDto = {
-  targetEntityType: EntityType | "offer";
+  targetEntityType: keyof typeof ModerationSubjectType;
   targetEntityId: string;
   reason: ReportReasonType;
 };

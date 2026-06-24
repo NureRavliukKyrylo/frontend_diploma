@@ -2,16 +2,18 @@ import { BaseModal } from "@shared/ui/modals";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useHideContent } from "../../model/useHideContent";
 import styles from "./HideContentModal.module.scss";
-import { getReportReasonOptions } from "@entities/report";
+import {
+  getReportReasonOptions,
+  ModerationSubjectType,
+} from "@entities/report";
 import { SortDropDown } from "@shared/ui/drop-down";
-import type { EntityType } from "@shared/config/types";
 import { useTranslation } from "react-i18next";
 
 interface HideContentModalProps {
   isOpen: boolean;
   onClose: () => void;
   caseId: string;
-  targetEntityType: EntityType;
+  targetEntityType: keyof typeof ModerationSubjectType;
   targetEntityId: string;
 }
 
