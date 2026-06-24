@@ -29,28 +29,28 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
       <h2 className={styles.title}>Report Case</h2>
 
       <div className={styles.reporterWrapper}>
-        <Avatar
-          src={reportCase.reporter.avatarUrl}
-          fallback={reporterFullName}
-          className={styles.avatar}
-        />
-        <div className={styles.reporterInfo}>
-          <span className={styles.reporterName}>{reporterFullName}</span>
-          <span className={styles.reporterLabel}>Reporter</span>
+        <div className={styles.wrapperReporterInfo}>
+          <Avatar
+            src={reportCase.reporter.avatarUrl}
+            fallback={reporterFullName}
+            className={styles.avatar}
+          />
+          <div className={styles.reporterInfo}>
+            <span className={styles.reporterName}>{reporterFullName}</span>
+            <span className={styles.reporterLabel}>Reporter</span>
+          </div>
         </div>
-      </div>
-
-      <div className={styles.detailsBlock}>
+        <p className={styles.detailsText}>Details: {reportCase.details}</p>
         <div className={styles.pills}>
           <span className={styles.pill}>{reportCase.subjectType}</span>
           <span className={styles.pill}>{reportCase.reason}</span>
         </div>
+      </div>
 
+      <div className={styles.detailsBlock}>
         {reportCase.subject.title && (
           <p className={styles.subjectTitle}>{reportCase.subject.title}</p>
         )}
-
-        <p className={styles.detailsText}>{reportCase.details}</p>
 
         {reportCase.subject.content && (
           <div className={styles.entityContent}>

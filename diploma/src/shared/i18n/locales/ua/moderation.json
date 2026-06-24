@@ -3,7 +3,8 @@
     "title": "Поскаржитися на {{subject}}",
     "labels": {
       "reason": "Причина",
-      "details": "Деталі"
+      "details": "Деталі",
+      "noDetails": "Без деталей"
     },
     "placeholders": {
       "details": "Опишіть проблему..."

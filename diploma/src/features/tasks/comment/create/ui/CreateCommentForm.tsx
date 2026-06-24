@@ -1,6 +1,5 @@
 import { Avatar } from "@shared/ui";
 import styles from "./CreateCommentForm.module.scss";
-import { DefaultAvatar } from "@shared/assets/images/user";
 import { useCreateComment } from "../model/useCreateComment";
 import { SendMessageIcon } from "@shared/assets/icons/actions";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
@@ -29,7 +28,7 @@ export const CreateCommentForm = ({
       <Avatar
         className={styles.avatarAuthor}
         fallback={authorName}
-        src={avatarUrl ?? DefaultAvatar}
+        src={avatarUrl}
       />
 
       <div className={styles.sendMessageWrapper}>

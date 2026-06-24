@@ -11,6 +11,7 @@ import {
   createTabCleanerMiddleware,
 } from "@shared/libs/search-params";
 import { createFileRoute } from "@tanstack/react-router";
+import { activityQuery } from "@widgets/activities";
 
 export const Route = createFileRoute("/_masterLayout/activities/")({
   validateSearch: listActivitiesSearchSchema,
@@ -33,7 +34,7 @@ export const Route = createFileRoute("/_masterLayout/activities/")({
     const { tab, taskMode, taskId, ...params } = config.schema.parse(
       location.search,
     ) as any;
-
+    await queryClient.ensureQueryData(activityQuery.count());
     await queryClient.ensureQueryData(config.query(params) as any);
     config.prefetch(queryClient);
   },

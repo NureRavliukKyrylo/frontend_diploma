@@ -1,3 +1,4 @@
+import type { Message } from "@entities/chat";
 import { apiClient } from "@shared/api";
 
 export interface SendMessageDto {
@@ -5,7 +6,11 @@ export interface SendMessageDto {
   replyToMessageId: string;
   mentionedUserIds: string[];
 }
-export const sendMessage = async (chatId: string, data: SendMessageDto) => {
+
+export const sendMessage = async (
+  chatId: string,
+  data: SendMessageDto,
+): Promise<Message> => {
   const result = await apiClient.post(`Chats/${chatId}/messages`, data);
-  return result.data;
+  return result.data.data;
 };

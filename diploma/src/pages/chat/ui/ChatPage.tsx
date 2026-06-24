@@ -2,6 +2,7 @@ import {
   ChatItem,
   chatQuery,
   relatedEntityTypeChatValues,
+  useChatChangedEvent,
 } from "@entities/chat";
 import { getFullName } from "@entities/user";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
@@ -32,6 +33,7 @@ export const ChatPage = () => {
   const isMobile = useMediaQuery("(max-width: 850px)");
   const showList = !isMobile || !chatId;
   const showChat = !isMobile || !!chatId;
+  useChatChangedEvent();
 
   return (
     <div className={styles.chatPageWrapper}>

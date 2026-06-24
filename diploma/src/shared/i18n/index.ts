@@ -37,15 +37,11 @@ import enChat from "./locales/en/chat.json";
 import uaChat from "./locales/ua/chat.json";
 import { useLocaleStore } from "@shared/config/stores";
 
-const savedLocale =
-  useLocaleStore.getState().locale ??
-  (["uk", "ru"].some((lang) => navigator.language.startsWith(lang))
-    ? "uk"
-    : "en");
+const savedLocale = useLocaleStore.getState().locale;
 
 i18n.use(initReactI18next).init({
   fallbackLng: "en",
-  lng: savedLocale,
+  lng: savedLocale!,
   resources: {
     en: {
       common: enCommon,

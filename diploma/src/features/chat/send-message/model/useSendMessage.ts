@@ -16,8 +16,8 @@ export const useSendMessage = (chatId: string, onSuccess?: () => void) => {
   const mutation = useMutation({
     mutationFn: (data: SendMessageDto) => sendMessage(chatId, data),
     onSuccess: (newMessage: Message) => {
-      console.log(newMessage);
       useChatScrollStore.getState().requestScrollToBottom(chatId);
+      appendMessage(queryKey, newMessage);
       onSuccess?.();
     },
     onError: (error: unknown) => {

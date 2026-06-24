@@ -21,4 +21,5 @@ export type ReportCase = {
   reason: keyof typeof ReportReasonType;
   details: string;
   resolvedAt: string;
+  reportId: string;
 };

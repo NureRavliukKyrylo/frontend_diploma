@@ -15,6 +15,7 @@ import { categoryKeys } from "@entities/category/model/queries/category-query/ca
 import { skillKeys } from "@entities/skill";
 import { badgesKeys } from "@entities/badge";
 import { filtersKeys } from "@shared/api/filters";
+import { useSignalRSend } from "@shared/libs/hooks";
 
 export interface RouterContext {
   queryClient: QueryClient;
@@ -28,11 +29,26 @@ function RootComponent() {
   const connect = useSignalRStore((s) => s.connect);
   const { i18n } = useTranslation();
   const locale = useLocaleStore((s) => s.locale);
+  const setLocale = useLocaleStore((s) => s.setLocale);
   const disconnectAll = useSignalRStore((s) => s.disconnectAll);
+  const send = useSignalRSend("notifications");
+  const connection = useSignalRStore(
+    (s) => s.hubs["notifications"].connection?.state,
+  );
   useNotificationSignalR();
 
   useEffect(() => {
-    if (i18n.language !== locale && locale) {
+    if (!locale) {
+      const detected = ["uk", "ru"].some((lang) =>
+        navigator.language.startsWith(lang),
+      )
+        ? "uk"
+        : "en";
+      setLocale(detected);
+      return;
+    }
+
+    if (i18n.language !== locale) {
       i18n.changeLanguage(locale);
       Promise.all([
         queryClient.invalidateQueries({ queryKey: notificationKeys.all() }),
@@ -42,6 +58,7 @@ function RootComponent() {
         queryClient.invalidateQueries({ queryKey: filtersKeys.all() }),
       ]);
     }
+    send("UpdateLanguage", locale);
   }, [locale]);
 
   useEffect(() => {
@@ -52,6 +69,11 @@ function RootComponent() {
     connect("notifications");
     connect("chats");
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    if (connection !== "Connected" || !locale) return;
+    send("UpdateLanguage", locale);
+  }, [connection]);
 
   return (
     <>

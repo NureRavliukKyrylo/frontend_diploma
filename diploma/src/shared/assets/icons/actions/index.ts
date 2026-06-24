@@ -34,3 +34,4 @@ export { default as RequestIcon } from "./request.svg?react";
 export { default as ShareVariant } from "./share-variant.png";
 export { default as CompanyIcon } from "./free-icon-company-5355565.png";
 export { default as DisputeIcon } from "./dispute.svg?react";
+export { default as ExportIcon } from "./export.svg?react";

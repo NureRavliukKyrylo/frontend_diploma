@@ -12,4 +12,5 @@ export type Notification = {
     requestId?: string;
     bookingId: string;
   };
+  readAt: string | null;
 };

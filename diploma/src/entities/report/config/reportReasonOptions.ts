@@ -3,29 +3,29 @@ import { ReportReasonType } from "../model/types/ReportReason";
 import type { TFunction } from "i18next";
 
 const reportReasonKeys: Record<ReportReasonType, string> = {
-  [ReportReasonType.Spam]: "Spam",
-  [ReportReasonType.Harassment]: "Harassment",
-  [ReportReasonType.HateSpeech]: "HateSpeech",
-  [ReportReasonType.Misinformation]: "Misinformation",
-  [ReportReasonType.InappropriateContent]: "InappropriateContent",
-  [ReportReasonType.Violence]: "Violence",
-  [ReportReasonType.Copyright]: "Copyright",
-  [ReportReasonType.Fraud]: "Fraud",
-  [ReportReasonType.PrivacyViolation]: "PrivacyViolation",
-  [ReportReasonType.Other]: "Other",
+  [ReportReasonType.spam]: "spam",
+  [ReportReasonType.harassment]: "harassment",
+  [ReportReasonType.hateSpeech]: "hateSpeech",
+  [ReportReasonType.misinformation]: "misinformation",
+  [ReportReasonType.inappropriateContent]: "inappropriateContent",
+  [ReportReasonType.violence]: "violence",
+  [ReportReasonType.copyright]: "copyright",
+  [ReportReasonType.fraud]: "fraud",
+  [ReportReasonType.privacyViolation]: "privacyViolation",
+  [ReportReasonType.other]: "other",
 };
 
 export const reportReasons: ReportReasonType[] = [
-  ReportReasonType.Spam,
-  ReportReasonType.Harassment,
-  ReportReasonType.HateSpeech,
-  ReportReasonType.Misinformation,
-  ReportReasonType.InappropriateContent,
-  ReportReasonType.Violence,
-  ReportReasonType.Copyright,
-  ReportReasonType.Fraud,
-  ReportReasonType.PrivacyViolation,
-  ReportReasonType.Other,
+  ReportReasonType.spam,
+  ReportReasonType.harassment,
+  ReportReasonType.hateSpeech,
+  ReportReasonType.misinformation,
+  ReportReasonType.inappropriateContent,
+  ReportReasonType.violence,
+  ReportReasonType.copyright,
+  ReportReasonType.fraud,
+  ReportReasonType.privacyViolation,
+  ReportReasonType.other,
 ];
 
 export const getReportReasonOptions = (

@@ -5,6 +5,8 @@ import { Toggle } from "@shared/ui";
 import type { ListActivitiesMode } from "@shared/config/types";
 import { useTranslation } from "react-i18next";
 import { getListActivitiesTabs } from "@shared/config/constants";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { activityQuery } from "../model/activitiesQuery";
 
 interface ListActivitiesHeaderProps {
   activeTab: ListActivitiesMode;
@@ -16,6 +18,7 @@ export const ListActivitiesHeader = ({
   onTabChange,
 }: ListActivitiesHeaderProps) => {
   const { t } = useTranslation("activities");
+  const { data: count } = useSuspenseQuery(activityQuery.count());
   const tabs = getListActivitiesTabs(t);
 
   return (
@@ -24,7 +27,7 @@ export const ListActivitiesHeader = ({
         <div className={styles.textActivitiesInfotamtion}>
           <div className={styles.textActivities}>
             <h1>{t("header.title")}</h1>
-            <h2>{t("header.count", { count: 432 })}</h2>
+            <h2>{t("header.count", { count: count.total })}</h2>
           </div>
           <div className={styles.activitiesDescription}>
             <p>

@@ -4,6 +4,7 @@ import throttle from "lodash/throttle";
 
 export function useTypingMessage(chatId: string) {
   const send = useSignalRSend("chats");
+  const stopTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const setTyping = useRef(
     throttle(
@@ -16,7 +17,18 @@ export function useTypingMessage(chatId: string) {
   ).current;
 
   return useCallback(
-    (isTyping: boolean) => setTyping(isTyping, send, chatId),
+    (isTyping: boolean) => {
+      setTyping(isTyping, send, chatId);
+
+      if (isTyping) {
+        if (stopTimerRef.current) clearTimeout(stopTimerRef.current);
+        stopTimerRef.current = setTimeout(() => {
+          send("SetTyping", chatId, false);
+        }, 5000);
+      } else {
+        if (stopTimerRef.current) clearTimeout(stopTimerRef.current);
+      }
+    },
     [send, chatId],
   );
 }

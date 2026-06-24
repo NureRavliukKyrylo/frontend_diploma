@@ -16,3 +16,7 @@ export { deleteMessage } from "./libs/deleteMessage";
 export { updateMessage } from "./libs/updateMessage";
 export { MessageItemSkeleton } from "./ui/message-item/sender-message/MessageItemSkeleton";
 export { useTypingMessage } from "./model/hooks/useTypingMessage";
+export { useChatChangedEvent } from "./model/hooks/useChatChangedEvent";
+export { useChatTypingEvents } from "./model/hooks/useChatTypingEvents";
+export { useMessageEvents } from "./model/hooks/useMessagesEvents";
+export type { MessagesResponse } from "./api/messages-list/messagesListApi";

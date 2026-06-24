@@ -39,6 +39,7 @@ export const useTaskWidget = ({
     ? getPolicyStatusConfig(task.joinPolicy, t)
     : null;
 
+  console.log(getFullName(user?.firstName, user?.lastName));
   const forms = task
     ? getTaskMainForms({
         task,

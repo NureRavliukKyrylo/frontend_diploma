@@ -5,7 +5,7 @@ import { ModerationSubjectType, ReportReasonType } from "../model";
 export const reportCasesSearchDefaults = {
   OrderBy: "Default" as const,
   Page: 1,
-  PageSize: 12,
+  PageSize: 20,
 };
 
 export const reportCasesSearchSchema = z
@@ -42,6 +42,6 @@ export const reportCasesSearchSchema = z
       .catch(undefined),
   })
   .extend(paginationSchema.shape)
-  .extend({ PageSize: z.number().default(12) });
+  .extend({ PageSize: z.number().default(20) });
 
 export type ReportCasesSearchParams = z.infer<typeof reportCasesSearchSchema>;

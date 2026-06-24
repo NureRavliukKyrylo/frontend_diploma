@@ -19,7 +19,8 @@ export const getNotificationActionsButton = ({
 }: GetNotificationActionsButtonParams) => {
   if (
     notification.type === "JoinRequestCreated" &&
-    notification.metadata?.requestId
+    notification.metadata?.requestId &&
+    !notification.readAt
   ) {
     return (
       <>
@@ -37,7 +38,8 @@ export const getNotificationActionsButton = ({
 
   if (
     notification.type === "TimeSpendOfferUpdated" &&
-    notification.metadata?.bookingId
+    notification.metadata?.bookingId &&
+    !notification.readAt
   ) {
     return (
       <>

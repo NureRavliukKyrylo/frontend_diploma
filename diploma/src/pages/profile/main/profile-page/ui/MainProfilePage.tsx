@@ -38,6 +38,7 @@ export function MainProfilePage() {
   const profileMainTabs = getProfileMainTabs(t);
 
   const { data: user } = useSuspenseQuery(profileQuery.all());
+  const { data: statistics } = useSuspenseQuery(profileQuery.statistics());
 
   return (
     <div className={styles.mainProfileBlock}>
@@ -132,7 +133,7 @@ export function MainProfilePage() {
             }}
           >
             <MainProfileWrapper>
-              {profileMainForms[tab]({ user, search })}
+              {profileMainForms[tab]({ user, search, statistics })}
             </MainProfileWrapper>
           </motion.div>
         </AnimatePresence>

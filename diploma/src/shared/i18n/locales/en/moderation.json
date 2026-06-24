@@ -3,7 +3,8 @@
     "title": "Report {{subject}}",
     "labels": {
       "reason": "Reason",
-      "details": "Details"
+      "details": "Details",
+      "noDetails": "No details"
     },
     "placeholders": {
       "details": "Describe the issue..."

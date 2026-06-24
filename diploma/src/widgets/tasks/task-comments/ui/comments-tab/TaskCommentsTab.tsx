@@ -24,6 +24,7 @@ export const TaskCommentsTab = ({
   avatarUrl,
 }: TaskCommentsTabProps) => {
   const { t } = useTranslation("common");
+  console.log(userName);
   return (
     <div className={styles.wrapperTaskComments}>
       <div className={styles.wrapperSendMessage}>
@@ -46,6 +47,7 @@ export const TaskCommentsTab = ({
             fallback={
               <ListWidgetSkeleton
                 renderSkeleton={() => <TaskCommentItemSkeleton />}
+                className={styles.wrapperTaskComments}
               />
             }
           >

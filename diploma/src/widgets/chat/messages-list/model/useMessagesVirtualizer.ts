@@ -29,7 +29,7 @@ export const useMessagesVirtualizer = ({
   const prevLengthRef = useRef(messages.length);
   const pendingScrollChatId = useChatScrollStore((s) => s.pendingScrollChatId);
   const setNotAtBottom = useChatScrollStore((s) => s.setNotAtBottom);
-
+  const virtualItems = virtualizer.getVirtualItems();
   useEffect(() => {
     const len = messages.length;
     if (len > prevLengthRef.current) {
@@ -57,15 +57,17 @@ export const useMessagesVirtualizer = ({
     const el = messagesWrapperRef.current;
     if (!el) return;
 
-    const onScroll = () => {
+    const check = () => {
       const distanceFromBottom =
         el.scrollHeight - el.scrollTop - el.clientHeight;
       setNotAtBottom(chatId, distanceFromBottom > 50);
     };
 
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
-  }, [chatId]);
+    check();
+
+    el.addEventListener("scroll", check, { passive: true });
+    return () => el.removeEventListener("scroll", check);
+  }, [chatId, virtualItems.length]);
 
   useLayoutEffect(() => {
     const targetIndex = targetMessageId
@@ -82,6 +84,6 @@ export const useMessagesVirtualizer = ({
   return {
     messagesWrapperRef,
     virtualizer,
-    virtualItems: virtualizer.getVirtualItems(),
+    virtualItems,
   };
 };

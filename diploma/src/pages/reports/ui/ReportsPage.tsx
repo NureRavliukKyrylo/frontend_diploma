@@ -123,7 +123,7 @@ export const ReportsPage = () => {
                       initial="hidden"
                       animate="visible"
                       whileHover="hover"
-                      onClick={() => handleReportClick(report.id)}
+                      onClick={() => handleReportClick(report.reportId)}
                       className={styles.reportWrapper}
                     >
                       <ReportCaseItem reportCase={report} />

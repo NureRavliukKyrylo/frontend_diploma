@@ -7,7 +7,7 @@ interface UseMessageReadObserverProps {
   chatId: string;
   virtualItems: VirtualItem[];
   messagesWrapperRef: React.RefObject<HTMLDivElement | null>;
-  markAsRead: (messageId: string) => void;
+  markAsRead: (messageId: string, visibleUnreadIds: string[]) => void;
 }
 
 export const useMessageReadObserver = ({
@@ -35,7 +35,11 @@ export const useMessageReadObserver = ({
 
         const lastVisibleId = visibleEntries.reverse().find((id) => {
           const message = messages.find((m) => m.id === id);
-          return message && !message.isMine;
+          return message && !message.isMine && message.readStatus !== "Read";
+        });
+        const visibleUnreadIds = visibleEntries.filter((id) => {
+          const message = messages.find((m) => m.id === id);
+          return message && !message.isMine && message.readStatus !== "Read";
         });
 
         if (
@@ -43,7 +47,7 @@ export const useMessageReadObserver = ({
           lastVisibleId !== lastVisibleMessageIdRef.current
         ) {
           lastVisibleMessageIdRef.current = lastVisibleId;
-          markAsRead(lastVisibleId);
+          markAsRead(lastVisibleId, visibleUnreadIds);
         }
       },
       { root: scrollEl, threshold: 0.5 },

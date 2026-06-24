@@ -1,11 +1,14 @@
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { Avatar } from "@shared/ui";
 import { useTranslation } from "react-i18next";
 import styles from "./ChatContentWidget.module.scss";
 import { useChatHeaderData } from "../model/useChatHeaderData";
 import { MessageForm } from "@features/chat";
 import {
+  useChatMessagesQuery,
   useChatScrollStore,
+  useChatTypingEvents,
+  useMessageEvents,
   type Message,
   type MessageModeType,
 } from "@entities/chat";
@@ -14,6 +17,8 @@ import { useQuery } from "@tanstack/react-query";
 import { profileQuery } from "@entities/user/profile";
 import { AnimatePresence, motion } from "framer-motion";
 import { NavigationArrow } from "@shared/assets/icons/actions";
+import { useSignalRSend } from "@shared/libs/hooks";
+import { useChatStore } from "@entities/chat/model/store/useChatStore";
 
 interface ChatContentWidgetProps {
   chatId: string;
@@ -51,6 +56,19 @@ export const ChatContentWidget = ({
   const requestScrollToBottom = useChatScrollStore(
     (s) => s.requestScrollToBottom,
   );
+  useChatTypingEvents();
+  const { queryKey } = useChatMessagesQuery(chatId);
+  useMessageEvents(chatId, queryKey);
+  const send = useSignalRSend("chats");
+
+  const typingUser = useChatStore((s) => s.typingByChat[chatId]);
+
+  useEffect(() => {
+    send("JoinChat", chatId);
+    return () => {
+      send("LeaveChat", chatId);
+    };
+  }, [chatId]);
 
   return (
     <div className={styles.chatContentWrapper}>
@@ -71,12 +89,19 @@ export const ChatContentWidget = ({
                 defaultValue: chat.relatedEntityType,
               })}
             </span>
-            {!isPrivate && (
-              <span className={styles.membersCount}>
-                {t("labels.membersCount", {
-                  count: chat.participants.length,
-                })}
+            {typingUser ? (
+              <span className={styles.typingUser}>
+                {getFullName(typingUser.firstName, typingUser.lastName)}{" "}
+                typing...
               </span>
+            ) : (
+              !isPrivate && (
+                <span className={styles.membersCount}>
+                  {t("labels.membersCount", {
+                    count: chat.participants.length,
+                  })}
+                </span>
+              )
             )}
           </div>
         </div>

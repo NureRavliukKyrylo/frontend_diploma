@@ -130,8 +130,10 @@ export const MessageItem = ({
           )}
           {message.isMine && (
             <div className={styles.readStatus}>
-              <ApproveIcon className={styles.checkIcon} />
-              {message.isRead && (
+              <ApproveIcon
+                className={`${styles.checkIcon} ${message.readStatus === "Read" ? styles.checkRead : ""}`}
+              />
+              {message.readStatus === "Read" && (
                 <ApproveIcon
                   className={`${styles.checkIcon} ${styles.checkRead}`}
                 />

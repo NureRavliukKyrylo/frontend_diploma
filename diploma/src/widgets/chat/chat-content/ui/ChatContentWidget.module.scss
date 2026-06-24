@@ -1,7 +1,8 @@
 @use "@shared/assets/styles" as *;
 
 .chatContentWrapper {
-  display: flex;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
   flex-direction: column;
   height: 100%;
   width: 100%;
@@ -20,6 +21,26 @@
   @include respond-to(mobile) {
     padding: 10px 12px;
     gap: 10px;
+  }
+}
+
+.typingUser {
+  @include font-base(14px, 400);
+  color: #9aa0a6;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
   }
 }
 

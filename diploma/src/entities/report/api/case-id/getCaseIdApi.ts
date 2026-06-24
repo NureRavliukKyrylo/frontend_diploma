@@ -5,6 +5,6 @@ import { type ApiResponse } from "@shared/api";
 export const getCaseId = async (
   id: string,
 ): Promise<ApiResponse<ReportCase>> => {
-  const result = await apiClient.get(`/moderation/cases/${id}`);
+  const result = await apiClient.get(`/reports/${id}`);
   return result.data;
 };

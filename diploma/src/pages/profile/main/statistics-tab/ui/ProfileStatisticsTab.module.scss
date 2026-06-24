@@ -1,0 +1,306 @@
+@use "@shared/assets/styles" as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include respond-to(mobile) {
+    gap: 12px;
+  }
+}
+
+.exportButton {
+  display: flex;
+  align-self: flex-end;
+}
+.row {
+  display: grid;
+  gap: 14px;
+
+  @include respond-to(mobile) {
+    gap: 10px;
+  }
+}
+
+.row2 {
+  grid-template-columns: 1fr 1fr;
+  @include respond-to(mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.row3 {
+  grid-template-columns: 1fr 1fr 1fr;
+  @include respond-to(laptop) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @include respond-to(mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #ebebeb;
+
+  @include respond-to(laptop) {
+    padding: 16px 18px;
+  }
+  @include respond-to(mobile) {
+    padding: 14px 16px;
+  }
+}
+
+.cardLabel {
+  @include font-base(11px, 600);
+  color: rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.cardUnit {
+  @include font-base(14px, 500);
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.cardValue {
+  @include font-base(50px, 700);
+  color: #8c0000;
+  line-height: 1;
+  word-break: break-all;
+  margin: 0;
+
+  @include respond-to(laptop) {
+    font-size: 36px;
+  }
+  @include respond-to(tablet) {
+    font-size: 30px;
+  }
+  @include respond-to(mobile) {
+    font-size: 26px;
+  }
+}
+
+.cardBottom {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.accentTeal {
+  border-left: 3px solid #1d9e75;
+}
+.accentRed {
+  border-left: 3px solid #8c0000;
+}
+.accentAmber {
+  border-left: 3px solid #ba7517;
+  @include respond-to(laptop) {
+    grid-column: 1 / 3;
+  }
+}
+.accentBlue {
+  border-left: 3px solid #185fa5;
+}
+.accentGreen {
+  border-left: 3px solid #3b6d11;
+}
+
+.heroCard {
+  background: linear-gradient(135deg, #5a0000 0%, #8c0000 50%, #6b0000 100%);
+  border: none;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 28px;
+
+  .cardLabel {
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .cardUnit {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  @include respond-to(laptop) {
+    padding: 20px 22px;
+    gap: 16px;
+  }
+  @include respond-to(mobile) {
+    padding: 18px 20px;
+    gap: 14px;
+  }
+}
+
+.heroIcon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.7);
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.heroInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.heroRight {
+  margin-left: auto;
+  text-align: right;
+}
+
+.heroValue {
+  @include font-base(64px, 700);
+  color: #ffffff;
+  line-height: 1;
+  margin: 0;
+  word-break: break-all;
+
+  @include respond-to(laptop) {
+    font-size: 48px;
+  }
+  @include respond-to(mobile) {
+    font-size: 38px;
+  }
+}
+
+.badgeCard {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  border-left: 3px solid #8c0000;
+}
+
+.badgeIconBig {
+  width: 48px;
+  height: 48px;
+  background: #fff0f0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg {
+    width: 26px;
+    height: 26px;
+    color: #8c0000;
+  }
+}
+
+.badgeCount {
+  @include font-base(50px, 700);
+  color: #8c0000;
+  line-height: 1;
+  margin: 0;
+  word-break: break-all;
+
+  @include respond-to(laptop) {
+    font-size: 36px;
+  }
+  @include respond-to(tablet) {
+    font-size: 30px;
+  }
+  @include respond-to(mobile) {
+    font-size: 26px;
+  }
+}
+
+.ratingCard {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  border-left: 3px solid #ba7517;
+}
+
+.ratingRight {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ratingNum {
+  @include font-base(46px, 700);
+  color: #1a1a1a;
+  line-height: 1;
+  margin: 0;
+  word-break: break-all;
+
+  @include respond-to(laptop) {
+    font-size: 34px;
+  }
+}
+
+.stars {
+  display: flex;
+  gap: 3px;
+
+  .starIcon {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+.levelCard {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  border-left: 3px solid #534ab7;
+  @include respond-to(laptop) {
+    grid-column: 1 / 3;
+  }
+}
+
+.levelIcon {
+  width: 48px;
+  height: 48px;
+  background: #7f0d0d;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    color: #fff;
+  }
+}
+
+.levelInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.levelPill {
+  @include font-base(14px, 700);
+  background: #fff0f0;
+  color: #8c0000;
+  border: 1.5px solid #e0a0a0;
+  border-radius: 20px;
+  padding: 4px 14px;
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  word-break: break-all;
+}

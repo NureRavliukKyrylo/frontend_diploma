@@ -28,3 +28,4 @@ export {
   type ProfileSettingsSearchParams,
   profileSettingsSearchDefaults,
 } from "./profile/libs/search-schema/profileSettingsSearchSchema";
+export type { StatisticsVolunteerResponse } from "./profile/api/statistics/statisticsVolunteerApi";

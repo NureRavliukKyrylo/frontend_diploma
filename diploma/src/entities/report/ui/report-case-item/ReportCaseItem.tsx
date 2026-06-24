@@ -29,7 +29,7 @@ export const ReportCaseItem = ({ reportCase }: ReportCaseItemProps) => {
       <div className={styles.mainContent}>
         <span className={styles.userName}>{fullName}</span>
         <p className={styles.details}>
-          asdasdadsadasdasdasdasdadasdasdasdasdasdadadadadadadadadasdasdasdasassssssssssssssssssssssssssssssssssssssssssssdad
+          {reportCase.details ?? t("moderation:report.labels.noDetails")}
         </p>
         <div className={styles.pills}>
           <span className={styles.reasonPill}>
@@ -43,7 +43,6 @@ export const ReportCaseItem = ({ reportCase }: ReportCaseItemProps) => {
             })}
           </span>
         </div>
-        <p className={styles.details}>{reportCase.details}</p>
       </div>
 
       <div className={styles.statusCol}>

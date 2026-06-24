@@ -200,5 +200,52 @@
       "title": "Google Calendar",
       "description": "Sync your calendar events"
     }
+  },
+  "statistics": {
+    "totalEventsAttended": {
+      "label": "Events attended",
+      "unit": "events"
+    },
+    "totalTasksCompleted": {
+      "label": "Tasks completed",
+      "unit": "tasks"
+    },
+    "totalEarnedMinutes": {
+      "label": "Time earned",
+      "unit": "min"
+    },
+    "totalSpentMinutes": {
+      "label": "Time spent",
+      "unit": "min"
+    },
+    "availableMinutes": {
+      "label": "Available balance",
+      "unit": "min"
+    },
+    "reservedMinutes": {
+      "label": "Reserved",
+      "unit": "min"
+    },
+    "approvedAttendanceCount": {
+      "label": "Approved attendances",
+      "unit": "times"
+    },
+    "badgesCount": {
+      "label": "Badges earned",
+      "unit": "badges"
+    },
+    "averageRating": {
+      "label": "Average rating"
+    },
+    "currentLevel": {
+      "label": "Current level"
+    },
+    "export": {
+      "button": "Export as PDF",
+      "successTitle": "Statistics exported",
+      "successDescription": "Your statistics have been downloaded as a PDF",
+      "failedTitle": "Export failed",
+      "failedDescription": "Something went wrong while exporting your statistics"
+    }
   }
 }

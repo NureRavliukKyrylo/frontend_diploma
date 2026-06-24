@@ -1,20 +1,20 @@
 import { ModerationSubjectType } from "../model";
 
 const subjectTranslationKeys: Record<ModerationSubjectType, string> = {
-  [ModerationSubjectType.user]: "User",
-  [ModerationSubjectType.organization]: "Organization",
-  [ModerationSubjectType.project]: "Project",
-  [ModerationSubjectType.event]: "Event",
-  [ModerationSubjectType.task]: "Task",
-  [ModerationSubjectType.offer]: "Offer",
-  [ModerationSubjectType.chatMessage]: "ChatMessage",
-  [ModerationSubjectType.comment]: "Comment",
-  [ModerationSubjectType.feedback]: "Feedback",
-  [ModerationSubjectType.other]: "Other",
+  [ModerationSubjectType.user]: "user",
+  [ModerationSubjectType.organization]: "organization",
+  [ModerationSubjectType.project]: "project",
+  [ModerationSubjectType.event]: "event",
+  [ModerationSubjectType.task]: "task",
+  [ModerationSubjectType.offer]: "offer",
+  [ModerationSubjectType.chatMessage]: "chatMessage",
+  [ModerationSubjectType.comment]: "comment",
+  [ModerationSubjectType.feedback]: "feedback",
+  [ModerationSubjectType.other]: "other",
 };
 
 export const getModerationSubjectKey = (
   type: ModerationSubjectType,
 ): string => {
-  return subjectTranslationKeys[type] ?? "Other";
+  return subjectTranslationKeys[type] ?? "other";
 };

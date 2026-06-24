@@ -201,5 +201,52 @@
       "title": "Google Календар",
       "description": "Синхронізуйте події вашого календаря"
     }
+  },
+  "statistics": {
+    "totalEventsAttended": {
+      "label": "Відвідано подій",
+      "unit": "подій"
+    },
+    "totalTasksCompleted": {
+      "label": "Виконано завдань",
+      "unit": "завдань"
+    },
+    "totalEarnedMinutes": {
+      "label": "Зароблено часу",
+      "unit": "хв"
+    },
+    "totalSpentMinutes": {
+      "label": "Витрачено часу",
+      "unit": "хв"
+    },
+    "availableMinutes": {
+      "label": "Доступний баланс",
+      "unit": "хв"
+    },
+    "reservedMinutes": {
+      "label": "Зарезервовано",
+      "unit": "хв"
+    },
+    "approvedAttendanceCount": {
+      "label": "Підтверджених відвідувань",
+      "unit": "разів"
+    },
+    "badgesCount": {
+      "label": "Отримано бейджів",
+      "unit": "бейджів"
+    },
+    "averageRating": {
+      "label": "Середній рейтинг"
+    },
+    "currentLevel": {
+      "label": "Поточний рівень"
+    },
+    "export": {
+      "button": "Експортувати як PDF",
+      "successTitle": "Статистику експортовано",
+      "successDescription": "Вашу статистику було завантажено у форматі PDF",
+      "failedTitle": "Помилка експорту",
+      "failedDescription": "Під час експорту статистики сталася помилка"
+    }
   }
 }

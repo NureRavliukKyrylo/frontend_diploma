@@ -31,3 +31,4 @@ export { default as ReminderIcon } from "./reminder.svg?react";
 export { default as DeadlineIcon } from "./deadline.svg?react";
 export { default as Report } from "./report.svg?react";
 export { default as CommentIcon } from "./comment-icon.svg?react";
+export { default as TaskIcon } from "./task.svg?react";

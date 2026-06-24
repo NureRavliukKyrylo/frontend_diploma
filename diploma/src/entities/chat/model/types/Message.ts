@@ -17,7 +17,7 @@ export type Message = {
   };
   mentions: { firstName: string; lastName: string }[];
   isMine: boolean;
-  isRead: boolean;
+  readStatus: "Unread" | "Read";
   isSystem: boolean;
   canSubmitReport: boolean;
 };

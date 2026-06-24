@@ -1,17 +1,10 @@
-import { notificationQuery } from "@entities/notification";
-import { useUserStore } from "@entities/user";
-import { useQuery } from "@tanstack/react-query";
+import { useNotificationStore } from "@entities/notification";
 import { Link } from "@tanstack/react-router";
 import { Bell, MessageSquareText } from "lucide-react";
 import styles from "./HeaderNotifications.module.scss";
 
 export const HeaderNotifications = () => {
-  const { isAuthenticated } = useUserStore();
-  const { data: unreadCountData } = useQuery({
-    ...notificationQuery.unreadCount(),
-    enabled: isAuthenticated === true,
-  });
-  const unreadCount = unreadCountData?.count ?? 0;
+  const unreadCount = useNotificationStore((s) => s.unreadCount);
 
   return (
     <>
@@ -30,11 +23,7 @@ export const HeaderNotifications = () => {
         </Link>
       </span>
       <span className={styles.tooltip} data-tooltip="Messages">
-        <Link
-          to="/chat"
-          className={styles.iconButton}
-          aria-label="Messages"
-        >
+        <Link to="/chat" className={styles.iconButton} aria-label="Messages">
           <MessageSquareText className={styles.icon} strokeWidth={2} />
         </Link>
       </span>
