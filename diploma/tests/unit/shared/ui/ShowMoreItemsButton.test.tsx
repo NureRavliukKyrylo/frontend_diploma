@@ -137,7 +137,6 @@ describe("ShowMoreItemsButton", () => {
         <ShowMoreItemsButton items={makeItems(10)} initialVisibleCount={4} />,
       );
       await user.click(screen.getByRole("button"));
-      // Button is gone — all items remain visible, no way to re-collapse
       expect(screen.queryByRole("button")).not.toBeInTheDocument();
       expect(screen.getAllByTestId(/^item-/)).toHaveLength(10);
     });

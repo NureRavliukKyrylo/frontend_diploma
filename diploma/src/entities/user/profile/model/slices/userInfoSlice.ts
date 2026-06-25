@@ -1,3 +1,4 @@
+import type { SystemRole } from "@shared/config/types";
 import { type StateCreator } from "zustand";
 
 export interface UserInfoSlice {
@@ -5,6 +6,7 @@ export interface UserInfoSlice {
   firstName?: string;
   lastName?: string;
   email?: string;
+  role?: SystemRole;
   isPasswordSet?: boolean;
   isAuthenticated?: boolean;
 
@@ -14,6 +16,7 @@ export interface UserInfoSlice {
   setEmail: (val: string) => void;
   setIsPasswordSet: (val: boolean) => void;
   setIsAuthenticated: (val: boolean) => void;
+  setRole: (val: SystemRole) => void;
   clearUserInfo: () => void;
 }
 
@@ -24,6 +27,7 @@ export const createUserInfoSlice: StateCreator<UserInfoSlice> = (set) => ({
   email: undefined,
   isPasswordSet: undefined,
   isAuthenticated: undefined,
+  role: undefined,
 
   setUserId: (val) => set({ userId: val }),
   setFirstName: (val) => set({ firstName: val }),
@@ -31,7 +35,7 @@ export const createUserInfoSlice: StateCreator<UserInfoSlice> = (set) => ({
   setEmail: (val) => set({ email: val }),
   setIsAuthenticated: (val) => set({ isAuthenticated: val }),
   setIsPasswordSet: (val) => set({ isPasswordSet: val }),
-
+  setRole: (val) => set({ role: val }),
   clearUserInfo: () =>
     set({
       userId: undefined,

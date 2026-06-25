@@ -219,8 +219,10 @@
 }
 
 .offerCardMotion {
-  display: grid;
   grid-row: span 5;
+  display: grid;
+  grid-template-rows: subgrid;
+  gap: 0px;
 }
 
 .emptyState {

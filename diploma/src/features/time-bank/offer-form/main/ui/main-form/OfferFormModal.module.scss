@@ -5,6 +5,16 @@
   flex-direction: column;
   gap: 24px;
   padding: 40px;
+
+  @include respond-to(tablet) {
+    padding: 24px;
+    gap: 16px;
+  }
+
+  @include respond-to(mobile) {
+    padding: 20px;
+    gap: 12px;
+  }
 }
 
 .header {
@@ -14,6 +24,17 @@
   gap: 40px;
   position: relative;
   padding-bottom: 20px;
+
+  @include respond-to(tablet) {
+    gap: 24px;
+  }
+
+  @include respond-to(mobile) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding-bottom: 16px;
+  }
 
   &::after {
     content: "";
@@ -52,6 +73,14 @@
   text-transform: uppercase;
   line-height: 110%;
 
+  @include respond-to(tablet) {
+    font-size: 24px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 20px;
+  }
+
   &.editTitle {
     background: linear-gradient(180deg, #c97f00 0%, #5a3800 100%);
     -webkit-background-clip: text;
@@ -65,6 +94,16 @@
   color: #1a1a1a;
   text-align: right;
   white-space: nowrap;
+
+  @include respond-to(tablet) {
+    font-size: 16px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 14px;
+    text-align: left;
+    white-space: normal;
+  }
 }
 
 .footer {
@@ -73,6 +112,10 @@
   justify-content: space-between;
   gap: 12px;
   padding-top: 8px;
+
+  @include respond-to(mobile) {
+    flex-wrap: wrap;
+  }
 }
 
 .backButton {
@@ -86,6 +129,11 @@
   height: 100%;
   padding: 10px 24px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  @include respond-to(mobile) {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
 
   .arrowIcon {
     width: 14px;
@@ -105,4 +153,17 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-left: auto;
   min-width: 200px;
+
+  @include respond-to(tablet) {
+    font-size: 16px;
+    min-width: 160px;
+    padding: 10px 24px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 14px;
+    min-width: unset;
+    width: 100%;
+    padding: 10px 20px;
+  }
 }

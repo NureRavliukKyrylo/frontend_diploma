@@ -32,6 +32,28 @@ vi.mock("@shared/assets/icons/info", async (importOriginal) => {
   };
 });
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    i18n: {
+      language: "en",
+    },
+    t: (key: string) => {
+      const translations: Record<string, string> = {
+        "transactions.types.earn": "Earned",
+        "transactions.types.spend": "Spent",
+        "transactions.types.reservation": "Reservation",
+        "transactions.types.reservationRelease": "Reservation Release",
+        "transactions.types.adminAdjustmentPlus": "Admin Adjustment (+)",
+        "transactions.types.adminAdjustmentMinus": "Admin Adjustment (-)",
+        "transactions.types.giftIn": "Gift In",
+        "transactions.types.giftOut": "Gift Out",
+        "transactions.labels.balanceAfter": "Balance",
+      };
+      return translations[key] || key;
+    },
+  }),
+}));
+
 const makeTransaction = (
   overrides: Partial<TimeTransaction> = {},
 ): TimeTransaction => ({
@@ -85,14 +107,25 @@ describe("TransactionListItem — amount sign and color", () => {
     "giftOut",
   ];
 
+  const matchAmount =
+    (prefix: "+" | "-") => (_content: string, element: Element | null) => {
+      if (!element) return false;
+      const hasCorrectClass = element.classList.contains("amount");
+      const normalizedText = element.textContent?.replace(/\s+/g, "") || "";
+      const matchesPattern = new RegExp(`^\\${prefix}\\d+units\\.m$`).test(
+        normalizedText,
+      );
+      return hasCorrectClass && matchesPattern;
+    };
+
   it.each(positiveTypes)("shows + prefix for %s", (type) => {
     render(<TransactionListItem transaction={makeTransaction({ type })} />);
-    expect(screen.getByText(/^\+\d+m$/)).toBeInTheDocument();
+    expect(screen.getByText(matchAmount("+"))).toBeInTheDocument();
   });
 
   it.each(negativeTypes)("shows - prefix for %s", (type) => {
     render(<TransactionListItem transaction={makeTransaction({ type })} />);
-    expect(screen.getByText(/^-\d+m$/)).toBeInTheDocument();
+    expect(screen.getByText(matchAmount("-"))).toBeInTheDocument();
   });
 
   it("shows - prefix for reservation", () => {
@@ -101,21 +134,25 @@ describe("TransactionListItem — amount sign and color", () => {
         transaction={makeTransaction({ type: "reservation" })}
       />,
     );
-    expect(screen.getByText(/^-\d+m$/)).toBeInTheDocument();
+    expect(screen.getByText(matchAmount("-"))).toBeInTheDocument();
   });
 
   it("applies green color for positive type", () => {
     render(
       <TransactionListItem transaction={makeTransaction({ type: "earn" })} />,
     );
-    expect(screen.getByText(/^\+\d+m$/)).toHaveStyle({ color: "#3d995f" });
+    expect(screen.getByText(matchAmount("+"))).toHaveStyle({
+      color: "#3d995f",
+    });
   });
 
   it("applies red color for negative type", () => {
     render(
       <TransactionListItem transaction={makeTransaction({ type: "spend" })} />,
     );
-    expect(screen.getByText(/^-\d+m$/)).toHaveStyle({ color: "#a80b0b" });
+    expect(screen.getByText(matchAmount("-"))).toHaveStyle({
+      color: "#a80b0b",
+    });
   });
 
   it("applies amber color for reservation (neutral)", () => {
@@ -124,7 +161,9 @@ describe("TransactionListItem — amount sign and color", () => {
         transaction={makeTransaction({ type: "reservation" })}
       />,
     );
-    expect(screen.getByText(/^-\d+m$/)).toHaveStyle({ color: "#b87c00" });
+    expect(screen.getByText(matchAmount("-"))).toHaveStyle({
+      color: "#b87c00",
+    });
   });
 
   it("renders absolute amount regardless of sign", () => {
@@ -133,7 +172,7 @@ describe("TransactionListItem — amount sign and color", () => {
         transaction={makeTransaction({ type: "spend", amountMinutes: 30 })}
       />,
     );
-    expect(screen.getByText("-30m")).toBeInTheDocument();
+    expect(screen.getByText(matchAmount("-"))).toBeInTheDocument();
   });
 });
 
@@ -144,7 +183,17 @@ describe("TransactionListItem — balance", () => {
         transaction={makeTransaction({ balanceAfterMinutes: 200 })}
       />,
     );
-    expect(screen.getByText("Balance: 200m")).toBeInTheDocument();
+
+    const balanceMatcher = (_content: string, element: Element | null) => {
+      if (!element) return false;
+      const text = element.textContent?.replace(/\s+/g, "") || "";
+      return (
+        element.classList.contains("balance") &&
+        text.includes("Balance:200units.m")
+      );
+    };
+
+    expect(screen.getByText(balanceMatcher)).toBeInTheDocument();
   });
 });
 

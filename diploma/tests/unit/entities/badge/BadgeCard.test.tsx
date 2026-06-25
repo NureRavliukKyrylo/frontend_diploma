@@ -6,6 +6,17 @@ import {
 } from "@entities/badge";
 import { render, screen } from "@testing-library/react";
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => {
+      const translations: Record<string, string> = {
+        "badge:labels.rank": "RANK",
+      };
+      return translations[key] || key;
+    },
+  }),
+}));
+
 const makeBadge = (overrides: Partial<Badge> = {}): Badge => ({
   id: "1",
   title: "Test Badge",
@@ -72,8 +83,12 @@ describe("BadgeCardDetailed", () => {
         badge={makeBadge({ rank: { value: 6, name: "A" } })}
       />,
     );
-    const rankEl = screen.getByText("RANK A");
-    expect(rankEl).toHaveStyle({ color: TierColors["A"] });
+
+    const rankLabelEl = screen.getByText("RANK");
+    expect(rankLabelEl).toHaveStyle({ color: TierColors["A"] });
+
+    const rankLetterEl = screen.getByText("A");
+    expect(rankLetterEl.parentElement).toHaveStyle({ color: TierColors["A"] });
   });
 
   it("renders without onClick as plain div", () => {

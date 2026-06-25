@@ -16,6 +16,10 @@ import { skillKeys } from "@entities/skill";
 import { badgesKeys } from "@entities/badge";
 import { filtersKeys } from "@shared/api/filters";
 import { useSignalRSend } from "@shared/libs/hooks";
+import { projectKeys } from "@entities/project";
+import { eventKeys } from "@entities/event";
+import { taskKeys } from "@entities/task";
+import { offerKeys } from "@entities/offer";
 
 export interface RouterContext {
   queryClient: QueryClient;
@@ -56,6 +60,10 @@ function RootComponent() {
         queryClient.invalidateQueries({ queryKey: skillKeys.all() }),
         queryClient.invalidateQueries({ queryKey: badgesKeys.all() }),
         queryClient.invalidateQueries({ queryKey: filtersKeys.all() }),
+        queryClient.invalidateQueries({ queryKey: projectKeys.all() }),
+        queryClient.invalidateQueries({ queryKey: eventKeys.all() }),
+        queryClient.invalidateQueries({ queryKey: taskKeys.all() }),
+        queryClient.invalidateQueries({ queryKey: offerKeys.all() }),
       ]);
     }
     send("UpdateLanguage", locale);

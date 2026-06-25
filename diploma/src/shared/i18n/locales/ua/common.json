@@ -58,14 +58,14 @@
     "reserved": "Зарезервовано"
   },
   "nav": {
-    "home": "Головна",
-    "profile": "Профіль",
-    "notifications": "Сповіщення",
-    "chat": "Чат",
-    "timeBank": "Банк часу",
-    "tasks": "Завдання",
-    "events": "Події",
-    "organizations": "Організації"
+    "activities": "АКТИВНОСТІ",
+    "map": "КАРТА",
+    "organizations": "ОРГАНІЗАЦІЇ",
+    "calendar": "КАЛЕНДАР",
+    "moderation": "МОДЕРАЦІЯ",
+    "admin": "АДМІН",
+    "categories": "КАТЕГОРІЇ",
+    "timeBank": "БАНКА ЧАСУ"
   },
   "errors": {
     "somethingWentWrong": "Щось пішло не так",

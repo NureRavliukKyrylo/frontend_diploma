@@ -8,8 +8,10 @@ export const messageKeys = {
     ...messageKeys.list(chatId),
     params,
   ],
+  anchorNoParams: (chatId: string) =>
+    [...messageKeys.list(chatId), "anchor"] as const,
   anchor: (chatId: string, params: { pageSize: number }) =>
-    [...messageKeys.list(chatId), "anchor", params] as const,
+    [...messageKeys.anchorNoParams(chatId), params] as const,
 };
 
 export const messageQuery = {

@@ -142,32 +142,37 @@ export const MyOffersTab = ({ search }: MyOffersTabProps) => {
                                 onClick={(e) => e.stopPropagation()}
                               >
                                 <p className={styles.offerActionsText}>
-                                  {t("myOffers.manageText")}
+                                  {offer.isActive
+                                    ? t("myOffers.manageText")
+                                    : t("myOffers.inactiveText")}
                                 </p>
-                                <div className={styles.offerActionsButtons}>
-                                  <OfferFormButton
-                                    initialValues={{
-                                      id: offer.id,
-                                      title: offer.title,
-                                      categories: offer.categories,
-                                      description: offer.description,
-                                      endAt: offer.endAt
-                                        ? new Date(offer.endAt).toISOString()
-                                        : null,
-                                      startAt: offer.startAt
-                                        ? new Date(offer.startAt).toISOString()
-                                        : null,
-                                      isOnline: offer.isOnline,
-                                      location: offer.location,
-                                      priceMinutes: offer.priceMinutes,
-                                      skills: offer.skills,
-                                    }}
-                                    isEdit={true}
-                                  />
-                                  {offer.isActive && (
+                                {offer.isActive && (
+                                  <div className={styles.offerActionsButtons}>
+                                    <OfferFormButton
+                                      initialValues={{
+                                        id: offer.id,
+                                        title: offer.title,
+                                        categories: offer.categories,
+                                        description: offer.description,
+                                        endAt: offer.endAt
+                                          ? new Date(offer.endAt).toISOString()
+                                          : null,
+                                        startAt: offer.startAt
+                                          ? new Date(
+                                              offer.startAt,
+                                            ).toISOString()
+                                          : null,
+                                        isOnline: offer.isOnline,
+                                        location: offer.location,
+                                        priceMinutes: offer.priceMinutes,
+                                        skills: offer.skills,
+                                      }}
+                                      isEdit={true}
+                                    />
+
                                     <DeactivateOfferButton offerId={offer.id} />
-                                  )}
-                                </div>
+                                  </div>
+                                )}
                               </div>
                             }
                           />

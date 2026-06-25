@@ -3,6 +3,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { useSubmitOfferForm } from "@features/time-bank/offer-form/main/model/useSubmitOfferForm";
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
 const { createOfferMock, updateOfferMock, clearMock, setStepMock } = vi.hoisted(
   () => ({
     createOfferMock: vi.fn(),
@@ -208,11 +214,13 @@ describe("useSubmitOfferForm", () => {
       wrapper: createWrapper(),
     });
 
-    expect(result.current.stepLabels).not.toContain("Location");
+    expect(result.current.stepLabels).not.toContain(
+      "timeBank:forms.steps.location",
+    );
     expect(result.current.stepLabels).toEqual([
-      "Overview",
-      "Categories",
-      "Skills",
+      "timeBank:forms.steps.overview",
+      "timeBank:forms.steps.categories",
+      "timeBank:forms.steps.skills",
     ]);
   });
 
@@ -224,10 +232,10 @@ describe("useSubmitOfferForm", () => {
     });
 
     expect(result.current.stepLabels).toEqual([
-      "Overview",
-      "Location",
-      "Categories",
-      "Skills",
+      "timeBank:forms.steps.overview",
+      "timeBank:forms.steps.location",
+      "timeBank:forms.steps.categories",
+      "timeBank:forms.steps.skills",
     ]);
   });
 });

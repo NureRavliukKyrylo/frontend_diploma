@@ -3,6 +3,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { useLogin } from "@features/auth/login-form/model/useLogin";
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
 const {
   navigateMock,
   invalidateMock,
@@ -13,7 +19,8 @@ const {
   addToastMock,
 } = vi.hoisted(() => ({
   navigateMock: vi.fn(),
-  invalidateMock: vi.fn(),
+  // Make invalidate resolve a promise so 'await router.invalidate()' can progress safely
+  invalidateMock: vi.fn(() => Promise.resolve()),
   clearLoginFormMock: vi.fn(),
   setEmailMock: vi.fn(),
   setUserIdMock: vi.fn(),
@@ -51,6 +58,7 @@ vi.mock("@entities/user", async (importOriginal) => {
         setEmail: setEmailMock,
         setUserId: setUserIdMock,
         setIsAuthenticated: setIsAuthenticatedMock,
+        setRole: vi.fn(),
       };
       return selector ? selector(state) : state;
     },
@@ -62,7 +70,7 @@ vi.mock("@tanstack/react-router", () => ({
     navigate: navigateMock,
     invalidate: invalidateMock,
   }),
-  useSearch: () => ({}),
+  useSearch: () => ({ redirect: "/activities" }),
 }));
 
 vi.mock("@shared/routes", () => ({
@@ -128,7 +136,9 @@ describe("useLogin", () => {
     });
 
     await waitFor(() => {
-      expect(result.current.formik.errors.email).toBe("Email is required");
+      expect(result.current.formik.errors.email).toBe(
+        "common:validation.emailRequired",
+      );
     });
   });
 
@@ -138,7 +148,7 @@ describe("useLogin", () => {
     });
 
     await act(async () => {
-      result.current.formik.setFieldValue("email", "bad-email");
+      await result.current.formik.setFieldValue("email", "bad-email");
     });
 
     await act(async () => {
@@ -147,7 +157,7 @@ describe("useLogin", () => {
 
     await waitFor(() => {
       expect(result.current.formik.errors.email).toBe(
-        "Please enter a valid email address",
+        "common:validation.invalidEmail",
       );
     });
   });
@@ -158,7 +168,7 @@ describe("useLogin", () => {
     });
 
     await act(async () => {
-      result.current.formik.setFieldValue("password", "");
+      await result.current.formik.setFieldValue("password", "");
     });
 
     await act(async () => {
@@ -167,7 +177,7 @@ describe("useLogin", () => {
 
     await waitFor(() => {
       expect(result.current.formik.errors.password).toBe(
-        "Password is required",
+        "common:validation.passwordRequired",
       );
     });
   });
@@ -232,7 +242,7 @@ describe("useLogin", () => {
     });
 
     await waitFor(() => {
-      expect(navigateMock).toHaveBeenCalledWith({ to: "/projects" });
+      expect(navigateMock).toHaveBeenCalledWith({ to: "/activities" });
     });
   });
 

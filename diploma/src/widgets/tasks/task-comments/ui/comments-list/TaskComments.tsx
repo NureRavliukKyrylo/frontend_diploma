@@ -1,15 +1,13 @@
-import { TaskCommentItem, taskQuery } from "@entities/task";
+import { taskQuery } from "@entities/task";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import styles from "./TaskComments.module.scss";
 import { LoadMoreButton } from "@shared/ui/buttons";
 import type { TaskComment } from "@entities/task/model";
 import type { MenuItem } from "@shared/config/types";
 import { useTaskComments } from "../../model/useTaskComments";
-import { useLayoutEffect, useRef } from "react";
-import { DeleteCommentModal, EditCommentForm } from "@features/tasks";
-import { ReportButton } from "@features/moderation";
-import { ModerationSubjectType } from "@entities/report";
+import { DeleteCommentModal } from "@features/tasks";
 import { useTranslation } from "react-i18next";
+import { CommentThreadNode } from "./CommentThreadNode";
 
 interface TaskCommentsProps {
   PageSize: number;
@@ -87,7 +85,7 @@ export const TaskComments = ({
   );
 };
 
-const CommentList = ({
+export const CommentList = ({
   comments,
   depth = 0,
   userId,
@@ -96,75 +94,21 @@ const CommentList = ({
   taskId,
   onCancel,
 }: CommentListProps) => {
-  const firstCommentRef = useRef<HTMLDivElement>(null);
-  const repliesRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    if (!firstCommentRef.current || !repliesRef.current) return;
-
-    const observer = new ResizeObserver(() => {
-      const height = firstCommentRef.current!.getBoundingClientRect().height;
-      repliesRef.current!.style.setProperty(
-        "--comment-wrapper-height",
-        `${height}px`,
-      );
-    });
-
-    observer.observe(firstCommentRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <div
-      className={depth > 0 ? styles.repliesWrapper : undefined}
-      ref={repliesRef}
-    >
+    <div className={depth > 0 ? styles.repliesWrapper : undefined}>
       <div className={styles.replies}>
         {comments.map((comment, index) => (
-          <div
+          <CommentThreadNode
             key={comment.id}
-            ref={index === 0 ? firstCommentRef : undefined}
-            className={depth > 0 ? styles.replyItem : undefined}
-          >
-            <TaskCommentItem
-              comment={comment}
-              menuItems={
-                comment.author.id === userId ? getMenuItems(comment) : []
-              }
-              editSlot={
-                editingId === comment.id ? (
-                  <EditCommentForm
-                    taskId={taskId}
-                    commentId={comment.id}
-                    initialBody={comment.body}
-                    onCancel={onCancel}
-                  />
-                ) : null
-              }
-              reportSlot={
-                comment.author.id !== userId &&
-                comment.canSubmitReport && (
-                  <ReportButton
-                    subjectType={ModerationSubjectType.comment}
-                    subjectId={comment.id}
-                    buttonClassName={styles.reportButton}
-                    iconClassName={styles.reportIcon}
-                  />
-                )
-              }
-            />
-            {!!comment.replies?.length && (
-              <CommentList
-                comments={comment.replies}
-                depth={depth + 1}
-                userId={userId}
-                getMenuItems={getMenuItems}
-                editingId={editingId}
-                taskId={taskId}
-                onCancel={onCancel}
-              />
-            )}
-          </div>
+            comment={comment}
+            depth={depth}
+            userId={userId}
+            getMenuItems={getMenuItems}
+            editingId={editingId}
+            taskId={taskId}
+            onCancel={onCancel}
+            isLast={index === comments.length - 1}
+          />
         ))}
       </div>
     </div>

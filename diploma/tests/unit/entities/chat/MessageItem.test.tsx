@@ -51,8 +51,9 @@ const makeMessage = (overrides: Partial<Message> = {}): Message => ({
   replyTo: null as any,
   mentions: [],
   isMine: false,
-  isRead: false,
+  readStatus: "Unread",
   isSystem: false,
+  canSubmitReport: false,
   ...overrides,
 });
 
@@ -210,7 +211,7 @@ describe("MessageItem", () => {
   it("renders single approve icon when message is mine and unread", () => {
     render(
       <MessageItem
-        message={makeMessage({ isMine: true, isRead: false })}
+        message={makeMessage({ isMine: true, readStatus: "Unread" })}
         menuItems={makeMenuItems()}
         openId={null}
         setOpenId={vi.fn()}
@@ -222,7 +223,7 @@ describe("MessageItem", () => {
   it("renders double approve icon when message is mine and read", () => {
     render(
       <MessageItem
-        message={makeMessage({ isMine: true, isRead: true })}
+        message={makeMessage({ isMine: true, readStatus: "Read" })}
         menuItems={makeMenuItems()}
         openId={null}
         setOpenId={vi.fn()}

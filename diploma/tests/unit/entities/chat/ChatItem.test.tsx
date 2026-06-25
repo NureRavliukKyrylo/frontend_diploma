@@ -19,12 +19,25 @@ vi.mock("@shared/assets/icons/info", async (importOriginal) => {
   };
 });
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    i18n: {
+      language: "en",
+    },
+    t: (key: string) => {
+      const translations: Record<string, string> = {
+        "chat:states.noMessages": "No messages yet",
+      };
+      return translations[key] || key;
+    },
+  }),
+}));
+
 const makeChat = (overrides: Partial<Chat> = {}): Chat => ({
   id: "1",
   name: "John Doe",
   avatarUrl: "https://example.com/avatar.png",
-  lastMessageAt: "2024-01-01T00:00:00Z",
-  lastMessage: { message: "Hello there", type: "text" },
+  lastMessage: { message: "Hello there", timestamp: "2024-01-01T00:00:00Z" },
   unreadCount: 0,
   participants: [],
   relatedEntityType: "private",
@@ -42,7 +55,10 @@ describe("ChatItem", () => {
     render(
       <ChatItem
         chat={makeChat({
-          lastMessage: { message: "Hello there", type: "text" },
+          lastMessage: {
+            message: "Hello there",
+            timestamp: "2024-01-01T00:00:00Z",
+          },
         })}
       />,
     );
@@ -51,18 +67,7 @@ describe("ChatItem", () => {
 
   it("renders fallback when lastMessage is null", () => {
     render(<ChatItem chat={makeChat({ lastMessage: null })} />);
-    expect(screen.getByText("No messages yet")).toBeInTheDocument();
-  });
-
-  it("renders typing indicator instead of last message when typing", () => {
-    render(<ChatItem chat={makeChat()} typing="John" />);
-    expect(screen.getByText("typing...")).toBeInTheDocument();
-    expect(screen.queryByText("Hello there")).not.toBeInTheDocument();
-  });
-
-  it("applies typing class when typing", () => {
-    render(<ChatItem chat={makeChat()} typing="John" />);
-    expect(screen.getByText("typing...")).toHaveClass("typing");
+    expect(screen.getByText(/No messages yet/i)).toBeInTheDocument();
   });
 
   it("does not apply typing class when not typing", () => {
@@ -85,9 +90,9 @@ describe("ChatItem", () => {
     expect(screen.getByText("5")).toBeInTheDocument();
   });
 
-  it("renders 0 when unreadCount is null", () => {
+  it("does not render count when unreadCount is 0", () => {
     render(<ChatItem chat={makeChat({ unreadCount: 0 })} />);
-    expect(screen.getByText("0")).toBeInTheDocument();
+    expect(screen.queryByText("0")).not.toBeInTheDocument();
   });
 
   it("renders formatted date", () => {

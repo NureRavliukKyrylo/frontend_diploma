@@ -24,3 +24,4 @@ export type { EventType } from "./calendar/EventType";
 export type { ListActivitiesMode } from "./entity/ListActivitiesMode";
 export type { BaseFiltersRoute } from "./filters/BaseFiltersRoute";
 export type { LevelProgress } from "./level/LevelProgress";
+export type { SystemRole } from "./roles/SystemRole";

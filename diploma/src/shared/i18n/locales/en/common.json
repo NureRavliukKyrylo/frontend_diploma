@@ -60,14 +60,14 @@
     "next": "Next level"
   },
   "nav": {
-    "home": "Home",
-    "profile": "Profile",
-    "notifications": "Notifications",
-    "chat": "Chat",
-    "timeBank": "Time Bank",
-    "tasks": "Tasks",
-    "events": "Events",
-    "organizations": "Organizations"
+    "activities": "ACTIVITIES",
+    "map": "MAP",
+    "organizations": "ORGANIZATIONS",
+    "calendar": "CALENDAR",
+    "moderation": "MODERATION",
+    "admin": "ADMIN",
+    "categories": "CATEGORIES",
+    "timeBank": "TIME BANK"
   },
   "errors": {
     "somethingWentWrong": "Something went wrong",

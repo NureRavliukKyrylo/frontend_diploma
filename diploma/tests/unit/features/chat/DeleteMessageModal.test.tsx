@@ -3,6 +3,17 @@ import userEvent from "@testing-library/user-event";
 import { DeleteMessageModal } from "@features/chat/delete-message/ui/DeleteMessageModal";
 import type { Message } from "@entities/chat";
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string, options?: any) => {
+      if (options?.message) {
+        return `${key} "${options.message}"`;
+      }
+      return key;
+    },
+  }),
+}));
+
 const { deleteMessageMock } = vi.hoisted(() => ({
   deleteMessageMock: vi.fn(),
 }));
@@ -66,7 +77,8 @@ const message: Message = {
   },
   mentions: [{ firstName: "Alice", lastName: "Brown" }],
   isMine: false,
-  isRead: true,
+  readStatus: "Unread",
+  canSubmitReport: false,
   isSystem: false,
 };
 
@@ -93,21 +105,23 @@ describe("DeleteMessageModal", () => {
   it("renders correct title", () => {
     render(<DeleteMessageModal {...defaultProps} />);
     expect(screen.getByTestId("modal-title")).toHaveTextContent(
-      "Delete Message",
+      "chat:modals.delete.title",
     );
   });
 
   it("truncates message preview to 20 chars", () => {
     render(<DeleteMessageModal {...defaultProps} />);
     expect(screen.getByTestId("modal-text")).toHaveTextContent(
-      ' "Hello world this is ..."',
+      "chat:modals.delete.text",
     );
   });
 
   it("shows full message when 20 chars or less", () => {
     const shortMsg = { ...message, message: "Short msg" };
     render(<DeleteMessageModal {...defaultProps} message={shortMsg} />);
-    expect(screen.getByTestId("modal-text")).toHaveTextContent('"Short msg"');
+    expect(screen.getByTestId("modal-text")).toHaveTextContent(
+      "chat:modals.delete.text",
+    );
   });
 
   it("calls deleteMessage with message id on confirm", async () => {

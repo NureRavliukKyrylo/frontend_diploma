@@ -2,12 +2,15 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ParticipationJoinButton } from "@features/participation/ui/join-button/ParticipationJoinButton";
 
-const { handleJoinMock } = vi.hoisted(() => ({ handleJoinMock: vi.fn() }));
+const { handleJoinMock, mockState } = vi.hoisted(() => ({
+  handleJoinMock: vi.fn(),
+  mockState: { isLoading: false },
+}));
 
 vi.mock("@features/participation/model/useJoinParticipation", () => ({
   useJoinParticipation: () => ({
     handleJoin: handleJoinMock,
-    isLoading: false,
+    isLoading: mockState.isLoading,
   }),
 }));
 
@@ -17,7 +20,16 @@ vi.mock("framer-motion", () => ({
     {
       get:
         (_target, tag) =>
-        ({ children, ...props }: any) => {
+        ({
+          children,
+          whileHover,
+          whileTap,
+          transition,
+          animate,
+          initial,
+          exit,
+          ...props
+        }: any) => {
           const Tag = tag as string;
           return <Tag {...props}>{children}</Tag>;
         },
@@ -33,10 +45,23 @@ vi.mock("@shared/ui/buttons", () => ({
   ),
 }));
 
+// Mock react-i18next and provide the i18n object with a fallback language
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+    i18n: {
+      language: "en", // Resolves the TypeError: Cannot read properties of undefined (reading 'language')
+    },
+  }),
+}));
+
 const defaultProps = { entityType: "event" as const, entityId: "e1" };
 
 describe("ParticipationJoinButton", () => {
-  beforeEach(() => vi.clearAllMocks());
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockState.isLoading = false;
+  });
 
   it("renders join button", () => {
     render(<ParticipationJoinButton {...defaultProps} />);
@@ -45,24 +70,22 @@ describe("ParticipationJoinButton", () => {
 
   it("displays entity type label", () => {
     render(<ParticipationJoinButton {...defaultProps} />);
-    expect(screen.getByText("Join EVENT")).toBeInTheDocument();
+    expect(screen.getByText("participation.join")).toBeInTheDocument();
   });
 
   it("calls handleJoin on click", async () => {
     const user = userEvent.setup();
     render(<ParticipationJoinButton {...defaultProps} />);
+
     await user.click(screen.getByTestId("join-btn"));
     expect(handleJoinMock).toHaveBeenCalled();
   });
 
   it("disables button while loading", () => {
-    vi.mock("@features/participation/model/useJoinParticipation", () => ({
-      useJoinParticipation: () => ({
-        handleJoin: handleJoinMock,
-        isLoading: true,
-      }),
-    }));
+    mockState.isLoading = true;
+
     render(<ParticipationJoinButton {...defaultProps} />);
+    expect(screen.getByTestId("join-btn")).toBeDisabled();
   });
 
   it("calls onSuccess when provided", async () => {

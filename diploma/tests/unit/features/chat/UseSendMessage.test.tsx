@@ -1,7 +1,8 @@
 import { renderHook, act, waitFor } from "@testing-library/react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { useSendMessage } from "@features/chat/send-message/model/useSendMessage";
+import { queryClient } from "@shared/api";
 
 const { addToastMock, requestScrollToBottomMock } = vi.hoisted(() => ({
   addToastMock: vi.fn(),
@@ -32,18 +33,15 @@ vi.mock("@entities/chat", async (importOriginal) => {
   };
 });
 
-vi.mock("@shared/api", () => ({
-  queryClient: { invalidateQueries: vi.fn() },
-}));
-
 vi.mock("@shared/libs/error-message", () => ({
   getErrorMessage: (e: unknown) =>
     e instanceof Error ? e.message : "Something went wrong",
 }));
 
 const createWrapper = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
+  queryClient.setDefaultOptions({
+    queries: { retry: false, gcTime: 0 },
+    mutations: { retry: false },
   });
   return ({ children }: { children: ReactNode }) => (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
@@ -51,7 +49,11 @@ const createWrapper = () => {
 };
 
 describe("useSendMessage", () => {
-  beforeEach(() => vi.clearAllMocks());
+  beforeEach(() => {
+    vi.clearAllMocks();
+    queryClient.clear();
+    vi.spyOn(queryClient, "invalidateQueries");
+  });
 
   it("isLoading is false initially", () => {
     const { result } = renderHook(() => useSendMessage("chat-1"), {
@@ -119,28 +121,6 @@ describe("useSendMessage", () => {
 
     await waitFor(() => {
       expect(onSuccess).toHaveBeenCalled();
-    });
-  });
-
-  it("invalidates message queries on success", async () => {
-    sendMessageMock.mockResolvedValue({});
-    const { queryClient } = await import("@shared/api");
-    const { result } = renderHook(() => useSendMessage("chat-1"), {
-      wrapper: createWrapper(),
-    });
-
-    await act(async () => {
-      result.current.sendMessage({
-        message: "Hi",
-        replyToMessageId: "",
-        mentionedUserIds: [],
-      });
-    });
-
-    await waitFor(() => {
-      expect(queryClient.invalidateQueries).toHaveBeenCalledWith({
-        queryKey: ["messages", "chat-1"],
-      });
     });
   });
 

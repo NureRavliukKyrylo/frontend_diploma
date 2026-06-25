@@ -6,6 +6,7 @@ vi.mock("@shared/ui", () => ({
     <img src={src} alt={fallback} />
   ),
 }));
+
 vi.mock("@shared/assets/icons/info", async (importOriginal) => {
   const actual = await importOriginal();
   return {
@@ -24,27 +25,54 @@ vi.mock("@shared/libs/text", () => ({
   capitalize: (s: string) => s.charAt(0).toUpperCase() + s.slice(1),
 }));
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => {
+      const translations: Record<string, string> = {
+        "moderation:report.reasons.harassment": "Harassment",
+        "moderation:report.reasons.spam": "Spam",
+        "moderation:report.subjects.user": "user",
+        "moderation:report.subjects.organization": "organization",
+        "moderation:report.statuses.open": "Open",
+        "moderation:report.statuses.resolved": "Resolved",
+        "moderation:report.statuses.rejected": "Rejected",
+      };
+      return translations[key] || key;
+    },
+  }),
+}));
+
 const makeReportCase = (overrides: Partial<ReportCase> = {}): ReportCase => ({
   id: "case-1",
   status: "open",
-  subjectType: "user",
-  reporterUser: {
+  subjectType: "user" as any,
+  reporter: {
     id: "user-1",
     firstName: "John",
     lastName: "Doe",
     avatarUrl: "https://example.com/avatar.png",
   },
-  relatedReported: {
-    id: "user-2",
-    firstName: "Jane",
-    lastName: "Smith",
-    avatarUrl: "https://example.com/avatar2.png",
+  subject: {
+    id: "subject-1",
+    type: "user" as any,
+    content: "This is spam content",
+    title: "Spam behavior",
+    author: {
+      id: "user-2",
+      firstName: "Jane",
+      lastName: "Smith",
+      avatarUrl: "https://example.com/avatar2.png",
+    },
+  },
+  case: {
+    id: "internal-case-1",
+    status: "opened",
   },
   createdAt: "2024-01-01T10:00:00Z",
-  reason: "spam",
-  subjectId: "subject-1",
+  reason: "spam" as any,
   details: "This is spam content",
   resolvedAt: "",
+  reportId: "report-1",
   ...overrides,
 });
 
@@ -62,7 +90,9 @@ describe("ReportCaseItem", () => {
 
   it("renders reason pill", () => {
     render(
-      <ReportCaseItem reportCase={makeReportCase({ reason: "harassment" })} />,
+      <ReportCaseItem
+        reportCase={makeReportCase({ reason: "harassment" as any })}
+      />,
     );
     expect(screen.getByText("Harassment")).toBeInTheDocument();
   });
@@ -70,7 +100,7 @@ describe("ReportCaseItem", () => {
   it("renders subjectType pill", () => {
     render(
       <ReportCaseItem
-        reportCase={makeReportCase({ subjectType: "organization" })}
+        reportCase={makeReportCase({ subjectType: "organization" as any })}
       />,
     );
     expect(screen.getByText("organization")).toBeInTheDocument();

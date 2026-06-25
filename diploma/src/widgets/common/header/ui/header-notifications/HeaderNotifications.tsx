@@ -1,10 +1,26 @@
-import { useNotificationStore } from "@entities/notification";
+import {
+  notificationQuery,
+  useNotificationStore,
+} from "@entities/notification";
 import { Link } from "@tanstack/react-router";
 import { Bell, MessageSquareText } from "lucide-react";
 import styles from "./HeaderNotifications.module.scss";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 export const HeaderNotifications = () => {
+  const { data: unreadCountData } = useSuspenseQuery(
+    notificationQuery.unreadCount(),
+  );
+
   const unreadCount = useNotificationStore((s) => s.unreadCount);
+  const setUnreadCount = useNotificationStore((s) => s.setUnreadCount);
+
+  useEffect(() => {
+    if (unreadCountData?.count != null) {
+      setUnreadCount(unreadCountData.count);
+    }
+  }, [unreadCountData?.count]);
 
   return (
     <>

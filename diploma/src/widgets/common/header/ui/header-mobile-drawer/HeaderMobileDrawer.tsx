@@ -3,14 +3,13 @@ import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useEffect } from "react";
-import { headerLinks } from "../../config/headerLinks";
-import {
-  isHeaderLinkActive,
-  type HeaderLanguage,
-} from "../../lib/header";
+import { getHeaderLinks } from "../../config/headerLinks";
+import { isHeaderLinkActive, type HeaderLanguage } from "../../lib/header";
 import { HeaderSearch } from "../header-search/HeaderSearch";
 import { HeaderDrawerActions } from "./HeaderDrawerActions";
 import styles from "./HeaderMobileDrawer.module.scss";
+import { useUserStore } from "@entities/user";
+import { useTranslation } from "react-i18next";
 
 interface HeaderMobileDrawerProps {
   isOpen: boolean;
@@ -32,6 +31,9 @@ export const HeaderMobileDrawer = ({
   onClose,
 }: HeaderMobileDrawerProps) => {
   const location = useLocation();
+  const role = useUserStore((s) => s.role);
+  const { t } = useTranslation("common");
+  const headerLinks = getHeaderLinks(t, role);
 
   useEffect(() => {
     if (!isOpen) return;

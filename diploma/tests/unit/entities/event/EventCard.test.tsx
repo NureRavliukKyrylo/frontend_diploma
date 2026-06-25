@@ -1,8 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import type {
-  LevelProgress,
-  Rating,
-} from "@shared/config/types";
+import type { LevelProgress, Rating } from "@shared/config/types";
 import type { ParticipationMember } from "@entities/participation";
 import { EventCard, type Event } from "@entities/event";
 
@@ -122,6 +119,7 @@ const makeEvent = (overrides: Partial<Event> = {}): Event => ({
   canSubmitFeedback: false,
   hasPendingJoinRequest: false,
   hasPendingLeaveRequest: false,
+  canSubmitReport: false,
   ...overrides,
 });
 
@@ -213,7 +211,7 @@ describe("EventCard", () => {
 
   it("renders no volunteers message when memberPreviews is empty", () => {
     render(<EventCard event={makeEvent({ memberPreviews: [] })} />);
-    expect(screen.getByText("No volunteers joined yet")).toBeInTheDocument();
+    expect(screen.getByText("event:cards.noVolunteers")).toBeInTheDocument();
   });
 
   it("does not render avatar group when memberPreviews is empty", () => {

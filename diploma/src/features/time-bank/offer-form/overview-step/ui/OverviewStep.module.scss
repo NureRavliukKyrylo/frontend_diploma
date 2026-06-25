@@ -4,6 +4,10 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @include respond-to(mobile) {
+    gap: 14px;
+  }
 }
 
 .field {
@@ -16,6 +20,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @include respond-to(mobile) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
 }
 
 .label {
@@ -23,6 +33,10 @@
   color: #1a1a1a;
   white-space: nowrap;
   flex-shrink: 0;
+
+  @include respond-to(mobile) {
+    font-size: 15px;
+  }
 }
 
 .dateRangeField {
@@ -31,8 +45,19 @@
   gap: 20px;
   align-items: baseline;
   justify-content: space-between;
+
+  @include respond-to(mobile) {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
   & > :last-child {
     width: 80%;
+
+    @include respond-to(mobile) {
+      width: 100%;
+    }
   }
 }
 
@@ -87,8 +112,19 @@
   gap: 20px;
   align-items: baseline;
   justify-content: space-between;
+
+  @include respond-to(mobile) {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
   & > :last-child {
     width: 80%;
+
+    @include respond-to(mobile) {
+      width: 100%;
+    }
   }
 }
 
@@ -100,5 +136,9 @@
   h1 {
     @include font-base(18px, 600);
     color: #1a1a1a;
+
+    @include respond-to(mobile) {
+      font-size: 15px;
+    }
   }
 }

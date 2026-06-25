@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 
 export const useGoogleAuth = () => {
   const { t } = useTranslation(["auth", "common"]);
-  const { setIsAuthenticated } = useUserStore();
+  const { setIsAuthenticated, setRole } = useUserStore();
   const router = useRouter();
   const search = useSearch({ strict: false }) as { redirect?: string };
 
@@ -23,6 +23,7 @@ export const useGoogleAuth = () => {
         color: "success",
       });
       setIsAuthenticated(true);
+      setRole(data.role);
       if (data.newUser) {
         router.navigate({ to: MultiStepFormRoutes.fillForm });
       } else {

@@ -109,7 +109,7 @@ describe("MentionButton", () => {
       <MentionButton participants={[]} mentionIds={[]} onToggle={vi.fn()} />,
     );
     await user.click(getToggleBtn());
-    expect(screen.getByText("No participants")).toBeInTheDocument();
+    expect(screen.getByText("chat:states.noParticipants")).toBeInTheDocument();
   });
 
   it("shows badge with count when mentions are active", () => {

@@ -5,9 +5,10 @@ import styles from "./ChatContentWidget.module.scss";
 import { useChatHeaderData } from "../model/useChatHeaderData";
 import { MessageForm } from "@features/chat";
 import {
-  useChatMessagesQuery,
+  clearFirstUnread,
   useChatScrollStore,
   useChatTypingEvents,
+  useGetMessagesQueryKey,
   useMessageEvents,
   type Message,
   type MessageModeType,
@@ -57,16 +58,16 @@ export const ChatContentWidget = ({
     (s) => s.requestScrollToBottom,
   );
   useChatTypingEvents();
-  const { queryKey } = useChatMessagesQuery(chatId);
-  useMessageEvents(chatId, queryKey);
+  useMessageEvents();
   const send = useSignalRSend("chats");
 
   const typingUser = useChatStore((s) => s.typingByChat[chatId]);
-
+  const getMessagesQueryKey = useGetMessagesQueryKey();
   useEffect(() => {
     send("JoinChat", chatId);
     return () => {
       send("LeaveChat", chatId);
+      clearFirstUnread(getMessagesQueryKey(chatId));
     };
   }, [chatId]);
 
@@ -92,7 +93,7 @@ export const ChatContentWidget = ({
             {typingUser ? (
               <span className={styles.typingUser}>
                 {getFullName(typingUser.firstName, typingUser.lastName)}{" "}
-                typing...
+                {t("chat:states.typing")}
               </span>
             ) : (
               !isPrivate && (

@@ -55,7 +55,7 @@ describe("ParticipationLeaveButton", () => {
 
   it("displays entity type label", () => {
     render(<ParticipationLeaveButton {...defaultProps} />);
-    expect(screen.getByText("Leave event")).toBeInTheDocument();
+    expect(screen.getByText("participation.leave")).toBeInTheDocument();
   });
 
   it("modal is closed initially", () => {

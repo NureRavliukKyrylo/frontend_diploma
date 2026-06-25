@@ -104,7 +104,9 @@ describe("ForgotPasswordVerificationForm", () => {
 
   it("renders confirm button", () => {
     render(<ForgotPasswordVerificationForm />);
-    expect(screen.getByTestId("confirm-button")).toHaveTextContent("Confirm");
+    expect(screen.getByTestId("confirm-button")).toHaveTextContent(
+      "verification.confirm",
+    );
   });
 
   it("shows loading state on confirm button", () => {

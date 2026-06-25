@@ -2,6 +2,12 @@ import { OfferFormButton } from "@features/time-bank";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
 const { storeMock } = vi.hoisted(() => ({
   storeMock: {
     isOpen: false,
@@ -67,13 +73,15 @@ describe("OfferFormButton", () => {
   it("renders create button by default", () => {
     render(<OfferFormButton />);
     expect(screen.getByTestId("offer-button")).toHaveTextContent(
-      "Create new offer",
+      "timeBank:forms.actions.createNewOffer",
     );
   });
 
   it("renders edit button when isEdit is true", () => {
     render(<OfferFormButton isEdit />);
-    expect(screen.getByTestId("offer-button")).toHaveTextContent("Edit");
+    expect(screen.getByTestId("offer-button")).toHaveTextContent(
+      "timeBank:forms.actions.edit",
+    );
     expect(screen.getByTestId("edit-icon")).toBeInTheDocument();
   });
 

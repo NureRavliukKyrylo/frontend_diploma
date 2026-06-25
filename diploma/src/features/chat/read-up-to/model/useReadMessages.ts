@@ -2,6 +2,7 @@ import { useMutation, type InfiniteData } from "@tanstack/react-query";
 import { queryClient } from "@shared/api";
 import {
   chatKeys,
+  messageKeys,
   useChatMessagesQuery,
   type Chat,
   type MessagesResponse,
@@ -54,6 +55,27 @@ export const useReadMessages = (chatId: string) => {
       { queryKey, exact: false },
       (old) => {
         if (!old) return old;
+
+        const allMessages = old.pages.flatMap((page) => page.data);
+        const nextUnread = allMessages.find(
+          (msg) =>
+            msg.readStatus !== "Read" && !visibleUnreadIds.includes(msg.id),
+        );
+
+        queryClient.setQueriesData<MessagesResponse>(
+          { queryKey: messageKeys.anchorNoParams(chatId), exact: false },
+          (anchorOld) => {
+            if (!anchorOld) return anchorOld;
+            return {
+              ...anchorOld,
+              pagination: {
+                ...anchorOld.pagination,
+                firstUnreadMessageId: nextUnread?.id ?? null,
+              },
+            };
+          },
+        );
+
         return {
           ...old,
           pages: old.pages.map((page) => ({

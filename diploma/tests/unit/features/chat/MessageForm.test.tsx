@@ -2,6 +2,12 @@ import { MessageForm } from "@features/chat";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
 const { formMock } = vi.hoisted(() => ({
   formMock: {
     formik: {
@@ -67,6 +73,7 @@ vi.mock("@shared/assets/icons/actions", async (importOriginal) => {
 const defaultProps = {
   chatId: "chat-1",
   participants: [],
+  hideMentionButton: false,
 };
 
 describe("MessageForm", () => {
@@ -98,7 +105,9 @@ describe("MessageForm", () => {
 
   it("shows send message placeholder when not editing", () => {
     render(<MessageForm {...defaultProps} />);
-    expect(screen.getByPlaceholderText("Send Message...")).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText("chat:form.placeholderSend"),
+    ).toBeInTheDocument();
   });
 
   it("shows edit message placeholder when editing", () => {
@@ -108,7 +117,9 @@ describe("MessageForm", () => {
         editingMessage={{ id: "msg-1", content: "Old text" }}
       />,
     );
-    expect(screen.getByPlaceholderText("Edit message...")).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText("chat:form.placeholderEdit"),
+    ).toBeInTheDocument();
   });
 
   it("shows reply banner when replyToMessage is set", () => {
@@ -122,7 +133,7 @@ describe("MessageForm", () => {
         }}
       />,
     );
-    expect(screen.getByText(/Replying to Alice/)).toBeInTheDocument();
+    expect(screen.getByText("chat:banners.replying")).toBeInTheDocument();
   });
 
   it("shows editing banner when editingMessage is set", () => {
@@ -132,13 +143,13 @@ describe("MessageForm", () => {
         editingMessage={{ id: "msg-1", content: "Old text" }}
       />,
     );
-    expect(screen.getByText("Editing message")).toBeInTheDocument();
+    expect(screen.getByText("chat:banners.editing")).toBeInTheDocument();
   });
 
   it("does not show banner when neither replying nor editing", () => {
     render(<MessageForm {...defaultProps} />);
-    expect(screen.queryByText("Editing message")).not.toBeInTheDocument();
-    expect(screen.queryByText(/Replying to/)).not.toBeInTheDocument();
+    expect(screen.queryByText("chat:banners.editing")).not.toBeInTheDocument();
+    expect(screen.queryByText("chat:banners.replying")).not.toBeInTheDocument();
   });
 
   it("calls onCancel when banner close is clicked", async () => {

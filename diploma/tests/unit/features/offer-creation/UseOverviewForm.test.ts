@@ -1,6 +1,12 @@
 import { useOverviewForm } from "@features/time-bank/offer-form/overview-step/model/useOverviewForm";
 import { renderHook, act, waitFor } from "@testing-library/react";
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
 const { setDataMock } = vi.hoisted(() => ({ setDataMock: vi.fn() }));
 
 vi.mock("@entities/offer", async (importOriginal) => {
@@ -77,7 +83,9 @@ describe("useOverviewForm", () => {
     });
 
     await waitFor(() => {
-      expect(result.current.formik.errors.title).toBe("Title is required");
+      expect(result.current.formik.errors.title).toBe(
+        "timeBank:validation.titleRequired",
+      );
     });
 
     expect(setDataMock).not.toHaveBeenCalled();

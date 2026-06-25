@@ -127,7 +127,7 @@ export const EventsTab = ({ search }: EventsTabProps) => {
                               key: "leave",
                               label: t("common:participation.leave", {
                                 entity: t(
-                                  `common:participation.entities.event`,
+                                  `common:participation.entitiesAccusative.event`,
                                 ),
                               }),
                               onClick: () => handleLeaveEvent(event),

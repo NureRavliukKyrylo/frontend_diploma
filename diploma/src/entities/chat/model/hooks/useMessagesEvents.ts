@@ -4,7 +4,7 @@ import type { Message } from "../types/Message";
 import { appendMessage } from "@entities/chat/libs/appendMessage";
 import { updateMessage } from "@entities/chat/libs/updateMessage";
 import { deleteMessage } from "@entities/chat/libs/deleteMessage";
-import type { QueryKey } from "@tanstack/react-query";
+import { useGetMessagesQueryKey } from "@entities/chat/libs/getMessagesQueryKey";
 
 interface MessageCreatedPayload {
   chatId: string;
@@ -26,15 +26,17 @@ interface MessageDeletedPayload {
   deletedAt: string;
 }
 
-export function useMessageEvents(chatId: string, queryKey: QueryKey) {
+export function useMessageEvents() {
+  const getMessagesQueryKey = useGetMessagesQueryKey();
   useSignalREvent(
     "chats",
     "chat.message.created",
     useCallback(
       (payload: MessageCreatedPayload) => {
-        appendMessage(queryKey, payload.message);
+        const queryKey = getMessagesQueryKey(payload.chatId);
+        appendMessage(queryKey, payload.message, payload.chatId, true);
       },
-      [chatId],
+      [getMessagesQueryKey],
     ),
   );
 
@@ -43,10 +45,10 @@ export function useMessageEvents(chatId: string, queryKey: QueryKey) {
     "chat.message.edited",
     useCallback(
       (payload: MessageEditedPayload) => {
-        if (payload.chatId !== chatId) return;
+        const queryKey = getMessagesQueryKey(payload.chatId);
         updateMessage(queryKey, payload.message);
       },
-      [chatId],
+      [getMessagesQueryKey],
     ),
   );
 
@@ -55,10 +57,10 @@ export function useMessageEvents(chatId: string, queryKey: QueryKey) {
     "message.deleted",
     useCallback(
       (payload: MessageDeletedPayload) => {
-        if (payload.chatId !== chatId) return;
+        const queryKey = getMessagesQueryKey(payload.chatId);
         deleteMessage(queryKey, payload.messageId);
       },
-      [chatId],
+      [getMessagesQueryKey],
     ),
   );
 }

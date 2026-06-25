@@ -70,14 +70,14 @@ describe("LeaveConfirmationModal", () => {
   it("shows entity name in title", () => {
     render(<LeaveConfirmationModal {...defaultProps} />);
     expect(screen.getByTestId("modal-title")).toHaveTextContent(
-      "Leave Community Cleanup?",
+      "participation.leaveTitle",
     );
   });
 
   it("shows confirmation text", () => {
     render(<LeaveConfirmationModal {...defaultProps} />);
     expect(screen.getByTestId("modal-text")).toHaveTextContent(
-      "Are you sure you want to leave?",
+      "participation.leaveText",
     );
   });
 

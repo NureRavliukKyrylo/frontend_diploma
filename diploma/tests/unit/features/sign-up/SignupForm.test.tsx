@@ -32,6 +32,20 @@ vi.mock("@features/auth/signup-form/model/useRegistration", () => ({
   useRegistration: () => registrationMock,
 }));
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => {
+      const translations: Record<string, string> = {
+        "register.title": "Create an account",
+        "register.firstNamePlaceholder": "Enter first name",
+        "register.lastNamePlaceholder": "Enter last name",
+        "register.submit": "Create an account",
+      };
+      return translations[key] || key;
+    },
+  }),
+}));
+
 vi.mock("@entities/user", async (importOriginal) => {
   const actual = await importOriginal();
   return {

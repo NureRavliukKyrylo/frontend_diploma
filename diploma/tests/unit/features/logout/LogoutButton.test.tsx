@@ -2,6 +2,12 @@ import { LogoutButton } from "@features/auth";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
 const { logoutMock } = vi.hoisted(() => ({
   logoutMock: {
     handleLogout: vi.fn(),
@@ -105,7 +111,7 @@ describe("LogoutButton", () => {
     render(<LogoutButton />);
     await user.click(screen.getByTestId("logout-button"));
     expect(screen.getByTestId("modal-title")).toHaveTextContent(
-      "Are you logging out?",
+      "logout.modal.title",
     );
   });
 
@@ -114,7 +120,7 @@ describe("LogoutButton", () => {
     render(<LogoutButton />);
     await user.click(screen.getByTestId("logout-button"));
     expect(screen.getByTestId("modal-text")).toHaveTextContent(
-      "Do you want to log out now?",
+      "logout.modal.text",
     );
   });
 

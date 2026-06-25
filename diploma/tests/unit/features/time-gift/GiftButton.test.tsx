@@ -34,7 +34,9 @@ describe("GiftMinutesButton", () => {
 
   it("renders Gift minutes text", () => {
     render(<GiftMinutesButton recipientUserId="user-1" />);
-    expect(screen.getByTestId("gift-button")).toHaveTextContent("Gift minutes");
+    expect(screen.getByTestId("gift-button")).toHaveTextContent(
+      "timeBank:gifts.labels.giftMinutes",
+    );
   });
 
   it("does not show modal initially", () => {

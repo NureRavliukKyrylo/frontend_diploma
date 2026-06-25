@@ -34,9 +34,17 @@ vi.mock("@shared/ui/modals", () => ({
 }));
 
 vi.mock("@shared/ui/buttons", () => ({
-  BaseButtonWrapper: ({ children, loading, onClick, type }: any) => (
+  BaseButtonWrapper: ({
+    children,
+    loading,
+    onClick,
+    type,
+    dataTestId,
+  }: any) => (
     <button
-      data-testid={type === "submit" ? "submit-button" : "cancel-button"}
+      data-testid={
+        dataTestId || (type === "submit" ? "submit-button" : "cancel-button")
+      }
       disabled={loading}
       onClick={onClick}
       type={type ?? "button"}
@@ -75,15 +83,38 @@ vi.mock("@shared/ui/drop-down", () => ({
   ),
 }));
 
-vi.mock("@entities/report", () => ({
-  reportReasonOptions: [
-    { value: "Spam", label: "Spam" },
-    { value: "Harassment", label: "Harassment" },
-  ],
-  ModerationSubjectType: { Project: "project", User: "user" },
-  getModerationSubjectLabel: (type: string) =>
-    type.charAt(0).toUpperCase() + type.slice(1),
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string, options?: any) => {
+      if (key === "moderation:report.title") {
+        return `Report ${options?.subject || "Content"}`;
+      }
+      if (key === "moderation:report.subjects.Project") {
+        return "Project";
+      }
+      if (key === "moderation:report.actions.cancel") {
+        return "Cancel";
+      }
+      if (key === "moderation:report.actions.submit") {
+        return "Submit Report";
+      }
+      return options?.defaultValue || key;
+    },
+  }),
 }));
+
+vi.mock("@entities/report", async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...(actual as object),
+    getModerationSubjectKey: (subjectType: string) =>
+      subjectType.charAt(0).toUpperCase() + subjectType.slice(1),
+    getReportReasonOptions: () => [
+      { value: "0", label: "spam" },
+      { value: "1", label: "harassment" },
+    ],
+  };
+});
 
 const defaultProps = {
   isOpen: true,
@@ -193,7 +224,15 @@ describe("ReportModal", () => {
   it("calls setFieldValue when reason is changed", async () => {
     const user = userEvent.setup();
     render(<ReportModal {...defaultProps} />);
-    await user.selectOptions(screen.getByTestId("reason-select"), "Harassment");
-    expect(setFieldValueMock).toHaveBeenCalledWith("reason", "Harassment");
+
+    const option = screen
+      .getAllByRole("option")
+      .find((opt) =>
+        opt.textContent?.includes("harassment"),
+      ) as HTMLOptionElement;
+    const targetValue = option ? option.value : "1";
+
+    await user.selectOptions(screen.getByTestId("reason-select"), targetValue);
+    expect(setFieldValueMock).toHaveBeenCalledWith("reason", targetValue);
   });
 });

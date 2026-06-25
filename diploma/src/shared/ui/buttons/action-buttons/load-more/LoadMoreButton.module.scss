@@ -10,4 +10,16 @@
   @include font-base(17px, 800);
   color: #ffffff;
   letter-spacing: 0.05em;
+
+  @include respond-to(tablet) {
+    width: 220px;
+    padding: 10px 0px;
+    @include font-base(16px, 800);
+  }
+  @include respond-to(mobile) {
+    width: 100%;
+    max-width: 200px;
+    padding: 8px 0px;
+    @include font-base(14px, 800);
+  }
 }

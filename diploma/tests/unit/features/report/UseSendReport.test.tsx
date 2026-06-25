@@ -3,18 +3,23 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { useSendReport } from "@features/moderation/report/model/useSendReport";
 
-const { addToastMock } = vi.hoisted(() => ({
-  addToastMock: vi.fn(),
-}));
+// 1. Create a dedicated mock for addToast that remains active across module lifecycles
+const mockAddToast = vi.fn();
 
 vi.mock("@features/moderation/report/api/reportApi", () => ({
   sendReport: vi.fn(),
 }));
 
-vi.mock("@heroui/react", async (importOriginal) => {
-  const actual = await importOriginal();
-  return { ...(actual as object), addToast: addToastMock };
-});
+// Mock the whole UI kit package explicitly, returning our scoped mock function
+vi.mock("@heroui/react", () => ({
+  addToast: (options: any) => mockAddToast(options),
+}));
+
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string, options?: any) => options?.defaultValue || key,
+  }),
+}));
 
 vi.mock("@shared/libs/error-message", () => ({
   getErrorMessage: (e: unknown) =>
@@ -46,7 +51,7 @@ describe("useSendReport", () => {
       wrapper: createWrapper(),
     });
 
-    expect(result.current.formik.values.reason).toBe("Spam");
+    expect(result.current.formik.values.reason).toBe(0);
     expect(result.current.formik.values.details).toBe("");
   });
 
@@ -86,8 +91,11 @@ describe("useSendReport", () => {
     });
 
     await act(async () => {
-      await result.current.formik.setFieldValue("reason", "Spam");
-      await result.current.formik.setFieldValue("details", "Test details");
+      await result.current.formik.setFieldValue("reason", 0);
+      await result.current.formik.setFieldValue(
+        "details",
+        "Valid length details text here",
+      );
     });
 
     await act(async () => {
@@ -98,8 +106,8 @@ describe("useSendReport", () => {
       expect(sendReport).toHaveBeenCalledWith({
         subjectType: "project",
         subjectId: "subject-123",
-        reason: "Spam",
-        details: "Test details",
+        reason: 0,
+        details: "Valid length details text here",
       });
     });
   });
@@ -114,6 +122,14 @@ describe("useSendReport", () => {
       () => useSendReport({ ...defaultProps, onSuccess }),
       { wrapper: createWrapper() },
     );
+
+    await act(async () => {
+      await result.current.formik.setFieldValue("reason", 0);
+      await result.current.formik.setFieldValue(
+        "details",
+        "Valid length details text here",
+      );
+    });
 
     await act(async () => {
       await result.current.formik.submitForm();
@@ -134,11 +150,19 @@ describe("useSendReport", () => {
     });
 
     await act(async () => {
+      await result.current.formik.setFieldValue("reason", 0);
+      await result.current.formik.setFieldValue(
+        "details",
+        "Valid length details text here",
+      );
+    });
+
+    await act(async () => {
       await result.current.formik.submitForm();
     });
 
     await waitFor(() => {
-      expect(addToastMock).toHaveBeenCalledWith(
+      expect(mockAddToast).toHaveBeenCalledWith(
         expect.objectContaining({ color: "success" }),
       );
     });
@@ -154,11 +178,19 @@ describe("useSendReport", () => {
     });
 
     await act(async () => {
+      await result.current.formik.setFieldValue("reason", 0);
+      await result.current.formik.setFieldValue(
+        "details",
+        "Valid length details text here",
+      );
+    });
+
+    await act(async () => {
       await result.current.formik.submitForm();
     });
 
     await waitFor(() => {
-      expect(addToastMock).toHaveBeenCalledWith(
+      expect(mockAddToast).toHaveBeenCalledWith(
         expect.objectContaining({ color: "danger" }),
       );
     });
@@ -174,11 +206,19 @@ describe("useSendReport", () => {
     });
 
     await act(async () => {
+      await result.current.formik.setFieldValue("reason", 0);
+      await result.current.formik.setFieldValue(
+        "details",
+        "Valid length details text here",
+      );
+    });
+
+    await act(async () => {
       await result.current.formik.submitForm();
     });
 
     await waitFor(() => {
-      expect(addToastMock).toHaveBeenCalledWith(
+      expect(mockAddToast).toHaveBeenCalledWith(
         expect.objectContaining({
           color: "danger",
           description: "Unauthorized",
@@ -199,11 +239,19 @@ describe("useSendReport", () => {
     );
 
     await act(async () => {
+      await result.current.formik.setFieldValue("reason", 0);
+      await result.current.formik.setFieldValue(
+        "details",
+        "Valid length details text here",
+      );
+    });
+
+    await act(async () => {
       await result.current.formik.submitForm();
     });
 
     await waitFor(() => {
-      expect(addToastMock).toHaveBeenCalledWith(
+      expect(mockAddToast).toHaveBeenCalledWith(
         expect.objectContaining({ color: "danger" }),
       );
     });

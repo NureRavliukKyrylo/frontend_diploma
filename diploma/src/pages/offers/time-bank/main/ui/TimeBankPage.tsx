@@ -32,10 +32,13 @@ export const TimeBankPage = () => {
     <div className={styles.activitiesWrapper}>
       <nav className={styles.tabs}>
         {timeBankTabs.map((tab) => (
-          <button
+          <motion.button
             key={tab.value}
             className={`${styles.tab} ${activeTab === tab.value ? styles.activeTab : ""}`}
             onClick={() => handleTabChange(tab.value)}
+            whileHover={{ scale: 1.05, color: "#8c0000" }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.15 }}
           >
             {tab.label}
             {activeTab === tab.value && (
@@ -45,7 +48,7 @@ export const TimeBankPage = () => {
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
               />
             )}
-          </button>
+          </motion.button>
         ))}
       </nav>
       {pendingTab ? (

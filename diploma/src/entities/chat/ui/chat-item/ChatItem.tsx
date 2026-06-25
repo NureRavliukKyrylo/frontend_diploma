@@ -4,16 +4,17 @@ import styles from "./ChatItem.module.scss";
 import { OnlineIcon } from "@shared/assets/icons/info";
 import { formatDateToText } from "@shared/libs/date";
 import { useTranslation } from "react-i18next";
+import { useChatStore } from "@entities/chat/model/store/useChatStore";
 
 interface ChatItemProps {
   chat: Chat;
-  typing?: string;
   isOnline?: string;
 }
 
-export const ChatItem = ({ chat, typing, isOnline }: ChatItemProps) => {
+export const ChatItem = ({ chat, isOnline }: ChatItemProps) => {
   const { t, i18n } = useTranslation(["chat"]);
   const initials = chat.name?.split(" ").slice(0, 2).join(" ") ?? "nothing";
+  const typing = useChatStore((s) => s.typingByChat[chat.id]);
 
   return (
     <div className={styles.chatWrapper}>

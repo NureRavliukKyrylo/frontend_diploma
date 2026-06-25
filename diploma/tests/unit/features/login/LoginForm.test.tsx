@@ -2,6 +2,12 @@ import { LoginForm } from "@features/auth";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
+}));
+
 const setLoginEmailMock = vi.fn();
 const setLoginPasswordMock = vi.fn();
 const setRememberMeMock = vi.fn();
@@ -105,7 +111,7 @@ describe("LoginForm", () => {
 
   it("renders heading", () => {
     render(<LoginForm />);
-    expect(screen.getByText("Sign in to your account")).toBeInTheDocument();
+    expect(screen.getByText("login.title")).toBeInTheDocument();
   });
 
   it("renders email input", () => {
@@ -125,7 +131,7 @@ describe("LoginForm", () => {
 
   it("renders forgot password link", () => {
     render(<LoginForm />);
-    expect(screen.getByText("Forgot Password")).toHaveAttribute(
+    expect(screen.getByText("login.forgotPassword")).toHaveAttribute(
       "href",
       "/auth/forgot-password",
     );
@@ -133,7 +139,9 @@ describe("LoginForm", () => {
 
   it("renders submit button", () => {
     render(<LoginForm />);
-    expect(screen.getByTestId("submit-button")).toHaveTextContent("Sign in");
+    expect(screen.getByTestId("submit-button")).toHaveTextContent(
+      "login.signIn",
+    );
   });
 
   it("calls handleSubmit on form submit", async () => {

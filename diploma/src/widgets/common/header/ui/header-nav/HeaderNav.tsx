@@ -1,12 +1,17 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import clsx from "clsx";
 import { motion } from "framer-motion";
-import { headerLinks } from "../../config/headerLinks";
+import { getHeaderLinks } from "../../config/headerLinks";
 import { isHeaderLinkActive } from "../../lib/header";
 import styles from "./HeaderNav.module.scss";
+import { useTranslation } from "react-i18next";
+import { useUserStore } from "@entities/user";
 
 export const HeaderNav = () => {
   const location = useLocation();
+  const { t } = useTranslation("common");
+  const role = useUserStore((s) => s.role);
+  const headerLinks = getHeaderLinks(t, role);
 
   return (
     <div

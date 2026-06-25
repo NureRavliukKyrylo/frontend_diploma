@@ -21,6 +21,20 @@ vi.mock("@features/time-bank/gift/model/useSendGiftMinutes", () => ({
   useSendGiftMinutes: () => giftMock,
 }));
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => {
+      const translations: Record<string, string> = {
+        "timeBank:gifts.labels.giftMinutes": "Gift minutes",
+        "timeBank:gifts.labels.minutesPlaceholder": "minutes",
+        "timeBank:gifts.actions.sendGift": "Send gift",
+        "timeBank:gifts.actions.cancel": "Cancel",
+      };
+      return translations[key] || key;
+    },
+  }),
+}));
+
 vi.mock("@shared/ui/modals", () => ({
   BaseModal: ({ isOpen, children }: any) =>
     isOpen ? <div data-testid="modal">{children}</div> : null,

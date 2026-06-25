@@ -1,5 +1,5 @@
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useChatScrollStore } from "@entities/chat";
 import type { Message } from "@entities/chat";
 
@@ -69,7 +69,7 @@ export const useMessagesVirtualizer = ({
     return () => el.removeEventListener("scroll", check);
   }, [chatId, virtualItems.length]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const targetIndex = targetMessageId
       ? (messages.findIndex((m) => m.id === targetMessageId) ?? -1)
       : -1;

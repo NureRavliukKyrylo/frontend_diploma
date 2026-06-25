@@ -129,7 +129,7 @@ export const ProjectsTab = ({ search }: ProjectsTabProps) => {
                               key: "leave",
                               label: t("common:participation.leave", {
                                 entity: t(
-                                  `common:participation.entities.project`,
+                                  `common:participation.entitiesAccusative.project`,
                                 ),
                               }),
                               onClick: () => handleLeaveProject(project),

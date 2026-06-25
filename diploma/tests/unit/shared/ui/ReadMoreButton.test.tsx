@@ -18,6 +18,18 @@ vi.mock("framer-motion", () => ({
   AnimatePresence: ({ children }: any) => <>{children}</>,
 }));
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => {
+      const translations: Record<string, string> = {
+        "common:actions.readMore": "Read more",
+        "common:actions.readLess": "Read less",
+      };
+      return translations[key] || key;
+    },
+  }),
+}));
+
 const SHORT_CONTENT = <p>Short text</p>;
 const LONG_CONTENT = <p>Long text that exceeds collapsed height</p>;
 

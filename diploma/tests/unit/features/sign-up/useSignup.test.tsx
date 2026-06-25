@@ -25,6 +25,22 @@ vi.mock("@features/auth/signup-form/api/signUpApi", () => ({
   register: vi.fn(),
 }));
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => {
+      const translations: Record<string, string> = {
+        "common:validation.firstNameRequired": "First name is required",
+        "common:validation.lastNameRequired": "Last name is required",
+        "common:validation.emailRequired": "Email is required",
+        "common:validation.invalidEmail": "Please enter a valid email address",
+        "common:validation.passwordRequired": "Password is required",
+        "common:validation.agreementRequired": "You must agree to the terms",
+      };
+      return translations[key] || key;
+    },
+  }),
+}));
+
 vi.mock("@heroui/react", async (importOriginal) => {
   const actual = await importOriginal();
   return { ...(actual as object), addToast: addToastMock };

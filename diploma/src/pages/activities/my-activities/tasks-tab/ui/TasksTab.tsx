@@ -145,7 +145,9 @@ export const TasksTab = ({ search }: TasksTabProps) => {
                             {
                               key: "leave",
                               label: t("common:participation.leave", {
-                                entity: t(`common:participation.entities.task`),
+                                entity: t(
+                                  `common:participation.entitiesAccusative.task`,
+                                ),
                               }),
                               onClick: () => handleLeaveTask(task),
                               variant: "leave",

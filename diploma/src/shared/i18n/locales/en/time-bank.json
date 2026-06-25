@@ -174,6 +174,7 @@
       "totalBookings": "Total bookings"
     },
     "manageText": "Manage your offer settings and availability.",
+    "inactiveText": "This offer is inactive and not visible to others",
     "emptyState": {
       "title": "No offers found",
       "description": "Try adjusting your search query"

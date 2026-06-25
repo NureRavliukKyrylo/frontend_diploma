@@ -20,3 +20,5 @@ export { useChatChangedEvent } from "./model/hooks/useChatChangedEvent";
 export { useChatTypingEvents } from "./model/hooks/useChatTypingEvents";
 export { useMessageEvents } from "./model/hooks/useMessagesEvents";
 export type { MessagesResponse } from "./api/messages-list/messagesListApi";
+export { clearFirstUnread } from "./libs/appendMessage";
+export { useGetMessagesQueryKey } from "./libs/getMessagesQueryKey";

@@ -25,6 +25,7 @@ export const MessagesListWidget = ({
   const queryResult = useMessagesQuery?.();
   const messages = readyMessages ?? queryResult?.data ?? [];
   const { t } = useTranslation("chat");
+
   const { messagesWrapperRef, virtualizer, virtualItems } =
     useMessagesVirtualizer({
       messages,

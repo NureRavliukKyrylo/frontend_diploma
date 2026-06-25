@@ -11,6 +11,17 @@ vi.mock("@features/time-bank/gift/api/sendGiftApi", () => ({
   sendGift: vi.fn(),
 }));
 
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => {
+      const translations: Record<string, string> = {
+        "timeBank:gifts.validation.messageRequired": "Message is required",
+      };
+      return translations[key] || key;
+    },
+  }),
+}));
+
 vi.mock("@heroui/react", async (importOriginal) => {
   const actual = await importOriginal();
   return { ...(actual as object), addToast: addToastMock };

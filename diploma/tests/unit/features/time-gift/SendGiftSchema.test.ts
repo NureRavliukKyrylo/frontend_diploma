@@ -8,7 +8,8 @@ const t = ((key: string) => {
     "timeBank:gifts.validation.amountPositive": "Amount must be positive",
     "timeBank:gifts.validation.amountInteger": "Amount must be a whole number",
     "timeBank:gifts.validation.messageRequired": "Message is required",
-    "timeBank:gifts.validation.messageMax": "Message must be at most 70 characters",
+    "timeBank:gifts.validation.messageMax":
+      "Message must be at most 70 characters",
   };
 
   return messages[key] ?? key;

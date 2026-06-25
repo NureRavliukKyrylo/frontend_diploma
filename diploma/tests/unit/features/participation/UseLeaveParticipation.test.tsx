@@ -42,7 +42,10 @@ const createWrapper = () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
   });
-  vi.spyOn(queryClient, "invalidateQueries").mockImplementation(invalidateMock);
+  // Надійне відстеження через прототип QueryClient
+  vi.spyOn(QueryClient.prototype, "invalidateQueries").mockImplementation(
+    invalidateMock,
+  );
   return {
     queryClient,
     wrapper: ({ children }: { children: ReactNode }) => (
@@ -98,7 +101,8 @@ describe("useLeaveParticipation", () => {
       expect(addToastMock).toHaveBeenCalledWith(
         expect.objectContaining({
           color: "success",
-          title: "Left Event Successfully",
+          title: "participation.leaveSuccess",
+          description: "participation.leaveSuccessDescription",
         }),
       ),
     );
@@ -128,7 +132,7 @@ describe("useLeaveParticipation", () => {
   });
 
   it("invalidates all relevant query keys on success", async () => {
-    leaveMock.mockResolvedValue({});
+    leaveMock.mockResolvedValue({ requiresApproval: false });
     const { wrapper } = createWrapper();
     const { result } = renderHook(
       () => useLeaveParticipation({ entityType: "event", entityId: "e1" }),
@@ -141,7 +145,7 @@ describe("useLeaveParticipation", () => {
   });
 
   it("calls onSuccess callback on success", async () => {
-    leaveMock.mockResolvedValue({});
+    leaveMock.mockResolvedValue({ requiresApproval: false });
     const onSuccess = vi.fn();
     const { wrapper } = createWrapper();
     const { result } = renderHook(
@@ -171,7 +175,11 @@ describe("useLeaveParticipation", () => {
     });
     await waitFor(() =>
       expect(addToastMock).toHaveBeenCalledWith(
-        expect.objectContaining({ color: "danger" }),
+        expect.objectContaining({
+          color: "danger",
+          title: "participation.leaveFailed",
+          description: "Forbidden",
+        }),
       ),
     );
   });

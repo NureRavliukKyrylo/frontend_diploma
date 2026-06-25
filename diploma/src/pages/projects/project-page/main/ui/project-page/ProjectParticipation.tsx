@@ -48,7 +48,10 @@ export const ProjectParticipation = ({
               entityName={project.title}
             />
           ) : (
-            <ParticipationJoinButton entityId={project.id} entityType="project" />
+            <ParticipationJoinButton
+              entityId={project.id}
+              entityType="project"
+            />
           )}
         </div>
       ) : null}

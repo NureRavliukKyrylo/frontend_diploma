@@ -91,7 +91,7 @@ describe("Avatar", () => {
     });
 
     it("trims whitespace from fallback before computing initials", () => {
-      render(<Avatar fallback="  Jane Doe  " />);
+      render(<Avatar fallback="   Jane Doe   " />);
       expect(screen.getByRole("heading")).toHaveTextContent("JD");
     });
   });
@@ -113,15 +113,12 @@ describe("Avatar", () => {
       );
     });
 
-    it("renders default avatar when fallback is only whitespace", () => {
+    it("renders placeholder initials heading when fallback is only whitespace", () => {
       render(<Avatar fallback="   " />);
-      expect(screen.getByRole("img")).toHaveAttribute(
-        "src",
-        "/default-avatar.png",
-      );
+      expect(screen.getByRole("heading")).toHaveTextContent("?");
     });
 
-    it("does not render initials", () => {
+    it("does not render initials on true default value", () => {
       render(<Avatar />);
       expect(screen.queryByRole("heading")).not.toBeInTheDocument();
     });

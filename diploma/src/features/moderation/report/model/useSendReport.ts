@@ -7,6 +7,8 @@ import { getReportSchema } from "../libs/reportSchema";
 import type { ModerationSubjectType } from "@entities/report";
 import { ReportReasonType } from "@entities/report/model";
 import { useTranslation } from "react-i18next";
+import { getModerationSubjectQueryKey } from "../libs/getModerationSubjectQueryKey";
+import { queryClient } from "@shared/api";
 
 interface UseSendReportProps {
   subjectType: ModerationSubjectType;
@@ -29,6 +31,10 @@ export const useSendReport = ({
         description: t("moderation:report.notifications.successDescription"),
         color: "success",
       });
+      const queryKey = getModerationSubjectQueryKey(subjectType, subjectId);
+      if (queryKey) {
+        queryClient.invalidateQueries({ queryKey });
+      }
       onSuccess();
     },
     onError: (error: unknown) => {

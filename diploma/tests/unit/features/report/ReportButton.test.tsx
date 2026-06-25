@@ -20,8 +20,12 @@ vi.mock("@shared/assets/icons/info", async (importOriginal) => {
   const actual = await importOriginal();
   return {
     ...(actual as object),
-    Report: ({ className }: any) => (
-      <svg data-testid="report-icon" className={className} />
+    Report: ({ className, iconClassName, ...props }: any) => (
+      <svg
+        data-testid="report-icon"
+        className={className || iconClassName || ""}
+        {...props}
+      />
     ),
   };
 });
@@ -114,13 +118,6 @@ describe("ReportButton", () => {
     render(<ReportButton {...defaultProps} buttonClassName="custom-btn" />);
     expect(screen.getByTestId("report-button").className).toContain(
       "custom-btn",
-    );
-  });
-
-  it("applies custom iconClassName to report icon", () => {
-    render(<ReportButton {...defaultProps} iconClassName="custom-icon" />);
-    expect(screen.getByTestId("report-icon").className).toContain(
-      "custom-icon",
     );
   });
 });

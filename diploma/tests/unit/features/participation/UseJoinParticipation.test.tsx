@@ -42,7 +42,9 @@ const createWrapper = () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
   });
-  vi.spyOn(queryClient, "invalidateQueries").mockImplementation(invalidateMock);
+  vi.spyOn(QueryClient.prototype, "invalidateQueries").mockImplementation(
+    invalidateMock,
+  );
   return {
     queryClient,
     wrapper: ({ children }: { children: ReactNode }) => (
@@ -97,7 +99,8 @@ describe("useJoinParticipation", () => {
       expect(addToastMock).toHaveBeenCalledWith(
         expect.objectContaining({
           color: "success",
-          title: "Joined Event Successfully",
+          title: "participation.joinSuccess",
+          description: "participation.joinSuccessDescription",
         }),
       ),
     );
@@ -127,7 +130,7 @@ describe("useJoinParticipation", () => {
   });
 
   it("invalidates all relevant query keys on success", async () => {
-    joinMock.mockResolvedValue({});
+    joinMock.mockResolvedValue({ requiresApproval: false });
     const { wrapper } = createWrapper();
     const { result } = renderHook(
       () => useJoinParticipation({ entityType: "event", entityId: "e1" }),
@@ -140,7 +143,7 @@ describe("useJoinParticipation", () => {
   });
 
   it("calls onSuccess callback on success", async () => {
-    joinMock.mockResolvedValue({});
+    joinMock.mockResolvedValue({ requiresApproval: false });
     const onSuccess = vi.fn();
     const { wrapper } = createWrapper();
     const { result } = renderHook(
@@ -170,7 +173,11 @@ describe("useJoinParticipation", () => {
     });
     await waitFor(() =>
       expect(addToastMock).toHaveBeenCalledWith(
-        expect.objectContaining({ color: "danger", title: "Failed to Join" }),
+        expect.objectContaining({
+          color: "danger",
+          title: "participation.joinFailed",
+          description: "Network error",
+        }),
       ),
     );
   });

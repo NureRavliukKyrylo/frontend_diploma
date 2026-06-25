@@ -7,7 +7,7 @@ import type { useProjectPage } from "../../model/useProjectPage";
 import { ProjectMetaChips } from "./ProjectMetaChips";
 import { ProjectStats } from "./ProjectStats";
 import styles from "../ProjectPage.module.scss";
-import { ParticipationJoinButton } from "@features/participation";
+import { ProjectParticipation } from "./ProjectParticipation";
 
 interface ProjectHeaderProps {
   project: Project;
@@ -58,6 +58,6 @@ export const ProjectHeader = ({
       </div>
     </div>
     <ProjectStats project={project} />
-    <ParticipationJoinButton entityId={project.id} entityType="project" />
+    <ProjectParticipation project={project} />
   </motion.div>
 );

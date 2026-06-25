@@ -2,6 +2,7 @@ import type { LocationSuggestion } from "@shared/config/types";
 import { useEffect, useState } from "react";
 import { useDebounce } from "../../hooks";
 import axios from "axios";
+import { useLocaleStore } from "@shared/config/stores";
 
 const BASE_URL = import.meta.env.VITE_BASE_GEO_URL;
 const API_KEY = import.meta.env.VITE_API_GEO_KEY;
@@ -10,7 +11,7 @@ export function useAutocompleteSuggestions(inputString: string) {
   const debouncedInput = useDebounce(inputString, 400);
   const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
   const [error, setError] = useState<string | null>(null);
-
+  const locale = useLocaleStore((s) => s.locale);
   useEffect(() => {
     if (!debouncedInput.trim()) {
       setSuggestions([]);
@@ -25,6 +26,7 @@ export function useAutocompleteSuggestions(inputString: string) {
           q: debouncedInput,
           limit: 10,
           normalizecity: 1,
+          "accept-language": locale,
         },
       })
       .then(({ data }) => {

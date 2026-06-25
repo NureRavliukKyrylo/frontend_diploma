@@ -8,16 +8,18 @@ import { useRouter, useSearch } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { useTranslation } from "react-i18next";
+import type { SystemRole } from "@shared/config/types";
 
 interface LoginResponse {
   userId: string;
   requires2FA: boolean;
+  role: SystemRole;
 }
 
 export const useLogin = () => {
   const { loginEmail, loginPassword, rememberMe, clearLoginForm } =
     useAuthStore();
-  const { setEmail, setUserId, setIsAuthenticated } = useUserStore();
+  const { setEmail, setUserId, setIsAuthenticated, setRole } = useUserStore();
   const { t } = useTranslation(["auth", "common"]);
   const validationSchema = getLoginSchema(t);
 
@@ -45,6 +47,7 @@ export const useLogin = () => {
       await router.invalidate();
 
       setIsAuthenticated(true);
+      setRole(data.role);
 
       router.navigate({ to: search.redirect ?? "/activities" });
     },

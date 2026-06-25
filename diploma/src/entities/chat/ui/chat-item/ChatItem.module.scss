@@ -110,11 +110,22 @@
   }
 
   &.typing {
-    color: #4caf50;
+    color: #0aa65a;
     @include font-base(14px, 400);
 
     @include respond-to(mobile) {
       font-size: 12px;
+    }
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
     }
   }
 }

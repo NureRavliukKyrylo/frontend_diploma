@@ -145,12 +145,12 @@ export const OfferPage = () => {
             <p>{offer.description}</p>
           </ReadMoreButton>
         </div>
-        {!offer.canCancel && !offer.canDispute && (
+        {!offer.canCancel && !offer.canDispute && offer.isActive && (
           <div className={styles.bookingBlock}>
             <BookingButton offerId={id} offerName={offer.title} />
           </div>
         )}
-        {offer.hasMyPendingRequest && offer.canCancel && (
+        {offer.hasMyPendingRequest && offer.canCancel && offer.isActive && (
           <div className={styles.pendingBlock}>
             <p className={styles.pendingText}>
               {t("timeBank:offerPage.blocks.pendingText")}
@@ -162,7 +162,8 @@ export const OfferPage = () => {
           </div>
         )}
         {!offer.hasMyPendingRequest &&
-          (offer.canCancel || offer.canComplete) && (
+          (offer.canCancel || offer.canComplete) &&
+          offer.isActive && (
             <div className={styles.activeBlock}>
               {offer.canComplete && (
                 <CompleteBookingButton bookingId={offer.myBookingId} />
