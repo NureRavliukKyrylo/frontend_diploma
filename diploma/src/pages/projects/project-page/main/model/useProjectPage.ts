@@ -14,9 +14,9 @@ import type { TaskDrawerSearch } from "@entities/task";
 import { useTranslation } from "react-i18next";
 
 export const useProjectPage = () => {
-  const { id } = useParams({ from: "/_masterLayout/projects/$id/" });
+  const { id } = useParams({ from: "/_publicLayout/projects/$id/" });
   const { tab, ...search } = useSearch({
-    from: "/_masterLayout/projects/$id/",
+    from: "/_publicLayout/projects/$id/",
   });
   const { t } = useTranslation(["common"]);
 

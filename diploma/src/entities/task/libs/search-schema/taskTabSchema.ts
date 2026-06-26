@@ -6,7 +6,7 @@ export const tasksTabDefaults = {
   Page: 1,
   PageSize: 5,
   OrderBy: "Default" as const,
-  OnlyActive: false,
+  IncludeArchived: false,
 };
 
 export const tasksOrderSchema = z.object({
@@ -29,7 +29,7 @@ export const tasksTabBaseShape = z.object({
   EventIds: z.array(z.string()).optional().catch(undefined),
   OrganizationIds: z.array(z.string()).optional().catch(undefined),
   Search: z.string().optional(),
-  OnlyActive: z.boolean().optional(),
+  IncludeArchived: z.boolean().optional(),
 });
 
 export const tasksTabBaseSchema = tasksTabBaseShape

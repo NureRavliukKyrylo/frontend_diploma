@@ -13,7 +13,7 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { activityQuery } from "@widgets/activities";
 
-export const Route = createFileRoute("/_masterLayout/activities/")({
+export const Route = createFileRoute("/_publicLayout/activities/")({
   validateSearch: listActivitiesSearchSchema,
   search: {
     middlewares: [

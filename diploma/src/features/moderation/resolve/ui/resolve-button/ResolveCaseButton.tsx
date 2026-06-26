@@ -24,6 +24,7 @@ export const ResolveCaseButton = ({
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.97 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        style={{ width: "100%" }}
       >
         <BaseButtonWrapper
           className={styles.resolveButton}

@@ -10,8 +10,8 @@ import { categoryDetailSearchDefaults } from "../libs/categoryDetailSearchSchema
 import { ActivitiesCategoryContent } from "../config/categoryActivitiesForms";
 
 export const CategoryDetailPage = () => {
-  const search = useSearch({ from: "/_masterLayout/categories/$id/" });
-  const { id } = useParams({ from: "/_masterLayout/categories/$id/" });
+  const search = useSearch({ from: "/_publicLayout/categories/$id/" });
+  const { id } = useParams({ from: "/_publicLayout/categories/$id/" });
   const { data: category } = useQuery(categoryQuery.id(id));
   const navigate = useNavigate({ from: "/categories/$id/" });
 

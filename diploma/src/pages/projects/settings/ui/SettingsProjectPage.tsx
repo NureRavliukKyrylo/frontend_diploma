@@ -3,7 +3,7 @@ import { useParams } from "@tanstack/react-router";
 import styles from "./SettingsProjectPage.module.scss";
 
 export const SettingsProjectPage = () => {
-  const { id } = useParams({ from: "/_masterLayout/projects/$id/settings/" });
+  const { id } = useParams({ from: "/_publicLayout/projects/$id/settings/" });
 
   return (
     <section className={styles.page}>

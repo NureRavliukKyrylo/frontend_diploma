@@ -68,14 +68,14 @@ export const useOrganizationCategoryCarousel = (organizationId: string) => {
           getListProjects({
             ...baseProjectParams,
             Page: page,
-            OnlyActive: false,
+            IncludeArchived: false,
           }),
         ),
         fetchAllPages((page) =>
           getListProjects({
             ...baseProjectParams,
             Page: page,
-            OnlyActive: true,
+            IncludeArchived: true,
           }),
         ),
         fetchAllPages((page) =>

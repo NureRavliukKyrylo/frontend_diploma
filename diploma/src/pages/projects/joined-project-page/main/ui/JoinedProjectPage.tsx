@@ -77,7 +77,11 @@ export const JoinedProjectPage = () => {
                 whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
                 whileTap={{ scale: 0.98 }}
               >
-                <LinkButtonWrapper className={styles.chatWrapper}>
+                <LinkButtonWrapper
+                  to="/chat"
+                  search={{ chatId: project.chatId }}
+                  className={styles.chatWrapper}
+                >
                   <ChatIcon className={styles.chatIcon} />
                   <h1>{t("project:meta.chat")}</h1>
                 </LinkButtonWrapper>

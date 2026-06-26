@@ -92,7 +92,7 @@ export const MyTasksFilterWidget = ({ search }: MyTasksFilterWidgetProps) => {
               label={t("filters.displayCompleted", {
                 subject: t("filters.subjects.tasks"),
               })}
-              value={search.OnlyActive ?? false}
+              value={search.IncludeArchived ?? false}
               onChange={onOnlyActiveChange}
             />
           </div>

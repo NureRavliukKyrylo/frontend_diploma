@@ -86,7 +86,11 @@ export const JoinedEventPage = () => {
                   whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <LinkButtonWrapper className={styles.chatWrapper}>
+                  <LinkButtonWrapper
+                    to="/chat"
+                    search={{ chatId: event.chatId }}
+                    className={styles.chatWrapper}
+                  >
                     <ChatIcon className={styles.chatIcon} />
                     <h1>{t("event:labels.chat")}</h1>
                   </LinkButtonWrapper>

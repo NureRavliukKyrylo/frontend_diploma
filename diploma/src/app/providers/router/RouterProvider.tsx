@@ -7,13 +7,15 @@ import { getHttpErrorInfo } from "@shared/libs/error";
 import { useTranslation } from "react-i18next";
 import { ForbiddenPage } from "@pages/forbidden";
 import axios from "axios";
+import { useUserStore } from "@entities/user";
 
 const isForbiddenError = (error: unknown) =>
   axios.isAxiosError(error) && error.response?.status === 403;
 
 const router = createRouter({
   routeTree,
-  defaultPendingMs: 0,
+  defaultPendingMs: 200,
+  defaultPendingMinMs: 300,
   defaultPreload: "intent",
   defaultPreloadDelay: 300,
   defaultPendingComponent: () => (
@@ -46,6 +48,7 @@ const router = createRouter({
   context: {
     queryClient: queryClient,
     auth: undefined!,
+    role: undefined!,
   },
   scrollRestoration: true,
   scrollRestorationBehavior: "smooth",
@@ -58,5 +61,13 @@ declare module "@tanstack/react-router" {
 }
 
 export function AppRouterProvider() {
-  return <RouterProvider router={router} context={{ auth: {} }} />;
+  const isAuthenticated = useUserStore((s) => s.isAuthenticated);
+  const role = useUserStore((s) => s.role);
+
+  return (
+    <RouterProvider
+      router={router}
+      context={{ auth: { isAuthenticated }, role }}
+    />
+  );
 }

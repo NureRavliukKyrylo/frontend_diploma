@@ -5,7 +5,7 @@ export const getFeedbackValidationSchema = (t: TFunction) =>
   yup.object({
     rating: yup
       .number()
-      .min(1, t("feedback:validation.ratingRequired"))
-      .required(),
+      .moreThan(0, t("feedback:validation.ratingRequired"))
+      .required(t("feedback:validation.ratingRequired")),
     comment: yup.string().max(150, t("feedback:validation.commentMax")),
   });

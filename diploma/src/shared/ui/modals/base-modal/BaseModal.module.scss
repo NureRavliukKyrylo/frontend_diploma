@@ -66,6 +66,22 @@
   }
 }
 
+.errorMessage {
+  color: #dc2626;
+  font-size: 0.75rem;
+  @include font-base(15px, 900);
+  display: flex;
+  justify-content: center;
+  padding: 0px 0px 15px;
+  @include respond-to(tablet) {
+    font-size: 0.7rem;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 0.65rem;
+  }
+}
+
 .childrenSection {
   overflow-y: auto;
   max-height: 90vh;

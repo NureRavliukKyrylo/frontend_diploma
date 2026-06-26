@@ -1,22 +1,25 @@
 import {
-  eventDetailDefaults,
-  eventDetailSearchSchema,
-  eventQuery,
-  type EventDetailSearch,
-} from "@entities/event";
+  projectDetailDefaults,
+  projectDetailSearchSchema,
+  type ProjectDetailSearch,
+} from "@entities/project";
+import { projectQuery } from "@entities/project";
 import { taskDrawerDefaults } from "@entities/task";
-import { eventDetailTabLoaderConfig, EventPageSkeleton } from "@pages/events";
+import {
+  projectDetailTabLoaderConfig,
+  ProjectPageSkeleton,
+} from "@pages/projects";
 import {
   createDrawerCleanerMiddleware,
   createTabCleanerMiddleware,
 } from "@shared/libs/search-params";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/_masterLayout/events/$id/")({
-  validateSearch: eventDetailSearchSchema,
+export const Route = createFileRoute("/_publicLayout/projects/$id/")({
+  validateSearch: projectDetailSearchSchema,
   search: {
     middlewares: [
-      createTabCleanerMiddleware(eventDetailDefaults, "overview"),
+      createTabCleanerMiddleware(projectDetailDefaults, "overview"),
       createDrawerCleanerMiddleware({
         idKey: "taskId",
         modeKey: "taskMode",
@@ -26,14 +29,13 @@ export const Route = createFileRoute("/_masterLayout/events/$id/")({
       }),
     ],
   },
-  loader: async ({ context: { queryClient }, location, params: { id } }) => {
-    const search = location.search as EventDetailSearch;
-
-    const config = eventDetailTabLoaderConfig[search.tab ?? "overview"];
+  loader: async ({ context: { queryClient }, params: { id }, location }) => {
+    const search = location.search as ProjectDetailSearch;
+    const config = projectDetailTabLoaderConfig[search.tab ?? "overview"];
 
     const { tab, ...params } = config.schema.parse(location.search) as any;
 
-    await queryClient.ensureQueryData(eventQuery.id(id));
+    await queryClient.ensureQueryData(projectQuery.id(id));
 
     const query = config.query(id, params);
 
@@ -55,5 +57,5 @@ export const Route = createFileRoute("/_masterLayout/events/$id/")({
 
     config.prefetch(queryClient, id);
   },
-  pendingComponent: EventPageSkeleton,
+  pendingComponent: ProjectPageSkeleton,
 });

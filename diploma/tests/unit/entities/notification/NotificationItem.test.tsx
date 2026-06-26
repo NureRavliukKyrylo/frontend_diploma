@@ -59,6 +59,11 @@ const makeNotification = (
   message: "Your join request was approved",
   createdAt: new Date("2024-01-01T10:00:00Z"),
   relatedAvatarUrl: null,
+  readAt: null,
+  metadata: {
+    bookingId: "id",
+    requestId: undefined,
+  },
   ...overrides,
 });
 

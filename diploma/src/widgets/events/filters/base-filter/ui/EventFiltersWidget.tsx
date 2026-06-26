@@ -14,7 +14,10 @@ import { OrganizationsListFilter } from "@features/organization";
 import { CategoriesListFilter, ProjectsListFilter } from "@features/project";
 import { SkillsListFilter } from "@features/skills";
 import { useSkillsInfiniteQuery } from "@entities/skill";
-import type { EventRequestParams, EventSearchParams } from "@entities/event/libs";
+import type {
+  EventRequestParams,
+  EventSearchParams,
+} from "@entities/event/libs";
 import { Link } from "@tanstack/react-router";
 import { useCategoriesInfiniteQuery } from "@entities/category";
 import type { BaseFiltersRoute } from "@shared/config/types";
@@ -48,7 +51,7 @@ export const EventFiltersWidget = ({
     ? (date: string | undefined) => onChange({ To: date, Page: 1 })
     : routeFilters.onEndBeforeChange;
   const onRatingChange = onChange
-    ? (rating: number | undefined) => onChange({ Rating: rating, Page: 1 })
+    ? (rating: number | undefined) => onChange({ RatingFrom: rating, Page: 1 })
     : routeFilters.onRatingChange;
   const onProjectToggle = onChange
     ? (id: string) =>
@@ -65,7 +68,10 @@ export const EventFiltersWidget = ({
         })
     : routeFilters.onOrganizationToggle;
   const onLocationSelect = onChange
-    ? (location: { lat: number; lng: number; displayName: string }, radiusKm: number) =>
+    ? (
+        location: { lat: number; lng: number; displayName: string },
+        radiusKm: number,
+      ) =>
         onChange({
           Lat: location.lat,
           Lng: location.lng,
@@ -151,7 +157,7 @@ export const EventFiltersWidget = ({
             {t("filters.rating", { subject: t("filters.subjects.event") })}
           </h1>
           <RatingFilter
-            rating={search.Rating}
+            rating={search.RatingFrom}
             onRatingChange={onRatingChange}
           />
         </div>

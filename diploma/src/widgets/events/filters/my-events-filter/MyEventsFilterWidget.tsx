@@ -78,7 +78,7 @@ export const MyEventsFilterWidget = ({ search }: MyEventsFilterWidgetProps) => {
               label={t("filters.displayCompleted", {
                 subject: t("filters.subjects.events"),
               })}
-              value={search.OnlyActive ?? false}
+              value={search.IncludeArchived ?? false}
               onChange={onOnlyActiveChange}
             />
           </div>

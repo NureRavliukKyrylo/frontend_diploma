@@ -4,7 +4,7 @@ import {
   categoriesSearchSchema,
 } from "@entities/category";
 
-export const Route = createFileRoute("/_masterLayout/categories/")({
+export const Route = createFileRoute("/_publicLayout/categories/")({
   validateSearch: categoriesSearchSchema,
   search: {
     middlewares: [stripSearchParams(categoriesSearchDefaults)],

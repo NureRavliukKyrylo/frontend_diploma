@@ -42,7 +42,16 @@ export const EditFeedbackModal = ({
   });
 
   return (
-    <BaseModal isOpen={isOpen} onClose={handleClose} maxWidth="640px">
+    <BaseModal
+      isOpen={isOpen}
+      onClose={handleClose}
+      error={
+        formik.submitCount > 0
+          ? formik.errors.rating || formik.errors.comment
+          : ""
+      }
+      maxWidth="640px"
+    >
       <FeedbackForm
         formik={formik}
         isLoading={isLoading}

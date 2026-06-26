@@ -87,7 +87,7 @@ export const ProjectFiltersWidget = ({
             {t("filters.rating", { subject: t("filters.subjects.project") })}
           </h1>
           <RatingFilter
-            rating={search.Rating}
+            rating={search.RatingFrom}
             onRatingChange={onRatingChange}
           />
         </div>
@@ -142,15 +142,15 @@ export const ProjectFiltersWidget = ({
               label={t("filters.displayCompleted", {
                 subject: t("filters.subjects.projects"),
               })}
-              value={search.ShowJoined ?? false}
-              onChange={onShowJoinedChange}
+              value={search.IncludeArchived ?? false}
+              onChange={onOnlyActiveChange}
             />
             <SwitchFilter
               label={t("filters.displayJoined", {
                 subject: t("filters.subjects.projects"),
               })}
-              value={search.OnlyActive ?? false}
-              onChange={onOnlyActiveChange}
+              value={search.ShowJoined ?? false}
+              onChange={onShowJoinedChange}
             />
           </div>
         </div>

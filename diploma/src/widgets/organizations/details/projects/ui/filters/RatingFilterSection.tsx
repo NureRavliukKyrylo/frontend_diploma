@@ -18,7 +18,7 @@ export const OrganizationProjectRatingFilterSection = ({
   onChange,
 }: OrganizationProjectRatingFilterSectionProps) => {
   const hasRatingFilter =
-    typeof search.Rating === "number" && search.Rating > 0;
+    typeof search.RatingFrom === "number" && search.RatingFrom > 0;
 
   return (
     <OrganizationProjectFiltersSection
@@ -35,7 +35,7 @@ export const OrganizationProjectRatingFilterSection = ({
         <Slider
           aria-label="project-rating"
           size="md"
-          value={search.Rating ?? 0}
+          value={search.RatingFrom ?? 0}
           minValue={0}
           maxValue={5}
           step={0.1}
@@ -43,7 +43,7 @@ export const OrganizationProjectRatingFilterSection = ({
           onChange={(rating) => {
             const nextValue = rating as number;
             onChange({
-              Rating: nextValue === 0 ? undefined : nextValue,
+              RatingFrom: nextValue === 0 ? undefined : nextValue,
               Page: 1,
             });
           }}

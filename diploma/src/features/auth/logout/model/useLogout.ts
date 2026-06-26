@@ -20,7 +20,6 @@ export const useLogout = (onSuccessCallback?: () => void, showToast = true) => {
       queryClient.clear();
       localStorage.clear();
       clearUserInfo();
-      await router.invalidate();
 
       if (showToast) {
         addToast({
@@ -32,6 +31,7 @@ export const useLogout = (onSuccessCallback?: () => void, showToast = true) => {
 
       onSuccessCallback?.();
       router.navigate({ to: AuthRoutes.root });
+      await router.invalidate();
     },
     onError: (error: unknown) => {
       addToast({

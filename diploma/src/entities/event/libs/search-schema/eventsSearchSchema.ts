@@ -13,7 +13,7 @@ export const eventSearchDefaults = {
 };
 
 export const eventsFiltersSchema = z.object({
-  Rating: z.number().min(0).max(5).optional().catch(5),
+  RatingFrom: z.number().min(0).max(5).optional().catch(5),
   IncludeSeriesMasters: z.boolean().optional(),
   ShowJoined: z.boolean().optional().catch(false),
   IncludeArchived: z.boolean().optional(),

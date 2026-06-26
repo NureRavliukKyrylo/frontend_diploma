@@ -4,7 +4,7 @@ import { useLogout } from "@features/auth";
 import { LogOutImage } from "@shared/assets/images/actions";
 import { Avatar } from "@shared/ui";
 import { ConfirmationModal } from "@shared/ui/modals";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
@@ -23,10 +23,7 @@ export const HeaderAccountMenu = ({
   const rootRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-  const { data: user } = useQuery({
-    ...profileQuery.all(),
-    enabled: isAuthenticated === true,
-  });
+  const { data: user } = useSuspenseQuery(profileQuery.all());
   const { handleLogout, isLoading, errorMessage } = useLogout(() => {
     setIsOpen(false);
     setIsLogoutModalOpen(false);

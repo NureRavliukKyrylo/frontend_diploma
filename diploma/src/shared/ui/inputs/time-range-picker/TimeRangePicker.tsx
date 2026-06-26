@@ -11,7 +11,7 @@ export const TimeRangePicker = (props: SingleInputTimeRangeFieldProps) => {
   return (
     <LocalizationProvider
       dateAdapter={AdapterDayjs}
-      adapterLocale={i18n.language === "ua" ? "uk" : "en"}
+      adapterLocale={i18n.language === "uk" ? "uk" : "en"}
     >
       <div className={styles.timeRangePicker}>
         <SingleInputTimeRangeField {...props} />

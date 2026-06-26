@@ -24,7 +24,6 @@ export const useLogin = () => {
   const validationSchema = getLoginSchema(t);
 
   const router = useRouter();
-
   const search = useSearch({ strict: false }) as { redirect?: string };
 
   const mutation = useMutation({
@@ -40,16 +39,18 @@ export const useLogin = () => {
 
       if (data.requires2FA) {
         setUserId(data.userId);
+        setRole(data.role);
+
         router.navigate({ to: AuthRoutes.verification.twoFactor });
         return;
       }
 
-      await router.invalidate();
-
       setIsAuthenticated(true);
       setRole(data.role);
 
-      router.navigate({ to: search.redirect ?? "/activities" });
+      await router.invalidate({ sync: true });
+
+      await router.navigate({ to: search.redirect ?? "/activities" });
     },
     onError: (error: unknown) => {
       const errorMessage = getErrorMessage(error, t);

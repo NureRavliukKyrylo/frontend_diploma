@@ -1,4 +1,4 @@
-import { formatDateRange } from "@shared/libs/date";
+import { formatDateRange, formatDateToText } from "@shared/libs/date";
 import styles from "./EventAttendanceListItem.module.scss";
 import { type EventAttendance } from "../../model";
 import { formatMinutes } from "@shared/libs/time";
@@ -34,11 +34,24 @@ export const EventAttendanceListItem = ({
   return (
     <div className={styles.eventAttendanceListItemWrapper}>
       <span className={styles.dateCell}>
-        {formatDateRange(
-          attendance.currentAttendance.dateFrom,
-          attendance.currentAttendance.dateTo,
-          i18n.language as "en" | "uk",
-        )}
+        {attendance.currentAttendance.checkOutAt
+          ? formatDateToText(
+              attendance.currentAttendance.checkOutAt as string,
+              i18n.language as "en" | "uk",
+              true,
+            )
+          : attendance.currentAttendance.checkInAt
+            ? formatDateToText(
+                attendance.currentAttendance.checkInAt as string,
+                i18n.language as "en" | "uk",
+                true,
+              )
+            : formatDateRange(
+                attendance.currentAttendance.dateFrom,
+                attendance.currentAttendance.dateTo,
+                i18n.language as "en" | "uk",
+                true,
+              )}
       </span>
       <span className={styles.descriptionCell}>
         {attendance.currentAttendance.description}

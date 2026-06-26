@@ -85,7 +85,7 @@ export const MyProjectsFilterWidget = ({
               label={t("filters.displayCompleted", {
                 subject: t("filters.subjects.projects"),
               })}
-              value={search.OnlyActive ?? false}
+              value={search.IncludeArchived ?? false}
               onChange={onOnlyActiveChange}
             />
           </div>

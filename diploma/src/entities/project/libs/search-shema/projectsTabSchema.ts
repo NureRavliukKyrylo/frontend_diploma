@@ -6,7 +6,7 @@ export const projectsTabDefaults = {
   Page: 1,
   PageSize: 9,
   OrderBy: "Default" as const,
-  OnlyActive: false,
+  IncludeArchived: false,
 };
 
 export const projectOrderSchema = z.object({
@@ -32,7 +32,7 @@ export const projectsTabBaseSchema = projectsTabBaseShape
 
 export const projectsTabSchema = projectsTabBaseSchema.extend({
   CategoryIds: z.array(z.string()).optional().catch([]),
-  OnlyActive: z.boolean().default(false).optional(),
+  IncludeArchived: z.boolean().default(false).optional(),
 });
 
 export type MyProjectsSearchParams = z.infer<typeof projectsTabSchema>;

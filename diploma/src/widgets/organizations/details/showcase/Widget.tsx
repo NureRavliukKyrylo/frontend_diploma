@@ -33,7 +33,7 @@ export const OrganizationDetailsProjectsWidget = ({
       OrganizationIds: [organizationId],
       Page: 1,
       PageSize: 100,
-      OnlyActive: false,
+      IncludeArchived: false,
       ShowJoined: false,
       OrderBy: "Default",
     }),
@@ -46,7 +46,9 @@ export const OrganizationDetailsProjectsWidget = ({
     () => buildProjectPreviewCards(projectsResponse?.data ?? []),
     [projectsResponse?.data],
   );
-  const showCarouselControls = hasProjectCarouselControls(previewProjects.length);
+  const showCarouselControls = hasProjectCarouselControls(
+    previewProjects.length,
+  );
 
   const shiftCarousel = (direction: 1 | -1) => {
     setCarouselDirection(direction);
@@ -117,10 +119,7 @@ export const OrganizationDetailsProjectsWidget = ({
         onShiftCarousel={shiftCarousel}
       />
 
-      <OrganizationTasksTable
-        taskRows={taskRows}
-        isLoading={isTasksLoading}
-      />
+      <OrganizationTasksTable taskRows={taskRows} isLoading={isTasksLoading} />
     </motion.section>
   );
 };

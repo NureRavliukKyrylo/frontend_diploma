@@ -45,7 +45,7 @@ export const TaskFiltersWidget = ({
     ? (date: string | undefined) => onChange({ To: date, Page: 1 })
     : routeFilters.onEndBeforeChange;
   const onRatingChange = onChange
-    ? (rating: number | undefined) => onChange({ Rating: rating, Page: 1 })
+    ? (rating: number | undefined) => onChange({ RatingFrom: rating, Page: 1 })
     : routeFilters.onRatingChange;
   const onProjectToggle = onChange
     ? (id: string) =>
@@ -124,7 +124,7 @@ export const TaskFiltersWidget = ({
             {t("filters.rating", { subject: t("filters.subjects.task") })}
           </h1>
           <RatingFilter
-            rating={search.Rating}
+            rating={search.RatingFrom}
             onRatingChange={onRatingChange}
           />
         </div>

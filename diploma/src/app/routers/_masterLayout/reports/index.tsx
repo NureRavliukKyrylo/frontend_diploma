@@ -13,5 +13,8 @@ export const Route = createFileRoute("/_masterLayout/reports/")({
   loader: async ({ context: { queryClient }, location }) => {
     const search = reportCasesSearchSchema.parse(location.search);
     await queryClient.ensureQueryData(reportQuery.listParams(search));
+    if (search.reportId) {
+      await queryClient.ensureQueryData(reportQuery.id(search.reportId));
+    }
   },
 });

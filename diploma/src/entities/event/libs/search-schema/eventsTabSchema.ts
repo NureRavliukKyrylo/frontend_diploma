@@ -6,7 +6,7 @@ export const eventsTabDefaults = {
   Page: 1,
   PageSize: 9,
   OrderBy: "Default" as const,
-  OnlyActive: false,
+  IncludeArchived: false,
 };
 
 export const eventOrderSchema = z.object({
@@ -32,7 +32,7 @@ export const eventsTabBaseSchema = eventsTabBaseShape
   .extend(paginationSchema.shape);
 
 export const eventsTabSchema = eventsTabBaseSchema.extend({
-  OnlyActive: z.boolean().optional().default(false),
+  IncludeArchived: z.boolean().optional().default(false),
 });
 
 export type MyEventsSearchParams = z.infer<typeof eventsTabSchema>;

@@ -74,7 +74,7 @@ export const MapFiltersWidget = ({ search }: MapFiltersWidgetProps) => {
             title={t("common:filters.rating", { subject: projectSubject })}
           >
             <RatingFilter
-              rating={search.Rating}
+              rating={search.RatingFrom}
               onRatingChange={onRatingChange}
             />
           </AccordionItem>
@@ -129,7 +129,7 @@ export const MapFiltersWidget = ({ search }: MapFiltersWidgetProps) => {
                 label={t("common:filters.displayJoined", {
                   subject: t("common:filters.subjects.projects"),
                 })}
-                value={search.OnlyActive ?? false}
+                value={search.IncludeArchived ?? false}
                 onChange={onOnlyActiveChange}
               />
             </div>

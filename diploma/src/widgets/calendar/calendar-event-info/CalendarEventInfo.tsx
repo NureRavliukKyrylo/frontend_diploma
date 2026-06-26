@@ -5,7 +5,6 @@ import { OfferCalendarDetail, offerQuery } from "@entities/offer";
 import type { EventType } from "@shared/config/types";
 import { Close, NavigationArrow } from "@shared/assets/icons/actions";
 import styles from "./CalendarEventInfo.module.scss";
-import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { AnimatePresence, motion } from "framer-motion";
 import { BasePopover } from "@shared/ui/modals";
 import { CalendarDetailSkeleton } from "./CalendarDetailSkeleton";
@@ -117,35 +116,9 @@ export const CalendarEventInfo = ({
               {isLoading ? (
                 <CalendarDetailSkeleton />
               ) : type === "event" && event ? (
-                <>
-                  <EventCalendarDetail event={event} />
-                  <div className={styles.bottomContent}>
-                    <h1>Will you be attending the event?</h1>
-                    <div className={styles.actions}>
-                      <BaseButtonWrapper className={styles.attendingAgree}>
-                        Yes
-                      </BaseButtonWrapper>
-                      <BaseButtonWrapper className={styles.attendingDisagree}>
-                        No
-                      </BaseButtonWrapper>
-                    </div>
-                  </div>
-                </>
+                <EventCalendarDetail event={event} />
               ) : type === "task" && task ? (
-                <>
-                  <TaskCalendarDetail task={task} />
-                  <div className={styles.bottomContent}>
-                    <h1>Will you be completing the task?</h1>
-                    <div className={styles.actions}>
-                      <BaseButtonWrapper className={styles.attendingAgree}>
-                        Yes
-                      </BaseButtonWrapper>
-                      <BaseButtonWrapper className={styles.attendingDisagree}>
-                        No
-                      </BaseButtonWrapper>
-                    </div>
-                  </div>
-                </>
+                <TaskCalendarDetail task={task} />
               ) : type === "offer" && offer ? (
                 <OfferCalendarDetail offer={offer} />
               ) : null}

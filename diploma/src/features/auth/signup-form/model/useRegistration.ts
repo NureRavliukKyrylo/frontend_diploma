@@ -19,7 +19,14 @@ export const useRegistration = () => {
     agreement,
     clearSignupForm,
   } = useAuthStore();
-  const { setUserId, setFirstName, setLastName, setEmail } = useUserStore();
+  const {
+    setUserId,
+    setFirstName,
+    setLastName,
+    setIsAuthenticated,
+    setRole,
+    setEmail,
+  } = useUserStore();
   const { t } = useTranslation(["auth", "common"]);
   const validationSchema = getRegisterSchema(t);
 
@@ -32,6 +39,8 @@ export const useRegistration = () => {
         color: "success",
       });
       setUserId(data.userId);
+      setIsAuthenticated(true);
+      setRole(data.role);
       clearSignupForm();
       router.navigate({ to: AuthRoutes.verification.email });
     },

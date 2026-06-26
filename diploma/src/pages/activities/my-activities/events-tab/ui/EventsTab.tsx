@@ -97,7 +97,11 @@ export const EventsTab = ({ search }: EventsTabProps) => {
             <Suspense
               fallback={
                 <ListWidgetSkeleton
-                  renderSkeleton={EventControlCardSkeleton}
+                  renderSkeleton={() => (
+                    <div className={styles.motionCard}>
+                      <EventControlCardSkeleton />
+                    </div>
+                  )}
                   className={styles.myEventsListWrapper}
                 />
               }

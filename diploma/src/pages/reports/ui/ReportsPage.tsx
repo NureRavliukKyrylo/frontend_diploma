@@ -136,8 +136,8 @@ export const ReportsPage = () => {
                   renderEmpty={(reports) =>
                     reports && reports.length === 0 ? (
                       <div className={styles.emptyState}>
-                        <h2>No reports found</h2>
-                        <p>Try adjusting your filters</p>
+                        <h2>{t("moderation:page.empty.title")}</h2>
+                        <p>{t("moderation:page.empty.description")}</p>
                       </div>
                     ) : null
                   }

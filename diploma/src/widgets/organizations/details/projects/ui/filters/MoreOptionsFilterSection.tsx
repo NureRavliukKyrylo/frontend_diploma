@@ -10,8 +10,7 @@ interface OrganizationProjectMoreOptionsFilterSectionProps {
 
 const switchClassNames = {
   base: "scale-80 sm:scale-90 lg:scale-95",
-  wrapper:
-    "bg-[rgba(44,44,44,0.3)] group-data-[selected=true]:bg-[#8C0000]",
+  wrapper: "bg-[rgba(44,44,44,0.3)] group-data-[selected=true]:bg-[#8C0000]",
   thumb: "w-[20px] h-[20px]",
 };
 
@@ -19,7 +18,9 @@ export const OrganizationProjectMoreOptionsFilterSection = ({
   search,
   onChange,
 }: OrganizationProjectMoreOptionsFilterSectionProps) => {
-  const hasMoreOptionsFilter = Boolean(search.OnlyActive || search.ShowJoined);
+  const hasMoreOptionsFilter = Boolean(
+    search.IncludeArchived || search.ShowJoined,
+  );
 
   return (
     <OrganizationProjectFiltersSection
@@ -34,8 +35,10 @@ export const OrganizationProjectMoreOptionsFilterSection = ({
             Show only active projects
           </h4>
           <Switch
-            isSelected={search.OnlyActive ?? false}
-            onValueChange={(value) => onChange({ OnlyActive: value, Page: 1 })}
+            isSelected={search.IncludeArchived ?? false}
+            onValueChange={(value) =>
+              onChange({ IncludeArchived: value, Page: 1 })
+            }
             classNames={switchClassNames}
           />
         </div>

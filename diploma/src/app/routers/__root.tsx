@@ -20,12 +20,14 @@ import { projectKeys } from "@entities/project";
 import { eventKeys } from "@entities/event";
 import { taskKeys } from "@entities/task";
 import { offerKeys } from "@entities/offer";
+import type { SystemRole } from "@shared/config/types";
 
 export interface RouterContext {
   queryClient: QueryClient;
   auth: {
     isAuthenticated?: boolean;
   };
+  role?: SystemRole;
 }
 
 function RootComponent() {

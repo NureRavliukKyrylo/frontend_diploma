@@ -93,6 +93,23 @@
       "failedTitle": "Event check-in Failed"
     }
   },
+  "checkOut": {
+    "button": "Check out",
+    "title": "Check Out - {{title}}",
+    "placeholder": "Leave a note... (optional)",
+    "confirmButton": "Confirm Check Out",
+    "cancel": "Cancel",
+    "validation": {
+      "noteMax": "Note must be 50 characters or less"
+    },
+    "notifications": {
+      "geoNotSupported": "Geolocation not supported",
+      "geoRequired": "Location access is required to check out",
+      "successTitle": "Event check-out success",
+      "successDescription": "You have checked out successfully",
+      "failedTitle": "Event check-out failed"
+    }
+  },
   "dispute": {
     "button": "Dispute",
     "title": "Dispute — {{title}}",

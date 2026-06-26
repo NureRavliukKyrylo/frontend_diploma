@@ -20,7 +20,7 @@ export const useTaskFilters = (from: BaseFiltersRoute) => {
       nav((prev) => ({ ...prev, To: date, Page: 1 })),
 
     onRatingChange: (rating: number | undefined) =>
-      nav((prev) => ({ ...prev, Rating: rating, Page: 1 })),
+      nav((prev) => ({ ...prev, RatingFrom: rating, Page: 1 })),
 
     onProjectToggle: (id: string) =>
       nav((prev) => ({

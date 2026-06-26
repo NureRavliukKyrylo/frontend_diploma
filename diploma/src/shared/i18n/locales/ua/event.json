@@ -95,6 +95,23 @@
       "failedTitle": "Помилка реєстрації"
     }
   },
+  "checkOut": {
+    "button": "Відзначити вихід",
+    "title": "Вихід — {{title}}",
+    "placeholder": "Залиште нотатку... (необов'язково)",
+    "confirmButton": "Підтвердити вихід",
+    "cancel": "Скасувати",
+    "validation": {
+      "noteMax": "Нотатка має бути не більше 50 символів"
+    },
+    "notifications": {
+      "geoNotSupported": "Геолокація не підтримується",
+      "geoRequired": "Для виходу необхідний доступ до геолокації",
+      "successTitle": "Вихід з події успішний",
+      "successDescription": "Ви успішно відзначили вихід",
+      "failedTitle": "Помилка виходу з події"
+    }
+  },
   "dispute": {
     "button": "Оскаржити",
     "title": "Оскарження — {{title}}",

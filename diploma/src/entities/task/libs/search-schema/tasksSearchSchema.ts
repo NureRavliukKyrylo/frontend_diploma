@@ -19,7 +19,7 @@ export const tasksFiltersSchema = z.object({
     .catch(undefined),
   SkillIds: z.array(z.string()).optional().catch(undefined),
   CategoryIds: z.array(z.string()).optional().catch([]),
-  Rating: z.number().min(0).max(5).optional().catch(5),
+  RatingFrom: z.number().min(0).max(5).optional().catch(5),
 });
 
 export const tasksSearchSchema = tasksFiltersSchema

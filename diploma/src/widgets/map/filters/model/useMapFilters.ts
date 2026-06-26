@@ -20,7 +20,7 @@ export const useMapFilters = () => {
       nav((prev) => ({ ...prev, EndBefore: date, Page: 1 })),
 
     onRatingChange: (rating: number | undefined) =>
-      nav((prev) => ({ ...prev, Rating: rating, Page: 1 })),
+      nav((prev) => ({ ...prev, RatingFrom: rating, Page: 1 })),
 
     onCategoryToggle: (id: string) =>
       nav((prev) => ({
@@ -59,7 +59,7 @@ export const useMapFilters = () => {
       nav((prev) => ({ ...prev, RadiusKm: radiusKm, Page: 1 })),
 
     onOnlyActiveChange: (value: boolean) =>
-      nav((prev) => ({ ...prev, OnlyActive: value, Page: 1 })),
+      nav((prev) => ({ ...prev, IncludeArchived: value, Page: 1 })),
 
     onShowJoinedChange: (value: boolean) =>
       nav((prev) => ({ ...prev, ShowJoined: value, Page: 1 })),

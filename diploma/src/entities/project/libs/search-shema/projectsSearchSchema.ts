@@ -11,20 +11,20 @@ export const projectSearchDefaults = {
   OrderBy: "Default" as const,
   Page: 1,
   PageSize: 9,
-  OnlyActive: false,
+  IncludeArchived: false,
   ShowJoined: false,
 };
 
 export const mapProjectDefaults = {
   Page: 1,
   PageSize: 7,
-  OnlyActive: false,
+  IncludeArchived: false,
   ShowJoined: false,
 };
 
 export const projectFiltersSchema = locationSchema.extend({
-  Rating: z.number().min(0).max(5).optional().catch(5),
-  OnlyActive: z.boolean().default(false).optional(),
+  RatingFrom: z.number().min(0).max(5).optional().catch(5),
+  IncludeArchived: z.boolean().default(false).optional(),
   ShowJoined: z.boolean().default(false).optional(),
 });
 

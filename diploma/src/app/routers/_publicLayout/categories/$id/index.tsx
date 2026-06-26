@@ -13,7 +13,7 @@ import {
 import { taskDrawerDefaults } from "@entities/task";
 import { categoryQuery } from "@entities/category";
 
-export const Route = createFileRoute("/_masterLayout/categories/$id/")({
+export const Route = createFileRoute("/_publicLayout/categories/$id/")({
   search: {
     middlewares: [
       createTabCleanerMiddleware(categoryDetailSearchDefaults, "projects"),

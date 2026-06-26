@@ -5,9 +5,14 @@ import { listActivitiesSearchDefaults } from "@pages/activities";
 import { ListActivitiesHeader } from "@widgets/activities";
 import { ActivitiesContent } from "../config/activitiesForms";
 import { headerVariants } from "@shared/assets/animations";
-import type { BaseFiltersRoute, ListActivitiesMode } from "@shared/config/types";
+import type {
+  BaseFiltersRoute,
+  ListActivitiesMode,
+} from "@shared/config/types";
 
-type ListActivitiesRoute = "/_masterLayout/activities/" | "/_masterLayout/bookmarks/";
+type ListActivitiesRoute =
+  | "/_publicLayout/activities/"
+  | "/_masterLayout/bookmarks/";
 
 interface ListActivitiesPageProps {
   routeFrom?: ListActivitiesRoute;
@@ -22,7 +27,7 @@ const getTabDefaults = (tab: ListActivitiesMode, joinedOnly: boolean) => ({
 });
 
 export const ListActivitiesPage = ({
-  routeFrom = "/_masterLayout/activities/",
+  routeFrom = "/_publicLayout/activities/",
   navigateFrom = "/activities/",
   joinedOnly = false,
   hideOrganizationFilter = false,

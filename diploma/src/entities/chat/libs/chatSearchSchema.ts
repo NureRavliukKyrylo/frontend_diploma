@@ -5,11 +5,11 @@ import type { RelatedEntityTypeChatValue } from "../model";
 
 export const chatDefaults = {
   Page: 1,
-  PageSize: 5,
+  PageSize: 3,
 };
 
 export const chatPaginationSchema = paginationSchema.extend({
-  PageSize: z.number().default(5).catch(5),
+  PageSize: z.number().default(3).catch(3),
 });
 
 export const chatSearchSchema = chatPaginationSchema.extend({

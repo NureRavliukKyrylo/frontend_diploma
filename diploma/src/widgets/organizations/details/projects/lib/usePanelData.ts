@@ -20,16 +20,17 @@ export const useOrganizationProjectsPanelData = ({
   organization,
   search,
 }: UseOrganizationProjectsPanelDataParams) => {
-  const { data: allProjectsResponse, isLoading: isAllProjectsLoading } = useQuery(
-    projectQuery.list({
-      OrganizationIds: [organization.id],
-      Page: 1,
-      PageSize: 100,
-      OnlyActive: false,
-      ShowJoined: false,
-      OrderBy: "Default",
-    }),
-  );
+  const { data: allProjectsResponse, isLoading: isAllProjectsLoading } =
+    useQuery(
+      projectQuery.list({
+        OrganizationIds: [organization.id],
+        Page: 1,
+        PageSize: 100,
+        IncludeArchived: false,
+        ShowJoined: false,
+        OrderBy: "Default",
+      }),
+    );
 
   const { data: filteredProjectsResponse, isLoading } = useQuery(
     projectQuery.list(search),

@@ -7,6 +7,7 @@ export const useReportsPage = () => {
   const { reportId, ...search } = useSearch({
     from: "/_masterLayout/reports/",
   });
+
   const { data: reports } = useQuery(reportQuery.listParams(search));
 
   const nav = (

@@ -2,7 +2,10 @@ import { BaseModal } from "@shared/ui/modals";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { useBlockUser } from "../../model/useBlockUser";
 import styles from "./BlockUserModal.module.scss";
-import { getReportReasonOptions } from "@entities/report";
+import {
+  getReportReasonOptions,
+  ModerationSubjectType,
+} from "@entities/report";
 import { SortDropDown } from "@shared/ui/drop-down";
 import { useTranslation } from "react-i18next";
 
@@ -11,7 +14,7 @@ interface BlockUserModalProps {
   onClose: () => void;
   caseId: string;
   targetUserId: string;
-  entityType: string;
+  entityType: keyof typeof ModerationSubjectType;
   entityId: string;
 }
 
@@ -64,6 +67,10 @@ export const BlockUserModal = ({
             <div className="errorInput">{formik.errors.reason}</div>
           )}
         </div>
+
+        <p className={styles.description}>
+          {t("moderation:blockUser.description")}
+        </p>
 
         <div className={styles.footer}>
           <BaseButtonWrapper

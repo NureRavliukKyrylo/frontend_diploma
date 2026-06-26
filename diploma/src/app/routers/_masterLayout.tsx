@@ -2,10 +2,21 @@ import { IndexLayout } from "@app/layouts";
 import {
   createFileRoute,
   Outlet,
+  redirect,
   useRouterState,
 } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_masterLayout")({
+  beforeLoad: ({ context, location }) => {
+    if (!context.auth.isAuthenticated) {
+      throw redirect({
+        to: "/auth",
+        search: {
+          redirect: location.href,
+        },
+      });
+    }
+  },
   component: MasterLayoutComponent,
 });
 

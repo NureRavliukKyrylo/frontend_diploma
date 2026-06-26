@@ -6,13 +6,13 @@ import { queryOptions } from "@tanstack/react-query";
 export const reportKeys = {
   all: () => ["reports"] as const,
   list: () => [...reportKeys.all(), "list"] as const,
-  listParams: (params: ReportCasesSearchParams) =>
+  listParams: ({ reportId, ...params }: ReportCasesSearchParams) =>
     [...reportKeys.list(), params] as const,
   id: (caseId: string) => [...reportKeys.all(), "id", caseId],
 };
 
 export const reportQuery = {
-  listParams: (params: ReportCasesSearchParams) =>
+  listParams: ({ reportId, ...params }: ReportCasesSearchParams) =>
     queryOptions({
       queryKey: reportKeys.listParams({ ...params }),
       queryFn: () => getListCases({ ...params }),

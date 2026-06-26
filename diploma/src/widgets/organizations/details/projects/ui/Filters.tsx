@@ -29,7 +29,7 @@ export const ProjectFilters = ({
     () => withDebounce(DatePickerInput, 300),
     [],
   );
-  const [displayRating, setDisplayRating] = useState(search.Rating ?? 0);
+  const [displayRating, setDisplayRating] = useState(search.RatingFrom ?? 0);
   const [inputValue, setInputValue] = useState(search.Location ?? "");
   const [query, setQuery] = useState("");
   const [radiusInput, setRadiusInput] = useState(String(search.RadiusKm ?? 10));
@@ -46,8 +46,8 @@ export const ProjectFilters = ({
   const selectedCategoryIds = search.CategoryIds ?? [];
 
   useEffect(() => {
-    setDisplayRating(search.Rating ?? 0);
-  }, [search.Rating]);
+    setDisplayRating(search.RatingFrom ?? 0);
+  }, [search.RatingFrom]);
 
   useEffect(() => {
     setInputValue(search.Location ?? "");
@@ -103,7 +103,9 @@ export const ProjectFilters = ({
     }
   };
 
-  const handleRadiusInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRadiusInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const rawValue = event.target.value;
 
     if (Number(rawValue) > 100) {

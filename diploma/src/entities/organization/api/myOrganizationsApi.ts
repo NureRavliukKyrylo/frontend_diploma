@@ -81,6 +81,8 @@ const recoverMyOrganizations = async (
       ),
       nextPage: 0,
       previousPage: 0,
+      firstUnreadMessageId: null,
+      firstUnreadPage: null,
     },
   };
 };

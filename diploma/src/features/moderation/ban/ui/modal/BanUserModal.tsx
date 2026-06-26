@@ -65,13 +65,15 @@ export const BanUserModal = ({
           <span className={styles.label}>
             {t("moderation:banUser.labels.expiresAt")}
           </span>
-          <DatePickerInput
-            value={formik.values.expiresAt}
-            onChange={(value) => formik.setFieldValue("expiresAt", value)}
-            error={formik.errors.expiresAt}
-            submit={formik.submitCount > 0}
-            minValue={today(getLocalTimeZone())}
-          />
+          <div className={styles.datePickerWrapper}>
+            <DatePickerInput
+              value={formik.values.expiresAt}
+              onChange={(value) => formik.setFieldValue("expiresAt", value)}
+              error={formik.errors.expiresAt}
+              submit={formik.submitCount > 0}
+              minValue={today(getLocalTimeZone())}
+            />
+          </div>
         </div>
 
         <div className={styles.footer}>

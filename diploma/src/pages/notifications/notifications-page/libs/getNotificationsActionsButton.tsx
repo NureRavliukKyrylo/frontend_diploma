@@ -18,7 +18,7 @@ export const getNotificationActionsButton = ({
   onSuccess,
 }: GetNotificationActionsButtonParams) => {
   if (
-    notification.type === "JoinRequestCreated" &&
+    notification.type === "InvitationCreated" &&
     notification.metadata?.requestId &&
     !notification.readAt
   ) {

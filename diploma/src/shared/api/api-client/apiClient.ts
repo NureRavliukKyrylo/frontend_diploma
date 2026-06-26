@@ -4,7 +4,7 @@ import { useLocaleStore } from "@shared/config/stores";
 
 export const apiClient = axios.create({
   baseURL: `${API_URL}/api/`,
-  timeout: 10000,
+  timeout: 20000,
   headers: {
     "Content-Type": "application/json",
   },

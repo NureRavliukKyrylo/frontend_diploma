@@ -65,6 +65,10 @@
       "default": "Default",
       "newest": "Newest",
       "latest": "Latest"
+    },
+    "empty": {
+      "title": "No reports found",
+      "description": "Try adjusting your filters"
     }
   },
   "hideContent": {
@@ -103,7 +107,8 @@
       "successTitle": "User blocked",
       "successDescription": "The user has been blocked successfully.",
       "failedTitle": "Action failed"
-    }
+    },
+    "description": "This will block the user and restrict their access to this activity"
   },
   "banUser": {
     "button": "Ban User",

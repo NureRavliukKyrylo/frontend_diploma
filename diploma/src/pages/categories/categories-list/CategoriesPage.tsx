@@ -29,8 +29,8 @@ const categoryCardVariants = createCardVariants({
 export function CategoriesPage() {
   const { t } = useTranslation(["category", "common"]);
   const navigate = useNavigate({ from: "/categories/" });
-  const { Page } = useSearch({ from: "/_masterLayout/categories/" });
-  const search = useSearch({ from: "/_masterLayout/categories/" });
+  const { Page } = useSearch({ from: "/_publicLayout/categories/" });
+  const search = useSearch({ from: "/_publicLayout/categories/" });
   const { data: categories } = useQuery(categoryQuery.list(search));
 
   return (
@@ -73,7 +73,7 @@ export function CategoriesPage() {
                       animate="visible"
                       whileHover="hover"
                     >
-                      <Link to="/activities">
+                      <Link to="/activities" search={{ tab: "projects" }}>
                         <AllCategoriesCard />
                       </Link>
                     </motion.div>

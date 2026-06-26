@@ -14,6 +14,7 @@ import { HeaderSearch } from "./header-search/HeaderSearch";
 import styles from "./Header.module.scss";
 import { useTranslation } from "react-i18next";
 import { useLocaleStore } from "@shared/config/stores";
+import { useUserStore } from "@entities/user";
 
 export const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -26,6 +27,8 @@ export const Header = () => {
   const { i18n } = useTranslation();
   const locale = useLocaleStore((s) => s.locale);
   const setLocale = useLocaleStore((s) => s.setLocale);
+
+  const isAuthenticated = useUserStore((s) => s.isAuthenticated);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1023px)");
@@ -80,7 +83,7 @@ export const Header = () => {
           )}
         >
           <HeaderSearch value={search} onValueChange={setSearch} />
-          <HeaderNotifications />
+          {isAuthenticated && <HeaderNotifications />}
         </div>
         <div className={styles.center}>
           <h1 className={styles.logo}>IMPACTFLOW</h1>
@@ -96,11 +99,13 @@ export const Header = () => {
             value={locale ?? (i18n.language as "en" | "uk")}
             onChange={(locale) => setLocale(locale)}
           />
-          <HeaderAccountMenu />
+          {isAuthenticated && <HeaderAccountMenu />}
         </div>
-        <div className={clsx(styles.mobileRight, "!flex lg:!hidden")}>
-          <HeaderAccountMenu responsive />
-        </div>
+        {isAuthenticated && (
+          <div className={clsx(styles.mobileRight, "!flex lg:!hidden")}>
+            <HeaderAccountMenu responsive />
+          </div>
+        )}
       </div>
       <HeaderNav />
       <HeaderMobileDrawer

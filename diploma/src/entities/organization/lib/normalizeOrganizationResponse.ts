@@ -37,6 +37,8 @@ export const normalizePagination = (
     totalPages,
     nextPage: nextPage ?? 0,
     previousPage: previousPage ?? 0,
+    firstUnreadMessageId: null,
+    firstUnreadPage: null,
   };
 };
 

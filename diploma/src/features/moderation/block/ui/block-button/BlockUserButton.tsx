@@ -28,6 +28,7 @@ export const BlockUserButton = ({
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         transition={{ type: "spring", stiffness: 300, damping: 15, mass: 0.5 }}
+        style={{ width: "100%" }}
       >
         <BaseButtonWrapper
           className={styles.blockButton}

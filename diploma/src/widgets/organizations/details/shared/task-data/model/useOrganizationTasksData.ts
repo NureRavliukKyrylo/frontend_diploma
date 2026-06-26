@@ -13,7 +13,7 @@ export const useOrganizationTasksData = ({
       OrganizationIds: [organizationId],
       Page: 1,
       PageSize: 100,
-      OnlyActive: false,
+      IncludeArchived: false,
       ShowJoined: false,
       OrderBy: "Default",
     }),

@@ -3,7 +3,7 @@ import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useTaskDrawer } from "@widgets/tasks";
 
 export const useTasksTabEvent = () => {
-  const search = useSearch({ from: "/_masterLayout/events/$id/" });
+  const search = useSearch({ from: "/_publicLayout/events/$id/" });
   const navigate = useNavigate({ from: "/events/$id/" });
 
   return useTaskDrawer(search as TaskDrawerSearch, (updater) => {

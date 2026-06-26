@@ -74,7 +74,7 @@ export const BaseModal: React.FC<BaseModalProps> = ({
               </div>
             )}
             <div className={styles.childrenSection}>{children}</div>
-            {error && <div className="errorMessage">{error}</div>}
+            {error && <div className={styles.errorMessage}>{error}</div>}
           </motion.div>
         </motion.div>
       )}

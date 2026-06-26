@@ -13,8 +13,8 @@ import type { TaskDrawerSearch } from "@entities/task";
 import { useTranslation } from "react-i18next";
 
 export const useEventPage = () => {
-  const { id } = useParams({ from: "/_masterLayout/events/$id/" });
-  const { tab, ...search } = useSearch({ from: "/_masterLayout/events/$id/" });
+  const { id } = useParams({ from: "/_publicLayout/events/$id/" });
+  const { tab, ...search } = useSearch({ from: "/_publicLayout/events/$id/" });
   const { t } = useTranslation(["common"]);
   const { data: event } = useSuspenseQuery(eventQuery.id(id));
   const { user, coordinates: userLocation } = useMapUserLocation();

@@ -43,5 +43,6 @@ export const createUserInfoSlice: StateCreator<UserInfoSlice> = (set) => ({
       lastName: undefined,
       email: undefined,
       isAuthenticated: undefined,
+      role: undefined,
     }),
 });
