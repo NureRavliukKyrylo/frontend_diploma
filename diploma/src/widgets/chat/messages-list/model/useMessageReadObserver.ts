@@ -33,22 +33,30 @@ export const useMessageReadObserver = ({
 
         if (!visibleEntries.length) return;
 
-        const lastVisibleId = visibleEntries.reverse().find((id) => {
-          const message = messages.find((m) => m.id === id);
-          return message && !message.isMine && message.readStatus !== "Read";
-        });
-        const visibleUnreadIds = visibleEntries.filter((id) => {
+        const lastVisibleUnreadId = visibleEntries.reverse().find((id) => {
           const message = messages.find((m) => m.id === id);
           return message && !message.isMine && message.readStatus !== "Read";
         });
 
         if (
-          lastVisibleId &&
-          lastVisibleId !== lastVisibleMessageIdRef.current
-        ) {
-          lastVisibleMessageIdRef.current = lastVisibleId;
-          markAsRead(lastVisibleId, visibleUnreadIds);
-        }
+          !lastVisibleUnreadId ||
+          lastVisibleUnreadId === lastVisibleMessageIdRef.current
+        )
+          return;
+
+        const lastVisibleIndex = messages.findIndex(
+          (m) => m.id === lastVisibleUnreadId,
+        );
+
+        const allUnreadUpTo = messages
+          .slice(0, lastVisibleIndex + 1)
+          .filter((m) => !m.isMine && m.readStatus !== "Read")
+          .map((m) => m.id);
+
+        if (!allUnreadUpTo.length) return;
+
+        lastVisibleMessageIdRef.current = lastVisibleUnreadId;
+        markAsRead(lastVisibleUnreadId, allUnreadUpTo);
       },
       { root: scrollEl, threshold: 0.5 },
     );

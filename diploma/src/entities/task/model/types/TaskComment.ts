@@ -12,5 +12,6 @@ export interface TaskComment {
     roleName: string;
   };
   canSubmitReport: boolean;
+  isDeleted: boolean;
   replies: TaskComment[];
 }

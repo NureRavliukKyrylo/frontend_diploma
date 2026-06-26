@@ -126,6 +126,19 @@
         font-size: 14px;
       }
     }
+    .deletedContent {
+      @include font-base(22px, 400);
+      color: #868585;
+      font-style: italic;
+      word-break: break-all;
+
+      @include respond-to(tablet) {
+        font-size: 17px;
+      }
+      @include respond-to(mobile) {
+        font-size: 14px;
+      }
+    }
   }
 }
 

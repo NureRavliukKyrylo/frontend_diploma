@@ -53,6 +53,7 @@
       "deleteComment": "Delete Comment",
       "editComment": "Edit Comment"
     },
+    "deletedComment": "This comment has been deleted",
     "deleteModal": {
       "title": "Delete Your Comment",
       "textPattern": "Are you sure you want to delete your comment? with content: {{content}}"

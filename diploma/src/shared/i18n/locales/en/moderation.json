@@ -84,6 +84,7 @@
     "validation": {
       "reasonRequired": "Please select a reason"
     },
+    "description": "This content will be hidden from other users and will no longer appear in public feeds or search results.",
     "notifications": {
       "successTitle": "Content hidden",
       "successDescription": "The content has been hidden successfully.",
@@ -161,6 +162,7 @@
       "failedTitle": "Action failed"
     }
   },
+
   "filters": {
     "status": {
       "title": "Report Status",

@@ -142,11 +142,15 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
               />
             </div>
           )}
-          <HideContentButton
-            caseId={reportCase.case.id}
-            targetEntityId={reportCase.subject.id}
-            targetEntityType={reportCase.subject.type}
-          />
+          {["chatMessage", "comment", "feedback"].includes(
+            reportCase.subjectType,
+          ) && (
+            <HideContentButton
+              caseId={reportCase.case.id}
+              targetEntityId={reportCase.subject.id}
+              targetEntityType={reportCase.subject.type}
+            />
+          )}
         </div>
       )}
     </div>

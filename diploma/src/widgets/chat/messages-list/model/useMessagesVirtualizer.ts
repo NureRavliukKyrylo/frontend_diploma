@@ -1,18 +1,26 @@
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useEffect, useRef } from "react";
-import { useChatScrollStore } from "@entities/chat";
-import type { Message } from "@entities/chat";
+import { useCallback, useEffect, useRef } from "react";
+import {
+  messageKeys,
+  messageQuery,
+  useChatScrollStore,
+  useGetMessagesQueryKey,
+} from "@entities/chat";
+import type { Message, MessagesResponse } from "@entities/chat";
+import { queryClient } from "@shared/api";
 
 interface UseMessagesVirtualizerProps {
   messages: Message[];
   chatId: string;
   targetMessageId?: string | null;
+  hasNextPage?: boolean;
 }
 
 export const useMessagesVirtualizer = ({
   messages,
   chatId,
   targetMessageId,
+  hasNextPage,
 }: UseMessagesVirtualizerProps) => {
   const messagesWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -30,6 +38,51 @@ export const useMessagesVirtualizer = ({
   const pendingScrollChatId = useChatScrollStore((s) => s.pendingScrollChatId);
   const setNotAtBottom = useChatScrollStore((s) => s.setNotAtBottom);
   const virtualItems = virtualizer.getVirtualItems();
+
+  const getQueryKey = useGetMessagesQueryKey();
+
+  const fetchLastPage = useCallback(async () => {
+    const anchorData = queryClient.getQueriesData<MessagesResponse>({
+      queryKey: messageKeys.anchorNoParams(chatId),
+      exact: false,
+    });
+    const lastPage = anchorData?.[0]?.[1]?.pagination.totalPages ?? 1;
+
+    const queryKey = getQueryKey(chatId);
+
+    await queryClient.cancelQueries({ queryKey, exact: false });
+
+    const lastPageData = await queryClient.fetchInfiniteQuery(
+      messageQuery.list(chatId, { pageSize: 40, page: lastPage }),
+    );
+
+    queryClient.setQueriesData(
+      { queryKey, exact: false },
+      {
+        pages: [lastPageData.pages[0]],
+        pageParams: [lastPage],
+      },
+    );
+  }, [chatId, getQueryKey]);
+
+  const prefetchLastPage = useCallback(async () => {
+    const anchorData = queryClient.getQueriesData<MessagesResponse>({
+      queryKey: messageKeys.anchorNoParams(chatId),
+      exact: false,
+    });
+    const lastPage = anchorData?.[0]?.[1]?.pagination.totalPages ?? 1;
+
+    await queryClient.prefetchInfiniteQuery(
+      messageQuery.list(chatId, { pageSize: 40, page: lastPage }),
+    );
+  }, [chatId]);
+
+  useEffect(() => {
+    if (hasNextPage) {
+      prefetchLastPage();
+    }
+  }, [chatId, hasNextPage]);
+
   useEffect(() => {
     const len = messages.length;
     if (len > prevLengthRef.current) {
@@ -48,9 +101,22 @@ export const useMessagesVirtualizer = ({
 
   useEffect(() => {
     if (!pendingScrollChatId || pendingScrollChatId !== chatId) return;
-    const len = messages.length;
     useChatScrollStore.getState().consumeScrollRequest(chatId);
-    virtualizer.scrollToIndex(len - 1, { align: "end", behavior: "smooth" });
+
+    if (hasNextPage) {
+      fetchLastPage().then(() => {
+        virtualizer.scrollToIndex(messages.length - 1, {
+          align: "end",
+          behavior: "smooth",
+        });
+      });
+      return;
+    }
+
+    virtualizer.scrollToIndex(messages.length - 1, {
+      align: "end",
+      behavior: "smooth",
+    });
   }, [pendingScrollChatId]);
 
   useEffect(() => {

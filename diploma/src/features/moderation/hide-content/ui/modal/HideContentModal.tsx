@@ -65,6 +65,10 @@ export const HideContentModal = ({
           )}
         </div>
 
+        <p className={styles.description}>
+          {t("moderation:hideContent.description")}
+        </p>
+
         <div className={styles.footer}>
           <BaseButtonWrapper
             className={styles.cancelButton}

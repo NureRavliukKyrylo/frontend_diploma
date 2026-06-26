@@ -31,7 +31,7 @@ export const TaskCommentItem = ({
   editSlot,
   reportSlot,
 }: TaskCommentItemProps) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["common", "task"]);
   return (
     <div className={`${styles.commentWrapper} ${className ?? ""}`}>
       <div className={styles.time}>{formatTimeAgo(comment.createdAt, t)}</div>
@@ -89,6 +89,10 @@ export const TaskCommentItem = ({
             >
               {editSlot}
             </motion.div>
+          ) : comment.isDeleted ? (
+            <p className={styles.deletedContent}>
+              {t("task:comments.deletedComment")}
+            </p>
           ) : (
             <p>{comment.body}</p>
           )}

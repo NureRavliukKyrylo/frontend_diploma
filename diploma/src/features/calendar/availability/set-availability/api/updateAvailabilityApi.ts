@@ -12,6 +12,6 @@ export interface UpdateAvailabilityDto {
 }
 
 export const updateAvailability = async (data: UpdateAvailabilityDto) => {
-  const result = await apiClient.put("/users/me/availability-slots", data);
+  const result = await apiClient.put("/users/me/availability-slots", [data]);
   return result.data;
 };

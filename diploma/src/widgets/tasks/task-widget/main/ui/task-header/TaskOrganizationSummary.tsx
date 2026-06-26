@@ -22,7 +22,7 @@ export const TaskOrganizationSummary = ({
       </div>
       <div className={styles.ratingTaskInfo}>
         <h1>{task.rating.value}</h1>
-        <p>({t("task:labels.votes", { count: task.rating.totalVotes })})</p>
+        <p>{t("task:labels.votes", { count: task.rating.totalVotes })}</p>
       </div>
     </div>
   );

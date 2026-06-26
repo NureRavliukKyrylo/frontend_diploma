@@ -31,6 +31,7 @@ export const MessagesListWidget = ({
       messages,
       chatId,
       targetMessageId: queryResult?.targetMessageId,
+      hasNextPage: queryResult?.hasNextPage,
     });
 
   useMessagesInfiniteScroll({

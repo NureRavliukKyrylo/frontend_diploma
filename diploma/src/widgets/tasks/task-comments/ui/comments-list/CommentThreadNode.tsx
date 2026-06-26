@@ -78,7 +78,11 @@ export const CommentThreadNode = ({
       >
         <TaskCommentItem
           comment={comment}
-          menuItems={comment.author.id === userId ? getMenuItems(comment) : []}
+          menuItems={
+            comment.author.id === userId && !comment.isDeleted
+              ? getMenuItems(comment)
+              : []
+          }
           editSlot={
             editingId === comment.id ? (
               <EditCommentForm

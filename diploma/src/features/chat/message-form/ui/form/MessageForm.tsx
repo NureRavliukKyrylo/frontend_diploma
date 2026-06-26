@@ -71,6 +71,14 @@ export const MessageForm = ({
       if (!isBlank) formik.handleSubmit();
     }
   };
+  useEffect(() => {
+    if (
+      editingMessage?.content &&
+      formik.values.body === editingMessage.content
+    ) {
+      requestAnimationFrame(() => autoResize());
+    }
+  }, [formik.values.body, editingMessage?.content]);
 
   useEffect(() => {
     if (!formik.values.body) resetHeight();

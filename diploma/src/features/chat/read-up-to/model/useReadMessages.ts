@@ -13,6 +13,7 @@ import { readUpTo } from "../api/readUpToApi";
 
 export const useReadMessages = (chatId: string) => {
   const lastReadMessageIdRef = useRef<string | null>(null);
+  const nextUnreadRef = useRef<string | null>(null);
   const { queryKey } = useChatMessagesQuery(chatId);
   const mutation = useMutation({
     mutationFn: ({ messageId }: { messageId: string }) =>
@@ -61,20 +62,7 @@ export const useReadMessages = (chatId: string) => {
           (msg) =>
             msg.readStatus !== "Read" && !visibleUnreadIds.includes(msg.id),
         );
-
-        queryClient.setQueriesData<MessagesResponse>(
-          { queryKey: messageKeys.anchorNoParams(chatId), exact: false },
-          (anchorOld) => {
-            if (!anchorOld) return anchorOld;
-            return {
-              ...anchorOld,
-              pagination: {
-                ...anchorOld.pagination,
-                firstUnreadMessageId: nextUnread?.id ?? null,
-              },
-            };
-          },
-        );
+        nextUnreadRef.current = nextUnread?.id ?? null;
 
         return {
           ...old,
@@ -86,6 +74,19 @@ export const useReadMessages = (chatId: string) => {
                 : msg,
             ),
           })),
+        };
+      },
+    );
+    queryClient.setQueriesData<MessagesResponse>(
+      { queryKey: messageKeys.anchorNoParams(chatId), exact: false },
+      (anchorOld) => {
+        if (!anchorOld) return anchorOld;
+        return {
+          ...anchorOld,
+          pagination: {
+            ...anchorOld.pagination,
+            firstUnreadMessageId: nextUnreadRef.current ?? null,
+          },
         };
       },
     );
