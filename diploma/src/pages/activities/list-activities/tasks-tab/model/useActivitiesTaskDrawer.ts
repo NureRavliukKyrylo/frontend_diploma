@@ -4,11 +4,11 @@ import { useTaskDrawer } from "@widgets/tasks";
 import type { BaseFiltersRoute } from "@shared/config/types";
 
 type ActivitiesSearchRoute =
-  | "/_masterLayout/activities/"
+  | "/_publicLayout/activities/"
   | "/_masterLayout/bookmarks/";
 
 export const useActivitiesTaskDrawer = (
-  routeFrom: ActivitiesSearchRoute = "/_masterLayout/activities/",
+  routeFrom: ActivitiesSearchRoute = "/_publicLayout/activities/",
   navigateFrom: BaseFiltersRoute = "/activities/",
   joinedOnly = false,
 ) => {

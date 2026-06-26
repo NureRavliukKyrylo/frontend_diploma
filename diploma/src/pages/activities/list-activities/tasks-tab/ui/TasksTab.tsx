@@ -28,6 +28,7 @@ import { useActivitiesTaskDrawer } from "../model/useActivitiesTaskDrawer";
 import { SwipeableDrawer } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import type { BaseFiltersRoute } from "@shared/config/types";
+
 interface TasksTabProps {
   search: TaskSearchParams;
   from?: BaseFiltersRoute;
@@ -38,7 +39,7 @@ interface TasksTabProps {
 const getRouteFrom = (from: BaseFiltersRoute) =>
   from === "/bookmarks/"
     ? "/_masterLayout/bookmarks/"
-    : "/_masterLayout/activities/";
+    : "/_publicLayout/activities/";
 
 export const TasksTab = ({
   search,
@@ -46,9 +47,7 @@ export const TasksTab = ({
   joinedOnly = false,
   hideOrganizationFilter = false,
 }: TasksTabProps) => {
-  const effectiveSearch = joinedOnly
-    ? { ...search, ShowJoined: true }
-    : search;
+  const effectiveSearch = joinedOnly ? { ...search, ShowJoined: true } : search;
   const { t } = useTranslation(["activities", "common"]);
   const {
     isOpen,
