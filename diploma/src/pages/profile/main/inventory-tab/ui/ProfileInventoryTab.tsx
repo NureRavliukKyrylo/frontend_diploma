@@ -109,8 +109,8 @@ export const ProfileInventoryTab = ({ search }: ProfileInventoryTabProps) => {
                   renderEmpty={(badges) =>
                     badges.length === 0 ? (
                       <div className={styles.emptyState}>
-                        <h2>No unlocked badges yet</h2>
-                        <p>Complete activities to earn your first badge</p>
+                        <h2>{t("inventory.noBadgesTitle")}</h2>
+                        <p>{t("inventory.noBadgesDescription")}</p>
                       </div>
                     ) : null
                   }

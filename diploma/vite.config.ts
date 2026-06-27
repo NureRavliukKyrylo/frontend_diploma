@@ -18,6 +18,9 @@ export default defineConfig({
     tailwindcss(),
     svgr(),
   ],
+  preview: {
+    port: 5173,
+  },
   test: {
     environment: "jsdom",
     globals: true,

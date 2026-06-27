@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./InputAction.module.scss";
 
-type InputVariant = "default" | "edit";
+type InputVariant = "default" | "edit" | "editLocalized";
 
 interface InputWithActionProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;

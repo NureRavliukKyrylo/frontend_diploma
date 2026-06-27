@@ -5,21 +5,25 @@ import { useRouter } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { queryClient } from "@shared/api";
-import { useUserStore } from "@entities/user";
+import {
+  useAuthStore,
+  useUserProfileStore,
+  useUserStore,
+} from "@entities/user";
 import { useTranslation } from "react-i18next";
 
 export const useLogout = (onSuccessCallback?: () => void, showToast = true) => {
   const { t } = useTranslation(["auth", "common"]);
   const router = useRouter();
-  const { clearUserInfo } = useUserStore();
 
   const mutation = useMutation({
     mutationFn: logout,
     onSuccess: async () => {
       await queryClient.cancelQueries();
       queryClient.clear();
-      localStorage.clear();
-      clearUserInfo();
+      useAuthStore.persist.clearStorage();
+      useUserStore.persist.clearStorage();
+      useUserProfileStore.persist.clearStorage();
 
       if (showToast) {
         addToast({

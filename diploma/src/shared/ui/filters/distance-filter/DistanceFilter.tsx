@@ -89,6 +89,7 @@ export const DistanceFilter = ({
                 setRadiusInput(String(clamped));
                 onRadiusChange(clamped);
               }}
+              disabled={!inputValue || !!query}
               style={{
                 width: `${radiusInput.length}ch`,
               }}

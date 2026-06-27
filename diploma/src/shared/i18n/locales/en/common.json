@@ -177,6 +177,8 @@
     "includeArchived": "Include archived {{subject}}",
     "setDistanceLocationPlaceholder": "Set location",
     "kmUnit": "km",
+    "searchAreaCenter": "Search area center",
+    "kmRadiusSuffix": "km radius",
     "onlineOptions": {
       "all": "All"
     },

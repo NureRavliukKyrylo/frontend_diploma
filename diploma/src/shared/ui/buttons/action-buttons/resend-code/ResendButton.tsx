@@ -7,16 +7,12 @@ type ResendButtonProps = {
   onResend: () => void;
   resetTimer: () => void;
   decrementTimer: () => void;
-  serverError?: string | null;
   isLoading: boolean;
   variant?: "default" | "profile";
   t?: TFunction;
 };
 
-const fallbackT = ((
-  key: string,
-  options?: { time?: string },
-) => {
+const fallbackT = ((key: string, options?: { time?: string }) => {
   if (key === "common:actions.resendCode") return "Resend Code";
   if (key === "common:actions.didNotReceive") return "Resend code in";
   if (key === "common:actions.resendIn") return options?.time ?? "";
@@ -28,7 +24,6 @@ export const ResendButton: React.FC<ResendButtonProps> = ({
   onResend,
   resetTimer,
   decrementTimer,
-  serverError,
   isLoading,
   variant = "default",
   t,
@@ -46,9 +41,8 @@ export const ResendButton: React.FC<ResendButtonProps> = ({
     if (!canResend) return;
     try {
       await onResend();
-      if (!serverError) resetTimer();
-    } catch {
-    }
+      resetTimer();
+    } catch {}
   };
 
   const formattedTime = `${Math.floor(seconds / 60)}:${(seconds % 60)

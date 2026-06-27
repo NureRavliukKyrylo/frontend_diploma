@@ -48,7 +48,7 @@ export const VolunteerCalendar = () => {
   const events = useCalendarMyActivities({ From, To });
   const { data } = useQuery(calendarQuery.availabilitySlots());
   const slots: AvailabilitySlot[] = data ?? [];
-
+  console.log(slots);
   const {
     initialView,
     initialDate,

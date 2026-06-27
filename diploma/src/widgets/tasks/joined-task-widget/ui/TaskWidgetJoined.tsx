@@ -115,6 +115,7 @@ export const TaskWidgetJoined = ({
                   }}
                   whileTap={{ scale: 0.97 }}
                   transition={{ type: "spring", stiffness: 400, damping: 22 }}
+                  className={styles.organizationInfo}
                 >
                   <img
                     src={task?.organization?.logoUrl ?? undefined}

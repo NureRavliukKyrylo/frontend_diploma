@@ -11,6 +11,7 @@ export type Notification = {
   metadata: {
     requestId?: string;
     bookingId: string;
+    status?: "New" | "Applied";
   };
   readAt: string | null;
 };

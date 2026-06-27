@@ -24,7 +24,7 @@ export const ResendCodeButton = ({
   email,
   t,
 }: ResendCodeButton) => {
-  const { resend, isLoadingResend, resendErrorMessage } = useResendCode({
+  const { resend, isLoadingResend } = useResendCode({
     type: otpType,
     userId,
     email,
@@ -36,7 +36,6 @@ export const ResendCodeButton = ({
       onResend={resend}
       resetTimer={() => resetOtpTimer(otpType)}
       decrementTimer={() => decrementOtpTimer(otpType)}
-      serverError={resendErrorMessage}
       isLoading={isLoadingResend}
       variant={variant}
       t={t}

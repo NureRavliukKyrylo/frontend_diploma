@@ -11,12 +11,13 @@ export const ChangeEmailVerificationContent = () => {
     useUserProfileStore();
   const { handleLogout } = useLogout(undefined, false);
   const currentStep = verificationSteps["emailVerification"];
-  const code: Record<string, CodeType> = {
-    oldCode: "old-code",
-    newCode: "new-code",
+  console.log(currentStep);
+  const code: Record<number, CodeType> = {
+    1: "old-code",
+    3: "new-code",
   };
   const dataCode = code[currentStep];
-
+  console.log(dataCode);
   const onSuccess = async () => {
     if (dataCode === "new-code") {
       await handleLogout();

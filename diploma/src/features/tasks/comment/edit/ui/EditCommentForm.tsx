@@ -18,7 +18,7 @@ export const EditCommentForm = ({
   onCancel,
   initialBody,
 }: EditCommentFormProps) => {
-  const { t } = useTranslation(["task"]);
+  const { t, i18n } = useTranslation(["task"]);
   const { formik, isLoading, mutation } = useEditComment(
     taskId,
     commentId,
@@ -40,11 +40,11 @@ export const EditCommentForm = ({
           name="body"
           type="text"
           value={formik.values.body}
-          placeholder={t("tasks:comments.inputPlaceholder")}
+          placeholder={t("task:comments.inputEditPlaceholder")}
           onChange={(e) => formik.setFieldValue("body", e.target.value)}
           error={formik.submitCount > 0 ? formik.errors.body : undefined}
           wrapperClassName={styles.editMessageWrapper}
-          variant="edit"
+          variant={i18n.language === "uk" ? "editLocalized" : "edit"}
           action={
             <div className={styles.actions}>
               <BaseButtonWrapper

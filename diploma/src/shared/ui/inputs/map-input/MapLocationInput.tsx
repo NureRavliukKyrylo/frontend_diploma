@@ -1,6 +1,7 @@
 import { FullSizeIcon } from "@shared/assets/icons/actions";
 import styles from "./MapLocationInput.module.scss";
 import { MapIcon } from "@shared/assets/icons/info";
+import { useTranslation } from "react-i18next";
 
 interface MapLocationInputProps {
   label?: string;
@@ -14,7 +15,7 @@ export const MapLocationInput: React.FC<MapLocationInputProps> = ({
   variant = "default",
 }) => {
   const variantClass = variant !== "default" ? styles[variant] : "";
-
+  const { t } = useTranslation("common");
   return (
     <div className={`${styles.mapLocationWrapper} ${variantClass}`}>
       <div className={styles.leftMapContent}>
@@ -23,7 +24,9 @@ export const MapLocationInput: React.FC<MapLocationInputProps> = ({
         </span>
 
         <span className={styles.divider}></span>
-        <h1 title={label ?? "Location"}>{label ?? "Location"}</h1>
+        <h1 title={label ?? t("filters.setDistanceLocationPlaceholder")}>
+          {label ?? t("filters.setDistanceLocationPlaceholder")}
+        </h1>
       </div>
       {handleMapOpen && (
         <button

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { Circle, Marker, Popup } from "react-leaflet";
 import styles from "../base-page/MapPage.module.scss";
 import type { MapProjectSearchParams } from "@entities/project";
+import { useTranslation } from "react-i18next";
 
 interface SearchLocationLayerProps {
   coordinates: { latitude: number; longitude: number };
@@ -16,6 +17,7 @@ export const SearchLocationLayer = ({
   radiusMeters,
   search,
 }: SearchLocationLayerProps) => {
+  const { t } = useTranslation("common");
   const prevCoordsRef = useRef<{ latitude: number; longitude: number } | null>(
     null,
   );
@@ -39,11 +41,14 @@ export const SearchLocationLayer = ({
       >
         <Popup className={styles.popupSearchLocation}>
           <div className={styles.popupContent}>
-            <h1 className={styles.locationSearchText}>Search area center</h1>
+            <h1 className={styles.locationSearchText}>
+              {t("common:filters.searchAreaCenter")}
+            </h1>
             <span className={styles.locationName}>{search.Location}</span>
             {radiusMeters && (
               <div className={styles.radiusBadge}>
-                ⌀ {(radiusMeters / 1000).toFixed(1)} km radius
+                ⌀ {(radiusMeters / 1000).toFixed(1)}{" "}
+                {t("common:filters.kmRadiusSuffix")}
               </div>
             )}
           </div>

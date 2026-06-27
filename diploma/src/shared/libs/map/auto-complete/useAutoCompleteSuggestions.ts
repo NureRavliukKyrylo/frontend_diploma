@@ -12,6 +12,7 @@ export function useAutocompleteSuggestions(inputString: string) {
   const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
   const [error, setError] = useState<string | null>(null);
   const locale = useLocaleStore((s) => s.locale);
+
   useEffect(() => {
     if (!debouncedInput.trim()) {
       setSuggestions([]);

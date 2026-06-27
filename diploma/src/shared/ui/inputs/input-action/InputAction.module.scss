@@ -48,5 +48,15 @@
         padding: 8px 90px 8px 14px;
       }
     }
+    &.editLocalized {
+      padding: 12px 165px 12px 20px;
+
+      @include respond-to(tablet) {
+        padding: 10px 145px 10px 16px;
+      }
+      @include respond-to(mobile) {
+        padding: 8px 125px 8px 14px;
+      }
+    }
   }
 }

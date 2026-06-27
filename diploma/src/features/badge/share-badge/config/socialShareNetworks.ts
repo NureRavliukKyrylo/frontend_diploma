@@ -7,8 +7,6 @@ import {
   TelegramIcon,
   WhatsappShareButton,
   WhatsappIcon,
-  LinkedinShareButton,
-  LinkedinIcon,
   RedditShareButton,
   RedditIcon,
 } from "react-share";
@@ -42,12 +40,6 @@ export const getSocialShareNetworks = (hashtags: string[] = []) => [
     id: "whatsapp",
     Button: WhatsappShareButton,
     Icon: WhatsappIcon,
-    extra: {},
-  },
-  {
-    id: "linkedIn",
-    Button: LinkedinShareButton,
-    Icon: LinkedinIcon,
     extra: {},
   },
   {

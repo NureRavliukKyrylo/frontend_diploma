@@ -53,6 +53,7 @@
     "emptyStateTitle": "Коментарів ще немає",
     "emptyStateSubtitle": "Будьте першим, хто залишить коментар",
     "inputPlaceholder": "Задайте питання про цю активність...",
+    "inputEditPlaceholder": "Відредагуйте питання про цю активність...",
     "actions": {
       "cancel": "Скасувати",
       "deleteComment": "Видалити коментар",

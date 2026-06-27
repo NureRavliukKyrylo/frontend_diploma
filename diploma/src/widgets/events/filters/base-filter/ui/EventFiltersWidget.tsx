@@ -230,14 +230,14 @@ export const EventFiltersWidget = ({
           <div className={styles.moreOptionsBlock}>
             <SwitchFilter
               label={t("filters.displayCompleted", {
-                subject: t("filters.subjects.projects"),
+                subject: t("filters.subjects.events"),
               })}
               value={search.IncludeArchived ?? false}
               onChange={onOnlyActiveChange}
             />
             <SwitchFilter
               label={t("filters.displayJoined", {
-                subject: t("filters.subjects.projects"),
+                subject: t("filters.subjects.events"),
               })}
               value={search.ShowJoined ?? false}
               onChange={onShowJoinedChange}

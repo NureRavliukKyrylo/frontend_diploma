@@ -1,7 +1,7 @@
 import { apiClient } from "@shared/api";
 
 export const resendEmailVerification = async (userId: string) => {
-  const response = await apiClient.post("Auth/resend-code", {
+  const response = await apiClient.post("Auth/verify-email/resend", {
     userId,
     type: 0,
   });

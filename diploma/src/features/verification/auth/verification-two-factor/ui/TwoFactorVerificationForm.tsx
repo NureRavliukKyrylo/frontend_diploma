@@ -25,7 +25,7 @@ export const TwoFactorVerificationForm: React.FC = () => {
     onSuccess: async () => {
       setIsAuthenticated(true);
       await router.invalidate();
-      router.navigate({ to: search.redirect ?? "/" });
+      router.navigate({ to: search.redirect ?? "/activities" });
     },
   });
 

@@ -187,6 +187,8 @@
     "dueDate": "Кінцева дата",
     "includeArchived": "Показати архівовані {{subject}}",
     "setDistanceLocationPlaceholder": "Вкажіть локацію",
+    "searchAreaCenter": "Центр зони пошуку",
+    "kmRadiusSuffix": "км радіус",
     "kmUnit": "км",
     "onlineOptions": {
       "all": "Усі"

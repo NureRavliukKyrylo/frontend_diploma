@@ -6,7 +6,7 @@ import { profileQuery } from "@entities/user/profile";
 import { ChangePasswordButton } from "../../change-password";
 import { ChangeEmailButton } from "../../change-email";
 import { TwoFactorSwitch } from "../../set-two-factor";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { ConnectedLinks } from "../../connected-links";
 import { useUserStore } from "@entities/user";
 import { useEffect } from "react";
@@ -14,10 +14,14 @@ import { useTranslation } from "react-i18next";
 
 export function PasswordProfileForm() {
   const { t } = useTranslation("profile");
-  const { data: user } = useSuspenseQuery(profileQuery.all());
+  const isAuthenticated = useUserStore((s) => s.isAuthenticated);
+  const { data: user } = useQuery({
+    ...profileQuery.all(),
+    enabled: isAuthenticated,
+  });
   const { isPasswordSet, setIsPasswordSet } = useUserStore();
   const isPasswordConnected =
-    user.connectedServices.find((s) => s.provider === "password")?.connected ??
+    user?.connectedServices.find((s) => s.provider === "password")?.connected ??
     false;
 
   useEffect(() => {

@@ -122,15 +122,15 @@ export const MapFiltersWidget = ({ search }: MapFiltersWidgetProps) => {
                 label={t("common:filters.displayCompleted", {
                   subject: t("common:filters.subjects.projects"),
                 })}
-                value={search.ShowJoined ?? false}
-                onChange={onShowJoinedChange}
+                value={search.IncludeArchived ?? false}
+                onChange={onOnlyActiveChange}
               />
               <SwitchFilter
                 label={t("common:filters.displayJoined", {
                   subject: t("common:filters.subjects.projects"),
                 })}
-                value={search.IncludeArchived ?? false}
-                onChange={onOnlyActiveChange}
+                value={search.ShowJoined ?? false}
+                onChange={onShowJoinedChange}
               />
             </div>
           </AccordionItem>

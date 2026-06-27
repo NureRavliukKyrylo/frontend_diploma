@@ -328,6 +328,7 @@
               border-radius: 100px;
               padding: 10px 20px;
               flex-shrink: 0;
+              cursor: pointer;
 
               @include respond-to(tablet) {
                 padding: 8px 14px;
@@ -390,7 +391,7 @@
               background: #ffffff;
               box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
               border-radius: 100px;
-              padding: 5px;
+              padding: 5px 10px;
               @include respond-to(laptop) {
                 font-size: 18px;
               }

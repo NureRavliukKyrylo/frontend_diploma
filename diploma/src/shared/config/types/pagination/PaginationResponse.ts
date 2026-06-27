@@ -3,8 +3,8 @@ export interface PaginationResponse {
   page: number;
   pageSize: number;
   totalPages: number;
-  nextPage: number;
-  previousPage: number;
+  nextPage: number | null;
+  previousPage: number | null;
   firstUnreadPage: number | null;
   firstUnreadMessageId: string | null;
 }

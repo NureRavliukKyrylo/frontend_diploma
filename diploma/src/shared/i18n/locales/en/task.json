@@ -48,6 +48,7 @@
     "emptyStateTitle": "No comments yet",
     "emptyStateSubtitle": "Be the first one to leave a comment",
     "inputPlaceholder": "Ask a question about this activity...",
+    "inputEditPlaceholder": "Edit a question about this activity...",
     "actions": {
       "cancel": "Cancel",
       "deleteComment": "Delete Comment",

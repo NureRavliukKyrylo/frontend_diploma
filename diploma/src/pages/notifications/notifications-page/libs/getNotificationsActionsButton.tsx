@@ -20,7 +20,7 @@ export const getNotificationActionsButton = ({
   if (
     notification.type === "InvitationCreated" &&
     notification.metadata?.requestId &&
-    !notification.readAt
+    notification.metadata?.status === "New"
   ) {
     return (
       <>
