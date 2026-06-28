@@ -11,7 +11,7 @@ export const useOrganizationFilters = () => {
 
   return {
     onRatingChange: (rating: number | undefined) =>
-      nav((prev) => ({ ...prev, Rating: rating, Page: 1 })),
+      nav((prev) => ({ ...prev, RatingFrom: rating, Page: 1 })),
 
     onLocationSelect: (location: LocationSuggestion, radiusKm: number) =>
       nav((prev) => ({

@@ -27,6 +27,10 @@ export type ReportCase = {
     id: string;
     status: "opened" | "resolved" | "rejected";
   };
+  relatedSubject: {
+    type: keyof typeof ModerationSubjectType;
+    id: string;
+  };
   createdAt: string;
   reason: keyof typeof ReportReasonType;
   details: string;

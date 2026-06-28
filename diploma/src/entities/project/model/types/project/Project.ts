@@ -50,6 +50,7 @@ export interface Project {
   isJoined: boolean;
   canSubmitFeedback: boolean;
   canSubmitReport: boolean;
+  canApply: boolean;
   hasPendingJoinRequest: boolean;
   hasPendingLeaveRequest: boolean;
 }

@@ -9,6 +9,7 @@ import { AuthRoutes } from "@shared/routes";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { useTranslation } from "react-i18next";
 import type { SystemRole } from "@shared/config/types";
+import { queryClient } from "@shared/api";
 
 interface LoginResponse {
   userId: string;
@@ -49,7 +50,8 @@ export const useLogin = () => {
       setRole(data.role);
 
       await router.invalidate({ sync: true });
-
+      await queryClient.cancelQueries();
+      queryClient.clear();
       await router.navigate({ to: search.redirect ?? "/activities" });
     },
     onError: (error: unknown) => {

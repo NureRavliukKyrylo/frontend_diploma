@@ -4,6 +4,7 @@ import styles from "./ReportCaseWidget.module.scss";
 import { getSubjectLink } from "../libs/getSubjectLink";
 import { reportQuery } from "@entities/report";
 import {
+  BanEntityButton,
   BanUserButton,
   BlockUserButton,
   HideContentButton,
@@ -130,12 +131,16 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
           </div>
           {reportCase.subject.author && (
             <div className={styles.actionMainButtons}>
-              <BlockUserButton
-                caseId={reportCase.case.id}
-                entityId={reportCase.subject.id}
-                entityType={reportCase.subject.type}
-                targetUserId={reportCase.subject.author.id}
-              />
+              {["chatMessage", "comment", "feedback"].includes(
+                reportCase.subjectType,
+              ) && (
+                <BlockUserButton
+                  caseId={reportCase.case.id}
+                  entityId={reportCase.relatedSubject.id}
+                  entityType={reportCase.relatedSubject.type}
+                  targetUserId={reportCase.subject.author.id}
+                />
+              )}
               <BanUserButton
                 caseId={reportCase.case.id}
                 targetUserId={reportCase.subject.author.id}
@@ -146,6 +151,15 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
             reportCase.subjectType,
           ) && (
             <HideContentButton
+              caseId={reportCase.case.id}
+              targetEntityId={reportCase.subject.id}
+              targetEntityType={reportCase.subject.type}
+            />
+          )}
+          {!["chatMessage", "comment", "feedback"].includes(
+            reportCase.subjectType,
+          ) && (
+            <BanEntityButton
               caseId={reportCase.case.id}
               targetEntityId={reportCase.subject.id}
               targetEntityType={reportCase.subject.type}

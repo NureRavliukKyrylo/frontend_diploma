@@ -65,6 +65,7 @@ export interface Event {
   hasPendingJoinRequest: boolean;
   hasPendingLeaveRequest: boolean;
   canSubmitReport: boolean;
+  canApply: boolean;
 }
 
 export interface EventJoined extends Event {

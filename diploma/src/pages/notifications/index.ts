@@ -1,2 +1,2 @@
-export { NotificationsPage } from "./notifications-page/ui/NotificationsPage";
-export { NotificationsPageSkeleton } from "./notifications-page/ui/NotificationsPageSkeleton";
+export { NotificationsPage } from "./ui/NotificationsPage";
+export { NotificationsPageSkeleton } from "./ui/NotificationsPageSkeleton";

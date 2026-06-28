@@ -25,7 +25,7 @@ export const organizationOrderSchema = z.object({
 export const organizationFiltersSchema = locationSchema.extend({
   Search: z.string().optional(),
   CategoryIds: z.array(z.string()).optional().catch([]),
-  Rating: z.number().min(0).max(5).optional().catch(5),
+  RatingFrom: z.number().min(0).max(5).optional().catch(5),
   IncludeArchived: z.boolean().optional().catch(false),
   ShowJoined: z.boolean().optional().catch(false),
   MinLat: z.number().optional(),

@@ -40,7 +40,7 @@ export const ProjectStats = ({ project }: ProjectStatsProps) => {
         </div>
       </div>
       <div className={styles.ratingProjectInfo}>
-        <h1>{project.rating.value}</h1>
+        <h1>{parseFloat(project.rating.value.toFixed(2))}</h1>
         <p>
           ({t("project:rating.votes", { count: project.rating.totalVotes })})
         </p>

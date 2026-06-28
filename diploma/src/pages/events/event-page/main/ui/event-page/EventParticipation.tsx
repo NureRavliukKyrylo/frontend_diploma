@@ -30,20 +30,21 @@ export const EventParticipation = ({ event }: EventParticipationProps) => {
       ) : null}
 
       {event.id && event.hasPendingJoinRequest ? (
-        <p className={styles.pendingRequest}>
-          {t("event:states.pendingJoin")}
-        </p>
+        <p className={styles.pendingRequest}>{t("event:states.pendingJoin")}</p>
       ) : null}
 
-      {event.id && !event.hasPendingJoinRequest && !event.hasPendingLeaveRequest ? (
+      {event.id &&
+      !event.hasPendingJoinRequest &&
+      !event.hasPendingLeaveRequest ? (
         <div className={styles.joinEventBlockButton}>
-          {event.isJoined ? (
+          {event.isJoined && (
             <ParticipationLeaveButton
               entityId={event.id}
               entityType="event"
               entityName={event.title}
             />
-          ) : (
+          )}
+          {event.canApply && (
             <ParticipationJoinButton entityId={event.id} entityType="event" />
           )}
         </div>

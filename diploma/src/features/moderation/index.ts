@@ -4,3 +4,4 @@ export { HideContentButton } from "./hide-content/ui/hide-button/HideContentButt
 export { BlockUserButton } from "./block/ui/block-button/BlockUserButton";
 export { BanUserButton } from "./ban/ui/ban-button/BanUserButton";
 export { ReportModal } from "./report/ui/modal/ReportModal";
+export { BanEntityButton } from "./ban-entity/ui/button/BanEntityButton";

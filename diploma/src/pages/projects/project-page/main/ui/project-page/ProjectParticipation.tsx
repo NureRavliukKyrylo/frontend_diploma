@@ -41,13 +41,14 @@ export const ProjectParticipation = ({
       !project.hasPendingJoinRequest &&
       !project.hasPendingLeaveRequest ? (
         <div className={styles.joinProjectBlockButton}>
-          {project.isJoined ? (
+          {project.isJoined && (
             <ParticipationLeaveButton
               entityId={project.id}
               entityType="project"
               entityName={project.title}
             />
-          ) : (
+          )}
+          {project.canApply && (
             <ParticipationJoinButton
               entityId={project.id}
               entityType="project"

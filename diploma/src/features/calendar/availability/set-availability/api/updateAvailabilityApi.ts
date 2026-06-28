@@ -1,7 +1,6 @@
 import { apiClient } from "@shared/api";
 
 export interface UpdateAvailabilityDto {
-  id: string;
   date: Date | null;
   startDate: Date | null;
   endDate: Date | null;
@@ -11,7 +10,13 @@ export interface UpdateAvailabilityDto {
   allDay: boolean;
 }
 
-export const updateAvailability = async (data: UpdateAvailabilityDto) => {
-  const result = await apiClient.put("/users/me/availability-slots", [data]);
+export const updateAvailability = async (
+  slotId: string,
+  data: UpdateAvailabilityDto,
+) => {
+  const result = await apiClient.put(
+    `/users/me/availability-slots/${slotId}`,
+    data,
+  );
   return result.data;
 };

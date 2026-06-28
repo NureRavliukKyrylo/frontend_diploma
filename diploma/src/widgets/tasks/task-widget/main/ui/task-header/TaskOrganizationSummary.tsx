@@ -33,7 +33,7 @@ export const TaskOrganizationSummary = ({
         </LinkButtonWrapper>
       </motion.div>
       <div className={styles.ratingTaskInfo}>
-        <h1>{task.rating.value}</h1>
+        <h1>{parseFloat(task.rating.value.toFixed(2))}</h1>
         <p>({t("task:labels.votes", { count: task.rating.totalVotes })})</p>
       </div>
     </div>

@@ -35,13 +35,14 @@ export const TaskParticipationBlock = ({
       !task.hasPendingJoinRequest &&
       !task.hasPendingLeaveRequest ? (
         <div className={styles.joinTaskBlockButton}>
-          {task.isJoined ? (
+          {task.isJoined && (
             <ParticipationLeaveButton
               entityId={task.id}
               entityType="task"
               entityName={task.title}
             />
-          ) : (
+          )}
+          {task.canApply && (
             <ParticipationJoinButton entityId={task.id} entityType="task" />
           )}
         </div>

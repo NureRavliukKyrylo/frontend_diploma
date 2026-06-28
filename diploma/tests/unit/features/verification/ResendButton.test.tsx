@@ -72,7 +72,6 @@ describe("ResendButton", () => {
         onResend={onResend}
         resetTimer={resetTimer}
         seconds={0}
-        serverError={null}
       />,
     );
     await user.click(screen.getByRole("button"));
@@ -89,7 +88,6 @@ describe("ResendButton", () => {
         onResend={onResend}
         resetTimer={resetTimer}
         seconds={0}
-        serverError="Too many requests"
       />,
     );
     await user.click(screen.getByRole("button"));

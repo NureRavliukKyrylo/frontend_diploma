@@ -4,7 +4,10 @@ import { addToast } from "@heroui/react";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { calendarKeys, type AvailabilitySlot } from "@entities/user/calendar";
 import { addAvailability } from "../api/addAvailabilityApi";
-import { updateAvailability } from "../api/updateAvailabilityApi";
+import {
+  updateAvailability,
+  type UpdateAvailabilityDto,
+} from "../api/updateAvailabilityApi";
 import { getAvailabilitySchema } from "../libs/availabilitySchema";
 import { useTranslation } from "react-i18next";
 
@@ -54,7 +57,13 @@ export const useAvailabilityForm = ({
   });
 
   const updateMutation = useMutation({
-    mutationFn: updateAvailability,
+    mutationFn: ({
+      slotId,
+      data,
+    }: {
+      slotId: string;
+      data: UpdateAvailabilityDto;
+    }) => updateAvailability(slotId, data),
     onSuccess: () => {
       addToast({
         title: t("calendar:formNotifications.updateSuccessTitle"),
@@ -101,7 +110,7 @@ export const useAvailabilityForm = ({
       };
 
       if (isUpdate) {
-        updateMutation.mutate({ id: availability.id, ...base });
+        updateMutation.mutate({ slotId: availability.id, data: base });
       } else {
         addMutation.mutate(base);
       }

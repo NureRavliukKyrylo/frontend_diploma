@@ -31,13 +31,14 @@ export const EventStats = ({ event }: EventStatsProps) => {
           <span className={styles.label}>{t("common:level.next")}</span>
           <span className={styles.next}>
             {t("common:level.current", {
-              level: event.progress?.level == null ? 1 : event.progress.level + 1,
+              level:
+                event.progress?.level == null ? 1 : event.progress.level + 1,
             })}
           </span>
         </div>
       </div>
       <div className={styles.ratingEventInfo}>
-        <h1>{event.rating.value}</h1>
+        <h1>{parseFloat(event.rating.value.toFixed(2))}</h1>
         <p>{t("event:labels.votes", { count: event.rating.totalVotes })}</p>
       </div>
     </div>

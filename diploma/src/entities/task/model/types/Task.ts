@@ -62,6 +62,7 @@ export interface Task {
   hasPendingJoinRequest: boolean;
   hasPendingLeaveRequest: boolean;
   canSubmitReport: boolean;
+  canApply: boolean;
 }
 
 export interface TaskJoined extends Task {

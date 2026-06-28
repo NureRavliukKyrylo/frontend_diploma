@@ -34,7 +34,7 @@ export const OrganizationFiltersWidget = ({
             })}
           </h1>
           <RatingFilter
-            rating={search.Rating}
+            rating={search.RatingFrom}
             onRatingChange={onRatingChange}
           />
         </div>
