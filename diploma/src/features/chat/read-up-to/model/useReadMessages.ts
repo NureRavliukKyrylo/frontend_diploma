@@ -2,9 +2,11 @@ import { useMutation, type InfiniteData } from "@tanstack/react-query";
 import { queryClient } from "@shared/api";
 import {
   chatKeys,
+  mentionKeys,
   messageKeys,
   useChatMessagesQuery,
   type Chat,
+  type MentionFeedItem,
   type MessagesResponse,
 } from "@entities/chat";
 import throttle from "lodash/throttle";
@@ -18,6 +20,9 @@ export const useReadMessages = (chatId: string) => {
   const mutation = useMutation({
     mutationFn: ({ messageId }: { messageId: string }) =>
       readUpTo(chatId, messageId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: mentionKeys.all() });
+    },
   });
 
   const updateUnreadCache = (visibleUnreadIds: string[]) => {
@@ -29,6 +34,7 @@ export const useReadMessages = (chatId: string) => {
         data: {
           ...old.data,
           unreadCount: Math.max(0, old.data.unreadCount - decrementBy),
+          mentionCount: 0,
         },
       };
     });
@@ -45,6 +51,7 @@ export const useReadMessages = (chatId: string) => {
                 ? {
                     ...chat,
                     unreadCount: Math.max(0, chat.unreadCount - decrementBy),
+                    mentionCount: 0,
                   }
                 : chat,
             ),
@@ -89,6 +96,18 @@ export const useReadMessages = (chatId: string) => {
           },
         };
       },
+    );
+    queryClient.setQueriesData<MentionFeedItem[]>(
+      { queryKey: mentionKeys.all(), exact: false },
+      (old) =>
+        old?.map((mention) =>
+          visibleUnreadIds.includes(mention.message?.id ?? "")
+            ? {
+                ...mention,
+                message: { ...mention.message, readStatus: "Read" },
+              }
+            : mention,
+        ),
     );
   };
 

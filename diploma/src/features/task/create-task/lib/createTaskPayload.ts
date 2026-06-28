@@ -6,6 +6,7 @@ const toIsoDateTime = (value: string) => new Date(value).toISOString();
 export const buildCreateTaskPayload = (
   organizationId: string,
   projectId: string | undefined,
+  eventId: string | undefined,
   values: CreateTaskFormState,
 ): CreateTaskPayload => {
   if (!values.startAt || !values.endAt) {
@@ -15,6 +16,7 @@ export const buildCreateTaskPayload = (
   return {
     OrganizationId: organizationId,
     ...(projectId ? { ProjectId: projectId } : {}),
+    ...(eventId ? { EventId: eventId } : {}),
     Title: values.title.trim(),
     Description: values.description.trim(),
     StartAt: toIsoDateTime(values.startAt),

@@ -1,5 +1,9 @@
 export { ActivityFeedbackTab } from "./tabs/feedback-tab/ui/ActivityFeedbackTab";
 export { ActivityMembersTab } from "./tabs/members-tab/ui/ActivityMembersTab";
+export { EntityMembersPanel } from "./entity-management/ui/EntityMembersPanel";
+export { EventAttendanceManagerPage } from "./entity-management/ui/EventAttendanceManagerPage";
+export { EntityMembersPage } from "./entity-management/ui/EntityMembersPage";
+export { EntityRolesPage } from "./entity-management/ui/EntityRolesPage";
 export { MyActivitiesHeader } from "./my-activities-header/ui/MyActivitiesHeader";
 export { MyActivitiesHeaderSkeleton } from "./my-activities-header/ui/MyActivitiesHeaderSkeleton";
 export { type MyActivitiesMode } from "./my-activities-header/config/MyActivitiesMode";

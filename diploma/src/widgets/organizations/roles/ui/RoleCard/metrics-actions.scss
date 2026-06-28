@@ -1,9 +1,10 @@
 
 .roleDescription {
-  min-height: 58px;
+  flex: 1;
+  min-height: 78px;
   margin: 0 0 14px;
   color: #aaaaaa;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.5;
 }
@@ -92,13 +93,13 @@
 }
 
 .useButton {
-  border: 1.5px solid #c07000;
-  background: #fff8e8;
-  color: #c07000;
+  border: none;
+  background: #1a1a1a;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
 
   &:hover {
-    background: #c07000;
-    color: #ffffff;
+    background: #8b0000;
   }
 }
 
@@ -110,6 +111,7 @@
   border: 1px solid #1a1a1a;
   background: #1a1a1a;
   color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
 
   &:hover {
     background: #8b0000;
@@ -121,6 +123,7 @@
   border: 1.5px solid #e0e0e0;
   background: #ffffff;
   color: #1a1a1a;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
 
   &:hover {
     border-color: #1a7a45;

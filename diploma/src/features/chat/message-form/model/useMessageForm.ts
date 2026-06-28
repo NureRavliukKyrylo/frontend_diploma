@@ -10,6 +10,8 @@ interface UseMessageFormProps {
   mentionedUserIds?: string[];
   editingMessage?: { id: string; content: string } | null;
   onCancel?: () => void;
+  submitFallbackBody?: string;
+  onAfterSubmit?: () => void;
 }
 
 export const useMessageForm = ({
@@ -18,6 +20,8 @@ export const useMessageForm = ({
   mentionedUserIds = [],
   editingMessage,
   onCancel,
+  submitFallbackBody = "",
+  onAfterSubmit,
 }: UseMessageFormProps) => {
   const { t } = useTranslation(["chat"]);
   const { sendMessage, isLoading: isSending } = useSendMessage(
@@ -35,17 +39,19 @@ export const useMessageForm = ({
     validationSchema: getMessageSchema(t),
     enableReinitialize: true,
     onSubmit: (values, { resetForm }) => {
-      if (!values.body.trim()) return;
+      const body = values.body.trim() ? values.body : submitFallbackBody;
+      if (!body.trim()) return;
       if (editingMessage) {
-        editMessage({ newContent: values.body });
+        editMessage({ newContent: body });
       } else {
         sendMessage({
-          message: values.body,
+          message: body,
           replyToMessageId,
           mentionedUserIds,
         });
       }
       resetForm();
+      onAfterSubmit?.();
     },
   });
 

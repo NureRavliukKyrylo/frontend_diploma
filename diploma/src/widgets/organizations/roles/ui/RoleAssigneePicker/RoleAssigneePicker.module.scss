@@ -1,0 +1,173 @@
+.pickerBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pickerLabel {
+  color: #8b0000;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pickerBox {
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  background: #f7f7f7;
+  padding: 12px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 5px 8px 5px 5px;
+  font-size: 12.5px;
+  font-weight: 800;
+}
+
+.personChip {
+  background: #fbeaea;
+  color: #8b0000;
+}
+
+.roleChip {
+  background: #eeedfe;
+  color: #534ab7;
+}
+
+.chipAvatar,
+.chipIcon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+}
+
+.chipInitials {
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.chipIcon {
+  border-radius: 999px;
+  background: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeChip {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.65);
+  color: currentColor;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.emptyAssignment {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  color: #999999;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 9px 12px;
+  color: #8b0000;
+
+  input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: #1a1a1a;
+    font-family: "Exo 2", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    outline: none;
+
+    &::placeholder {
+      color: #bbbbbb;
+    }
+  }
+}
+
+.resultsMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+  max-height: 168px;
+  overflow-y: auto;
+}
+
+.resultRow {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  font-family: "Exo 2", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: left;
+
+  &:hover {
+    background: #ffffff;
+  }
+}
+
+.resultAvatar,
+.resultRoleIcon {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+}
+
+.resultInitials {
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.resultRoleIcon {
+  border-radius: 999px;
+  background: #eeedfe;
+  color: #534ab7;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noResults {
+  color: #bbbbbb;
+  padding: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+}

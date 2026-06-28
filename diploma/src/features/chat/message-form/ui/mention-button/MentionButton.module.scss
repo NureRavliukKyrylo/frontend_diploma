@@ -10,50 +10,54 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 55px;
-  height: 55px;
+  width: 36px;
+  height: 36px;
   border: none;
-  background: transparent;
+  background: #f4f4f4;
   cursor: pointer;
   border-radius: 50%;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 
   &.buttonActive {
-    background: #f0f4ff;
+    background: $chat-brand-soft-bg;
+    color: $chat-brand;
   }
 
   .icon {
-    width: 55px;
-    height: 55px;
-    color: #6c8ebf;
+    width: 18px;
+    height: 18px;
+    color: currentColor;
   }
 
   @include respond-to(laptop) {
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
 
     .icon {
-      width: 48px;
-      height: 48px;
+      width: 18px;
+      height: 18px;
     }
   }
 
   @include respond-to(tablet) {
-    width: 42px;
-    height: 42px;
+    width: 34px;
+    height: 34px;
 
     .icon {
-      width: 42px;
-      height: 42px;
+      width: 17px;
+      height: 17px;
     }
   }
 
   @include respond-to(mobile) {
-    width: 42px;
-    height: 42px;
+    width: 34px;
+    height: 34px;
 
     .icon {
-      width: 42px;
-      height: 42px;
+      width: 17px;
+      height: 17px;
     }
   }
 }
@@ -62,12 +66,12 @@
   position: absolute;
   top: 0px;
   right: 0px;
-  width: 25px;
-  height: 25px;
+  width: 17px;
+  height: 17px;
   border-radius: 50%;
-  background: #4f46e5;
+  background: $chat-brand;
   color: #fff;
-  @include font-base(15px, 700);
+  @include font-base(10px, 800);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -151,15 +155,15 @@
     border-color 0.15s ease;
 
   &:hover {
-    background: #f0f4ff;
+    background: $chat-bg-subtle;
   }
 
   &.selected {
-    background: #f0f4ff;
-    border-color: rgba(79, 70, 229, 0.3);
+    background: $chat-brand-soft-bg;
+    border-color: rgba(132, 0, 0, 0.22);
 
     .name {
-      color: #4f46e5;
+      color: $chat-brand;
     }
   }
 

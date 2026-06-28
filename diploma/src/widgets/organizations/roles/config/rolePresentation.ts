@@ -129,6 +129,9 @@ export const getPermissionLabel = (code: string) =>
 export const getRoleStripeColor = (index: number) =>
   stripePalette[index] ?? "#888888";
 
+export const getRoleAccentColor = (index: number) =>
+  stripePalette[index] ?? "#888888";
+
 export const getRoleIndexLabel = (
   type: ContextRoleCardType,
   index: number,

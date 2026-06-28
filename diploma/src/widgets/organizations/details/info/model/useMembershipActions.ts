@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
+import { chatKeys } from "@entities/chat";
 import { getErrorMessage } from "@shared/libs/error-message";
 import {
   isPendingRequestStatus,
@@ -44,6 +45,9 @@ export const useOrganizationDetailsMembershipActions = ({
         queryClient.invalidateQueries({
           queryKey: organizationKeys.joinRequests(organizationId),
         }),
+        joinedDirectly
+          ? queryClient.invalidateQueries({ queryKey: chatKeys.lists() })
+          : Promise.resolve(),
       ]);
 
       addToast({
@@ -79,6 +83,7 @@ export const useOrganizationDetailsMembershipActions = ({
 
       if (joinedAfterRefresh) {
         setIsSubscribed(true);
+        await queryClient.invalidateQueries({ queryKey: chatKeys.lists() });
         addToast({
           title: "Joined organization",
           description: "You are already a member of this organization.",

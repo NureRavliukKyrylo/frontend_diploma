@@ -24,6 +24,7 @@ export const categoryQuery = {
     queryOptions({
       queryKey: categoryKeys.list(params),
       queryFn: () => getListCategories(params),
+      staleTime: 30_000,
     }),
   id: (id: string) =>
     queryOptions({

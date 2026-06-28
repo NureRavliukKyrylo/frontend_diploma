@@ -1,1 +1,1 @@
-export { categoryQuery } from "./category-query/categoryQuery";
+export { categoryKeys, categoryQuery } from "./category-query/categoryQuery";

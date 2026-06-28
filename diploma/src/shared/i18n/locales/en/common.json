@@ -88,6 +88,20 @@
     "emptyTitle": "No members yet",
     "emptySubtitle": "Be the first to join and make a difference"
   },
+  "entityMembers": {
+    "loading": "Loading members...",
+    "error": "We could not load members right now.",
+    "empty": "No members yet.",
+    "confirmRemoveTitle": "Remove member",
+    "confirmRemoveText": "This member will lose access to this activity.",
+    "confirmRemove": "Remove",
+    "cancel": "Cancel",
+    "roleUpdated": "Role updated",
+    "roleUpdateFailed": "Role update failed",
+    "memberRemoved": "Member removed",
+    "memberRemoveFailed": "Member removal failed",
+    "missingParticipation": "This member does not have a participation record."
+  },
   "pagination": {
     "loadMore": "Load more",
     "noResults": "No results found"

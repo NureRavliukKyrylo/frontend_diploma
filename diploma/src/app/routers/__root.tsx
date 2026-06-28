@@ -2,8 +2,10 @@ import {
   notificationKeys,
   useNotificationSignalR,
 } from "@entities/notification";
+import { adminDashboardKeys } from "@entities/admin";
 import { NotFoundPage } from "@pages/not-found";
 import { useUserStore } from "@entities/user";
+import { useSyncUserInfoFromProfile } from "@entities/user/profile";
 import { useLocaleStore, useSignalRStore } from "@shared/config/stores";
 import type { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
@@ -41,6 +43,7 @@ function RootComponent() {
   const connection = useSignalRStore(
     (s) => s.hubs["notifications"].connection?.state,
   );
+  useSyncUserInfoFromProfile();
   useNotificationSignalR();
 
   useEffect(() => {
@@ -66,6 +69,7 @@ function RootComponent() {
         queryClient.invalidateQueries({ queryKey: eventKeys.all() }),
         queryClient.invalidateQueries({ queryKey: taskKeys.all() }),
         queryClient.invalidateQueries({ queryKey: offerKeys.all() }),
+        queryClient.invalidateQueries({ queryKey: adminDashboardKeys.all() }),
       ]);
     }
     send("UpdateLanguage", locale);

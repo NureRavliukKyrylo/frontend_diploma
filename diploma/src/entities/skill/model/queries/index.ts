@@ -1,1 +1,1 @@
-export { skillsQuery } from "./skill-query/skillQueries";
+export { skillKeys, skillQuery, skillsQuery } from "./skill-query/skillQueries";

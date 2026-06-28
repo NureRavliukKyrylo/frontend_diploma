@@ -1,1 +1,7 @@
-export type TaskMode = "overview" | "comments" | "members" | "feedbacks";
+export type TaskMode =
+  | "overview"
+  | "comments"
+  | "members"
+  | "feedbacks"
+  | "roles"
+  | "timelog";

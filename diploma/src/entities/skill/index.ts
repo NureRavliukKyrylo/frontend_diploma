@@ -1,6 +1,17 @@
 export { SkillCardBase } from "./ui/skill-card/base/SkillCardBase";
-export type { Skill } from "./model";
-export { skillsQuery } from "./model/queries/skill-query/skillQueries";
+export type {
+  CategoryListItemDto,
+  Skill,
+  SkillListItemDto,
+  SkillsListParams,
+  SkillSortingParams,
+  VolunteerSkillListItemDto,
+} from "./model";
+export {
+  skillKeys,
+  skillQuery,
+  skillsQuery,
+} from "./model/queries/skill-query/skillQueries";
 export { useSkillsListQuery } from "./model/hooks/useSkillsListQuery";
 export { useMySkillsListQuery } from "./model/hooks/useMySkillsQuery";
 export {
@@ -14,10 +25,17 @@ export {
 } from "./libs/search-shema/skillsSearchSchema";
 export { SkillControlCardSkeleton } from "./ui/skill-card/control/SkillControlCardSkeleton";
 export type { SkillProfile } from "./model/types/skill-profile/SkillProfile";
-export { skillKeys } from "./model/queries/skill-query/skillQueries";
 export {
   getSortingSkillItems,
   type SortSkillsValues,
 } from "./config/sortingSkillItems";
 export { useSkillsInfiniteQuery } from "./model/hooks/useSkillsInfiniteQuery";
 export { getSkillLevelTranslations } from "./config/getSkillLevelTranslations";
+export {
+  createSkill,
+  deleteSkill,
+  updateAdminSkill,
+  uploadSkillIcon,
+  type SkillCreatePayload,
+  type SkillMutationPayload,
+} from "./api";

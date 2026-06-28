@@ -3,33 +3,74 @@
 .chatWrapper {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 13px;
   min-width: 0;
   overflow: hidden;
+  padding: 14px 14px 14px 13px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.045);
+  cursor: pointer;
+  position: relative;
+  background: #ffffff;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.035);
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    background: #fffdfc;
+    border-color: rgba(132, 0, 0, 0.1);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.055);
+    transform: translateY(-1px);
+  }
+
+  &.active {
+    background: #ffffff;
+    border-color: rgba(132, 0, 0, 0.18);
+    box-shadow:
+      0 12px 26px rgba(132, 0, 0, 0.09),
+      0 3px 10px rgba(0, 0, 0, 0.045);
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 14px;
+      bottom: 14px;
+      width: 4px;
+      border-radius: 0 999px 999px 0;
+      background: $chat-brand;
+    }
+  }
 }
 
 .chatAvatar {
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
   flex-shrink: 0;
   position: relative;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.075);
 
   @include respond-to(tablet) {
-    width: 46px;
-    height: 46px;
-  }
-  @include respond-to(mobile) {
     width: 42px;
     height: 42px;
+  }
+  @include respond-to(mobile) {
+    width: 38px;
+    height: 38px;
   }
 }
 
 .onlineIcon {
   position: absolute;
-  width: 12px;
-  height: 12px;
-  left: 48px;
-  top: 44px;
+  width: 13px;
+  height: 13px;
+  left: 50px;
+  top: 48px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.16));
 
   @include respond-to(tablet) {
     left: 42px;
@@ -48,7 +89,7 @@
 .rightContent {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   min-width: 0;
   flex: 1;
 }
@@ -60,10 +101,11 @@
   gap: 8px;
 
   h1 {
-    @include font-base(16px, 600);
+    @include font-base(15px, 900);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #1a1a1a;
 
     @include respond-to(tablet) {
       font-size: 15px;
@@ -74,8 +116,8 @@
   }
 
   h2 {
-    @include font-base(13px, 400);
-    color: #9aa0a6;
+    @include font-base(11px, 700);
+    color: $chat-text-faint;
     white-space: nowrap;
     flex-shrink: 0;
 
@@ -94,8 +136,8 @@
 }
 
 .lastMessage {
-  @include font-base(14px, 300);
-  color: #8d8d8d;
+  @include font-base(13px, 600);
+  color: $chat-text-muted;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -110,8 +152,8 @@
   }
 
   &.typing {
-    color: #0aa65a;
-    @include font-base(14px, 400);
+    color: $chat-brand;
+    @include font-base(13px, 600);
 
     @include respond-to(mobile) {
       font-size: 12px;
@@ -131,22 +173,51 @@
 }
 
 .unreadCount {
-  @include font-base(12px, 600);
-  background: #8c0000;
+  @include font-base(11px, 900);
+  background: #840000;
   color: #fff;
   border-radius: 50%;
-  min-width: 20px;
-  height: 20px;
+  min-width: 22px;
+  height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 4px;
   flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(132, 0, 0, 0.24);
 
   @include respond-to(mobile) {
     min-width: 18px;
     height: 18px;
     font-size: 11px;
+  }
+}
+
+.badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.mentionCount {
+  @include font-base(11px, 900);
+  min-width: 24px;
+  height: 22px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: #1a1a1a;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+
+  @include respond-to(mobile) {
+    min-width: 22px;
+    height: 20px;
+    font-size: 10px;
+    padding: 0 6px;
   }
 }
 

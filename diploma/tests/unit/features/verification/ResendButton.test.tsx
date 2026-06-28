@@ -8,7 +8,6 @@ describe("ResendButton", () => {
     onResend: vi.fn().mockResolvedValue(undefined),
     resetTimer: vi.fn(),
     decrementTimer: vi.fn(),
-    serverError: null,
     isLoading: false,
   };
 
@@ -78,10 +77,10 @@ describe("ResendButton", () => {
     expect(resetTimer).toHaveBeenCalled();
   });
 
-  it("does not call resetTimer when serverError is present", async () => {
+  it("does not call resetTimer when resend fails", async () => {
     const user = userEvent.setup();
     const resetTimer = vi.fn();
-    const onResend = vi.fn().mockResolvedValue(undefined);
+    const onResend = vi.fn().mockRejectedValue(new Error("Too many requests"));
     render(
       <ResendButton
         {...defaultProps}

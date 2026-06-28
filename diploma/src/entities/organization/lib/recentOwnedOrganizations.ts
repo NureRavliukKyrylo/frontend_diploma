@@ -31,10 +31,7 @@ export const rememberOwnedOrganizationIds = (
   if (!userId || typeof window === "undefined") return;
 
   const nextOrganizationIds = Array.from(
-    new Set([
-      ...organizationIds.filter(Boolean),
-      ...getRememberedOwnedOrganizationIds(userId),
-    ]),
+    new Set(organizationIds.filter(Boolean)),
   ).slice(0, MAX_STORED_ORGANIZATIONS);
 
   try {
@@ -51,5 +48,18 @@ export const rememberOwnedOrganizationId = (
   userId: string | null | undefined,
   organizationId: string,
 ): void => {
-  rememberOwnedOrganizationIds(userId, [organizationId]);
+  if (!userId || typeof window === "undefined") return;
+
+  const nextOrganizationIds = Array.from(
+    new Set([organizationId, ...getRememberedOwnedOrganizationIds(userId)]),
+  ).slice(0, MAX_STORED_ORGANIZATIONS);
+
+  try {
+    window.localStorage.setItem(
+      getStorageKey(userId),
+      JSON.stringify(nextOrganizationIds),
+    );
+  } catch {
+    return;
+  }
 };

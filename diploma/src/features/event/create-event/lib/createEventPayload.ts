@@ -8,6 +8,7 @@ const toRecurrenceUntilIso = (value: string) =>
 
 export const buildCreateEventPayload = (
   organizationId: string,
+  projectId: string | undefined,
   values: CreateEventFormState,
 ): CreateEventPayload => {
   if (!values.location || !values.startAt || !values.endAt) {
@@ -23,7 +24,7 @@ export const buildCreateEventPayload = (
 
   return {
     OrganizationId: organizationId,
-    ProjectId: null,
+    ProjectId: projectId ?? null,
     Title: values.title.trim(),
     Description: values.description.trim() || null,
     StartAt: toDateTimeIso(values.startAt),

@@ -78,6 +78,7 @@ export const useOrganizationRolesData = (organizationId: string) => {
     activeRolesResult,
     templatesResult,
     templateRoles: templatesResult.data ?? [],
+    members,
     membersByRoleId,
     profilesByUserId,
     ...groupedRoles,

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { addToast } from "@heroui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { chatKeys } from "@entities/chat";
 import {
   approveOrganizationRequest,
   organizationKeys,
@@ -117,6 +118,9 @@ export const useOrganizationMemberMutations = (organizationId: string) => {
         queryClient.invalidateQueries({
           queryKey: organizationKeys.details(organizationId),
         }),
+        action === "approve"
+          ? queryClient.invalidateQueries({ queryKey: chatKeys.lists() })
+          : Promise.resolve(),
       ]);
       addToast({
         title: action === "approve" ? "Request approved" : "Request rejected",

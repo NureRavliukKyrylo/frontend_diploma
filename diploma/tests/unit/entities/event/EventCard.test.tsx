@@ -120,6 +120,7 @@ const makeEvent = (overrides: Partial<Event> = {}): Event => ({
   hasPendingJoinRequest: false,
   hasPendingLeaveRequest: false,
   canSubmitReport: false,
+  canApply: false,
   ...overrides,
 });
 

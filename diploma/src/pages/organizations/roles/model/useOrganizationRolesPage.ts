@@ -16,6 +16,7 @@ import { useOrganizationRolesData } from "./useOrganizationRolesData";
 import type {
   RoleActionState,
   RoleFormState,
+  RoleSortOption,
   RolesTab,
   SelectedRoleState,
 } from "./types";
@@ -26,6 +27,7 @@ export const useOrganizationRolesPage = () => {
   });
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<RolesTab>("active");
+  const [roleSort, setRoleSort] = useState<RoleSortOption>("name");
   const [selectedRole, setSelectedRole] = useState<SelectedRoleState | null>(
     null,
   );
@@ -96,6 +98,8 @@ export const useOrganizationRolesPage = () => {
     navigate,
     activeTab,
     setActiveTab,
+    roleSort,
+    setRoleSort,
     selectedRole,
     setSelectedRole,
     formState,

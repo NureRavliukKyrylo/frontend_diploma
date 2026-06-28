@@ -9,24 +9,29 @@ import { useChatStore } from "@entities/chat/model/store/useChatStore";
 interface ChatItemProps {
   chat: Chat;
   isOnline?: string;
+  isActive?: boolean;
 }
 
-export const ChatItem = ({ chat, isOnline }: ChatItemProps) => {
+export const ChatItem = ({ chat, isOnline, isActive = false }: ChatItemProps) => {
   const { t, i18n } = useTranslation(["chat"]);
   const initials = chat.name?.split(" ").slice(0, 2).join(" ") ?? "nothing";
   const typing = useChatStore((s) => s.typingByChat[chat.id]);
+  const mentionCount = chat.mentionCount ?? 0;
 
   return (
-    <div className={styles.chatWrapper}>
+    <div
+      className={`${styles.chatWrapper} ${isActive ? styles.active : ""}`}
+    >
       <Avatar
         className={styles.chatAvatar}
         src={chat.avatarUrl ?? undefined}
         fallback={initials}
+        shape="rounded"
       />
       {isOnline && <OnlineIcon className={styles.onlineIcon} />}
       <div className={styles.rightContent}>
         <div className={styles.topContent}>
-          <h1> {chat.name}</h1>
+          <h1>{chat.name}</h1>
           {chat.lastMessage?.timestamp && (
             <h2>
               {formatDateToText(
@@ -43,8 +48,17 @@ export const ChatItem = ({ chat, isOnline }: ChatItemProps) => {
               ? t("chat:states.typing")
               : (chat.lastMessage?.message ?? t("chat:states.noMessages"))}
           </p>
-          {chat.unreadCount !== 0 && (
-            <span className={styles.unreadCount}>{chat.unreadCount}</span>
+          {(mentionCount > 0 || chat.unreadCount !== 0) && (
+            <span className={styles.badges}>
+              {mentionCount > 0 && (
+                <span className={styles.mentionCount}>
+                  @{mentionCount >= 100 ? "99+" : mentionCount}
+                </span>
+              )}
+              {chat.unreadCount !== 0 && (
+                <span className={styles.unreadCount}>{chat.unreadCount}</span>
+              )}
+            </span>
           )}
         </div>
       </div>

@@ -4,12 +4,19 @@ import styles from "./HeaderTimeBank.module.scss";
 
 interface HeaderTimeBankProps {
   availableMinutes?: number | null;
+  onClick?: () => void;
 }
 
 export const HeaderTimeBank = ({
   availableMinutes,
+  onClick,
 }: HeaderTimeBankProps) => (
-  <div className={styles.timeBankBlock}>
+  <button
+    type="button"
+    className={styles.timeBankBlock}
+    role="menuitem"
+    onClick={onClick}
+  >
     <span className={styles.timeBankIcon}>
       <Hourglass aria-hidden="true" strokeWidth={1.9} />
     </span>
@@ -17,5 +24,5 @@ export const HeaderTimeBank = ({
       <span>Time Bank</span>
       <span>{formatTimeBankMinutes(availableMinutes)}</span>
     </div>
-  </div>
+  </button>
 );

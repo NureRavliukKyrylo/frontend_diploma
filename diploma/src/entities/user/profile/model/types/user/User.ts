@@ -10,6 +10,7 @@ export interface User {
   lastName: string;
   googleId: string | null;
   email: string;
+  roleName?: string;
   registeredAt: string;
   profile: Profile | null;
   googleVerified: boolean;

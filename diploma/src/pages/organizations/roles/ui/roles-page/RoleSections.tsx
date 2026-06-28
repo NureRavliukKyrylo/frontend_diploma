@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { Plus } from "lucide-react";
+import { EmptyState } from "@shared/ui";
 import { RoleCard } from "@widgets/organizations/roles";
+import { sortRolesByOption } from "../../lib/sortingRoleItems";
 import type { OrganizationRolesPageModel } from "../../model/pageModel";
+import { SectionHeader } from "./SectionHeader";
 import styles from "./RoleSections.module.scss";
 
 interface RoleSectionsProps {
@@ -9,25 +12,24 @@ interface RoleSectionsProps {
 }
 
 export const RoleSections = ({ model }: RoleSectionsProps) => {
+  const sortRoles = (roles: Parameters<typeof sortRolesByOption>[0]) =>
+    sortRolesByOption(roles, model.roleSort, model.getMemberCountForRole);
   const activeSections = [
     {
-      title: "System",
-      roles: model.systemRoles,
-      type: "system" as const,
-    },
-    {
       title: "Templates",
-      roles: model.templateRoles,
+      roles: sortRoles(model.templateRoles),
       type: "template" as const,
     },
     {
       title: "Custom",
-      roles: model.customRoles,
+      roles: sortRoles(model.customRoles),
       type: "custom" as const,
     },
   ];
 
   if (model.activeTab === "archived") {
+    const archivedRoles = sortRoles(model.archivedRoles);
+
     return (
       <motion.section
         className={styles.section}
@@ -35,22 +37,34 @@ export const RoleSections = ({ model }: RoleSectionsProps) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <SectionHeader title="Archived roles" count={model.archivedRoles.length} />
-        <div className={styles.cardsGrid}>
-          {model.archivedRoles.map((role, index) => (
-            <RoleCard
-              key={role.id}
-              role={role}
-              index={index}
-              type="custom"
-              archived
-              memberCount={model.getMemberCountForRole(role.id)}
-              onClick={() => model.openRoleCard(role, "custom", index)}
-              onRestore={() => model.openAction(role, "custom", "restore")}
-              onDelete={() => model.openAction(role, "custom", "delete")}
+        <SectionHeader
+          title="Archived roles"
+          count={archivedRoles.length}
+        />
+        {archivedRoles.length > 0 ? (
+          <div className={styles.cardsGrid}>
+            {archivedRoles.map((role, index) => (
+              <RoleCard
+                key={role.id}
+                role={role}
+                index={index}
+                type="custom"
+                archived
+                memberCount={model.getMemberCountForRole(role.id)}
+                onClick={() => model.openRoleCard(role, "custom", index)}
+                onRestore={() => model.openAction(role, "custom", "restore")}
+                onDelete={() => model.openAction(role, "custom", "delete")}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className={styles.archivedEmpty}>
+            <EmptyState
+              title="No archived roles"
+              subtitle="Roles you archive will appear here."
             />
-          ))}
-        </div>
+          </div>
+        )}
       </motion.section>
     );
   }
@@ -116,6 +130,7 @@ export const RoleSections = ({ model }: RoleSectionsProps) => {
                 }}
                 onClick={() => model.setFormState({ mode: "create", role: null })}
               >
+                <span className={styles.createDeco} aria-hidden="true" />
                 <motion.span
                   className={styles.createIcon}
                   variants={{
@@ -137,16 +152,3 @@ export const RoleSections = ({ model }: RoleSectionsProps) => {
   );
 };
 
-const SectionHeader = ({
-  title,
-  count,
-}: {
-  title: string;
-  count: number;
-}) => (
-  <div className={styles.sectionHeader}>
-    <span className={styles.sectionTitle}>{title}</span>
-    <span className={styles.sectionLine} />
-    <span className={styles.sectionBadge}>{count}</span>
-  </div>
-);

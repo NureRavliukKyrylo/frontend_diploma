@@ -19,5 +19,5 @@ export type Message = {
   isMine: boolean;
   readStatus: "Unread" | "Read";
   isSystem: boolean;
-  canSubmitReport: boolean;
+  canSubmitReport?: boolean;
 };

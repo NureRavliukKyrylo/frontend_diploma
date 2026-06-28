@@ -1,6 +1,7 @@
 import { addToast } from "@heroui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
+import { chatKeys } from "@entities/chat";
 import { organizationKeys } from "@entities/organization";
 import {
   createOrganization,
@@ -96,6 +97,10 @@ export const useOrganizationCreateFlow = () => {
         }),
         queryClient.invalidateQueries({
           queryKey: profileKeys.all(),
+          refetchType: "all",
+        }),
+        queryClient.invalidateQueries({
+          queryKey: chatKeys.lists(),
           refetchType: "all",
         }),
       ]);

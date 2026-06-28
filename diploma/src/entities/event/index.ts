@@ -55,9 +55,20 @@ export { type EventAttendance } from "./model/types/EventAttendance";
 export { EventAttendanceListItem } from "./ui/event-attendance-item/EventAttendanceListItem";
 export { EventAttendanceListItemSkeleton } from "./ui/event-attendance-item/EventAttendanceListItemSkeleton";
 export {
+  approveEventAttendance,
   cancelEvent,
+  exportEventAttendance,
+  getEventAttendanceManagerList,
+  rejectEventAttendance,
+  resolveEventAttendance,
   updateEvent,
   type CancelEventResponse,
+  type EventAttendanceDecisionPayload,
+  type EventAttendanceManagerRecord,
+  type EventAttendanceManagerResponse,
+  type EventAttendanceManagerSearchParams,
+  type EventAttendanceManagerStatus,
+  type EventAttendanceResolvePayload,
   type UpdateEventLocation,
   type UpdateEventPayload,
   type UpdateEventResponse,

@@ -5,6 +5,7 @@ import {
 } from "../lib/normalizeContextRole";
 import type {
   ContextRoleArchiveReason,
+  ContextRoleCreateFromTemplateRequest,
   ContextRoleCreateDto,
   ContextRoleDto,
 } from "../model/types/contextRolesTypes";
@@ -23,17 +24,29 @@ export const getOrgContextRoles = async (
   return normalizeContextRoles(response.data);
 };
 
+export const getContextRolesForEntity = async (
+  entityType: string,
+  entityId: string,
+  includeArchived = false,
+): Promise<ContextRoleDto[]> => {
+  const response = await apiClient.get<unknown>(
+    `ContextRole/entity/${entityType}/${entityId}`,
+    {
+      params: includeArchived ? { includeArchived: true } : undefined,
+    },
+  );
+
+  return normalizeContextRoles(response.data);
+};
+
 export const getContextRoleTemplates = async (
   entityType: string,
 ): Promise<ContextRoleDto[]> => {
-  const response = await apiClient.get<unknown>(
-    "ContextRole/templates",
-    {
-      params: {
-        entityType,
-      },
+  const response = await apiClient.get<unknown>("ContextRole/templates", {
+    params: {
+      entityType,
     },
-  );
+  });
 
   return normalizeContextRoles(response.data);
 };
@@ -43,11 +56,24 @@ export const createContextRole = async (payload: ContextRoleCreateDto) => {
   return normalizeContextRoleResponse(response.data);
 };
 
+export const createContextRoleFromTemplate = async (
+  payload: ContextRoleCreateFromTemplateRequest,
+) => {
+  const response = await apiClient.post<unknown>(
+    "ContextRole/create-from-template",
+    payload,
+  );
+  return normalizeContextRoleResponse(response.data);
+};
+
 export const updateContextRole = async (
   id: string,
   dto: ContextRoleCreateDto,
 ) => {
-  const response = await apiClient.put<unknown>(`ContextRole/update/${id}`, dto);
+  const response = await apiClient.put<unknown>(
+    `ContextRole/update/${id}`,
+    dto,
+  );
   return normalizeContextRoleResponse(response.data);
 };
 
@@ -55,9 +81,13 @@ export const archiveContextRole = async (
   id: string,
   reason: ContextRoleArchiveReason,
 ) => {
-  const response = await apiClient.post<unknown>(`ContextRole/archive/${id}`, null, {
-    params: { reason },
-  });
+  const response = await apiClient.post<unknown>(
+    `ContextRole/archive/${id}`,
+    null,
+    {
+      params: { reason },
+    },
+  );
   return normalizeContextRoleResponse(response.data);
 };
 
@@ -76,7 +106,5 @@ export const setDefaultContextRole = async (
   dto: ContextRoleCreateDto,
 ) => updateContextRole(id, { ...dto, isDefaultForJoin: true });
 
-export const setDefaultRole = async (
-  id: string,
-  dto: ContextRoleCreateDto,
-) => setDefaultContextRole(id, dto);
+export const setDefaultRole = async (id: string, dto: ContextRoleCreateDto) =>
+  setDefaultContextRole(id, dto);

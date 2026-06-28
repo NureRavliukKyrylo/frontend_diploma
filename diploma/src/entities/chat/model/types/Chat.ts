@@ -16,8 +16,10 @@ export type Chat = {
   }[];
   name: string;
   avatarUrl: string | null;
-  lastMessage: { message: string; timestamp: string } | null;
+  lastMessage: { message: string; timestamp?: string; type?: string } | null;
+  lastMessageAt?: string;
   relatedEntityType: RelatedEntityTypeChatValue;
   relatedEntityId: string;
   unreadCount: number;
+  mentionCount?: number;
 };

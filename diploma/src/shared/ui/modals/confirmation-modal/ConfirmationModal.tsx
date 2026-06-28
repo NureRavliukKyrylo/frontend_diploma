@@ -19,6 +19,7 @@ interface ConfirmationModalProps {
   maxWidth?: string;
   confirmButtonClassName?: string;
   cancelButtonClassName?: string;
+  children?: React.ReactNode;
 }
 
 export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
@@ -36,6 +37,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   maxWidth = "650px",
   confirmButtonClassName,
   cancelButtonClassName,
+  children,
 }) => {
   return (
     <BaseModal isOpen={isOpen} onClose={onCancel} maxWidth={maxWidth}>
@@ -54,6 +56,8 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         <div className={styles.modalConfirmationDescription}>
           <p>{text}</p>
         </div>
+
+        {children}
 
         <div className={styles.actionsConfirmationModal}>
           <motion.div

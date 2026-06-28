@@ -49,6 +49,7 @@ export const useTaskWidget = ({
         userName: getFullName(user?.firstName, user?.lastName),
         search,
         handleSort,
+        t,
       })
     : null;
 

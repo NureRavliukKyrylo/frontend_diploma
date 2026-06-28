@@ -5,6 +5,6 @@ export interface PaginationResponse {
   totalPages: number;
   nextPage: number | null;
   previousPage: number | null;
-  firstUnreadPage: number | null;
-  firstUnreadMessageId: string | null;
+  firstUnreadPage?: number | null;
+  firstUnreadMessageId?: string | null;
 }

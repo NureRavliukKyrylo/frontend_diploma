@@ -1,6 +1,10 @@
 .roleCard {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  position: relative;
   background: #ffffff;
-  border-radius: 20px;
+  border-radius: 36px 22px 36px 22px;
   overflow: hidden;
   border: 1px solid #ebebeb;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
@@ -16,6 +20,18 @@
   }
 }
 
+.cardDeco {
+  position: absolute;
+  top: -36px;
+  right: -36px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(132, 0, 0, 0.03);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .locked {
   background: #fafafa;
 
@@ -26,23 +42,10 @@
 
 .template {
   border-style: dashed;
-
-  &:hover {
-    border-color: #c07000;
-    background: #fffcf5;
-  }
 }
 
 .archived {
   opacity: 0.75;
-
-  .stripe {
-    background-image: repeating-linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0.2) 0 12px,
-      rgba(0, 0, 0, 0.06) 12px 20px
-    );
-  }
 
   .roleName {
     color: #888888;
@@ -55,14 +58,14 @@
   }
 }
 
-.stripe {
-  display: block;
-  height: 4px;
-  width: 100%;
-}
-
 .cardBody {
-  padding: 20px 22px;
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 24px 28px;
 }
 
 .topRow {
@@ -117,7 +120,7 @@
 .roleName {
   margin: 0 0 4px;
   color: #1a1a1a;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 900;
   line-height: 1.2;
 }

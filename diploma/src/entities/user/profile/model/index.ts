@@ -1,4 +1,5 @@
 export type { User } from "./types/user/User";
+export { useSyncUserInfoFromProfile } from "./hooks/useSyncUserInfoFromProfile";
 export type { ProfileMode } from "./types/modes/ProfileMode";
 export type { ProfileSettingsMode } from "./types/modes/ProfileSettingsMode";
 export type {

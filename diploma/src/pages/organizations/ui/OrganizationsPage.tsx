@@ -42,7 +42,10 @@ export const OrganizationsPage = () => {
   const { data: user } = useQuery(profileQuery.all());
   const currentUserId = storedUserId || user?.id?.trim();
   const { data: memberships = [] } = useQuery(organizationQuery.memberships());
-  const { data: ownedOrganizationsResponse } = useQuery(
+  const {
+    data: ownedOrganizationsResponse,
+    isSuccess: isOwnedOrganizationsSuccess,
+  } = useQuery(
     organizationQuery.my({
       ...search,
       Page: 1,
@@ -57,7 +60,16 @@ export const OrganizationsPage = () => {
     archivedOrganizationsResponse?.data.length ??
     0;
 
-  const serverOwnedOrganizations = ownedOrganizationsResponse?.data ?? [];
+  const serverOwnedOrganizations = useMemo(
+    () =>
+      (ownedOrganizationsResponse?.data ?? []).filter(
+        (organization) =>
+          Boolean(
+            currentUserId && organization.ownerId?.trim() === currentUserId,
+          ),
+      ),
+    [currentUserId, ownedOrganizationsResponse?.data],
+  );
   const serverOwnedOrganizationIds = useMemo(
     () => serverOwnedOrganizations.map((organization) => organization.id),
     [serverOwnedOrganizations],
@@ -88,29 +100,47 @@ export const OrganizationsPage = () => {
       Array.from(
         new Set([
           ...serverOwnedOrganizationIds,
-          ...rememberedOwnedOrganizationIds,
           ...cachedOwnedOrganizations.map((organization) => organization.id),
         ]),
       ),
-    [
-      cachedOwnedOrganizations,
-      rememberedOwnedOrganizationIds,
-      serverOwnedOrganizationIds,
-    ],
+    [cachedOwnedOrganizations, serverOwnedOrganizationIds],
   );
   const profileOrganizations = user?.profile?.organizations ?? [];
+  const membershipOrganizationIds = useMemo(
+    () =>
+      memberships
+        .filter((membership) => membership.isActive)
+        .map((membership) => membership.entityId),
+    [memberships],
+  );
+  const profileOrganizationIds = useMemo(
+    () => profileOrganizations.map(getOrganizationId).filter(Boolean),
+    [profileOrganizations],
+  );
+  const relationshipOrganizationIds = useMemo(
+    () =>
+      new Set([
+        ...ownedOrganizationIds,
+        ...membershipOrganizationIds,
+        ...profileOrganizationIds,
+      ]),
+    [membershipOrganizationIds, ownedOrganizationIds, profileOrganizationIds],
+  );
   const detailOrganizationIds = useMemo(() => {
-    const membershipIds = memberships
-      .filter((membership) => membership.isActive)
-      .map((membership) => membership.entityId);
-    const profileIds = profileOrganizations
-      .map(getOrganizationId)
-      .filter(Boolean);
-
     return Array.from(
-      new Set([...ownedOrganizationIds, ...membershipIds, ...profileIds]),
+      new Set([
+        ...ownedOrganizationIds,
+        ...membershipOrganizationIds,
+        ...profileOrganizationIds,
+        ...rememberedOwnedOrganizationIds,
+      ]),
     );
-  }, [memberships, ownedOrganizationIds, profileOrganizations]);
+  }, [
+    membershipOrganizationIds,
+    ownedOrganizationIds,
+    profileOrganizationIds,
+    rememberedOwnedOrganizationIds,
+  ]);
   const detailOrganizationQueries = useQueries({
     queries: detailOrganizationIds.map((organizationId) => ({
       ...organizationQuery.byId(organizationId),
@@ -133,9 +163,16 @@ export const OrganizationsPage = () => {
     });
     const detailedOrganizations = detailOrganizationQueries
       .map((query) => query.data)
-      .filter((organization): organization is Organization =>
-        Boolean(organization),
-      );
+      .filter((organization): organization is Organization => {
+        if (!organization) return false;
+
+        return (
+          relationshipOrganizationIds.has(organization.id) ||
+          Boolean(
+            currentUserId && organization.ownerId?.trim() === currentUserId,
+          )
+        );
+      });
 
     return Array.from(
       new Map(
@@ -149,14 +186,17 @@ export const OrganizationsPage = () => {
     );
   }, [
     cachedOwnedOrganizations,
+    currentUserId,
     detailOrganizationQueries,
     profileOrganizations,
+    relationshipOrganizationIds,
     serverOwnedOrganizations,
   ]);
 
   useEffect(() => {
+    if (!isOwnedOrganizationsSuccess) return;
     rememberOwnedOrganizationIds(currentUserId, ownedOrganizationIds);
-  }, [currentUserId, ownedOrganizationIds]);
+  }, [currentUserId, isOwnedOrganizationsSuccess, ownedOrganizationIds]);
 
   const filteredOrganizations = useMemo(() => {
     const searchTerm = search.Search?.trim().toLowerCase();
@@ -228,7 +268,6 @@ export const OrganizationsPage = () => {
 
       <MyOrganizationsListWidget
         organizations={organizations}
-        ownedOrganizationIds={ownedOrganizationIds}
         showDiscoverCard
       />
 

@@ -10,9 +10,9 @@ interface MembersSectionProps {
 
 export const MembersSection = ({ memberCount, members }: MembersSectionProps) => (
   <section className={styles.section}>
-    <div className={styles.sectionHeading}>
-      <h3>Members With This Role · {memberCount}</h3>
-      <p>These members are currently assigned to this role in the organization.</p>
+    <div className={styles.sectionHeadingRow}>
+      <h3>Members</h3>
+      <span>{memberCount} total</span>
     </div>
 
     {members.length > 0 ? (

@@ -15,6 +15,8 @@ export const RolesOverlays = ({ model }: RolesOverlaysProps) => (
       stripeColor={model.selectedStripeColor}
       memberCount={model.selectedMemberCount}
       members={model.selectedMembers}
+      assignmentMembers={model.members}
+      assignmentRoles={model.activeScopedRoles}
       onClose={() => model.setSelectedRole(null)}
       onEdit={
         model.selectedRole?.type === "custom" &&
@@ -60,6 +62,10 @@ export const RolesOverlays = ({ model }: RolesOverlaysProps) => (
       mode={model.formState?.mode ?? "create"}
       role={model.formState?.role ?? null}
       organizationId={model.organizationId}
+      organizationName={model.organization?.name}
+      members={model.members}
+      roles={model.activeScopedRoles}
+      existingRoles={model.allScopedRoles}
       isSubmitting={model.saveMutation.isPending}
       onClose={() => model.setFormState(null)}
       onSubmit={model.submitRole}

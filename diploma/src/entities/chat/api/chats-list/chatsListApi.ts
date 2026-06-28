@@ -11,6 +11,9 @@ export interface ChatsResponse {
 export const getListChats = async (
   params?: ChatSearchQuery,
 ): Promise<ChatsResponse> => {
-  const response = await apiClient.get("/Chats/list", { params });
+  const response = await apiClient.get("/Chats/list", {
+    params,
+    timeout: 30000,
+  });
   return response.data;
 };

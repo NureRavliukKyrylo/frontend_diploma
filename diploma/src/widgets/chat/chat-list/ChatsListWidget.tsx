@@ -5,13 +5,14 @@ import {
   type Chat,
   type RelatedEntityTypeChatValue,
 } from "@entities/chat";
-import { Accordion, AccordionItem } from "@heroui/react";
-import { Suspense } from "react";
+import { Suspense, useCallback, useMemo, useState } from "react";
 import { ChatSection } from "./ChatSection";
 import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { ErrorBoundary } from "react-error-boundary";
 import { getHttpErrorInfo } from "@shared/libs/error";
 import { useTranslation } from "react-i18next";
+import { ChatFolderRail } from "../chat-folder-rail/ui/ChatFolderRail";
+import { useChatFolderRail } from "../chat-folder-rail/model/useChatFolderRail";
 
 interface ChatsListWidgetProps {
   useChatsQuery: (entityType: RelatedEntityTypeChatValue) => QueryResult<Chat>;
@@ -28,64 +29,71 @@ export const ChatsListWidget = ({
 }: ChatsListWidgetProps) => {
   const { t } = useTranslation(["chat", "common"]);
   const wrapperClass = `${styles.chatsWidgetBlock} ${className ?? ""}`.trim();
+  const { activeType, setActiveType } = useChatFolderRail(entityTypes);
+  const [counts, setCounts] = useState<
+    Partial<Record<RelatedEntityTypeChatValue, number>>
+  >({});
+
+  const handleCountChange = useCallback(
+    (entityType: RelatedEntityTypeChatValue, count: number) => {
+      setCounts((prev) =>
+        prev[entityType] === count ? prev : { ...prev, [entityType]: count },
+      );
+    },
+    [],
+  );
+
+  const activeLabel = useMemo(
+    () =>
+      t(`chat:categories.${activeType}`, {
+        defaultValue: activeType,
+      }).toUpperCase(),
+    [activeType, t],
+  );
+
+  const activeCount = counts[activeType] ?? 0;
 
   return (
     <div className={styles.wrapperListChats}>
-      <Accordion
-        selectionMode="multiple"
-        motionProps={{
-          initial: { opacity: 0, y: -4 },
-          animate: { opacity: 1, y: 0 },
-          exit: { opacity: 0, y: -4 },
-          transition: { duration: 0.18, ease: "easeInOut" },
-        }}
-        itemClasses={{
-          title: styles.title,
-          base: styles.base,
-          indicator: styles.indicator,
-          trigger: styles.trigger,
-          content: styles.content,
-          heading: styles.heading,
-        }}
-        className={styles.accordionWrapper}
-        defaultExpandedKeys={entityTypes}
-      >
-        {entityTypes.map((entityType) => (
-          <AccordionItem
-            key={entityType}
-            title={t(`chat:categories.${entityType}`, {
-              defaultValue: entityType,
-            })}
+      <ChatFolderRail
+        entityTypes={entityTypes}
+        activeType={activeType}
+        onChange={setActiveType}
+        counts={counts}
+      />
+      <div className={styles.activeFolderPanel}>
+        <div className={styles.activeSectionHeader}>
+          <span className={styles.activeSectionLabel}>{activeLabel}</span>
+          <span className={styles.activeSectionCount}>
+            {activeCount === 1 ? "1 chat" : `${activeCount} chats`}
+          </span>
+        </div>
+        <ErrorBoundary
+          fallbackRender={({ error }) => (
+            <div className={styles.errorState}>
+              <p className="errorHttpMessage">{getHttpErrorInfo(error, t)}</p>
+              <p className="errorHint">{t("common:errors.errorHint")}</p>
+            </div>
+          )}
+        >
+          <Suspense
+            fallback={
+              <ListWidgetSkeleton
+                renderSkeleton={() => <ChatItemSkeleton />}
+                items={5}
+              />
+            }
           >
-            <ErrorBoundary
-              fallbackRender={({ error }) => (
-                <div className={styles.errorState}>
-                  <p className="errorHttpMessage">
-                    {getHttpErrorInfo(error, t)}
-                  </p>
-                  <p className="errorHint">{t("common:errors.errorHint")}</p>
-                </div>
-              )}
-            >
-              <Suspense
-                fallback={
-                  <ListWidgetSkeleton
-                    renderSkeleton={() => <ChatItemSkeleton />}
-                    items={5}
-                  />
-                }
-              >
-                <ChatSection
-                  useChatsQuery={useChatsQuery}
-                  entityType={entityType}
-                  renderCard={renderCard}
-                  wrapperClass={wrapperClass}
-                />
-              </Suspense>
-            </ErrorBoundary>
-          </AccordionItem>
-        ))}
-      </Accordion>
+            <ChatSection
+              useChatsQuery={useChatsQuery}
+              entityType={activeType}
+              renderCard={renderCard}
+              wrapperClass={wrapperClass}
+              onCountChange={handleCountChange}
+            />
+          </Suspense>
+        </ErrorBoundary>
+      </div>
     </div>
   );
 };

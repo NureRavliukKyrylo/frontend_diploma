@@ -1,0 +1,110 @@
+@use "@shared/assets/styles" as *;
+
+.rail {
+  width: 96px;
+  background:
+    linear-gradient(180deg, #fbfaf8 0%, #f5f3ef 100%);
+  border-right: 1px solid $chat-border;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 10px;
+  gap: 8px;
+  flex-shrink: 0;
+
+  @include respond-to(mobile) {
+    width: 82px;
+    padding: 12px 7px;
+  }
+}
+
+.folderButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 7px 10px;
+  border: 1px solid transparent;
+  border-radius: 18px;
+  width: 76px;
+  cursor: pointer;
+  position: relative;
+  background: transparent;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  @include respond-to(mobile) {
+    width: 66px;
+    padding: 10px 5px 8px;
+    border-radius: 16px;
+  }
+
+  &:not(.folderButtonActive):hover {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.04);
+
+    .folderIcon,
+    .folderLabel {
+      color: #1a1a1a;
+    }
+  }
+}
+
+.folderButtonActive {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.16),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.folderIcon {
+  width: 21px;
+  height: 21px;
+  color: $chat-text-faint;
+}
+
+.folderIconActive {
+  color: #ffffff;
+}
+
+.folderLabel {
+  font-size: 10px;
+  font-weight: 800;
+  color: $chat-text-faint;
+  text-align: center;
+  line-height: 1.15;
+  max-width: 62px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.01em;
+
+  @include respond-to(mobile) {
+    font-size: 9px;
+    max-width: 56px;
+  }
+}
+
+.folderLabelActive {
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.folderBadge {
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: $chat-brand;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(132, 0, 0, 0.28);
+}

@@ -17,3 +17,17 @@ export {
   type UpdateTaskStatusPayload,
 } from "./update-task-status/updateTaskStatusApi";
 export { deleteTask, type DeleteTaskResponse } from "./delete-task/deleteTaskApi";
+export {
+  approveTaskTimeLog,
+  exportTaskTimeLogs,
+  getTaskTimeLogs,
+  managerEditTaskTimeLog,
+  rejectTaskTimeLog,
+  resolveTaskTimeLog,
+  type TaskTimeLogDecisionPayload,
+  type TaskTimeLogManagerEditPayload,
+  type TaskTimeLogRecord,
+  type TaskTimeLogResolvePayload,
+  type TaskTimeLogsResponse,
+  type TaskTimeLogsSearchParams,
+} from "./time-logs/taskTimeLogsApi";

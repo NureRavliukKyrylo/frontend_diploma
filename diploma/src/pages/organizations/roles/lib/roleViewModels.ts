@@ -32,6 +32,8 @@ export const groupOrganizationRoles = (
   );
 
   return {
+    allScopedRoles: scopedAll,
+    activeScopedRoles: scopedActive,
     systemRoles: scopedActive.filter(
       (role) => role.isSystemGenerated && getRoleStatus(role) === "active",
     ),

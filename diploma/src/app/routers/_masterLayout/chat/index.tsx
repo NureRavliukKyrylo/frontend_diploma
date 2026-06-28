@@ -3,7 +3,6 @@ import {
   chatQuery,
   chatSearchSchema,
   messageQuery,
-  relatedEntityTypeChatValues,
 } from "@entities/chat";
 import { ChatPage } from "@pages/chat";
 import { createFileRoute, stripSearchParams } from "@tanstack/react-router";
@@ -13,17 +12,10 @@ export const Route = createFileRoute("/_masterLayout/chat/")({
   search: { middlewares: [stripSearchParams(chatDefaults)] },
   component: ChatPage,
   loader: async ({ context: { queryClient }, location }) => {
-    const { chatId, ...search } = chatSearchSchema.parse(location.search);
-
-    const promises: Promise<unknown>[] = [
-      ...relatedEntityTypeChatValues.map((entityType) =>
-        queryClient.ensureInfiniteQueryData(
-          chatQuery.list({ ...search, RelatedEntityType: entityType }),
-        ),
-      ),
-    ];
+    const { chatId } = chatSearchSchema.parse(location.search);
 
     if (chatId) {
+      await queryClient.ensureQueryData(chatQuery.chat(chatId));
       const anchorData = await queryClient.ensureQueryData(
         messageQuery.anchor(chatId, { pageSize: 40 }),
       );
@@ -35,6 +27,5 @@ export const Route = createFileRoute("/_masterLayout/chat/")({
       const queryOptions = messageQuery.list(chatId, { pageSize: 40, page });
       await queryClient.ensureInfiniteQueryData(queryOptions);
     }
-    await Promise.all(promises);
   },
 });

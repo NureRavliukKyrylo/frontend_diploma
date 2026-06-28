@@ -1,0 +1,892 @@
+.page {
+  width: 100%;
+}
+
+.heading {
+  margin-bottom: 27px;
+}
+
+.headingEyebrow {
+  margin-bottom: 14px;
+  color: #8b0000;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.headingTitle {
+  margin: 0;
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: -1.6px;
+  color: #1a1a1a;
+  line-height: 1.08;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 21px;
+}
+
+.metricCard {
+  position: relative;
+  background: #ffffff;
+  border-radius: 27px 18px 27px 18px;
+  overflow: hidden;
+  min-height: 112px;
+  padding: 23px 25px;
+}
+
+.metricCard_reports {
+  box-shadow: 0 4px 20px rgba(139, 0, 0, 0.1);
+
+  .metricDeco {
+    background: rgba(132, 0, 0, 0.04);
+  }
+}
+
+.metricCard_requests {
+  box-shadow: 0 4px 20px rgba(192, 112, 0, 0.1);
+
+  .metricDeco {
+    background: rgba(192, 112, 0, 0.04);
+  }
+}
+
+.metricCard_neutral {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+
+  .metricDeco {
+    background: rgba(132, 0, 0, 0.03);
+  }
+}
+
+.metricDeco {
+  position: absolute;
+  top: -34px;
+  right: -34px;
+  width: 102px;
+  height: 102px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.metricBody {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.metricLabel {
+  color: #999999;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.metricValue {
+  font-size: 35px;
+  font-weight: 900;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.metricValueAccent {
+  color: #8b0000;
+}
+
+.metricValueSkeleton {
+  width: 104px;
+  height: 35px;
+  border-radius: 11px;
+}
+
+.metricValueError {
+  color: #8b0000;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.insightGrid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 18px;
+  margin-bottom: 27px;
+}
+
+.recentCard,
+.healthCard {
+  position: relative;
+  border-radius: 27px 18px 27px 18px;
+  overflow: hidden;
+}
+
+.recentCard {
+  background: #1a1a1a;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+  padding: 27px 30px;
+}
+
+.recentDeco {
+  position: absolute;
+  top: -45px;
+  right: -45px;
+  width: 158px;
+  height: 158px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+}
+
+.recentHeader {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 21px;
+}
+
+.recentTitle {
+  color: #888888;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.viewUsersLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #ff8c8c;
+  font-size: 15px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.userTable {
+  position: relative;
+  z-index: 1;
+}
+
+.userTableHead,
+.userRow {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 0.8fr;
+  align-items: center;
+  gap: 18px;
+}
+
+.userTableHead {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #2c2c2c;
+  color: #666666;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.userRow {
+  padding: 14px 0;
+  border-bottom: 1px solid #2c2c2c;
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.userCell {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.avatar_red {
+  background: #3a2424;
+  color: #ff9d9d;
+}
+
+.avatar_amber {
+  background: #3a2f1c;
+  color: #ffc36b;
+}
+
+.avatar_neutral {
+  background: #2c2c2c;
+  color: #aaaaaa;
+}
+
+.avatar_violet {
+  background: #2e2a47;
+  color: #b8b0f0;
+}
+
+.userName {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.joinedDate {
+  color: #888888;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.statusPill {
+  justify-self: start;
+  border-radius: 999px;
+  padding: 5px 13px;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.statusPillActive {
+  background: rgba(26, 122, 69, 0.18);
+  color: #5fd596;
+}
+
+.statusPillSuspended {
+  background: rgba(139, 0, 0, 0.28);
+  color: #ff9d9d;
+}
+
+.recentState {
+  padding: 21px 0 5px;
+  color: #888888;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.userAvatarSkeleton {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.userNameSkeleton {
+  width: 158px;
+  height: 18px;
+  border-radius: 9px;
+}
+
+.userDateSkeleton {
+  width: 109px;
+  height: 18px;
+  border-radius: 9px;
+}
+
+.userStatusSkeleton {
+  width: 88px;
+  height: 23px;
+  border-radius: 999px;
+}
+
+.healthCard {
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(26, 122, 69, 0.12);
+  padding: 27px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.healthDeco {
+  position: absolute;
+  top: -45px;
+  right: -45px;
+  width: 147px;
+  height: 147px;
+  border-radius: 50%;
+  background: rgba(26, 122, 69, 0.04);
+  pointer-events: none;
+}
+
+.healthBody {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.healthTitle {
+  margin-bottom: 21px;
+  color: #8f8f8f;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.healthRing {
+  position: relative;
+  width: 104px;
+  height: 104px;
+  border: 9px solid #edfbf3;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.healthRingArc {
+  position: absolute;
+  inset: -9px;
+  border: 9px solid #1a7a45;
+  border-left-color: transparent;
+  border-radius: 50%;
+  transform: rotate(-20deg);
+}
+
+.healthRingText {
+  position: relative;
+  z-index: 1;
+  font-size: 25px;
+  font-weight: 900;
+  color: #1a7a45;
+}
+
+.healthRows {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.healthRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 21px;
+}
+
+.healthLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #777777;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.healthDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.healthDotOk {
+  background: #1a7a45;
+}
+
+.healthDotWarning {
+  background: #c07000;
+}
+
+.healthDotCritical {
+  background: #8b0000;
+}
+
+.healthStatusOk,
+.healthStatusWarning,
+.healthStatusCritical {
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.healthStatusOk {
+  color: #1a7a45;
+}
+
+.healthStatusWarning {
+  color: #c07000;
+}
+
+.healthStatusCritical {
+  color: #8b0000;
+}
+
+.healthState {
+  color: #999999;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.healthRingSkeleton {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  margin-bottom: 25px;
+}
+
+.healthLabelSkeleton {
+  width: 170px;
+  height: 17px;
+  border-radius: 9px;
+}
+
+.healthStatusSkeleton {
+  width: 66px;
+  height: 17px;
+  border-radius: 9px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+  color: #8f8f8f;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sectionHeaderBlock {
+  margin-bottom: 18px;
+
+  .sectionHeader {
+    margin-bottom: 6px;
+  }
+}
+
+.sectionNote {
+  color: #bbbbbb;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sectionLine {
+  flex: 1;
+  height: 1px;
+  background: #e6e6e6;
+}
+
+.quickGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 27px;
+}
+
+.quickCard {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 215px;
+  padding: 27px;
+  border: 1px solid #ebebeb;
+  border-radius: 23px;
+  background: #ffffff;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+  }
+}
+
+.quickCard_users {
+  .quickDeco {
+    background: rgba(132, 0, 0, 0.04);
+  }
+
+  .quickIcon {
+    background: #fbeaea;
+    color: #8b0000;
+  }
+}
+
+.quickCard_bans {
+  box-shadow: 0 4px 18px rgba(192, 112, 0, 0.1);
+
+  .quickDeco {
+    background: rgba(192, 112, 0, 0.05);
+  }
+
+  .quickIcon {
+    background: #fff3da;
+    color: #c07000;
+  }
+}
+
+.quickCard_communication {
+  box-shadow: 0 4px 18px rgba(24, 95, 165, 0.1);
+
+  .quickDeco {
+    background: rgba(24, 95, 165, 0.05);
+  }
+
+  .quickIcon {
+    background: #e6f1fb;
+    color: #185fa5;
+  }
+}
+
+.quickCard_roles {
+  box-shadow: 0 4px 18px rgba(26, 122, 69, 0.1);
+
+  .quickDeco {
+    background: rgba(26, 122, 69, 0.05);
+  }
+
+  .quickIcon {
+    background: #edfbf3;
+    color: #1a7a45;
+  }
+}
+
+.quickCard_timeBank {
+  box-shadow: 0 4px 18px rgba(163, 95, 11, 0.1);
+
+  .quickDeco {
+    background: rgba(163, 95, 11, 0.05);
+  }
+
+  .quickIcon {
+    background: #f1ede7;
+    color: #a35f0b;
+  }
+}
+
+.quickCard_skills {
+  box-shadow: 0 4px 18px rgba(83, 74, 183, 0.1);
+
+  .quickDeco {
+    background: rgba(83, 74, 183, 0.05);
+  }
+
+  .quickIcon {
+    background: #eeedfe;
+    color: #534ab7;
+  }
+}
+
+.quickCard_requests {
+  box-shadow: 0 4px 18px rgba(139, 0, 0, 0.1);
+
+  .quickDeco {
+    background: rgba(132, 0, 0, 0.04);
+  }
+
+  .quickIcon {
+    background: #fbeaea;
+    color: #8b0000;
+  }
+}
+
+.quickCard_statistics {
+  .quickDeco {
+    background: rgba(0, 0, 0, 0.025);
+  }
+
+  .quickIcon {
+    background: #f0f0f0;
+    color: #555555;
+  }
+}
+
+.quickDeco {
+  position: absolute;
+  top: -34px;
+  right: -34px;
+  width: 102px;
+  height: 102px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.025);
+  pointer-events: none;
+}
+
+.quickIcon,
+.quickTitle,
+.quickDesc {
+  position: relative;
+  z-index: 1;
+}
+
+.quickIcon {
+  width: 59px;
+  height: 59px;
+  border-radius: 16px;
+  background: #f0f0f0;
+  color: #444444;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.quickTitle {
+  margin-bottom: 7px;
+  color: #1a1a1a;
+  font-size: 23px;
+  font-weight: 900;
+}
+
+.quickDesc {
+  margin-bottom: 16px;
+  color: #999999;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.quickFooter {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #f5f5f5;
+}
+
+.quickFooterEnd {
+  justify-content: flex-end;
+}
+
+.quickFooterValue {
+  color: #1a1a1a;
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.quickFooterValueDanger {
+  color: #8b0000;
+}
+
+.quickFooterValueWarning {
+  color: #c07000;
+}
+
+.quickFooterAction {
+  color: #bbbbbb;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.quickFooterSkeleton {
+  width: 72px;
+  height: 25px;
+  border-radius: 10px;
+}
+
+.quickFooterError {
+  color: #8b0000;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.activityCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 27px 18px 27px 18px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 27px 32px;
+}
+
+.activityDeco {
+  position: absolute;
+  top: -45px;
+  right: -45px;
+  width: 147px;
+  height: 147px;
+  border-radius: 50%;
+  background: rgba(132, 0, 0, 0.03);
+  pointer-events: none;
+}
+
+.activityList {
+  position: relative;
+  z-index: 1;
+}
+
+.activityRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid #f5f5f5;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.activityIcon {
+  width: 39px;
+  height: 39px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #f0f0f0;
+  color: #555555;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activityIcon_report {
+  background: #fbeaea;
+  color: #8b0000;
+}
+
+.activityIcon_request {
+  background: #fff3da;
+  color: #c07000;
+}
+
+.activityIcon_role {
+  background: #edfbf3;
+  color: #1a7a45;
+}
+
+.activityIcon_timeBank {
+  background: #fff3da;
+  color: #c07000;
+}
+
+.activityIcon_organization {
+  background: #e6f1fb;
+  color: #185fa5;
+}
+
+.activityIcon_skill {
+  background: #eeedfe;
+  color: #534ab7;
+}
+
+.activityText {
+  min-width: 0;
+  flex: 1;
+  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.activityTime {
+  flex-shrink: 0;
+  color: #aaaaaa;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.activityIconSkeleton {
+  width: 39px;
+  height: 39px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.activityTextSkeleton {
+  width: min(420px, 60%);
+  height: 18px;
+  border-radius: 9px;
+}
+
+.activityTimeSkeleton {
+  width: 64px;
+  height: 18px;
+  flex-shrink: 0;
+  border-radius: 9px;
+}
+
+.activityUnavailable {
+  position: relative;
+  z-index: 1;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 9px;
+}
+
+.activityUnavailableTitle {
+  color: #1a1a1a;
+  font-size: 21px;
+  font-weight: 900;
+}
+
+.activityUnavailableText {
+  max-width: 590px;
+  color: #999999;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+@media (max-width: 1400px) {
+  .metricsGrid,
+  .quickGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .insightGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .metricsGrid,
+  .quickGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .userTableHead,
+  .userRow {
+    grid-template-columns: 1.4fr 1fr 0.8fr;
+  }
+}

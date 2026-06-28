@@ -1,6 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Archive, MoreHorizontal, Shield, Trash2 } from "lucide-react";
+import {
+  Archive,
+  Lock,
+  MoreHorizontal,
+  Pencil,
+  Shield,
+  Trash2,
+} from "lucide-react";
 import type { ContextRoleDto } from "@entities/organization";
 import type { ContextRoleCardType } from "../../../config/rolePresentation";
 import styles from "../RoleDrawer.module.scss";
@@ -8,7 +15,6 @@ import styles from "../RoleDrawer.module.scss";
 interface RoleDrawerFooterProps {
   role: ContextRoleDto;
   type: ContextRoleCardType;
-  onClose: () => void;
   onEdit?: () => void;
   onSetDefault?: () => void;
   onArchive?: () => void;
@@ -18,7 +24,6 @@ interface RoleDrawerFooterProps {
 export const RoleDrawerFooter = ({
   role,
   type,
-  onClose,
   onEdit,
   onSetDefault,
   onArchive,
@@ -44,9 +49,6 @@ export const RoleDrawerFooter = ({
     <footer className={styles.footer}>
       {type === "custom" && !role.archivedAt ? (
         <>
-          <button type="button" className={styles.editButton} onClick={onEdit}>
-            Edit role
-          </button>
           <div className={styles.moreWrap} ref={menuRef}>
             <AnimatePresence>
               {isMenuOpen ? (
@@ -105,11 +107,16 @@ export const RoleDrawerFooter = ({
               <MoreHorizontal size={18} strokeWidth={2.3} />
             </button>
           </div>
+          <button type="button" className={styles.editButton} onClick={onEdit}>
+            <Pencil size={15} strokeWidth={2.3} />
+            Edit role
+          </button>
         </>
       ) : (
-        <button type="button" className={styles.closeFooterButton} onClick={onClose}>
-          Close
-        </button>
+        <span className={styles.lockedFooterText}>
+          <Lock size={15} strokeWidth={2.3} />
+          Locked
+        </span>
       )}
     </footer>
   );

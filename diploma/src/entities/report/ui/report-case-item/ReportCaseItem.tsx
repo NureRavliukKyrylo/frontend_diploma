@@ -11,17 +11,15 @@ interface ReportCaseItemProps {
 
 export const ReportCaseItem = ({ reportCase }: ReportCaseItemProps) => {
   const { t } = useTranslation("moderation");
-  const fullName = getFullName(
-    reportCase.reporter.firstName,
-    reportCase.reporter.lastName,
-  );
+  const reporter = reportCase.reporter ?? reportCase.reporterUser;
+  const fullName = getFullName(reporter?.firstName, reporter?.lastName);
 
   return (
     <div className={`${styles.wrapper} ${styles[reportCase.status]}`}>
       <div className={styles.avatarCol}>
         <Avatar
           className={styles.avatar}
-          src={reportCase.reporter.avatarUrl}
+          src={reporter?.avatarUrl}
           fallback={fullName}
         />
       </div>

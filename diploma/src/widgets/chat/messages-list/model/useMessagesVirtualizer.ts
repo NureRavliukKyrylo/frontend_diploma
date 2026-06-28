@@ -142,10 +142,28 @@ export const useMessagesVirtualizer = ({
 
     if (targetIndex !== -1) {
       virtualizer.scrollToIndex(targetIndex, { align: "start" });
+      useChatScrollStore
+        .getState()
+        .consumeTargetMessage(chatId, targetMessageId!);
     } else {
       virtualizer.scrollToEnd();
     }
   }, [chatId, virtualizer]);
+
+  useEffect(() => {
+    if (!targetMessageId) return;
+
+    const targetIndex = messages.findIndex(
+      (message) => message.id === targetMessageId,
+    );
+    if (targetIndex === -1) return;
+
+    virtualizer.scrollToIndex(targetIndex, {
+      align: "start",
+      behavior: "smooth",
+    });
+    useChatScrollStore.getState().consumeTargetMessage(chatId, targetMessageId);
+  }, [chatId, targetMessageId, messages.length, virtualizer]);
 
   return {
     messagesWrapperRef,

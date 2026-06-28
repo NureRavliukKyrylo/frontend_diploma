@@ -1,14 +1,15 @@
-import { useMemo } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import type { ContextRoleDto } from "@entities/organization";
+import type { ParticipationListItem } from "@entities/participation";
 import {
   getRoleTypeLabel,
   type ContextRoleCardType,
 } from "../../config/rolePresentation";
 import { useRoleDrawerLifecycle } from "./lib/useRoleDrawerLifecycle";
 import type { RoleDrawerMember } from "./types";
+import { AssignmentSection } from "./ui/AssignmentSection";
 import { MembersSection } from "./ui/MembersSection";
 import { PermissionsSection } from "./ui/PermissionsSection";
 import { RoleDrawerFooter } from "./ui/RoleDrawerFooter";
@@ -20,6 +21,8 @@ interface RoleDrawerProps {
   type: ContextRoleCardType | null;
   memberCount: number;
   members: RoleDrawerMember[];
+  assignmentMembers: ParticipationListItem[];
+  assignmentRoles: ContextRoleDto[];
   stripeColor: string;
   onClose: () => void;
   onEdit?: () => void;
@@ -34,6 +37,8 @@ export const RoleDrawer = ({
   type,
   memberCount,
   members,
+  assignmentMembers,
+  assignmentRoles,
   stripeColor,
   onClose,
   onEdit,
@@ -42,16 +47,6 @@ export const RoleDrawer = ({
   onDelete,
 }: RoleDrawerProps) => {
   useRoleDrawerLifecycle(isOpen, onClose);
-
-  const subtitle = useMemo(() => {
-    if (!role || !type) return "";
-
-    const typeLabel = getRoleTypeLabel(type, role);
-    const membersLabel =
-      memberCount === 1 ? "1 member" : `${memberCount} members`;
-
-    return `${typeLabel} · ${membersLabel}`;
-  }, [memberCount, role, type]);
 
   if (!role || !type) return null;
 
@@ -82,9 +77,20 @@ export const RoleDrawer = ({
             />
 
             <header className={styles.header}>
-              <div>
-                <h2 className={styles.title}>{role.name}</h2>
-                <p className={styles.subtitle}>{subtitle}</p>
+              <div className={styles.headerMain}>
+                <div className={styles.titleRow}>
+                  <span className={styles.roleIcon}>
+                    {role.name.trim().charAt(0).toUpperCase() || "R"}
+                  </span>
+                  <h2 className={styles.title}>{role.name}</h2>
+                </div>
+                <div className={styles.metaLine}>
+                  <span>{getRoleTypeLabel(type, role)}</span>
+                  <span className={styles.metaDot} />
+                  <span>
+                    {memberCount === 1 ? "1 member" : `${memberCount} members`}
+                  </span>
+                </div>
               </div>
               <button
                 type="button"
@@ -98,13 +104,19 @@ export const RoleDrawer = ({
 
             <div className={styles.body}>
               <PermissionsSection permissions={role.permissions} />
+              <AssignmentSection
+                assignableBy={role.assignableBy}
+                approvableBy={role.approvableBy}
+                members={assignmentMembers}
+                roles={assignmentRoles}
+                currentRoleId={role.id}
+              />
               <MembersSection memberCount={memberCount} members={members} />
             </div>
 
             <RoleDrawerFooter
               role={role}
               type={type}
-              onClose={onClose}
               onEdit={onEdit}
               onSetDefault={onSetDefault}
               onArchive={onArchive}

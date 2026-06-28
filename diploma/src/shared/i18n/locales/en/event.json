@@ -1,4 +1,8 @@
 {
+  "create": {
+    "projectContextLabel": "Project",
+    "projectContextSidebar": "Project context"
+  },
   "modes": {
     "daily": "Daily",
     "weekly": "Weekly",
@@ -75,6 +79,74 @@
     "endingSoon": "Ending soon",
     "completed": "Completed",
     "archived": "Archived"
+  },
+  "fab": {
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "members": "Members",
+    "roles": "Roles",
+    "newTask": "New task",
+    "attendance": "Attendance",
+    "contextHint": "You're working in",
+    "openActions": "Open event actions",
+    "closeActions": "Close event actions"
+  },
+  "membersPage": {
+    "eyebrow": "Event members",
+    "title": "{{name}} members",
+    "subtitle": "Review the people participating in this event.",
+    "back": "Back to event"
+  },
+  "rolesPage": {
+    "eyebrow": "Event roles",
+    "title": "{{name}} roles",
+    "subtitle": "Review context roles available inside this event.",
+    "back": "Back to event",
+    "loading": "Loading event roles...",
+    "error": "We could not load event roles right now.",
+    "empty": "No roles are configured for this event yet."
+  },
+  "attendancePage": {
+    "eyebrow": "Attendance",
+    "title": "{{name}} attendance",
+    "subtitle": "Review attendance records submitted for this event.",
+    "back": "Back to event",
+    "loading": "Loading attendance records...",
+    "error": "We could not load attendance records right now.",
+    "empty": "No attendance records have been submitted yet.",
+    "export": "Export CSV",
+    "filters": {
+      "allStatuses": "All statuses"
+    },
+    "actions": {
+      "approve": "Approve",
+      "reject": "Reject",
+      "resolve": "Resolve",
+      "resolveAsApprove": "Approve record",
+      "resolveAsReject": "Reject record"
+    },
+    "modal": {
+      "title": "Review attendance",
+      "text": "Add an optional note for the audit trail, then confirm the decision.",
+      "commentPlaceholder": "Decision note",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    },
+    "notifications": {
+      "saved": "Attendance updated",
+      "failed": "Attendance update failed",
+      "exported": "Attendance export started"
+    },
+    "table": {
+      "user": "Volunteer",
+      "checkIn": "Check in",
+      "checkOut": "Check out",
+      "minutes": "Minutes",
+      "status": "Status",
+      "note": "Note",
+      "actions": "Actions",
+      "notProvided": "Not provided"
+    }
   },
   "checkIn": {
     "button": "Check in",

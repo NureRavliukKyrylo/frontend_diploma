@@ -1,8 +1,5 @@
-import { useEffect, type ReactNode } from "react";
-import { Avatar } from "@shared/ui";
-import { useTranslation } from "react-i18next";
-import styles from "./ChatContentWidget.module.scss";
-import { useChatHeaderData } from "../model/useChatHeaderData";
+import { useEffect, useState, type ReactNode } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { MessageForm } from "@features/chat";
 import {
   clearFirstUnread,
@@ -13,13 +10,16 @@ import {
   type Message,
   type MessageModeType,
 } from "@entities/chat";
-import { getFullName } from "@entities/user";
-import { useQuery } from "@tanstack/react-query";
-import { profileQuery } from "@entities/user/profile";
-import { AnimatePresence, motion } from "framer-motion";
-import { NavigationArrow } from "@shared/assets/icons/actions";
-import { useSignalRSend } from "@shared/libs/hooks";
 import { useChatStore } from "@entities/chat/model/store/useChatStore";
+import { profileQuery } from "@entities/user/profile";
+import { getFullName } from "@entities/user";
+import { useSignalRSend } from "@shared/libs/hooks";
+import { ChatDetailsModal } from "../../chat-details-modal/ui/ChatDetailsModal";
+import { useChatHeaderData } from "../model/useChatHeaderData";
+import { ChatFloatingControls } from "./ChatFloatingControls";
+import { ChatHeader } from "./ChatHeader";
+import { LeaveChatConfirmationModal } from "./LeaveChatConfirmationModal";
+import styles from "./ChatContentWidget.module.scss";
 
 interface ChatContentWidgetProps {
   chatId: string;
@@ -42,27 +42,35 @@ export const ChatContentWidget = ({
   onCancel,
   leftContent,
 }: ChatContentWidgetProps) => {
-  const { t } = useTranslation(["chat"]);
   const { data: chat } = useChatHeaderData(chatId);
   const { data: user } = useQuery(profileQuery.all());
+  const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [isLeaving, setIsLeaving] = useState(false);
   const participantsNotUser = chat.participants.filter(
     (participant) => participant.id != user?.id,
   );
-  const initials = chat.name?.split(" ").slice(0, 2).join(" ") ?? "nothing";
-
   const isPrivate = chat.relatedEntityType === "private";
-  const chipClassName = `${styles.chatTypeChip} ${styles[chat.relatedEntityType]}`;
-
-  const notAtBottom = useChatScrollStore((s) => s.notAtBottom[chatId] ?? false);
+  const notAtBottom = useChatScrollStore((state) => state.notAtBottom[chatId] ?? false);
   const requestScrollToBottom = useChatScrollStore(
-    (s) => s.requestScrollToBottom,
+    (state) => state.requestScrollToBottom,
   );
+  const requestScrollToMessage = useChatScrollStore(
+    (state) => state.requestScrollToMessage,
+  );
+  const send = useSignalRSend("chats");
+  const typingUser = useChatStore((state) => state.typingByChat[chatId]);
+  const typingParticipant = typingUser
+    ? chat.participants.find((participant) => participant.id === typingUser.id)
+    : null;
+  const typingName = typingUser
+    ? getFullName(typingUser.firstName, typingUser.lastName)
+    : "";
+  const getMessagesQueryKey = useGetMessagesQueryKey();
+
   useChatTypingEvents();
   useMessageEvents();
-  const send = useSignalRSend("chats");
 
-  const typingUser = useChatStore((s) => s.typingByChat[chatId]);
-  const getMessagesQueryKey = useGetMessagesQueryKey();
   useEffect(() => {
     send("JoinChat", chatId);
     return () => {
@@ -73,61 +81,25 @@ export const ChatContentWidget = ({
 
   return (
     <div className={styles.chatContentWrapper}>
-      <div className={styles.chatHeader}>
-        <div className={styles.avatarBack}>
-          {leftContent}
-          <Avatar
-            className={styles.chatAvatar}
-            src={chat.avatarUrl ?? undefined}
-            fallback={initials}
-          />
-        </div>
-        <div className={styles.chatInfo}>
-          <span className={styles.chatName}>{chat.name}</span>
-          <div className={styles.chatMetaRow}>
-            <span className={chipClassName}>
-              {t(`chat:categories.${chat.relatedEntityType}`, {
-                defaultValue: chat.relatedEntityType,
-              })}
-            </span>
-            {typingUser ? (
-              <span className={styles.typingUser}>
-                {getFullName(typingUser.firstName, typingUser.lastName)}{" "}
-                {t("chat:states.typing")}
-              </span>
-            ) : (
-              !isPrivate && (
-                <span className={styles.membersCount}>
-                  {t("labels.membersCount", {
-                    count: chat.participants.length,
-                  })}
-                </span>
-              )
-            )}
-          </div>
-        </div>
-      </div>
+      <ChatHeader
+        chat={chat}
+        leftContent={leftContent}
+        onOpenDetails={() => setIsDetailsOpen(true)}
+      />
       <div className={styles.chatBody}>
         {children}
-        <AnimatePresence>
-          {notAtBottom && (
-            <motion.button
-              className={styles.scrollToBottom}
-              onClick={() => requestScrollToBottom(chatId)}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.15 }}
-            >
-              <NavigationArrow />
-              {chat.unreadCount > 0 && (
-                <div className={styles.unreadCount}>
-                  {chat.unreadCount >= 100 ? "99+" : chat.unreadCount}
-                </div>
-              )}
-            </motion.button>
-          )}
-        </AnimatePresence>
+        <ChatFloatingControls
+          chatId={chatId}
+          isTyping={Boolean(typingUser)}
+          typingAvatarUrl={typingParticipant?.avatarUrl}
+          typingName={typingName}
+          notAtBottom={notAtBottom}
+          unreadCount={chat.unreadCount}
+          onScrollToBottom={() => requestScrollToBottom(chatId)}
+          onScrollToMessage={(messageId) =>
+            requestScrollToMessage(chatId, messageId)
+          }
+        />
       </div>
       <MessageForm
         replyToMessage={
@@ -154,6 +126,21 @@ export const ChatContentWidget = ({
         participants={participantsNotUser}
         chatId={chatId}
         hideMentionButton={isPrivate}
+      />
+      <ChatDetailsModal
+        isOpen={isDetailsOpen}
+        chat={chat}
+        onClose={() => setIsDetailsOpen(false)}
+        onLeaveChat={() => setIsLeaveModalOpen(true)}
+        isLeaving={isLeaving}
+      />
+      <LeaveChatConfirmationModal
+        chatId={chatId}
+        chatName={chat.name}
+        isOpen={isLeaveModalOpen}
+        onClose={() => setIsLeaveModalOpen(false)}
+        onAfterLeave={() => setIsDetailsOpen(false)}
+        onPendingChange={setIsLeaving}
       />
     </div>
   );

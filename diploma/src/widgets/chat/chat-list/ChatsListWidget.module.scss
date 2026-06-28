@@ -3,9 +3,19 @@
 .wrapperListChats {
   width: 100%;
   background: white;
-  border-radius: 0px 0px 0px 20px;
   height: 100%;
+  display: flex;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.activeFolderPanel {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
   overflow-y: auto;
+  background: #ffffff;
+
   &::-webkit-scrollbar {
     width: 4px;
   }
@@ -17,77 +27,70 @@
     border-radius: 4px;
   }
 }
-.accordionWrapper {
+
+.activeSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 18px 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.035);
+  background:
+    linear-gradient(180deg, rgba(250, 249, 247, 0.72), rgba(255, 255, 255, 0));
+}
+
+.activeSectionLabel {
+  font-size: 12px;
+  font-weight: 900;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.activeSectionCount {
+  font-size: 11px;
+  font-weight: 900;
+  color: $chat-brand;
+  background: $chat-brand-soft-bg;
+  border-radius: 999px;
+  padding: 5px 9px;
+}
+
+.chatsWidgetBlock {
   display: flex;
   flex-direction: column;
-  padding: 0px;
-  hr {
-    display: none;
-  }
-}
-.dividerFilterBlock {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  width: 100%;
-}
-.title {
-  @include font-base(20px, 700);
-
-  @include respond-to(laptop) {
-    font-size: 18px;
-  }
-  @include respond-to(tablet) {
-    font-size: 16px;
-  }
-  @include respond-to(mobile) {
-    font-size: 15px;
-  }
-}
-.trigger {
-  padding: 10px;
-  border-bottom: 1px solid #cbc9c9;
-}
-.content {
-  padding: 0px;
-  overflow: hidden;
-}
-.divider {
-  display: none;
+  gap: 10px;
+  min-height: 0;
 }
 
-.indicator {
-  color: #888;
-  font-size: 25px;
-}
-
-.emptyState {
+.activeEmptyState {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  padding: 20px 0px;
-  border-bottom: 1px solid #cbc9c9;
+  min-height: 280px;
+  margin: 12px;
+  padding: 42px 22px;
+  gap: 10px;
+  text-align: center;
+  border: 1px dashed rgba(0, 0, 0, 0.08);
+  border-radius: 22px;
+  background: #fbfaf8;
+}
 
-  h2 {
-    @include font-base(20px, 800);
-    color: rgba(0, 0, 0, 0.7);
-    @include respond-to(tablet) {
-      font-size: 18px;
-    }
-    @include respond-to(mobile) {
-      font-size: 16px;
-    }
-  }
-  p {
-    @include font-base(16px, 400);
-    color: rgba(0, 0, 0, 0.4);
-    @include respond-to(tablet) {
-      font-size: 14px;
-    }
-    @include respond-to(mobile) {
-      font-size: 12px;
-    }
-  }
+.activeEmptyTitle {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 900;
+  color: #1a1a1a;
+}
+
+.activeEmptySubtitle {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: $chat-text-faint;
+  line-height: 1.5;
+  max-width: 240px;
 }
 
 .errorState {
@@ -100,7 +103,6 @@
   width: 100%;
   text-align: center;
   background: white;
-  border-bottom: 1px solid #cbc9c9;
 }
 .errorHttpMessage {
   font-size: 30px;

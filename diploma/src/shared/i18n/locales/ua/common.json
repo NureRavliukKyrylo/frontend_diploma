@@ -86,6 +86,20 @@
     "emptyTitle": "Учасників ще немає",
     "emptySubtitle": "Будьте першим, хто приєднається та змінить ситуацію"
   },
+  "entityMembers": {
+    "loading": "Завантажуємо учасників...",
+    "error": "Не вдалося завантажити учасників.",
+    "empty": "Учасників ще немає.",
+    "confirmRemoveTitle": "Видалити учасника",
+    "confirmRemoveText": "Цей учасник втратить доступ до активності.",
+    "confirmRemove": "Видалити",
+    "cancel": "Скасувати",
+    "roleUpdated": "Роль оновлено",
+    "roleUpdateFailed": "Не вдалося оновити роль",
+    "memberRemoved": "Учасника видалено",
+    "memberRemoveFailed": "Не вдалося видалити учасника",
+    "missingParticipation": "Для цього учасника немає запису участі."
+  },
   "pagination": {
     "loadMore": "Завантажити ще",
     "noResults": "Результатів не знайдено"

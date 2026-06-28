@@ -14,6 +14,7 @@ interface HeaderAccountDropdownProps {
   availableMinutes?: number | null;
   isLogoutLoading: boolean;
   onProfileClick: () => void;
+  onTimeBankClick: () => void;
   onLogoutClick: () => void;
 }
 
@@ -26,6 +27,7 @@ export const HeaderAccountDropdown = ({
   availableMinutes,
   isLogoutLoading,
   onProfileClick,
+  onTimeBankClick,
   onLogoutClick,
 }: HeaderAccountDropdownProps) => (
   <AnimatePresence>
@@ -60,7 +62,10 @@ export const HeaderAccountDropdown = ({
             <span>{email}</span>
           </div>
         </button>
-        <HeaderTimeBank availableMinutes={availableMinutes} />
+        <HeaderTimeBank
+          availableMinutes={availableMinutes}
+          onClick={onTimeBankClick}
+        />
         <div className={styles.actions}>
           <button
             type="button"

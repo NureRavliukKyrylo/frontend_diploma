@@ -21,15 +21,18 @@ interface ReportCaseWidgetProps {
 export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
   const { data: reportCase } = useSuspenseQuery(reportQuery.id(caseId));
   const { t } = useTranslation("moderation");
-  const reporterFullName = getFullName(
-    reportCase.reporter.firstName,
-    reportCase.reporter.lastName,
-  );
+  const reporter = reportCase.reporter ?? reportCase.reporterUser;
+  const subject = reportCase.subject ?? {
+    id: reportCase.subjectId ?? "",
+    type: reportCase.subjectType,
+    content: null,
+    title: "",
+    author: null,
+  };
 
-  const linkProps = getSubjectLink(
-    reportCase.subject.type,
-    reportCase.subject.id,
-  );
+  const reporterFullName = getFullName(reporter?.firstName, reporter?.lastName);
+
+  const linkProps = getSubjectLink(subject.type, subject.id);
 
   const isResolved = reportCase.case.status !== "opened";
 
@@ -47,7 +50,7 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
       <div className={styles.reporterWrapper}>
         <div className={styles.wrapperReporterInfo}>
           <Avatar
-            src={reportCase.reporter.avatarUrl}
+            src={reporter?.avatarUrl}
             fallback={reporterFullName}
             className={styles.avatar}
           />
@@ -61,7 +64,9 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
         <p className={styles.detailsText}>
           {t("reportCase.details")}: {reportCase.details}
         </p>
+      </div>
 
+      <div className={styles.detailsBlock}>
         <div className={styles.pills}>
           <span className={styles.pill}>
             {t(`report.subjects.${reportCase.subjectType}`)}
@@ -70,28 +75,26 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
             {t(`report.reasons.${reportCase.reason}`)}
           </span>
         </div>
-      </div>
 
-      <div className={styles.detailsBlock}>
-        {reportCase.subject.title && (
-          <p className={styles.subjectTitle}>{reportCase.subject.title}</p>
+        {subject.title && (
+          <p className={styles.subjectTitle}>{subject.title}</p>
         )}
 
-        {reportCase.subject.author && (
+        {subject.author && (
           <div className={styles.authorWrapper}>
             <Avatar
-              src={reportCase.subject.author.avatarUrl}
+              src={subject.author.avatarUrl}
               fallback={getFullName(
-                reportCase.subject.author.firstName,
-                reportCase.subject.author.lastName,
+                subject.author.firstName,
+                subject.author.lastName,
               )}
               className={styles.avatar}
             />
             <div className={styles.reporterInfo}>
               <span className={styles.reporterName}>
                 {getFullName(
-                  reportCase.subject.author.firstName,
-                  reportCase.subject.author.lastName,
+                  subject.author.firstName,
+                  subject.author.lastName,
                 )}
               </span>
               <span className={styles.reporterLabel}>
@@ -101,13 +104,13 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
           </div>
         )}
 
-        {reportCase.subject.content && (
+        {subject.content && (
           <div className={styles.entityContent}>
             <span className={styles.entityContentLabel}>
               {t("reportCase.reportedContent")}
             </span>
             <p className={styles.entityContentText}>
-              {reportCase.subject.content}
+              {subject.content}
             </p>
           </div>
         )}
@@ -129,21 +132,21 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
               reportId={reportCase.id}
             />
           </div>
-          {reportCase.subject.author && (
+          {subject.author && (
             <div className={styles.actionMainButtons}>
               {["chatMessage", "comment", "feedback"].includes(
                 reportCase.subjectType,
               ) && (
                 <BlockUserButton
                   caseId={reportCase.case.id}
-                  entityId={reportCase.relatedSubject.id}
-                  entityType={reportCase.relatedSubject.type}
-                  targetUserId={reportCase.subject.author.id}
+                  entityId={subject.id}
+                  entityType={subject.type}
+                  targetUserId={subject.author.id}
                 />
               )}
               <BanUserButton
                 caseId={reportCase.case.id}
-                targetUserId={reportCase.subject.author.id}
+                targetUserId={subject.author.id}
               />
             </div>
           )}
@@ -152,8 +155,8 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
           ) && (
             <HideContentButton
               caseId={reportCase.case.id}
-              targetEntityId={reportCase.subject.id}
-              targetEntityType={reportCase.subject.type}
+              targetEntityId={subject.id}
+              targetEntityType={subject.type}
             />
           )}
           {!["chatMessage", "comment", "feedback"].includes(
@@ -161,8 +164,8 @@ export const ReportCaseWidget = ({ caseId }: ReportCaseWidgetProps) => {
           ) && (
             <BanEntityButton
               caseId={reportCase.case.id}
-              targetEntityId={reportCase.subject.id}
-              targetEntityType={reportCase.subject.type}
+              targetEntityId={subject.id}
+              targetEntityType={subject.type}
             />
           )}
         </div>

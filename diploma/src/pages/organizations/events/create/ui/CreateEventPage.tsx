@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { organizationQuery } from "@entities/organization";
+import { projectQuery } from "@entities/project";
 import {
   AccessStep,
   BasicsStep,
@@ -13,6 +14,7 @@ import {
   EVENT_CREATE_STEP_HEADERS,
   EVENT_CREATE_STEPS,
 } from "../config/eventCreateSteps";
+import { useTranslation } from "react-i18next";
 import { getInitials } from "../../../shared/create-flow/lib/getInitials";
 import { CreateFlowContent } from "../../../shared/create-flow/ui/CreateFlowContent";
 import { CreateFlowSidebar } from "../../../shared/create-flow/ui/CreateFlowSidebar";
@@ -21,18 +23,35 @@ import styles from "./CreateEventPage.module.scss";
 
 interface CreateEventPageProps {
   organizationId: string;
+  projectId?: string;
 }
 
-export const CreateEventPage = ({ organizationId }: CreateEventPageProps) => {
+export const CreateEventPage = ({
+  organizationId,
+  projectId,
+}: CreateEventPageProps) => {
+  const { t } = useTranslation(["event"]);
   const navigate = useNavigate();
   const { data: organization, isLoading } = useQuery(
     organizationQuery.byId(organizationId),
   );
-  const form = useCreateEventForm(organizationId);
+  const { data: projectContext } = useQuery({
+    ...projectQuery.id(projectId ?? ""),
+    enabled: Boolean(projectId),
+  });
+  const form = useCreateEventForm(organizationId, projectId);
   const isLastStep = form.activeStep === EVENT_CREATE_STEPS.length - 1;
   const stepHeader = EVENT_CREATE_STEP_HEADERS[form.activeStep];
 
   const handleCancel = () => {
+    if (projectId) {
+      void navigate({
+        to: "/projects/$id",
+        params: { id: projectId },
+      });
+      return;
+    }
+
     void navigate({
       to: "/organizations/$id/events",
       params: { id: organizationId },
@@ -113,6 +132,10 @@ export const CreateEventPage = ({ organizationId }: CreateEventPageProps) => {
           organizationName={organization.name}
           title="New event"
           backLabel="Back to organization events"
+          contextLabel={
+            projectContext ? t("create.projectContextLabel") : undefined
+          }
+          contextValue={projectContext?.title}
           onCancel={handleCancel}
           styles={styles}
         />
@@ -124,6 +147,15 @@ export const CreateEventPage = ({ organizationId }: CreateEventPageProps) => {
             logoUrl={organization.logoUrl}
             initials={initials}
             label="Event setup"
+            projectContext={
+              projectId && projectContext
+                ? {
+                    id: projectId,
+                    name: projectContext.title,
+                    label: t("create.projectContextSidebar"),
+                  }
+                : undefined
+            }
             steps={EVENT_CREATE_STEPS}
             activeStep={form.activeStep}
             onStepClick={form.goToStep}

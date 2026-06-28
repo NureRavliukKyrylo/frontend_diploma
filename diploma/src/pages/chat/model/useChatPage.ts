@@ -43,8 +43,6 @@ export const useChatPage = () => {
       [type]: { isActive: false, message: null },
     }));
 
-  console.log(mode);
-
   const getMenuItems = (
     message: Message,
     t: TFunction,

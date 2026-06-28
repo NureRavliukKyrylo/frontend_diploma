@@ -13,7 +13,10 @@ export type {
   CreateEventFormState,
 } from "./createEventFormTypes";
 
-export const useCreateEventForm = (organizationId: string) => {
+export const useCreateEventForm = (
+  organizationId: string,
+  projectId?: string,
+) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const fields = useCreateEventFields();
@@ -58,7 +61,7 @@ export const useCreateEventForm = (organizationId: string) => {
       return;
     }
     createMutation.mutate(
-      buildCreateEventPayload(organizationId, fields.values),
+      buildCreateEventPayload(organizationId, projectId, fields.values),
     );
   };
 

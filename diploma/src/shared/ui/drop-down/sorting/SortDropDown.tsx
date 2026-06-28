@@ -10,6 +10,8 @@ interface SortDropDownProps<T extends string | number> {
   value: T;
   variant?: "default" | "report";
   label?: string;
+  selectedLabelOnly?: boolean;
+  fitTriggerToWidestOption?: boolean;
 }
 
 export const SortDropDown = <T extends string | number>({
@@ -18,18 +20,44 @@ export const SortDropDown = <T extends string | number>({
   value,
   variant = "default",
   label,
+  selectedLabelOnly = false,
+  fitTriggerToWidestOption = false,
 }: SortDropDownProps<T>) => {
   const { t } = useTranslation("common");
+  const labelPrefix = label ?? (variant === "report" ? t("reason.title") : t("sorting.title"));
+  const selectedLabel = options.find((o) => o.value === value)?.label;
+  const getTriggerLabel = (optionLabel?: string) =>
+    selectedLabelOnly ? optionLabel ?? "" : `${labelPrefix}:${optionLabel ?? ""}`;
+
   return (
     <BaseDropDown
       label={
-        <h1 className={styles.dropDownLabel}>
-          {label ?? (variant === "report" ? t("reason.title") : t("sorting.title"))}:
-          {options.find((o) => o.value === value)?.label}
+        <h1
+          className={`${styles.dropDownLabel} ${
+            fitTriggerToWidestOption ? styles.measuredDropDownLabel : ""
+          }`}
+        >
+          <span className={styles.visibleLabel}>
+            {getTriggerLabel(selectedLabel)}
+          </span>
+          {fitTriggerToWidestOption &&
+            options.map((option) => (
+              <span
+                key={option.value}
+                className={styles.widthMeasure}
+                aria-hidden="true"
+              >
+                {getTriggerLabel(option.label)}
+              </span>
+            ))}
         </h1>
       }
+      className={fitTriggerToWidestOption ? styles.fitWidestDropDown : undefined}
+      buttonClassName={fitTriggerToWidestOption ? styles.fitWidestButton : undefined}
       dropdownClassName={
-        variant === "report" ? styles.dropdownReport : undefined
+        `${variant === "report" ? styles.dropdownReport : ""} ${
+          fitTriggerToWidestOption ? styles.fitWidestDropdown : ""
+        }`
       }
     >
       {options.map((option) => {

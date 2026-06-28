@@ -21,7 +21,7 @@ export function useChatChangedEvent() {
     useCallback(
       (payload: ChatChangedPayload) => {
         queryClient.setQueriesData<{ pages: { data: Chat[] }[] }>(
-          { queryKey: [...chatKeys.all(), "list"] },
+          { queryKey: chatKeys.lists() },
           (old) => {
             if (!old) return old;
             return {

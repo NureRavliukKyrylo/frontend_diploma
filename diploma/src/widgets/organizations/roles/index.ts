@@ -9,6 +9,7 @@ export {
 export {
   contextRolePermissionGroups,
   getPermissionLabel,
+  getRoleAccentColor,
   getRoleIndexLabel,
   getRoleStripeColor,
   getRoleTypeLabel,

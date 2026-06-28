@@ -37,6 +37,16 @@ export interface ContextRoleCreateDto {
   archiveReason?: "none" | ContextRoleArchiveReason | null;
 }
 
+export interface ContextRoleCreateFromTemplateRequest {
+  templateId: string;
+  entityType: string;
+  entityId: string;
+  name?: string | null;
+  description?: string | null;
+  isDefaultForJoin?: boolean;
+  permissionsOverride?: string[] | null;
+}
+
 export interface ContextRoleApiRecord {
   id?: string;
   Id?: string;

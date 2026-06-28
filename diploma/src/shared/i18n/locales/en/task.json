@@ -26,7 +26,62 @@
     "overview": "OVERVIEW",
     "comments": "COMMENTS",
     "members": "MEMBERS",
-    "feedback": "FEEDBACK"
+    "feedback": "FEEDBACK",
+    "roles": "ROLES",
+    "timelog": "WORK LOG"
+  },
+  "fab": {
+    "openActions": "Open task actions",
+    "closeActions": "Close task actions",
+    "members": "Members",
+    "roles": "Roles",
+    "timelog": "Work log"
+  },
+  "roles": {
+    "loading": "Loading task roles...",
+    "error": "We could not load task roles right now.",
+    "empty": "No roles are configured for this task yet."
+  },
+  "timelog": {
+    "loading": "Loading work logs...",
+    "error": "We could not load work logs right now.",
+    "empty": "No work logs have been submitted yet.",
+    "table": {
+      "volunteer": "Volunteer",
+      "logged": "Logged",
+      "adjusted": "Adjusted",
+      "approved": "Approved",
+      "status": "Status",
+      "note": "Note",
+      "actions": "Actions",
+      "notProvided": "Not provided"
+    },
+    "controls": {
+      "allStatuses": "All statuses",
+      "export": "Export CSV"
+    },
+    "actions": {
+      "managerEdit": "Edit",
+      "approve": "Approve",
+      "reject": "Reject",
+      "resolve": "Resolve",
+      "resolveAsApprove": "Approve log",
+      "resolveAsReject": "Reject log"
+    },
+    "modal": {
+      "title": "Review work log",
+      "text": "Adjust the record if needed, add an optional audit note, then confirm the decision.",
+      "minutes": "Adjusted minutes",
+      "finalMinutes": "Final approved minutes",
+      "commentPlaceholder": "Decision note",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    },
+    "notifications": {
+      "saved": "Work log updated",
+      "failed": "Work log update failed",
+      "exported": "Work log export started"
+    }
   },
   "statuses": {
     "Pending": "Pending",

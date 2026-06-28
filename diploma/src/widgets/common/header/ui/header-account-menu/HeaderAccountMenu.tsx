@@ -90,6 +90,10 @@ export const HeaderAccountMenu = ({
             setIsOpen(false);
             void navigate({ to: "/profile", search: { tab: "profile" } });
           }}
+          onTimeBankClick={() => {
+            setIsOpen(false);
+            void navigate({ to: "/time-bank" });
+          }}
           onLogoutClick={openLogoutModal}
         />
       </div>

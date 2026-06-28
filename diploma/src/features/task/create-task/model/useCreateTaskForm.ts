@@ -15,12 +15,14 @@ export type {
 interface UseCreateTaskFormOptions {
   organizationId: string;
   projectId?: string;
+  eventId?: string;
   onSuccess: () => void;
 }
 
 export const useCreateTaskForm = ({
   organizationId,
   projectId,
+  eventId,
   onSuccess,
 }: UseCreateTaskFormOptions) => {
   const queryClient = useQueryClient();
@@ -64,7 +66,7 @@ export const useCreateTaskForm = ({
       return;
     }
     createMutation.mutate(
-      buildCreateTaskPayload(organizationId, projectId, fields.values),
+      buildCreateTaskPayload(organizationId, projectId, eventId, fields.values),
     );
   };
 

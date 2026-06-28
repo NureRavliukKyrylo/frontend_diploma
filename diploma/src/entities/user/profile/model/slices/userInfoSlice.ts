@@ -7,6 +7,7 @@ export interface UserInfoSlice {
   lastName?: string;
   email?: string;
   role?: SystemRole;
+  systemRole?: string;
   isPasswordSet?: boolean;
   isAuthenticated?: boolean;
 
@@ -14,6 +15,7 @@ export interface UserInfoSlice {
   setFirstName: (val: string) => void;
   setLastName: (val: string) => void;
   setEmail: (val: string) => void;
+  setSystemRole: (val: string | undefined) => void;
   setIsPasswordSet: (val: boolean) => void;
   setIsAuthenticated: (val: boolean) => void;
   setRole: (val: SystemRole) => void;
@@ -25,6 +27,7 @@ export const createUserInfoSlice: StateCreator<UserInfoSlice> = (set) => ({
   firstName: undefined,
   lastName: undefined,
   email: undefined,
+  systemRole: undefined,
   isPasswordSet: undefined,
   isAuthenticated: undefined,
   role: undefined,
@@ -33,6 +36,7 @@ export const createUserInfoSlice: StateCreator<UserInfoSlice> = (set) => ({
   setFirstName: (val) => set({ firstName: val }),
   setLastName: (val) => set({ lastName: val }),
   setEmail: (val) => set({ email: val }),
+  setSystemRole: (val) => set({ systemRole: val }),
   setIsAuthenticated: (val) => set({ isAuthenticated: val }),
   setIsPasswordSet: (val) => set({ isPasswordSet: val }),
   setRole: (val) => set({ role: val }),
@@ -42,6 +46,7 @@ export const createUserInfoSlice: StateCreator<UserInfoSlice> = (set) => ({
       firstName: undefined,
       lastName: undefined,
       email: undefined,
+      systemRole: undefined,
       isAuthenticated: undefined,
       role: undefined,
     }),

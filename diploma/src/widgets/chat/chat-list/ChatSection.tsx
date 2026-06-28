@@ -9,6 +9,7 @@ interface ChatSectionProps {
   entityType: RelatedEntityTypeChatValue;
   renderCard: (chat: Chat, index: number) => React.ReactNode;
   wrapperClass: string;
+  onCountChange?: (entityType: RelatedEntityTypeChatValue, count: number) => void;
 }
 
 export const ChatSection = ({
@@ -16,6 +17,7 @@ export const ChatSection = ({
   entityType,
   renderCard,
   wrapperClass,
+  onCountChange,
 }: ChatSectionProps) => {
   const { t } = useTranslation(["chat"]);
   const {
@@ -51,12 +53,18 @@ export const ChatSection = ({
     defaultValue: entityType,
   });
 
+  useEffect(() => {
+    onCountChange?.(entityType, chats?.length ?? 0);
+  }, [chats?.length, entityType, onCountChange]);
+
   return (
     <div className={wrapperClass}>
       {chats?.length === 0 ? (
-        <div className={styles.emptyState}>
-          <h2>{t("chat:states.emptyTitle")}</h2>
-          <p>
+        <div className={styles.activeEmptyState}>
+          <h2 className={styles.activeEmptyTitle}>
+            {t("chat:states.emptyTitle")}
+          </h2>
+          <p className={styles.activeEmptySubtitle}>
             {t("chat:states.emptyDescription", { type: translatedCategory })}
           </p>
         </div>

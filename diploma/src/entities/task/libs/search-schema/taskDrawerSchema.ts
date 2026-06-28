@@ -17,11 +17,24 @@ export const taskDrawerDefaults = {
     DrawerPageSize: 3,
     DrawerOrderBy: "Default" as const,
   },
+  roles: {
+    taskMode: "roles" as const,
+  },
+  timelog: {
+    taskMode: "timelog" as const,
+    DrawerPageSize: 20,
+  },
 };
 
 export type TaskDrawerSearch = {
   taskId?: string;
-  taskMode?: "overview" | "comments" | "members" | "feedbacks";
+  taskMode?:
+    | "overview"
+    | "comments"
+    | "members"
+    | "feedbacks"
+    | "roles"
+    | "timelog";
   PageSize: number;
   DrawerPageSize?: number;
   DrawerOrderBy?: FeedbackSortValues;

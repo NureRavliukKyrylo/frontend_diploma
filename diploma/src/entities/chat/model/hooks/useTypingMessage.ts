@@ -1,6 +1,6 @@
 import { useSignalRSend } from "@shared/libs/hooks";
-import { useCallback, useRef } from "react";
 import throttle from "lodash/throttle";
+import { useCallback, useRef } from "react";
 
 export function useTypingMessage(chatId: string) {
   const send = useSignalRSend("chats");

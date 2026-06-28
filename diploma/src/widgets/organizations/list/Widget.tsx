@@ -25,7 +25,6 @@ import styles from "./Widget.module.scss";
 
 interface OrganizationsListWidgetProps {
   organizations?: Organization[];
-  ownedOrganizationIds?: string[];
   showDiscoverCard?: boolean;
   className?: string;
 }
@@ -51,7 +50,6 @@ const cardVariants = {
 
 export const OrganizationsListWidget = ({
   organizations = [],
-  ownedOrganizationIds = [],
   showDiscoverCard = false,
   className,
 }: OrganizationsListWidgetProps) => {
@@ -64,10 +62,6 @@ export const OrganizationsListWidget = ({
   const storedUserId = useUserStore((state) => state.userId)?.trim();
   const { data: currentUser } = useQuery(profileQuery.all());
   const currentUserId = storedUserId || currentUser?.id?.trim();
-  const ownedIds = useMemo(
-    () => new Set(ownedOrganizationIds),
-    [ownedOrganizationIds],
-  );
 
   const visibleOrganizations = useMemo(
     () =>
@@ -151,12 +145,9 @@ export const OrganizationsListWidget = ({
         animate="show"
       >
         {visibleOrganizations.map((organization) => {
-          const isOwner =
-            ownedIds.has(organization.id) ||
-            Boolean(
-              currentUserId &&
-                organization.ownerId?.trim() === currentUserId,
-            );
+          const isOwner = Boolean(
+            currentUserId && organization.ownerId?.trim() === currentUserId,
+          );
 
           return (
             <motion.div

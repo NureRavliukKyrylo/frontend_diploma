@@ -1,0 +1,48 @@
+.rolesManager {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.rolesToolbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.createButton {
+  border: none;
+  border-radius: 999px;
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 13px 22px;
+  font-family: "Exo 2", sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    background: #840000;
+    box-shadow: 0 8px 22px rgba(132, 0, 0, 0.24);
+  }
+}
+
+.sectionLabel {
+  color: #999999;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.rolesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 22px;
+}

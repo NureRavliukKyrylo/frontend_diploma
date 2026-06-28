@@ -15,6 +15,7 @@ export interface CreateTaskDrawerProps {
   onClose: () => void;
   organizationId: string;
   projectId?: string;
+  eventId?: string;
   orgName?: string;
 }
 
@@ -23,11 +24,13 @@ export const CreateTaskDrawer = ({
   onClose,
   organizationId,
   projectId,
+  eventId,
   orgName,
 }: CreateTaskDrawerProps) => {
   const form = useCreateTaskForm({
     organizationId,
     projectId,
+    eventId,
     onSuccess: onClose,
   });
   const isLastStep = form.activeStep === STEPS.length - 1;

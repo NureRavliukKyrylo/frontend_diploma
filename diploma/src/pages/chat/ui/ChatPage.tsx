@@ -17,6 +17,7 @@ import { LinkButtonWrapper } from "@shared/ui/buttons";
 import { Arrow } from "@shared/assets/icons/actions";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChatMessagesSection } from "./ChatMessagesSection";
+import { ChatEmptyState } from "./ChatEmptyState";
 
 export const ChatPage = () => {
   const {
@@ -57,7 +58,7 @@ export const ChatPage = () => {
                     className={styles.chatItemWrapper}
                     onClick={() => handleClickChat(chat.id)}
                   >
-                    <ChatItem chat={chat} />
+                    <ChatItem chat={chat} isActive={chat.id === chatId} />
                   </div>
                 )}
                 useChatsQuery={(entityType) => {
@@ -99,7 +100,7 @@ export const ChatPage = () => {
             exit={isMobile ? { opacity: 0, x: 24 } : undefined}
             transition={{ type: "spring", stiffness: 380, damping: 30 }}
           >
-            {chatId && (
+            {chatId ? (
               <ChatContentWidget
                 chatId={chatId}
                 mode={mode}
@@ -136,6 +137,8 @@ export const ChatPage = () => {
                   setOpenId={setOpenId}
                 />
               </ChatContentWidget>
+            ) : (
+              <ChatEmptyState />
             )}
           </motion.div>
         )}

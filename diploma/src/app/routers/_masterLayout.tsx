@@ -26,15 +26,21 @@ function MasterLayoutComponent() {
   });
   const hidePlatformChrome =
     /^\/(?:faq|privacy|terms|terms-of-service|cookies)\/?$/.test(pathname);
+  const isChatRoute = /^\/chat(?:\/.*)?$/.test(pathname);
   const hideFooter =
     hidePlatformChrome ||
     pathname === "/organizations/create" ||
     /^\/organizations\/[^/]+\/settings\/?$/.test(pathname) ||
     /^\/organizations\/[^/]+\/members\/?$/.test(pathname) ||
-    /^\/organizations\/[^/]+\/roles\/?$/.test(pathname);
+    /^\/organizations\/[^/]+\/roles\/?$/.test(pathname) ||
+    isChatRoute;
 
   return (
-    <IndexLayout showHeader={!hidePlatformChrome} showFooter={!hideFooter}>
+    <IndexLayout
+      showHeader={!hidePlatformChrome}
+      showFooter={!hideFooter}
+      noFooterVariant={isChatRoute ? "fullscreen" : "content"}
+    >
       <Outlet />
     </IndexLayout>
   );

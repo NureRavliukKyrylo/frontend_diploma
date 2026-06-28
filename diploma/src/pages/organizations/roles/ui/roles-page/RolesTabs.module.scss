@@ -1,3 +1,11 @@
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
 .tabsContainer {
   display: flex;
   align-items: center;
@@ -5,7 +13,7 @@
   border: 1px solid #e8e8e8;
   border-radius: 999px;
   background: #ffffff;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   padding: 5px;
 }
 
@@ -48,4 +56,22 @@
 .tabBadgeActive {
   background: #ffffff;
   color: #1a1a1a;
+}
+
+.sortControl {
+  width: fit-content;
+  height: 50px;
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+@media (max-width: 720px) {
+  .controlsRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sortControl {
+    width: 100%;
+  }
 }

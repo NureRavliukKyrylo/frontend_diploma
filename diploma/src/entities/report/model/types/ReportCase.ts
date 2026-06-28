@@ -1,17 +1,21 @@
 import type { ModerationSubjectType } from "./ModerationSubjectType";
 import type { ReportReasonType } from "./ReportReason";
 
+type ReportPerson = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  avatarUrl: string;
+};
+
 export type ReportCase = {
   id: string;
   status: "open" | "resolved" | "rejected";
   subjectType: keyof typeof ModerationSubjectType;
-  reporter: {
-    id: string;
-    firstName: string;
-    lastName: string;
-    avatarUrl: string;
-  };
-  subject: {
+  reporter?: ReportPerson;
+  reporterUser?: ReportPerson;
+  relatedReported?: ReportPerson;
+  subject?: {
     id: string;
     type: keyof typeof ModerationSubjectType;
     content: string | null;
@@ -31,6 +35,7 @@ export type ReportCase = {
     type: keyof typeof ModerationSubjectType;
     id: string;
   };
+  subjectId?: string;
   createdAt: string;
   reason: keyof typeof ReportReasonType;
   details: string;

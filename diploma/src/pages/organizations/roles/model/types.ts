@@ -5,6 +5,7 @@ import type {
 import type { ContextRoleCardType } from "@widgets/organizations/roles";
 
 export type RolesTab = "active" | "archived";
+export type RoleSortOption = "name" | "permissions" | "members";
 
 export type RoleFormState =
   | { mode: "create"; role: null }

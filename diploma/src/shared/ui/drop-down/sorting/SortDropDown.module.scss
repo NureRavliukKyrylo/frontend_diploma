@@ -2,7 +2,10 @@
 
 .dropDownLabel {
   @include font-base(20px, 600);
+  margin: 0;
   color: rgba(0, 0, 0, 0.6);
+  line-height: 1;
+  white-space: nowrap;
 
   @include respond-to(laptop) {
     font-size: 18px;
@@ -25,6 +28,36 @@
     display: none;
   }
 }
+
+.measuredDropDownLabel {
+  display: inline-grid;
+}
+
+.visibleLabel,
+.widthMeasure {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+}
+
+.widthMeasure {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.fitWidestDropDown.fitWidestDropDown {
+  width: max-content;
+}
+
+.fitWidestButton.fitWidestButton {
+  width: max-content;
+  justify-content: flex-start;
+}
+
+.fitWidestDropdown.fitWidestDropdown {
+  width: 100%;
+  min-width: 100%;
+}
+
 .wrapperItem {
   &:hover {
     background: rgba(0, 0, 0, 0.05);

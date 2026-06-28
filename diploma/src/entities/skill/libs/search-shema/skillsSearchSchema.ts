@@ -4,7 +4,7 @@ import { paginationSchema } from "@shared/config/schemas";
 export const skillSearchDefaults = {
   OrderBy: "Default" as const,
   Page: 1,
-  PageSize: 12,
+  PageSize: 20,
 };
 
 export const skillFiltersSchema = z.object({
@@ -19,7 +19,7 @@ export const skillFiltersSchema = z.object({
 export const skillSearchSchema = skillFiltersSchema
   .extend(paginationSchema.shape)
   .extend({
-    PageSize: z.number().min(1).default(12).optional(),
+    PageSize: z.number().min(1).default(skillSearchDefaults.PageSize).optional(),
     CategoryIds: z.array(z.string()).optional().catch(undefined),
   });
 

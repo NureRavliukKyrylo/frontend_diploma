@@ -68,6 +68,10 @@ const makeReportCase = (overrides: Partial<ReportCase> = {}): ReportCase => ({
     id: "internal-case-1",
     status: "opened",
   },
+  relatedSubject: {
+    id: "subject-1",
+    type: "user" as any,
+  },
   createdAt: "2024-01-01T10:00:00Z",
   reason: "spam" as any,
   details: "This is spam content",

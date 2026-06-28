@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import type { ContextRoleDto } from "@entities/organization";
 import {
+  getRoleAccentColor,
   getRoleIndexLabel,
-  getRoleStripeColor,
   type ContextRoleCardType,
 } from "../../config/rolePresentation";
 import { formatArchiveDate, formatArchiveReason } from "./lib/roleArchiveFormat";
@@ -42,7 +42,7 @@ export const RoleCard = ({
 }: RoleCardProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
-  const stripeColor = getRoleStripeColor(index);
+  const accentColor = getRoleAccentColor(index);
   const indexLabel = getRoleIndexLabel(type, index);
   const archiveReason = formatArchiveReason(role.archiveReason);
   const archiveDate = formatArchiveDate(role.archivedAt);
@@ -79,16 +79,15 @@ export const RoleCard = ({
       }}
       onClick={onClick}
     >
-      <span
-        className={styles.stripe}
-        style={{ backgroundColor: stripeColor }}
-        aria-hidden="true"
-      />
+      <span className={styles.cardDeco} aria-hidden="true" />
 
       <div className={styles.cardBody}>
         <div className={styles.topRow}>
           <span className={styles.indexMark}>{indexLabel}</span>
-          <RoleTags type={type} isDefaultForJoin={role.isDefaultForJoin} />
+          <RoleTags
+            type={type}
+            isDefaultForJoin={role.isDefaultForJoin}
+          />
         </div>
 
         <h3 className={styles.roleName}>{role.name}</h3>
@@ -109,7 +108,7 @@ export const RoleCard = ({
               className={styles.permsFill}
               style={{
                 width: `${Math.min((role.permissions.length / 16) * 100, 100)}%`,
-                backgroundColor: stripeColor,
+                backgroundColor: accentColor,
               }}
             />
           </div>

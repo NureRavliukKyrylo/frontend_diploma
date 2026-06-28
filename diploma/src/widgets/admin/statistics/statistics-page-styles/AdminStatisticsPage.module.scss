@@ -1,0 +1,1017 @@
+.page {
+  width: 100%;
+}
+
+.heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  margin-bottom: 18px;
+}
+
+.pageEyebrow {
+  margin-bottom: 14px;
+  color: #8b0000;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.pageTitle {
+  margin: 0;
+  color: #1a1a1a;
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: -1.6px;
+  line-height: 1.08;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.dateRangeButton,
+.exportButton {
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid #ebebeb;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-family: "Exo 2", sans-serif;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.dateRangeButton {
+  background: #ffffff;
+  color: #5f5e5a;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  padding: 0 18px;
+}
+
+.exportButton {
+  background: #1a1a1a;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  border-color: #1a1a1a;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  padding: 0 20px;
+}
+
+.rangePopover,
+.exportPopover {
+  border-radius: 22px 14px 22px 14px;
+  background: #ffffff;
+  border: 1px solid #ebebeb;
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+}
+
+.rangePopover {
+  width: 360px;
+  padding: 10px;
+}
+
+.exportPopover {
+  min-width: 230px;
+  padding: 8px;
+
+  a {
+    display: flex;
+    align-items: center;
+    border-radius: 14px;
+    color: #1a1a1a;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+    padding: 12px 14px;
+
+    &:hover {
+      background: #f5f5f5;
+    }
+  }
+}
+
+.rangeOptions {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+
+  button {
+    height: 38px;
+    border: 0;
+    border-radius: 14px;
+    background: transparent;
+    color: #5f5e5a;
+    cursor: pointer;
+    font-family: "Exo 2", sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    text-align: left;
+    padding: 0 12px;
+
+    &:hover {
+      background: #f5f5f5;
+    }
+  }
+}
+
+.rangeOptionActive {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+}
+
+.customRangePanel {
+  border-top: 1px solid #f0f0f0;
+  padding: 12px 4px 4px;
+}
+
+.customRangeLabel {
+  display: block;
+  margin-bottom: 9px;
+  color: #999999;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.customRangeGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.datePickerBase {
+  min-height: 42px;
+  border-radius: 16px !important;
+}
+
+.datePickerInputWrapper {
+  min-height: 42px !important;
+  background: #f5f5f5 !important;
+}
+
+.datePickerInput,
+.datePickerSegment {
+  color: #1a1a1a !important;
+  font-family: "Exo 2", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+.datePickerSelectorIcon {
+  color: #1a1a1a !important;
+}
+
+.rangeError {
+  display: block;
+  margin-top: 8px;
+  color: #8b0000;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.applyRangeButton {
+  width: 100%;
+  height: 40px;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 999px;
+  background: #1a1a1a;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: "Exo 2", sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.45;
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 14px 0;
+  color: #8f8f8f;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  strong {
+    color: #8b0000;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+}
+
+.sectionLine {
+  flex: 1;
+  height: 1px;
+  background: #e6e6e6;
+}
+
+.totalsGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.totalCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px 14px 22px 14px;
+  background: #ffffff;
+  padding: 18px;
+}
+
+.totalCard_neutral {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+
+  .totalCardDeco {
+    background: rgba(0, 0, 0, 0.025);
+  }
+}
+
+.totalCard_green {
+  box-shadow: 0 4px 16px rgba(26, 122, 69, 0.1);
+
+  .totalCardDeco {
+    background: rgba(26, 122, 69, 0.05);
+  }
+
+  .totalCardValue {
+    color: #1a7a45;
+  }
+}
+
+.totalCard_amber {
+  box-shadow: 0 4px 16px rgba(192, 112, 0, 0.1);
+
+  .totalCardDeco {
+    background: rgba(192, 112, 0, 0.05);
+  }
+
+  .totalCardValue {
+    color: #854f0b;
+  }
+}
+
+.totalCard_red {
+  box-shadow: 0 4px 16px rgba(139, 0, 0, 0.08);
+
+  .totalCardDeco {
+    background: rgba(132, 0, 0, 0.04);
+  }
+
+  .totalCardValue {
+    color: #8b0000;
+  }
+}
+
+.totalCardDeco {
+  position: absolute;
+  top: -26px;
+  right: -26px;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.totalCardLabel {
+  position: relative;
+  z-index: 1;
+  display: block;
+  color: #999999;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.totalCardValue {
+  position: relative;
+  z-index: 1;
+  color: #1a1a1a;
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.totalCardSkeleton {
+  width: 78px;
+  height: 27px;
+  border-radius: 10px;
+}
+
+.totalCardError {
+  color: #8b0000;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.insightRow {
+  display: grid;
+  grid-template-columns: 1.6fr 0.9fr 1.1fr;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.growthCard,
+.funnelCard,
+.slaCard,
+.categoryTableCard,
+.lifetimeCard,
+.walletsCard {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #ebebeb;
+  border-radius: 27px 18px 27px 18px;
+}
+
+.growthCard,
+.funnelCard {
+  padding: 22px 24px;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+}
+
+.growthTitle,
+.categoryTableTitle {
+  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.growthSubtitle,
+.categoryTableCaption {
+  color: #999999;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.growthSubtitle {
+  margin: 2px 0 14px;
+}
+
+.growthHeaderRow,
+.growthDataRow {
+  display: grid;
+  grid-template-columns: 60px repeat(6, 1fr);
+  gap: 5px;
+}
+
+.growthHeaderRow {
+  color: #b5b3ac;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.growthDataRow {
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.growthRowLabel {
+  color: #1a1a1a;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.growthCell {
+  height: 22px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a1a1a;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.growthCellCurrent {
+  color: #ffffff;
+}
+
+.growthSkeleton,
+.funnelSkeleton,
+.categoryTableSkeleton,
+.lifetimeSkeleton,
+.walletsSkeleton,
+.slaSkeleton {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.growthSkeleton,
+.funnelSkeleton {
+  height: 190px;
+}
+
+.reliabilityCard {
+  position: relative;
+  overflow: hidden;
+  background: #1a1a1a;
+  border-radius: 27px 18px 27px 18px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.reliabilityDeco {
+  position: absolute;
+  top: -45px;
+  right: -45px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+}
+
+.reliabilityLabel {
+  align-self: flex-start;
+  color: #8c8c8c;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.reliabilityRing {
+  width: 98px;
+  height: 98px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.reliabilityRingInner {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.reliabilityBreakdown {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  border-top: 1px solid #2c2c2c;
+  padding-top: 12px;
+
+  span {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  strong {
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  em {
+    color: #8c8c8c;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+}
+
+.approvedValue {
+  color: #4ade80;
+}
+
+.rejectedValue {
+  color: #f87171;
+}
+
+.reliabilitySkeleton {
+  width: 98px;
+  height: 98px;
+  border-radius: 50%;
+}
+
+.darkCardState,
+.cardState,
+.wideState {
+  color: #999999;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.darkCardState {
+  color: #8c8c8c;
+}
+
+.wideState {
+  grid-column: 1 / -1;
+  border-radius: 24px;
+  background: #ffffff;
+  padding: 28px;
+}
+
+.funnelStage {
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.funnelStageHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  color: #1a1a1a;
+  font-size: 12px;
+  font-weight: 700;
+
+  strong {
+    font-size: 13px;
+    font-weight: 900;
+  }
+}
+
+.funnelBarTrack,
+.slaBarTrack {
+  border-radius: 999px;
+  background: #f1efe8;
+  overflow: hidden;
+}
+
+.funnelBarTrack {
+  height: 8px;
+}
+
+.funnelBarFill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+
+.slaRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.slaCard {
+  padding: 20px 22px;
+}
+
+.slaTitle {
+  display: block;
+  color: #1a1a1a;
+  font-size: 14px;
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+
+.slaStatsRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+
+  span {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  strong {
+    color: #1a1a1a;
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  em {
+    color: #999999;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}
+
+.slaBarTrack {
+  height: 7px;
+  display: flex;
+}
+
+.slaBarGreen,
+.slaBarAmber,
+.slaBarRed {
+  height: 100%;
+}
+
+.slaBarGreen {
+  background: #1a7a45;
+}
+
+.slaBarAmber {
+  background: #c07000;
+}
+
+.slaBarRed {
+  background: #8b0000;
+}
+
+.slaMeta {
+  margin-top: 8px;
+  color: #999999;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.stuckAlert {
+  border-radius: 14px;
+  background: #fff3da;
+  color: #854f0b;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 10px 12px;
+}
+
+.categoryTableCard {
+  padding: 20px 24px;
+  margin-bottom: 18px;
+}
+
+.categoryTableHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.categoryTableHeader > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.categoryTableHeadRow,
+.categoryTableRow {
+  display: grid;
+  grid-template-columns: 1.4fr 0.7fr 0.7fr 0.8fr 0.8fr;
+  gap: 14px;
+}
+
+.categoryTableHeadRow {
+  border-bottom: 1px solid #f0f0f0;
+  color: #b5b3ac;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding-bottom: 8px;
+}
+
+.categoryTableRow {
+  align-items: center;
+  border-bottom: 1px solid #f7f7f5;
+  padding: 10px 0;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.categoryName {
+  color: #1a1a1a;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.categoryNumber {
+  text-align: center;
+  color: #1a1a1a;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.categoryHoursValue {
+  text-align: right;
+  color: #1a1a1a;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.completionPill {
+  display: inline-block;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 9px;
+}
+
+.completion_good {
+  background: rgba(26, 122, 69, 0.14);
+  color: #1a7a45;
+}
+
+.completion_warn {
+  background: rgba(192, 112, 0, 0.16);
+  color: #854f0b;
+}
+
+.completion_bad {
+  background: rgba(139, 0, 0, 0.14);
+  color: #8b0000;
+}
+
+.completionDash {
+  color: #bbbbbb;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.timeBankTotalsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.timeBankDetailRow {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 18px;
+}
+
+.lifetimeCard,
+.walletsCard {
+  padding: 20px 22px;
+}
+
+.lifetimeGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+
+  span {
+    border-radius: 16px 10px 16px 10px;
+    background: #faf9f7;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 16px;
+  }
+
+  strong {
+    color: #1a1a1a;
+    font-size: 21px;
+    font-weight: 900;
+  }
+
+  em {
+    color: #999999;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+}
+
+.walletGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.walletRow {
+  min-width: 0;
+  border-radius: 16px 10px 16px 10px;
+  background: #faf9f7;
+  color: inherit;
+  text-decoration: none;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    background: #f1efe8;
+    transform: translateY(-1px);
+  }
+
+  span:not(.walletAvatar) {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  strong,
+  em {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  strong {
+    color: #1a1a1a;
+    font-size: 13px;
+    font-weight: 900;
+  }
+
+  em {
+    color: #999999;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  b {
+    color: #1a1a1a;
+    font-size: 13px;
+    font-weight: 900;
+  }
+}
+
+.walletAvatar {
+  width: 34px;
+  height: 34px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #1a1a1a;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 900;
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+}
+
+.showWalletsButton {
+  border: 0;
+  background: transparent;
+  color: #8b0000;
+  cursor: pointer;
+  font-family: "Exo 2", sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.securityNote {
+  margin-top: 18px;
+  border-radius: 22px 14px 22px 14px;
+  background: #fff3da;
+  color: #854f0b;
+  display: flex;
+  gap: 12px;
+  padding: 16px 18px;
+
+  strong {
+    flex-shrink: 0;
+    color: #854f0b;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  span {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+}
+
+.categoryTableSkeleton {
+  height: 260px;
+}
+
+.lifetimeSkeleton,
+.walletsSkeleton {
+  height: 220px;
+}
+
+.slaSkeleton {
+  height: 160px;
+}
+
+@media (max-width: 1700px) {
+  .totalsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1400px) {
+  .insightRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1100px) {
+  .totalsGrid,
+  .timeBankTotalsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .slaRow,
+  .timeBankDetailRow {
+    grid-template-columns: 1fr;
+  }
+
+  .walletGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .heading,
+  .headerActions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .totalsGrid,
+  .timeBankTotalsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .dateRangeButton,
+  .exportButton {
+    width: 100%;
+  }
+
+  .categoryTable {
+    overflow-x: auto;
+  }
+
+  .categoryTableHeadRow,
+  .categoryTableRow {
+    min-width: 620px;
+  }
+
+  .customRangeGrid,
+  .lifetimeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .rangePopover {
+    width: calc(100vw - 32px);
+  }
+}

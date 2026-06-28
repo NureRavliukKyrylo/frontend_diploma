@@ -1,7 +1,14 @@
 export { chatQuery, chatKeys } from "./model/queries/chatQuery";
+export { mentionQuery, mentionKeys } from "./model/queries/mentionQuery";
 export { chatSearchSchema, chatDefaults } from "./libs/chatSearchSchema";
 export { ChatItem } from "./ui/chat-item/ChatItem";
-export type { Chat, RelatedEntityTypeChatValue, Message } from "./model";
+export type {
+  Chat,
+  RelatedEntityTypeChatValue,
+  Message,
+  MentionFeedItem,
+  MentionSearchResult,
+} from "./model";
 export { relatedEntityTypeChatValues } from "./config";
 export type { ChatSearchParams } from "./libs";
 export { ChatItemSkeleton } from "./ui/chat-item/ChatItemSkeleton";
@@ -22,3 +29,10 @@ export { useMessageEvents } from "./model/hooks/useMessagesEvents";
 export type { MessagesResponse } from "./api/messages-list/messagesListApi";
 export { clearFirstUnread } from "./libs/appendMessage";
 export { useGetMessagesQueryKey } from "./libs/getMessagesQueryKey";
+export {
+  getMentionFeedMessageId,
+  getMentionMessageId,
+  isUnreadMention,
+  isUnreadMentionFeedItem,
+} from "./libs";
+export { leaveChat } from "./api";

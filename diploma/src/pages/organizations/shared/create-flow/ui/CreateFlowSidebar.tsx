@@ -7,6 +7,11 @@ interface CreateFlowSidebarProps {
   logoUrl?: string | null;
   initials: string;
   label: string;
+  projectContext?: {
+    id: string;
+    name: string;
+    label: string;
+  };
   steps: readonly { label: string; sublabel: string }[];
   activeStep: number;
   onStepClick: (index: number) => void;
@@ -19,6 +24,7 @@ export const CreateFlowSidebar = ({
   logoUrl,
   initials,
   label,
+  projectContext,
   steps,
   activeStep,
   onStepClick,
@@ -74,5 +80,20 @@ export const CreateFlowSidebar = ({
         <small className={styles.creatorRole}>Creating in this org</small>
       </span>
     </Link>
+
+    {projectContext ? (
+      <Link
+        to="/projects/$id"
+        params={{ id: projectContext.id }}
+        className={styles.projectContextCard}
+      >
+        <span className={styles.projectContextLabel}>
+          {projectContext.label}
+        </span>
+        <strong className={styles.projectContextName}>
+          {projectContext.name}
+        </strong>
+      </Link>
+    ) : null}
   </aside>
 );

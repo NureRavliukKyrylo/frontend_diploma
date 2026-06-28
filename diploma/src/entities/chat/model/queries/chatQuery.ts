@@ -4,6 +4,7 @@ import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
 
 export const chatKeys = {
   all: () => ["chats"] as const,
+  lists: () => [...chatKeys.all(), "list"] as const,
   list: (params: ChatSearchQuery) => [...chatKeys.all(), "list", params],
   id: (id: string) => [...chatKeys.all(), "id", id],
 };

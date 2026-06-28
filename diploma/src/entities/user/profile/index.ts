@@ -3,6 +3,7 @@ export {
   createUserProfileSlice,
 } from "./model/slices/userProfileSlice";
 export { profileQuery } from "./model/queries/profileQuery";
+export { useSyncUserInfoFromProfile } from "./model/hooks/useSyncUserInfoFromProfile";
 export { type VerificationModalType } from "./model/types/modal/VerificationModalType";
 export type { User } from "./model/types/user/User";
 export { profileKeys } from "./model/queries/profileQuery";

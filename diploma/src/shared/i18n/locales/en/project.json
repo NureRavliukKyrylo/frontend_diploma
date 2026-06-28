@@ -45,5 +45,31 @@
     "endingSoon": "Ending soon",
     "completed": "Completed",
     "archived": "Archived"
+  },
+  "fab": {
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "members": "Members",
+    "newEvent": "New event",
+    "newTask": "New task",
+    "roles": "Roles",
+    "contextHint": "You're working in",
+    "openActions": "Open project actions",
+    "closeActions": "Close project actions"
+  },
+  "membersPage": {
+    "eyebrow": "Project members",
+    "title": "{{name}} members",
+    "subtitle": "Review the people participating in this project.",
+    "back": "Back to project"
+  },
+  "rolesPage": {
+    "eyebrow": "Project roles",
+    "title": "{{name}} roles",
+    "subtitle": "Review context roles available inside this project.",
+    "back": "Back to project",
+    "loading": "Loading project roles...",
+    "error": "We could not load project roles right now.",
+    "empty": "No roles are configured for this project yet."
   }
 }

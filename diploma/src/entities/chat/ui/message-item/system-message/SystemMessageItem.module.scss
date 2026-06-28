@@ -3,21 +3,16 @@
 .wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 4px 16px;
+  margin: 8px 0;
 }
 
 .message {
-  @include font-base(12px, 400);
-  color: #9aa0a6;
-  font-style: italic;
-  background: rgba(0, 0, 0, 0.04);
-  padding: 4px 12px;
-  border-radius: 20px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  @include font-base(12px, 500);
+  color: $chat-text-muted;
+  font-style: normal;
+  background: $chat-bg-subtle;
+  padding: 6px 14px;
+  border-radius: 999px;
 }
 
 .timestamp {

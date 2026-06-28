@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   archiveContextRole,
   createContextRole,
+  createContextRoleFromTemplate,
   deleteContextRole,
   organizationKeys,
   restoreContextRole,
@@ -46,7 +47,17 @@ export const useOrganizationRoleMutations = ({
     mutationFn: ({ role, payload, mode }: SaveRoleVariables) =>
       mode === "edit" && role
         ? updateContextRole(role.id, payload)
-        : createContextRole(payload),
+        : mode === "template" && role
+          ? createContextRoleFromTemplate({
+              templateId: role.id,
+              entityType: payload.entityType ?? "organization",
+              entityId: payload.entityId ?? organizationId,
+              name: payload.name,
+              description: payload.description,
+              isDefaultForJoin: payload.isDefaultForJoin,
+              permissionsOverride: payload.permissions,
+            })
+          : createContextRole(payload),
     onSuccess: async () => {
       await invalidate();
       addToast({ title: "Role saved", color: "success" });
@@ -102,13 +113,14 @@ export const useOrganizationRoleMutations = ({
       });
       setPendingAction(null);
       setSelectedRole((current) =>
-        current && current.role.id === state.role.id && state.action === "delete"
+        current &&
+        current.role.id === state.role.id &&
+        state.action === "delete"
           ? null
           : current,
       );
     },
-    onError: () =>
-      addToast({ title: "Role action failed", color: "danger" }),
+    onError: () => addToast({ title: "Role action failed", color: "danger" }),
   });
 
   return { saveMutation, toggleDefaultMutation, actionMutation };

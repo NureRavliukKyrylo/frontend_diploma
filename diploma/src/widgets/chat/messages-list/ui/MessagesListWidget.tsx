@@ -1,11 +1,12 @@
 import styles from "./MessagesListWidget.module.scss";
 import type { QueryResult } from "@shared/config/types";
-import { type Message } from "@entities/chat";
+import { type Message, useChatScrollStore } from "@entities/chat";
 import { useReadMessages } from "@features/chat";
 import { useMessagesVirtualizer } from "../model/useMessagesVirtualizer";
 import { useMessagesInfiniteScroll } from "../model/useMessagesInfiniteScroll";
 import { useMessageReadObserver } from "../model/useMessageReadObserver";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 interface MessagesListWidgetProps {
   useMessagesQuery?: () => QueryResult<Message>;
@@ -25,12 +26,15 @@ export const MessagesListWidget = ({
   const queryResult = useMessagesQuery?.();
   const messages = readyMessages ?? queryResult?.data ?? [];
   const { t } = useTranslation("chat");
+  const targetMessageId = useChatScrollStore(
+    (state) => state.targetMessageIds[chatId] ?? null,
+  );
 
   const { messagesWrapperRef, virtualizer, virtualItems } =
     useMessagesVirtualizer({
       messages,
       chatId,
-      targetMessageId: queryResult?.targetMessageId,
+      targetMessageId: targetMessageId ?? queryResult?.targetMessageId,
       hasNextPage: queryResult?.hasNextPage,
     });
 
@@ -47,6 +51,29 @@ export const MessagesListWidget = ({
   });
 
   const { markAsRead } = useReadMessages(chatId);
+
+  useEffect(() => {
+    if (!targetMessageId) return;
+
+    const targetIndex = messages.findIndex(
+      (message) => message.id === targetMessageId,
+    );
+    if (targetIndex === -1) return;
+
+    const targetMessage = messages[targetIndex];
+    if (!targetMessage || targetMessage.isMine || targetMessage.readStatus === "Read") {
+      return;
+    }
+
+    const unreadUpToTarget = messages
+      .slice(0, targetIndex + 1)
+      .filter((message) => !message.isMine && message.readStatus !== "Read")
+      .map((message) => message.id);
+
+    if (!unreadUpToTarget.length) return;
+
+    markAsRead(targetMessage.id, unreadUpToTarget);
+  }, [targetMessageId, messages, markAsRead]);
 
   useMessageReadObserver({
     messages,

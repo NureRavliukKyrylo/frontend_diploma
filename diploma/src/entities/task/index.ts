@@ -55,11 +55,23 @@ export type {
   OrganizationTaskStatus,
 } from "./model/types/OrganizationTask";
 export {
+  approveTaskTimeLog,
   updateTask,
   updateTaskStatus,
   deleteTask,
+  exportTaskTimeLogs,
+  getTaskTimeLogs,
+  managerEditTaskTimeLog,
+  rejectTaskTimeLog,
+  resolveTaskTimeLog,
+  type TaskTimeLogDecisionPayload,
+  type TaskTimeLogManagerEditPayload,
   type UpdateTaskLocation,
   type UpdateTaskPayload,
   type UpdateTaskStatusPayload,
   type DeleteTaskResponse,
+  type TaskTimeLogRecord,
+  type TaskTimeLogResolvePayload,
+  type TaskTimeLogsResponse,
+  type TaskTimeLogsSearchParams,
 } from "./api";

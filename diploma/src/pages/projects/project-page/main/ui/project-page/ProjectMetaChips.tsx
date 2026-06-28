@@ -15,6 +15,7 @@ export const ProjectMetaChips = ({
   policyConfig,
 }: ProjectMetaChipsProps) => {
   const { t, i18n } = useTranslation(["project"]);
+  const dateLocale = i18n.language === "uk" ? "uk" : "en";
 
   return (
     <div className={styles.projectMetaInfo}>
@@ -23,11 +24,7 @@ export const ProjectMetaChips = ({
         <span className={`${styles.metaChip} ${styles.calendar}`}>
           <Calendar className={styles.calendarImg} />
           <span>
-            {formatDateRange(
-              project.startAt,
-              project.endAt,
-              i18n.language as "en" | "uk",
-            )}
+            {formatDateRange(project.startAt, project.endAt, dateLocale)}
           </span>
         </span>
       ) : null}

@@ -3,20 +3,25 @@
 .chatContentWrapper {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  flex-direction: column;
   height: 100%;
   width: 100%;
+  min-width: 0;
 }
 
 .chatHeader {
   display: flex;
   align-items: center;
-  gap: 14px;
-  background: white;
-  padding: 20px 16px;
-  border-bottom: 1px solid #cbc9c9;
-  border-radius: 0px 20px 0px 0px;
+  gap: 16px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(132, 0, 0, 0.045), transparent 28%),
+    rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 20px 26px;
+  border-bottom: 1px solid $chat-border;
+  border-radius: 0;
   flex-shrink: 0;
+  min-height: 88px;
 
   @include respond-to(mobile) {
     padding: 10px 12px;
@@ -25,9 +30,9 @@
 }
 
 .typingUser {
-  @include font-base(14px, 400);
-  color: #9aa0a6;
-  font-style: italic;
+  @include font-base(13px, 800);
+  color: $chat-brand;
+  font-style: normal;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -47,13 +52,15 @@
 .avatarBack {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 16px;
 }
 
 .chatAvatar {
-  width: 48px;
-  height: 48px;
+  width: 54px;
+  height: 54px;
+  border-radius: 17px;
   flex-shrink: 0;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.09);
 
   @include respond-to(tablet) {
     width: 42px;
@@ -68,12 +75,13 @@
 .chatInfo {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 7px;
   min-width: 0;
+  flex: 1;
 }
 
 .chatName {
-  @include font-base(18px, 700);
+  @include font-base(19px, 900);
   color: #1a1a1a;
   white-space: nowrap;
   overflow: hidden;
@@ -89,18 +97,17 @@
 
 .chatMetaRow {
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
+  align-items: center;
+  gap: 9px;
   flex-wrap: wrap;
-  flex-direction: column;
 }
 
 .chatTypeChip {
   width: fit-content;
-  border-radius: 100px;
-  padding: 2px 12px;
+  border-radius: 999px;
+  padding: 5px 12px;
   text-transform: capitalize;
-  @include font-base(12px, 600);
+  @include font-base(11px, 900);
 
   @include respond-to(mobile) {
     font-size: 10px;
@@ -109,38 +116,33 @@
 }
 
 .event {
-  background: linear-gradient(135deg, #fff4e0 0%, #ffe1b3 100%);
-  box-shadow: 0px 2px 8px rgba(255, 165, 0, 0.25);
-  color: #b35900;
+  background: #fff3da;
+  color: #c07000;
 }
 
 .private {
-  background: linear-gradient(135deg, #e8f0ff 0%, #cfe0ff 100%);
-  box-shadow: 0px 2px 8px rgba(0, 90, 255, 0.2);
-  color: #1d4ed8;
+  background: #e6f1fb;
+  color: #185fa5;
 }
 
 .task {
-  background: linear-gradient(135deg, #e6f9ee 0%, #c2f0d8 100%);
-  box-shadow: 0px 2px 8px rgba(0, 150, 80, 0.2);
-  color: #0c7a43;
+  background: #e6f6ec;
+  color: #1a7a45;
 }
 
 .project {
-  background: linear-gradient(135deg, #f3e8ff 0%, #e0c3ff 100%);
-  box-shadow: 0px 2px 8px rgba(140, 0, 255, 0.2);
-  color: #6b21a8;
+  background: #f1efe8;
+  color: #5f5e5a;
 }
 
 .organization {
-  background: linear-gradient(135deg, #fde8e8 0%, #f7c2c2 100%);
-  box-shadow: 0px 2px 8px rgba(140, 0, 0, 0.25);
-  color: #8c0000;
+  background: $chat-brand-soft-bg;
+  color: $chat-brand;
 }
 
 .membersCount {
-  color: #888888;
-  @include font-base(12px, 500);
+  color: $chat-text-muted;
+  @include font-base(12px, 700);
 
   @include respond-to(mobile) {
     font-size: 10px;
@@ -153,26 +155,123 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  background:
+    radial-gradient(circle at 88% 18%, rgba(132, 0, 0, 0.04), transparent 24%),
+    linear-gradient(180deg, #fdfcfb 0%, #f8f5f0 100%);
 }
+
+.typingIndicator {
+  position: absolute;
+  left: 42px;
+  bottom: 24px;
+  z-index: 8;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 9px;
+  pointer-events: none;
+}
+
+.typingAvatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.08);
+}
+
+.typingBubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 34px;
+  padding: 0 13px;
+  border-radius: 17px 17px 17px 5px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.045);
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.055),
+    0 1px 4px rgba(0, 0, 0, 0.035);
+
+  span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #999999;
+    animation: typingDotBounce 1.2s ease-in-out infinite;
+
+    &:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  }
+}
+
+@keyframes typingDotBounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typingBubble span {
+    animation: none;
+  }
+}
+
+.detailsButton {
+  margin-left: auto;
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 15px;
+  background: #ffffff;
+  color: #555555;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.055);
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    background: #1a1a1a;
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+}
+
 .scrollToBottom {
   position: absolute;
-  bottom: 16px;
-  right: 16px;
-  width: 60px;
-  height: 60px;
+  bottom: 22px;
+  right: 26px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background: white;
-  color: #736c6c;
+  color: #666666;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.14),
+    0 2px 8px rgba(0, 0, 0, 0.08);
   z-index: 10;
   svg {
-    width: 30px;
-    height: 30px;
+    width: 22px;
+    height: 22px;
     transform: rotate(-90deg);
   }
 }
@@ -181,12 +280,12 @@
   position: absolute;
   top: -6px;
   right: -3px;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: #8c0000;
   color: #fff;
-  @include font-base(14px, 700);
+  @include font-base(11px, 800);
   display: flex;
   align-items: center;
   justify-content: center;

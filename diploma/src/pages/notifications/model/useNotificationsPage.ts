@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import {
   notificationQuery,
   useNotificationStore,
+  type NotificationSearchParams,
   type NotificationType,
 } from "@entities/notification";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 
 export const useNotificationsPage = () => {
-  const search = useSearch({ from: "/_masterLayout/notifications/" });
-  const navigate = useNavigate({ from: "/notifications/" });
+  const search = useSearch({ strict: false }) as NotificationSearchParams;
+  const navigate = useNavigate();
 
   const [isSelectMode, setIsSelectMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -45,11 +46,11 @@ export const useNotificationsPage = () => {
 
   const handleTypeChange = (type: NotificationType | "All") => {
     navigate({
-      search: (prev) => ({
-        ...prev,
+      search: {
+        ...search,
         Type: type === "All" ? undefined : type,
         Page: undefined,
-      }),
+      } as never,
     });
   };
 
@@ -64,16 +65,16 @@ export const useNotificationsPage = () => {
   };
 
   const handlePageChange = (page: number) => {
-    navigate({ search: (prev) => ({ ...prev, Page: page }) });
+    navigate({ search: { ...search, Page: page } as never });
   };
 
   const handleStatusChange = (status: "All" | "Unread") => {
     navigate({
-      search: (prev) => ({
-        ...prev,
+      search: {
+        ...search,
         Status: status === "All" ? undefined : status,
         Page: undefined,
-      }),
+      } as never,
     });
   };
 

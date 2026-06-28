@@ -1,4 +1,3 @@
-import { Check } from "lucide-react";
 import styles from "./RoleFormModal.module.scss";
 
 interface PermissionGroup {
@@ -31,28 +30,21 @@ export const RolePermissionGroups = ({
 
     {groups.map((group) => (
       <div key={group.title} className={styles.permissionGroup}>
-        <h4>{group.title}</h4>
-        <div className={styles.permissionGrid}>
+        <span className={styles.permissionGroupLabel}>
+          {group.title.replace("Organization", "Org")}:
+        </span>
+        <div className={styles.permissionPills}>
           {group.permissions.map(({ code, label, checked }) => (
-            <label
+            <button
               key={code}
-              className={`${styles.permissionOption} ${
-                checked ? styles.permissionOptionChecked : ""
+              type="button"
+              className={`${styles.permissionPill} ${
+                checked ? styles.permissionPillSelected : ""
               }`}
+              onClick={() => onToggle(code)}
             >
-              <input
-                type="checkbox"
-                checked={checked}
-                onChange={() => onToggle(code)}
-              />
-              <span className={styles.customCheckbox}>
-                {checked ? <Check size={10} strokeWidth={3} /> : null}
-              </span>
-              <span className={styles.permissionText}>
-                <strong>{label}</strong>
-                <span>{code}</span>
-              </span>
-            </label>
+              {label}
+            </button>
           ))}
         </div>
       </div>

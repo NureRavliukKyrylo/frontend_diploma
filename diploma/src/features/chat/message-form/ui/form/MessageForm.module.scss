@@ -3,10 +3,14 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  border-top: 1px solid #cbc9c9;
-  padding: 10px;
+  gap: 10px;
+  border-top: 1px solid $chat-border;
+  padding: 16px 24px 18px;
   width: 100%;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.035);
 
   @include respond-to(mobile) {
     padding: 8px;
@@ -19,14 +23,14 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 8px 12px;
-  border-radius: 8px;
+  padding: 10px 14px;
+  border-radius: 14px;
   transform-origin: bottom;
   overflow: hidden;
 
   &.editingBanner {
-    background-color: #fffbeb;
-    border-left: 3px solid #f59e0b;
+    background-color: #fff8e8;
+    border-left: 3px solid #c07000;
 
     .bannerLabel {
       color: #b45309;
@@ -40,17 +44,17 @@
   }
 
   &.replyingBanner {
-    background-color: #f5f3ff;
-    border-left: 3px solid #8b5cf6;
+    background-color: $chat-brand-soft-bg;
+    border-left: 3px solid $chat-brand;
 
     .bannerLabel {
-      color: #6d28d9;
+      color: $chat-brand;
     }
     .bannerText {
-      color: #5b21b6;
+      color: $chat-brand-deeper;
     }
     .bannerCloseIcon path {
-      fill: #6d28d9;
+      fill: $chat-brand;
     }
   }
 
@@ -119,59 +123,11 @@
 
 .sendMessageWrapper {
   display: flex;
-  align-items: baseline;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
 
   @include respond-to(mobile) {
     gap: 6px;
-  }
-
-  .mentionButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 55px;
-    height: 55px;
-    flex-shrink: 0;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-
-    .mentionIcon {
-      width: 55px;
-      height: 55px;
-      color: #6c8ebf;
-    }
-
-    @include respond-to(laptop) {
-      width: 48px;
-      height: 48px;
-
-      .mentionIcon {
-        width: 48px;
-        height: 48px;
-      }
-    }
-
-    @include respond-to(tablet) {
-      width: 42px;
-      height: 42px;
-
-      .mentionIcon {
-        width: 42px;
-        height: 42px;
-      }
-    }
-
-    @include respond-to(mobile) {
-      width: 36px;
-      height: 36px;
-
-      .mentionIcon {
-        width: 36px;
-        height: 36px;
-      }
-    }
   }
 
   .wrapperInputResult {
@@ -183,25 +139,65 @@
     .inputWrapper {
       position: relative;
       width: 100%;
+      min-height: 58px;
+      max-height: 112px;
+      overflow-y: auto;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 7px;
+      padding: 7px 58px 7px 12px;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.075);
+      border-radius: 28px;
+      box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.055),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+      transition:
+        border-color 0.2s,
+        background 0.2s,
+        box-shadow 0.2s;
+
+      &:focus-within {
+        border-color: rgba(132, 0, 0, 0.34);
+        background: #fff;
+        box-shadow:
+          0 10px 28px rgba(132, 0, 0, 0.08),
+          0 0 0 4px rgba(132, 0, 0, 0.055);
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      scrollbar-width: none;
+
+      &.inputWrapperError {
+        border-color: $chat-brand;
+        background: #fff7f7;
+      }
 
       .input {
-        background: #f5f5f5;
-        border: 1px solid #e4e4e7;
-        border-radius: 20px;
-        width: 100%;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        flex: 1;
+        min-width: 160px;
         outline: none;
         box-sizing: border-box;
-        padding: 12px 50px 12px 20px;
+        padding: 9px 0;
         @include font-base(16px, 500);
         color: #1a1a1a;
         resize: none;
         overflow-y: auto;
-        min-height: 50px;
+        min-height: 40px;
         max-height: 160px;
         line-height: 1.4;
+        box-shadow: none;
         transition:
           border-color 0.2s,
-          background 0.2s;
+          background 0.2s,
+          box-shadow 0.2s;
 
         &::-webkit-scrollbar {
           display: none;
@@ -210,8 +206,8 @@
         scrollbar-width: none;
 
         &:focus {
-          border-color: #1a1a1a;
-          background: #fff;
+          background: transparent;
+          box-shadow: none;
         }
 
         &::placeholder {
@@ -227,8 +223,7 @@
           }
         }
         &.inputError {
-          border-color: #8c0000;
-          background: #fff0f0;
+          background: transparent;
         }
 
         @include respond-to(tablet) {
@@ -245,17 +240,52 @@
 
       .sendMessageButton {
         position: absolute;
-        right: 6px;
-        bottom: 12px;
+        right: 7px;
+        bottom: 50%;
+        transform: translateY(50%);
 
         .sendMessage {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 36px;
-          height: 36px;
+          width: 46px;
+          height: 46px;
           border-radius: 50%;
-          transition: background 0.2s;
+          border: none;
+          background: #e7e7e7;
+          color: #9a9a9a;
+          cursor: pointer;
+          box-shadow: none;
+          transition:
+            background-color 0.15s ease,
+            color 0.15s ease,
+            opacity 0.2s,
+            transform 0.15s ease;
+
+          &:hover {
+            transform: translateY(-1px);
+          }
+
+          &.ready {
+            background: #1a1a1a;
+            color: #ffffff;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+
+            .icon {
+              color: #ffffff;
+              stroke: #ffffff;
+            }
+          }
+
+          &.empty {
+            background: #e7e7e7;
+            color: #9a9a9a;
+
+            .icon {
+              color: #9a9a9a;
+              stroke: #9a9a9a;
+            }
+          }
 
           &.loading {
             opacity: 0.6;
@@ -263,28 +293,29 @@
           }
 
           .icon {
-            width: 36px;
-            height: 36px;
-            color: black;
+            width: 22px;
+            height: 22px;
+            color: currentColor;
+            stroke: currentColor;
           }
 
           @include respond-to(tablet) {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
 
             .icon {
-              width: 32px;
-              height: 32px;
+              width: 20px;
+              height: 20px;
             }
           }
 
           @include respond-to(mobile) {
-            width: 28px;
-            height: 28px;
+            width: 34px;
+            height: 34px;
 
             .icon {
-              width: 26px;
-              height: 26px;
+              width: 18px;
+              height: 18px;
             }
           }
         }
@@ -293,7 +324,7 @@
 
     .errorMessage {
       @include font-base(11px, 600);
-      color: #8c0000;
+      color: $chat-brand;
       padding-left: 20px;
 
       @include respond-to(mobile) {
@@ -303,49 +334,42 @@
     }
   }
 }
-.mentionTags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 0 4px;
-  transform-origin: bottom;
+.mentionTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 10px 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(132, 0, 0, 0.16);
+  background: $chat-brand-soft-bg;
+  color: $chat-brand;
+  @include font-base(13px, 800);
+  line-height: 1;
+  flex-shrink: 0;
 
-  .mentionTag {
-    display: inline-flex;
+  .mentionTagRemove {
+    display: flex;
     align-items: center;
-    gap: 4px;
-    padding: 3px 8px 3px 10px;
-    border-radius: 100px;
-    border: 1px solid rgba(79, 70, 229, 0.2);
-    @include font-base(13px, 800);
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: currentColor;
 
-    .mentionTagRemove {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-
-      .mentionTagRemoveIcon {
-        width: 12px;
-        height: 12px;
-      }
+    .mentionTagRemoveIcon {
+      width: 12px;
+      height: 12px;
     }
   }
 
   @include respond-to(mobile) {
-    gap: 4px;
+    padding: 6px 8px 6px 10px;
+    font-size: 11px;
 
-    .mentionTag {
-      padding: 2px 6px 2px 8px;
-      font-size: 11px;
-
-      .mentionTagRemoveIcon {
-        width: 10px;
-        height: 10px;
-      }
+    .mentionTagRemoveIcon {
+      width: 10px;
+      height: 10px;
     }
   }
 }

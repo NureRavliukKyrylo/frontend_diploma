@@ -3,9 +3,10 @@
 .messageWrapper {
   display: flex;
   align-items: flex-end;
-  gap: 8px;
-  max-width: 75%;
+  gap: 10px;
+  max-width: min(72%, 760px);
   width: fit-content;
+  margin-bottom: 10px;
 
   @include respond-to(tablet) {
     max-width: 85%;
@@ -19,8 +20,12 @@
     margin-left: auto;
 
     .bubble {
-      background: #eff6ff;
+      background: $chat-brand;
+      color: #ffffff;
       border-radius: 20px 20px 4px 20px;
+      box-shadow:
+        0 10px 24px rgba(132, 0, 0, 0.2),
+        0 2px 8px rgba(132, 0, 0, 0.14);
     }
 
     .meta {
@@ -28,14 +33,35 @@
     }
 
     .replyBlock {
-      background: rgba(59, 130, 246, 0.08);
+      background: rgba(255, 255, 255, 0.12);
+      border-left: 3px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .replyName,
+    .message {
+      color: #ffffff;
+    }
+
+    .replyMessage {
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .timestamp,
+    .edited {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .editIcon {
+      opacity: 0.85;
+      filter: brightness(0) invert(1);
     }
   }
 }
 
 .avatar {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
+  border-radius: 13px;
   flex-shrink: 0;
 
   @include respond-to(mobile) {
@@ -47,11 +73,15 @@
 .bubble {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  background: #f2f2f2;
+  gap: 5px;
+  background: #ffffff;
   border-radius: 20px 20px 20px 4px;
-  padding: 10px 14px;
+  padding: 12px 15px;
   position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.045);
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.055),
+    0 1px 4px rgba(0, 0, 0, 0.035);
 }
 
 .initialsBlock {
@@ -63,8 +93,8 @@
     gap: 4px;
   }
 
-  .name {
-    @include font-base(13px, 600);
+    .name {
+    @include font-base(13px, 800);
     line-height: 120%;
     color: #1a1a1a;
 
@@ -73,10 +103,10 @@
     }
   }
 
-  .roleName {
-    @include font-base(14px, 400);
+    .roleName {
+    @include font-base(12px, 700);
     font-style: italic;
-    color: #8c0000;
+    color: $chat-brand;
 
     @include respond-to(mobile) {
       font-size: 11px;
@@ -88,16 +118,16 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  border-left: 3px solid #8c0000;
-  padding: 4px 8px;
-  background: rgba(0, 0, 0, 0.04);
+  border-left: 3px solid $chat-brand;
+  padding: 6px 9px;
+  background: rgba(132, 0, 0, 0.055);
   border-radius: 0px 8px 8px 0px;
   margin-bottom: 4px;
 }
 
 .replyName {
   @include font-base(12px, 600);
-  color: #8c0000;
+  color: $chat-brand;
 }
 
 .replyMessage {
@@ -117,14 +147,16 @@
 }
 
 .mention {
-  @include font-base(13px, 500);
-  padding: 2px 6px;
-  border-radius: 6px;
+  @include font-base(13px, 800);
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: $chat-brand-soft-bg;
+  color: $chat-brand;
 }
 
 .message {
-  @include font-base(15px, 400);
-  line-height: 1.5;
+  @include font-base(15px, 500);
+  line-height: 1.55;
   word-break: break-word;
 
   @include respond-to(mobile) {
@@ -140,7 +172,7 @@
 }
 
 .timestamp {
-  @include font-base(11px, 300);
+  @include font-base(11px, 600);
   color: #9aa0a6;
 }
 
@@ -148,7 +180,7 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  @include font-base(11px, 300);
+  @include font-base(11px, 600);
   color: #9aa0a6;
 }
 
@@ -170,7 +202,7 @@
   position: absolute;
   width: 14px;
   height: 14px;
-  color: #9aa0a6;
+  color: rgba(255, 255, 255, 0.55);
 
   &:first-child {
     left: 0;
@@ -179,7 +211,7 @@
 
 .checkRead {
   left: 4px;
-  color: #3b82f6;
+  color: #ffffff;
 }
 
 .dropdownAnchor {
@@ -222,27 +254,27 @@
   }
 
   &.edit:hover {
-    background: #fefce8;
+    background: $chat-bg-subtle;
     transform: translateX(3px);
     .menuItemTitle {
-      color: #ca8a04;
+      color: #1a1a1a;
       font-weight: 600;
     }
   }
   &.reply:hover {
-    background: #faf5ff;
+    background: $chat-brand-soft-bg;
     transform: translateX(3px);
     .menuItemTitle {
-      color: #7c3aed;
+      color: $chat-brand;
       font-weight: 600;
     }
   }
 
   &.report:hover {
-    background: #fff7ed;
+    background: $chat-bg-subtle;
     transform: translateX(3px);
     .menuItemTitle {
-      color: #ea580c;
+      color: #1a1a1a;
       font-weight: 600;
     }
   }

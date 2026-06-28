@@ -33,7 +33,6 @@ export const TaskWidget = ({
   const [isEditMode, setIsEditMode] = useState(false);
   const { task, isLoading, isError, error, statusConfig, policyConfig, forms } =
     useTaskWidget({ taskId, search, handleSort });
-  const localizedTabs = getTaskMainTabs(t);
 
   useEffect(() => {
     setIsEditMode(false);
@@ -61,6 +60,8 @@ export const TaskWidget = ({
   }
 
   if (!task) return null;
+
+  const localizedTabs = getTaskMainTabs(t, task);
 
   return (
     <div className={styles.wrapperTaskWidget}>
