@@ -4,15 +4,15 @@ import { useRequestSearchControls } from "./useRequestSearchControls";
 
 export const useAdminRequestsPage = () => {
   const searchControls = useRequestSearchControls();
-  const data = useRequestDataQueries(searchControls.search);
+  const requestData = useRequestDataQueries(searchControls.search);
   const decisionFlow = useRequestDecisionFlow();
 
   return {
     ...searchControls,
-    categoryMap: data.categoryMap,
-    metrics: data.metrics,
-    tabs: data.tabs,
-    list: data.list,
+    categoryMap: requestData.categoryMap,
+    metrics: requestData.metrics,
+    tabs: requestData.tabs,
+    list: requestData.list,
     decision: decisionFlow.decision,
     drawer: decisionFlow.drawer,
   };

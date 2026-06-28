@@ -12,14 +12,15 @@ interface ProposedCategoryPreviewProps {
 export const ProposedCategoryPreview = ({
   request,
 }: ProposedCategoryPreviewProps) => {
-  const data = asRequestRecord(request.dataJson);
+  const requestData = asRequestRecord(request.dataJson);
   const name =
-    readPayloadString(data, ["name", "Name", "title", "Title"]) || request.title;
+    readPayloadString(requestData, ["name", "Name", "title", "Title"]) ||
+    request.title;
   const description =
-    readPayloadString(data, ["description", "Description"]) ||
+    readPayloadString(requestData, ["description", "Description"]) ||
     request.description ||
     "No description provided.";
-  const imageUrl = readPayloadString(data, ["imageUrl", "ImageUrl"]);
+  const imageUrl = readPayloadString(requestData, ["imageUrl", "ImageUrl"]);
 
   return (
     <>

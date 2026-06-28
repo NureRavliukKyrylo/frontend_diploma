@@ -17,12 +17,16 @@ export const getAdminRequests = async (
   const dataValue =
     readValue(root, "data", "Data", "items", "Items", "results", "Results") ??
     response.data;
-  const data = Array.isArray(dataValue)
+  const requests = Array.isArray(dataValue)
     ? dataValue.map(normalizeAdminRequest)
     : [];
 
   return {
-    data,
-    pagination: normalizeAdminRequestsPagination(root, data.length, params),
+    data: requests,
+    pagination: normalizeAdminRequestsPagination(
+      root,
+      requests.length,
+      params,
+    ),
   };
 };

@@ -35,7 +35,7 @@ export const useOrganizationRolesPage = () => {
   const [pendingAction, setPendingAction] = useState<RoleActionState | null>(
     null,
   );
-  const data = useOrganizationRolesData(organizationId);
+  const rolesData = useOrganizationRolesData(organizationId);
   const mutations = useOrganizationRoleMutations({
     organizationId,
     setFormState,
@@ -45,8 +45,8 @@ export const useOrganizationRolesPage = () => {
 
   useEffect(() => {
     if (
-      data.activeRolesResult.isError &&
-      getRoleErrorStatus(data.activeRolesResult.error) === 403
+      rolesData.activeRolesResult.isError &&
+      getRoleErrorStatus(rolesData.activeRolesResult.error) === 403
     ) {
       void navigate({
         to: "/organizations/$id",
@@ -54,11 +54,11 @@ export const useOrganizationRolesPage = () => {
         replace: true,
       });
     }
-  }, [data.activeRolesResult, navigate, organizationId]);
+  }, [navigate, organizationId, rolesData.activeRolesResult]);
 
   const getMembersForRole = useCallback(
-    (roleId: string) => data.membersByRoleId.get(roleId) ?? [],
-    [data.membersByRoleId],
+    (roleId: string) => rolesData.membersByRoleId.get(roleId) ?? [],
+    [rolesData.membersByRoleId],
   );
   const getMemberCountForRole = useCallback(
     (roleId: string) => getMembersForRole(roleId).length,
@@ -69,10 +69,10 @@ export const useOrganizationRolesPage = () => {
       selectedRole
         ? buildRoleMembers(
             getMembersForRole(selectedRole.role.id),
-            data.profilesByUserId,
+            rolesData.profilesByUserId,
           )
         : [],
-    [data.profilesByUserId, getMembersForRole, selectedRole],
+    [getMembersForRole, rolesData.profilesByUserId, selectedRole],
   );
   const openRoleCard = (
     role: OrganizationContextRole,
@@ -116,7 +116,7 @@ export const useOrganizationRolesPage = () => {
     openRoleCard,
     openAction,
     submitRole,
-    ...data,
+    ...rolesData,
     ...mutations,
   };
 };

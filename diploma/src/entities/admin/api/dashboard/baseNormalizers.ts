@@ -11,15 +11,23 @@ import type {
 
 export const unwrapResponsePayload = (value: unknown) => {
   const record = asRecord(value);
-  const data = record.data ?? record.Data;
-  const result = record.result ?? record.Result;
+  const dataPayload = record.data ?? record.Data;
+  const resultPayload = record.result ?? record.Result;
 
-  if (data && typeof data === "object" && !Array.isArray(data)) {
-    return data;
+  if (
+    dataPayload &&
+    typeof dataPayload === "object" &&
+    !Array.isArray(dataPayload)
+  ) {
+    return dataPayload;
   }
 
-  if (result && typeof result === "object" && !Array.isArray(result)) {
-    return result;
+  if (
+    resultPayload &&
+    typeof resultPayload === "object" &&
+    !Array.isArray(resultPayload)
+  ) {
+    return resultPayload;
   }
 
   return value;

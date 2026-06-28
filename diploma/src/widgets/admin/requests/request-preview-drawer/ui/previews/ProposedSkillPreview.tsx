@@ -17,20 +17,21 @@ export const ProposedSkillPreview = ({
   request,
   categoryMap,
 }: ProposedSkillPreviewProps) => {
-  const data = asRequestRecord(request.dataJson);
+  const requestData = asRequestRecord(request.dataJson);
   const name =
-    readPayloadString(data, ["name", "Name", "title", "Title"]) || request.title;
+    readPayloadString(requestData, ["name", "Name", "title", "Title"]) ||
+    request.title;
   const description =
-    readPayloadString(data, ["description", "Description"]) ||
+    readPayloadString(requestData, ["description", "Description"]) ||
     request.description ||
     "No description provided.";
-  const iconUrl = readPayloadString(data, [
+  const iconUrl = readPayloadString(requestData, [
     "iconUrl",
     "IconUrl",
     "imageUrl",
     "ImageUrl",
   ]);
-  const categoryIds = readPayloadStringArray(data, [
+  const categoryIds = readPayloadStringArray(requestData, [
     "categoryIds",
     "CategoryIds",
   ]);

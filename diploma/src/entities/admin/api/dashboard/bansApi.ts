@@ -29,9 +29,9 @@ export const getAdminActiveBans = async (take = 500) => {
     params: { take },
   });
   const record = asRecord(response.data);
-  const data = read(record, "data", "Data");
+  const banItems = read(record, "data", "Data");
 
-  return Array.isArray(data) ? data.map(normalizeAdminBan) : [];
+  return Array.isArray(banItems) ? banItems.map(normalizeAdminBan) : [];
 };
 
 export const revokeAdminBan = async (id: string, reason?: string) => {

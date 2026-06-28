@@ -60,22 +60,22 @@ export const getEventAttendancesList = async (
   eventId: string,
   params: EventAttendanceSearchParams,
 ): Promise<EventAttendanceResponse> => {
-  const result = await apiClient.get(`events/${eventId}/attendance/me`, {
+  const response = await apiClient.get(`events/${eventId}/attendance/me`, {
     params,
   });
-  return result.data;
+  return response.data;
 };
 
 export const getEventAttendanceManagerList = async (
   eventId: string,
   params: EventAttendanceManagerSearchParams,
 ): Promise<EventAttendanceManagerResponse> => {
-  const result = await apiClient.get<EventAttendanceManagerResponse>(
+  const response = await apiClient.get<EventAttendanceManagerResponse>(
     `events/${eventId}/attendance`,
     { params },
   );
 
-  return result.data;
+  return response.data;
 };
 
 export const approveEventAttendance = async (
@@ -83,11 +83,11 @@ export const approveEventAttendance = async (
   attendanceId: string,
   payload: EventAttendanceDecisionPayload,
 ) => {
-  const result = await apiClient.post(
+  const response = await apiClient.post(
     `events/${eventId}/attendance/${attendanceId}/approve`,
     payload,
   );
-  return result.data;
+  return response.data;
 };
 
 export const rejectEventAttendance = async (
@@ -95,11 +95,11 @@ export const rejectEventAttendance = async (
   attendanceId: string,
   payload: EventAttendanceDecisionPayload,
 ) => {
-  const result = await apiClient.post(
+  const response = await apiClient.post(
     `events/${eventId}/attendance/${attendanceId}/reject`,
     payload,
   );
-  return result.data;
+  return response.data;
 };
 
 export const resolveEventAttendance = async (
@@ -107,20 +107,20 @@ export const resolveEventAttendance = async (
   attendanceId: string,
   payload: EventAttendanceResolvePayload,
 ) => {
-  const result = await apiClient.post(
+  const response = await apiClient.post(
     `events/${eventId}/attendance/${attendanceId}/resolve`,
     payload,
   );
-  return result.data;
+  return response.data;
 };
 
 export const exportEventAttendance = async (eventId: string) => {
-  const result = await apiClient.get<Blob>(
+  const response = await apiClient.get<Blob>(
     `events/${eventId}/attendance/export`,
     {
       params: { format: "csv" },
       responseType: "blob",
     },
   );
-  return result.data;
+  return response.data;
 };
