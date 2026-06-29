@@ -5,6 +5,7 @@ import { appendMessage } from "@entities/chat/libs/appendMessage";
 import { updateMessage } from "@entities/chat/libs/updateMessage";
 import { deleteMessage } from "@entities/chat/libs/deleteMessage";
 import { useGetMessagesQueryKey } from "@entities/chat/libs/getMessagesQueryKey";
+import { readMessage } from "@entities/chat/libs/readMessage";
 
 interface MessageCreatedPayload {
   chatId: string;
@@ -24,6 +25,11 @@ interface MessageDeletedPayload {
   isDeleted: boolean;
   isDeletedContentVisible: boolean;
   deletedAt: string;
+}
+
+interface MessageReadPayload {
+  chatId: string;
+  lastReadMessageId: string;
 }
 
 export function useMessageEvents() {
@@ -47,6 +53,18 @@ export function useMessageEvents() {
       (payload: MessageEditedPayload) => {
         const queryKey = getMessagesQueryKey(payload.chatId);
         updateMessage(queryKey, payload.message);
+      },
+      [getMessagesQueryKey],
+    ),
+  );
+
+  useSignalREvent(
+    "chats",
+    "chat.read.updated",
+    useCallback(
+      (payload: MessageReadPayload) => {
+        const queryKey = getMessagesQueryKey(payload.chatId);
+        readMessage(queryKey, payload.lastReadMessageId);
       },
       [getMessagesQueryKey],
     ),

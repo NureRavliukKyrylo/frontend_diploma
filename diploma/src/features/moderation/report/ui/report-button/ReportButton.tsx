@@ -31,6 +31,7 @@ export const ReportButton = ({
         <BaseButtonWrapper
           className={`${styles.button} ${buttonClassName ?? ""}`}
           onClick={() => setIsOpen(true)}
+          aria-label="report"
         >
           <Report className={`${styles.icon} ${iconClassName ?? ""}`} />
         </BaseButtonWrapper>

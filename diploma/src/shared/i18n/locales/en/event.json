@@ -65,7 +65,8 @@
       "Rejected": "Rejected",
       "Disputed": "Disputed",
       "Resolved": "Resolved",
-      "Cancelled": "Cancelled"
+      "Cancelled": "Cancelled",
+      "CheckedOutPendingApproval": "Pending Approval"
     }
   },
   "cards": {

@@ -71,6 +71,7 @@ export const LoginForm = () => {
           <BaseButtonWrapper
             loading={isLoading}
             className={styles.signInButton}
+            type="submit"
           >
             {t("login.signIn")}
           </BaseButtonWrapper>

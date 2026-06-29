@@ -50,8 +50,10 @@ export const useLogin = () => {
       setRole(data.role);
 
       await router.invalidate({ sync: true });
+
       await queryClient.cancelQueries();
       queryClient.clear();
+
       await router.navigate({ to: search.redirect ?? "/activities" });
     },
     onError: (error: unknown) => {

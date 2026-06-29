@@ -6,7 +6,12 @@ import {
 } from "@entities/chat";
 import { getFullName } from "@entities/user";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
-import { ChatContentWidget, ChatSidebar, ChatsListWidget } from "@widgets/chat";
+import {
+  ChatContentWidget,
+  ChatContentWidgetSkeleton,
+  ChatSidebar,
+  ChatsListWidget,
+} from "@widgets/chat";
 import styles from "./ChatPage.module.scss";
 import { DeleteMessageModal } from "@features/chat";
 import { useChatPage } from "../model/useChatPage";
@@ -18,6 +23,7 @@ import { Arrow } from "@shared/assets/icons/actions";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChatMessagesSection } from "./ChatMessagesSection";
 import { ChatEmptyState } from "./ChatEmptyState";
+import { Suspense } from "react";
 
 export const ChatPage = () => {
   const {
@@ -101,42 +107,44 @@ export const ChatPage = () => {
             transition={{ type: "spring", stiffness: 380, damping: 30 }}
           >
             {chatId ? (
-              <ChatContentWidget
-                chatId={chatId}
-                mode={mode}
-                onCancel={() => {
-                  clearModeType("reply");
-                  clearModeType("edit");
-                }}
-                leftContent={
-                  isMobile && (
-                    <LinkButtonWrapper
-                      to="/chat"
-                      className={styles.backToChats}
-                    >
-                      <motion.div
-                        whileTap={{ scale: 0.85 }}
-                        whileHover={{ scale: 1.1 }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 400,
-                          damping: 20,
-                        }}
-                        className={styles.wrapper}
-                      >
-                        <Arrow className={styles.arrowIcon} />
-                      </motion.div>
-                    </LinkButtonWrapper>
-                  )
-                }
-              >
-                <ChatMessagesSection
+              <Suspense fallback={<ChatContentWidgetSkeleton />}>
+                <ChatContentWidget
                   chatId={chatId}
-                  getMenuItems={getMenuItems}
-                  openId={openId}
-                  setOpenId={setOpenId}
-                />
-              </ChatContentWidget>
+                  mode={mode}
+                  onCancel={() => {
+                    clearModeType("reply");
+                    clearModeType("edit");
+                  }}
+                  leftContent={
+                    isMobile && (
+                      <LinkButtonWrapper
+                        to="/chat"
+                        className={styles.backToChats}
+                      >
+                        <motion.div
+                          whileTap={{ scale: 0.85 }}
+                          whileHover={{ scale: 1.1 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 400,
+                            damping: 20,
+                          }}
+                          className={styles.wrapper}
+                        >
+                          <Arrow className={styles.arrowIcon} />
+                        </motion.div>
+                      </LinkButtonWrapper>
+                    )
+                  }
+                >
+                  <ChatMessagesSection
+                    chatId={chatId}
+                    getMenuItems={getMenuItems}
+                    openId={openId}
+                    setOpenId={setOpenId}
+                  />
+                </ChatContentWidget>
+              </Suspense>
             ) : (
               <ChatEmptyState />
             )}

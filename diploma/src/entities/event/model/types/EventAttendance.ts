@@ -2,6 +2,7 @@ export type AttendanceStatus =
   | "draft"
   | "checkedOut"
   | "checkedIn"
+  | "CheckedOutPendingApproval"
   | "approved"
   | "rejected"
   | "disputed"
@@ -11,6 +12,7 @@ export type AttendanceStatus =
 export interface EventAttendance {
   canCheckIn: boolean;
   canCheckOut: boolean;
+  canDispute: boolean;
   currentAttendance: {
     id: string;
     dateFrom: Date | string;

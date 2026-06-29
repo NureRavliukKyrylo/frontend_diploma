@@ -141,6 +141,10 @@
     background: rgba(156, 163, 175, 0.12);
     color: #6b7280;
   }
+  &.CheckedOutPendingApproval {
+    background: rgba(249, 115, 22, 0.12);
+    color: #c2410c;
+  }
 
   @include respond-to(tablet) {
     font-size: 14px;

@@ -18,16 +18,11 @@ export const EventAttendanceListItem = ({
   disputeAttendance,
 }: EventAttendanceListItemProps) => {
   const { t, i18n } = useTranslation(["event"]);
-  const now = new Date();
-  const isInRange =
-    now >= new Date(attendance.currentAttendance.dateFrom) &&
-    now <= new Date(attendance.currentAttendance.dateTo);
 
   const renderAction = () => {
     if (attendance.canCheckIn) return checkIn;
     if (attendance.canCheckOut) return checkOut;
-    if (!isInRange && attendance.currentAttendance.checkOutAt !== null)
-      return disputeAttendance;
+    if (attendance.canDispute) return disputeAttendance;
     return null;
   };
 

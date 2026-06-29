@@ -116,7 +116,9 @@ export const MyOfferPage = () => {
         {(offer.canComplete || offer.canCancel) && (
           <div className={styles.offerActions}>
             {offer.canComplete && (
-              <CompleteBookingButton bookingId={offer.reservedBookingId} />
+              <CompleteBookingButton
+                bookingId={offer.reservedBookingId ?? offer.myBookingId}
+              />
             )}
             {offer.canCancel && (
               <CancelBookingButton

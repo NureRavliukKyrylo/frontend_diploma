@@ -75,7 +75,9 @@ export const ActivityFeedbackTab = ({
         <div className={styles.headerWrapper}>
           <div className={styles.overAllRatingInfo}>
             <div className={styles.baseInfo}>
-              <h1 className={styles.baseRating}>{rating.value}</h1>
+              <h1 className={styles.baseRating}>
+                {parseFloat(rating.value.toFixed(2))}
+              </h1>
               <Stars
                 value={rating.value}
                 gradient="linear-gradient(180deg, #8C0000 0%, #260000 100%)"

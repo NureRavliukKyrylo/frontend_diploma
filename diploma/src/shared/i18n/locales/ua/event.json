@@ -60,7 +60,8 @@
       "Rejected": "Відхилено",
       "Disputed": "Оскаржується",
       "Resolved": "Вирішено",
-      "Cancelled": "Скасовано"
+      "Cancelled": "Скасовано",
+      "CheckedOutPendingApproval": "Очікує підтвердження"
     },
     "empty": {
       "title": "Немає записів про відвідуваність",
