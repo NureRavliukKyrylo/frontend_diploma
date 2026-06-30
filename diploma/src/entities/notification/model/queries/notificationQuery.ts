@@ -6,7 +6,7 @@ export const notificationKeys = {
   all: () => ["notifications"] as const,
   list: (params: NotificationSearchParams) =>
     [...notificationKeys.all(), "list", params] as const,
-  unreadCount: () => ["unread", "notifications"] as const,
+  unreadCount: () => [...notificationKeys.all(), "unread"] as const,
 };
 
 export const notificationQuery = {

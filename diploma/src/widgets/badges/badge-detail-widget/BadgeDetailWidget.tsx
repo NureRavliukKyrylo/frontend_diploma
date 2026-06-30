@@ -133,9 +133,7 @@ export const BadgeDetailWidget = ({ id }: { id: string }) => {
             </h2>
           </div>
           <div className={styles.requirementsBadge}>
-            {badge.ruleProgress.map((value, idx) => (
-              <h1 key={idx}>{value.label}</h1>
-            ))}
+            <h1>Join activities by different categories</h1>
           </div>
         </div>
       </div>

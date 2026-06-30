@@ -10,12 +10,19 @@ export const readMessage = (queryKey: QueryKey, messageId: string) => {
 
       return {
         ...old,
-        pages: old.pages.map((page) => ({
-          ...page,
-          data: page.data.map((msg) =>
-            msg.id <= messageId ? { ...msg, readStatus: "Read" } : msg,
-          ),
-        })),
+        pages: old.pages.map((page) => {
+          const targetIndex = page.data.findIndex(
+            (msg) => msg.id === messageId,
+          );
+          if (targetIndex === -1) return page;
+
+          return {
+            ...page,
+            data: page.data.map((msg, index) =>
+              index <= targetIndex ? { ...msg, readStatus: "Read" } : msg,
+            ),
+          };
+        }),
       };
     },
   );

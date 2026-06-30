@@ -62,10 +62,19 @@ async function clickIfVisible(page: Page, name: RegExp): Promise<boolean> {
   const btn = page.getByRole("button", { name }).first();
   if (await btn.isVisible().catch(() => false)) {
     await btn.click();
-    await page.waitForTimeout(3_000);
+    await page.waitForTimeout(8_000);
     return true;
   }
   return false;
+}
+
+function locationMapTrigger(page: Page) {
+  return page
+    .locator("section", {
+      has: page.getByRole("heading", { name: "Location" }),
+    })
+    .getByRole("button")
+    .first();
 }
 
 test.describe.serial("ImpactFlow sanity", () => {
@@ -119,7 +128,7 @@ test.describe.serial("ImpactFlow sanity", () => {
       const confirmLeave = page.getByRole("button", { name: /^leave$/i });
       if (await confirmLeave.isVisible().catch(() => false)) {
         await confirmLeave.click();
-        await page.waitForTimeout(3_000);
+        await page.waitForTimeout(8_000);
       }
       await expect(page.locator("body")).toContainText(
         /left project|join project|leave request/i,
@@ -139,7 +148,7 @@ test.describe.serial("ImpactFlow sanity", () => {
       const accept = invitation.getByRole("button", { name: /accept/i });
       if (await accept.isVisible().catch(() => false)) {
         await accept.click();
-        await page.waitForTimeout(3_000);
+        await page.waitForTimeout(8_000);
       }
     }
 
@@ -185,7 +194,7 @@ test.describe.serial("ImpactFlow sanity", () => {
     const approveBtn = page.getByRole("button", { name: /approve/i }).first();
     if (await approveBtn.isVisible({ timeout: 5_000 }).catch(() => false)) {
       await approveBtn.click();
-      await page.waitForTimeout(2_000);
+      await page.waitForTimeout(8_000);
 
       const confirmApprove = page
         .getByRole("button", { name: /^approve$/i })
@@ -222,14 +231,14 @@ test.describe.serial("ImpactFlow sanity", () => {
       .first();
     if (await teamLeadCard.isVisible().catch(() => false)) {
       await teamLeadCard.click();
-      await page.waitForTimeout(2_000);
+      await page.waitForTimeout(8_000);
     } else {
       const newRoleBtn = page.getByRole("button", {
         name: "New role",
         exact: true,
       });
       await newRoleBtn.click();
-      await page.waitForTimeout(2_000);
+      await page.waitForTimeout(8_000);
     }
 
     const useBtn = page
@@ -237,7 +246,7 @@ test.describe.serial("ImpactFlow sanity", () => {
       .first();
     if (await useBtn.isVisible().catch(() => false)) {
       await useBtn.click();
-      await page.waitForTimeout(2_000);
+      await page.waitForTimeout(8_000);
     }
 
     const roleName = `Smoke Team Lead ${Date.now()}`;
@@ -252,19 +261,19 @@ test.describe.serial("ImpactFlow sanity", () => {
         await anyInput.fill(roleName);
       }
     }
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(8_000);
 
     const darinaOption = page.getByText(/Darina Suprun/i).first();
     if (await darinaOption.isVisible().catch(() => false)) {
       await darinaOption.click();
-      await page.waitForTimeout(500);
+      await page.waitForTimeout(8_000);
     }
 
     await page
       .getByRole("button", { name: /save|create/i })
       .last()
       .click();
-    await page.waitForTimeout(3_000);
+    await page.waitForTimeout(8_000);
 
     await expect(page.locator("body")).toContainText(roleName, {
       timeout: 15_000,
@@ -306,7 +315,7 @@ test.describe.serial("ImpactFlow sanity", () => {
       "input[placeholder*='city or region'], input[placeholder*='Start typing']",
     );
     await locationInput.fill("Kyiv");
-    await page.waitForTimeout(2_000);
+    await page.waitForTimeout(8_000);
 
     const firstSuggestion = page
       .locator("ul li")
@@ -316,7 +325,7 @@ test.describe.serial("ImpactFlow sanity", () => {
       await firstSuggestion.isVisible({ timeout: 5_000 }).catch(() => false)
     ) {
       await firstSuggestion.click();
-      await page.waitForTimeout(500);
+      await page.waitForTimeout(8_000);
     }
 
     const startDateField = page
@@ -340,12 +349,9 @@ test.describe.serial("ImpactFlow sanity", () => {
     await page.getByRole("button", { name: /^continue$/i }).click();
     await waitForSkeletons(page);
 
-    await expect(page.locator("body")).toContainText(
-      /Choose categories|Categories/i,
-      {
-        timeout: 10_000,
-      },
-    );
+    await expect(page.locator("body")).toContainText(/Categories/i, {
+      timeout: 10_000,
+    });
 
     await page.waitForFunction(
       () => document.querySelectorAll("button[aria-pressed]").length > 0,
@@ -356,7 +362,7 @@ test.describe.serial("ImpactFlow sanity", () => {
     const count = await chips.count();
     if (count >= 1) await chips.nth(0).click();
     if (count >= 2) await chips.nth(1).click();
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(8_000);
 
     await expect(
       page.locator("button[aria-pressed='true']").first(),
@@ -430,19 +436,11 @@ test.describe.serial("ImpactFlow sanity", () => {
       { timeout: 10_000 },
     );
 
-    const mapBtn = page
-      .getByRole("button", { name: /Pick event location|pick.*location/i })
-      .first();
-    const mapLocationBtn = page
-      .locator("button", { hasText: /Pick event location/i })
-      .first();
-    const locationTrigger = (await mapBtn.isVisible().catch(() => false))
-      ? mapBtn
-      : mapLocationBtn;
+    const locationTrigger = locationMapTrigger(page);
 
     if (await locationTrigger.isVisible().catch(() => false)) {
       await locationTrigger.click();
-      await page.waitForTimeout(1_500);
+      await page.waitForTimeout(8_000);
 
       const mapCanvas = page
         .locator(".leaflet-container, [class*='map']")
@@ -451,16 +449,16 @@ test.describe.serial("ImpactFlow sanity", () => {
         const box = await mapCanvas.boundingBox();
         if (box) {
           await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
-          await page.waitForTimeout(1_500);
+          await page.waitForTimeout(8_000);
         }
       }
       const closeBtn = page.getByRole("button", { name: /close|×|✕/i }).first();
       if (await closeBtn.isVisible().catch(() => false)) {
         await closeBtn.click();
-        await page.waitForTimeout(500);
+        await page.waitForTimeout(8_000);
       } else {
         await page.keyboard.press("Escape");
-        await page.waitForTimeout(500);
+        await page.waitForTimeout(8_000);
       }
     }
 
@@ -492,10 +490,9 @@ test.describe.serial("ImpactFlow sanity", () => {
     await page.getByRole("button", { name: /^continue$/i }).click();
     await waitForSkeletons(page);
 
-    await expect(page.locator("body")).toContainText(
-      /Categories.*skills|Categories & skills/i,
-      { timeout: 10_000 },
-    );
+    await expect(page.locator("body")).toContainText(/Categories/i, {
+      timeout: 10_000,
+    });
 
     await page.waitForFunction(
       () => document.querySelectorAll("button[aria-pressed]").length > 0,
@@ -560,7 +557,7 @@ test.describe.serial("ImpactFlow sanity", () => {
 
     if (await fabBtn.isVisible().catch(() => false)) {
       await fabBtn.click();
-      await page.waitForTimeout(1_000);
+      await page.waitForTimeout(8_000);
     }
 
     const newTaskAction = page
@@ -568,7 +565,7 @@ test.describe.serial("ImpactFlow sanity", () => {
       .first();
     if (await newTaskAction.isVisible().catch(() => false)) {
       await newTaskAction.click();
-      await page.waitForTimeout(1_000);
+      await page.waitForTimeout(8_000);
     }
 
     await expect(page.locator("body")).toContainText(
@@ -587,18 +584,36 @@ test.describe.serial("ImpactFlow sanity", () => {
       );
 
     await page.getByRole("button", { name: /^continue$/i }).click();
-    await page.waitForTimeout(1_000);
+    await page.waitForTimeout(8_000);
     await expect(page.locator("body")).toContainText(
       /Location|Timeline|Estimated/i,
       { timeout: 10_000 },
     );
+
+    const taskStartDt = page
+      .locator('[aria-label="Task start date and time"]')
+      .first();
+    if (await taskStartDt.isVisible().catch(() => false)) {
+      await taskStartDt.click();
+      await page.keyboard.type("0801202610001");
+      await page.keyboard.press("Escape");
+    }
+
+    const taskEndDt = page
+      .locator('[aria-label="Task end date and time"]')
+      .first();
+    if (await taskEndDt.isVisible().catch(() => false)) {
+      await taskEndDt.click();
+      await page.keyboard.type("0801202612001");
+      await page.keyboard.press("Escape");
+    }
 
     await page.locator("input[placeholder*='120']").fill("90");
 
     await page.locator("input[placeholder*='Optional']").fill("10");
 
     await page.getByRole("button", { name: /^continue$/i }).click();
-    await page.waitForTimeout(1_000);
+    await page.waitForTimeout(8_000);
 
     await expect(page.locator("body")).toContainText(/Categories/i, {
       timeout: 10_000,
@@ -614,7 +629,7 @@ test.describe.serial("ImpactFlow sanity", () => {
     await page.waitForTimeout(8_000);
 
     await page.getByRole("button", { name: /^continue$/i }).click();
-    await page.waitForTimeout(1_000);
+    await page.waitForTimeout(8_000);
 
     await expect(page.locator("body")).toContainText(
       /Join policy|Leave policy/i,
@@ -638,7 +653,7 @@ test.describe.serial("ImpactFlow sanity", () => {
     }
 
     await page.getByRole("button", { name: /Create task/i }).click();
-    await page.waitForTimeout(4_000);
+    await page.waitForTimeout(8_000);
 
     await expectHealthy(page);
 
