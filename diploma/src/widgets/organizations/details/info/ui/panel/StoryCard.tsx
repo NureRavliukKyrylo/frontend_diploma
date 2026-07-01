@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Avatar } from "@shared/ui";
 import { DefaultAvatar } from "@shared/assets/images/user";
 import type { OrganizationMember } from "@entities/organization";
 import type { OrganizationDetailsAnimationConfig } from "../../lib/animation";
 import { getMemberName } from "../../lib/helpers";
+import { useElementOverflow } from "@shared/libs/hooks";
 import styles from "./StoryCard.module.scss";
 
 interface StoryCardProps {
@@ -28,6 +29,7 @@ export const StoryCard = ({
   animation,
   onToggleDescription,
 }: StoryCardProps) => {
+  const { t } = useTranslation("organizations");
   const collapsedDescriptionHeight = 140;
   const {
     blockVariants,
@@ -36,39 +38,12 @@ export const StoryCard = ({
     buttonHover,
     prefersReducedMotion,
   } = animation;
-  const descriptionRef = useRef<HTMLParagraphElement>(null);
-  const [isDescriptionOverflowing, setIsDescriptionOverflowing] =
-    useState(false);
-
-  useEffect(() => {
-    if (!hasLongDescription) {
-      setIsDescriptionOverflowing(false);
-      return;
-    }
-
-    const checkOverflow = () => {
-      const element = descriptionRef.current;
-
-      if (!element) {
-        setIsDescriptionOverflowing(false);
-        return;
-      }
-
-      setIsDescriptionOverflowing(
-        element.scrollHeight > collapsedDescriptionHeight + 1,
-      );
-    };
-
-    checkOverflow();
-    window.addEventListener("resize", checkOverflow);
-
-    return () => window.removeEventListener("resize", checkOverflow);
-  }, [
-    collapsedDescriptionHeight,
-    descriptionExpanded,
-    hasLongDescription,
-    renderedDescription,
-  ]);
+  const { elementRef: descriptionRef, isOverflowing } =
+    useElementOverflow<HTMLParagraphElement>(
+      collapsedDescriptionHeight,
+      `${descriptionExpanded}-${hasLongDescription}-${renderedDescription}`,
+    );
+  const isDescriptionOverflowing = hasLongDescription && isOverflowing;
 
   return (
     <div className={styles.storyCard}>
@@ -92,7 +67,9 @@ export const StoryCard = ({
             whileHover={buttonHover}
             whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
           >
-            {descriptionExpanded ? "Show less" : "Read more"}
+            {descriptionExpanded
+              ? t("details.actions.showLess")
+              : t("details.actions.readMore")}
           </motion.button>
         ) : null}
       </motion.div>
@@ -103,8 +80,10 @@ export const StoryCard = ({
         whileHover={subtleHover}
       >
         <div>
-          <span className={styles.cardEyebrow}>TEAM</span>
-          <h3>MEMBERS</h3>
+          <span className={styles.cardEyebrow}>
+            {t("details.story.team")}
+          </span>
+          <h3>{t("details.story.members")}</h3>
         </div>
 
         <motion.div className={styles.membersRow} variants={sideRevealVariants}>
@@ -114,7 +93,10 @@ export const StoryCard = ({
                 <Avatar
                   key={member.id}
                   src={member.avatarUrl ?? DefaultAvatar}
-                  fallback={getMemberName(member)}
+                  fallback={getMemberName(
+                    member,
+                    t("details.labels.teamMember"),
+                  )}
                   variant="default"
                   className={styles.memberAvatar}
                   initialsClassName={styles.memberInitials}
@@ -129,8 +111,8 @@ export const StoryCard = ({
           ) : (
             <span className={styles.membersFallback}>
               {membersAccessDenied
-                ? "Members are hidden by access policy"
-                : "No members available yet"}
+                ? t("details.members.hidden")
+                : t("details.members.unavailable")}
             </span>
           )}
         </motion.div>

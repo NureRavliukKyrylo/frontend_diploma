@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { organizationQuery } from "@entities/organization";
 import {
@@ -14,6 +15,7 @@ import {
 import { buildRequestCards } from "../lib/requestViewModels";
 
 export const useOrganizationMembersData = (organizationId: string) => {
+  const { t, i18n } = useTranslation("common");
   const storedUserId = useUserStore((state) => state.userId);
   const currentUserQuery = useQuery(profileQuery.all());
   const currentUser = currentUserQuery.data;
@@ -96,23 +98,55 @@ export const useOrganizationMembersData = (organizationId: string) => {
     () =>
       buildMembersByUserId({
         rawMembers: rawMembers as ParticipationListItem[],
-        organization: organization ?? undefined,
+        entityType: "organization",
+        entityId: organizationId,
+        ownerId: organization?.ownerId,
+        createdAt: organization?.createdAt,
         userById,
         currentUser,
         currentUserId,
+        ownerLabel: t("member.ownerLabel"),
       }),
-    [currentUser, currentUserId, organization, rawMembers, userById],
+    [
+      currentUser,
+      currentUserId,
+      organization?.createdAt,
+      organization?.ownerId,
+      organizationId,
+      rawMembers,
+      t,
+      userById,
+    ],
   );
   const memberCards = useMemo(
-    () => buildMemberCards(membersByUserId, userById, organization?.ownerId),
-    [membersByUserId, organization?.ownerId, userById],
+    () =>
+      buildMemberCards(
+        membersByUserId,
+        userById,
+        organization?.ownerId,
+        t,
+        i18n.language,
+      ),
+    [i18n.language, membersByUserId, organization?.ownerId, t, userById],
   );
   const requestCards = useMemo(
     () => [
-      ...buildRequestCards(joinRequests, "join", membersByUserId, userById),
-      ...buildRequestCards(leaveRequests, "leave", membersByUserId, userById),
+      ...buildRequestCards(
+        joinRequests,
+        "join",
+        membersByUserId,
+        userById,
+        t,
+      ),
+      ...buildRequestCards(
+        leaveRequests,
+        "leave",
+        membersByUserId,
+        userById,
+        t,
+      ),
     ],
-    [joinRequests, leaveRequests, membersByUserId, userById],
+    [joinRequests, leaveRequests, membersByUserId, t, userById],
   );
   const roles = useMemo(
     () =>

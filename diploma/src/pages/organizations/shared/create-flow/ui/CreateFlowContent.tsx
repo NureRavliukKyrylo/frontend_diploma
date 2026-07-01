@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 interface CreateFlowContentProps {
   activeStep: number;
@@ -26,35 +27,43 @@ export const CreateFlowContent = ({
   onPrimaryAction,
   children,
   styles,
-}: CreateFlowContentProps) => (
-  <main className={styles.content}>
-    <div key={activeStep} className={styles.contentInner}>
-      <header className={styles.contentHeader}>
-        <div className={styles.eyebrow}>
-          <span className={styles.eyebrowDot} />
-          <span className={styles.eyebrowText}>{eyebrow}</span>
-        </div>
-        <h1 className={styles.h1}>{title}</h1>
-        <p className={styles.h1sub}>{subtitle}</p>
-      </header>
+}: CreateFlowContentProps) => {
+  const { t } = useTranslation("common");
 
-      {children}
+  return (
+    <main className={styles.content}>
+      <div key={activeStep} className={styles.contentInner}>
+        <header className={styles.contentHeader}>
+          <div className={styles.eyebrow}>
+            <span className={styles.eyebrowDot} />
+            <span className={styles.eyebrowText}>{eyebrow}</span>
+          </div>
+          <h1 className={styles.h1}>{title}</h1>
+          <p className={styles.h1sub}>{subtitle}</p>
+        </header>
 
-      <div className={styles.continueWrap}>
-        {activeStep > 0 ? (
-          <button type="button" className={styles.backStepBtn} onClick={onBack}>
-            Back
+        {children}
+
+        <div className={styles.continueWrap}>
+          {activeStep > 0 ? (
+            <button type="button" className={styles.backStepBtn} onClick={onBack}>
+              {t("createFlow.back")}
+            </button>
+          ) : null}
+          <button
+            type="button"
+            className={styles.continueBtn}
+            disabled={isSubmitting}
+            onClick={onPrimaryAction}
+          >
+            {isLastStep
+              ? isSubmitting
+                ? t("createFlow.creating")
+                : finalLabel
+              : t("createFlow.continue")}
           </button>
-        ) : null}
-        <button
-          type="button"
-          className={styles.continueBtn}
-          disabled={isSubmitting}
-          onClick={onPrimaryAction}
-        >
-          {isLastStep ? (isSubmitting ? "Creating..." : finalLabel) : "Continue"}
-        </button>
+        </div>
       </div>
-    </div>
-  </main>
-);
+    </main>
+  );
+};

@@ -8,6 +8,7 @@ import { SectionHeader } from "@widgets/admin/statistics/statistics-totals/ui/Se
 import { TotalCard } from "@widgets/admin/statistics/statistics-totals/ui/TotalCard";
 import styles from "../../statistics-page-styles/AdminStatisticsPage.module.scss";
 import { TimeBankWallets } from "./TimeBankWallets";
+import { useTranslation } from "react-i18next";
 
 interface TimeBankOverviewSectionProps {
   totals: TotalCardItem[];
@@ -21,65 +22,81 @@ export const TimeBankOverviewSection = ({
   timeBank,
   isLoading,
   isError,
-}: TimeBankOverviewSectionProps) => (
-  <>
-    <SectionHeader label="Time Bank overview" />
+}: TimeBankOverviewSectionProps) => {
+  const { t } = useTranslation("admin");
 
-    <div className={styles.timeBankTotalsGrid}>
-      {totals.map((item) => (
-        <TotalCard key={item.label} item={item} />
-      ))}
-    </div>
+  return (
+    <>
+      <SectionHeader label={t("statistics.timeBank.overview")} />
 
-    <div className={styles.timeBankDetailRow}>
-      <div className={styles.lifetimeCard}>
-        <div className={styles.categoryTableHeader}>
-          <strong className={styles.categoryTableTitle}>Lifetime totals</strong>
-          <span className={styles.categoryTableCaption}>Purpose-built source</span>
-        </div>
-        {isLoading ? (
-          <Skeleton className={styles.lifetimeSkeleton} />
-        ) : isError ? (
-          <div className={styles.cardState}>Time Bank totals unavailable.</div>
-        ) : (
-          <div className={styles.lifetimeGrid}>
-            <span>
-              <strong>
-                {formatAdminHoursFromMinutes(timeBank?.totalLifetimeEarnedMinutes)}
-              </strong>
-              <em>Earned</em>
-            </span>
-            <span>
-              <strong>
-                {formatAdminHoursFromMinutes(timeBank?.totalLifetimeSpentMinutes)}
-              </strong>
-              <em>Spent</em>
-            </span>
-            <span>
-              <strong>
-                {formatAdminHoursFromMinutes(timeBank?.totalGiftedInMinutes)}
-              </strong>
-              <em>Gifted in</em>
-            </span>
-            <span>
-              <strong>
-                {formatAdminHoursFromMinutes(timeBank?.totalGiftedOutMinutes)}
-              </strong>
-              <em>Gifted out</em>
-            </span>
-          </div>
-        )}
+      <div className={styles.timeBankTotalsGrid}>
+        {totals.map((item) => (
+          <TotalCard key={item.label} item={item} />
+        ))}
       </div>
 
-      {isLoading ? (
-        <Skeleton className={styles.walletsSkeleton} />
-      ) : isError ? (
-        <div className={styles.walletsCard}>
-          <div className={styles.cardState}>Top wallets unavailable.</div>
+      <div className={styles.timeBankDetailRow}>
+        <div className={styles.lifetimeCard}>
+          <div className={styles.categoryTableHeader}>
+            <strong className={styles.categoryTableTitle}>
+              {t("statistics.timeBank.lifetime")}
+            </strong>
+            <span className={styles.categoryTableCaption}>
+              {t("statistics.timeBank.source")}
+            </span>
+          </div>
+          {isLoading ? (
+            <Skeleton className={styles.lifetimeSkeleton} />
+          ) : isError ? (
+            <div className={styles.cardState}>
+              {t("statistics.timeBank.unavailable")}
+            </div>
+          ) : (
+            <div className={styles.lifetimeGrid}>
+              <span>
+                <strong>
+                  {formatAdminHoursFromMinutes(
+                    timeBank?.totalLifetimeEarnedMinutes,
+                  )}
+                </strong>
+                <em>{t("statistics.timeBank.earned")}</em>
+              </span>
+              <span>
+                <strong>
+                  {formatAdminHoursFromMinutes(
+                    timeBank?.totalLifetimeSpentMinutes,
+                  )}
+                </strong>
+                <em>{t("statistics.timeBank.spent")}</em>
+              </span>
+              <span>
+                <strong>
+                  {formatAdminHoursFromMinutes(timeBank?.totalGiftedInMinutes)}
+                </strong>
+                <em>{t("statistics.timeBank.giftedIn")}</em>
+              </span>
+              <span>
+                <strong>
+                  {formatAdminHoursFromMinutes(timeBank?.totalGiftedOutMinutes)}
+                </strong>
+                <em>{t("statistics.timeBank.giftedOut")}</em>
+              </span>
+            </div>
+          )}
         </div>
-      ) : (
-        <TimeBankWallets users={timeBank?.topUsersByBalance ?? []} />
-      )}
-    </div>
-  </>
-);
+
+        {isLoading ? (
+          <Skeleton className={styles.walletsSkeleton} />
+        ) : isError ? (
+          <div className={styles.walletsCard}>
+            <div className={styles.cardState}>
+              {t("statistics.timeBank.walletsUnavailable")}
+            </div>
+          </div>
+        ) : (
+          <TimeBankWallets users={timeBank?.topUsersByBalance ?? []} />
+        )}
+      </div>
+    </>
+  );
+};

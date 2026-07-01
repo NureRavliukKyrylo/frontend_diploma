@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Calendar } from "@shared/assets/icons/info";
 import type { OrganizationTaskListItem } from "../lib/helpers";
 import styles from "./TaskListItem.module.scss";
@@ -9,10 +10,10 @@ interface TaskListItemProps {
 }
 
 const statusLabelMap = {
-  Pending: "Pending",
-  InProgress: "In progress",
-  Completed: "Completed",
-  Cancelled: "Cancelled",
+  Pending: "details.tasks.status.pending",
+  InProgress: "details.tasks.status.inProgress",
+  Completed: "details.tasks.status.completed",
+  Cancelled: "details.tasks.status.cancelled",
 } as const;
 
 const statusClassNameMap = {
@@ -33,6 +34,7 @@ export const TaskListItem = ({
   task,
   index,
 }: TaskListItemProps) => {
+  const { t } = useTranslation("organizations");
   return (
     <motion.article
       className={`${styles.taskRow} ${taskRowClassNameMap[task.status]}`}
@@ -50,7 +52,7 @@ export const TaskListItem = ({
             <span
               className={`${styles.taskStatusBadge} ${statusClassNameMap[task.status]}`}
             >
-              {statusLabelMap[task.status]}
+              {t(statusLabelMap[task.status])}
             </span>
             <h3>{task.title}</h3>
           </div>
@@ -58,7 +60,7 @@ export const TaskListItem = ({
           <button
             type="button"
             className={styles.taskMenuButton}
-            aria-label={`More actions for ${task.title}`}
+            aria-label={t("details.tasks.moreActions", { title: task.title })}
           >
             ...
           </button>
@@ -71,7 +73,7 @@ export const TaskListItem = ({
         <div className={styles.taskDueBlock}>
           <Calendar aria-hidden="true" className={styles.taskMetaIcon} />
           <div className={styles.taskMetaCopy}>
-            <span>Due date</span>
+            <span>{t("details.tasks.dueDate")}</span>
             <strong>{task.dueDateLabel}</strong>
           </div>
         </div>

@@ -92,6 +92,29 @@
   line-height: 1.1;
 }
 
+.titleHeadingRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.contextBadge {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(132, 0, 0, 0.14);
+  border-radius: 999px;
+  background: rgba(132, 0, 0, 0.07);
+  color: #840000;
+  padding: 6px 10px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
 .newRoleButton {
   display: inline-flex;
   align-items: center;

@@ -1,3 +1,4 @@
+import type { TFunction } from "i18next";
 import type { Organization } from "@entities/organization";
 import type { Project, ProjectSortValues } from "@entities/project";
 import type { AvatarItem } from "@shared/config/types";
@@ -9,6 +10,7 @@ export interface OrganizationProjectCardData {
   title: string;
   description: string;
   deadlineLabel: string;
+  deadlineAt: number | null;
   progressPercent: number;
   progressLabel: string;
   progressItemsLabel: string;
@@ -29,46 +31,61 @@ const clampPercent = (value?: number | null) => {
   return Math.min(100, Math.max(0, Math.round(value)));
 };
 
-const formatProjectDeadline = (value?: string | null) => {
-  if (!value) return "No deadline yet";
+const formatProjectDeadline = (
+  value: string | null | undefined,
+  t: TFunction,
+  locale: string,
+) => {
+  if (!value) return t("details.projects.noDeadline");
 
   const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return "No deadline yet";
+  if (Number.isNaN(date.getTime())) return t("details.projects.noDeadline");
 
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString(locale, {
     month: "short",
     day: "numeric",
     year: "numeric",
   });
 };
 
-const buildProjectAvatarItems = (project: Project): AvatarItem[] =>
+const buildProjectAvatarItems = (
+  project: Project,
+  t: TFunction,
+): AvatarItem[] =>
   (project.memberPreviews ?? []).slice(0, 5).map((member) => ({
     name:
       [member.firstName, member.lastName].filter(Boolean).join(" ").trim() ||
-      "Project member",
+      t("details.projects.projectMember"),
     src: member.avatarUrl ?? undefined,
   }));
 
 const mapRealProjectToCard = (
   project: Project,
   organization: Organization,
+  t: TFunction,
+  locale: string,
 ): OrganizationProjectCardData => {
   const progressPercent = clampPercent(project.progress?.percent);
   const tasksTotal = Math.max(project.tasksTotal, 0);
+  const parsedDeadline = project.endAt ? new Date(project.endAt).getTime() : NaN;
 
   return {
     id: project.id,
     title: project.title,
     description: project.description,
-    deadlineLabel: formatProjectDeadline(project.endAt),
+    deadlineLabel: formatProjectDeadline(project.endAt, t, locale),
+    deadlineAt: Number.isNaN(parsedDeadline) ? null : parsedDeadline,
     progressPercent,
     progressLabel: `${progressPercent}%`,
-    progressItemsLabel: `${tasksTotal} task${tasksTotal === 1 ? "" : "s"}`,
+    progressItemsLabel: t("details.projects.taskCount", {
+      count: tasksTotal,
+    }),
     tasksTotal,
-    avatarItems: buildProjectAvatarItems(project),
+    avatarItems: buildProjectAvatarItems(project, t),
     organizationName:
-      project.organization?.name?.trim() || organization.name.trim() || "organization",
+      project.organization?.name?.trim() ||
+      organization.name.trim() ||
+      t("details.projects.organizationFallback"),
     organizationLogoUrl: project.organization?.logoUrl ?? organization.logoUrl ?? null,
   };
 };
@@ -76,9 +93,13 @@ const mapRealProjectToCard = (
 export const buildOrganizationProjectCards = ({
   organization,
   projects,
+  t,
+  locale,
 }: {
   organization: Organization;
   projects: Project[];
+  t: TFunction;
+  locale: string;
 }): OrganizationProjectCardData[] => {
   const explicitOrganizationMatches = projects.filter(
     (project) => project.organization?.id === organization.id,
@@ -92,7 +113,7 @@ export const buildOrganizationProjectCards = ({
   }
 
   return scopedProjects.map((project) =>
-    mapRealProjectToCard(project, organization),
+    mapRealProjectToCard(project, organization, t, locale),
   );
 };
 
@@ -149,9 +170,9 @@ export const filterAndSortOrganizationProjectCards = ({
       break;
     case "EndingSoon":
       sortedCards.sort((left, right) => {
-        if (left.deadlineLabel === "No deadline yet") return 1;
-        if (right.deadlineLabel === "No deadline yet") return -1;
-        return new Date(left.deadlineLabel).getTime() - new Date(right.deadlineLabel).getTime();
+        if (left.deadlineAt === null) return 1;
+        if (right.deadlineAt === null) return -1;
+        return left.deadlineAt - right.deadlineAt;
       });
       break;
     default:

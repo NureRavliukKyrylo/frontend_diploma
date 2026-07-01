@@ -27,7 +27,9 @@ export const useRequestDataQueries = (search: AdminRequestsSearchParams) => {
           ? undefined
           : (search.Status as AdminRequestStatusCode),
       Type:
-        search.Type === "all" ? undefined : (search.Type as AdminRequestTypeCode),
+        search.Type === "all"
+          ? undefined
+          : (search.Type as AdminRequestTypeCode),
       Search: search.Search || undefined,
       Page: search.Page,
       PageSize: search.PageSize,
@@ -69,7 +71,8 @@ export const useRequestDataQueries = (search: AdminRequestsSearchParams) => {
   );
   const rawRequests = requestsQuery.data?.data ?? [];
   const actionableRequests = useMemo(
-    () => rawRequests.filter((request) => !hiddenInviteTypes.has(request.typeName)),
+    () =>
+      rawRequests.filter((request) => !hiddenInviteTypes.has(request.typeName)),
     [rawRequests],
   );
   const filteredRequests = useMemo(
@@ -81,12 +84,15 @@ export const useRequestDataQueries = (search: AdminRequestsSearchParams) => {
   );
   const tabCounts = useMemo(
     () =>
-      tabOptions.reduce<Record<RequestsTab, number>>((acc, tab) => {
-        acc[tab.value] = actionableRequests.filter((request) =>
-          getTabMatch(request, tab.value),
-        ).length;
-        return acc;
-      }, {} as Record<RequestsTab, number>),
+      tabOptions.reduce<Record<RequestsTab, number>>(
+        (acc, tab) => {
+          acc[tab.value] = actionableRequests.filter((request) =>
+            getTabMatch(request, tab.value),
+          ).length;
+          return acc;
+        },
+        {} as Record<RequestsTab, number>,
+      ),
     [actionableRequests],
   );
 

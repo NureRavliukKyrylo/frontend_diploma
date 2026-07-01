@@ -7,6 +7,7 @@ import {
 } from "@widgets/admin/requests/requests-config/libs/requestTypeConfig";
 import { Search } from "lucide-react";
 import styles from "../../requests-page-styles/AdminRequestsPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface RequestsToolbarProps {
   searchInput: string;
@@ -24,33 +25,45 @@ export const RequestsToolbar = ({
   onSearchInputChange,
   onStatusChange,
   onTypeChange,
-}: RequestsToolbarProps) => (
-  <div className={styles.toolbar}>
-    <div className={styles.searchField}>
-      <Search size={18} aria-hidden="true" />
-      <input
-        value={searchInput}
-        onChange={(event) => onSearchInputChange(event.target.value)}
-        placeholder="Search requests"
-      />
-    </div>
+}: RequestsToolbarProps) => {
+  const { t } = useTranslation("admin");
+  const localizedStatusOptions = statusOptions.map((option) => ({
+    ...option,
+    label: t(option.label),
+  }));
+  const localizedTypeOptions = typeOptions.map((option) => ({
+    ...option,
+    label: t(option.label),
+  }));
 
-    <div className={styles.dropdownShell}>
-      <SortDropDown
-        selectedLabelOnly
-        options={statusOptions}
-        value={status}
-        onSelect={onStatusChange}
-      />
-    </div>
+  return (
+    <div className={styles.toolbar}>
+      <div className={styles.searchField}>
+        <Search size={18} aria-hidden="true" />
+        <input
+          value={searchInput}
+          onChange={(event) => onSearchInputChange(event.target.value)}
+          placeholder={t("requests.search")}
+        />
+      </div>
 
-    <div className={styles.dropdownShell}>
-      <SortDropDown
-        selectedLabelOnly
-        options={typeOptions}
-        value={type}
-        onSelect={onTypeChange}
-      />
+      <div className={styles.dropdownShell}>
+        <SortDropDown
+          selectedLabelOnly
+          options={localizedStatusOptions}
+          value={status}
+          onSelect={onStatusChange}
+        />
+      </div>
+
+      <div className={styles.dropdownShell}>
+        <SortDropDown
+          selectedLabelOnly
+          options={localizedTypeOptions}
+          value={type}
+          onSelect={onTypeChange}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};

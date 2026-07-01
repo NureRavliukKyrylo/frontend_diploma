@@ -3,6 +3,7 @@ import type {
   AdminRequestTypeName,
 } from "@entities/admin";
 import { requestTypeLabels } from "./requestTypeConfig";
+import type { TFunction } from "i18next";
 
 export const getRequestInitials = (value: string) =>
   value
@@ -13,15 +14,16 @@ export const getRequestInitials = (value: string) =>
     .join("") || "IF";
 
 export const getShortId = (value: string | null | undefined) => {
-  if (!value) return "Not provided";
+  if (!value) return "";
   if (value.length <= 18) return value;
   return `${value.slice(0, 8)}...${value.slice(-6)}`;
 };
 
 export const formatDrawerValue = (
   value: string | number | null | undefined,
+  fallback: string,
 ) => {
-  if (value === null || value === undefined || value === "") return "Not provided";
+  if (value === null || value === undefined || value === "") return fallback;
   if (typeof value === "number") return String(value);
   return getShortId(value);
 };
@@ -46,7 +48,7 @@ export const getCompactEntityLabel = (
   type: string | null,
   id: string | null,
 ) => {
-  if (!type && !id) return "Not provided";
+  if (!type && !id) return "";
   if (!type) return getShortId(id);
   if (!id) return type;
   return `${type} - ${getShortId(id)}`;
@@ -70,74 +72,68 @@ export const getDrawerToneClass = (typeName: AdminRequestTypeName) => {
   return "drawerToneNeutral";
 };
 
-export const getDrawerIntro = (request: AdminRequestListItem) => {
+export const getDrawerIntro = (request: AdminRequestListItem, t: TFunction) => {
   const entityName = getRequestEntityName(request);
 
   if (request.typeName.includes("Join")) {
     return {
-      label: "Membership review",
-      title: `Join ${entityName}`,
-      text: "Review the requester and approve access only if the context looks right.",
+      label: t("admin:requests.previews.membershipReview"),
+      title: t("admin:requests.previews.joinTitle", { entity: entityName }),
+      text: t("admin:requests.previews.joinReview"),
     };
   }
 
   if (request.typeName.includes("Leave")) {
     return {
-      label: "Membership change",
-      title: `Leave ${entityName}`,
-      text: "This request records a member leaving the selected workspace.",
+      label: t("admin:requests.previews.leaveChange"),
+      title: t("admin:requests.previews.leaveTitle", { entity: entityName }),
+      text: t("admin:requests.previews.leaveReview"),
     };
   }
 
   if (request.typeName === "skillCreation") {
     return {
-      label: "Catalog proposal",
-      title: "New skill candidate",
-      text: "Check the proposed skill name, description, and attached categories before publishing it.",
+      label: t("admin:requests.previews.catalogProposal"),
+      title: t("admin:requests.previews.newSkill"),
+      text: t("admin:requests.previews.skillReview"),
     };
   }
 
   if (request.typeName === "categoryCreation") {
     return {
-      label: "Catalog proposal",
-      title: "New category candidate",
-      text: "Review whether this category is clear, reusable, and ready to appear in the public catalog.",
+      label: t("admin:requests.previews.catalogProposal"),
+      title: t("admin:requests.previews.newCategory"),
+      text: t("admin:requests.previews.categoryReview"),
     };
   }
 
   if (request.typeName === "badgeAward") {
     return {
-      label: "Recognition",
-      title: "Badge award",
-      text:
-        request.description ||
-        "Confirm that this badge should be attached to the selected user or activity.",
+      label: t("admin:requests.previews.recognition"),
+      title: t("admin:requests.types.badgeAward"),
+      text: request.description || t("admin:requests.previews.recognitionText"),
     };
   }
 
   if (request.typeName === "report") {
     return {
-      label: "Moderation signal",
-      title: "Report received",
-      text:
-        request.description ||
-        "This report is informational here. Open the linked moderation case when available.",
+      label: t("admin:requests.previews.moderationSignal"),
+      title: t("admin:requests.previews.reportReceived"),
+      text: request.description || t("admin:requests.previews.reportText"),
     };
   }
 
   if (request.typeName === "appeal") {
     return {
-      label: "Dispute review",
-      title: "Appeal received",
-      text:
-        request.description ||
-        "This appeal needs a dedicated backend resolution flow before it can be decided here.",
+      label: t("admin:requests.previews.disputeReview"),
+      title: t("admin:requests.previews.appealReceived"),
+      text: request.description || t("admin:requests.previews.appealText"),
     };
   }
 
   return {
-    label: "Request review",
-    title: requestTypeLabels[request.typeName],
-    text: request.description || "Review the available context before taking action.",
+    label: t("admin:requests.previews.requestReview"),
+    title: t(requestTypeLabels[request.typeName]),
+    text: request.description || t("admin:requests.previews.reviewFallback"),
   };
 };

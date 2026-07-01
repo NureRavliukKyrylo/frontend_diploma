@@ -1,0 +1,54 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.organization {
+  max-width: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid #ebebeb;
+  border-radius: 999px;
+  background: #ffffff;
+  padding: 6px 11px 6px 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.avatar,
+.fallback {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+}
+
+.fallback {
+  border-radius: 9px;
+  background: #f0f0f0;
+  color: #666666;
+  display: grid;
+  place-items: center;
+}
+
+.name {
+  overflow: hidden;
+  color: #1a1a1a;
+  font-size: 14px;
+  font-weight: 850;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.role {
+  color: #777777;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.empty {
+  margin: 0;
+  color: #999999;
+  font-size: 14px;
+  font-weight: 600;
+}

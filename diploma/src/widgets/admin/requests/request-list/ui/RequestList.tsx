@@ -35,7 +35,7 @@ export const RequestList = ({
   onOpenPreview,
   onDecide,
 }: RequestListProps) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["admin", "common"]);
 
   if (isLoading) {
     return (
@@ -50,8 +50,8 @@ export const RequestList = ({
   if (isError) {
     return (
       <div className={styles.stateCard}>
-        <strong>Requests unavailable</strong>
-        <span>The requests endpoint could not be loaded.</span>
+        <strong>{t("admin:requests.states.errorTitle")}</strong>
+        <span>{t("admin:requests.states.errorText")}</span>
       </div>
     );
   }
@@ -60,8 +60,8 @@ export const RequestList = ({
     return (
       <div className={styles.stateCard}>
         <Inbox size={34} aria-hidden="true" />
-        <strong>No requests found</strong>
-        <span>Try another status, type, tab, or search term.</span>
+        <strong>{t("admin:requests.states.emptyTitle")}</strong>
+        <span>{t("admin:requests.states.emptyText")}</span>
       </div>
     );
   }
@@ -110,7 +110,7 @@ export const RequestList = ({
                     {request.priorityBoostApplied && (
                       <span className={styles.priorityPill}>
                         <Bolt size={13} aria-hidden="true" />
-                        Priority boosted
+                        {t("admin:requests.metrics.priorityBoosted")}
                       </span>
                     )}
                   </div>
@@ -120,7 +120,7 @@ export const RequestList = ({
                     </p>
                   )}
                   <div className={styles.requestMeta}>
-                    <span>{requestTypeLabels[request.typeName]}</span>
+                    <span>{t(requestTypeLabels[request.typeName])}</span>
                     <span aria-hidden="true">-</span>
                     <span>{formatTimeAgo(request.createdAt, t)}</span>
                   </div>
@@ -132,13 +132,15 @@ export const RequestList = ({
                       request.statusName,
                     )}`}
                   >
-                    {statusLabels[request.statusName]}
+                    {t(statusLabels[request.statusName])}
                   </span>
                   <RequestActions request={request} onDecide={onDecide} />
                   <button
                     type="button"
                     className={
-                      hasDrawer ? styles.expandButton : styles.expandButtonDisabled
+                      hasDrawer
+                        ? styles.expandButton
+                        : styles.expandButtonDisabled
                     }
                     disabled={!hasDrawer}
                     onClick={(event) => {
@@ -147,7 +149,7 @@ export const RequestList = ({
                         onOpenPreview(request);
                       }
                     }}
-                    aria-label="Open request preview"
+                    aria-label={t("admin:requests.drawer.open")}
                   >
                     <ArrowUpRight size={17} aria-hidden="true" />
                   </button>

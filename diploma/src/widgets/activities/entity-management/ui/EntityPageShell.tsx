@@ -5,6 +5,7 @@ interface EntityPageShellProps {
   eyebrow: string;
   title: string;
   subtitle: string;
+  contextLabel?: string;
   backLabel: string;
   onBack: () => void;
   headerActions?: ReactNode;
@@ -15,6 +16,7 @@ export const EntityPageShell = ({
   eyebrow,
   title,
   subtitle,
+  contextLabel,
   backLabel,
   onBack,
   headerActions,
@@ -24,7 +26,12 @@ export const EntityPageShell = ({
     <div className={styles.content}>
       <div className={styles.topRow}>
         <div>
-          <div className={styles.eyebrow}>{eyebrow}</div>
+          <div className={styles.headingMeta}>
+            <div className={styles.eyebrow}>{eyebrow}</div>
+            {contextLabel ? (
+              <span className={styles.contextBadge}>{contextLabel}</span>
+            ) : null}
+          </div>
           <h1 className={styles.title}>{title}</h1>
           <p className={styles.subtitle}>{subtitle}</p>
         </div>

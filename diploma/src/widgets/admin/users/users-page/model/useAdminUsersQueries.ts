@@ -1,7 +1,4 @@
-import {
-  adminDashboardQuery,
-  type AdminUsersParams,
-} from "@entities/admin";
+import { adminDashboardQuery, type AdminUsersParams } from "@entities/admin";
 import { useQuery } from "@tanstack/react-query";
 
 export const useAdminUsersQueries = (
@@ -30,7 +27,9 @@ export const useAdminUsersQueries = (
   );
   const bansQuery = useQuery(adminDashboardQuery.activeBans());
   const rolesQuery = useQuery(adminDashboardQuery.systemRoles());
-  const summaryQueryOptions = adminDashboardQuery.userSummary(selectedUserId ?? "");
+  const summaryQueryOptions = adminDashboardQuery.userSummary(
+    selectedUserId ?? "",
+  );
   const summaryQuery = useQuery({
     ...summaryQueryOptions,
     enabled: Boolean(selectedUserId),

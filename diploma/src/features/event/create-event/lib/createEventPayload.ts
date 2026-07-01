@@ -1,5 +1,6 @@
 import type { CreateEventPayload } from "../api/createEventApi";
 import type { CreateEventFormState } from "../model/createEventFormTypes";
+import type { TFunction } from "i18next";
 
 const toDateTimeIso = (value: string) => new Date(value).toISOString();
 
@@ -10,9 +11,10 @@ export const buildCreateEventPayload = (
   organizationId: string,
   projectId: string | undefined,
   values: CreateEventFormState,
+  t: TFunction,
 ): CreateEventPayload => {
   if (!values.location || !values.startAt || !values.endAt) {
-    throw new Error("Event location and dates are required.");
+    throw new Error(t("event:create.locationDatesRequired"));
   }
 
   const requiredSkills = values.requiredSkills

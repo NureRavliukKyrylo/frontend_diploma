@@ -1,4 +1,5 @@
 import { CalendarDays } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { MapLocationPicker } from "@features/map";
 import { UserMarker } from "@entities/user/profile";
 import type { Coordinates } from "@shared/config/types";
@@ -17,12 +18,16 @@ export const LocationMapModal = ({
   coordinates,
   onClose,
   onLocationChange,
-}: LocationMapModalProps) => (
-  <BaseModal
+}: LocationMapModalProps) => {
+  const { t } = useTranslation("project");
+
+  return (
+    <BaseModal
     isOpen={isOpen}
     onClose={onClose}
     maxWidth="920px"
-    showClosed
+    className={styles.locationMapModalShell}
+    showClosed={false}
     animation="right"
   >
     <div className={styles.locationMapModal}>
@@ -34,10 +39,11 @@ export const LocationMapModal = ({
         popupContent={
           <p className={styles.mapPopupContent}>
             <CalendarDays size={16} />
-            Project location
+            {t("settings.general.projectLocation")}
           </p>
         }
       />
     </div>
-  </BaseModal>
-);
+    </BaseModal>
+  );
+};

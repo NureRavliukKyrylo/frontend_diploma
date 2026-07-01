@@ -88,7 +88,9 @@ export const EventAttendanceWidget = ({
   onViewChange,
   eventTitle,
 }: EventAttendanceWidgetProps) => {
-  const { t } = useTranslation(["event", "common"]);
+  const { t, i18n } = useTranslation(["event", "common"]);
+  const intlLocale =
+    i18n.language === "uk" || i18n.language === "ua" ? "uk-UA" : "en-US";
 
   const viewTabs: TabOption<CalendarView>[] = [
     { label: t("event:attendance.views.month"), value: "month" },
@@ -120,17 +122,19 @@ export const EventAttendanceWidget = ({
         <div className={styles.headerWrapper}>
           <div className={styles.headerStart}>
             <span className={styles.dateTitle}>
-              {formatTitle(currentDate, activeView)}
+              {formatTitle(currentDate, activeView, intlLocale)}
             </span>
             <div className={styles.navigationsBlock}>
               <button
                 className={styles.prevButton}
+                aria-label={t("event:attendance.previous")}
                 onClick={() => navigate("prev")}
               >
                 <NavigationArrow />
               </button>
               <button
                 className={styles.nextButton}
+                aria-label={t("event:attendance.next")}
                 onClick={() => navigate("next")}
               >
                 <NavigationArrow />

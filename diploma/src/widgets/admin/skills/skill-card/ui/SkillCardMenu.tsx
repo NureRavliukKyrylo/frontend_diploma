@@ -9,6 +9,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import styles from "./SkillCardMenu.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface SkillCardMenuProps {
   triggerClassName: string;
@@ -34,6 +35,7 @@ export const SkillCardMenu = ({
   onViewVolunteers,
   onDelete,
 }: SkillCardMenuProps) => {
+  const { t } = useTranslation("admin");
   const triggerRef = useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
@@ -72,10 +74,23 @@ export const SkillCardMenu = ({
   };
 
   const menuItems: SkillCardMenuItem[] = [
-    { label: "Edit skill", icon: Pencil, onSelect: onEdit },
-    { label: "Change icon", icon: ImageUp, onSelect: onChangeIcon },
-    { label: "View volunteers", icon: UsersRound, onSelect: onViewVolunteers },
-    { label: "Delete skill", icon: Trash2, onSelect: onDelete, danger: true },
+    { label: t("skills.menu.edit"), icon: Pencil, onSelect: onEdit },
+    {
+      label: t("skills.menu.changeIcon"),
+      icon: ImageUp,
+      onSelect: onChangeIcon,
+    },
+    {
+      label: t("skills.menu.volunteers"),
+      icon: UsersRound,
+      onSelect: onViewVolunteers,
+    },
+    {
+      label: t("skills.menu.delete"),
+      icon: Trash2,
+      onSelect: onDelete,
+      danger: true,
+    },
   ];
 
   return (
@@ -89,7 +104,7 @@ export const SkillCardMenu = ({
           updatePosition();
           setIsOpen((current) => !current);
         }}
-        aria-label="Open skill actions"
+        aria-label={t("skills.openActions")}
       >
         <MoreHorizontal size={16} aria-hidden="true" />
       </button>

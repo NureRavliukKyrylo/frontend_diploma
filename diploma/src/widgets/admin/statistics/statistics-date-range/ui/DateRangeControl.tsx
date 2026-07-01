@@ -10,6 +10,7 @@ import {
   type DateRangePreset,
 } from "../../statistics-config/libs/statisticsFormat";
 import styles from "../../statistics-page-styles/AdminStatisticsPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 const getDatePickerClassNames = () => ({
   base: styles.datePickerBase,
@@ -28,13 +29,14 @@ export const DateRangeControl = ({
   range,
   onChange,
 }: DateRangeControlProps) => {
+  const { t } = useTranslation("admin");
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [draftFrom, setDraftFrom] = useState(range.from);
   const [draftTo, setDraftTo] = useState(range.to);
   const activeLabel =
     rangeOptions.find((option) => option.value === range.preset)?.label ??
-    "Date range";
+    "admin:statistics.ranges.custom";
   const customIsInvalid =
     draftFrom && draftTo ? dayjs(draftTo).isBefore(dayjs(draftFrom)) : false;
 
@@ -65,7 +67,7 @@ export const DateRangeControl = ({
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <CalendarDays size={17} aria-hidden="true" />
-        {activeLabel}
+        {t(activeLabel)}
         <ChevronDown size={16} aria-hidden="true" />
       </button>
 
@@ -84,12 +86,14 @@ export const DateRangeControl = ({
               }
               onClick={() => selectPreset(option.value)}
             >
-              {option.label}
+              {t(option.label)}
             </button>
           ))}
         </div>
         <div className={styles.customRangePanel}>
-          <span className={styles.customRangeLabel}>Custom dates</span>
+          <span className={styles.customRangeLabel}>
+            {t("statistics.ranges.customDates")}
+          </span>
           <div className={styles.customRangeGrid}>
             <DatePickerInput
               showMonthAndYearPickers
@@ -106,7 +110,7 @@ export const DateRangeControl = ({
           </div>
           {customIsInvalid && (
             <span className={styles.rangeError}>
-              End date must be after start date.
+              {t("statistics.ranges.invalidRange")}
             </span>
           )}
           <button
@@ -115,7 +119,7 @@ export const DateRangeControl = ({
             disabled={customIsInvalid || !draftFrom || !draftTo}
             onClick={applyCustom}
           >
-            Apply range
+            {t("statistics.ranges.apply")}
           </button>
         </div>
       </PortalMenu>

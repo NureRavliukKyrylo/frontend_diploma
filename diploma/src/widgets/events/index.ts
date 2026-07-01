@@ -4,3 +4,4 @@ export { MyEventsFilterWidget } from "./filters/my-events-filter/MyEventsFilterW
 export { EventAttendanceWidget } from "./attendance/ui/EventAttendanceWidget";
 export { EventSettingsWidget } from "./settings";
 export { EventFab } from "./details/ui/EventFab";
+export { useEventPermissionContext } from "./details/model/useEventPermissionContext";

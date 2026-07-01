@@ -24,48 +24,48 @@ export interface AdminNavItem {
 
 export const adminNavItems: AdminNavItem[] = [
   {
-    title: "Overview",
+    title: "admin:sidebar.items.overview",
     href: "/admin",
-    searchLabel: "Search overview",
+    searchLabel: "admin:sidebar.search.overview",
     icon: LayoutDashboard,
   },
   {
-    title: "Users",
+    title: "admin:sidebar.items.users",
     href: "/admin/users",
-    searchLabel: "Search users",
+    searchLabel: "admin:sidebar.search.users",
     icon: Users,
     badge: { key: "users", tone: "neutral" },
   },
   {
-    title: "Bans",
+    title: "admin:sidebar.items.bans",
     href: "/admin/bans",
-    searchLabel: "Search bans",
+    searchLabel: "admin:sidebar.search.bans",
     icon: Ban,
     badge: { key: "bans", tone: "accent" },
   },
   {
-    title: "Skills",
+    title: "admin:sidebar.items.skills",
     href: "/admin/skills",
-    searchLabel: "Search skills",
+    searchLabel: "admin:sidebar.search.skills",
     icon: Tag,
     badge: { key: "skills", tone: "neutral" },
   },
   {
-    title: "Requests",
+    title: "admin:sidebar.items.requests",
     href: "/admin/requests",
-    searchLabel: "Search requests",
+    searchLabel: "admin:sidebar.search.requests",
     icon: ClipboardList,
     badge: { key: "requests", tone: "neutral" },
   },
   {
-    title: "Statistics",
+    title: "admin:sidebar.items.statistics",
     href: "/admin/statistics",
-    searchLabel: "Search statistics",
+    searchLabel: "admin:sidebar.search.statistics",
     icon: ChartBar,
   },
 ];
 
 export const moderationNavItem = {
-  title: "Moderation",
+  title: "admin:sidebar.items.moderation",
   icon: Flag,
 };

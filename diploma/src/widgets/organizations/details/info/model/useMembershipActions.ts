@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { addToast } from "@heroui/react";
 import { chatKeys } from "@entities/chat";
 import { getErrorMessage } from "@shared/libs/error-message";
@@ -25,6 +26,7 @@ export const useOrganizationDetailsMembershipActions = ({
   setIsNotificationsEnabled,
   closeLeaveModal,
 }: UseOrganizationDetailsMembershipActionsParams) => {
+  const { t } = useTranslation("organizations");
   const queryClient = useQueryClient();
 
   const joinOrganizationMutation = useMutation({
@@ -51,10 +53,12 @@ export const useOrganizationDetailsMembershipActions = ({
       ]);
 
       addToast({
-        title: joinedDirectly ? "Joined organization" : "Join request sent",
+        title: joinedDirectly
+          ? t("details.notifications.joined")
+          : t("details.notifications.joinRequested"),
         description: joinedDirectly
-          ? "You have joined this organization."
-          : "Your request has been sent for review.",
+          ? t("details.notifications.joinedText")
+          : t("details.notifications.joinRequestedText"),
         color: "success",
       });
     },
@@ -85,8 +89,8 @@ export const useOrganizationDetailsMembershipActions = ({
         setIsSubscribed(true);
         await queryClient.invalidateQueries({ queryKey: chatKeys.lists() });
         addToast({
-          title: "Joined organization",
-          description: "You are already a member of this organization.",
+          title: t("details.notifications.joined"),
+          description: t("details.notifications.alreadyMemberText"),
           color: "success",
         });
         return;
@@ -94,16 +98,16 @@ export const useOrganizationDetailsMembershipActions = ({
 
       if (pendingAfterRefresh) {
         addToast({
-          title: "Request already sent",
-          description: "Your join request is already pending review.",
+          title: t("details.notifications.requestAlreadySent"),
+          description: t("details.notifications.requestAlreadyPending"),
           color: "warning",
         });
         return;
       }
 
       addToast({
-        title: "Join failed",
-        description: getErrorMessage(error),
+        title: t("details.notifications.joinFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -128,17 +132,19 @@ export const useOrganizationDetailsMembershipActions = ({
       closeLeaveModal();
 
       addToast({
-        title: leftDirectly ? "Left organization" : "Leave request sent",
+        title: leftDirectly
+          ? t("details.notifications.left")
+          : t("details.notifications.leaveRequested"),
         description: leftDirectly
-          ? "You have left this organization."
-          : "Your request to leave has been sent for review.",
+          ? t("details.notifications.leftText")
+          : t("details.notifications.leaveRequestedText"),
         color: "success",
       });
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Leave failed",
-        description: getErrorMessage(error),
+        title: t("details.notifications.leaveFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -148,7 +154,7 @@ export const useOrganizationDetailsMembershipActions = ({
 
   return {
     leaveOrganizationErrorMessage: leaveOrganizationMutation.error
-      ? getErrorMessage(leaveOrganizationMutation.error)
+      ? getErrorMessage(leaveOrganizationMutation.error, t)
       : null,
     isJoinPending: joinOrganizationMutation.isPending,
     isLeavePending: leaveOrganizationMutation.isPending,

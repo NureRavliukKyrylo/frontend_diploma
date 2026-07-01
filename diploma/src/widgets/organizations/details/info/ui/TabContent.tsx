@@ -1,4 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
+import { useTranslation } from "react-i18next";
 import { EmptyState } from "@shared/ui";
 import type { Organization } from "@entities/organization";
 import type { FeedbackSortValues } from "@entities/feedback";
@@ -34,6 +35,7 @@ export const OrganizationDetailsTabContent = ({
   setFeedbackOrderBy,
   model,
 }: OrganizationDetailsTabContentProps) => {
+  const { t } = useTranslation("organizations");
   const projectsCount =
     organization.activeProjects ?? organization.projects?.length ?? 0;
   const eventsCount = organization.activeEvents ?? 0;
@@ -54,8 +56,8 @@ export const OrganizationDetailsTabContent = ({
     if (isOverviewEmpty) {
       return (
         <EmptyState
-          title="Nothing here yet"
-          subtitle="This organization is just getting started. Stay tuned for upcoming projects and events."
+          title={t("details.overview.emptyTitle")}
+          subtitle={t("details.overview.emptyText")}
         />
       );
     }

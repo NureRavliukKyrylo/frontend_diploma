@@ -1,4 +1,8 @@
-export { BadgeCard, BadgeCardDetailed } from "./ui/badge-card/BadgeCard";
+export {
+  BadgeCard,
+  BadgeCardDetailed,
+  type BadgeCardModel,
+} from "./ui/badge-card/BadgeCard";
 export { useMyBadgesQuery } from "./model/hooks/useMyBadgesQuery";
 export type { Badge } from "./model";
 export type { Tier } from "./model/types/tier/TierList";

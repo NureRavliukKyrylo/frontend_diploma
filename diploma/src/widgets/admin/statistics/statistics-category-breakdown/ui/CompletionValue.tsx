@@ -15,7 +15,9 @@ export const CompletionValue = ({ item }: { item: CategoryHeatmapItem }) => {
         : "bad";
 
   return (
-    <span className={`${styles.completionPill} ${styles[`completion_${tone}`]}`}>
+    <span
+      className={`${styles.completionPill} ${styles[`completion_${tone}`]}`}
+    >
       {formatPercent(item.completionRate)}
     </span>
   );

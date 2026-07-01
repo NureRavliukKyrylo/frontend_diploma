@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Slider } from "@shared/ui";
 import { Star } from "@shared/assets/icons/info";
 import type { ProjectSearchParams } from "@entities/project";
@@ -17,14 +18,17 @@ export const OrganizationProjectRatingFilterSection = ({
   setDisplayRating,
   onChange,
 }: OrganizationProjectRatingFilterSectionProps) => {
+  const { t } = useTranslation("organizations");
   const hasRatingFilter =
     typeof search.RatingFrom === "number" && search.RatingFrom > 0;
 
   return (
     <OrganizationProjectFiltersSection
-      title="Project rating"
+      title={t("details.projects.filters.rating")}
       isActive={hasRatingFilter}
-      badge={hasRatingFilter ? "Applied" : undefined}
+      badge={
+        hasRatingFilter ? t("details.tasks.filters.applied") : undefined
+      }
       className={styles.projectRating}
     >
       <div className={styles.ratingBlock}>
@@ -33,7 +37,7 @@ export const OrganizationProjectRatingFilterSection = ({
           <span className={styles.starReviewValue}>{displayRating}</span>
         </div>
         <Slider
-          aria-label="project-rating"
+          aria-label={t("details.projects.filters.rating")}
           size="md"
           value={search.RatingFrom ?? 0}
           minValue={0}

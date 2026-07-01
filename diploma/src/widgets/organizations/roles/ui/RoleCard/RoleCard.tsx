@@ -6,10 +6,14 @@ import {
   getRoleIndexLabel,
   type ContextRoleCardType,
 } from "../../config/rolePresentation";
-import { formatArchiveDate, formatArchiveReason } from "./lib/roleArchiveFormat";
+import {
+  formatArchiveDate,
+  formatArchiveReason,
+} from "./lib/roleArchiveFormat";
 import { RoleCardActions } from "./ui/RoleCardActions";
 import { RoleTags } from "./ui/RoleTags";
 import styles from "./RoleCard.module.scss";
+import { useTranslation } from "react-i18next";
 
 export interface RoleCardProps {
   role: ContextRoleDto;
@@ -40,12 +44,13 @@ export const RoleCard = ({
   onRestore,
   onSetDefault,
 }: RoleCardProps) => {
+  const { t, i18n } = useTranslation("roles");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const accentColor = getRoleAccentColor(index);
   const indexLabel = getRoleIndexLabel(type, index);
-  const archiveReason = formatArchiveReason(role.archiveReason);
-  const archiveDate = formatArchiveDate(role.archivedAt);
+  const archiveReason = formatArchiveReason(role.archiveReason, t);
+  const archiveDate = formatArchiveDate(role.archivedAt, i18n.language);
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -84,20 +89,19 @@ export const RoleCard = ({
       <div className={styles.cardBody}>
         <div className={styles.topRow}>
           <span className={styles.indexMark}>{indexLabel}</span>
-          <RoleTags
-            type={type}
-            isDefaultForJoin={role.isDefaultForJoin}
-          />
+          <RoleTags type={type} isDefaultForJoin={role.isDefaultForJoin} />
         </div>
 
         <h3 className={styles.roleName}>{role.name}</h3>
         <p className={styles.roleDescription}>
-          {role.description?.trim() || "No description provided yet."}
+          {role.description?.trim() || t("card.noDescription")}
         </p>
 
         {archived && (archiveReason || archiveDate) ? (
           <p className={styles.archiveMeta}>
-            {archiveReason ? `Archived: ${archiveReason}` : "Archived role"}
+            {archiveReason
+              ? t("card.archived", { reason: archiveReason })
+              : t("card.archivedRole")}
             {archiveDate ? ` · ${archiveDate}` : ""}
           </p>
         ) : null}
@@ -113,15 +117,15 @@ export const RoleCard = ({
             />
           </div>
           <span className={styles.permsNum}>
-            {role.permissions.length} permissions
+            {t("card.permissions", { count: role.permissions.length })}
           </span>
         </div>
 
         <div className={styles.footer}>
           <span className={styles.metaText}>
             {type === "template"
-              ? "Ready to use"
-              : `${memberCount} ${memberCount === 1 ? "member" : "members"}`}
+              ? t("card.ready")
+              : t("card.members", { count: memberCount })}
           </span>
 
           <div

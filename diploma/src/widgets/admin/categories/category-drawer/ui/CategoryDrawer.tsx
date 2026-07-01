@@ -4,6 +4,7 @@ import {
   type AdminCategoryCardData,
 } from "../../lib/categoryVisuals";
 import styles from "./CategoryDrawer.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface CategoryDrawerProps {
   category: AdminCategoryCardData | null;
@@ -20,13 +21,17 @@ export const CategoryDrawer = ({
   onDelete,
   onChangeImage,
 }: CategoryDrawerProps) => {
+  const { t } = useTranslation("admin");
   if (!category) {
     return null;
   }
 
   return (
     <div className={styles.drawerBackdrop} onClick={onClose}>
-      <aside className={styles.drawer} onClick={(event) => event.stopPropagation()}>
+      <aside
+        className={styles.drawer}
+        onClick={(event) => event.stopPropagation()}
+      >
         <div
           className={styles.drawerHero}
           style={{
@@ -40,15 +45,19 @@ export const CategoryDrawer = ({
             type="button"
             className={styles.drawerClose}
             onClick={onClose}
-            aria-label="Close category details"
+            aria-label={t("categories.drawer.close")}
           >
             <X size={18} aria-hidden="true" />
           </button>
 
           <div className={styles.heroContent}>
-            <div className={styles.heroEyebrow}>Category</div>
+            <div className={styles.heroEyebrow}>
+              {t("categories.drawer.category")}
+            </div>
             <div className={styles.drawerTitle}>{category.name}</div>
-            <div className={styles.drawerMeta}>ID {category.id}</div>
+            <div className={styles.drawerMeta}>
+              {t("categories.drawer.id")} {category.id}
+            </div>
           </div>
 
           <button
@@ -57,20 +66,26 @@ export const CategoryDrawer = ({
             onClick={() => onChangeImage(category)}
           >
             <Pencil size={13} aria-hidden="true" />
-            Change
+            {t("common.actions.change")}
           </button>
         </div>
 
         <div className={styles.drawerBody}>
           <div className={styles.infoGrid}>
             <div className={styles.infoTile}>
-              <span className={styles.infoLabel}>Record ID</span>
+              <span className={styles.infoLabel}>
+                {t("categories.drawer.recordId")}
+              </span>
               <strong className={styles.infoValue}>{category.id}</strong>
             </div>
             <div className={styles.infoTile}>
-              <span className={styles.infoLabel}>Image</span>
+              <span className={styles.infoLabel}>
+                {t("categories.drawer.image")}
+              </span>
               <strong className={styles.infoValue}>
-                {category.imageUrl ? "Configured" : "Fallback"}
+                {category.imageUrl
+                  ? t("categories.drawer.configured")
+                  : t("categories.drawer.fallback")}
               </strong>
             </div>
           </div>
@@ -81,9 +96,11 @@ export const CategoryDrawer = ({
                 <Image size={18} aria-hidden="true" />
               </span>
               <div>
-                <div className={styles.sectionLabel}>Description</div>
+                <div className={styles.sectionLabel}>
+                  {t("categories.drawer.description")}
+                </div>
                 <p className={styles.description}>
-                  {category.description || "No description has been added yet."}
+                  {category.description || t("categories.drawer.noDescription")}
                 </p>
               </div>
             </div>
@@ -91,7 +108,9 @@ export const CategoryDrawer = ({
 
           {category.imageUrl ? (
             <section className={styles.sectionCard}>
-              <div className={styles.sectionLabel}>Image URL</div>
+              <div className={styles.sectionLabel}>
+                {t("categories.drawer.imageUrl")}
+              </div>
               <div className={styles.urlRow}>
                 <span className={styles.imageUrl}>{category.imageUrl}</span>
                 <a
@@ -99,7 +118,7 @@ export const CategoryDrawer = ({
                   href={category.imageUrl}
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="Open category image"
+                  aria-label={t("categories.drawer.openImage")}
                 >
                   <ExternalLink size={15} aria-hidden="true" />
                 </a>
@@ -107,9 +126,11 @@ export const CategoryDrawer = ({
             </section>
           ) : (
             <section className={styles.sectionCard}>
-              <div className={styles.sectionLabel}>Image URL</div>
+              <div className={styles.sectionLabel}>
+                {t("categories.drawer.imageUrl")}
+              </div>
               <p className={styles.emptyText}>
-                This category uses the default gradient until an image URL is added.
+                {t("categories.drawer.defaultImage")}
               </p>
             </section>
           )}
@@ -122,7 +143,7 @@ export const CategoryDrawer = ({
             onClick={() => onDelete(category)}
           >
             <Trash2 size={17} aria-hidden="true" />
-            Delete
+            {t("common.actions.delete")}
           </button>
           <button
             type="button"
@@ -130,7 +151,7 @@ export const CategoryDrawer = ({
             onClick={() => onEdit(category)}
           >
             <Pencil size={17} aria-hidden="true" />
-            Edit category
+            {t("categories.drawer.edit")}
           </button>
         </div>
       </aside>

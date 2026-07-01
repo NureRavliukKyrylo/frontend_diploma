@@ -1,5 +1,6 @@
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { IconArrowLeft } from "@tabler/icons-react";
+import { useTranslation } from "react-i18next";
 import { useOrganizationCreateFlow } from "@features/organization/create-form";
 import { OrganizationCreateStepper } from "./ui/Stepper";
 import { OrganizationCreateAccessStep } from "./ui/steps/AccessStep";
@@ -10,6 +11,7 @@ import commonStyles from "./ui/Common.module.scss";
 import styles from "./Widget.module.scss";
 
 export const OrganizationCreateFlowWidget = () => {
+  const { t } = useTranslation("organizations");
   const {
     currentStep,
     access,
@@ -30,7 +32,7 @@ export const OrganizationCreateFlowWidget = () => {
         type="button"
         className={styles.backButton}
         onClick={handlePreviousStep}
-        aria-label="Go back"
+        aria-label={t("create.aria.back")}
       >
         <IconArrowLeft size={20} aria-hidden="true" />
       </BaseButtonWrapper>
@@ -66,7 +68,7 @@ export const OrganizationCreateFlowWidget = () => {
           onClick={handlePreviousStep}
         >
           <IconArrowLeft size={16} aria-hidden="true" />
-          Back
+          {t("create.actions.back")}
         </BaseButtonWrapper>
       ) : null}
     </section>

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { tabs, type ActiveTab } from "../config/settingsTabs";
 import styles from "../SettingsWidget.module.scss";
 
@@ -10,8 +11,11 @@ interface ProjectTabSwitcherProps {
 export const ProjectTabSwitcher = ({
   activeTab,
   onChange,
-}: ProjectTabSwitcherProps) => (
-  <div className={styles.tabSwitcher}>
+}: ProjectTabSwitcherProps) => {
+  const { t } = useTranslation("project");
+
+  return (
+    <div className={styles.tabSwitcher}>
     {tabs.map((tab) => {
       const isActive = activeTab === tab.id;
 
@@ -31,9 +35,10 @@ export const ProjectTabSwitcher = ({
               transition={{ type: "spring", stiffness: 380, damping: 32 }}
             />
           ) : null}
-          <span>{tab.label}</span>
+          <span>{t(tab.labelKey)}</span>
         </button>
       );
     })}
-  </div>
-);
+    </div>
+  );
+};

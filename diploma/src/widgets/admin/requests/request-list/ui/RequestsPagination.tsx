@@ -1,4 +1,5 @@
 import styles from "../../requests-page-styles/AdminRequestsPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface RequestsPaginationProps {
   currentPage: number;
@@ -13,6 +14,8 @@ export const RequestsPagination = ({
   pageWindow,
   onPageChange,
 }: RequestsPaginationProps) => {
+  const { t } = useTranslation("admin");
+
   if (totalPages <= 1) {
     return null;
   }
@@ -24,7 +27,7 @@ export const RequestsPagination = ({
         onClick={() => onPageChange(Math.max(1, currentPage - 1))}
         disabled={currentPage <= 1}
       >
-        Prev
+        {t("common.actions.previous")}
       </button>
       {pageWindow.map((page) => (
         <button
@@ -41,7 +44,7 @@ export const RequestsPagination = ({
         onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage >= totalPages}
       >
-        Next
+        {t("common.actions.next")}
       </button>
     </div>
   );

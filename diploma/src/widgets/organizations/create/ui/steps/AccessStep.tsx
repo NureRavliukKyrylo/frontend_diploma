@@ -1,4 +1,5 @@
 import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { useTranslation } from "react-i18next";
 import {
   IconDoorEnter,
   IconDoorExit,
@@ -30,19 +31,23 @@ export const OrganizationCreateAccessStep = ({
   onContinue,
   isSubmitting,
 }: OrganizationCreateAccessStepProps) => {
+  const { t } = useTranslation("organizations");
   return (
     <div className={commonStyles.formShell}>
       <div className={commonStyles.card}>
         <div className={commonStyles.cardDeco} />
-        <h2 className={commonStyles.cardHeading}>Set your access rules</h2>
+        <h2 className={commonStyles.cardHeading}>
+          {t("create.access.title")}
+        </h2>
         <p className={commonStyles.cardDesc}>
-          Decide how volunteers can join your organization and how members can
-          leave. You can change these settings anytime.
+          {t("create.access.text")}
         </p>
 
         <div className={styles.accessRows}>
           <section className={styles.accessSection}>
-            <h3 className={styles.accessLabel}>Join policy</h3>
+            <h3 className={styles.accessLabel}>
+              {t("create.fields.joinPolicy")}
+            </h3>
             <div className={styles.choiceGrid}>
               {organizationCreateAccessOptions.joinPolicy.map(
                 (option, index) => {
@@ -62,9 +67,11 @@ export const OrganizationCreateAccessStep = ({
                       <span className={styles.choiceIcon}>
                         <OptionIcon size={18} aria-hidden="true" />
                       </span>
-                      <span className={styles.choiceTitle}>{option.label}</span>
+                      <span className={styles.choiceTitle}>
+                        {t(option.labelKey)}
+                      </span>
                       <span className={styles.choiceDesc}>
-                        {option.description}
+                        {t(option.descriptionKey)}
                       </span>
                     </BaseButtonWrapper>
                   );
@@ -74,7 +81,9 @@ export const OrganizationCreateAccessStep = ({
           </section>
 
           <section className={styles.accessSection}>
-            <h3 className={styles.accessLabel}>Leave policy</h3>
+            <h3 className={styles.accessLabel}>
+              {t("create.fields.leavePolicy")}
+            </h3>
             <div className={styles.choiceGrid}>
               {organizationCreateAccessOptions.leavePolicy.map(
                 (option, index) => {
@@ -94,9 +103,11 @@ export const OrganizationCreateAccessStep = ({
                       <span className={styles.choiceIcon}>
                         <OptionIcon size={18} aria-hidden="true" />
                       </span>
-                      <span className={styles.choiceTitle}>{option.label}</span>
+                      <span className={styles.choiceTitle}>
+                        {t(option.labelKey)}
+                      </span>
                       <span className={styles.choiceDesc}>
-                        {option.description}
+                        {t(option.descriptionKey)}
                       </span>
                     </BaseButtonWrapper>
                   );
@@ -114,7 +125,7 @@ export const OrganizationCreateAccessStep = ({
           onClick={onSkip}
           disabled={isSubmitting}
         >
-          Skip for now
+          {t("create.actions.skip")}
         </BaseButtonWrapper>
         <BaseButtonWrapper
           type="button"
@@ -122,7 +133,7 @@ export const OrganizationCreateAccessStep = ({
           onClick={onContinue}
           loading={isSubmitting}
         >
-          Create organization
+          {t("create.actions.create")}
         </BaseButtonWrapper>
       </div>
     </div>

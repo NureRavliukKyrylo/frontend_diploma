@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "@tanstack/react-router";
+import type { EntityType } from "@shared/config/types";
 import type {
   ContextRoleCreateDto,
   OrganizationContextRole,
@@ -20,8 +21,10 @@ import type {
   RolesTab,
   SelectedRoleState,
 } from "./types";
+import { useTranslation } from "react-i18next";
 
 export const useOrganizationRolesPage = () => {
+  const { t, i18n } = useTranslation("roles");
   const { id: organizationId } = useParams({
     from: "/_masterLayout/organizations/$id/roles/",
   });
@@ -70,9 +73,17 @@ export const useOrganizationRolesPage = () => {
         ? buildRoleMembers(
             getMembersForRole(selectedRole.role.id),
             rolesData.profilesByUserId,
+            t,
+            i18n.language,
           )
         : [],
-    [getMembersForRole, rolesData.profilesByUserId, selectedRole],
+    [
+      getMembersForRole,
+      rolesData.profilesByUserId,
+      selectedRole,
+      t,
+      i18n.language,
+    ],
   );
   const openRoleCard = (
     role: OrganizationContextRole,
@@ -95,6 +106,9 @@ export const useOrganizationRolesPage = () => {
 
   return {
     organizationId,
+    entityType: "organization" as EntityType,
+    entityId: organizationId,
+    contextName: rolesData.organization?.name,
     navigate,
     activeTab,
     setActiveTab,
@@ -106,7 +120,7 @@ export const useOrganizationRolesPage = () => {
     setFormState,
     pendingAction,
     setPendingAction,
-    actionCopy: buildRoleActionCopy(pendingAction),
+    actionCopy: buildRoleActionCopy(pendingAction, t),
     selectedMembers,
     selectedMemberCount: selectedRole
       ? getMemberCountForRole(selectedRole.role.id)

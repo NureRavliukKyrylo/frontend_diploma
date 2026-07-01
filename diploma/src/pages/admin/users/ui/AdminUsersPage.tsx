@@ -7,22 +7,21 @@ import { UsersPagination } from "@widgets/admin/users/users-grid/ui/UsersPaginat
 import { UsersMetricCards } from "@widgets/admin/users/users-metrics/ui/UsersMetricCards";
 import { useAdminUsersPage } from "@widgets/admin/users/users-page/model/useAdminUsersPage";
 import { UsersToolbar } from "@widgets/admin/users/users-toolbar/ui/UsersToolbar";
+import { useTranslation } from "react-i18next";
 import styles from "./AdminUsersPage.module.scss";
 
 export const AdminUsersPage = () => {
+  const { t } = useTranslation("admin");
   const page = useAdminUsersPage();
 
   return (
     <section className={styles.page}>
       <div className={styles.heading}>
         <div>
-          <div className={styles.headingEyebrow}>Admin</div>
-          <h1 className={styles.headingTitle}>Users</h1>
+          <div className={styles.headingEyebrow}>{t("common.eyebrow")}</div>
+          <h1 className={styles.headingTitle}>{t("users.title")}</h1>
         </div>
-        <p className={styles.headingText}>
-          Search accounts, inspect summaries, review active restrictions, and
-          manage system roles from one real-time view.
-        </p>
+        <p className={styles.headingText}>{t("users.description")}</p>
       </div>
 
       <UsersMetricCards styles={styles} metrics={page.metrics} />
@@ -40,9 +39,13 @@ export const AdminUsersPage = () => {
       />
 
       <div className={styles.sectionHeader}>
-        <span>User directory</span>
+        <span>{t("users.directory")}</span>
         <span className={styles.sectionLine} aria-hidden="true" />
-        <strong>{formatAdminCount(page.list.totalCount)} matches</strong>
+        <strong>
+          {t("common.matches", {
+            count: formatAdminCount(page.list.totalCount),
+          })}
+        </strong>
       </div>
 
       <UsersGrid

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { EventAttendanceManagerPage } from "@widgets/activities";
 import { canViewEventAttendance } from "@widgets/events/details/lib/eventPermissions";
+import { useEventPermissionContext } from "@widgets/events";
 
 export const Route = createFileRoute("/_masterLayout/events/$id/attendance/")({
   loader: async ({ context: { queryClient }, params }) => {
@@ -17,8 +18,13 @@ function EventAttendanceRoute() {
   const { t } = useTranslation(["event"]);
   const navigate = useNavigate();
   const { data: event } = useQuery(eventQuery.id(id));
+  const permissionContext = useEventPermissionContext(event);
 
-  if (!event || !canViewEventAttendance(event)) {
+  if (
+    !event ||
+    permissionContext.isLoading ||
+    !canViewEventAttendance(event, permissionContext)
+  ) {
     return null;
   }
 
@@ -26,6 +32,7 @@ function EventAttendanceRoute() {
     <EventAttendanceManagerPage
       event={event}
       eventId={id}
+      permissionContext={permissionContext}
       labels={{
         eyebrow: t("attendancePage.eyebrow"),
         title: t("attendancePage.title", { name: event.title }),

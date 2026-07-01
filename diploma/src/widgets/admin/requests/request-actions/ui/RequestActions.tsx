@@ -3,6 +3,7 @@ import type { AdminRequestListItem } from "@entities/admin";
 import { isDecidable } from "../../requests-config/libs/requestHelpers";
 import type { DecisionAction } from "../../requests-config/libs/requestTypeConfig";
 import styles from "../../requests-page-styles/AdminRequestsPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface RequestActionsProps {
   request: AdminRequestListItem;
@@ -10,6 +11,8 @@ interface RequestActionsProps {
 }
 
 export const RequestActions = ({ request, onDecide }: RequestActionsProps) => {
+  const { t } = useTranslation("admin");
+
   if (isDecidable(request)) {
     return (
       <div className={styles.actionButtons}>
@@ -22,7 +25,7 @@ export const RequestActions = ({ request, onDecide }: RequestActionsProps) => {
           }}
         >
           <Check size={15} aria-hidden="true" />
-          Approve
+          {t("requests.actions.approve")}
         </button>
         <button
           type="button"
@@ -33,19 +36,30 @@ export const RequestActions = ({ request, onDecide }: RequestActionsProps) => {
           }}
         >
           <X size={15} aria-hidden="true" />
-          Reject
+          {t("requests.actions.reject")}
         </button>
       </div>
     );
   }
 
-  if (request.typeName === "categoryUpdate" || request.typeName === "categoryDeletion") {
-    return <span className={styles.viewLinkDisabled}>Pending backend support</span>;
+  if (
+    request.typeName === "categoryUpdate" ||
+    request.typeName === "categoryDeletion"
+  ) {
+    return (
+      <span className={styles.viewLinkDisabled}>
+        {t("requests.actions.pendingBackend")}
+      </span>
+    );
   }
 
   if (request.typeName === "report" || request.typeName === "appeal") {
     return null;
   }
 
-  return <span className={styles.viewLinkDisabled}>Not actionable here</span>;
+  return (
+    <span className={styles.viewLinkDisabled}>
+      {t("requests.actions.notActionable")}
+    </span>
+  );
 };

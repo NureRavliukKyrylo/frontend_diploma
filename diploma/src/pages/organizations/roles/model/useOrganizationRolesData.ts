@@ -1,6 +1,9 @@
 import { useMemo } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { organizationQuery } from "@entities/organization";
+import {
+  contextRoleQuery,
+  organizationQuery,
+} from "@entities/organization";
 import {
   participationQuery,
   type ParticipationListItem,
@@ -14,17 +17,17 @@ import {
 export const useOrganizationRolesData = (organizationId: string) => {
   const organizationResult = useQuery(organizationQuery.byId(organizationId));
   const activeRolesResult = useQuery({
-    ...organizationQuery.contextRoles(organizationId),
+    ...contextRoleQuery.entity("organization", organizationId),
     retry: false,
     enabled: Boolean(organizationId),
   });
   const archivedRolesResult = useQuery({
-    ...organizationQuery.contextRoles(organizationId, true),
+    ...contextRoleQuery.entity("organization", organizationId, true),
     retry: false,
     enabled: Boolean(organizationId),
   });
   const templatesResult = useQuery({
-    ...organizationQuery.contextRoleTemplates("organization"),
+    ...contextRoleQuery.templates("organization"),
     retry: false,
     enabled: Boolean(organizationId),
   });

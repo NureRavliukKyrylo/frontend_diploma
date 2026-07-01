@@ -5,6 +5,7 @@ import {
   type EventSettingsValues,
 } from "@features/event";
 import { DatePickerInput } from "@shared/ui/inputs";
+import { useTranslation } from "react-i18next";
 import sectionStyles from "./GeneralTabShared.module.scss";
 import styles from "./BasicInfoSection.module.scss";
 
@@ -46,21 +47,24 @@ export const BasicInfoSection = ({
   onChange,
   onDateChange,
 }: BasicInfoSectionProps) => {
+  const { t } = useTranslation("event");
   const minimumEndDate = safelyParseDateTime(values.startAt);
 
   return (
     <section className={sectionStyles.section}>
-      <h2 className={sectionStyles.sectionLabel}>Basic info</h2>
+      <h2 className={sectionStyles.sectionLabel}>
+        {t("settings.general.basicInfo")}
+      </h2>
       <p className={sectionStyles.sectionDescription}>
-        Keep the public event profile clear, searchable, and useful.
+        {t("settings.general.basicInfoText")}
       </p>
 
       <label className={styles.field}>
-        <span>Event title</span>
+        <span>{t("settings.general.title")}</span>
         <input
           value={values.title}
           maxLength={200}
-          placeholder="Event title"
+          placeholder={t("settings.general.titlePlaceholder")}
           aria-invalid={Boolean(errors.title)}
           onChange={(event) => onChange("title", event.target.value)}
         />
@@ -68,11 +72,11 @@ export const BasicInfoSection = ({
       </label>
 
       <label className={`${styles.field} ${styles.fullField}`}>
-        <span>Description</span>
+        <span>{t("settings.general.description")}</span>
         <textarea
           value={values.description}
           maxLength={1000}
-          placeholder="Describe what volunteers will do and why it matters."
+          placeholder={t("settings.general.descriptionPlaceholder")}
           aria-invalid={Boolean(errors.description)}
           onChange={(event) => onChange("description", event.target.value)}
         />
@@ -84,9 +88,11 @@ export const BasicInfoSection = ({
 
       <div className={styles.dateRow}>
         <label className={styles.dateField}>
-          <span className={sectionStyles.fieldLabel}>Start date and time</span>
+          <span className={sectionStyles.fieldLabel}>
+            {t("settings.general.start")}
+          </span>
           <DatePickerInput
-            aria-label="Event start date and time"
+            aria-label={t("settings.general.start")}
             value={values.startAt}
             granularity="minute"
             hourCycle={24}
@@ -98,9 +104,11 @@ export const BasicInfoSection = ({
           {errors.startAt ? <small>{errors.startAt}</small> : null}
         </label>
         <label className={styles.dateField}>
-          <span className={sectionStyles.fieldLabel}>End date and time</span>
+          <span className={sectionStyles.fieldLabel}>
+            {t("settings.general.end")}
+          </span>
           <DatePickerInput
-            aria-label="Event end date and time"
+            aria-label={t("settings.general.end")}
             value={values.endAt}
             minValue={minimumEndDate}
             granularity="minute"
@@ -115,10 +123,10 @@ export const BasicInfoSection = ({
       </div>
 
       <label className={`${styles.field} ${styles.fullField}`}>
-        <span>Type</span>
+        <span>{t("settings.general.type")}</span>
         <input
           value={values.type}
-          placeholder="e.g. Workshop, cleanup, meetup"
+          placeholder={t("settings.general.typePlaceholder")}
           disabled={lockState.typeAndSkillsLocked}
           onChange={(event) => onChange("type", event.target.value)}
         />

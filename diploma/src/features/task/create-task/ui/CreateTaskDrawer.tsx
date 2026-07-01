@@ -9,6 +9,7 @@ import { CreateTaskStepIndicator } from "./components/CreateTaskStepIndicator";
 import { STEPS } from "./config/createTaskDrawerConfig";
 import { useCreateTaskDrawerLifecycle } from "./lib/useCreateTaskDrawerLifecycle";
 import styles from "./CreateTaskDrawer.module.scss";
+import { useTranslation } from "react-i18next";
 
 export interface CreateTaskDrawerProps {
   isOpen: boolean;
@@ -27,6 +28,7 @@ export const CreateTaskDrawer = ({
   eventId,
   orgName,
 }: CreateTaskDrawerProps) => {
+  const { t } = useTranslation("task");
   const form = useCreateTaskForm({
     organizationId,
     projectId,
@@ -53,7 +55,7 @@ export const CreateTaskDrawer = ({
           <motion.button
             type="button"
             className={styles.backdrop}
-            aria-label="Close create task drawer"
+            aria-label={t("create.close")}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

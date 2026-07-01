@@ -4,6 +4,7 @@ export { OrganizationsPage as MyOrganizationsPage } from "./ui/OrganizationsPage
 export { OrganizationDetailsPage } from "./details/ui/OrganizationDetailsPage";
 export { SettingsOrganizationPage } from "./settings";
 export { OrganizationMembersPage } from "./members";
+export { RecommendedVolunteersPage } from "./recommendations";
 export { OrganizationRolesPage } from "./roles";
 export { CreateOrganizationPage } from "./create";
 export { CreateProjectPage } from "./projects/create";

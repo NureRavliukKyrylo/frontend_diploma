@@ -1,4 +1,5 @@
 import { DeleteModal } from "@shared/assets/images/actions";
+import { useTranslation } from "react-i18next";
 import { ConfirmationModal } from "@shared/ui/modals";
 import type { Organization } from "@entities/organization";
 import type { useOrganizationDetailsInfoModel } from "../model/useInfoModel";
@@ -15,19 +16,22 @@ interface OrganizationDetailsActionModalsProps {
 export const OrganizationDetailsActionModals = ({
   organization,
   model,
-}: OrganizationDetailsActionModalsProps) => (
-  <>
+}: OrganizationDetailsActionModalsProps) => {
+  const { t } = useTranslation("organizations");
+
+  return (
+    <>
     <ConfirmationModal
       isOpen={model.isLeaveModalOpen}
       onCancel={model.closeLeaveModal}
       onConfirm={model.confirmLeave}
-      title="Are you leaving?"
-      text={`Are you sure you want to leave ${organization.name}? You can join it again later.`}
+      title={t("details.modals.leaveTitle")}
+      text={t("myOrganizations.leaveText", { name: organization.name })}
       maxWidth="628px"
       error={model.leaveOrganizationErrorMessage}
       isLoading={model.isLeavePending}
-      cancelText="Cancel"
-      confirmText="Leave"
+      cancelText={t("details.modals.cancel")}
+      confirmText={t("details.modals.confirmLeave")}
       image={DeleteModal}
     />
 
@@ -35,18 +39,27 @@ export const OrganizationDetailsActionModals = ({
       isOpen={model.isMemberRemovalModalOpen}
       onCancel={model.closeMemberRemoval}
       onConfirm={model.confirmMemberRemoval}
-      title="Remove team member?"
+      title={t("details.modals.removeTitle", {
+        name: model.memberToRemove?.name ?? t("details.labels.teamMember"),
+      })}
       text={
         model.memberToRemove
-          ? `Are you sure you want to remove ${model.memberToRemove.name} from ${organization.name}?`
-          : "Are you sure you want to remove this team member?"
+          ? t("details.modals.removeText", {
+              name: model.memberToRemove.name,
+              organization: organization.name,
+            })
+          : t("details.modals.removeText", {
+              name: t("details.labels.teamMember"),
+              organization: organization.name,
+            })
       }
       maxWidth="628px"
       error={model.memberRemovalErrorMessage}
       isLoading={model.isMemberRemovalPending}
-      cancelText="Cancel"
-      confirmText="Remove"
+      cancelText={t("details.modals.cancel")}
+      confirmText={t("details.modals.confirmRemove")}
       image={DeleteModal}
     />
-  </>
-);
+    </>
+  );
+};

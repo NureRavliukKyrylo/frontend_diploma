@@ -1,6 +1,7 @@
 import { ClipboardCheck, DoorClosed, DoorOpen, Lock } from "lucide-react";
 import type { EventPolicyField, EventSettingsValues } from "@features/event";
 import type { Policy } from "@shared/config/types";
+import { useTranslation } from "react-i18next";
 import styles from "./AccessTab.module.scss";
 
 interface AccessTabProps {
@@ -10,51 +11,55 @@ interface AccessTabProps {
 
 const joinPolicyOptions: Array<{
   value: Policy;
-  title: string;
-  description: string;
+  titleKey: string;
+  descriptionKey: string;
   icon: typeof DoorOpen;
 }> = [
   {
     value: "open",
-    title: "Open",
-    description: "Anyone can join instantly without waiting for approval",
+    titleKey: "settings.access.open",
+    descriptionKey: "settings.access.joinOpenText",
     icon: DoorOpen,
   },
   {
     value: "approval_required",
-    title: "Approval required",
-    description: "New volunteers must be manually approved by an admin",
+    titleKey: "settings.access.joinApproval",
+    descriptionKey: "settings.access.joinApprovalText",
     icon: ClipboardCheck,
   },
 ];
 
 const leavePolicyOptions: Array<{
   value: Policy;
-  title: string;
-  description: string;
+  titleKey: string;
+  descriptionKey: string;
   icon: typeof DoorOpen;
 }> = [
   {
     value: "open",
-    title: "Open",
-    description: "Volunteers can leave at any time without restrictions",
+    titleKey: "settings.access.leaveOpen",
+    descriptionKey: "settings.access.leaveOpenText",
     icon: DoorClosed,
   },
   {
     value: "approval_required",
-    title: "Approval required",
-    description: "Leave requests must be confirmed by an admin",
+    titleKey: "settings.access.leaveApproval",
+    descriptionKey: "settings.access.leaveApprovalText",
     icon: Lock,
   },
 ];
 
 export const AccessTab = ({ values, onPolicyChange }: AccessTabProps) => {
+  const { t } = useTranslation("event");
+
   return (
     <div className={styles.sectionsContainer}>
       <section className={styles.section}>
-        <h2 className={styles.sectionLabel}>Join policy</h2>
+        <h2 className={styles.sectionLabel}>
+          {t("settings.access.joinTitle")}
+        </h2>
         <p className={styles.sectionDescription}>
-          Control how new volunteers join your event.
+          {t("settings.access.joinText")}
         </p>
 
         <div className={styles.policyGrid}>
@@ -79,8 +84,8 @@ export const AccessTab = ({ values, onPolicyChange }: AccessTabProps) => {
                     <span />
                   </span>
                 </span>
-                <strong>{option.title}</strong>
-                <small>{option.description}</small>
+                <strong>{t(option.titleKey)}</strong>
+                <small>{t(option.descriptionKey)}</small>
               </button>
             );
           })}
@@ -88,9 +93,11 @@ export const AccessTab = ({ values, onPolicyChange }: AccessTabProps) => {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionLabel}>Leave policy</h2>
+        <h2 className={styles.sectionLabel}>
+          {t("settings.access.leaveTitle")}
+        </h2>
         <p className={styles.sectionDescription}>
-          Choose whether volunteers can leave freely or need confirmation.
+          {t("settings.access.leaveText")}
         </p>
 
         <div className={styles.policyGrid}>
@@ -115,8 +122,8 @@ export const AccessTab = ({ values, onPolicyChange }: AccessTabProps) => {
                     <span />
                   </span>
                 </span>
-                <strong>{option.title}</strong>
-                <small>{option.description}</small>
+                <strong>{t(option.titleKey)}</strong>
+                <small>{t(option.descriptionKey)}</small>
               </button>
             );
           })}

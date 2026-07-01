@@ -7,6 +7,7 @@ import {
   readPayloadStringArray,
 } from "../../../requests-config/libs/requestPayloadParsing";
 import styles from "../../../requests-page-styles/AdminRequestsPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface ProposedSkillPreviewProps {
   request: AdminRequestListItem;
@@ -17,6 +18,7 @@ export const ProposedSkillPreview = ({
   request,
   categoryMap,
 }: ProposedSkillPreviewProps) => {
+  const { t } = useTranslation("admin");
   const requestData = asRequestRecord(request.dataJson);
   const name =
     readPayloadString(requestData, ["name", "Name", "title", "Title"]) ||
@@ -24,7 +26,7 @@ export const ProposedSkillPreview = ({
   const description =
     readPayloadString(requestData, ["description", "Description"]) ||
     request.description ||
-    "No description provided.";
+    t("requests.previews.noDescription");
   const iconUrl = readPayloadString(requestData, [
     "iconUrl",
     "IconUrl",
@@ -41,21 +43,29 @@ export const ProposedSkillPreview = ({
     <>
       <div className={styles.proposedSkillPreview}>
         <span className={styles.proposedSkillIcon}>
-          {iconUrl ? <img src={iconUrl} alt={name} /> : getRequestInitials(name)}
+          {iconUrl ? (
+            <img src={iconUrl} alt={name} />
+          ) : (
+            getRequestInitials(name)
+          )}
         </span>
         <div className={styles.proposedSkillMain}>
           <strong>{name}</strong>
-          <span>Proposed skill</span>
+          <span>{t("requests.previews.proposedSkill")}</span>
         </div>
       </div>
 
       <section className={styles.drawerSection}>
-        <div className={styles.drawerSectionLabel}>Description</div>
+        <div className={styles.drawerSectionLabel}>
+          {t("requests.previews.description")}
+        </div>
         <p className={styles.drawerParagraph}>{description}</p>
       </section>
 
       <section className={styles.drawerSection}>
-        <div className={styles.drawerSectionLabel}>Categories</div>
+        <div className={styles.drawerSectionLabel}>
+          {t("requests.previews.categories")}
+        </div>
         {categories.length > 0 ? (
           <div className={styles.drawerPills}>
             {categories.map((category) => (
@@ -63,7 +73,9 @@ export const ProposedSkillPreview = ({
             ))}
           </div>
         ) : (
-          <p className={styles.drawerMutedText}>No categories attached.</p>
+          <p className={styles.drawerMutedText}>
+            {t("requests.previews.noCategories")}
+          </p>
         )}
       </section>
     </>

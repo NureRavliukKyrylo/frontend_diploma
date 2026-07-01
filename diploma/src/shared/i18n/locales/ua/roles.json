@@ -1,0 +1,219 @@
+{
+  "page": {
+    "title": "Ролі",
+    "loading": "Завантаження ролей...",
+    "organizationError": "Не вдалося завантажити організацію.",
+    "rolesError": "Не вдалося завантажити ролі організації.",
+    "back": "Повернутися до організації",
+    "logoAlt": "Логотип {{name}}",
+    "newRole": "Нова роль"
+  },
+  "tabs": {
+    "active": "Активні ролі",
+    "archived": "Архівні"
+  },
+  "sort": {
+    "name": "Назва (А-Я)",
+    "permissions": "Найбільше дозволів",
+    "members": "Найбільше учасників"
+  },
+  "sections": {
+    "templates": "Шаблони",
+    "custom": "Власні",
+    "archived": "Архівні ролі",
+    "emptyArchived": "Архівних ролей немає",
+    "emptyArchivedText": "Заархівовані ролі з’являться тут.",
+    "create": "Створити роль",
+    "createText": "Сформуйте власний набір дозволів для команди."
+  },
+  "types": {
+    "archived": "Архівна роль",
+    "system": "Системна роль",
+    "template": "Шаблон ролі",
+    "custom": "Власна роль"
+  },
+  "tags": {
+    "system": "Системна",
+    "template": "Шаблон",
+    "default": "Типова",
+    "autoAssign": "Автопризначення"
+  },
+  "card": {
+    "noDescription": "Опис ще не додано.",
+    "archived": "Архівовано: {{reason}}",
+    "archivedRole": "Архівна роль",
+    "archiveReasons": {
+      "manual": "Вручну",
+      "no_users": "Немає учасників",
+      "context_ended": "Контекст завершено",
+      "none": "Не вказано"
+    },
+    "permissions_one": "{{count}} дозвіл",
+    "permissions_few": "{{count}} дозволи",
+    "permissions_many": "{{count}} дозволів",
+    "permissions_other": "{{count}} дозволу",
+    "members_one": "{{count}} учасник",
+    "members_few": "{{count}} учасники",
+    "members_many": "{{count}} учасників",
+    "members_other": "{{count}} учасника",
+    "ready": "Готовий до використання"
+  },
+  "actions": {
+    "restore": "Відновити",
+    "deleteRole": "Видалити роль «{{name}}»",
+    "locked": "Заблоковано",
+    "use": "Використати",
+    "removeDefault": "Прибрати типову",
+    "setDefault": "Зробити типовою",
+    "archive": "Архівувати",
+    "delete": "Видалити",
+    "more": "Більше дій для ролі «{{name}}»",
+    "edit": "Редагувати",
+    "editRole": "Редагувати роль"
+  },
+  "drawer": {
+    "close": "Закрити інформацію про роль",
+    "assignment": "Призначення",
+    "assignableBy": "Хто може призначати",
+    "approvableBy": "Хто може схвалювати",
+    "anyone": "Усі з дозволом керувати ролями",
+    "members": "Учасники",
+    "total": "Усього: {{count}}",
+    "noMembers": "Цю роль ще нікому не призначено.",
+    "permissions": "Дозволи",
+    "other": "Інші"
+  },
+  "members": {
+    "teamMember": "Учасник команди",
+    "joinUnavailable": "Дата приєднання недоступна",
+    "joined": "Приєднався(-лася) {{date}}"
+  },
+  "picker": {
+    "open": "Відкрито — усі з дозволом керувати ролями",
+    "search": "Пошук людей або ролей",
+    "remove": "Прибрати {{name}}",
+    "noResults": "Людей або ролей не знайдено"
+  },
+  "form": {
+    "steps": {
+      "basics": "Основне",
+      "permissions": "Дозволи",
+      "assignment": "Призначення"
+    },
+    "entity": {
+      "organization": "Організація",
+      "project": "Проєкт",
+      "event": "Подія",
+      "task": "Завдання"
+    },
+    "close": "Закрити форму ролі",
+    "name": "Назва",
+    "namePlaceholder": "Наприклад, координатор подій",
+    "description": "Опис",
+    "descriptionPlaceholder": "Опишіть можливості цієї ролі...",
+    "appliesTo": "Застосовується до:",
+    "currentOrganization": "Поточна організація",
+    "currentContext": "Поточний контекст",
+    "assignmentHint": "Оберіть конкретних людей або інші ролі. Залиште порожнім, щоб дозволити призначення всім, хто керує ролями.",
+    "assignableBy": "Хто може призначати",
+    "approvableBy": "Хто може схвалювати",
+    "defaultTitle": "Типова для нових учасників",
+    "defaultText": "Автоматично призначати цю роль новим учасникам.",
+    "yes": "Так",
+    "no": "Ні",
+    "cancel": "Скасувати",
+    "back": "Назад",
+    "saving": "Збереження...",
+    "continue": "Продовжити",
+    "permissions": "Дозволи",
+    "selected_one": "Вибрано {{count}} дозвіл",
+    "selected_few": "Вибрано {{count}} дозволи",
+    "selected_many": "Вибрано {{count}} дозволів",
+    "selected_other": "Вибрано {{count}} дозволу",
+    "step1": "Крок 1 із 3 — назвіть і опишіть роль.",
+    "step2": "Крок 2 із 3 — оберіть можливості ролі.",
+    "step3": "Крок 3 із 3 — визначте, хто може призначати та схвалювати роль.",
+    "editTitle": "Редагувати роль",
+    "templateTitle": "Створити із шаблону",
+    "createTitle": "Створити роль",
+    "save": "Зберегти",
+    "createFromTemplate": "Створити із шаблону",
+    "createRole": "Створити роль",
+    "errors": {
+      "duplicate": "Роль із назвою «{{name}}» уже існує в цій організації, зокрема серед архівних.",
+      "required": "Вкажіть назву ролі.",
+      "tooLong": "Назва ролі має містити не більше 200 символів.",
+      "permissionRequired": "Оберіть принаймні один дозвіл.",
+      "save": "Не вдалося зберегти роль.",
+      "serverRejected": "Сервер відхилив роль ({{status}})."
+    }
+  },
+  "permissions": {
+    "groups": {
+      "organization": "Орг.",
+      "projects": "Проєкти",
+      "events": "Події",
+      "tasks": "Завдання",
+      "participation": "Участь",
+      "timeBank": "Банк часу"
+    },
+    "labels": {
+      "organizationContentManage": "Керування вмістом організації",
+      "organizationMembersManage": "Керування учасниками",
+      "organizationRolesManage": "Керування ролями",
+      "organizationRolesAssign": "Призначення ролей",
+      "projectContentManage": "Керування проєктами",
+      "projectMembersManage": "Керування учасниками проєкту",
+      "projectRolesManage": "Керування ролями проєкту",
+      "projectRolesAssign": "Призначення ролей проєкту",
+      "eventContentManage": "Керування подіями",
+      "eventMembersManage": "Керування учасниками подій",
+      "eventRolesManage": "Керування ролями подій",
+      "eventRolesAssign": "Призначення ролей подій",
+      "taskContentManage": "Керування завданнями",
+      "taskMembersManage": "Керування учасниками завдань",
+      "taskRolesManage": "Керування ролями завдань",
+      "taskRolesAssign": "Призначення ролей завдань",
+      "taskTimelogViewAll": "Перегляд усіх записів часу",
+      "taskTimelogEditManager": "Редагування записів часу керівником",
+      "taskTimelogApprove": "Схвалення записів часу",
+      "taskTimelogReject": "Відхилення записів часу",
+      "taskTimelogResolveDispute": "Вирішення спорів щодо часу",
+      "attendanceViewEvent": "Перегляд відвідуваності події",
+      "attendanceApproveEvent": "Підтвердження відвідуваності",
+      "attendanceRejectEvent": "Відхилення відвідуваності",
+      "attendanceResolveDispute": "Вирішення спорів щодо відвідуваності",
+      "attendanceExportEvent": "Експорт відвідуваності",
+      "participationViewMembers": "Перегляд списку учасників",
+      "participationViewHistory": "Перегляд історії участі",
+      "participationJoinForUser": "Додавання учасників вручну",
+      "participationLeaveForUser": "Видалення учасників вручну",
+      "participationMembersManage": "Керування записами участі",
+      "participationRolesAssign": "Призначення ролей участі",
+      "timebankViewUserSummary": "Перегляд банку часу користувача"
+    }
+  },
+  "confirmation": {
+    "archiveTitle": "Архівувати роль",
+    "archiveText": "Архівувати роль «{{name}}»?",
+    "archive": "Архівувати",
+    "restoreTitle": "Відновити роль",
+    "restoreText": "Відновити роль «{{name}}» і знову зробити її доступною?",
+    "restore": "Відновити",
+    "deleteTitle": "Видалити роль",
+    "deleteText": "Видалити роль «{{name}}» назавжди? Цю дію неможливо скасувати.",
+    "delete": "Видалити",
+    "cancel": "Скасувати"
+  },
+  "toast": {
+    "saved": "Роль збережено",
+    "saveFailed": "Не вдалося зберегти роль",
+    "defaultRemoved": "Типову роль скасовано",
+    "defaultUpdated": "Типову роль оновлено",
+    "defaultFailed": "Не вдалося оновити типову роль",
+    "archived": "Роль архівовано",
+    "restored": "Роль відновлено",
+    "deleted": "Роль видалено",
+    "actionFailed": "Не вдалося виконати дію з роллю"
+  }
+}

@@ -59,6 +59,7 @@ export interface Organization {
   rating?: OrganizationRating;
   totalActivities?: number;
   activeCount?: number;
+  currentProgress?: number;
   progressPercent?: number;
   maxProgress?: number;
   memberCount?: number;

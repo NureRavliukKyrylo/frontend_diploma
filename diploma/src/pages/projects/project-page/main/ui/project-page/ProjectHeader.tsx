@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import type { Project } from "@entities/project";
 import { ModerationSubjectType } from "@entities/report";
 import { ReportButton } from "@features/moderation";
@@ -17,8 +18,11 @@ interface ProjectHeaderProps {
 export const ProjectHeader = ({
   project,
   policyConfig,
-}: ProjectHeaderProps) => (
-  <motion.div
+}: ProjectHeaderProps) => {
+  const { t } = useTranslation("project");
+
+  return (
+    <motion.div
     className={styles.projectPageHeader}
     initial={{ opacity: 0, y: -16 }}
     animate={{ opacity: 1, y: 0 }}
@@ -50,7 +54,7 @@ export const ProjectHeader = ({
           >
             <img
               src={project.organization?.logoUrl ?? undefined}
-              alt="organization-image"
+              alt={t("images.organization")}
             />
             <p>{project.organization?.name}</p>
           </LinkButtonWrapper>
@@ -59,5 +63,6 @@ export const ProjectHeader = ({
     </div>
     <ProjectStats project={project} />
     <ProjectParticipation project={project} />
-  </motion.div>
-);
+    </motion.div>
+  );
+};

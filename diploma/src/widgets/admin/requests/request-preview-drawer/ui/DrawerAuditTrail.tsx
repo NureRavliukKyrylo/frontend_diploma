@@ -1,44 +1,53 @@
 import { CalendarClock, Check, CircleDot } from "lucide-react";
 import { formatAdminDate, type AdminRequestListItem } from "@entities/admin";
 import styles from "../../requests-page-styles/AdminRequestsPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface DrawerAuditTrailProps {
   request: AdminRequestListItem;
 }
 
-export const DrawerAuditTrail = ({ request }: DrawerAuditTrailProps) => (
-  <section className={styles.drawerSection}>
-    <div className={styles.drawerSectionLabel}>Audit trail</div>
-    <div className={styles.drawerTimeline}>
-      <div className={styles.drawerTimelineItem}>
-        <span className={styles.drawerTimelineIcon}>
-          <CalendarClock size={15} aria-hidden="true" />
-        </span>
-        <div>
-          <span>Created</span>
-          <strong>{formatAdminDate(request.createdAt)}</strong>
+export const DrawerAuditTrail = ({ request }: DrawerAuditTrailProps) => {
+  const { t } = useTranslation("admin");
+
+  return (
+    <section className={styles.drawerSection}>
+      <div className={styles.drawerSectionLabel}>
+        {t("requests.drawer.auditTrail")}
+      </div>
+      <div className={styles.drawerTimeline}>
+        <div className={styles.drawerTimelineItem}>
+          <span className={styles.drawerTimelineIcon}>
+            <CalendarClock size={15} aria-hidden="true" />
+          </span>
+          <div>
+            <span>{t("requests.drawer.created")}</span>
+            <strong>{formatAdminDate(request.createdAt)}</strong>
+          </div>
+        </div>
+        <div className={styles.drawerTimelineItem}>
+          <span className={styles.drawerTimelineIcon}>
+            <CircleDot size={15} aria-hidden="true" />
+          </span>
+          <div>
+            <span>{t("requests.drawer.updated")}</span>
+            <strong>{formatAdminDate(request.updatedAt)}</strong>
+          </div>
+        </div>
+        <div className={styles.drawerTimelineItem}>
+          <span className={styles.drawerTimelineIcon}>
+            <Check size={15} aria-hidden="true" />
+          </span>
+          <div>
+            <span>{t("requests.drawer.decision")}</span>
+            <strong>
+              {request.decidedAt
+                ? formatAdminDate(request.decidedAt)
+                : t("requests.metrics.pending")}
+            </strong>
+          </div>
         </div>
       </div>
-      <div className={styles.drawerTimelineItem}>
-        <span className={styles.drawerTimelineIcon}>
-          <CircleDot size={15} aria-hidden="true" />
-        </span>
-        <div>
-          <span>Updated</span>
-          <strong>{formatAdminDate(request.updatedAt)}</strong>
-        </div>
-      </div>
-      <div className={styles.drawerTimelineItem}>
-        <span className={styles.drawerTimelineIcon}>
-          <Check size={15} aria-hidden="true" />
-        </span>
-        <div>
-          <span>Decision</span>
-          <strong>
-            {request.decidedAt ? formatAdminDate(request.decidedAt) : "Pending"}
-          </strong>
-        </div>
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};

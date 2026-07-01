@@ -11,6 +11,7 @@ import {
   type KeyboardEvent,
 } from "react";
 import styles from "./CategorySearchPicker.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface CategorySearchPickerProps {
   value: string[];
@@ -54,8 +55,10 @@ export const CategorySearchPicker = ({
   value,
   onChange,
   multiple = true,
-  placeholder = "Search categories",
+  placeholder,
 }: CategorySearchPickerProps) => {
+  const { t } = useTranslation("category");
+  const resolvedPlaceholder = placeholder ?? t("picker.search");
   const wrapperRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -224,7 +227,7 @@ export const CategorySearchPicker = ({
                   event.stopPropagation();
                   removeCategory(category.id);
                 }}
-                aria-label={`Remove ${category.name}`}
+                aria-label={t("picker.remove", { name: category.name })}
               >
                 x
               </button>
@@ -244,7 +247,7 @@ export const CategorySearchPicker = ({
           }}
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleKeyDown}
-          placeholder={selectedCategories.length ? "" : placeholder}
+          placeholder={selectedCategories.length ? "" : resolvedPlaceholder}
         />
       </div>
 
@@ -261,7 +264,9 @@ export const CategorySearchPicker = ({
             }}
           >
             {categoriesQuery.isLoading ? (
-              <div className={styles.pickerEmptyState}>Loading categories...</div>
+              <div className={styles.pickerEmptyState}>
+                {t("picker.loading")}
+              </div>
             ) : filteredCategories.length ? (
               filteredCategories.map((category, index) => (
                 <button
@@ -280,7 +285,7 @@ export const CategorySearchPicker = ({
                 </button>
               ))
             ) : (
-              <div className={styles.pickerEmptyState}>No categories found</div>
+              <div className={styles.pickerEmptyState}>{t("picker.empty")}</div>
             )}
           </div>,
           document.body,

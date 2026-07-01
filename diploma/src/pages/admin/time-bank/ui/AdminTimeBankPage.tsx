@@ -1,9 +1,14 @@
 import { AdminPlaceholderPage } from "../../shared/ui/AdminPlaceholderPage";
+import { useTranslation } from "react-i18next";
 
-export const AdminTimeBankPage = () => (
-  <AdminPlaceholderPage
-    eyebrow="Admin"
-    title="Time bank"
-    description="Page content area"
-  />
-);
+export const AdminTimeBankPage = () => {
+  const { t } = useTranslation("admin");
+
+  return (
+    <AdminPlaceholderPage
+      eyebrow={t("common.eyebrow")}
+      title={t("timeBank.title")}
+      description={t("timeBank.description")}
+    />
+  );
+};

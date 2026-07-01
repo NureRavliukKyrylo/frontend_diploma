@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import styles from "./MetaStrip.module.scss";
 
 interface OrganizationDetailsMetaStripProps {
@@ -11,18 +12,19 @@ export const OrganizationDetailsMetaStrip = ({
   launchDateLabel,
   phoneLabel,
 }: OrganizationDetailsMetaStripProps) => {
+  const { t } = useTranslation("organizations");
   return (
     <div className={styles.metaStrip}>
       <article>
-        <span>Created</span>
+        <span>{t("details.labels.created")}</span>
         <strong>{createdAtLabel}</strong>
       </article>
       <article>
-        <span>Launch date</span>
+        <span>{t("details.labels.launchDate")}</span>
         <strong>{launchDateLabel}</strong>
       </article>
       <article>
-        <span>Phone</span>
+        <span>{t("details.labels.phone")}</span>
         <strong>{phoneLabel}</strong>
       </article>
     </div>

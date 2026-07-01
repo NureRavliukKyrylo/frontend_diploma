@@ -15,6 +15,7 @@ import type {
   OrganizationMemberCardModel,
   OrganizationRequestCardModel,
 } from "@widgets/organizations/members";
+import { useTranslation } from "react-i18next";
 
 export interface PendingRequestDecision {
   action: "approve" | "reject";
@@ -22,6 +23,7 @@ export interface PendingRequestDecision {
 }
 
 export const useOrganizationMemberMutations = (organizationId: string) => {
+  const { t } = useTranslation("common");
   const queryClient = useQueryClient();
   const [memberToRemove, setMemberToRemove] =
     useState<OrganizationMemberCardModel | null>(null);
@@ -47,7 +49,7 @@ export const useOrganizationMemberMutations = (organizationId: string) => {
       roleId: string;
     }) => {
       if (!member.participationId) {
-        throw new Error("This member does not have a participation record.");
+        throw new Error(t("memberMutations.missingParticipation"));
       }
       return updateOrganizationMemberRole({
         participationId: member.participationId,
@@ -59,15 +61,17 @@ export const useOrganizationMemberMutations = (organizationId: string) => {
     onSuccess: async (_, { member }) => {
       await invalidateMembers();
       addToast({
-        title: "Role updated",
-        description: `${member.fullName}'s role has been updated.`,
+        title: t("memberMutations.roleUpdated"),
+        description: t("memberMutations.roleUpdatedText", {
+          name: member.fullName,
+        }),
         color: "success",
       });
     },
     onError: (error: unknown) =>
       addToast({
-        title: "Role update failed",
-        description: getErrorMessage(error),
+        title: t("memberMutations.roleUpdateFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       }),
     onSettled: () => setActiveRoleChangeParticipationId(null),
@@ -80,18 +84,18 @@ export const useOrganizationMemberMutations = (organizationId: string) => {
       }),
     onSuccess: async () => {
       await Promise.all([
-        ...await invalidateMembers(),
+        ...(await invalidateMembers()),
         queryClient.invalidateQueries({
           queryKey: organizationKeys.details(organizationId),
         }),
       ]);
-      addToast({ title: "Member removed", color: "success" });
+      addToast({ title: t("memberMutations.memberRemoved"), color: "success" });
       setMemberToRemove(null);
     },
     onError: (error: unknown) =>
       addToast({
-        title: "Removal failed",
-        description: getErrorMessage(error),
+        title: t("memberMutations.removalFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       }),
   });
@@ -114,7 +118,7 @@ export const useOrganizationMemberMutations = (organizationId: string) => {
         queryClient.invalidateQueries({
           queryKey: organizationKeys.pendingLeaveRequests(organizationId),
         }),
-        ...await invalidateMembers(),
+        ...(await invalidateMembers()),
         queryClient.invalidateQueries({
           queryKey: organizationKeys.details(organizationId),
         }),
@@ -123,15 +127,18 @@ export const useOrganizationMemberMutations = (organizationId: string) => {
           : Promise.resolve(),
       ]);
       addToast({
-        title: action === "approve" ? "Request approved" : "Request rejected",
+        title:
+          action === "approve"
+            ? t("memberMutations.requestApproved")
+            : t("memberMutations.requestRejected"),
         color: "success",
       });
       setPendingDecision(null);
     },
     onError: (error: unknown) =>
       addToast({
-        title: "Request update failed",
-        description: getErrorMessage(error),
+        title: t("memberMutations.requestUpdateFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       }),
   });

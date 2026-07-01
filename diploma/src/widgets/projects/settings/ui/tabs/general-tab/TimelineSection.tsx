@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import type {
   ProjectSettingsErrors,
   ProjectSettingsValues,
@@ -18,18 +19,23 @@ export const TimelineSection = ({
   errors,
   minimumEndDate,
   onDateChange,
-}: TimelineSectionProps) => (
-  <section className={styles.section}>
-    <h2 className={styles.sectionLabel}>Timeline</h2>
+}: TimelineSectionProps) => {
+  const { t } = useTranslation("project");
+
+  return (
+    <section className={styles.section}>
+    <h2 className={styles.sectionLabel}>{t("settings.general.timeline")}</h2>
     <p className={styles.sectionDescription}>
-      Adjust the start and end dates shown on the project page.
+      {t("settings.general.timelineText")}
     </p>
 
     <div className={styles.dateRow}>
       <label className={styles.dateField}>
-        <span className={styles.fieldLabel}>Start date</span>
+        <span className={styles.fieldLabel}>
+          {t("settings.general.startDate")}
+        </span>
         <DatePickerInput
-          aria-label="Project start date"
+          aria-label={t("settings.general.startDate")}
           value={values.startAt}
           onChange={(value) => onDateChange("startAt", value ?? null)}
           classNames={datePickerClassNames}
@@ -37,9 +43,11 @@ export const TimelineSection = ({
         {errors.startAt ? <small>{errors.startAt}</small> : null}
       </label>
       <label className={styles.dateField}>
-        <span className={styles.fieldLabel}>End date</span>
+        <span className={styles.fieldLabel}>
+          {t("settings.general.endDate")}
+        </span>
         <DatePickerInput
-          aria-label="Project end date"
+          aria-label={t("settings.general.endDate")}
           value={values.endAt}
           minValue={minimumEndDate}
           onChange={(value) => onDateChange("endAt", value ?? null)}
@@ -48,5 +56,6 @@ export const TimelineSection = ({
         {errors.endAt ? <small>{errors.endAt}</small> : null}
       </label>
     </div>
-  </section>
-);
+    </section>
+  );
+};

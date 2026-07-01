@@ -13,10 +13,12 @@ import { profileKeys } from "@entities/user/profile/model/queries/profileQuery";
 import { getErrorMessage } from "@shared/libs/error-message";
 import type { OrganizationCreatePolicyValue } from "./types";
 import { useOrganizationCreateDraftStore } from "./useOrganizationCreateDraftStore";
+import { useTranslation } from "react-i18next";
 
 const MAX_CREATE_STEP = 4;
 
 export const useOrganizationCreateFlow = () => {
+  const { t } = useTranslation(["organizations", "common"]);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const storedUserId = useUserStore((state) => state.userId)?.trim();
@@ -107,18 +109,18 @@ export const useOrganizationCreateFlow = () => {
 
       addToast({
         title: logoUploadError
-          ? "Organization created with notes"
-          : "Organization created",
+          ? t("organizations:createFlow.createdWithNotes")
+          : t("organizations:createFlow.created"),
         description: logoUploadError
-          ? "Your organization was created, but the logo could not be uploaded right now."
-          : "Your organization is ready.",
+          ? t("organizations:createFlow.logoUploadFailed")
+          : t("organizations:createFlow.ready"),
         color: logoUploadError ? "warning" : "success",
       });
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Creation failed",
-        description: getErrorMessage(error),
+        title: t("organizations:createFlow.creationFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },

@@ -20,7 +20,7 @@ export type OrganizationFabActionId =
 
 export interface OrganizationFabActionConfig {
   id: OrganizationFabActionId;
-  label: string;
+  labelKey: string;
   icon: LucideIcon;
   permission: "visible" | "manage" | "roles";
   target:
@@ -36,49 +36,49 @@ export interface OrganizationFabActionConfig {
 export const organizationFabActionsConfig: OrganizationFabActionConfig[] = [
   {
     id: "dashboard",
-    label: "Dashboard",
+    labelKey: "fab.actions.dashboard",
     icon: LayoutDashboard,
     permission: "visible",
     target: "/organizations/$id",
   },
   {
     id: "settings",
-    label: "Settings",
+    labelKey: "fab.actions.settings",
     icon: Settings,
     permission: "manage",
     target: "/organizations/$id/settings",
   },
   {
     id: "members",
-    label: "Members",
+    labelKey: "fab.actions.members",
     icon: Users,
     permission: "manage",
     target: "/organizations/$id/members",
   },
   {
     id: "new-project",
-    label: "New project",
+    labelKey: "fab.actions.project",
     icon: FolderPlus,
     permission: "manage",
     target: "/organizations/$id/projects/create",
   },
   {
     id: "new-event",
-    label: "New event",
+    labelKey: "fab.actions.event",
     icon: CalendarPlus,
     permission: "manage",
     target: "/organizations/$id/events/create",
   },
   {
     id: "new-task",
-    label: "New task",
+    labelKey: "fab.actions.task",
     icon: CirclePlus,
     permission: "manage",
     target: null,
   },
   {
     id: "roles",
-    label: "Roles",
+    labelKey: "fab.actions.roles",
     icon: Shield,
     permission: "roles",
     target: "/organizations/$id/roles",

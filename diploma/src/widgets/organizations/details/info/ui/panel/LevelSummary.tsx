@@ -1,10 +1,13 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import type { OrganizationDetailsAnimationConfig } from "../../lib/animation";
 import styles from "./LevelSummary.module.scss";
 
 interface LevelSummaryProps {
   level: number;
   levelCurrent: number;
+  levelMax: number;
+  levelProgressPercent: number;
   levelNext: number;
   rating: number;
   votes: number;
@@ -14,11 +17,14 @@ interface LevelSummaryProps {
 export const LevelSummary = ({
   level,
   levelCurrent,
+  levelMax,
+  levelProgressPercent,
   levelNext,
   rating,
   votes,
   animation,
 }: LevelSummaryProps) => {
+  const { t } = useTranslation("organizations");
   const { prefersReducedMotion, summaryVariants, sideRevealVariants } =
     animation;
 
@@ -32,17 +38,21 @@ export const LevelSummary = ({
     >
       <div className={styles.levelMain}>
         <div className={styles.levelHeader}>
-          <h2>Level {level}</h2>
-          <div className={styles.levelValue}>{levelCurrent}/100</div>
+          <h2>{t("details.labels.level", { level })}</h2>
+          <div className={styles.levelValue}>
+            {levelMax > 0 ? `${levelCurrent}/${levelMax}` : levelCurrent}
+          </div>
         </div>
 
         <div className={styles.levelProgressTrack}>
           <motion.div
             className={styles.levelProgressFill}
             initial={
-              prefersReducedMotion ? { width: `${levelCurrent}%` } : { width: 0 }
+              prefersReducedMotion
+                ? { width: `${levelProgressPercent}%` }
+                : { width: 0 }
             }
-            whileInView={{ width: `${levelCurrent}%` }}
+            whileInView={{ width: `${levelProgressPercent}%` }}
             viewport={{ once: true, amount: 0.8 }}
             transition={
               prefersReducedMotion
@@ -59,14 +69,14 @@ export const LevelSummary = ({
         </div>
 
         <div className={styles.levelProgressHints}>
-          <span>Next level</span>
-          <span>Level {levelNext}</span>
+          <span>{t("details.labels.nextLevel")}</span>
+          <span>{t("details.labels.level", { level: levelNext })}</span>
         </div>
       </div>
 
       <motion.div className={styles.ratingBlock} variants={sideRevealVariants}>
         <strong>{rating.toFixed(1)}</strong>
-        <span>({votes} votes)</span>
+        <span>{t("details.labels.votes", { count: votes })}</span>
       </motion.div>
     </motion.div>
   );

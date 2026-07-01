@@ -1,5 +1,6 @@
 import { IconArchive, IconSearch } from "@tabler/icons-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { OrganizationsMapImage } from "@shared/assets/images/information";
 import { LinkButtonWrapper } from "@shared/ui/buttons";
 import styles from "./Widget.module.scss";
@@ -11,6 +12,7 @@ interface OrganizationsHeroWidgetProps {
 export const OrganizationsHeroWidget = ({
   archivedCount = 0,
 }: OrganizationsHeroWidgetProps) => {
+  const { t } = useTranslation("organizations");
   return (
     <motion.section
       className={styles.hero}
@@ -21,23 +23,21 @@ export const OrganizationsHeroWidget = ({
       <div className={styles.heroLeft}>
         <div className={styles.eyebrow}>
           <span className={styles.eyebrowLine} />
-          <span className={styles.eyebrowText}>Your Space</span>
+          <span className={styles.eyebrowText}>
+            {t("catalog.eyebrow")}
+          </span>
         </div>
-        <h1 className={styles.heading}>My organizations</h1>
+        <h1 className={styles.heading}>{t("catalog.title")}</h1>
         <h2 className={styles.subheading}>
-          Where volunteer initiatives are created and coordinated
+          {t("catalog.subtitle")}
         </h2>
         <p className={styles.description}>
-          Here you'll find all the organizations you've joined or created. Open
-          any organization to explore its active projects, track upcoming
-          events, and see how your contributions add up over time. Stay
-          connected with your team, coordinate tasks together, and keep an eye
-          on your progress as you level up within each community.
+          {t("catalog.description")}
         </p>
         <div className={styles.heroActions}>
           <LinkButtonWrapper to="/organizations" className={styles.heroBtn}>
             <IconSearch size={16} stroke={2.2} />
-            Browse organizations
+            {t("catalog.browse")}
           </LinkButtonWrapper>
 
           {archivedCount > 0 && (
@@ -46,7 +46,7 @@ export const OrganizationsHeroWidget = ({
               className={styles.archiveBtn}
             >
               <IconArchive size={16} stroke={2.2} />
-              Archived
+              {t("catalog.archived")}
               <span className={styles.archiveBadge}>{archivedCount}</span>
             </LinkButtonWrapper>
           )}

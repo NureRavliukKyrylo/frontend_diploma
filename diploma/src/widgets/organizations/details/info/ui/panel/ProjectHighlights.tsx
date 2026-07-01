@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { LayoutCard } from "@shared/assets/images/layout";
 import type { OrganizationDetailsAnimationConfig } from "../../lib/animation";
 import styles from "./ProjectHighlights.module.scss";
@@ -16,6 +17,7 @@ export const ProjectHighlights = ({
   animation,
   onScrollToProjects,
 }: ProjectHighlightsProps) => {
+  const { t } = useTranslation("organizations");
   const {
     prefersReducedMotion,
     nestedContainerVariants,
@@ -36,8 +38,12 @@ export const ProjectHighlights = ({
           whileHover={subtleHover}
         >
           <div className={styles.metricLabel}>
-            <span className={styles.metricLead}>ACTIVE</span>
-            <span className={styles.metricTitle}>PROJECTS</span>
+            <span className={styles.metricLead}>
+              {t("details.highlights.active")}
+            </span>
+            <span className={styles.metricTitle}>
+              {t("details.highlights.projects")}
+            </span>
           </div>
           <strong>{activeProjects}</strong>
         </motion.article>
@@ -48,8 +54,12 @@ export const ProjectHighlights = ({
           whileHover={subtleHover}
         >
           <div className={styles.metricLabel}>
-            <span className={styles.metricLead}>COMPLETED</span>
-            <span className={styles.metricTitle}>PROJECTS</span>
+            <span className={styles.metricLead}>
+              {t("details.highlights.completed")}
+            </span>
+            <span className={styles.metricTitle}>
+              {t("details.highlights.projects")}
+            </span>
           </div>
           <strong>{completedProjects}</strong>
         </motion.article>
@@ -72,7 +82,7 @@ export const ProjectHighlights = ({
           whileHover={buttonHover}
           whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
         >
-          SEE MORE
+          {t("details.actions.seeMore")}
         </motion.button>
       </motion.div>
     </motion.div>

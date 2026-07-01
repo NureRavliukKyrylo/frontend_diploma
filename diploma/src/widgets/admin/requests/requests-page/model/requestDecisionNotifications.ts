@@ -6,42 +6,57 @@ import type { TFunction } from "i18next";
 
 export const notifyDecisionSuccess = (
   action: "approve" | "reject",
+  t: TFunction,
   title?: string,
 ) => {
   addToast({
-    title: getDecisionToastTitle(action),
+    title: getDecisionToastTitle(action, t),
     description: title
-      ? `${title} was ${action === "approve" ? "approved" : "rejected"}.`
-      : `Request ${action === "approve" ? "approved" : "rejected"}.`,
+      ? t(
+          action === "approve"
+            ? "admin:requests.notifications.approved"
+            : "admin:requests.notifications.rejected",
+          { title },
+        )
+      : t(
+          action === "approve"
+            ? "admin:requests.notifications.requestApproved"
+            : "admin:requests.notifications.requestRejected",
+        ),
     color: "success",
   });
 };
 
-export const notifyApprovalSideEffect = (typeName: AdminRequestTypeName) => {
+export const notifyApprovalSideEffect = (
+  typeName: AdminRequestTypeName,
+  t: TFunction,
+) => {
   if (typeName === "categoryCreation") {
     addToast({
-      title: "Category created",
-      description: "The category catalog now includes this request.",
+      title: t("admin:requests.notifications.categoryCreated"),
+      description: t("admin:requests.notifications.categoryCreatedText"),
       color: "success",
     });
   }
 
   if (typeName === "skillCreation") {
     addToast({
-      title: "Skill created",
-      description: "The skill catalog now includes this request.",
+      title: t("admin:requests.notifications.skillCreated"),
+      description: t("admin:requests.notifications.skillCreatedText"),
       color: "success",
     });
   }
 };
 
 export const notifyDecisionFailure = (
-  action: "Approval" | "Rejection",
+  action: "approval" | "rejection",
   error: unknown,
-  t: TFunction<"common">,
+  t: TFunction,
 ) => {
   addToast({
-    title: `${action} failed`,
+    title: t("admin:requests.decision.failed", {
+      action: t(`admin:requests.decision.${action}`),
+    }),
     description: getErrorMessage(error, t),
     color: "danger",
   });

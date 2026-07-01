@@ -10,6 +10,7 @@ import type {
   EventSettingsErrors,
   EventSettingsValues,
 } from "@features/event";
+import { useTranslation } from "react-i18next";
 import { AttendanceToggleRow } from "./attendance-tab/AttendanceToggleRow";
 import styles from "./AttendanceTab.module.scss";
 
@@ -35,53 +36,56 @@ export const AttendanceTab = ({
   onRadiusChange,
   onRadiusClear,
 }: AttendanceTabProps) => {
+  const { t } = useTranslation("event");
   const attendanceDisabled = !values.attendanceEnabled;
   const radiusVisible = values.geoEnabled;
 
   return (
     <div className={styles.sectionsContainer}>
       <section className={styles.section}>
-        <h2 className={styles.sectionLabel}>Attendance</h2>
+        <h2 className={styles.sectionLabel}>
+          {t("settings.attendance.title")}
+        </h2>
         <p className={styles.sectionDescription}>
-          Configure how volunteer attendance is tracked for this event.
+          {t("settings.attendance.text")}
         </p>
 
         <div className={styles.toggleList}>
           <AttendanceToggleRow
             icon={Users}
-            title="Track attendance"
-            description="Record who actually showed up to this event"
+            title={t("settings.attendance.track")}
+            description={t("settings.attendance.trackText")}
             checked={values.attendanceEnabled}
             onToggle={() => onToggle("attendanceEnabled")}
           />
           <AttendanceToggleRow
             icon={ClipboardCheck}
-            title="Require approval"
-            description="An organizer must approve each attendance record"
+            title={t("settings.attendance.approval")}
+            description={t("settings.attendance.approvalText")}
             checked={values.attendanceRequiresApproval}
             disabled={attendanceDisabled}
             onToggle={() => onToggle("attendanceRequiresApproval")}
           />
           <AttendanceToggleRow
             icon={LogOut}
-            title="Require checkout"
-            description="Volunteers must check out when they leave"
+            title={t("settings.attendance.checkout")}
+            description={t("settings.attendance.checkoutText")}
             checked={values.attendanceRequiresVolunteerCheckout}
             disabled={attendanceDisabled}
             onToggle={() => onToggle("attendanceRequiresVolunteerCheckout")}
           />
           <AttendanceToggleRow
             icon={QrCode}
-            title="QR code check-in"
-            description="Allow volunteers to check in by scanning a QR code"
+            title={t("settings.attendance.qrTitle")}
+            description={t("settings.attendance.qrText")}
             checked={values.qrEnabled}
             disabled={attendanceDisabled}
             onToggle={() => onToggle("qrEnabled")}
           />
           <AttendanceToggleRow
             icon={MapPin}
-            title="Location check-in"
-            description="Allow volunteers to check in based on their location"
+            title={t("settings.attendance.geo")}
+            description={t("settings.attendance.geoText")}
             checked={values.geoEnabled}
             disabled={attendanceDisabled}
             onToggle={() => onToggle("geoEnabled")}
@@ -95,13 +99,13 @@ export const AttendanceTab = ({
             }`}
           >
             <div className={styles.radiusLabelRow}>
-              <span>Check-in radius (meters)</span>
+              <span>{t("settings.attendance.radius")}</span>
               <button
                 type="button"
                 disabled={attendanceDisabled}
                 onClick={onRadiusClear}
               >
-                Clear radius
+                {t("settings.attendance.clearRadius")}
               </button>
             </div>
             <input
@@ -119,7 +123,7 @@ export const AttendanceTab = ({
             ) : (
               <em>
                 <CheckCircle2 size={14} />
-                Accepted range is 10 to 10000 meters.
+                {t("settings.attendance.range")}
               </em>
             )}
           </div>

@@ -1,3 +1,4 @@
+import type { TFunction } from "i18next";
 import type {
   OrganizationTaskRecord,
   OrganizationTaskStatus,
@@ -46,47 +47,60 @@ export const organizationTaskSearchDefaults: OrganizationTaskSearchState = {
 };
 
 export const organizationTaskStateOptions: Array<{
-  label: string;
+  labelKey: string;
   value: OrganizationTaskStateFilter;
 }> = [
-  { label: "All tasks", value: "AllTasks" },
-  { label: "Pending", value: "Pending" },
-  { label: "In progress", value: "InProgress" },
-  { label: "Completed", value: "Completed" },
-  { label: "Cancelled", value: "Cancelled" },
+  { labelKey: "details.tasks.status.all", value: "AllTasks" },
+  { labelKey: "details.tasks.status.pending", value: "Pending" },
+  { labelKey: "details.tasks.status.inProgress", value: "InProgress" },
+  { labelKey: "details.tasks.status.completed", value: "Completed" },
+  { labelKey: "details.tasks.status.cancelled", value: "Cancelled" },
 ];
 
-const formatTaskDueDate = (value?: string | null) => {
-  if (!value) return "No due date";
+const formatTaskDueDate = (
+  value: string | null | undefined,
+  t: TFunction,
+  locale: string,
+) => {
+  if (!value) return t("details.tasks.noDueDate");
 
   const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return "No due date";
+  if (Number.isNaN(date.getTime())) return t("details.tasks.noDueDate");
 
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString(locale, {
     month: "long",
     day: "numeric",
     year: "numeric",
   });
 };
 
-const buildTaskDescription = (task: OrganizationTaskRecord) => {
+const buildTaskDescription = (
+  task: OrganizationTaskRecord,
+  t: TFunction,
+) => {
   if (!task.linkedEntityTitle) {
-    return "Linked to the current organization workspace.";
+    return t("details.tasks.linkedWorkspace");
   }
 
-  const prefix = task.linkedEntityType === "event" ? "Event" : "Project";
-  return `${prefix}: ${task.linkedEntityTitle}`;
+  return t(
+    task.linkedEntityType === "event"
+      ? "details.tasks.eventContext"
+      : "details.tasks.projectContext",
+    { title: task.linkedEntityTitle },
+  );
 };
 
 export const buildOrganizationTaskListItems = (
   tasks: OrganizationTaskRecord[],
+  t: TFunction,
+  locale: string,
 ): OrganizationTaskListItem[] =>
   tasks.map((task, index) => ({
     id: task.id,
     title: task.title,
-    description: buildTaskDescription(task),
+    description: buildTaskDescription(task, t),
     dueAt: task.dueAt ?? "",
-    dueDateLabel: formatTaskDueDate(task.dueAt),
+    dueDateLabel: formatTaskDueDate(task.dueAt, t, locale),
     status: task.status,
     assignedToUserId: task.assignedToUserId,
     order: index,

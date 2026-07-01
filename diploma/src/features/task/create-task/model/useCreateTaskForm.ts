@@ -6,6 +6,7 @@ import { createTaskApi, type CreateTaskPayload } from "../api/createTaskApi";
 import { buildCreateTaskPayload } from "../lib/createTaskPayload";
 import { useCreateTaskFields } from "./useCreateTaskFields";
 import { useCreateTaskSteps } from "./useCreateTaskSteps";
+import { useTranslation } from "react-i18next";
 
 export type {
   CreateTaskFormErrors,
@@ -25,6 +26,7 @@ export const useCreateTaskForm = ({
   eventId,
   onSuccess,
 }: UseCreateTaskFormOptions) => {
+  const { t } = useTranslation("task");
   const queryClient = useQueryClient();
   const fields = useCreateTaskFields();
   const steps = useCreateTaskSteps({
@@ -49,12 +51,11 @@ export const useCreateTaskForm = ({
         }),
         queryClient.invalidateQueries({ queryKey: organizationKeys.all() }),
       ]);
-      addToast({ title: "Task created", color: "success" });
+      addToast({ title: t("create.created"), color: "success" });
       reset();
       onSuccess();
     },
-    onError: () =>
-      addToast({ title: "Failed to create task", color: "danger" }),
+    onError: () => addToast({ title: t("create.failed"), color: "danger" }),
   });
   const submit = () => {
     if (!steps.validateStep(0)) {
@@ -66,7 +67,13 @@ export const useCreateTaskForm = ({
       return;
     }
     createMutation.mutate(
-      buildCreateTaskPayload(organizationId, projectId, eventId, fields.values),
+      buildCreateTaskPayload(
+        organizationId,
+        projectId,
+        eventId,
+        fields.values,
+        t,
+      ),
     );
   };
 

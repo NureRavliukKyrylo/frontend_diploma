@@ -10,6 +10,7 @@ import {
 import { useSkillRequirementQueries } from "../../lib/useSkillRequirementQueries";
 import sectionStyles from "./GeneralTabShared.module.scss";
 import { SkillRequirementRow } from "./SkillRequirementRow";
+import { useTranslation } from "react-i18next";
 import styles from "./SkillsSection.module.scss";
 
 interface SkillsSectionProps {
@@ -30,6 +31,7 @@ export const SkillsSection = ({
   onSkillChange,
   onSkillRemove,
 }: SkillsSectionProps) => {
+  const { t } = useTranslation("event");
   const { data: skillsResponse } = useQuery(
     skillsQuery.list({ Page: 1, PageSize: 100 }),
   );
@@ -93,9 +95,11 @@ export const SkillsSection = ({
 
   return (
     <section className={sectionStyles.section}>
-      <h2 className={sectionStyles.sectionLabel}>Required skills</h2>
+      <h2 className={sectionStyles.sectionLabel}>
+        {t("settings.general.skills")}
+      </h2>
       <p className={sectionStyles.sectionDescription}>
-        Specify skills volunteers should have. Optional.
+        {t("settings.general.skillsText")}
       </p>
 
       <div
@@ -151,7 +155,7 @@ export const SkillsSection = ({
           onClick={onSkillAdd}
         >
           <IconPlus size={18} stroke={2.4} />
-          Add skill requirement
+          {t("settings.general.addSkillRequirement")}
         </button>
       </div>
     </section>

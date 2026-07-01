@@ -7,6 +7,10 @@ export {
   organizationQuery,
 } from "./model/queries/organization-query/organizationQuery";
 export {
+  contextRoleKeys,
+  contextRoleQuery,
+} from "./model/queries/context-role-query/contextRoleQuery";
+export {
   type OrganizationSearchParams,
   type OrganizationPaginationParams,
   type OrganizationMapParams,

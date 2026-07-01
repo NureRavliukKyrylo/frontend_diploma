@@ -1,3 +1,10 @@
+import {
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { createPortal } from "react-dom";
 import { IconX } from "@tabler/icons-react";
 import type { Skill } from "@entities/skill";
 import type { CreateEventSkillRequirement } from "../../../api/createEventApi";
@@ -29,10 +36,44 @@ export const EventSkillRequirementRow = ({
   onSelectSkill,
   onHoursChange,
   onRemove,
-}: EventSkillRequirementRowProps) => (
-  <div className={styles.skillRow}>
+}: EventSkillRequirementRowProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [dropdownPosition, setDropdownPosition] = useState({
+    top: 0,
+    left: 0,
+    width: 0,
+  });
+  const isSuggestionsOpen = focused && Boolean(searchValue.trim());
+  const updateDropdownPosition = useCallback(() => {
+    const rect = inputRef.current?.getBoundingClientRect();
+
+    if (!rect) return;
+
+    setDropdownPosition({
+      top: rect.bottom + 8,
+      left: rect.left,
+      width: rect.width,
+    });
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!isSuggestionsOpen) return undefined;
+
+    updateDropdownPosition();
+    window.addEventListener("resize", updateDropdownPosition);
+    window.addEventListener("scroll", updateDropdownPosition, true);
+
+    return () => {
+      window.removeEventListener("resize", updateDropdownPosition);
+      window.removeEventListener("scroll", updateDropdownPosition, true);
+    };
+  }, [isSuggestionsOpen, updateDropdownPosition]);
+
+  return (
+    <div className={styles.skillRow}>
     <div className={styles.skillSearchField}>
       <input
+        ref={inputRef}
         className={styles.eventInput}
         value={searchValue}
         placeholder="Search for a skill"
@@ -41,26 +82,34 @@ export const EventSkillRequirementRow = ({
         onChange={(event) => onInputChange(event.target.value)}
       />
 
-      {focused && searchValue.trim() ? (
-        <ul className={styles.skillSuggestions}>
-          {suggestions.length > 0 ? (
-            suggestions.map((skill) => (
-              <li key={skill.id}>
-                <button
-                  type="button"
-                  className={styles.skillSuggestionButton}
-                  onMouseDown={(event) => event.preventDefault()}
-                  onClick={() => onSelectSkill(skill)}
-                >
-                  {skill.name}
-                </button>
-              </li>
-            ))
-          ) : (
-            <li className={styles.skillSuggestionsEmpty}>No matching skills</li>
-          )}
-        </ul>
-      ) : null}
+      {typeof document !== "undefined" && isSuggestionsOpen
+        ? createPortal(
+            <ul
+              className={styles.skillSuggestions}
+              style={dropdownPosition}
+            >
+              {suggestions.length > 0 ? (
+                suggestions.map((skill) => (
+                  <li key={skill.id}>
+                    <button
+                      type="button"
+                      className={styles.skillSuggestionButton}
+                      onMouseDown={(event) => event.preventDefault()}
+                      onClick={() => onSelectSkill(skill)}
+                    >
+                      {skill.name}
+                    </button>
+                  </li>
+                ))
+              ) : (
+                <li className={styles.skillSuggestionsEmpty}>
+                  No matching skills
+                </li>
+              )}
+            </ul>,
+            document.body,
+          )
+        : null}
     </div>
 
     <input
@@ -80,5 +129,6 @@ export const EventSkillRequirementRow = ({
     >
       <IconX size={18} stroke={2.4} />
     </button>
-  </div>
-);
+    </div>
+  );
+};

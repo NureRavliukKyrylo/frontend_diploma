@@ -10,6 +10,7 @@ import { useDebounce } from "@shared/libs/hooks";
 import { getAdminPageWindow } from "@widgets/admin/shared/lib/adminPagination";
 import { useDeleteSkill } from "../../skill-delete-confirmation/model/useDeleteSkill";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export type CategoryFilterValue = "all" | `category:${string}`;
 
@@ -23,6 +24,7 @@ const getCategoryFilterValue = (categoryIds?: string[]): CategoryFilterValue =>
   categoryIds?.[0] ? `category:${categoryIds[0]}` : "all";
 
 export const useAdminSkillsPage = () => {
+  const { t } = useTranslation("admin");
   const navigate = useNavigate({ from: "/admin/skills/" });
   const search = useSearch({ from: "/_adminLayout/admin/skills/" });
   const [searchInput, setSearchInput] = useState(search.Search ?? "");
@@ -34,7 +36,9 @@ export const useAdminSkillsPage = () => {
     skill: SkillListItemDto | null;
   } | null>(null);
   const [iconSkill, setIconSkill] = useState<SkillListItemDto | null>(null);
-  const [deleteTarget, setDeleteTarget] = useState<DeleteSkillTarget | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<DeleteSkillTarget | null>(
+    null,
+  );
   const debouncedSearch = useDebounce(searchInput, 300);
   const deleteMutation = useDeleteSkill(() => {
     if (deleteTarget?.closeDrawer) {
@@ -75,7 +79,13 @@ export const useAdminSkillsPage = () => {
       Page: search.Page,
       PageSize: search.PageSize,
     }),
-    [search.CategoryIds, search.OrderBy, search.Page, search.PageSize, search.Search],
+    [
+      search.CategoryIds,
+      search.OrderBy,
+      search.Page,
+      search.PageSize,
+      search.Search,
+    ],
   );
 
   const skillsQueryResult = useQuery(skillQuery.list(skillsParams));
@@ -90,19 +100,23 @@ export const useAdminSkillsPage = () => {
   const pageWindow = getAdminPageWindow(currentPage, totalPages);
   const categoryOptions = useMemo(
     () => [
-      { value: "all" as CategoryFilterValue, label: "All categories" },
+      {
+        value: "all" as CategoryFilterValue,
+        label: t("skills.allCategories"),
+      },
       ...((categoriesQuery.data?.data ?? []).map((category) => ({
         value: `category:${category.id}` as CategoryFilterValue,
         label: category.name,
       })) ?? []),
     ],
-    [categoriesQuery.data?.data],
+    [categoriesQuery.data?.data, t],
   );
   const categoryFilterValue = getCategoryFilterValue(search.CategoryIds);
 
   const setCategoryFilter = (value: CategoryFilterValue) => {
     updateSearch({
-      CategoryIds: value === "all" ? undefined : [value.replace(/^category:/, "")],
+      CategoryIds:
+        value === "all" ? undefined : [value.replace(/^category:/, "")],
       Page: 1,
     });
   };

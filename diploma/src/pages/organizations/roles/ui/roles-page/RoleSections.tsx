@@ -6,22 +6,24 @@ import { sortRolesByOption } from "../../lib/sortingRoleItems";
 import type { OrganizationRolesPageModel } from "../../model/pageModel";
 import { SectionHeader } from "./SectionHeader";
 import styles from "./RoleSections.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface RoleSectionsProps {
   model: OrganizationRolesPageModel;
 }
 
 export const RoleSections = ({ model }: RoleSectionsProps) => {
+  const { t } = useTranslation("roles");
   const sortRoles = (roles: Parameters<typeof sortRolesByOption>[0]) =>
     sortRolesByOption(roles, model.roleSort, model.getMemberCountForRole);
   const activeSections = [
     {
-      title: "Templates",
+      title: t("sections.templates"),
       roles: sortRoles(model.templateRoles),
       type: "template" as const,
     },
     {
-      title: "Custom",
+      title: t("sections.custom"),
       roles: sortRoles(model.customRoles),
       type: "custom" as const,
     },
@@ -38,7 +40,7 @@ export const RoleSections = ({ model }: RoleSectionsProps) => {
         transition={{ duration: 0.3 }}
       >
         <SectionHeader
-          title="Archived roles"
+          title={t("sections.archived")}
           count={archivedRoles.length}
         />
         {archivedRoles.length > 0 ? (
@@ -60,8 +62,8 @@ export const RoleSections = ({ model }: RoleSectionsProps) => {
         ) : (
           <div className={styles.archivedEmpty}>
             <EmptyState
-              title="No archived roles"
-              subtitle="Roles you archive will appear here."
+              title={t("sections.emptyArchived")}
+              subtitle={t("sections.emptyArchivedText")}
             />
           </div>
         )}
@@ -128,7 +130,9 @@ export const RoleSections = ({ model }: RoleSectionsProps) => {
                   rest: { y: 0 },
                   hover: { y: -3 },
                 }}
-                onClick={() => model.setFormState({ mode: "create", role: null })}
+                onClick={() =>
+                  model.setFormState({ mode: "create", role: null })
+                }
               >
                 <span className={styles.createDeco} aria-hidden="true" />
                 <motion.span
@@ -141,8 +145,8 @@ export const RoleSections = ({ model }: RoleSectionsProps) => {
                 >
                   <Plus size={20} strokeWidth={2.6} />
                 </motion.span>
-                <strong>Create new role</strong>
-                <span>Build a custom permission set for your team.</span>
+                <strong>{t("sections.create")}</strong>
+                <span>{t("sections.createText")}</span>
               </motion.button>
             ) : null}
           </div>
@@ -151,4 +155,3 @@ export const RoleSections = ({ model }: RoleSectionsProps) => {
     </div>
   );
 };
-

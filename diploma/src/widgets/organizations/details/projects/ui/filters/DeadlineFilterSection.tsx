@@ -1,4 +1,5 @@
 import type { ComponentType } from "react";
+import { useTranslation } from "react-i18next";
 import type { ProjectSearchParams } from "@entities/project";
 import styles from "../../../shared/filters/Filters.module.scss";
 import { OrganizationProjectFiltersSection } from "./Section";
@@ -14,18 +15,21 @@ export const OrganizationProjectDeadlineFilterSection = ({
   onChange,
   DateInput,
 }: OrganizationProjectDeadlineFilterSectionProps) => {
+  const { t } = useTranslation("organizations");
   const hasDeadlineFilter = Boolean(search.StartDate || search.EndBefore);
 
   return (
     <OrganizationProjectFiltersSection
-      title="Project deadline due"
+      title={t("details.projects.filters.deadline")}
       isActive={hasDeadlineFilter}
-      badge={hasDeadlineFilter ? "Applied" : undefined}
+      badge={
+        hasDeadlineFilter ? t("details.tasks.filters.applied") : undefined
+      }
       className={styles.projectDeadLine}
     >
       <div className={styles.deadlineCalendarBlock}>
         <div className={styles.startDate}>
-          <h4>Start date</h4>
+          <h4>{t("details.projects.filters.startDate")}</h4>
           <div className={styles.dateStartInput}>
             <DateInput
               label=""
@@ -39,7 +43,7 @@ export const OrganizationProjectDeadlineFilterSection = ({
           </div>
         </div>
         <div className={styles.dueDate}>
-          <h4>Due date</h4>
+          <h4>{t("details.projects.filters.dueDate")}</h4>
           <div className={styles.dateDueInput}>
             <DateInput
               label=""

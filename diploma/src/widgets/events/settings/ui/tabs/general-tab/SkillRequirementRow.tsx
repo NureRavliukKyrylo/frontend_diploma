@@ -1,6 +1,7 @@
 import { IconX } from "@tabler/icons-react";
 import type { Skill } from "@entities/skill";
 import type { EventSettingsSkillRequirement } from "@features/event";
+import { useTranslation } from "react-i18next";
 import styles from "./SkillsSection.module.scss";
 
 interface SkillRequirementRowProps {
@@ -31,12 +32,15 @@ export const SkillRequirementRow = ({
   onSelectSkill,
   onHoursChange,
   onRemove,
-}: SkillRequirementRowProps) => (
-  <div className={styles.skillRow}>
+}: SkillRequirementRowProps) => {
+  const { t } = useTranslation("event");
+
+  return (
+    <div className={styles.skillRow}>
     <div className={styles.skillSearchField}>
       <input
         value={searchValue}
-        placeholder="Search for a skill"
+        placeholder={t("settings.general.skillPlaceholder")}
         disabled={disabled}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -59,7 +63,9 @@ export const SkillRequirementRow = ({
               </li>
             ))
           ) : (
-            <li className={styles.skillSuggestionsEmpty}>No matching skills</li>
+            <li className={styles.skillSuggestionsEmpty}>
+              {t("settings.general.noSkills")}
+            </li>
           )}
         </ul>
       ) : null}
@@ -69,7 +75,7 @@ export const SkillRequirementRow = ({
       type="number"
       min={0}
       value={requirement.expectedHours > 0 ? String(requirement.expectedHours) : ""}
-      placeholder="Hours"
+      placeholder={t("settings.general.hours")}
       disabled={disabled}
       onChange={(event) => onHoursChange(Math.max(0, Number(event.target.value || 0)))}
     />
@@ -77,11 +83,14 @@ export const SkillRequirementRow = ({
     <button
       type="button"
       className={styles.removeSkillButton}
-      aria-label={`Remove skill requirement ${index + 1}`}
+      aria-label={t("settings.general.removeSkillAria", {
+        number: index + 1,
+      })}
       disabled={disabled}
       onClick={onRemove}
     >
       <IconX size={18} stroke={2.4} />
     </button>
-  </div>
-);
+    </div>
+  );
+};

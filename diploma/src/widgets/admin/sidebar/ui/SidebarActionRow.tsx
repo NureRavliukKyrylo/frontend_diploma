@@ -16,7 +16,7 @@ export const SidebarActionRow = ({
   notificationLabel,
   notificationTooltip,
 }: SidebarActionRowProps) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation("admin");
   const locale = useLocaleStore((state) => state.locale);
   const setLocale = useLocaleStore((state) => state.setLocale);
 
@@ -27,22 +27,24 @@ export const SidebarActionRow = ({
           <Search size={16} aria-hidden="true" />
           <span>{searchLabel}</span>
         </span>
-        <span className={styles.shortcut}>вЊK</span>
+        <span className={styles.shortcut}>⌘K</span>
       </button>
       <Link
         to="/admin/notifications"
         className={styles.notificationButton}
-        aria-label="Notifications"
+        aria-label={t("sidebar.notifications")}
       >
         <Bell size={18} aria-hidden="true" />
         <span className={styles.notificationBadge}>{notificationLabel}</span>
-        <span className={styles.notificationTooltip}>{notificationTooltip}</span>
+        <span className={styles.notificationTooltip}>
+          {notificationTooltip}
+        </span>
       </Link>
       <LanguageMenu
         className={styles.languageMenu}
         triggerClassName={styles.languageTrigger}
         triggerIcon={<Globe size={18} aria-hidden="true" />}
-        tooltip="Language"
+        tooltip={t("sidebar.language")}
         value={locale ?? (i18n.language as "en" | "uk")}
         onChange={(nextLocale) => setLocale(nextLocale)}
       />

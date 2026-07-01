@@ -3,6 +3,7 @@ import { ChevronDown, Download } from "lucide-react";
 import { API_URL } from "@shared/config/constants";
 import { PortalMenu } from "@shared/ui/portal-menu";
 import styles from "../../statistics-page-styles/AdminStatisticsPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface ExportMenuProps {
   from: string;
@@ -10,6 +11,7 @@ interface ExportMenuProps {
 }
 
 export const ExportMenu = ({ from, to }: ExportMenuProps) => {
+  const { t } = useTranslation("admin");
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const advancedParams = new URLSearchParams({ from, to });
@@ -23,7 +25,7 @@ export const ExportMenu = ({ from, to }: ExportMenuProps) => {
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <Download size={17} aria-hidden="true" />
-        Export PDF
+        {t("statistics.export.pdf")}
         <ChevronDown size={16} aria-hidden="true" />
       </button>
       <PortalMenu
@@ -32,10 +34,10 @@ export const ExportMenu = ({ from, to }: ExportMenuProps) => {
         className={styles.exportPopover}
       >
         <a href={`${API_URL}/api/admin/statistics/platform/export`}>
-          Platform summary
+          {t("statistics.export.summary")}
         </a>
         <a href={`${API_URL}/api/statistics/advanced/export?${advancedParams}`}>
-          Advanced report
+          {t("statistics.export.advanced")}
         </a>
       </PortalMenu>
     </>

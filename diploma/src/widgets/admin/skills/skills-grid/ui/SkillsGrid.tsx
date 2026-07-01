@@ -2,6 +2,7 @@ import type { SkillListItemDto } from "@entities/skill";
 import { Skeleton } from "@heroui/react";
 import { SkillCard } from "../../skill-card/ui/SkillCard";
 import styles from "./SkillsGrid.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface SkillsGridProps {
   skills: SkillListItemDto[];
@@ -22,6 +23,7 @@ export const SkillsGrid = ({
   onChangeSkillIcon,
   onDeleteSkill,
 }: SkillsGridProps) => {
+  const { t } = useTranslation("admin");
   if (isLoading) {
     return (
       <div className={styles.skillsGrid}>
@@ -35,8 +37,8 @@ export const SkillsGrid = ({
   if (isError) {
     return (
       <div className={styles.stateCard}>
-        <strong>Skills unavailable</strong>
-        <span>The skills endpoint could not be loaded.</span>
+        <strong>{t("skills.states.errorTitle")}</strong>
+        <span>{t("skills.states.errorText")}</span>
       </div>
     );
   }
@@ -44,8 +46,8 @@ export const SkillsGrid = ({
   if (!skills.length) {
     return (
       <div className={styles.stateCard}>
-        <strong>No skills found</strong>
-        <span>Try a different search term or clear the current filters.</span>
+        <strong>{t("skills.states.emptyTitle")}</strong>
+        <span>{t("skills.states.emptyText")}</span>
       </div>
     );
   }

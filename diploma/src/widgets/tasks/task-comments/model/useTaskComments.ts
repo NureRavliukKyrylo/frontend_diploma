@@ -8,10 +8,12 @@ export const useTaskComments = () => {
   const [selectedTaskComment, setSelectedTaskComment] =
     useState<TaskComment | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [replyingToId, setReplyingToId] = useState<string | null>(null);
   const [modalType, setModalType] = useState<ModalType | null>(null);
   const { t } = useTranslation(["task"]);
 
   const handleOpenModal = (comment: TaskComment, type: ModalType) => {
+    setReplyingToId(null);
     setSelectedTaskComment(comment);
     setModalType(type);
   };
@@ -25,7 +27,10 @@ export const useTaskComments = () => {
     {
       key: "edit",
       label: t("task:comments.actions.editComment"),
-      onClick: () => setEditingId(comment.id),
+      onClick: () => {
+        setReplyingToId(null);
+        setEditingId(comment.id);
+      },
       variant: "edit" as const,
     },
     {
@@ -38,6 +43,13 @@ export const useTaskComments = () => {
   const handleCancel = () => {
     setEditingId(null);
   };
+  const handleReply = (commentId: string) => {
+    setEditingId(null);
+    setReplyingToId(commentId);
+  };
+  const handleCancelReply = () => {
+    setReplyingToId(null);
+  };
 
   return {
     modalType,
@@ -46,5 +58,8 @@ export const useTaskComments = () => {
     handleCloseModal,
     editingId,
     handleCancel,
+    replyingToId,
+    handleReply,
+    handleCancelReply,
   };
 };

@@ -2,6 +2,7 @@ import Icon from "@mdi/react";
 import { mdiDotsHorizontal } from "@mdi/js";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   Dropdown,
   DropdownItem,
@@ -31,6 +32,7 @@ export const OrganizationDetailsMembersPanel = ({
   currentUserId,
   onRequestUnsubscribe,
 }: OrganizationDetailsMembersPanelProps) => {
+  const { t } = useTranslation("organizations");
   const { containerVariants, blockVariants, subtleHover } = animation;
 
   return (
@@ -44,8 +46,8 @@ export const OrganizationDetailsMembersPanel = ({
       <div className={styles.membersDirectoryGrid}>
         <div className={styles.membersDirectoryIntro}>
           <div className={styles.membersDirectoryIntroCopy}>
-            <h3>Team members</h3>
-            <p>These are the volunteers helping us create positive change</p>
+            <h3>{t("details.members.title")}</h3>
+            <p>{t("details.members.description")}</p>
           </div>
         </div>
 
@@ -67,13 +69,19 @@ export const OrganizationDetailsMembersPanel = ({
                       <button
                         type="button"
                         className={styles.membersDirectoryMenuButton}
-                        aria-label={`Open actions for ${memberCard.name}`}
+                        aria-label={t("details.actions.openActions", {
+                          name: memberCard.name,
+                        })}
                         onClick={(event) => event.stopPropagation()}
                       >
                         <Icon path={mdiDotsHorizontal} size={0.95} />
                       </button>
                     </DropdownTrigger>
-                    <DropdownMenu aria-label={`${memberCard.name} actions`}>
+                    <DropdownMenu
+                      aria-label={t("details.actions.memberActions", {
+                        name: memberCard.name,
+                      })}
+                    >
                       <DropdownItem
                         key="unsubscribe"
                         onClick={() => onRequestUnsubscribe(memberCard)}
@@ -82,7 +90,9 @@ export const OrganizationDetailsMembersPanel = ({
                           title: styles.membersDirectoryDropdownTitle,
                         }}
                       >
-                        {memberCard.id === currentUserId ? "Leave" : "Remove"}
+                        {memberCard.id === currentUserId
+                          ? t("details.actions.leave")
+                          : t("details.actions.remove")}
                       </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>
@@ -93,7 +103,9 @@ export const OrganizationDetailsMembersPanel = ({
                 to={memberCard.profilePath}
                 search={profileSearchDefaults.profile}
                 className={styles.membersDirectoryLink}
-                aria-label={`Open ${memberCard.name} profile`}
+                aria-label={t("details.actions.openProfile", {
+                  name: memberCard.name,
+                })}
               >
                 <Avatar
                   src={memberCard.avatarUrl ?? undefined}
@@ -115,8 +127,8 @@ export const OrganizationDetailsMembersPanel = ({
             className={styles.membersDirectoryEmpty}
             variants={blockVariants}
           >
-            <h4>No team members yet</h4>
-            <p>When people join the organization, they will appear here.</p>
+            <h4>{t("details.members.emptyTitle")}</h4>
+            <p>{t("details.members.emptyText")}</p>
           </motion.article>
         )}
       </div>

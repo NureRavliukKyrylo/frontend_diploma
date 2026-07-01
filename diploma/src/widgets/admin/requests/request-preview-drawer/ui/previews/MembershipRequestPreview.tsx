@@ -6,6 +6,7 @@ import {
 } from "../../../requests-config/libs/requestDrawerHelpers";
 import { DrawerInfoRow } from "../DrawerInfoRow";
 import styles from "../../../requests-page-styles/AdminRequestsPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface MembershipRequestPreviewProps {
   request: AdminRequestListItem;
@@ -14,6 +15,7 @@ interface MembershipRequestPreviewProps {
 export const MembershipRequestPreview = ({
   request,
 }: MembershipRequestPreviewProps) => {
+  const { t } = useTranslation("admin");
   const isLeave = request.typeName.includes("Leave");
   const entityName = getRequestEntityName(request);
 
@@ -28,40 +30,60 @@ export const MembershipRequestPreview = ({
           )}
         </div>
         <div>
-          <span>{isLeave ? "Exit request" : "Access request"}</span>
+          <span>
+            {isLeave
+              ? t("requests.previews.exitRequest")
+              : t("requests.previews.accessRequest")}
+          </span>
           <strong>
             {isLeave
-              ? `Member leaves this ${entityName}`
-              : `Member wants to join this ${entityName}`}
+              ? t("requests.previews.memberLeaves", { entity: entityName })
+              : t("requests.previews.memberJoins", { entity: entityName })}
           </strong>
           <p>
             {request.description ||
               (isLeave
-                ? "No additional reason was provided for this leave request."
-                : "No additional note was provided for this join request.")}
+                ? t("requests.previews.leaveFallback")
+                : t("requests.previews.joinFallback"))}
           </p>
         </div>
       </div>
 
       <section className={styles.drawerSection}>
-        <div className={styles.drawerSectionLabel}>Membership context</div>
+        <div className={styles.drawerSectionLabel}>
+          {t("requests.previews.membershipContext")}
+        </div>
         <div className={styles.drawerInfoGrid}>
-          <DrawerInfoRow label="Member" value={request.userId} />
           <DrawerInfoRow
-            label={`${entityName} target`}
-            value={getCompactEntityLabel(request.targetEntityType, request.targetEntityId)}
+            label={t("requests.drawer.member")}
+            value={request.userId}
           />
-          <DrawerInfoRow label="Linked entity" value={request.linkedEntityId} />
           <DrawerInfoRow
-            label="Source"
-            value={getCompactEntityLabel(request.sourceEntityType, request.sourceEntityId)}
+            label={t("requests.drawer.target")}
+            value={getCompactEntityLabel(
+              request.targetEntityType,
+              request.targetEntityId,
+            )}
+          />
+          <DrawerInfoRow
+            label={t("requests.drawer.linkedEntity")}
+            value={request.linkedEntityId}
+          />
+          <DrawerInfoRow
+            label={t("requests.drawer.source")}
+            value={getCompactEntityLabel(
+              request.sourceEntityType,
+              request.sourceEntityId,
+            )}
           />
         </div>
       </section>
 
       {request.decisionComment && (
         <section className={styles.drawerSection}>
-          <div className={styles.drawerSectionLabel}>Decision note</div>
+          <div className={styles.drawerSectionLabel}>
+            {t("requests.previews.decisionNote")}
+          </div>
           <div className={styles.drawerNoteCard}>
             <MessageSquareText size={17} aria-hidden="true" />
             <p>{request.decisionComment}</p>

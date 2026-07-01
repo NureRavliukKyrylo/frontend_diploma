@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { useTranslation } from "react-i18next";
 import { IconCheck } from "@tabler/icons-react";
 import {
   organizationCreateStepMeta,
@@ -14,6 +15,7 @@ interface OrganizationCreateStepperProps {
 export const OrganizationCreateStepper = ({
   currentStep,
 }: OrganizationCreateStepperProps) => {
+  const { t } = useTranslation("organizations");
   const stepMeta = organizationCreateStepMeta[currentStep];
   const stepWidth = 58;
   const lineWidth = 58;
@@ -27,7 +29,10 @@ export const OrganizationCreateStepper = ({
 
   return (
     <div className={styles.stepperContainer}>
-      <div className={styles.stepper} aria-label="Organization creation steps">
+      <div
+        className={styles.stepper}
+        aria-label={t("create.aria.steps")}
+      >
         {organizationCreateStepNumbers.map((step, index) => {
           const isCompleted = step < currentStep;
           const isActive = step === currentStep;
@@ -68,9 +73,9 @@ export const OrganizationCreateStepper = ({
         style={{ transform: `translateX(${activeOffset}px)` }}
       >
         <div className={styles.eyebrow}>
-          <h1 className={styles.eyebrowText}>{stepMeta.title}</h1>
+          <h1 className={styles.eyebrowText}>{t(stepMeta.titleKey)}</h1>
         </div>
-        <p className={styles.stepperSub}>{stepMeta.subtitle}</p>
+        <p className={styles.stepperSub}>{t(stepMeta.subtitleKey)}</p>
       </div>
     </div>
   );

@@ -16,7 +16,11 @@ export const DrawerInfoCard = ({
 }: DrawerInfoCardProps) => (
   <span className={styles.drawerInfoCard}>
     <span className={styles.drawerInfoCardIconWrap}>
-      <Icon className={styles.drawerInfoCardIcon} size={20} aria-hidden="true" />
+      <Icon
+        className={styles.drawerInfoCardIcon}
+        size={20}
+        aria-hidden="true"
+      />
     </span>
     <strong>{value}</strong>
     <small>{label}</small>

@@ -22,6 +22,7 @@ import { getErrorMessage } from "@shared/libs/error-message";
 import { DeleteModal } from "@shared/assets/images/actions";
 import { ConfirmationModal } from "@shared/ui/modals";
 import styles from "./Widget.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface OrganizationsListWidgetProps {
   organizations?: Organization[];
@@ -53,6 +54,7 @@ export const OrganizationsListWidget = ({
   showDiscoverCard = false,
   className,
 }: OrganizationsListWidgetProps) => {
+  const { t } = useTranslation(["organizations", "common"]);
   const queryClient = useQueryClient();
   const [hiddenOrganizationIds, setHiddenOrganizationIds] = useState<string[]>(
     [],
@@ -72,7 +74,8 @@ export const OrganizationsListWidget = ({
   );
 
   const leaveOrganizationMutation = useMutation({
-    mutationFn: (organization: Organization) => leaveOrganization(organization.id),
+    mutationFn: (organization: Organization) =>
+      leaveOrganization(organization.id),
     onSuccess: async (data, organization) => {
       const leftDirectly =
         data.mode === "direct" || data.request?.status === "resolved";
@@ -91,17 +94,19 @@ export const OrganizationsListWidget = ({
       setOrganizationToLeave(null);
 
       addToast({
-        title: leftDirectly ? "Left organization" : "Leave request sent",
+        title: leftDirectly
+          ? t("organizations:myOrganizations.left")
+          : t("organizations:myOrganizations.leaveRequestSent"),
         description: leftDirectly
-          ? "You have left this organization."
-          : "Your request to leave has been sent for review.",
+          ? t("organizations:myOrganizations.leftText")
+          : t("organizations:myOrganizations.leaveRequestText"),
         color: "success",
       });
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Leave failed",
-        description: getErrorMessage(error),
+        title: t("organizations:myOrganizations.leaveFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -113,7 +118,8 @@ export const OrganizationsListWidget = ({
   };
 
   const handleShare = async (organization: Organization) => {
-    const rawLink = organization.shareUrl ?? `/organizations/${organization.id}`;
+    const rawLink =
+      organization.shareUrl ?? `/organizations/${organization.id}`;
     const link = rawLink.startsWith("http")
       ? rawLink
       : `${window.location.origin}${
@@ -123,14 +129,16 @@ export const OrganizationsListWidget = ({
     try {
       await navigator.clipboard.writeText(link);
       addToast({
-        title: "Link copied",
-        description: `${organization.name} is ready to share.`,
+        title: t("organizations:myOrganizations.linkCopied"),
+        description: t("organizations:myOrganizations.shareReady", {
+          name: organization.name,
+        }),
         color: "success",
       });
     } catch (error) {
       addToast({
-        title: "Share failed",
-        description: getErrorMessage(error),
+        title: t("organizations:myOrganizations.shareFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     }
@@ -174,7 +182,9 @@ export const OrganizationsListWidget = ({
 
               <div className={styles.emptyEyebrow}>
                 <div className={styles.emptyEyebrowLine} />
-                <span className={styles.emptyEyebrowText}>Discover</span>
+                <span className={styles.emptyEyebrowText}>
+                  {t("organizations:myOrganizations.discover")}
+                </span>
               </div>
 
               <div className={styles.emptyBody}>
@@ -189,14 +199,15 @@ export const OrganizationsListWidget = ({
                     <IconUsers size={18} />
                   </div>
                 </div>
-                <h2 className={styles.emptyTitle}>Find your next community</h2>
+                <h2 className={styles.emptyTitle}>
+                  {t("organizations:myOrganizations.discoverTitle")}
+                </h2>
                 <p className={styles.emptyDesc}>
-                  Browse the public catalog to discover organizations that
-                  match your interests.
+                  {t("organizations:myOrganizations.discoverText")}
                 </p>
                 <Link to="/organizations" className={styles.emptyBtn}>
                   <IconSearch size={14} />
-                  Browse organizations
+                  {t("organizations:myOrganizations.browse")}
                 </Link>
               </div>
             </div>
@@ -208,18 +219,22 @@ export const OrganizationsListWidget = ({
         <ConfirmationModal
           isOpen
           onCancel={handleCloseLeaveModal}
-          onConfirm={() => leaveOrganizationMutation.mutate(organizationToLeave)}
-          title="Are you leaving?"
-          text={`Are you sure you want to leave ${organizationToLeave.name}? You can join it again later.`}
+          onConfirm={() =>
+            leaveOrganizationMutation.mutate(organizationToLeave)
+          }
+          title={t("organizations:myOrganizations.leaveTitle")}
+          text={t("organizations:myOrganizations.leaveText", {
+            name: organizationToLeave.name,
+          })}
           maxWidth="628px"
           error={
             leaveOrganizationMutation.error
-              ? getErrorMessage(leaveOrganizationMutation.error)
+              ? getErrorMessage(leaveOrganizationMutation.error, t)
               : null
           }
           isLoading={leaveOrganizationMutation.isPending}
-          cancelText="Cancel"
-          confirmText="Leave"
+          cancelText={t("common:actions.cancel")}
+          confirmText={t("organizations:myOrganizations.leave")}
           image={DeleteModal}
         />
       )}

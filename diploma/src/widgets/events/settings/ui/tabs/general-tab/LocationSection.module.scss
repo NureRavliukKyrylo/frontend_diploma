@@ -117,12 +117,15 @@
   font-weight: 700;
 }
 
+.locationMapModalShell {
+  overflow: hidden;
+}
+
 .locationMapModal {
   width: 100%;
   height: min(70vh, 620px);
   min-height: 420px;
   overflow: hidden;
-  border-radius: 20px;
 }
 
 .mapPopup {

@@ -1,9 +1,16 @@
-import { useCallback, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { BaseButtonWrapper } from "../../buttons";
 import { DownArrow } from "@shared/assets/icons/actions";
 import styles from "./BaseDropDown.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface BaseDropDownProps {
   label: ReactNode;
@@ -20,6 +27,7 @@ export const BaseDropDown = ({
   className,
   dropdownClassName,
 }: BaseDropDownProps) => {
+  const { t } = useTranslation("common");
   const innerRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({
@@ -69,7 +77,7 @@ export const BaseDropDown = ({
         <div className={styles.labelBlock}>{label}</div>
         <motion.img
           src={DownArrow}
-          alt="down arrow"
+          alt={t("accessibility.downArrow")}
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
         />

@@ -4,3 +4,5 @@ export { eventDetailTabLoaderConfig } from "./event-page/main/config/eventTabLoa
 export { JoinedEventPage } from "./joined-event-page/main/ui/JoinedEventPage";
 export { JoinedEventPageSkeleton } from "./joined-event-page/main/ui/JoinedEventPageSkeleton";
 export { SettingsEventPage } from "./settings";
+export { EventMembersPage } from "./members";
+export { EventRolesPage } from "./roles";

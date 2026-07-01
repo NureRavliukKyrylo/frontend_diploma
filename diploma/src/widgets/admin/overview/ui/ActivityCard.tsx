@@ -34,19 +34,19 @@ export const ActivityCard = ({
     ) : isError ? (
       <div className={styles.activityUnavailable}>
         <span className={styles.activityUnavailableTitle}>
-          Activity unavailable
+          {t("admin:overview.activity.unavailable")}
         </span>
         <span className={styles.activityUnavailableText}>
-          Reports or pending requests could not be loaded.
+          {t("admin:overview.activity.loadError")}
         </span>
       </div>
     ) : activityFeed.length === 0 ? (
       <div className={styles.activityUnavailable}>
         <span className={styles.activityUnavailableTitle}>
-          No recent activity
+          {t("admin:overview.activity.empty")}
         </span>
         <span className={styles.activityUnavailableText}>
-          New reports and pending requests will appear here.
+          {t("admin:overview.activity.emptyText")}
         </span>
       </div>
     ) : (
@@ -65,9 +65,7 @@ export const ActivityCard = ({
               >
                 <ActivityIcon size={18} aria-hidden="true" />
               </span>
-              <span className={styles.activityText}>
-                {item.description}
-              </span>
+              <span className={styles.activityText}>{item.description}</span>
               <span className={styles.activityTime}>
                 {formatTimeAgo(item.createdAt, t)}
               </span>

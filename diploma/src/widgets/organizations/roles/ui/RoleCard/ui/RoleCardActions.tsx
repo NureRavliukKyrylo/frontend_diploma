@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import type { ContextRoleCardType } from "../../../config/rolePresentation";
 import styles from "../RoleCard.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface RoleCardActionsProps {
   roleName: string;
@@ -45,17 +46,22 @@ export const RoleCardActions = ({
   onRestore,
   onSetDefault,
 }: RoleCardActionsProps) => {
+  const { t } = useTranslation("roles");
   if (archived) {
     return (
       <>
-        <button type="button" className={styles.restoreButton} onClick={onRestore}>
+        <button
+          type="button"
+          className={styles.restoreButton}
+          onClick={onRestore}
+        >
           <RotateCcw size={15} strokeWidth={2.2} />
-          Restore
+          {t("actions.restore")}
         </button>
         <button
           type="button"
           className={styles.iconDangerButton}
-          aria-label={`Delete ${roleName}`}
+          aria-label={t("actions.deleteRole", { name: roleName })}
           onClick={onDelete}
         >
           <Trash2 size={16} strokeWidth={2.3} />
@@ -68,7 +74,7 @@ export const RoleCardActions = ({
     return (
       <button type="button" className={styles.lockedButton} disabled>
         <Lock size={14} strokeWidth={2.2} />
-        Locked
+        {t("actions.locked")}
       </button>
     );
   }
@@ -76,7 +82,7 @@ export const RoleCardActions = ({
   if (type === "template") {
     return (
       <button type="button" className={styles.useButton} onClick={onUse}>
-        Use
+        {t("actions.use")}
       </button>
     );
   }
@@ -102,7 +108,9 @@ export const RoleCardActions = ({
                 }}
               >
                 <Shield size={15} strokeWidth={2.2} />
-                {isDefaultForJoin ? "Remove default" : "Set as default"}
+                {isDefaultForJoin
+                  ? t("actions.removeDefault")
+                  : t("actions.setDefault")}
               </button>
               <button
                 type="button"
@@ -113,7 +121,7 @@ export const RoleCardActions = ({
                 }}
               >
                 <Archive size={15} strokeWidth={2.2} />
-                Archive
+                {t("actions.archive")}
               </button>
               <button
                 type="button"
@@ -124,7 +132,7 @@ export const RoleCardActions = ({
                 }}
               >
                 <Trash2 size={15} strokeWidth={2.2} />
-                Delete
+                {t("actions.delete")}
               </button>
             </motion.div>
           ) : null}
@@ -133,7 +141,7 @@ export const RoleCardActions = ({
         <button
           type="button"
           className={`${styles.moreButton} ${isMenuOpen ? styles.moreButtonOpen : ""}`}
-          aria-label={`More actions for ${roleName}`}
+          aria-label={t("actions.more", { name: roleName })}
           onClick={onToggleMenu}
         >
           <MoreHorizontal size={18} strokeWidth={2.3} />
@@ -142,7 +150,7 @@ export const RoleCardActions = ({
 
       <button type="button" className={styles.editButton} onClick={onEdit}>
         <Pencil size={14} strokeWidth={2.3} />
-        Edit
+        {t("actions.edit")}
       </button>
     </>
   );

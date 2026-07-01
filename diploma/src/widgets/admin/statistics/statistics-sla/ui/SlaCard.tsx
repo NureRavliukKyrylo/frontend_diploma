@@ -1,6 +1,7 @@
 import type { QueueSlaStatistics } from "@entities/admin";
 import { formatNumber } from "../../statistics-config/libs/statisticsFormat";
 import styles from "../../statistics-page-styles/AdminStatisticsPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface SlaCardProps {
   title: string;
@@ -8,6 +9,7 @@ interface SlaCardProps {
 }
 
 export const SlaCard = ({ title, data }: SlaCardProps) => {
+  const { t } = useTranslation("admin");
   const pending = data.pendingTotal;
   const under24 = Math.max(0, pending - data.olderThan24h);
   const between24And72 = Math.max(0, data.olderThan24h - data.olderThan72h);
@@ -20,15 +22,15 @@ export const SlaCard = ({ title, data }: SlaCardProps) => {
       <div className={styles.slaStatsRow}>
         <span>
           <strong>{formatNumber(data.pendingTotal)}</strong>
-          <em>Pending</em>
+          <em>{t("statistics.sla.pending")}</em>
         </span>
         <span>
           <strong>{formatNumber(data.olderThan24h)}</strong>
-          <em>24h+</em>
+          <em>{t("statistics.sla.over24")}</em>
         </span>
         <span>
           <strong>{formatNumber(data.olderThan72h)}</strong>
-          <em>72h+</em>
+          <em>{t("statistics.sla.over72")}</em>
         </span>
       </div>
       <div className={styles.slaBarTrack}>
@@ -50,7 +52,10 @@ export const SlaCard = ({ title, data }: SlaCardProps) => {
         )}
       </div>
       <div className={styles.slaMeta}>
-        avg {Math.round(data.averageAgeHours)}h - max {Math.round(data.maxAgeHours)}h
+        {t("statistics.sla.average")} {Math.round(data.averageAgeHours)}
+        {t("statistics.sla.hours")} - {t("statistics.sla.maximum")}{" "}
+        {Math.round(data.maxAgeHours)}
+        {t("statistics.sla.hours")}
       </div>
     </div>
   );

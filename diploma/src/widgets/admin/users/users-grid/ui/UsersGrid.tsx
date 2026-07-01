@@ -2,6 +2,7 @@ import type { AdminUserListItem } from "@entities/admin";
 import { Skeleton } from "@heroui/react";
 import type { AdminUsersStyles } from "../../model/types";
 import { UserCard } from "../../ui/UserCard";
+import { useTranslation } from "react-i18next";
 
 interface UsersGridProps {
   styles: AdminUsersStyles;
@@ -20,6 +21,8 @@ export const UsersGrid = ({
   isError,
   onOpenUser,
 }: UsersGridProps) => {
+  const { t } = useTranslation("admin");
+
   if (isLoading) {
     return (
       <div className={styles.usersGrid}>
@@ -33,8 +36,8 @@ export const UsersGrid = ({
   if (isError) {
     return (
       <div className={styles.stateCard}>
-        <strong>Users unavailable</strong>
-        <span>The admin users endpoint could not be loaded.</span>
+        <strong>{t("users.states.errorTitle")}</strong>
+        <span>{t("users.states.errorText")}</span>
       </div>
     );
   }
@@ -42,8 +45,8 @@ export const UsersGrid = ({
   if (users.length === 0) {
     return (
       <div className={styles.stateCard}>
-        <strong>No users found</strong>
-        <span>Try a different search term or clear the current filters.</span>
+        <strong>{t("users.states.emptyTitle")}</strong>
+        <span>{t("users.states.emptyText")}</span>
       </div>
     );
   }

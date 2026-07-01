@@ -21,7 +21,7 @@ export const RequestDrawerHeader = ({
   visual,
   onClose,
 }: RequestDrawerHeaderProps) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["admin", "common"]);
   const Icon = visual.icon;
 
   return (
@@ -38,7 +38,7 @@ export const RequestDrawerHeader = ({
           <div className={styles.requestDrawerTitle}>{request.title}</div>
           <div className={styles.requestDrawerMetaRow}>
             <div className={styles.requestDrawerMeta}>
-              {requestTypeLabels[request.typeName]} -{" "}
+              {t(requestTypeLabels[request.typeName])} -{" "}
               {formatTimeAgo(request.createdAt, t)}
             </div>
             <span
@@ -46,7 +46,7 @@ export const RequestDrawerHeader = ({
                 request.statusName,
               )}`}
             >
-              {statusLabels[request.statusName]}
+              {t(statusLabels[request.statusName])}
             </span>
           </div>
         </div>
@@ -56,7 +56,7 @@ export const RequestDrawerHeader = ({
         type="button"
         className={styles.drawerCloseButton}
         onClick={onClose}
-        aria-label="Close request details"
+        aria-label={t("admin:requests.drawer.close")}
       >
         <X size={18} aria-hidden="true" />
       </button>

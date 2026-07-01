@@ -14,16 +14,12 @@ import {
   getUserName,
   sortBans,
 } from "../../lib/banDisplay";
-import type {
-  BanDisplay,
-  DurationFilter,
-  SortValue,
-} from "../../model/types";
+import type { BanDisplay, DurationFilter, SortValue } from "../../model/types";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export const useAdminBansPage = () => {
-  const { t } = useTranslation("common");
+export const useAdminBansPage = (enabled = true) => {
+  const { t } = useTranslation(["admin", "common"]);
   const queryClient = useQueryClient();
   const [take, setTake] = useState(100);
   const [search, setSearch] = useState("");
@@ -32,17 +28,25 @@ export const useAdminBansPage = () => {
   const [revokeTarget, setRevokeTarget] = useState<BanDisplay | null>(null);
   const [revokeReason, setRevokeReason] = useState("");
 
-  const bansQuery = useQuery(adminDashboardQuery.activeBans(take));
-  const usersQuery = useQuery(
-    adminDashboardQuery.users({ OrderBy: "Newest", Page: 1, PageSize: 500 }),
-  );
+  const bansQuery = useQuery({
+    ...adminDashboardQuery.activeBans(take),
+    enabled,
+  });
+  const usersQuery = useQuery({
+    ...adminDashboardQuery.users({
+      OrderBy: "Newest",
+      Page: 1,
+      PageSize: 500,
+    }),
+    enabled,
+  });
   const revokeMutation = useMutation({
     mutationFn: ({ id, reason }: { id: string; reason?: string }) =>
       revokeAdminBan(id, reason),
     onSuccess: async () => {
       addToast({
-        title: "Ban revoked",
-        description: "The user restriction was removed successfully.",
+        title: t("admin:bans.revoke.success"),
+        description: t("admin:bans.revoke.successText"),
         color: "success",
       });
       setRevokeTarget(null);
@@ -53,7 +57,7 @@ export const useAdminBansPage = () => {
     },
     onError: (error) => {
       addToast({
-        title: "Revoke failed",
+        title: t("admin:bans.revoke.error"),
         description: getErrorMessage(error, t),
         color: "danger",
       });
@@ -81,7 +85,7 @@ export const useAdminBansPage = () => {
           user: userMap.get(ban.userId),
           creator: userMap.get(ban.createdByUserId),
           tone,
-          statusLabel: getStatusLabel(ban),
+          statusLabel: getStatusLabel(ban, t),
           icon: getBanIcon(tone),
         };
       }),
@@ -139,8 +143,10 @@ export const useAdminBansPage = () => {
     bansQuery,
     banDisplays,
     filteredBans,
-    expiringSoonCount: banDisplays.filter((item) => item.tone === "soon").length,
-    permanentCount: banDisplays.filter((item) => item.tone === "permanent").length,
+    expiringSoonCount: banDisplays.filter((item) => item.tone === "soon")
+      .length,
+    permanentCount: banDisplays.filter((item) => item.tone === "permanent")
+      .length,
     revokeTarget,
     setRevokeTarget,
     revokeReason,

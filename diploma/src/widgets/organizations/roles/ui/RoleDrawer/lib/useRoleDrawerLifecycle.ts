@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 
-export const useRoleDrawerLifecycle = (isOpen: boolean, onClose: () => void) => {
+export const useRoleDrawerLifecycle = (
+  isOpen: boolean,
+  onClose: () => void,
+) => {
   useEffect(() => {
     if (!isOpen) return undefined;
 

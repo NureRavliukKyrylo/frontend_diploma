@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { getCategoryById } from "@entities/category/api/category-id/categoryIdApi";
 import { getListEvents } from "@entities/event/api";
 import { getListProjects } from "@entities/project/api";
@@ -38,8 +39,16 @@ const fetchAllPages = async <TItem>(
 };
 
 export const useOrganizationCategoryCarousel = (organizationId: string) => {
+  const { t, i18n } = useTranslation("organizations");
+
   return useQuery({
-    queryKey: ["organization", organizationId, "overview", "category-carousel"],
+    queryKey: [
+      "organization",
+      organizationId,
+      "overview",
+      "category-carousel",
+      i18n.language,
+    ],
     enabled: Boolean(organizationId),
     staleTime: 60_000,
     queryFn: async (): Promise<OrganizationCategoryCarouselItem[]> => {
@@ -115,7 +124,11 @@ export const useOrganizationCategoryCarousel = (organizationId: string) => {
         }),
       );
 
-      return buildCategoryCarouselItems(aggregates, categoryDetails);
+      return buildCategoryCarouselItems(
+        aggregates,
+        categoryDetails,
+        t("details.categories.unnamed"),
+      );
     },
   });
 };

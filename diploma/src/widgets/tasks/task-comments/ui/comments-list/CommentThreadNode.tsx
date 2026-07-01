@@ -3,10 +3,12 @@ import type { MenuItem } from "@shared/config/types";
 import { useLayoutEffect, useRef } from "react";
 import styles from "./TaskComments.module.scss";
 import { TaskCommentItem } from "@entities/task";
-import { EditCommentForm } from "@features/tasks";
+import { CreateCommentForm, EditCommentForm } from "@features/tasks";
 import { ReportButton } from "@features/moderation";
 import { ModerationSubjectType } from "@entities/report";
 import { CommentList } from "./TaskComments";
+import { getFullName } from "@entities/user";
+import { useTranslation } from "react-i18next";
 
 interface CommentThreadNodeProps {
   comment: TaskComment;
@@ -14,8 +16,11 @@ interface CommentThreadNodeProps {
   userId?: string;
   getMenuItems: (comment: TaskComment) => MenuItem<"edit" | "delete">[];
   editingId: string | null;
+  replyingToId: string | null;
   taskId: string;
   onCancel: () => void;
+  onReply: (commentId: string) => void;
+  onCancelReply: () => void;
   isLast: boolean;
 }
 
@@ -25,12 +30,21 @@ export const CommentThreadNode = ({
   userId,
   getMenuItems,
   editingId,
+  replyingToId,
   taskId,
   onCancel,
+  onReply,
+  onCancelReply,
   isLast,
 }: CommentThreadNodeProps) => {
+  const { t } = useTranslation("task");
   const parentCommentRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isReplying = replyingToId === comment.id;
+  const authorName = getFullName(
+    comment.author.firstName,
+    comment.author.lastName,
+  );
 
   useLayoutEffect(() => {
     const parentEl = parentCommentRef.current;
@@ -104,6 +118,33 @@ export const CommentThreadNode = ({
               />
             )
           }
+          replyButton={
+            userId && !comment.isDeleted ? (
+              <div className={styles.replySection}>
+                <button
+                  type="button"
+                  className={styles.replyButton}
+                  aria-expanded={isReplying}
+                  onClick={() =>
+                    isReplying ? onCancelReply() : onReply(comment.id)
+                  }
+                >
+                  {t("comments.actions.reply")}
+                </button>
+                {isReplying && (
+                  <CreateCommentForm
+                    taskId={taskId}
+                    parentCommentId={comment.id}
+                    replyToUserId={comment.author.id}
+                    replyToName={authorName}
+                    variant="reply"
+                    onSuccess={onCancelReply}
+                    onCancel={onCancelReply}
+                  />
+                )}
+              </div>
+            ) : null
+          }
         />
       </div>
       {!!comment.replies?.length && (
@@ -113,8 +154,11 @@ export const CommentThreadNode = ({
           userId={userId}
           getMenuItems={getMenuItems}
           editingId={editingId}
+          replyingToId={replyingToId}
           taskId={taskId}
           onCancel={onCancel}
+          onReply={onReply}
+          onCancelReply={onCancelReply}
         />
       )}
     </div>

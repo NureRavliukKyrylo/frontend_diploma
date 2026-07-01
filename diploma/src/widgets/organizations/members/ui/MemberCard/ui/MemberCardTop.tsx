@@ -1,4 +1,5 @@
 import { Clock3 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Avatar } from "@shared/ui";
 import { Stars } from "@shared/ui/stars";
 import type { OrganizationMemberCardModel } from "../types";
@@ -10,7 +11,12 @@ interface MemberCardTopProps {
 }
 
 export const MemberCardTop = ({ member }: MemberCardTopProps) => {
-  const roleTone = getRoleTone(member.roleName, member.isOwner);
+  const { t } = useTranslation("common");
+  const roleTone = getRoleTone(
+    member.roleName,
+    member.isOwner,
+    t("member.ownerLabel"),
+  );
   const RoleIcon = roleTone.icon;
 
   return (
@@ -24,7 +30,9 @@ export const MemberCardTop = ({ member }: MemberCardTopProps) => {
           initialsClassName={styles.avatarInitials}
         />
         {typeof member.level === "number" ? (
-          <span className={styles.levelBadge}>LVL {member.level}</span>
+          <span className={styles.levelBadge}>
+            {t("member.level", { level: member.level })}
+          </span>
         ) : null}
       </div>
 
@@ -45,7 +53,7 @@ export const MemberCardTop = ({ member }: MemberCardTopProps) => {
       {typeof member.totalHours === "number" ? (
         <span className={styles.timeBankPill}>
           <Clock3 size={13} strokeWidth={2.2} />
-          {member.totalHours.toFixed(1)} h
+          {t("member.hours", { hours: member.totalHours.toFixed(1) })}
         </span>
       ) : null}
 

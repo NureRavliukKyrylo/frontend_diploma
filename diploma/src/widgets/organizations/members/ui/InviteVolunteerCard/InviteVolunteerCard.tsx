@@ -1,11 +1,20 @@
+import { useTranslation } from "react-i18next";
 import styles from "./InviteVolunteerCard.module.scss";
 
 interface InviteVolunteerCardProps {
   onBrowse: () => void;
+  entityLabel?: string;
 }
 
-export const InviteVolunteerCard = ({ onBrowse }: InviteVolunteerCardProps) => (
-  <article
+export const InviteVolunteerCard = ({
+  onBrowse,
+  entityLabel = "organization",
+}: InviteVolunteerCardProps) => {
+  const { t } = useTranslation("common");
+  const entity = t(`member.entities.${entityLabel}`);
+
+  return (
+    <article
     className={styles.inviteCard}
     role="button"
     tabIndex={0}
@@ -23,7 +32,7 @@ export const InviteVolunteerCard = ({ onBrowse }: InviteVolunteerCardProps) => (
 
     <div className={styles.eyebrow}>
       <div className={styles.eyebrowLine} />
-      <span className={styles.eyebrowText}>Grow your team</span>
+      <span className={styles.eyebrowText}>{t("inviteCard.eyebrow")}</span>
     </div>
 
     <div className={styles.cardBody}>
@@ -39,11 +48,8 @@ export const InviteVolunteerCard = ({ onBrowse }: InviteVolunteerCardProps) => (
         </div>
       </div>
 
-      <h3 className={styles.cardTitle}>Invite a volunteer</h3>
-      <p className={styles.cardDesc}>
-        Browse the volunteer directory and invite new members to this
-        organization.
-      </p>
+      <h3 className={styles.cardTitle}>{t("inviteCard.title")}</h3>
+      <p className={styles.cardDesc}>{t("inviteCard.description", { entity })}</p>
 
       <button
         type="button"
@@ -54,8 +60,9 @@ export const InviteVolunteerCard = ({ onBrowse }: InviteVolunteerCardProps) => (
         }}
       >
         <i className="ti ti-search" aria-hidden="true" />
-        Browse volunteers
+        {t("inviteCard.cta")}
       </button>
     </div>
-  </article>
-);
+    </article>
+  );
+};

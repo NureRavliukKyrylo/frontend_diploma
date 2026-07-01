@@ -4,6 +4,8 @@ import type { ContextRoleDto } from "@entities/organization";
 import type { ParticipationListItem } from "@entities/participation";
 import { Avatar } from "@shared/ui";
 import styles from "./RoleAssigneePicker.module.scss";
+import type { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 
 interface RoleAssigneePickerProps {
   label: string;
@@ -19,9 +21,9 @@ type PickerResult =
   | { type: "person"; value: string; label: string; avatarUrl?: string | null }
   | { type: "role"; value: string; label: string };
 
-const getMemberName = (member: ParticipationListItem) =>
+const getMemberName = (member: ParticipationListItem, t: TFunction) =>
   [member.firstName, member.lastName].filter(Boolean).join(" ").trim() ||
-  "Team member";
+  t("roles:members.teamMember");
 
 export const RoleAssigneePicker = ({
   label,
@@ -32,16 +34,17 @@ export const RoleAssigneePicker = ({
   onAdd,
   onRemove,
 }: RoleAssigneePickerProps) => {
+  const { t } = useTranslation("roles");
   const [query, setQuery] = useState("");
   const memberResults = useMemo(
     () =>
       members.map<PickerResult>((member) => ({
         type: "person",
         value: member.userId,
-        label: getMemberName(member),
+        label: getMemberName(member, t),
         avatarUrl: member.avatarUrl,
       })),
-    [members],
+    [members, t],
   );
   const roleResults = useMemo(
     () =>
@@ -61,7 +64,9 @@ export const RoleAssigneePicker = ({
   const selectedEntries = values.map((value) => {
     const resolved =
       allResults.find((result) => result.value === value) ??
-      roleResults.find((result) => result.type === "role" && result.label === value);
+      roleResults.find(
+        (result) => result.type === "role" && result.label === value,
+      );
     return resolved ?? ({ type: "role", value, label: value } as PickerResult);
   });
   const filteredResults = allResults
@@ -103,7 +108,7 @@ export const RoleAssigneePicker = ({
                 <button
                   type="button"
                   className={styles.removeChip}
-                  aria-label={`Remove ${entry.label}`}
+                  aria-label={t("picker.remove", { name: entry.label })}
                   onClick={() => onRemove(entry.value)}
                 >
                   <X size={12} strokeWidth={2.8} />
@@ -114,14 +119,14 @@ export const RoleAssigneePicker = ({
         ) : (
           <div className={styles.emptyAssignment}>
             <LockOpen size={15} strokeWidth={2.4} />
-            Open — anyone with manage permission
+            {t("picker.open")}
           </div>
         )}
         <div className={styles.searchRow}>
           <Search size={15} strokeWidth={2.4} />
           <input
             value={query}
-            placeholder="Search people or roles"
+            placeholder={t("picker.search")}
             onChange={(event) => setQuery(event.target.value)}
           />
         </div>
@@ -154,7 +159,7 @@ export const RoleAssigneePicker = ({
               </button>
             ))
           ) : (
-            <span className={styles.noResults}>No matching people or roles</span>
+            <span className={styles.noResults}>{t("picker.noResults")}</span>
           )}
         </div>
       </div>

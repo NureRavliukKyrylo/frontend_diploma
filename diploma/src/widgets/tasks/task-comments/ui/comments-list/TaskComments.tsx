@@ -21,8 +21,11 @@ interface CommentListProps {
   userId?: string;
   getMenuItems: (comment: TaskComment) => MenuItem<"edit" | "delete">[];
   editingId: string | null;
+  replyingToId: string | null;
   taskId: string;
   onCancel: () => void;
+  onReply: (commentId: string) => void;
+  onCancelReply: () => void;
 }
 
 export const TaskComments = ({
@@ -38,6 +41,9 @@ export const TaskComments = ({
     handleCloseModal,
     editingId,
     handleCancel,
+    replyingToId,
+    handleReply,
+    handleCancelReply,
   } = useTaskComments();
 
   const {
@@ -63,8 +69,11 @@ export const TaskComments = ({
         userId={userId}
         getMenuItems={getMenuItems}
         editingId={editingId}
+        replyingToId={replyingToId}
         taskId={taskId}
         onCancel={handleCancel}
+        onReply={handleReply}
+        onCancelReply={handleCancelReply}
       />
       {hasNextPage && (
         <LoadMoreButton
@@ -91,8 +100,11 @@ export const CommentList = ({
   userId,
   getMenuItems,
   editingId,
+  replyingToId,
   taskId,
   onCancel,
+  onReply,
+  onCancelReply,
 }: CommentListProps) => {
   return (
     <div className={depth > 0 ? styles.repliesWrapper : undefined}>
@@ -105,8 +117,11 @@ export const CommentList = ({
             userId={userId}
             getMenuItems={getMenuItems}
             editingId={editingId}
+            replyingToId={replyingToId}
             taskId={taskId}
             onCancel={onCancel}
+            onReply={onReply}
+            onCancelReply={onCancelReply}
             isLast={index === comments.length - 1}
           />
         ))}

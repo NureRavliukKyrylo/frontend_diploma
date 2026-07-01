@@ -11,6 +11,7 @@ interface EntityRolesPageProps {
   eyebrow: string;
   title: string;
   subtitle: string;
+  contextLabel?: string;
   backLabel: string;
   loadingLabel: string;
   errorLabel: string;
@@ -24,6 +25,7 @@ export const EntityRolesPage = ({
   eyebrow,
   title,
   subtitle,
+  contextLabel,
   backLabel,
   loadingLabel,
   errorLabel,
@@ -42,6 +44,7 @@ export const EntityRolesPage = ({
       eyebrow={eyebrow}
       title={title}
       subtitle={subtitle}
+      contextLabel={contextLabel}
       backLabel={backLabel}
       onBack={onBack}
     >

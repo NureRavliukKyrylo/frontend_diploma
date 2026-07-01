@@ -61,7 +61,15 @@
     "eyebrow": "Project members",
     "title": "{{name}} members",
     "subtitle": "Review the people participating in this project.",
-    "back": "Back to project"
+    "back": "Back to project",
+    "shortTitle": "Members",
+    "loading": "Loading project members...",
+    "projectError": "We could not load this project right now.",
+    "checkingAccess": "Checking your access...",
+    "redirecting": "Redirecting...",
+    "membersError": "We could not load project members right now.",
+    "messageUnavailable": "Direct messaging is not available from this page yet.",
+    "entityLabel": "project"
   },
   "rolesPage": {
     "eyebrow": "Project roles",
@@ -70,6 +78,153 @@
     "back": "Back to project",
     "loading": "Loading project roles...",
     "error": "We could not load project roles right now.",
-    "empty": "No roles are configured for this project yet."
+    "empty": "No roles are configured for this project yet.",
+    "checkingAccess": "Checking your access...",
+    "redirecting": "Redirecting...",
+    "context": "Project"
+  },
+  "create": {
+    "loading": "Preparing project setup...",
+    "newProject": "New project",
+    "back": "Back to organization",
+    "setup": "Project setup",
+    "create": "Create project",
+    "steps": {
+      "basics": "Basics",
+      "basicsSub": "Name & description",
+      "location": "Location & dates",
+      "locationSub": "Where and when",
+      "categories": "Categories",
+      "categoriesSub": "Tags & topics",
+      "access": "Access",
+      "accessSub": "Join & leave policies"
+    },
+    "headers": {
+      "step1": "Step 01 of 04",
+      "step2": "Step 02 of 04",
+      "step3": "Step 03 of 04",
+      "step4": "Step 04 of 04",
+      "basicsTitle": "Tell us about your project",
+      "basicsText": "Give it a clear name and description so volunteers know exactly what to expect.",
+      "locationTitle": "Where and when?",
+      "locationText": "Set the location and timeline for your project.",
+      "categoriesTitle": "Choose categories",
+      "categoriesText": "Help people find your project by selecting relevant categories. This step is optional.",
+      "accessTitle": "Access policies",
+      "accessText": "Control how volunteers join and leave your project."
+    }
+  },
+  "joinRequests": {
+    "eyebrow": "Project access",
+    "title": "Pending join requests",
+    "subtitle": "Review volunteers who asked to join this project.",
+    "loading": "Loading join requests...",
+    "error": "We could not load project join requests.",
+    "empty": "No pending join requests.",
+    "approved": "Join request approved",
+    "rejected": "Join request rejected",
+    "updateError": "Could not update this request",
+    "approveTitle": "Approve join request?",
+    "rejectTitle": "Reject join request?",
+    "approveText": "Approve {{name}}'s request to join this project?",
+    "rejectText": "Reject {{name}}'s request to join this project?",
+    "approve": "Approve",
+    "reject": "Reject",
+    "cancel": "Cancel",
+    "volunteer": "Volunteer"
+  },
+  "settings": {
+    "states": {
+      "loadingTitle": "Loading project settings",
+      "loadingText": "Fetching the latest project details.",
+      "unavailableTitle": "Project unavailable",
+      "unavailableText": "We could not load this project settings page.",
+      "accessTitle": "You do not have access",
+      "accessText": "Project settings require permission to manage project content.",
+      "back": "Back to project"
+    },
+    "topBar": {
+      "back": "Back to project",
+      "title": "Settings",
+      "discard": "Discard",
+      "save": "Save changes",
+      "saving": "Saving"
+    },
+    "tabs": {
+      "general": "General",
+      "access": "Access",
+      "danger": "Danger zone"
+    },
+    "sidebar": {
+      "organization": "Organization",
+      "volunteers": "Volunteers",
+      "progress": "Progress",
+      "start": "Start",
+      "end": "End",
+      "noDate": "No date"
+    },
+    "modals": {
+      "saveTitle": "Save project settings?",
+      "saveText": "Your changes will update the public project profile and access rules.",
+      "policyTitle": "Change access policy?",
+      "policyText": "This policy change will apply after you save the project settings.",
+      "apply": "Apply",
+      "archiveTitle": "Archive this project?",
+      "archiveText": "The project will be hidden from public listings and can be recovered later.",
+      "recoverTitle": "Recover this project?",
+      "recoverText": "The project will be restored to the project experience.",
+      "archive": "Archive",
+      "recover": "Recover",
+      "cancel": "Cancel"
+    },
+    "access": {
+      "joinTitle": "Join policy",
+      "joinText": "Control how new volunteers join your project.",
+      "leaveTitle": "Leave policy",
+      "leaveText": "Choose whether volunteers can leave freely or need confirmation.",
+      "open": "Open",
+      "joinOpenText": "Anyone can join instantly without waiting for approval.",
+      "joinApproval": "Approval required",
+      "joinApprovalText": "New volunteers must be manually approved by an admin.",
+      "leaveOpen": "Open",
+      "leaveOpenText": "Volunteers can leave at any time without restrictions.",
+      "leaveApproval": "Approval required",
+      "leaveApprovalText": "Leave requests must be confirmed by an admin."
+    },
+    "danger": {
+      "title": "Danger zone",
+      "description": "Control whether this project is visible and active.",
+      "archive": "Archive project",
+      "archiveText": "Hide the project from public listings. It can be restored later.",
+      "recover": "Recover project",
+      "recoverText": "Restore the project to the public project experience.",
+      "archiving": "Archiving",
+      "recovering": "Recovering"
+    },
+    "general": {
+      "basicInfo": "Basic info",
+      "basicInfoText": "Keep the public project profile clear, searchable, and useful.",
+      "title": "Project title",
+      "titlePlaceholder": "Enter project title",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe the project goals, scope, and volunteer impact.",
+      "categories": "Categories",
+      "categoriesText": "Choose the topics that best describe this project.",
+      "loadingCategories": "Loading categories...",
+      "location": "Location",
+      "locationText": "Move the project marker or choose a more precise public location.",
+      "projectLocation": "Project location",
+      "locationPlaceholder": "Search city, region, or address",
+      "locationAria": "Pick project location on the map",
+      "timeline": "Timeline",
+      "timelineText": "Adjust the start and end dates shown on the project page.",
+      "startDate": "Start date",
+      "endDate": "End date"
+    }
+  },
+  "images": {
+    "organization": "Organization logo",
+    "project": "Project image",
+    "activities": "Project activities"
   }
 }

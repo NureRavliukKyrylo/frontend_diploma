@@ -24,7 +24,7 @@ export const Header = () => {
     () => setIsLogoutModalOpen(false),
     false,
   );
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation("common");
   const locale = useLocaleStore((s) => s.locale);
   const setLocale = useLocaleStore((s) => s.setLocale);
 
@@ -68,7 +68,7 @@ export const Header = () => {
           <button
             type="button"
             className={styles.menuButton}
-            aria-label="Open menu"
+            aria-label={t("header.openMenu")}
             aria-haspopup="dialog"
             aria-expanded={isDrawerOpen}
             onClick={() => setIsDrawerOpen(true)}
@@ -122,10 +122,10 @@ export const Header = () => {
       />
       <ConfirmationModal
         isOpen={isLogoutModalOpen}
-        title="Are you sure you want to logout?"
-        text="You will be able to sign in again whenever you need."
-        confirmText="Logout"
-        cancelText="Cancel"
+        title={t("header.logoutTitle")}
+        text={t("header.logoutText")}
+        confirmText={t("header.logout")}
+        cancelText={t("actions.cancel")}
         onConfirm={() => handleLogout()}
         onCancel={() => setIsLogoutModalOpen(false)}
         isLoading={isLoading}

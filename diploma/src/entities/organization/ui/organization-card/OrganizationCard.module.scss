@@ -92,16 +92,17 @@
 }
 
 .cardTitle {
+  display: -webkit-box;
   margin: 0 0 8px;
   padding-right: 70px;
   overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   color: #000;
   font-size: 27px;
   font-weight: 900;
   line-height: 1.25;
   letter-spacing: -0.3px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .cardMeta {

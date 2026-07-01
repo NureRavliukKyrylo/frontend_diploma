@@ -33,7 +33,7 @@ export const ChatFolderRail = ({
   const { t } = useTranslation(["chat"]);
 
   return (
-    <nav className={styles.rail} aria-label="Chat folders">
+    <nav className={styles.rail} aria-label={t("chat:labels.folders")}>
       {entityTypes.map((type) => {
         const Icon = folderIcons[type];
         const isActive = type === activeType;

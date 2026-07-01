@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import styles from "./Summary.module.scss";
 
 interface ProjectsSummaryProps {
@@ -12,6 +13,7 @@ export const ProjectsSummary = ({
   active,
   completed,
 }: ProjectsSummaryProps) => {
+  const { t } = useTranslation("organizations");
   return (
     <motion.section
       className={styles.projectsSummarySurface}
@@ -24,15 +26,15 @@ export const ProjectsSummary = ({
       <div className={styles.projectsSummaryStats}>
         <article>
           <strong>{total}</strong>
-          <span>All projects</span>
+          <span>{t("details.projects.all")}</span>
         </article>
         <article>
           <strong>{active}</strong>
-          <span>Active projects</span>
+          <span>{t("details.projects.active")}</span>
         </article>
         <article>
           <strong>{completed}</strong>
-          <span>Completed projects</span>
+          <span>{t("details.projects.completed")}</span>
         </article>
       </div>
     </motion.section>

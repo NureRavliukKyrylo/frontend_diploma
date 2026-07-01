@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import type { Organization } from "@entities/organization";
 import { CreateTaskDrawer } from "@features/task/create-task";
 import type { OrganizationDetailsTab } from "../../info/config/tabs";
@@ -16,6 +17,7 @@ interface OrganizationFabProps {
 }
 
 export const OrganizationFab = (props: OrganizationFabProps) => {
+  const { t } = useTranslation("organizations");
   const model = useOrganizationFabActions(props);
 
   if (!model.isVisible) return null;
@@ -27,7 +29,7 @@ export const OrganizationFab = (props: OrganizationFabProps) => {
           <motion.button
             type="button"
             className={styles.backdrop}
-            aria-label="Close organization actions"
+            aria-label={t("fab.close")}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

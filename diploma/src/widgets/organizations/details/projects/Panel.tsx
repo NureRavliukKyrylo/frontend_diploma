@@ -41,7 +41,7 @@ export const OrganizationDetailsProjectsPanel = ({
   organization,
 }: OrganizationDetailsProjectsPanelProps) => {
   const navigate = useNavigate();
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["common", "organizations"]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const sortingProjectItems = useMemo(() => getSortingProjectItems(t), [t]);
   const [search, setSearch] = useState<ProjectSearchParams>({
@@ -131,8 +131,8 @@ export const OrganizationDetailsProjectsPanel = ({
           >
             {projectsResponse?.data?.length === 0 ? (
               <section className={styles.projectsEmptyState}>
-                <h2>No projects found</h2>
-                <p>Try adjusting your filters or search query.</p>
+                <h2>{t("organizations:details.panels.noProjects")}</h2>
+                <p>{t("organizations:details.panels.adjustFilters")}</p>
               </section>
             ) : (
               <Suspense

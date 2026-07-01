@@ -1,4 +1,5 @@
 import type { HTMLAttributes } from "react";
+import { useTranslation } from "react-i18next";
 import { ImpactFlowLogo } from "@shared/assets/images/information";
 import styles from "./EmptyState.module.scss";
 
@@ -8,10 +9,11 @@ interface OrganizationDetailsEmptyStateProps
 }
 
 export const OrganizationDetailsEmptyState = ({
-  title = "NOTHING YET",
+  title,
   className,
   ...props
 }: OrganizationDetailsEmptyStateProps) => {
+  const { t } = useTranslation("organizations");
   const rootClassName = className
     ? `${styles.emptyState} ${className}`
     : styles.emptyState;
@@ -24,7 +26,9 @@ export const OrganizationDetailsEmptyState = ({
         aria-hidden="true"
         className={styles.image}
       />
-      <p className={styles.title}>{title}</p>
+      <p className={styles.title}>
+        {title ?? t("details.emptyState.title")}
+      </p>
     </div>
   );
 };

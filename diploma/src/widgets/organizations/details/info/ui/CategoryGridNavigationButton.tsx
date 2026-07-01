@@ -1,5 +1,6 @@
 import { motion, type TargetAndTransition } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import styles from "./CategoryGrid.module.scss";
 
 interface CategoryGridNavigationButtonProps {
@@ -17,6 +18,7 @@ export const CategoryGridNavigationButton = ({
   buttonHover,
   prefersReducedMotion,
 }: CategoryGridNavigationButtonProps) => {
+  const { t } = useTranslation("organizations");
   const isPrevious = direction === "previous";
 
   return (
@@ -27,7 +29,11 @@ export const CategoryGridNavigationButton = ({
           ? styles.carouselNavButtonLeft
           : styles.carouselNavButtonRight
       } ${disabled ? styles.carouselNavButtonDisabled : ""}`}
-      aria-label={`${isPrevious ? "Previous" : "Next"} category group`}
+      aria-label={t(
+        isPrevious
+          ? "details.categoryGrid.previous"
+          : "details.categoryGrid.next",
+      )}
       disabled={disabled}
       onClick={onClick}
       whileHover={

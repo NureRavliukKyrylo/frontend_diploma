@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useLocation } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { adminNavItems } from "../config/adminSidebarNav";
 import { getInitials, isNavItemActive } from "../lib/sidebarNavState";
 import { useAdminSidebarBadges } from "../model/useAdminSidebarBadges";
@@ -15,6 +16,7 @@ import { SidebarNav } from "./SidebarNav";
 import styles from "./AdminSidebar.module.scss";
 
 export const AdminSidebar = () => {
+  const { t } = useTranslation("admin");
   const location = useLocation();
   const systemRole = useUserStore((state) => state.systemRole);
   const rootRef = useRef<HTMLElement>(null);
@@ -35,8 +37,10 @@ export const AdminSidebar = () => {
     [location.pathname],
   );
   const fullName =
-    getFullName(user?.firstName, user?.lastName) || user?.email || "Admin";
-  const roleLabel = systemRole ?? user?.roleName ?? "Admin";
+    getFullName(user?.firstName, user?.lastName) ||
+    user?.email ||
+    t("sidebar.adminFallback");
+  const roleLabel = systemRole ?? user?.roleName ?? t("sidebar.adminFallback");
   const initials = getInitials(fullName);
 
   useEffect(() => {
@@ -74,11 +78,13 @@ export const AdminSidebar = () => {
       <aside ref={rootRef} className={styles.sidebar}>
         <div className={styles.logoBlock}>
           <span className={styles.logo}>IMPACTFLOW</span>
-          <span className={styles.logoCaption}>Admin panel</span>
+          <span className={styles.logoCaption}>{t("sidebar.panel")}</span>
         </div>
 
         <SidebarActionRow
-          searchLabel={activeItem?.searchLabel ?? "Search anything"}
+          searchLabel={
+            activeItem ? t(activeItem.searchLabel) : t("sidebar.searchAnything")
+          }
           notificationLabel={notificationLabel}
           notificationTooltip={notificationTooltip}
         />
@@ -87,7 +93,7 @@ export const AdminSidebar = () => {
 
         <Link to="/activities" className={styles.backLink}>
           <ArrowLeft size={15} aria-hidden="true" />
-          <span>Back to platform</span>
+          <span>{t("sidebar.backToPlatform")}</span>
         </Link>
 
         <AccountDropdown

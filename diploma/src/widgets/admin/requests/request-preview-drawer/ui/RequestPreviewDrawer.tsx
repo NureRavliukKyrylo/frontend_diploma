@@ -49,7 +49,11 @@ export const RequestPreviewDrawer = ({
         className={`${styles.requestDrawer} ${drawerToneClass}`}
         onClick={(event) => event.stopPropagation()}
       >
-        <RequestDrawerHeader request={request} visual={visual} onClose={onClose} />
+        <RequestDrawerHeader
+          request={request}
+          visual={visual}
+          onClose={onClose}
+        />
         <RequestDrawerBody
           request={request}
           categoryMap={categoryMap}

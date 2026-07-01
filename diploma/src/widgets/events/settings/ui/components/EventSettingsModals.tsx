@@ -1,4 +1,5 @@
 import { BaseModal, ConfirmationModal } from "@shared/ui/modals";
+import { useTranslation } from "react-i18next";
 import styles from "../SettingsWidget.module.scss";
 
 interface EventSettingsModalsProps {
@@ -31,14 +32,17 @@ export const EventSettingsModals = ({
   onCancelModalClose,
   onCancelReasonChange,
   onCancelEvent,
-}: EventSettingsModalsProps) => (
-  <>
+}: EventSettingsModalsProps) => {
+  const { t } = useTranslation("event");
+
+  return (
+    <>
     <ConfirmationModal
       isOpen={isSaveModalOpen}
-      title="Save event settings?"
-      text="Your changes will update the public event profile and access rules."
-      confirmText="Save changes"
-      cancelText="Cancel"
+      title={t("settings.modals.saveTitle")}
+      text={t("settings.modals.saveText")}
+      confirmText={t("settings.topBar.save")}
+      cancelText={t("settings.modals.cancel")}
       isLoading={isSavePending}
       onConfirm={onSaveConfirm}
       onCancel={onSaveCancel}
@@ -46,10 +50,10 @@ export const EventSettingsModals = ({
 
     <ConfirmationModal
       isOpen={hasPendingPolicyChange}
-      title="Change access policy?"
-      text="This policy change will apply after you save the event settings."
-      confirmText="Apply"
-      cancelText="Cancel"
+      title={t("settings.modals.policyTitle")}
+      text={t("settings.modals.policyText")}
+      confirmText={t("settings.modals.apply")}
+      cancelText={t("settings.modals.cancel")}
       onConfirm={onPolicyConfirm}
       onCancel={onPolicyCancel}
     />
@@ -61,17 +65,14 @@ export const EventSettingsModals = ({
       showClosed={false}
     >
       <div className={styles.cancelModal}>
-        <h2>Cancel this event?</h2>
-        <p>
-          This event will be marked as cancelled and volunteer participation
-          will be deactivated.
-        </p>
+        <h2>{t("settings.modals.cancelTitle")}</h2>
+        <p>{t("settings.modals.cancelText")}</p>
         <label>
-          <span>Reason (optional)</span>
+          <span>{t("settings.modals.reason")}</span>
           <input
             value={cancelReason}
             maxLength={160}
-            placeholder="Briefly explain why this event is being cancelled"
+            placeholder={t("settings.modals.reasonPlaceholder")}
             onChange={(event) => onCancelReasonChange(event.target.value)}
           />
         </label>
@@ -81,7 +82,7 @@ export const EventSettingsModals = ({
             className={styles.cancelModalGhost}
             onClick={onCancelModalClose}
           >
-            Keep event
+            {t("settings.modals.keepEvent")}
           </button>
           <button
             type="button"
@@ -89,10 +90,13 @@ export const EventSettingsModals = ({
             disabled={isCancelPending}
             onClick={onCancelEvent}
           >
-            {isCancelPending ? "Cancelling" : "Cancel event"}
+            {isCancelPending
+              ? t("settings.modals.cancelling")
+              : t("settings.modals.cancelEvent")}
           </button>
         </div>
       </div>
     </BaseModal>
-  </>
-);
+    </>
+  );
+};

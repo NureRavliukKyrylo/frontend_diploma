@@ -1,5 +1,6 @@
 import { motion, type Variants } from "framer-motion";
 import { Grid3X3 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import styles from "./CategoryGrid.module.scss";
 
 interface CategoryGridEmptyProps {
@@ -8,8 +9,11 @@ interface CategoryGridEmptyProps {
 
 export const CategoryGridEmpty = ({
   containerVariants,
-}: CategoryGridEmptyProps) => (
-  <motion.section
+}: CategoryGridEmptyProps) => {
+  const { t } = useTranslation("organizations");
+
+  return (
+    <motion.section
     className={styles.categorySection}
     variants={containerVariants}
     initial="hidden"
@@ -21,9 +25,10 @@ export const CategoryGridEmpty = ({
         <Grid3X3 aria-hidden="true" />
       </div>
       <div className={styles.statusText}>
-        <h4>No categories yet</h4>
-        <p>This organization does not have categorized activities yet.</p>
+        <h4>{t("details.categoryGrid.emptyTitle")}</h4>
+        <p>{t("details.categoryGrid.emptyText")}</p>
       </div>
     </div>
-  </motion.section>
-);
+    </motion.section>
+  );
+};

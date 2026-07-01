@@ -2,12 +2,15 @@ import { SortDropDown } from "@shared/ui/drop-down";
 import { getSortingRoleItems } from "../../lib/sortingRoleItems";
 import type { OrganizationRolesPageModel } from "../../model/pageModel";
 import styles from "./RolesTabs.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface RolesTabsProps {
   model: OrganizationRolesPageModel;
 }
 
 export const RolesTabs = ({ model }: RolesTabsProps) => {
+  const { t } = useTranslation("roles");
+
   return (
     <div className={styles.controlsRow}>
       <div className={styles.tabsContainer}>
@@ -18,7 +21,7 @@ export const RolesTabs = ({ model }: RolesTabsProps) => {
           }`}
           onClick={() => model.setActiveTab("active")}
         >
-          Active roles
+          {t("tabs.active")}
         </button>
         <button
           type="button"
@@ -27,7 +30,7 @@ export const RolesTabs = ({ model }: RolesTabsProps) => {
           }`}
           onClick={() => model.setActiveTab("archived")}
         >
-          Archived
+          {t("tabs.archived")}
           <span
             className={`${styles.tabBadge} ${
               model.activeTab === "archived" ? styles.tabBadgeActive : ""
@@ -40,11 +43,10 @@ export const RolesTabs = ({ model }: RolesTabsProps) => {
 
       <div className={styles.sortControl}>
         <SortDropDown
-          options={getSortingRoleItems()}
+          options={getSortingRoleItems(t)}
           value={model.roleSort}
           onSelect={model.setRoleSort}
           selectedLabelOnly
-          fitTriggerToWidestOption
         />
       </div>
     </div>

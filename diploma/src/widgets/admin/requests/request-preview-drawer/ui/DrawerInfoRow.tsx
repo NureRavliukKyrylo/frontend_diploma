@@ -1,4 +1,5 @@
 import { formatDrawerValue } from "../../requests-config/libs/requestDrawerHelpers";
+import { useTranslation } from "react-i18next";
 import styles from "../../requests-page-styles/AdminRequestsPage.module.scss";
 
 interface DrawerInfoRowProps {
@@ -7,7 +8,8 @@ interface DrawerInfoRowProps {
 }
 
 export const DrawerInfoRow = ({ label, value }: DrawerInfoRowProps) => {
-  const displayValue = formatDrawerValue(value);
+  const { t } = useTranslation("admin");
+  const displayValue = formatDrawerValue(value, t("common.notProvided"));
   const title = typeof value === "string" ? value : undefined;
 
   return (

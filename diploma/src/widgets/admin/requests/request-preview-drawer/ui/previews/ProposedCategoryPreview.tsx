@@ -4,6 +4,7 @@ import {
   readPayloadString,
 } from "../../../requests-config/libs/requestPayloadParsing";
 import styles from "../../../requests-page-styles/AdminRequestsPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface ProposedCategoryPreviewProps {
   request: AdminRequestListItem;
@@ -12,6 +13,7 @@ interface ProposedCategoryPreviewProps {
 export const ProposedCategoryPreview = ({
   request,
 }: ProposedCategoryPreviewProps) => {
+  const { t } = useTranslation("admin");
   const requestData = asRequestRecord(request.dataJson);
   const name =
     readPayloadString(requestData, ["name", "Name", "title", "Title"]) ||
@@ -19,7 +21,7 @@ export const ProposedCategoryPreview = ({
   const description =
     readPayloadString(requestData, ["description", "Description"]) ||
     request.description ||
-    "No description provided.";
+    t("requests.previews.noDescription");
   const imageUrl = readPayloadString(requestData, ["imageUrl", "ImageUrl"]);
 
   return (
@@ -30,7 +32,9 @@ export const ProposedCategoryPreview = ({
         </div>
       )}
       <section className={styles.drawerSection}>
-        <div className={styles.drawerSectionLabel}>Proposed category</div>
+        <div className={styles.drawerSectionLabel}>
+          {t("requests.previews.proposedCategory")}
+        </div>
         <div className={styles.proposedCategoryCard}>
           <strong>{name}</strong>
           <p>{description}</p>

@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import {
   projectQuery,
@@ -20,6 +21,9 @@ export const useOrganizationProjectsPanelData = ({
   organization,
   search,
 }: UseOrganizationProjectsPanelDataParams) => {
+  const { t, i18n } = useTranslation("organizations");
+  const intlLocale =
+    i18n.language === "uk" || i18n.language === "ua" ? "uk-UA" : "en-US";
   const { data: allProjectsResponse, isLoading: isAllProjectsLoading } =
     useQuery(
       projectQuery.list({
@@ -51,8 +55,10 @@ export const useOrganizationProjectsPanelData = ({
       buildOrganizationProjectCards({
         organization,
         projects: allProjects,
+        t,
+        locale: intlLocale,
       }),
-    [allProjects, organization],
+    [allProjects, intlLocale, organization, t],
   );
 
   const summary = useMemo(
@@ -65,8 +71,10 @@ export const useOrganizationProjectsPanelData = ({
       buildOrganizationProjectCards({
         organization,
         projects: filteredProjects,
+        t,
+        locale: intlLocale,
       }),
-    [filteredProjects, organization],
+    [filteredProjects, intlLocale, organization, t],
   );
 
   return {

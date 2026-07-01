@@ -7,17 +7,19 @@ import { SkillsGrid } from "@widgets/admin/skills/skills-grid/ui/SkillsGrid";
 import { SkillsHeaderActions } from "@widgets/admin/skills/skills-page/ui/SkillsHeaderActions";
 import { SkillsToolbar } from "@widgets/admin/skills/skills-page/ui/SkillsToolbar";
 import { useAdminSkillsPage } from "@widgets/admin/skills/skills-page/model/useAdminSkillsPage";
+import { useTranslation } from "react-i18next";
 import styles from "./AdminSkillsPage.module.scss";
 
 export const AdminSkillsPage = () => {
+  const { t } = useTranslation("admin");
   const page = useAdminSkillsPage();
 
   return (
     <section className={styles.page}>
       <div className={styles.heading}>
         <div>
-          <div className={styles.pageEyebrow}>Admin</div>
-          <h1 className={styles.pageTitle}>Skills</h1>
+          <div className={styles.pageEyebrow}>{t("common.eyebrow")}</div>
+          <h1 className={styles.pageTitle}>{t("skills.title")}</h1>
         </div>
         <SkillsHeaderActions
           styles={styles}
@@ -37,10 +39,10 @@ export const AdminSkillsPage = () => {
       />
 
       <div className={styles.sectionHeader}>
-        <span>Skill directory</span>
+        <span>{t("skills.directory")}</span>
         <span className={styles.sectionLine} aria-hidden="true" />
         <strong className={styles.matchCount}>
-          {page.pagination.totalCount} matches
+          {t("common.matches", { count: page.pagination.totalCount })}
         </strong>
       </div>
 

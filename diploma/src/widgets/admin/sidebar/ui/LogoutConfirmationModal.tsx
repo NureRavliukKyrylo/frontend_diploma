@@ -1,5 +1,6 @@
 import { LogOutImage } from "@shared/assets/images/actions";
 import { ConfirmationModal } from "@shared/ui/modals";
+import { useTranslation } from "react-i18next";
 
 interface LogoutConfirmationModalProps {
   isOpen: boolean;
@@ -15,17 +16,21 @@ export const LogoutConfirmationModal = ({
   error,
   onConfirm,
   onCancel,
-}: LogoutConfirmationModalProps) => (
-  <ConfirmationModal
-    isOpen={isOpen}
-    title="Are you sure you want to logout?"
-    text="You will be able to sign in again whenever you need."
-    confirmText="Logout"
-    cancelText="Cancel"
-    onConfirm={onConfirm}
-    onCancel={onCancel}
-    isLoading={isLoading}
-    image={LogOutImage}
-    error={error}
-  />
-);
+}: LogoutConfirmationModalProps) => {
+  const { t } = useTranslation("admin");
+
+  return (
+    <ConfirmationModal
+      isOpen={isOpen}
+      title={t("sidebar.logoutConfirm")}
+      text={t("sidebar.logoutDescription")}
+      confirmText={t("sidebar.logout")}
+      cancelText={t("common.actions.cancel")}
+      onConfirm={onConfirm}
+      onCancel={onCancel}
+      isLoading={isLoading}
+      image={LogOutImage}
+      error={error}
+    />
+  );
+};

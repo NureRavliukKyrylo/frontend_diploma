@@ -44,6 +44,46 @@
   margin-bottom: 27px;
 }
 
+.tabsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 22px;
+}
+
+.tab {
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: "Exo 2", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 0 18px;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.tabActive {
+  border: 1px solid #1a1a1a;
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.tabInactive {
+  border: 1px solid #ebebeb;
+  background: #ffffff;
+  color: #5f5e5a;
+}
+
 .metricCard {
   position: relative;
   min-height: 112px;

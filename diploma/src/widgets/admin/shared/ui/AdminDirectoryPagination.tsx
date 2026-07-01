@@ -12,33 +12,38 @@ export const AdminDirectoryPagination = ({
   totalPages,
   pageWindow,
   onPageChange,
-}: AdminDirectoryPaginationProps) => (
-  <div className={styles.pagination}>
-    <button
-      type="button"
-      onClick={() => onPageChange(Math.max(1, currentPage - 1))}
-      disabled={currentPage <= 1}
-      aria-label="Previous page"
-    >
-      Prev
-    </button>
-    {pageWindow.map((page) => (
+}: AdminDirectoryPaginationProps) => {
+  const { t } = useTranslation("admin");
+
+  return (
+    <div className={styles.pagination}>
       <button
-        key={page}
         type="button"
-        className={page === currentPage ? styles.pageButtonActive : ""}
-        onClick={() => onPageChange(page)}
+        onClick={() => onPageChange(Math.max(1, currentPage - 1))}
+        disabled={currentPage <= 1}
+        aria-label={t("common.pagination.previous")}
       >
-        {page}
+        {t("common.actions.previous")}
       </button>
-    ))}
-    <button
-      type="button"
-      onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
-      disabled={currentPage >= totalPages}
-      aria-label="Next page"
-    >
-      Next
-    </button>
-  </div>
-);
+      {pageWindow.map((page) => (
+        <button
+          key={page}
+          type="button"
+          className={page === currentPage ? styles.pageButtonActive : ""}
+          onClick={() => onPageChange(page)}
+        >
+          {page}
+        </button>
+      ))}
+      <button
+        type="button"
+        onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
+        disabled={currentPage >= totalPages}
+        aria-label={t("common.pagination.next")}
+      >
+        {t("common.actions.next")}
+      </button>
+    </div>
+  );
+};
+import { useTranslation } from "react-i18next";

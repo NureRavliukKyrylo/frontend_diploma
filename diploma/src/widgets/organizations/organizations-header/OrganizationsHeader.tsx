@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import styles from "./OrganizationsHeader.module.scss";
+import { useTranslation } from "react-i18next";
 import { HeaderOrganization } from "@shared/assets/images/entity-information";
+import styles from "./OrganizationsHeader.module.scss";
 
 interface OrganizationHeaderProps {
   organizationsCount?: number;
@@ -9,34 +10,29 @@ interface OrganizationHeaderProps {
 export const OrganizationHeader = ({
   organizationsCount,
 }: OrganizationHeaderProps) => {
+  const { t } = useTranslation("organizations");
+
   return (
     <div className={styles.organizationListHeader}>
       <div className={styles.organizationsMainInfo}>
         <div className={styles.headerTextOrganizations}>
-          <h1 className={styles.headerText}>
-            Find people and causes you truly want to support
-          </h1>
+          <h1 className={styles.headerText}>{t("catalog.headerTitle")}</h1>
           <h1 className={styles.totalOrganizations}>
-            {organizationsCount} organizations
+            {t("catalog.count", { count: organizationsCount ?? 0 })}
           </h1>
         </div>
         <div className={styles.bottomTextOrganizations}>
-          <h1 className={styles.bottomText}>
-            Every organization here is working to help real people, respond to
-            real needs, and create meaningful change. Explore their mission,
-            learn what they need right now, and find the place where your time,
-            skills, or support can truly matter.
-          </h1>
+          <h1 className={styles.bottomText}>{t("catalog.headerText")}</h1>
           <h1 className={styles.joinedOrganizationsText}>
-            Want to see the organizations you’ve already joined?{" "}
+            {t("catalog.joinedPrompt")}{" "}
             <Link to="/activities/my" className={styles.toOrganizationsLink}>
-              Click
+              {t("catalog.joinedLink")}
             </Link>
           </h1>
         </div>
       </div>
       <div className={styles.organizationsMainInfoImage}>
-        <img src={HeaderOrganization} alt="header-organization" />
+        <img src={HeaderOrganization} alt={t("catalog.imageAlt")} />
       </div>
     </div>
   );

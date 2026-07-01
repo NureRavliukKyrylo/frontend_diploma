@@ -11,12 +11,7 @@ const getHash = (source: string) =>
   source.split("").reduce((sum, char) => sum + char.charCodeAt(0), 0);
 
 export const getSkillInitials = (name: string) =>
-  name
-    .trim()
-    .split(/\s+/)
-    .join("")
-    .slice(0, 2)
-    .toUpperCase() || "SK";
+  name.trim().split(/\s+/).join("").slice(0, 2).toUpperCase() || "SK";
 
 export const getSkillTone = (skill: Pick<SkillListItemDto, "id" | "name">) =>
   skillTones[getHash(skill.id || skill.name) % skillTones.length];

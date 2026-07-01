@@ -25,8 +25,12 @@ export interface EventAttendanceManagerRecord {
   id: string;
   userId: string;
   userName?: string | null;
+  dateFrom?: string | null;
+  dateTo?: string | null;
   checkInAt?: string | null;
   checkOutAt?: string | null;
+  qrCheckInTokenId?: string | null;
+  qrCheckOutTokenId?: string | null;
   confirmedMinutes?: number | null;
   status?: EventAttendanceManagerStatus | string | null;
   comment?: string | null;

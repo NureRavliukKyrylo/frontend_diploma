@@ -10,16 +10,18 @@ import { TimeBankOverviewSection } from "@widgets/admin/statistics/statistics-ti
 import { SectionHeader } from "@widgets/admin/statistics/statistics-totals/ui/SectionHeader";
 import { TotalCard } from "@widgets/admin/statistics/statistics-totals/ui/TotalCard";
 import { CategoryBreakdownCard } from "@widgets/admin/statistics/statistics-category-breakdown/ui/CategoryBreakdownCard";
+import { useTranslation } from "react-i18next";
 
 export const AdminStatisticsPage = () => {
+  const { t } = useTranslation("admin");
   const page = useAdminStatisticsPage();
 
   return (
     <section className={styles.page}>
       <div className={styles.heading}>
         <div>
-          <div className={styles.pageEyebrow}>Admin</div>
-          <h1 className={styles.pageTitle}>Statistics</h1>
+          <div className={styles.pageEyebrow}>{t("common.eyebrow")}</div>
+          <h1 className={styles.pageTitle}>{t("statistics.title")}</h1>
         </div>
         <div className={styles.headerActions}>
           <DateRangeControl range={page.range} onChange={page.setRange} />
@@ -34,7 +36,7 @@ export const AdminStatisticsPage = () => {
       </div>
 
       <SectionHeader
-        label="Operational analytics"
+        label={t("statistics.operationalAnalytics")}
         value={`${page.range.from} to ${page.range.to}`}
       />
 
@@ -78,14 +80,6 @@ export const AdminStatisticsPage = () => {
         isError={page.timeBankQuery.isError}
       />
 
-      <div className={styles.securityNote}>
-        <strong>Backend note</strong>
-        <span>
-          The advanced statistics endpoint is still protected only by authenticated
-          access in the referenced backend. The admin route guard protects this UI,
-          but the API should be role-restricted server-side.
-        </span>
-      </div>
     </section>
   );
 };

@@ -9,6 +9,7 @@ import type {
   RoleTone,
   StatusFilter,
 } from "../model/types";
+import i18n from "@shared/i18n";
 
 type UnknownRecord = Record<string, unknown>;
 
@@ -19,7 +20,9 @@ const asRecord = (value: unknown): UnknownRecord =>
 
 const readString = (value: unknown, ...keys: string[]) => {
   const record = asRecord(value);
-  const found = keys.map((key) => record[key]).find((item) => typeof item === "string");
+  const found = keys
+    .map((key) => record[key])
+    .find((item) => typeof item === "string");
 
   return typeof found === "string" ? found : "";
 };
@@ -54,7 +57,12 @@ export const getInitials = (user: AdminUserListItem) => {
 export const getUserName = (user: AdminUserListItem) => {
   const fullName = `${user.firstName} ${user.lastName}`.trim();
 
-  return user.displayName || fullName || user.email || "Unknown user";
+  return (
+    user.displayName ||
+    fullName ||
+    user.email ||
+    i18n.t("admin:users.card.unknown")
+  );
 };
 
 export const enumToLabel = (value: string) =>
@@ -83,7 +91,8 @@ export const getStatusFilter = (
   return "all";
 };
 
-export const getBanUserId = (ban: unknown) => readString(ban, "userId", "UserId");
+export const getBanUserId = (ban: unknown) =>
+  readString(ban, "userId", "UserId");
 
 export const getRoleName = (role: unknown) => readString(role, "name", "Name");
 

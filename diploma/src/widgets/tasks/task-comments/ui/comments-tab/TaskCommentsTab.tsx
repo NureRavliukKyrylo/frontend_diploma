@@ -39,7 +39,7 @@ export const TaskCommentsTab = ({
           fallbackRender={({ error }) => (
             <div className={styles.errorState}>
               <p className="errorHttpMessage">{getHttpErrorInfo(error, t)}</p>
-              <p className="errorHint">{t("common.errors.errorHint")}</p>
+              <p className="errorHint">{t("errors.errorHint")}</p>
             </div>
           )}
         >

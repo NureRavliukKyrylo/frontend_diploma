@@ -35,6 +35,10 @@ import enOrganizations from "./locales/en/organizations.json";
 import uaOrganizations from "./locales/ua/organizations.json";
 import enChat from "./locales/en/chat.json";
 import uaChat from "./locales/ua/chat.json";
+import enAdmin from "./locales/en/admin.json";
+import uaAdmin from "./locales/ua/admin.json";
+import enRoles from "./locales/en/roles.json";
+import uaRoles from "./locales/ua/roles.json";
 import { useLocaleStore } from "@shared/config/stores";
 
 const savedLocale = useLocaleStore.getState().locale;
@@ -61,6 +65,8 @@ i18n.use(initReactI18next).init({
       notification: enNotification,
       organizations: enOrganizations,
       chat: enChat,
+      admin: enAdmin,
+      roles: enRoles,
     },
     uk: {
       common: uaCommon,
@@ -80,6 +86,8 @@ i18n.use(initReactI18next).init({
       notification: uaNotification,
       organizations: uaOrganizations,
       chat: uaChat,
+      admin: uaAdmin,
+      roles: uaRoles,
     },
   },
   interpolation: { escapeValue: false },

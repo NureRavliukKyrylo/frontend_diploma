@@ -13,21 +13,20 @@ import type {
   StatusFilterValue,
   TypeFilterValue,
 } from "@widgets/admin/requests/requests-config/libs/requestTypeConfig";
+import { useTranslation } from "react-i18next";
 
 export const AdminRequestsPage = () => {
+  const { t } = useTranslation("admin");
   const page = useAdminRequestsPage();
 
   return (
     <section className={styles.page}>
       <div className={styles.heading}>
         <div>
-          <div className={styles.headingEyebrow}>Admin</div>
-          <h1 className={styles.headingTitle}>Requests</h1>
+          <div className={styles.headingEyebrow}>{t("common.eyebrow")}</div>
+          <h1 className={styles.headingTitle}>{t("requests.title")}</h1>
         </div>
-        <p className={styles.headingText}>
-          Review admin-actionable requests, route cases that belong elsewhere, and
-          resolve approvals without mixing in user-owned invitations.
-        </p>
+        <p className={styles.headingText}>{t("requests.description")}</p>
       </div>
 
       <RequestsMetrics
@@ -42,20 +41,28 @@ export const AdminRequestsPage = () => {
         status={page.search.Status as StatusFilterValue}
         type={page.search.Type as TypeFilterValue}
         onSearchInputChange={page.setSearchInput}
-        onStatusChange={(value) => page.updateSearch({ Status: value, Page: 1 })}
+        onStatusChange={(value) =>
+          page.updateSearch({ Status: value, Page: 1 })
+        }
         onTypeChange={(value) => page.updateSearch({ Type: value, Page: 1 })}
       />
 
       <RequestsTabs
         activeTab={page.tabs.active}
         counts={page.tabs.counts}
-        onSelect={(tab: RequestsTab) => page.updateSearch({ Tab: tab, Page: 1 })}
+        onSelect={(tab: RequestsTab) =>
+          page.updateSearch({ Tab: tab, Page: 1 })
+        }
       />
 
       <div className={styles.sectionHeader}>
-        <span>Request queue</span>
+        <span>{t("requests.directory")}</span>
         <span className={styles.sectionLine} aria-hidden="true" />
-        <strong>{formatAdminCount(page.list.totalCount)} matches</strong>
+        <strong>
+          {t("common.matches", {
+            count: formatAdminCount(page.list.totalCount),
+          })}
+        </strong>
       </div>
 
       <RequestList

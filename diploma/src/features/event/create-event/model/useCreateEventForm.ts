@@ -7,6 +7,7 @@ import { createEventApi, type CreateEventPayload } from "../api/createEventApi";
 import { buildCreateEventPayload } from "../lib/createEventPayload";
 import { useCreateEventFields } from "./useCreateEventFields";
 import { useCreateEventSteps } from "./useCreateEventSteps";
+import { useTranslation } from "react-i18next";
 
 export type {
   CreateEventFormErrors,
@@ -17,6 +18,7 @@ export const useCreateEventForm = (
   organizationId: string,
   projectId?: string,
 ) => {
+  const { t } = useTranslation("event");
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const fields = useCreateEventFields();
@@ -36,8 +38,7 @@ export const useCreateEventForm = (
         params: { id: organizationId },
       });
     },
-    onError: () =>
-      addToast({ title: "Failed to create event", color: "danger" }),
+    onError: () => addToast({ title: t("create.failed"), color: "danger" }),
   });
   const submit = () => {
     if (!steps.validateStep(0)) {
@@ -55,13 +56,13 @@ export const useCreateEventForm = (
     if (!fields.values.location) {
       fields.setErrors((current) => ({
         ...current,
-        location: "Event location is required",
+        location: t("create.locationRequired"),
       }));
       steps.setActiveStep(1);
       return;
     }
     createMutation.mutate(
-      buildCreateEventPayload(organizationId, projectId, fields.values),
+      buildCreateEventPayload(organizationId, projectId, fields.values, t),
     );
   };
 

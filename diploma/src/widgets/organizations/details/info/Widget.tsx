@@ -77,6 +77,8 @@ export const OrganizationDetailsInfoWidget = ({
           <OrganizationDetailsInfoPanel
             level={model.level}
             levelCurrent={model.levelCurrent}
+            levelMax={model.levelMax}
+            levelProgressPercent={model.levelProgressPercent}
             levelNext={model.levelNext}
             rating={model.rating}
             votes={model.votes}

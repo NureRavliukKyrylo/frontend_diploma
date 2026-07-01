@@ -1,4 +1,5 @@
 import { Archive, Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { Organization } from "@entities/organization";
 import styles from "./DangerTab.module.scss";
 
@@ -15,19 +16,20 @@ export const DangerTab = ({
   onArchiveClick,
   onDeleteClick,
 }: DangerTabProps) => {
+  const { t } = useTranslation("organizations");
   return (
     <div className={styles.sectionsContainer}>
       <section className={styles.section}>
-        <h2 className={styles.sectionLabel}>Danger zone</h2>
+        <h2 className={styles.sectionLabel}>{t("settings.danger.title")}</h2>
         <p className={styles.sectionDescription}>
-          These actions can affect visibility and long-term organization data.
+          {t("settings.danger.description")}
         </p>
 
         <div className={styles.dangerRows}>
           <div className={styles.dangerRow}>
             <div className={styles.dangerCopy}>
-              <h3>Archive organization</h3>
-              <p>Hides from public listings. Can be restored later.</p>
+              <h3>{t("settings.danger.archive")}</h3>
+              <p>{t("settings.danger.archiveText")}</p>
             </div>
 
             <button
@@ -37,14 +39,16 @@ export const DangerTab = ({
               onClick={onArchiveClick}
             >
               <Archive size={15} />
-              {isArchivePending ? "Archiving" : "Archive"}
+              {isArchivePending
+                ? t("settings.danger.archiving")
+                : t("settings.modals.archiveConfirm")}
             </button>
           </div>
 
           <div className={styles.dangerRow}>
             <div className={styles.dangerCopy}>
-              <h3>Delete organization</h3>
-              <p>Permanently deletes all data. This cannot be undone.</p>
+              <h3>{t("settings.danger.delete")}</h3>
+              <p>{t("settings.danger.deleteText")}</p>
             </div>
 
             <button
@@ -53,7 +57,7 @@ export const DangerTab = ({
               onClick={onDeleteClick}
             >
               <Trash2 size={15} />
-              Delete
+              {t("settings.danger.deleteButton")}
             </button>
           </div>
         </div>

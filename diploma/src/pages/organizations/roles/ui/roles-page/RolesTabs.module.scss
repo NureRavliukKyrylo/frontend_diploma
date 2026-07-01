@@ -59,10 +59,16 @@
 }
 
 .sortControl {
-  width: fit-content;
+  width: max-content;
+  max-width: 100%;
   height: 50px;
   flex: 0 0 auto;
   margin-left: auto;
+
+  > div {
+    width: max-content;
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 720px) {
@@ -72,6 +78,7 @@
   }
 
   .sortControl {
-    width: 100%;
+    width: max-content;
+    margin-left: 0;
   }
 }

@@ -1,12 +1,21 @@
 import * as Yup from "yup";
+import type { TFunction } from "i18next";
 
-export const categoryFormSchema = Yup.object({
-  name: Yup.string().trim().min(2).max(100).required("Name is required"),
-  description: Yup.string().trim().max(1000).nullable(),
-  imageUrl: Yup.string().trim().url("Must be a valid URL").nullable(),
-  nameLocalizedUk: Yup.string().trim().max(100).nullable(),
-  descriptionLocalizedUk: Yup.string().trim().max(1000).nullable(),
-});
+export const getCategoryFormSchema = (t: TFunction) =>
+  Yup.object({
+    name: Yup.string()
+      .trim()
+      .min(2)
+      .max(100)
+      .required(t("admin:categories.form.nameRequired")),
+    description: Yup.string().trim().max(1000).nullable(),
+    imageUrl: Yup.string()
+      .trim()
+      .url(t("admin:categories.form.invalidUrl"))
+      .nullable(),
+    nameLocalizedUk: Yup.string().trim().max(100).nullable(),
+    descriptionLocalizedUk: Yup.string().trim().max(1000).nullable(),
+  });
 
 export interface CategoryFormValues {
   name: string;

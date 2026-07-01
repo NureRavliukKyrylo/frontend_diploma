@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import styles from "../SettingsWidget.module.scss";
 
 interface OrganizationSidebarCardProps {
@@ -12,11 +13,17 @@ export const OrganizationSidebarCard = ({
   contactEmail,
   currentLogoUrl,
   initials,
-}: OrganizationSidebarCardProps) => (
-  <aside className={styles.orgCard}>
+}: OrganizationSidebarCardProps) => {
+  const { t } = useTranslation("organizations");
+
+  return (
+    <aside className={styles.orgCard}>
     <div className={styles.orgLogo}>
       {currentLogoUrl ? (
-        <img src={currentLogoUrl} alt={`${name} logo`} />
+        <img
+          src={currentLogoUrl}
+          alt={t("settings.general.logoAlt", { name })}
+        />
       ) : (
         <span>{initials}</span>
       )}
@@ -24,15 +31,16 @@ export const OrganizationSidebarCard = ({
     <h2 title={name}>{name}</h2>
     <p
       className={!contactEmail ? styles.emptyEmail : undefined}
-      title={contactEmail || "Email not added yet"}
+      title={contactEmail || t("settings.sidebar.emailMissing")}
     >
-      {contactEmail || "Email not added yet"}
+      {contactEmail || t("settings.sidebar.emailMissing")}
     </p>
     <div className={styles.statusWrapper}>
       <span className={styles.statusBadge}>
         <span aria-hidden="true" />
-        Active
+        {t("settings.sidebar.active")}
       </span>
     </div>
-  </aside>
-);
+    </aside>
+  );
+};

@@ -65,7 +65,7 @@ export const ChatsListWidget = ({
         <div className={styles.activeSectionHeader}>
           <span className={styles.activeSectionLabel}>{activeLabel}</span>
           <span className={styles.activeSectionCount}>
-            {activeCount === 1 ? "1 chat" : `${activeCount} chats`}
+            {t("chat:labels.chatsCount", { count: activeCount })}
           </span>
         </div>
         <ErrorBoundary

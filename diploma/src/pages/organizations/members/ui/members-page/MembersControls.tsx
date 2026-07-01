@@ -1,4 +1,5 @@
 import { Search } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { OrganizationMembersPageModel } from "../../model/types";
 import styles from "./MembersControls.module.scss";
 
@@ -6,12 +7,16 @@ interface MembersControlsProps {
   model: OrganizationMembersPageModel;
 }
 
-export const MembersControls = ({ model }: MembersControlsProps) => (
-  <div className={styles.controlsRow}>
+export const MembersControls = ({ model }: MembersControlsProps) => {
+  const { t } = useTranslation("common");
+  const entity = t(`member.entities.${model.entityLabel}`);
+
+  return (
+    <div className={styles.controlsRow}>
     <div
       className={styles.tabsContainer}
       role="tablist"
-      aria-label="Organization members sections"
+      aria-label={t("memberList.tabsLabel", { entity })}
     >
       <button
         type="button"
@@ -22,7 +27,7 @@ export const MembersControls = ({ model }: MembersControlsProps) => (
         }`}
         onClick={() => model.setActiveTab("members")}
       >
-        Members
+        {t("memberList.membersTab")}
       </button>
       <button
         type="button"
@@ -33,7 +38,7 @@ export const MembersControls = ({ model }: MembersControlsProps) => (
         }`}
         onClick={() => model.setActiveTab("requests")}
       >
-        Requests
+        {t("memberList.requestsTab")}
         <span
           className={`${styles.tabBadge} ${
             model.activeTab === "requests" ? styles.tabBadgeActive : ""
@@ -51,10 +56,13 @@ export const MembersControls = ({ model }: MembersControlsProps) => (
         type="search"
         value={model.searchValue}
         placeholder={
-          model.activeTab === "members" ? "Search members" : "Search requests"
+          model.activeTab === "members"
+            ? t("memberList.searchMembers")
+            : t("memberList.searchRequests")
         }
         onChange={(event) => model.setSearchValue(event.target.value)}
       />
     </label>
-  </div>
-);
+    </div>
+  );
+};

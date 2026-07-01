@@ -3,7 +3,13 @@ import {
   type AdminUserTimeBankSummary,
 } from "@entities/admin";
 import { formatTimeAgo } from "@shared/libs/date";
-import { CheckCircle2, ChevronDown, ChevronUp, Clock3, Wallet } from "lucide-react";
+import {
+  CheckCircle2,
+  ChevronDown,
+  ChevronUp,
+  Clock3,
+  Wallet,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { AdminUsersStyles } from "../../model/types";
 import { DrawerInfoCard } from "./DrawerInfoCard";
@@ -21,30 +27,34 @@ export const DrawerTimeBankSection = ({
   lifetimeExpanded,
   onToggleLifetime,
 }: DrawerTimeBankSectionProps) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["admin", "common"]);
 
   return (
     <div className={styles.drawerSection}>
-      <div className={styles.drawerSectionTitle}>Time bank</div>
+      <div className={styles.drawerSectionTitle}>
+        {t("admin:users.drawer.timeBank")}
+      </div>
       <div className={styles.timeBankTopGrid}>
         <DrawerInfoCard
           styles={styles}
           icon={Wallet}
           value={formatAdminHoursFromMinutes(timeBank?.availableMinutes)}
-          label="Available"
+          label={t("admin:users.drawer.available")}
         />
         <DrawerInfoCard
           styles={styles}
           icon={Clock3}
           value={formatAdminHoursFromMinutes(timeBank?.reservedMinutes)}
-          label="Reserved"
+          label={t("admin:users.drawer.reserved")}
         />
         <DrawerInfoCard
           styles={styles}
           icon={CheckCircle2}
-          value={timeBank?.currentLevelCode || "None"}
+          value={timeBank?.currentLevelCode || t("admin:users.drawer.none")}
           label={
-            timeBank?.currentLevelCode ? "Current level" : "No level reached yet"
+            timeBank?.currentLevelCode
+              ? t("admin:users.drawer.currentLevel")
+              : t("admin:users.drawer.noLevel")
           }
         />
       </div>
@@ -55,7 +65,9 @@ export const DrawerTimeBankSection = ({
         onClick={onToggleLifetime}
       >
         <span>
-          {lifetimeExpanded ? "Hide lifetime stats" : "Show lifetime stats"}
+          {lifetimeExpanded
+            ? t("admin:users.drawer.hideLifetime")
+            : t("admin:users.drawer.showLifetime")}
         </span>
         {lifetimeExpanded ? (
           <ChevronUp size={17} aria-hidden="true" />
@@ -67,35 +79,35 @@ export const DrawerTimeBankSection = ({
       {lifetimeExpanded && (
         <div className={styles.lifetimeGrid}>
           <span>
-            <small>Lifetime earned</small>
+            <small>{t("admin:users.drawer.lifetimeEarned")}</small>
             <strong>
               {formatAdminHoursFromMinutes(timeBank?.lifetimeEarnedMinutes)}
             </strong>
           </span>
           <span>
-            <small>Lifetime spent</small>
+            <small>{t("admin:users.drawer.lifetimeSpent")}</small>
             <strong>
               {formatAdminHoursFromMinutes(timeBank?.lifetimeSpentMinutes)}
             </strong>
           </span>
           <span>
-            <small>Lifetime gifted in</small>
+            <small>{t("admin:users.drawer.lifetimeGiftedIn")}</small>
             <strong>
               {formatAdminHoursFromMinutes(timeBank?.lifetimeGiftedInMinutes)}
             </strong>
           </span>
           <span>
-            <small>Lifetime gifted out</small>
+            <small>{t("admin:users.drawer.lifetimeGiftedOut")}</small>
             <strong>
               {formatAdminHoursFromMinutes(timeBank?.lifetimeGiftedOutMinutes)}
             </strong>
           </span>
           <span className={styles.lifetimeFull}>
-            <small>Last transaction</small>
+            <small>{t("admin:users.drawer.lastTransaction")}</small>
             <strong>
               {timeBank?.lastTransactionAt
                 ? formatTimeAgo(timeBank.lastTransactionAt, t)
-                : "No transactions yet"}
+                : t("admin:users.drawer.noTransactions")}
             </strong>
           </span>
         </div>

@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import type { ChangeEvent } from "react";
 import { Map } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { ProjectSettingsErrors } from "@features/project";
 import styles from "../GeneralTab.module.scss";
 
@@ -30,26 +31,31 @@ export const LocationSection = ({
   onInputChange,
   onMapOpen,
   onSuggestionSelect,
-}: LocationSectionProps) => (
-  <section className={styles.section}>
-    <h2 className={styles.sectionLabel}>Location</h2>
+}: LocationSectionProps) => {
+  const { t } = useTranslation("project");
+
+  return (
+    <section className={styles.section}>
+    <h2 className={styles.sectionLabel}>{t("settings.general.location")}</h2>
     <p className={styles.sectionDescription}>
-      Move the project marker or choose a more precise public location.
+      {t("settings.general.locationText")}
     </p>
 
     <div className={styles.locationField}>
-      <span className={styles.fieldLabel}>Project location</span>
+      <span className={styles.fieldLabel}>
+        {t("settings.general.projectLocation")}
+      </span>
       <div className={styles.locationSearchWrapper}>
         <input
           value={locationQuery}
-          placeholder="Search city, region, or address"
+          placeholder={t("settings.general.locationPlaceholder")}
           aria-invalid={Boolean(errors.location)}
           onChange={onInputChange}
         />
         <button
           type="button"
           className={styles.mapPickerButton}
-          aria-label="Pick project location on map"
+          aria-label={t("settings.general.locationAria")}
           onClick={onMapOpen}
         >
           <Map size={22} />
@@ -84,5 +90,6 @@ export const LocationSection = ({
         <small className={styles.fieldError}>{errors.location}</small>
       ) : null}
     </div>
-  </section>
-);
+    </section>
+  );
+};

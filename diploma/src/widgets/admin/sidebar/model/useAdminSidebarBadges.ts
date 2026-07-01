@@ -1,8 +1,10 @@
 import { adminDashboardQuery, formatAdminCount } from "@entities/admin";
 import { notificationQuery } from "@entities/notification";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 export const useAdminSidebarBadges = () => {
+  const { t } = useTranslation("admin");
   const usersQuery = useQuery(adminDashboardQuery.users());
   const bansQuery = useQuery(adminDashboardQuery.activeBans());
   const skillsQuery = useQuery(adminDashboardQuery.skills());
@@ -14,10 +16,12 @@ export const useAdminSidebarBadges = () => {
       ? "!"
       : formatAdminCount(unreadCountQuery.data?.count ?? 0);
   const notificationTooltip = unreadCountQuery.isLoading
-    ? "Loading notifications"
+    ? t("sidebar.loadingNotifications")
     : unreadCountQuery.isError
-      ? "Notifications unavailable"
-      : `${notificationLabel} unread`;
+      ? t("sidebar.notificationsUnavailable")
+      : t("sidebar.unreadNotifications", {
+          count: unreadCountQuery.data?.count ?? 0,
+        });
 
   return {
     notificationLabel,

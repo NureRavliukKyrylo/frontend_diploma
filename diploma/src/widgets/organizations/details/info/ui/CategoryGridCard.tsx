@@ -1,5 +1,6 @@
 import { motion, type TargetAndTransition } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { OrganizationCategoryCarouselItem } from "../model/categoryCarouselTypes";
 import styles from "./CategoryGrid.module.scss";
 
@@ -15,8 +16,13 @@ export const CategoryGridCard = ({
   subtleHover,
   buttonHover,
   prefersReducedMotion,
-}: CategoryGridCardProps) => (
-  <motion.article
+}: CategoryGridCardProps) => {
+  const { t, i18n } = useTranslation("organizations");
+  const intlLocale =
+    i18n.language === "uk" || i18n.language === "ua" ? "uk-UA" : "en-US";
+
+  return (
+    <motion.article
     className={styles.categoryCard}
     whileHover={subtleHover}
   >
@@ -44,24 +50,25 @@ export const CategoryGridCard = ({
     <div className={styles.categoryFooter}>
       <div className={styles.categoryStats}>
         <div className={styles.categoryStat}>
-          <strong>{category.totalActivities.toLocaleString("en-US")}</strong>
-          <span>All activities</span>
+          <strong>{category.totalActivities.toLocaleString(intlLocale)}</strong>
+          <span>{t("details.categoryGrid.allActivities")}</span>
         </div>
         <div className={styles.categoryStat}>
-          <strong>{category.activeActivities.toLocaleString("en-US")}</strong>
-          <span>Active activities</span>
+          <strong>{category.activeActivities.toLocaleString(intlLocale)}</strong>
+          <span>{t("details.categoryGrid.activeActivities")}</span>
         </div>
       </div>
 
       <motion.button
         type="button"
         className={styles.categoryAction}
-        aria-label={`Category action for ${category.title}`}
+        aria-label={category.title}
         whileHover={prefersReducedMotion ? undefined : buttonHover}
         whileTap={prefersReducedMotion ? undefined : { scale: 0.97 }}
       >
         <ArrowRight aria-hidden="true" />
       </motion.button>
     </div>
-  </motion.article>
-);
+    </motion.article>
+  );
+};

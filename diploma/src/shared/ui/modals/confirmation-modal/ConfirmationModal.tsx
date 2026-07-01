@@ -3,6 +3,7 @@ import { BaseModal } from "../base-modal/BaseModal";
 import styles from "./ConfirmationModal.module.scss";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface ConfirmationModalProps {
   isOpen: boolean;
@@ -28,8 +29,8 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   text,
   onConfirm,
   onCancel,
-  confirmText = "Yes",
-  cancelText = "No",
+  confirmText,
+  cancelText,
   isLoading = false,
   error,
   image,
@@ -39,6 +40,8 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   cancelButtonClassName,
   children,
 }) => {
+  const { t } = useTranslation("common");
+
   return (
     <BaseModal isOpen={isOpen} onClose={onCancel} maxWidth={maxWidth}>
       <div className={styles.modalConfirmationWrapper}>
@@ -46,7 +49,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
           <img
             className={`${styles.modalConfirmationImage} ${imageClassName ?? ""}`}
             src={image}
-            alt="modal image"
+            alt={t("accessibility.modalImage")}
           />
         )}
         <div className={styles.modalConfirmationTitle}>
@@ -71,7 +74,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
               loading={isLoading}
               className={`${styles.confirmButtonModal} ${confirmButtonClassName ?? ""}`}
             >
-              {confirmText}
+              {confirmText ?? t("confirmation.yes")}
             </BaseButtonWrapper>
           </motion.div>
 
@@ -86,7 +89,7 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
               onClick={onCancel}
               className={`${styles.cancelButtonModal} ${cancelButtonClassName ?? ""}`}
             >
-              {cancelText}
+              {cancelText ?? t("confirmation.no")}
             </BaseButtonWrapper>
           </motion.div>
         </div>

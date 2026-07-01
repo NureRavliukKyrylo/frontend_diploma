@@ -1,5 +1,6 @@
 import { Skeleton } from "@heroui/react";
 import type { AdminOverviewStyles, HealthRow } from "../model/types";
+import { useTranslation } from "react-i18next";
 
 interface HealthCardProps {
   styles: AdminOverviewStyles;
@@ -9,7 +10,10 @@ interface HealthCardProps {
   isError: boolean;
 }
 
-const getDotClassName = (styles: AdminOverviewStyles, severity: HealthRow["severity"]) =>
+const getDotClassName = (
+  styles: AdminOverviewStyles,
+  severity: HealthRow["severity"],
+) =>
   severity === "critical"
     ? styles.healthDotCritical
     : severity === "warning"
@@ -32,57 +36,66 @@ export const HealthCard = ({
   healthScore,
   isLoading,
   isError,
-}: HealthCardProps) => (
-  <div className={styles.healthCard}>
-    <span className={styles.healthDeco} aria-hidden="true" />
-    <div className={styles.healthBody}>
-      <span className={styles.healthTitle}>System health</span>
-      {isLoading ? (
-        <Skeleton className={styles.healthRingSkeleton} />
-      ) : isError ? (
-        <div className={styles.healthState}>Health unavailable</div>
-      ) : (
-        <div
-          className={styles.healthRing}
-          aria-label={`System health ${healthScore} percent`}
-        >
-          <span className={styles.healthRingArc} aria-hidden="true" />
-          <span className={styles.healthRingText}>{healthScore}%</span>
-        </div>
-      )}
+}: HealthCardProps) => {
+  const { t } = useTranslation("admin");
 
-      <div className={styles.healthRows}>
+  return (
+    <div className={styles.healthCard}>
+      <span className={styles.healthDeco} aria-hidden="true" />
+      <div className={styles.healthBody}>
+        <span className={styles.healthTitle}>{t("overview.health.title")}</span>
         {isLoading ? (
-          Array.from({ length: 3 }).map((_, index) => (
-            <div key={index} className={styles.healthRow}>
-              <Skeleton className={styles.healthLabelSkeleton} />
-              <Skeleton className={styles.healthStatusSkeleton} />
-            </div>
-          ))
+          <Skeleton className={styles.healthRingSkeleton} />
         ) : isError ? (
           <div className={styles.healthState}>
-            Unable to load system health.
+            {t("overview.health.unavailable")}
           </div>
         ) : (
-          healthRows.map((row) => (
-            <div key={`${row.label}-${row.status}`} className={styles.healthRow}>
-              <span className={styles.healthLabel}>
-                <span
-                  className={`${styles.healthDot} ${getDotClassName(
-                    styles,
-                    row.severity,
-                  )}`}
-                  aria-hidden="true"
-                />
-                {row.label}
-              </span>
-              <span className={getStatusClassName(styles, row.severity)}>
-                {row.status}
-              </span>
-            </div>
-          ))
+          <div
+            className={styles.healthRing}
+            aria-label={`${t("overview.health.title")} ${healthScore}%`}
+          >
+            <span className={styles.healthRingArc} aria-hidden="true" />
+            <span className={styles.healthRingText}>{healthScore}%</span>
+          </div>
         )}
+
+        <div className={styles.healthRows}>
+          {isLoading ? (
+            Array.from({ length: 3 }).map((_, index) => (
+              <div key={index} className={styles.healthRow}>
+                <Skeleton className={styles.healthLabelSkeleton} />
+                <Skeleton className={styles.healthStatusSkeleton} />
+              </div>
+            ))
+          ) : isError ? (
+            <div className={styles.healthState}>
+              {t("overview.health.loadError")}
+            </div>
+          ) : (
+            healthRows.map((row) => (
+              <div
+                key={`${row.label}-${row.status}`}
+                className={styles.healthRow}
+              >
+                <span className={styles.healthLabel}>
+                  <span
+                    className={`${styles.healthDot} ${getDotClassName(
+                      styles,
+                      row.severity,
+                    )}`}
+                    aria-hidden="true"
+                  />
+                  {row.label}
+                </span>
+                <span className={getStatusClassName(styles, row.severity)}>
+                  {row.status}
+                </span>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};

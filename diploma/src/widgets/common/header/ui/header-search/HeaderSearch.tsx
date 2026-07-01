@@ -3,7 +3,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "@tanstack/react-router";
 import clsx from "clsx";
 import { Search } from "lucide-react";
-import { searchablePages, type SearchablePage } from "../../config/searchablePages";
+import {
+  searchablePages,
+  type SearchablePage,
+} from "../../config/searchablePages";
 import { HeaderSearchResults } from "./HeaderSearchResults";
 import styles from "./HeaderSearch.module.scss";
 
@@ -70,7 +73,9 @@ export const HeaderSearch = ({
   return (
     <form
       ref={formRef}
-      className={clsx(isDrawer ? styles.drawerSearchForm : styles.searchBarBlock)}
+      className={clsx(
+        isDrawer ? styles.drawerSearchForm : styles.searchBarBlock,
+      )}
       role="search"
       onSubmit={handleSubmit}
     >

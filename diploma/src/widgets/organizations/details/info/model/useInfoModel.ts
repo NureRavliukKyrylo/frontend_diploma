@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "@tanstack/react-router";
 import { useReducedMotion } from "framer-motion";
 import { addToast } from "@heroui/react";
@@ -28,6 +29,7 @@ export const useOrganizationDetailsInfoModel = ({
   activeTab,
   onTabChange,
 }: UseOrganizationDetailsInfoModelParams) => {
+  const { t } = useTranslation("organizations");
   const prefersReducedMotion = Boolean(useReducedMotion());
   const animation = useMemo(
     () => createOrganizationDetailsAnimationConfig(prefersReducedMotion),
@@ -95,8 +97,8 @@ export const useOrganizationDetailsInfoModel = ({
     if (member.id === access.currentUserId) {
       if (!access.isJoinedOrganization) {
         addToast({
-          title: "Leave unavailable",
-          description: "You are not an active member of this organization.",
+          title: t("details.notifications.leaveUnavailable"),
+          description: t("details.notifications.notActiveMember"),
           color: "warning",
         });
         return;

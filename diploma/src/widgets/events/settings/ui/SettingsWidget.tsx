@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useEventSettingsForm } from "@features/event";
 import { EventSettingsModals } from "./components/EventSettingsModals";
 import { EventSidebarCard } from "./components/EventSidebarCard";
@@ -14,6 +15,7 @@ interface EventSettingsWidgetProps {
 }
 
 export const EventSettingsWidget = ({ eventId }: EventSettingsWidgetProps) => {
+  const { t } = useTranslation("event");
   const [activeTab, setActiveTab] = useState<ActiveTab>("general");
   const form = useEventSettingsForm(eventId);
   const {
@@ -45,8 +47,8 @@ export const EventSettingsWidget = ({ eventId }: EventSettingsWidgetProps) => {
   if (isLoading) {
     return (
       <StatePanel
-        title="Loading event settings"
-        text="Fetching the latest event details."
+        title={t("settings.states.loadingTitle")}
+        text={t("settings.states.loadingText")}
       />
     );
   }
@@ -54,15 +56,15 @@ export const EventSettingsWidget = ({ eventId }: EventSettingsWidgetProps) => {
   if (isError || !event || !values) {
     return (
       <StatePanel
-        title="Event unavailable"
-        text="We could not load this event settings page."
+        title={t("settings.states.unavailableTitle")}
+        text={t("settings.states.unavailableText")}
         action={
           <button
             type="button"
             className={styles.stateButton}
             onClick={navigateToEvent}
           >
-            Back to event
+            {t("settings.states.back")}
           </button>
         }
       />
@@ -72,15 +74,15 @@ export const EventSettingsWidget = ({ eventId }: EventSettingsWidgetProps) => {
   if (!canEditEvent) {
     return (
       <StatePanel
-        title="You do not have access"
-        text="Event settings require the event.content_manage permission."
+        title={t("settings.states.accessTitle")}
+        text={t("settings.states.accessText")}
         action={
           <button
             type="button"
             className={styles.stateButton}
             onClick={navigateToEvent}
           >
-            Back to event
+            {t("settings.states.back")}
           </button>
         }
       />

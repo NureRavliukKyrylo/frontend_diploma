@@ -1,4 +1,5 @@
 import type { KeyboardEvent } from "react";
+import { useTranslation } from "react-i18next";
 import type { Project } from "@entities/project";
 import styles from "../ProjectsCarousel.module.scss";
 
@@ -23,6 +24,7 @@ export const ProjectCarouselCard = ({
   project,
   onOpen,
 }: ProjectCarouselCardProps) => {
+  const { t } = useTranslation("organizations");
   const progress = getProjectProgress(project);
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === "Enter" || event.key === " ") {
@@ -42,13 +44,13 @@ export const ProjectCarouselCard = ({
       <div>
         <h3 className={styles.cardTitle}>{project.title}</h3>
         <p className={styles.cardDesc}>
-          {project.description || "No description provided yet."}
+          {project.description || t("carousel.noDescription")}
         </p>
       </div>
 
       <div className={styles.progressBlock}>
         <div className={styles.progressRow}>
-          <span>Progress</span>
+          <span>{t("carousel.progress")}</span>
           <span>
             {progress.completed}/{progress.total}
           </span>

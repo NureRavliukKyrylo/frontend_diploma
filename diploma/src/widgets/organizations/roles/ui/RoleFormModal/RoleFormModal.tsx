@@ -10,6 +10,8 @@ import { RoleAssigneePicker } from "../RoleAssigneePicker";
 import { RolePermissionGroups } from "./RolePermissionGroups";
 import { type RoleFormMode, useRoleFormModal } from "./model/useRoleFormModal";
 import styles from "./RoleFormModal.module.scss";
+import type { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 
 interface RoleFormModalProps {
   isOpen: boolean;
@@ -27,18 +29,14 @@ interface RoleFormModalProps {
   onSubmit: (payload: ContextRoleCreateDto) => Promise<void>;
 }
 
-const toggleTabs = [
-  { label: "No", value: "off" },
-  { label: "Yes", value: "on" },
-];
-
-const steps = ["Basics", "Permissions", "Assignment"];
-
-const getEntityLabel = (entityType?: string | null) => {
-  if (entityType === "project") return "Project";
-  if (entityType === "event") return "Event";
-  if (entityType === "task") return "Task";
-  return "Organization";
+const getEntityLabel = (
+  entityType: string | null | undefined,
+  t: TFunction,
+) => {
+  if (entityType === "project") return t("roles:form.entity.project");
+  if (entityType === "event") return t("roles:form.entity.event");
+  if (entityType === "task") return t("roles:form.entity.task");
+  return t("roles:form.entity.organization");
 };
 
 export const RoleFormModal = ({
@@ -56,6 +54,16 @@ export const RoleFormModal = ({
   onClose,
   onSubmit,
 }: RoleFormModalProps) => {
+  const { t } = useTranslation("roles");
+  const toggleTabs = [
+    { label: t("form.no"), value: "off" },
+    { label: t("form.yes"), value: "on" },
+  ];
+  const steps = [
+    t("form.steps.basics"),
+    t("form.steps.permissions"),
+    t("form.steps.assignment"),
+  ];
   const form = useRoleFormModal({
     isOpen,
     mode,
@@ -85,7 +93,7 @@ export const RoleFormModal = ({
           <button
             type="button"
             className={styles.closeButton}
-            aria-label="Close role form"
+            aria-label={t("form.close")}
             onClick={onClose}
           >
             <X size={18} strokeWidth={2.5} />
@@ -126,12 +134,12 @@ export const RoleFormModal = ({
           {form.currentStep === 1 ? (
             <>
               <div className={styles.field}>
-                <label htmlFor="role-name">Name</label>
+                <label htmlFor="role-name">{t("form.name")}</label>
                 <input
                   id="role-name"
                   value={form.values.name}
                   maxLength={200}
-                  placeholder="e.g. Event Coordinator"
+                  placeholder={t("form.namePlaceholder")}
                   onChange={(event) =>
                     form.updateField("name", event.target.value)
                   }
@@ -142,11 +150,13 @@ export const RoleFormModal = ({
               </div>
 
               <div className={styles.field}>
-                <label htmlFor="role-description">Description</label>
+                <label htmlFor="role-description">
+                  {t("form.description")}
+                </label>
                 <textarea
                   id="role-description"
                   value={form.values.description}
-                  placeholder="Describe what this role can do..."
+                  placeholder={t("form.descriptionPlaceholder")}
                   onChange={(event) =>
                     form.updateField("description", event.target.value)
                   }
@@ -157,12 +167,12 @@ export const RoleFormModal = ({
                 <div className={styles.contextLine}>
                   <MapPin size={15} strokeWidth={2.4} />
                   <span>
-                    Applies to:{" "}
+                    {t("form.appliesTo")}{" "}
                     <strong>
-                      {getEntityLabel(role.entityType)} —{" "}
+                      {getEntityLabel(role.entityType, t)} —{" "}
                       {role.entityType === "organization"
-                        ? (organizationName ?? "Current organization")
-                        : (role.entityId ?? "Current context")}
+                        ? (organizationName ?? t("form.currentOrganization"))
+                        : (role.entityId ?? t("form.currentContext"))}
                     </strong>
                   </span>
                 </div>
@@ -182,11 +192,10 @@ export const RoleFormModal = ({
           {form.currentStep === 3 ? (
             <div className={styles.assignmentStep}>
               <p className={styles.assignmentHint}>
-                Pick specific people or other roles. Leave empty to allow anyone
-                with role-management permission.
+                {t("form.assignmentHint")}
               </p>
               <RoleAssigneePicker
-                label="Assignable by"
+                label={t("form.assignableBy")}
                 values={form.values.assignableBy}
                 members={members}
                 roles={roles}
@@ -197,7 +206,7 @@ export const RoleFormModal = ({
                 }
               />
               <RoleAssigneePicker
-                label="Approvable by"
+                label={t("form.approvableBy")}
                 values={form.values.approvableBy}
                 members={members}
                 roles={roles}
@@ -210,8 +219,8 @@ export const RoleFormModal = ({
 
               <section className={styles.defaultBlock}>
                 <div className={styles.defaultCopy}>
-                  <h3>Default for new members</h3>
-                  <p>Assign this role automatically when a member joins.</p>
+                  <h3>{t("form.defaultTitle")}</h3>
+                  <p>{t("form.defaultText")}</p>
                 </div>
                 <Toggle
                   tabs={toggleTabs}
@@ -240,7 +249,7 @@ export const RoleFormModal = ({
             onClick={onClose}
             disabled={isSubmitting}
           >
-            Cancel
+            {t("form.cancel")}
           </button>
           {form.currentStep > 1 ? (
             <button
@@ -250,7 +259,7 @@ export const RoleFormModal = ({
               disabled={isSubmitting}
             >
               <ArrowLeft size={15} strokeWidth={2.4} />
-              Back
+              {t("form.back")}
             </button>
           ) : null}
           <button
@@ -262,10 +271,10 @@ export const RoleFormModal = ({
             disabled={isSubmitting || !form.canContinue}
           >
             {isSubmitting
-              ? "Saving..."
+              ? t("form.saving")
               : form.currentStep === 3
                 ? form.submitLabel
-                : "Continue"}
+                : t("form.continue")}
             {form.currentStep < 3 ? (
               <ArrowRight size={15} strokeWidth={2.4} />
             ) : null}

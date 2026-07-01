@@ -11,6 +11,7 @@ import { useFormik } from "formik";
 import { Check, Send, X } from "lucide-react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import * as Yup from "yup";
 import styles from "./AdminMessageUserModal.module.scss";
 
@@ -39,54 +40,62 @@ const getInitials = (user: AdminUserListItem) => {
   return initials || "IF";
 };
 
-const getUserName = (user: AdminUserListItem) => {
+const getUserName = (user: AdminUserListItem, fallback: string) => {
   const fullName = `${user.firstName} ${user.lastName}`.trim();
-  return user.displayName || fullName || user.email || "Unknown user";
+  return user.displayName || fullName || user.email || fallback;
 };
 
-const getDeliveryDescription = ({
-  emailSent,
-  notificationSent,
-}: {
-  emailSent: boolean;
-  notificationSent: boolean;
-}) => {
+const getDeliveryDescription = (
+  {
+    emailSent,
+    notificationSent,
+  }: {
+    emailSent: boolean;
+    notificationSent: boolean;
+  },
+  t: TFunction,
+) => {
   if (emailSent && notificationSent) {
-    return "In-app notification and email were delivered.";
+    return t("admin:users.message.deliveredBoth");
   }
 
   if (notificationSent) {
-    return "In-app notification was delivered.";
+    return t("admin:users.message.deliveredNotification");
   }
 
   if (emailSent) {
-    return "Email was delivered.";
+    return t("admin:users.message.deliveredEmail");
   }
 
-  return "The backend accepted the request, but no delivery channel was confirmed.";
+  return t("admin:users.message.deliveredUnknown");
 };
 
-const validationSchema = Yup.object({
-  sendNotification: Yup.boolean().required(),
-  sendEmail: Yup.boolean().required(),
-  subjectOrTitle: Yup.string().required("Subject is required").max(200),
-  message: Yup.string().required("Message is required").max(5000),
-}).test(
-  "at-least-one-channel",
-  "Select at least one channel",
-  (value) => Boolean(value?.sendNotification || value?.sendEmail),
-);
+const getValidationSchema = (t: TFunction) =>
+  Yup.object({
+    sendNotification: Yup.boolean().required(),
+    sendEmail: Yup.boolean().required(),
+    subjectOrTitle: Yup.string()
+      .required(t("admin:users.message.subjectRequired"))
+      .max(200),
+    message: Yup.string()
+      .required(t("admin:users.message.messageRequired"))
+      .max(5000),
+  }).test(
+    "at-least-one-channel",
+    t("admin:users.message.channelRequired"),
+    (value) => Boolean(value?.sendNotification || value?.sendEmail),
+  );
 
 export const AdminMessageUserModal = ({
   user,
   onClose,
 }: AdminMessageUserModalProps) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["admin", "common"]);
   const hasEmail = Boolean(user?.email);
   const mutation = useMutation({
     mutationFn: (values: MessageFormValues) => {
       if (!user) {
-        throw new Error("User is not selected");
+        throw new Error(t("admin:users.message.userRequired"));
       }
 
       return sendAdminUserCommunication({
@@ -99,15 +108,15 @@ export const AdminMessageUserModal = ({
     },
     onSuccess: (result) => {
       addToast({
-        title: "Message sent",
-        description: getDeliveryDescription(result),
+        title: t("admin:users.message.success"),
+        description: getDeliveryDescription(result, t),
         color: "success",
       });
       handleClose();
     },
     onError: (error) => {
       addToast({
-        title: "Message failed",
+        title: t("admin:users.message.error"),
         description: getErrorMessage(error, t),
         color: "danger",
       });
@@ -120,7 +129,7 @@ export const AdminMessageUserModal = ({
       subjectOrTitle: "",
       message: "",
     },
-    validationSchema,
+    validationSchema: getValidationSchema(t),
     onSubmit: (values) => mutation.mutate(values),
   });
   const channelsError =
@@ -129,7 +138,7 @@ export const AdminMessageUserModal = ({
       : formik.submitCount > 0 &&
           !formik.values.sendNotification &&
           !formik.values.sendEmail
-        ? "Select at least one channel"
+        ? t("admin:users.message.channelRequired")
         : "";
 
   function handleClose() {
@@ -152,7 +161,7 @@ export const AdminMessageUserModal = ({
     return null;
   }
 
-  const userName = getUserName(user);
+  const userName = getUserName(user, t("admin:users.card.unknown"));
 
   return (
     <BaseModal
@@ -167,11 +176,11 @@ export const AdminMessageUserModal = ({
             type="button"
             className={styles.closeButton}
             onClick={handleClose}
-            aria-label="Close message dialog"
+            aria-label={t("admin:users.message.close")}
           >
             <X size={18} aria-hidden="true" />
           </button>
-          <h1 className={styles.title}>Message user</h1>
+          <h1 className={styles.title}>{t("admin:users.message.title")}</h1>
           <div className={styles.recipientLine}>
             <span className={styles.recipientAvatar}>
               {user.avatarUrl ? (
@@ -180,7 +189,9 @@ export const AdminMessageUserModal = ({
                 getInitials(user)
               )}
             </span>
-            <span>to {userName}</span>
+            <span>
+              {t("admin:users.message.to")} {userName}
+            </span>
           </div>
         </div>
 
@@ -204,7 +215,7 @@ export const AdminMessageUserModal = ({
             >
               {formik.values.sendNotification && <Check size={14} />}
             </span>
-            In-app notification
+            {t("admin:users.message.notification")}
           </button>
 
           <button
@@ -225,26 +236,30 @@ export const AdminMessageUserModal = ({
             >
               {formik.values.sendEmail && <Check size={14} />}
             </span>
-            Email
+            {t("admin:users.message.email")}
           </button>
         </div>
 
         {!hasEmail && (
-          <div className={styles.inlineWarning}>This user has no email address.</div>
+          <div className={styles.inlineWarning}>
+            {t("admin:users.message.noEmail")}
+          </div>
         )}
         {channelsError && (
           <div className={styles.inlineWarning}>{channelsError}</div>
         )}
 
         <label className={styles.field}>
-          <span className={styles.fieldLabel}>Subject / title</span>
+          <span className={styles.fieldLabel}>
+            {t("admin:users.message.subject")}
+          </span>
           <input
             name="subjectOrTitle"
             value={formik.values.subjectOrTitle}
             onChange={formik.handleChange}
             maxLength={200}
             className={styles.fieldInput}
-            placeholder="Short message title"
+            placeholder={t("admin:users.message.subjectPlaceholder")}
           />
           <span className={styles.charCounter}>
             {formik.values.subjectOrTitle.length} / 200
@@ -255,14 +270,16 @@ export const AdminMessageUserModal = ({
         </label>
 
         <label className={styles.field}>
-          <span className={styles.fieldLabel}>Message</span>
+          <span className={styles.fieldLabel}>
+            {t("admin:users.message.body")}
+          </span>
           <textarea
             name="message"
             value={formik.values.message}
             onChange={formik.handleChange}
             maxLength={5000}
             className={styles.fieldTextarea}
-            placeholder="Write the message that should be sent to this user"
+            placeholder={t("admin:users.message.bodyPlaceholder")}
           />
           <span className={styles.charCounter}>
             {formik.values.message.length} / 5000
@@ -278,7 +295,7 @@ export const AdminMessageUserModal = ({
             className={styles.cancelButton}
             onClick={handleClose}
           >
-            Cancel
+            {t("admin:common.actions.cancel")}
           </BaseButtonWrapper>
           <BaseButtonWrapper
             type="submit"
@@ -289,12 +306,14 @@ export const AdminMessageUserModal = ({
             }
           >
             <Send size={16} aria-hidden="true" />
-            Send message
+            {t("admin:users.message.send")}
           </BaseButtonWrapper>
         </div>
 
         {mutation.isError && (
-          <div className={styles.error}>{getErrorMessage(mutation.error, t)}</div>
+          <div className={styles.error}>
+            {getErrorMessage(mutation.error, t)}
+          </div>
         )}
       </form>
     </BaseModal>

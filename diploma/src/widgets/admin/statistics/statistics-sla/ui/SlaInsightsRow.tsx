@@ -3,6 +3,7 @@ import { Skeleton } from "@heroui/react";
 import styles from "../../statistics-page-styles/AdminStatisticsPage.module.scss";
 import { SlaCard } from "./SlaCard";
 import { VelocityCard } from "./VelocityCard";
+import { useTranslation } from "react-i18next";
 
 interface SlaInsightsRowProps {
   advanced?: AdvancedStatisticsDashboard;
@@ -23,27 +24,41 @@ export const SlaInsightsRow = ({
   advanced,
   isLoading,
   isError,
-}: SlaInsightsRowProps) => (
-  <div className={styles.slaRow}>
-    {isLoading ? (
-      <>
-        <Skeleton className={styles.slaSkeleton} />
-        <Skeleton className={styles.slaSkeleton} />
-        <Skeleton className={styles.slaSkeleton} />
-      </>
-    ) : isError ? (
-      <div className={styles.wideState}>Advanced SLA data unavailable.</div>
-    ) : (
-      <>
-        <SlaCard title="Request SLA" data={advanced?.requestSla ?? emptySla} />
-        <SlaCard title="Report SLA" data={advanced?.reportSla ?? emptySla} />
-        <VelocityCard
-          earned={advanced?.timeBankVelocity.earnedThisWeekMinutes ?? 0}
-          spent={advanced?.timeBankVelocity.spentThisWeekMinutes ?? 0}
-          adjusted={advanced?.timeBankVelocity.adminAdjustmentMinutesThisWeek ?? 0}
-          stuck={advanced?.timeBankVelocity.stuckReservedMinutes ?? 0}
-        />
-      </>
-    )}
-  </div>
-);
+}: SlaInsightsRowProps) => {
+  const { t } = useTranslation("admin");
+
+  return (
+    <div className={styles.slaRow}>
+      {isLoading ? (
+        <>
+          <Skeleton className={styles.slaSkeleton} />
+          <Skeleton className={styles.slaSkeleton} />
+          <Skeleton className={styles.slaSkeleton} />
+        </>
+      ) : isError ? (
+        <div className={styles.wideState}>
+          {t("statistics.sla.unavailable")}
+        </div>
+      ) : (
+        <>
+          <SlaCard
+            title={t("statistics.sla.requests")}
+            data={advanced?.requestSla ?? emptySla}
+          />
+          <SlaCard
+            title={t("statistics.sla.reports")}
+            data={advanced?.reportSla ?? emptySla}
+          />
+          <VelocityCard
+            earned={advanced?.timeBankVelocity.earnedThisWeekMinutes ?? 0}
+            spent={advanced?.timeBankVelocity.spentThisWeekMinutes ?? 0}
+            adjusted={
+              advanced?.timeBankVelocity.adminAdjustmentMinutesThisWeek ?? 0
+            }
+            stuck={advanced?.timeBankVelocity.stuckReservedMinutes ?? 0}
+          />
+        </>
+      )}
+    </div>
+  );
+};

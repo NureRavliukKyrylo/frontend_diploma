@@ -1,0 +1,213 @@
+{
+  "page": {
+    "title": "Roles",
+    "loading": "Loading roles...",
+    "organizationError": "We couldn't load this organization.",
+    "rolesError": "We couldn't load the organization roles.",
+    "back": "Back to organization",
+    "logoAlt": "{{name}} logo",
+    "newRole": "New role"
+  },
+  "tabs": {
+    "active": "Active roles",
+    "archived": "Archived"
+  },
+  "sort": {
+    "name": "Name (A-Z)",
+    "permissions": "Most permissions",
+    "members": "Most members"
+  },
+  "sections": {
+    "templates": "Templates",
+    "custom": "Custom",
+    "archived": "Archived roles",
+    "emptyArchived": "No archived roles",
+    "emptyArchivedText": "Roles you archive will appear here.",
+    "create": "Create new role",
+    "createText": "Build a custom permission set for your team."
+  },
+  "types": {
+    "archived": "Archived role",
+    "system": "System role",
+    "template": "Template role",
+    "custom": "Custom role"
+  },
+  "tags": {
+    "system": "System",
+    "template": "Template",
+    "default": "Default",
+    "autoAssign": "Auto-assign"
+  },
+  "card": {
+    "noDescription": "No description provided yet.",
+    "archived": "Archived: {{reason}}",
+    "archivedRole": "Archived role",
+    "archiveReasons": {
+      "manual": "Manual",
+      "no_users": "No users",
+      "context_ended": "Context ended",
+      "none": "None"
+    },
+    "permissions_one": "{{count}} permission",
+    "permissions_other": "{{count}} permissions",
+    "members_one": "{{count}} member",
+    "members_other": "{{count}} members",
+    "ready": "Ready to use"
+  },
+  "actions": {
+    "restore": "Restore",
+    "deleteRole": "Delete {{name}}",
+    "locked": "Locked",
+    "use": "Use",
+    "removeDefault": "Remove default",
+    "setDefault": "Set as default",
+    "archive": "Archive",
+    "delete": "Delete",
+    "more": "More actions for {{name}}",
+    "edit": "Edit",
+    "editRole": "Edit role"
+  },
+  "drawer": {
+    "close": "Close role drawer",
+    "assignment": "Assignment",
+    "assignableBy": "Assignable by",
+    "approvableBy": "Approvable by",
+    "anyone": "Anyone with manage permission",
+    "members": "Members",
+    "total": "{{count}} total",
+    "noMembers": "No members have this role yet.",
+    "permissions": "Permissions",
+    "other": "Other"
+  },
+  "members": {
+    "teamMember": "Team member",
+    "joinUnavailable": "Join date unavailable",
+    "joined": "Joined {{date}}"
+  },
+  "picker": {
+    "open": "Open — anyone with manage permission",
+    "search": "Search people or roles",
+    "remove": "Remove {{name}}",
+    "noResults": "No matching people or roles"
+  },
+  "form": {
+    "steps": {
+      "basics": "Basics",
+      "permissions": "Permissions",
+      "assignment": "Assignment"
+    },
+    "entity": {
+      "organization": "Organization",
+      "project": "Project",
+      "event": "Event",
+      "task": "Task"
+    },
+    "close": "Close role form",
+    "name": "Name",
+    "namePlaceholder": "e.g. Event Coordinator",
+    "description": "Description",
+    "descriptionPlaceholder": "Describe what this role can do...",
+    "appliesTo": "Applies to:",
+    "currentOrganization": "Current organization",
+    "currentContext": "Current context",
+    "assignmentHint": "Pick specific people or other roles. Leave empty to allow anyone with role-management permission.",
+    "assignableBy": "Assignable by",
+    "approvableBy": "Approvable by",
+    "defaultTitle": "Default for new members",
+    "defaultText": "Assign this role automatically when a member joins.",
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel",
+    "back": "Back",
+    "saving": "Saving...",
+    "continue": "Continue",
+    "permissions": "Permissions",
+    "selected_one": "{{count}} permission selected",
+    "selected_other": "{{count}} permissions selected",
+    "step1": "Step 1 of 3 — name and describe this role.",
+    "step2": "Step 2 of 3 — choose what this role can do.",
+    "step3": "Step 3 of 3 — decide who can assign and approve it.",
+    "editTitle": "Edit role",
+    "templateTitle": "Create from template",
+    "createTitle": "Create new role",
+    "save": "Save",
+    "createFromTemplate": "Create from template",
+    "createRole": "Create role",
+    "errors": {
+      "duplicate": "A role named \"{{name}}\" already exists in this organization, including archived roles.",
+      "required": "Role name is required.",
+      "tooLong": "Role name must be 200 characters or less.",
+      "permissionRequired": "Select at least one permission.",
+      "save": "Unable to save this role.",
+      "serverRejected": "The server rejected the role ({{status}})."
+    }
+  },
+  "permissions": {
+    "groups": {
+      "organization": "Org",
+      "projects": "Projects",
+      "events": "Events",
+      "tasks": "Tasks",
+      "participation": "Participation",
+      "timeBank": "Time Bank"
+    },
+    "labels": {
+      "organizationContentManage": "Manage organization content",
+      "organizationMembersManage": "Manage members",
+      "organizationRolesManage": "Manage roles",
+      "organizationRolesAssign": "Assign roles",
+      "projectContentManage": "Manage projects",
+      "projectMembersManage": "Manage project members",
+      "projectRolesManage": "Manage project roles",
+      "projectRolesAssign": "Assign project roles",
+      "eventContentManage": "Manage events",
+      "eventMembersManage": "Manage event members",
+      "eventRolesManage": "Manage event roles",
+      "eventRolesAssign": "Assign event roles",
+      "taskContentManage": "Manage tasks",
+      "taskMembersManage": "Manage task members",
+      "taskRolesManage": "Manage task roles",
+      "taskRolesAssign": "Assign task roles",
+      "taskTimelogViewAll": "View all time logs",
+      "taskTimelogEditManager": "Edit time logs (manager)",
+      "taskTimelogApprove": "Approve time logs",
+      "taskTimelogReject": "Reject time logs",
+      "taskTimelogResolveDispute": "Resolve time log disputes",
+      "attendanceViewEvent": "View event attendance",
+      "attendanceApproveEvent": "Approve attendance",
+      "attendanceRejectEvent": "Reject attendance",
+      "attendanceResolveDispute": "Resolve attendance disputes",
+      "attendanceExportEvent": "Export attendance",
+      "participationViewMembers": "View member list",
+      "participationViewHistory": "View participation history",
+      "participationJoinForUser": "Add members manually",
+      "participationLeaveForUser": "Remove members manually",
+      "participationMembersManage": "Manage participation records",
+      "participationRolesAssign": "Assign participation roles",
+      "timebankViewUserSummary": "View user time bank summary"
+    }
+  },
+  "confirmation": {
+    "archiveTitle": "Archive role",
+    "archiveText": "Are you sure you want to archive \"{{name}}\"?",
+    "archive": "Archive",
+    "restoreTitle": "Restore role",
+    "restoreText": "Restore \"{{name}}\" and make it available again?",
+    "restore": "Restore",
+    "deleteTitle": "Delete role",
+    "deleteText": "Delete \"{{name}}\" permanently? This action cannot be undone.",
+    "delete": "Delete",
+    "cancel": "Cancel"
+  },
+  "toast": {
+    "saved": "Role saved",
+    "saveFailed": "Failed to save role",
+    "defaultRemoved": "Default role removed",
+    "defaultUpdated": "Default role updated",
+    "defaultFailed": "Failed to update default role",
+    "archived": "Role archived",
+    "restored": "Role restored",
+    "deleted": "Role deleted",
+    "actionFailed": "Role action failed"
+  }
+}

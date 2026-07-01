@@ -2,6 +2,7 @@ import { formatAdminDate } from "@entities/admin";
 import { Copy, RotateCcw } from "lucide-react";
 import type { AdminBansStyles, BanDisplay } from "../model/types";
 import { getInitials, getUserName, shortId } from "../lib/banDisplay";
+import { useTranslation } from "react-i18next";
 
 interface BanCardProps {
   styles: AdminBansStyles;
@@ -10,6 +11,7 @@ interface BanCardProps {
 }
 
 export const BanCard = ({ styles, item, onRevoke }: BanCardProps) => {
+  const { t } = useTranslation("admin");
   const Icon = item.icon;
   const targetName = getUserName(item.user, item.ban.userId);
   const creatorName = getUserName(item.creator, item.ban.createdByUserId);
@@ -47,22 +49,24 @@ export const BanCard = ({ styles, item, onRevoke }: BanCardProps) => {
           </button>
         </div>
 
-        <span className={`${styles.statusPill} ${styles[`statusPill_${item.tone}`]}`}>
+        <span
+          className={`${styles.statusPill} ${styles[`statusPill_${item.tone}`]}`}
+        >
           {item.statusLabel}
         </span>
       </div>
 
       <p className={styles.banCardReason}>
-        {item.ban.reason || "No reason provided."}
+        {item.ban.reason || t("bans.card.noReason")}
       </p>
 
       <div className={styles.banCardMetaGrid}>
         <span>
-          <small>Banned by</small>
+          <small>{t("bans.card.bannedBy")}</small>
           <strong>{creatorName || shortId(item.ban.createdByUserId)}</strong>
         </span>
         <span>
-          <small>Issued</small>
+          <small>{t("bans.card.issued")}</small>
           <strong>{formatAdminDate(item.ban.createdAt)}</strong>
         </span>
       </div>
@@ -73,7 +77,7 @@ export const BanCard = ({ styles, item, onRevoke }: BanCardProps) => {
         onClick={() => onRevoke(item)}
       >
         <RotateCcw size={16} aria-hidden="true" />
-        Revoke
+        {t("bans.card.revoke")}
       </button>
     </article>
   );

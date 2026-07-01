@@ -24,10 +24,13 @@ export const SortDropDown = <T extends string | number>({
   fitTriggerToWidestOption = false,
 }: SortDropDownProps<T>) => {
   const { t } = useTranslation("common");
-  const labelPrefix = label ?? (variant === "report" ? t("reason.title") : t("sorting.title"));
+  const labelPrefix =
+    label ?? (variant === "report" ? t("reason.title") : t("sorting.title"));
   const selectedLabel = options.find((o) => o.value === value)?.label;
   const getTriggerLabel = (optionLabel?: string) =>
-    selectedLabelOnly ? optionLabel ?? "" : `${labelPrefix}:${optionLabel ?? ""}`;
+    selectedLabelOnly
+      ? (optionLabel ?? "")
+      : `${labelPrefix}:${optionLabel ?? ""}`;
 
   return (
     <BaseDropDown
@@ -52,13 +55,15 @@ export const SortDropDown = <T extends string | number>({
             ))}
         </h1>
       }
-      className={fitTriggerToWidestOption ? styles.fitWidestDropDown : undefined}
-      buttonClassName={fitTriggerToWidestOption ? styles.fitWidestButton : undefined}
-      dropdownClassName={
-        `${variant === "report" ? styles.dropdownReport : ""} ${
-          fitTriggerToWidestOption ? styles.fitWidestDropdown : ""
-        }`
+      className={
+        fitTriggerToWidestOption ? styles.fitWidestDropDown : undefined
       }
+      buttonClassName={
+        fitTriggerToWidestOption ? styles.fitWidestButton : undefined
+      }
+      dropdownClassName={`${variant === "report" ? styles.dropdownReport : ""} ${
+        fitTriggerToWidestOption ? styles.fitWidestDropdown : ""
+      }`}
     >
       {options.map((option) => {
         const isActive = String(value).includes(String(option.value));
@@ -70,7 +75,9 @@ export const SortDropDown = <T extends string | number>({
               onClick={() => onSelect(option.value)}
             >
               {option.label}
-              {isActive && <img src={CheckMark} alt="check-mark" />}
+              {isActive && (
+                <img src={CheckMark} alt={t("accessibility.checkMark")} />
+              )}
             </div>
           </div>
         );

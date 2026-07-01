@@ -1,10 +1,15 @@
-import { skillKeys, uploadSkillIcon, type SkillListItemDto } from "@entities/skill";
+import {
+  skillKeys,
+  uploadSkillIcon,
+  type SkillListItemDto,
+} from "@entities/skill";
 import { addToast } from "@heroui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { BaseModal } from "@shared/ui/modals";
 import { ImagePlus, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import styles from "./ChangeSkillIconModal.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface ChangeSkillIconModalProps {
   skill: SkillListItemDto | null;
@@ -15,6 +20,7 @@ export const ChangeSkillIconModal = ({
   skill,
   onClose,
 }: ChangeSkillIconModalProps) => {
+  const { t } = useTranslation("admin");
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [iconFile, setIconFile] = useState<File | null>(null);
@@ -23,18 +29,18 @@ export const ChangeSkillIconModal = ({
   const mutation = useMutation({
     mutationFn: async () => {
       if (!skill || !iconFile) {
-        throw new Error("Choose an icon first");
+        throw new Error(t("skills.icon.chooseFirst"));
       }
 
       return uploadSkillIcon(skill.id, iconFile);
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: skillKeys.all() });
-      addToast({ title: "Skill icon updated", color: "success" });
+      addToast({ title: t("skills.icon.updated"), color: "success" });
       onClose();
     },
     onError: () => {
-      addToast({ title: "Failed to upload icon", color: "danger" });
+      addToast({ title: t("skills.icon.uploadFailed"), color: "danger" });
     },
   });
 
@@ -52,12 +58,12 @@ export const ChangeSkillIconModal = ({
     }
 
     if (file.size > 2 * 1024 * 1024) {
-      setError("Icon must be 2MB or smaller");
+      setError(t("skills.form.fileTooLarge"));
       return;
     }
 
     if (!file.type.startsWith("image/")) {
-      setError("Please choose an image file");
+      setError(t("skills.form.imageOnly"));
       return;
     }
 
@@ -77,13 +83,15 @@ export const ChangeSkillIconModal = ({
           type="button"
           className={styles.closeButton}
           onClick={onClose}
-          aria-label="Close icon modal"
+          aria-label={t("skills.icon.close")}
         >
           <X size={18} aria-hidden="true" />
         </button>
-        <h2 className={styles.title}>Change icon</h2>
+        <h2 className={styles.title}>{t("skills.icon.title")}</h2>
         <p className={styles.subtitle}>
-          Upload a square image for {skill?.name ?? "this skill"}.
+          {t("skills.icon.description", {
+            name: skill?.name ?? t("skills.icon.thisSkill"),
+          })}
         </p>
         <div className={styles.dropzone}>
           {preview ? (
@@ -109,7 +117,7 @@ export const ChangeSkillIconModal = ({
             className={styles.secondaryButton}
             onClick={() => fileInputRef.current?.click()}
           >
-            Choose file
+            {t("skills.icon.choose")}
           </button>
           <button
             type="button"
@@ -117,7 +125,7 @@ export const ChangeSkillIconModal = ({
             disabled={!iconFile || mutation.isPending}
             onClick={() => mutation.mutate()}
           >
-            Save icon
+            {t("skills.icon.save")}
           </button>
         </div>
       </div>

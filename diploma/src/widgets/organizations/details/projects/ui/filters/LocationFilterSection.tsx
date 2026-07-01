@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import type { LocationSuggestion } from "@shared/config/types";
 import type { ProjectSearchParams } from "@entities/project";
 import styles from "../../../shared/filters/Filters.module.scss";
@@ -29,6 +30,7 @@ export const OrganizationProjectLocationFilterSection = ({
   onRadiusBlur,
   onSelectLocation,
 }: OrganizationProjectLocationFilterSectionProps) => {
+  const { t } = useTranslation("organizations");
   const hasDistanceFilter = Boolean(
     search.Location ||
       search.Lat ||
@@ -38,9 +40,11 @@ export const OrganizationProjectLocationFilterSection = ({
 
   return (
     <OrganizationProjectFiltersSection
-      title="Distance"
+      title={t("details.projects.filters.distance")}
       isActive={hasDistanceFilter}
-      badge={hasDistanceFilter ? "Applied" : undefined}
+      badge={
+        hasDistanceFilter ? t("details.tasks.filters.applied") : undefined
+      }
       className={styles.projectDistance}
     >
       <div className={styles.locationSuggestionsWrapper}>
@@ -70,7 +74,7 @@ export const OrganizationProjectLocationFilterSection = ({
               className={styles.locationInput}
               value={inputValue}
               onChange={onLocationChange}
-              placeholder="Set location"
+              placeholder={t("details.projects.filters.setLocation")}
             />
           </div>
 
@@ -88,7 +92,9 @@ export const OrganizationProjectLocationFilterSection = ({
                 onBlur={onRadiusBlur}
                 style={{ width: `${radiusInput.length}ch` }}
               />
-              <span className={styles.radiusSuffix}>km</span>
+              <span className={styles.radiusSuffix}>
+                {t("details.projects.filters.kilometers")}
+              </span>
             </div>
           </div>
         </div>

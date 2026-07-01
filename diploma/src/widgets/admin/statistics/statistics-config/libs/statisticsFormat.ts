@@ -37,19 +37,44 @@ export interface FunnelStage {
 }
 
 export const rangeOptions: { value: DateRangePreset; label: string }[] = [
-  { value: "7d", label: "Last 7 days" },
-  { value: "30d", label: "Last 30 days" },
-  { value: "90d", label: "Last 90 days" },
-  { value: "year", label: "This year" },
-  { value: "custom", label: "Custom range" },
+  { value: "7d", label: "admin:statistics.ranges.last7" },
+  { value: "30d", label: "admin:statistics.ranges.last30" },
+  { value: "90d", label: "admin:statistics.ranges.last90" },
+  { value: "year", label: "admin:statistics.ranges.year" },
+  { value: "custom", label: "admin:statistics.ranges.custom" },
 ];
 
 export const growthRows: GrowthRow[] = [
-  { key: "users", label: "Users", soft: "#fbeaea", solid: "#8b0000" },
-  { key: "organizations", label: "Orgs", soft: "#fff3da", solid: "#c07000" },
-  { key: "projects", label: "Projects", soft: "#e6f6ec", solid: "#1a7a45" },
-  { key: "events", label: "Events", soft: "#e6f1fb", solid: "#185fa5" },
-  { key: "tasks", label: "Tasks", soft: "#f1efe8", solid: "#5f5e5a" },
+  {
+    key: "users",
+    label: "admin:statistics.totals.users",
+    soft: "#fbeaea",
+    solid: "#8b0000",
+  },
+  {
+    key: "organizations",
+    label: "admin:statistics.totals.organizations",
+    soft: "#fff3da",
+    solid: "#c07000",
+  },
+  {
+    key: "projects",
+    label: "admin:statistics.totals.projects",
+    soft: "#e6f6ec",
+    solid: "#1a7a45",
+  },
+  {
+    key: "events",
+    label: "admin:statistics.totals.events",
+    soft: "#e6f1fb",
+    solid: "#185fa5",
+  },
+  {
+    key: "tasks",
+    label: "admin:statistics.totals.tasks",
+    soft: "#f1efe8",
+    solid: "#5f5e5a",
+  },
 ];
 
 export const getRangeDates = (preset: DateRangePreset) => {
@@ -87,7 +112,8 @@ export const defaultRange = {
   ...getRangeDates("30d"),
 };
 
-export const clampPercent = (value: number) => Math.max(0, Math.min(100, value || 0));
+export const clampPercent = (value: number) =>
+  Math.max(0, Math.min(100, value || 0));
 export const formatPercent = (value: number) => `${Math.round(value)}%`;
 export const formatNumber = (value: number | null | undefined) =>
   formatAdminCount(value ?? 0);

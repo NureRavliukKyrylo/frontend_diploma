@@ -1,6 +1,7 @@
 import { formatAdminCount } from "@entities/admin";
 import type { AdminBansStyles } from "../../model/types";
 import { BanMetric } from "../../ui/BanMetric";
+import { useTranslation } from "react-i18next";
 
 interface BansMetricCardsProps {
   styles: AdminBansStyles;
@@ -18,31 +19,35 @@ export const BansMetricCards = ({
   permanentCount,
   isLoading,
   isError,
-}: BansMetricCardsProps) => (
-  <div className={styles.metricsGrid}>
-    <BanMetric
-      styles={styles}
-      label="Active bans"
-      value={formatAdminCount(activeCount)}
-      tone="active"
-      isLoading={isLoading}
-      isError={isError}
-    />
-    <BanMetric
-      styles={styles}
-      label="Expiring in 7 days"
-      value={formatAdminCount(expiringSoonCount)}
-      tone="soon"
-      isLoading={isLoading}
-      isError={isError}
-    />
-    <BanMetric
-      styles={styles}
-      label="Permanent"
-      value={formatAdminCount(permanentCount)}
-      tone="permanent"
-      isLoading={isLoading}
-      isError={isError}
-    />
-  </div>
-);
+}: BansMetricCardsProps) => {
+  const { t } = useTranslation("admin");
+
+  return (
+    <div className={styles.metricsGrid}>
+      <BanMetric
+        styles={styles}
+        label={t("bans.metrics.active")}
+        value={formatAdminCount(activeCount)}
+        tone="active"
+        isLoading={isLoading}
+        isError={isError}
+      />
+      <BanMetric
+        styles={styles}
+        label={t("bans.metrics.expiring")}
+        value={formatAdminCount(expiringSoonCount)}
+        tone="soon"
+        isLoading={isLoading}
+        isError={isError}
+      />
+      <BanMetric
+        styles={styles}
+        label={t("bans.metrics.permanent")}
+        value={formatAdminCount(permanentCount)}
+        tone="permanent"
+        isLoading={isLoading}
+        isError={isError}
+      />
+    </div>
+  );
+};

@@ -8,6 +8,8 @@ import {
   getMyEvents,
   getEventId,
   type EventAttendanceSearchParams,
+  type EventAttendanceManagerSearchParams,
+  getEventAttendanceManagerList,
   getEventAttendancesList,
   getEventJoinedId,
 } from "../../api";
@@ -28,6 +30,11 @@ export const eventKeys = {
     "attendance",
     params,
   ],
+  attendanceManager: (
+    eventId: string,
+    params: EventAttendanceManagerSearchParams,
+  ) =>
+    [...eventKeys.id(eventId), "attendance-manager", params] as const,
 };
 
 export const eventQuery = {
@@ -59,6 +66,15 @@ export const eventQuery = {
     queryOptions({
       queryKey: eventKeys.attendance(eventId, { ...params }),
       queryFn: () => getEventAttendancesList(eventId, { ...params }),
+      placeholderData: (prev) => prev,
+    }),
+  attendanceManager: (
+    eventId: string,
+    params: EventAttendanceManagerSearchParams,
+  ) =>
+    queryOptions({
+      queryKey: eventKeys.attendanceManager(eventId, { ...params }),
+      queryFn: () => getEventAttendanceManagerList(eventId, { ...params }),
       placeholderData: (prev) => prev,
     }),
   infinite: (params: EventPaginationParams) =>

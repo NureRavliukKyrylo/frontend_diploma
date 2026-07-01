@@ -1,8 +1,5 @@
 import { CalendarClock, FileText, Link2 } from "lucide-react";
-import {
-  formatAdminDate,
-  type AdminRequestListItem,
-} from "@entities/admin";
+import { formatAdminDate, type AdminRequestListItem } from "@entities/admin";
 import {
   getCompactEntityLabel,
   getDrawerIntro,
@@ -16,6 +13,7 @@ import { DrawerRequesterCard } from "./DrawerRequesterCard";
 import { GenericRequestPreview } from "./previews/GenericRequestPreview";
 import { ProposedCategoryPreview } from "./previews/ProposedCategoryPreview";
 import { ProposedSkillPreview } from "./previews/ProposedSkillPreview";
+import { useTranslation } from "react-i18next";
 
 interface RequestDrawerBodyProps {
   request: AdminRequestListItem;
@@ -34,7 +32,8 @@ export const RequestDrawerBody = ({
   assignToTask,
   onAssignToTaskChange,
 }: RequestDrawerBodyProps) => {
-  const intro = getDrawerIntro(request);
+  const { t } = useTranslation("admin");
+  const intro = getDrawerIntro(request, t);
   const rawData = stringifyData(request.dataJson);
   const showDecisionControls = isDecidable(request);
 
@@ -49,7 +48,10 @@ export const RequestDrawerBody = ({
         <div className={styles.drawerIntroMeta}>
           <span>
             <Link2 size={14} aria-hidden="true" />
-            {getCompactEntityLabel(request.targetEntityType, request.targetEntityId)}
+            {getCompactEntityLabel(
+              request.targetEntityType,
+              request.targetEntityId,
+            )}
           </span>
           <span>
             <CalendarClock size={14} aria-hidden="true" />
@@ -69,24 +71,16 @@ export const RequestDrawerBody = ({
       <DrawerRequesterCard request={request} />
       <DrawerAuditTrail request={request} />
 
-      {request.typeName === "appeal" && (
-        <div className={styles.drawerSupportBanner}>
-          No resolution action is available for this dispute yet. This needs a
-          backend endpoint before it can be decided here.
-        </div>
-      )}
-
       {(request.typeName === "categoryUpdate" ||
         request.typeName === "categoryDeletion") && (
         <div className={styles.drawerSupportBanner}>
-          Pending backend support. This request type has no confirmed decision
-          endpoint yet.
+          {t("requests.drawer.pendingBackend")}
         </div>
       )}
 
       {request.typeName === "report" && !request.linkedEntityId && (
         <div className={styles.drawerSupportBanner}>
-          No linked moderation case is available for this report yet.
+          {t("requests.drawer.moderationUnavailable")}
         </div>
       )}
 
@@ -94,7 +88,7 @@ export const RequestDrawerBody = ({
         <details className={styles.rawPayloadDetails}>
           <summary>
             <FileText size={15} aria-hidden="true" />
-            Raw payload
+            {t("requests.drawer.rawPayload")}
           </summary>
           <pre className={styles.rawJson}>{rawData}</pre>
         </details>
@@ -102,12 +96,12 @@ export const RequestDrawerBody = ({
 
       {showDecisionControls && (
         <label className={styles.drawerCommentField}>
-          <span>Decision comment (optional)</span>
+          <span>{t("requests.decision.comment")}</span>
           <textarea
             value={decisionComment}
             maxLength={1000}
             onChange={(event) => onDecisionCommentChange(event.target.value)}
-            placeholder="Add a short note for the audit trail"
+            placeholder={t("requests.decision.placeholder")}
           />
         </label>
       )}
@@ -119,7 +113,7 @@ export const RequestDrawerBody = ({
             checked={assignToTask}
             onChange={(event) => onAssignToTaskChange(event.target.checked)}
           />
-          <span>Assign volunteer to the task after approval</span>
+          <span>{t("requests.decision.assignVolunteer")}</span>
         </label>
       )}
     </div>

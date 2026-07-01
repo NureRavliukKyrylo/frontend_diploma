@@ -1,6 +1,7 @@
 import type { UseMutationResult } from "@tanstack/react-query";
 import { ConfirmationModal } from "@shared/ui/modals";
 import type { DeleteSkillTarget } from "../model/useAdminSkillsPage";
+import { useTranslation } from "react-i18next";
 
 interface SkillDeleteConfirmationModalProps {
   target: DeleteSkillTarget | null;
@@ -12,27 +13,31 @@ export const SkillDeleteConfirmationModal = ({
   target,
   mutation,
   onClose,
-}: SkillDeleteConfirmationModalProps) => (
-  <ConfirmationModal
-    isOpen={Boolean(target)}
-    title="Delete this skill?"
-    text={
-      target?.totalVolunteers
-        ? `${target.totalVolunteers} volunteers currently have this skill. Deleting it will not automatically remove it from their profiles - they may be left with a reference to a skill that no longer exists.`
-        : "This action cannot be undone."
-    }
-    confirmText="Delete"
-    cancelText="Cancel"
-    isLoading={mutation.isPending}
-    onCancel={() => {
-      if (!mutation.isPending) {
-        onClose();
+}: SkillDeleteConfirmationModalProps) => {
+  const { t } = useTranslation("admin");
+
+  return (
+    <ConfirmationModal
+      isOpen={Boolean(target)}
+      title={t("skills.delete.title")}
+      text={
+        target?.totalVolunteers
+          ? t("skills.delete.usedText", { count: target.totalVolunteers })
+          : t("skills.delete.warning")
       }
-    }}
-    onConfirm={() => {
-      if (target) {
-        mutation.mutate(target.skill.id);
-      }
-    }}
-  />
-);
+      confirmText={t("common.actions.delete")}
+      cancelText={t("common.actions.cancel")}
+      isLoading={mutation.isPending}
+      onCancel={() => {
+        if (!mutation.isPending) {
+          onClose();
+        }
+      }}
+      onConfirm={() => {
+        if (target) {
+          mutation.mutate(target.skill.id);
+        }
+      }}
+    />
+  );
+};

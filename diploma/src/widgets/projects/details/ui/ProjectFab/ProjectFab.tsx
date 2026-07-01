@@ -11,7 +11,7 @@ interface ProjectFabProps {
   projectId: string;
   project: Project;
   activeTab?: ProjectMode;
-  onTabChange?: (nextTab: ProjectMode) => void;
+  onTabChange?: (nextTab: "overview") => void;
 }
 
 export const ProjectFab = (props: ProjectFabProps) => {

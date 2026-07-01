@@ -5,5 +5,5 @@ export const getEditCommentValidationSchema = (t: TFunction) =>
   Yup.object({
     body: Yup.string()
       .required(t("task:comments.validation.bodyRequired"))
-      .max(80, t("task:comments.validation.bodyMax")),
+      .max(2000, t("task:comments.validation.bodyMax")),
   });

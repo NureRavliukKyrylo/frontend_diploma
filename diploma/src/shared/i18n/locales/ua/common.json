@@ -9,6 +9,8 @@
     "back": "Назад",
     "next": "Далі",
     "submit": "Надіслати",
+    "search": "Пошук",
+    "filter": "Фільтр",
     "reset": "Скинути",
     "approve": "Схвалити",
     "reject": "Відхилити",
@@ -23,6 +25,35 @@
     "readMore": "Читати більше",
     "readLess": "Згорнути",
     "getStarted": "РОЗПОЧАТИ"
+  },
+  "accessibility": {
+    "downArrow": "Відкрити параметри",
+    "checkMark": "Вибрано",
+    "modalImage": "Ілюстрація підтвердження"
+  },
+  "confirmation": {
+    "yes": "Так",
+    "no": "Ні"
+  },
+  "header": {
+    "openMenu": "Відкрити меню",
+    "profile": "Профіль",
+    "loading": "Завантаження...",
+    "timeBank": "Банк часу",
+    "logout": "Вийти",
+    "logoutTitle": "Ви впевнені, що хочете вийти?",
+    "logoutText": "Ви зможете знову ввійти, коли буде потрібно."
+  },
+  "memberMutations": {
+    "missingParticipation": "Для цього учасника немає запису участі.",
+    "roleUpdated": "Роль оновлено",
+    "roleUpdatedText": "Роль користувача {{name}} оновлено.",
+    "roleUpdateFailed": "Не вдалося оновити роль",
+    "memberRemoved": "Учасника видалено",
+    "removalFailed": "Не вдалося видалити учасника",
+    "requestApproved": "Запит схвалено",
+    "requestRejected": "Запит відхилено",
+    "requestUpdateFailed": "Не вдалося оновити запит"
   },
   "policies": {
     "open": "Відкритий для вступу",
@@ -70,6 +101,7 @@
   "errors": {
     "somethingWentWrong": "Щось пішло не так",
     "actionFailed": "Помилка: {{action}}",
+    "hint": "Спробуйте оновити сторінку або завітайте пізніше.",
     "errorHint": "Спробуйте оновити сторінку або завітайте пізніше.",
     "unexpected": "Сталася неочікувана помилка",
     "unauthorized": "Немає доступу. Будь ласка, авторизуйтесь.",
@@ -98,7 +130,13 @@
     "roleUpdateFailed": "Не вдалося оновити роль",
     "memberRemoved": "Учасника видалено",
     "memberRemoveFailed": "Не вдалося видалити учасника",
-    "missingParticipation": "Для цього учасника немає запису участі."
+    "missingParticipation": "Для цього учасника немає запису участі.",
+    "teamMember": "Учасник команди",
+    "volunteer": "Волонтер",
+    "active": "Активний",
+    "inactive": "Неактивний",
+    "status": "Статус",
+    "joined": "Приєднався(-лася)"
   },
   "pagination": {
     "loadMore": "Завантажити ще",
@@ -106,6 +144,8 @@
   },
   "time": {
     "minutes": "{{count}}хв",
+    "compactHours": "{{count}}г",
+    "compactMinutes": "{{count}}хв",
     "hoursAgo": "{{count}}г тому",
     "justNow": "Щойно"
   },
@@ -145,6 +185,12 @@
     "leaveSuccessDescription": "Ви успішно покинули {{entity}}.",
     "leaveFailed": "Не вдалось покинути",
     "approvalRequired": "Потрібне схвалення для {{entity}}",
+    "entities": {
+      "project": "Проєкт",
+      "event": "Подія",
+      "task": "Завдання",
+      "organization": "Організація"
+    },
     "entitiesGenitive": {
       "project": "Проєкту",
       "event": "Події",
@@ -170,6 +216,151 @@
   "mapEmptyState": {
     "title": "Проєктів не знайдено",
     "subtitle": "Спробуйте змінити налаштування фільтрів або пошуковий запит"
+  },
+  "createFlow": {
+    "back": "Назад",
+    "continue": "Далі",
+    "creating": "Створюємо..."
+  },
+  "member": {
+    "ownerLabel": "Власник",
+    "volunteerLabel": "Волонтер",
+    "teamMember": "Учасник команди",
+    "level": "РІВ. {{level}}",
+    "hours": "{{hours}} год",
+    "completedProjects": "Завершені проєкти",
+    "activeProjects": "Активні проєкти",
+    "joinedDate": "Приєднався(-лася) {{date}}",
+    "joinDateUnavailable": "Дата приєднання недоступна",
+    "profile": "Профіль",
+    "sendMessage": "Написати повідомлення",
+    "removeFrom": "Видалити з {{entity}}",
+    "openActions": "Відкрити дії для {{name}}",
+    "changeRole": "Змінити роль",
+    "requestJoin": "Запит на вступ",
+    "requestLeave": "Запит на вихід",
+    "entities": {
+      "organization": "організації",
+      "project": "проєкту",
+      "event": "події",
+      "task": "завдання"
+    }
+  },
+  "memberList": {
+    "tabsLabel": "Розділи учасників: {{entity}}",
+    "membersTab": "Учасники",
+    "requestsTab": "Запити",
+    "searchMembers": "Пошук учасників",
+    "searchRequests": "Пошук запитів",
+    "totalMembers": "Усього учасників",
+    "pendingJoin": "Очікують вступу",
+    "pendingLeave": "Очікують виходу",
+    "noMembersFound": "Учасників не знайдено",
+    "noMembersFoundHint": "Спробуйте інше ім’я або очистьте пошук, щоб побачити всіх учасників.",
+    "noMembers": "Учасників ще немає",
+    "noMembersHint": "Запросіть волонтерів приєднатися до {{entity}}, і вони з’являться тут.",
+    "requestTypesLabel": "Типи запитів: {{entity}}",
+    "joinRequests": "Запити на вступ",
+    "leaveRequests": "Запити на вихід",
+    "noRequestsFound": "Результатів не знайдено",
+    "noRequestsFoundHint": "Спробуйте інше ім’я або очистьте пошук, щоб побачити всі запити.",
+    "noPendingRequests": "Запитів на розгляді немає",
+    "noJoinRequests": "Запити з’являться тут, коли волонтери захочуть приєднатися до {{entity}}.",
+    "noLeaveRequests": "Запити з’являться тут, коли учасники захочуть вийти з {{entity}}.",
+    "removeTitle": "Видалити учасника?",
+    "removeNamedText": "Видалити {{name}} з {{entity}}?",
+    "removeText": "Видалити цього учасника?",
+    "remove": "Видалити",
+    "approveTitle": "Схвалити запит?",
+    "rejectTitle": "Відхилити запит?",
+    "approveText": "Схвалити запит користувача {{name}}: {{kind}}?",
+    "rejectText": "Відхилити запит користувача {{name}}: {{kind}}?"
+  },
+  "inviteCard": {
+    "eyebrow": "Розширюйте команду",
+    "title": "Запросити волонтера",
+    "description": "Перегляньте каталог волонтерів і запросіть нових учасників до {{entity}}.",
+    "cta": "Переглянути волонтерів"
+  },
+  "inviteModal": {
+    "title": "Запросити {{name}}?",
+    "text": "Буде надіслано запрошення приєднатися до {{entity}}.",
+    "send": "Надіслати запрошення",
+    "cancel": "Скасувати",
+    "message": "Повідомлення",
+    "optional": "Необов’язково",
+    "placeholder": "Напишіть коротко про {{entityLabel}} і чому ви хотіли б запросити цю людину.",
+    "entityFallback": "організації"
+  },
+  "publicProfile": {
+    "loading": "Завантажуємо профіль волонтера...",
+    "error": "Не вдалося завантажити профіль волонтера.",
+    "volunteer": "Волонтер",
+    "organizationFallback": "цієї організації",
+    "sections": {
+      "about": "Про себе",
+      "overview": "Огляд",
+      "skills": "Навички",
+      "badges": "Відзнаки",
+      "organizations": "Організації",
+      "availability": "Доступність"
+    },
+    "actions": {
+      "invite": "Запросити до організації",
+      "invited": "Запрошено",
+      "message": "Написати повідомлення",
+      "readMore": "Читати більше",
+      "showLess": "Згорнути"
+    },
+    "about": {
+      "level": "Рівень {{level}}",
+      "maximumLevel": "Максимальний рівень",
+      "nextLevel": "Наступний рівень",
+      "votes_one": "({{count}} голос)",
+      "votes_few": "({{count}} голоси)",
+      "votes_many": "({{count}} голосів)",
+      "votes_other": "({{count}} голосу)",
+      "emptyBio": "Цей волонтер ще не додав інформацію про себе."
+    },
+    "overview": {
+      "activeProjects": "Активні проєкти",
+      "completedProjects": "Завершені проєкти",
+      "hoursContributed": "Відпрацьовані години"
+    },
+    "skills": {
+      "empty": "Навички ще не додано.",
+      "iconLabel": "Іконка навички {{name}}",
+      "levels": {
+        "Beginner": "Початковий",
+        "Intermediate": "Середній",
+        "Advanced": "Просунутий",
+        "Expert": "Експертний"
+      }
+    },
+    "badges": {
+      "progress": "{{unlocked}} з {{total}}",
+      "empty": "Відзнак ще немає."
+    },
+    "organizations": {
+      "empty": "Організацій для показу немає."
+    },
+    "availability": {
+      "allDay": "Увесь день",
+      "notSet": "Не вказано",
+      "unavailable": "Недоступний день",
+      "empty": "Інформацію про доступність ще не додано.",
+      "days": {
+        "sun": "Нд",
+        "mon": "Пн",
+        "tue": "Вт",
+        "wed": "Ср",
+        "thu": "Чт",
+        "fri": "Пт",
+        "sat": "Сб"
+      }
+    },
+    "invitationSent": "Запрошення надіслано",
+    "invitationSentText": "{{name}} тепер може відповісти на запрошення."
   },
   "search": {
     "title": "Пошук"

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { Organization } from "@entities/organization";
 import {
   actionClassNames,
@@ -17,8 +18,11 @@ interface OrganizationFabActionStackProps {
 export const OrganizationFabActionStack = ({
   organization,
   model,
-}: OrganizationFabActionStackProps) => (
-  <motion.div
+}: OrganizationFabActionStackProps) => {
+  const { t } = useTranslation("organizations");
+
+  return (
+    <motion.div
     className={styles.actionsStack}
     variants={menuVariants}
     initial="initial"
@@ -39,13 +43,16 @@ export const OrganizationFabActionStack = ({
         >
           <span className={styles.contextAvatar}>
             {organization.logoUrl ? (
-              <img src={organization.logoUrl} alt={`${organization.name} logo`} />
+              <img
+                src={organization.logoUrl}
+                alt={t("fab.logoAlt", { name: organization.name })}
+              />
             ) : (
               <span>{model.initials}</span>
             )}
           </span>
           <span className={styles.contextText}>
-            <span className={styles.contextHint}>You're working in</span>
+            <span className={styles.contextHint}>{t("fab.context")}</span>
             <span className={styles.contextName}>{organization.name}</span>
           </span>
           <ArrowRight size={16} color="#bbb" strokeWidth={2.4} />
@@ -99,5 +106,6 @@ export const OrganizationFabActionStack = ({
         </motion.div>
       );
     })}
-  </motion.div>
-);
+    </motion.div>
+  );
+};

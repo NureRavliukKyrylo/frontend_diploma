@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useOrganizationSettingsForm } from "@features/organization/settings-form";
 import { OrganizationSettingsModals } from "./components/OrganizationSettingsModals";
 import { OrganizationSettingsTabContent } from "./components/OrganizationSettingsTabContent";
@@ -15,6 +16,7 @@ interface OrganizationSettingsWidgetProps {
 export const OrganizationSettingsWidget = ({
   organizationId,
 }: OrganizationSettingsWidgetProps) => {
+  const { t } = useTranslation("organizations");
   const [activeTab, setActiveTab] = useState<SettingsTab>("general");
   const form = useOrganizationSettingsForm(organizationId);
   const {
@@ -50,23 +52,33 @@ export const OrganizationSettingsWidget = ({
   } = form;
 
   if (isPending || !values) {
-    return <div className={styles.statePanel}>Loading organization settings...</div>;
+    return (
+      <div className={styles.statePanel}>{t("settings.states.loading")}</div>
+    );
   }
 
   if (isError || !organization) {
     return (
       <div className={styles.statePanel}>
-        We could not load this organization right now.
+        {t("settings.states.error")}
       </div>
     );
   }
 
   if (!isOrganizationOwner && isEditAccessLoading) {
-    return <div className={styles.statePanel}>Checking your access...</div>;
+    return (
+      <div className={styles.statePanel}>
+        {t("settings.states.checkingAccess")}
+      </div>
+    );
   }
 
   if (!isOrganizationOwner && !canEditOrganization) {
-    return <div className={styles.statePanel}>Redirecting...</div>;
+    return (
+      <div className={styles.statePanel}>
+        {t("settings.states.redirecting")}
+      </div>
+    );
   }
 
   return (

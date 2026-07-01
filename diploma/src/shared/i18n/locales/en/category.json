@@ -12,5 +12,11 @@
   },
   "filter": {
     "error": "Failed to load categories"
+  },
+  "picker": {
+    "search": "Search categories",
+    "remove": "Remove {{name}}",
+    "loading": "Loading categories...",
+    "empty": "No categories found"
   }
 }

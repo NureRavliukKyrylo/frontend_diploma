@@ -1,6 +1,7 @@
 import { BaseModal } from "@shared/ui/modals";
 import { Check, ChevronDown, ChevronUp, Plus, X } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import type { AdminCategoryCardData } from "../../lib/categoryVisuals";
 import { categoryFallbackGradient } from "../../lib/categoryVisuals";
 import { useCategoryForm } from "../model/useCategoryForm";
@@ -20,6 +21,7 @@ export const CategoryFormModal = ({
   category,
   onClose,
 }: CategoryFormModalProps) => {
+  const { t } = useTranslation("admin");
   const [localizationOpen, setLocalizationOpen] = useState(false);
   const [imageBroken, setImageBroken] = useState(false);
   const { formik, isSubmitting } = useCategoryForm({
@@ -27,11 +29,14 @@ export const CategoryFormModal = ({
     category,
     onSuccess: onClose,
   });
-  const title = mode === "create" ? "Create category" : "Edit category";
+  const title =
+    mode === "create"
+      ? t("categories.form.createTitle")
+      : t("categories.form.editTitle");
   const subtitle =
     mode === "create"
-      ? "Create a public category used across projects, events, and skills."
-      : "Update the category name, description, or cover image URL.";
+      ? t("categories.form.createSubtitle")
+      : t("categories.form.editSubtitle");
   const imageUrl = formik.values.imageUrl.trim();
   const previewBackground =
     imageUrl && !imageBroken ? `url(${imageUrl})` : categoryFallbackGradient;
@@ -48,7 +53,7 @@ export const CategoryFormModal = ({
           type="button"
           className={formStyles.closeButton}
           onClick={onClose}
-          aria-label="Close category form"
+          aria-label={t("categories.form.close")}
         >
           <X size={18} aria-hidden="true" />
         </button>
@@ -58,7 +63,8 @@ export const CategoryFormModal = ({
 
         <label className={formStyles.field}>
           <span className={formStyles.fieldLabel}>
-            Name <span className={formStyles.fieldRequired}>*</span>
+            {t("categories.form.name")}{" "}
+            <span className={formStyles.fieldRequired}>*</span>
           </span>
           <input
             name="name"
@@ -74,7 +80,9 @@ export const CategoryFormModal = ({
         </label>
 
         <label className={formStyles.field}>
-          <span className={formStyles.fieldLabel}>Description</span>
+          <span className={formStyles.fieldLabel}>
+            {t("categories.form.description")}
+          </span>
           <textarea
             name="description"
             value={formik.values.description}
@@ -96,7 +104,9 @@ export const CategoryFormModal = ({
         </label>
 
         <label className={formStyles.field}>
-          <span className={formStyles.fieldLabel}>Image URL</span>
+          <span className={formStyles.fieldLabel}>
+            {t("categories.form.imageUrl")}
+          </span>
           <input
             name="imageUrl"
             value={formik.values.imageUrl}
@@ -108,7 +118,9 @@ export const CategoryFormModal = ({
             className={formStyles.fieldInput}
           />
           {formik.touched.imageUrl && formik.errors.imageUrl && (
-            <div className={formStyles.fieldError}>{formik.errors.imageUrl}</div>
+            <div className={formStyles.fieldError}>
+              {formik.errors.imageUrl}
+            </div>
           )}
         </label>
 
@@ -136,13 +148,15 @@ export const CategoryFormModal = ({
           ) : (
             <ChevronDown size={14} aria-hidden="true" />
           )}
-          Add Ukrainian translation (optional)
+          {t("categories.form.addUkrainian")}
         </button>
 
         {localizationOpen && (
           <>
             <label className={formStyles.field}>
-              <span className={formStyles.fieldLabel}>Ukrainian name</span>
+              <span className={formStyles.fieldLabel}>
+                {t("categories.form.ukrainianName")}
+              </span>
               <input
                 name="nameLocalizedUk"
                 value={formik.values.nameLocalizedUk}
@@ -154,7 +168,9 @@ export const CategoryFormModal = ({
             </label>
 
             <label className={formStyles.field}>
-              <span className={formStyles.fieldLabel}>Ukrainian description</span>
+              <span className={formStyles.fieldLabel}>
+                {t("categories.form.ukrainianDescription")}
+              </span>
               <textarea
                 name="descriptionLocalizedUk"
                 value={formik.values.descriptionLocalizedUk}
@@ -178,7 +194,7 @@ export const CategoryFormModal = ({
             className={formStyles.cancelButton}
             onClick={onClose}
           >
-            Cancel
+            {t("common.actions.cancel")}
           </button>
           <button
             type="submit"
@@ -190,7 +206,9 @@ export const CategoryFormModal = ({
             ) : (
               <Check size={16} aria-hidden="true" />
             )}
-            {mode === "create" ? "Create category" : "Save changes"}
+            {mode === "create"
+              ? t("categories.form.createTitle")
+              : t("categories.form.saveChanges")}
           </button>
         </div>
       </form>

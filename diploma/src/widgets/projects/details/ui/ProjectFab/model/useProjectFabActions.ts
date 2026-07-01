@@ -1,6 +1,10 @@
 import { useMemo, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import type { Project, ProjectMode } from "@entities/project";
+import { pendingEntityRequestsQuery } from "@entities/request";
+import { getContextRolesForEntity } from "@entities/organization";
+import { useProjectPermissionContext } from "../../../model/useProjectPermissionContext";
 import {
   canManageProject,
   canManageProjectMembers,
@@ -16,7 +20,7 @@ interface Params {
   projectId: string;
   project: Project;
   activeTab?: ProjectMode;
-  onTabChange?: (nextTab: ProjectMode) => void;
+  onTabChange?: (nextTab: "overview") => void;
 }
 
 export interface ProjectFabAction extends ProjectFabActionConfig {
@@ -43,9 +47,42 @@ export const useProjectFabActions = ({
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isTaskDrawerOpen, setIsTaskDrawerOpen] = useState(false);
-  const canContent = canManageProject(project);
-  const canMembers = canManageProjectMembers(project);
-  const canRoles = canManageProjectRoles(project);
+  const permissionContext = useProjectPermissionContext(project);
+  const rolesAccessResult = useQuery({
+    queryKey: ["context-roles", "project", projectId],
+    queryFn: () => getContextRolesForEntity("project", projectId),
+    enabled: !canManageProjectRoles(project, permissionContext),
+    retry: false,
+  });
+  const currentRole = rolesAccessResult.data?.find(
+    (role) => role.id === project.currentUserRole?.roleId,
+  );
+  const projectWithResolvedRole = currentRole
+    ? {
+        ...project,
+        currentUserRole: {
+          ...project.currentUserRole,
+          permissions: currentRole.permissions,
+        },
+      }
+    : project;
+  const hasKnownMembersAccess = canManageProjectMembers(
+    projectWithResolvedRole,
+    permissionContext,
+  );
+  const membersAccessResult = useQuery({
+    ...pendingEntityRequestsQuery("project", projectId, "join"),
+    enabled: !hasKnownMembersAccess,
+  });
+  const canContent = canManageProject(
+    projectWithResolvedRole,
+    permissionContext,
+  );
+  const canMembers =
+    hasKnownMembersAccess || membersAccessResult.isSuccess;
+  const canRoles =
+    canManageProjectRoles(projectWithResolvedRole, permissionContext) ||
+    rolesAccessResult.isSuccess;
   const closeMenu = () => setIsOpen(false);
 
   const actions = useMemo<ProjectFabAction[]>(

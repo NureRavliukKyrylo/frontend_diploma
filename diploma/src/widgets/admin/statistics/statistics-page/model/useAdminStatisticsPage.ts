@@ -14,8 +14,10 @@ import {
   type TotalCardItem,
 } from "@widgets/admin/statistics/statistics-config/libs/statisticsFormat";
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export const useAdminStatisticsPage = () => {
+  const { t } = useTranslation("admin");
   const [range, setRange] = useState<DateRangeState>(defaultRange);
   const platformQuery = useQuery(adminDashboardQuery.platformStatistics());
   const advancedQuery = useQuery(
@@ -54,13 +56,13 @@ export const useAdminStatisticsPage = () => {
 
   const funnelStages: FunnelStage[] = [
     {
-      label: "Sent",
+      label: t("statistics.funnel.sent"),
       value: formatNumber(funnel?.invitationsSent ?? 0),
       width: completionBaseline > 0 ? 100 : 0,
       color: "#1a1a1a",
     },
     {
-      label: "Accepted",
+      label: t("statistics.funnel.accepted"),
       value: `${formatNumber(funnel?.invitationsAccepted ?? 0)} - ${formatPercent(
         funnel?.inviteToAcceptPercent ?? 0,
       )}`,
@@ -68,7 +70,7 @@ export const useAdminStatisticsPage = () => {
       color: "#185fa5",
     },
     {
-      label: "Completed",
+      label: t("statistics.funnel.completed"),
       value: `${formatNumber(
         funnel?.attendanceOrCompletions ?? 0,
       )} - ${formatPercent(funnel?.acceptToCompletionPercent ?? 0)}`,
@@ -82,49 +84,49 @@ export const useAdminStatisticsPage = () => {
 
   const totals: TotalCardItem[] = [
     {
-      label: "Users",
+      label: t("statistics.totals.users"),
       value: formatNumber(platform?.usersTotal),
       tone: "neutral",
       isLoading: platformQuery.isLoading,
       isError: platformQuery.isError,
     },
     {
-      label: "Active",
+      label: t("statistics.totals.active"),
       value: formatNumber(platform?.activeUsers),
       tone: "green",
       isLoading: platformQuery.isLoading,
       isError: platformQuery.isError,
     },
     {
-      label: "Orgs",
+      label: t("statistics.totals.organizations"),
       value: formatNumber(platform?.organizationsTotal),
       tone: "amber",
       isLoading: platformQuery.isLoading,
       isError: platformQuery.isError,
     },
     {
-      label: "Projects",
+      label: t("statistics.totals.projects"),
       value: formatNumber(platform?.projectsTotal),
       tone: "neutral",
       isLoading: platformQuery.isLoading,
       isError: platformQuery.isError,
     },
     {
-      label: "Events",
+      label: t("statistics.totals.events"),
       value: formatNumber(platform?.eventsTotal),
       tone: "neutral",
       isLoading: platformQuery.isLoading,
       isError: platformQuery.isError,
     },
     {
-      label: "Tasks",
+      label: t("statistics.totals.tasks"),
       value: formatNumber(platform?.tasksTotal),
       tone: "neutral",
       isLoading: platformQuery.isLoading,
       isError: platformQuery.isError,
     },
     {
-      label: "Open reports",
+      label: t("statistics.totals.openReports"),
       value: formatNumber(platform?.openReports),
       tone: "red",
       isLoading: platformQuery.isLoading,
@@ -134,28 +136,28 @@ export const useAdminStatisticsPage = () => {
 
   const timeBankTotals: TotalCardItem[] = [
     {
-      label: "Total balance",
+      label: t("statistics.totals.totalBalance"),
       value: formatAdminHoursFromMinutes(timeBank?.totalBalanceMinutes),
       tone: "neutral",
       isLoading: timeBankQuery.isLoading,
       isError: timeBankQuery.isError,
     },
     {
-      label: "Reserved share",
+      label: t("statistics.totals.reservedShare"),
       value: formatPercent(timeBank?.reservedSharePercent ?? 0),
       tone: "amber",
       isLoading: timeBankQuery.isLoading,
       isError: timeBankQuery.isError,
     },
     {
-      label: "Spend/earn",
+      label: t("statistics.totals.spendEarn"),
       value: formatRatio(timeBank?.spendToEarnRatio),
       tone: "green",
       isLoading: timeBankQuery.isLoading,
       isError: timeBankQuery.isError,
     },
     {
-      label: "Wallets",
+      label: t("statistics.totals.wallets"),
       value: formatNumber(timeBank?.walletsCount),
       tone: "neutral",
       isLoading: timeBankQuery.isLoading,

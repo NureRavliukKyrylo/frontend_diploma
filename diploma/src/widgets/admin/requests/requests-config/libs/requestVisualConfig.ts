@@ -51,7 +51,9 @@ const unsupportedVisual: RequestVisual = {
   shadow: "rgba(0, 0, 0, 0.06)",
 };
 
-export const requestVisuals: Partial<Record<AdminRequestTypeName, RequestVisual>> = {
+export const requestVisuals: Partial<
+  Record<AdminRequestTypeName, RequestVisual>
+> = {
   organizationJoin: joinVisual,
   projectJoin: joinVisual,
   eventJoin: joinVisual,

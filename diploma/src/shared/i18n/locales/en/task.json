@@ -3,13 +3,52 @@
     "pendingLeave": "Your leave request is pending approval",
     "pendingJoin": "Your join request is pending approval"
   },
+  "create": {
+    "datesRequired": "Task dates are required.",
+    "created": "Task created",
+    "failed": "Failed to create task",
+    "close": "Close create task drawer",
+    "newTask": "New task",
+    "organization": "Organization",
+    "creatingIn": "Creating in {{name}}",
+    "back": "Back",
+    "creating": "Creating...",
+    "submit": "Create task",
+    "continue": "Continue",
+    "stepsLabel": "Task setup steps",
+    "steps": {
+      "basics": "Basics",
+      "basicsSub": "Title & description",
+      "details": "Details",
+      "detailsSub": "Time & location",
+      "categories": "Categories",
+      "categoriesSub": "Tags & topics",
+      "access": "Access",
+      "accessSub": "Policies"
+    },
+    "headers": {
+      "step1Eyebrow": "STEP 01 OF 04",
+      "step1Title": "What needs to be done?",
+      "step1Subtitle": "Give your task a clear name and description.",
+      "step2Eyebrow": "STEP 02 OF 04",
+      "step2Title": "Time & location",
+      "step2Subtitle": "Set when and where this task takes place.",
+      "step3Eyebrow": "STEP 03 OF 04",
+      "step3Title": "Categories",
+      "step3Subtitle": "Help people find this task. Optional.",
+      "step4Eyebrow": "STEP 04 OF 04",
+      "step4Title": "Access policies",
+      "step4Subtitle": "Control how volunteers join and leave."
+    }
+  },
   "labels": {
     "task": "Task",
     "joinedChip": "Joined Task",
     "chat": "TASK CHAT",
     "project": "PROJECT",
     "event": "EVENT",
-    "votes": "({{count}} VOTES)",
+    "votes_one": "({{count}} VOTE)",
+    "votes_other": "({{count}} VOTES)",
     "skills": "TASK Skills",
     "activities": "Activities",
     "locations": "Locations",
@@ -81,6 +120,16 @@
       "saved": "Work log updated",
       "failed": "Work log update failed",
       "exported": "Work log export started"
+    },
+    "statuses": {
+      "Draft": "Draft",
+      "Submitted": "Submitted",
+      "ManagerEditedPendingVolunteerReconfirm": "Awaiting volunteer confirmation",
+      "Approved": "Approved",
+      "Rejected": "Rejected",
+      "Disputed": "Disputed",
+      "Resolved": "Resolved",
+      "Cancelled": "Cancelled"
     }
   },
   "statuses": {
@@ -104,10 +153,14 @@
     "emptyStateSubtitle": "Be the first one to leave a comment",
     "inputPlaceholder": "Ask a question about this activity...",
     "inputEditPlaceholder": "Edit a question about this activity...",
+    "replyPlaceholder": "Write a reply to {{name}}...",
+    "replyingTo": "Replying to {{name}}",
     "actions": {
       "cancel": "Cancel",
       "deleteComment": "Delete Comment",
-      "editComment": "Edit Comment"
+      "editComment": "Edit Comment",
+      "reply": "Reply",
+      "send": "Send comment"
     },
     "deletedComment": "This comment has been deleted",
     "deleteModal": {
@@ -116,12 +169,13 @@
     },
     "validation": {
       "bodyRequired": "Comment is required",
-      "bodyMax": "Comment must be 80 characters or less"
+      "bodyMax": "Comment must be 2000 characters or less"
     },
     "notifications": {
       "createSuccessTitle": "Create Comment Success",
       "createSuccessDescription": "Your comment has been created successfully",
       "createFailedTitle": "Comment creation Failed",
+      "replyForbidden": "You do not have permission to reply to task comments.",
       "editSuccessTitle": "Comment Edit Success",
       "editSuccessDescription": "Your comment has been edited successfully",
       "editFailedTitle": "Comment edition Failed",

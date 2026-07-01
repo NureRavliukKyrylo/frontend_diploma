@@ -2,6 +2,7 @@ import type { AdminUserListItem } from "@entities/admin";
 import dayjs from "dayjs";
 import { Ban, Clock3 } from "lucide-react";
 import type { BanDisplay, SortValue } from "../model/types";
+import type { TFunction } from "i18next";
 
 export const getInitials = (user: AdminUserListItem) => {
   const fullName = `${user.firstName} ${user.lastName}`.trim();
@@ -50,18 +51,18 @@ export const getBanTone = (ban: BanDisplay["ban"]): BanDisplay["tone"] => {
   return days <= 7 ? "soon" : "long";
 };
 
-export const getStatusLabel = (ban: BanDisplay["ban"]) => {
+export const getStatusLabel = (ban: BanDisplay["ban"], t: TFunction) => {
   const days = getDaysUntilExpiry(ban.expiresAt);
 
   if (days === null) {
-    return "Permanent";
+    return t("admin:bans.card.permanent");
   }
 
   if (days === 0) {
-    return "Expires today";
+    return t("admin:bans.card.expiresToday");
   }
 
-  return `Expires in ${days} ${days === 1 ? "day" : "days"}`;
+  return t("admin:bans.card.expiresIn", { count: days });
 };
 
 export const getBanIcon = (tone: BanDisplay["tone"]) =>
@@ -73,7 +74,8 @@ export const sortBans = (items: BanDisplay[], sort: SortValue) => {
   if (sort === "oldest") {
     return sorted.sort(
       (left, right) =>
-        dayjs(left.ban.createdAt).valueOf() - dayjs(right.ban.createdAt).valueOf(),
+        dayjs(left.ban.createdAt).valueOf() -
+        dayjs(right.ban.createdAt).valueOf(),
     );
   }
 
@@ -92,6 +94,7 @@ export const sortBans = (items: BanDisplay[], sort: SortValue) => {
 
   return sorted.sort(
     (left, right) =>
-      dayjs(right.ban.createdAt).valueOf() - dayjs(left.ban.createdAt).valueOf(),
+      dayjs(right.ban.createdAt).valueOf() -
+      dayjs(left.ban.createdAt).valueOf(),
   );
 };

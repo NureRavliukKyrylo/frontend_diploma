@@ -1,4 +1,5 @@
 import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { useTranslation } from "react-i18next";
 import { useOrganizationCreateBasicInfoForm } from "@features/organization/create-form";
 import {
   IconBuildingCommunity,
@@ -16,6 +17,7 @@ const getFieldError = (error?: string, touched?: boolean, submitCount = 0) => {
 };
 
 export const OrganizationCreateBasicInfoStep = () => {
+  const { t } = useTranslation("organizations");
   const { formik } = useOrganizationCreateBasicInfoForm();
   const nameError = getFieldError(
     formik.errors.name,
@@ -47,12 +49,10 @@ export const OrganizationCreateBasicInfoStep = () => {
       <div className={commonStyles.card}>
         <div className={commonStyles.cardDeco} />
         <h2 className={commonStyles.cardHeading}>
-          Tell us about your organization
+          {t("create.basics.title")}
         </h2>
         <p className={commonStyles.cardDesc}>
-          Add your organization&apos;s name and a short description to help
-          volunteers, partners, and supporters understand your mission and
-          impact.
+          {t("create.basics.text")}
         </p>
 
         <div className={commonStyles.fields}>
@@ -61,7 +61,7 @@ export const OrganizationCreateBasicInfoStep = () => {
               className={commonStyles.fieldLabel}
               htmlFor="organization-name"
             >
-              Organization name
+              {t("create.fields.name")}
             </label>
             <div className={commonStyles.iconField}>
               <IconBuildingCommunity
@@ -74,11 +74,11 @@ export const OrganizationCreateBasicInfoStep = () => {
                 name="name"
                 type="text"
                 autoComplete="organization"
-                aria-label="Organization name"
+                aria-label={t("create.fields.name")}
                 className={`${commonStyles.input} ${
                   nameError ? commonStyles.inputError : ""
                 }`}
-                placeholder="e.g. Green Hands Volunteer Community"
+                placeholder={t("create.basics.nameExample")}
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -95,7 +95,7 @@ export const OrganizationCreateBasicInfoStep = () => {
                 className={commonStyles.fieldLabel}
                 htmlFor="organization-website"
               >
-                Website
+                {t("create.fields.website")}
               </label>
               <div className={commonStyles.iconField}>
                 <IconWorld
@@ -109,12 +109,12 @@ export const OrganizationCreateBasicInfoStep = () => {
                   type="text"
                   inputMode="url"
                   autoComplete="url"
-                  aria-label="Organization website"
+                  aria-label={t("create.fields.website")}
                   spellCheck={false}
                   className={`${commonStyles.input} ${
                     websiteError ? commonStyles.inputError : ""
                   }`}
-                  placeholder="yourorganization.org"
+                  placeholder={t("create.basics.websiteExample")}
                   value={formik.values.website}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -130,7 +130,7 @@ export const OrganizationCreateBasicInfoStep = () => {
                 className={commonStyles.fieldLabel}
                 htmlFor="organization-email"
               >
-                Email
+                {t("create.fields.email")}
               </label>
               <div className={commonStyles.iconField}>
                 <IconMail
@@ -143,12 +143,12 @@ export const OrganizationCreateBasicInfoStep = () => {
                   name="contactEmail"
                   type="email"
                   autoComplete="email"
-                  aria-label="Organization email"
+                  aria-label={t("create.fields.email")}
                   spellCheck={false}
                   className={`${commonStyles.input} ${
                     emailError ? commonStyles.inputError : ""
                   }`}
-                  placeholder="contact@yourorganization.org"
+                  placeholder={t("create.basics.emailExample")}
                   value={formik.values.contactEmail}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -165,16 +165,16 @@ export const OrganizationCreateBasicInfoStep = () => {
               className={commonStyles.fieldLabel}
               htmlFor="organization-description"
             >
-              Description
+              {t("create.fields.description")}
             </label>
             <textarea
               id="organization-description"
               name="description"
-              aria-label="Organization description"
+              aria-label={t("create.fields.description")}
               className={`${commonStyles.textarea} ${
                 descriptionError ? commonStyles.textareaError : ""
               }`}
-              placeholder="Share your mission, what you do, and the impact you're aiming for..."
+              placeholder={t("create.basics.descriptionExample")}
               maxLength={1000}
               value={formik.values.description}
               onChange={formik.handleChange}
@@ -192,7 +192,7 @@ export const OrganizationCreateBasicInfoStep = () => {
           type="submit"
           className={commonStyles.continueButton}
         >
-          Continue
+          {t("create.actions.continue")}
         </BaseButtonWrapper>
       </div>
     </form>

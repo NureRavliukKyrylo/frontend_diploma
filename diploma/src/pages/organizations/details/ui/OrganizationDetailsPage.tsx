@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { organizationQuery, type OrganizationMember } from "@entities/organization";
@@ -20,6 +21,7 @@ export const OrganizationDetailsPage = ({
   organizationId: id,
   initialTab = "overview",
 }: OrganizationDetailsPageProps) => {
+  const { t } = useTranslation("organizations");
   const [activeTab, setActiveTab] =
     useState<OrganizationDetailsTab>(initialTab);
   const storedUserId = useUserStore((state) => state.userId);
@@ -69,12 +71,21 @@ export const OrganizationDetailsPage = ({
   const canViewMembersTab = isMembersSuccess && !isMembersAccessDenied;
 
   const resolvedMembers = useMemo(() => {
-    const baseMembers = members.length > 0 ? members : (organization?.members ?? []);
+    const baseMembers = isMembersLoading
+      ? []
+      : isMembersSuccess
+        ? members
+        : (organization?.members ?? []);
     const membersMap = new Map<string, OrganizationMember>(
       baseMembers.map((member) => [member.id, member]),
     );
 
-    if (viewerUserId && normalizedOwnerId && viewerUserId === normalizedOwnerId) {
+    if (
+      !isMembersLoading &&
+      viewerUserId &&
+      normalizedOwnerId &&
+      viewerUserId === normalizedOwnerId
+    ) {
       const existingOwner = membersMap.get(viewerUserId);
 
       membersMap.set(viewerUserId, {
@@ -105,6 +116,8 @@ export const OrganizationDetailsPage = ({
     currentUser?.id,
     currentUser?.lastName,
     currentUser?.profile?.avatarUrl,
+    isMembersLoading,
+    isMembersSuccess,
     members,
     organization?.members,
     storedEmail,
@@ -117,7 +130,7 @@ export const OrganizationDetailsPage = ({
   if (isPending) {
     return (
       <div className={styles.page}>
-        <div className={styles.loadingPanel}>Loading organization details...</div>
+        <div className={styles.loadingPanel}>{t("details.states.loading")}</div>
       </div>
     );
   }
@@ -126,7 +139,7 @@ export const OrganizationDetailsPage = ({
     return (
       <div className={styles.page}>
         <div className={styles.errorPanel}>
-          Organization not found or unavailable right now.
+          {t("details.states.error")}
         </div>
       </div>
     );

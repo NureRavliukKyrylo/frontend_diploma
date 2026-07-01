@@ -42,6 +42,10 @@ export const CreateEventPage = ({
   const form = useCreateEventForm(organizationId, projectId);
   const isLastStep = form.activeStep === EVENT_CREATE_STEPS.length - 1;
   const stepHeader = EVENT_CREATE_STEP_HEADERS[form.activeStep];
+  const localizedSteps = EVENT_CREATE_STEPS.map((step) => ({
+    label: t(step.label),
+    sublabel: t(step.sublabel),
+  }));
 
   const handleCancel = () => {
     if (projectId) {
@@ -118,7 +122,7 @@ export const CreateEventPage = ({
   if (isLoading || !organization) {
     return (
       <div className={styles.loadingPage}>
-        <div className={styles.loadingCard}>Preparing event setup...</div>
+        <div className={styles.loadingCard}>{t("create.loading")}</div>
       </div>
     );
   }
@@ -130,8 +134,8 @@ export const CreateEventPage = ({
       <div className={styles.workArea}>
         <CreateFlowTopRow
           organizationName={organization.name}
-          title="New event"
-          backLabel="Back to organization events"
+          title={t("create.title")}
+          backLabel={t("create.back")}
           contextLabel={
             projectContext ? t("create.projectContextLabel") : undefined
           }
@@ -146,7 +150,7 @@ export const CreateEventPage = ({
             organizationName={organization.name}
             logoUrl={organization.logoUrl}
             initials={initials}
-            label="Event setup"
+            label={t("create.setup")}
             projectContext={
               projectId && projectContext
                 ? {
@@ -156,7 +160,7 @@ export const CreateEventPage = ({
                   }
                 : undefined
             }
-            steps={EVENT_CREATE_STEPS}
+            steps={localizedSteps}
             activeStep={form.activeStep}
             onStepClick={form.goToStep}
             styles={styles}
@@ -164,12 +168,12 @@ export const CreateEventPage = ({
 
           <CreateFlowContent
             activeStep={form.activeStep}
-            eyebrow={stepHeader.eyebrow}
-            title={stepHeader.title}
-            subtitle={stepHeader.subtitle}
+            eyebrow={t(stepHeader.eyebrow)}
+            title={t(stepHeader.title)}
+            subtitle={t(stepHeader.subtitle)}
             isLastStep={isLastStep}
             isSubmitting={form.isSubmitting}
-            finalLabel="Create event"
+            finalLabel={t("create.submit")}
             onBack={form.goBack}
             onPrimaryAction={handlePrimaryAction}
             styles={styles}

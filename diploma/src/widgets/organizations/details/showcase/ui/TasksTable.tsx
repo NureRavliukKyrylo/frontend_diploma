@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Avatar } from "@shared/ui";
 import { OrganizationDetailsEmptyState } from "../../shared/empty-state/ui/EmptyState";
 import type { ProjectTaskRowData } from "../lib/helpers";
@@ -15,21 +16,22 @@ interface OrganizationTasksTableProps {
 }
 
 const statusLabelMap = {
-  Pending: "Pending",
-  InProgress: "In progress",
-  Completed: "Completed",
-  Cancelled: "Cancelled",
+  Pending: "details.showcase.status.pending",
+  InProgress: "details.showcase.status.inProgress",
+  Completed: "details.showcase.status.completed",
+  Cancelled: "details.showcase.status.cancelled",
 } as const;
 
 export const OrganizationTasksTable = ({
   taskRows,
   isLoading,
 }: OrganizationTasksTableProps) => {
+  const { t } = useTranslation("organizations");
   return (
     <div id="organization-tasks-section" className={styles.tasksBlock}>
       <motion.div className={styles.tasksSurface} variants={surfaceVariants}>
         <div className={styles.tasksHeading}>
-          <h3>Tasks</h3>
+          <h3>{t("details.showcase.tasks")}</h3>
         </div>
 
         {isLoading ? (
@@ -41,11 +43,11 @@ export const OrganizationTasksTable = ({
         ) : taskRows.length > 0 ? (
           <>
             <div className={styles.tasksHeader}>
-              <span>Task</span>
-              <span>Context</span>
-              <span>Assignee</span>
-              <span>Due date</span>
-              <span>Status</span>
+              <span>{t("details.showcase.task")}</span>
+              <span>{t("details.showcase.context")}</span>
+              <span>{t("details.showcase.assignee")}</span>
+              <span>{t("details.showcase.dueDate")}</span>
+              <span>{t("details.showcase.statusLabel")}</span>
             </div>
 
             <motion.div className={styles.tasksRows} variants={rowsContainerVariants}>
@@ -61,7 +63,9 @@ export const OrganizationTasksTable = ({
                           key={`${task.id}-${assignee.name ?? assignee.src ?? index}`}
                           className={styles.assigneeItem}
                           style={{ zIndex: task.assignees.length - index + 1 }}
-                          title={assignee.name ?? "Team member"}
+                          title={
+                            assignee.name ?? t("details.showcase.teamMember")
+                          }
                         >
                           <Avatar
                             src={assignee.src ?? undefined}
@@ -73,7 +77,9 @@ export const OrganizationTasksTable = ({
                         </span>
                       ))
                     ) : (
-                      <span className={styles.unassignedLabel}>Unassigned</span>
+                      <span className={styles.unassignedLabel}>
+                        {t("details.showcase.unassigned")}
+                      </span>
                     )}
                   </div>
 
@@ -82,7 +88,7 @@ export const OrganizationTasksTable = ({
                   <span
                     className={`${styles.statusPill} ${styles[`status${task.status}`]}`}
                   >
-                    {statusLabelMap[task.status]}
+                    {t(statusLabelMap[task.status])}
                   </span>
                 </motion.div>
               ))}

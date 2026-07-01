@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useProjectSettingsForm } from "@features/project";
 import { ProjectSettingsModals } from "./components/ProjectSettingsModals";
 import { ProjectSettingsTabContent } from "./components/ProjectSettingsTabContent";
@@ -17,6 +18,7 @@ interface ProjectSettingsWidgetProps {
 export const ProjectSettingsWidget = ({
   projectId,
 }: ProjectSettingsWidgetProps) => {
+  const { t } = useTranslation("project");
   const [activeTab, setActiveTab] = useState<ActiveTab>("general");
   const form = useProjectSettingsForm(projectId);
   const {
@@ -49,8 +51,8 @@ export const ProjectSettingsWidget = ({
   if (isLoading) {
     return (
       <StatePanel
-        title="Loading project settings"
-        text="Fetching the latest project details."
+        title={t("settings.states.loadingTitle")}
+        text={t("settings.states.loadingText")}
       />
     );
   }
@@ -58,15 +60,15 @@ export const ProjectSettingsWidget = ({
   if (isError || !project || !values) {
     return (
       <StatePanel
-        title="Project unavailable"
-        text="We could not load this project settings page."
+        title={t("settings.states.unavailableTitle")}
+        text={t("settings.states.unavailableText")}
         action={
           <button
             type="button"
             className={styles.stateButton}
             onClick={navigateToProject}
           >
-            Back to project
+            {t("settings.states.back")}
           </button>
         }
       />
@@ -76,15 +78,15 @@ export const ProjectSettingsWidget = ({
   if (!canEditProject) {
     return (
       <StatePanel
-        title="You do not have access"
-        text="Project settings require the project.content_manage permission."
+        title={t("settings.states.accessTitle")}
+        text={t("settings.states.accessText")}
         action={
           <button
             type="button"
             className={styles.stateButton}
             onClick={navigateToProject}
           >
-            Back to project
+            {t("settings.states.back")}
           </button>
         }
       />

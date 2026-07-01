@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Switch } from "@shared/ui";
 import type { ProjectSearchParams } from "@entities/project";
 import styles from "../../../shared/filters/Filters.module.scss";
@@ -18,21 +19,24 @@ export const OrganizationProjectMoreOptionsFilterSection = ({
   search,
   onChange,
 }: OrganizationProjectMoreOptionsFilterSectionProps) => {
+  const { t } = useTranslation("organizations");
   const hasMoreOptionsFilter = Boolean(
     search.IncludeArchived || search.ShowJoined,
   );
 
   return (
     <OrganizationProjectFiltersSection
-      title="More options"
+      title={t("details.projects.filters.more")}
       isActive={hasMoreOptionsFilter}
-      badge={hasMoreOptionsFilter ? "Applied" : undefined}
+      badge={
+        hasMoreOptionsFilter ? t("details.tasks.filters.applied") : undefined
+      }
       className={styles.moreOptions}
     >
       <div className={styles.wrapperMoreOptionsFilter}>
         <div className={styles.completedProject}>
           <h4 className={styles.titleFilterMoreOptions}>
-            Show only active projects
+            {t("details.projects.filters.activeOnly")}
           </h4>
           <Switch
             isSelected={search.IncludeArchived ?? false}
@@ -44,7 +48,7 @@ export const OrganizationProjectMoreOptionsFilterSection = ({
         </div>
         <div className={styles.joinedProject}>
           <h4 className={styles.titleFilterMoreOptions}>
-            Display joined projects
+            {t("details.projects.filters.joined")}
           </h4>
           <Switch
             isSelected={search.ShowJoined ?? false}

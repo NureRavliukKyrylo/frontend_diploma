@@ -1,37 +1,35 @@
 export const EVENT_CREATE_STEPS = [
-  { label: "Basics", sublabel: "Name & description" },
-  { label: "Location & dates", sublabel: "Where and when" },
-  { label: "Recurring", sublabel: "Repeat schedule" },
-  { label: "Categories & skills", sublabel: "Tags & requirements" },
-  { label: "Access", sublabel: "Join & leave policies" },
+  { label: "create.steps.basics", sublabel: "create.steps.basicsSub" },
+  { label: "create.steps.location", sublabel: "create.steps.locationSub" },
+  { label: "create.steps.recurring", sublabel: "create.steps.recurringSub" },
+  { label: "create.steps.categories", sublabel: "create.steps.categoriesSub" },
+  { label: "create.steps.access", sublabel: "create.steps.accessSub" },
 ] as const;
 
 export const EVENT_CREATE_STEP_HEADERS = [
   {
-    eyebrow: "Step 01 of 05",
-    title: "Tell us about your event",
-    subtitle:
-      "Give it a clear name and description so volunteers know exactly what to expect.",
+    eyebrow: "create.headers.step1Eyebrow",
+    title: "create.headers.step1Title",
+    subtitle: "create.headers.step1Subtitle",
   },
   {
-    eyebrow: "Step 02 of 05",
-    title: "Where and when?",
-    subtitle: "Set the location and timeline for your event.",
+    eyebrow: "create.headers.step2Eyebrow",
+    title: "create.headers.step2Title",
+    subtitle: "create.headers.step2Subtitle",
   },
   {
-    eyebrow: "Step 03 of 05",
-    title: "Set a repeat schedule",
-    subtitle: "Choose whether this event repeats and how often.",
+    eyebrow: "create.headers.step3Eyebrow",
+    title: "create.headers.step3Title",
+    subtitle: "create.headers.step3Subtitle",
   },
   {
-    eyebrow: "Step 04 of 05",
-    title: "Categories & skills",
-    subtitle:
-      "Help people find your event by selecting relevant categories and required skills. This step is optional.",
+    eyebrow: "create.headers.step4Eyebrow",
+    title: "create.headers.step4Title",
+    subtitle: "create.headers.step4Subtitle",
   },
   {
-    eyebrow: "Step 05 of 05",
-    title: "Access policies",
-    subtitle: "Control how volunteers join and leave your event.",
+    eyebrow: "create.headers.step5Eyebrow",
+    title: "create.headers.step5Title",
+    subtitle: "create.headers.step5Subtitle",
   },
 ] as const;

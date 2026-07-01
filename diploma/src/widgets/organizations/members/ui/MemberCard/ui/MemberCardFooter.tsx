@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   Check,
   MessageSquare,
@@ -16,6 +17,7 @@ interface MemberCardFooterProps {
   roleMenu: ReturnType<typeof useMemberRoleMenu>;
   isRoleChangePending: boolean;
   showRoleSection: boolean;
+  entityLabel: string;
   onProfileClick: (member: OrganizationMemberCardModel) => void;
   onMessageClick: (member: OrganizationMemberCardModel) => void;
   onRemoveClick: (member: OrganizationMemberCardModel) => void;
@@ -26,17 +28,22 @@ export const MemberCardFooter = ({
   roleMenu,
   isRoleChangePending,
   showRoleSection,
+  entityLabel,
   onProfileClick,
   onMessageClick,
   onRemoveClick,
-}: MemberCardFooterProps) => (
-  <div className={styles.footer}>
+}: MemberCardFooterProps) => {
+  const { t } = useTranslation("common");
+  const entity = t(`member.entities.${entityLabel}`);
+
+  return (
+    <div className={styles.footer}>
     <button
       type="button"
       className={styles.profileBtn}
       onClick={() => onProfileClick(member)}
     >
-      Profile
+      {t("member.profile")}
     </button>
 
     {!member.isOwner ? (
@@ -68,7 +75,7 @@ export const MemberCardFooter = ({
                   }}
                 >
                   <MessageSquare size={15} strokeWidth={2.2} />
-                  <span>Send message</span>
+                  <span>{t("member.sendMessage")}</span>
                 </button>
               </div>
 
@@ -82,7 +89,7 @@ export const MemberCardFooter = ({
                   }}
                 >
                   <UserMinus size={15} strokeWidth={2.2} />
-                  <span>Remove from org</span>
+                  <span>{t("member.removeFrom", { entity })}</span>
                 </button>
               </div>
             </motion.div>
@@ -95,15 +102,16 @@ export const MemberCardFooter = ({
             roleMenu.isMenuOpen ? styles.moreBtnOpen : ""
           }`}
           aria-expanded={roleMenu.isMenuOpen}
-          aria-label={`Open actions for ${member.fullName}`}
+          aria-label={t("member.openActions", { name: member.fullName })}
           onClick={roleMenu.toggleMenu}
         >
           <MoreHorizontal size={20} strokeWidth={2.4} />
         </button>
       </div>
     ) : null}
-  </div>
-);
+    </div>
+  );
+};
 
 interface RoleMenuSectionProps {
   roles: OrganizationContextRole[];
@@ -115,13 +123,16 @@ const RoleMenuSection = ({
   roles,
   roleMenu,
   isRoleChangePending,
-}: RoleMenuSectionProps) => (
-  <div className={styles.menuSection}>
-    <p className={styles.sectionLabel}>Change role</p>
+}: RoleMenuSectionProps) => {
+  const { t } = useTranslation("common");
+
+  return (
+    <div className={styles.menuSection}>
+    <p className={styles.sectionLabel}>{t("member.changeRole")}</p>
     <div className={styles.roleList}>
       {roles.map((role) => {
         const isActiveRole = roleMenu.isCurrentRole(role.id);
-        const tone = getRoleTone(role.name, false);
+        const tone = getRoleTone(role.name, false, t("member.ownerLabel"));
 
         return (
           <button
@@ -147,5 +158,6 @@ const RoleMenuSection = ({
         );
       })}
     </div>
-  </div>
-);
+    </div>
+  );
+};

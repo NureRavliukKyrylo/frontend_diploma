@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import type { Category } from "@entities/category";
 import styles from "../../../shared/filters/Filters.module.scss";
@@ -21,14 +22,19 @@ export const OrganizationProjectCategoryFilterSection = ({
   onToggleCategory,
   onFetchNextPage,
 }: OrganizationProjectCategoryFilterSectionProps) => {
+  const { t } = useTranslation("organizations");
   const hasCategoryFilter = selectedCategoryIds.length > 0;
 
   return (
     <OrganizationProjectFiltersSection
-      title="Categories"
+      title={t("details.projects.filters.category")}
       isActive={hasCategoryFilter}
       badge={
-        hasCategoryFilter ? `${selectedCategoryIds.length} selected` : undefined
+        hasCategoryFilter
+          ? t("details.projects.filters.selected", {
+              count: selectedCategoryIds.length,
+            })
+          : undefined
       }
       className={styles.projectCategories}
     >
@@ -66,7 +72,9 @@ export const OrganizationProjectCategoryFilterSection = ({
             disabled={isFetchingNextPage}
             className={styles.showMoreButton}
           >
-            {isFetchingNextPage ? "Loading..." : "show more"}
+            {isFetchingNextPage
+              ? t("details.projects.filters.loading")
+              : t("details.projects.filters.showMore")}
           </BaseButtonWrapper>
         ) : null}
       </div>

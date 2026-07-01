@@ -1,10 +1,11 @@
 import axios from "axios";
+import type { TFunction } from "i18next";
 
 export const getRoleErrorStatus = (error: unknown) =>
   axios.isAxiosError(error) ? error.response?.status : undefined;
 
-export const getRoleSaveErrorMessage = (error: unknown) => {
-  if (!axios.isAxiosError(error)) return "Unable to save this role.";
+export const getRoleSaveErrorMessage = (error: unknown, t: TFunction) => {
+  if (!axios.isAxiosError(error)) return t("roles:form.errors.save");
 
   const responseData = error.response?.data;
 
@@ -22,6 +23,8 @@ export const getRoleSaveErrorMessage = (error: unknown) => {
   }
 
   return error.response?.status
-    ? `The server rejected the role (${error.response.status}).`
-    : "Unable to save this role.";
+    ? t("roles:form.errors.serverRejected", {
+        status: error.response.status,
+      })
+    : t("roles:form.errors.save");
 };

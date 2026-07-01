@@ -1,5 +1,6 @@
 import AddRounded from "@mui/icons-material/AddRounded";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import cardStyles from "../Card.module.scss";
 import styles from "./CreateCard.module.scss";
 
@@ -12,6 +13,7 @@ export const ProjectCreateCard = ({
   organizationName,
   onCreateProject,
 }: ProjectCreateCardProps) => {
+  const { t } = useTranslation("organizations");
   return (
     <motion.button
       type="button"
@@ -19,7 +21,7 @@ export const ProjectCreateCard = ({
       variants={{ hidden: { opacity: 0, y: 22 }, visible: { opacity: 1, y: 0 } }}
       transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
       onClick={onCreateProject}
-      aria-label="Create project"
+      aria-label={t("details.projects.create")}
     >
       <div className={styles.projectCreateTop}>
         <span className={styles.projectCreateIcon} aria-hidden="true">
@@ -28,11 +30,8 @@ export const ProjectCreateCard = ({
       </div>
 
       <div className={styles.projectCreateBody}>
-        <h3>Create project</h3>
-        <p>
-          Add a new project for {organizationName} and place it next to the
-          current organization initiatives.
-        </p>
+        <h3>{t("details.projects.create")}</h3>
+        <p>{t("details.projects.createText", { name: organizationName })}</p>
       </div>
     </motion.button>
   );

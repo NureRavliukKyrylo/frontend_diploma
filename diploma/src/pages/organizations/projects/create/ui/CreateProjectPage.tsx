@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import { organizationQuery } from "@entities/organization";
 import {
   AccessStep,
@@ -25,6 +26,7 @@ interface CreateProjectPageProps {
 export const CreateProjectPage = ({
   organizationId,
 }: CreateProjectPageProps) => {
+  const { t } = useTranslation("project");
   const navigate = useNavigate();
   const { data: organization, isLoading } = useQuery(
     organizationQuery.byId(organizationId),
@@ -86,7 +88,7 @@ export const CreateProjectPage = ({
   if (isLoading || !organization) {
     return (
       <div className={styles.loadingPage}>
-        <div className={styles.loadingCard}>Preparing project setup...</div>
+        <div className={styles.loadingCard}>{t("create.loading")}</div>
       </div>
     );
   }
@@ -98,8 +100,8 @@ export const CreateProjectPage = ({
       <div className={styles.workArea}>
         <CreateFlowTopRow
           organizationName={organization.name}
-          title="New project"
-          backLabel="Back to organization"
+          title={t("create.newProject")}
+          backLabel={t("create.back")}
           onCancel={handleCancel}
           styles={styles}
         />
@@ -110,8 +112,11 @@ export const CreateProjectPage = ({
             organizationName={organization.name}
             logoUrl={organization.logoUrl}
             initials={initials}
-            label="Project setup"
-            steps={PROJECT_CREATE_STEPS}
+            label={t("create.setup")}
+            steps={PROJECT_CREATE_STEPS.map((step) => ({
+              label: t(step.labelKey),
+              sublabel: t(step.sublabelKey),
+            }))}
             activeStep={form.activeStep}
             onStepClick={form.goToStep}
             styles={styles}
@@ -119,12 +124,12 @@ export const CreateProjectPage = ({
 
           <CreateFlowContent
             activeStep={form.activeStep}
-            eyebrow={stepHeader.eyebrow}
-            title={stepHeader.title}
-            subtitle={stepHeader.subtitle}
+            eyebrow={t(stepHeader.eyebrowKey)}
+            title={t(stepHeader.titleKey)}
+            subtitle={t(stepHeader.subtitleKey)}
             isLastStep={isLastStep}
             isSubmitting={form.isSubmitting}
-            finalLabel="Create project"
+            finalLabel={t("create.create")}
             onBack={form.goBack}
             onPrimaryAction={handlePrimaryAction}
             styles={styles}

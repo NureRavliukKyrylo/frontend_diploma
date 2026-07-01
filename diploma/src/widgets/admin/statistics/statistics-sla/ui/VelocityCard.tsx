@@ -1,5 +1,6 @@
 import { formatAdminHoursFromMinutes } from "@entities/admin";
 import styles from "../../statistics-page-styles/AdminStatisticsPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface VelocityCardProps {
   earned: number;
@@ -13,27 +14,33 @@ export const VelocityCard = ({
   spent,
   adjusted,
   stuck,
-}: VelocityCardProps) => (
-  <div className={styles.slaCard}>
-    <strong className={styles.slaTitle}>Time Bank velocity</strong>
-    <div className={styles.slaStatsRow}>
-      <span>
-        <strong>{formatAdminHoursFromMinutes(earned)}</strong>
-        <em>Earned</em>
-      </span>
-      <span>
-        <strong>{formatAdminHoursFromMinutes(spent)}</strong>
-        <em>Spent</em>
-      </span>
-      <span>
-        <strong>{formatAdminHoursFromMinutes(adjusted)}</strong>
-        <em>Adjusted</em>
-      </span>
-    </div>
-    {stuck > 0 && (
-      <div className={styles.stuckAlert}>
-        {formatAdminHoursFromMinutes(stuck)} stuck in reservations
+}: VelocityCardProps) => {
+  const { t } = useTranslation("admin");
+
+  return (
+    <div className={styles.slaCard}>
+      <strong className={styles.slaTitle}>
+        {t("statistics.velocity.title")}
+      </strong>
+      <div className={styles.slaStatsRow}>
+        <span>
+          <strong>{formatAdminHoursFromMinutes(earned)}</strong>
+          <em>{t("statistics.velocity.earned")}</em>
+        </span>
+        <span>
+          <strong>{formatAdminHoursFromMinutes(spent)}</strong>
+          <em>{t("statistics.velocity.spent")}</em>
+        </span>
+        <span>
+          <strong>{formatAdminHoursFromMinutes(adjusted)}</strong>
+          <em>{t("statistics.velocity.adjusted")}</em>
+        </span>
       </div>
-    )}
-  </div>
-);
+      {stuck > 0 && (
+        <div className={styles.stuckAlert}>
+          {formatAdminHoursFromMinutes(stuck)} {t("statistics.velocity.stuck")}
+        </div>
+      )}
+    </div>
+  );
+};

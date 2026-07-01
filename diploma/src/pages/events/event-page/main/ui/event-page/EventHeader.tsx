@@ -53,7 +53,7 @@ export const EventHeader = ({ event, policyConfig }: EventHeaderProps) => {
               >
                 <img
                   src={event.organization?.logoUrl ?? undefined}
-                  alt="organization-image"
+                  alt={t("event:images.organization")}
                 />
                 <p>{event.organization?.name}</p>
               </LinkButtonWrapper>

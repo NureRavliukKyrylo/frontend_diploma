@@ -6,6 +6,7 @@ import type {
   DurationFilter,
   SortValue,
 } from "../../model/types";
+import { useTranslation } from "react-i18next";
 
 interface BansToolbarProps {
   styles: AdminBansStyles;
@@ -25,35 +26,47 @@ export const BansToolbar = ({
   onSearchChange,
   onDurationChange,
   onSortChange,
-}: BansToolbarProps) => (
-  <div className={styles.toolbar}>
-    <div className={styles.searchShell}>
-      <SearchBar value={search} onChange={onSearchChange} debounce={250} />
-    </div>
+}: BansToolbarProps) => {
+  const { t } = useTranslation("admin");
+  const localizedDurationOptions = durationOptions.map((option) => ({
+    ...option,
+    label: t(option.label),
+  }));
+  const localizedSortOptions = sortOptions.map((option) => ({
+    ...option,
+    label: t(option.label),
+  }));
 
-    <div className={styles.filters}>
-      <label className={styles.filterField}>
-        <span>Duration</span>
-        <div className={styles.dropdownShell}>
-          <SortDropDown
-            selectedLabelOnly
-            options={durationOptions}
-            value={duration}
-            onSelect={onDurationChange}
-          />
-        </div>
-      </label>
-      <label className={styles.filterField}>
-        <span>Sort</span>
-        <div className={styles.dropdownShell}>
-          <SortDropDown
-            selectedLabelOnly
-            options={sortOptions}
-            value={sort}
-            onSelect={onSortChange}
-          />
-        </div>
-      </label>
+  return (
+    <div className={styles.toolbar}>
+      <div className={styles.searchShell}>
+        <SearchBar value={search} onChange={onSearchChange} debounce={250} />
+      </div>
+
+      <div className={styles.filters}>
+        <label className={styles.filterField}>
+          <span>{t("bans.filters.duration")}</span>
+          <div className={styles.dropdownShell}>
+            <SortDropDown
+              selectedLabelOnly
+              options={localizedDurationOptions}
+              value={duration}
+              onSelect={onDurationChange}
+            />
+          </div>
+        </label>
+        <label className={styles.filterField}>
+          <span>{t("bans.filters.sort")}</span>
+          <div className={styles.dropdownShell}>
+            <SortDropDown
+              selectedLabelOnly
+              options={localizedSortOptions}
+              value={sort}
+              onSelect={onSortChange}
+            />
+          </div>
+        </label>
+      </div>
     </div>
-  </div>
-);
+  );
+};

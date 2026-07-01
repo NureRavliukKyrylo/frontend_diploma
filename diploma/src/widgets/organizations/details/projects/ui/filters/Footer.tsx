@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import styles from "../../../shared/filters/Filters.module.scss";
 
@@ -9,6 +10,7 @@ interface OrganizationProjectFiltersFooterProps {
 export const OrganizationProjectFiltersFooter = ({
   onReset,
 }: OrganizationProjectFiltersFooterProps) => {
+  const { t } = useTranslation("organizations");
   return (
     <div className={styles.buttonClear}>
       <motion.div
@@ -18,7 +20,7 @@ export const OrganizationProjectFiltersFooter = ({
         className={styles.animationButtonBlock}
       >
         <BaseButtonWrapper onClick={onReset} className={styles.clearFiltersButton}>
-          Clear Filters
+          {t("details.projects.filters.reset")}
         </BaseButtonWrapper>
       </motion.div>
     </div>

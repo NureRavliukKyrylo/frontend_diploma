@@ -1,5 +1,6 @@
 import { formatEventDate } from "../lib/formatEventDate";
 import { statusLabels } from "../config/settingsTabs";
+import { useTranslation } from "react-i18next";
 import styles from "../SettingsWidget.module.scss";
 
 interface EventSidebarCardProps {
@@ -18,6 +19,11 @@ export const EventSidebarCard = ({
   event,
   eventStatus,
 }: EventSidebarCardProps) => {
+  const { t, i18n } = useTranslation("event");
+  const locale = i18n.language === "ua" || i18n.language === "uk"
+    ? "uk-UA"
+    : "en-US";
+  const noDate = t("settings.sidebar.noDate");
   const statusClassName =
     eventStatus === "active"
       ? styles.statusActive
@@ -35,7 +41,7 @@ export const EventSidebarCard = ({
       <h2>{event.title}</h2>
       <p>
         <i className="ti ti-building" aria-hidden="true" />
-        {event.organization?.name ?? "Organization"}
+        {event.organization?.name ?? t("settings.sidebar.organization")}
       </p>
       <div
         className={`${styles.sidebarStats} ${
@@ -44,27 +50,27 @@ export const EventSidebarCard = ({
       >
         <div className={styles.sidebarStat}>
           <strong>{event.memberCount ?? 0}</strong>
-          <span>Volunteers</span>
+          <span>{t("settings.sidebar.volunteers")}</span>
         </div>
         {showTaskStat ? (
           <div className={styles.sidebarStat}>
             <strong>{event.tasksTotal ?? 0}</strong>
-            <span>Tasks</span>
+            <span>{t("settings.sidebar.tasks")}</span>
           </div>
         ) : null}
       </div>
 
       <div className={styles.sidebarMeta}>
-        <span>Start</span>
-        <strong>{formatEventDate(event.startAt)}</strong>
+        <span>{t("settings.sidebar.start")}</span>
+        <strong>{formatEventDate(event.startAt, locale, noDate)}</strong>
       </div>
       <div className={styles.sidebarMeta}>
-        <span>End</span>
-        <strong>{formatEventDate(event.endAt)}</strong>
+        <span>{t("settings.sidebar.end")}</span>
+        <strong>{formatEventDate(event.endAt, locale, noDate)}</strong>
       </div>
       <span className={`${styles.statusBadge} ${statusClassName}`}>
         <span />
-        {statusLabels[eventStatus]}
+        {t(statusLabels[eventStatus])}
       </span>
     </aside>
   );

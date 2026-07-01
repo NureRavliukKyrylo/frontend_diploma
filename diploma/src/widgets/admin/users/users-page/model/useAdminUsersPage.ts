@@ -7,22 +7,25 @@ import {
   getRoleTone,
   getStatusFilter,
 } from "../../lib/userDisplay";
-import type {
-  RoleFilter,
-  StatusDropDownValue,
-} from "../../model/types";
+import type { RoleFilter, StatusDropDownValue } from "../../model/types";
 import { useAdminUsersDrawerState } from "./useAdminUsersDrawerState";
 import { useAdminUsersQueries } from "./useAdminUsersQueries";
 import { useAdminUsersSearchControls } from "./useAdminUsersSearchControls";
+import { useTranslation } from "react-i18next";
 
 export const useAdminUsersPage = () => {
+  const { t } = useTranslation("admin");
   const controls = useAdminUsersSearchControls();
   const drawerState = useAdminUsersDrawerState();
-  const params = useMemo(() => buildUserParams(controls.search), [controls.search]);
+  const params = useMemo(
+    () => buildUserParams(controls.search),
+    [controls.search],
+  );
   const queries = useAdminUsersQueries(params, drawerState.selectedUserId);
 
   const bannedUserIds = useMemo(
-    () => new Set((queries.bansQuery.data ?? []).map(getBanUserId).filter(Boolean)),
+    () =>
+      new Set((queries.bansQuery.data ?? []).map(getBanUserId).filter(Boolean)),
     [queries.bansQuery.data],
   );
 
@@ -37,20 +40,21 @@ export const useAdminUsersPage = () => {
   const statusValue = getStatusFilter(controls.search);
   const roleFilterOptions = useMemo(
     () => [
-      { value: "all" as const, label: "All roles" },
+      { value: "all" as const, label: t("users.toolbar.allRoles") },
       ...roleOptions.map((role) => ({
         value: `role:${role}` as RoleFilter,
         label: role,
       })),
     ],
-    [roleOptions],
+    [roleOptions, t],
   );
   const roleFilterValue = controls.search.RoleName
     ? (`role:${controls.search.RoleName}` as RoleFilter)
     : "all";
   const statusDropDownValue = `status:${statusValue}` as StatusDropDownValue;
   const users = queries.usersQuery.data?.items ?? [];
-  const currentPage = queries.usersQuery.data?.page || controls.search.Page || 1;
+  const currentPage =
+    queries.usersQuery.data?.page || controls.search.Page || 1;
   const totalPages = Math.max(queries.usersQuery.data?.totalPages || 1, 1);
   const pageWindow = getPageWindow(currentPage, totalPages);
   const selectedUser =

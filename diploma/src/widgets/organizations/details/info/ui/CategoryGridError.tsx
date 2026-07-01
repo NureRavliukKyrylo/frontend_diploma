@@ -4,6 +4,7 @@ import {
   type Variants,
 } from "framer-motion";
 import { Grid3X3, RefreshCw } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { getErrorMessage } from "@shared/libs/error-message/format-error/getErrorMessage";
 import styles from "./CategoryGrid.module.scss";
 
@@ -21,8 +22,11 @@ export const CategoryGridError = ({
   containerVariants,
   buttonHover,
   prefersReducedMotion,
-}: CategoryGridErrorProps) => (
-  <motion.section
+}: CategoryGridErrorProps) => {
+  const { t } = useTranslation("organizations");
+
+  return (
+    <motion.section
     className={styles.categorySection}
     variants={containerVariants}
     initial="hidden"
@@ -34,8 +38,8 @@ export const CategoryGridError = ({
         <Grid3X3 aria-hidden="true" />
       </div>
       <div className={styles.statusText}>
-        <h4>Unable to load categories</h4>
-        <p>{getErrorMessage(error)}</p>
+        <h4>{t("details.categoryGrid.errorTitle")}</h4>
+        <p>{getErrorMessage(error, t)}</p>
       </div>
       <motion.button
         type="button"
@@ -45,8 +49,9 @@ export const CategoryGridError = ({
         whileTap={prefersReducedMotion ? undefined : { scale: 0.97 }}
       >
         <RefreshCw aria-hidden="true" />
-        <span>Try again</span>
+        <span>{t("details.actions.tryAgain")}</span>
       </motion.button>
     </div>
-  </motion.section>
-);
+    </motion.section>
+  );
+};

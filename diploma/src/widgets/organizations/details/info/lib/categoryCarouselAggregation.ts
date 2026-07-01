@@ -128,13 +128,14 @@ export const aggregateCategoryActivities = ({
 export const buildCategoryCarouselItems = (
   aggregates: Array<[string, CategoryAggregate]>,
   categoryDetails: Array<Category | null>,
+  fallbackTitle: string,
 ): OrganizationCategoryCarouselItem[] =>
   aggregates.map(([id, aggregate], index) => ({
     id,
     title:
       categoryDetails[index]?.name ||
       aggregate.fallbackName ||
-      "Unnamed category",
+      fallbackTitle,
     imageSrc:
       categoryDetails[index]?.imageUrl || aggregate.fallbackImageSrc,
     totalActivities: aggregate.totalActivities,

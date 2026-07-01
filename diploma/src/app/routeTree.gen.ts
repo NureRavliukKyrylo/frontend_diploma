@@ -42,6 +42,7 @@ import { Route as MasterLayoutOrganizationsIdRouteImport } from './routers/_mast
 import { Route as PublicLayoutProjectsIdIndexRouteImport } from './routers/_publicLayout/projects/$id/index'
 import { Route as PublicLayoutEventsIdIndexRouteImport } from './routers/_publicLayout/events/$id/index'
 import { Route as PublicLayoutCategoriesIdIndexRouteImport } from './routers/_publicLayout/categories/$id/index'
+import { Route as MasterLayoutUsersUserIdIndexRouteImport } from './routers/_masterLayout/users/$userId/index'
 import { Route as MasterLayoutTasksIdIndexRouteImport } from './routers/_masterLayout/tasks/$id/index'
 import { Route as MasterLayoutProfileSettingsIndexRouteImport } from './routers/_masterLayout/profile/settings/index'
 import { Route as MasterLayoutOrganizationsMyIndexRouteImport } from './routers/_masterLayout/organizations/my/index'
@@ -60,17 +61,19 @@ import { Route as AdminLayoutAdminCategoriesIndexRouteImport } from './routers/_
 import { Route as AdminLayoutAdminBansIndexRouteImport } from './routers/_adminLayout/admin/bans/index'
 import { Route as AdminLayoutAdminAccessPoliciesIndexRouteImport } from './routers/_adminLayout/admin/access-policies/index'
 import { Route as PublicLayoutProjectsIdSettingsIndexRouteImport } from './routers/_publicLayout/projects/$id/settings/index'
-import { Route as PublicLayoutEventsIdSettingsIndexRouteImport } from './routers/_publicLayout/events/$id/settings/index'
 import { Route as MasterLayoutProjectsMyIdIndexRouteImport } from './routers/_masterLayout/projects/my/$id/index'
 import { Route as MasterLayoutProjectsIdRolesIndexRouteImport } from './routers/_masterLayout/projects/$id/roles/index'
+import { Route as MasterLayoutProjectsIdRecommendationsIndexRouteImport } from './routers/_masterLayout/projects/$id/recommendations/index'
 import { Route as MasterLayoutProjectsIdMembersIndexRouteImport } from './routers/_masterLayout/projects/$id/members/index'
 import { Route as MasterLayoutOrganizationsIdSettingsIndexRouteImport } from './routers/_masterLayout/organizations/$id/settings/index'
 import { Route as MasterLayoutOrganizationsIdRolesIndexRouteImport } from './routers/_masterLayout/organizations/$id/roles/index'
+import { Route as MasterLayoutOrganizationsIdRecommendationsIndexRouteImport } from './routers/_masterLayout/organizations/$id/recommendations/index'
 import { Route as MasterLayoutOrganizationsIdProjectsIndexRouteImport } from './routers/_masterLayout/organizations/$id/projects/index'
 import { Route as MasterLayoutOrganizationsIdMembersIndexRouteImport } from './routers/_masterLayout/organizations/$id/members/index'
 import { Route as MasterLayoutOrganizationsIdEventsIndexRouteImport } from './routers/_masterLayout/organizations/$id/events/index'
 import { Route as MasterLayoutOffersMyIdIndexRouteImport } from './routers/_masterLayout/offers/my/$id/index'
 import { Route as MasterLayoutEventsMyIdIndexRouteImport } from './routers/_masterLayout/events/my/$id/index'
+import { Route as MasterLayoutEventsIdSettingsIndexRouteImport } from './routers/_masterLayout/events/$id/settings/index'
 import { Route as MasterLayoutEventsIdRolesIndexRouteImport } from './routers/_masterLayout/events/$id/roles/index'
 import { Route as MasterLayoutEventsIdMembersIndexRouteImport } from './routers/_masterLayout/events/$id/members/index'
 import { Route as MasterLayoutEventsIdAttendanceIndexRouteImport } from './routers/_masterLayout/events/$id/attendance/index'
@@ -341,6 +344,12 @@ const PublicLayoutCategoriesIdIndexRoute =
       (d) => d.Route,
     ),
   )
+const MasterLayoutUsersUserIdIndexRoute =
+  MasterLayoutUsersUserIdIndexRouteImport.update({
+    id: '/users/$userId/',
+    path: '/users/$userId/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
 const MasterLayoutTasksIdIndexRoute =
   MasterLayoutTasksIdIndexRouteImport.update({
     id: '/tasks/$id/',
@@ -481,12 +490,6 @@ const PublicLayoutProjectsIdSettingsIndexRoute =
     path: '/projects/$id/settings/',
     getParentRoute: () => PublicLayoutRoute,
   } as any)
-const PublicLayoutEventsIdSettingsIndexRoute =
-  PublicLayoutEventsIdSettingsIndexRouteImport.update({
-    id: '/events/$id/settings/',
-    path: '/events/$id/settings/',
-    getParentRoute: () => PublicLayoutRoute,
-  } as any)
 const MasterLayoutProjectsMyIdIndexRoute =
   MasterLayoutProjectsMyIdIndexRouteImport.update({
     id: '/projects/my/$id/',
@@ -501,6 +504,12 @@ const MasterLayoutProjectsIdRolesIndexRoute =
   MasterLayoutProjectsIdRolesIndexRouteImport.update({
     id: '/projects/$id/roles/',
     path: '/projects/$id/roles/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
+const MasterLayoutProjectsIdRecommendationsIndexRoute =
+  MasterLayoutProjectsIdRecommendationsIndexRouteImport.update({
+    id: '/projects/$id/recommendations/',
+    path: '/projects/$id/recommendations/',
     getParentRoute: () => MasterLayoutRoute,
   } as any)
 const MasterLayoutProjectsIdMembersIndexRoute =
@@ -519,6 +528,12 @@ const MasterLayoutOrganizationsIdRolesIndexRoute =
   MasterLayoutOrganizationsIdRolesIndexRouteImport.update({
     id: '/roles/',
     path: '/roles/',
+    getParentRoute: () => MasterLayoutOrganizationsIdRoute,
+  } as any)
+const MasterLayoutOrganizationsIdRecommendationsIndexRoute =
+  MasterLayoutOrganizationsIdRecommendationsIndexRouteImport.update({
+    id: '/recommendations/',
+    path: '/recommendations/',
     getParentRoute: () => MasterLayoutOrganizationsIdRoute,
   } as any)
 const MasterLayoutOrganizationsIdProjectsIndexRoute =
@@ -559,6 +574,12 @@ const MasterLayoutEventsMyIdIndexRoute =
       (d) => d.Route,
     ),
   )
+const MasterLayoutEventsIdSettingsIndexRoute =
+  MasterLayoutEventsIdSettingsIndexRouteImport.update({
+    id: '/events/$id/settings/',
+    path: '/events/$id/settings/',
+    getParentRoute: () => MasterLayoutRoute,
+  } as any)
 const MasterLayoutEventsIdRolesIndexRoute =
   MasterLayoutEventsIdRolesIndexRouteImport.update({
     id: '/events/$id/roles/',
@@ -637,6 +658,7 @@ export interface FileRoutesByFullPath {
   '/organizations/my/': typeof MasterLayoutOrganizationsMyIndexRoute
   '/profile/settings/': typeof MasterLayoutProfileSettingsIndexRoute
   '/tasks/$id/': typeof MasterLayoutTasksIdIndexRoute
+  '/users/$userId/': typeof MasterLayoutUsersUserIdIndexRoute
   '/categories/$id/': typeof PublicLayoutCategoriesIdIndexRoute
   '/events/$id/': typeof PublicLayoutEventsIdIndexRoute
   '/projects/$id/': typeof PublicLayoutProjectsIdIndexRoute
@@ -644,17 +666,19 @@ export interface FileRoutesByFullPath {
   '/events/$id/attendance/': typeof MasterLayoutEventsIdAttendanceIndexRoute
   '/events/$id/members/': typeof MasterLayoutEventsIdMembersIndexRoute
   '/events/$id/roles/': typeof MasterLayoutEventsIdRolesIndexRoute
+  '/events/$id/settings/': typeof MasterLayoutEventsIdSettingsIndexRoute
   '/events/my/$id/': typeof MasterLayoutEventsMyIdIndexRoute
   '/offers/my/$id/': typeof MasterLayoutOffersMyIdIndexRoute
   '/organizations/$id/events/': typeof MasterLayoutOrganizationsIdEventsIndexRoute
   '/organizations/$id/members/': typeof MasterLayoutOrganizationsIdMembersIndexRoute
   '/organizations/$id/projects/': typeof MasterLayoutOrganizationsIdProjectsIndexRoute
+  '/organizations/$id/recommendations/': typeof MasterLayoutOrganizationsIdRecommendationsIndexRoute
   '/organizations/$id/roles/': typeof MasterLayoutOrganizationsIdRolesIndexRoute
   '/organizations/$id/settings/': typeof MasterLayoutOrganizationsIdSettingsIndexRoute
   '/projects/$id/members/': typeof MasterLayoutProjectsIdMembersIndexRoute
+  '/projects/$id/recommendations/': typeof MasterLayoutProjectsIdRecommendationsIndexRoute
   '/projects/$id/roles/': typeof MasterLayoutProjectsIdRolesIndexRoute
   '/projects/my/$id/': typeof MasterLayoutProjectsMyIdIndexRoute
-  '/events/$id/settings/': typeof PublicLayoutEventsIdSettingsIndexRoute
   '/projects/$id/settings/': typeof PublicLayoutProjectsIdSettingsIndexRoute
   '/organizations/$id/events/create/': typeof MasterLayoutOrganizationsIdEventsCreateIndexRoute
   '/organizations/$id/projects/create/': typeof MasterLayoutOrganizationsIdProjectsCreateIndexRoute
@@ -704,6 +728,7 @@ export interface FileRoutesByTo {
   '/organizations/my': typeof MasterLayoutOrganizationsMyIndexRoute
   '/profile/settings': typeof MasterLayoutProfileSettingsIndexRoute
   '/tasks/$id': typeof MasterLayoutTasksIdIndexRoute
+  '/users/$userId': typeof MasterLayoutUsersUserIdIndexRoute
   '/categories/$id': typeof PublicLayoutCategoriesIdIndexRoute
   '/events/$id': typeof PublicLayoutEventsIdIndexRoute
   '/projects/$id': typeof PublicLayoutProjectsIdIndexRoute
@@ -711,17 +736,19 @@ export interface FileRoutesByTo {
   '/events/$id/attendance': typeof MasterLayoutEventsIdAttendanceIndexRoute
   '/events/$id/members': typeof MasterLayoutEventsIdMembersIndexRoute
   '/events/$id/roles': typeof MasterLayoutEventsIdRolesIndexRoute
+  '/events/$id/settings': typeof MasterLayoutEventsIdSettingsIndexRoute
   '/events/my/$id': typeof MasterLayoutEventsMyIdIndexRoute
   '/offers/my/$id': typeof MasterLayoutOffersMyIdIndexRoute
   '/organizations/$id/events': typeof MasterLayoutOrganizationsIdEventsIndexRoute
   '/organizations/$id/members': typeof MasterLayoutOrganizationsIdMembersIndexRoute
   '/organizations/$id/projects': typeof MasterLayoutOrganizationsIdProjectsIndexRoute
+  '/organizations/$id/recommendations': typeof MasterLayoutOrganizationsIdRecommendationsIndexRoute
   '/organizations/$id/roles': typeof MasterLayoutOrganizationsIdRolesIndexRoute
   '/organizations/$id/settings': typeof MasterLayoutOrganizationsIdSettingsIndexRoute
   '/projects/$id/members': typeof MasterLayoutProjectsIdMembersIndexRoute
+  '/projects/$id/recommendations': typeof MasterLayoutProjectsIdRecommendationsIndexRoute
   '/projects/$id/roles': typeof MasterLayoutProjectsIdRolesIndexRoute
   '/projects/my/$id': typeof MasterLayoutProjectsMyIdIndexRoute
-  '/events/$id/settings': typeof PublicLayoutEventsIdSettingsIndexRoute
   '/projects/$id/settings': typeof PublicLayoutProjectsIdSettingsIndexRoute
   '/organizations/$id/events/create': typeof MasterLayoutOrganizationsIdEventsCreateIndexRoute
   '/organizations/$id/projects/create': typeof MasterLayoutOrganizationsIdProjectsCreateIndexRoute
@@ -779,6 +806,7 @@ export interface FileRoutesById {
   '/_masterLayout/organizations/my/': typeof MasterLayoutOrganizationsMyIndexRoute
   '/_masterLayout/profile/settings/': typeof MasterLayoutProfileSettingsIndexRoute
   '/_masterLayout/tasks/$id/': typeof MasterLayoutTasksIdIndexRoute
+  '/_masterLayout/users/$userId/': typeof MasterLayoutUsersUserIdIndexRoute
   '/_publicLayout/categories/$id/': typeof PublicLayoutCategoriesIdIndexRoute
   '/_publicLayout/events/$id/': typeof PublicLayoutEventsIdIndexRoute
   '/_publicLayout/projects/$id/': typeof PublicLayoutProjectsIdIndexRoute
@@ -786,17 +814,19 @@ export interface FileRoutesById {
   '/_masterLayout/events/$id/attendance/': typeof MasterLayoutEventsIdAttendanceIndexRoute
   '/_masterLayout/events/$id/members/': typeof MasterLayoutEventsIdMembersIndexRoute
   '/_masterLayout/events/$id/roles/': typeof MasterLayoutEventsIdRolesIndexRoute
+  '/_masterLayout/events/$id/settings/': typeof MasterLayoutEventsIdSettingsIndexRoute
   '/_masterLayout/events/my/$id/': typeof MasterLayoutEventsMyIdIndexRoute
   '/_masterLayout/offers/my/$id/': typeof MasterLayoutOffersMyIdIndexRoute
   '/_masterLayout/organizations/$id/events/': typeof MasterLayoutOrganizationsIdEventsIndexRoute
   '/_masterLayout/organizations/$id/members/': typeof MasterLayoutOrganizationsIdMembersIndexRoute
   '/_masterLayout/organizations/$id/projects/': typeof MasterLayoutOrganizationsIdProjectsIndexRoute
+  '/_masterLayout/organizations/$id/recommendations/': typeof MasterLayoutOrganizationsIdRecommendationsIndexRoute
   '/_masterLayout/organizations/$id/roles/': typeof MasterLayoutOrganizationsIdRolesIndexRoute
   '/_masterLayout/organizations/$id/settings/': typeof MasterLayoutOrganizationsIdSettingsIndexRoute
   '/_masterLayout/projects/$id/members/': typeof MasterLayoutProjectsIdMembersIndexRoute
+  '/_masterLayout/projects/$id/recommendations/': typeof MasterLayoutProjectsIdRecommendationsIndexRoute
   '/_masterLayout/projects/$id/roles/': typeof MasterLayoutProjectsIdRolesIndexRoute
   '/_masterLayout/projects/my/$id/': typeof MasterLayoutProjectsMyIdIndexRoute
-  '/_publicLayout/events/$id/settings/': typeof PublicLayoutEventsIdSettingsIndexRoute
   '/_publicLayout/projects/$id/settings/': typeof PublicLayoutProjectsIdSettingsIndexRoute
   '/_masterLayout/organizations/$id/events/create/': typeof MasterLayoutOrganizationsIdEventsCreateIndexRoute
   '/_masterLayout/organizations/$id/projects/create/': typeof MasterLayoutOrganizationsIdProjectsCreateIndexRoute
@@ -850,6 +880,7 @@ export interface FileRouteTypes {
     | '/organizations/my/'
     | '/profile/settings/'
     | '/tasks/$id/'
+    | '/users/$userId/'
     | '/categories/$id/'
     | '/events/$id/'
     | '/projects/$id/'
@@ -857,17 +888,19 @@ export interface FileRouteTypes {
     | '/events/$id/attendance/'
     | '/events/$id/members/'
     | '/events/$id/roles/'
+    | '/events/$id/settings/'
     | '/events/my/$id/'
     | '/offers/my/$id/'
     | '/organizations/$id/events/'
     | '/organizations/$id/members/'
     | '/organizations/$id/projects/'
+    | '/organizations/$id/recommendations/'
     | '/organizations/$id/roles/'
     | '/organizations/$id/settings/'
     | '/projects/$id/members/'
+    | '/projects/$id/recommendations/'
     | '/projects/$id/roles/'
     | '/projects/my/$id/'
-    | '/events/$id/settings/'
     | '/projects/$id/settings/'
     | '/organizations/$id/events/create/'
     | '/organizations/$id/projects/create/'
@@ -917,6 +950,7 @@ export interface FileRouteTypes {
     | '/organizations/my'
     | '/profile/settings'
     | '/tasks/$id'
+    | '/users/$userId'
     | '/categories/$id'
     | '/events/$id'
     | '/projects/$id'
@@ -924,17 +958,19 @@ export interface FileRouteTypes {
     | '/events/$id/attendance'
     | '/events/$id/members'
     | '/events/$id/roles'
+    | '/events/$id/settings'
     | '/events/my/$id'
     | '/offers/my/$id'
     | '/organizations/$id/events'
     | '/organizations/$id/members'
     | '/organizations/$id/projects'
+    | '/organizations/$id/recommendations'
     | '/organizations/$id/roles'
     | '/organizations/$id/settings'
     | '/projects/$id/members'
+    | '/projects/$id/recommendations'
     | '/projects/$id/roles'
     | '/projects/my/$id'
-    | '/events/$id/settings'
     | '/projects/$id/settings'
     | '/organizations/$id/events/create'
     | '/organizations/$id/projects/create'
@@ -991,6 +1027,7 @@ export interface FileRouteTypes {
     | '/_masterLayout/organizations/my/'
     | '/_masterLayout/profile/settings/'
     | '/_masterLayout/tasks/$id/'
+    | '/_masterLayout/users/$userId/'
     | '/_publicLayout/categories/$id/'
     | '/_publicLayout/events/$id/'
     | '/_publicLayout/projects/$id/'
@@ -998,17 +1035,19 @@ export interface FileRouteTypes {
     | '/_masterLayout/events/$id/attendance/'
     | '/_masterLayout/events/$id/members/'
     | '/_masterLayout/events/$id/roles/'
+    | '/_masterLayout/events/$id/settings/'
     | '/_masterLayout/events/my/$id/'
     | '/_masterLayout/offers/my/$id/'
     | '/_masterLayout/organizations/$id/events/'
     | '/_masterLayout/organizations/$id/members/'
     | '/_masterLayout/organizations/$id/projects/'
+    | '/_masterLayout/organizations/$id/recommendations/'
     | '/_masterLayout/organizations/$id/roles/'
     | '/_masterLayout/organizations/$id/settings/'
     | '/_masterLayout/projects/$id/members/'
+    | '/_masterLayout/projects/$id/recommendations/'
     | '/_masterLayout/projects/$id/roles/'
     | '/_masterLayout/projects/my/$id/'
-    | '/_publicLayout/events/$id/settings/'
     | '/_publicLayout/projects/$id/settings/'
     | '/_masterLayout/organizations/$id/events/create/'
     | '/_masterLayout/organizations/$id/projects/create/'
@@ -1281,6 +1320,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicLayoutCategoriesIdIndexRouteImport
       parentRoute: typeof PublicLayoutRoute
     }
+    '/_masterLayout/users/$userId/': {
+      id: '/_masterLayout/users/$userId/'
+      path: '/users/$userId'
+      fullPath: '/users/$userId/'
+      preLoaderRoute: typeof MasterLayoutUsersUserIdIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
     '/_masterLayout/tasks/$id/': {
       id: '/_masterLayout/tasks/$id/'
       path: '/tasks/$id'
@@ -1421,13 +1467,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicLayoutProjectsIdSettingsIndexRouteImport
       parentRoute: typeof PublicLayoutRoute
     }
-    '/_publicLayout/events/$id/settings/': {
-      id: '/_publicLayout/events/$id/settings/'
-      path: '/events/$id/settings'
-      fullPath: '/events/$id/settings/'
-      preLoaderRoute: typeof PublicLayoutEventsIdSettingsIndexRouteImport
-      parentRoute: typeof PublicLayoutRoute
-    }
     '/_masterLayout/projects/my/$id/': {
       id: '/_masterLayout/projects/my/$id/'
       path: '/projects/my/$id'
@@ -1440,6 +1479,13 @@ declare module '@tanstack/react-router' {
       path: '/projects/$id/roles'
       fullPath: '/projects/$id/roles/'
       preLoaderRoute: typeof MasterLayoutProjectsIdRolesIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/projects/$id/recommendations/': {
+      id: '/_masterLayout/projects/$id/recommendations/'
+      path: '/projects/$id/recommendations'
+      fullPath: '/projects/$id/recommendations/'
+      preLoaderRoute: typeof MasterLayoutProjectsIdRecommendationsIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
     '/_masterLayout/projects/$id/members/': {
@@ -1461,6 +1507,13 @@ declare module '@tanstack/react-router' {
       path: '/roles'
       fullPath: '/organizations/$id/roles/'
       preLoaderRoute: typeof MasterLayoutOrganizationsIdRolesIndexRouteImport
+      parentRoute: typeof MasterLayoutOrganizationsIdRoute
+    }
+    '/_masterLayout/organizations/$id/recommendations/': {
+      id: '/_masterLayout/organizations/$id/recommendations/'
+      path: '/recommendations'
+      fullPath: '/organizations/$id/recommendations/'
+      preLoaderRoute: typeof MasterLayoutOrganizationsIdRecommendationsIndexRouteImport
       parentRoute: typeof MasterLayoutOrganizationsIdRoute
     }
     '/_masterLayout/organizations/$id/projects/': {
@@ -1496,6 +1549,13 @@ declare module '@tanstack/react-router' {
       path: '/events/my/$id'
       fullPath: '/events/my/$id/'
       preLoaderRoute: typeof MasterLayoutEventsMyIdIndexRouteImport
+      parentRoute: typeof MasterLayoutRoute
+    }
+    '/_masterLayout/events/$id/settings/': {
+      id: '/_masterLayout/events/$id/settings/'
+      path: '/events/$id/settings'
+      fullPath: '/events/$id/settings/'
+      preLoaderRoute: typeof MasterLayoutEventsIdSettingsIndexRouteImport
       parentRoute: typeof MasterLayoutRoute
     }
     '/_masterLayout/events/$id/roles/': {
@@ -1611,6 +1671,7 @@ interface MasterLayoutOrganizationsIdRouteChildren {
   MasterLayoutOrganizationsIdEventsIndexRoute: typeof MasterLayoutOrganizationsIdEventsIndexRoute
   MasterLayoutOrganizationsIdMembersIndexRoute: typeof MasterLayoutOrganizationsIdMembersIndexRoute
   MasterLayoutOrganizationsIdProjectsIndexRoute: typeof MasterLayoutOrganizationsIdProjectsIndexRoute
+  MasterLayoutOrganizationsIdRecommendationsIndexRoute: typeof MasterLayoutOrganizationsIdRecommendationsIndexRoute
   MasterLayoutOrganizationsIdRolesIndexRoute: typeof MasterLayoutOrganizationsIdRolesIndexRoute
   MasterLayoutOrganizationsIdSettingsIndexRoute: typeof MasterLayoutOrganizationsIdSettingsIndexRoute
   MasterLayoutOrganizationsIdEventsCreateIndexRoute: typeof MasterLayoutOrganizationsIdEventsCreateIndexRoute
@@ -1627,6 +1688,8 @@ const MasterLayoutOrganizationsIdRouteChildren: MasterLayoutOrganizationsIdRoute
       MasterLayoutOrganizationsIdMembersIndexRoute,
     MasterLayoutOrganizationsIdProjectsIndexRoute:
       MasterLayoutOrganizationsIdProjectsIndexRoute,
+    MasterLayoutOrganizationsIdRecommendationsIndexRoute:
+      MasterLayoutOrganizationsIdRecommendationsIndexRoute,
     MasterLayoutOrganizationsIdRolesIndexRoute:
       MasterLayoutOrganizationsIdRolesIndexRoute,
     MasterLayoutOrganizationsIdSettingsIndexRoute:
@@ -1660,12 +1723,15 @@ interface MasterLayoutRouteChildren {
   MasterLayoutOrganizationsMyIndexRoute: typeof MasterLayoutOrganizationsMyIndexRoute
   MasterLayoutProfileSettingsIndexRoute: typeof MasterLayoutProfileSettingsIndexRoute
   MasterLayoutTasksIdIndexRoute: typeof MasterLayoutTasksIdIndexRoute
+  MasterLayoutUsersUserIdIndexRoute: typeof MasterLayoutUsersUserIdIndexRoute
   MasterLayoutEventsIdAttendanceIndexRoute: typeof MasterLayoutEventsIdAttendanceIndexRoute
   MasterLayoutEventsIdMembersIndexRoute: typeof MasterLayoutEventsIdMembersIndexRoute
   MasterLayoutEventsIdRolesIndexRoute: typeof MasterLayoutEventsIdRolesIndexRoute
+  MasterLayoutEventsIdSettingsIndexRoute: typeof MasterLayoutEventsIdSettingsIndexRoute
   MasterLayoutEventsMyIdIndexRoute: typeof MasterLayoutEventsMyIdIndexRoute
   MasterLayoutOffersMyIdIndexRoute: typeof MasterLayoutOffersMyIdIndexRoute
   MasterLayoutProjectsIdMembersIndexRoute: typeof MasterLayoutProjectsIdMembersIndexRoute
+  MasterLayoutProjectsIdRecommendationsIndexRoute: typeof MasterLayoutProjectsIdRecommendationsIndexRoute
   MasterLayoutProjectsIdRolesIndexRoute: typeof MasterLayoutProjectsIdRolesIndexRoute
   MasterLayoutProjectsMyIdIndexRoute: typeof MasterLayoutProjectsMyIdIndexRoute
 }
@@ -1691,14 +1757,19 @@ const MasterLayoutRouteChildren: MasterLayoutRouteChildren = {
   MasterLayoutOrganizationsMyIndexRoute: MasterLayoutOrganizationsMyIndexRoute,
   MasterLayoutProfileSettingsIndexRoute: MasterLayoutProfileSettingsIndexRoute,
   MasterLayoutTasksIdIndexRoute: MasterLayoutTasksIdIndexRoute,
+  MasterLayoutUsersUserIdIndexRoute: MasterLayoutUsersUserIdIndexRoute,
   MasterLayoutEventsIdAttendanceIndexRoute:
     MasterLayoutEventsIdAttendanceIndexRoute,
   MasterLayoutEventsIdMembersIndexRoute: MasterLayoutEventsIdMembersIndexRoute,
   MasterLayoutEventsIdRolesIndexRoute: MasterLayoutEventsIdRolesIndexRoute,
+  MasterLayoutEventsIdSettingsIndexRoute:
+    MasterLayoutEventsIdSettingsIndexRoute,
   MasterLayoutEventsMyIdIndexRoute: MasterLayoutEventsMyIdIndexRoute,
   MasterLayoutOffersMyIdIndexRoute: MasterLayoutOffersMyIdIndexRoute,
   MasterLayoutProjectsIdMembersIndexRoute:
     MasterLayoutProjectsIdMembersIndexRoute,
+  MasterLayoutProjectsIdRecommendationsIndexRoute:
+    MasterLayoutProjectsIdRecommendationsIndexRoute,
   MasterLayoutProjectsIdRolesIndexRoute: MasterLayoutProjectsIdRolesIndexRoute,
   MasterLayoutProjectsMyIdIndexRoute: MasterLayoutProjectsMyIdIndexRoute,
 }
@@ -1729,7 +1800,6 @@ interface PublicLayoutRouteChildren {
   PublicLayoutCategoriesIdIndexRoute: typeof PublicLayoutCategoriesIdIndexRoute
   PublicLayoutEventsIdIndexRoute: typeof PublicLayoutEventsIdIndexRoute
   PublicLayoutProjectsIdIndexRoute: typeof PublicLayoutProjectsIdIndexRoute
-  PublicLayoutEventsIdSettingsIndexRoute: typeof PublicLayoutEventsIdSettingsIndexRoute
   PublicLayoutProjectsIdSettingsIndexRoute: typeof PublicLayoutProjectsIdSettingsIndexRoute
 }
 
@@ -1743,8 +1813,6 @@ const PublicLayoutRouteChildren: PublicLayoutRouteChildren = {
   PublicLayoutCategoriesIdIndexRoute: PublicLayoutCategoriesIdIndexRoute,
   PublicLayoutEventsIdIndexRoute: PublicLayoutEventsIdIndexRoute,
   PublicLayoutProjectsIdIndexRoute: PublicLayoutProjectsIdIndexRoute,
-  PublicLayoutEventsIdSettingsIndexRoute:
-    PublicLayoutEventsIdSettingsIndexRoute,
   PublicLayoutProjectsIdSettingsIndexRoute:
     PublicLayoutProjectsIdSettingsIndexRoute,
 }

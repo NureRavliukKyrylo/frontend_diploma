@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import type { OrganizationDetailsTab } from "../config/tabs";
 import styles from "./InternalNav.module.scss";
 
@@ -21,6 +22,7 @@ export const OrganizationDetailsInternalNav = ({
   onTabChange,
   prefersReducedMotion,
 }: OrganizationDetailsInternalNavProps) => {
+  const { t } = useTranslation("organizations");
   const visibleTabsCount = availableTabs.length;
 
   const navStyle = {
@@ -43,7 +45,7 @@ export const OrganizationDetailsInternalNav = ({
       <div
         className={styles.internalNav}
         role="tablist"
-        aria-label="Organization sections"
+        aria-label={t("details.tabs.overview")}
       >
         {availableTabs.map((tab) => {
           const isActive = activeTab === tab.value;
@@ -125,7 +127,7 @@ export const OrganizationDetailsInternalNav = ({
                       }
                 }
               >
-                {tab.label}
+                {t(tab.label)}
               </motion.span>
             </motion.button>
           );

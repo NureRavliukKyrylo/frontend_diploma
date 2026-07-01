@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Plus, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import styles from "../OrganizationFab.module.scss";
 
 interface OrganizationFabMainButtonProps {
@@ -10,11 +11,14 @@ interface OrganizationFabMainButtonProps {
 export const OrganizationFabMainButton = ({
   isOpen,
   onClick,
-}: OrganizationFabMainButtonProps) => (
-  <motion.button
+}: OrganizationFabMainButtonProps) => {
+  const { t } = useTranslation("organizations");
+
+  return (
+    <motion.button
     type="button"
     className={`${styles.mainButton} ${isOpen ? styles.mainButtonOpen : ""}`}
-    aria-label={isOpen ? "Close organization actions" : "Open organization actions"}
+    aria-label={isOpen ? t("fab.close") : t("fab.open")}
     aria-expanded={isOpen}
     whileHover={{ scale: 1.06 }}
     whileTap={{ scale: 0.96 }}
@@ -39,5 +43,6 @@ export const OrganizationFabMainButton = ({
       size="1em"
       strokeWidth={2.8}
     />
-  </motion.button>
-);
+    </motion.button>
+  );
+};

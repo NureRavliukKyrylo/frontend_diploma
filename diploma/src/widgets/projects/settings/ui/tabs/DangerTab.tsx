@@ -1,4 +1,5 @@
 import { Archive, RotateCcw } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { EntityStatus } from "@shared/config/types";
 import styles from "./DangerTab.module.scss";
 
@@ -17,24 +18,29 @@ export const DangerTab = ({
   onArchiveClick,
   onRecoverClick,
 }: DangerTabProps) => {
+  const { t } = useTranslation("project");
   const isArchived = projectStatus === "archived";
 
   return (
     <div className={styles.sectionsContainer}>
       <section className={styles.section}>
-        <h2 className={styles.sectionLabel}>Danger zone</h2>
+        <h2 className={styles.sectionLabel}>{t("settings.danger.title")}</h2>
         <p className={styles.sectionDescription}>
-          Control whether this project is visible and active.
+          {t("settings.danger.description")}
         </p>
 
         <div className={styles.dangerRows}>
           <div className={styles.dangerRow}>
             <div className={styles.dangerCopy}>
-              <h3>{isArchived ? "Recover project" : "Archive project"}</h3>
+              <h3>
+                {isArchived
+                  ? t("settings.danger.recover")
+                  : t("settings.danger.archive")}
+              </h3>
               <p>
                 {isArchived
-                  ? "Restores the project to the public project experience."
-                  : "Hides the project from public listings. It can be restored later."}
+                  ? t("settings.danger.recoverText")
+                  : t("settings.danger.archiveText")}
               </p>
             </div>
 
@@ -49,11 +55,11 @@ export const DangerTab = ({
               {isArchived ? <RotateCcw size={15} /> : <Archive size={15} />}
               {isArchived
                 ? isRecoverPending
-                  ? "Recovering"
-                  : "Recover"
+                  ? t("settings.danger.recovering")
+                  : t("settings.modals.recover")
                 : isArchivePending
-                  ? "Archiving"
-                  : "Archive"}
+                  ? t("settings.danger.archiving")
+                  : t("settings.modals.archive")}
             </button>
           </div>
         </div>

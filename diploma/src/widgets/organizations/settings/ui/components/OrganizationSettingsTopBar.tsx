@@ -1,4 +1,5 @@
 import { Check, ChevronLeft } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import styles from "../SettingsWidget.module.scss";
 
 interface OrganizationSettingsTopBarProps {
@@ -15,13 +16,16 @@ export const OrganizationSettingsTopBar = ({
   onBack,
   onDiscard,
   onSave,
-}: OrganizationSettingsTopBarProps) => (
-  <div className={styles.topBar}>
+}: OrganizationSettingsTopBarProps) => {
+  const { t } = useTranslation("organizations");
+
+  return (
+    <div className={styles.topBar}>
     <div className={styles.titleGroup}>
       <button
         type="button"
         className={styles.backButton}
-        aria-label="Back to organization"
+        aria-label={t("settings.topBar.back")}
         onClick={onBack}
       >
         <ChevronLeft size={20} strokeWidth={2.4} />
@@ -29,13 +33,15 @@ export const OrganizationSettingsTopBar = ({
       <h1 className={styles.breadcrumbTitle}>
         <span className={styles.organizationName}>{name}</span>
         <span className={styles.breadcrumbSeparator}>›</span>
-        <span className={styles.settingsLabel}>settings</span>
+        <span className={styles.settingsLabel}>
+          {t("settings.topBar.title")}
+        </span>
       </h1>
     </div>
 
     <div className={styles.topActions}>
       <button type="button" className={styles.discardButton} onClick={onDiscard}>
-        Discard
+        {t("settings.topBar.discard")}
       </button>
       <button
         type="button"
@@ -44,8 +50,11 @@ export const OrganizationSettingsTopBar = ({
         onClick={onSave}
       >
         <Check size={15} strokeWidth={3} />
-        {isSaving ? "Saving..." : "Save changes"}
+        {isSaving
+          ? t("settings.topBar.saving")
+          : t("settings.topBar.save")}
       </button>
     </div>
-  </div>
-);
+    </div>
+  );
+};

@@ -8,32 +8,32 @@ export type OrganizationCreateStep =
 export const organizationCreateStepMeta: Record<
   OrganizationCreateStep,
   {
-    title: string;
-    subtitle: string;
+    titleKey: string;
+    subtitleKey: string;
   }
 > = {
   1: {
-    title: "BASIC INFO",
-    subtitle: "How would you describe your organization?",
+    titleKey: "create.steps.basics",
+    subtitleKey: "create.steps.basicsText",
   },
   2: {
-    title: "BRANDING",
-    subtitle: "Which logo would you like to upload?",
+    titleKey: "create.steps.branding",
+    subtitleKey: "create.steps.brandingText",
   },
   3: {
-    title: "ACCESS",
-    subtitle: "Who can join and leave your organization?",
+    titleKey: "create.steps.access",
+    subtitleKey: "create.steps.accessText",
   },
   4: {
-    title: "GET STARTED",
-    subtitle: "Your organization is ready — what's next?",
+    titleKey: "create.steps.finish",
+    subtitleKey: "create.steps.finishText",
   },
 };
 
 interface OrganizationCreateAccessOption {
   value: OrganizationCreatePolicyValue;
-  label: string;
-  description: string;
+  labelKey: string;
+  descriptionKey: string;
 }
 
 export const organizationCreateAccessOptions: Record<
@@ -43,25 +43,25 @@ export const organizationCreateAccessOptions: Record<
   joinPolicy: [
     {
       value: "open",
-      label: "Open access",
-      description: "Anyone can join instantly",
+      labelKey: "create.access.openAccess",
+      descriptionKey: "create.access.openAccessText",
     },
     {
       value: "approval_required",
-      label: "Approval required",
-      description: "Owners review join requests",
+      labelKey: "create.access.joinApproval",
+      descriptionKey: "create.access.joinApprovalText",
     },
   ],
   leavePolicy: [
     {
       value: "open",
-      label: "Instant leave",
-      description: "Members can leave anytime",
+      labelKey: "create.access.instantLeave",
+      descriptionKey: "create.access.instantLeaveText",
     },
     {
       value: "approval_required",
-      label: "Approval required",
-      description: "Owners review leave requests",
+      labelKey: "create.access.leaveApproval",
+      descriptionKey: "create.access.leaveApprovalText",
     },
   ],
 };

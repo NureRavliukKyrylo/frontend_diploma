@@ -11,9 +11,10 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import {
   getInitialSkillValues,
-  skillFormSchema,
+  getSkillFormSchema,
   type SkillFormValues,
 } from "../libs/skillFormSchema";
+import { useTranslation } from "react-i18next";
 
 interface UseSkillFormParams {
   mode: "create" | "edit";
@@ -21,7 +22,12 @@ interface UseSkillFormParams {
   onSuccess: () => void;
 }
 
-export const useSkillForm = ({ mode, skill, onSuccess }: UseSkillFormParams) => {
+export const useSkillForm = ({
+  mode,
+  skill,
+  onSuccess,
+}: UseSkillFormParams) => {
+  const { t } = useTranslation("admin");
   const queryClient = useQueryClient();
   const [iconFile, setIconFile] = useState<File | null>(null);
   const [iconPreview, setIconPreview] = useState<string | null>(null);
@@ -41,7 +47,7 @@ export const useSkillForm = ({ mode, skill, onSuccess }: UseSkillFormParams) => 
       }
 
       if (!skill) {
-        throw new Error("Skill is not selected");
+        throw new Error(t("skills.form.notSelected"));
       }
 
       await updateAdminSkill(skill.id, { ...payload, icon: iconFile });
@@ -51,7 +57,10 @@ export const useSkillForm = ({ mode, skill, onSuccess }: UseSkillFormParams) => 
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: skillKeys.all() });
       addToast({
-        title: mode === "create" ? "Skill created" : "Skill updated",
+        title:
+          mode === "create"
+            ? t("skills.form.created")
+            : t("skills.form.updated"),
         color: "success",
       });
       onSuccess();
@@ -66,7 +75,7 @@ export const useSkillForm = ({ mode, skill, onSuccess }: UseSkillFormParams) => 
       description: skill?.description ?? "",
       categoryIds: skill?.categories.map((category) => category.id) ?? [],
     }),
-    validationSchema: skillFormSchema,
+    validationSchema: getSkillFormSchema(t),
     enableReinitialize: true,
     onSubmit: (values) => mutation.mutate(values),
   });
@@ -87,12 +96,12 @@ export const useSkillForm = ({ mode, skill, onSuccess }: UseSkillFormParams) => 
     }
 
     if (file.size > 2 * 1024 * 1024) {
-      setIconError("Icon must be 2MB or smaller");
+      setIconError(t("skills.form.fileTooLarge"));
       return;
     }
 
     if (!file.type.startsWith("image/")) {
-      setIconError("Please choose an image file");
+      setIconError(t("skills.form.imageOnly"));
       return;
     }
 

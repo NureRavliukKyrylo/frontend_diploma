@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { EmptyState } from "@shared/ui";
 import { RequestCard } from "@widgets/organizations/members";
 import type { OrganizationMembersPageModel } from "../../model/types";
@@ -10,17 +11,19 @@ interface RequestsContentProps {
 }
 
 export const RequestsContent = ({ model, hasSearch }: RequestsContentProps) => {
+  const { t } = useTranslation("common");
+  const entity = t(`member.entities.${model.entityLabel}`);
   const emptyCopy = hasSearch
     ? {
-        title: "No results found",
-        subtitle: "Try a different name or clear your search to see all requests.",
+        title: t("memberList.noRequestsFound"),
+        subtitle: t("memberList.noRequestsFoundHint"),
       }
     : {
-        title: "No pending requests",
+        title: t("memberList.noPendingRequests"),
         subtitle:
           model.activeRequestTab === "join"
-            ? "Join requests will appear here when volunteers ask to enter the org."
-            : "Leave requests will appear here when members ask to exit the org.",
+            ? t("memberList.noJoinRequests", { entity })
+            : t("memberList.noLeaveRequests", { entity }),
       };
 
   return (
@@ -28,7 +31,7 @@ export const RequestsContent = ({ model, hasSearch }: RequestsContentProps) => {
       <div
         className={styles.requestTabsContainer}
         role="tablist"
-        aria-label="Organization request types"
+        aria-label={t("memberList.requestTypesLabel", { entity })}
       >
         <button
           type="button"
@@ -38,7 +41,7 @@ export const RequestsContent = ({ model, hasSearch }: RequestsContentProps) => {
           aria-selected={model.activeRequestTab === "join"}
           onClick={() => model.setActiveRequestTab("join")}
         >
-          Join requests
+          {t("memberList.joinRequests")}
           <span className={styles.requestTabBadge}>{model.joinRequests.length}</span>
         </button>
         <button
@@ -49,7 +52,7 @@ export const RequestsContent = ({ model, hasSearch }: RequestsContentProps) => {
           aria-selected={model.activeRequestTab === "leave"}
           onClick={() => model.setActiveRequestTab("leave")}
         >
-          Leave requests
+          {t("memberList.leaveRequests")}
           <span className={styles.requestTabBadge}>{model.leaveRequests.length}</span>
         </button>
       </div>

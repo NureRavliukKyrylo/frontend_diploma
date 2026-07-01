@@ -1,12 +1,16 @@
 import { useMemo, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate } from "@tanstack/react-router";
-import type { Event, EventMode } from "@entities/event";
+import type { Event, EventJoinedMode, EventMode } from "@entities/event";
+import { contextRoleQuery } from "@entities/organization";
+import { pendingEntityRequestsQuery } from "@entities/request";
 import {
   canManageEvent,
   canManageEventMembers,
   canManageEventRoles,
   canViewEventAttendance,
 } from "../../../lib/eventPermissions";
+import { useEventPermissionContext } from "../../../model/useEventPermissionContext";
 import {
   eventFabActionsConfig,
   type EventFabActionConfig,
@@ -16,8 +20,8 @@ import { useTranslation } from "react-i18next";
 interface Params {
   eventId: string;
   event: Event;
-  activeTab?: EventMode;
-  onTabChange?: (nextTab: EventMode) => void;
+  activeTab?: EventMode | EventJoinedMode;
+  onTabChange?: (nextTab: "overview") => void;
 }
 
 export interface EventFabAction extends EventFabActionConfig {
@@ -44,10 +48,45 @@ export const useEventFabActions = ({
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isTaskDrawerOpen, setIsTaskDrawerOpen] = useState(false);
-  const canContent = canManageEvent(event);
-  const canMembers = canManageEventMembers(event);
-  const canRoles = canManageEventRoles(event);
-  const canAttendance = canViewEventAttendance(event);
+  const permissionContext = useEventPermissionContext(event);
+  const rolesAccessResult = useQuery({
+    ...contextRoleQuery.entity("event", eventId),
+    enabled: !canManageEventRoles(event, permissionContext),
+    retry: false,
+  });
+  const currentRole = rolesAccessResult.data?.find(
+    (role) => role.id === event.currentUserRole?.roleId,
+  );
+  const eventWithResolvedRole = currentRole
+    ? {
+        ...event,
+        currentUserRole: {
+          ...event.currentUserRole,
+          permissions: currentRole.permissions,
+        },
+      }
+    : event;
+  const hasKnownMembersAccess = canManageEventMembers(
+    eventWithResolvedRole,
+    permissionContext,
+  );
+  const membersAccessResult = useQuery({
+    ...pendingEntityRequestsQuery("event", eventId, "join"),
+    enabled: !hasKnownMembersAccess,
+  });
+  const canContent = canManageEvent(
+    eventWithResolvedRole,
+    permissionContext,
+  );
+  const canMembers =
+    hasKnownMembersAccess || membersAccessResult.isSuccess;
+  const canRoles =
+    canManageEventRoles(eventWithResolvedRole, permissionContext) ||
+    rolesAccessResult.isSuccess;
+  const canAttendance = canViewEventAttendance(
+    eventWithResolvedRole,
+    permissionContext,
+  );
   const closeMenu = () => setIsOpen(false);
 
   const actions = useMemo<EventFabAction[]>(

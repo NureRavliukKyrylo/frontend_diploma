@@ -3,41 +3,56 @@ import type { AdminRequestListItem } from "@entities/admin";
 import { getCompactEntityLabel } from "../../../requests-config/libs/requestDrawerHelpers";
 import { DrawerInfoRow } from "../DrawerInfoRow";
 import styles from "../../../requests-page-styles/AdminRequestsPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface BadgeRequestPreviewProps {
   request: AdminRequestListItem;
 }
 
-export const BadgeRequestPreview = ({ request }: BadgeRequestPreviewProps) => (
-  <>
-    <div className={styles.drawerDecisionCard}>
-      <div className={styles.drawerDecisionIcon}>
-        <Award size={23} aria-hidden="true" />
-      </div>
-      <div>
-        <span>Recognition review</span>
-        <strong>Badge award request</strong>
-        <p>
-          {request.description ||
-            "Confirm the recipient and linked achievement before approving this award."}
-        </p>
-      </div>
-    </div>
+export const BadgeRequestPreview = ({ request }: BadgeRequestPreviewProps) => {
+  const { t } = useTranslation("admin");
 
-    <section className={styles.drawerSection}>
-      <div className={styles.drawerSectionLabel}>Award context</div>
-      <div className={styles.drawerInfoGrid}>
-        <DrawerInfoRow label="Recipient" value={request.userId} />
-        <DrawerInfoRow
-          label="Badge target"
-          value={getCompactEntityLabel(request.targetEntityType, request.targetEntityId)}
-        />
-        <DrawerInfoRow label="Linked proof" value={request.linkedEntityId} />
-        <DrawerInfoRow
-          label="Priority minutes"
-          value={request.priorityBoostMinutesReserved}
-        />
+  return (
+    <>
+      <div className={styles.drawerDecisionCard}>
+        <div className={styles.drawerDecisionIcon}>
+          <Award size={23} aria-hidden="true" />
+        </div>
+        <div>
+          <span>{t("requests.previews.recognitionReview")}</span>
+          <strong>{t("requests.previews.badgeAward")}</strong>
+          <p>
+            {request.description || t("requests.previews.recognitionFallback")}
+          </p>
+        </div>
       </div>
-    </section>
-  </>
-);
+
+      <section className={styles.drawerSection}>
+        <div className={styles.drawerSectionLabel}>
+          {t("requests.previews.awardContext")}
+        </div>
+        <div className={styles.drawerInfoGrid}>
+          <DrawerInfoRow
+            label={t("requests.drawer.recipient")}
+            value={request.userId}
+          />
+          <DrawerInfoRow
+            label={t("requests.drawer.badgeTarget")}
+            value={getCompactEntityLabel(
+              request.targetEntityType,
+              request.targetEntityId,
+            )}
+          />
+          <DrawerInfoRow
+            label={t("requests.drawer.linkedProof")}
+            value={request.linkedEntityId}
+          />
+          <DrawerInfoRow
+            label={t("requests.drawer.priorityMinutes")}
+            value={request.priorityBoostMinutesReserved}
+          />
+        </div>
+      </section>
+    </>
+  );
+};

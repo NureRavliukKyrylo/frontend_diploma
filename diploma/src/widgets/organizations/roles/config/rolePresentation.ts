@@ -1,4 +1,5 @@
 import type { ContextRoleDto } from "@entities/organization";
+import type { TFunction } from "i18next";
 
 export type ContextRoleCardType = "system" | "template" | "custom";
 
@@ -17,44 +18,58 @@ const stripePalette = [
 ] as const;
 
 export const permissionLabels: Record<string, string> = {
-  "organization.content_manage": "Manage organization content",
-  "organization.members_manage": "Manage members",
-  "organization.roles_manage": "Manage roles",
-  "organization.roles_assign": "Assign roles",
-  "project.content_manage": "Manage projects",
-  "project.members_manage": "Manage project members",
-  "project.roles_manage": "Manage project roles",
-  "project.roles_assign": "Assign project roles",
-  "event.content_manage": "Manage events",
-  "event.members_manage": "Manage event members",
-  "event.roles_manage": "Manage event roles",
-  "event.roles_assign": "Assign event roles",
-  "task.content_manage": "Manage tasks",
-  "task.members_manage": "Manage task members",
-  "task.roles_manage": "Manage task roles",
-  "task.roles_assign": "Assign task roles",
-  "task.timelog_view_all": "View all time logs",
-  "task.timelog_edit_manager": "Edit time logs (manager)",
-  "task.timelog_approve": "Approve time logs",
-  "task.timelog_reject": "Reject time logs",
-  "task.timelog_resolve_dispute": "Resolve time log disputes",
-  "attendance.view_event": "View event attendance",
-  "attendance.approve_event": "Approve attendance",
-  "attendance.reject_event": "Reject attendance",
-  "attendance.resolve_dispute": "Resolve attendance disputes",
-  "attendance.export_event": "Export attendance",
-  "participation.view_members": "View member list",
-  "participation.view_history": "View participation history",
-  "participation.join_for_user": "Add members manually",
-  "participation.leave_for_user": "Remove members manually",
-  "participation.members_manage": "Manage participation records",
-  "participation.roles_assign": "Assign participation roles",
-  "timebank.view_user_summary": "View user time bank summary",
+  "organization.content_manage":
+    "roles:permissions.labels.organizationContentManage",
+  "organization.members_manage":
+    "roles:permissions.labels.organizationMembersManage",
+  "organization.roles_manage":
+    "roles:permissions.labels.organizationRolesManage",
+  "organization.roles_assign":
+    "roles:permissions.labels.organizationRolesAssign",
+  "project.content_manage": "roles:permissions.labels.projectContentManage",
+  "project.members_manage": "roles:permissions.labels.projectMembersManage",
+  "project.roles_manage": "roles:permissions.labels.projectRolesManage",
+  "project.roles_assign": "roles:permissions.labels.projectRolesAssign",
+  "event.content_manage": "roles:permissions.labels.eventContentManage",
+  "event.members_manage": "roles:permissions.labels.eventMembersManage",
+  "event.roles_manage": "roles:permissions.labels.eventRolesManage",
+  "event.roles_assign": "roles:permissions.labels.eventRolesAssign",
+  "task.content_manage": "roles:permissions.labels.taskContentManage",
+  "task.members_manage": "roles:permissions.labels.taskMembersManage",
+  "task.roles_manage": "roles:permissions.labels.taskRolesManage",
+  "task.roles_assign": "roles:permissions.labels.taskRolesAssign",
+  "task.timelog_view_all": "roles:permissions.labels.taskTimelogViewAll",
+  "task.timelog_edit_manager":
+    "roles:permissions.labels.taskTimelogEditManager",
+  "task.timelog_approve": "roles:permissions.labels.taskTimelogApprove",
+  "task.timelog_reject": "roles:permissions.labels.taskTimelogReject",
+  "task.timelog_resolve_dispute":
+    "roles:permissions.labels.taskTimelogResolveDispute",
+  "attendance.view_event": "roles:permissions.labels.attendanceViewEvent",
+  "attendance.approve_event": "roles:permissions.labels.attendanceApproveEvent",
+  "attendance.reject_event": "roles:permissions.labels.attendanceRejectEvent",
+  "attendance.resolve_dispute":
+    "roles:permissions.labels.attendanceResolveDispute",
+  "attendance.export_event": "roles:permissions.labels.attendanceExportEvent",
+  "participation.view_members":
+    "roles:permissions.labels.participationViewMembers",
+  "participation.view_history":
+    "roles:permissions.labels.participationViewHistory",
+  "participation.join_for_user":
+    "roles:permissions.labels.participationJoinForUser",
+  "participation.leave_for_user":
+    "roles:permissions.labels.participationLeaveForUser",
+  "participation.members_manage":
+    "roles:permissions.labels.participationMembersManage",
+  "participation.roles_assign":
+    "roles:permissions.labels.participationRolesAssign",
+  "timebank.view_user_summary":
+    "roles:permissions.labels.timebankViewUserSummary",
 };
 
 export const contextRolePermissionGroups: PermissionGroup[] = [
   {
-    title: "Organization",
+    title: "roles:permissions.groups.organization",
     permissions: [
       "organization.content_manage",
       "organization.members_manage",
@@ -63,7 +78,7 @@ export const contextRolePermissionGroups: PermissionGroup[] = [
     ],
   },
   {
-    title: "Projects",
+    title: "roles:permissions.groups.projects",
     permissions: [
       "project.content_manage",
       "project.members_manage",
@@ -72,7 +87,7 @@ export const contextRolePermissionGroups: PermissionGroup[] = [
     ],
   },
   {
-    title: "Events",
+    title: "roles:permissions.groups.events",
     permissions: [
       "event.content_manage",
       "event.members_manage",
@@ -86,7 +101,7 @@ export const contextRolePermissionGroups: PermissionGroup[] = [
     ],
   },
   {
-    title: "Tasks",
+    title: "roles:permissions.groups.tasks",
     permissions: [
       "task.content_manage",
       "task.members_manage",
@@ -100,7 +115,7 @@ export const contextRolePermissionGroups: PermissionGroup[] = [
     ],
   },
   {
-    title: "Participation",
+    title: "roles:permissions.groups.participation",
     permissions: [
       "participation.view_members",
       "participation.view_history",
@@ -111,7 +126,7 @@ export const contextRolePermissionGroups: PermissionGroup[] = [
     ],
   },
   {
-    title: "Time Bank",
+    title: "roles:permissions.groups.timeBank",
     permissions: ["timebank.view_user_summary"],
   },
 ];
@@ -123,8 +138,10 @@ const humanizePermissionCode = (code: string) =>
     .replace(/_/g, " ")
     .replace(/\b\w/g, (char) => char.toUpperCase());
 
-export const getPermissionLabel = (code: string) =>
-  permissionLabels[code] ?? humanizePermissionCode(code);
+export const getPermissionLabel = (code: string, t: TFunction) => {
+  const key = permissionLabels[code];
+  return key ? t(key) : humanizePermissionCode(code);
+};
 
 export const getRoleStripeColor = (index: number) =>
   stripePalette[index] ?? "#888888";
@@ -132,10 +149,7 @@ export const getRoleStripeColor = (index: number) =>
 export const getRoleAccentColor = (index: number) =>
   stripePalette[index] ?? "#888888";
 
-export const getRoleIndexLabel = (
-  type: ContextRoleCardType,
-  index: number,
-) => {
+export const getRoleIndexLabel = (type: ContextRoleCardType, index: number) => {
   const sequence = String(index + 1).padStart(2, "0");
 
   if (type === "system") return sequence;
@@ -146,9 +160,10 @@ export const getRoleIndexLabel = (
 export const getRoleTypeLabel = (
   type: ContextRoleCardType,
   role: ContextRoleDto,
+  t: TFunction,
 ) => {
-  if (role.archivedAt) return "Archived role";
-  if (type === "system") return "System role";
-  if (type === "template") return "Template role";
-  return "Custom role";
+  if (role.archivedAt) return t("roles:types.archived");
+  if (type === "system") return t("roles:types.system");
+  if (type === "template") return t("roles:types.template");
+  return t("roles:types.custom");
 };

@@ -11,6 +11,7 @@ import { SortDropDown } from "@shared/ui/drop-down";
 import { BaseModal, ConfirmationModal } from "@shared/ui/modals";
 import { BadgeCheck, X } from "lucide-react";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { useTranslation } from "react-i18next";
 import styles from "./AdminChangeRoleModal.module.scss";
 
 interface AdminChangeRoleModalProps {
@@ -21,16 +22,16 @@ interface AdminChangeRoleModalProps {
 type SystemRoleValue = "Guest" | "User" | "Moderator" | "Admin" | "SuperAdmin";
 
 const systemRoleOptions: { value: SystemRoleValue; label: string }[] = [
-  { value: "Guest", label: "Guest" },
-  { value: "User", label: "User" },
-  { value: "Moderator", label: "Moderator" },
-  { value: "Admin", label: "Admin" },
-  { value: "SuperAdmin", label: "SuperAdmin" },
+  { value: "Guest", label: "admin:users.role.roles.Guest" },
+  { value: "User", label: "admin:users.role.roles.User" },
+  { value: "Moderator", label: "admin:users.role.roles.Moderator" },
+  { value: "Admin", label: "admin:users.role.roles.Admin" },
+  { value: "SuperAdmin", label: "admin:users.role.roles.SuperAdmin" },
 ];
 
-const getUserName = (user: AdminUserListItem) => {
+const getUserName = (user: AdminUserListItem, fallback: string) => {
   const fullName = `${user.firstName} ${user.lastName}`.trim();
-  return user.displayName || fullName || user.email || "Unknown user";
+  return user.displayName || fullName || user.email || fallback;
 };
 
 const normalizeRole = (role?: string | null): SystemRoleValue => {
@@ -38,11 +39,15 @@ const normalizeRole = (role?: string | null): SystemRoleValue => {
   return match?.value ?? "User";
 };
 
-const getRoleChangeErrorMessage = (error: unknown) => {
-  const status = (error as { response?: { status?: number } })?.response?.status;
+const getRoleChangeErrorMessage = (
+  error: unknown,
+  forbiddenMessage: string,
+) => {
+  const status = (error as { response?: { status?: number } })?.response
+    ?.status;
 
   if (status === 403) {
-    return "You don't have permission to assign this role";
+    return forbiddenMessage;
   }
 
   return getErrorMessage(error);
@@ -52,23 +57,39 @@ export const AdminChangeRoleModal = ({
   user,
   onClose,
 }: AdminChangeRoleModalProps) => {
+  const { t } = useTranslation("admin");
   const queryClient = useQueryClient();
-  const currentRole = useMemo(() => normalizeRole(user?.roleName), [user?.roleName]);
-  const [selectedRole, setSelectedRole] = useState<SystemRoleValue>(currentRole);
+  const localizedRoleOptions = systemRoleOptions.map((option) => ({
+    ...option,
+    label: t(option.label),
+  }));
+  const currentRole = useMemo(
+    () => normalizeRole(user?.roleName),
+    [user?.roleName],
+  );
+  const [selectedRole, setSelectedRole] =
+    useState<SystemRoleValue>(currentRole);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const mutation = useMutation({
     mutationFn: () => {
       if (!user) {
-        throw new Error("User is not selected");
+        throw new Error(t("users.role.notSelected"));
       }
 
       return changeAdminUserRole(user.userId, selectedRole);
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: adminDashboardKeys.all() });
+      await queryClient.invalidateQueries({
+        queryKey: adminDashboardKeys.all(),
+      });
       addToast({
-        title: "Role changed",
-        description: `${user ? getUserName(user) : "The user"} is now ${selectedRole}.`,
+        title: t("users.role.changed"),
+        description: t("users.role.success", {
+          name: user
+            ? getUserName(user, t("users.card.unknown"))
+            : t("users.card.unknown"),
+          role: t(`users.role.roles.${selectedRole}`),
+        }),
         color: "success",
       });
       setIsConfirmOpen(false);
@@ -85,10 +106,10 @@ export const AdminChangeRoleModal = ({
     return null;
   }
 
-  const displayName = getUserName(user);
+  const displayName = getUserName(user, t("users.card.unknown"));
   const isSameRole = selectedRole === currentRole;
   const errorMessage = mutation.isError
-    ? getRoleChangeErrorMessage(mutation.error)
+    ? getRoleChangeErrorMessage(mutation.error, t("users.role.forbidden"))
     : null;
 
   const handleCancel = () => {
@@ -122,7 +143,7 @@ export const AdminChangeRoleModal = ({
             type="button"
             className={styles.closeButton}
             onClick={handleCancel}
-            aria-label="Close role dialog"
+            aria-label={t("users.role.close")}
           >
             <X size={18} aria-hidden="true" />
           </button>
@@ -132,22 +153,25 @@ export const AdminChangeRoleModal = ({
           </div>
 
           <div className={styles.header}>
-            <h2 className={styles.title}>Change system role</h2>
+            <h2 className={styles.title}>{t("users.role.title")}</h2>
             <p className={styles.description}>
-              Update the platform-wide role for <strong>{displayName}</strong>.
+              {t("users.role.description", { name: displayName })}
             </p>
           </div>
 
           <div className={styles.currentRoleLine}>
-            Current role: <strong>{user.roleName || currentRole}</strong>
+            {t("users.role.current")}{" "}
+            <strong>
+              {t(`users.role.roles.${user.roleName || currentRole}`)}
+            </strong>
           </div>
 
           <label className={styles.field}>
-            <span className={styles.fieldLabel}>New role</span>
+            <span className={styles.fieldLabel}>{t("users.role.new")}</span>
             <div className={styles.dropdownField}>
               <SortDropDown
                 selectedLabelOnly
-                options={systemRoleOptions}
+                options={localizedRoleOptions}
                 value={selectedRole}
                 onSelect={(value) => {
                   mutation.reset();
@@ -165,14 +189,14 @@ export const AdminChangeRoleModal = ({
               className={styles.cancelButton}
               onClick={handleCancel}
             >
-              Cancel
+              {t("common.actions.cancel")}
             </BaseButtonWrapper>
             <BaseButtonWrapper
               type="submit"
               className={styles.submitButton}
               disabled={isSameRole}
             >
-              Change role
+              {t("users.drawer.changeRole")}
             </BaseButtonWrapper>
           </div>
         </form>
@@ -180,16 +204,20 @@ export const AdminChangeRoleModal = ({
 
       <ConfirmationModal
         isOpen={isConfirmOpen}
-        title="Change system role?"
-        text={`${displayName} will be changed from ${user.roleName || currentRole} to ${selectedRole}. This affects what they can do across the entire platform.`}
+        title={t("users.role.confirmTitle")}
+        text={t("users.role.confirmText", {
+          name: displayName,
+          current: t(`users.role.roles.${user.roleName || currentRole}`),
+          next: t(`users.role.roles.${selectedRole}`),
+        })}
         onConfirm={() => mutation.mutate()}
         onCancel={() => {
           if (!mutation.isPending) {
             setIsConfirmOpen(false);
           }
         }}
-        confirmText="Change role"
-        cancelText="Cancel"
+        confirmText={t("users.drawer.changeRole")}
+        cancelText={t("common.actions.cancel")}
         isLoading={mutation.isPending}
         error={errorMessage}
         maxWidth="480px"

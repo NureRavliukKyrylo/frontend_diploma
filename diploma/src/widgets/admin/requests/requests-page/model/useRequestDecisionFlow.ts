@@ -22,9 +22,11 @@ import {
 } from "./requestDecisionNotifications";
 
 export const useRequestDecisionFlow = () => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["admin", "common"]);
   const queryClient = useQueryClient();
-  const [decisionTarget, setDecisionTarget] = useState<DecisionTarget | null>(null);
+  const [decisionTarget, setDecisionTarget] = useState<DecisionTarget | null>(
+    null,
+  );
   const [previewRequest, setPreviewRequest] =
     useState<AdminRequestListItem | null>(null);
   const [decisionComment, setDecisionComment] = useState("");
@@ -53,7 +55,7 @@ export const useRequestDecisionFlow = () => {
     mutationFn: approveAdminRequest,
     onSuccess: async (_, variables) => {
       const title = decisionTarget?.request.title;
-      notifyDecisionSuccess("approve", title);
+      notifyDecisionSuccess("approve", t, title);
       setDecisionTarget(null);
       setPreviewRequest(null);
       await Promise.all([
@@ -63,10 +65,10 @@ export const useRequestDecisionFlow = () => {
           ? queryClient.invalidateQueries({ queryKey: chatKeys.lists() })
           : Promise.resolve(),
       ]);
-      notifyApprovalSideEffect(variables.typeName);
+      notifyApprovalSideEffect(variables.typeName, t);
     },
     onError: async (error) => {
-      notifyDecisionFailure("Approval", error, t);
+      notifyDecisionFailure("approval", error, t);
       await invalidateRequests();
     },
   });
@@ -75,13 +77,13 @@ export const useRequestDecisionFlow = () => {
     mutationFn: rejectAdminRequest,
     onSuccess: async () => {
       const title = decisionTarget?.request.title;
-      notifyDecisionSuccess("reject", title);
+      notifyDecisionSuccess("reject", t, title);
       setDecisionTarget(null);
       setPreviewRequest(null);
       await invalidateRequests();
     },
     onError: async (error) => {
-      notifyDecisionFailure("Rejection", error, t);
+      notifyDecisionFailure("rejection", error, t);
       await invalidateRequests();
     },
   });

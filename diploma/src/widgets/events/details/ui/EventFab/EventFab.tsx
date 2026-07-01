@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import type { Event, EventMode } from "@entities/event";
+import type { Event, EventJoinedMode, EventMode } from "@entities/event";
 import { CreateTaskDrawer } from "@features/task/create-task";
 import { useTranslation } from "react-i18next";
 import { useEventFabActions } from "./model/useEventFabActions";
@@ -10,8 +10,8 @@ import styles from "@widgets/organizations/details/ui/OrganizationFab/Organizati
 interface EventFabProps {
   eventId: string;
   event: Event;
-  activeTab?: EventMode;
-  onTabChange?: (nextTab: EventMode) => void;
+  activeTab?: EventMode | EventJoinedMode;
+  onTabChange?: (nextTab: "overview") => void;
 }
 
 export const EventFab = (props: EventFabProps) => {

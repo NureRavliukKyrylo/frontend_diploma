@@ -1,10 +1,18 @@
 import type { SkillListItemDto } from "@entities/skill";
 import { BaseModal } from "@shared/ui/modals";
 import { CategorySearchPicker } from "@shared/ui/pickers";
-import { Check, ChevronDown, ChevronUp, ImagePlus, Plus, X } from "lucide-react";
+import {
+  Check,
+  ChevronDown,
+  ChevronUp,
+  ImagePlus,
+  Plus,
+  X,
+} from "lucide-react";
 import { useRef, useState } from "react";
 import { useSkillForm } from "../model/useSkillForm";
 import styles from "./SkillFormModal.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface SkillFormModalProps {
   isOpen: boolean;
@@ -19,6 +27,7 @@ export const SkillFormModal = ({
   skill,
   onClose,
 }: SkillFormModalProps) => {
+  const { t } = useTranslation("admin");
   const iconInputRef = useRef<HTMLInputElement>(null);
   const [localizationOpen, setLocalizationOpen] = useState(false);
   const { formik, iconError, iconPreview, isSubmitting, selectIcon } =
@@ -27,11 +36,14 @@ export const SkillFormModal = ({
       skill,
       onSuccess: onClose,
     });
-  const title = mode === "create" ? "Create skill" : "Edit skill";
+  const title =
+    mode === "create"
+      ? t("skills.form.createTitle")
+      : t("skills.form.editTitle");
   const subtitle =
     mode === "create"
-      ? "Add a reusable skill volunteers can attach to their profile."
-      : "Update the public information shown for this skill.";
+      ? t("skills.form.createSubtitle")
+      : t("skills.form.editSubtitle");
 
   return (
     <BaseModal
@@ -45,7 +57,7 @@ export const SkillFormModal = ({
           type="button"
           className={styles.closeButton}
           onClick={onClose}
-          aria-label="Close skill form"
+          aria-label={t("skills.form.close")}
         >
           <X size={18} aria-hidden="true" />
         </button>
@@ -72,9 +84,9 @@ export const SkillFormModal = ({
               onClick={() => iconInputRef.current?.click()}
             >
               <ImagePlus size={15} aria-hidden="true" />
-              Upload icon
+              {t("skills.form.uploadIcon")}
             </button>
-            <div className={styles.hintText}>PNG, JPG, SVG. 2MB max.</div>
+            <div className={styles.hintText}>{t("skills.form.uploadHint")}</div>
             {iconError && <div className={styles.fieldError}>{iconError}</div>}
             <input
               ref={iconInputRef}
@@ -91,7 +103,8 @@ export const SkillFormModal = ({
 
         <label className={styles.field}>
           <span className={styles.fieldLabel}>
-            Name <span className={styles.fieldRequired}>*</span>
+            {t("skills.form.name")}{" "}
+            <span className={styles.fieldRequired}>*</span>
           </span>
           <input
             name="name"
@@ -107,7 +120,9 @@ export const SkillFormModal = ({
         </label>
 
         <label className={styles.field}>
-          <span className={styles.fieldLabel}>Description</span>
+          <span className={styles.fieldLabel}>
+            {t("skills.form.description")}
+          </span>
           <textarea
             name="description"
             value={formik.values.description}
@@ -129,7 +144,9 @@ export const SkillFormModal = ({
         </label>
 
         <label className={styles.field}>
-          <span className={styles.fieldLabel}>Categories</span>
+          <span className={styles.fieldLabel}>
+            {t("skills.form.categories")}
+          </span>
           <CategorySearchPicker
             value={formik.values.categoryIds}
             onChange={(categoryIds) =>
@@ -148,13 +165,15 @@ export const SkillFormModal = ({
           ) : (
             <ChevronDown size={14} aria-hidden="true" />
           )}
-          Add Ukrainian translation (optional)
+          {t("skills.form.addUkrainian")}
         </button>
 
         {localizationOpen && (
           <>
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>Ukrainian name</span>
+              <span className={styles.fieldLabel}>
+                {t("skills.form.ukrainianName")}
+              </span>
               <input
                 name="nameLocalizedUk"
                 value={formik.values.nameLocalizedUk}
@@ -166,7 +185,9 @@ export const SkillFormModal = ({
             </label>
 
             <label className={styles.field}>
-              <span className={styles.fieldLabel}>Ukrainian description</span>
+              <span className={styles.fieldLabel}>
+                {t("skills.form.ukrainianDescription")}
+              </span>
               <textarea
                 name="descriptionLocalizedUk"
                 value={formik.values.descriptionLocalizedUk}
@@ -190,7 +211,7 @@ export const SkillFormModal = ({
             className={styles.cancelButton}
             onClick={onClose}
           >
-            Cancel
+            {t("common.actions.cancel")}
           </button>
           <button
             type="submit"
@@ -202,7 +223,9 @@ export const SkillFormModal = ({
             ) : (
               <Check size={16} aria-hidden="true" />
             )}
-            {mode === "create" ? "Create skill" : "Save changes"}
+            {mode === "create"
+              ? t("skills.form.createTitle")
+              : t("skills.form.saveChanges")}
           </button>
         </div>
       </form>

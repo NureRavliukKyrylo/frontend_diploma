@@ -3,6 +3,8 @@ import type { ContextRoleDto } from "@entities/organization";
 import type { ParticipationListItem } from "@entities/participation";
 import { Avatar } from "@shared/ui";
 import styles from "../RoleDrawer.module.scss";
+import type { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 
 interface AssignmentSectionProps {
   assignableBy: string[];
@@ -16,14 +18,15 @@ type AssignmentEntry =
   | { type: "person"; value: string; label: string; avatarUrl?: string | null }
   | { type: "role"; value: string; label: string };
 
-const getMemberName = (member: ParticipationListItem) =>
+const getMemberName = (member: ParticipationListItem, t: TFunction) =>
   [member.firstName, member.lastName].filter(Boolean).join(" ").trim() ||
-  "Team member";
+  t("roles:members.teamMember");
 
 const resolveEntries = (
   values: string[],
   members: ParticipationListItem[],
   roles: ContextRoleDto[],
+  t: TFunction,
   currentRoleId?: string | null,
 ) =>
   values.map((value): AssignmentEntry => {
@@ -32,7 +35,7 @@ const resolveEntries = (
       return {
         type: "person",
         value,
-        label: getMemberName(member),
+        label: getMemberName(member, t),
         avatarUrl: member.avatarUrl,
       };
     }
@@ -56,27 +59,38 @@ export const AssignmentSection = ({
   roles,
   currentRoleId,
 }: AssignmentSectionProps) => {
+  const { t } = useTranslation("roles");
   const assignableEntries = resolveEntries(
     assignableBy,
     members,
     roles,
+    t,
     currentRoleId,
   );
   const approvableEntries = resolveEntries(
     approvableBy,
     members,
     roles,
+    t,
     currentRoleId,
   );
 
   return (
     <section className={styles.section}>
       <div className={styles.sectionHeadingRow}>
-        <h3>Assignment</h3>
+        <h3>{t("drawer.assignment")}</h3>
       </div>
       <div className={styles.assignmentRows}>
-        <AssignmentRow label="Assignable by" entries={assignableEntries} />
-        <AssignmentRow label="Approvable by" entries={approvableEntries} />
+        <AssignmentRow
+          label={t("drawer.assignableBy")}
+          entries={assignableEntries}
+          emptyLabel={t("drawer.anyone")}
+        />
+        <AssignmentRow
+          label={t("drawer.approvableBy")}
+          entries={approvableEntries}
+          emptyLabel={t("drawer.anyone")}
+        />
       </div>
     </section>
   );
@@ -85,9 +99,11 @@ export const AssignmentSection = ({
 const AssignmentRow = ({
   label,
   entries,
+  emptyLabel,
 }: {
   label: string;
   entries: AssignmentEntry[];
+  emptyLabel: string;
 }) => (
   <div className={styles.assignmentRow}>
     <span className={styles.assignmentLabel}>{label}</span>
@@ -120,9 +136,7 @@ const AssignmentRow = ({
         ))}
       </div>
     ) : (
-      <span className={styles.assignmentOpen}>
-        Anyone with manage permission
-      </span>
+      <span className={styles.assignmentOpen}>{emptyLabel}</span>
     )}
   </div>
 );

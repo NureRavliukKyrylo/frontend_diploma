@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { Trash2, Upload } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import styles from "../GeneralTab.module.scss";
 
 interface LogoSectionProps {
@@ -21,27 +22,33 @@ export const LogoSection = ({
   onLogoSelect,
   onLogoRemove,
 }: LogoSectionProps) => {
+  const { t } = useTranslation("organizations");
   const logoInputRef = useRef<HTMLInputElement | null>(null);
 
   return (
     <section className={styles.section}>
-      <h2 className={styles.sectionLabel}>Logo</h2>
+      <h2 className={styles.sectionLabel}>{t("settings.general.logo")}</h2>
       <p className={styles.sectionDescription}>
-        Keep your organization identity recognizable across ImpactFlow.
+        {t("settings.general.logoText")}
       </p>
 
       <div className={styles.logoSection}>
         <div className={styles.logoPreview}>
           {logoUrl ? (
-            <img src={logoUrl} alt={`${organizationName} logo`} />
+            <img
+              src={logoUrl}
+              alt={t("settings.general.logoAlt", {
+                name: organizationName,
+              })}
+            />
           ) : (
             <span>{initials}</span>
           )}
         </div>
 
         <div className={styles.logoCopy}>
-          <h3>Organization logo</h3>
-          <p>JPG, PNG or WEBP - max 2 MB</p>
+          <h3>{t("settings.general.logoTitle")}</h3>
+          <p>{t("settings.general.logoHint")}</p>
         </div>
 
         <input
@@ -63,7 +70,9 @@ export const LogoSection = ({
             onClick={() => logoInputRef.current?.click()}
           >
             <Upload size={15} />
-            {isLogoUploading ? "Uploading" : "Upload"}
+            {isLogoUploading
+              ? t("settings.general.uploading")
+              : t("settings.general.uploadLogo")}
           </button>
           <button
             type="button"
@@ -72,7 +81,9 @@ export const LogoSection = ({
             onClick={onLogoRemove}
           >
             <Trash2 size={15} />
-            {isLogoRemoving ? "Removing" : "Remove"}
+            {isLogoRemoving
+              ? t("settings.general.removing")
+              : t("settings.general.removeLogo")}
           </button>
         </div>
       </div>

@@ -2,11 +2,14 @@ import type { SortOption } from "@shared/config/types";
 import type { OrganizationContextRole } from "@entities/organization";
 import type { RoleSortOption } from "../model/types";
 import type { OrganizationRolesPageModel } from "../model/pageModel";
+import type { TFunction } from "i18next";
 
-export const getSortingRoleItems = (): SortOption<RoleSortOption>[] => [
-  { label: "Name (A-Z)", value: "name" },
-  { label: "Most permissions", value: "permissions" },
-  { label: "Most members", value: "members" },
+export const getSortingRoleItems = (
+  t: TFunction,
+): SortOption<RoleSortOption>[] => [
+  { label: t("roles:sort.name"), value: "name" },
+  { label: t("roles:sort.permissions"), value: "permissions" },
+  { label: t("roles:sort.members"), value: "members" },
 ];
 
 export const sortRolesByOption = (

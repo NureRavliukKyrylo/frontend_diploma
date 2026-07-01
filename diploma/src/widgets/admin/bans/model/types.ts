@@ -1,7 +1,4 @@
-import type {
-  AdminBan,
-  AdminUserListItem,
-} from "@entities/admin";
+import type { AdminBan, AdminUserListItem } from "@entities/admin";
 import type { LucideIcon } from "lucide-react";
 
 export type DurationFilter = "all" | "permanent" | "soon" | "long";

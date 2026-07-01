@@ -2,11 +2,12 @@ import type { SkillSortingParams } from "@entities/skill";
 import { SortDropDown } from "@shared/ui/drop-down";
 import { Search } from "lucide-react";
 import type { CategoryFilterValue } from "../model/useAdminSkillsPage";
+import { useTranslation } from "react-i18next";
 
 const sortOptions: { value: SkillSortingParams; label: string }[] = [
-  { value: "Default", label: "Default order" },
-  { value: "NameAsc", label: "Name A-Z" },
-  { value: "NameDesc", label: "Name Z-A" },
+  { value: "Default", label: "admin:skills.sort.default" },
+  { value: "NameAsc", label: "admin:skills.sort.nameAsc" },
+  { value: "NameDesc", label: "admin:skills.sort.nameDesc" },
 ];
 
 interface SkillsToolbarProps {
@@ -29,33 +30,41 @@ export const SkillsToolbar = ({
   onSearchInputChange,
   onCategoryChange,
   onSortChange,
-}: SkillsToolbarProps) => (
-  <div className={styles.toolbar}>
-    <div className={styles.searchBox}>
-      <Search size={19} aria-hidden="true" />
-      <input
-        value={searchInput}
-        onChange={(event) => onSearchInputChange(event.target.value)}
-        placeholder="Search skills"
-      />
-    </div>
+}: SkillsToolbarProps) => {
+  const { t } = useTranslation("admin");
+  const localizedSortOptions = sortOptions.map((option) => ({
+    ...option,
+    label: t(option.label),
+  }));
 
-    <div className={styles.dropdownShell}>
-      <SortDropDown
-        selectedLabelOnly
-        options={categoryOptions}
-        value={categoryFilterValue}
-        onSelect={onCategoryChange}
-      />
-    </div>
+  return (
+    <div className={styles.toolbar}>
+      <div className={styles.searchBox}>
+        <Search size={19} aria-hidden="true" />
+        <input
+          value={searchInput}
+          onChange={(event) => onSearchInputChange(event.target.value)}
+          placeholder={t("skills.search")}
+        />
+      </div>
 
-    <div className={styles.dropdownShell}>
-      <SortDropDown
-        selectedLabelOnly
-        options={sortOptions}
-        value={sortValue ?? "Default"}
-        onSelect={onSortChange}
-      />
+      <div className={styles.dropdownShell}>
+        <SortDropDown
+          selectedLabelOnly
+          options={categoryOptions}
+          value={categoryFilterValue}
+          onSelect={onCategoryChange}
+        />
+      </div>
+
+      <div className={styles.dropdownShell}>
+        <SortDropDown
+          selectedLabelOnly
+          options={localizedSortOptions}
+          value={sortValue ?? "Default"}
+          onSelect={onSortChange}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};

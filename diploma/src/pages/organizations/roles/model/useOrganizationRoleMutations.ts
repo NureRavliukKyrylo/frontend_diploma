@@ -3,6 +3,7 @@ import { addToast } from "@heroui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   archiveContextRole,
+  contextRoleKeys,
   createContextRole,
   createContextRoleFromTemplate,
   deleteContextRole,
@@ -19,6 +20,7 @@ import type {
   SaveRoleVariables,
   SelectedRoleState,
 } from "./types";
+import { useTranslation } from "react-i18next";
 
 interface Params {
   organizationId: string;
@@ -33,14 +35,33 @@ export const useOrganizationRoleMutations = ({
   setPendingAction,
   setSelectedRole,
 }: Params) => {
+  const { t } = useTranslation("roles");
   const queryClient = useQueryClient();
   const invalidate = () =>
     Promise.all([
       queryClient.invalidateQueries({
-        queryKey: [...organizationKeys.all(), "context-roles", organizationId],
+        queryKey: contextRoleKeys.entity(
+          "organization",
+          organizationId,
+          false,
+        ),
       }),
       queryClient.invalidateQueries({
-        queryKey: organizationKeys.contextRoleTemplates("organization"),
+        queryKey: contextRoleKeys.entity(
+          "organization",
+          organizationId,
+          true,
+        ),
+      }),
+      queryClient.invalidateQueries({
+        queryKey: contextRoleKeys.templates("organization"),
+      }),
+      queryClient.invalidateQueries({
+        queryKey: [
+          ...organizationKeys.all(),
+          "context-roles",
+          organizationId,
+        ],
       }),
     ]);
   const saveMutation = useMutation({
@@ -60,13 +81,13 @@ export const useOrganizationRoleMutations = ({
           : createContextRole(payload),
     onSuccess: async () => {
       await invalidate();
-      addToast({ title: "Role saved", color: "success" });
+      addToast({ title: t("toast.saved"), color: "success" });
       setFormState(null);
     },
     onError: (error: unknown) =>
       addToast({
-        title: "Failed to save role",
-        description: getRoleSaveErrorMessage(error),
+        title: t("toast.saveFailed"),
+        description: getRoleSaveErrorMessage(error, t),
         color: "danger",
       }),
   });
@@ -84,13 +105,13 @@ export const useOrganizationRoleMutations = ({
       await invalidate();
       addToast({
         title: role.isDefaultForJoin
-          ? "Default role removed"
-          : "Default role updated",
+          ? t("toast.defaultRemoved")
+          : t("toast.defaultUpdated"),
         color: "success",
       });
     },
     onError: () =>
-      addToast({ title: "Failed to update default role", color: "danger" }),
+      addToast({ title: t("toast.defaultFailed"), color: "danger" }),
   });
   const actionMutation = useMutation({
     mutationFn: (state: RoleActionState) => {
@@ -105,10 +126,10 @@ export const useOrganizationRoleMutations = ({
       addToast({
         title:
           state.action === "archive"
-            ? "Role archived"
+            ? t("toast.archived")
             : state.action === "restore"
-              ? "Role restored"
-              : "Role deleted",
+              ? t("toast.restored")
+              : t("toast.deleted"),
         color: "success",
       });
       setPendingAction(null);
@@ -120,7 +141,8 @@ export const useOrganizationRoleMutations = ({
           : current,
       );
     },
-    onError: () => addToast({ title: "Role action failed", color: "danger" }),
+    onError: () =>
+      addToast({ title: t("toast.actionFailed"), color: "danger" }),
   });
 
   return { saveMutation, toggleDefaultMutation, actionMutation };

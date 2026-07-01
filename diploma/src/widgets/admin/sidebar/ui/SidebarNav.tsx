@@ -7,6 +7,8 @@ import {
 } from "../config/adminSidebarNav";
 import { isNavItemActive } from "../lib/sidebarNavState";
 import styles from "./AdminSidebar.module.scss";
+import type { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 
 interface SidebarNavProps {
   pathname: string;
@@ -16,13 +18,14 @@ interface SidebarNavProps {
 const renderNavContent = (
   item: AdminNavItem,
   badgeLabels: Record<AdminNavBadge["key"], string>,
+  t: TFunction,
 ) => {
   const Icon = item.icon;
 
   return (
     <>
       <Icon className={styles.navIcon} aria-hidden="true" />
-      <span className={styles.navLabel}>{item.title}</span>
+      <span className={styles.navLabel}>{t(item.title)}</span>
       <span className={styles.navTrail}>
         {item.badge ? (
           <span
@@ -39,14 +42,17 @@ const renderNavContent = (
 };
 
 export const SidebarNav = ({ pathname, badgeLabels }: SidebarNavProps) => {
+  const { t } = useTranslation("admin");
   const ModerationIcon = moderationNavItem.icon;
 
   return (
     <>
-      <div className={styles.sectionLabel}>Menu</div>
-      <nav className={styles.navList} aria-label="Admin navigation">
+      <div className={styles.sectionLabel}>{t("sidebar.menu")}</div>
+      <nav className={styles.navList} aria-label={t("sidebar.navigation")}>
         {adminNavItems.map((item) => {
-          const isActive = item.href ? isNavItemActive(pathname, item.href) : false;
+          const isActive = item.href
+            ? isNavItemActive(pathname, item.href)
+            : false;
           const itemKey = item.href ?? item.title;
 
           if (!item.href) {
@@ -60,7 +66,7 @@ export const SidebarNav = ({ pathname, badgeLabels }: SidebarNavProps) => {
               className={styles.navItem}
               data-active={isActive ? "true" : undefined}
             >
-              {renderNavContent(item, badgeLabels)}
+              {renderNavContent(item, badgeLabels, t)}
             </Link>
           );
         })}
@@ -69,7 +75,7 @@ export const SidebarNav = ({ pathname, badgeLabels }: SidebarNavProps) => {
       <div className={styles.divider} />
       <div className={styles.moderationItem} aria-disabled="true">
         <ModerationIcon className={styles.navIcon} aria-hidden="true" />
-        <span>{moderationNavItem.title}</span>
+        <span>{t(moderationNavItem.title)}</span>
       </div>
     </>
   );

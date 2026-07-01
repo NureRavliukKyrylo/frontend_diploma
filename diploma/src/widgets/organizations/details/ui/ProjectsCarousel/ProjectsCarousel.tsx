@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
@@ -15,6 +16,7 @@ const PROJECTS_PER_PAGE = 3;
 const PROJECTS_PAGE_SIZE = 6;
 
 export const ProjectsCarousel = ({ organizationId }: ProjectsCarouselProps) => {
+  const { t } = useTranslation("organizations");
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
 
@@ -60,7 +62,7 @@ export const ProjectsCarousel = ({ organizationId }: ProjectsCarouselProps) => {
     <section className={styles.outerCard}>
       <div className={styles.titleRow}>
         <div className={styles.titleLineBefore} aria-hidden="true" />
-        <h2 className={styles.title}>PROJECTS</h2>
+        <h2 className={styles.title}>{t("carousel.title")}</h2>
         <div className={styles.titleLineAfter} aria-hidden="true" />
       </div>
 
@@ -73,7 +75,7 @@ export const ProjectsCarousel = ({ organizationId }: ProjectsCarouselProps) => {
               setPage((currentPage) => Math.max(currentPage - 1, 0))
             }
             disabled={!canPrev}
-            aria-label="Previous projects"
+            aria-label={t("carousel.previous")}
           >
             <ChevronLeft size={28} color="#8C0000" strokeWidth={3} />
           </button>
@@ -85,10 +87,10 @@ export const ProjectsCarousel = ({ organizationId }: ProjectsCarouselProps) => {
               ))}
             </div>
           ) : isError ? (
-            <div className={styles.stateMessage}>Unable to load projects.</div>
+            <div className={styles.stateMessage}>{t("carousel.error")}</div>
           ) : projects.length === 0 ? (
             <div className={styles.stateMessage}>
-              No projects have been added yet.
+              {t("carousel.empty")}
             </div>
           ) : (
             <AnimatePresence mode="wait">
@@ -118,7 +120,7 @@ export const ProjectsCarousel = ({ organizationId }: ProjectsCarouselProps) => {
             className={`${styles.navBtn} ${styles.navBtnRight}`}
             onClick={() => setPage((currentPage) => currentPage + 1)}
             disabled={!canNext}
-            aria-label="Next projects"
+            aria-label={t("carousel.next")}
           >
             <ChevronRight size={28} color="#8C0000" strokeWidth={3} />
           </button>
@@ -130,7 +132,7 @@ export const ProjectsCarousel = ({ organizationId }: ProjectsCarouselProps) => {
         className={styles.seeMoreBtn}
         onClick={openProjectsList}
       >
-        SEE MORE
+        {t("carousel.seeMore")}
       </button>
     </section>
   );

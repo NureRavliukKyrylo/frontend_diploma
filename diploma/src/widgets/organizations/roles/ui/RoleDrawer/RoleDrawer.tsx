@@ -14,6 +14,7 @@ import { MembersSection } from "./ui/MembersSection";
 import { PermissionsSection } from "./ui/PermissionsSection";
 import { RoleDrawerFooter } from "./ui/RoleDrawerFooter";
 import styles from "./RoleDrawer.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface RoleDrawerProps {
   isOpen: boolean;
@@ -46,6 +47,7 @@ export const RoleDrawer = ({
   onArchive,
   onDelete,
 }: RoleDrawerProps) => {
+  const { t } = useTranslation("roles");
   useRoleDrawerLifecycle(isOpen, onClose);
 
   if (!role || !type) return null;
@@ -57,7 +59,7 @@ export const RoleDrawer = ({
           <motion.button
             type="button"
             className={styles.backdrop}
-            aria-label="Close role drawer"
+            aria-label={t("drawer.close")}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -85,17 +87,15 @@ export const RoleDrawer = ({
                   <h2 className={styles.title}>{role.name}</h2>
                 </div>
                 <div className={styles.metaLine}>
-                  <span>{getRoleTypeLabel(type, role)}</span>
+                  <span>{getRoleTypeLabel(type, role, t)}</span>
                   <span className={styles.metaDot} />
-                  <span>
-                    {memberCount === 1 ? "1 member" : `${memberCount} members`}
-                  </span>
+                  <span>{t("card.members", { count: memberCount })}</span>
                 </div>
               </div>
               <button
                 type="button"
                 className={styles.closeButton}
-                aria-label="Close role drawer"
+                aria-label={t("drawer.close")}
                 onClick={onClose}
               >
                 <X size={18} strokeWidth={2.6} />

@@ -1,6 +1,7 @@
 import Icon from "@mdi/react";
 import { mdiDotsHorizontal } from "@mdi/js";
 import { useNavigate } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import { Calendar } from "@shared/assets/icons/info";
 import { AvatarGroup, ProgressBar } from "@shared/ui";
 import { DefaultAvatar } from "@shared/assets/images/user";
@@ -14,6 +15,7 @@ interface ProjectCardProps {
 export const ProjectCard = ({
   project,
 }: ProjectCardProps) => {
+  const { t } = useTranslation("organizations");
   const navigate = useNavigate();
   const description =
     project.description.length <= 118
@@ -32,7 +34,7 @@ export const ProjectCard = ({
       className={styles.projectCard}
       role="link"
       tabIndex={0}
-      aria-label={`Open project ${project.title}`}
+      aria-label={t("details.projects.openProject", { title: project.title })}
       onClick={handleOpenProject}
       onKeyDown={(event) => {
         if (event.key === "Enter" || event.key === " ") {
@@ -54,7 +56,9 @@ export const ProjectCard = ({
         <button
           type="button"
           className={styles.projectCardMenu}
-          aria-label={`Project options for ${project.title}`}
+          aria-label={t("details.projects.projectOptions", {
+            title: project.title,
+          })}
           onClick={(event) => event.stopPropagation()}
         >
           <Icon path={mdiDotsHorizontal} size={1.05} />
@@ -70,7 +74,7 @@ export const ProjectCard = ({
         <div className={styles.projectDeadlineRow}>
           <div className={styles.projectDeadlineInfo}>
             <Calendar aria-hidden="true" />
-            <span>Deadline:</span>
+            <span>{t("details.projects.deadline")}</span>
             <strong>{project.deadlineLabel}</strong>
           </div>
         </div>
@@ -78,7 +82,7 @@ export const ProjectCard = ({
 
       <div className={styles.projectProgressBlock}>
         <div className={styles.projectProgressMeta}>
-          <span>Progress</span>
+          <span>{t("details.projects.progress")}</span>
           <strong>{project.progressLabel}</strong>
         </div>
         <ProgressBar current={project.progressPercent} />
@@ -92,7 +96,9 @@ export const ProjectCard = ({
             avatarClassName={styles.projectAvatar}
           />
         ) : (
-          <span className={styles.projectAvatarPlaceholder}>No assignees yet</span>
+          <span className={styles.projectAvatarPlaceholder}>
+            {t("details.projects.noAssignees")}
+          </span>
         )}
 
         <span className={styles.projectTasksLabel}>{project.progressItemsLabel}</span>

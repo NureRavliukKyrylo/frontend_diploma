@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { categoryQuery } from "@entities/category";
 import { type EventSettingsValues } from "@features/event";
+import { useTranslation } from "react-i18next";
 import sectionStyles from "./GeneralTabShared.module.scss";
 import styles from "./CategoriesSection.module.scss";
 
@@ -13,6 +14,7 @@ export const CategoriesSection = ({
   values,
   onCategoryToggle,
 }: CategoriesSectionProps) => {
+  const { t } = useTranslation("event");
   const { data: categoriesResponse, isLoading: categoriesLoading } = useQuery(
     categoryQuery.list({ Page: 1, PageSize: 100 }),
   );
@@ -20,13 +22,17 @@ export const CategoriesSection = ({
 
   return (
     <section className={sectionStyles.section}>
-      <h2 className={sectionStyles.sectionLabel}>Categories</h2>
+      <h2 className={sectionStyles.sectionLabel}>
+        {t("settings.general.categories")}
+      </h2>
       <p className={sectionStyles.sectionDescription}>
-        Choose the topics that best describe this event.
+        {t("settings.general.categoriesText")}
       </p>
 
       {categoriesLoading ? (
-        <div className={styles.categoryState}>Loading categories...</div>
+        <div className={styles.categoryState}>
+          {t("settings.general.loadingCategories")}
+        </div>
       ) : (
         <div className={styles.categoryGrid}>
           {categories.map((category) => {

@@ -1,0 +1,740 @@
+{
+  "common": {
+    "eyebrow": "Admin",
+    "unavailable": "Unavailable",
+    "notProvided": "Not provided",
+    "unknown": "Unknown",
+    "matches": "{{count}} matches",
+    "actions": {
+      "cancel": "Cancel",
+      "close": "Close",
+      "approve": "Approve",
+      "reject": "Reject",
+      "delete": "Delete",
+      "edit": "Edit",
+      "save": "Save",
+      "create": "Create",
+      "change": "Change",
+      "revoke": "Revoke",
+      "next": "Next",
+      "previous": "Prev"
+    },
+    "pagination": {
+      "previous": "Previous page",
+      "next": "Next page"
+    }
+  },
+  "accessPolicies": {
+    "title": "Access policies",
+    "description": "Page content area"
+  },
+  "timeBank": {
+    "title": "Time bank",
+    "description": "Page content area"
+  },
+  "sidebar": {
+    "panel": "Admin panel",
+    "menu": "Menu",
+    "navigation": "Admin navigation",
+    "backToPlatform": "Back to platform",
+    "logout": "Log out",
+    "logoutConfirm": "Are you sure you want to logout?",
+    "logoutDescription": "You will be able to sign in again whenever you need.",
+    "notifications": "Notifications",
+    "loadingNotifications": "Loading notifications",
+    "notificationsUnavailable": "Notifications unavailable",
+    "unreadNotifications": "{{count}} unread",
+    "language": "Language",
+    "searchAnything": "Search anything",
+    "adminFallback": "Admin",
+    "items": {
+      "overview": "Overview",
+      "users": "Users",
+      "bans": "Bans",
+      "skills": "Skills",
+      "requests": "Requests",
+      "statistics": "Statistics",
+      "moderation": "Moderation"
+    },
+    "search": {
+      "overview": "Search overview",
+      "users": "Search users",
+      "bans": "Search bans",
+      "skills": "Search skills",
+      "requests": "Search requests",
+      "statistics": "Search statistics"
+    }
+  },
+  "overview": {
+    "title": "Overview",
+    "metrics": {
+      "openReports": "Open reports",
+      "pendingRequests": "Pending requests",
+      "totalUsers": "Total users",
+      "timeBankVolume": "Time bank volume"
+    },
+    "sections": {
+      "quickAccess": "Quick access",
+      "platformActivity": "Platform activity",
+      "activityNote": "Showing reports and requests only"
+    },
+    "recentUsers": {
+      "title": "Recently joined",
+      "viewAll": "View all users",
+      "user": "User",
+      "joined": "Joined",
+      "status": "Status",
+      "error": "Recently joined users unavailable.",
+      "empty": "No users found."
+    },
+    "health": {
+      "title": "System health",
+      "unavailable": "Health unavailable",
+      "loadError": "Unable to load system health.",
+      "database": "Database",
+      "overall": "Overall status",
+      "activeRisks": "Active risks",
+      "ok": "OK",
+      "down": "Down",
+      "none": "None"
+    },
+    "activity": {
+      "unavailable": "Activity unavailable",
+      "loadError": "Reports or pending requests could not be loaded.",
+      "empty": "No recent activity",
+      "emptyText": "New reports and pending requests will appear here.",
+      "reportFiled": "Report filed: {{title}}",
+      "requestPending": "{{type}} request pending"
+    },
+    "quickAccess": {
+      "users": {
+        "title": "Users",
+        "description": "Search accounts, view summaries, and manage roles platform-wide.",
+        "action": "accounts"
+      },
+      "bans": {
+        "title": "Bans",
+        "description": "Review active bans and revoke them early with a recorded reason.",
+        "action": "active"
+      },
+      "timeBank": {
+        "title": "Time bank",
+        "description": "Adjust balances manually and view platform-wide statistics.",
+        "action": "volume"
+      },
+      "skills": {
+        "title": "Skills",
+        "description": "Create, verify, and manage the platform skills registry.",
+        "action": "in registry"
+      },
+      "requests": {
+        "title": "Requests",
+        "description": "Review category, skill, and appeal requests awaiting a decision.",
+        "action": "pending"
+      },
+      "statistics": {
+        "title": "Statistics",
+        "description": "Explore platform-wide growth, activity, and engagement metrics.",
+        "action": "View report"
+      }
+    }
+  },
+  "bans": {
+    "title": "Bans",
+    "description": "Review active restrictions, identify bans nearing expiration, and revoke access limits when moderation decisions change.",
+    "tabs": {
+      "users": "Users",
+      "organizations": "Organizations",
+      "activities": "Activities"
+    },
+    "directory": "Active restrictions",
+    "showingLatest": "showing latest",
+    "metrics": {
+      "active": "Active bans",
+      "expiring": "Expiring in 7 days",
+      "permanent": "Permanent"
+    },
+    "filters": {
+      "duration": "Duration",
+      "sort": "Sort",
+      "all": "All",
+      "permanent": "Permanent",
+      "soon": "Expiring soon (≤7d)",
+      "long": "Long-term (>7d)",
+      "newest": "Newest first",
+      "oldest": "Oldest first",
+      "expiring": "Expiring soonest"
+    },
+    "states": {
+      "errorTitle": "Bans unavailable",
+      "errorText": "The active bans endpoint could not be loaded.",
+      "emptyTitle": "No active bans found",
+      "emptyText": "Try another search term or duration filter.",
+      "loadMore": "Load more"
+    },
+    "card": {
+      "bannedBy": "Banned by",
+      "issued": "Issued",
+      "unknownUser": "Unknown user",
+      "permanent": "Permanent",
+      "expiresToday": "Expires today",
+      "expiresIn_one": "Expires in {{count}} day",
+      "expiresIn_other": "Expires in {{count}} days",
+      "noReason": "No reason provided.",
+      "revoke": "Revoke"
+    },
+    "revoke": {
+      "title": "Revoke ban?",
+      "description": "Remove the active ban for {{name}}?",
+      "descriptionFallback": "Remove this active ban.",
+      "confirm": "Revoke ban",
+      "reason": "Reason for revoking (optional)",
+      "placeholder": "Add a note for the audit trail",
+      "success": "Ban revoked",
+      "successText": "The user restriction was removed successfully.",
+      "error": "Revoke failed"
+    }
+  },
+  "categories": {
+    "title": "Categories",
+    "directory": "Category directory",
+    "manageSkills": "Manage skills",
+    "newCategory": "New category",
+    "search": "Search categories",
+    "sort": {
+      "default": "Default order",
+      "nameAsc": "Name A-Z",
+      "nameDesc": "Name Z-A"
+    },
+    "states": {
+      "errorTitle": "Categories unavailable",
+      "errorText": "The categories endpoint could not be loaded."
+    },
+    "createCard": {
+      "action": "Create",
+      "title": "New category",
+      "description": "Group related skills and make the directory easier to browse."
+    },
+    "form": {
+      "createTitle": "Create category",
+      "editTitle": "Edit category",
+      "createSubtitle": "Create a public category used across projects, events, and skills.",
+      "editSubtitle": "Update the category name, description, or cover image URL.",
+      "close": "Close category form",
+      "name": "Name",
+      "description": "Description",
+      "imageUrl": "Image URL",
+      "addUkrainian": "Add Ukrainian translation (optional)",
+      "ukrainianName": "Ukrainian name",
+      "ukrainianDescription": "Ukrainian description",
+      "nameRequired": "Name is required",
+      "invalidUrl": "Must be a valid URL",
+      "notSelected": "Category is not selected",
+      "created": "Category created",
+      "updated": "Category updated",
+      "saveChanges": "Save changes"
+    },
+    "drawer": {
+      "close": "Close category details",
+      "category": "Category",
+      "id": "ID",
+      "recordId": "Record ID",
+      "image": "Image",
+      "configured": "Configured",
+      "fallback": "Fallback",
+      "noDescription": "No description has been added yet.",
+      "description": "Description",
+      "imageUrl": "Image URL",
+      "openImage": "Open category image",
+      "defaultImage": "This category uses the default gradient until an image URL is added.",
+      "edit": "Edit category"
+    },
+    "delete": {
+      "title": "Delete this category?",
+      "warning": "This action cannot be undone.",
+      "success": "Category deleted",
+      "error": "Failed to delete category"
+    }
+  },
+  "skills": {
+    "title": "Skills",
+    "directory": "Skill directory",
+    "categories": "Categories",
+    "newSkill": "New skill",
+    "search": "Search skills",
+    "allCategories": "All categories",
+    "noCategories": "No categories",
+    "viewDetails": "View details",
+    "openActions": "Open skill actions",
+    "descriptionReady": "Description ready",
+    "noDescription": "No description",
+    "sort": {
+      "default": "Default order",
+      "nameAsc": "Name A-Z",
+      "nameDesc": "Name Z-A"
+    },
+    "menu": {
+      "edit": "Edit skill",
+      "changeIcon": "Change icon",
+      "volunteers": "View volunteers",
+      "delete": "Delete skill"
+    },
+    "states": {
+      "errorTitle": "Skills unavailable",
+      "errorText": "The skills endpoint could not be loaded.",
+      "emptyTitle": "No skills found",
+      "emptyText": "Try a different search term or clear the current filters."
+    },
+    "form": {
+      "createTitle": "Create skill",
+      "editTitle": "Edit skill",
+      "createSubtitle": "Add a reusable skill volunteers can attach to their profile.",
+      "editSubtitle": "Update the public information shown for this skill.",
+      "close": "Close skill form",
+      "uploadIcon": "Upload icon",
+      "uploadHint": "PNG, JPG, SVG. 2MB max.",
+      "name": "Name",
+      "description": "Description",
+      "categories": "Categories",
+      "addUkrainian": "Add Ukrainian translation (optional)",
+      "ukrainianName": "Ukrainian name",
+      "ukrainianDescription": "Ukrainian description",
+      "nameRequired": "Name is required",
+      "notSelected": "Skill is not selected",
+      "created": "Skill created",
+      "updated": "Skill updated",
+      "saveChanges": "Save changes",
+      "fileTooLarge": "Icon must be 2MB or smaller",
+      "imageOnly": "Please choose an image file"
+    },
+    "drawer": {
+      "close": "Close skill details",
+      "id": "ID",
+      "copied": "Copied",
+      "copiedToast": "Skill ID copied",
+      "description": "Description",
+      "usage": "Usage",
+      "totalVolunteers": "Total volunteers",
+      "verified": "Verified",
+      "volunteers": "Volunteers with this skill",
+      "loadError": "Volunteers could not be loaded.",
+      "empty": "No volunteers have claimed this skill yet.",
+      "delete": "Delete skill",
+      "edit": "Edit skill",
+      "volunteer": "Volunteer {{index}}",
+      "showAll": "Show all {{count}} volunteers",
+      "showFewer": "Show fewer volunteers"
+    },
+    "icon": {
+      "close": "Close icon modal",
+      "title": "Change icon",
+      "description": "Upload a square image for {{name}}.",
+      "thisSkill": "this skill",
+      "chooseFirst": "Choose an icon first",
+      "updated": "Skill icon updated",
+      "uploadFailed": "Failed to upload icon",
+      "choose": "Choose file",
+      "save": "Save icon"
+    },
+    "delete": {
+      "title": "Delete this skill?",
+      "usedText": "{{count}} volunteers currently have this skill. Deleting it will not automatically remove it from their profiles.",
+      "warning": "This action cannot be undone.",
+      "success": "Skill deleted",
+      "error": "Failed to delete skill"
+    }
+  },
+  "requests": {
+    "title": "Requests",
+    "description": "Review admin-actionable requests, route cases that belong elsewhere, and resolve approvals without mixing in user-owned invitations.",
+    "directory": "Request queue",
+    "search": "Search requests",
+    "tabs": {
+      "all": "All",
+      "joinLeave": "Join & Leave",
+      "skillsCategories": "Skills & Categories",
+      "badges": "Badges",
+      "reportsAppeals": "Reports & Appeals"
+    },
+    "metrics": {
+      "pending": "Pending",
+      "resolvedToday": "Resolved today",
+      "inProgress": "In progress",
+      "priorityBoosted": "Priority boosted"
+    },
+    "states": {
+      "errorTitle": "Requests unavailable",
+      "errorText": "The requests endpoint could not be loaded.",
+      "emptyTitle": "No requests found",
+      "emptyText": "Try another status, type, tab, or search term."
+    },
+    "filters": {
+      "allStatuses": "All statuses",
+      "allTypes": "All request types"
+    },
+    "types": {
+      "categoryCreation": "Category creation",
+      "categoryUpdate": "Category update",
+      "categoryDeletion": "Category deletion",
+      "skillCreation": "Skill creation",
+      "appeal": "Appeal",
+      "organizationJoin": "Organization join",
+      "projectJoin": "Project join",
+      "eventJoin": "Event join",
+      "taskJoin": "Task join",
+      "organizationInvite": "Organization invite",
+      "projectInvite": "Project invite",
+      "eventInvite": "Event invite",
+      "taskInvite": "Task invite",
+      "organizationLeave": "Organization leave",
+      "projectLeave": "Project leave",
+      "eventLeave": "Event leave",
+      "taskLeave": "Task leave",
+      "badgeAward": "Badge award",
+      "report": "Report",
+      "unknown": "Unknown request"
+    },
+    "statuses": {
+      "new": "New",
+      "inProgress": "In progress",
+      "resolved": "Resolved",
+      "rejected": "Rejected",
+      "appealed": "Appealed",
+      "appealResolved": "Appeal resolved",
+      "cancelled": "Cancelled",
+      "unknown": "Unknown"
+    },
+    "actions": {
+      "approve": "Approve",
+      "reject": "Reject",
+      "approveCreateSkill": "Approve & create skill",
+      "approveCreateCategory": "Approve & create category",
+      "pendingBackend": "Pending backend support",
+      "notActionable": "Not actionable here",
+      "openModeration": "Open moderation case",
+      "readOnly": "This request is read-only on this page."
+    },
+    "decision": {
+      "titleApprove": "Approve this request?",
+      "titleReject": "Reject this request?",
+      "confirmTitle": "Confirm request decision",
+      "confirmText": "Confirm this request decision.",
+      "result": "{{title}} will be {{status}}.",
+      "confirmApproval": "Confirm approval",
+      "confirmRejection": "Confirm rejection",
+      "comment": "Decision comment (optional)",
+      "placeholder": "Add a short note for the audit trail",
+      "assignVolunteer": "Assign volunteer to the task after approval",
+      "approval": "Approval",
+      "rejection": "Rejection",
+      "failed": "{{action}} failed"
+    },
+    "drawer": {
+      "close": "Close request details",
+      "open": "Open request preview",
+      "auditTrail": "Audit trail",
+      "created": "Created",
+      "updated": "Updated",
+      "decision": "Decision",
+      "requester": "Requester",
+      "submitted": "Submitted",
+      "target": "Target",
+      "linkedEntity": "Linked entity",
+      "source": "Source",
+      "recipient": "Recipient",
+      "badgeTarget": "Badge target",
+      "linkedProof": "Linked proof",
+      "priorityMinutes": "Priority minutes",
+      "member": "Member",
+      "submittedBy": "Submitted by",
+      "linkedCase": "Linked case",
+      "rawPayload": "Raw payload",
+      "notProvided": "Not provided",
+      "pendingBackend": "Pending backend support. This request type has no confirmed decision endpoint yet.",
+      "disputeUnavailable": "No resolution action is available for this dispute yet. This needs a backend endpoint before it can be decided here.",
+      "moderationUnavailable": "No linked moderation case is available for this report yet."
+    },
+    "previews": {
+      "recognitionReview": "Recognition review",
+      "badgeAward": "Badge award request",
+      "awardContext": "Award context",
+      "requestDetails": "Request details",
+      "requestContext": "Request context",
+      "membershipContext": "Membership context",
+      "decisionNote": "Decision note",
+      "caseContext": "Case context",
+      "proposedCategory": "Proposed category",
+      "proposedSkill": "Proposed skill",
+      "description": "Description",
+      "categories": "Categories",
+      "noCategories": "No categories attached.",
+      "membershipReview": "Membership review",
+      "joinReview": "Review the requester and approve access only if the context looks right.",
+      "leaveChange": "Membership change",
+      "leaveReview": "This request records a member leaving the selected workspace.",
+      "catalogProposal": "Catalog proposal",
+      "newSkill": "New skill candidate",
+      "newCategory": "New category candidate",
+      "joinTitle": "Join {{entity}}",
+      "leaveTitle": "Leave {{entity}}",
+      "skillReview": "Check the proposed skill name, description, and attached categories before publishing it.",
+      "categoryReview": "Review whether this category is clear, reusable, and ready to appear in the public catalog.",
+      "recognition": "Recognition",
+      "recognitionText": "Confirm that this badge should be attached to the selected user or activity.",
+      "moderationSignal": "Moderation signal",
+      "reportReceived": "Report received",
+      "reportText": "This report is informational here. Open the linked moderation case when available.",
+      "disputeReview": "Dispute review",
+      "appealReceived": "Appeal received",
+      "appealText": "This appeal needs a dedicated backend resolution flow before it can be decided here.",
+      "requestReview": "Request review",
+      "reviewFallback": "Review the available context before taking action.",
+      "noDescription": "No description provided.",
+      "recognitionFallback": "Confirm the recipient and linked achievement before approving this award.",
+      "exitRequest": "Exit request",
+      "accessRequest": "Access request",
+      "memberLeaves": "Member leaves this {{entity}}",
+      "memberJoins": "Member wants to join this {{entity}}",
+      "leaveFallback": "No additional reason was provided for this leave request.",
+      "joinFallback": "No additional note was provided for this join request.",
+      "reportSignal": "Moderation case signal",
+      "appealReview": "Dispute needs review",
+      "detailsFallback": "No additional details were provided with this request."
+    },
+    "notifications": {
+      "categoryCreated": "Category created",
+      "categoryCreatedText": "The category catalog now includes this request.",
+      "skillCreated": "Skill created",
+      "skillCreatedText": "The skill catalog now includes this request.",
+      "approved": "{{title}} was approved.",
+      "rejected": "{{title}} was rejected.",
+      "requestApproved": "Request approved.",
+      "requestRejected": "Request rejected."
+    }
+  },
+  "statistics": {
+    "title": "Statistics",
+    "backendNote": "Backend note",
+    "backendWarning": "The advanced statistics endpoint is protected only by authenticated access. The admin route guard protects this UI, but the API should be role-restricted server-side.",
+    "operationalAnalytics": "Operational analytics",
+    "ranges": {
+      "last7": "Last 7 days",
+      "last30": "Last 30 days",
+      "last90": "Last 90 days",
+      "year": "This year",
+      "custom": "Custom range",
+      "customDates": "Custom dates",
+      "invalidRange": "End date must be after start date.",
+      "apply": "Apply range"
+    },
+    "export": {
+      "pdf": "Export PDF",
+      "summary": "Platform summary",
+      "advanced": "Advanced report"
+    },
+    "totals": {
+      "users": "Users",
+      "organizations": "Orgs",
+      "projects": "Projects",
+      "events": "Events",
+      "tasks": "Tasks",
+      "openReports": "Open reports",
+      "totalBalance": "Total balance",
+      "reservedShare": "Reserved share",
+      "wallets": "Wallets",
+      "active": "Active",
+      "spendEarn": "Spend/earn"
+    },
+    "categories": {
+      "title": "Category activity breakdown",
+      "subtitle": "Top activity categories for the selected range",
+      "rows": "rows",
+      "unavailable": "Category heatmap unavailable.",
+      "empty": "No category activity found.",
+      "category": "Category",
+      "events": "Events",
+      "tasks": "Tasks",
+      "completion": "Completion",
+      "hours": "Hours",
+      "unknown": "Unknown category"
+    },
+    "funnel": {
+      "title": "Invitation funnel",
+      "subtitle": "Sent to completed",
+      "unavailable": "Funnel unavailable.",
+      "sent": "Sent",
+      "accepted": "Accepted",
+      "completed": "Completed"
+    },
+    "growth": {
+      "title": "Monthly growth",
+      "subtitle": "Six-month platform creation window",
+      "unavailable": "Growth data unavailable.",
+      "empty": "No growth data yet."
+    },
+    "reliability": {
+      "title": "Reliability",
+      "unavailable": "Reliability unavailable.",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "sla": {
+      "pending": "Pending",
+      "over24": "24h+",
+      "over72": "72h+",
+      "average": "avg",
+      "maximum": "max",
+      "hours": "h",
+      "unavailable": "Advanced SLA data unavailable.",
+      "requests": "Request SLA",
+      "reports": "Report SLA"
+    },
+    "velocity": {
+      "title": "Time Bank velocity",
+      "earned": "Earned",
+      "spent": "Spent",
+      "adjusted": "Adjusted",
+      "stuck": "stuck in reservations"
+    },
+    "timeBank": {
+      "overview": "Time Bank overview",
+      "lifetime": "Lifetime totals",
+      "source": "Purpose-built source",
+      "unavailable": "Time Bank totals unavailable.",
+      "earned": "Earned",
+      "spent": "Spent",
+      "giftedIn": "Gifted in",
+      "giftedOut": "Gifted out",
+      "walletsUnavailable": "Top wallets unavailable.",
+      "topWallets": "Top wallets by balance",
+      "emptyWallets": "No wallet balances found.",
+      "showAll": "Show all {{count}}",
+      "showLess": "Show less",
+      "unknownUser": "Unknown user"
+    }
+  },
+  "users": {
+    "title": "Users",
+    "description": "Search accounts, inspect summaries, review active restrictions, and manage system roles from one real-time view.",
+    "directory": "User directory",
+    "metrics": {
+      "total": "Total users",
+      "verified": "Verified",
+      "unverified": "Unverified",
+      "activeBans": "Active bans"
+    },
+    "toolbar": {
+      "search": "Search by name or email",
+      "role": "Role",
+      "status": "Status",
+      "registeredFrom": "Registered from",
+      "registeredTo": "Registered to",
+      "sort": "Sort",
+      "allRoles": "All roles",
+      "allStatuses": "All statuses",
+      "googleConnected": "Google connected",
+      "newest": "Newest first",
+      "oldest": "Oldest first",
+      "email": "Email",
+      "name": "Name"
+    },
+    "states": {
+      "errorTitle": "Users unavailable",
+      "errorText": "The admin users endpoint could not be loaded.",
+      "emptyTitle": "No users found",
+      "emptyText": "Try a different search term or clear the current filters."
+    },
+    "card": {
+      "unknown": "Unknown user",
+      "timeBank": "Time bank",
+      "joined": "Joined",
+      "summary": "Summary",
+      "noLevel": "No level",
+      "google": "Google",
+      "calendar": "Calendar",
+      "banned": "Banned"
+    },
+    "role": {
+      "close": "Close role dialog",
+      "title": "Change system role",
+      "description": "Update the platform-wide role for {{name}}.",
+      "current": "Current role:",
+      "new": "New role",
+      "confirmTitle": "Change system role?",
+      "success": "{{name}} is now {{role}}.",
+      "confirmText": "{{name}} will be changed from {{current}} to {{next}}. This affects what they can do across the entire platform.",
+      "changed": "Role changed",
+      "notSelected": "User is not selected",
+      "forbidden": "You don't have permission to assign this role",
+      "roles": {
+        "Guest": "Guest",
+        "User": "User",
+        "Moderator": "Moderator",
+        "Admin": "Admin",
+        "SuperAdmin": "SuperAdmin"
+      }
+    },
+    "message": {
+      "close": "Close message dialog",
+      "title": "Message user",
+      "to": "to",
+      "notification": "In-app notification",
+      "email": "Email",
+      "noEmail": "This user has no email address.",
+      "subject": "Subject / title",
+      "subjectPlaceholder": "Short message title",
+      "body": "Message",
+      "bodyPlaceholder": "Write the message that should be sent to this user",
+      "send": "Send message",
+      "subjectRequired": "Subject is required",
+      "messageRequired": "Message is required",
+      "channelRequired": "Select at least one channel",
+      "userRequired": "User is not selected",
+      "success": "Message sent",
+      "error": "Message failed",
+      "deliveredBoth": "In-app notification and email were delivered.",
+      "deliveredNotification": "In-app notification was delivered.",
+      "deliveredEmail": "Email was delivered.",
+      "deliveredUnknown": "The backend accepted the request, but no delivery channel was confirmed."
+    },
+    "drawer": {
+      "close": "Close user summary",
+      "userId": "User ID:",
+      "copied": "Copied!",
+      "activity": "Activity",
+      "activityMetrics": {
+        "participations": "Active participations",
+        "events": "Events attended",
+        "workLogs": "Approved work logs",
+        "badges": "Badges earned",
+        "requests": "Open requests"
+      },
+      "activityEmpty": "This user hasn't started volunteering yet",
+      "showActivity": "Show all activity counters",
+      "recentRequests": "Recent requests",
+      "requestsEmpty": "No recent requests for this user.",
+      "timeBank": "Time bank",
+      "available": "Available",
+      "reserved": "Reserved",
+      "none": "None",
+      "currentLevel": "Current level",
+      "noLevel": "No level reached yet",
+      "showLifetime": "Show lifetime stats",
+      "hideLifetime": "Hide lifetime stats",
+      "lifetimeEarned": "Lifetime earned",
+      "lifetimeSpent": "Lifetime spent",
+      "lifetimeGiftedIn": "Lifetime gifted in",
+      "lifetimeGiftedOut": "Lifetime gifted out",
+      "lastTransaction": "Last transaction",
+      "noTransactions": "No transactions yet",
+      "summaryUnavailable": "Summary unavailable",
+      "summaryError": "Could not load this user's admin summary.",
+      "changeRole": "Change role",
+      "message": "Message",
+      "systemRole": "System role",
+      "registered": "Registered",
+      "request": "Request",
+      "new": "New"
+    }
+  }
+}

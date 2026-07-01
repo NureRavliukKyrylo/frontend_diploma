@@ -1,4 +1,5 @@
 import { Globe, Mail, Phone } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type {
   OrganizationSettingsChangeHandler,
   OrganizationSettingsErrors,
@@ -18,20 +19,23 @@ export const BasicInfoSection = ({
   errors,
   descriptionLength,
   onChange,
-}: BasicInfoSectionProps) => (
-  <section className={styles.section}>
-    <h2 className={styles.sectionLabel}>Basic info</h2>
+}: BasicInfoSectionProps) => {
+  const { t } = useTranslation("organizations");
+
+  return (
+    <section className={styles.section}>
+    <h2 className={styles.sectionLabel}>{t("settings.general.basicInfo")}</h2>
     <p className={styles.sectionDescription}>
-      Update the public details volunteers see before joining.
+      {t("settings.general.basicInfoText")}
     </p>
 
     <div className={styles.fieldsGrid}>
       <label className={styles.field}>
-        <span>Name</span>
+        <span>{t("settings.general.name")}</span>
         <input
           value={values.name}
           maxLength={200}
-          placeholder="Organization name"
+          placeholder={t("settings.general.namePlaceholder")}
           aria-invalid={Boolean(errors.name)}
           onChange={(event) => onChange("name", event.target.value)}
         />
@@ -39,12 +43,12 @@ export const BasicInfoSection = ({
       </label>
 
       <label className={styles.field}>
-        <span>Phone</span>
+        <span>{t("settings.general.phone")}</span>
         <div className={styles.iconField}>
           <Phone size={16} />
           <input
             value={values.phoneNumber}
-            placeholder="+380 00 000 0000"
+            placeholder={t("settings.general.phonePlaceholder")}
             onChange={(event) => onChange("phoneNumber", event.target.value)}
           />
         </div>
@@ -52,11 +56,11 @@ export const BasicInfoSection = ({
     </div>
 
     <label className={`${styles.field} ${styles.fullField}`}>
-      <span>Description</span>
+      <span>{t("settings.general.description")}</span>
       <textarea
         value={values.description}
         maxLength={1000}
-        placeholder="Describe what your organization does and how volunteers can help"
+        placeholder={t("settings.general.descriptionPlaceholder")}
         aria-invalid={Boolean(errors.description)}
         onChange={(event) => onChange("description", event.target.value)}
       />
@@ -68,30 +72,31 @@ export const BasicInfoSection = ({
 
     <div className={styles.contactGrid}>
       <label className={styles.field}>
-        <span>Contact email</span>
+        <span>{t("settings.general.contactEmail")}</span>
         <div className={styles.iconField}>
           <Mail size={16} />
           <input
             type="email"
             value={values.contactEmail}
-            placeholder="example@gmail.com"
+            placeholder={t("settings.general.emailPlaceholder")}
             onChange={(event) => onChange("contactEmail", event.target.value)}
           />
         </div>
       </label>
 
       <label className={styles.field}>
-        <span>Website</span>
+        <span>{t("settings.general.website")}</span>
         <div className={styles.iconField}>
           <Globe size={16} />
           <input
             type="url"
             value={values.website}
-            placeholder="https://yourwebsite.com"
+            placeholder={t("settings.general.websitePlaceholder")}
             onChange={(event) => onChange("website", event.target.value)}
           />
         </div>
       </label>
     </div>
-  </section>
-);
+    </section>
+  );
+};

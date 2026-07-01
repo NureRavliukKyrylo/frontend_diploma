@@ -1,3 +1,4 @@
+import type { TFunction } from "i18next";
 import type { OrganizationPendingRequest } from "@entities/organization";
 import type { ParticipationListItem } from "@entities/participation";
 import type { User } from "@entities/user/profile";
@@ -9,7 +10,7 @@ import {
 } from "./memberViewModels";
 
 const formatCompactCount = (value?: number | null) =>
-  typeof value === "number" ? String(value) : "—";
+  typeof value === "number" ? String(value) : "\u2014";
 
 export type OrganizationRequestTab = "join" | "leave";
 
@@ -18,6 +19,7 @@ export const buildRequestCards = (
   kind: OrganizationRequestTab,
   membersByUserId: Map<string, ParticipationListItem>,
   userById: Map<string, User | null>,
+  t: TFunction,
 ): OrganizationRequestCardModel[] =>
   requests.map((request) => {
     const user = userById.get(request.userId);
@@ -30,7 +32,7 @@ export const buildRequestCards = (
       fullName: getFullName(
         member?.firstName ?? user?.firstName,
         member?.lastName ?? user?.lastName,
-        request.title || "Team member",
+        request.title || t("member.teamMember"),
       ),
       avatarUrl: member?.avatarUrl ?? user?.profile?.avatarUrl ?? null,
       level: user?.progress?.level ?? null,
@@ -40,11 +42,11 @@ export const buildRequestCards = (
       primaryStatValue: formatCompactCount(
         user?.profile?.completedProjectCount,
       ),
-      primaryStatLabel: "Completed projects",
+      primaryStatLabel: t("member.completedProjects"),
       secondaryStatValue: formatCompactCount(
         user?.profile?.activeProjectCount,
       ),
-      secondaryStatLabel: "Active projects",
+      secondaryStatLabel: t("member.activeProjects"),
       submittedAt: request.createdAt,
     };
   });

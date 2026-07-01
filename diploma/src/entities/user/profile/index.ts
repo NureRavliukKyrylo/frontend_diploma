@@ -6,6 +6,18 @@ export { profileQuery } from "./model/queries/profileQuery";
 export { useSyncUserInfoFromProfile } from "./model/hooks/useSyncUserInfoFromProfile";
 export { type VerificationModalType } from "./model/types/modal/VerificationModalType";
 export type { User } from "./model/types/user/User";
+export type {
+  PublicAvailabilitySlot,
+  PublicBadgePreview,
+  PublicProfileOrganization,
+  PublicProfileProgress,
+  PublicProfileRating,
+  PublicProfileSocialLink,
+  PublicTimeBankSummary,
+  PublicUserProfile,
+  PublicUserProfileDetails,
+  PublicVolunteerSkill,
+} from "./model/types/public/PublicUserProfile";
 export { profileKeys } from "./model/queries/profileQuery";
 export { ConnectedLink } from "./ui/connected-link/ConnectedLink";
 export { UserMarker } from "./ui/user-marker/UserMarker";

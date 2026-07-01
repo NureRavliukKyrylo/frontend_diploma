@@ -3,6 +3,44 @@
     "pendingLeave": "Ваш запит на вихід очікує підтвердження",
     "pendingJoin": "Ваш запит на приєднання очікує підтвердження"
   },
+  "create": {
+    "datesRequired": "Вкажіть дати завдання.",
+    "created": "Завдання створено",
+    "failed": "Не вдалося створити завдання",
+    "close": "Закрити створення завдання",
+    "newTask": "Нове завдання",
+    "organization": "Організація",
+    "creatingIn": "Створення в «{{name}}»",
+    "back": "Назад",
+    "creating": "Створення...",
+    "submit": "Створити завдання",
+    "continue": "Продовжити",
+    "stepsLabel": "Етапи створення завдання",
+    "steps": {
+      "basics": "Основне",
+      "basicsSub": "Назва й опис",
+      "details": "Деталі",
+      "detailsSub": "Час і місце",
+      "categories": "Категорії",
+      "categoriesSub": "Теги й теми",
+      "access": "Доступ",
+      "accessSub": "Правила"
+    },
+    "headers": {
+      "step1Eyebrow": "КРОК 01 ІЗ 04",
+      "step1Title": "Що потрібно зробити?",
+      "step1Subtitle": "Додайте зрозумілу назву й опис завдання.",
+      "step2Eyebrow": "КРОК 02 ІЗ 04",
+      "step2Title": "Час і місце",
+      "step2Subtitle": "Вкажіть, коли й де виконуватиметься завдання.",
+      "step3Eyebrow": "КРОК 03 ІЗ 04",
+      "step3Title": "Категорії",
+      "step3Subtitle": "Допоможіть знайти завдання. Цей крок необов’язковий.",
+      "step4Eyebrow": "КРОК 04 ІЗ 04",
+      "step4Title": "Правила доступу",
+      "step4Subtitle": "Визначте, як волонтери приєднуються та виходять."
+    }
+  },
   "labels": {
     "task": "Завдання",
     "joinedChip": "Приєднався до завдання",
@@ -86,6 +124,16 @@
       "saved": "Журнал роботи оновлено",
       "failed": "Не вдалося оновити журнал роботи",
       "exported": "Експорт журналу роботи розпочато"
+    },
+    "statuses": {
+      "Draft": "Чернетка",
+      "Submitted": "Надіслано",
+      "ManagerEditedPendingVolunteerReconfirm": "Очікує підтвердження волонтера",
+      "Approved": "Схвалено",
+      "Rejected": "Відхилено",
+      "Disputed": "Оскаржується",
+      "Resolved": "Вирішено",
+      "Cancelled": "Скасовано"
     }
   },
   "statuses": {
@@ -109,10 +157,14 @@
     "emptyStateSubtitle": "Будьте першим, хто залишить коментар",
     "inputPlaceholder": "Задайте питання про цю активність...",
     "inputEditPlaceholder": "Відредагуйте питання про цю активність...",
+    "replyPlaceholder": "Напишіть відповідь для {{name}}...",
+    "replyingTo": "Відповідь для {{name}}",
     "actions": {
       "cancel": "Скасувати",
       "deleteComment": "Видалити коментар",
-      "editComment": "Редагувати коментар"
+      "editComment": "Редагувати коментар",
+      "reply": "Відповісти",
+      "send": "Надіслати коментар"
     },
     "deletedComment": "Цей коментар було видалено",
     "deleteModal": {
@@ -121,12 +173,13 @@
     },
     "validation": {
       "bodyRequired": "Коментар є обов'язковим",
-      "bodyMax": "Коментар має містити не більше 80 символів"
+      "bodyMax": "Коментар має містити не більше 2000 символів"
     },
     "notifications": {
       "createSuccessTitle": "Коментар успішно створено",
       "createSuccessDescription": "Ваш коментар було успішно додано",
       "createFailedTitle": "Помилка створення коментаря",
+      "replyForbidden": "У вас немає дозволу відповідати на коментарі до завдання.",
       "editSuccessTitle": "Коментар успішно відредаговано",
       "editSuccessDescription": "Ваш коментар було успішно змінено",
       "editFailedTitle": "Помилка редагування коментаря",

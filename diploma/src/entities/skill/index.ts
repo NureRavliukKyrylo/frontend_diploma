@@ -29,6 +29,7 @@ export {
   getSortingSkillItems,
   type SortSkillsValues,
 } from "./config/sortingSkillItems";
+export { normalizeSkillListItem } from "./libs";
 export { useSkillsInfiniteQuery } from "./model/hooks/useSkillsInfiniteQuery";
 export { getSkillLevelTranslations } from "./config/getSkillLevelTranslations";
 export {

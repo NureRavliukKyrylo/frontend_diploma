@@ -34,12 +34,12 @@ const requestMeta = {
   join: {
     className: styles.requestJoin,
     icon: LogIn,
-    label: "Join request",
+    labelKey: "member.requestJoin",
   },
   leave: {
     className: styles.requestLeave,
     icon: LogOut,
-    label: "Leave request",
+    labelKey: "member.requestLeave",
   },
 } as const;
 
@@ -65,7 +65,9 @@ export const RequestCard = ({
             initialsClassName={styles.avatarInitials}
           />
           {typeof request.level === "number" ? (
-            <span className={styles.levelBadge}>LVL {request.level}</span>
+            <span className={styles.levelBadge}>
+              {t("member.level", { level: request.level })}
+            </span>
           ) : null}
         </div>
 
@@ -88,7 +90,7 @@ export const RequestCard = ({
         {typeof request.totalHours === "number" ? (
           <span className={styles.timeBankPill}>
             <Clock3 size={13} strokeWidth={2.2} />
-            {request.totalHours.toFixed(1)} h
+            {t("member.hours", { hours: request.totalHours.toFixed(1) })}
           </span>
         ) : null}
       </div>
@@ -96,18 +98,18 @@ export const RequestCard = ({
       <div className={styles.statsGrid}>
         <div className={styles.statBlock}>
           <strong>{request.primaryStatValue}</strong>
-          <span>{request.primaryStatLabel}</span>
+          <span>{t("member.completedProjects")}</span>
         </div>
         <div className={styles.statBlock}>
           <strong>{request.secondaryStatValue}</strong>
-          <span>{request.secondaryStatLabel}</span>
+          <span>{t("member.activeProjects")}</span>
         </div>
       </div>
 
       <div className={styles.metaSection}>
         <span className={`${styles.requestBadge} ${meta.className}`}>
           <MetaIcon size={13} strokeWidth={2.2} />
-          {meta.label}
+          {t(meta.labelKey)}
         </span>
         <span className={styles.metaDate}>
           {formatTimeAgo(request.submittedAt, t)}
@@ -122,7 +124,7 @@ export const RequestCard = ({
           whileTap={{ scale: 0.96 }}
           onClick={() => onReject(request)}
         >
-          Reject
+          {t("actions.reject")}
         </motion.button>
         <motion.button
           type="button"
@@ -131,7 +133,7 @@ export const RequestCard = ({
           whileTap={{ scale: 0.96 }}
           onClick={() => onApprove(request)}
         >
-          Approve
+          {t("actions.approve")}
         </motion.button>
       </div>
     </article>

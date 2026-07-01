@@ -3,7 +3,12 @@
     "membersCount_one": "{{count}} учасник",
     "membersCount_few": "{{count}} учасники",
     "membersCount_many": "{{count}} учасників",
-    "membersCount_other": "{{count}} учасника"
+    "membersCount_other": "{{count}} учасника",
+    "chatsCount_one": "{{count}} чат",
+    "chatsCount_few": "{{count}} чати",
+    "chatsCount_many": "{{count}} чатів",
+    "chatsCount_other": "{{count}} чату",
+    "folders": "Папки чатів"
   },
   "categories": {
     "event": "Події",

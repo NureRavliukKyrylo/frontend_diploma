@@ -32,17 +32,16 @@ export const RevokeConfirmationModal = ({
 }: RevokeConfirmationModalProps) => (
   <ConfirmationModal
     isOpen={Boolean(target)}
-    title="Revoke ban?"
+    title={t("admin:bans.revoke.title")}
     text={
       target
-        ? `Remove the active ban for ${getUserName(
-            target.user,
-            target.ban.userId,
-          )}.`
-        : "Remove this active ban."
+        ? t("admin:bans.revoke.description", {
+            name: getUserName(target.user, target.ban.userId),
+          })
+        : t("admin:bans.revoke.descriptionFallback")
     }
-    confirmText="Revoke ban"
-    cancelText="Cancel"
+    confirmText={t("admin:bans.revoke.confirm")}
+    cancelText={t("admin:common.actions.cancel")}
     onConfirm={() => {
       if (target) {
         mutation.mutate({
@@ -57,12 +56,12 @@ export const RevokeConfirmationModal = ({
     maxWidth="560px"
   >
     <label className={styles.revokeReasonField}>
-      <span>Reason for revoking (optional)</span>
+      <span>{t("admin:bans.revoke.reason")}</span>
       <textarea
         value={reason}
         maxLength={1000}
         onChange={(event) => onReasonChange(event.target.value)}
-        placeholder="Add a note for the audit trail"
+        placeholder={t("admin:bans.revoke.placeholder")}
       />
     </label>
   </ConfirmationModal>

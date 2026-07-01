@@ -1,4 +1,5 @@
 import { ConfirmationModal } from "@shared/ui/modals";
+import { useTranslation } from "react-i18next";
 import type { OrganizationMembersPageModel } from "../../model/types";
 
 interface MembersConfirmationModalsProps {
@@ -7,18 +8,32 @@ interface MembersConfirmationModalsProps {
 
 export const MembersConfirmationModals = ({
   model,
-}: MembersConfirmationModalsProps) => (
-  <>
-    <ConfirmationModal
+}: MembersConfirmationModalsProps) => {
+  const { t } = useTranslation("common");
+  const entity = t(`member.entities.${model.entityLabel}`);
+  const requestKind = model.pendingDecision
+    ? t(
+        model.pendingDecision.request.kind === "join"
+          ? "member.requestJoin"
+          : "member.requestLeave",
+      )
+    : "";
+
+  return (
+    <>
+      <ConfirmationModal
       isOpen={Boolean(model.memberToRemove)}
-      title="Remove member?"
+      title={t("memberList.removeTitle")}
       text={
         model.memberToRemove
-          ? `Are you sure you want to remove ${model.memberToRemove.fullName} from this organization?`
-          : "Are you sure you want to remove this member?"
+          ? t("memberList.removeNamedText", {
+              name: model.memberToRemove.fullName,
+              entity,
+            })
+          : t("memberList.removeText")
       }
-      confirmText="Remove"
-      cancelText="Cancel"
+      confirmText={t("memberList.remove")}
+      cancelText={t("actions.cancel")}
       isLoading={model.removalMutation.isPending}
       onConfirm={() =>
         model.memberToRemove &&
@@ -27,24 +42,32 @@ export const MembersConfirmationModals = ({
       onCancel={() => model.setMemberToRemove(null)}
     />
 
-    <ConfirmationModal
+      <ConfirmationModal
       isOpen={Boolean(model.pendingDecision)}
       title={
         model.pendingDecision?.action === "approve"
-          ? "Approve request?"
-          : "Reject request?"
+          ? t("memberList.approveTitle")
+          : t("memberList.rejectTitle")
       }
       text={
         model.pendingDecision
-          ? model.pendingDecision.action === "approve"
-            ? `Approve ${model.pendingDecision.request.fullName}'s ${model.pendingDecision.request.kind} request?`
-            : `Reject ${model.pendingDecision.request.fullName}'s ${model.pendingDecision.request.kind} request?`
+          ? t(
+              model.pendingDecision.action === "approve"
+                ? "memberList.approveText"
+                : "memberList.rejectText",
+              {
+                name: model.pendingDecision.request.fullName,
+                kind: requestKind,
+              },
+            )
           : ""
       }
       confirmText={
-        model.pendingDecision?.action === "approve" ? "Approve" : "Reject"
+        model.pendingDecision?.action === "approve"
+          ? t("actions.approve")
+          : t("actions.reject")
       }
-      cancelText="Cancel"
+      cancelText={t("actions.cancel")}
       isLoading={model.decisionMutation.isPending}
       onConfirm={() =>
         model.pendingDecision &&
@@ -54,6 +77,7 @@ export const MembersConfirmationModals = ({
         })
       }
       onCancel={() => model.setPendingDecision(null)}
-    />
-  </>
-);
+      />
+    </>
+  );
+};

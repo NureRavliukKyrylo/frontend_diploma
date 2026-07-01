@@ -75,7 +75,10 @@ export const OverviewTabJoined = ({
             </div>
             {isDesktop && (
               <div className={styles.activitiesImageBlock}>
-                <img src={Activities} alt="activities-image" />
+                <img
+                  src={Activities}
+                  alt={t("project:images.activities")}
+                />
               </div>
             )}
           </div>

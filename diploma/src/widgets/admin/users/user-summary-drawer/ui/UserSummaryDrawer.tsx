@@ -12,6 +12,7 @@ import { DrawerHeader } from "./DrawerHeader";
 import { DrawerInfoGrid } from "./DrawerInfoGrid";
 import { DrawerRecentRequestsSection } from "./DrawerRecentRequestsSection";
 import { DrawerTimeBankSection } from "./DrawerTimeBankSection";
+import { useTranslation } from "react-i18next";
 
 interface UserSummaryDrawerProps {
   styles: AdminUsersStyles;
@@ -41,16 +42,20 @@ const DrawerCloseButton = ({
 }: {
   styles: AdminUsersStyles;
   onClose: () => void;
-}) => (
-  <button
-    type="button"
-    className={styles.drawerClose}
-    onClick={onClose}
-    aria-label="Close user summary"
-  >
-    <X size={20} aria-hidden="true" />
-  </button>
-);
+}) => {
+  const { t } = useTranslation("admin");
+
+  return (
+    <button
+      type="button"
+      className={styles.drawerClose}
+      onClick={onClose}
+      aria-label={t("users.drawer.close")}
+    >
+      <X size={20} aria-hidden="true" />
+    </button>
+  );
+};
 
 export const UserSummaryDrawer = ({
   styles,
@@ -73,13 +78,18 @@ export const UserSummaryDrawer = ({
   onChangeRole,
   onMessage,
 }: UserSummaryDrawerProps) => {
+  const { t } = useTranslation("admin");
+
   if (!selectedUserId) {
     return null;
   }
 
   return (
     <div className={styles.drawerOverlay} onClick={onClose}>
-      <aside className={styles.drawer} onClick={(event) => event.stopPropagation()}>
+      <aside
+        className={styles.drawer}
+        onClick={(event) => event.stopPropagation()}
+      >
         <span
           className={`${styles.headerStripe} ${styles[`headerStripe_${tone}`]}`}
           aria-hidden="true"
@@ -99,8 +109,8 @@ export const UserSummaryDrawer = ({
           <div className={styles.drawerBody}>
             <DrawerCloseButton styles={styles} onClose={onClose} />
             <div className={styles.drawerState}>
-              <strong>Summary unavailable</strong>
-              <span>Could not load this user's admin summary.</span>
+              <strong>{t("users.drawer.summaryUnavailable")}</strong>
+              <span>{t("users.drawer.summaryError")}</span>
             </div>
           </div>
         ) : (
@@ -140,7 +150,7 @@ export const UserSummaryDrawer = ({
                   onClick={() => onChangeRole(user)}
                 >
                   <ShieldCheck size={17} aria-hidden="true" />
-                  Change role
+                  {t("users.drawer.changeRole")}
                 </button>
                 <button
                   type="button"
@@ -148,7 +158,7 @@ export const UserSummaryDrawer = ({
                   onClick={() => onMessage(user)}
                 >
                   <MessageCircle size={17} aria-hidden="true" />
-                  Message
+                  {t("users.drawer.message")}
                 </button>
               </div>
             </div>

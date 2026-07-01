@@ -9,6 +9,7 @@ import { ParticipationLeaveButton } from "@features/participation";
 import { getEventJoinedMainTabs } from "../config/eventJoinedMainTabs";
 import { useJoinedEventPage } from "../model/useJoinedEventPage";
 import { ChatIcon } from "@shared/assets/icons/info";
+import { EventFab } from "@widgets/events";
 import { useTranslation } from "react-i18next";
 
 export const JoinedEventPage = () => {
@@ -71,7 +72,7 @@ export const JoinedEventPage = () => {
                   >
                     <img
                       src={event?.organization?.logoUrl ?? undefined}
-                      alt="organization-image"
+                      alt={t("event:images.organization")}
                     />
                     <p>{event?.organization?.name}</p>
                   </LinkButtonWrapper>
@@ -186,6 +187,12 @@ export const JoinedEventPage = () => {
           {forms[tab]}
         </motion.div>
       </AnimatePresence>
+      <EventFab
+        eventId={event.id}
+        event={event}
+        activeTab={tab}
+        onTabChange={handleTabChange}
+      />
     </div>
   );
 };

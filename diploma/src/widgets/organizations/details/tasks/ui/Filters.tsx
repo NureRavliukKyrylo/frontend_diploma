@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { withDebounce } from "@shared/libs/hocs";
 import { BaseButtonWrapper } from "@shared/ui/buttons";
 import { DatePickerInput } from "@shared/ui/inputs";
@@ -21,6 +22,7 @@ export const TaskFilters = ({
   onChange,
   onReset,
 }: TaskFiltersProps) => {
+  const { t } = useTranslation("organizations");
   const DebouncedDatePicker = useMemo(
     () => withDebounce(DatePickerInput, 300),
     [],
@@ -43,9 +45,13 @@ export const TaskFilters = ({
           }`}
         >
           <div className={filterStyles.sectionHeaderRow}>
-            <h3 className={filterStyles.subHeaderFilter}>Task state</h3>
+            <h3 className={filterStyles.subHeaderFilter}>
+              {t("details.tasks.filters.state")}
+            </h3>
             {hasStateFilter && (
-              <span className={filterStyles.activeBadge}>Applied</span>
+              <span className={filterStyles.activeBadge}>
+                {t("details.tasks.filters.applied")}
+              </span>
             )}
           </div>
 
@@ -62,7 +68,7 @@ export const TaskFilters = ({
                       isActive ? filterStyles.taskStateButtonActive : ""
                     }`}
                   >
-                    {option.label}
+                    {t(option.labelKey)}
                   </BaseButtonWrapper>
                 );
               })}
@@ -78,15 +84,19 @@ export const TaskFilters = ({
           }`}
         >
           <div className={filterStyles.sectionHeaderRow}>
-            <h3 className={filterStyles.subHeaderFilter}>Due date</h3>
+            <h3 className={filterStyles.subHeaderFilter}>
+              {t("details.tasks.filters.dueDate")}
+            </h3>
             {hasDateFilter && (
-              <span className={filterStyles.activeBadge}>Applied</span>
+              <span className={filterStyles.activeBadge}>
+                {t("details.tasks.filters.applied")}
+              </span>
             )}
           </div>
 
           <div className={filterStyles.deadlineCalendarBlock}>
             <div className={`${filterStyles.startDate} ${filterStyles.singleDateField}`}>
-              <h4>Due before</h4>
+              <h4>{t("details.tasks.filters.dueBefore")}</h4>
               <div className={filterStyles.dateStartInput}>
                 <DebouncedDatePicker
                   label=""
@@ -108,16 +118,20 @@ export const TaskFilters = ({
           }`}
         >
           <div className={filterStyles.sectionHeaderRow}>
-            <h3 className={filterStyles.subHeaderFilter}>More options</h3>
+            <h3 className={filterStyles.subHeaderFilter}>
+              {t("details.tasks.filters.more")}
+            </h3>
             {hasMoreOptionsFilter && (
-              <span className={filterStyles.activeBadge}>Applied</span>
+              <span className={filterStyles.activeBadge}>
+                {t("details.tasks.filters.applied")}
+              </span>
             )}
           </div>
 
           <div className={filterStyles.wrapperMoreOptionsFilter}>
             <div className={filterStyles.completedProject}>
               <h4 className={filterStyles.titleFilterMoreOptions}>
-                Only assigned tasks
+                {t("details.tasks.onlyAssigned")}
               </h4>
               <Switch
                 isSelected={search.OnlyAssigned ?? false}
@@ -133,7 +147,7 @@ export const TaskFilters = ({
 
             <div className={filterStyles.joinedProject}>
               <h4 className={filterStyles.titleFilterMoreOptions}>
-                Only tasks with due date
+                {t("details.tasks.onlyWithDueDate")}
               </h4>
               <Switch
                 isSelected={search.WithDueDateOnly ?? false}
@@ -158,7 +172,7 @@ export const TaskFilters = ({
             onClick={onReset}
             className={filterStyles.clearFiltersButton}
           >
-            Clear filters
+            {t("details.tasks.filters.clear")}
           </BaseButtonWrapper>
         </div>
       </div>

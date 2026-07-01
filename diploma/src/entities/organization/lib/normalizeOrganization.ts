@@ -113,6 +113,12 @@ export const normalizeOrganization = (
       raw.TotalActivities,
     ),
     activeCount: pickFiniteNumber(raw.activeCount, raw.ActiveCount),
+    currentProgress: pickFiniteNumber(
+      raw.currentProgress,
+      raw.CurrentProgress,
+      rawProgress.currentProgress,
+      rawProgress.CurrentProgress,
+    ),
     progressPercent: pickFiniteNumber(
       raw.progressPercent,
       rawProgress.percent,

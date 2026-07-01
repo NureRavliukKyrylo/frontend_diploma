@@ -1,7 +1,7 @@
 .backdrop {
   position: fixed;
   inset: 0;
-  z-index: 99;
+  z-index: 102;
   border: none;
   background: rgba(0, 0, 0, 0.12);
   backdrop-filter: blur(3px);
@@ -12,7 +12,7 @@
   position: fixed;
   right: 36px;
   bottom: 36px;
-  z-index: 100;
+  z-index: 103;
   display: flex;
   flex-direction: column;
   align-items: flex-end;

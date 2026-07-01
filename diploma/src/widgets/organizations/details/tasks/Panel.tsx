@@ -42,7 +42,7 @@ interface OrganizationDetailsTasksPanelProps {
 export const OrganizationDetailsTasksPanel = ({
   organization,
 }: OrganizationDetailsTasksPanelProps) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["common", "organizations"]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const sortingTaskItems = useMemo(() => getSortingTaskItems(t), [t]);
   const [search, setSearch] = useState<TaskSearchParams>({
@@ -153,8 +153,8 @@ export const OrganizationDetailsTasksPanel = ({
           >
             {tasksResponse?.data?.length === 0 ? (
               <div className={styles.emptyState}>
-                <h2>No Tasks found</h2>
-                <p>Try adjusting your filters or search query</p>
+                <h2>{t("organizations:details.panels.noTasks")}</h2>
+                <p>{t("organizations:details.panels.adjustFilters")}</p>
               </div>
             ) : (
               <Suspense

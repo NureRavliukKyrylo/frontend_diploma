@@ -16,6 +16,7 @@ export const useCreateComment = (
   taskId: string,
   parentCommentId?: string,
   replyToUserId?: string,
+  onSuccess?: () => void,
 ) => {
   const { t } = useTranslation(["task", "common"]);
   const validationSchema = getCreateCommentValidationSchema(t);
@@ -32,11 +33,17 @@ export const useCreateComment = (
       queryClient.invalidateQueries({
         queryKey: taskKeys.id(taskId),
       });
+      onSuccess?.();
     },
     onError: (error: unknown) => {
+      const status = (error as { response?: { status?: number } })?.response
+        ?.status;
       addToast({
         title: t("task:comments.notifications.createFailedTitle"),
-        description: getErrorMessage(error, t),
+        description:
+          parentCommentId && status === 403
+            ? t("task:comments.notifications.replyForbidden")
+            : getErrorMessage(error, t),
         color: "danger",
       });
     },

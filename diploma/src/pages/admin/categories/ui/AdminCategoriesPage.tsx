@@ -6,17 +6,19 @@ import { CategoryDeleteConfirmationModal } from "@widgets/admin/categories/categ
 import { CategoryDrawer } from "@widgets/admin/categories/category-drawer/ui/CategoryDrawer";
 import { CategoryFormModal } from "@widgets/admin/categories/category-create-edit-modal/ui/CategoryFormModal";
 import { useAdminCategoriesPage } from "@widgets/admin/categories/categories-page/model/useAdminCategoriesPage";
+import { useTranslation } from "react-i18next";
 import styles from "../../skills/ui/AdminSkillsPage.module.scss";
 
 export const AdminCategoriesPage = () => {
+  const { t } = useTranslation("admin");
   const page = useAdminCategoriesPage();
 
   return (
     <section className={styles.page}>
       <div className={styles.heading}>
         <div>
-          <div className={styles.pageEyebrow}>Admin</div>
-          <h1 className={styles.pageTitle}>Categories</h1>
+          <div className={styles.pageEyebrow}>{t("common.eyebrow")}</div>
+          <h1 className={styles.pageTitle}>{t("categories.title")}</h1>
         </div>
         <CategoriesHeaderActions
           styles={styles}
@@ -35,10 +37,10 @@ export const AdminCategoriesPage = () => {
       />
 
       <div className={styles.sectionHeader}>
-        <span>Category directory</span>
+        <span>{t("categories.directory")}</span>
         <span className={styles.sectionLine} aria-hidden="true" />
         <strong className={styles.matchCount}>
-          {page.pagination.totalCount} matches
+          {t("common.matches", { count: page.pagination.totalCount })}
         </strong>
       </div>
 

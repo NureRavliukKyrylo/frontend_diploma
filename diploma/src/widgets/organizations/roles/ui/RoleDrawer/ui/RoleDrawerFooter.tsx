@@ -11,6 +11,7 @@ import {
 import type { ContextRoleDto } from "@entities/organization";
 import type { ContextRoleCardType } from "../../../config/rolePresentation";
 import styles from "../RoleDrawer.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface RoleDrawerFooterProps {
   role: ContextRoleDto;
@@ -29,6 +30,7 @@ export const RoleDrawerFooter = ({
   onArchive,
   onDelete,
 }: RoleDrawerFooterProps) => {
+  const { t } = useTranslation("roles");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -68,7 +70,9 @@ export const RoleDrawerFooter = ({
                     }}
                   >
                     <Shield size={15} strokeWidth={2.2} />
-                    {role.isDefaultForJoin ? "Remove default" : "Set as default"}
+                    {role.isDefaultForJoin
+                      ? t("actions.removeDefault")
+                      : t("actions.setDefault")}
                   </button>
                   <button
                     type="button"
@@ -79,7 +83,7 @@ export const RoleDrawerFooter = ({
                     }}
                   >
                     <Archive size={15} strokeWidth={2.2} />
-                    Archive
+                    {t("actions.archive")}
                   </button>
                   <button
                     type="button"
@@ -90,7 +94,7 @@ export const RoleDrawerFooter = ({
                     }}
                   >
                     <Trash2 size={15} strokeWidth={2.2} />
-                    Delete
+                    {t("actions.delete")}
                   </button>
                 </motion.div>
               ) : null}
@@ -101,7 +105,7 @@ export const RoleDrawerFooter = ({
               className={`${styles.moreButton} ${
                 isMenuOpen ? styles.moreButtonOpen : ""
               }`}
-              aria-label={`More actions for ${role.name}`}
+              aria-label={t("actions.more", { name: role.name })}
               onClick={() => setIsMenuOpen((current) => !current)}
             >
               <MoreHorizontal size={18} strokeWidth={2.3} />
@@ -109,13 +113,13 @@ export const RoleDrawerFooter = ({
           </div>
           <button type="button" className={styles.editButton} onClick={onEdit}>
             <Pencil size={15} strokeWidth={2.3} />
-            Edit role
+            {t("actions.editRole")}
           </button>
         </>
       ) : (
         <span className={styles.lockedFooterText}>
           <Lock size={15} strokeWidth={2.3} />
-          Locked
+          {t("actions.locked")}
         </span>
       )}
     </footer>

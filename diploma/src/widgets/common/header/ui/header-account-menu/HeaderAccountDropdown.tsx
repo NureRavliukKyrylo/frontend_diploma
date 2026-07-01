@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { LogOut } from "lucide-react";
 import { HeaderTimeBank } from "../header-time-bank/HeaderTimeBank";
 import styles from "./HeaderAccountMenu.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface HeaderAccountDropdownProps {
   isOpen: boolean;
@@ -29,56 +30,60 @@ export const HeaderAccountDropdown = ({
   onProfileClick,
   onTimeBankClick,
   onLogoutClick,
-}: HeaderAccountDropdownProps) => (
-  <AnimatePresence>
-    {isOpen && (
-      <motion.div
-        className={clsx(
-          styles.dropdown,
-          responsive
-            ? "max-lg:!right-0 max-lg:!max-w-[calc(100vw-24px)]"
-            : "lg:max-xl:!right-0 lg:max-xl:!max-w-[calc(100vw-48px)]",
-        )}
-        role="menu"
-        initial={{ opacity: 0, y: 8, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 8, scale: 0.98 }}
-        transition={{ duration: 0.16, ease: "easeOut" }}
-      >
-        <button
-          type="button"
-          className={styles.userInfo}
-          role="menuitem"
-          onClick={onProfileClick}
+}: HeaderAccountDropdownProps) => {
+  const { t } = useTranslation("common");
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className={clsx(
+            styles.dropdown,
+            responsive
+              ? "max-lg:!right-0 max-lg:!max-w-[calc(100vw-24px)]"
+              : "lg:max-xl:!right-0 lg:max-xl:!max-w-[calc(100vw-48px)]",
+          )}
+          role="menu"
+          initial={{ opacity: 0, y: 8, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 8, scale: 0.98 }}
+          transition={{ duration: 0.16, ease: "easeOut" }}
         >
-          <Avatar
-            src={avatarSrc}
-            fallback={fullName}
-            shape="circle"
-            className={styles.dropdownImage}
-          />
-          <div className={styles.userText}>
-            <span>{fullName}</span>
-            <span>{email}</span>
-          </div>
-        </button>
-        <HeaderTimeBank
-          availableMinutes={availableMinutes}
-          onClick={onTimeBankClick}
-        />
-        <div className={styles.actions}>
           <button
             type="button"
-            className={styles.actionButton}
+            className={styles.userInfo}
             role="menuitem"
-            disabled={isLogoutLoading}
-            onClick={onLogoutClick}
+            onClick={onProfileClick}
           >
-            <LogOut aria-hidden="true" strokeWidth={1.9} />
-            <span>Logout</span>
+            <Avatar
+              src={avatarSrc}
+              fallback={fullName}
+              shape="circle"
+              className={styles.dropdownImage}
+            />
+            <div className={styles.userText}>
+              <span>{fullName}</span>
+              <span>{email}</span>
+            </div>
           </button>
-        </div>
-      </motion.div>
-    )}
-  </AnimatePresence>
-);
+          <HeaderTimeBank
+            availableMinutes={availableMinutes}
+            onClick={onTimeBankClick}
+          />
+          <div className={styles.actions}>
+            <button
+              type="button"
+              className={styles.actionButton}
+              role="menuitem"
+              disabled={isLogoutLoading}
+              onClick={onLogoutClick}
+            >
+              <LogOut aria-hidden="true" strokeWidth={1.9} />
+              <span>{t("header.logout")}</span>
+            </button>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};

@@ -33,24 +33,31 @@ const toneByIndex: CategoryTone[] = [
   "neutral",
 ];
 
-export const getMemberName = (member: OrganizationMember) =>
-  [member.firstName, member.lastName].filter(Boolean).join(" ") || "Team Member";
+export const getMemberName = (
+  member: OrganizationMember,
+  fallback = "Team member",
+) => [member.firstName, member.lastName].filter(Boolean).join(" ") || fallback;
 
 export const getDirectoryMemberName = (
   firstName?: string | null,
   lastName?: string | null,
+  fallback = "Team member",
 ) =>
   [lastName, firstName].filter(Boolean).join(" ") ||
   [firstName, lastName].filter(Boolean).join(" ") ||
-  "Team Member";
+  fallback;
 
-export const formatDate = (value?: string | null) => {
-  if (!value) return "Not added yet";
+export const formatDate = (
+  value: string | null | undefined,
+  locale: string,
+  fallback: string,
+) => {
+  if (!value) return fallback;
 
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
 
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString(locale, {
     month: "long",
     day: "numeric",
     year: "numeric",
@@ -123,11 +130,17 @@ export const buildResolvedCategoryCards = (
 interface BuildMemberDirectoryCardsParams {
   members: OrganizationMember[];
   ownerId?: string | null;
+  founderLabel: string;
+  volunteerLabel: string;
+  teamMemberLabel: string;
 }
 
 export const buildMemberDirectoryCards = ({
   members,
   ownerId,
+  founderLabel,
+  volunteerLabel,
+  teamMemberLabel,
 }: BuildMemberDirectoryCardsParams): DirectoryMemberCard[] => {
   const normalizedOwnerId = ownerId?.trim();
   return members.map((member) => {
@@ -136,14 +149,18 @@ export const buildMemberDirectoryCards = ({
 
     return {
       id: member.id,
-      name: getDirectoryMemberName(member.firstName, member.lastName),
+      name: getDirectoryMemberName(
+        member.firstName,
+        member.lastName,
+        teamMemberLabel,
+      ),
       isOwner: isOwnerCard,
       roleLabel:
         isOwnerCard
-          ? "Founder"
+          ? founderLabel
           : normalizedRole && normalizedRole.length > 0
             ? normalizedRole
-            : "Volunteer",
+            : volunteerLabel,
       avatarUrl: member.avatarUrl ?? null,
       profilePath: "/profile" as const,
     };

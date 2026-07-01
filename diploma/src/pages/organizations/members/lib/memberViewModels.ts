@@ -1,19 +1,32 @@
-import type { Organization } from "@entities/organization";
+import type { TFunction } from "i18next";
 import type { ParticipationListItem } from "@entities/participation";
 import type { User } from "@entities/user/profile";
+import type { EntityType } from "@shared/config/types";
 import type { OrganizationMemberCardModel } from "@widgets/organizations/members";
 
 const formatCompactCount = (value?: number | null) =>
-  typeof value === "number" ? String(value) : "—";
-const formatJoinedLabel = (value?: string | null) => {
-  if (!value) return null;
+  typeof value === "number" ? String(value) : "\u2014";
+
+const formatJoinedLabel = (
+  value: string | null | undefined,
+  t: TFunction,
+  locale: string,
+) => {
+  if (!value) return t("member.joinDateUnavailable");
+
   const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return null;
-  return `Joined ${date.toLocaleDateString("en-US", {
+  if (Number.isNaN(date.getTime())) {
+    return t("member.joinDateUnavailable");
+  }
+
+  const intlLocale = locale === "uk" || locale === "ua" ? "uk-UA" : "en-US";
+  const formattedDate = date.toLocaleDateString(intlLocale, {
     month: "short",
     day: "numeric",
     year: "numeric",
-  })}`;
+  });
+
+  return t("member.joinedDate", { date: formattedDate });
 };
 
 export const getFullName = (
@@ -62,43 +75,50 @@ export const getRatingCount = (rating: unknown) => {
 
 interface BuildMembersMapParams {
   rawMembers: ParticipationListItem[];
-  organization?: Organization;
+  entityType: EntityType;
+  entityId: string;
+  ownerId?: string | null;
+  createdAt?: string | null;
   userById: Map<string, User | null>;
   currentUser?: User;
   currentUserId: string | null;
+  ownerLabel: string;
 }
 
 export const buildMembersByUserId = ({
   rawMembers,
-  organization,
+  entityType,
+  entityId,
+  ownerId,
+  createdAt,
   userById,
   currentUser,
   currentUserId,
+  ownerLabel,
 }: BuildMembersMapParams) => {
   const membersByUserId = new Map<string, ParticipationListItem>();
 
   rawMembers.forEach((member) => membersByUserId.set(member.userId, member));
 
-  if (!organization?.ownerId || membersByUserId.has(organization.ownerId)) {
+  if (!ownerId || membersByUserId.has(ownerId)) {
     return membersByUserId;
   }
 
-  const ownerProfile = userById.get(organization.ownerId);
-  const fallback =
-    currentUserId === organization.ownerId ? currentUser : ownerProfile;
+  const ownerProfile = userById.get(ownerId);
+  const fallback = currentUserId === ownerId ? currentUser : ownerProfile;
 
-  membersByUserId.set(organization.ownerId, {
-    id: `owner-${organization.ownerId}`,
-    entityType: "organization",
-    entityId: organization.id,
-    userId: organization.ownerId,
-    firstName: ownerProfile?.firstName ?? fallback?.firstName ?? "Owner",
+  membersByUserId.set(ownerId, {
+    id: `owner-${ownerId}`,
+    entityType,
+    entityId,
+    userId: ownerId,
+    firstName: ownerProfile?.firstName ?? fallback?.firstName ?? ownerLabel,
     lastName: ownerProfile?.lastName ?? fallback?.lastName ?? "",
     avatarUrl:
       ownerProfile?.profile?.avatarUrl ?? fallback?.profile?.avatarUrl ?? "",
-    role: { roleId: "owner", name: "Owner" },
+    role: { roleId: "owner", name: ownerLabel },
     isActive: true,
-    joinDates: organization.createdAt ? [organization.createdAt] : [],
+    joinDates: createdAt ? [createdAt] : [],
   });
 
   return membersByUserId;
@@ -107,7 +127,9 @@ export const buildMembersByUserId = ({
 export const buildMemberCards = (
   membersByUserId: Map<string, ParticipationListItem>,
   userById: Map<string, User | null>,
-  ownerId?: string | null,
+  ownerId: string | null | undefined,
+  t: TFunction,
+  locale: string,
 ): OrganizationMemberCardModel[] =>
   [...membersByUserId.values()]
     .sort((left, right) => {
@@ -127,12 +149,18 @@ export const buildMemberCards = (
         fullName: getFullName(
           member.firstName,
           member.lastName,
-          getFullName(user?.firstName, user?.lastName),
+          getFullName(
+            user?.firstName,
+            user?.lastName,
+            t("member.teamMember"),
+          ),
         ),
         avatarUrl: member.avatarUrl || user?.profile?.avatarUrl || null,
         isOwner,
         roleId: member.role?.roleId ?? null,
-        roleName: isOwner ? "Owner" : member.role?.name || "Volunteer",
+        roleName: isOwner
+          ? t("member.ownerLabel")
+          : member.role?.name || t("member.volunteerLabel"),
         level: user?.progress?.level ?? null,
         rating: getRatingValue(user?.rating),
         ratingCount: getRatingCount(user?.rating),
@@ -140,11 +168,15 @@ export const buildMemberCards = (
         primaryStatValue: formatCompactCount(
           user?.profile?.completedProjectCount,
         ),
-        primaryStatLabel: "Completed projects",
+        primaryStatLabel: t("member.completedProjects"),
         secondaryStatValue: formatCompactCount(
           user?.profile?.activeProjectCount,
         ),
-        secondaryStatLabel: "Active projects",
-        joinedAtLabel: formatJoinedLabel(getEarliestJoinDate(member)),
+        secondaryStatLabel: t("member.activeProjects"),
+        joinedAtLabel: formatJoinedLabel(
+          getEarliestJoinDate(member),
+          t,
+          locale,
+        ),
       };
     });

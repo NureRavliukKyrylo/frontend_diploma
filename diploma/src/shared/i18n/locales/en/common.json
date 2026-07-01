@@ -26,6 +26,35 @@
     "readLess": "Read less",
     "getStarted": "GET STARTED"
   },
+  "accessibility": {
+    "downArrow": "Open options",
+    "checkMark": "Selected",
+    "modalImage": "Confirmation illustration"
+  },
+  "confirmation": {
+    "yes": "Yes",
+    "no": "No"
+  },
+  "header": {
+    "openMenu": "Open menu",
+    "profile": "Profile",
+    "loading": "Loading...",
+    "timeBank": "Time Bank",
+    "logout": "Logout",
+    "logoutTitle": "Are you sure you want to logout?",
+    "logoutText": "You will be able to sign in again whenever you need."
+  },
+  "memberMutations": {
+    "missingParticipation": "This member does not have a participation record.",
+    "roleUpdated": "Role updated",
+    "roleUpdatedText": "{{name}}'s role has been updated.",
+    "roleUpdateFailed": "Role update failed",
+    "memberRemoved": "Member removed",
+    "removalFailed": "Removal failed",
+    "requestApproved": "Request approved",
+    "requestRejected": "Request rejected",
+    "requestUpdateFailed": "Request update failed"
+  },
   "policies": {
     "open": "Open to join",
     "approval_required": "Approval required"
@@ -72,7 +101,8 @@
   "errors": {
     "somethingWentWrong": "Something went wrong",
     "actionFailed": "{{action}} failed",
-    "errorHint": "Спробуйте оновити сторінку або завітайте пізніше.",
+    "hint": "Try refreshing the page or come back later.",
+    "errorHint": "Try refreshing the page or come back later.",
     "unexpected": "An unexpected error occurred",
     "unauthorized": "You need to be logged in to view this content.",
     "forbidden": "You don't have permission to view this content.",
@@ -100,7 +130,13 @@
     "roleUpdateFailed": "Role update failed",
     "memberRemoved": "Member removed",
     "memberRemoveFailed": "Member removal failed",
-    "missingParticipation": "This member does not have a participation record."
+    "missingParticipation": "This member does not have a participation record.",
+    "teamMember": "Team member",
+    "volunteer": "Volunteer",
+    "active": "Active",
+    "inactive": "Inactive",
+    "status": "Status",
+    "joined": "Joined"
   },
   "pagination": {
     "loadMore": "Load more",
@@ -108,6 +144,8 @@
   },
   "time": {
     "minutes": "{{count}}m",
+    "compactHours": "{{count}}h",
+    "compactMinutes": "{{count}}m",
     "hoursAgo": "{{count}}h ago",
     "justNow": "Just now"
   },
@@ -152,6 +190,18 @@
     "approvalRequired": "{{entity}} Approval Required",
 
     "entities": {
+      "project": "Project",
+      "event": "Event",
+      "task": "Task",
+      "organization": "Organization"
+    },
+    "entitiesGenitive": {
+      "project": "Project",
+      "event": "Event",
+      "task": "Task",
+      "organization": "Organization"
+    },
+    "entitiesAccusative": {
       "project": "Project",
       "event": "Event",
       "task": "Task",
@@ -215,6 +265,149 @@
   "mapEmptyState": {
     "title": "No projects found",
     "subtitle": "Try adjusting your filters or search query"
+  },
+  "createFlow": {
+    "back": "Back",
+    "continue": "Continue",
+    "creating": "Creating..."
+  },
+  "member": {
+    "ownerLabel": "Owner",
+    "volunteerLabel": "Volunteer",
+    "teamMember": "Team member",
+    "level": "LVL {{level}}",
+    "hours": "{{hours}} h",
+    "completedProjects": "Completed projects",
+    "activeProjects": "Active projects",
+    "joinedDate": "Joined {{date}}",
+    "joinDateUnavailable": "Join date unavailable",
+    "profile": "Profile",
+    "sendMessage": "Send message",
+    "removeFrom": "Remove from {{entity}}",
+    "openActions": "Open actions for {{name}}",
+    "changeRole": "Change role",
+    "requestJoin": "Join request",
+    "requestLeave": "Leave request",
+    "entities": {
+      "organization": "organization",
+      "project": "project",
+      "event": "event",
+      "task": "task"
+    }
+  },
+  "memberList": {
+    "tabsLabel": "{{entity}} member sections",
+    "membersTab": "Members",
+    "requestsTab": "Requests",
+    "searchMembers": "Search members",
+    "searchRequests": "Search requests",
+    "totalMembers": "Total members",
+    "pendingJoin": "Pending join",
+    "pendingLeave": "Pending leave",
+    "noMembersFound": "No members found",
+    "noMembersFoundHint": "Try a different name or clear your search to see all members.",
+    "noMembers": "No members yet",
+    "noMembersHint": "Invite volunteers to join this {{entity}} to see them here.",
+    "requestTypesLabel": "{{entity}} request types",
+    "joinRequests": "Join requests",
+    "leaveRequests": "Leave requests",
+    "noRequestsFound": "No results found",
+    "noRequestsFoundHint": "Try a different name or clear your search to see all requests.",
+    "noPendingRequests": "No pending requests",
+    "noJoinRequests": "Join requests will appear here when volunteers ask to enter the {{entity}}.",
+    "noLeaveRequests": "Leave requests will appear here when members ask to exit the {{entity}}.",
+    "removeTitle": "Remove member?",
+    "removeNamedText": "Are you sure you want to remove {{name}} from this {{entity}}?",
+    "removeText": "Are you sure you want to remove this member?",
+    "remove": "Remove",
+    "approveTitle": "Approve request?",
+    "rejectTitle": "Reject request?",
+    "approveText": "Approve {{name}}'s {{kind}} request?",
+    "rejectText": "Reject {{name}}'s {{kind}} request?"
+  },
+  "inviteCard": {
+    "eyebrow": "Grow your team",
+    "title": "Invite a volunteer",
+    "description": "Browse the volunteer directory and invite new members to this {{entity}}.",
+    "cta": "Browse volunteers"
+  },
+  "inviteModal": {
+    "title": "Invite {{name}}?",
+    "text": "This sends an invitation to join {{entity}}.",
+    "send": "Send invitation",
+    "cancel": "Cancel",
+    "message": "Message",
+    "optional": "Optional",
+    "placeholder": "Share a short note about the {{entityLabel}} and why you would like them to join.",
+    "entityFallback": "organization"
+  },
+  "publicProfile": {
+    "loading": "Loading volunteer profile...",
+    "error": "We could not load this volunteer profile.",
+    "volunteer": "Volunteer",
+    "organizationFallback": "this organization",
+    "sections": {
+      "about": "About",
+      "overview": "Overview",
+      "skills": "Skills",
+      "badges": "Badges",
+      "organizations": "Organizations",
+      "availability": "Availability"
+    },
+    "actions": {
+      "invite": "Invite to organization",
+      "invited": "Invited",
+      "message": "Send message",
+      "readMore": "Read more",
+      "showLess": "Show less"
+    },
+    "about": {
+      "level": "Level {{level}}",
+      "maximumLevel": "Maximum level",
+      "nextLevel": "Next level",
+      "votes_one": "({{count}} vote)",
+      "votes_other": "({{count}} votes)",
+      "emptyBio": "This volunteer has not added a bio yet."
+    },
+    "overview": {
+      "activeProjects": "Active projects",
+      "completedProjects": "Completed projects",
+      "hoursContributed": "Hours contributed"
+    },
+    "skills": {
+      "empty": "No skills have been added yet.",
+      "iconLabel": "{{name}} icon",
+      "levels": {
+        "Beginner": "Beginner",
+        "Intermediate": "Intermediate",
+        "Advanced": "Advanced",
+        "Expert": "Expert"
+      }
+    },
+    "badges": {
+      "progress": "{{unlocked}} of {{total}}",
+      "empty": "No badges unlocked yet."
+    },
+    "organizations": {
+      "empty": "No organizations to show."
+    },
+    "availability": {
+      "allDay": "All day",
+      "notSet": "Not set",
+      "unavailable": "Unavailable",
+      "empty": "No availability has been shared.",
+      "days": {
+        "sun": "Sun",
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat"
+      }
+    },
+    "invitationSent": "Invitation sent",
+    "invitationSentText": "{{name}} can now respond to the invitation."
   },
   "reason": {
     "title": "Reason"

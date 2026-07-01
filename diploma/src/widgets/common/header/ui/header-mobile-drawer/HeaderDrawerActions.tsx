@@ -97,7 +97,9 @@ export const HeaderDrawerActions = ({
                 onClick={() => onLanguageChange(option.value)}
               >
                 <span>{display.flag}</span>
-                <span>{option.value === "uk" ? "\u0423\u043A\u0440" : "Eng"}</span>
+                <span>
+                  {option.value === "uk" ? "\u0423\u043A\u0440" : "Eng"}
+                </span>
               </button>
             );
           })}

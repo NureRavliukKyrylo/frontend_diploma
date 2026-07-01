@@ -33,6 +33,7 @@ export type RawOrganization = Partial<Organization> & {
   MemberPreviews?: unknown[];
   TotalActivities?: number;
   ActiveCount?: number;
+  CurrentProgress?: number;
   progress?: unknown;
   Progress?: unknown;
   Members?: unknown[];

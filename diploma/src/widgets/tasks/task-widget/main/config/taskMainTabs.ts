@@ -1,10 +1,7 @@
 import type { TabOption } from "@shared/config/types";
 import type { Task, TaskMode } from "@entities/task";
 import type { TFunction } from "i18next";
-import {
-  canManageTaskRoles,
-  canViewTaskTimeLogs,
-} from "../lib/canManageTask";
+import { canViewTaskTimeLogs } from "../lib/canManageTask";
 
 export const getTaskMainTabs = (
   t: TFunction,
@@ -28,13 +25,6 @@ export const getTaskMainTabs = (
       value: "feedbacks",
     },
   ];
-
-  if (canManageTaskRoles(task)) {
-    tabs.push({
-      label: t("task:tabs.roles", { defaultValue: "ROLES" }),
-      value: "roles",
-    });
-  }
 
   if (canViewTaskTimeLogs(task)) {
     tabs.push({

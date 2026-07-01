@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { organizationQuery, type Organization } from "@entities/organization";
@@ -18,6 +19,7 @@ interface Params {
 }
 
 export interface OrganizationFabAction extends OrganizationFabActionConfig {
+  label: string;
   onClick: () => void;
 }
 
@@ -37,6 +39,7 @@ export const useOrganizationFabActions = ({
   activeTab,
   onTabChange,
 }: Params) => {
+  const { t } = useTranslation("organizations");
   const navigate = useNavigate();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
@@ -93,6 +96,7 @@ export const useOrganizationFabActions = ({
         )
         .map((action) => ({
           ...action,
+          label: t(action.labelKey),
           onClick: () => {
             closeMenu();
             if (action.id === "new-task") {
@@ -109,7 +113,7 @@ export const useOrganizationFabActions = ({
           },
         }))
         .reverse(),
-    [canManage, canManageRoles, navigate, organizationId, selectTab],
+    [canManage, canManageRoles, navigate, organizationId, selectTab, t],
   );
   const normalizedPath = location.pathname.replace(/\/+$/, "");
 

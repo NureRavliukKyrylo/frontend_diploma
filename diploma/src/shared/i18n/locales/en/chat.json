@@ -1,7 +1,10 @@
 {
   "labels": {
     "membersCount_one": "{{count}} member",
-    "membersCount_other": "{{count}} members"
+    "membersCount_other": "{{count}} members",
+    "chatsCount_one": "{{count}} chat",
+    "chatsCount_other": "{{count}} chats",
+    "folders": "Chat folders"
   },
   "categories": {
     "event": "Events",

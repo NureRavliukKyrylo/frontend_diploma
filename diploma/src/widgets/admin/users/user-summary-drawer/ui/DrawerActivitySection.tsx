@@ -1,7 +1,14 @@
 import type { AdminUserActivitySummary } from "@entities/admin";
-import { Award, CheckCircle2, SlidersHorizontal, Trophy, Users } from "lucide-react";
+import {
+  Award,
+  CheckCircle2,
+  SlidersHorizontal,
+  Trophy,
+  Users,
+} from "lucide-react";
 import type { AdminUsersStyles } from "../../model/types";
 import { ActivityCounter } from "../../ui/ActivityCounter";
+import { useTranslation } from "react-i18next";
 
 interface DrawerActivitySectionProps {
   styles: AdminUsersStyles;
@@ -16,30 +23,31 @@ export const DrawerActivitySection = ({
   showActivityCounters,
   onShowActivityCounters,
 }: DrawerActivitySectionProps) => {
+  const { t } = useTranslation("admin");
   const activityMetrics = [
     {
       icon: Users,
-      label: "Active participations",
+      label: t("users.drawer.activityMetrics.participations"),
       value: activity?.activeParticipations ?? 0,
     },
     {
       icon: CheckCircle2,
-      label: "Events attended",
+      label: t("users.drawer.activityMetrics.events"),
       value: activity?.eventsAttended ?? 0,
     },
     {
       icon: Trophy,
-      label: "Approved work logs",
+      label: t("users.drawer.activityMetrics.workLogs"),
       value: activity?.approvedTaskWorkLogs ?? 0,
     },
     {
       icon: Award,
-      label: "Badges earned",
+      label: t("users.drawer.activityMetrics.badges"),
       value: activity?.badgesCount ?? 0,
     },
     {
       icon: SlidersHorizontal,
-      label: "Open requests",
+      label: t("users.drawer.activityMetrics.requests"),
       value: activity?.openRequests ?? 0,
     },
   ];
@@ -47,12 +55,14 @@ export const DrawerActivitySection = ({
 
   return (
     <div className={styles.drawerSection}>
-      <div className={styles.drawerSectionTitle}>Activity</div>
+      <div className={styles.drawerSectionTitle}>
+        {t("users.drawer.activity")}
+      </div>
       {activityIsEmpty && !showActivityCounters ? (
         <div className={styles.activityEmptyState}>
-          <span>This user hasn't started volunteering yet</span>
+          <span>{t("users.drawer.activityEmpty")}</span>
           <button type="button" onClick={onShowActivityCounters}>
-            Show all activity counters
+            {t("users.drawer.showActivity")}
           </button>
         </div>
       ) : (

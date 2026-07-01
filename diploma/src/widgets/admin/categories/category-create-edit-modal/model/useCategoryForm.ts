@@ -7,9 +7,10 @@ import { addToast } from "@heroui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { useFormik } from "formik";
+import { useTranslation } from "react-i18next";
 import type { AdminCategoryCardData } from "../../lib/categoryVisuals";
 import {
-  categoryFormSchema,
+  getCategoryFormSchema,
   getInitialCategoryValues,
   type CategoryFormValues,
 } from "../libs/categoryFormSchema";
@@ -25,6 +26,7 @@ export const useCategoryForm = ({
   category,
   onSuccess,
 }: UseCategoryFormParams) => {
+  const { t } = useTranslation("admin");
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: async (values: CategoryFormValues) => {
@@ -41,7 +43,7 @@ export const useCategoryForm = ({
       }
 
       if (!category) {
-        throw new Error("Category is not selected");
+        throw new Error(t("categories.form.notSelected"));
       }
 
       return updateCategory(category.id, payload);
@@ -49,7 +51,10 @@ export const useCategoryForm = ({
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: categoryKeys.all() });
       addToast({
-        title: mode === "create" ? "Category created" : "Category updated",
+        title:
+          mode === "create"
+            ? t("categories.form.created")
+            : t("categories.form.updated"),
         color: "success",
       });
       onSuccess();
@@ -64,7 +69,7 @@ export const useCategoryForm = ({
       description: category?.description ?? "",
       imageUrl: category?.imageUrl ?? "",
     }),
-    validationSchema: categoryFormSchema,
+    validationSchema: getCategoryFormSchema(t),
     enableReinitialize: true,
     onSubmit: (values) => mutation.mutate(values),
   });

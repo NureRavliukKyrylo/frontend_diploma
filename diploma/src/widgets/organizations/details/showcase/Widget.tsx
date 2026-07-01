@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { motion, useReducedMotion } from "framer-motion";
 import type { OrganizationMember } from "@entities/organization";
@@ -25,6 +26,9 @@ export const OrganizationDetailsProjectsWidget = ({
   organizationId,
   members,
 }: OrganizationDetailsProjectsWidgetProps) => {
+  const { t, i18n } = useTranslation("organizations");
+  const intlLocale =
+    i18n.language === "uk" || i18n.language === "ua" ? "uk-UA" : "en-US";
   const prefersReducedMotion = Boolean(useReducedMotion());
   const [carouselOffset, setCarouselOffset] = useState(0);
   const [carouselDirection, setCarouselDirection] = useState<1 | -1>(1);
@@ -43,8 +47,8 @@ export const OrganizationDetailsProjectsWidget = ({
   });
 
   const previewProjects = useMemo(
-    () => buildProjectPreviewCards(projectsResponse?.data ?? []),
-    [projectsResponse?.data],
+    () => buildProjectPreviewCards(projectsResponse?.data ?? [], t),
+    [projectsResponse?.data, t],
   );
   const showCarouselControls = hasProjectCarouselControls(
     previewProjects.length,
@@ -66,8 +70,8 @@ export const OrganizationDetailsProjectsWidget = ({
   );
 
   const taskRows = useMemo(
-    () => buildProjectTaskRows(tasks, members),
-    [members, tasks],
+    () => buildProjectTaskRows(tasks, members, t, intlLocale),
+    [intlLocale, members, t, tasks],
   );
   const showUnifiedEmptyState =
     !isProjectsLoading &&
@@ -105,7 +109,7 @@ export const OrganizationDetailsProjectsWidget = ({
     >
       <motion.div className={styles.sectionTitle} variants={surfaceVariants}>
         <span className={styles.line} />
-        <h2>Projects</h2>
+        <h2>{t("details.showcase.projects")}</h2>
         <span className={styles.line} />
       </motion.div>
 

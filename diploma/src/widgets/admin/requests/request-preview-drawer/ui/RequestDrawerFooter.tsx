@@ -3,6 +3,7 @@ import type { AdminRequestListItem } from "@entities/admin";
 import { isDecidable } from "../../requests-config/libs/requestHelpers";
 import type { DecisionAction } from "../../requests-config/libs/requestTypeConfig";
 import styles from "../../requests-page-styles/AdminRequestsPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface RequestDrawerFooterProps {
   request: AdminRequestListItem;
@@ -15,8 +16,10 @@ export const RequestDrawerFooter = ({
   onDecide,
   isDecisionPending,
 }: RequestDrawerFooterProps) => {
+  const { t } = useTranslation("admin");
   const showDecisionControls = isDecidable(request);
-  const showReportLink = request.typeName === "report" && request.linkedEntityId;
+  const showReportLink =
+    request.typeName === "report" && request.linkedEntityId;
 
   return (
     <div className={styles.requestDrawerFooter}>
@@ -29,7 +32,7 @@ export const RequestDrawerFooter = ({
             onClick={() => onDecide("reject")}
           >
             <X size={17} aria-hidden="true" />
-            Reject
+            {t("requests.actions.reject")}
           </button>
           <button
             type="button"
@@ -39,10 +42,10 @@ export const RequestDrawerFooter = ({
           >
             <Check size={17} aria-hidden="true" />
             {request.typeName === "skillCreation"
-              ? "Approve & create skill"
+              ? t("requests.actions.approveCreateSkill")
               : request.typeName === "categoryCreation"
-                ? "Approve & create category"
-                : "Approve"}
+                ? t("requests.actions.approveCreateCategory")
+                : t("requests.actions.approve")}
           </button>
         </>
       ) : showReportLink ? (
@@ -53,11 +56,11 @@ export const RequestDrawerFooter = ({
           )}`}
         >
           <ExternalLink size={17} aria-hidden="true" />
-          Open moderation case
+          {t("requests.actions.openModeration")}
         </a>
       ) : (
         <div className={styles.drawerFooterBanner}>
-          This request is read-only on this page.
+          {t("requests.actions.readOnly")}
         </div>
       )}
     </div>

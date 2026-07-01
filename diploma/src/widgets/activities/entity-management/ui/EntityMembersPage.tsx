@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { EntityType } from "@shared/config/types";
 import { EntityPageShell } from "./EntityPageShell";
 import { EntityMembersPanel } from "./EntityMembersPanel";
@@ -11,6 +12,9 @@ interface EntityMembersPageProps {
   eyebrow: string;
   title: string;
   subtitle: string;
+  contextLabel?: string;
+  leadingCard?: ReactNode;
+  afterPanel?: ReactNode;
   backLabel: string;
   labels: {
     loading: string;
@@ -37,6 +41,9 @@ export const EntityMembersPage = ({
   eyebrow,
   title,
   subtitle,
+  contextLabel,
+  leadingCard,
+  afterPanel,
   backLabel,
   labels,
   onBack,
@@ -45,6 +52,7 @@ export const EntityMembersPage = ({
     eyebrow={eyebrow}
     title={title}
     subtitle={subtitle}
+    contextLabel={contextLabel}
     backLabel={backLabel}
     onBack={onBack}
   >
@@ -56,7 +64,9 @@ export const EntityMembersPage = ({
         canManage={canManage}
         pageSize={24}
         labels={labels}
+        leadingCard={leadingCard}
       />
     </div>
+    {afterPanel}
   </EntityPageShell>
 );

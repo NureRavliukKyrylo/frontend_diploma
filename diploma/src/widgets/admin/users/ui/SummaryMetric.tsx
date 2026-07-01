@@ -1,5 +1,6 @@
 import { Skeleton } from "@heroui/react";
 import type { AdminUsersStyles } from "../model/types";
+import { useTranslation } from "react-i18next";
 
 interface SummaryMetricProps {
   styles: AdminUsersStyles;
@@ -17,18 +18,24 @@ export const SummaryMetric = ({
   tone,
   isLoading,
   isError,
-}: SummaryMetricProps) => (
-  <div className={`${styles.metricCard} ${styles[`metricCard_${tone}`]}`}>
-    <span className={styles.metricDeco} aria-hidden="true" />
-    <div className={styles.metricBody}>
-      <span className={styles.metricLabel}>{label}</span>
-      {isLoading ? (
-        <Skeleton className={styles.metricValueSkeleton} />
-      ) : isError ? (
-        <span className={styles.metricValueError}>Unavailable</span>
-      ) : (
-        <span className={styles.metricValue}>{value}</span>
-      )}
+}: SummaryMetricProps) => {
+  const { t } = useTranslation("admin");
+
+  return (
+    <div className={`${styles.metricCard} ${styles[`metricCard_${tone}`]}`}>
+      <span className={styles.metricDeco} aria-hidden="true" />
+      <div className={styles.metricBody}>
+        <span className={styles.metricLabel}>{label}</span>
+        {isLoading ? (
+          <Skeleton className={styles.metricValueSkeleton} />
+        ) : isError ? (
+          <span className={styles.metricValueError}>
+            {t("common.unavailable")}
+          </span>
+        ) : (
+          <span className={styles.metricValue}>{value}</span>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};

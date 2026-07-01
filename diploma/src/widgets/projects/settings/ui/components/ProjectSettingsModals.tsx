@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { ConfirmationModal } from "@shared/ui/modals";
 
 interface ProjectSettingsModalsProps {
@@ -34,14 +35,17 @@ export const ProjectSettingsModals = ({
   onArchiveCancel,
   onRecoverConfirm,
   onRecoverCancel,
-}: ProjectSettingsModalsProps) => (
-  <>
+}: ProjectSettingsModalsProps) => {
+  const { t } = useTranslation("project");
+
+  return (
+    <>
     <ConfirmationModal
       isOpen={isSaveModalOpen}
-      title="Save project settings?"
-      text="Your changes will update the public project profile and access rules."
-      confirmText="Save changes"
-      cancelText="Cancel"
+      title={t("settings.modals.saveTitle")}
+      text={t("settings.modals.saveText")}
+      confirmText={t("settings.topBar.save")}
+      cancelText={t("settings.modals.cancel")}
       isLoading={isSavePending}
       onConfirm={onSaveConfirm}
       onCancel={onSaveCancel}
@@ -49,20 +53,20 @@ export const ProjectSettingsModals = ({
 
     <ConfirmationModal
       isOpen={hasPendingPolicyChange}
-      title="Change access policy?"
-      text="This policy change will apply after you save the project settings."
-      confirmText="Apply"
-      cancelText="Cancel"
+      title={t("settings.modals.policyTitle")}
+      text={t("settings.modals.policyText")}
+      confirmText={t("settings.modals.apply")}
+      cancelText={t("settings.modals.cancel")}
       onConfirm={onPolicyConfirm}
       onCancel={onPolicyCancel}
     />
 
     <ConfirmationModal
       isOpen={isArchiveModalOpen}
-      title="Archive this project?"
-      text="The project will be hidden from public listings and can be recovered later."
-      confirmText="Archive"
-      cancelText="Cancel"
+      title={t("settings.modals.archiveTitle")}
+      text={t("settings.modals.archiveText")}
+      confirmText={t("settings.modals.archive")}
+      cancelText={t("settings.modals.cancel")}
       isLoading={isArchivePending}
       onConfirm={onArchiveConfirm}
       onCancel={onArchiveCancel}
@@ -70,13 +74,14 @@ export const ProjectSettingsModals = ({
 
     <ConfirmationModal
       isOpen={isRecoverModalOpen}
-      title="Recover this project?"
-      text="The project will be restored to the project experience."
-      confirmText="Recover"
-      cancelText="Cancel"
+      title={t("settings.modals.recoverTitle")}
+      text={t("settings.modals.recoverText")}
+      confirmText={t("settings.modals.recover")}
+      cancelText={t("settings.modals.cancel")}
       isLoading={isRecoverPending}
       onConfirm={onRecoverConfirm}
       onCancel={onRecoverCancel}
     />
-  </>
-);
+    </>
+  );
+};

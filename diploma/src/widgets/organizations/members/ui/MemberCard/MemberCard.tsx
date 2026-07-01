@@ -10,6 +10,7 @@ import styles from "./MemberCard.module.scss";
 interface MemberCardProps {
   member: OrganizationMemberCardModel;
   roles: OrganizationContextRole[];
+  entityLabel?: string;
   isRoleChangePending?: boolean;
   onChangeRole: (member: OrganizationMemberCardModel, roleId: string) => void;
   onProfileClick: (member: OrganizationMemberCardModel) => void;
@@ -20,6 +21,7 @@ interface MemberCardProps {
 export const MemberCard = ({
   member,
   roles,
+  entityLabel = "organization",
   isRoleChangePending = false,
   onChangeRole,
   onProfileClick,
@@ -47,6 +49,7 @@ export const MemberCard = ({
         roleMenu={roleMenu}
         isRoleChangePending={isRoleChangePending}
         showRoleSection={showRoleSection}
+        entityLabel={entityLabel}
         onProfileClick={onProfileClick}
         onMessageClick={onMessageClick}
         onRemoveClick={onRemoveClick}

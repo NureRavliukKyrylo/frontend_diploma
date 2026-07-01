@@ -4,3 +4,5 @@ export { projectDetailTabLoaderConfig } from "./project-page/main/config/project
 export { JoinedProjectPage } from "./joined-project-page/main/ui/JoinedProjectPage";
 export { JoinedProjectPageSkeleton } from "./joined-project-page/main/ui/JoinedProjectPageSkeleton";
 export { SettingsProjectPage } from "./settings";
+export { ProjectMembersPage } from "./members";
+export { ProjectRolesPage } from "./roles";

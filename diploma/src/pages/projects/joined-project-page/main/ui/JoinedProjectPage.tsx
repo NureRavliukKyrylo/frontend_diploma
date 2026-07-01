@@ -7,6 +7,7 @@ import { useProjectJoinedPage } from "../model/useProjectJoinedPage";
 import { ProgressBar, Toggle } from "@shared/ui";
 import { ParticipationLeaveButton } from "@features/participation";
 import { getJoinedProjectMainTabs } from "../config/joinedProjectMainTabs";
+import { ProjectFab } from "@widgets/projects";
 import { useTranslation } from "react-i18next";
 
 export const JoinedProjectPage = () => {
@@ -62,7 +63,7 @@ export const JoinedProjectPage = () => {
                 >
                   <img
                     src={project?.organization?.logoUrl ?? undefined}
-                    alt="organization-image"
+                    alt={t("project:images.organization")}
                   />
                   <p>{project?.organization?.name}</p>
                 </LinkButtonWrapper>
@@ -163,6 +164,12 @@ export const JoinedProjectPage = () => {
           {forms[tab]}
         </motion.div>
       </AnimatePresence>
+      <ProjectFab
+        projectId={project.id}
+        project={project}
+        activeTab={tab}
+        onTabChange={handleTabChange}
+      />
     </div>
   );
 };

@@ -8,6 +8,7 @@ import {
   contextRolePermissionGroups,
   getPermissionLabel,
 } from "../../../config/rolePresentation";
+import { useTranslation } from "react-i18next";
 
 export type RoleFormMode = "create" | "edit" | "template";
 export interface RoleFormState {
@@ -78,6 +79,7 @@ export const useRoleFormModal = ({
   existingRoles,
   onSubmit,
 }: UseRoleFormModalParams) => {
+  const { t } = useTranslation("roles");
   const [values, setValues] = useState(() => buildInitialState(mode, role));
   const [errors, setErrors] = useState<RoleFormErrors>({});
   const [currentStep, setCurrentStep] = useState(1);
@@ -93,14 +95,14 @@ export const useRoleFormModal = ({
         normalizeRoleName(existingRole.name) === normalizedName,
     );
     return duplicate
-      ? `A role named "${trimmedName}" already exists in this organization, including archived roles.`
+      ? t("form.errors.duplicate", { name: trimmedName })
       : undefined;
   };
   const getNameError = (name: string) => {
     const trimmedName = name.trim();
-    if (!trimmedName) return "Role name is required.";
+    if (!trimmedName) return t("form.errors.required");
     if (trimmedName.length > 200) {
-      return "Role name must be 200 characters or less.";
+      return t("form.errors.tooLong");
     }
     return getDuplicateNameError(trimmedName);
   };
@@ -156,14 +158,14 @@ export const useRoleFormModal = ({
   const permissionGroups = useMemo(
     () =>
       contextRolePermissionGroups.map((group) => ({
-        title: group.title,
+        title: t(group.title),
         permissions: group.permissions.map((code) => ({
           code,
-          label: getPermissionLabel(code),
+          label: getPermissionLabel(code, t),
           checked: values.permissions.includes(code),
         })),
       })),
-    [values.permissions],
+    [values.permissions, t],
   );
   const validateStep = (step: number) => {
     const nextErrors: RoleFormErrors = {};
@@ -172,7 +174,7 @@ export const useRoleFormModal = ({
       if (nameError) nextErrors.name = nameError;
     }
     if ((step === 2 || step === 3) && values.permissions.length === 0) {
-      nextErrors.permissions = "Select at least one permission.";
+      nextErrors.permissions = t("form.errors.permissionRequired");
     }
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
@@ -225,26 +227,26 @@ export const useRoleFormModal = ({
     values,
     errors,
     permissionGroups,
-    selectedCountLabel: `${count} permission${count === 1 ? "" : "s"} selected`,
+    selectedCountLabel: t("form.selected", { count }),
     currentStep,
     stepSubtitle:
       currentStep === 1
-        ? "Step 1 of 3 — name and describe this role."
+        ? t("form.step1")
         : currentStep === 2
-          ? "Step 2 of 3 — choose what this role can do."
-          : "Step 3 of 3 — decide who can assign and approve it.",
+          ? t("form.step2")
+          : t("form.step3"),
     title:
       mode === "edit"
-        ? "Edit role"
+        ? t("form.editTitle")
         : mode === "template"
-          ? "Create from template"
-          : "Create new role",
+          ? t("form.templateTitle")
+          : t("form.createTitle"),
     submitLabel:
       mode === "edit"
-        ? "Save"
+        ? t("form.save")
         : mode === "template"
-          ? "Create from template"
-          : "Create role",
+          ? t("form.createFromTemplate")
+          : t("form.createRole"),
     updateField,
     togglePermission,
     addAssignment,

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import styles from "../GeneralTab.module.scss";
 
 interface CategoryOption {
@@ -17,15 +18,20 @@ export const CategoriesSection = ({
   selectedIds,
   isLoading,
   onCategoryToggle,
-}: CategoriesSectionProps) => (
-  <section className={styles.section}>
-    <h2 className={styles.sectionLabel}>Categories</h2>
+}: CategoriesSectionProps) => {
+  const { t } = useTranslation("project");
+
+  return (
+    <section className={styles.section}>
+    <h2 className={styles.sectionLabel}>{t("settings.general.categories")}</h2>
     <p className={styles.sectionDescription}>
-      Choose the topics that best describe this project.
+      {t("settings.general.categoriesText")}
     </p>
 
     {isLoading ? (
-      <div className={styles.categoryState}>Loading categories...</div>
+      <div className={styles.categoryState}>
+        {t("settings.general.loadingCategories")}
+      </div>
     ) : (
       <div className={styles.categoryGrid}>
         {categories.map((category) => {
@@ -44,5 +50,6 @@ export const CategoriesSection = ({
         })}
       </div>
     )}
-  </section>
-);
+    </section>
+  );
+};

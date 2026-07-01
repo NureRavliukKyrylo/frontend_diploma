@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import { Arrow } from "@shared/assets/icons/actions";
 import { OrganizationDetailsEmptyState } from "../../shared/empty-state/ui/EmptyState";
 import type { ProjectPreviewCardData } from "../lib/helpers";
@@ -29,6 +30,7 @@ export const OrganizationProjectsShowcase = ({
   prefersReducedMotion,
   onShiftCarousel,
 }: OrganizationProjectsShowcaseProps) => {
+  const { t } = useTranslation("organizations");
   if (isLoading) {
     return (
       <motion.div className={styles.previewShowcase} variants={surfaceVariants}>
@@ -59,7 +61,7 @@ export const OrganizationProjectsShowcase = ({
             type="button"
             className={`${styles.carouselArrow} ${styles.leftArrow}`}
             onClick={() => onShiftCarousel(-1)}
-            aria-label="Previous projects"
+            aria-label={t("details.showcase.previousProjects")}
             whileHover={prefersReducedMotion ? undefined : { scale: 1.04, x: -2 }}
             whileTap={prefersReducedMotion ? undefined : { scale: 0.96 }}
           >
@@ -110,7 +112,7 @@ export const OrganizationProjectsShowcase = ({
             type="button"
             className={`${styles.carouselArrow} ${styles.rightArrow}`}
             onClick={() => onShiftCarousel(1)}
-            aria-label="Next projects"
+            aria-label={t("details.showcase.nextProjects")}
             whileHover={prefersReducedMotion ? undefined : { scale: 1.04, x: 2 }}
             whileTap={prefersReducedMotion ? undefined : { scale: 0.96 }}
           >
@@ -124,7 +126,7 @@ export const OrganizationProjectsShowcase = ({
           to="/activities"
           className={styles.seeMoreButton}
         >
-          SEE MORE
+          {t("details.actions.seeMore")}
         </Link>
       </motion.div>
     </motion.div>

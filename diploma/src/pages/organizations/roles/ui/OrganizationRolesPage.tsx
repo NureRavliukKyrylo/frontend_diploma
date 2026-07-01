@@ -5,6 +5,7 @@ import { RolesOverlays } from "./roles-page/RolesOverlays";
 import { RolesTabs } from "./roles-page/RolesTabs";
 import { RolesTopBar } from "./roles-page/RolesTopBar";
 import styles from "./OrganizationRolesPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 const PageState = ({ children }: { children: string }) => (
   <div className={styles.page}>
@@ -13,6 +14,7 @@ const PageState = ({ children }: { children: string }) => (
 );
 
 export const OrganizationRolesPage = () => {
+  const { t } = useTranslation("roles");
   const model = useOrganizationRolesPage();
 
   if (
@@ -20,18 +22,18 @@ export const OrganizationRolesPage = () => {
     model.activeRolesResult.isPending ||
     model.templatesResult.isPending
   ) {
-    return <PageState>Loading roles...</PageState>;
+    return <PageState>{t("page.loading")}</PageState>;
   }
 
   if (model.isOrganizationError || !model.organization) {
-    return <PageState>We couldn't load this organization.</PageState>;
+    return <PageState>{t("page.organizationError")}</PageState>;
   }
 
   if (
     model.activeRolesResult.isError &&
     getRoleErrorStatus(model.activeRolesResult.error) !== 403
   ) {
-    return <PageState>We couldn't load the organization roles.</PageState>;
+    return <PageState>{t("page.rolesError")}</PageState>;
   }
 
   return (

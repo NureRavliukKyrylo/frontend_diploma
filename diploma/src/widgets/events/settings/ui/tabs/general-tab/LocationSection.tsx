@@ -11,6 +11,7 @@ import { MapLocationPicker } from "@features/map";
 import type { Coordinates } from "@shared/config/types";
 import { useAutocompleteSuggestions } from "@shared/libs/map";
 import { BaseModal } from "@shared/ui/modals";
+import { useTranslation } from "react-i18next";
 import sectionStyles from "./GeneralTabShared.module.scss";
 import styles from "./LocationSection.module.scss";
 
@@ -29,6 +30,7 @@ export const LocationSection = ({
   onLocationTextChange,
   onLocationChange,
 }: LocationSectionProps) => {
+  const { t } = useTranslation("event");
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [locationQuery, setLocationQuery] = useState(values.locationLabel);
   const { suggestions, error, reset } =
@@ -52,9 +54,11 @@ export const LocationSection = ({
 
   return (
     <section className={sectionStyles.section}>
-      <h2 className={sectionStyles.sectionLabel}>Location</h2>
+      <h2 className={sectionStyles.sectionLabel}>
+        {t("settings.general.location")}
+      </h2>
       <p className={sectionStyles.sectionDescription}>
-        Move the event marker or choose a more precise public location.
+        {t("settings.general.locationText")}
       </p>
 
       <div
@@ -62,11 +66,13 @@ export const LocationSection = ({
           lockState.scheduleAndLocationLocked ? sectionStyles.disabledBlock : ""
         }`}
       >
-        <span className={sectionStyles.fieldLabel}>Event location</span>
+        <span className={sectionStyles.fieldLabel}>
+          {t("settings.general.eventLocation")}
+        </span>
         <div className={styles.locationSearchWrapper}>
           <input
             value={locationQuery}
-            placeholder="Search city, region, or address"
+            placeholder={t("settings.general.locationPlaceholder")}
             aria-invalid={Boolean(errors.location)}
             disabled={lockState.scheduleAndLocationLocked}
             onChange={handleLocationInputChange}
@@ -74,7 +80,7 @@ export const LocationSection = ({
           <button
             type="button"
             className={styles.mapPickerButton}
-            aria-label="Pick event location on map"
+            aria-label={t("settings.general.locationAria")}
             disabled={lockState.scheduleAndLocationLocked}
             onClick={() => setIsMapOpen(true)}
           >
@@ -125,7 +131,8 @@ export const LocationSection = ({
         isOpen={isMapOpen}
         onClose={() => setIsMapOpen(false)}
         maxWidth="920px"
-        showClosed
+        className={styles.locationMapModalShell}
+        showClosed={false}
         animation="right"
       >
         <div className={styles.locationMapModal}>
@@ -137,7 +144,7 @@ export const LocationSection = ({
             popupContent={
               <p className={styles.mapPopupContent}>
                 <CalendarDays size={16} />
-                Event location
+                {t("settings.general.eventLocation")}
               </p>
             }
           />

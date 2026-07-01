@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { tabs, type SettingsTab } from "../config/settingsTabs";
 import styles from "../SettingsWidget.module.scss";
 
@@ -10,11 +11,14 @@ interface OrganizationTabSwitcherProps {
 export const OrganizationTabSwitcher = ({
   activeTab,
   onChange,
-}: OrganizationTabSwitcherProps) => (
-  <div
+}: OrganizationTabSwitcherProps) => {
+  const { t } = useTranslation("organizations");
+
+  return (
+    <div
     className={styles.tabSwitcher}
     role="tablist"
-    aria-label="Organization settings sections"
+    aria-label={t("settings.topBar.title")}
   >
     {tabs.map((tab) => {
       const isActive = activeTab === tab.value;
@@ -42,9 +46,10 @@ export const OrganizationTabSwitcher = ({
               }}
             />
           ) : null}
-          <span>{tab.label}</span>
+          <span>{t(tab.labelKey)}</span>
         </button>
       );
     })}
-  </div>
-);
+    </div>
+  );
+};

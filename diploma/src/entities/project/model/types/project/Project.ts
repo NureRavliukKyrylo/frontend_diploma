@@ -24,7 +24,7 @@ export interface Project {
   eventsCompleted: number;
   activeTasks?: number;
   activeEvents?: number;
-  organization?: Pick<Organization, "id" | "logoUrl" | "name">;
+  organization?: Pick<Organization, "id" | "logoUrl" | "name" | "ownerId">;
   categories?: Category[];
   categoryIds?: string[];
   location: Coordinates;

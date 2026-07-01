@@ -1,10 +1,14 @@
-export const formatEventDate = (value?: string | null) => {
-  if (!value) return "No date";
+export const formatEventDate = (
+  value: string | null | undefined,
+  locale: string,
+  fallback: string,
+) => {
+  if (!value) return fallback;
 
   const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return "No date";
+  if (Number.isNaN(date.getTime())) return fallback;
 
-  return new Intl.DateTimeFormat("en", {
+  return new Intl.DateTimeFormat(locale, {
     month: "short",
     day: "numeric",
     year: "numeric",

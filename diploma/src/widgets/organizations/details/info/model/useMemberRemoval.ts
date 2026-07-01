@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addToast } from "@heroui/react";
 import {
@@ -15,6 +16,7 @@ interface UseOrganizationDetailsMemberRemovalParams {
 export const useOrganizationDetailsMemberRemoval = ({
   organizationId,
 }: UseOrganizationDetailsMemberRemovalParams) => {
+  const { t } = useTranslation("organizations");
   const queryClient = useQueryClient();
   const [memberToRemove, setMemberToRemove] = useState<DirectoryMemberCard | null>(
     null,
@@ -36,19 +38,22 @@ export const useOrganizationDetailsMemberRemoval = ({
         }),
       ]);
 
-      const removedMemberName = memberToRemove?.name ?? "Team member";
+      const removedMemberName =
+        memberToRemove?.name ?? t("details.labels.teamMember");
       setMemberToRemove(null);
 
       addToast({
-        title: "Member removed",
-        description: `${removedMemberName} has been removed from the organization.`,
+        title: t("details.notifications.memberRemoved"),
+        description: t("details.notifications.memberRemovedText", {
+          name: removedMemberName,
+        }),
         color: "success",
       });
     },
     onError: (error: unknown) => {
       addToast({
-        title: "Removal failed",
-        description: getErrorMessage(error),
+        title: t("details.notifications.removalFailed"),
+        description: getErrorMessage(error, t),
         color: "danger",
       });
     },
@@ -74,7 +79,7 @@ export const useOrganizationDetailsMemberRemoval = ({
     isMemberRemovalModalOpen: Boolean(memberToRemove),
     isMemberRemovalPending: memberRemovalMutation.isPending,
     memberRemovalErrorMessage: memberRemovalMutation.error
-      ? getErrorMessage(memberRemovalMutation.error)
+      ? getErrorMessage(memberRemovalMutation.error, t)
       : null,
     requestMemberRemoval: openMemberRemoval,
     closeMemberRemoval,

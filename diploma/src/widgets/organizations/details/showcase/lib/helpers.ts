@@ -1,3 +1,4 @@
+import type { TFunction } from "i18next";
 import type { AvatarItem } from "@shared/config/types";
 import type { OrganizationMember } from "@entities/organization";
 import type { Project } from "@entities/project";
@@ -31,31 +32,43 @@ const clampPercent = (value?: number | null) => {
   return Math.min(100, Math.max(0, Math.round(value)));
 };
 
-const formatLongDate = (value?: string | null) => {
-  if (!value) return "No due date";
+const formatLongDate = (
+  value: string | null | undefined,
+  t: TFunction,
+  locale: string,
+) => {
+  if (!value) return t("details.showcase.noDueDate");
 
   const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return "No due date";
+  if (Number.isNaN(date.getTime())) return t("details.showcase.noDueDate");
 
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString(locale, {
     month: "long",
     day: "numeric",
     year: "numeric",
   });
 };
 
-const buildTaskContextDescription = (task: OrganizationTaskRecord) => {
+const buildTaskContextDescription = (
+  task: OrganizationTaskRecord,
+  t: TFunction,
+) => {
   if (!task.linkedEntityTitle) {
-    return "Linked to the current organization workspace.";
+    return t("details.showcase.linkedWorkspace");
   }
 
-  const prefix = task.linkedEntityType === "event" ? "Event" : "Project";
-  return `${prefix}: ${task.linkedEntityTitle}`;
+  return t(
+    task.linkedEntityType === "event"
+      ? "details.showcase.eventContext"
+      : "details.showcase.projectContext",
+    { title: task.linkedEntityTitle },
+  );
 };
 
 const resolveTaskAssignees = (
   task: OrganizationTaskRecord,
   members: OrganizationMember[],
+  t: TFunction,
 ): AvatarItem[] => {
   if (!task.assignedToUserId) {
     return [];
@@ -66,7 +79,7 @@ const resolveTaskAssignees = (
   );
 
   if (!assignedMember) {
-    return [{ name: "Assigned" }];
+    return [{ name: t("details.showcase.assigned") }];
   }
 
   return [
@@ -76,7 +89,7 @@ const resolveTaskAssignees = (
         [assignedMember.firstName, assignedMember.lastName]
           .filter(Boolean)
           .join(" ")
-          .trim() || "Assigned member",
+          .trim() || t("details.showcase.assignedMember"),
     },
   ];
 };
@@ -86,6 +99,7 @@ export const hasProjectCarouselControls = (projectsCount: number) =>
 
 export const buildProjectPreviewCards = (
   projects: Project[],
+  t: TFunction,
 ): ProjectPreviewCardData[] =>
   projects.map((project) => {
     const progressPercent = clampPercent(project.progress?.percent);
@@ -95,10 +109,10 @@ export const buildProjectPreviewCards = (
       id: project.id,
       title: project.title,
       description:
-        project.description?.trim() || "Project details will appear here soon.",
+        project.description?.trim() || t("details.showcase.projectFallback"),
       progressPercent,
       progressLabel: `${progressPercent}%`,
-      tasksLabel: `${tasksTotal} task${tasksTotal === 1 ? "" : "s"}`,
+      tasksLabel: t("details.showcase.taskCount", { count: tasksTotal }),
     };
   });
 
@@ -118,6 +132,8 @@ export const getVisibleProjects = (
 export const buildProjectTaskRows = (
   tasks: OrganizationTaskRecord[],
   members: OrganizationMember[],
+  t: TFunction,
+  locale: string,
 ): ProjectTaskRowData[] =>
   [...tasks]
     .sort((left, right) => {
@@ -134,8 +150,8 @@ export const buildProjectTaskRows = (
     .map((task) => ({
       id: task.id,
       task: task.title,
-      description: buildTaskContextDescription(task),
-      assignees: resolveTaskAssignees(task, members),
-      dueDate: formatLongDate(task.dueAt),
+      description: buildTaskContextDescription(task, t),
+      assignees: resolveTaskAssignees(task, members, t),
+      dueDate: formatLongDate(task.dueAt, t, locale),
       status: task.status,
     }));

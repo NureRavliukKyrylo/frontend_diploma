@@ -1,0 +1,29 @@
+.page {
+  width: 70%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f4f4f4;
+  padding: 8px 0 32px;
+  color: #1a1a1a;
+  font-family: "Exo 2", sans-serif;
+}
+
+@media (max-width: 1280px) {
+  .page {
+    width: 78%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .page {
+    width: 88%;
+  }
+}
+
+@media (max-width: 720px) {
+  .page {
+    width: 94%;
+    padding-bottom: 24px;
+  }
+}

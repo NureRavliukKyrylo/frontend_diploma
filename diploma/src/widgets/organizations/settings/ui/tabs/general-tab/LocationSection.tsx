@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import type { ChangeEvent } from "react";
 import { Map } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import type { OrganizationSettingsValues } from "@features/organization/settings-form";
 import styles from "../GeneralTab.module.scss";
 
@@ -28,26 +29,31 @@ export const LocationSection = ({
   onLocationInputChange,
   onLocationSuggestionSelect,
   onMapOpen,
-}: LocationSectionProps) => (
-  <section className={styles.section}>
-    <h2 className={styles.sectionLabel}>Location</h2>
+}: LocationSectionProps) => {
+  const { t } = useTranslation("organizations");
+
+  return (
+    <section className={styles.section}>
+    <h2 className={styles.sectionLabel}>{t("settings.general.location")}</h2>
     <p className={styles.sectionDescription}>
-      Set your organization's primary city or region.
+      {t("settings.general.locationText")}
     </p>
 
     <div className={styles.locationField}>
-      <span className={styles.fieldLabel}>City / Region</span>
+      <span className={styles.fieldLabel}>
+        {t("settings.general.cityRegion")}
+      </span>
       <div className={styles.locationSearchWrapper}>
         <input
           value={values.locationLabel}
-          placeholder="Start typing a city or region..."
+          placeholder={t("settings.general.locationPlaceholder")}
           onChange={onLocationInputChange}
         />
         <button
           type="button"
           className={styles.mapPickerButton}
           onClick={onMapOpen}
-          aria-label="Pick organization location on map"
+          aria-label={t("settings.general.mapAria")}
         >
           <Map size={22} strokeWidth={2.2} />
         </button>
@@ -78,5 +84,6 @@ export const LocationSection = ({
         </AnimatePresence>
       </div>
     </div>
-  </section>
-);
+    </section>
+  );
+};

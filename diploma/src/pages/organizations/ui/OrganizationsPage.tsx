@@ -18,6 +18,7 @@ import {
   OrganizationsHeroWidget,
 } from "@widgets/organizations";
 import styles from "./OrganizationsPage.module.scss";
+import { useTranslation } from "react-i18next";
 
 const OWNED_ORGANIZATIONS_FETCH_LIMIT = 200;
 const FAB_FOOTER_GAP = 24;
@@ -32,6 +33,7 @@ const getOrganizationId = (organization: Organization): string =>
   organization.organizationId ?? organization.id;
 
 export const OrganizationsPage = () => {
+  const { t } = useTranslation("organizations");
   const queryClient = useQueryClient();
   const navigate = useNavigate({ from: "/organizations/my/" });
   const search = useSearch({ from: "/_masterLayout/organizations/my/" });
@@ -62,11 +64,10 @@ export const OrganizationsPage = () => {
 
   const serverOwnedOrganizations = useMemo(
     () =>
-      (ownedOrganizationsResponse?.data ?? []).filter(
-        (organization) =>
-          Boolean(
-            currentUserId && organization.ownerId?.trim() === currentUserId,
-          ),
+      (ownedOrganizationsResponse?.data ?? []).filter((organization) =>
+        Boolean(
+          currentUserId && organization.ownerId?.trim() === currentUserId,
+        ),
       ),
     [currentUserId, ownedOrganizationsResponse?.data],
   );
@@ -81,13 +82,12 @@ export const OrganizationsPage = () => {
           queryKey: [...organizationKeys.all(), "details"],
         })
         .map(([, organization]) => organization)
-        .filter(
-          (organization): organization is Organization =>
-            Boolean(
-              organization &&
-                currentUserId &&
-                organization.ownerId?.trim() === currentUserId,
-            ),
+        .filter((organization): organization is Organization =>
+          Boolean(
+            organization &&
+            currentUserId &&
+            organization.ownerId?.trim() === currentUserId,
+          ),
         ),
     [currentUserId, queryClient],
   );
@@ -211,7 +211,8 @@ export const OrganizationsPage = () => {
   const totalFilteredCount = filteredOrganizations.length;
   const totalPages =
     totalFilteredCount > 0 ? Math.ceil(totalFilteredCount / pageSize) : 0;
-  const currentPage = totalPages > 0 ? Math.min(currentSearchPage, totalPages) : 1;
+  const currentPage =
+    totalPages > 0 ? Math.min(currentSearchPage, totalPages) : 1;
 
   const organizations = useMemo(() => {
     const startIndex = (currentPage - 1) * pageSize;
@@ -248,7 +249,9 @@ export const OrganizationsPage = () => {
     };
 
     measureFabLift();
-    window.addEventListener("scroll", scheduleFabLiftMeasure, { passive: true });
+    window.addEventListener("scroll", scheduleFabLiftMeasure, {
+      passive: true,
+    });
     window.addEventListener("resize", scheduleFabLiftMeasure);
 
     return () => {
@@ -289,7 +292,7 @@ export const OrganizationsPage = () => {
       <LinkButtonWrapper
         to="/organizations/create"
         className={styles.fab}
-        aria-label="Create organization"
+        aria-label={t("page.create")}
         style={fabStyle}
       >
         <IconPlus size="1em" stroke={2.4} />

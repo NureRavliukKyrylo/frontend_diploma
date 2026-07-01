@@ -10,6 +10,7 @@ import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { HeaderAccountDropdown } from "./HeaderAccountDropdown";
 import styles from "./HeaderAccountMenu.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface HeaderAccountMenuProps {
   responsive?: boolean;
@@ -18,6 +19,7 @@ interface HeaderAccountMenuProps {
 export const HeaderAccountMenu = ({
   responsive = false,
 }: HeaderAccountMenuProps) => {
+  const { t } = useTranslation("common");
   const { isAuthenticated } = useUserStore();
   const navigate = useNavigate();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -29,7 +31,9 @@ export const HeaderAccountMenu = ({
     setIsLogoutModalOpen(false);
   }, false);
   const fullName =
-    getFullName(user?.firstName, user?.lastName) || user?.email || "Profile";
+    getFullName(user?.firstName, user?.lastName) ||
+    user?.email ||
+    t("header.profile");
   const avatarSrc = user?.profile?.avatarUrl;
 
   useEffect(() => {
@@ -60,13 +64,13 @@ export const HeaderAccountMenu = ({
           responsive ? styles.responsiveRoot : styles.root,
           !responsive && styles.tooltip,
         )}
-        data-tooltip={!responsive ? "Profile" : undefined}
+        data-tooltip={!responsive ? t("header.profile") : undefined}
         data-menu-open={isOpen ? "true" : undefined}
       >
         <button
           type="button"
           className={responsive ? styles.responsiveTrigger : styles.trigger}
-          aria-label="Profile"
+          aria-label={t("header.profile")}
           aria-haspopup="menu"
           aria-expanded={isOpen}
           onClick={() => isAuthenticated && setIsOpen((current) => !current)}
@@ -83,7 +87,7 @@ export const HeaderAccountMenu = ({
           responsive={responsive}
           avatarSrc={avatarSrc}
           fullName={fullName}
-          email={user?.email ?? "Loading..."}
+          email={user?.email ?? t("header.loading")}
           availableMinutes={user?.profile?.timeBank.availableMinutes}
           isLogoutLoading={isLoading}
           onProfileClick={() => {
@@ -99,10 +103,10 @@ export const HeaderAccountMenu = ({
       </div>
       <ConfirmationModal
         isOpen={isLogoutModalOpen}
-        title="Are you sure you want to logout?"
-        text="You will be able to sign in again whenever you need."
-        confirmText="Logout"
-        cancelText="Cancel"
+        title={t("header.logoutTitle")}
+        text={t("header.logoutText")}
+        confirmText={t("header.logout")}
+        cancelText={t("actions.cancel")}
         onConfirm={() => handleLogout()}
         onCancel={() => setIsLogoutModalOpen(false)}
         isLoading={isLoading}

@@ -1,14 +1,14 @@
 import type { DurationFilter, SortValue } from "../model/types";
 
 export const durationOptions: { value: DurationFilter; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "permanent", label: "Permanent" },
-  { value: "soon", label: "Expiring soon (<=7d)" },
-  { value: "long", label: "Long-term (>7d)" },
+  { value: "all", label: "admin:bans.filters.all" },
+  { value: "permanent", label: "admin:bans.filters.permanent" },
+  { value: "soon", label: "admin:bans.filters.soon" },
+  { value: "long", label: "admin:bans.filters.long" },
 ];
 
 export const sortOptions: { value: SortValue; label: string }[] = [
-  { value: "newest", label: "Newest first" },
-  { value: "oldest", label: "Oldest first" },
-  { value: "expires", label: "Expiring soonest" },
+  { value: "newest", label: "admin:bans.filters.newest" },
+  { value: "oldest", label: "admin:bans.filters.oldest" },
+  { value: "expires", label: "admin:bans.filters.expiring" },
 ];

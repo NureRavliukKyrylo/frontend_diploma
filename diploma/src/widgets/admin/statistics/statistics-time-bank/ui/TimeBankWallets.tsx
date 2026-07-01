@@ -6,31 +6,39 @@ import {
 } from "@entities/admin";
 import styles from "../../statistics-page-styles/AdminStatisticsPage.module.scss";
 import { WalletAvatar } from "./WalletAvatar";
+import { useTranslation } from "react-i18next";
 
 interface TimeBankWalletsProps {
   users: AdminTimeBankTopUser[];
 }
 
 export const TimeBankWallets = ({ users }: TimeBankWalletsProps) => {
+  const { t } = useTranslation("admin");
   const [showAll, setShowAll] = useState(false);
   const visibleUsers = showAll ? users : users.slice(0, 4);
 
   return (
     <div className={styles.walletsCard}>
       <div className={styles.categoryTableHeader}>
-        <strong className={styles.categoryTableTitle}>Top wallets by balance</strong>
+        <strong className={styles.categoryTableTitle}>
+          {t("statistics.timeBank.topWallets")}
+        </strong>
         {users.length > 4 && (
           <button
             type="button"
             className={styles.showWalletsButton}
             onClick={() => setShowAll((prev) => !prev)}
           >
-            {showAll ? "Show less" : `Show all ${users.length}`}
+            {showAll
+              ? t("statistics.timeBank.showLess")
+              : t("statistics.timeBank.showAll", { count: users.length })}
           </button>
         )}
       </div>
       {users.length === 0 ? (
-        <div className={styles.cardState}>No wallet balances found.</div>
+        <div className={styles.cardState}>
+          {t("statistics.timeBank.emptyWallets")}
+        </div>
       ) : (
         <div className={styles.walletGrid}>
           {visibleUsers.map((user) => (
@@ -47,7 +55,11 @@ export const TimeBankWallets = ({ users }: TimeBankWalletsProps) => {
             >
               <WalletAvatar user={user} />
               <span>
-                <strong>{user.displayName || user.email || "Unknown user"}</strong>
+                <strong>
+                  {user.displayName ||
+                    user.email ||
+                    t("statistics.timeBank.unknownUser")}
+                </strong>
                 <em>{user.email || user.userId}</em>
               </span>
               <b>{formatAdminHoursFromMinutes(user.balanceMinutes)}</b>

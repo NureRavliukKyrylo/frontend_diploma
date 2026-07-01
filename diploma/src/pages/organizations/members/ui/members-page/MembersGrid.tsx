@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { EmptyState } from "@shared/ui";
 import { InviteVolunteerCard, MemberCard } from "@widgets/organizations/members";
 import type { OrganizationMembersPageModel } from "../../model/types";
@@ -10,14 +11,16 @@ interface MembersGridProps {
 }
 
 export const MembersGrid = ({ model, hasSearch }: MembersGridProps) => {
+  const { t } = useTranslation("common");
+  const entity = t(`member.entities.${model.entityLabel}`);
   const emptyCopy = hasSearch
     ? {
-        title: "No members found",
-        subtitle: "Try a different name or clear your search to see all members.",
+        title: t("memberList.noMembersFound"),
+        subtitle: t("memberList.noMembersFoundHint"),
       }
     : {
-        title: "No members yet",
-        subtitle: "Invite volunteers to join this organization to see them here.",
+        title: t("memberList.noMembers"),
+        subtitle: t("memberList.noMembersHint", { entity }),
       };
   const shouldRenderGrid = model.filteredMembers.length > 0 || !hasSearch;
 
@@ -37,6 +40,7 @@ export const MembersGrid = ({ model, hasSearch }: MembersGridProps) => {
           <MemberCard
             member={member}
             roles={model.roles}
+            entityLabel={model.entityLabel}
             isRoleChangePending={
               model.activeRoleChangeParticipationId === member.participationId
             }
@@ -58,7 +62,10 @@ export const MembersGrid = ({ model, hasSearch }: MembersGridProps) => {
           ease: "easeOut",
         }}
       >
-        <InviteVolunteerCard onBrowse={model.handleBrowseVolunteers} />
+        <InviteVolunteerCard
+          entityLabel={model.entityLabel}
+          onBrowse={model.handleBrowseVolunteers}
+        />
       </motion.div>
     </div>
   );

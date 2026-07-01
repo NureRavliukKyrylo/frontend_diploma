@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { addToast } from "@heroui/react";
 import { useNavigate, useParams, useRouter } from "@tanstack/react-router";
 import { profileSearchDefaults } from "@entities/user";
@@ -13,6 +14,7 @@ const matchesSearch = (value: string, search: string) =>
   value.toLowerCase().includes(search.trim().toLowerCase());
 
 export const useOrganizationMembersPage = () => {
+  const { t } = useTranslation("organizations");
   const { id: organizationId } = useParams({
     from: "/_masterLayout/organizations/$id/members/",
   });
@@ -78,22 +80,23 @@ export const useOrganizationMembersPage = () => {
       void navigate({ to: "/profile", search: profileSearchDefaults.profile });
       return;
     }
-    addToast({
-      title: "Profile route unavailable",
-      description: "This frontend does not have a member profile route yet.",
-      color: "warning",
+
+    void navigate({
+      to: "/users/$userId",
+      params: { userId: member.userId },
+      search: { organizationId },
     });
   };
   const handleMessageClick = () =>
     addToast({
-      title: "Chat route unavailable",
-      description: "This frontend does not have a chat route yet.",
+      title: t("members.messageUnavailable"),
+      description: t("members.messageUnavailable"),
       color: "warning",
     });
   const handleBrowseVolunteers = () => {
     void navigate({
-      to: "/volunteers" as never,
-      search: { inviteToOrg: organizationId } as never,
+      to: "/organizations/$id/recommendations",
+      params: { id: organizationId },
     });
   };
   const handleBack = () => {
@@ -112,6 +115,7 @@ export const useOrganizationMembersPage = () => {
   return {
     ...data,
     ...mutations,
+    entityLabel: t("members.entityLabel"),
     activeTab,
     setActiveTab,
     activeRequestTab,

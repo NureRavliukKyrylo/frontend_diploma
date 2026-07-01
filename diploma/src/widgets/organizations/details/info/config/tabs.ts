@@ -8,9 +8,9 @@ export type OrganizationDetailsTab =
   | "feedback";
 
 export const organizationDetailsTabs: TabOption<OrganizationDetailsTab>[] = [
-  { label: "OVERVIEW", value: "overview" },
-  { label: "PROJECTS", value: "projects" },
-  { label: "EVENTS", value: "events" },
-  { label: "TASKS", value: "tasks" },
-  { label: "FEEDBACK", value: "feedback" },
+  { label: "details.tabs.overview", value: "overview" },
+  { label: "details.tabs.projects", value: "projects" },
+  { label: "details.tabs.events", value: "events" },
+  { label: "details.tabs.tasks", value: "tasks" },
+  { label: "details.tabs.feedback", value: "feedback" },
 ];

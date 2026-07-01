@@ -31,14 +31,23 @@ export const getLanguageDisplay = (language: HeaderLanguage) =>
 export const isHeaderLinkActive = (pathname: string, href: string) =>
   pathname === href || pathname.startsWith(`${href}/`);
 
-export const formatTimeBankMinutes = (minutes?: number | null) => {
+export const formatTimeBankMinutes = (
+  minutes: number | null | undefined,
+  t: TFunction,
+) => {
   const safeMinutes = Number.isFinite(minutes) ? Math.max(0, minutes ?? 0) : 0;
   const hours = Math.floor(safeMinutes / 60);
   const remainingMinutes = safeMinutes % 60;
 
   if (hours > 0 && remainingMinutes > 0) {
-    return `${hours}h ${remainingMinutes}m`;
+    return `${t("common:time.compactHours", { count: hours })} ${t(
+      "common:time.compactMinutes",
+      { count: remainingMinutes },
+    )}`;
   }
 
-  return hours > 0 ? `${hours}h` : `${remainingMinutes}m`;
+  return hours > 0
+    ? t("common:time.compactHours", { count: hours })
+    : t("common:time.compactMinutes", { count: remainingMinutes });
 };
+import type { TFunction } from "i18next";

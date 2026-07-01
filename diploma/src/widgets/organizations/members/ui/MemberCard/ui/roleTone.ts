@@ -8,12 +8,16 @@ export interface RoleTone {
   dotColor: string;
 }
 
-export const getRoleTone = (roleName: string, isOwner: boolean): RoleTone => {
+export const getRoleTone = (
+  roleName: string,
+  isOwner: boolean,
+  ownerLabel: string,
+): RoleTone => {
   if (isOwner) {
     return {
       className: styles.roleOwner,
       icon: Crown,
-      label: "Owner",
+      label: ownerLabel,
       dotColor: "#8b0000",
     };
   }

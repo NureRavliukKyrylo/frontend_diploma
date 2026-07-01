@@ -10,6 +10,8 @@ import styles from "./Panel.module.scss";
 interface OrganizationDetailsInfoPanelProps {
   level: number;
   levelCurrent: number;
+  levelMax: number;
+  levelProgressPercent: number;
   levelNext: number;
   rating: number;
   votes: number;
@@ -29,6 +31,8 @@ interface OrganizationDetailsInfoPanelProps {
 export const OrganizationDetailsInfoPanel = ({
   level,
   levelCurrent,
+  levelMax,
+  levelProgressPercent,
   levelNext,
   rating,
   votes,
@@ -52,6 +56,8 @@ export const OrganizationDetailsInfoPanel = ({
       <LevelSummary
         level={level}
         levelCurrent={levelCurrent}
+        levelMax={levelMax}
+        levelProgressPercent={levelProgressPercent}
         levelNext={levelNext}
         rating={rating}
         votes={votes}

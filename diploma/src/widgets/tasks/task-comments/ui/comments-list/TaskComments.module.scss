@@ -96,6 +96,42 @@
   }
 }
 
+.replySection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.replyButton {
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  color: #840000;
+  cursor: pointer;
+  font-family: "Exo 2", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 0 0 2px;
+  transition:
+    color 0.15s ease,
+    opacity 0.15s ease;
+
+  &:hover {
+    color: #1a1a1a;
+  }
+
+  &:focus-visible {
+    border-radius: 3px;
+    outline: 2px solid rgba(132, 0, 0, 0.3);
+    outline-offset: 3px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 13px;
+  }
+}
+
 .emptyState {
   display: flex;
   flex-direction: column;

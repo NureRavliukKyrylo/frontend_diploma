@@ -3,8 +3,12 @@ import { useEffect, useState } from "react";
 
 export const useAdminUsersDrawerState = () => {
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
-  const [roleModalUser, setRoleModalUser] = useState<AdminUserListItem | null>(null);
-  const [messageUser, setMessageUser] = useState<AdminUserListItem | null>(null);
+  const [roleModalUser, setRoleModalUser] = useState<AdminUserListItem | null>(
+    null,
+  );
+  const [messageUser, setMessageUser] = useState<AdminUserListItem | null>(
+    null,
+  );
   const [copiedUserId, setCopiedUserId] = useState<string | null>(null);
   const [lifetimeExpanded, setLifetimeExpanded] = useState(false);
   const [showActivityCounters, setShowActivityCounters] = useState(false);

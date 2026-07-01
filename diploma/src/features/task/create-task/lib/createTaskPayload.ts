@@ -1,5 +1,6 @@
 import type { CreateTaskPayload } from "../api/createTaskApi";
 import type { CreateTaskFormState } from "../model/createTaskFormTypes";
+import type { TFunction } from "i18next";
 
 const toIsoDateTime = (value: string) => new Date(value).toISOString();
 
@@ -8,9 +9,10 @@ export const buildCreateTaskPayload = (
   projectId: string | undefined,
   eventId: string | undefined,
   values: CreateTaskFormState,
+  t: TFunction,
 ): CreateTaskPayload => {
   if (!values.startAt || !values.endAt) {
-    throw new Error("Task dates are required.");
+    throw new Error(t("task:create.datesRequired"));
   }
 
   return {

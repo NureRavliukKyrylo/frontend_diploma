@@ -1,0 +1,83 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.search {
+  min-width: 240px;
+  flex: 1;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.filterChip {
+  min-height: 42px;
+  border: 1px solid #ebebeb;
+  border-radius: 999px;
+  background: #ffffff;
+  padding: 0 18px;
+  color: #777777;
+  font-family: "Exo 2", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  transition:
+    color 0.16s ease,
+    background 0.16s ease,
+    transform 0.16s ease;
+
+  &:hover {
+    color: #1a1a1a;
+    transform: translateY(-1px);
+  }
+}
+
+.filterChipActive {
+  border-color: #1a1a1a;
+  background: #1a1a1a;
+  color: #ffffff;
+
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.sort {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 920px) {
+  .toolbar {
+    flex-wrap: wrap;
+  }
+
+  .search {
+    flex-basis: 100%;
+  }
+
+  .sort {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .filters {
+    width: 100%;
+  }
+
+  .filterChip {
+    flex: 1;
+    padding-inline: 12px;
+  }
+
+  .sort {
+    margin-left: 0;
+  }
+}

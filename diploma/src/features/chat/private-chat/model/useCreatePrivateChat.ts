@@ -14,7 +14,7 @@ export const useCreatePrivateChat = () => {
     onSuccess: ({ id }) => {
       router.navigate({
         to: "/chat",
-        params: { id },
+        search: { chatId: id },
       });
     },
     onError: (error: unknown) => {

@@ -18,7 +18,7 @@
   border: none;
   border-radius: 50%;
   background: #ececec;
-  color: #888;
+  color: #888888;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,7 +30,7 @@
 
   &:hover {
     background: #d8d8d8;
-    color: #555;
+    color: #555555;
     transform: translateX(-1px);
   }
 }
@@ -40,11 +40,10 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  font-family: "Exo 2", sans-serif;
   font-size: 18px;
 }
 
-.crumbOrg {
+.crumbContext {
   max-width: min(380px, 34vw);
   overflow: hidden;
   color: #cccccc;
@@ -59,9 +58,27 @@
 }
 
 .crumbTitle {
+  overflow: hidden;
   color: #1a1a1a;
   font-weight: 900;
+  text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.contextBadge {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(132, 0, 0, 0.14);
+  border-radius: 999px;
+  background: rgba(132, 0, 0, 0.07);
+  color: #840000;
+  padding: 7px 12px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 @media (max-width: 720px) {
@@ -79,8 +96,12 @@
     font-size: 16px;
   }
 
-  .crumbOrg,
+  .crumbContext,
   .crumbSep {
     display: none;
+  }
+
+  .contextBadge {
+    padding-inline: 10px;
   }
 }

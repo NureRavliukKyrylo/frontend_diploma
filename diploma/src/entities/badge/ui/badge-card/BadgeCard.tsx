@@ -1,11 +1,20 @@
 import { motion } from "framer-motion";
-import { TierColors, type Badge } from "../../model";
+import { TierColors } from "../../model";
+import type { Tier } from "../../model/types/tier/TierList";
 import styles from "./BadgeCard.module.scss";
 import { LockedIcon } from "@shared/assets/icons/info";
 import { useTranslation } from "react-i18next";
 
+export interface BadgeCardModel {
+  id: string;
+  title: string;
+  iconUrl: string;
+  rank: { name: Tier };
+  isUnlocked: boolean;
+}
+
 export interface BadgeCardProps {
-  badge: Badge;
+  badge: BadgeCardModel;
   classImgName?: string;
   onClick?: () => void;
 }

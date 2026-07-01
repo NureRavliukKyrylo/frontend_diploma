@@ -1,6 +1,7 @@
 import { Skeleton } from "@heroui/react";
 import type { AdminBansStyles, BanDisplay } from "../../model/types";
 import { BanCard } from "../../ui/BanCard";
+import { useTranslation } from "react-i18next";
 
 interface BansGridProps {
   styles: AdminBansStyles;
@@ -20,43 +21,47 @@ export const BansGrid = ({
   canLoadMore,
   onLoadMore,
   onRevoke,
-}: BansGridProps) => (
-  <>
-    {isLoading ? (
-      <div className={styles.bansGrid}>
-        {Array.from({ length: 8 }).map((_, index) => (
-          <Skeleton key={index} className={styles.banCardSkeleton} />
-        ))}
-      </div>
-    ) : isError ? (
-      <div className={styles.stateCard}>
-        <strong>Bans unavailable</strong>
-        <span>The active bans endpoint could not be loaded.</span>
-      </div>
-    ) : bans.length === 0 ? (
-      <div className={styles.stateCard}>
-        <strong>No active bans found</strong>
-        <span>Try another search term or duration filter.</span>
-      </div>
-    ) : (
-      <div className={styles.bansGrid}>
-        {bans.map((item) => (
-          <BanCard
-            key={item.ban.id}
-            styles={styles}
-            item={item}
-            onRevoke={onRevoke}
-          />
-        ))}
-      </div>
-    )}
+}: BansGridProps) => {
+  const { t } = useTranslation("admin");
 
-    {canLoadMore && (
-      <div className={styles.loadMoreRow}>
-        <button type="button" onClick={onLoadMore}>
-          Load more
-        </button>
-      </div>
-    )}
-  </>
-);
+  return (
+    <>
+      {isLoading ? (
+        <div className={styles.bansGrid}>
+          {Array.from({ length: 8 }).map((_, index) => (
+            <Skeleton key={index} className={styles.banCardSkeleton} />
+          ))}
+        </div>
+      ) : isError ? (
+        <div className={styles.stateCard}>
+          <strong>{t("bans.states.errorTitle")}</strong>
+          <span>{t("bans.states.errorText")}</span>
+        </div>
+      ) : bans.length === 0 ? (
+        <div className={styles.stateCard}>
+          <strong>{t("bans.states.emptyTitle")}</strong>
+          <span>{t("bans.states.emptyText")}</span>
+        </div>
+      ) : (
+        <div className={styles.bansGrid}>
+          {bans.map((item) => (
+            <BanCard
+              key={item.ban.id}
+              styles={styles}
+              item={item}
+              onRevoke={onRevoke}
+            />
+          ))}
+        </div>
+      )}
+
+      {canLoadMore && (
+        <div className={styles.loadMoreRow}>
+          <button type="button" onClick={onLoadMore}>
+            {t("bans.states.loadMore")}
+          </button>
+        </div>
+      )}
+    </>
+  );
+};

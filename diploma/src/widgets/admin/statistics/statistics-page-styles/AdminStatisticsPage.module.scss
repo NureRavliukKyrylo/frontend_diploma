@@ -914,31 +914,6 @@
   font-weight: 900;
 }
 
-.securityNote {
-  margin-top: 18px;
-  border-radius: 22px 14px 22px 14px;
-  background: #fff3da;
-  color: #854f0b;
-  display: flex;
-  gap: 12px;
-  padding: 16px 18px;
-
-  strong {
-    flex-shrink: 0;
-    color: #854f0b;
-    font-size: 13px;
-    font-weight: 900;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  span {
-    font-size: 13px;
-    font-weight: 700;
-    line-height: 1.5;
-  }
-}
-
 .categoryTableSkeleton {
   height: 260px;
 }

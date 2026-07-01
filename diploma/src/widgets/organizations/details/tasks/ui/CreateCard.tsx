@@ -1,5 +1,6 @@
 import AddRounded from "@mui/icons-material/AddRounded";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import styles from "./CreateCard.module.scss";
 
 interface CreateCardProps {
@@ -7,6 +8,7 @@ interface CreateCardProps {
 }
 
 export const CreateCard = ({ organizationName }: CreateCardProps) => {
+  const { t } = useTranslation("organizations");
   return (
     <motion.article
       className={styles.taskCreateRow}
@@ -21,7 +23,7 @@ export const CreateCard = ({ organizationName }: CreateCardProps) => {
       <div className={styles.taskContent}>
         <div className={styles.taskHeader}>
           <div className={styles.taskIntro}>
-            <h3>Create task</h3>
+            <h3>{t("details.tasks.create")}</h3>
           </div>
 
           <span className={styles.taskCreateIcon} aria-hidden="true">
@@ -30,8 +32,7 @@ export const CreateCard = ({ organizationName }: CreateCardProps) => {
         </div>
 
         <p className={styles.taskDescription}>
-          Add a new task for {organizationName} and place it beside the current
-          organization workload.
+          {t("details.tasks.createText", { name: organizationName })}
         </p>
       </div>
     </motion.article>

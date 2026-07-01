@@ -35,7 +35,7 @@ export const OrganizationDetailsEventsPanel = ({
   organization,
 }: OrganizationDetailsEventsPanelProps) => {
   const navigate = useNavigate();
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["common", "organizations"]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const sortingEventItems = useMemo(() => getSortingEventItems(t), [t]);
   const [search, setSearch] = useState<EventSearchParams>({
@@ -91,8 +91,8 @@ export const OrganizationDetailsEventsPanel = ({
           >
             {eventsResponse?.data?.length === 0 ? (
               <div className={styles.emptyState}>
-                <h2>No events found</h2>
-                <p>Try adjusting your filters or search query</p>
+                <h2>{t("organizations:details.panels.noEvents")}</h2>
+                <p>{t("organizations:details.panels.adjustFilters")}</p>
               </div>
             ) : (
               <Suspense

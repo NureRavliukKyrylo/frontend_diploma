@@ -26,12 +26,26 @@ export const RequestRow = ({ styles, item, t }: RequestRowProps) => {
       </span>
       <span className={styles.requestBody}>
         <strong>{item.title || enumToLabel(item.type)}</strong>
-        <small>{enumToLabel(item.type || "Request")}</small>
+        <small>
+          {t(`admin:requests.types.${item.type}`, {
+            defaultValue: item.type
+              ? enumToLabel(item.type)
+              : t("admin:users.drawer.request"),
+          })}
+        </small>
       </span>
-      <span className={`${styles.requestStatus} ${styles[`requestStatus_${tone}`]}`}>
-        {enumToLabel(item.status || "New")}
+      <span
+        className={`${styles.requestStatus} ${styles[`requestStatus_${tone}`]}`}
+      >
+        {t(`admin:requests.statuses.${item.status}`, {
+          defaultValue: item.status
+            ? enumToLabel(item.status)
+            : t("admin:users.drawer.new"),
+        })}
       </span>
-      <span className={styles.requestTime}>{formatTimeAgo(item.createdAt, t)}</span>
+      <span className={styles.requestTime}>
+        {formatTimeAgo(item.createdAt, t)}
+      </span>
     </Link>
   );
 };

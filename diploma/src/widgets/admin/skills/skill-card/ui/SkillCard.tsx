@@ -3,6 +3,7 @@ import type { KeyboardEvent } from "react";
 import { getSkillInitials, getSkillTone } from "../../lib/skillVisuals";
 import { SkillCardMenu } from "./SkillCardMenu";
 import styles from "./SkillCard.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface SkillCardProps {
   skill: SkillListItemDto;
@@ -19,9 +20,11 @@ export const SkillCard = ({
   onChangeIcon,
   onDelete,
 }: SkillCardProps) => {
+  const { t } = useTranslation("admin");
   const tone = getSkillTone(skill);
   const visibleCategories = skill.categories.slice(0, 2);
-  const remainingCategories = skill.categories.length - visibleCategories.length;
+  const remainingCategories =
+    skill.categories.length - visibleCategories.length;
 
   const openFromKeyboard = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === "Enter" || event.key === " ") {
@@ -87,15 +90,21 @@ export const SkillCard = ({
             )}
           </>
         ) : (
-          <span className={`${styles.categoryPill} ${styles.categoryPillMuted}`}>
-            No categories
+          <span
+            className={`${styles.categoryPill} ${styles.categoryPillMuted}`}
+          >
+            {t("skills.noCategories")}
           </span>
         )}
       </div>
 
       <div className={styles.cardFooter}>
-        <span>{skill.description ? "Description ready" : "No description"}</span>
-        <span className={styles.viewLink}>View details</span>
+        <span>
+          {skill.description
+            ? t("skills.descriptionReady")
+            : t("skills.noDescription")}
+        </span>
+        <span className={styles.viewLink}>{t("skills.viewDetails")}</span>
       </div>
     </article>
   );
