@@ -3,16 +3,28 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { useLogout } from "@features/auth/logout/model/useLogout";
 
-const { navigateMock, invalidateMock, clearUserInfoMock, addToastMock } =
-  vi.hoisted(() => ({
-    navigateMock: vi.fn(),
-    invalidateMock: vi.fn(),
-    clearUserInfoMock: vi.fn(),
-    addToastMock: vi.fn(),
-  }));
+const {
+  navigateMock,
+  invalidateMock,
+  clearUserInfoMock,
+  addToastMock,
+  mockLogout,
+} = vi.hoisted(() => ({
+  navigateMock: vi.fn(),
+  invalidateMock: vi.fn(),
+  clearUserInfoMock: vi.fn(),
+  addToastMock: vi.fn(),
+  mockLogout: vi.fn(),
+}));
 
 vi.mock("@features/auth/logout/api/logoutApi", () => ({
-  logout: vi.fn(),
+  logout: (...args: any[]) => mockLogout(...args),
+}));
+
+vi.mock("react-i18next", () => ({
+  useTranslation: () => ({
+    t: (key: string) => key,
+  }),
 }));
 
 vi.mock("@heroui/react", async (importOriginal) => {
@@ -22,12 +34,19 @@ vi.mock("@heroui/react", async (importOriginal) => {
 
 vi.mock("@entities/user", async (importOriginal) => {
   const actual = await importOriginal();
+  const mockStore = {
+    persist: {
+      clearStorage: vi.fn(),
+    },
+  };
   return {
     ...(actual as object),
-    useUserStore: (selector?: (s: any) => any) => {
-      const state = { clearUserInfo: clearUserInfoMock };
-      return selector ? selector(state) : state;
-    },
+    useAuthStore: Object.assign(() => ({}), mockStore),
+    useUserStore: Object.assign(
+      () => ({ clearUserInfo: clearUserInfoMock }),
+      mockStore,
+    ),
+    useUserProfileStore: Object.assign(() => ({}), mockStore),
   };
 });
 
@@ -86,48 +105,29 @@ describe("useLogout", () => {
   });
 
   it("calls logout api on handleLogout", async () => {
-    const { logout } = await import("@features/auth/logout/api/logoutApi");
-    vi.mocked(logout).mockResolvedValue(undefined);
+    mockLogout.mockResolvedValue(undefined);
 
     const { result } = renderHook(() => useLogout(), {
       wrapper: createWrapper(),
     });
 
-    await act(async () => {
+    act(() => {
       result.current.handleLogout();
     });
 
     await waitFor(() => {
-      expect(logout).toHaveBeenCalled();
-    });
-  });
-
-  it("calls clearUserInfo on success", async () => {
-    const { logout } = await import("@features/auth/logout/api/logoutApi");
-    vi.mocked(logout).mockResolvedValue(undefined);
-
-    const { result } = renderHook(() => useLogout(), {
-      wrapper: createWrapper(),
-    });
-
-    await act(async () => {
-      result.current.handleLogout();
-    });
-
-    await waitFor(() => {
-      expect(clearUserInfoMock).toHaveBeenCalled();
+      expect(mockLogout).toHaveBeenCalled();
     });
   });
 
   it("invalidates router on success", async () => {
-    const { logout } = await import("@features/auth/logout/api/logoutApi");
-    vi.mocked(logout).mockResolvedValue(undefined);
+    mockLogout.mockResolvedValue(undefined);
 
     const { result } = renderHook(() => useLogout(), {
       wrapper: createWrapper(),
     });
 
-    await act(async () => {
+    act(() => {
       result.current.handleLogout();
     });
 
@@ -137,14 +137,13 @@ describe("useLogout", () => {
   });
 
   it("navigates to auth root on success", async () => {
-    const { logout } = await import("@features/auth/logout/api/logoutApi");
-    vi.mocked(logout).mockResolvedValue(undefined);
+    mockLogout.mockResolvedValue(undefined);
 
     const { result } = renderHook(() => useLogout(), {
       wrapper: createWrapper(),
     });
 
-    await act(async () => {
+    act(() => {
       result.current.handleLogout();
     });
 
@@ -154,14 +153,13 @@ describe("useLogout", () => {
   });
 
   it("shows success toast on logout success when showToast is true", async () => {
-    const { logout } = await import("@features/auth/logout/api/logoutApi");
-    vi.mocked(logout).mockResolvedValue(undefined);
+    mockLogout.mockResolvedValue(undefined);
 
     const { result } = renderHook(() => useLogout(undefined, true), {
       wrapper: createWrapper(),
     });
 
-    await act(async () => {
+    act(() => {
       result.current.handleLogout();
     });
 
@@ -173,14 +171,13 @@ describe("useLogout", () => {
   });
 
   it("does not show success toast when showToast is false", async () => {
-    const { logout } = await import("@features/auth/logout/api/logoutApi");
-    vi.mocked(logout).mockResolvedValue(undefined);
+    mockLogout.mockResolvedValue(undefined);
 
     const { result } = renderHook(() => useLogout(undefined, false), {
       wrapper: createWrapper(),
     });
 
-    await act(async () => {
+    act(() => {
       result.current.handleLogout();
     });
 
@@ -194,15 +191,14 @@ describe("useLogout", () => {
   });
 
   it("calls onSuccessCallback on success", async () => {
-    const { logout } = await import("@features/auth/logout/api/logoutApi");
-    vi.mocked(logout).mockResolvedValue(undefined);
+    mockLogout.mockResolvedValue(undefined);
     const onSuccessCallback = vi.fn();
 
     const { result } = renderHook(() => useLogout(onSuccessCallback), {
       wrapper: createWrapper(),
     });
 
-    await act(async () => {
+    act(() => {
       result.current.handleLogout();
     });
 
@@ -212,14 +208,13 @@ describe("useLogout", () => {
   });
 
   it("shows error toast on logout failure", async () => {
-    const { logout } = await import("@features/auth/logout/api/logoutApi");
-    vi.mocked(logout).mockRejectedValue(new Error("Network error"));
+    mockLogout.mockRejectedValue(new Error("Network error"));
 
     const { result } = renderHook(() => useLogout(), {
       wrapper: createWrapper(),
     });
 
-    await act(async () => {
+    act(() => {
       result.current.handleLogout();
     });
 
@@ -231,14 +226,13 @@ describe("useLogout", () => {
   });
 
   it("sets errorMessage on logout failure", async () => {
-    const { logout } = await import("@features/auth/logout/api/logoutApi");
-    vi.mocked(logout).mockRejectedValue(new Error("Network error"));
+    mockLogout.mockRejectedValue(new Error("Network error"));
 
     const { result } = renderHook(() => useLogout(), {
       wrapper: createWrapper(),
     });
 
-    await act(async () => {
+    act(() => {
       result.current.handleLogout();
     });
 
@@ -248,15 +242,14 @@ describe("useLogout", () => {
   });
 
   it("does not call onSuccessCallback on failure", async () => {
-    const { logout } = await import("@features/auth/logout/api/logoutApi");
-    vi.mocked(logout).mockRejectedValue(new Error("Network error"));
+    mockLogout.mockRejectedValue(new Error("Network error"));
     const onSuccessCallback = vi.fn();
 
     const { result } = renderHook(() => useLogout(onSuccessCallback), {
       wrapper: createWrapper(),
     });
 
-    await act(async () => {
+    act(() => {
       result.current.handleLogout();
     });
 

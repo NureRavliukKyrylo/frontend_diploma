@@ -27,12 +27,27 @@ export const useMessagesVirtualizer = ({
   const virtualizer = useVirtualizer({
     count: messages.length,
     getScrollElement: () => messagesWrapperRef.current,
-    estimateSize: () => 90,
+    estimateSize: () => 95,
     getItemKey: (index) => messages[index]!.id,
     anchorTo: "end",
     overscan: 6,
     gap: 12,
   });
+  console.log(targetMessageId);
+  useEffect(() => {
+    const targetIndex = targetMessageId
+      ? (messages.findIndex((m) => m.id === targetMessageId) ?? -1)
+      : -1;
+
+    if (targetIndex !== -1) {
+      virtualizer.scrollToIndex(targetIndex, { align: "start" });
+      useChatScrollStore
+        .getState()
+        .consumeTargetMessage(chatId, targetMessageId!);
+    } else {
+      virtualizer.scrollToEnd();
+    }
+  }, [chatId, virtualizer]);
 
   const prevLengthRef = useRef(messages.length);
   const pendingScrollChatId = useChatScrollStore((s) => s.pendingScrollChatId);
@@ -134,21 +149,6 @@ export const useMessagesVirtualizer = ({
     el.addEventListener("scroll", check, { passive: true });
     return () => el.removeEventListener("scroll", check);
   }, [chatId, virtualItems.length]);
-
-  useEffect(() => {
-    const targetIndex = targetMessageId
-      ? (messages.findIndex((m) => m.id === targetMessageId) ?? -1)
-      : -1;
-
-    if (targetIndex !== -1) {
-      virtualizer.scrollToIndex(targetIndex, { align: "start" });
-      useChatScrollStore
-        .getState()
-        .consumeTargetMessage(chatId, targetMessageId!);
-    } else {
-      virtualizer.scrollToEnd();
-    }
-  }, [chatId, virtualizer]);
 
   useEffect(() => {
     if (!targetMessageId) return;

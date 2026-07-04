@@ -42,7 +42,6 @@ const createWrapper = () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
   });
-  // Надійне відстеження через прототип QueryClient
   vi.spyOn(QueryClient.prototype, "invalidateQueries").mockImplementation(
     invalidateMock,
   );

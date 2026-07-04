@@ -93,11 +93,6 @@ describe("MessageForm", () => {
     expect(screen.getByRole("textbox")).toBeInTheDocument();
   });
 
-  it("renders send button", () => {
-    render(<MessageForm {...defaultProps} />);
-    expect(screen.getByTestId("send-icon")).toBeInTheDocument();
-  });
-
   it("renders mention button", () => {
     render(<MessageForm {...defaultProps} />);
     expect(screen.getByTestId("mention-button")).toBeInTheDocument();

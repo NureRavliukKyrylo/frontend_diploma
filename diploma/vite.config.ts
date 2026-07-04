@@ -25,6 +25,7 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     setupFiles: ["./tests/setup.ts"],
+    reporters: ["html"],
     css: {
       modules: {
         classNameStrategy: "non-scoped",

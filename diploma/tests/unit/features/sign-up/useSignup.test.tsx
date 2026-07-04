@@ -10,7 +10,10 @@ const {
   setFirstNameMock,
   setLastNameMock,
   setEmailMock,
+  setIsAuthenticatedMock,
+  setRoleMock,
   addToastMock,
+  mockRegister,
 } = vi.hoisted(() => ({
   navigateMock: vi.fn(),
   clearSignupFormMock: vi.fn(),
@@ -18,11 +21,14 @@ const {
   setFirstNameMock: vi.fn(),
   setLastNameMock: vi.fn(),
   setEmailMock: vi.fn(),
+  setIsAuthenticatedMock: vi.fn(),
+  setRoleMock: vi.fn(),
   addToastMock: vi.fn(),
+  mockRegister: vi.fn(),
 }));
 
 vi.mock("@features/auth/signup-form/api/signUpApi", () => ({
-  register: vi.fn(),
+  register: (...args: any[]) => mockRegister(...args),
 }));
 
 vi.mock("react-i18next", () => ({
@@ -54,6 +60,8 @@ vi.mock("@entities/user", async (importOriginal) => {
       const state = {
         signUpEmail: "john@example.com",
         signUpPassword: "Password1@",
+        signUpFirstName: "John",
+        signUpLastName: "Doe",
         signFirstName: "John",
         signLastName: "Doe",
         agreement: true,
@@ -72,6 +80,8 @@ vi.mock("@entities/user", async (importOriginal) => {
         setFirstName: setFirstNameMock,
         setLastName: setLastNameMock,
         setEmail: setEmailMock,
+        setIsAuthenticated: setIsAuthenticatedMock,
+        setRole: setRoleMock,
       };
       return selector ? selector(state) : state;
     },
@@ -107,6 +117,7 @@ const createWrapper = () => {
 describe("useRegistration", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    vi.resetModules();
   });
 
   it("initializes formik with values from auth store", () => {
@@ -247,9 +258,7 @@ describe("useRegistration", () => {
   });
 
   it("calls register mutation on valid submit", async () => {
-    const { register } =
-      await import("@features/auth/signup-form/api/signUpApi");
-    vi.mocked(register).mockResolvedValue({ userId: "user-1" });
+    mockRegister.mockResolvedValue({ userId: "user-1", role: "user" });
 
     const { result } = renderHook(() => useRegistration(), {
       wrapper: createWrapper(),
@@ -260,7 +269,7 @@ describe("useRegistration", () => {
     });
 
     await waitFor(() => {
-      expect(register).toHaveBeenCalledWith({
+      expect(mockRegister).toHaveBeenCalledWith({
         email: "john@example.com",
         firstName: "John",
         lastName: "Doe",
@@ -270,9 +279,7 @@ describe("useRegistration", () => {
   });
 
   it("calls setEmail on valid submit", async () => {
-    const { register } =
-      await import("@features/auth/signup-form/api/signUpApi");
-    vi.mocked(register).mockResolvedValue({ userId: "user-1" });
+    mockRegister.mockResolvedValue({ userId: "user-1", role: "user" });
 
     const { result } = renderHook(() => useRegistration(), {
       wrapper: createWrapper(),
@@ -288,9 +295,7 @@ describe("useRegistration", () => {
   });
 
   it("calls setFirstName and setLastName on valid submit", async () => {
-    const { register } =
-      await import("@features/auth/signup-form/api/signUpApi");
-    vi.mocked(register).mockResolvedValue({ userId: "user-1" });
+    mockRegister.mockResolvedValue({ userId: "user-1", role: "user" });
 
     const { result } = renderHook(() => useRegistration(), {
       wrapper: createWrapper(),
@@ -307,9 +312,7 @@ describe("useRegistration", () => {
   });
 
   it("navigates to email verification on success", async () => {
-    const { register } =
-      await import("@features/auth/signup-form/api/signUpApi");
-    vi.mocked(register).mockResolvedValue({ userId: "user-1" });
+    mockRegister.mockResolvedValue({ userId: "user-1", role: "user" });
 
     const { result } = renderHook(() => useRegistration(), {
       wrapper: createWrapper(),
@@ -325,9 +328,7 @@ describe("useRegistration", () => {
   });
 
   it("clears signup form on success", async () => {
-    const { register } =
-      await import("@features/auth/signup-form/api/signUpApi");
-    vi.mocked(register).mockResolvedValue({ userId: "user-1" });
+    mockRegister.mockResolvedValue({ userId: "user-1", role: "user" });
 
     const { result } = renderHook(() => useRegistration(), {
       wrapper: createWrapper(),
@@ -343,9 +344,7 @@ describe("useRegistration", () => {
   });
 
   it("shows success toast on register success", async () => {
-    const { register } =
-      await import("@features/auth/signup-form/api/signUpApi");
-    vi.mocked(register).mockResolvedValue({ userId: "user-1" });
+    mockRegister.mockResolvedValue({ userId: "user-1", role: "user" });
 
     const { result } = renderHook(() => useRegistration(), {
       wrapper: createWrapper(),
@@ -363,9 +362,7 @@ describe("useRegistration", () => {
   });
 
   it("shows error toast on register failure", async () => {
-    const { register } =
-      await import("@features/auth/signup-form/api/signUpApi");
-    vi.mocked(register).mockRejectedValue(new Error("Email already exists"));
+    mockRegister.mockRejectedValue(new Error("Email already exists"));
 
     const { result } = renderHook(() => useRegistration(), {
       wrapper: createWrapper(),
@@ -383,9 +380,7 @@ describe("useRegistration", () => {
   });
 
   it("sets errorMessage on register failure", async () => {
-    const { register } =
-      await import("@features/auth/signup-form/api/signUpApi");
-    vi.mocked(register).mockRejectedValue(new Error("Email already exists"));
+    mockRegister.mockRejectedValue(new Error("Email already exists"));
 
     const { result } = renderHook(() => useRegistration(), {
       wrapper: createWrapper(),

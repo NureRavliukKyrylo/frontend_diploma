@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Load &amp; Stress testing">
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
-        <intProp name="ThreadGroup.num_threads">500</intProp>
-        <intProp name="ThreadGroup.ramp_time">5</intProp>
+        <intProp name="ThreadGroup.num_threads">1000</intProp>
+        <intProp name="ThreadGroup.ramp_time">40</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
-          <stringProp name="LoopController.loops">320</stringProp>
+          <intProp name="LoopController.loops">-1</intProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
@@ -90,7 +90,7 @@
           <stringProp name="variableNames">name,name_uk,description,description_uk,imageUrl</stringProp>
         </CSVDataSet>
         <hashTree/>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Moderation">
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Moderation" enabled="true">
           <stringProp name="delimiter">,</stringProp>
           <stringProp name="fileEncoding">UTF-8</stringProp>
           <stringProp name="filename">C:\Users\kyryl\OneDrive\Pulpit\moderation.csv</stringProp>
@@ -108,6 +108,10 @@
               <stringProp name="Header.name">Content-Type</stringProp>
               <stringProp name="Header.value"> application/json</stringProp>
             </elementProp>
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Authorization</stringProp>
+              <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+            </elementProp>
           </collectionProp>
         </HeaderManager>
         <hashTree/>
@@ -117,12 +121,12 @@
           <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
         </CookieManager>
         <hashTree/>
-        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Once Only Controller"/>
+        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Once Only Controller" enabled="true"/>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Login">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Login" enabled="true">
             <stringProp name="HTTPSampler.domain">localhost</stringProp>
-            <stringProp name="HTTPSampler.port">7111</stringProp>
-            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.port">5085</stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
             <stringProp name="HTTPSampler.path">/api/Auth/login</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
             <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -142,78 +146,146 @@
               </collectionProp>
             </elementProp>
           </HTTPSamplerProxy>
+          <hashTree>
+            <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+              <stringProp name="RegexExtractor.useHeaders">true</stringProp>
+              <stringProp name="RegexExtractor.refname">access_token</stringProp>
+              <stringProp name="RegexExtractor.regex">Authorization: Bearer (.+?)[\r\n]</stringProp>
+              <stringProp name="RegexExtractor.template">$1$</stringProp>
+              <stringProp name="RegexExtractor.default"></stringProp>
+              <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
+              <stringProp name="RegexExtractor.match_number"></stringProp>
+            </RegexExtractor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Chats connection"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Negotiate" enabled="true">
+            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+            <stringProp name="HTTPSampler.port">5085</stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.path">/hubs/chats/negotiate</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">connectionId</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">connectionId</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+          </hashTree>
+          <JMeter.plugins.functional.samplers.websocket.WebSocketSampler guiclass="JMeter.plugins.functional.samplers.websocket.WebSocketSamplerGui" testclass="JMeter.plugins.functional.samplers.websocket.WebSocketSampler" testname="WebSocket Chats" enabled="true">
+            <stringProp name="serverAddress">localhost</stringProp>
+            <stringProp name="serverPort">5085</stringProp>
+            <stringProp name="implementation">RFC6455 (v13)</stringProp>
+            <stringProp name="protocol">ws</stringProp>
+            <stringProp name="contextPath">/hubs/chats</stringProp>
+            <stringProp name="contentEncoding">UTF-8</stringProp>
+            <stringProp name="requestPayload"></stringProp>
+            <stringProp name="connectionTimeout">2000</stringProp>
+            <stringProp name="responseTimeout">2000</stringProp>
+            <boolProp name="ignoreSslErrors">true</boolProp>
+            <boolProp name="streamingConnection">true</boolProp>
+            <stringProp name="connectionId"></stringProp>
+            <stringProp name="responsePattern"></stringProp>
+            <stringProp name="closeConncectionPattern"></stringProp>
+            <stringProp name="proxyAddress"></stringProp>
+            <stringProp name="proxyPassword"></stringProp>
+            <stringProp name="proxyPort"></stringProp>
+            <stringProp name="proxyUsername"></stringProp>
+            <stringProp name="messageBacklog">3</stringProp>
+            <elementProp name="queryStringParameters" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="access_token" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                  <stringProp name="Argument.value">${access_token}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">access_token</stringProp>
+                </elementProp>
+                <elementProp name="id" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${connectionId}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">id</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+          </JMeter.plugins.functional.samplers.websocket.WebSocketSampler>
           <hashTree/>
         </hashTree>
-        <JMeter.plugins.functional.samplers.websocket.WebSocketSampler guiclass="JMeter.plugins.functional.samplers.websocket.WebSocketSamplerGui" testclass="JMeter.plugins.functional.samplers.websocket.WebSocketSampler" testname="WebSocket Chats">
-          <stringProp name="serverAddress">localhost</stringProp>
-          <stringProp name="serverPort">7111</stringProp>
-          <stringProp name="implementation">RFC6455 (v13)</stringProp>
-          <stringProp name="protocol">ws</stringProp>
-          <stringProp name="contextPath">/hubs/chats</stringProp>
-          <stringProp name="contentEncoding">UTF-8</stringProp>
-          <stringProp name="requestPayload"></stringProp>
-          <stringProp name="connectionTimeout">5000</stringProp>
-          <stringProp name="responseTimeout">20000</stringProp>
-          <boolProp name="ignoreSslErrors">true</boolProp>
-          <boolProp name="streamingConnection">true</boolProp>
-          <stringProp name="connectionId"></stringProp>
-          <stringProp name="responsePattern"></stringProp>
-          <stringProp name="closeConncectionPattern"></stringProp>
-          <stringProp name="proxyAddress"></stringProp>
-          <stringProp name="proxyPassword"></stringProp>
-          <stringProp name="proxyPort"></stringProp>
-          <stringProp name="proxyUsername"></stringProp>
-          <stringProp name="messageBacklog">3</stringProp>
-          <elementProp name="queryStringParameters" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-        </JMeter.plugins.functional.samplers.websocket.WebSocketSampler>
-        <hashTree/>
-        <JMeter.plugins.functional.samplers.websocket.WebSocketSampler guiclass="JMeter.plugins.functional.samplers.websocket.WebSocketSamplerGui" testclass="JMeter.plugins.functional.samplers.websocket.WebSocketSampler" testname="WebSocket Notifications">
-          <stringProp name="serverAddress">localhost</stringProp>
-          <stringProp name="serverPort">7111</stringProp>
-          <stringProp name="implementation">RFC6455 (v13)</stringProp>
-          <stringProp name="protocol">ws</stringProp>
-          <stringProp name="contextPath">/hubs/notifications</stringProp>
-          <stringProp name="contentEncoding">UTF-8</stringProp>
-          <stringProp name="requestPayload"></stringProp>
-          <stringProp name="connectionTimeout">5000</stringProp>
-          <stringProp name="responseTimeout">20000</stringProp>
-          <boolProp name="ignoreSslErrors">true</boolProp>
-          <boolProp name="streamingConnection">true</boolProp>
-          <stringProp name="connectionId"></stringProp>
-          <stringProp name="responsePattern"></stringProp>
-          <stringProp name="closeConncectionPattern"></stringProp>
-          <stringProp name="proxyAddress"></stringProp>
-          <stringProp name="proxyPassword"></stringProp>
-          <stringProp name="proxyPort"></stringProp>
-          <stringProp name="proxyUsername"></stringProp>
-          <stringProp name="messageBacklog">3</stringProp>
-          <elementProp name="queryStringParameters" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-        </JMeter.plugins.functional.samplers.websocket.WebSocketSampler>
-        <hashTree/>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="false">
-          <boolProp name="displayJMeterProperties">false</boolProp>
-          <boolProp name="displayJMeterVariables">true</boolProp>
-          <boolProp name="displaySystemProperties">false</boolProp>
-        </DebugSampler>
-        <hashTree/>
-        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Admin(requests)">
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Notifications connection" enabled="true"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Negotiate" enabled="true">
+            <stringProp name="HTTPSampler.domain">localhost</stringProp>
+            <stringProp name="HTTPSampler.port">5085</stringProp>
+            <stringProp name="HTTPSampler.protocol">http</stringProp>
+            <stringProp name="HTTPSampler.path">/hubs/notifications/negotiate</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">connectionId</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">connectionId</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+          </hashTree>
+          <JMeter.plugins.functional.samplers.websocket.WebSocketSampler guiclass="JMeter.plugins.functional.samplers.websocket.WebSocketSamplerGui" testclass="JMeter.plugins.functional.samplers.websocket.WebSocketSampler" testname="WebSocket Notifications" enabled="true">
+            <stringProp name="serverAddress">localhost</stringProp>
+            <stringProp name="serverPort">5085</stringProp>
+            <stringProp name="implementation">RFC6455 (v13)</stringProp>
+            <stringProp name="protocol">ws</stringProp>
+            <stringProp name="contextPath">/hubs/notifications</stringProp>
+            <stringProp name="contentEncoding">UTF-8</stringProp>
+            <stringProp name="requestPayload"></stringProp>
+            <stringProp name="connectionTimeout">2000</stringProp>
+            <stringProp name="responseTimeout">2000</stringProp>
+            <boolProp name="ignoreSslErrors">true</boolProp>
+            <boolProp name="streamingConnection">true</boolProp>
+            <stringProp name="connectionId"></stringProp>
+            <stringProp name="responsePattern"></stringProp>
+            <stringProp name="closeConncectionPattern"></stringProp>
+            <stringProp name="proxyAddress"></stringProp>
+            <stringProp name="proxyPassword"></stringProp>
+            <stringProp name="proxyPort"></stringProp>
+            <stringProp name="proxyUsername"></stringProp>
+            <stringProp name="messageBacklog">3</stringProp>
+            <elementProp name="queryStringParameters" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+          </JMeter.plugins.functional.samplers.websocket.WebSocketSampler>
+          <hashTree/>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Admin(requests)" enabled="true">
           <stringProp name="IfController.condition">${__javaScript(&quot;${role}&quot; == &quot;Admin&quot;)}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
         <hashTree>
-          <RandomOrderController guiclass="RandomOrderControllerGui" testclass="RandomOrderController" testname="Random Order Controller"/>
+          <RandomOrderController guiclass="RandomOrderControllerGui" testclass="RandomOrderController" testname="Random Order Controller" enabled="true"/>
           <hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Users"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Users" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Bans" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/admin/bans</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -226,8 +298,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Users" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/admin/users</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -240,8 +312,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SendMessage" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/admin/communication/users/send</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -265,12 +337,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="TimeBank"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="TimeBank" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Overview" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/admin/time-bank/overview</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -283,8 +355,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Statistics" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Events/list</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -296,12 +368,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Statistics"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Statistics" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Statistics" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/admin/statistics/platform</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -313,12 +385,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Categories"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Categories" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Categories" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Categories/list</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -331,8 +403,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Categories(Post)" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Categories/create</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -364,20 +436,20 @@
             </hashTree>
           </hashTree>
         </hashTree>
-        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Volunteer(requests)">
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Volunteer(requests)" enabled="true">
           <stringProp name="IfController.condition">${__javaScript(&quot;${role}&quot; == &quot;Volunteer&quot;)}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
         <hashTree>
-          <RandomOrderController guiclass="RandomOrderControllerGui" testclass="RandomOrderController" testname="Random Order Controller"/>
+          <RandomOrderController guiclass="RandomOrderControllerGui" testclass="RandomOrderController" testname="Random Order Controller" enabled="true"/>
           <hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Events"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Events" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Events" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Events/list</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -390,8 +462,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Events(Params)" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Events/list</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -425,12 +497,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Projects"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Projects" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Projects" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Projects/list</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -443,8 +515,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Projects(Params)" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Projects/list</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -478,12 +550,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Tasks"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Tasks" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Tasks" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Tasks/list</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -495,12 +567,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Calendar"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Calendar" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="CalendarActivities" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/users/me/calendar/activities</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -513,8 +585,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AvailabilitySlots" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/users/me/availability-slots</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -527,8 +599,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="AvailabilitySlots(POST)" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/users/me/availability-slots</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -554,12 +626,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Organizations"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Organizations" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="OrganizationID" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Organization/${organization_id}</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -572,8 +644,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="OrganizationJoinedID" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Organization/joined/${organization_id}</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -585,12 +657,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Activities"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Activities" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ActivityID" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/${type}s/joined/${id}</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -603,8 +675,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="JoinedActivityID" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/${type}s/${id}</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -617,8 +689,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="JoinParticipation" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Participation/join</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -640,8 +712,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="LeaveParticipation" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Participation/join</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -663,12 +735,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Offers"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Offers" enabled="true"/>
             <hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Offers">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Offers" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">api/time-bank/offers</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -679,10 +751,10 @@
                 </elementProp>
               </HTTPSamplerProxy>
               <hashTree/>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="OfferID">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="OfferID" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/time-bank/offers/${offer_id}</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -693,10 +765,10 @@
                 </elementProp>
               </HTTPSamplerProxy>
               <hashTree/>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Offers(Post)">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Offers(Post)" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">api/time-bank/offers</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -730,10 +802,10 @@
                 </elementProp>
               </HTTPSamplerProxy>
               <hashTree/>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="MyOffers">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="MyOffers" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/time-bank/my/offers</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -744,10 +816,10 @@
                 </elementProp>
               </HTTPSamplerProxy>
               <hashTree/>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Booking">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Booking" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/time-bank/offers/${offer_id}/bookings</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -767,12 +839,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Profile"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Profile" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Profile" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/User/get</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -785,8 +857,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Profile(Put)" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/User/get</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -821,12 +893,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Feedbacks"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Feedbacks" enabled="true"/>
             <hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Feedbacks">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Feedbacks" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Feedback/create</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -849,12 +921,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Chat"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Chat" enabled="true"/>
             <hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Chats">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Chats" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">api/Chats/list</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -865,10 +937,10 @@
                 </elementProp>
               </HTTPSamplerProxy>
               <hashTree/>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ChatMessages">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ChatMessages" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">api/Chats/6a267804e611d60f73e39a5a/messages</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -879,10 +951,10 @@
                 </elementProp>
               </HTTPSamplerProxy>
               <hashTree/>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SendMessage">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="SendMessage" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Chats/6a267804e611d60f73e39a5a/messages</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -901,17 +973,17 @@
                 </elementProp>
               </HTTPSamplerProxy>
               <hashTree>
-                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor">
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
                   <stringProp name="JSONPostProcessor.referenceNames">message_id</stringProp>
                   <stringProp name="JSONPostProcessor.jsonPathExprs">$.data[0].id</stringProp>
                   <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
                 </JSONPostProcessor>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ReadMessage">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ReadMessage" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Chats/6a267804e611d60f73e39a5a/read-up-to/${message_id}</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -925,22 +997,22 @@
             </hashTree>
           </hashTree>
         </hashTree>
-        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Organizer(requests)">
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Organizer(requests)" enabled="true">
           <stringProp name="IfController.condition">${__javaScript(&quot;${role}&quot; == &quot;Organizer&quot;)}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
         <hashTree>
-          <RandomController guiclass="RandomControlGui" testclass="RandomController" testname="Random Controller">
+          <RandomController guiclass="RandomControlGui" testclass="RandomController" testname="Random Controller" enabled="true">
             <intProp name="InterleaveControl.style">1</intProp>
           </RandomController>
           <hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Organizations"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Organizations" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="OrganizationID" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Organization/${organization_id}</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -953,8 +1025,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="OrganizationsMy" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Organization/my</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -967,8 +1039,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Organizations(Post)" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Organization/create</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -1011,12 +1083,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Projects"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Projects" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Projects" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Projects/organization/${organization_id}/list</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1029,8 +1101,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Project(Post)" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Projects/create</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -1066,12 +1138,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Events"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Events" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Event(Post)" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Events/create</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -1132,8 +1204,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Event" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Events/69fc43b0d9578c4425554993</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1145,12 +1217,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Tasks"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Tasks" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Task" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Tasks/69fc45fad9578c44255549d2</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1163,8 +1235,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Task(Post)" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Tasks/create</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -1217,8 +1289,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Comments" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Tasks/69fc4602d9578c44255549d8/comments</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1231,8 +1303,8 @@
               <hashTree/>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Comments" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Tasks/69fc4602d9578c44255549d8/comments</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -1254,12 +1326,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Feedbacks"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Feedbacks" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Feedbacks" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/Feedback/entity/${type}/${id}</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1271,12 +1343,12 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Invitations"/>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Invitations" enabled="true"/>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Invitations" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/requests/invitations/inbox</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1305,18 +1377,18 @@
             </hashTree>
           </hashTree>
         </hashTree>
-        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Moderator(requests)">
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Moderator(requests)" enabled="true">
           <stringProp name="IfController.condition">${__javaScript(&quot;${role}&quot; == &quot;Moderator&quot;)}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
         <hashTree>
-          <RandomOrderController guiclass="RandomOrderControllerGui" testclass="RandomOrderController" testname="Random Order Controller"/>
+          <RandomOrderController guiclass="RandomOrderControllerGui" testclass="RandomOrderController" testname="Random Order Controller" enabled="true"/>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ReportCases">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ReportCases" enabled="true">
               <stringProp name="HTTPSampler.domain">localhost</stringProp>
-              <stringProp name="HTTPSampler.port">7111</stringProp>
-              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.port">5085</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.path">/api/moderation/cases</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1327,10 +1399,10 @@
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree/>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ReportId">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ReportId" enabled="true">
               <stringProp name="HTTPSampler.domain">localhost</stringProp>
-              <stringProp name="HTTPSampler.port">7111</stringProp>
-              <stringProp name="HTTPSampler.protocol">https</stringProp>
+              <stringProp name="HTTPSampler.port">5085</stringProp>
+              <stringProp name="HTTPSampler.protocol">http</stringProp>
               <stringProp name="HTTPSampler.path">/api/reports/${report_id}</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -1341,7 +1413,7 @@
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree/>
-            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Resolve">
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Resolve" enabled="true">
               <stringProp name="IfController.condition">${__javaScript(&quot;${action}&quot; == &quot;resolve&quot;)}</stringProp>
               <boolProp name="IfController.evaluateAll">false</boolProp>
               <boolProp name="IfController.useExpression">true</boolProp>
@@ -1349,8 +1421,8 @@
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="ResolveCase" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/moderation/cases/${case_id}/resolve</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -1371,7 +1443,7 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Hide">
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Hide" enabled="true">
               <stringProp name="IfController.condition">${__javaScript(&quot;${action}&quot; == &quot;hide-content&quot;)}</stringProp>
               <boolProp name="IfController.evaluateAll">false</boolProp>
               <boolProp name="IfController.useExpression">true</boolProp>
@@ -1379,8 +1451,8 @@
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HideContent" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/moderation/cases/${case_id}/actions/hide-content</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -1402,7 +1474,7 @@
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
-            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Ban">
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Ban" enabled="true">
               <stringProp name="IfController.condition">${__javaScript(&quot;${action}&quot; == &quot;ban&quot;)}</stringProp>
               <boolProp name="IfController.evaluateAll">false</boolProp>
               <boolProp name="IfController.useExpression">true</boolProp>
@@ -1410,8 +1482,8 @@
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="BanUser" enabled="true">
                 <stringProp name="HTTPSampler.domain">localhost</stringProp>
-                <stringProp name="HTTPSampler.port">7111</stringProp>
-                <stringProp name="HTTPSampler.protocol">https</stringProp>
+                <stringProp name="HTTPSampler.port">5085</stringProp>
+                <stringProp name="HTTPSampler.protocol">http</stringProp>
                 <stringProp name="HTTPSampler.path">/api/moderation/cases/${case_id}/actions/ban</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -1435,11 +1507,11 @@
             </hashTree>
           </hashTree>
         </hashTree>
-        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer">
-          <stringProp name="ConstantTimer.delay">5000</stringProp>
+        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
+          <stringProp name="ConstantTimer.delay">500</stringProp>
         </ConstantTimer>
         <hashTree/>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -1476,7 +1548,7 @@
           <stringProp name="filename"></stringProp>
         </ResultCollector>
         <hashTree/>
-        <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ResponseTimesOverTimeGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Response Times Over Time">
+        <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ResponseTimesOverTimeGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Response Times Over Time" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -1521,7 +1593,7 @@
           <boolProp name="exclude_checkbox_state">false</boolProp>
         </kg.apc.jmeter.vizualizers.CorrectedResultCollector>
         <hashTree/>
-        <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ResponseCodesPerSecondGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Response Codes per Second">
+        <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass="kg.apc.jmeter.vizualizers.ResponseCodesPerSecondGui" testclass="kg.apc.jmeter.vizualizers.CorrectedResultCollector" testname="jp@gc - Response Codes per Second" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>

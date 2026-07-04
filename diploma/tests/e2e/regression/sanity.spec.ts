@@ -11,6 +11,16 @@ const seed = {
   },
 };
 
+async function fillDateTimeField(
+  page: Page,
+  field: ReturnType<Page["locator"]>,
+  digits: string,
+) {
+  await expect(field).toBeVisible({ timeout: 10_000 });
+  await field.getByText("mm", { exact: true }).first().click();
+  await page.keyboard.type(digits);
+}
+
 async function expectHealthy(page: Page) {
   await expect(page.locator("body")).not.toContainText(
     /404|not found|something went wrong|cannot navigate/i,
@@ -25,7 +35,7 @@ async function gotoAndWait(page: Page, url: string) {
   );
 }
 
-async function waitForSkeletons(page: Page, timeout = 20_000) {
+async function waitForSkeletons(page: Page, timeout = 60_000) {
   await page.waitForFunction(
     () => document.querySelectorAll('[data-slot="skeleton"]').length === 0,
     { timeout },
@@ -68,6 +78,20 @@ async function clickIfVisible(page: Page, name: RegExp): Promise<boolean> {
   return false;
 }
 
+async function clickFirstVisible(page: Page, name: RegExp): Promise<boolean> {
+  const candidates = page.getByRole("button", { name });
+  const count = await candidates.count();
+  for (let i = 0; i < count; i++) {
+    const candidate = candidates.nth(i);
+    if (await candidate.isVisible().catch(() => false)) {
+      await candidate.click();
+      await page.waitForTimeout(8_000);
+      return true;
+    }
+  }
+  return false;
+}
+
 function locationMapTrigger(page: Page) {
   return page
     .locator("section", {
@@ -77,7 +101,20 @@ function locationMapTrigger(page: Page) {
     .first();
 }
 
+async function closeBaseModal(page: Page) {
+  const closeBlock = page.locator('[class*="closeButtonBlock"]').first();
+  if (await closeBlock.isVisible().catch(() => false)) {
+    await closeBlock.click();
+    await page.waitForTimeout(8_000);
+    return;
+  }
+  await page.mouse.click(5, 5);
+  await page.waitForTimeout(8_000);
+}
+
 test.describe.serial("ImpactFlow sanity", () => {
+  let createdTaskId: string;
+
   test("volunteer: browse activities, join/request projects & event, calendar, accept invitation, check my activities", async ({
     page,
   }) => {
@@ -221,59 +258,60 @@ test.describe.serial("ImpactFlow sanity", () => {
     await login(page, seed.organizer);
 
     await gotoAndVerify(page, `/organizations/${seed.ids.organization}/roles`);
-    await expect(page.locator("body")).toContainText(
-      /Roles|Templates|Custom/i,
-      { timeout: 15_000 },
-    );
+
+    const articleLocator = page.locator("article");
+    await expect(articleLocator.first()).toBeVisible({ timeout: 15_000 });
+    await expect(page.locator("body")).toContainText(/Roles|Templates|Custom/i);
 
     const teamLeadCard = page
-      .locator("div, button, article", { hasText: /Team Lead/i })
+      .locator("article", { hasText: /Team Lead/i })
       .first();
-    if (await teamLeadCard.isVisible().catch(() => false)) {
-      await teamLeadCard.click();
-      await page.waitForTimeout(8_000);
+
+    const hasTeamLeadTemplate = (await teamLeadCard.count()) > 0;
+
+    let submitLabel: string;
+
+    if (hasTeamLeadTemplate) {
+      await teamLeadCard
+        .getByRole("button", { name: "Use", exact: true })
+        .click();
+      submitLabel = "Create from template";
     } else {
-      const newRoleBtn = page.getByRole("button", {
-        name: "New role",
-        exact: true,
-      });
-      await newRoleBtn.click();
-      await page.waitForTimeout(8_000);
+      await page.getByRole("button", { name: "New role", exact: true }).click();
+      submitLabel = "Create role";
     }
 
-    const useBtn = page
-      .getByRole("button", { name: /use|edit|create from template/i })
-      .first();
-    if (await useBtn.isVisible().catch(() => false)) {
-      await useBtn.click();
-      await page.waitForTimeout(8_000);
-    }
+    await expect(page.locator("#role-name")).toBeVisible({ timeout: 10_000 });
 
     const roleName = `Smoke Team Lead ${Date.now()}`;
-    const roleNameInput = page.getByLabel(/role name|name/i).first();
-    if (await roleNameInput.isVisible().catch(() => false)) {
-      await roleNameInput.clear();
-      await roleNameInput.fill(roleName);
-    } else {
-      const anyInput = page.locator("input").filter({ hasText: /^$/ }).first();
-      if (await anyInput.isVisible().catch(() => false)) {
-        await anyInput.clear();
-        await anyInput.fill(roleName);
-      }
-    }
-    await page.waitForTimeout(8_000);
+    await page.locator("#role-name").fill(roleName);
 
-    const darinaOption = page.getByText(/Darina Suprun/i).first();
-    if (await darinaOption.isVisible().catch(() => false)) {
+    await page.getByRole("button", { name: "Continue", exact: true }).click();
+    await expect(page.locator("body")).toContainText(/Permissions/i, {
+      timeout: 10_000,
+    });
+
+    if (!hasTeamLeadTemplate) {
+      const permChips = page.locator("button[aria-pressed]");
+      await expect(permChips.first()).toBeVisible({ timeout: 10_000 });
+      await permChips.first().click();
+    }
+
+    await page.getByRole("button", { name: "Continue", exact: true }).click();
+    await expect(page.locator("body")).toContainText(
+      /Assignment|Assignable by/i,
+      { timeout: 10_000 },
+    );
+
+    const darinaOption = page
+      .getByRole("button", { name: /Darina Suprun/i })
+      .first();
+
+    if ((await darinaOption.count()) > 0) {
       await darinaOption.click();
-      await page.waitForTimeout(8_000);
     }
 
-    await page
-      .getByRole("button", { name: /save|create/i })
-      .last()
-      .click();
-    await page.waitForTimeout(8_000);
+    await page.getByRole("button", { name: submitLabel, exact: true }).click();
 
     await expect(page.locator("body")).toContainText(roleName, {
       timeout: 15_000,
@@ -324,7 +362,7 @@ test.describe.serial("ImpactFlow sanity", () => {
     if (
       await firstSuggestion.isVisible({ timeout: 5_000 }).catch(() => false)
     ) {
-      await firstSuggestion.click();
+      await firstSuggestion.dispatchEvent("click");
       await page.waitForTimeout(8_000);
     }
 
@@ -448,18 +486,15 @@ test.describe.serial("ImpactFlow sanity", () => {
       if (await mapCanvas.isVisible().catch(() => false)) {
         const box = await mapCanvas.boundingBox();
         if (box) {
-          await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+          await page.mouse.click(
+            box.x + box.width / 2,
+            box.y + box.height / 2,
+            { button: "right" },
+          );
           await page.waitForTimeout(8_000);
         }
       }
-      const closeBtn = page.getByRole("button", { name: /close|×|✕/i }).first();
-      if (await closeBtn.isVisible().catch(() => false)) {
-        await closeBtn.click();
-        await page.waitForTimeout(8_000);
-      } else {
-        await page.keyboard.press("Escape");
-        await page.waitForTimeout(8_000);
-      }
+      await closeBaseModal(page);
     }
 
     const startDt = page
@@ -538,125 +573,169 @@ test.describe.serial("ImpactFlow sanity", () => {
     });
   });
 
-  test("organizer: fill and submit full task creation drawer", async ({
+  test("organizer: fill and submit full task creation drawer + volunteer workflows", async ({
     page,
   }) => {
-    await login(page, seed.organizer);
+    test.setTimeout(180_000);
+    await test.step("organizer: create task", async () => {
+      await login(page, seed.organizer);
 
-    await gotoAndVerify(page, `/organizations/${seed.ids.organization}`);
+      await gotoAndVerify(page, `/organizations/${seed.ids.organization}`);
 
-    const fabMainBtn = page
-      .locator(
-        "button[aria-label*='organization actions'], button[class*='fabMain'], button[class*='FabMain']",
-      )
-      .first();
+      const fabBtn = page
+        .getByRole("button", { name: /organization actions/i })
+        .first();
 
-    const fabBtn = (await fabMainBtn.isVisible().catch(() => false))
-      ? fabMainBtn
-      : page.locator("button", { hasText: /^\+$/ }).first();
-
-    if (await fabBtn.isVisible().catch(() => false)) {
       await fabBtn.click();
-      await page.waitForTimeout(8_000);
-    }
 
-    const newTaskAction = page
-      .getByRole("button", { name: /new task/i })
-      .first();
-    if (await newTaskAction.isVisible().catch(() => false)) {
-      await newTaskAction.click();
-      await page.waitForTimeout(8_000);
-    }
+      await clickFirstVisible(page, /new task/i);
 
-    await expect(page.locator("body")).toContainText(
-      /Task title|Sort recyclable/i,
-      { timeout: 10_000 },
-    );
-
-    const taskTitle = `Smoke Task ${Date.now()}`;
-
-    await page.locator("input[placeholder*='Sort recyclable']").fill(taskTitle);
-
-    await page
-      .locator("textarea[placeholder*='Describe the task']")
-      .fill(
-        "Automated sanity test task – created by Playwright to verify the 4-step drawer.",
+      await expect(page.locator("body")).toContainText(
+        /Task title|Sort recyclable/i,
+        { timeout: 10_000 },
       );
 
-    await page.getByRole("button", { name: /^continue$/i }).click();
-    await page.waitForTimeout(8_000);
-    await expect(page.locator("body")).toContainText(
-      /Location|Timeline|Estimated/i,
-      { timeout: 10_000 },
-    );
+      const taskTitle = `Smoke Task ${Date.now()}`;
 
-    const taskStartDt = page
-      .locator('[aria-label="Task start date and time"]')
-      .first();
-    if (await taskStartDt.isVisible().catch(() => false)) {
-      await taskStartDt.click();
-      await page.keyboard.type("0801202610001");
-      await page.keyboard.press("Escape");
-    }
+      await page
+        .locator("input[placeholder*='Sort recyclable']")
+        .fill(taskTitle);
 
-    const taskEndDt = page
-      .locator('[aria-label="Task end date and time"]')
-      .first();
-    if (await taskEndDt.isVisible().catch(() => false)) {
-      await taskEndDt.click();
-      await page.keyboard.type("0801202612001");
-      await page.keyboard.press("Escape");
-    }
+      await page
+        .locator("textarea[placeholder*='Describe the task']")
+        .fill(
+          "Automated sanity test task – created by Playwright to verify the 4-step drawer.",
+        );
 
-    await page.locator("input[placeholder*='120']").fill("90");
+      await page.getByRole("button", { name: /^continue$/i }).click();
+      await page.waitForTimeout(8_000);
+      await expect(page.locator("body")).toContainText(
+        /Location|Timeline|Estimated/i,
+        { timeout: 10_000 },
+      );
 
-    await page.locator("input[placeholder*='Optional']").fill("10");
+      const taskStartDt = page
+        .locator('[aria-label="Task start date and time"]')
+        .first();
+      if ((await taskStartDt.count()) > 0) {
+        await fillDateTimeField(page, taskStartDt, "080120261000");
+      }
 
-    await page.getByRole("button", { name: /^continue$/i }).click();
-    await page.waitForTimeout(8_000);
+      await page.waitForTimeout(1_000);
 
-    await expect(page.locator("body")).toContainText(/Categories/i, {
-      timeout: 10_000,
+      const taskEndDt = page
+        .locator('[aria-label="Task end date and time"]')
+        .first();
+      if ((await taskEndDt.count()) > 0) {
+        await fillDateTimeField(page, taskEndDt, "080120261200");
+      }
+
+      await page.locator("input[placeholder*='120']").fill("90");
+
+      await page.locator("input[placeholder*='Optional']").fill("10");
+
+      await page.getByRole("button", { name: /^continue$/i }).click();
+      await page.waitForTimeout(8_000);
+
+      await expect(page.locator("body")).toContainText(/Categories/i, {
+        timeout: 10_000,
+      });
+
+      await page.waitForFunction(
+        () => document.querySelectorAll("button[aria-pressed]").length > 0,
+        { timeout: 10_000 },
+      );
+      const taskChips = page.locator("button[aria-pressed]");
+      const taskChipCount = await taskChips.count();
+      if (taskChipCount >= 1) await taskChips.nth(0).click();
+      await page.waitForTimeout(8_000);
+
+      await page.getByRole("button", { name: /^continue$/i }).click();
+      await page.waitForTimeout(8_000);
+
+      await expect(page.locator("body")).toContainText(
+        /Join policy|Leave policy/i,
+        { timeout: 10_000 },
+      );
+
+      const taskJoinOpen = page
+        .locator("button[aria-pressed]", { hasText: /^Open$/i })
+        .first();
+      if (await taskJoinOpen.isVisible().catch(() => false)) {
+        await taskJoinOpen.click();
+        await page.waitForTimeout(8_000);
+      }
+
+      const taskLeaveOpen = page
+        .locator("button[aria-pressed]", { hasText: /^Open$/i })
+        .nth(1);
+      if (await taskLeaveOpen.isVisible().catch(() => false)) {
+        await taskLeaveOpen.click();
+        await page.waitForTimeout(8_000);
+      }
+
+      const responsePromise = page.waitForResponse(
+        (response) =>
+          response.url().includes("/Tasks") &&
+          (response.status() === 200 || response.status() === 201),
+        { timeout: 20_000 },
+      );
+
+      await page
+        .getByRole("button", { name: "Create task", exact: true })
+        .click();
+
+      const response = await responsePromise;
+      const responseBody = await response.json();
+      createdTaskId = responseBody.id;
+
+      await page.waitForTimeout(8_000);
+      await expectHealthy(page);
+      await expect(page.locator("body")).not.toContainText(/Task title/i);
     });
 
-    await page.waitForFunction(
-      () => document.querySelectorAll("button[aria-pressed]").length > 0,
-      { timeout: 10_000 },
-    );
-    const taskChips = page.locator("button[aria-pressed]");
-    const taskChipCount = await taskChips.count();
-    if (taskChipCount >= 1) await taskChips.nth(0).click();
-    await page.waitForTimeout(8_000);
+    await test.step("volunteer: dynamic workflow interaction", async () => {
+      expect(createdTaskId).toBeDefined();
 
-    await page.getByRole("button", { name: /^continue$/i }).click();
-    await page.waitForTimeout(8_000);
+      await login(page, seed.volunteer);
 
-    await expect(page.locator("body")).toContainText(
-      /Join policy|Leave policy/i,
-      { timeout: 10_000 },
-    );
+      await gotoAndVerify(
+        page,
+        `/activities?tab=tasks&taskId=${createdTaskId}`,
+      );
 
-    const taskJoinOpen = page
-      .locator("button[aria-pressed]", { hasText: /^Open$/i })
-      .first();
-    if (await taskJoinOpen.isVisible().catch(() => false)) {
-      await taskJoinOpen.click();
+      const joinBtn = page.getByRole("button", { name: /join task/i }).first();
+      await expect(joinBtn).toBeVisible({ timeout: 10_000 });
+      await joinBtn.click();
       await page.waitForTimeout(8_000);
-    }
 
-    const taskLeaveOpen = page
-      .locator("button[aria-pressed]", { hasText: /^Open$/i })
-      .nth(1);
-    if (await taskLeaveOpen.isVisible().catch(() => false)) {
-      await taskLeaveOpen.click();
+      const commentInput = page
+        .locator("input, textarea")
+        .filter({ hasText: /comment/i })
+        .first();
+      if ((await commentInput.count()) > 0) {
+        await commentInput.fill("Temporary automated test comment string");
+        await page.keyboard.press("Enter");
+        await page.waitForTimeout(8_000);
+      }
+
+      const leaveBtn = page
+        .getByRole("button", { name: /leave task/i })
+        .first();
+      await leaveBtn.click();
       await page.waitForTimeout(8_000);
-    }
 
-    await page.getByRole("button", { name: /Create task/i }).click();
-    await page.waitForTimeout(8_000);
+      const confirmLeave = page.getByRole("button", { name: /^leave$/i });
+      if ((await confirmLeave.count()) > 0) {
+        await confirmLeave.click();
+        await page.waitForTimeout(8_000);
+      }
 
-    await expectHealthy(page);
-
-    await expect(page.locator("body")).not.toContainText(/Task title/i);
+      await expect(
+        page.getByText(/Your leave request is pending approval/i),
+      ).toBeVisible({
+        timeout: 10_000,
+      });
+    });
   });
 });

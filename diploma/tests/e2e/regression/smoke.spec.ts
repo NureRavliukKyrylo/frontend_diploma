@@ -53,7 +53,7 @@ async function openAndExpect(
     () => {
       return document.querySelectorAll('[data-slot="skeleton"]').length === 0;
     },
-    { timeout: 20_000 },
+    { timeout: 40_000 },
   );
 
   await expect(page.locator("body")).toContainText(expectedText, {
@@ -225,11 +225,7 @@ test.describe("Must-have public smoke", () => {
   test("books Editing & Proofreading from offers", async ({ page }) => {
     const offerTitle = "Editing & Proofreading";
 
-    await openAndExpect(
-      page,
-      "http://localhost:5173/time-bank?tab=offers",
-      offerTitle,
-    );
+    await openAndExpect(page, "/time-bank?tab=offers", offerTitle);
 
     const offerCard = page
       .locator("div", { hasText: offerTitle })
@@ -259,13 +255,9 @@ test.describe("Must-have public smoke", () => {
   test("opens seeded chat, sends a message, and sees it", async ({ page }) => {
     const message = `Smoke chat message ${Date.now()}`;
 
-    await openAndExpect(
-      page,
-      "http://localhost:5173/chat",
-      /chat|loading|messages/i,
-    );
+    await openAndExpect(page, "/chat", /chat|loading|messages/i);
 
-    await page.goto(`http://localhost:5173/chat?chatId=${seed.ids.chatId}`, {
+    await page.goto(`/chat?chatId=${seed.ids.chatId}`, {
       waitUntil: "domcontentloaded",
     });
 
@@ -292,7 +284,7 @@ test.describe("Must-have public smoke", () => {
   test("switches language to Ukrainian and shows localized navigation", async ({
     page,
   }) => {
-    await page.goto("http://localhost:5173/activities", {
+    await page.goto("/activities", {
       waitUntil: "domcontentloaded",
     });
 

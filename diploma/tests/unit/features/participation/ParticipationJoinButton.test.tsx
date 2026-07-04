@@ -45,12 +45,11 @@ vi.mock("@shared/ui/buttons", () => ({
   ),
 }));
 
-// Mock react-i18next and provide the i18n object with a fallback language
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
     i18n: {
-      language: "en", // Resolves the TypeError: Cannot read properties of undefined (reading 'language')
+      language: "en",
     },
   }),
 }));

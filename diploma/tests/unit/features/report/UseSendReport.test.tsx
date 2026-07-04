@@ -2,15 +2,12 @@ import { renderHook, act, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { useSendReport } from "@features/moderation/report/model/useSendReport";
-
-// 1. Create a dedicated mock for addToast that remains active across module lifecycles
 const mockAddToast = vi.fn();
 
 vi.mock("@features/moderation/report/api/reportApi", () => ({
   sendReport: vi.fn(),
 }));
 
-// Mock the whole UI kit package explicitly, returning our scoped mock function
 vi.mock("@heroui/react", () => ({
   addToast: (options: any) => mockAddToast(options),
 }));

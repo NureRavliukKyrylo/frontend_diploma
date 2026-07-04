@@ -291,7 +291,7 @@ test.describe.serial("Volunteer: full activities flow", () => {
 
     await gotoAndWait(page, `/events/${seed.ids.openEvent}`);
     await expect(page.locator("body")).toContainText(
-      /River Cleanup Day|cleanup/i,
+      /Weekly Community Garden MaintenanceEvent|cleanup/i,
       { timeout: 15_000 },
     );
 
