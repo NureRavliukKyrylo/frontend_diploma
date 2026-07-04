@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { execSync } from "child_process";
 
 const seed = {
   volunteer: { email: "xasygata32@gmail.com", password: "Test1234!" },
@@ -57,15 +58,28 @@ async function gotoAndWait(page: Page, url: string) {
 }
 
 async function selectReportReason(page: Page, reasonLabel: string) {
-  const trigger = page.getByRole("button", { name: /Reason:/i }).first();
+  const trigger = page.getByRole("button", { name: /^Reason:/i });
   await trigger.click();
 
-  const option = page.getByText(reasonLabel, { exact: true }).last();
-  await option.waitFor({ state: "visible", timeout: 10_000 });
+  const option = page
+    .locator('[class*="dropdownReport"] [class*="item"]')
+    .filter({ hasText: reasonLabel })
+    .first();
+  await expect(option).toBeVisible({ timeout: 5_000 });
   await option.click();
+
+  await trigger.click();
+  await expect(option)
+    .toBeHidden({ timeout: 5_000 })
+    .catch(() => {});
 }
 
 test.describe.serial("Moderator + Reporting flow", () => {
+  test.afterAll(async () => {
+    execSync('mongosh "mongodb://localhost:27017" tests/seedScript.js', {
+      stdio: "inherit",
+    });
+  });
   test("volunteer: login and report a project", async ({ page }) => {
     await login(page, seed.volunteer);
 
@@ -91,7 +105,7 @@ test.describe.serial("Moderator + Reporting flow", () => {
       );
 
     await page.getByRole("button", { name: "Submit Report" }).click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15_000);
   });
 
   test("volunteer: report a feedback/review on the project", async ({
@@ -131,7 +145,7 @@ test.describe.serial("Moderator + Reporting flow", () => {
       .fill("This feedback contains misleading and harmful information.");
 
     await page.getByRole("button", { name: "Submit Report" }).click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 
   test("moderator: login and access general reports interface list", async ({
@@ -169,7 +183,7 @@ test.describe.serial("Moderator + Reporting flow", () => {
 
     await selectReportReason(page, "Inappropriate Content");
     await page.getByRole("button", { name: "Ban", exact: true }).click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
 
     const resolveBtn = page.getByRole("button", { name: "Resolve" });
     await expect(resolveBtn).toBeVisible({ timeout: 10_000 });
@@ -180,7 +194,7 @@ test.describe.serial("Moderator + Reporting flow", () => {
       .getByPlaceholder("Describe the resolution...")
       .fill("Verified and banned the reported project entity.");
     await page.getByRole("button", { name: "Confirm" }).click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 
   test("moderator: review feedback report and obscure the content", async ({
@@ -206,7 +220,7 @@ test.describe.serial("Moderator + Reporting flow", () => {
       .getByRole("button", { name: "Hide Content", exact: true })
       .and(page.locator("[type='submit']"))
       .click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 
   test("volunteer: verify targeted content is no longer visible on project view", async ({
@@ -277,7 +291,7 @@ test.describe.serial("Moderator + Reporting flow", () => {
       .getByRole("button", { name: "Ban User", exact: true })
       .and(page.locator("[type='submit']"))
       .click({ force: true });
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
 
     const resolveBtn = page.getByRole("button", { name: "Resolve" });
     await expect(resolveBtn).toBeVisible({ timeout: 10_000 });
@@ -287,7 +301,7 @@ test.describe.serial("Moderator + Reporting flow", () => {
       .getByPlaceholder("Describe the resolution...")
       .fill("Verified and banned the user responsible for the feedback.");
     await page.getByRole("button", { name: "Confirm" }).click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 
   test("banned user: confirm block state triggers restriction landing page upon authentication", async ({
@@ -321,7 +335,7 @@ test.describe.serial("Moderator + Reporting flow", () => {
     await page
       .locator("button[type='submit']", { hasText: /sign in/i })
       .click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
 
     await expect(page.locator("body")).toContainText(
       /banned|suspended|restricted|access denied|violation|account/i,

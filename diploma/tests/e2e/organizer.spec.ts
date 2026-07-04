@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { execSync } from "child_process";
 
 const seed = {
   organizer: { email: "stasyanravluk@gmail.com", password: "Test1234!" },
@@ -70,7 +71,7 @@ async function clickFirstVisible(page: Page, name: RegExp): Promise<boolean> {
     const candidate = candidates.nth(i);
     if (await candidate.isVisible().catch(() => false)) {
       await candidate.click();
-      await page.waitForTimeout(8_000);
+      await page.waitForTimeout(15);
       return true;
     }
   }
@@ -90,11 +91,11 @@ async function closeBaseModal(page: Page) {
   const closeBlock = page.locator('[class*="closeButtonBlock"]').first();
   if (await closeBlock.isVisible().catch(() => false)) {
     await closeBlock.click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
     return;
   }
   await page.mouse.click(5, 5);
-  await page.waitForTimeout(8_000);
+  await page.waitForTimeout(15);
 }
 
 async function fillDateTimeField(
@@ -108,6 +109,11 @@ async function fillDateTimeField(
 }
 
 test.describe.serial("Organizer: full management flow", () => {
+  test.afterAll(async () => {
+    execSync('mongosh "mongodb://localhost:27017" tests/seedScript.js', {
+      stdio: "inherit",
+    });
+  });
   test.slow();
 
   test("organizer: login and browse overall activities list", async ({
@@ -120,7 +126,7 @@ test.describe.serial("Organizer: full management flow", () => {
       /project|initiative|tutoring|shelter|cleanup/i,
       { timeout: 15_000 },
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15_000);
   });
 
   test("organizer: browse managed organizations list", async ({ page }) => {
@@ -131,7 +137,7 @@ test.describe.serial("Organizer: full management flow", () => {
       /GreenPaw|CommunityBridge|Eco Warriors|organization/i,
       { timeout: 15_000 },
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 
   test("organizer: select organization and review current members", async ({
@@ -144,7 +150,7 @@ test.describe.serial("Organizer: full management flow", () => {
       /member|CommunityBridge|Kyrylo|Ravliuk/i,
       { timeout: 15_000 },
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 
   test("organizer: handle and approve incoming membership requests", async ({
@@ -172,16 +178,16 @@ test.describe.serial("Organizer: full management flow", () => {
         await confirmApprove.isVisible({ timeout: 3_000 }).catch(() => false)
       ) {
         await confirmApprove.click();
-        await page.waitForTimeout(8_000);
+        await page.waitForTimeout(15);
       }
     } else {
-      await page.waitForTimeout(8_000);
+      await page.waitForTimeout(15);
     }
 
     await expect(page.locator("body")).not.toContainText(
       /404|something went wrong/i,
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 
   test("organizer: complete the multi-step project creation", async ({
@@ -217,7 +223,7 @@ test.describe.serial("Organizer: full management flow", () => {
       "input[placeholder*='city or region'], input[placeholder*='Start typing']",
     );
     await locationInput.fill("Kyiv");
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
 
     const firstSuggestion = page
       .locator("ul li")
@@ -227,7 +233,7 @@ test.describe.serial("Organizer: full management flow", () => {
       await firstSuggestion.isVisible({ timeout: 5_000 }).catch(() => false)
     ) {
       await firstSuggestion.dispatchEvent("click");
-      await page.waitForTimeout(8_000);
+      await page.waitForTimeout(15);
     }
 
     const startDateField = page
@@ -264,7 +270,7 @@ test.describe.serial("Organizer: full management flow", () => {
     const count = await chips.count();
     if (count >= 1) await chips.nth(0).click();
     if (count >= 2) await chips.nth(1).click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
 
     await expect(
       page.locator("button[aria-pressed='true']").first(),
@@ -283,7 +289,7 @@ test.describe.serial("Organizer: full management flow", () => {
       .first();
     if (await joinOpen.isVisible().catch(() => false)) {
       await joinOpen.click();
-      await page.waitForTimeout(8_000);
+      await page.waitForTimeout(15);
     }
 
     const leaveOpen = page
@@ -291,7 +297,7 @@ test.describe.serial("Organizer: full management flow", () => {
       .nth(1);
     if (await leaveOpen.isVisible().catch(() => false)) {
       await leaveOpen.click();
-      await page.waitForTimeout(8_000);
+      await page.waitForTimeout(15);
     }
 
     await page.getByRole("button", { name: /Create project/i }).click();
@@ -339,7 +345,7 @@ test.describe.serial("Organizer: full management flow", () => {
     const locationTrigger = locationMapTrigger(page);
     if (await locationTrigger.isVisible().catch(() => false)) {
       await locationTrigger.click();
-      await page.waitForTimeout(8_000);
+      await page.waitForTimeout(15);
 
       const mapCanvas = page
         .locator(".leaflet-container, [class*='map']")
@@ -352,7 +358,7 @@ test.describe.serial("Organizer: full management flow", () => {
             box.y + box.height / 2,
             { button: "right" },
           );
-          await page.waitForTimeout(8_000);
+          await page.waitForTimeout(15);
         }
       }
       await closeBaseModal(page);
@@ -397,7 +403,7 @@ test.describe.serial("Organizer: full management flow", () => {
     const eventChips = page.locator("button[aria-pressed]");
     const eventChipCount = await eventChips.count();
     if (eventChipCount >= 1) await eventChips.nth(0).click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
 
     await page.getByRole("button", { name: /^continue$/i }).click();
     await waitForSkeletons(page);
@@ -412,7 +418,7 @@ test.describe.serial("Organizer: full management flow", () => {
       .nth(1);
     if (await leaveOpenEvent.isVisible().catch(() => false)) {
       await leaveOpenEvent.click();
-      await page.waitForTimeout(8_000);
+      await page.waitForTimeout(15);
     }
 
     await page.getByRole("button", { name: /Create event/i }).click();
@@ -452,7 +458,7 @@ test.describe.serial("Organizer: full management flow", () => {
       .fill("E2E automated test task for organizer flow verification.");
 
     await page.getByRole("button", { name: /^continue$/i }).click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
 
     await expect(page.locator("body")).toContainText(
       /Location|Timeline|Estimated/i,
@@ -478,7 +484,7 @@ test.describe.serial("Organizer: full management flow", () => {
     await page.locator("input[placeholder*='Optional']").fill("10");
 
     await page.getByRole("button", { name: /^continue$/i }).click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
 
     await expect(page.locator("body")).toContainText(/Categories/i, {
       timeout: 10_000,
@@ -490,10 +496,10 @@ test.describe.serial("Organizer: full management flow", () => {
     );
     const taskChips = page.locator("button[aria-pressed]");
     if ((await taskChips.count()) >= 1) await taskChips.nth(0).click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
 
     await page.getByRole("button", { name: /^continue$/i }).click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
 
     await expect(page.locator("body")).toContainText(
       /Join policy|Leave policy/i,
@@ -505,14 +511,14 @@ test.describe.serial("Organizer: full management flow", () => {
       .first();
     if (await taskJoinOpen.isVisible().catch(() => false)) {
       await taskJoinOpen.click();
-      await page.waitForTimeout(8_000);
+      await page.waitForTimeout(15);
     }
 
     await page
       .getByRole("button", { name: "Create task", exact: true })
       .click();
 
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
     await expectHealthy(page);
     await expect(page.locator("body")).not.toContainText(/Task title/i);
   });
@@ -555,12 +561,12 @@ test.describe.serial("Organizer: full management flow", () => {
       .getByRole("button", { name: /save|create/i })
       .last()
       .click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
 
     await expect(page.locator("body")).not.toContainText(
       /404|something went wrong/i,
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 
   test("organizer: verify scope of internal organization projects", async ({
@@ -573,7 +579,7 @@ test.describe.serial("Organizer: full management flow", () => {
       /project|CommunityBridge|cleanup|tutoring/i,
       { timeout: 15_000 },
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 
   test("organizer: verify scope of internal organization events", async ({
@@ -586,6 +592,6 @@ test.describe.serial("Organizer: full management flow", () => {
       /event|CommunityBridge|garden|cleanup/i,
       { timeout: 15_000 },
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 });

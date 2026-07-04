@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { execSync } from "child_process";
 
 const seed = {
   admin: { email: "admin@impactflow.dev", password: "Test1234!" },
@@ -62,6 +63,11 @@ async function gotoAndWait(page: Page, url: string) {
 }
 
 test.describe.serial("Administrator - admin panel actions", () => {
+  test.afterAll(async () => {
+    execSync('mongosh "mongodb://localhost:27017" tests/seedScript.js', {
+      stdio: "inherit",
+    });
+  });
   test("admin: sign in and load system overview dashboard metrics", async ({
     page,
   }) => {
@@ -177,21 +183,20 @@ test.describe.serial("Administrator - admin panel actions", () => {
       .fill("Skill created by an automated E2E test.");
 
     const categoryPicker = page
-      .locator(
-        "input[placeholder*='categor' i], input[placeholder*='search' i]",
-      )
-      .last();
+      .locator("input[placeholder='Search categories']")
+      .first();
+
     if (await categoryPicker.isVisible({ timeout: 3_000 }).catch(() => false)) {
       await categoryPicker.click();
+
       const firstOption = page
-        .locator("[role='option'], li, div")
-        .filter({
-          hasText: /Animal Rescue|Education|Environmental/i,
-        })
+        .locator('[class*="pickerDropdown"] button[class*="pickerOption"]')
         .first();
-      if (await firstOption.isVisible({ timeout: 3_000 }).catch(() => false)) {
+
+      if (await firstOption.isVisible({ timeout: 5_000 }).catch(() => false)) {
         await firstOption.click();
       }
+
       await page.keyboard.press("Escape");
     }
 

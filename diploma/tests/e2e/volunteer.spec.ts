@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { execSync } from "child_process";
 
 const seed = {
   volunteer: { email: "xasygata32@gmail.com", password: "Test1234!" },
@@ -60,7 +61,7 @@ async function clickIfVisible(page: Page, name: RegExp): Promise<boolean> {
   try {
     await btn.waitFor({ state: "visible", timeout: 5_000 });
     await btn.click();
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15_000);
     return true;
   } catch {
     return false;
@@ -68,6 +69,11 @@ async function clickIfVisible(page: Page, name: RegExp): Promise<boolean> {
 }
 
 test.describe.serial("Volunteer: full activities flow", () => {
+  test.afterAll(async () => {
+    execSync('mongosh "mongodb://localhost:27017" tests/seedScript.js', {
+      stdio: "inherit",
+    });
+  });
   test("login => profile => check info", async ({ page }) => {
     await login(page, seed.volunteer);
 
@@ -76,7 +82,7 @@ test.describe.serial("Volunteer: full activities flow", () => {
       timeout: 15_000,
     });
     await expect(page.locator("body")).toContainText(/xasygata32@gmail.com/i);
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15_000);
   });
 
   test("profile settings - change birth date and apply", async ({ page }) => {
@@ -108,16 +114,16 @@ test.describe.serial("Volunteer: full activities flow", () => {
     try {
       await saveBtn.waitFor({ state: "visible", timeout: 5_000 });
       await saveBtn.click();
-      await page.waitForTimeout(8_000);
+      await page.waitForTimeout(15_000);
       await expect(page.locator("body")).not.toContainText(/error|failed/i);
     } catch {
-      await page.waitForTimeout(8_000);
+      await page.waitForTimeout(15_000);
     }
 
     await expect(page.locator("body")).not.toContainText(
       /404|something went wrong/i,
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15_000);
   });
 
   test("activities - browse and join open project", async ({ page }) => {
@@ -141,7 +147,7 @@ test.describe.serial("Volunteer: full activities flow", () => {
       /joined|leave project|member|request sent|pending/i,
       { timeout: 20_000 },
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15_000);
   });
 
   test("my activities - check joined project appears", async ({ page }) => {
@@ -152,7 +158,7 @@ test.describe.serial("Volunteer: full activities flow", () => {
       /project|tutoring|activities/i,
       { timeout: 20_000 },
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15_000);
   });
 
   test("project - send feedback (stars + comment)", async ({ page }) => {
@@ -216,7 +222,7 @@ test.describe.serial("Volunteer: full activities flow", () => {
       try {
         await submitBtn.waitFor({ state: "visible", timeout: 3_000 });
         await submitBtn.click();
-        await page.waitForTimeout(8_000);
+        await page.waitForTimeout(15_000);
       } catch {}
     } catch {
       await page.keyboard.press("End");
@@ -226,7 +232,7 @@ test.describe.serial("Volunteer: full activities flow", () => {
     await expect(page.locator("body")).not.toContainText(
       /404|something went wrong/i,
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15_000);
   });
 
   test("tasks - open a task and ask a question in comments", async ({
@@ -263,21 +269,21 @@ test.describe.serial("Volunteer: full activities flow", () => {
       )
       .first();
     try {
-      await commentInput.waitFor({ state: "visible", timeout: 8_000 });
+      await commentInput.waitFor({ state: "visible", timeout: 15_000 });
       await commentInput.fill(
         "Could you please clarify what materials are needed for the tutoring session?",
       );
 
       await commentInput.press("Enter");
-      await page.waitForTimeout(8_000);
+      await page.waitForTimeout(15_000);
     } catch {
-      await page.waitForTimeout(8_000);
+      await page.waitForTimeout(15_000);
     }
 
     await expect(page.locator("body")).not.toContainText(
       /404|something went wrong/i,
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15_000);
   });
 
   test("events - find and join an open event", async ({ page }) => {
@@ -301,7 +307,7 @@ test.describe.serial("Volunteer: full activities flow", () => {
       /joined|leave event|member|request sent|pending/i,
       { timeout: 20_000 },
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15_000);
   });
 
   test("calendar - check event appears in calendar", async ({ page }) => {
@@ -312,7 +318,7 @@ test.describe.serial("Volunteer: full activities flow", () => {
       /calendar|June|event|cleanup|garden/i,
       { timeout: 20_000 },
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15_000);
   });
 
   test("map - check activity markers appear", async ({ page }) => {
@@ -328,10 +334,10 @@ test.describe.serial("Volunteer: full activities flow", () => {
       .locator(".leaflet-container, [class*='map'], [id*='map']")
       .first();
     try {
-      await mapContainer.waitFor({ state: "visible", timeout: 8_000 });
+      await mapContainer.waitFor({ state: "visible", timeout: 15_000 });
       await expect(mapContainer).toBeVisible();
     } catch {}
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15_000);
   });
 
   test("organizations - browse organizations list", async ({ page }) => {
@@ -342,6 +348,6 @@ test.describe.serial("Volunteer: full activities flow", () => {
       /GreenPaw|CommunityBridge|Eco Warriors|KidCare/i,
       { timeout: 15_000 },
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15_000);
   });
 });

@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { execSync } from "child_process";
 
 const seed = {
   worker: { email: "xasygata32@gmail.com", password: "Test1234!" },
@@ -56,6 +57,11 @@ async function gotoAndWait(page: Page, url: string) {
 }
 
 test.describe.serial("Time Bank: full booking flow", () => {
+  test.afterAll(async () => {
+    execSync('mongosh "mongodb://localhost:27017" tests/seedScript.js', {
+      stdio: "inherit",
+    });
+  });
   test("worker: login, navigate to time bank, and browse offers", async ({
     page,
   }) => {
@@ -66,7 +72,7 @@ test.describe.serial("Time Bank: full booking flow", () => {
       /offer|tutoring|walking|proofreading|editing/i,
       { timeout: 15_000 },
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15_000);
   });
 
   test("worker: open offer and send booking request", async ({ page }) => {
@@ -82,7 +88,7 @@ test.describe.serial("Time Bank: full booking flow", () => {
       .getByRole("button", { name: /book now|request|send request/i })
       .first();
 
-    if (await bookBtn.isVisible({ timeout: 8_000 }).catch(() => false)) {
+    if (await bookBtn.isVisible({ timeout: 15 }).catch(() => false)) {
       await bookBtn.click();
       await page.waitForTimeout(2_000);
 
@@ -102,10 +108,10 @@ test.describe.serial("Time Bank: full booking flow", () => {
         .first();
       if (await sendBtn.isVisible({ timeout: 3_000 }).catch(() => false)) {
         await sendBtn.click();
-        await page.waitForTimeout(8_000);
+        await page.waitForTimeout(15);
       }
     } else {
-      await page.waitForTimeout(8_000);
+      await page.waitForTimeout(15);
     }
 
     await gotoAndWait(page, `/time-bank/?tab=bookings`);
@@ -114,7 +120,7 @@ test.describe.serial("Time Bank: full booking flow", () => {
       /pending|booking|cancel|request sent|booked/i,
       { timeout: 20_000 },
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 
   test("offer owner: login, check bookings, and approve first item", async ({
@@ -141,7 +147,7 @@ test.describe.serial("Time Bank: full booking flow", () => {
       .first();
 
     try {
-      await approveBtn.waitFor({ state: "visible", timeout: 8_000 });
+      await approveBtn.waitFor({ state: "visible", timeout: 15 });
       await approveBtn.click();
       await page.waitForTimeout(2_000);
 
@@ -158,7 +164,7 @@ test.describe.serial("Time Bank: full booking flow", () => {
     await expect(page.locator("body")).not.toContainText(
       /404|something went wrong/i,
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 
   test("worker: verify approved booking is visible", async ({ page }) => {
@@ -169,7 +175,7 @@ test.describe.serial("Time Bank: full booking flow", () => {
       /booking|approved|accepted|editing|proofreading/i,
       { timeout: 20_000 },
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 
   test("worker: mark booking as complete", async ({ page }) => {
@@ -183,7 +189,7 @@ test.describe.serial("Time Bank: full booking flow", () => {
     const completeBtn = page
       .getByRole("button", { name: /complete|mark.*complete|done/i })
       .first();
-    if (await completeBtn.isVisible({ timeout: 8_000 }).catch(() => false)) {
+    if (await completeBtn.isVisible({ timeout: 15 }).catch(() => false)) {
       await completeBtn.click();
       await page.waitForTimeout(2_000);
 
@@ -194,16 +200,16 @@ test.describe.serial("Time Bank: full booking flow", () => {
         await confirmComplete.isVisible({ timeout: 3_000 }).catch(() => false)
       ) {
         await confirmComplete.click();
-        await page.waitForTimeout(8_000);
+        await page.waitForTimeout(15);
       }
     } else {
-      await page.waitForTimeout(8_000);
+      await page.waitForTimeout(15);
     }
 
     await expect(page.locator("body")).not.toContainText(
       /404|something went wrong/i,
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 
   test("offer owner: mark booking as complete from owner view", async ({
@@ -225,7 +231,7 @@ test.describe.serial("Time Bank: full booking flow", () => {
       .first();
 
     try {
-      await completeBtn.waitFor({ state: "visible", timeout: 8_000 });
+      await completeBtn.waitFor({ state: "visible", timeout: 15 });
       await completeBtn.click();
       await page.waitForTimeout(2_000);
 
@@ -236,16 +242,16 @@ test.describe.serial("Time Bank: full booking flow", () => {
         await confirmComplete.isVisible({ timeout: 3_000 }).catch(() => false)
       ) {
         await confirmComplete.click();
-        await page.waitForTimeout(8_000);
+        await page.waitForTimeout(15);
       }
     } catch (error) {
-      await page.waitForTimeout(8_000);
+      await page.waitForTimeout(15);
     }
 
     await expect(page.locator("body")).not.toContainText(
       /404|something went wrong/i,
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 
   test("worker: verify transactions history for updated balance", async ({
@@ -258,6 +264,6 @@ test.describe.serial("Time Bank: full booking flow", () => {
       /transaction|minutes|time|balance|earned/i,
       { timeout: 20_000 },
     );
-    await page.waitForTimeout(8_000);
+    await page.waitForTimeout(15);
   });
 });

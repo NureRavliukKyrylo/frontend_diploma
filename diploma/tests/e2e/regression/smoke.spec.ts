@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { execSync } from "child_process";
 
 const seed = {
   user: {
@@ -66,6 +67,11 @@ async function openAndExpect(
 }
 
 test.describe("Must-have public smoke", () => {
+  test.afterAll(async () => {
+    execSync('mongosh "mongodb://localhost:27017" tests/seedScript.js', {
+      stdio: "inherit",
+    });
+  });
   test.beforeEach(async ({ page }) => {
     await loginAsSeedUser(page);
   });
@@ -197,7 +203,7 @@ test.describe("Must-have public smoke", () => {
       { timeout: 20_000 },
     );
 
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(15000);
 
     await openAndExpect(page, "/activities/my?tab=projects", projectTitle);
 
@@ -215,7 +221,7 @@ test.describe("Must-have public smoke", () => {
     await page.getByRole("button", { name: /leave project/i }).click();
     await page.getByRole("button", { name: /^leave$/i }).click();
 
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(15000);
 
     await expect(page.locator("body")).toContainText(
       /left project|join project|leave request/i,
