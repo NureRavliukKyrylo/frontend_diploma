@@ -83,6 +83,16 @@
     "SkillVerified": "Skill Verified",
     "InvitationCreated": "Invitation created",
     "InvitationAccepted": "Invitation accepted",
-    "InvitationDeclined": "Invitation declined"
+    "InvitationDeclined": "Invitation declined",
+    "ModerationCaseCreated": "Moderation case created",
+    "ModerationCaseAssigned": "Moderation case assigned",
+    "ModerationCaseResolved": "Moderation case resolved",
+    "ModerationCaseRejected": "Moderation case rejected",
+    "ModerationWarning": "Moderation warning",
+    "ModerationContentHidden": "Content hidden",
+    "ModerationUserBlocked": "User blocked",
+    "ModerationUserBanned": "User banned",
+    "ModerationEntityBanned": "Entity banned",
+    "ModerationEntityUnbanned": "Entity unbanned"
   }
 }

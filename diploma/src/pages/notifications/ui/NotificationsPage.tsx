@@ -25,6 +25,7 @@ import { ListWidgetSkeleton } from "@shared/ui/skeleton";
 import { useTranslation } from "react-i18next";
 import { getNotificationTypeOptions } from "@entities/notification";
 import { getNotificationActionsButton } from "../libs/getNotificationsActionsButton";
+import { useUserStore } from "@entities/user";
 
 export const NotificationsPage = () => {
   const { t } = useTranslation(["notification", "common"]);
@@ -47,7 +48,7 @@ export const NotificationsPage = () => {
   } = useNotificationsPage();
 
   const { readNotification } = useReadNotification();
-
+  const role = useUserStore((s) => s.role);
   const notificationStatusTabs: TabOption<"All" | "Unread">[] = [
     { label: t("notification:page.statusTabs.all"), value: "All" },
     { label: t("notification:page.statusTabs.unread"), value: "Unread" },
@@ -74,14 +75,16 @@ export const NotificationsPage = () => {
               activeButtonClassName={styles.toggleNotificationButtonActive}
               pillClassName={styles.toggleNotificationPill}
             />
-            <SelectFilter
-              label={t("notification:page.filterLabels.type")}
-              options={getNotificationTypeOptions(t)}
-              value={activeType ?? "All"}
-              onChange={handleTypeChange}
-              hideLabel={true}
-              variant="absolute"
-            />
+            {role !== "Moderator" && (
+              <SelectFilter
+                label={t("notification:page.filterLabels.type")}
+                options={getNotificationTypeOptions(t)}
+                value={activeType ?? "All"}
+                onChange={handleTypeChange}
+                hideLabel={true}
+                variant="absolute"
+              />
+            )}
           </div>
         </div>
         <div className={styles.headerRight}>

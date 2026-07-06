@@ -56,6 +56,16 @@ export const notificationTypeValues = [
   "InvitationCreated",
   "InvitationAccepted",
   "InvitationDeclined",
+  "ModerationCaseCreated",
+  "ModerationCaseAssigned",
+  "ModerationCaseResolved",
+  "ModerationCaseRejected",
+  "ModerationWarning",
+  "ModerationContentHidden",
+  "ModerationUserBlocked",
+  "ModerationUserBanned",
+  "ModerationEntityBanned",
+  "ModerationEntityUnbanned",
 ] as const satisfies NotificationType[];
 
 export const notificationPaginationSchema = paginationSchema.extend({

@@ -83,6 +83,16 @@
     "SkillVerified": "Навичку підтверджено",
     "InvitationCreated": "Запрошення створено",
     "InvitationAccepted": "Запрошення прийнято",
-    "InvitationDeclined": "Запрошення відхилено"
+    "InvitationDeclined": "Запрошення відхилено",
+    "ModerationCaseCreated": "Справу модерації створено",
+    "ModerationCaseAssigned": "Справу модерації призначено",
+    "ModerationCaseResolved": "Справу модерації вирішено",
+    "ModerationCaseRejected": "Справу модерації відхилено",
+    "ModerationWarning": "Попередження модератора",
+    "ModerationContentHidden": "Контент приховано",
+    "ModerationUserBlocked": "Користувача заблоковано",
+    "ModerationUserBanned": "Користувача забанено",
+    "ModerationEntityBanned": "Сутність забанено",
+    "ModerationEntityUnbanned": "Бан сутності знято"
   }
 }

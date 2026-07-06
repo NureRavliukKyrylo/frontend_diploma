@@ -6,8 +6,9 @@ import {
 } from "../../api";
 
 export const calendarKeys = {
+  activities: () => ["my-activities"] as const,
   myActivities: (params: MyActivitiesCalendarListSearch) =>
-    ["my-activities", params] as const,
+    [...calendarKeys.activities(), params] as const,
   availabilitySlots: () => ["availability-slots"] as const,
 };
 

@@ -1,5 +1,6 @@
 import {
   notificationKeys,
+  NotificationToast,
   useNotificationSignalR,
 } from "@entities/notification";
 import { adminDashboardKeys } from "@entities/admin";
@@ -91,6 +92,7 @@ function RootComponent() {
 
   return (
     <>
+      <NotificationToast />
       <Outlet />
       <TanStackRouterDevtools />
     </>

@@ -7,6 +7,9 @@ import {
   ChatIcon,
   CommentIcon,
   VerifiedIcon,
+  BannedIcon,
+  HiddenIcon,
+  CaseIcon,
 } from "@shared/assets/icons/info";
 import {
   GiftIcon,
@@ -267,5 +270,55 @@ export const NOTIFICATION_TYPE_CONFIG: Record<
     icon: RejectIcon,
     iconColor: "#e11d48",
     wrapperColor: "#fff1f2",
+  },
+  ModerationCaseCreated: {
+    icon: CaseIcon,
+    iconColor: "#3b82f6",
+    wrapperColor: "#eff6ff",
+  },
+  ModerationCaseAssigned: {
+    icon: CaseIcon,
+    iconColor: "#f97316",
+    wrapperColor: "#fff7ed",
+  },
+  ModerationCaseResolved: {
+    icon: ApproveIcon,
+    iconColor: "#16a34a",
+    wrapperColor: "#f0fdf4",
+  },
+  ModerationCaseRejected: {
+    icon: RejectIcon,
+    iconColor: "#e11d48",
+    wrapperColor: "#fff1f2",
+  },
+  ModerationWarning: {
+    icon: CaseIcon,
+    iconColor: "#d97706",
+    wrapperColor: "#fffbeb",
+  },
+  ModerationContentHidden: {
+    icon: HiddenIcon,
+    iconColor: "#6b7280",
+    wrapperColor: "#f9fafb",
+  },
+  ModerationUserBlocked: {
+    icon: BannedIcon,
+    iconColor: "#dc2626",
+    wrapperColor: "#fff1f2",
+  },
+  ModerationUserBanned: {
+    icon: BannedIcon,
+    iconColor: "#991b1b",
+    wrapperColor: "#fef2f2",
+  },
+  ModerationEntityBanned: {
+    icon: BannedIcon,
+    iconColor: "#991b1b",
+    wrapperColor: "#fef2f2",
+  },
+  ModerationEntityUnbanned: {
+    icon: ApproveIcon,
+    iconColor: "#16a34a",
+    wrapperColor: "#f0fdf4",
   },
 };

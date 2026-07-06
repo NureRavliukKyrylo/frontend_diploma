@@ -36,7 +36,7 @@ export const NotificationItem = ({
       >
         {notification.relatedAvatarUrl ? (
           <Avatar
-            className={styles.avatar}
+            className={`styles.avatar `}
             src={notification.relatedAvatarUrl}
           />
         ) : (

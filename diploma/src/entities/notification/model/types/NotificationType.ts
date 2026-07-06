@@ -46,4 +46,14 @@ export type NotificationType =
   | "SkillVerified"
   | "InvitationCreated"
   | "InvitationAccepted"
-  | "InvitationDeclined";
+  | "InvitationDeclined"
+  | "ModerationCaseCreated"
+  | "ModerationCaseAssigned"
+  | "ModerationCaseResolved"
+  | "ModerationCaseRejected"
+  | "ModerationWarning"
+  | "ModerationContentHidden"
+  | "ModerationUserBlocked"
+  | "ModerationUserBanned"
+  | "ModerationEntityBanned"
+  | "ModerationEntityUnbanned";

@@ -33,7 +33,7 @@ export const useSignalRStore = create<SignalRStore>((set, get) => ({
       return;
 
     const connection = new signalR.HubConnectionBuilder()
-      .withUrl(`https://localhost:7111/hubs/${hub}`, {
+      .withUrl(`hubs/${hub}`, {
         withCredentials: true,
       })
       .withAutomaticReconnect()

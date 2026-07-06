@@ -21,6 +21,21 @@ export default defineConfig({
   preview: {
     port: 5173,
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://localhost:7111",
+        changeOrigin: true,
+        secure: false,
+      },
+      "/hubs": {
+        target: "https://localhost:7111",
+        changeOrigin: true,
+        secure: false,
+        ws: true,
+      },
+    },
+  },
   test: {
     environment: "jsdom",
     globals: true,

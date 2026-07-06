@@ -1,9 +1,9 @@
 import axios, { AxiosHeaders } from "axios";
-import { API_URL, LOCALE_MAP } from "@shared/config/constants";
+import { LOCALE_MAP } from "@shared/config/constants";
 import { useLocaleStore } from "@shared/config/stores";
 
 export const apiClient = axios.create({
-  baseURL: `${API_URL}/api/`,
+  baseURL: `/api/`,
   timeout: 20000,
   headers: {
     "Content-Type": "application/json",

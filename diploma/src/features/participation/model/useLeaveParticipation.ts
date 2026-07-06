@@ -50,6 +50,10 @@ export const useLeaveParticipation = ({
       queryClient.invalidateQueries({
         queryKey: queryKeyMap[entityType].mys(),
       });
+      const entry = queryKeyMap[entityType];
+      if ("calendar" in entry) {
+        queryClient.invalidateQueries({ queryKey: entry.calendar() });
+      }
       queryClient.invalidateQueries({
         queryKey: filtersKeys.infinite({ entityType }),
       });

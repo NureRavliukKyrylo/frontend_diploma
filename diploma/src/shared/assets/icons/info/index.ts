@@ -32,3 +32,6 @@ export { default as DeadlineIcon } from "./deadline.svg?react";
 export { default as Report } from "./report.svg?react";
 export { default as CommentIcon } from "./comment-icon.svg?react";
 export { default as TaskIcon } from "./task.svg?react";
+export { default as BannedIcon } from "./banned.svg?react";
+export { default as CaseIcon } from "./case.svg?react";
+export { default as HiddenIcon } from "./hidden.svg?react";
