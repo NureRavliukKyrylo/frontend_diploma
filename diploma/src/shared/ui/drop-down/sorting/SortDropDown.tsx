@@ -66,11 +66,10 @@ export const SortDropDown = <T extends string | number>({
       }`}
     >
       {options.map((option) => {
-        const isActive = String(value).includes(String(option.value));
+        const isActive = String(value) === String(option.value);
         return (
-          <div className={styles.wrapperItem}>
+          <div key={option.value} className={styles.wrapperItem}>
             <div
-              key={option.value}
               className={`${styles.item} ${isActive ? styles.itemActive : ""}`}
               onClick={() => onSelect(option.value)}
             >

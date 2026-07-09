@@ -22,6 +22,7 @@ interface ProjectTabsProps {
   userId?: string;
   search: Omit<ProjectDetailSearch, "tab">;
   filters?: Omit<TasksRequestParams, "Status">;
+  canMoveTasks?: boolean;
   handleSort: (value: FeedbackSortValues) => void;
 }
 
@@ -65,6 +66,7 @@ export const getProjectMainForms = (
     <TasksTab
       search={props.search as TaskDrawerSearch}
       filters={props.filters}
+      canMoveTasks={props.canMoveTasks}
     />
   ),
 });

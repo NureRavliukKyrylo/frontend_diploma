@@ -23,8 +23,6 @@ export const useRegistration = () => {
     setUserId,
     setFirstName,
     setLastName,
-    setIsAuthenticated,
-    setRole,
     setEmail,
   } = useUserStore();
   const { t } = useTranslation(["auth", "common"]);
@@ -39,8 +37,6 @@ export const useRegistration = () => {
         color: "success",
       });
       setUserId(data.userId);
-      setIsAuthenticated(true);
-      setRole(data.role);
       clearSignupForm();
       router.navigate({ to: AuthRoutes.verification.email });
     },

@@ -1,7 +1,7 @@
 import { apiClient } from "@shared/api";
 
 export interface VerificationForgotPasswordDto {
-  userId?: string;
+  email?: string;
   code: string;
 }
 

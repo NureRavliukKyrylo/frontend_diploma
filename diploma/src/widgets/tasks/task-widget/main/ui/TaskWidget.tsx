@@ -10,6 +10,7 @@ import { TaskEditSettings } from "../../settings/ui/TaskEditSettings";
 import { TaskWidgetContent } from "./TaskWidgetContent";
 import { TaskWidgetHeader } from "./task-header/TaskWidgetHeader";
 import { TaskWidgetSkeleton } from "./TaskWidgetSkeleton";
+import { TaskFab } from "./TaskFab/TaskFab";
 import styles from "./TaskWidget.module.scss";
 
 interface TaskWidgetProps {
@@ -31,8 +32,16 @@ export const TaskWidget = ({
 }: TaskWidgetProps) => {
   const { t } = useTranslation(["task", "common"]);
   const [isEditMode, setIsEditMode] = useState(false);
-  const { task, isLoading, isError, error, statusConfig, policyConfig, forms } =
-    useTaskWidget({ taskId, search, handleSort });
+  const {
+    task,
+    isLoading,
+    isError,
+    error,
+    statusConfig,
+    policyConfig,
+    forms,
+    permissionContext,
+  } = useTaskWidget({ taskId, search, handleSort });
 
   useEffect(() => {
     setIsEditMode(false);
@@ -61,7 +70,7 @@ export const TaskWidget = ({
 
   if (!task) return null;
 
-  const localizedTabs = getTaskMainTabs(t, task);
+  const localizedTabs = getTaskMainTabs(t, task, permissionContext);
 
   return (
     <div className={styles.wrapperTaskWidget}>
@@ -69,7 +78,7 @@ export const TaskWidget = ({
         task={task}
         statusConfig={statusConfig}
         policyConfig={policyConfig}
-        showEditAction={canManageTask(task)}
+        showEditAction={canManageTask(task, permissionContext)}
         onEdit={() => setIsEditMode(true)}
       />
       <TaskWidgetContent
@@ -78,6 +87,15 @@ export const TaskWidget = ({
         forms={forms}
         onModeChange={handleModeChange}
       />
+      {!isEditMode && (
+        <TaskFab
+          task={task}
+          activeMode={taskMode}
+          permissionContext={permissionContext}
+          onModeChange={handleModeChange}
+          onOpenSettings={() => setIsEditMode(true)}
+        />
+      )}
     </div>
   );
 };

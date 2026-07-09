@@ -69,7 +69,7 @@ export const HeaderMobileDrawer = ({
             )}
             role="dialog"
             aria-modal="true"
-            aria-label="Navigation menu"
+            aria-label={t("header.navigationMenu")}
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
@@ -80,7 +80,7 @@ export const HeaderMobileDrawer = ({
               <button
                 type="button"
                 className={styles.closeButton}
-                aria-label="Close menu"
+                aria-label={t("header.closeMenu")}
                 onClick={onClose}
               >
                 <X className={styles.icon} strokeWidth={2} />
@@ -93,7 +93,7 @@ export const HeaderMobileDrawer = ({
               onNavigate={onClose}
             />
             <div className={styles.divider} />
-            <nav className={styles.nav} aria-label="Mobile primary">
+            <nav className={styles.nav} aria-label={t("header.mobilePrimary")}>
               {headerLinks.map(({ title, href }) => (
                 <Link
                   key={href}

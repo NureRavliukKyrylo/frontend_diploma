@@ -2,9 +2,11 @@ import { useMemo, useState } from "react";
 import type { Task, TaskMode } from "@entities/task";
 import { useTranslation } from "react-i18next";
 import {
+  canManageTask,
   canManageTaskMembers,
   canManageTaskRoles,
   canViewTaskTimeLogs,
+  type TaskPermissionContext,
 } from "../../../lib/canManageTask";
 import {
   taskFabActionsConfig,
@@ -15,6 +17,8 @@ interface Params {
   task: Task;
   activeMode: TaskMode;
   onModeChange: (mode: TaskMode) => void;
+  permissionContext?: TaskPermissionContext;
+  onOpenSettings?: () => void;
 }
 
 export interface TaskFabAction extends TaskFabActionConfig {
@@ -23,12 +27,19 @@ export interface TaskFabAction extends TaskFabActionConfig {
   isActive: boolean;
 }
 
-export const useTaskFabActions = ({ task, activeMode, onModeChange }: Params) => {
+export const useTaskFabActions = ({
+  task,
+  activeMode,
+  onModeChange,
+  permissionContext,
+  onOpenSettings,
+}: Params) => {
   const { t } = useTranslation(["task"]);
   const [isOpen, setIsOpen] = useState(false);
-  const canMembers = canManageTaskMembers(task);
-  const canRoles = canManageTaskRoles(task);
-  const canTimelog = canViewTaskTimeLogs(task);
+  const canContent = canManageTask(task, permissionContext);
+  const canMembers = canManageTaskMembers(task, permissionContext);
+  const canRoles = canManageTaskRoles(task, permissionContext);
+  const canTimelog = canViewTaskTimeLogs(task, permissionContext);
   const closeMenu = () => setIsOpen(false);
 
   const actions = useMemo<TaskFabAction[]>(
@@ -38,19 +49,33 @@ export const useTaskFabActions = ({ task, activeMode, onModeChange }: Params) =>
           (action) =>
             (action.permission === "members" && canMembers) ||
             (action.permission === "roles" && canRoles) ||
-            (action.permission === "timelog" && canTimelog),
+            (action.permission === "timelog" && canTimelog) ||
+            (action.permission === "content" && canContent),
         )
         .map((action) => ({
           ...action,
           label: t(action.labelKey),
-          isActive: activeMode === action.id,
+          isActive: action.id !== "settings" && activeMode === action.id,
           onClick: () => {
             closeMenu();
+            if (action.id === "settings") {
+              onOpenSettings?.();
+              return;
+            }
             onModeChange(action.id);
           },
         }))
         .reverse(),
-    [activeMode, canMembers, canRoles, canTimelog, onModeChange, t],
+    [
+      activeMode,
+      canContent,
+      canMembers,
+      canRoles,
+      canTimelog,
+      onModeChange,
+      onOpenSettings,
+      t,
+    ],
   );
 
   return {
@@ -59,5 +84,6 @@ export const useTaskFabActions = ({ task, activeMode, onModeChange }: Params) =>
     setIsOpen,
     closeMenu,
     isVisible: actions.length > 0,
+    activeActionId: actions.find((action) => action.isActive)?.id,
   };
 };

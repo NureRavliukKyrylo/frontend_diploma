@@ -16,6 +16,7 @@ import {
   type HeaderLanguage,
 } from "../../lib/header";
 import styles from "./HeaderMobileDrawer.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface HeaderDrawerActionsProps {
   language: HeaderLanguage;
@@ -31,6 +32,7 @@ export const HeaderDrawerActions = ({
   onNavigate,
 }: HeaderDrawerActionsProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation("common");
   const { isAuthenticated } = useUserStore();
   const { data: unreadCountData } = useQuery({
     ...notificationQuery.unreadCount(),
@@ -52,7 +54,7 @@ export const HeaderDrawerActions = ({
           onClick={() => goTo("/notifications")}
         >
           <Bell aria-hidden="true" strokeWidth={1.9} />
-          <span>Notifications</span>
+          <span>{t("header.notifications")}</span>
           {unreadCount > 0 && (
             <span className={styles.notificationBadge}>{unreadCount}</span>
           )}
@@ -63,7 +65,7 @@ export const HeaderDrawerActions = ({
           onClick={() => goTo("/chat")}
         >
           <MessageSquareText aria-hidden="true" strokeWidth={1.9} />
-          <span>Messages</span>
+          <span>{t("header.messages")}</span>
         </button>
         <button
           type="button"
@@ -71,7 +73,7 @@ export const HeaderDrawerActions = ({
           onClick={() => goTo("/organizations/my")}
         >
           <Building2 aria-hidden="true" strokeWidth={1.9} />
-          <span>My Organizations</span>
+          <span>{t("header.myOrganizations")}</span>
         </button>
         <button
           type="button"
@@ -79,7 +81,7 @@ export const HeaderDrawerActions = ({
           onClick={() => goTo("/activities/my")}
         >
           <Bookmark aria-hidden="true" strokeWidth={1.9} />
-          <span>Bookmark</span>
+          <span>{t("header.bookmark")}</span>
         </button>
         <div className={styles.languageSwitcher}>
           {languageOptions.map((option) => {
@@ -115,7 +117,7 @@ export const HeaderDrawerActions = ({
         }}
       >
         <LogOut aria-hidden="true" strokeWidth={1.9} />
-        <span>Logout</span>
+        <span>{t("header.logout")}</span>
       </button>
     </div>
   );

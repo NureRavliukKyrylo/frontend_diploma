@@ -10,7 +10,7 @@ import { useSyncUserInfoFromProfile } from "@entities/user/profile";
 import { useLocaleStore, useSignalRStore } from "@shared/config/stores";
 import type { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { queryClient } from "@shared/api";
@@ -94,7 +94,7 @@ function RootComponent() {
     <>
       <NotificationToast />
       <Outlet />
-      <TanStackRouterDevtools />
+
     </>
   );
 }

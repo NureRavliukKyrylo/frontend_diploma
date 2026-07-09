@@ -1,4 +1,5 @@
 import {
+  Award,
   Ban,
   ChartBar,
   ClipboardList,
@@ -49,6 +50,12 @@ export const adminNavItems: AdminNavItem[] = [
     searchLabel: "admin:sidebar.search.skills",
     icon: Tag,
     badge: { key: "skills", tone: "neutral" },
+  },
+  {
+    title: "admin:sidebar.items.badges",
+    href: "/admin/badges",
+    searchLabel: "admin:sidebar.search.badges",
+    icon: Award,
   },
   {
     title: "admin:sidebar.items.requests",

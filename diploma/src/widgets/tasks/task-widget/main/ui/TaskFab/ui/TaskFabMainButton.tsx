@@ -5,11 +5,13 @@ import styles from "@widgets/organizations/details/ui/OrganizationFab/Organizati
 
 interface TaskFabMainButtonProps {
   isOpen: boolean;
+  activeClassName?: string;
   onClick: () => void;
 }
 
 export const TaskFabMainButton = ({
   isOpen,
+  activeClassName,
   onClick,
 }: TaskFabMainButtonProps) => {
   const { t } = useTranslation(["task"]);
@@ -17,7 +19,9 @@ export const TaskFabMainButton = ({
   return (
     <motion.button
       type="button"
-      className={`${styles.mainButton} ${isOpen ? styles.mainButtonOpen : ""}`}
+      className={`${styles.mainButton} ${
+        isOpen ? styles.mainButtonOpen : (activeClassName ?? "")
+      }`}
       aria-label={isOpen ? t("fab.closeActions") : t("fab.openActions")}
       aria-expanded={isOpen}
       whileHover={{ scale: 1.06 }}

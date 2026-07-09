@@ -29,6 +29,8 @@ interface Params {
   setSelectedRole: Dispatch<SetStateAction<SelectedRoleState | null>>;
 }
 
+
+
 export const useOrganizationRoleMutations = ({
   organizationId,
   setFormState,
@@ -64,20 +66,24 @@ export const useOrganizationRoleMutations = ({
         ],
       }),
     ]);
+
+
+
+
   const saveMutation = useMutation({
     mutationFn: ({ role, payload, mode }: SaveRoleVariables) =>
       mode === "edit" && role
         ? updateContextRole(role.id, payload)
         : mode === "template" && role
           ? createContextRoleFromTemplate({
-              templateId: role.id,
-              entityType: payload.entityType ?? "organization",
-              entityId: payload.entityId ?? organizationId,
-              name: payload.name,
-              description: payload.description,
-              isDefaultForJoin: payload.isDefaultForJoin,
-              permissionsOverride: payload.permissions,
-            })
+            templateId: role.id,
+            entityType: payload.entityType ?? "organization",
+            entityId: payload.entityId ?? organizationId,
+            name: payload.name,
+            description: payload.description,
+            isDefaultForJoin: payload.isDefaultForJoin,
+            permissionsOverride: payload.permissions,
+          })
           : createContextRole(payload),
     onSuccess: async () => {
       await invalidate();
@@ -91,6 +97,10 @@ export const useOrganizationRoleMutations = ({
         color: "danger",
       }),
   });
+
+
+
+
   const toggleDefaultMutation = useMutation({
     mutationFn: (role: OrganizationContextRole) =>
       updateContextRole(
@@ -113,6 +123,9 @@ export const useOrganizationRoleMutations = ({
     onError: () =>
       addToast({ title: t("toast.defaultFailed"), color: "danger" }),
   });
+
+
+
   const actionMutation = useMutation({
     mutationFn: (state: RoleActionState) => {
       if (state.action === "archive") {
@@ -135,8 +148,8 @@ export const useOrganizationRoleMutations = ({
       setPendingAction(null);
       setSelectedRole((current) =>
         current &&
-        current.role.id === state.role.id &&
-        state.action === "delete"
+          current.role.id === state.role.id &&
+          state.action === "delete"
           ? null
           : current,
       );

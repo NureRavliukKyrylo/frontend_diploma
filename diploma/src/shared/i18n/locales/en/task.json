@@ -74,7 +74,8 @@
     "closeActions": "Close task actions",
     "members": "Members",
     "roles": "Roles",
-    "timelog": "Work log"
+    "timelog": "Work log",
+    "settings": "Settings"
   },
   "roles": {
     "loading": "Loading task roles...",
@@ -84,7 +85,8 @@
   "timelog": {
     "loading": "Loading work logs...",
     "error": "We could not load work logs right now.",
-    "empty": "No work logs have been submitted yet.",
+    "empty": "No time records",
+    "emptyHint": "Submitted work logs will appear here for review.",
     "table": {
       "volunteer": "Volunteer",
       "logged": "Logged",
@@ -96,8 +98,26 @@
       "notProvided": "Not provided"
     },
     "controls": {
-      "allStatuses": "All statuses",
-      "export": "Export CSV"
+      "allStatuses": "All",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "disputed": "Disputed",
+      "export": "Export CSV",
+      "totalRecords": "Total records",
+      "pendingRecords": "Pending",
+      "approvedMinutes": "Approved minutes",
+      "loggedMinutes": "Logged minutes"
+    },
+    "sections": {
+      "pending": "Pending approval",
+      "disputed": "Disputed",
+      "approved": "Approved",
+      "other": "Other"
+    },
+    "badges": {
+      "managerEdited": "Manager edited",
+      "disputeOpen": "Dispute open"
     },
     "actions": {
       "managerEdit": "Edit",
@@ -123,8 +143,8 @@
     },
     "statuses": {
       "Draft": "Draft",
-      "Submitted": "Submitted",
-      "ManagerEditedPendingVolunteerReconfirm": "Awaiting volunteer confirmation",
+      "Submitted": "Pending",
+      "ManagerEditedPendingVolunteerReconfirm": "Edited",
       "Approved": "Approved",
       "Rejected": "Rejected",
       "Disputed": "Disputed",

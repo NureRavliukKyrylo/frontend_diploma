@@ -1,9 +1,7 @@
 @use "@shared/assets/styles" as *;
 
 .badgeImageBlock {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: #f4f1ea;
   width: 100%;
   height: 100%;
   border: 5px solid #000000;
@@ -14,6 +12,7 @@
   align-items: flex-start;
   aspect-ratio: 3/4;
   position: relative;
+  overflow: hidden;
 
   @include respond-to(laptop) {
     border-width: 4px;
@@ -29,6 +28,8 @@
   }
 
   .badgeInfoTier {
+    position: relative;
+    z-index: 1;
     padding: 5px 15px;
     background: white;
     border: 5px solid #000000;
@@ -69,6 +70,7 @@
   .lockedOverlay {
     position: absolute;
     inset: 0;
+    z-index: 2;
     border-radius: 10px;
     background: rgba(0, 0, 0, 0.45);
     display: flex;
@@ -87,6 +89,16 @@
     border: none;
     box-shadow: none;
   }
+}
+
+.badgeImage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .badgeCardWrapper {

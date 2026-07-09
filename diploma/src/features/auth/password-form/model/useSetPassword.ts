@@ -5,7 +5,7 @@ import { useRouter } from "@tanstack/react-router";
 import { AuthRoutes } from "@shared/routes";
 import { useFormik } from "formik";
 import { getSetPasswordSchema } from "../libs/setPasswordSchema";
-import { useAuthStore, useUserStore } from "@entities/user";
+import { useAuthStore } from "@entities/user";
 import { getErrorMessage } from "@shared/libs/error-message";
 import { useTranslation } from "react-i18next";
 
@@ -13,7 +13,6 @@ export const useSetPassword = () => {
   const { t } = useTranslation(["auth", "common"]);
   const router = useRouter();
   const { clearEmailForgotPassword } = useAuthStore();
-  const { userId } = useUserStore();
   const validationSchema = getSetPasswordSchema(t);
 
   const mutation = useMutation({
@@ -39,7 +38,7 @@ export const useSetPassword = () => {
   });
 
   const formik = useFormik<setPasswordDto>({
-    initialValues: { userId, newPassword: "", confirmPassword: "" },
+    initialValues: { newPassword: "", confirmPassword: "" },
     validationSchema,
     onSubmit: (values) => mutation.mutate(values),
   });

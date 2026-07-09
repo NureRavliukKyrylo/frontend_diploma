@@ -20,6 +20,8 @@ export const ForgotPasswordVerificationForm: React.FC = () => {
     apiFn: verificationForgotPassword,
     successRedirect: AuthRoutes.forgotPassword.setPassword,
     successMessage: t("verification.successMessage"),
+    includeUserId: false,
+    extraFields: { email: emailForgotPassword },
   });
 
   return (

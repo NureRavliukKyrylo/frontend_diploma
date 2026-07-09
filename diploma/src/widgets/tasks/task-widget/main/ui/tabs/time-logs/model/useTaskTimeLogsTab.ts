@@ -23,6 +23,7 @@ import type {
   TaskLogAction,
   TaskTimeLogsLabels,
 } from "./types";
+import type { TaskPermissionContext } from "../../../../lib/canManageTask";
 
 const downloadBlob = (blob: Blob, filename: string) => {
   const url = URL.createObjectURL(blob);
@@ -35,10 +36,28 @@ const downloadBlob = (blob: Blob, filename: string) => {
   URL.revokeObjectURL(url);
 };
 
+const matchesStatusFilter = (
+  record: TaskTimeLogRecord,
+  status: string,
+) => {
+  if (!status) return true;
+  if (status === "Submitted") {
+    return (
+      record.status === "Submitted" ||
+      record.status === "ManagerEditedPendingVolunteerReconfirm"
+    );
+  }
+  if (status === "Approved") {
+    return record.status === "Approved" || record.status === "Resolved";
+  }
+  return record.status === status;
+};
+
 export const useTaskTimeLogsTab = (
   task: Task,
   pageSize: number,
   labels: TaskTimeLogsLabels,
+  permissionContext: TaskPermissionContext,
 ) => {
   const queryClient = useQueryClient();
   const [status, setStatus] = useState("");
@@ -49,8 +68,8 @@ export const useTaskTimeLogsTab = (
   const [minutes, setMinutes] = useState("");
   const [resolveApprove, setResolveApprove] = useState(true);
   const queryKey = useMemo(
-    () => ["task-time-logs", task.id, pageSize, status],
-    [pageSize, status, task.id],
+    () => ["task-time-logs", task.id, pageSize],
+    [pageSize, task.id],
   );
   const logsResult = useQuery({
     queryKey,
@@ -58,9 +77,16 @@ export const useTaskTimeLogsTab = (
       getTaskTimeLogs(task.id, {
         Page: 1,
         PageSize: pageSize,
-        Status: status || undefined,
       }),
   });
+  const allLogs = useMemo(
+    () => logsResult.data?.data ?? [],
+    [logsResult.data?.data],
+  );
+  const logs = useMemo(
+    () => allLogs.filter((record) => matchesStatusFilter(record, status)),
+    [allLogs, status],
+  );
   const actionMutation = useMutation({
     mutationFn: async () => {
       if (!activeAction) return null;
@@ -149,12 +175,13 @@ export const useTaskTimeLogsTab = (
     status,
     setStatus,
     logsResult,
-    logs: logsResult.data?.data ?? [],
+    allLogs,
+    logs,
     permissions: {
-      canManagerEdit: canManagerEditTaskTimeLogs(task),
-      canApprove: canApproveTaskTimeLogs(task),
-      canReject: canRejectTaskTimeLogs(task),
-      canResolve: canResolveTaskTimeLogs(task),
+      canManagerEdit: canManagerEditTaskTimeLogs(task, permissionContext),
+      canApprove: canApproveTaskTimeLogs(task, permissionContext),
+      canReject: canRejectTaskTimeLogs(task, permissionContext),
+      canResolve: canResolveTaskTimeLogs(task, permissionContext),
     },
     activeAction,
     comment,

@@ -11,6 +11,7 @@ export interface TaskTimeLogsLabels {
   loading: string;
   error: string;
   empty: string;
+  emptyHint: string;
   table: {
     volunteer: string;
     logged: string;
@@ -23,7 +24,25 @@ export interface TaskTimeLogsLabels {
   };
   controls: {
     allStatuses: string;
+    pending: string;
+    approved: string;
+    rejected: string;
+    disputed: string;
     export: string;
+    totalRecords: string;
+    pendingRecords: string;
+    approvedMinutes: string;
+    loggedMinutes: string;
+  };
+  sections: {
+    pending: string;
+    disputed: string;
+    approved: string;
+    other: string;
+  };
+  badges: {
+    managerEdited: string;
+    disputeOpen: string;
   };
   actions: {
     managerEdit: string;
@@ -48,14 +67,3 @@ export interface TaskTimeLogsLabels {
     exported: string;
   };
 }
-
-export const statusOptions = [
-  "Draft",
-  "Submitted",
-  "ManagerEditedPendingVolunteerReconfirm",
-  "Approved",
-  "Rejected",
-  "Disputed",
-  "Resolved",
-  "Cancelled",
-];

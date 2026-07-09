@@ -1,19 +1,33 @@
-import { BadgeCard, type BadgeCardModel, type Tier } from "@entities/badge";
+import {
+  BadgeCard,
+  badgesQuery,
+  type Badge,
+  type BadgeCardModel,
+  type Tier,
+} from "@entities/badge";
 import { useTranslation } from "react-i18next";
 import type { PublicBadgePreview } from "@entities/user/profile";
 import { ProfileSectionCard } from "./ProfileSectionCard";
 import styles from "./PublicProfileBadges.module.scss";
+import { useQueries } from "@tanstack/react-query";
+import { useMemo } from "react";
 
 const supportedRanks = new Set(["S", "A", "B", "C", "D", "E", "F"]);
 
-const toBadge = (badge: PublicBadgePreview): BadgeCardModel => ({
+const normalizeRank = (rank: string): Tier => {
+  const normalizedRank = rank.toUpperCase();
+  return supportedRanks.has(normalizedRank) ? (normalizedRank as Tier) : "F";
+};
+
+const toBadge = (
+  badge: PublicBadgePreview,
+  liveBadge?: Badge,
+): BadgeCardModel => ({
   id: badge.id,
-  title: badge.title,
-  iconUrl: badge.iconUrl,
+  title: liveBadge?.title || badge.title,
+  iconUrl: liveBadge?.iconUrl || badge.iconUrl,
   rank: {
-    name: supportedRanks.has(badge.rank)
-      ? (badge.rank as Tier)
-      : "F",
+    name: liveBadge?.rank.name ?? normalizeRank(badge.rank),
   },
   isUnlocked: true,
 });
@@ -30,6 +44,21 @@ export const PublicProfileBadges = ({
   lockedCount,
 }: PublicProfileBadgesProps) => {
   const { t } = useTranslation("common");
+  const badgeDetails = useQueries({
+    queries: badges.map((badge) => ({
+      ...badgesQuery.id(badge.id),
+      enabled: Boolean(badge.id),
+      retry: false,
+    })),
+  });
+  const liveBadgesById = useMemo(() => {
+    return new Map(
+      badgeDetails
+        .map((query) => query.data)
+        .filter((badge): badge is Badge => Boolean(badge))
+        .map((badge) => [badge.id, badge]),
+    );
+  }, [badgeDetails]);
 
   return (
     <ProfileSectionCard
@@ -43,7 +72,7 @@ export const PublicProfileBadges = ({
       <div className={styles.grid}>
         {badges.map((badge) => (
           <div key={badge.id} className={styles.badge}>
-            <BadgeCard badge={toBadge(badge)} />
+            <BadgeCard badge={toBadge(badge, liveBadgesById.get(badge.id))} />
             <strong>{badge.title}</strong>
           </div>
         ))}

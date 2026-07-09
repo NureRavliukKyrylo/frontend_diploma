@@ -22,7 +22,7 @@ export const HeaderNav = () => {
     >
       <nav
         className={clsx(styles.menu, "!hidden lg:!flex lg:max-xl:!gap-8")}
-        aria-label="Primary"
+        aria-label={t("header.primaryNavigation")}
       >
         {headerLinks.map(({ title, href }) => (
           <motion.span

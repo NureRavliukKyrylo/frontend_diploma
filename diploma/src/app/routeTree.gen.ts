@@ -59,6 +59,7 @@ import { Route as AdminLayoutAdminRequestsIndexRouteImport } from './routers/_ad
 import { Route as AdminLayoutAdminNotificationsIndexRouteImport } from './routers/_adminLayout/admin/notifications/index'
 import { Route as AdminLayoutAdminCategoriesIndexRouteImport } from './routers/_adminLayout/admin/categories/index'
 import { Route as AdminLayoutAdminBansIndexRouteImport } from './routers/_adminLayout/admin/bans/index'
+import { Route as AdminLayoutAdminBadgesIndexRouteImport } from './routers/_adminLayout/admin/badges/index'
 import { Route as AdminLayoutAdminAccessPoliciesIndexRouteImport } from './routers/_adminLayout/admin/access-policies/index'
 import { Route as PublicLayoutProjectsIdSettingsIndexRouteImport } from './routers/_publicLayout/projects/$id/settings/index'
 import { Route as MasterLayoutProjectsMyIdIndexRouteImport } from './routers/_masterLayout/projects/my/$id/index'
@@ -458,6 +459,12 @@ const AdminLayoutAdminBansIndexRoute =
     path: '/admin/bans/',
     getParentRoute: () => AdminLayoutRoute,
   } as any)
+const AdminLayoutAdminBadgesIndexRoute =
+  AdminLayoutAdminBadgesIndexRouteImport.update({
+    id: '/admin/badges/',
+    path: '/admin/badges/',
+    getParentRoute: () => AdminLayoutRoute,
+  } as any)
 const AdminLayoutAdminAccessPoliciesIndexRoute =
   AdminLayoutAdminAccessPoliciesIndexRouteImport.update({
     id: '/admin/access-policies/',
@@ -642,6 +649,7 @@ export interface FileRoutesByFullPath {
   '/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordLazyRoute
   '/auth/forgot-password/verification': typeof AuthLayoutAuthForgotPasswordVerificationLazyRoute
   '/admin/access-policies/': typeof AdminLayoutAdminAccessPoliciesIndexRoute
+  '/admin/badges/': typeof AdminLayoutAdminBadgesIndexRoute
   '/admin/bans/': typeof AdminLayoutAdminBansIndexRoute
   '/admin/categories/': typeof AdminLayoutAdminCategoriesIndexRoute
   '/admin/notifications/': typeof AdminLayoutAdminNotificationsIndexRoute
@@ -712,6 +720,7 @@ export interface FileRoutesByTo {
   '/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordLazyRoute
   '/auth/forgot-password/verification': typeof AuthLayoutAuthForgotPasswordVerificationLazyRoute
   '/admin/access-policies': typeof AdminLayoutAdminAccessPoliciesIndexRoute
+  '/admin/badges': typeof AdminLayoutAdminBadgesIndexRoute
   '/admin/bans': typeof AdminLayoutAdminBansIndexRoute
   '/admin/categories': typeof AdminLayoutAdminCategoriesIndexRoute
   '/admin/notifications': typeof AdminLayoutAdminNotificationsIndexRoute
@@ -790,6 +799,7 @@ export interface FileRoutesById {
   '/_authLayout/auth/forgot-password/set-password': typeof AuthLayoutAuthForgotPasswordSetPasswordLazyRoute
   '/_authLayout/auth/forgot-password/verification': typeof AuthLayoutAuthForgotPasswordVerificationLazyRoute
   '/_adminLayout/admin/access-policies/': typeof AdminLayoutAdminAccessPoliciesIndexRoute
+  '/_adminLayout/admin/badges/': typeof AdminLayoutAdminBadgesIndexRoute
   '/_adminLayout/admin/bans/': typeof AdminLayoutAdminBansIndexRoute
   '/_adminLayout/admin/categories/': typeof AdminLayoutAdminCategoriesIndexRoute
   '/_adminLayout/admin/notifications/': typeof AdminLayoutAdminNotificationsIndexRoute
@@ -864,6 +874,7 @@ export interface FileRouteTypes {
     | '/auth/forgot-password/set-password'
     | '/auth/forgot-password/verification'
     | '/admin/access-policies/'
+    | '/admin/badges/'
     | '/admin/bans/'
     | '/admin/categories/'
     | '/admin/notifications/'
@@ -934,6 +945,7 @@ export interface FileRouteTypes {
     | '/auth/forgot-password/set-password'
     | '/auth/forgot-password/verification'
     | '/admin/access-policies'
+    | '/admin/badges'
     | '/admin/bans'
     | '/admin/categories'
     | '/admin/notifications'
@@ -1011,6 +1023,7 @@ export interface FileRouteTypes {
     | '/_authLayout/auth/forgot-password/set-password'
     | '/_authLayout/auth/forgot-password/verification'
     | '/_adminLayout/admin/access-policies/'
+    | '/_adminLayout/admin/badges/'
     | '/_adminLayout/admin/bans/'
     | '/_adminLayout/admin/categories/'
     | '/_adminLayout/admin/notifications/'
@@ -1439,6 +1452,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLayoutAdminBansIndexRouteImport
       parentRoute: typeof AdminLayoutRoute
     }
+    '/_adminLayout/admin/badges/': {
+      id: '/_adminLayout/admin/badges/'
+      path: '/admin/badges'
+      fullPath: '/admin/badges/'
+      preLoaderRoute: typeof AdminLayoutAdminBadgesIndexRouteImport
+      parentRoute: typeof AdminLayoutRoute
+    }
     '/_adminLayout/admin/access-policies/': {
       id: '/_adminLayout/admin/access-policies/'
       path: '/admin/access-policies'
@@ -1599,6 +1619,7 @@ declare module '@tanstack/react-router' {
 interface AdminLayoutRouteChildren {
   AdminLayoutAdminIndexRoute: typeof AdminLayoutAdminIndexRoute
   AdminLayoutAdminAccessPoliciesIndexRoute: typeof AdminLayoutAdminAccessPoliciesIndexRoute
+  AdminLayoutAdminBadgesIndexRoute: typeof AdminLayoutAdminBadgesIndexRoute
   AdminLayoutAdminBansIndexRoute: typeof AdminLayoutAdminBansIndexRoute
   AdminLayoutAdminCategoriesIndexRoute: typeof AdminLayoutAdminCategoriesIndexRoute
   AdminLayoutAdminNotificationsIndexRoute: typeof AdminLayoutAdminNotificationsIndexRoute
@@ -1613,6 +1634,7 @@ const AdminLayoutRouteChildren: AdminLayoutRouteChildren = {
   AdminLayoutAdminIndexRoute: AdminLayoutAdminIndexRoute,
   AdminLayoutAdminAccessPoliciesIndexRoute:
     AdminLayoutAdminAccessPoliciesIndexRoute,
+  AdminLayoutAdminBadgesIndexRoute: AdminLayoutAdminBadgesIndexRoute,
   AdminLayoutAdminBansIndexRoute: AdminLayoutAdminBansIndexRoute,
   AdminLayoutAdminCategoriesIndexRoute: AdminLayoutAdminCategoriesIndexRoute,
   AdminLayoutAdminNotificationsIndexRoute:

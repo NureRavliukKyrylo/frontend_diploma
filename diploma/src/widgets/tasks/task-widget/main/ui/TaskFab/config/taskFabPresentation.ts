@@ -1,6 +1,7 @@
 import type { Variants } from "framer-motion";
 import type { TaskFabActionId } from "./fabActionsConfig";
-import styles from "@widgets/organizations/details/ui/OrganizationFab/OrganizationFab.module.scss";
+import organizationStyles from "@widgets/organizations/details/ui/OrganizationFab/OrganizationFab.module.scss";
+import taskStyles from "../TaskFab.module.scss";
 
 export const menuVariants: Variants = {
   initial: { opacity: 0 },
@@ -25,7 +26,8 @@ export const itemVariants: Variants = {
 };
 
 export const actionClassNames: Record<TaskFabActionId, string> = {
-  members: styles.membersAction,
-  roles: styles.rolesAction,
-  timelog: styles.taskAction,
+  members: organizationStyles.membersAction,
+  roles: organizationStyles.rolesAction,
+  timelog: taskStyles.attendanceAction,
+  settings: taskStyles.settingsAction,
 };

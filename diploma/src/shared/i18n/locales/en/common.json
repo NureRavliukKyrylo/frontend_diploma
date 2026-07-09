@@ -37,12 +37,153 @@
   },
   "header": {
     "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "navigationMenu": "Navigation menu",
+    "primaryNavigation": "Primary navigation",
+    "mobilePrimary": "Mobile primary navigation",
     "profile": "Profile",
     "loading": "Loading...",
     "timeBank": "Time Bank",
+    "myOrganizations": "My Organizations",
+    "bookmarks": "Bookmarks",
+    "bookmark": "Bookmark",
+    "notifications": "Notifications",
+    "notificationsAriaUnread": "Notifications ({{count}} unread)",
+    "messages": "Messages",
+    "language": "Language",
     "logout": "Logout",
     "logoutTitle": "Are you sure you want to logout?",
-    "logoutText": "You will be able to sign in again whenever you need."
+    "logoutText": "You will be able to sign in again whenever you need.",
+    "search": {
+      "placeholder": "Search",
+      "ariaLabel": "Global site search",
+      "submit": "Search site",
+      "sitePages": "Site pages",
+      "emptyTitle": "No results found",
+      "emptyText": "Try Profile, Calendar, Map, Projects, or Skills."
+    },
+    "searchPages": {
+      "home": {
+        "title": "Home",
+        "description": "Main ImpactFlow page",
+        "keywords": "home|main|landing|impactflow"
+      },
+      "profile": {
+        "title": "Profile",
+        "description": "Your profile, inventory, badges, and activity",
+        "keywords": "profile|account|user|badges|inventory"
+      },
+      "profileSettings": {
+        "title": "Profile Settings",
+        "description": "Personal, security, and profile preferences",
+        "keywords": "settings|security|password|email|preferences"
+      },
+      "chat": {
+        "title": "Chat",
+        "description": "Your conversations and messages",
+        "keywords": "chat|messages|conversations|inbox"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "description": "Updates, requests, and activity alerts",
+        "keywords": "notifications|alerts|updates|requests"
+      },
+      "organizations": {
+        "title": "Organizations",
+        "description": "Public organization catalog",
+        "keywords": "organizations|organization|catalog|teams"
+      },
+      "myOrganizations": {
+        "title": "My Organizations",
+        "description": "Organizations you own or belong to",
+        "keywords": "my organizations|joined organizations|owned organizations|teams|workspace"
+      },
+      "createOrganization": {
+        "title": "Create Organization",
+        "description": "Start a new organization workspace",
+        "keywords": "create organization|new organization|workspace|team"
+      },
+      "archivedOrganizations": {
+        "title": "Archived Organizations",
+        "description": "Review archived organization spaces",
+        "keywords": "archived organizations|archive|inactive organizations"
+      },
+      "categories": {
+        "title": "Categories",
+        "description": "Browse activity categories and causes",
+        "keywords": "categories|category|topics|causes|activities"
+      },
+      "skills": {
+        "title": "Skills",
+        "description": "Browse skills and volunteer capabilities",
+        "keywords": "skills|skill|experience|capabilities|levels"
+      },
+      "projects": {
+        "title": "Projects",
+        "description": "Browse available projects",
+        "keywords": "projects|project|activities|volunteer"
+      },
+      "events": {
+        "title": "Events",
+        "description": "Browse upcoming events",
+        "keywords": "events|event|meetings|activities"
+      },
+      "tasks": {
+        "title": "Tasks",
+        "description": "Browse available tasks",
+        "keywords": "tasks|task|todo|activities"
+      },
+      "myActivities": {
+        "title": "My Activities",
+        "description": "Projects, events, and tasks you joined",
+        "keywords": "my activities|joined activities|my tasks|my events"
+      },
+      "reports": {
+        "title": "Reports",
+        "description": "Moderation reports and safety cases",
+        "keywords": "reports|moderation|safety|complaints"
+      },
+      "timeBank": {
+        "title": "Time Bank",
+        "description": "Track volunteer time, offers, and transactions",
+        "keywords": "time bank|hours|offers|bookings|transactions|volunteer time"
+      },
+      "bookmarks": {
+        "title": "Bookmarks",
+        "description": "Saved projects, events, and tasks",
+        "keywords": "bookmarks|saved|joined activities|participating"
+      },
+      "map": {
+        "title": "Map",
+        "description": "Explore activities by location",
+        "keywords": "map|location|nearby|geo"
+      },
+      "calendar": {
+        "title": "Calendar",
+        "description": "Availability and scheduled activities",
+        "keywords": "calendar|schedule|availability|dates"
+      },
+      "faq": {
+        "title": "FAQ",
+        "description": "Answers to common ImpactFlow questions",
+        "keywords": "faq|help|questions|support"
+      },
+      "privacy": {
+        "title": "Privacy Policy",
+        "description": "How ImpactFlow handles personal data",
+        "keywords": "privacy|policy|data|personal data"
+      },
+      "terms": {
+        "title": "Terms of Service",
+        "description": "Platform rules, terms, and conditions",
+        "keywords": "terms|rules|conditions|legal"
+      },
+      "admin": {
+        "title": "Admin",
+        "description": "Administrative overview and platform tools",
+        "keywords": "admin|dashboard|users|badges|requests"
+      }
+    }
   },
   "memberMutations": {
     "missingParticipation": "This member does not have a participation record.",

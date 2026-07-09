@@ -1,11 +1,15 @@
 import type { TabOption } from "@shared/config/types";
 import type { Task, TaskMode } from "@entities/task";
 import type { TFunction } from "i18next";
-import { canViewTaskTimeLogs } from "../lib/canManageTask";
+import {
+  canViewTaskTimeLogs,
+  type TaskPermissionContext,
+} from "../lib/canManageTask";
 
 export const getTaskMainTabs = (
   t: TFunction,
   task?: Task,
+  permissionContext?: TaskPermissionContext,
 ): TabOption<TaskMode>[] => {
   const tabs: TabOption<TaskMode>[] = [
     {
@@ -26,7 +30,7 @@ export const getTaskMainTabs = (
     },
   ];
 
-  if (canViewTaskTimeLogs(task)) {
+  if (canViewTaskTimeLogs(task, permissionContext)) {
     tabs.push({
       label: t("task:tabs.timelog", { defaultValue: "WORK LOG" }),
       value: "timelog",

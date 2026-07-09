@@ -10,6 +10,7 @@ import { getPolicyStatusConfig } from "@shared/libs/entity";
 import type { FeedbackSortValues } from "@entities/feedback";
 import { getFullName } from "@entities/user";
 import { useTranslation } from "react-i18next";
+import { useTaskPermissionContext } from "./useTaskPermissionContext";
 
 interface UseTaskWidgetProps {
   taskId?: string;
@@ -33,13 +34,13 @@ export const useTaskWidget = ({
   });
   const { t } = useTranslation(["common", "task"]);
   const { user, coordinates: userLocation } = useMapUserLocation();
+  const permissionContext = useTaskPermissionContext(task);
 
   const statusConfig = task ? getTaskStatusConfig(task.status, t) : null;
   const policyConfig = task?.joinPolicy
     ? getPolicyStatusConfig(task.joinPolicy, t)
     : null;
 
-  console.log(getFullName(user?.firstName, user?.lastName));
   const forms = task
     ? getTaskMainForms({
         task,
@@ -50,6 +51,7 @@ export const useTaskWidget = ({
         search,
         handleSort,
         t,
+        permissionContext,
       })
     : null;
 
@@ -61,5 +63,6 @@ export const useTaskWidget = ({
     statusConfig,
     policyConfig,
     forms,
+    permissionContext,
   };
 };

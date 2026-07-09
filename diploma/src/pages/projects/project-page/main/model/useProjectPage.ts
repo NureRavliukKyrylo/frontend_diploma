@@ -12,6 +12,8 @@ import { getProjectMainForms } from "../config/projectMainForms";
 import type { FeedbackSortValues } from "@entities/feedback";
 import type { TaskDrawerSearch } from "@entities/task";
 import { useTranslation } from "react-i18next";
+import { useProjectPermissionContext } from "@widgets/projects";
+import { canManageProject } from "@widgets/projects/details/lib/projectPermissions";
 
 export const useProjectPage = () => {
   const { id } = useParams({ from: "/_publicLayout/projects/$id/" });
@@ -23,6 +25,7 @@ export const useProjectPage = () => {
   const { data: project } = useSuspenseQuery(projectQuery.id(id));
   const { data: events } = useQuery(eventQuery.list({ ProjectIds: [id] }));
   const { user, coordinates: userLocation } = useMapUserLocation();
+  const permissionContext = useProjectPermissionContext(project);
 
   const navigate = useNavigate({ from: "/projects/$id/" });
 
@@ -59,6 +62,7 @@ export const useProjectPage = () => {
     search,
     handleSort,
     filters,
+    canMoveTasks: canManageProject(project, permissionContext),
   });
 
   return {

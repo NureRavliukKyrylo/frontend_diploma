@@ -11,6 +11,8 @@ import { getEventMainForms } from "../config/eventMainForms";
 import type { FeedbackSortValues } from "@entities/feedback";
 import type { TaskDrawerSearch } from "@entities/task";
 import { useTranslation } from "react-i18next";
+import { useEventPermissionContext } from "@widgets/events";
+import { canManageEvent } from "@widgets/events/details/lib/eventPermissions";
 
 export const useEventPage = () => {
   const { id } = useParams({ from: "/_publicLayout/events/$id/" });
@@ -18,6 +20,7 @@ export const useEventPage = () => {
   const { t } = useTranslation(["common"]);
   const { data: event } = useSuspenseQuery(eventQuery.id(id));
   const { user, coordinates: userLocation } = useMapUserLocation();
+  const permissionContext = useEventPermissionContext(event);
 
   const navigate = useNavigate({ from: "/events/$id/" });
 
@@ -53,6 +56,7 @@ export const useEventPage = () => {
     search,
     handleSort,
     filters,
+    canMoveTasks: canManageEvent(event, permissionContext),
   });
 
   return {

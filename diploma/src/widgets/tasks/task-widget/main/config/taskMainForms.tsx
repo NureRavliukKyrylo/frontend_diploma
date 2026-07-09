@@ -7,7 +7,10 @@ import { TaskCommentsTab } from "../../../task-comments/ui/comments-tab/TaskComm
 import type { TFunction } from "i18next";
 import { TaskRolesTab } from "../ui/tabs/TaskRolesTab";
 import { TaskTimeLogsTab } from "../ui/tabs/time-logs/ui/TaskTimeLogsTab";
-import { canManageTaskMembers } from "../lib/canManageTask";
+import {
+  canManageTaskMembers,
+  type TaskPermissionContext,
+} from "../lib/canManageTask";
 
 interface TaskTabsProps {
   task: Task;
@@ -18,6 +21,7 @@ interface TaskTabsProps {
   search?: TaskDrawerSearch;
   handleSort: (value: FeedbackSortValues) => void;
   t: TFunction;
+  permissionContext: TaskPermissionContext;
 }
 
 export const getTaskMainForms = (
@@ -38,7 +42,7 @@ export const getTaskMainForms = (
       entityId={props.task.id}
       userId={props.userId}
       entityType="task"
-      canManage={canManageTaskMembers(props.task)}
+      canManage={canManageTaskMembers(props.task, props.permissionContext)}
       pageSize={props.search?.DrawerPageSize ?? 8}
       labels={{
         loading: props.t("common:entityMembers.loading"),
@@ -83,11 +87,13 @@ export const getTaskMainForms = (
   timelog: (
     <TaskTimeLogsTab
       task={props.task}
+      permissionContext={props.permissionContext}
       pageSize={props.search?.DrawerPageSize ?? 20}
       labels={{
         loading: props.t("task:timelog.loading"),
         error: props.t("task:timelog.error"),
         empty: props.t("task:timelog.empty"),
+        emptyHint: props.t("task:timelog.emptyHint"),
         table: {
           volunteer: props.t("task:timelog.table.volunteer"),
           logged: props.t("task:timelog.table.logged"),
@@ -100,7 +106,25 @@ export const getTaskMainForms = (
         },
         controls: {
           allStatuses: props.t("task:timelog.controls.allStatuses"),
+          pending: props.t("task:timelog.controls.pending"),
+          approved: props.t("task:timelog.controls.approved"),
+          rejected: props.t("task:timelog.controls.rejected"),
+          disputed: props.t("task:timelog.controls.disputed"),
           export: props.t("task:timelog.controls.export"),
+          totalRecords: props.t("task:timelog.controls.totalRecords"),
+          pendingRecords: props.t("task:timelog.controls.pendingRecords"),
+          approvedMinutes: props.t("task:timelog.controls.approvedMinutes"),
+          loggedMinutes: props.t("task:timelog.controls.loggedMinutes"),
+        },
+        sections: {
+          pending: props.t("task:timelog.sections.pending"),
+          disputed: props.t("task:timelog.sections.disputed"),
+          approved: props.t("task:timelog.sections.approved"),
+          other: props.t("task:timelog.sections.other"),
+        },
+        badges: {
+          managerEdited: props.t("task:timelog.badges.managerEdited"),
+          disputeOpen: props.t("task:timelog.badges.disputeOpen"),
         },
         actions: {
           managerEdit: props.t("task:timelog.actions.managerEdit"),

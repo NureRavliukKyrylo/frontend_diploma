@@ -15,11 +15,26 @@ import { useTranslation } from "react-i18next";
 export const EmailVerificationForm: React.FC = () => {
   const { t } = useTranslation(["auth", "common"]);
   const { otpTimers, resetOtpTimer, decrementOtpTimer } = useAuthStore();
-  const { userId } = useUserStore();
+  const {
+    userId,
+    setUserId,
+    setFirstName,
+    setLastName,
+    setIsAuthenticated,
+    setRole,
+  } = useUserStore();
   const { formik, isLoading, errorMessage } = useVerification({
     apiFn: verificationEmail,
     successRedirect: MultiStepFormRoutes.fillForm,
     successMessage: t("verification.email.successMessage"),
+    requireUserId: true,
+    onSuccess: (data) => {
+      setUserId(data.userId);
+      setFirstName(data.firstName);
+      setLastName(data.lastName);
+      setRole(data.role);
+      setIsAuthenticated(true);
+    },
   });
 
   return (

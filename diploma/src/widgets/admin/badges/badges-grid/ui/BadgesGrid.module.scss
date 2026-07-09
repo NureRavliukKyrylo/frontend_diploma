@@ -1,0 +1,217 @@
+.badgesGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.badgeCell {
+  position: relative;
+  min-width: 0;
+  border: 0;
+  border-radius: 32px 22px 32px 22px;
+  background: #ffffff;
+  padding: 16px;
+  cursor: pointer;
+  color: inherit;
+  text-align: left;
+  overflow: hidden;
+  box-shadow:
+    0 14px 35px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    top: -86px;
+    right: -76px;
+    border-radius: 50%;
+    background: var(--tier-color);
+    opacity: 0.08;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+}
+
+.posterWrap {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 24px 16px 24px 16px;
+  padding: 12px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(245, 245, 245, 0.95)),
+    radial-gradient(circle at 82% 8%, var(--tier-color), transparent 34%);
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.04),
+    0 12px 28px rgba(0, 0, 0, 0.08);
+
+  > div:first-child {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.menuTrigger {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #777777;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.12);
+  z-index: 3;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+}
+
+.awardedPill {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  border-radius: 999px;
+  padding: 0 14px;
+  background: rgba(26, 26, 26, 0.92);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 900;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  z-index: 3;
+
+  svg {
+    color: #f3bf3f;
+  }
+}
+
+.archivedOverlay {
+  position: absolute;
+  inset: 12px;
+  border-radius: 18px 12px 18px 12px;
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  z-index: 2;
+}
+
+.badgeInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 15px 6px 3px;
+
+  h3 {
+    width: 100%;
+    margin: 0;
+    color: #1a1a1a;
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1.16;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    min-height: 40px;
+  }
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    border-radius: 999px;
+    padding: 0 12px;
+    background: color-mix(in srgb, var(--tier-color) 11%, #ffffff);
+    font-size: 13px;
+    font-weight: 900;
+  }
+}
+
+.badgeSkeleton {
+  min-height: 420px;
+  border-radius: 32px 22px 32px 22px;
+}
+
+.stateCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 27px 18px 27px 18px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 42px;
+
+  strong {
+    color: #1a1a1a;
+    font-size: 24px;
+    font-weight: 900;
+  }
+
+  span {
+    color: #999999;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 700px) {
+  .badgesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1700px) {
+  .badgesGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1300px) {
+  .badgesGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .badgesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

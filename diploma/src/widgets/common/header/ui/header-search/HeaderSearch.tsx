@@ -3,8 +3,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "@tanstack/react-router";
 import clsx from "clsx";
 import { Search } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import {
-  searchablePages,
+  searchablePageConfigs,
   type SearchablePage,
 } from "../../config/searchablePages";
 import { HeaderSearchResults } from "./HeaderSearchResults";
@@ -24,6 +25,7 @@ export const HeaderSearch = ({
   onNavigate,
 }: HeaderSearchProps) => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation("common");
   const formRef = useRef<HTMLFormElement>(null);
   const [internalSearch, setInternalSearch] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -33,14 +35,35 @@ export const HeaderSearch = ({
     if (value === undefined) setInternalSearch(nextValue);
     onValueChange?.(nextValue);
   };
+  const localizedPages = useMemo<SearchablePage[]>(
+    () =>
+      searchablePageConfigs.map((page) => ({
+        ...page,
+        title: t(page.titleKey),
+        description: t(page.descriptionKey),
+        keywords: t(page.keywordsKey)
+          .split("|")
+          .map((keyword) => keyword.trim())
+          .filter(Boolean),
+      })),
+    [i18n.language, t],
+  );
   const filteredPages = useMemo(() => {
     const normalized = search.trim().toLowerCase();
     return normalized
-      ? searchablePages.filter((page) =>
-          page.title.toLowerCase().includes(normalized),
-        )
-      : searchablePages;
-  }, [search]);
+      ? localizedPages.filter((page) => {
+          const searchableText = [
+            page.title,
+            page.description,
+            ...page.keywords,
+          ]
+            .join(" ")
+            .toLowerCase();
+
+          return searchableText.includes(normalized);
+        })
+      : localizedPages;
+  }, [localizedPages, search]);
 
   useEffect(() => {
     const handlePointerDown = (event: PointerEvent) => {
@@ -81,8 +104,8 @@ export const HeaderSearch = ({
     >
       <input
         type="text"
-        placeholder="Search"
-        aria-label="Global site search"
+        placeholder={t("header.search.placeholder")}
+        aria-label={t("header.search.ariaLabel")}
         className={isDrawer ? styles.drawerSearchInput : styles.searchInput}
         value={search}
         aria-expanded={isOpen}
@@ -97,7 +120,7 @@ export const HeaderSearch = ({
       <button
         type="submit"
         className={isDrawer ? styles.drawerSearchButton : styles.searchButton}
-        aria-label="Search site"
+        aria-label={t("header.search.submit")}
       >
         <Search className={styles.searchIcon} aria-hidden="true" />
       </button>
@@ -115,7 +138,7 @@ export const HeaderSearch = ({
             transition={{ duration: 0.18, ease: "easeOut" }}
           >
             <div className={styles.searchDropdownHeader}>
-              <span>Site pages</span>
+              <span>{t("header.search.sitePages")}</span>
               <span className={styles.searchCount}>{filteredPages.length}</span>
             </div>
             <HeaderSearchResults

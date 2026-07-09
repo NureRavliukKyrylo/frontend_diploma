@@ -78,7 +78,8 @@
     "closeActions": "Закрити дії завдання",
     "members": "Учасники",
     "roles": "Ролі",
-    "timelog": "Журнал роботи"
+    "timelog": "Журнал роботи",
+    "settings": "Налаштування"
   },
   "roles": {
     "loading": "Завантажуємо ролі завдання...",
@@ -88,7 +89,8 @@
   "timelog": {
     "loading": "Завантажуємо журнали роботи...",
     "error": "Не вдалося завантажити журнали роботи.",
-    "empty": "Журналів роботи ще немає.",
+    "empty": "Немає записів часу",
+    "emptyHint": "Надіслані записи роботи з’являться тут для перевірки.",
     "table": {
       "volunteer": "Волонтер",
       "logged": "Записано",
@@ -100,11 +102,29 @@
       "notProvided": "Не вказано"
     },
     "controls": {
-      "allStatuses": "Усі статуси",
-      "export": "Експорт CSV"
+      "allStatuses": "Усі",
+      "pending": "Очікує",
+      "approved": "Затверджено",
+      "rejected": "Відхилено",
+      "disputed": "Оскаржено",
+      "export": "Експорт CSV",
+      "totalRecords": "Усього записів",
+      "pendingRecords": "Очікують",
+      "approvedMinutes": "Затверджено хвилин",
+      "loggedMinutes": "Записано хвилин"
+    },
+    "sections": {
+      "pending": "Очікує затвердження",
+      "disputed": "Оскаржено",
+      "approved": "Затверджено",
+      "other": "Інше"
+    },
+    "badges": {
+      "managerEdited": "Змінено менеджером",
+      "disputeOpen": "Спір відкрито"
     },
     "actions": {
-      "managerEdit": "Редагувати",
+      "managerEdit": "Змінити",
       "approve": "Підтвердити",
       "reject": "Відхилити",
       "resolve": "Вирішити",
@@ -127,11 +147,11 @@
     },
     "statuses": {
       "Draft": "Чернетка",
-      "Submitted": "Надіслано",
-      "ManagerEditedPendingVolunteerReconfirm": "Очікує підтвердження волонтера",
-      "Approved": "Схвалено",
+      "Submitted": "Очікує",
+      "ManagerEditedPendingVolunteerReconfirm": "Змінено",
+      "Approved": "Затверджено",
       "Rejected": "Відхилено",
-      "Disputed": "Оскаржується",
+      "Disputed": "Оскаржено",
       "Resolved": "Вирішено",
       "Cancelled": "Скасовано"
     }

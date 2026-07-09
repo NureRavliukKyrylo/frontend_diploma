@@ -1,8 +1,14 @@
-import { Clock, Shield, Users, type LucideIcon } from "lucide-react";
+import {
+  Clock,
+  Settings,
+  Shield,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 
-export type TaskFabActionId = "members" | "roles" | "timelog";
+export type TaskFabActionId = "members" | "roles" | "timelog" | "settings";
 
-export type TaskFabPermission = "members" | "roles" | "timelog";
+export type TaskFabPermission = "members" | "roles" | "timelog" | "content";
 
 export interface TaskFabActionConfig {
   id: TaskFabActionId;
@@ -29,5 +35,11 @@ export const taskFabActionsConfig: TaskFabActionConfig[] = [
     labelKey: "task:fab.timelog",
     icon: Clock,
     permission: "timelog",
+  },
+  {
+    id: "settings",
+    labelKey: "task:fab.settings",
+    icon: Settings,
+    permission: "content",
   },
 ];

@@ -4,6 +4,8 @@ import type { Tier } from "../../model/types/tier/TierList";
 import styles from "./BadgeCard.module.scss";
 import { LockedIcon } from "@shared/assets/icons/info";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import { badgePlaceholderIcon, resolveBadgeIconUrl } from "../../lib/badgeIcon";
 
 export interface BadgeCardModel {
   id: string;
@@ -20,11 +22,22 @@ export interface BadgeCardProps {
 }
 
 export const BadgeCard = ({ badge }: BadgeCardProps) => {
+  const [iconUrl, setIconUrl] = useState(() =>
+    resolveBadgeIconUrl(badge.iconUrl),
+  );
+
+  useEffect(() => {
+    setIconUrl(resolveBadgeIconUrl(badge.iconUrl));
+  }, [badge.iconUrl]);
+
   return (
-    <div
-      className={styles.badgeImageBlock}
-      style={{ backgroundImage: `url(${badge.iconUrl})` }}
-    >
+    <div className={styles.badgeImageBlock}>
+      <img
+        className={styles.badgeImage}
+        src={iconUrl}
+        alt={badge.title}
+        onError={() => setIconUrl(badgePlaceholderIcon)}
+      />
       <div
         className={styles.badgeInfoTier}
         style={{ color: TierColors[badge.rank.name] }}

@@ -4,12 +4,18 @@ import { formatDateToText } from "@shared/libs/date";
 import { Stars } from "@shared/ui/stars";
 import { TierOrder } from "@entities/badge/model/types/tier/TierList";
 import { ProgressBar } from "@shared/ui";
-import { badgesQuery, TierColors } from "@entities/badge";
+import {
+  badgePlaceholderIcon,
+  badgesQuery,
+  resolveBadgeIconUrl,
+  TierColors,
+} from "@entities/badge";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ShareBadgeButton } from "@features/badge";
 import { Link } from "@tanstack/react-router";
 import { LockedIcon } from "@shared/assets/icons/info";
 import { useTranslation, Trans } from "react-i18next";
+import { useEffect, useState } from "react";
 
 const entityTypeToRoute = {
   organization: "/organizations/$id",
@@ -21,14 +27,22 @@ const entityTypeToRoute = {
 export const BadgeDetailWidget = ({ id }: { id: string }) => {
   const { t, i18n } = useTranslation(["badge"]);
   const { data: badge } = useSuspenseQuery(badgesQuery.id(id));
+  const [iconUrl, setIconUrl] = useState(() =>
+    resolveBadgeIconUrl(badge.iconUrl),
+  );
+
+  useEffect(() => {
+    setIconUrl(resolveBadgeIconUrl(badge.iconUrl));
+  }, [badge.iconUrl]);
 
   return (
     <>
       <div className={styles.imageWrapper}>
         <img
           className={styles.iconUrl}
-          src={badge.iconUrl}
+          src={iconUrl}
           alt={t("badge:labels.imgAltBadge")}
+          onError={() => setIconUrl(badgePlaceholderIcon)}
         />
         {!badge.isUnlocked && (
           <div className={styles.lockedOverlay}>

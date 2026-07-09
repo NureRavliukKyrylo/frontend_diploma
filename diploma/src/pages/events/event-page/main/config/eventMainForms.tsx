@@ -19,6 +19,7 @@ interface EventTabsProps {
   search: Omit<EventDetailSearch, "tab">;
   handleSort: (value: FeedbackSortValues) => void;
   filters?: Omit<TasksRequestParams, "Status">;
+  canMoveTasks?: boolean;
 }
 
 export const getEventMainForms = (
@@ -51,6 +52,7 @@ export const getEventMainForms = (
     <TasksTab
       search={props.search as TaskDrawerSearch}
       filters={props.filters}
+      canMoveTasks={props.canMoveTasks}
     />
   ),
 });

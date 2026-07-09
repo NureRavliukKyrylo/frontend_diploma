@@ -5,9 +5,10 @@ import { useTasksTabProject } from "../model/useTasksTabTaskDrawer";
 interface TasksTabProps {
   search: TaskDrawerSearch;
   filters?: Omit<TasksRequestParams, "Status">;
+  canMoveTasks?: boolean;
 }
 
-export const TasksTab = ({ search, filters }: TasksTabProps) => {
+export const TasksTab = ({ search, filters, canMoveTasks }: TasksTabProps) => {
   const {
     isOpen,
     closeTask,
@@ -29,6 +30,7 @@ export const TasksTab = ({ search, filters }: TasksTabProps) => {
       taskId={taskId}
       search={search}
       filters={filters}
+      canMoveTasks={canMoveTasks}
     />
   );
 };

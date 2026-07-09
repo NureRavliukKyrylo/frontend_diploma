@@ -8,6 +8,14 @@ interface TaskBoardContextValue {
   renderSkeleton?: () => ReactNode;
   onAddTask?: (status: TaskStatus) => void;
   useTasksQuery: (status: TaskStatus) => () => QueryResult<Task>;
+  canMoveTasks?: boolean;
+  draggedTask?: Task | null;
+  dropTargetStatus?: TaskStatus | null;
+  isMovingTask?: boolean;
+  onMoveTask?: (task: Task, status: TaskStatus) => void | Promise<void>;
+  startDraggingTask?: (task: Task) => void;
+  finishDraggingTask?: () => void;
+  setDropTargetStatus?: (status: TaskStatus | null) => void;
 }
 
 const TaskBoardContext = createContext<TaskBoardContextValue | null>(null);

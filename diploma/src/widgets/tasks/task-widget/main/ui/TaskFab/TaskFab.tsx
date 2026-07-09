@@ -6,16 +6,32 @@ import { TaskFabActionStack } from "./ui/TaskFabActionStack";
 import { TaskFabMainButton } from "./ui/TaskFabMainButton";
 import orgFabStyles from "@widgets/organizations/details/ui/OrganizationFab/OrganizationFab.module.scss";
 import styles from "./TaskFab.module.scss";
+import type { TaskPermissionContext } from "../../lib/canManageTask";
+import { actionClassNames } from "./config/taskFabPresentation";
 
 interface TaskFabProps {
   task: Task;
   activeMode: TaskMode;
   onModeChange: (mode: TaskMode) => void;
+  permissionContext?: TaskPermissionContext;
+  onOpenSettings?: () => void;
 }
 
-export const TaskFab = ({ task, activeMode, onModeChange }: TaskFabProps) => {
+export const TaskFab = ({
+  task,
+  activeMode,
+  onModeChange,
+  permissionContext,
+  onOpenSettings,
+}: TaskFabProps) => {
   const { t } = useTranslation(["task"]);
-  const model = useTaskFabActions({ task, activeMode, onModeChange });
+  const model = useTaskFabActions({
+    task,
+    activeMode,
+    onModeChange,
+    permissionContext,
+    onOpenSettings,
+  });
 
   if (!model.isVisible) return null;
 
@@ -43,6 +59,11 @@ export const TaskFab = ({ task, activeMode, onModeChange }: TaskFabProps) => {
 
         <TaskFabMainButton
           isOpen={model.isOpen}
+          activeClassName={
+            model.activeActionId
+              ? actionClassNames[model.activeActionId]
+              : undefined
+          }
           onClick={() => model.setIsOpen((current) => !current)}
         />
       </div>
