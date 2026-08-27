@@ -1,0 +1,585 @@
+{
+  "page": {
+    "create": "Create organization",
+    "emptyState": {
+      "title": "No organizations found",
+      "text": "Try adjusting your filters or search query"
+    }
+  },
+  "createFlow": {
+    "created": "Organization created",
+    "createdWithNotes": "Organization created with notes",
+    "ready": "Your organization is ready.",
+    "logoUploadFailed": "Your organization was created, but the logo could not be uploaded right now.",
+    "creationFailed": "Creation failed",
+    "stepsLabel": "{{label}} steps",
+    "logoAlt": "{{name}} logo",
+    "creatingInOrganization": "Creating in this organization",
+    "cancel": "Cancel"
+  },
+  "myOrganizations": {
+    "discover": "Discover",
+    "discoverTitle": "Find your next community",
+    "discoverText": "Browse the public catalog to discover organizations that match your interests.",
+    "browse": "Browse organizations",
+    "left": "Left organization",
+    "leaveRequestSent": "Leave request sent",
+    "leftText": "You have left this organization.",
+    "leaveRequestText": "Your request to leave has been sent for review.",
+    "leaveFailed": "Leave failed",
+    "linkCopied": "Link copied",
+    "shareReady": "{{name}} is ready to share.",
+    "shareFailed": "Share failed",
+    "leaveTitle": "Are you leaving?",
+    "leaveText": "Are you sure you want to leave {{name}}? You can join it again later.",
+    "leave": "Leave"
+  },
+  "details": {
+    "states": {
+      "loading": "Loading organization details...",
+      "error": "Organization not found or unavailable right now."
+    },
+    "tabs": {
+      "overview": "Overview",
+      "projects": "Projects",
+      "events": "Events",
+      "tasks": "Tasks",
+      "feedback": "Feedback"
+    },
+    "labels": {
+      "teamMember": "Team member",
+      "founder": "Founder",
+      "volunteer": "Volunteer",
+      "notAdded": "Not added yet",
+      "descriptionNotAdded": "Description not added yet",
+      "emailNotAdded": "Email not added yet",
+      "created": "Created",
+      "launchDate": "Launch date",
+      "phone": "Phone",
+      "level": "Level {{level}}",
+      "nextLevel": "Next level",
+      "votes_one": "({{count}} vote)",
+      "votes_other": "({{count}} votes)"
+    },
+    "actions": {
+      "readMore": "Read more",
+      "showLess": "Show less",
+      "seeMore": "See more",
+      "viewAll": "View all",
+      "leave": "Leave",
+      "remove": "Remove",
+      "openActions": "Open actions for {{name}}",
+      "memberActions": "{{name}} actions",
+      "openProfile": "Open {{name}} profile",
+      "tryAgain": "Try again"
+    },
+    "notifications": {
+      "leaveUnavailable": "Leave unavailable",
+      "notActiveMember": "You are not an active member of this organization.",
+      "memberRemoved": "Member removed",
+      "memberRemovedText": "{{name}} has been removed from the organization.",
+      "removalFailed": "Removal failed",
+      "joined": "Joined organization",
+      "joinRequested": "Join request sent",
+      "joinedText": "You are now a member of this organization.",
+      "joinRequestedText": "Your request to join has been sent for review.",
+      "alreadyMemberText": "You are already a member of this organization.",
+      "requestAlreadySent": "Request already sent",
+      "requestAlreadyPending": "Your join request is already pending review.",
+      "joinFailed": "Could not join",
+      "left": "Left organization",
+      "leaveRequested": "Leave request sent",
+      "leftText": "You have left this organization.",
+      "leaveRequestedText": "Your request to leave has been sent for review.",
+      "leaveFailed": "Could not leave"
+    },
+    "modals": {
+      "leaveTitle": "Leave organization?",
+      "leaveText": "Are you sure you want to leave this organization?",
+      "removeTitle": "Remove {{name}}?",
+      "removeText": "This member will lose access to the organization and its internal activities.",
+      "cancel": "Cancel",
+      "confirmLeave": "Leave organization",
+      "confirmRemove": "Remove member"
+    },
+    "categoryGrid": {
+      "allActivities": "All activities",
+      "activeActivities": "Active activities",
+      "emptyTitle": "No categories yet",
+      "emptyText": "This organization does not have categorized activities yet.",
+      "errorTitle": "Unable to load categories",
+      "previous": "Previous categories",
+      "next": "Next categories",
+      "unnamed": "Unnamed category"
+    },
+    "members": {
+      "title": "Team members",
+      "description": "These volunteers help the organization create positive change.",
+      "emptyTitle": "No team members yet",
+      "emptyText": "When people join the organization, they will appear here.",
+      "hidden": "Members are hidden by the access policy",
+      "unavailable": "No members available yet"
+    },
+    "overview": {
+      "emptyTitle": "Nothing here yet",
+      "emptyText": "This organization is just getting started. Stay tuned for upcoming projects and events."
+    },
+    "highlights": {
+      "active": "Active",
+      "completed": "Completed",
+      "projects": "Projects"
+    },
+    "story": {
+      "team": "Team",
+      "members": "Members",
+      "emptyDescription": "This organization has not shared its story yet."
+    },
+    "panels": {
+      "noProjects": "No projects found",
+      "noEvents": "No events found",
+      "noTasks": "No tasks found",
+      "adjustFilters": "Try adjusting your filters or search query."
+    },
+    "projects": {
+      "all": "All projects",
+      "active": "Active projects",
+      "completed": "Completed projects",
+      "create": "Create project",
+      "createText": "Start a new initiative for your organization.",
+      "deadline": "Deadline:",
+      "progress": "Progress",
+      "noAssignees": "No assignees yet",
+      "noDeadline": "No deadline yet",
+      "projectMember": "Project member",
+      "organizationFallback": "organization",
+      "taskCount_one": "{{count}} task",
+      "taskCount_other": "{{count}} tasks",
+      "openProject": "Open project {{title}}",
+      "projectOptions": "Project options for {{title}}",
+      "filters": {
+        "category": "Categories",
+        "selected_one": "{{count}} selected",
+        "selected_other": "{{count}} selected",
+        "loading": "Loading...",
+        "showMore": "Show more",
+        "deadline": "Project deadline",
+        "location": "Location",
+        "distance": "Distance",
+        "setLocation": "Set location",
+        "kilometers": "km",
+        "startDate": "Start date",
+        "dueDate": "Due date",
+        "rating": "Rating",
+        "more": "More options",
+        "activeOnly": "Show only active projects",
+        "joined": "Display joined projects",
+        "apply": "Apply filters",
+        "reset": "Clear filters",
+        "any": "Any",
+        "searchLocation": "Search location"
+      }
+    },
+    "tasks": {
+      "all": "All tasks",
+      "inProgress": "In progress",
+      "completed": "Completed",
+      "create": "Create task",
+      "createText": "Add a focused action for your team.",
+      "dueDate": "Due date",
+      "unassigned": "Unassigned",
+      "noDueDate": "No due date",
+      "linkedWorkspace": "Linked to the current organization workspace.",
+      "eventContext": "Event: {{title}}",
+      "projectContext": "Project: {{title}}",
+      "moreActions": "More actions for {{title}}",
+      "onlyAssigned": "Only assigned tasks",
+      "onlyWithDueDate": "Only tasks with a due date",
+      "status": {
+        "all": "All tasks",
+        "pending": "Pending",
+        "inProgress": "In progress",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
+      "filters": {
+        "state": "Task state",
+        "dueDate": "Due date",
+        "dueBefore": "Due before",
+        "more": "More options",
+        "applied": "Applied",
+        "clear": "Clear filters"
+      }
+    },
+    "showcase": {
+      "projects": "Projects",
+      "tasks": "Tasks",
+      "task": "Task",
+      "context": "Context",
+      "assignee": "Assignee",
+      "dueDate": "Due date",
+      "statusLabel": "Status",
+      "unassigned": "Unassigned",
+      "assigned": "Assigned",
+      "assignedMember": "Assigned member",
+      "teamMember": "Team member",
+      "noDueDate": "No due date",
+      "linkedWorkspace": "Linked to the current organization workspace.",
+      "eventContext": "Event: {{title}}",
+      "projectContext": "Project: {{title}}",
+      "projectFallback": "Project details will appear here soon.",
+      "taskCount_one": "{{count}} task",
+      "taskCount_other": "{{count}} tasks",
+      "noProjects": "No projects to showcase yet.",
+      "previousProjects": "Previous projects",
+      "nextProjects": "Next projects",
+      "status": {
+        "pending": "Pending",
+        "inProgress": "In progress",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      }
+    },
+    "emptyState": {
+      "title": "Nothing yet"
+    }
+  },
+  "recommendations": {
+    "states": {
+      "loading": "Finding strong matches...",
+      "error": "We could not load recommendations right now.",
+      "access": "You do not have access to invite volunteers for this organization.",
+      "emptyTitle": "No matching volunteers found",
+      "emptyText": "Try another search or filter."
+    },
+    "hero": {
+      "eyebrow": "Recommended volunteers",
+      "smartMatching": "Smart matching",
+      "title": "Find the right people for your mission",
+      "subtitle": "Review volunteers whose skills, availability, and experience align with your organization.",
+      "suggested": "Suggested",
+      "boosted": "Boosted",
+      "invited": "Invited",
+      "summary": "Recommendation summary"
+    },
+    "toolbar": {
+      "search": "Search volunteers",
+      "all": "All",
+      "boosted": "Boosted",
+      "nearby": "Nearby",
+      "topRated": "Top rated",
+      "sort": "Sort recommendations",
+      "bestMatch": "Best match",
+      "highestRated": "Highest rated"
+    },
+    "card": {
+      "match": "{{score}}% match",
+      "scoreLabel": "{{score}} percent match",
+      "rank": "Top {{rank}}",
+      "suggestedFallback": "Suggested for this organization",
+      "boosted": "Boosted",
+      "viewProfile": "View {{name}}'s profile"
+    },
+    "breakdown": {
+      "title": "Why this match",
+      "skills": "Skills",
+      "availability": "Availability",
+      "location": "Location",
+      "reliability": "Reliability",
+      "show": "Show match details",
+      "hide": "Hide match details"
+    },
+    "skills": {
+      "matched_one": "{{count}} matched skill",
+      "matched_other": "{{count}} matched skills",
+      "more": "+{{count}} more"
+    },
+    "actions": {
+      "invite": "Invite",
+      "invited": "Invited",
+      "message": "Send message",
+      "modalTitle": "Invite {{name}}",
+      "modalText": "Send an invitation to join {{organization}}.",
+      "messageLabel": "Message",
+      "optional": "Optional",
+      "messagePlaceholder": "Add a personal note",
+      "send": "Send invitation",
+      "cancel": "Cancel",
+      "sent": "Invitation sent",
+      "sentText": "{{name}} can now respond to your invitation.",
+      "messageAria": "Message {{name}}"
+    },
+    "signals": {
+      "label": "Volunteer strengths",
+      "reliability": "Strong reliability",
+      "availability": "Availability fits"
+    },
+    "page": {
+      "loading": "Loading {{entity}}...",
+      "entityError": "We could not load this {{entity}} right now.",
+      "checkingAccess": "Checking your access...",
+      "redirecting": "Redirecting...",
+      "title": "Recommended volunteers",
+      "project": "Project",
+      "volunteer": "volunteer",
+      "entityFallback": "this {{entity}}"
+    }
+  },
+  "settings": {
+    "states": {
+      "loading": "Loading organization settings...",
+      "error": "We could not load organization settings.",
+      "checkingAccess": "Checking your access...",
+      "redirecting": "Redirecting..."
+    },
+    "topBar": {
+      "back": "Back to organization",
+      "title": "Settings",
+      "discard": "Discard",
+      "save": "Save changes",
+      "saving": "Saving..."
+    },
+    "modals": {
+      "saveTitle": "Save changes?",
+      "saveText": "Are you sure you want to save these changes?",
+      "policyTitle": "Change policy?",
+      "policyText": "This change affects how members join or leave. Are you sure?",
+      "policyConfirm": "Change policy",
+      "archiveConfirm": "Archive",
+      "deleteConfirm": "I understand",
+      "cancel": "Cancel"
+    },
+    "tabs": {
+      "general": "General",
+      "access": "Access",
+      "danger": "Danger zone"
+    },
+    "sidebar": {
+      "organization": "Organization",
+      "emailMissing": "Email not added yet",
+      "members": "Members",
+      "projects": "Projects",
+      "created": "Created",
+      "active": "Active",
+      "archived": "Archived"
+    },
+    "general": {
+      "basicInfo": "Basic info",
+      "basicInfoText": "Update the public details volunteers see before joining.",
+      "name": "Name",
+      "namePlaceholder": "Enter organization name",
+      "phone": "Phone",
+      "phonePlaceholder": "Enter phone number",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe your organization",
+      "contactEmail": "Contact email",
+      "emailPlaceholder": "Enter contact email",
+      "website": "Website",
+      "websitePlaceholder": "Enter website URL",
+      "location": "Location",
+      "locationText": "Set your organization's primary city or region.",
+      "cityRegion": "City / Region",
+      "locationPlaceholder": "Choose a location",
+      "editLocation": "Edit location",
+      "removeLocation": "Remove location",
+      "mapTitle": "Organization location",
+      "mapSearch": "Search for a city or address",
+      "mapAria": "Pick organization location on the map",
+      "confirmLocation": "Use this location",
+      "logo": "Logo",
+      "logoText": "Keep your organization identity recognizable across ImpactFlow.",
+      "logoTitle": "Organization logo",
+      "logoHint": "JPG, PNG or WEBP - max 2 MB",
+      "uploadLogo": "Upload logo",
+      "changeLogo": "Change logo",
+      "removeLogo": "Remove logo",
+      "uploading": "Uploading",
+      "removing": "Removing",
+      "logoAlt": "{{name}} logo"
+    },
+    "access": {
+      "joinTitle": "Join policy",
+      "joinText": "Control how new volunteers join your organization.",
+      "leaveTitle": "Leave policy",
+      "leaveText": "Choose whether volunteers can leave freely or need confirmation.",
+      "visibilityTitle": "Visibility",
+      "visibilityText": "Control who can discover this organization.",
+      "open": "Open",
+      "openText": "Anyone can join instantly without waiting for approval.",
+      "approval": "Approval required",
+      "approvalText": "New members must be manually approved by an admin.",
+      "leaveFreely": "Leave freely",
+      "leaveFreelyText": "Members can leave at any time without restrictions.",
+      "leaveApproval": "Approval required",
+      "leaveApprovalText": "Leave requests must be confirmed by an admin.",
+      "public": "Public",
+      "private": "Private"
+    },
+    "danger": {
+      "title": "Danger zone",
+      "description": "These actions can affect visibility and long-term organization data.",
+      "archive": "Archive organization",
+      "archiveText": "Hide it from public listings. You can restore it later.",
+      "archiveButton": "Archive organization",
+      "delete": "Delete organization",
+      "deleteText": "Permanently delete all organization data. This cannot be undone.",
+      "deleteButton": "Delete organization",
+      "archiveModalTitle": "Archive this organization?",
+      "archiveModalText": "The organization will disappear from public listings until it is restored.",
+      "deleteModalTitle": "Delete this organization?",
+      "deleteModalText": "This action permanently removes the organization and all related data.",
+      "confirmName": "Enter {{name}} to confirm",
+      "cancel": "Cancel",
+      "archiving": "Archiving...",
+      "deleting": "Deleting..."
+    }
+  },
+  "create": {
+    "aria": {
+      "steps": "Organization creation steps",
+      "back": "Go back"
+    },
+    "steps": {
+      "basics": "Basics",
+      "basicsText": "How would you describe your organization?",
+      "branding": "Branding",
+      "brandingText": "Which logo would you like to upload?",
+      "access": "Access",
+      "accessText": "Who can join and leave your organization?",
+      "finish": "Get started",
+      "finishText": "Your organization is ready - what's next?"
+    },
+    "basics": {
+      "title": "Tell us about your organization",
+      "text": "Add a name and short description so volunteers, partners, and supporters can understand your mission and impact.",
+      "nameExample": "e.g. Green Hands Volunteer Community",
+      "websiteExample": "yourorganization.org",
+      "emailExample": "contact@yourorganization.org",
+      "descriptionExample": "Share your mission, what you do, and the impact you want to create..."
+    },
+    "branding": {
+      "title": "Upload your organization logo",
+      "text": "A clear, recognizable logo helps your organization stand out in the catalog and on the map. You can change it later."
+    },
+    "access": {
+      "title": "Set your access rules",
+      "text": "Decide how volunteers join your organization and how members leave. You can change these settings anytime.",
+      "openAccess": "Open access",
+      "openAccessText": "Anyone can join instantly",
+      "joinApproval": "Approval required",
+      "joinApprovalText": "Owners review join requests",
+      "instantLeave": "Instant leave",
+      "instantLeaveText": "Members can leave anytime",
+      "leaveApproval": "Approval required",
+      "leaveApprovalText": "Owners review leave requests"
+    },
+    "fields": {
+      "name": "Organization name",
+      "namePlaceholder": "Enter organization name",
+      "website": "Website",
+      "websitePlaceholder": "Enter website URL",
+      "email": "Email",
+      "emailPlaceholder": "Enter contact email",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe your organization",
+      "logo": "Organization logo",
+      "logoHint": "JPG, PNG or WEBP - max 2 MB",
+      "upload": "Upload logo",
+      "change": "Change logo",
+      "remove": "Remove logo",
+      "joinPolicy": "Join policy",
+      "leavePolicy": "Leave policy",
+      "open": "Open",
+      "approval": "Approval required",
+      "freeLeave": "Leave freely"
+    },
+    "getStarted": {
+      "eyebrow": "Ready to launch",
+      "title": "Create your organization",
+      "text": "Review the details and bring your community together.",
+      "create": "Create organization",
+      "or": "Or",
+      "back": "Back to organizations",
+      "welcome": "Welcome to {{name}}",
+      "readyText": "Your organization is live. Here is what you can do next.",
+      "firstProject": "Create your first project",
+      "firstProjectText": "Start a long-term initiative with tasks and contributors.",
+      "firstEvent": "Schedule your first event",
+      "firstEventText": "Plan a date for volunteers to gather and contribute.",
+      "firstTask": "Add your first task",
+      "firstTaskText": "Create one focused activity volunteers can pick up.",
+      "roles": "Set up member roles",
+      "rolesText": "Define roles and permissions for your team.",
+      "invite": "Invite members",
+      "inviteText": "Bring your team and volunteers on board.",
+      "goToOrganization": "Go to organization"
+    },
+    "actions": {
+      "skip": "Skip for now",
+      "continue": "Continue",
+      "create": "Create organization",
+      "back": "Back",
+      "or": "Or"
+    }
+  },
+  "fab": {
+    "open": "Open organization actions",
+    "close": "Close organization actions",
+    "context": "You're working in",
+    "actions": {
+      "dashboard": "Dashboard",
+      "project": "New project",
+      "event": "New event",
+      "task": "New task",
+      "members": "Members",
+      "roles": "Roles",
+      "settings": "Settings"
+    },
+    "logoAlt": "{{name}} logo"
+  },
+  "members": {
+    "title": "Organization members",
+    "shortTitle": "Members",
+    "context": "Organization",
+    "loading": "Loading organization members...",
+    "organizationError": "We could not load this organization right now.",
+    "checkingAccess": "Checking your access...",
+    "redirecting": "Redirecting...",
+    "membersError": "We could not load organization members right now.",
+    "messageUnavailable": "Messaging is unavailable right now.",
+    "entityLabel": "organization"
+  },
+  "catalog": {
+    "eyebrow": "Your space",
+    "title": "My organizations",
+    "subtitle": "Where volunteer initiatives are created and coordinated",
+    "description": "Find every organization you have joined or created. Explore active projects, upcoming events, shared tasks, and your progress in each community.",
+    "browse": "Browse organizations",
+    "archived": "Archived",
+    "search": "Search organizations",
+    "filter": "Filter organizations",
+    "all": "All organizations",
+    "headerTitle": "Find people and causes you truly want to support",
+    "count_one": "{{count}} organization",
+    "count_other": "{{count}} organizations",
+    "headerText": "Every organization here helps real people and responds to real needs. Explore its mission and find where your time, skills, or support can matter.",
+    "joinedPrompt": "Want to see the organizations you have already joined?",
+    "joinedLink": "Open them",
+    "imageAlt": "Organizations"
+  },
+  "carousel": {
+    "title": "Projects",
+    "previous": "Previous projects",
+    "next": "Next projects",
+    "empty": "No projects to show yet.",
+    "error": "Unable to load projects.",
+    "noDescription": "No description provided yet.",
+    "seeMore": "See more",
+    "progress": "Progress",
+    "deadline": "Deadline",
+    "members": "Members"
+  },
+  "filter": {
+    "error": "Failed to load organizations",
+    "empty": "No organizations found"
+  }
+}

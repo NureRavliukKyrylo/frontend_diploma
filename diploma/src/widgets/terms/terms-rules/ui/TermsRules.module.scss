@@ -1,0 +1,60 @@
+.rules {
+  padding: 28px 32px;
+  margin-bottom: 12px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+  scroll-margin-top: 88px;
+}
+
+.sectionNum {
+  margin: 0 0 6px;
+  color: #840000;
+  font-size: 11px;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0 0 16px;
+  color: #000;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.rule {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  margin-top: 7px;
+  background: #840000;
+  border-radius: 50%;
+}
+
+.ruleText {
+  color: #555;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+@media (max-width: 560px) {
+  .rules {
+    padding: 24px 22px;
+  }
+}

@@ -1,0 +1,131 @@
+.topBar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 34px;
+  padding: 0 var(--landing-pad);
+  background: #000000;
+}
+
+.topLinks {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.topLinks a,
+.languageButton {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.topLinks a:hover,
+.languageButton:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.firstTopLink {
+  position: relative;
+  padding-right: 14px;
+}
+
+.firstTopLink::after {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.15);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.languageButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.languageMenu {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.languageDropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 30;
+  display: grid;
+  min-width: 168px;
+  padding: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.14);
+  transform-origin: top right;
+}
+
+.languageOption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #666666;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.languageOption:hover {
+  background: #f4f4f4;
+  color: #000000;
+  transform: translateX(2px);
+}
+
+.selectedLanguageOption {
+  color: #840000;
+  font-weight: 800;
+}
+
+@media (max-width: 767px) {
+  .topBar {
+    min-height: auto;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px var(--landing-pad);
+  }
+
+  .topLinks {
+    flex-wrap: wrap;
+    gap: 10px 14px;
+  }
+
+  .topLinks a,
+  .languageButton {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topBar {
+    flex-direction: column;
+  }
+}

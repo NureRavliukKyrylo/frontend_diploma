@@ -1,0 +1,71 @@
+.sidebar {
+  position: sticky;
+  top: 80px;
+  align-self: start;
+  min-width: 240px;
+  padding: 22px 26px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+}
+
+.sidebarLabel {
+  padding: 0 6px;
+  margin: 0 0 12px;
+  color: #b3b3b3;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  padding: 10px 14px;
+  margin-bottom: 3px;
+  color: #888;
+  background: transparent;
+  border: none;
+  border-radius: 50px;
+  font-family: "Exo 2", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover,
+  &.active {
+    color: #000;
+    background: #f4f4f4;
+  }
+
+  &.active {
+    font-weight: 700;
+  }
+
+  &.active .dot {
+    background: #840000;
+  }
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  background: #ddd;
+  border-radius: 50%;
+  transition: background 0.15s;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    position: static;
+  }
+}

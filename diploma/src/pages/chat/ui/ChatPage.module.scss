@@ -1,0 +1,213 @@
+@use "@shared/assets/styles" as *;
+
+.chatPageWrapper {
+  width: min(94vw, 1840px);
+  height: calc(100vh - 140px);
+  min-height: 680px;
+  margin: 22px auto 28px;
+  display: grid;
+  grid-template-columns: minmax(420px, 26vw) 1fr;
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 28px;
+  box-shadow:
+    0 18px 54px rgba(0, 0, 0, 0.08),
+    0 4px 14px rgba(0, 0, 0, 0.04);
+
+  @include respond-to(null, 1150px) {
+    width: calc(100vw - 32px);
+    grid-template-columns: minmax(360px, 42%) 1fr;
+  }
+
+  @include respond-to(null, 850px) {
+    height: calc(100vh - 120px);
+    min-height: 0;
+    margin: 12px auto;
+    grid-template-columns: 1fr;
+  }
+
+  .chatsListWrapper {
+    border-right: 1px solid $chat-border;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+
+    @include respond-to(null, 850px) {
+      border-right: none;
+    }
+  }
+
+  .chatItemWrapper {
+    padding: 0;
+    cursor: pointer;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .chatList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 12px 24px;
+  }
+
+  .chatWrapper {
+    background:
+      radial-gradient(
+        circle at 14% 12%,
+        rgba(132, 0, 0, 0.035),
+        transparent 28%
+      ),
+      linear-gradient(180deg, #fff 0%, #faf8f5 100%);
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    @include respond-to(null, 850px) {
+      border-radius: 0;
+    }
+  }
+
+  .emptyChatState {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 40px;
+    text-align: center;
+
+    h2 {
+      @include font-base(28px, 900);
+      color: #1a1a1a;
+      letter-spacing: -0.5px;
+      margin: 8px 0 0;
+    }
+
+    p {
+      @include font-base(15px, 600);
+      color: $chat-text-muted;
+      line-height: 1.55;
+      max-width: 320px;
+      margin: 0;
+    }
+  }
+
+  .typewriterBubble {
+    display: inline-flex;
+    align-items: center;
+    min-width: 230px;
+    min-height: 54px;
+    padding: 15px 18px;
+    border-radius: 20px 20px 20px 4px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.045);
+    box-shadow:
+      0 12px 30px rgba(0, 0, 0, 0.07),
+      0 2px 8px rgba(0, 0, 0, 0.035);
+    color: #1a1a1a;
+  }
+
+  .typewriterText {
+    font-family: "Consolas", "Courier New", monospace;
+    @include font-base(15px, 700);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .typewriterCursor {
+    width: 2px;
+    height: 18px;
+    margin-left: 3px;
+    border-radius: 999px;
+    background: $chat-brand;
+    animation: chatCursorBlink 1s steps(2, start) infinite;
+  }
+  .backToChats {
+    .wrapper {
+      .arrowIcon {
+        transform: rotate(180deg);
+        width: 20px;
+        height: 20px;
+        @include respond-to(mobile) {
+          width: 15px;
+          height: 15px;
+        }
+      }
+    }
+  }
+  .wrapperMessages {
+    width: 100%;
+    background:
+      radial-gradient(
+        circle at 92% 12%,
+        rgba(132, 0, 0, 0.035),
+        transparent 28%
+      ),
+      radial-gradient(circle at 8% 88%, rgba(0, 0, 0, 0.035), transparent 24%),
+      linear-gradient(180deg, #fdfcfb 0%, #f8f5f0 100%);
+    min-height: 0;
+    overflow-y: auto;
+    padding: 28px 42px 26px;
+    display: flex;
+    height: 100%;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 4px;
+    }
+  }
+  .wrapperMessagesSkeleton {
+    width: 100%;
+    background: #fbfaf8;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 25px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+.headerSkeleton {
+  height: 89px;
+  flex-shrink: 0;
+}
+
+.chatHeaderSkeleton {
+  height: 89px;
+  flex-shrink: 0;
+  border-radius: 0px 20px 0px 0px;
+}
+
+@keyframes chatCursorBlink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+
+  46%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriterCursor {
+    animation: none;
+  }
+}

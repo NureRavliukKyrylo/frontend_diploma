@@ -1,0 +1,83 @@
+{
+  "labels": {
+    "membersCount_one": "{{count}} member",
+    "membersCount_other": "{{count}} members",
+    "chatsCount_one": "{{count}} chat",
+    "chatsCount_other": "{{count}} chats",
+    "folders": "Chat folders"
+  },
+  "categories": {
+    "event": "Events",
+    "private": "Private Chats",
+    "task": "Tasks",
+    "project": "Projects",
+    "organization": "Organizations"
+  },
+  "states": {
+    "emptyTitle": "No chats yet",
+    "emptyDescription": "No {{type}} chats available",
+    "errorHint": "Try reloading the page or come back later.",
+    "noMessages": "No messages yet",
+    "typing": "typing...",
+    "noParticipants": "No participants",
+    "mentionJump": "Jump to mention",
+    "empty": {
+      "title": "No messages yet",
+      "subtitle": "Be the first to say something!"
+    },
+    "emptySelection": {
+      "title": "Choose a chat",
+      "subtitle": "Pick a conversation from the list to keep the work moving.",
+      "phrases": [
+        "Ready when you are",
+        "Start with hello",
+        "Share a quick update",
+        "Ask the team",
+        "Keep the thread alive"
+      ]
+    }
+  },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "reply": "Reply",
+    "report": "Report",
+    "cancel": "Cancel",
+    "sendMessage": "Send message",
+    "leaveChat": "Leave chat"
+  },
+  "details": {
+    "open": "Open chat details",
+    "close": "Close chat details",
+    "participants": "Participants"
+  },
+  "banners": {
+    "editing": "Editing message",
+    "replying": "Replying to {{sender}}"
+  },
+  "form": {
+    "placeholderSend": "Send Message...",
+    "placeholderEdit": "Edit message..."
+  },
+  "validation": {
+    "maxCharacters": "Message must be at most 500 characters"
+  },
+  "modals": {
+    "delete": {
+      "title": "Delete Message",
+      "text": "Are you sure you want to delete \"{{preview}}\"? This action cannot be undone."
+    },
+    "leaveChat": {
+      "title": "Leave chat?",
+      "text": "Are you sure you want to leave {{name}}? The chat will disappear from your list."
+    }
+  },
+  "toasts": {
+    "sendError": "Failed to send message",
+    "openError": "Failed to open chat",
+    "editError": "Failed to edit message",
+    "deleteError": "Failed to delete message",
+    "leaveChatSuccess": "You left the chat",
+    "leaveChatError": "Failed to leave chat"
+  }
+}

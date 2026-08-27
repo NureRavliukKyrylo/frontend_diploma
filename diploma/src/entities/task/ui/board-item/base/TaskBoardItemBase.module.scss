@@ -1,0 +1,86 @@
+@use "@shared/assets/styles" as *;
+
+.taskBoardTitle {
+  @include font-base(22px, 700);
+  line-height: 120%;
+}
+.taskBoardDescription {
+  color: #8f8f8f;
+  @include font-base(20px, 400);
+  line-height: 120%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.deadlineBlock {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  .calendarTask {
+    width: 25px;
+    height: 25px;
+  }
+  span {
+    @include font-base(18px, 600);
+    background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-transform: uppercase;
+    line-height: 100%;
+  }
+}
+.dividerLine {
+  border: 1px solid rgba(166, 166, 166, 0.3);
+  width: 100%;
+}
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.skeletonTitle {
+  width: 80%;
+  height: 26px;
+  border-radius: 6px;
+}
+.skeletonDescLine {
+  width: 100%;
+  height: 18px;
+  border-radius: 5px;
+}
+.skeletonDescLineShort {
+  width: 60%;
+  height: 18px;
+  border-radius: 5px;
+}
+.skeletonCalendarIcon {
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+.skeletonDeadlineDate {
+  width: 80px;
+  height: 18px;
+  border-radius: 5px;
+}
+.skeletonAvatar {
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  margin-left: -10px;
+  flex-shrink: 0;
+}
+.skeletonFeedbackBadge {
+  width: 45px;
+  height: 30px;
+  border-radius: 10px;
+}
+.skeletonActionsIcon {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+}

@@ -1,0 +1,20 @@
+@use "@shared/assets/styles" as *;
+
+.button {
+  @include font-base(14px, 600);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1 solid #e0e0e0;
+  border-radius: 50px;
+  padding: 8px 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}

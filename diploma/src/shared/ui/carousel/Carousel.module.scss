@@ -1,0 +1,116 @@
+@use "@shared/assets/styles" as *;
+
+.carouselWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.sliderContainer {
+  overflow: hidden;
+  padding: 20px;
+
+  @include respond-to(tablet) {
+    padding: 14px;
+  }
+  @include respond-to(mobile) {
+    padding: 10px;
+  }
+}
+
+.backCarouselButton,
+.nextCarouselButton {
+  position: absolute;
+  top: 50%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 40px;
+    height: 65px;
+
+    @include respond-to(laptop) {
+      width: 36px;
+      height: 58px;
+    }
+    @include respond-to(tablet) {
+      width: 30px;
+      height: 48px;
+    }
+    @include respond-to(mobile) {
+      width: 24px;
+      height: 38px;
+    }
+  }
+}
+
+.backCarouselButton {
+  left: -40px;
+  transform: translateY(-50%);
+  color: white;
+  filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+  stroke: #000000;
+  stroke-width: 1px;
+
+  @include respond-to(laptop) {
+    left: -32px;
+  }
+  @include respond-to(tablet) {
+    left: -26px;
+  }
+  @include respond-to(mobile) {
+    left: -20px;
+  }
+}
+
+.nextCarouselButton {
+  right: -40px;
+  transform: translateY(-50%) rotate(180deg);
+  color: white;
+  filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
+  stroke: #000000;
+  stroke-width: 1px;
+
+  @include respond-to(laptop) {
+    right: -32px;
+  }
+  @include respond-to(tablet) {
+    right: -26px;
+  }
+  @include respond-to(mobile) {
+    right: -20px;
+  }
+}
+
+.itemsRow {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+
+  @include respond-to(tablet) {
+    gap: 12px;
+  }
+  @include respond-to(mobile) {
+    gap: 8px;
+  }
+}
+
+.sliderInner {
+  display: flex;
+  align-items: stretch;
+}
+
+.slideItem {
+  background: #1c1c1c;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

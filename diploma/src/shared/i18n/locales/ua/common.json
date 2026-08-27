@@ -1,0 +1,611 @@
+{
+  "actions": {
+    "save": "Зберегти",
+    "cancel": "Скасувати",
+    "delete": "Видалити",
+    "edit": "Редагувати",
+    "confirm": "Підтвердити",
+    "close": "Закрити",
+    "back": "Назад",
+    "next": "Далі",
+    "submit": "Надіслати",
+    "search": "Пошук",
+    "filter": "Фільтр",
+    "reset": "Скинути",
+    "approve": "Схвалити",
+    "reject": "Відхилити",
+    "contactUs": "Зв'язатися з нами",
+    "resendCode": "Надіслати код повторно",
+    "didNotReceive": "Не отримали код?",
+    "resendIn": "Надіслати код повторно через ({{time}})",
+    "clearFilters": "Скинути Фільтрацію",
+    "seeMore": "Показати більше",
+    "showMore": "Показати більше",
+    "showAll": "ПОКАЗАТИ ВСІ {{subject}}",
+    "readMore": "Читати більше",
+    "readLess": "Згорнути",
+    "getStarted": "РОЗПОЧАТИ"
+  },
+  "accessibility": {
+    "downArrow": "Відкрити параметри",
+    "checkMark": "Вибрано",
+    "modalImage": "Ілюстрація підтвердження"
+  },
+  "confirmation": {
+    "yes": "Так",
+    "no": "Ні"
+  },
+  "header": {
+    "openMenu": "Відкрити меню",
+    "closeMenu": "Закрити меню",
+    "navigationMenu": "Навігаційне меню",
+    "primaryNavigation": "Основна навігація",
+    "mobilePrimary": "Мобільна основна навігація",
+    "profile": "Профіль",
+    "loading": "Завантаження...",
+    "timeBank": "Банк часу",
+    "myOrganizations": "Мої організації",
+    "bookmarks": "Закладки",
+    "bookmark": "Закладка",
+    "notifications": "Сповіщення",
+    "notificationsAriaUnread": "Сповіщення ({{count}} непрочитаних)",
+    "messages": "Повідомлення",
+    "language": "Мова",
+    "logout": "Вийти",
+    "logoutTitle": "Ви впевнені, що хочете вийти?",
+    "logoutText": "Ви зможете знову ввійти, коли буде потрібно.",
+    "search": {
+      "placeholder": "Пошук",
+      "ariaLabel": "Глобальний пошук по сайту",
+      "submit": "Шукати по сайту",
+      "sitePages": "Сторінки сайту",
+      "emptyTitle": "Нічого не знайдено",
+      "emptyText": "Спробуйте Профіль, Календар, Карта, Проєкти або Навички."
+    },
+    "searchPages": {
+      "home": {
+        "title": "Головна",
+        "description": "Головна сторінка ImpactFlow",
+        "keywords": "головна|стартова|impactflow|імпактфлоу"
+      },
+      "profile": {
+        "title": "Профіль",
+        "description": "Ваш профіль, інвентар, відзнаки та активність",
+        "keywords": "профіль|акаунт|користувач|відзнаки|інвентар"
+      },
+      "profileSettings": {
+        "title": "Налаштування профілю",
+        "description": "Особисті дані, безпека та налаштування профілю",
+        "keywords": "налаштування|безпека|пароль|email|пошта|профіль"
+      },
+      "chat": {
+        "title": "Чат",
+        "description": "Ваші розмови та повідомлення",
+        "keywords": "чат|повідомлення|розмови|інбокс"
+      },
+      "notifications": {
+        "title": "Сповіщення",
+        "description": "Оновлення, запити та активність",
+        "keywords": "сповіщення|нотифікації|оновлення|запити"
+      },
+      "organizations": {
+        "title": "Організації",
+        "description": "Публічний каталог організацій",
+        "keywords": "організації|організація|каталог|команди"
+      },
+      "myOrganizations": {
+        "title": "Мої організації",
+        "description": "Організації, якими ви керуєте або до яких належите",
+        "keywords": "мої організації|приєднані організації|власні організації|команди|простір"
+      },
+      "createOrganization": {
+        "title": "Створити організацію",
+        "description": "Запустіть новий простір організації",
+        "keywords": "створити організацію|нова організація|простір|команда"
+      },
+      "archivedOrganizations": {
+        "title": "Архів організацій",
+        "description": "Перегляньте архівовані простори організацій",
+        "keywords": "архів організацій|архів|неактивні організації"
+      },
+      "categories": {
+        "title": "Категорії",
+        "description": "Перегляньте категорії активностей і напрямів",
+        "keywords": "категорії|категорія|теми|напрями|активності"
+      },
+      "skills": {
+        "title": "Навички",
+        "description": "Перегляньте навички та волонтерські можливості",
+        "keywords": "навички|навичка|досвід|можливості|рівні"
+      },
+      "projects": {
+        "title": "Проєкти",
+        "description": "Перегляньте доступні проєкти",
+        "keywords": "проєкти|проєкт|активності|волонтерство"
+      },
+      "events": {
+        "title": "Події",
+        "description": "Перегляньте майбутні події",
+        "keywords": "події|подія|зустрічі|активності"
+      },
+      "tasks": {
+        "title": "Завдання",
+        "description": "Перегляньте доступні завдання",
+        "keywords": "завдання|таски|таск|справи|активності"
+      },
+      "myActivities": {
+        "title": "Мої активності",
+        "description": "Проєкти, події та завдання, до яких ви приєдналися",
+        "keywords": "мої активності|приєднані активності|мої завдання|мої події"
+      },
+      "reports": {
+        "title": "Скарги",
+        "description": "Скарги модерації та справи безпеки",
+        "keywords": "скарги|модерація|безпека|звернення"
+      },
+      "timeBank": {
+        "title": "Банк часу",
+        "description": "Відстежуйте волонтерський час, пропозиції та транзакції",
+        "keywords": "банк часу|години|пропозиції|бронювання|транзакції|волонтерський час"
+      },
+      "bookmarks": {
+        "title": "Закладки",
+        "description": "Збережені проєкти, події та завдання",
+        "keywords": "закладки|збережені|збережені активності|участь"
+      },
+      "map": {
+        "title": "Карта",
+        "description": "Перегляньте активності за локацією",
+        "keywords": "карта|локація|поруч|гео"
+      },
+      "calendar": {
+        "title": "Календар",
+        "description": "Доступність і заплановані активності",
+        "keywords": "календар|розклад|доступність|дати"
+      },
+      "faq": {
+        "title": "FAQ",
+        "description": "Відповіді на поширені питання про ImpactFlow",
+        "keywords": "faq|допомога|питання|підтримка"
+      },
+      "privacy": {
+        "title": "Політика конфіденційності",
+        "description": "Як ImpactFlow обробляє персональні дані",
+        "keywords": "конфіденційність|політика|дані|персональні дані"
+      },
+      "terms": {
+        "title": "Умови користування",
+        "description": "Правила платформи, умови та положення",
+        "keywords": "умови|правила|положення|юридичне"
+      },
+      "admin": {
+        "title": "Адмін",
+        "description": "Адміністративний огляд і інструменти платформи",
+        "keywords": "адмін|адмінка|панель|користувачі|відзнаки|запити"
+      }
+    }
+  },
+  "memberMutations": {
+    "missingParticipation": "Для цього учасника немає запису участі.",
+    "roleUpdated": "Роль оновлено",
+    "roleUpdatedText": "Роль користувача {{name}} оновлено.",
+    "roleUpdateFailed": "Не вдалося оновити роль",
+    "memberRemoved": "Учасника видалено",
+    "removalFailed": "Не вдалося видалити учасника",
+    "requestApproved": "Запит схвалено",
+    "requestRejected": "Запит відхилено",
+    "requestUpdateFailed": "Не вдалося оновити запит"
+  },
+  "policies": {
+    "open": "Відкритий для вступу",
+    "approval_required": "Потрібне підтвердження"
+  },
+  "requests": {
+    "actions": {
+      "acceptName": "Прийняти",
+      "declineName": "Відхилити"
+    },
+    "toasts": {
+      "acceptSuccessTitle": "Запрошення прийнято",
+      "acceptSuccessDesc": "Ви успішно прийняли запрошення.",
+      "declineSuccessTitle": "Запрошення відхилено",
+      "declineSuccessDesc": "Ви успішно відхилили запрошення."
+    }
+  },
+  "loading": {
+    "title": "Завантаження..."
+  },
+  "level": {
+    "current": "Рівень {{level}}",
+    "next": "Наступний рівень"
+  },
+  "status": {
+    "online": "Онлайн",
+    "offline": "Офлайн",
+    "pending": "Очікує",
+    "completed": "Завершено",
+    "cancelled": "Скасовано",
+    "inProgress": "В процесі",
+    "completionRequested": "Запит на завершення",
+    "reserved": "Зарезервовано"
+  },
+  "nav": {
+    "activities": "АКТИВНОСТІ",
+    "map": "КАРТА",
+    "organizations": "ОРГАНІЗАЦІЇ",
+    "calendar": "КАЛЕНДАР",
+    "moderation": "МОДЕРАЦІЯ",
+    "admin": "АДМІН",
+    "categories": "КАТЕГОРІЇ",
+    "timeBank": "БАНКА ЧАСУ"
+  },
+  "errors": {
+    "somethingWentWrong": "Щось пішло не так",
+    "actionFailed": "Помилка: {{action}}",
+    "hint": "Спробуйте оновити сторінку або завітайте пізніше.",
+    "errorHint": "Спробуйте оновити сторінку або завітайте пізніше.",
+    "unexpected": "Сталася неочікувана помилка",
+    "unauthorized": "Немає доступу. Будь ласка, авторизуйтесь.",
+    "forbidden": "У вас немає прав для перегляду цього вмісту.",
+    "notFound": "Не знайдено.",
+    "tooManyRequests": "Занадто багато запитів. Будь ласка, зачекайте.",
+    "internalServer": "Помилка сервера. Спробуйте пізніше.",
+    "serviceUnavailable": "Сервіс тимчасово недоступний."
+  },
+  "members": {
+    "team": "Команда",
+    "members": "учасники",
+    "you": "Ви",
+    "emptyTitle": "Учасників ще немає",
+    "emptySubtitle": "Будьте першим, хто приєднається та змінить ситуацію"
+  },
+  "entityMembers": {
+    "loading": "Завантажуємо учасників...",
+    "error": "Не вдалося завантажити учасників.",
+    "empty": "Учасників ще немає.",
+    "confirmRemoveTitle": "Видалити учасника",
+    "confirmRemoveText": "Цей учасник втратить доступ до активності.",
+    "confirmRemove": "Видалити",
+    "cancel": "Скасувати",
+    "roleUpdated": "Роль оновлено",
+    "roleUpdateFailed": "Не вдалося оновити роль",
+    "memberRemoved": "Учасника видалено",
+    "memberRemoveFailed": "Не вдалося видалити учасника",
+    "missingParticipation": "Для цього учасника немає запису участі.",
+    "teamMember": "Учасник команди",
+    "volunteer": "Волонтер",
+    "active": "Активний",
+    "inactive": "Неактивний",
+    "status": "Статус",
+    "joined": "Приєднався(-лася)"
+  },
+  "pagination": {
+    "loadMore": "Завантажити ще",
+    "noResults": "Результатів не знайдено"
+  },
+  "time": {
+    "minutes": "{{count}}хв",
+    "compactHours": "{{count}}г",
+    "compactMinutes": "{{count}}хв",
+    "hoursAgo": "{{count}}г тому",
+    "justNow": "Щойно"
+  },
+  "socials": {
+    "instagram": {
+      "label": "Введіть посилання на Instagram",
+      "activeLabel": "Посилання Instagram"
+    },
+    "telegram": {
+      "label": "Введіть посилання на Telegram",
+      "activeLabel": "Посилання Telegram"
+    },
+    "x": { "label": "Введіть посилання на X", "activeLabel": "Посилання X" },
+    "tiktok": {
+      "label": "Введіть посилання на TikTok",
+      "activeLabel": "Посилання TikTok"
+    },
+    "facebook": {
+      "label": "Введіть посилання на Facebook",
+      "activeLabel": "Посилання Facebook"
+    },
+    "linkedin": {
+      "label": "Введіть посилання на LinkedIn",
+      "activeLabel": "Посилання LinkedIn"
+    }
+  },
+  "participation": {
+    "join": "Приєднатись до {{entity}}",
+    "leave": "Покинути {{entity}}",
+    "leaveTitle": "Покинути {{name}}?",
+    "leaveText": "Ви впевнені, що хочете покинути? Ви завжди можете приєднатись знову.",
+    "leaveConfirm": "Покинути",
+    "joinSuccess": "Успішно приєднались до {{entity}}",
+    "joinSuccessDescription": "Ви успішно приєднались до {{entity}}.",
+    "joinFailed": "Не вдалось приєднатись",
+    "leaveSuccess": "Успішно покинули {{entity}}",
+    "leaveSuccessDescription": "Ви успішно покинули {{entity}}.",
+    "leaveFailed": "Не вдалось покинути",
+    "approvalRequired": "Потрібне схвалення для {{entity}}",
+    "entities": {
+      "project": "Проєкт",
+      "event": "Подія",
+      "task": "Завдання",
+      "organization": "Організація"
+    },
+    "entitiesGenitive": {
+      "project": "Проєкту",
+      "event": "Події",
+      "task": "Завдання",
+      "organization": "Організації"
+    },
+    "entitiesAccusative": {
+      "project": "Проєкт",
+      "event": "Подію",
+      "task": "Завдання",
+      "organization": "Організацію"
+    }
+  },
+  "timeAgo": {
+    "justNow": "щойно",
+    "minutes": "{{count}}хв тому",
+    "hours": "{{count}}г тому",
+    "days": "{{count}}д тому"
+  },
+  "map": {
+    "yourLocation": "Ваше місцезнаходження"
+  },
+  "mapEmptyState": {
+    "title": "Проєктів не знайдено",
+    "subtitle": "Спробуйте змінити налаштування фільтрів або пошуковий запит"
+  },
+  "createFlow": {
+    "back": "Назад",
+    "continue": "Далі",
+    "creating": "Створюємо..."
+  },
+  "member": {
+    "ownerLabel": "Власник",
+    "volunteerLabel": "Волонтер",
+    "teamMember": "Учасник команди",
+    "level": "РІВ. {{level}}",
+    "hours": "{{hours}} год",
+    "completedProjects": "Завершені проєкти",
+    "activeProjects": "Активні проєкти",
+    "joinedDate": "Приєднався(-лася) {{date}}",
+    "joinDateUnavailable": "Дата приєднання недоступна",
+    "profile": "Профіль",
+    "sendMessage": "Написати повідомлення",
+    "removeFrom": "Видалити з {{entity}}",
+    "openActions": "Відкрити дії для {{name}}",
+    "changeRole": "Змінити роль",
+    "requestJoin": "Запит на вступ",
+    "requestLeave": "Запит на вихід",
+    "entities": {
+      "organization": "організації",
+      "project": "проєкту",
+      "event": "події",
+      "task": "завдання"
+    }
+  },
+  "memberList": {
+    "tabsLabel": "Розділи учасників: {{entity}}",
+    "membersTab": "Учасники",
+    "requestsTab": "Запити",
+    "searchMembers": "Пошук учасників",
+    "searchRequests": "Пошук запитів",
+    "totalMembers": "Усього учасників",
+    "pendingJoin": "Очікують вступу",
+    "pendingLeave": "Очікують виходу",
+    "noMembersFound": "Учасників не знайдено",
+    "noMembersFoundHint": "Спробуйте інше ім’я або очистьте пошук, щоб побачити всіх учасників.",
+    "noMembers": "Учасників ще немає",
+    "noMembersHint": "Запросіть волонтерів приєднатися до {{entity}}, і вони з’являться тут.",
+    "requestTypesLabel": "Типи запитів: {{entity}}",
+    "joinRequests": "Запити на вступ",
+    "leaveRequests": "Запити на вихід",
+    "noRequestsFound": "Результатів не знайдено",
+    "noRequestsFoundHint": "Спробуйте інше ім’я або очистьте пошук, щоб побачити всі запити.",
+    "noPendingRequests": "Запитів на розгляді немає",
+    "noJoinRequests": "Запити з’являться тут, коли волонтери захочуть приєднатися до {{entity}}.",
+    "noLeaveRequests": "Запити з’являться тут, коли учасники захочуть вийти з {{entity}}.",
+    "removeTitle": "Видалити учасника?",
+    "removeNamedText": "Видалити {{name}} з {{entity}}?",
+    "removeText": "Видалити цього учасника?",
+    "remove": "Видалити",
+    "approveTitle": "Схвалити запит?",
+    "rejectTitle": "Відхилити запит?",
+    "approveText": "Схвалити запит користувача {{name}}: {{kind}}?",
+    "rejectText": "Відхилити запит користувача {{name}}: {{kind}}?"
+  },
+  "inviteCard": {
+    "eyebrow": "Розширюйте команду",
+    "title": "Запросити волонтера",
+    "description": "Перегляньте каталог волонтерів і запросіть нових учасників до {{entity}}.",
+    "cta": "Переглянути волонтерів"
+  },
+  "inviteModal": {
+    "title": "Запросити {{name}}?",
+    "text": "Буде надіслано запрошення приєднатися до {{entity}}.",
+    "send": "Надіслати запрошення",
+    "cancel": "Скасувати",
+    "message": "Повідомлення",
+    "optional": "Необов’язково",
+    "placeholder": "Напишіть коротко про {{entityLabel}} і чому ви хотіли б запросити цю людину.",
+    "entityFallback": "організації"
+  },
+  "publicProfile": {
+    "loading": "Завантажуємо профіль волонтера...",
+    "error": "Не вдалося завантажити профіль волонтера.",
+    "volunteer": "Волонтер",
+    "organizationFallback": "цієї організації",
+    "sections": {
+      "about": "Про себе",
+      "overview": "Огляд",
+      "skills": "Навички",
+      "badges": "Відзнаки",
+      "organizations": "Організації",
+      "availability": "Доступність"
+    },
+    "actions": {
+      "invite": "Запросити до організації",
+      "invited": "Запрошено",
+      "message": "Написати повідомлення",
+      "readMore": "Читати більше",
+      "showLess": "Згорнути"
+    },
+    "about": {
+      "level": "Рівень {{level}}",
+      "maximumLevel": "Максимальний рівень",
+      "nextLevel": "Наступний рівень",
+      "votes_one": "({{count}} голос)",
+      "votes_few": "({{count}} голоси)",
+      "votes_many": "({{count}} голосів)",
+      "votes_other": "({{count}} голосу)",
+      "emptyBio": "Цей волонтер ще не додав інформацію про себе."
+    },
+    "overview": {
+      "activeProjects": "Активні проєкти",
+      "completedProjects": "Завершені проєкти",
+      "hoursContributed": "Відпрацьовані години"
+    },
+    "skills": {
+      "empty": "Навички ще не додано.",
+      "iconLabel": "Іконка навички {{name}}",
+      "levels": {
+        "Beginner": "Початковий",
+        "Intermediate": "Середній",
+        "Advanced": "Просунутий",
+        "Expert": "Експертний"
+      }
+    },
+    "badges": {
+      "progress": "{{unlocked}} з {{total}}",
+      "empty": "Відзнак ще немає."
+    },
+    "organizations": {
+      "empty": "Організацій для показу немає."
+    },
+    "availability": {
+      "allDay": "Увесь день",
+      "notSet": "Не вказано",
+      "unavailable": "Недоступний день",
+      "empty": "Інформацію про доступність ще не додано.",
+      "days": {
+        "sun": "Нд",
+        "mon": "Пн",
+        "tue": "Вт",
+        "wed": "Ср",
+        "thu": "Чт",
+        "fri": "Пт",
+        "sat": "Сб"
+      }
+    },
+    "invitationSent": "Запрошення надіслано",
+    "invitationSentText": "{{name}} тепер може відповісти на запрошення."
+  },
+  "search": {
+    "title": "Пошук"
+  },
+
+  "filters": {
+    "title": "Фільтрування",
+    "filterByTitle": "Фільтрація за",
+    "titleList": "Список",
+    "rating": "Рейтинг {{subject}}",
+    "deadlineDue": "Дедлайн {{subject}}",
+    "categories": "Категорії",
+    "requiredSkills": "Необхідні навички",
+    "skills": "Навички",
+    "projects": "Проєкти",
+    "organizations": "Організації",
+    "events": "Події",
+    "offerFormat": "Формат пропозиції",
+    "subjectType": "Тип суб'єкта",
+    "reportStatus": "Статус скарги",
+    "reportReason": "Причина скарги",
+    "dateRange": "Діапазон дат",
+    "distance": "Відстань",
+    "displayCompleted": "Показати завершені {{subject}}",
+    "displayJoined": "Показати приєднані {{subject}}",
+    "displaySeries": "Показати серійні події",
+    "moreOptions": "Більше параметрів",
+    "startDate": "Дата початку",
+    "dueDate": "Кінцева дата",
+    "includeArchived": "Показати архівовані {{subject}}",
+    "setDistanceLocationPlaceholder": "Вкажіть локацію",
+    "searchAreaCenter": "Центр зони пошуку",
+    "kmRadiusSuffix": "км радіус",
+    "kmUnit": "км",
+    "onlineOptions": {
+      "all": "Усі"
+    },
+    "subjects": {
+      "task": "завдання",
+      "project": "проєкту",
+      "organization": "організації",
+      "offer": "пропозиції",
+      "event": "події",
+      "tasks": "завдання",
+      "projects": "проєкти",
+      "organizations": "організації",
+      "offers": "пропозиції",
+      "events": "події"
+    }
+  },
+  "reason": {
+    "title": "Причина"
+  },
+  "sorting": {
+    "title": "Сортування",
+    "default": "За замовчуванням",
+    "newest": "Найновіші",
+    "titleAsc": "Назва А→Я",
+    "titleDesc": "Назва Я→А",
+    "endingSoon": "Незабаром закінчується",
+    "dateAsc": "Дата за зростанням",
+    "dateDesc": "Дата за спаданням",
+    "ratingAsc": "Рейтинг за зростанням",
+    "ratingDesc": "Рейтинг за спаданням",
+    "priceMinutesAsc": "Ціна за зростанням",
+    "priceMinutesDesc": "Ціна за спаданням"
+  },
+  "validation": {
+    "required": "Це поле є обов'язковим",
+    "emailRequired": "Email є обов'язковим",
+    "passwordRequired": "Пароль є обов'язковим",
+    "invalidEmail": "Введіть коректну email адресу",
+    "agreementRequired": "Ви повинні погодитись з умовами",
+    "invalidName": "Введіть коректне ім'я",
+    "firstNameRequired": "Ім'я є обов'язковим",
+    "firstNameTooShort": "Ім'я занадто коротке",
+    "firstNameTooLong": "Ім'я занадто довге",
+    "lastNameRequired": "Прізвище є обов'язковим",
+    "lastNameTooShort": "Прізвище занадто коротке",
+    "lastNameTooLong": "Прізвище занадто довге",
+    "passwordTooShort": "Пароль має містити щонайменше 8 символів",
+    "passwordUppercase": "Пароль має містити хоча б одну велику літеру",
+    "passwordLowercase": "Пароль має містити хоча б одну малу літеру",
+    "passwordNumber": "Пароль має містити хоча б одну цифру",
+    "passwordSpecial": "Пароль має містити хоча б один спеціальний символ",
+    "latitudeRequired": "Широта є обов'язковою",
+    "latitudeRange": "Широта має бути між -90 та 90",
+    "longitudeRequired": "Довгота є обов'язковою",
+    "longitudeRange": "Довгота має бути між -180 та 180",
+    "coordinatesRequired": "Координати є обов'язковими",
+    "unsupportedFormat": "Непідтримуваний формат файлу",
+    "fileTooLarge": "Файл занадто великий (макс {{size}}МБ)",
+    "requiredWhenEnabled": "Це поле є обов'язковим, оскільки перемикач увімкнено",
+    "invalidUrl": "Введіть коректний URL",
+    "invalidDate": "Невірна дата",
+    "ageTooYoung": "Вам має бути щонайменше {{count}} років",
+    "ageTooOld": "Вік не може перевищувати {{count}} років",
+    "minChars": "Має містити щонайменше {{count}} символів",
+    "maxChars": "Не може перевищувати {{count}} символів",
+    "passwordsMatch": "Паролі повинні співпадати",
+    "confirmPasswordRequired": "Підтвердження пароля є обов'язковим",
+    "newPasswordRequired": "Новий пароль є обов'язковим",
+    "codeMustBe6Digits": "Код має містити 6 цифр",
+    "codeOnlyDigits": "Код має містити лише цифри",
+    "codeRequired": "Код верифікації є обов'язковим"
+  }
+}

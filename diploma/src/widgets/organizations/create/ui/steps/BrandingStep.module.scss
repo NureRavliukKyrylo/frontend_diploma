@@ -1,0 +1,42 @@
+@use "@shared/assets/styles" as *;
+
+.brandingCard {
+  padding-top: 56px;
+  padding-bottom: 66px;
+}
+
+.brandingCardHeader {
+  gap: 14px;
+
+  p {
+    max-width: 720px;
+  }
+}
+
+@include respond-to(custom, 1320px) {
+  .brandingCard {
+    padding-top: 52px;
+    padding-bottom: 58px;
+  }
+}
+
+@include respond-to(custom, 1120px) {
+  .brandingCard {
+    padding-top: 44px;
+    padding-bottom: 50px;
+  }
+}
+
+@include respond-to(tablet) {
+  .brandingCard {
+    padding-top: 38px;
+    padding-bottom: 42px;
+  }
+}
+
+@include respond-to(mobile) {
+  .brandingCard {
+    padding-top: 26px;
+    padding-bottom: 30px;
+  }
+}

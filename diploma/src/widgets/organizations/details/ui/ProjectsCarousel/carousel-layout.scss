@@ -1,0 +1,127 @@
+.outerCard {
+  width: 100%;
+  height: auto;
+  min-height: 500px;
+  border-radius: 20px 20px 40px 40px;
+  background: #ffffff;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.1),
+    0 -2px 12px rgba(0, 0, 0, 0.05),
+    2px 0 10px rgba(0, 0, 0, 0.04),
+    -2px 0 10px rgba(0, 0, 0, 0.04);
+  padding: 28px 60px 48px 60px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  position: relative;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.titleLineBefore,
+.titleLineAfter {
+  flex: 1;
+  height: 3px;
+  border-radius: 999px;
+}
+
+.titleLineBefore {
+  margin-left: 121px;
+  background: linear-gradient(270deg, #8c0000 0%, transparent 100%);
+}
+
+.titleLineAfter {
+  margin-right: 121px;
+  background: linear-gradient(90deg, #8c0000 0%, transparent 100%);
+}
+
+.carouselArea {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+.gridShell {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  overflow: visible;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+  align-items: stretch;
+}
+
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2.5px solid #8c0000;
+  box-shadow: 0 3px 14px rgba(140, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    opacity 0.15s ease;
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    background: #fff5f5;
+  }
+}
+
+.navBtnLeft {
+  left: -33px;
+}
+
+.navBtnRight {
+  right: -33px;
+}
+
+.projectCard,
+.skeletonCard {
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.1),
+    0 -2px 8px rgba(0, 0, 0, 0.04),
+    2px 0 8px rgba(0, 0, 0, 0.04),
+    -2px 0 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}

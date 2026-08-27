@@ -1,14 +1,23 @@
-import { StrictMode } from "react";
+import "@shared/i18n";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import { RouterProvider } from "@tanstack/react-router";
-import { router } from "./app/routers";
-import { ReactQueryProvider } from "./app/providers";
+import "./index.scss";
+import "./hero.css";
+import {
+  AppRouterProvider,
+  DateLocalProvider,
+  ReactQueryProvider,
+} from "./app/providers";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { UIProvider } from "./app/providers";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+  <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
     <ReactQueryProvider>
-      <RouterProvider router={router} />
+      <UIProvider>
+        <DateLocalProvider>
+          <AppRouterProvider />
+        </DateLocalProvider>
+      </UIProvider>
     </ReactQueryProvider>
-  </StrictMode>
+  </GoogleOAuthProvider>,
 );

@@ -1,0 +1,169 @@
+@use "@shared/assets/styles" as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px;
+
+  @include respond-to(tablet) {
+    padding: 24px;
+    gap: 16px;
+  }
+
+  @include respond-to(mobile) {
+    padding: 20px;
+    gap: 12px;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  position: relative;
+  padding-bottom: 20px;
+
+  @include respond-to(tablet) {
+    gap: 24px;
+  }
+
+  @include respond-to(mobile) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding-bottom: 16px;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      #8c0000 30%,
+      #8c0000 60%,
+      transparent 100%
+    );
+    opacity: 0.8;
+  }
+
+  &.editHeader::after {
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      #c97f00 30%,
+      #c97f00 60%,
+      transparent 100%
+    );
+  }
+}
+
+.title {
+  @include font-base(30px, 700);
+  background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
+  line-height: 110%;
+
+  @include respond-to(tablet) {
+    font-size: 24px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 20px;
+  }
+
+  &.editTitle {
+    background: linear-gradient(180deg, #c97f00 0%, #5a3800 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.subTitle {
+  @include font-base(20px, 800);
+  color: #1a1a1a;
+  text-align: right;
+  white-space: nowrap;
+
+  @include respond-to(tablet) {
+    font-size: 16px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 14px;
+    text-align: left;
+    white-space: normal;
+  }
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 8px;
+
+  @include respond-to(mobile) {
+    flex-wrap: wrap;
+  }
+}
+
+.backButton {
+  @include font-base(16px, 600);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  color: #1a1a1a;
+  border-radius: 50px;
+  height: 100%;
+  padding: 10px 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  @include respond-to(mobile) {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .arrowIcon {
+    width: 14px;
+    height: 14px;
+    rotate: 180deg;
+    color: #1a1a1a;
+  }
+}
+
+.nextButton {
+  @include font-base(20px, 800);
+  background: #000000;
+  color: #ffffff;
+  border-radius: 50px;
+  height: 100%;
+  padding: 10px 32px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  min-width: 200px;
+
+  @include respond-to(tablet) {
+    font-size: 16px;
+    min-width: 160px;
+    padding: 10px 24px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 14px;
+    min-width: unset;
+    width: 100%;
+    padding: 10px 20px;
+  }
+}

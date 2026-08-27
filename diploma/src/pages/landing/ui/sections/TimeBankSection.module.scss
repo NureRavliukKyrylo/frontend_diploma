@@ -1,0 +1,170 @@
+.timeBankSection {
+  position: relative;
+  z-index: 2;
+  padding: 100px var(--landing-pad);
+  overflow: hidden;
+  background: radial-gradient(circle at 30% 50%, rgba(132, 0, 0, 0.08) 0%, transparent 60%), #000000;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.timeBankInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.82fr);
+  align-items: center;
+  gap: 68px;
+  width: min(100%, 1080px);
+  margin: 0 auto;
+}
+
+.darkTag {
+  margin: 0 0 14px;
+  color: #840000;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+.timeBankText h2 {
+  max-width: 500px;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -1.2px;
+}
+
+.timeBankText > p:not(.darkTag) {
+  max-width: 500px;
+  margin: 26px 0 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.timeBankList {
+  display: grid;
+  gap: 16px;
+  margin: 36px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeBankList li {
+  position: relative;
+  padding-left: 24px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.timeBankList li::before {
+  position: absolute;
+  top: 0.62em;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #840000;
+  content: "";
+  transform: translateY(-50%);
+}
+
+.balanceCard {
+  padding: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)), rgba(255, 255, 255, 0.04);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.balanceHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #840000;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+
+.balanceValue {
+  margin: 30px 0 0;
+  color: #ffffff;
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -3px;
+}
+
+.balanceLevel {
+  margin: 16px 0 0;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.progressTrack {
+  width: 100%;
+  height: 11px;
+  margin-top: 32px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.28);
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #6a0000, #840000, #b20000);
+  box-shadow: 0 0 18px rgba(132, 0, 0, 0.35);
+}
+
+.transactions {
+  display: grid;
+  gap: 0;
+  margin-top: 32px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.transactionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 17px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 14px;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.transactionRow:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
+  transform: translateX(4px);
+}
+
+.transactionRow:last-child { border-bottom: 0; }
+.transactionRow strong { font-weight: 900; }
+.positive { color: #34d399; }.negative { color: #ef4444; }
+
+@media (max-width: 1023px) {
+  .timeBankInner {
+    grid-template-columns: 1fr;
+    gap: 42px;
+    padding: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .timeBankSection { padding: 72px var(--landing-pad); }
+
+  .balanceCard { padding: 26px 22px; }.balanceValue { font-size: 58px; }
+}

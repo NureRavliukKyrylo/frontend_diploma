@@ -1,0 +1,288 @@
+.notFoundPage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: clamp(28px, 5vh, 56px) 32px;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: #f4f4f4;
+  color: #000000;
+  font-family: "Exo 2", sans-serif;
+  isolation: isolate;
+}
+
+.watermark {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  z-index: 0;
+  color: rgba(132, 0, 0, 0.04);
+  font-size: clamp(260px, 46vw, 680px);
+  font-weight: 900;
+  line-height: 0.78;
+  letter-spacing: -0.08em;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+
+.particlesLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  display: block;
+  background: #840000;
+  opacity: 0.16;
+}
+
+.circleParticle {
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+}
+
+.rectParticle {
+  width: 16px;
+  height: 8px;
+  border-radius: 3px;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100%, 520px);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  text-align: center;
+}
+
+.floatingStack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.compassIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 26px;
+}
+
+.compassSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.compassCircle {
+  fill: rgba(132, 0, 0, 0.08);
+  stroke: rgba(132, 0, 0, 0.2);
+  stroke-width: 2;
+}
+
+.compassInnerCircle {
+  fill: none;
+  stroke: rgba(132, 0, 0, 0.14);
+  stroke-width: 2;
+}
+
+.compassTicks {
+  fill: none;
+  stroke: rgba(132, 0, 0, 0.2);
+  stroke-width: 4;
+}
+
+.compassNeedle {
+  fill: #840000;
+}
+
+.compassNeedleMuted {
+  fill: rgba(132, 0, 0, 0.2);
+}
+
+.compassCenter {
+  fill: #840000;
+}
+
+.errorCode {
+  margin: 0;
+  color: #840000;
+  font-size: 146px;
+  font-weight: 900;
+  line-height: 0.84;
+  letter-spacing: -6px;
+  text-shadow: 0 10px 24px rgba(132, 0, 0, 0.08);
+}
+
+.decorLine {
+  width: 48px;
+  height: 3px;
+  margin-top: 38px;
+  border-radius: 2px;
+  background: #840000;
+  opacity: 0.4;
+}
+
+.title {
+  margin: 30px 0 0;
+  color: #000000;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.subtitle {
+  max-width: 360px;
+  margin: 18px 0 0;
+  color: #666666;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 38px;
+  flex-wrap: wrap;
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 46px;
+  padding: 0 22px;
+  border-radius: 999px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.primaryButton svg,
+.secondaryButton svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  fill: currentColor;
+}
+
+.primaryButton {
+  border: 1px solid #000000;
+  background: #000000;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+}
+
+.primaryButton:hover,
+.primaryButton:focus-visible {
+  outline: none;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+}
+
+.secondaryButton {
+  border: 1px solid #000000;
+  background: transparent;
+  color: #000000;
+}
+
+.secondaryButton:hover,
+.secondaryButton:focus-visible {
+  border-color: #840000;
+  color: #840000;
+  outline: none;
+}
+
+.brandLabel {
+  margin: 42px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+@media (max-width: 767px) {
+  .notFoundPage {
+    padding: 28px 18px;
+  }
+
+  .compassIcon {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 20px;
+  }
+
+  .errorCode {
+    font-size: clamp(96px, 31vw, 128px);
+    letter-spacing: -4px;
+  }
+
+  .decorLine {
+    margin-top: 30px;
+  }
+
+  .title {
+    margin-top: 26px;
+    font-size: 23px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .actions {
+    width: min(100%, 320px);
+    margin-top: 32px;
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+
+  .brandLabel {
+    margin-top: 34px;
+  }
+}
+
+@media (max-width: 380px) {
+  .compassIcon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .errorCode {
+    font-size: 76px;
+  }
+}

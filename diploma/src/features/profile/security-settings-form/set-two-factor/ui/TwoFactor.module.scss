@@ -1,0 +1,12 @@
+@use "@shared/assets/styles" as *;
+
+.verificationBlock {
+  width: 80%;
+
+  @include respond-to(tablet) {
+    width: 100%;
+  }
+  @include respond-to(mobile) {
+    width: 100%;
+  }
+}

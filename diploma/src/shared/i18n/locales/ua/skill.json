@@ -1,0 +1,53 @@
+{
+  "skillLevel": {
+    "beginner": "Початковий",
+    "intermediate": "Середній",
+    "advanced": "Просунутий",
+    "expert": "Експерт"
+  },
+  "skills": {
+    "assignCard": {
+      "title": "НОВА НАВИЧКА"
+    },
+    "stepConfirmLevel": {
+      "title": "РІВЕНЬ НАВИЧКИ",
+      "description": "Оберіть, наскільки добре ви знаєте <strong>{{name}}</strong> — від початківця до повного володіння.",
+      "addButton": "ДОДАТИ НАВИЧКУ"
+    },
+    "updateSkillModal": {
+      "updateButton": "ОНОВИТИ ДО {{level}}"
+    },
+    "profileTab": {
+      "updateLabel": "Оновити рівень навички",
+      "removeLabel": "Видалити навичку",
+      "assignLabel": "Призначити навичку"
+    },
+    "page": {
+      "title": "Огляд та призначення навичок",
+      "emptyTitle": "Навичок не знайдено",
+      "emptyHint": "Спробуйте змінити фільтри або пошуковий запит"
+    },
+    "assign": {
+      "action": "Призначити навичку",
+      "successTitle": "Навичку призначено",
+      "successDescription": "Ви успішно призначили навичку"
+    },
+    "update": {
+      "action": "Оновити навичку",
+      "successTitle": "Навичку оновлено",
+      "successDescription": "Ви успішно оновили рівень навички"
+    },
+    "remove": {
+      "action": "Видалити навичку",
+      "successTitle": "Навичку видалено",
+      "successDescription": "Ви успішно видалили навичку",
+      "modalTitle": "Видалити навичку - {{name}}?",
+      "modalText": "Ви впевнені, що хочете видалити цю навичку? Ви можете додати її знову будь-коли.",
+      "cancel": "Скасувати",
+      "confirm": "Видалити"
+    },
+    "filter": {
+      "error": "Не вдалося завантажити навички"
+    }
+  }
+}

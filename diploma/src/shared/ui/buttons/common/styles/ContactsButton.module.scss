@@ -1,0 +1,36 @@
+@use "@shared/assets/styles" as *;
+@use "@shared/assets/styles" as animation;
+@use "@shared/assets/styles" as breakpoints;
+
+.contactsButton {
+  background: rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 50px;
+  color: white;
+  @include font-base(18px, 600);
+  padding: 10px;
+  height: 37px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  @include animation.button-glow-effect($glow-color: #273646);
+
+  @include breakpoints.respond-to(laptop) {
+    @include font-base(17px, 600);
+    width: 40%;
+    height: 35px;
+  }
+
+  @include breakpoints.respond-to(tablet) {
+    @include font-base(16px, 600);
+    width: 60%;
+    height: 35px;
+  }
+
+  @include breakpoints.respond-to(mobile) {
+    @include font-base(15px, 600);
+    width: 100%;
+    height: 34px;
+  }
+}

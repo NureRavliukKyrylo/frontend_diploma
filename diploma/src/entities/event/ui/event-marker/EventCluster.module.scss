@@ -1,0 +1,17 @@
+@use "@shared/assets/styles" as *;
+
+.clusterEventMarker {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #6a5acd;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 4px 12px rgba(106, 90, 205, 0.45),
+    0 0 18px rgba(106, 90, 205, 0.35);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include font-base(18px, 800);
+}

@@ -1,0 +1,130 @@
+
+.creatorCard {
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.08),
+      0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+}
+
+.creatorAvatar {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #840000, #1a1a1a);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 900;
+  box-shadow: 0 4px 12px rgba(132, 0, 0, 0.25);
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+}
+
+.creatorText {
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.creatorName {
+  overflow: hidden;
+  color: #1a1a1a;
+  font-size: 15px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.creatorRole {
+  color: #bbbbbb;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentInner {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  animation: fadeSlide 0.35s ease;
+}
+
+.contentHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.eyebrowDot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  border-radius: 50%;
+  background: #aaaaaa;
+
+  &::after {
+    position: absolute;
+    inset: -4px;
+    border: 1.5px solid rgba(170, 170, 170, 0.35);
+    border-radius: 50%;
+    content: "";
+    animation: pulse 2s ease-out infinite;
+  }
+}
+
+.eyebrowText {
+  color: #aaaaaa;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.h1 {
+  margin: 10px 0 0;
+  color: #000000;
+  font-family: "Exo 2", sans-serif;
+  font-size: 43px;
+  font-weight: 900;
+  letter-spacing: -1.2px;
+  line-height: 1.1;
+}
+

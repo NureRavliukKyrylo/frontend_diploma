@@ -1,0 +1,161 @@
+.wrapper {
+  position: relative;
+  padding: 38px 40px 36px;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    top: -160px;
+    right: -110px;
+    border-radius: 50%;
+    background: rgba(132, 0, 0, 0.06);
+    pointer-events: none;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: #f5f5f5;
+  color: #555555;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+}
+
+.title {
+  position: relative;
+  z-index: 1;
+  margin: 0 42px 6px 0;
+  color: #1a1a1a;
+  font-size: 31px;
+  font-weight: 900;
+  letter-spacing: -0.7px;
+  line-height: 1.08;
+}
+
+.subtitle {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 26px;
+  color: #999999;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.58;
+}
+
+.dropzone {
+  position: relative;
+  z-index: 1;
+  width: 178px;
+  height: 178px;
+  border: 1.5px dashed #d5d5d5;
+  border-radius: 36px 24px 36px 24px;
+  background:
+    linear-gradient(135deg, #fbfbfb 0%, #f4f4f4 100%),
+    radial-gradient(circle at 80% 12%, rgba(132, 0, 0, 0.08), transparent 38%);
+  color: #aaaaaa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 18px;
+  cursor: pointer;
+  box-shadow:
+    inset 0 0 0 10px rgba(255, 255, 255, 0.78),
+    0 16px 34px rgba(0, 0, 0, 0.08);
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: #8b0000;
+    box-shadow:
+      inset 0 0 0 10px rgba(255, 255, 255, 0.78),
+      0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.secondaryButton,
+.primaryButton {
+  flex: 1;
+  height: 50px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: "Exo 2", sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.secondaryButton {
+  background: #ffffff;
+  border: 1px solid #ebebeb;
+  color: #5f5e5a;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.07),
+    0 2px 8px rgba(0, 0, 0, 0.035);
+}
+
+.primaryButton {
+  border: 0;
+  background: #1a1a1a;
+  color: #ffffff;
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.22),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.55;
+  }
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.error {
+  position: relative;
+  z-index: 1;
+  margin-top: 8px;
+  color: #8b0000;
+  font-size: 12px;
+  font-weight: 800;
+}

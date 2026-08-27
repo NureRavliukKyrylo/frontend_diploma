@@ -1,0 +1,8 @@
+@use "@shared/assets/styles" as *;
+@use "@shared/assets/styles" as breakpoint;
+
+.wrapperInputOTP {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

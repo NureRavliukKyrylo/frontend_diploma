@@ -1,0 +1,93 @@
+@use "@shared/assets/styles" as *;
+@use "@shared/assets/styles" as adaptive;
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Zen+Dots&display=swap");
+$error-color: #dc2626;
+
+:root {
+  font-family: $font-family;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+button {
+  padding: 0;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.errorMessage {
+  color: $error-color;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  @include font-base(15px, 900);
+  display: flex;
+  justify-content: center;
+  @include adaptive.respond-to(tablet) {
+    font-size: 0.7rem;
+    margin-top: 0.45rem;
+  }
+
+  @include adaptive.respond-to(mobile) {
+    font-size: 0.65rem;
+    margin-top: 0.4rem;
+  }
+}
+
+.errorInput {
+  color: $error-color;
+  @include font-base(13px, 700);
+  margin-top: 0.35rem;
+  @include adaptive.respond-to(tablet) {
+    font-size: 12px;
+    margin-top: 0.3rem;
+  }
+
+  @include adaptive.respond-to(mobile) {
+    font-size: 11px;
+    margin-top: 0.25rem;
+  }
+}
+
+.errorHttpMessage {
+  color: $error-color;
+  @include font-base(var(--error-message-size, 21px), 800);
+
+  @include adaptive.respond-to(tablet) {
+    font-size: var(--error-message-size-tablet, 16px);
+  }
+  @include adaptive.respond-to(mobile) {
+    font-size: var(--error-message-size-mobile, 14px);
+  }
+}
+
+.errorHint {
+  color: rgba(0, 0, 0, 0.4);
+  @include font-base(var(--error-hint-size, 14px), 400);
+
+  @include adaptive.respond-to(tablet) {
+    font-size: var(--error-hint-size-tablet, 12px);
+  }
+  @include adaptive.respond-to(mobile) {
+    font-size: var(--error-hint-size-mobile, 11px);
+  }
+}

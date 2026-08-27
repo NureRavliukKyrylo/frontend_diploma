@@ -1,0 +1,55 @@
+@use "@shared/assets/styles" as *;
+
+.readMoreContainer {
+  position: relative;
+  width: 100%;
+}
+
+.content {
+  overflow: hidden;
+  position: relative;
+}
+
+.gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--gradient-color), 0) 10%,
+    rgba(var(--gradient-color), 0.8) 90%,
+    rgb(var(--gradient-color)) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+
+  @include respond-to(mobile) {
+    height: 36px;
+  }
+}
+
+.readMoreButton {
+  background: transparent;
+  border: none;
+  color: rgba(0, 0, 0, 0.6);
+  @include font-base(20px, 700);
+  cursor: pointer;
+  padding: 8px 0;
+  margin-top: 4px;
+  transition: color 0.2s ease;
+
+  @include respond-to(laptop) {
+    font-size: 17px;
+  }
+  @include respond-to(tablet) {
+    font-size: 15px;
+    padding: 6px 0;
+  }
+  @include respond-to(mobile) {
+    font-size: 13px;
+    padding: 5px 0;
+    margin-top: 2px;
+  }
+}

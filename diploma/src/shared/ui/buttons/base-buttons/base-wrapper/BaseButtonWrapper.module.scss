@@ -1,0 +1,38 @@
+@use "@shared/assets/styles" as adaptive;
+@use "@shared/assets/styles" as *;
+
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  .spinner {
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+  &.loading {
+    pointer-events: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+  @include adaptive.respond-to(mobile) {
+    @include font-base(14px, 700);
+  }
+
+  @include adaptive.respond-to(tablet) {
+    @include font-base(15px, 800);
+  }
+
+  @include adaptive.respond-to(laptop) {
+    @include font-base(16px, 800);
+  }
+
+  @include adaptive.respond-to(desktop) {
+    @include font-base(17px, 900);
+  }
+}

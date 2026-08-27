@@ -1,0 +1,100 @@
+@use "@shared/assets/styles" as *;
+
+.popupProjectContent {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+
+  @include respond-to(tablet) {
+    gap: 14px;
+  }
+  @include respond-to(mobile) {
+    gap: 10px;
+  }
+
+  .projectInfo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+      @include font-base(25px, 900);
+      margin-bottom: 5px;
+      text-align: center;
+      line-height: 120%;
+
+      @include respond-to(tablet) {
+        font-size: 20px;
+      }
+      @include respond-to(mobile) {
+        font-size: 17px;
+        margin-bottom: 3px;
+      }
+    }
+
+    p {
+      @include font-base(18px, 500);
+      text-align: center;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 130%;
+
+      @include respond-to(tablet) {
+        font-size: 15px;
+      }
+      @include respond-to(mobile) {
+        font-size: 13px;
+      }
+    }
+
+    .seeMoreButtonProject {
+      color: #8c0000;
+      text-decoration-line: underline;
+      @include font-base(18px, 800);
+
+      @include respond-to(tablet) {
+        font-size: 15px;
+      }
+      @include respond-to(mobile) {
+        font-size: 13px;
+      }
+    }
+  }
+
+  .organizationProjectInfo {
+    .organizationImage {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+
+      img {
+        width: 28px;
+        height: 28px;
+
+        @include respond-to(tablet) {
+          width: 24px;
+          height: 24px;
+        }
+        @include respond-to(mobile) {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      h1 {
+        @include font-base(15px, 900);
+
+        @include respond-to(tablet) {
+          font-size: 13px;
+        }
+        @include respond-to(mobile) {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

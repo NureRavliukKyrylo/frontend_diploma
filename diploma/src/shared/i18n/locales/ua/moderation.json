@@ -1,0 +1,218 @@
+{
+  "report": {
+    "title": "Поскаржитися на {{subject}}",
+    "labels": {
+      "reason": "Причина",
+      "details": "Деталі",
+      "noDetails": "Без деталей"
+    },
+    "placeholders": {
+      "details": "Опишіть проблему..."
+    },
+    "actions": {
+      "cancel": "Скасувати",
+      "submit": "Надіслати скаргу"
+    },
+    "validation": {
+      "reasonRequired": "Будь ласка, оберіть причину",
+      "detailsRequired": "Деталі є обов'язковими",
+      "detailsMax": "Опис повинен містити не більше 200 символів"
+    },
+    "statuses": {
+      "opened": "Відкрито",
+      "open": "Відкрито",
+      "resolved": "Вирішено",
+      "rejected": "Відхилено"
+    },
+    "subjects": {
+      "user": "Користувач",
+      "organization": "Організація",
+      "project": "Проєкт",
+      "event": "Подія",
+      "task": "Завдання",
+      "offer": "Пропозиція",
+      "chatMessage": "Повідомлення",
+      "comment": "Коментар",
+      "feedback": "Відгук",
+      "other": "Вміст"
+    },
+    "reasons": {
+      "spam": "Спам",
+      "harassment": "Образи або цькування",
+      "hateSpeech": "Мова ворожнечі",
+      "misinformation": "Дезінформація",
+      "inappropriateContent": "Неприйнятний вміст",
+      "violence": "Насильство або погрози",
+      "copyright": "Порушення авторських прав",
+      "fraud": "Шахрайство",
+      "privacyViolation": "Порушення конфіденційності",
+      "other": "Інше"
+    },
+    "notifications": {
+      "successTitle": "Скарга надіслана",
+      "successDescription": "Дякуємо за ваше повідомлення. Ми розглянемо його найближчим часом.",
+      "failedTitle": "Не вдалося надіслати скаргу"
+    }
+  },
+  "page": {
+    "stats": {
+      "total": "Скарги",
+      "open": "Відкриті",
+      "resolved": "Вирішені",
+      "rejected": "Відхилені"
+    },
+    "sorting": {
+      "default": "За замовчуванням",
+      "newest": "Найновіші",
+      "latest": "Останні"
+    },
+    "empty": {
+      "title": "Звітів не знайдено",
+      "description": "Спробуйте змінити фільтри"
+    }
+  },
+  "hideContent": {
+    "button": "Приховати вміст",
+    "title": "Приховати вміст",
+    "actions": {
+      "cancel": "Скасувати",
+      "submit": "Приховати вміст"
+    },
+    "labels": {
+      "reason": "Причина"
+    },
+    "validation": {
+      "reasonRequired": "Будь ласка, оберіть причину"
+    },
+    "description": "Цей вміст буде приховано від інших користувачів і більше не відображатиметься у публічних стрічках та результатах пошуку.",
+    "notifications": {
+      "successTitle": "Вміст приховано",
+      "successDescription": "Вміст було успішно приховано.",
+      "failedTitle": "Помилка дії"
+    }
+  },
+  "blockUser": {
+    "button": "Заблокувати користувача",
+    "title": "Заблокувати користувача",
+    "labels": {
+      "reason": "Причина"
+    },
+    "actions": {
+      "cancel": "Скасувати",
+      "submit": "Заблокувати"
+    },
+    "validation": {
+      "reasonRequired": "Будь ласка, оберіть причину"
+    },
+    "notifications": {
+      "successTitle": "Користувача заблоковано",
+      "successDescription": "Користувача було успішно заблоковано.",
+      "failedTitle": "Помилка дії"
+    },
+    "description": "Це заблокує користувача та обмежить його доступ до цієї активності"
+  },
+  "banUser": {
+    "button": "Забанити користувача",
+    "title": "Забанити користувача",
+    "labels": {
+      "reason": "Причина",
+      "expiresAt": "Бан до"
+    },
+    "actions": {
+      "cancel": "Скасувати",
+      "submit": "Забанити"
+    },
+    "validation": {
+      "reasonRequired": "Будь ласка, оберіть причину",
+      "expiresAtRequired": "Будь ласка, оберіть дату закінчення"
+    },
+    "notifications": {
+      "successTitle": "Користувача забанено",
+      "successDescription": "Користувача було успішно забанено.",
+      "failedTitle": "Помилка дії"
+    }
+  },
+  "resolveCase": {
+    "button": "Вирішити",
+    "title": "Вирішити скаргу",
+    "decisions": {
+      "reject": "Відхилити",
+      "approve": "Затвердити"
+    },
+    "labels": {
+      "comment": "Коментар"
+    },
+    "placeholders": {
+      "rejectedComment": "Чому цю скаргу відхилено?",
+      "approvedComment": "Опишіть рішення..."
+    },
+    "actions": {
+      "cancel": "Скасувати",
+      "submit": "Підтвердити"
+    },
+    "validation": {
+      "commentRequired": "Коментар є обов'язковим",
+      "commentMaxLength": "Коментар повинен містити не більше 150 символів"
+    },
+    "notifications": {
+      "successTitleResolve": "Скаргу вирішено",
+      "successDescriptionResolve": "Скаргу було успішно вирішено.",
+      "successTitleReject": "Скаргу відхилено",
+      "successDescriptionReject": "Скаргу було відхилено.",
+      "failedTitle": "Помилка дії"
+    }
+  },
+  "banEntity": {
+    "button": "Заблокувати сутність",
+    "title": "Заблокувати сутність",
+    "description": "Ця дія назавжди заблокує сутність на платформі. Будь ласка, оберіть причину перед продовженням.",
+    "labels": {
+      "reason": "Причина"
+    },
+    "actions": {
+      "cancel": "Скасувати",
+      "submit": "Заблокувати"
+    },
+    "validation": {
+      "reasonRequired": "Будь ласка, оберіть причину"
+    },
+    "notifications": {
+      "successTitle": "Сутність заблокована",
+      "successDescription": "Сутність успішно заблоковано.",
+      "failedTitle": "Помилка блокування",
+      "failedDescription": "Щось пішло не так. Спробуйте ще раз."
+    }
+  },
+  "filters": {
+    "status": {
+      "title": "Статус скарги",
+      "label": "Статус",
+      "options": {
+        "all": "Усі",
+        "open": "Відкриті",
+        "resolved": "Вирішені",
+        "rejected": "Відхилені"
+      }
+    },
+    "dateRange": {
+      "title": "Часовий проміжок"
+    },
+    "reportReason": {
+      "title": "Причина скарги"
+    },
+    "subjectType": {
+      "title": "Тип об'єкта"
+    },
+    "actions": {
+      "clear": "Очистити фільтри"
+    }
+  },
+  "reportCase": {
+    "title": "Скарга",
+    "reporter": "Скаржник",
+    "contentAuthor": "Автор контенту",
+    "reportedContent": "Повідомлений вміст",
+    "details": "Деталі",
+    "goToActivity": "Перейти до активності"
+  }
+}

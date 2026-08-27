@@ -1,0 +1,83 @@
+
+@use "@shared/assets/styles" as *;
+
+.navLink {
+  justify-content: flex-start;
+  padding: 0 12px;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.navLink[data-active="true"] {
+  font-weight: 800;
+}
+
+.navLabel {
+  line-height: 1;
+}
+
+.navLink[data-active="true"] .navLabel {
+  background: linear-gradient(90deg, #6a0000 0%, #840000 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.actionItem {
+  gap: 12px;
+  width: 100%;
+  padding: 0 12px;
+  text-align: left;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    color: currentColor;
+  }
+}
+
+.notificationBadge {
+  @include font-base(10px, 700, "Inter");
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  margin-left: auto;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #d12626;
+  color: #ffffff;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+.languageSwitcher {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.languageButton {
+  justify-content: center;
+  gap: 8px;
+  padding: 0 10px;
+  font-weight: 600;
+}
+
+.languageButtonSelected {
+  color: #840000;
+  font-weight: 800;
+  background: rgba(132, 0, 0, 0.05);
+}
+
+.logoutButton {
+  color: #840000;
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.55;
+  }
+}

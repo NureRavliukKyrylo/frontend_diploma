@@ -1,0 +1,318 @@
+@use "@shared/assets/styles" as *;
+
+.eventControlCardWrapper {
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 30px;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 6;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  border-left: 3px solid transparent;
+  --org-image-card-radius: 50%;
+
+  @include respond-to(laptop) {
+    padding: 24px;
+    border-radius: 32px;
+  }
+  @include respond-to(tablet) {
+    padding: 18px;
+    border-radius: 24px;
+  }
+  @include respond-to(mobile) {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  &.active {
+    border-left-color: #639922;
+  }
+  &.endingSoon {
+    border-left-color: #ef9f27;
+  }
+  &.completed {
+    border-left-color: #378add;
+  }
+  &.archived {
+    border-left-color: #888780;
+    opacity: 0.7;
+  }
+
+  .moreActionsButton {
+    align-self: flex-end;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    top: 20px;
+    right: 15px;
+
+    @include respond-to(mobile) {
+      padding: 6px;
+      top: 14px;
+      right: 10px;
+    }
+
+    .actionsIcon {
+      width: 30px;
+      height: 30px;
+      display: block;
+
+      @include respond-to(laptop) {
+        width: 26px;
+        height: 26px;
+      }
+      @include respond-to(tablet) {
+        width: 22px;
+        height: 22px;
+      }
+      @include respond-to(mobile) {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  .bottomEventContent {
+    display: contents;
+  }
+}
+
+.menuItem {
+  border-radius: 8px;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+  cursor: pointer;
+
+  @include respond-to(tablet) {
+    padding: 2px 5px;
+  }
+  @include respond-to(mobile) {
+    padding: 0 5px;
+  }
+
+  &.leave:hover {
+    background: #fef2f2;
+    transform: translateX(3px);
+    .menuItemTitle {
+      color: #ef4444;
+      font-weight: 600;
+    }
+  }
+}
+
+.dropdownContent {
+  @include respond-to(tablet) {
+    min-width: 150px;
+  }
+  @include respond-to(mobile) {
+    min-width: 130px;
+  }
+}
+
+.menuItemTitle {
+  @include font-base(15px, 500);
+  color: #374151;
+  transition: color 0.15s ease;
+
+  @include respond-to(tablet) {
+    font-size: 14px;
+  }
+  @include respond-to(mobile) {
+    font-size: 13px;
+  }
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 15px;
+  border-radius: 20px;
+  @include font-base(16px, 600);
+  width: fit-content;
+
+  @include respond-to(laptop) {
+    font-size: 14px;
+    padding: 3px 12px;
+  }
+  @include respond-to(tablet) {
+    font-size: 13px;
+    padding: 2px 10px;
+  }
+  @include respond-to(mobile) {
+    font-size: 12px;
+    padding: 2px 8px;
+  }
+
+  &::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+}
+
+.skeletonOrgLogo {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  @include respond-to(laptop) {
+    width: 30px;
+    height: 30px;
+  }
+  @include respond-to(tablet) {
+    width: 26px;
+    height: 26px;
+  }
+  @include respond-to(mobile) {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.skeletonOrgName {
+  width: 130px;
+  height: 20px;
+  border-radius: 6px;
+
+  @include respond-to(tablet) {
+    width: 100px;
+    height: 16px;
+  }
+  @include respond-to(mobile) {
+    width: 80px;
+    height: 14px;
+  }
+}
+
+.skeletonStatusBadge {
+  width: 110px;
+  height: 28px;
+  border-radius: 20px;
+
+  @include respond-to(laptop) {
+    width: 90px;
+    height: 24px;
+  }
+  @include respond-to(tablet) {
+    width: 76px;
+    height: 21px;
+  }
+  @include respond-to(mobile) {
+    width: 62px;
+    height: 18px;
+  }
+}
+
+.skeletonTitle {
+  width: 80%;
+  height: 30px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+
+  @include respond-to(laptop) {
+    height: 25px;
+  }
+  @include respond-to(tablet) {
+    height: 22px;
+  }
+  @include respond-to(mobile) {
+    height: 18px;
+    margin-bottom: 5px;
+  }
+}
+
+.skeletonDescLine {
+  width: 100%;
+  height: 18px;
+  border-radius: 6px;
+
+  @include respond-to(laptop) {
+    height: 16px;
+  }
+  @include respond-to(tablet) {
+    height: 14px;
+  }
+  @include respond-to(mobile) {
+    height: 12px;
+  }
+}
+
+.skeletonDescLineShort {
+  width: 60%;
+  height: 18px;
+  border-radius: 6px;
+
+  @include respond-to(laptop) {
+    height: 16px;
+  }
+  @include respond-to(tablet) {
+    height: 14px;
+  }
+  @include respond-to(mobile) {
+    height: 12px;
+  }
+}
+
+.skeletonDeadline {
+  width: 120px;
+  height: 24px;
+  border-radius: 6px;
+
+  @include respond-to(laptop) {
+    width: 100px;
+    height: 20px;
+  }
+  @include respond-to(tablet) {
+    width: 85px;
+    height: 18px;
+  }
+  @include respond-to(mobile) {
+    width: 70px;
+    height: 15px;
+  }
+}
+
+.skeletonProgress {
+  width: 90px;
+  height: 42px;
+  border-radius: 100px;
+
+  @include respond-to(laptop) {
+    width: 76px;
+    height: 36px;
+  }
+  @include respond-to(tablet) {
+    width: 64px;
+    height: 30px;
+  }
+  @include respond-to(mobile) {
+    width: 54px;
+    height: 26px;
+  }
+}
+
+.skeletonLearnMore {
+  width: 100%;
+  height: 43px;
+  border-radius: 30px;
+
+  @include respond-to(laptop) {
+    height: 38px;
+  }
+  @include respond-to(tablet) {
+    height: 34px;
+  }
+  @include respond-to(mobile) {
+    height: 30px;
+    border-radius: 20px;
+  }
+}

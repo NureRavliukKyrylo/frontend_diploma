@@ -1,0 +1,81 @@
+import { BaseModal } from "@shared/ui/modals";
+import { BaseButtonWrapper } from "@shared/ui/buttons";
+import { TextAreaForm } from "@shared/ui/inputs";
+import styles from "./RejectBookingModal.module.scss";
+import { useRejectBooking } from "../../model/useRejectBooking";
+import { useTranslation } from "react-i18next";
+
+interface RejectBookingModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  bookingId: string;
+}
+
+export const RejectBookingModal = ({
+  isOpen,
+  onClose,
+  bookingId,
+}: RejectBookingModalProps) => {
+  const { t } = useTranslation(["timeBank"]);
+  const handleClose = () => {
+    formik.resetForm();
+    onClose();
+  };
+
+  const { formik, isLoading } = useRejectBooking({
+    bookingId,
+    onSuccess: handleClose,
+  });
+
+  return (
+    <BaseModal
+      isOpen={isOpen}
+      onClose={handleClose}
+      maxWidth="620px"
+      showClosed={false}
+    >
+      <form onSubmit={formik.handleSubmit} className={styles.wrapper}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>
+            {t("timeBank:bookings.labels.rejectTitle")}
+          </h1>
+        </div>
+
+        <div className={styles.field}>
+          <span className={styles.label}>
+            {t("timeBank:bookings.labels.reason")}
+          </span>
+          <TextAreaForm
+            name="reason"
+            placeholder={t("timeBank:bookings.labels.reasonPlaceholder")}
+            value={formik.values.reason}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            maxLength={300}
+            rows={4}
+          />
+          {formik.touched.reason && formik.errors.reason && (
+            <div className="errorInput">{formik.errors.reason}</div>
+          )}
+        </div>
+
+        <div className={styles.footer}>
+          <BaseButtonWrapper
+            className={styles.cancelButton}
+            onClick={handleClose}
+            type="button"
+          >
+            {t("timeBank:bookings.labels.cancel")}
+          </BaseButtonWrapper>
+          <BaseButtonWrapper
+            loading={isLoading}
+            className={styles.submitButton}
+            type="submit"
+          >
+            {t("timeBank:bookings.labels.reject")}
+          </BaseButtonWrapper>
+        </div>
+      </form>
+    </BaseModal>
+  );
+};

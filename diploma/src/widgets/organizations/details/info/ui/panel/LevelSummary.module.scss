@@ -1,0 +1,116 @@
+@use "@shared/assets/styles" as *;
+
+.levelSummary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px;
+  align-items: start;
+}
+
+.levelMain {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.levelHeader {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: end;
+
+  h2 {
+    @include font-base(32px, 900);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+}
+
+.levelValue {
+  @include font-base(30px, 900);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.ratingBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  min-width: 148px;
+  padding-right: 2px;
+  padding-top: 1px;
+
+  strong {
+    @include font-base(50px, 900);
+    color: #9f1414;
+    line-height: 0.9;
+    text-shadow: 0 10px 24px rgba(159, 20, 20, 0.14);
+  }
+
+  span {
+    @include font-base(15px, 700);
+    color: rgba(0, 0, 0, 0.58);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+}
+
+.levelProgressTrack {
+  width: 100%;
+  height: 15px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(239, 236, 232, 0.9) 100%);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.levelProgressFill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7c1414 0%, #bf2520 54%, #df4534 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 6px 18px rgba(162, 18, 18, 0.2);
+}
+
+.levelProgressHints {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  @include font-base(15px, 700);
+  color: rgba(0, 0, 0, 0.56);
+  letter-spacing: 0.01em;
+}
+
+@include respond-to(custom, 920px) {
+  .levelHeader {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+  }
+
+  .levelSummary {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .ratingBlock {
+    align-items: flex-start;
+    padding-right: 0;
+  }
+}
+
+@include respond-to(mobile) {
+  .levelHeader h2 {
+    @include font-base(26px, 900);
+  }
+
+  .levelValue {
+    @include font-base(24px, 900);
+  }
+
+  .ratingBlock strong {
+    @include font-base(36px, 900);
+  }
+}

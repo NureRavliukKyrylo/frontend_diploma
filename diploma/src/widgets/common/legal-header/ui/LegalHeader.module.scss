@@ -1,0 +1,28 @@
+.heroNav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 38px clamp(24px, 6vw, 96px) 0;
+}
+
+.logo {
+  color: #000000;
+  font-size: 24px;
+  font-weight: 900;
+  font-family: "Zen Dots", sans-serif;
+  line-height: 1;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .heroNav {
+    padding-top: 22px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+}

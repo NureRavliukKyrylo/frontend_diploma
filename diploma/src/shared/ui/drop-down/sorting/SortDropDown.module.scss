@@ -1,0 +1,119 @@
+@use "@shared/assets/styles" as *;
+
+.dropDownLabel {
+  @include font-base(20px, 600);
+  margin: 0;
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 1;
+  white-space: nowrap;
+
+  @include respond-to(laptop) {
+    font-size: 18px;
+  }
+  @include respond-to(tablet) {
+    font-size: 15px;
+  }
+  @include respond-to(mobile) {
+    font-size: 14px;
+  }
+}
+
+.dropdownReport {
+  max-height: 150px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  max-height: 200px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.measuredDropDownLabel {
+  display: inline-grid;
+}
+
+.visibleLabel,
+.widthMeasure {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+}
+
+.widthMeasure {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.fitWidestDropDown.fitWidestDropDown {
+  width: max-content;
+}
+
+.fitWidestButton.fitWidestButton {
+  width: max-content;
+  justify-content: flex-start;
+}
+
+.fitWidestDropdown.fitWidestDropdown {
+  width: 100%;
+  min-width: 100%;
+}
+
+.wrapperItem {
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.9);
+    border-radius: 0;
+  }
+  &:first-child {
+    padding-top: 5px;
+  }
+  &:last-child {
+    padding-bottom: 10px;
+  }
+
+  .item {
+    padding: 5px 30px;
+    cursor: pointer;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @include font-base(18px, 500);
+    color: rgba(0, 0, 0, 0.7);
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+
+    @include respond-to(laptop) {
+      font-size: 16px;
+      padding: 4px 24px;
+    }
+    @include respond-to(tablet) {
+      font-size: 14px;
+      padding: 3px 20px;
+    }
+    @include respond-to(mobile) {
+      font-size: 13px;
+      padding: 3px 16px;
+    }
+
+    img {
+      width: 19px;
+      height: 20px;
+
+      @include respond-to(tablet) {
+        width: 16px;
+        height: 17px;
+      }
+      @include respond-to(mobile) {
+        width: 15px;
+        height: 15px;
+      }
+    }
+
+    &.itemActive {
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.7);
+    }
+  }
+}

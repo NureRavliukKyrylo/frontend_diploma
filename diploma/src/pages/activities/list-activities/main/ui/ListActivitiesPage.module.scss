@@ -1,0 +1,114 @@
+@use "@shared/assets/styles" as *;
+
+.activitiesWrapper {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+
+  @include respond-to(laptop) {
+    gap: 40px;
+  }
+  @include respond-to(tablet) {
+    width: 95%;
+    gap: 30px;
+  }
+  @include respond-to(mobile) {
+    width: 100%;
+    padding: 0 16px;
+    gap: 24px;
+  }
+}
+
+.activityInfo {
+  width: 100%;
+}
+
+.contentFiltersWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+
+  @include respond-to(laptop) {
+    gap: 24px;
+  }
+  @include respond-to(tablet) {
+    gap: 16px;
+  }
+  @include respond-to(mobile) {
+    gap: 12px;
+  }
+}
+
+.filtersInteractions {
+  display: grid;
+  grid-template-columns: 480px 2fr 1fr;
+  grid-template-rows: minmax(54px, auto);
+  gap: 30px;
+  grid-column: 1 / 3;
+
+  @include respond-to(laptop) {
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-rows: 50px;
+    gap: 16px;
+  }
+  @include respond-to(tablet) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 40px 40px;
+    gap: 12px;
+    grid-column: 1 / 2;
+
+    & > *:first-child {
+      grid-column: 1 / 3;
+    }
+  }
+  @include respond-to(mobile) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 35px 35px 35px;
+    gap: 10px;
+    grid-column: 1 / 2;
+  }
+}
+
+.filterToggleSk {
+  height: 50px;
+  border-radius: 30px;
+
+  @include respond-to(tablet) {
+    height: 40px;
+  }
+  @include respond-to(mobile) {
+    height: 35px;
+  }
+}
+
+.searchBarSk {
+  height: 50px;
+  border-radius: 30px;
+
+  @include respond-to(tablet) {
+    height: 40px;
+  }
+  @include respond-to(mobile) {
+    height: 35px;
+  }
+}
+
+.sortDropdownSk {
+  height: 50px;
+  border-radius: 30px;
+
+  @include respond-to(tablet) {
+    height: 40px;
+  }
+  @include respond-to(mobile) {
+    height: 35px;
+  }
+}
+
+.contentBlockSk {
+  width: 100%;
+  min-height: 600px;
+  border-radius: 20px;
+}

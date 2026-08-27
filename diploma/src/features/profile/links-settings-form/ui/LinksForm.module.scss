@@ -1,0 +1,206 @@
+@use "@shared/assets/styles" as *;
+@use "@shared/assets/styles" as adaptive;
+@use "@shared/assets/styles" as animation;
+
+.linksInfoProfileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  @include respond-to(tablet) {
+    gap: 20px;
+  }
+  @include respond-to(mobile) {
+    gap: 16px;
+  }
+
+  .linksProfile {
+    display: flex;
+    justify-content: space-between;
+
+    > :first-child {
+      flex: 0 0 35%;
+    }
+    > :nth-child(2) {
+      flex: 0 0 60%;
+    }
+
+    @include respond-to(laptop) {
+      flex-direction: column;
+      gap: 16px;
+
+      > :first-child {
+        flex: unset;
+      }
+      > :nth-child(2) {
+        flex: unset;
+      }
+    }
+
+    @include respond-to(tablet) {
+      flex-direction: column;
+      gap: 16px;
+
+      > :first-child {
+        flex: unset;
+      }
+      > :nth-child(2) {
+        flex: unset;
+      }
+    }
+    @include respond-to(mobile) {
+      flex-direction: column;
+      gap: 12px;
+
+      > :first-child {
+        flex: unset;
+      }
+      > :nth-child(2) {
+        flex: unset;
+      }
+    }
+
+    .linksProfileText {
+      display: flex;
+      flex-direction: column;
+
+      h1 {
+        color: rgba(0, 0, 0, 0.8);
+        @include font-base(30px, 700);
+
+        @include respond-to(laptop) {
+          font-size: 24px;
+        }
+        @include respond-to(tablet) {
+          font-size: 20px;
+        }
+        @include respond-to(mobile) {
+          font-size: 17px;
+        }
+      }
+
+      p {
+        color: #767575;
+        @include font-base(20px, 500);
+
+        @include respond-to(laptop) {
+          font-size: 17px;
+        }
+        @include respond-to(tablet) {
+          font-size: 15px;
+        }
+        @include respond-to(mobile) {
+          font-size: 13px;
+        }
+      }
+    }
+
+    .formInfolinksProfile {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      @include respond-to(tablet) {
+        gap: 12px;
+      }
+      @include respond-to(mobile) {
+        gap: 10px;
+      }
+    }
+  }
+
+  .blockLinksButtons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+
+    @include respond-to(mobile) {
+      gap: 10px;
+    }
+
+    .profileButton {
+      flex: 1 1 100px;
+      max-width: 230px;
+      min-width: 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 30px;
+      min-height: 49px;
+      @include font-base(28px, 800);
+      @include animation.button-shine();
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      transition: color 0.3s ease;
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+
+      & > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      @include adaptive.respond-to(desktop) {
+        min-height: 47px;
+        @include font-base(17px, 900);
+      }
+      @include adaptive.respond-to(laptop) {
+        min-height: 45px;
+        @include font-base(16px, 800);
+      }
+      @include adaptive.respond-to(tablet) {
+        min-height: 40px;
+        @include font-base(15px, 800);
+      }
+      @include adaptive.respond-to(mobile) {
+        min-height: 35px;
+        @include font-base(14px, 700);
+      }
+    }
+
+    .saveProfileLinksButton {
+      max-width: 230px;
+      width: 100%;
+
+      @include respond-to(tablet) {
+        max-width: 180px;
+      }
+      @include respond-to(mobile) {
+        max-width: 100%;
+      }
+
+      .saveButton {
+        @extend .profileButton;
+        background: black;
+        color: white;
+        width: 100%;
+      }
+    }
+
+    .resetProfileLinksButton {
+      max-width: 230px;
+      width: 100%;
+
+      @include respond-to(tablet) {
+        max-width: 180px;
+      }
+      @include respond-to(mobile) {
+        max-width: 100%;
+      }
+
+      .resetButton {
+        @extend .profileButton;
+        background: white;
+        color: black;
+        width: 100%;
+      }
+    }
+  }
+}

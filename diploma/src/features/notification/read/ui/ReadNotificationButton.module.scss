@@ -1,0 +1,15 @@
+@use "@shared/assets/styles" as *;
+
+.button {
+  @include font-base(15px, 700);
+  color: #8096a7;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  white-space: nowrap;
+
+  @include respond-to(mobile) {
+    font-size: 13px;
+  }
+}

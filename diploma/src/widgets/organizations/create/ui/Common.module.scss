@@ -1,0 +1,282 @@
+.formShell {
+  width: 100%;
+}
+
+.card {
+  width: 100%;
+  max-width: 910px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 48px 28px 48px 28px;
+  box-shadow: 0 7px 34px rgba(0, 0, 0, 0.08);
+  margin: 0 auto;
+  padding: 58px 67px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cardDeco {
+  position: absolute;
+  top: -72px;
+  right: -72px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: rgba(132, 0, 0, 0.03);
+  pointer-events: none;
+}
+
+.cardHeading {
+  font-size: 43px;
+  font-weight: 900;
+  letter-spacing: -1.2px;
+  color: #000000;
+  text-align: center;
+  margin: 0 0 14px;
+  line-height: 1.1;
+  position: relative;
+  z-index: 1;
+}
+
+.cardDesc {
+  font-size: 18px;
+  color: #999999;
+  text-align: center;
+  line-height: 1.7;
+  max-width: 624px;
+  margin: 0 auto 43px;
+  position: relative;
+  z-index: 1;
+}
+
+.fields {
+  position: relative;
+  z-index: 1;
+}
+
+.field {
+  margin-bottom: 24px;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.fieldRow {
+  display: flex;
+  gap: 19px;
+  margin-bottom: 24px;
+}
+
+.fieldRow .field {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.fieldLabel {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  color: #bbbbbb;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.iconField {
+  position: relative;
+}
+
+.fieldIcon {
+  position: absolute;
+  left: 19px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #bbbbbb;
+  pointer-events: none;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1.8px solid #eeeeee;
+  border-radius: 19px;
+  padding: 19px 22px;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: "Exo 2", sans-serif;
+  color: #000000;
+  background: #f4f4f4;
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &::placeholder {
+    color: #aaaaaa;
+  }
+
+  &:focus {
+    border-color: #840000;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(132, 0, 0, 0.06);
+  }
+}
+
+.iconField .input {
+  padding-left: 55px;
+}
+
+.textarea {
+  min-height: 168px;
+  resize: none;
+}
+
+.inputError,
+.textareaError {
+  border-color: #840000;
+}
+
+.errorText {
+  display: block;
+  font-size: 14px;
+  color: #840000;
+  margin-top: 7px;
+  font-weight: 600;
+}
+
+.continueWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 38px;
+  gap: 14px;
+}
+
+.continueButton,
+.skipButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Exo 2", sans-serif;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.continueButton {
+  gap: 10px;
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  padding: 20px 53px;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    background: #840000;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(132, 0, 0, 0.3);
+  }
+
+  &:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+.skipButton {
+  gap: 8px;
+  background: #ffffff;
+  color: #999999;
+  border: 1.5px solid #eeeeee;
+  border-radius: 999px;
+  padding: 20px 53px;
+  font-size: 18px;
+  font-weight: 700;
+
+  &:hover {
+    border-color: #cccccc;
+    color: #666666;
+  }
+}
+
+.skipButton svg {
+  width: 19px;
+  height: 19px;
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #999999;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: "Exo 2", sans-serif;
+  transition: color 0.15s ease;
+  width: 100%;
+
+  &:hover {
+    color: #840000;
+  }
+}
+
+@media (max-width: 760px) {
+  .card {
+    border-radius: 32px 20px 32px 20px;
+    padding: 40px 32px;
+  }
+
+  .cardHeading {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 34px 20px;
+  }
+
+  .cardHeading {
+    font-size: 28px;
+  }
+
+  .cardDesc {
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+
+  .fieldRow {
+    flex-direction: column;
+  }
+
+  .continueWrap {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .continueButton,
+  .skipButton {
+    width: 100%;
+  }
+}

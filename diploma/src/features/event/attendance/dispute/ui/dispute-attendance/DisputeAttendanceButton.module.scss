@@ -1,0 +1,30 @@
+@use "@shared/assets/styles" as *;
+
+.disputeAttendanceButton {
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid #d85a30;
+  background-color: transparent;
+  color: #d85a30;
+  cursor: pointer;
+  white-space: nowrap;
+  @include font-base(16px, 700);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  @include respond-to(tablet) {
+    @include font-base(14px, 700);
+    padding: 4px 12px;
+  }
+
+  @include respond-to(mobile) {
+    @include font-base(12px, 700);
+    padding: 3px 10px;
+  }
+
+  &:hover {
+    background-color: #d85a30;
+    color: #fff;
+  }
+}

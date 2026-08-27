@@ -1,0 +1,70 @@
+@use "@shared/assets/styles" as *;
+
+.popupEventContent {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+
+  @include respond-to(tablet) {
+    gap: 14px;
+  }
+  @include respond-to(mobile) {
+    gap: 10px;
+  }
+
+  .eventInfo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+      @include font-base(25px, 900);
+      margin-bottom: 5px;
+      text-align: center;
+      line-height: 120%;
+
+      @include respond-to(tablet) {
+        font-size: 20px;
+      }
+      @include respond-to(mobile) {
+        font-size: 17px;
+        margin-bottom: 3px;
+      }
+    }
+
+    p {
+      @include font-base(18px, 500);
+      text-align: center;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 130%;
+
+      @include respond-to(tablet) {
+        font-size: 15px;
+      }
+      @include respond-to(mobile) {
+        font-size: 13px;
+      }
+    }
+
+    .seeMoreButtonEvent {
+      color: #8c0000;
+      text-decoration-line: underline;
+      @include font-base(18px, 800);
+      margin-top: 6px;
+
+      @include respond-to(tablet) {
+        font-size: 15px;
+        margin-top: 4px;
+      }
+      @include respond-to(mobile) {
+        font-size: 13px;
+        margin-top: 3px;
+      }
+    }
+  }
+}

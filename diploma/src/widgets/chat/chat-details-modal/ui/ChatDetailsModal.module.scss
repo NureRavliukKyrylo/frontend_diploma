@@ -1,0 +1,270 @@
+@use "@shared/assets/styles" as *;
+
+.modal {
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.22),
+    0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  max-height: 82vh;
+  background: #ffffff;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 28px 30px 20px;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(132, 0, 0, 0.06), transparent 38%),
+    #ffffff;
+}
+
+.headerMain {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.avatar {
+  width: 62px;
+  height: 62px;
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+
+.titleBlock {
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 23px;
+  font-weight: 900;
+  color: #1a1a1a;
+  line-height: 1.12;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.typeChip {
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: capitalize;
+}
+
+.event {
+  background: #fff3da;
+  color: #c07000;
+}
+
+.private {
+  background: #e6f1fb;
+  color: #185fa5;
+}
+
+.task {
+  background: #e6f6ec;
+  color: #1a7a45;
+}
+
+.project {
+  background: #f1efe8;
+  color: #5f5e5a;
+}
+
+.organization {
+  background: $chat-brand-soft-bg;
+  color: $chat-brand;
+}
+
+.participantCount {
+  color: $chat-text-muted;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.closeButton {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 999px;
+  background: #f4f4f4;
+  color: #555555;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+}
+
+.divider {
+  height: 1px;
+  background: $chat-border;
+  margin: 0 30px;
+}
+
+.participantsSection {
+  min-height: 0;
+  padding: 22px 30px 24px;
+  background: #fbfaf8;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  scrollbar-width: none;
+}
+
+.sectionLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #999999;
+}
+
+.participantsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.participantRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.035);
+}
+
+.participantAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+
+.participantInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.participantName {
+  color: #1a1a1a;
+  font-size: 15px;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.participantRole {
+  color: $chat-text-muted;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.footer {
+  padding: 18px 30px 28px;
+  border-top: 1px solid $chat-border;
+  background: #ffffff;
+}
+
+.leaveButton {
+  width: 100%;
+  min-height: 48px;
+  border: 1.5px solid rgba(132, 0, 0, 0.18);
+  border-radius: 999px;
+  background: #ffffff;
+  color: $chat-brand;
+  font-size: 14px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    background: $chat-brand;
+    border-color: $chat-brand;
+    color: #ffffff;
+    box-shadow: 0 8px 18px rgba(132, 0, 0, 0.18);
+  }
+
+  &:disabled {
+    cursor: wait;
+    opacity: 0.65;
+  }
+}
+
+@include respond-to(mobile) {
+  .modal {
+    border-radius: 24px;
+  }
+
+  .header,
+  .participantsSection,
+  .footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .divider {
+    margin: 0 20px;
+  }
+
+  .avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+}

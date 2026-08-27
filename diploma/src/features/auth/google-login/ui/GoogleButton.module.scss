@@ -1,0 +1,40 @@
+@use "@shared/assets/styles" as *;
+
+.googleBtn {
+  flex: 1;
+  background: #ffffff;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 50px;
+  text-align: center;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  @include font-base(14px, 700);
+  color: #555;
+  cursor: pointer;
+  @include button-hover-effect(#fff, 0.25s);
+}
+
+.googleBtn img {
+  width: 24px;
+  height: 24px;
+  opacity: 0.6;
+
+  @include respond-to(tablet) {
+    width: 22px;
+    height: 22px;
+  }
+
+  @include respond-to(mobile) {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.hiddenGoogleLogin {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}

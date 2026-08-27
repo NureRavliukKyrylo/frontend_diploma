@@ -1,0 +1,94 @@
+@use "@shared/assets/styles" as *;
+
+.contentBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 0 40px 40px 40px;
+
+  @include respond-to(laptop) {
+    padding: 0 28px 28px 28px;
+    gap: 28px;
+  }
+
+  @include respond-to(tablet) {
+    padding: 0 16px 20px 16px;
+    gap: 20px;
+  }
+
+  @include respond-to(mobile) {
+    padding: 0 10px 16px 10px;
+    gap: 16px;
+  }
+}
+
+.toggleWrapper {
+  width: 100%;
+}
+
+.toggleTaskButton {
+  flex-grow: 1;
+  color: rgba(0, 0, 0, 0.8);
+  padding: 0 20px;
+  @include font-base(25px, 500);
+
+  &:hover {
+    background: rgba(231, 226, 226, 0.5);
+  }
+
+  @include respond-to(laptop) {
+    font-size: 20px;
+    padding: 6px 14px;
+  }
+
+  @include respond-to(tablet) {
+    font-size: 16px;
+    padding: 6px 10px;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+}
+
+.toggleTaskButtonActive {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 800;
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    background: transparent;
+  }
+
+  @include respond-to(tablet) {
+    transform: scale(1.05);
+  }
+
+  @include respond-to(mobile) {
+    transform: scale(1.02);
+  }
+}
+
+.toggleTask {
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  padding: 10px;
+
+  @include respond-to(tablet) {
+    padding: 6px;
+  }
+
+  @include respond-to(mobile) {
+    padding: 4px;
+  }
+}
+
+.toggleTaskPill {
+  background-color: black;
+}

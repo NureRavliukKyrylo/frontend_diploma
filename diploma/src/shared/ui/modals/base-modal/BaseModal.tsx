@@ -1,0 +1,84 @@
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import styles from "./BaseModal.module.scss";
+import { Close } from "@shared/assets/icons/actions";
+import {
+  modalAnimations,
+  type ModalAnimationType,
+} from "@shared/assets/animations";
+
+interface BaseModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  className?: string;
+  error?: string | null;
+  maxWidth?: string;
+  showClosed?: boolean;
+  animation?: ModalAnimationType;
+}
+
+import { createPortal } from "react-dom";
+
+export const BaseModal: React.FC<BaseModalProps> = ({
+  isOpen,
+  onClose,
+  children,
+  className,
+  error,
+  maxWidth = "700px",
+  showClosed = true,
+  animation = "default",
+}) => {
+  const mouseDownTarget = React.useRef<EventTarget | null>(null);
+  const { overlay, modal, transition } = modalAnimations[animation];
+
+  return createPortal(
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className={styles.overlayModal}
+          onMouseDown={(e) => {
+            mouseDownTarget.current = e.target;
+          }}
+          onClick={(e) => {
+            if (mouseDownTarget.current === e.currentTarget) onClose();
+          }}
+          variants={overlay}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={{ duration: 0.2 }}
+        >
+          <motion.div
+            className={`${styles.modalWrapper} ${className ?? ""}`}
+            onClick={(e) => e.stopPropagation()}
+            variants={modal}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            style={{ maxWidth }}
+            transition={transition}
+          >
+            {showClosed && (
+              <div className={styles.closeButtonBlock}>
+                <motion.div
+                  className={styles.closeButton}
+                  onClick={onClose}
+                  whileHover={{ rotate: 90, scale: 1.05 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ type: "spring", stiffness: 200 }}
+                >
+                  <Close className={styles.closeButtonImg} />
+                </motion.div>
+              </div>
+            )}
+            <div className={styles.childrenSection}>{children}</div>
+            {error && <div className={styles.errorMessage}>{error}</div>}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>,
+    document.body,
+  );
+};

@@ -1,0 +1,24 @@
+@use "@shared/assets/styles" as *;
+
+.switchFilter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.titleSwitchFilter {
+  @include font-base(18px, 500);
+  color: rgba(0, 0, 0, 0.7);
+  flex: 1;
+
+  @include respond-to(laptop) {
+    font-size: 16px;
+  }
+  @include respond-to(tablet) {
+    font-size: 15px;
+  }
+  @include respond-to(mobile) {
+    font-size: 14px;
+  }
+}

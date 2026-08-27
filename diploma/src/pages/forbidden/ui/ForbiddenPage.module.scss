@@ -1,0 +1,387 @@
+.forbiddenPage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: clamp(28px, 5vh, 56px) 48px;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: #f4f4f4;
+  color: #000000;
+  font-family: "Exo 2", sans-serif;
+  isolation: isolate;
+}
+
+.watermark {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  z-index: 0;
+  color: rgba(132, 0, 0, 0.04);
+  font-size: clamp(260px, 46vw, 680px);
+  font-weight: 900;
+  line-height: 0.78;
+  letter-spacing: -0.08em;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+
+.particlesLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  display: block;
+  background: #840000;
+  opacity: 0.12;
+}
+
+.circleParticle {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+}
+
+.rectParticle {
+  width: 15px;
+  height: 7px;
+  border-radius: 3px;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 360px) clamp(320px, 27vw, 380px);
+  align-items: center;
+  justify-content: center;
+  gap: clamp(48px, 5vw, 72px);
+  width: min(100%, 980px);
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.errorCode {
+  margin: 0;
+  color: #840000;
+  font-size: 136px;
+  font-weight: 900;
+  line-height: 0.84;
+  letter-spacing: -6px;
+  text-shadow: 0 10px 24px rgba(132, 0, 0, 0.08);
+}
+
+.decorLine {
+  width: 48px;
+  height: 3px;
+  margin: 28px 0 18px;
+  border-radius: 2px;
+  background: #840000;
+  opacity: 0.4;
+}
+
+.title {
+  margin: 0;
+  color: #000000;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.subtitle {
+  max-width: 360px;
+  margin: 16px 0 0;
+  color: #666666;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.subtitle strong {
+  color: #840000;
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 22px;
+  border-radius: 50px;
+  box-sizing: border-box;
+  font-family: "Exo 2", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.primaryButton {
+  border: 1px solid #000000;
+  background: #000000;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.primaryButton:hover,
+.primaryButton:focus-visible {
+  outline: none;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.17);
+}
+
+.secondaryButton {
+  border: 1px solid #000000;
+  background: transparent;
+  color: #000000;
+}
+
+.secondaryButton:hover,
+.secondaryButton:focus-visible {
+  border-color: #840000;
+  color: #840000;
+  outline: none;
+}
+
+.brandLabel {
+  margin: 38px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.rightColumn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapCircle {
+  position: relative;
+  width: clamp(320px, 27vw, 380px);
+  height: clamp(320px, 27vw, 380px);
+  overflow: hidden;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
+}
+
+.mapGrid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+    #e8e8e8;
+  background-size: 32px 32px;
+}
+
+.mapArtwork {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.mapPath,
+.mapPathMuted {
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 6;
+}
+
+.mapPath {
+  stroke: rgba(0, 0, 0, 0.1);
+}
+
+.mapPathMuted {
+  stroke: rgba(0, 0, 0, 0.08);
+}
+
+.building {
+  fill: rgba(0, 0, 0, 0.06);
+}
+
+.locationDot {
+  fill: rgba(0, 0, 0, 0.16);
+}
+
+.zonePulse {
+  position: absolute;
+  top: calc(50% - 40px);
+  left: calc(50% - 40px);
+  z-index: 2;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.zonePulseStrong {
+  background: rgba(132, 0, 0, 0.08);
+}
+
+.zonePulseMedium {
+  background: rgba(132, 0, 0, 0.05);
+}
+
+.zonePulseSoft {
+  background: rgba(132, 0, 0, 0.03);
+}
+
+.restrictedZone {
+  position: absolute;
+  top: calc(50% - 36px);
+  left: calc(50% - 36px);
+  z-index: 3;
+  width: 72px;
+  height: 72px;
+  border: 2px dashed rgba(132, 0, 0, 0.35);
+  border-radius: 50%;
+  box-sizing: border-box;
+  background: rgba(132, 0, 0, 0.1);
+}
+
+.lockBadge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #840000;
+  transform: translate(-50%, -50%);
+}
+
+.mapPin {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666666;
+  opacity: 0.4;
+}
+
+.bottomLeftPin {
+  bottom: 20%;
+  left: 20%;
+}
+
+.topRightPin {
+  top: 17%;
+  right: 23%;
+}
+
+@media (max-width: 767px) {
+  .forbiddenPage {
+    padding: 28px 18px;
+  }
+
+  .watermark {
+    font-size: clamp(210px, 62vw, 360px);
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+    width: min(100%, 420px);
+    gap: 38px;
+  }
+
+  .rightColumn {
+    order: 1;
+  }
+
+  .leftColumn {
+    order: 2;
+    align-items: center;
+    text-align: center;
+  }
+
+  .mapCircle {
+    width: min(280px, 78vw);
+    height: min(280px, 78vw);
+  }
+
+  .errorCode {
+    font-size: clamp(96px, 31vw, 128px);
+    letter-spacing: -4px;
+  }
+
+  .decorLine {
+    margin-top: 28px;
+  }
+
+  .subtitle {
+    max-width: 300px;
+    font-size: 14px;
+  }
+
+  .actions {
+    justify-content: center;
+    margin-top: 32px;
+  }
+
+  .brandLabel {
+    margin-top: 34px;
+  }
+}
+
+@media (max-width: 420px) {
+  .errorCode {
+    font-size: 84px;
+  }
+
+  .actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .actions > * {
+    width: 100%;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+}

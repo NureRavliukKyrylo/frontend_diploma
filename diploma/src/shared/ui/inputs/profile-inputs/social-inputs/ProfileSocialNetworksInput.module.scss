@@ -1,0 +1,95 @@
+@use "@shared/assets/styles" as breakpoints;
+
+$label-color: rgba(0, 0, 0, 0.6);
+
+.iconProfileInputWrapper {
+  position: absolute;
+  left: 0.625rem;
+  color: $label-color;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 1.75rem;
+    height: 1.75rem;
+    opacity: 0.6;
+  }
+}
+
+.socialProfileInputDivider {
+  position: absolute;
+  left: 2.75rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 1px;
+  background-color: $label-color;
+  transform: scaleX(0.5);
+  transform-origin: center;
+}
+
+.switchProfileInputWrapper {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: all;
+}
+
+@include breakpoints.respond-to(laptop) {
+  .iconProfileInputWrapper {
+    left: 0.5rem;
+
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  .socialProfileInputDivider {
+    left: 2.5rem;
+  }
+
+  .switchProfileInputWrapper {
+    right: 0.5rem;
+  }
+}
+
+@include breakpoints.respond-to(tablet) {
+  .iconProfileInputWrapper {
+    left: 0.5rem;
+
+    img {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+  }
+
+  .socialProfileInputDivider {
+    left: 2.25rem;
+  }
+
+  .switchProfileInputWrapper {
+    right: 0.4rem;
+  }
+}
+
+@include breakpoints.respond-to(mobile) {
+  .iconProfileInputWrapper {
+    left: 0.5rem;
+
+    img {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
+
+  .socialProfileInputDivider {
+    left: 2rem;
+  }
+
+  .switchProfileInputWrapper {
+    right: 0.3rem;
+  }
+}

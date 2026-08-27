@@ -1,0 +1,108 @@
+@use "@shared/assets/styles" as *;
+
+.projectCreateCard {
+  position: relative;
+  width: 100%;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  appearance: none;
+  justify-content: flex-start;
+  gap: 0;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0) 26%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.998) 0%, rgba(255, 255, 255, 0.992) 100%);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.11),
+    0 8px 18px rgba(0, 0, 0, 0.05);
+
+  &::before {
+    opacity: 0.9;
+    background: linear-gradient(
+      90deg,
+      rgba(162, 18, 18, 0.86) 0%,
+      rgba(162, 18, 18, 0.16) 100%
+    );
+  }
+
+  &:hover .projectCreateIcon {
+    transform: translateY(-1px) scale(1.03);
+    box-shadow:
+      0 18px 32px rgba(137, 2, 0, 0.24),
+      0 1px 0 rgba(255, 255, 255, 0.26) inset;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow:
+      0 18px 42px rgba(0, 0, 0, 0.11),
+      0 8px 18px rgba(0, 0, 0, 0.05),
+      0 0 0 5px rgba(137, 2, 0, 0.08);
+  }
+}
+
+.projectCreateTop {
+  position: absolute;
+  top: 22px;
+  right: 26px;
+  z-index: 2;
+  display: flex;
+}
+
+.projectCreateIcon {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #8a0502 0%, #6f0200 100%);
+  color: #ffffff;
+  box-shadow:
+    0 16px 28px rgba(137, 2, 0, 0.22),
+    0 1px 0 rgba(255, 255, 255, 0.24) inset;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+
+  svg {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.projectCreateBody {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  padding-bottom: 0;
+  transform: none;
+
+  h3 {
+    @include font-base(38px, 900);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    color: rgba(0, 0, 0, 0.88);
+  }
+
+  p {
+    max-width: 82%;
+    color: rgba(0, 0, 0, 0.6);
+    @include font-base(18px, 500);
+    line-height: 1.42;
+  }
+}
+
+@include respond-to(mobile) {
+  .projectCreateBody h3 {
+    @include font-base(32px, 900);
+  }
+
+  .projectCreateBody p {
+    @include font-base(17px, 500);
+    max-width: 88%;
+  }
+}

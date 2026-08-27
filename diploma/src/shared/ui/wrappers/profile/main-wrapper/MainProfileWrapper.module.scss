@@ -1,0 +1,19 @@
+@use "@shared/assets/styles" as *;
+
+.mainProfileWrapper {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 30px 40px;
+  gap: 20px;
+  background-color: #ffffff;
+  @include respond-to(tablet) {
+    padding: 20px 30px;
+    gap: 15px;
+  }
+  @include respond-to(mobile) {
+    padding: 20px 20px;
+    gap: 13px;
+  }
+}

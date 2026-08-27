@@ -1,0 +1,28 @@
+{
+  "labels": {
+    "rank": "РАНГ {{rank}}",
+    "rankCapital": "Ранг {{rank}}",
+    "rarity": "РІДКІСТЬ",
+    "progress": "Прогрес",
+    "volunteers": "Волонтери",
+    "received": "отримали",
+    "first": "Вперше",
+    "earnedOn": "Отримано",
+    "imgAltBadge": "зображення відзнаки",
+    "imgAltOrg": "логотип організації"
+  },
+  "scopes": {
+    "organization": "організація",
+    "project": "проєкт",
+    "event": "подія",
+    "task": "завдання",
+    "global": "ImpactFlow"
+  },
+  "share": {
+    "message": "Я отримав відзнаку {{title}} на ImpactFlow!"
+  },
+  "progressMessages": {
+    "completed": "Ваша відданість заповнила шкалу — ви офіційно здобули відзнаку <0>{{title}}</0>!",
+    "incomplete": "Вам залишилося {{remaining}}%, щоб отримати відзнаку <0>{{title}}</0> у свій інвентар. Так тримати!"
+  }
+}

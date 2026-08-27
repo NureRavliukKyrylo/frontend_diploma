@@ -1,0 +1,43 @@
+.menu {
+  position: fixed;
+  width: 220px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+  padding: 8px;
+  z-index: 12000;
+}
+
+.menuItem {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  color: #1a1a1a;
+  cursor: pointer;
+  font-family: "Exo 2", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background: #f7f7f7;
+  }
+}
+
+.menuDivider {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 6px 4px;
+}
+
+.menuItemDanger {
+  color: #8b0000;
+}

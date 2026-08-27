@@ -1,0 +1,13 @@
+.progressCircle {
+  transform: rotate(-90deg);
+  width: 48px;
+  height: 48px;
+
+  .track {
+    stroke: #e4e4e4;
+  }
+
+  .progress {
+    transition: stroke-dashoffset 0.5s ease;
+  }
+}

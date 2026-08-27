@@ -1,0 +1,41 @@
+.feedbackWrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.skeletonAvatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeletonName {
+  width: 160px;
+  height: 35px;
+  border-radius: 8px;
+}
+
+.skeletonRole {
+  width: 100px;
+  height: 22px;
+  border-radius: 6px;
+}
+
+.skeletonStars {
+  width: 150px;
+  height: 43px;
+  border-radius: 8px;
+}
+
+.skeletonDate {
+  width: 90px;
+  height: 25px;
+  border-radius: 6px;
+}
+
+.skeletonComment {
+  width: 100%;
+  height: 20px;
+  border-radius: 6px;
+}

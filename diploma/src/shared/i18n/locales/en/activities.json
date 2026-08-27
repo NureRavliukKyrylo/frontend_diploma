@@ -1,0 +1,79 @@
+{
+  "tabs": {
+    "projects": "PROJECTS",
+    "events": "EVENTS",
+    "tasks": "TASKS"
+  },
+  "header": {
+    "title": "Explore activities that make a difference",
+    "count_one": "{{count}} activity",
+    "count_other": "{{count}} activities",
+    "descriptionMain": "Use our interactive world map to explore active and completed volunteer projects — from rebuilding schools and organizing community events to environmental clean-ups and humanitarian aid. Each pin on the map represents real people, real stories, and real change. Find out where help is needed most, learn more about each project, and get involved — locally or across the globe.",
+    "mapLinkText": "Map",
+    "myActivitiesPrompt": "Want to see the active projects you’ve already joined?",
+    "myActivitiesLinkText": "Click"
+  },
+  "states": {
+    "emptyProjects": {
+      "title": "No projects found",
+      "subtitle": "Try adjusting your filters or search query"
+    },
+    "emptyTasks": {
+      "title": "No Tasks found",
+      "subtitle": "Try adjusting your filters or search query"
+    },
+    "emptyEvents": {
+      "title": "No events found",
+      "subtitle": "Try adjusting your filters or search query"
+    }
+  },
+  "categories": {
+    "detail": {
+      "activitiesCount_one": "{{count}} activity",
+      "activitiesCount": "{{count}} activities",
+      "allActivities": "All activities",
+      "activeActivities": "Active activities",
+      "completedActivities": "Completed activities",
+      "coreSkills": "Core skills",
+      "noSkills": "No skills yet",
+      "seeMore": "See more",
+      "emptyStates": {
+        "tasks": {
+          "title": "No Tasks found",
+          "subtitle": "Try adjusting your filters or search query"
+        },
+        "projects": {
+          "title": "No projects found",
+          "subtitle": "Try adjusting your filters or search query"
+        },
+        "events": {
+          "title": "No events found",
+          "subtitle": "Try adjusting your filters or search query"
+        }
+      }
+    }
+  },
+  "my": {
+    "tasks": {
+      "empty": "No tasks yet",
+      "emptyHint": "Join your first project to get started",
+      "notFound": "No tasks found",
+      "notFoundHint": "Try adjusting your filters or search query"
+    },
+    "projects": {
+      "empty": "No projects yet",
+      "emptyHint": "Join your first project to get started",
+      "notFound": "No projects found",
+      "notFoundHint": "Try adjusting your filters or search query"
+    },
+    "events": {
+      "empty": "No events yet",
+      "emptyHint": "Join your first project to get started",
+      "notFound": "No events found",
+      "notFoundHint": "Try adjusting your filters or search query"
+    },
+    "header": {
+      "userActivities": "{{name}}'s Activities"
+    }
+  }
+}

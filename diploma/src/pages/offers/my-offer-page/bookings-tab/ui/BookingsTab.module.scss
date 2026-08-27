@@ -1,0 +1,130 @@
+@use "@shared/assets/styles" as *;
+
+.bookingsTabWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  @include respond-to(tablet) {
+    gap: 20px;
+  }
+  @include respond-to(mobile) {
+    gap: 16px;
+  }
+
+  .mainContent {
+    background: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @include respond-to(laptop) {
+      padding: 40px;
+      gap: 30px;
+    }
+    @include respond-to(tablet) {
+      padding: 28px;
+      gap: 24px;
+      border-radius: 28px;
+    }
+    @include respond-to(mobile) {
+      padding: 16px;
+      gap: 18px;
+      border-radius: 20px;
+    }
+
+    .bookingsTitle {
+      display: flex;
+      align-items: center;
+      gap: 45px;
+      @include font-base(30px, 900);
+      background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      white-space: nowrap;
+
+      @include respond-to(laptop) {
+        font-size: 24px;
+        gap: 30px;
+      }
+      @include respond-to(tablet) {
+        font-size: 20px;
+        gap: 20px;
+      }
+      @include respond-to(mobile) {
+        font-size: 18px;
+        gap: 14px;
+      }
+
+      &::before,
+      &::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          #260000 0%,
+          #8c0000 90%,
+          transparent 100%
+        );
+        box-shadow: 0px 1px 3px rgba(140, 0, 0, 0.3);
+        opacity: 0.85;
+        border-radius: 1px;
+      }
+      &::before {
+        transform: scaleX(-1);
+      }
+    }
+
+    .bookingsList {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      @include respond-to(tablet) {
+        gap: 20px;
+      }
+      @include respond-to(mobile) {
+        gap: 14px;
+      }
+    }
+
+    .emptyState {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      min-height: 300px;
+
+      h2 {
+        @include font-base(30px, 800);
+        color: rgba(0, 0, 0, 0.7);
+
+        @include respond-to(tablet) {
+          font-size: 24px;
+        }
+        @include respond-to(mobile) {
+          font-size: 20px;
+        }
+      }
+
+      p {
+        @include font-base(22px, 400);
+        color: rgba(0, 0, 0, 0.4);
+
+        @include respond-to(tablet) {
+          font-size: 18px;
+        }
+        @include respond-to(mobile) {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}

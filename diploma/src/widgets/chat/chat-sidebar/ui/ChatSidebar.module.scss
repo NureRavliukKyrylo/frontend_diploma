@@ -1,0 +1,161 @@
+@use "@shared/assets/styles" as *;
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(132, 0, 0, 0.055), transparent 34%),
+    #ffffff;
+  padding: 18px 18px 16px;
+  width: 100%;
+  border-bottom: 1px solid $chat-border;
+
+  @include respond-to(mobile) {
+    padding: 10px 12px;
+  }
+}
+.avatarSearch {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  min-width: 0;
+}
+
+.leftContent {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  width: 100%;
+
+  @include respond-to(mobile) {
+    gap: 8px;
+  }
+}
+
+.avatarHeader {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  flex-shrink: 0;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+
+  @include respond-to(tablet) {
+    width: 42px;
+    height: 42px;
+  }
+  @include respond-to(mobile) {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+.filterWrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.filterButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid $chat-border;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.045);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+
+    .filterIcon {
+      opacity: 1;
+      color: #ffffff;
+    }
+  }
+
+  @include respond-to(mobile) {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.filterIcon {
+  width: 20px;
+  height: 20px;
+  color: #666666;
+  opacity: 0.8;
+
+  @include respond-to(mobile) {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.filterBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #8c0000;
+  color: #fff;
+  @include font-base(10px, 700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #fff;
+  border-radius: 18px;
+  border: 1px solid $chat-border;
+  box-shadow:
+    0 16px 42px rgba(0, 0, 0, 0.14),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 160px;
+  z-index: 100;
+}
+
+.popoverItem {
+  @include font-base(14px, 600);
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1.5px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  text-transform: capitalize;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+  width: 100%;
+
+  &:hover {
+    background: $chat-bg-subtle;
+  }
+
+  &.selected {
+    background: $chat-brand-soft-bg;
+    border-color: rgba(132, 0, 0, 0.18);
+    color: $chat-brand;
+    @include font-base(14px, 800);
+  }
+}

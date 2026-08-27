@@ -1,0 +1,44 @@
+.messageField {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.messageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  label {
+    color: #999999;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+}
+
+.messageMeta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #b5b5b5;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.messageTextarea {
+  border-radius: 18px !important;
+  padding: 16px 18px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 1.6 !important;
+}
+
+.internalCounter {
+  display: none !important;
+}

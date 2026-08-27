@@ -1,0 +1,30 @@
+
+.skillsHint {
+  margin: 0;
+  color: #cccccc;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.accessHint {
+  margin: -5px 0 18px;
+  color: #bbbbbb;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+@media (max-width: 720px) {
+  .recurringToggleRow {
+    align-items: flex-start;
+  }
+
+  .recurrenceRow,
+  .skillRow {
+    grid-template-columns: 1fr;
+  }
+
+  .removeSkillButton {
+    justify-self: flex-end;
+  }
+}

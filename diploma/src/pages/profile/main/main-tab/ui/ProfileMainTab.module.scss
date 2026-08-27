@@ -1,0 +1,58 @@
+@use "@shared/assets/styles" as *;
+
+.skillsProfileList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+
+  @include respond-to(tablet) {
+    gap: 8px;
+    justify-content: center;
+  }
+  @include respond-to(mobile) {
+    gap: 6px;
+    justify-content: center;
+  }
+}
+
+.cardBaseProfileBlock {
+  --card-justify-content: flex-start;
+  --card-skill-height: auto;
+}
+
+.noBadgesContainer {
+  display: flex;
+  flex-direction: column;
+
+  .noBadgesTitle {
+    @include font-base(30px, 900);
+    line-height: 120%;
+    color: #1a1a2e;
+
+    @include respond-to(laptop) {
+      font-size: 24px;
+    }
+    @include respond-to(tablet) {
+      font-size: 20px;
+    }
+    @include respond-to(mobile) {
+      font-size: 18px;
+    }
+  }
+
+  .noBadgesSubtitle {
+    @include font-base(20px, 500);
+    color: #6b7280;
+
+    @include respond-to(laptop) {
+      font-size: 17px;
+    }
+    @include respond-to(tablet) {
+      font-size: 15px;
+    }
+    @include respond-to(mobile) {
+      font-size: 14px;
+    }
+  }
+}

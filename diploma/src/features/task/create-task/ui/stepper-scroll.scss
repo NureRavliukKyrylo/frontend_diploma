@@ -1,0 +1,124 @@
+
+.stepLine {
+  flex: 1 1 56px;
+  max-width: 56px;
+  height: 3px;
+  margin-top: 20px;
+  border-radius: 2px;
+  background: #ececec;
+  transition: background 0.3s ease;
+}
+
+.stepLineDone {
+  background: linear-gradient(90deg, #2a2a2a, #bbbbbb);
+}
+
+.stepCircle {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border-radius: 50%;
+  color: #cccccc;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 2px #ececec;
+  font-size: 16px;
+  font-weight: 900;
+  transition: all 0.25s ease;
+
+  i {
+    color: inherit;
+    font-size: 17px;
+    line-height: 1;
+  }
+}
+
+.stepCircleDone {
+  background: linear-gradient(135deg, #2a2a2a, #888888);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+
+  i {
+    font-size: 17px;
+    font-style: normal;
+
+    &::before {
+      content: "\2713";
+      font-family: "Exo 2", sans-serif;
+      font-weight: 900;
+      line-height: 1;
+    }
+  }
+}
+
+.stepCircleActive {
+  background: linear-gradient(135deg, #a30000, #840000);
+  color: #ffffff;
+  box-shadow:
+    0 0 0 5px rgba(132, 0, 0, 0.12),
+    0 4px 14px rgba(132, 0, 0, 0.28);
+}
+
+.stepCirclePending {
+  background: #f7f7f7;
+  color: #cccccc;
+  box-shadow: inset 0 0 0 2px #ececec;
+}
+
+.stepLabel {
+  color: #cccccc;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.stepGroupActive {
+  .stepCircle {
+    background: linear-gradient(135deg, #a30000, #840000);
+    color: #ffffff;
+    box-shadow:
+      0 0 0 5px rgba(132, 0, 0, 0.12),
+      0 4px 14px rgba(132, 0, 0, 0.28);
+  }
+
+  .stepLabel {
+    color: #840000;
+  }
+}
+
+.stepGroupDone {
+  .stepCircle {
+    background: linear-gradient(135deg, #2a2a2a 0%, #888888 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  }
+
+  .stepLabel {
+    color: #888888;
+  }
+}
+
+.stepGroupPending {
+  .stepCircle {
+    background: #f7f7f7;
+    color: #cccccc;
+    box-shadow: inset 0 0 0 2px #ececec;
+  }
+}
+
+.drawerScroll {
+  min-height: 0;
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  scrollbar-width: thin;
+}

@@ -1,0 +1,1 @@
+export { OrganizationDetailsProjectsWidget } from "./Widget";

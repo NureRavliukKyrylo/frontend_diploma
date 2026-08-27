@@ -1,0 +1,93 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #000;
+  font-family: "Exo 2", sans-serif;
+  box-sizing: border-box;
+  isolation: isolate;
+}
+
+.logoWrapper {
+  position: absolute;
+  top: 56px;
+  left: 64px;
+  z-index: 3;
+}
+
+.logo {
+  color: #000000;
+  font-size: 24px;
+  font-weight: 900;
+  font-family: "Zen Dots", sans-serif;
+  line-height: 1;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  text-align: center;
+  font-size: 23vw;
+  font-weight: 900;
+  color: rgba(132, 0, 0, 0.035);
+  letter-spacing: 0;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: #840000;
+  opacity: 0.15;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 140px 40px 40px 100px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .page {
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+
+  .content {
+    flex-direction: column-reverse;
+    gap: 42px;
+    max-width: 620px;
+    padding: 72px 32px;
+  }
+}
+
+@media (max-width: 520px) {
+  .content {
+    gap: 30px;
+    padding: 52px 20px;
+  }
+}

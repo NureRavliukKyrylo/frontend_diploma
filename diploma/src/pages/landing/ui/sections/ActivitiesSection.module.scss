@@ -1,0 +1,111 @@
+.section {
+  position: relative;
+  z-index: 2;
+  padding: 96px var(--landing-pad);
+  background: transparent;
+}
+
+.sectionHeader {
+  width: min(100%, 860px);
+  margin: 0 auto 48px;
+  text-align: center;
+}
+
+.sectionTag {
+  margin: 0 0 14px;
+  color: #840000;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+.sectionHeader h2 {
+  margin: 0;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -1.2px;
+}
+
+.activityGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+  width: min(100%, 1080px);
+  margin: 0 auto;
+}
+
+.activityCard {
+  position: relative;
+  padding: 34px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-top: 3px solid #840000;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.06);
+}
+
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 24px;
+  border-radius: 12px;
+  background: rgba(132, 0, 0, 0.08);
+  color: #840000;
+}
+
+.cardTag {
+  display: inline-flex;
+  margin-bottom: 14px;
+  color: #840000;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.activityCard h3 {
+  position: relative;
+  margin: 0;
+  color: #000000;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.activityCard h4 {
+  margin: 8px 0 0;
+  color: #666666;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.activityCard p {
+  position: relative;
+  margin: 16px 0 0;
+  color: #666666;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 1023px) {
+  .activityGrid {
+    grid-template-columns: 1fr;
+    max-width: 620px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 72px var(--landing-pad);
+  }
+
+  .sectionHeader {
+    margin-bottom: 30px;
+  }
+}

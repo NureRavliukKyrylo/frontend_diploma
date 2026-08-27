@@ -1,0 +1,160 @@
+
+.dangerCopy {
+  min-width: 0;
+
+  h3 {
+    margin: 0 0 5px;
+    color: #1a1a1a;
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+  p {
+    margin: 0;
+    color: #aaaaaa;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+}
+
+.dangerButton {
+  border: 1.5px solid rgba(139, 0, 0, 0.16);
+  border-radius: 999px;
+  background: #ffffff;
+  color: #8b0000;
+  padding: 11px 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  font-family: "Exo 2", sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.18s ease;
+
+  &:hover:not(:disabled) {
+    background: #fff1f1;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.cancelledState {
+  border-radius: 999px;
+  background: #fff1f1;
+  color: #8b0000;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.statePanel {
+  min-height: 360px;
+  border: 1px solid #e8e8e8;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px;
+  text-align: center;
+
+  h2 {
+    margin: 0;
+    color: #1a1a1a;
+    font-size: 32px;
+    font-weight: 900;
+  }
+
+  p {
+    max-width: 420px;
+    margin: 0;
+    color: #999999;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+}
+
+.locationMapModal {
+  width: 100%;
+  height: min(70vh, 620px);
+  min-height: 420px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.mapPopup {
+  font-family: "Exo 2", sans-serif;
+}
+
+.mapPopupContent {
+  margin: 0;
+  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 720px) {
+  .settingsRoot {
+    padding: 10px;
+  }
+
+  .topBar {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .topActions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .tabSwitcher {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .tabButton {
+    flex: 1;
+    justify-content: center;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .section {
+    padding: 24px 20px;
+  }
+
+  .dateRow,
+  .numberRow,
+  .policyGrid,
+  .reminderOptions {
+    grid-template-columns: 1fr;
+  }
+
+  .locationRow,
+  .dangerRow,
+  .statusDisplay {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .dangerButton,
+  .clearLocationButton {
+    justify-content: center;
+  }
+}

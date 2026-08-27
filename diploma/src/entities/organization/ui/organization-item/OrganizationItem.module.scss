@@ -1,0 +1,24 @@
+@use "@shared/assets/styles" as *;
+
+.organizationItemWrapper {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  flex-shrink: 0;
+  img {
+    width: 60px;
+    border-radius: 50%;
+  }
+  h1 {
+    @include font-base(13px, 600);
+    text-align: center;
+    max-width: 70px;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

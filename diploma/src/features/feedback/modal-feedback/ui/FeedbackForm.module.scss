@@ -1,0 +1,190 @@
+@use "@shared/assets/styles" as *;
+
+.interactiveStar {
+  cursor: pointer;
+  width: 64px;
+  height: 64px;
+
+  @include respond-to(laptop) {
+    width: 54px;
+    height: 54px;
+  }
+  @include respond-to(tablet) {
+    width: 44px;
+    height: 44px;
+  }
+  @include respond-to(mobile) {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.wrapperStars {
+  gap: 10px;
+
+  @include respond-to(tablet) {
+    gap: 8px;
+  }
+  @include respond-to(mobile) {
+    gap: 6px;
+  }
+}
+
+.submitRatingBlock {
+  padding: 30px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  @include respond-to(laptop) {
+    padding: 24px 40px;
+    gap: 24px;
+  }
+  @include respond-to(tablet) {
+    padding: 20px 28px;
+    gap: 20px;
+  }
+  @include respond-to(mobile) {
+    padding: 27px 16px;
+    gap: 16px;
+  }
+
+  .headerInformation {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    h1 {
+      background: linear-gradient(90deg, #8c0000 0%, #260000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      @include font-base(40px, 800);
+      line-height: 120%;
+      max-width: 325px;
+      text-transform: uppercase;
+
+      @include respond-to(laptop) {
+        font-size: 32px;
+        max-width: 280px;
+      }
+      @include respond-to(tablet) {
+        font-size: 26px;
+        max-width: 100%;
+      }
+      @include respond-to(mobile) {
+        font-size: 22px;
+      }
+    }
+
+    p {
+      color: rgba(0, 0, 0, 0.7);
+      @include font-base(20px, 400);
+      line-height: 120%;
+
+      @include respond-to(laptop) {
+        font-size: 17px;
+      }
+      @include respond-to(tablet) {
+        font-size: 15px;
+      }
+      @include respond-to(mobile) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .formRating {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    @include respond-to(laptop) {
+      gap: 22px;
+    }
+    @include respond-to(tablet) {
+      gap: 18px;
+    }
+    @include respond-to(mobile) {
+      gap: 14px;
+    }
+
+    .setStarsBlock {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      @include respond-to(mobile) {
+        gap: 8px;
+      }
+
+      h1 {
+        @include font-base(20px, 800);
+        line-height: 120%;
+        text-transform: uppercase;
+
+        @include respond-to(laptop) {
+          font-size: 17px;
+        }
+        @include respond-to(tablet) {
+          font-size: 15px;
+        }
+        @include respond-to(mobile) {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .setCommentBlock {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      @include respond-to(tablet) {
+        gap: 14px;
+      }
+      @include respond-to(mobile) {
+        gap: 10px;
+      }
+
+      h1 {
+        @include font-base(20px, 800);
+        line-height: 120%;
+        text-transform: uppercase;
+
+        @include respond-to(laptop) {
+          font-size: 17px;
+        }
+        @include respond-to(tablet) {
+          font-size: 15px;
+        }
+        @include respond-to(mobile) {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .submitRatingButton {
+      background: #000000;
+      border-radius: 100px;
+      padding: 15px;
+      color: white;
+      text-transform: uppercase;
+      @include font-base(22px, 700);
+      letter-spacing: 0.05em;
+
+      @include respond-to(laptop) {
+        font-size: 19px;
+        padding: 13px;
+      }
+      @include respond-to(tablet) {
+        font-size: 16px;
+        padding: 12px;
+      }
+      @include respond-to(mobile) {
+        font-size: 15px;
+        padding: 11px;
+      }
+    }
+  }
+}

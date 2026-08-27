@@ -1,0 +1,53 @@
+@use "@shared/assets/styles" as *;
+
+.popupUserLocation {
+  :global(.leaflet-popup-content-wrapper) {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 2px 10px rgba(99, 99, 99, 0.5);
+    border-radius: 20px;
+    padding: 15px;
+    width: fit-content;
+    @include respond-to(tablet) {
+      padding: 12px;
+    }
+    @include respond-to(mobile) {
+      padding: 9px;
+    }
+  }
+
+  :global(.leaflet-popup-content) {
+    margin: 0;
+  }
+  :global(.leaflet-popup-close-button) {
+    display: none;
+  }
+  .popupContent {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+    @include respond-to(tablet) {
+      gap: 4px;
+    }
+    @include respond-to(mobile) {
+      gap: 3px;
+    }
+
+    .userLocationText {
+      @include font-base(20px, 900);
+      color: rgba(0, 0, 0, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+
+      @include respond-to(laptop) {
+        font-size: 17px;
+      }
+      @include respond-to(tablet) {
+        font-size: 15px;
+      }
+      @include respond-to(mobile) {
+        font-size: 13px;
+      }
+    }
+  }
+}

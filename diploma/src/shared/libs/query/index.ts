@@ -1,0 +1,1 @@
+export { mapQueryData } from "./queryAdapter";

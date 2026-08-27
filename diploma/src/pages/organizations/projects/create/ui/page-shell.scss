@@ -1,0 +1,132 @@
+.page {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 24px 24px;
+  background: #f4f4f4;
+  color: #1a1a1a;
+  font-family: "Exo 2", sans-serif;
+}
+
+.workArea {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 16px 24px;
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.03);
+  margin-bottom: 28px;
+}
+
+.backBtn {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border: none;
+  border-radius: 50%;
+  background: #ececec;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    background: #d8d8d8;
+    color: #555;
+    transform: translateX(-1px);
+  }
+}
+
+.crumb {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: "Exo 2", sans-serif;
+  font-size: 18px;
+}
+
+.crumbOrg {
+  max-width: min(380px, 34vw);
+  overflow: hidden;
+  color: #cccccc;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.crumbSep {
+  color: #e5e5e5;
+  font-weight: 700;
+}
+
+.crumbTitle {
+  color: #1a1a1a;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.cancelBtn {
+  margin-left: auto;
+  border: 1.8px solid #ebebeb;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #aaaaaa;
+  padding: 13px 28px;
+  font-family: "Exo 2", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+
+  &:hover {
+    border-color: #dddddd;
+    color: #888888;
+    transform: translateY(-1px);
+  }
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  align-items: start;
+  gap: 32px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stepsCard,
+.creatorCard {
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.stepsCard {
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+}

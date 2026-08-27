@@ -1,0 +1,135 @@
+@use "@shared/assets/styles" as *;
+
+.internalNavRow {
+  --org-tabs-height: 58px;
+  --org-tabs-padding: 5px;
+  --org-tabs-radius: 25px;
+  --org-tabs-inner-radius: 20px;
+  --org-tabs-font-size: clamp(14px, 1.05vw, 18px);
+  --org-tabs-active-padding-inline: clamp(22px, 2.7vw, 48px);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  min-height: var(--org-tabs-height);
+  background: #ffffff;
+  border-radius: var(--org-tabs-radius);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  padding: var(--org-tabs-padding);
+  margin: 16px 0;
+  box-sizing: border-box;
+}
+
+.internalNav {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: calc(var(--org-tabs-height) - (var(--org-tabs-padding) * 2));
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  position: relative;
+  gap: 0;
+}
+
+.internalTab {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: calc(var(--org-tabs-height) - (var(--org-tabs-padding) * 2));
+  padding: 0 clamp(14px, 1.8vw, 28px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: var(--org-tabs-inner-radius);
+  border: none;
+  background: transparent;
+  color: #000000;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: var(--org-tabs-font-size);
+  font-weight: 500;
+  line-height: 1;
+  font-family: $font-family, sans-serif;
+  letter-spacing: 0;
+  transition:
+    background-color 150ms ease,
+    color 200ms ease,
+    transform 180ms ease;
+  white-space: nowrap;
+  overflow: hidden;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: var(--org-tabs-inner-radius);
+    color: #000000;
+  }
+}
+
+.internalTabActive {
+  flex: 1.2 1 0;
+  padding-inline: var(--org-tabs-active-padding-inline);
+  border-radius: var(--org-tabs-inner-radius);
+  color: #ffffff;
+  font-weight: 800;
+
+  &:hover {
+    background: transparent;
+    border-radius: var(--org-tabs-inner-radius);
+    color: #ffffff;
+  }
+}
+
+.internalTabIndicator {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--org-tabs-inner-radius);
+  background: #000000;
+  z-index: 0;
+}
+
+.internalTabLabel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+@include respond-to(custom, 920px) {
+  .internalNavRow {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .internalNav {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+@include respond-to(mobile) {
+  .internalNavRow {
+    align-items: stretch;
+    --org-tabs-height: 52px;
+    --org-tabs-padding: 6px;
+    --org-tabs-radius: 22px;
+    --org-tabs-inner-radius: 14px;
+    --org-tabs-font-size: 13px;
+    --org-tabs-active-padding-inline: 20px;
+  }
+
+  .internalNav {
+    gap: 0;
+    overflow-x: auto;
+  }
+
+  .internalTab {
+    min-width: max-content;
+    padding-inline: 18px;
+  }
+
+  .internalTabActive {
+    flex: 0 0 auto;
+  }
+}

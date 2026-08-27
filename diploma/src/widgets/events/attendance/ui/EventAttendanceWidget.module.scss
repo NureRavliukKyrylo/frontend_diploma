@@ -1,0 +1,281 @@
+@use "@shared/assets/styles" as *;
+
+.attendanceWidgetWrapper {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 300px;
+  width: 100%;
+  text-align: center;
+
+  .errorHttpMessage {
+    font-size: 30px;
+
+    @include respond-to(mobile) {
+      font-size: 22px;
+    }
+  }
+}
+
+.headerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  gap: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+
+  @include respond-to(tablet) {
+    padding: 14px 20px;
+    gap: 16px;
+  }
+  @include respond-to(mobile) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+  @include respond-to(null, 480px) {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+}
+
+.headerStart {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  @include respond-to(mobile) {
+    gap: 12px;
+    justify-content: space-between;
+    width: 100%;
+  }
+  @include respond-to(null, 480px) {
+    gap: 8px;
+  }
+}
+
+.dateTitle {
+  @include font-base(30px, 600);
+  color: #8c0000;
+
+  @include respond-to(laptop) {
+    font-size: 24px;
+  }
+  @include respond-to(tablet) {
+    font-size: 20px;
+  }
+  @include respond-to(mobile) {
+    font-size: 17px;
+  }
+  @include respond-to(null, 480px) {
+    font-size: 14px;
+  }
+}
+
+.navigationsBlock {
+  display: flex;
+  gap: 10px;
+
+  @include respond-to(mobile) {
+    gap: 6px;
+  }
+  @include respond-to(null, 480px) {
+    gap: 4px;
+  }
+
+  .prevButton,
+  .nextButton {
+    background: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    transition: opacity 0.15s;
+
+    &:hover {
+      opacity: 0.75;
+    }
+
+    @include respond-to(tablet) {
+      width: 36px;
+      height: 36px;
+    }
+    @include respond-to(mobile) {
+      width: 30px;
+      height: 30px;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: #8c0000;
+      display: block;
+
+      @include respond-to(tablet) {
+        width: 17px;
+        height: 17px;
+      }
+      @include respond-to(mobile) {
+        width: 14px;
+        height: 14px;
+      }
+      @include respond-to(null, 480px) {
+        width: 11px;
+        height: 11px;
+      }
+    }
+  }
+
+  .nextButton {
+    transform: rotate(180deg);
+    padding-right: 3px;
+  }
+}
+
+.toggleWrapper {
+  align-self: stretch;
+  height: auto;
+
+  @include respond-to(mobile) {
+    flex: 1;
+    width: 100%;
+  }
+
+  .toggleCalendarButton {
+    color: rgba(0, 0, 0, 0.7);
+    letter-spacing: 0.05em;
+    flex-grow: 1;
+    padding: 0 40px;
+    @include font-base(20px, 500);
+    text-transform: uppercase;
+
+    &:hover {
+      background: rgba(231, 226, 226, 0.5);
+    }
+
+    @include respond-to(laptop) {
+      padding: 0 24px;
+      font-size: 17px;
+    }
+    @include respond-to(tablet) {
+      padding: 0 16px;
+      font-size: 14px;
+    }
+    @include respond-to(mobile) {
+      padding: 0 10px;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+    }
+  }
+
+  .toggleCalendarButtonActive {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 700;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .toggleCalendar {
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    height: 100%;
+    border-radius: 20px;
+    padding: 5px;
+    justify-content: space-between;
+    width: 100%;
+
+    @include respond-to(mobile) {
+      padding: 4px;
+      border-radius: 14px;
+    }
+  }
+
+  .toggleCalendarPill {
+    background-color: black;
+  }
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 1.4fr 2fr 0.6fr 1fr;
+  padding: 10px 24px;
+  background: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+
+  @include respond-to(tablet) {
+    padding: 8px 20px;
+    grid-template-columns: 1.2fr 2fr 0.6fr 1fr;
+  }
+  @include respond-to(mobile) {
+    padding: 8px 16px;
+  }
+}
+
+.tableHeaderCell {
+  @include font-base(14px, 800);
+  color: rgba(0, 0, 0, 0.7);
+  text-transform: uppercase;
+
+  &:last-child {
+    text-align: right;
+  }
+
+  @include respond-to(mobile) {
+    font-size: 11px;
+  }
+}
+
+.attendanceList {
+  display: flex;
+  flex-direction: column;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 300px;
+
+  h2 {
+    @include font-base(30px, 800);
+    color: rgba(0, 0, 0, 0.7);
+    @include respond-to(tablet) {
+      font-size: 24px;
+    }
+    @include respond-to(mobile) {
+      font-size: 20px;
+    }
+  }
+  p {
+    @include font-base(22px, 400);
+    color: rgba(0, 0, 0, 0.4);
+    @include respond-to(tablet) {
+      font-size: 18px;
+    }
+    @include respond-to(mobile) {
+      font-size: 15px;
+    }
+  }
+}

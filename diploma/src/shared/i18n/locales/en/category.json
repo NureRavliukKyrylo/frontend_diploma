@@ -1,0 +1,22 @@
+{
+  "labels": {
+    "activities": "Activities",
+    "all": "ALL",
+    "categories": "CATEGORIES",
+    "imgAltRelated": "category-related-item",
+    "imgAltLayout": "layout"
+  },
+  "emptyState": {
+    "title": "No categories found",
+    "subtitle": "Try clearing your filters or refreshing the list."
+  },
+  "filter": {
+    "error": "Failed to load categories"
+  },
+  "picker": {
+    "search": "Search categories",
+    "remove": "Remove {{name}}",
+    "loading": "Loading categories...",
+    "empty": "No categories found"
+  }
+}

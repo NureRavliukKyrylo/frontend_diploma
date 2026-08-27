@@ -1,0 +1,91 @@
+@use "@shared/assets/styles" as *;
+
+.skillsProfileWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+
+  @include respond-to(laptop) {
+    gap: 24px;
+  }
+  @include respond-to(tablet) {
+    gap: 20px;
+  }
+  @include respond-to(mobile) {
+    gap: 16px;
+  }
+
+  .skillsProfileControl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    @include respond-to(tablet) {
+      align-items: flex-start;
+      gap: 14px;
+    }
+    @include respond-to(mobile) {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .skillProfileTitle {
+      @include font-base(50px, 800);
+
+      @include respond-to(laptop) {
+        font-size: 40px;
+      }
+      @include respond-to(tablet) {
+        font-size: 32px;
+      }
+      @include respond-to(mobile) {
+        font-size: 26px;
+      }
+    }
+
+    .filtersProfileSkill {
+      width: 50%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+
+      @include respond-to(laptop) {
+        width: 70%;
+        flex-direction: column;
+        height: unset;
+        max-width: 300px;
+        gap: 10px;
+        align-items: stretch;
+        > * {
+          flex: 1;
+        }
+      }
+      @include respond-to(tablet) {
+        width: 70%;
+        flex-direction: column;
+        height: unset;
+        max-width: 300px;
+        gap: 10px;
+        align-items: stretch;
+      }
+      @include respond-to(mobile) {
+        width: 100%;
+        flex-direction: column;
+        height: unset;
+
+        gap: 10px;
+        align-items: stretch;
+      }
+    }
+  }
+
+  .paginationWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}

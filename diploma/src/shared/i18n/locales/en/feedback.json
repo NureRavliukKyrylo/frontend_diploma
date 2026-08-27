@@ -1,0 +1,60 @@
+{
+  "rating": {
+    "votes_one": "{{count}} VOTE",
+    "votes_other": "{{count}} VOTES",
+    "stars_one": "{{count}} STAR",
+    "stars_other": "{{count}} STARS"
+  },
+  "actions": {
+    "submit": "Submit Feedback",
+    "update": "Update Feedback",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "editFeedback": "Edit Feedback",
+    "deleteFeedback": "Delete Feedback"
+  },
+  "content": {
+    "title": "Review",
+    "yourReview": "Your Review"
+  },
+  "states": {
+    "emptyTitle": "No Feedbacks yet",
+    "emptySubtitle": "Be the first one to leave a feedback",
+    "joinedEmptyTitle": "No feedback yet",
+    "joinedEmptySubtitle": "You've joined - now share what you think. Be the first to leave a review."
+  },
+  "form": {
+    "createTitle": "Your Feedback Matters",
+    "createDescription": "It takes less than a minute to complete.",
+    "editTitle": "Edit Your Feedback",
+    "editDescription": "Update your rating or comment below.",
+    "question": "How was your overall experience with {{entity}}?",
+    "improvementQuestion": "What could we improve?",
+    "placeholder": "Tell us more about your experience..."
+  },
+  "entities": {
+    "organization": "organization",
+    "project": "project",
+    "task": "task",
+    "event": "event"
+  },
+  "deleteModal": {
+    "title": "Delete feedback?",
+    "text": "Are you sure you want to delete this feedback? You can write new one again anytime."
+  },
+  "validation": {
+    "ratingRequired": "Rating is required",
+    "commentMax": "Comment must be at most 150 characters"
+  },
+  "notifications": {
+    "createSuccessTitle": "Feedback submitted",
+    "createSuccessDescription": "Thank you for your feedback!",
+    "createFailedTitle": "Failed to submit feedback",
+    "updateSuccessTitle": "Feedback updated",
+    "updateSuccessDescription": "Your feedback has been updated.",
+    "updateFailedTitle": "Failed to update feedback",
+    "deleteSuccessTitle": "Feedback deleted",
+    "deleteSuccessDescription": "Your feedback has been removed.",
+    "deleteFailedTitle": "Failed to delete feedback"
+  }
+}

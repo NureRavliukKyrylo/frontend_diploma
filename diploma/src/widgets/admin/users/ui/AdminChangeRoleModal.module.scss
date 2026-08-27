@@ -1,0 +1,175 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 40px 44px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: #f4f4f4;
+  color: #666666;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+}
+
+.icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  background: #fbeaea;
+  color: #8b0000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  margin: 0;
+  color: #1a1a1a;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.description {
+  margin: 0;
+  color: #999999;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.currentRoleLine {
+  border-radius: 16px;
+  background: #f5f5f5;
+  color: #999999;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 16px;
+
+  strong {
+    color: #1a1a1a;
+    font-weight: 900;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.fieldLabel {
+  color: #3f3f46;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.dropdownField {
+  height: 52px;
+
+  > div {
+    width: 100%;
+    height: 52px;
+  }
+
+  button {
+    width: 100%;
+    height: 52px;
+    min-height: 52px;
+    border: 1.5px solid #ebebeb;
+    border-radius: 999px;
+    background: #f5f5f5;
+    box-shadow: none;
+    padding: 0 18px;
+  }
+
+  h1 {
+    margin: 0;
+    color: #1a1a1a;
+    font-family: "Exo 2", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+  }
+}
+
+.error {
+  border-radius: 14px;
+  background: rgba(139, 0, 0, 0.08);
+  color: #8b0000;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 12px 14px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cancelButton,
+.submitButton {
+  flex: 1;
+  height: 50px;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Exo 2", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.cancelButton {
+  border: 1.5px solid #ebebeb;
+  background: #ffffff;
+  color: #5f5e5a;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.submitButton {
+  border: 0;
+  background: #1a1a1a;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+}
+
+@media (max-width: 700px) {
+  .wrapper {
+    padding: 32px 24px;
+  }
+
+  .footer {
+    flex-direction: column-reverse;
+
+    > * {
+      width: 100%;
+    }
+  }
+}

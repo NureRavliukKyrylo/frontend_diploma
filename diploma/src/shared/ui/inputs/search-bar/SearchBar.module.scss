@@ -1,0 +1,130 @@
+@use "@shared/assets/styles" as *;
+
+$focus-border-color: rgba(0, 0, 0, 0.6);
+
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
+  @include respond-to(tablet) {
+    height: 40px;
+  }
+  @include respond-to(mobile) {
+    height: 35px;
+  }
+  &.chat {
+    height: 42px;
+    min-width: 0;
+
+    .input {
+      @include font-base(14px, 700);
+      padding: 10px 16px 10px 42px;
+      border-radius: 999px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.045);
+      border: 1px solid $chat-border;
+      background: #ffffff;
+
+      &::placeholder {
+        color: #b7b7b7;
+        font-weight: 700;
+      }
+
+      &:focus {
+        border-color: rgba(132, 0, 0, 0.24);
+        box-shadow:
+          0 6px 18px rgba(132, 0, 0, 0.08),
+          0 0 0 4px rgba(132, 0, 0, 0.045);
+      }
+    }
+
+    .icon {
+      right: unset;
+      left: 14px;
+      width: 18px;
+      height: 18px;
+      opacity: 0.55;
+    }
+  }
+}
+
+.input {
+  @include font-base(18px, 600);
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border: 2px solid transparent;
+  border-radius: 30px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 6px 20px;
+  color: #000;
+  transition:
+    border 0.2s ease,
+    background-color 0.2s ease;
+  outline: none;
+
+  @include respond-to(tablet) {
+    padding: 8px 16px;
+    flex-shrink: 0;
+  }
+
+  @include respond-to(mobile) {
+    padding: 6px 14px;
+    flex-shrink: 0;
+  }
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+  }
+  &:focus {
+    border-color: $focus-border-color;
+  }
+
+  &.projects {
+    @include font-base(20px, 600);
+
+    @include respond-to(laptop) {
+      font-size: 18px;
+    }
+    @include respond-to(tablet) {
+      font-size: 15px;
+    }
+    @include respond-to(mobile) {
+      font-size: 14px;
+    }
+  }
+}
+
+.icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  opacity: 0.7;
+  pointer-events: none;
+
+  @include respond-to(laptop) {
+    right: 16px;
+    width: 20px;
+    height: 20px;
+  }
+  @include respond-to(tablet) {
+    right: 14px;
+    width: 18px;
+    height: 18px;
+  }
+  @include respond-to(mobile) {
+    right: 12px;
+    width: 16px;
+    height: 16px;
+  }
+
+  path {
+    fill: rgba(0, 0, 0, 0.6);
+  }
+}

@@ -1,0 +1,121 @@
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 344px) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.eventCard {
+  position: sticky;
+  top: 112px;
+  overflow: visible;
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+.eventCard h2 {
+  margin: 0 0 8px;
+  color: #1a1a1a;
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+
+.eventCard p {
+  margin: 0;
+  color: #aaaaaa;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  i {
+    font-size: 18px;
+    line-height: 1;
+  }
+}
+
+.statusBadge {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 18px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+
+  span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+}
+
+.statusActive {
+  background: #edfbf3;
+  color: #1a7a45;
+}
+
+.statusEndingSoon {
+  background: #fff7e6;
+  color: #9a6500;
+}
+
+.statusCompleted,
+.statusCancelled,
+.statusArchived {
+  background: #f1f1f1;
+  color: #555555;
+}
+
+.sidebarStats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 20px;
+  padding: 18px 0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebarStat {
+  min-width: 0;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  & + & {
+    border-left: 1px solid #f0f0f0;
+  }
+
+  strong {
+    color: #1a1a1a;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  span {
+    color: #bbbbbb;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+}

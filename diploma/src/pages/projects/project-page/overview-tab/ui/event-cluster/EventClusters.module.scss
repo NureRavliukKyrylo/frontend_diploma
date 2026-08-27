@@ -1,0 +1,28 @@
+@use "@shared/assets/styles" as *;
+
+.popupEvent {
+  :global(.leaflet-popup-content-wrapper) {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 2px 10px rgba(99, 99, 99, 0.5);
+    border-radius: 20px;
+    padding: 30px 20px 20px 20px;
+    width: fit-content;
+
+    @include respond-to(tablet) {
+      padding: 20px;
+    }
+    @include respond-to(mobile) {
+      padding: 12px;
+    }
+  }
+  :global(.leaflet-popup-content) {
+    margin: 0;
+    min-width: 250px;
+  }
+  :global(.leaflet-popup-close-button) {
+    top: 5px !important;
+    right: 5px !important;
+    font-size: 26px !important;
+    color: #000000 !important;
+  }
+}

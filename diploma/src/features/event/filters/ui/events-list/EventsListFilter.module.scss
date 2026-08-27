@@ -1,0 +1,75 @@
+@use "@shared/assets/styles" as *;
+
+.eventsInfinite {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  @include respond-to(tablet) {
+    gap: 8px;
+  }
+  @include respond-to(mobile) {
+    gap: 6px;
+  }
+
+  .eventsListFilter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    .eventTabWrapper {
+      display: flex;
+    }
+
+    @include respond-to(tablet) {
+      gap: 6px;
+    }
+    @include respond-to(mobile) {
+      gap: 6px;
+    }
+  }
+  .showMoreEventsButton {
+    @include font-base(16px, 600);
+    color: #8c0000;
+    align-self: flex-end;
+
+    @include respond-to(laptop) {
+      font-size: 15px;
+    }
+    @include respond-to(tablet) {
+      font-size: 14px;
+    }
+    @include respond-to(mobile) {
+      font-size: 13px;
+    }
+  }
+}
+
+.emptyText {
+  color: rgba(0, 0, 0, 0.4);
+  @include font-base(17px, 500);
+
+  @include respond-to(laptop) {
+    font-size: 15px;
+  }
+  @include respond-to(tablet) {
+    font-size: 14px;
+  }
+  @include respond-to(mobile) {
+    font-size: 13px;
+  }
+}
+
+.errorMessage {
+  color: #dc2626;
+  @include font-base(17px, 500);
+
+  @include respond-to(laptop) {
+    font-size: 15px;
+  }
+  @include respond-to(tablet) {
+    font-size: 14px;
+  }
+  @include respond-to(mobile) {
+    font-size: 13px;
+  }
+}

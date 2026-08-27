@@ -1,0 +1,219 @@
+{
+  "report": {
+    "title": "Report {{subject}}",
+    "labels": {
+      "reason": "Reason",
+      "details": "Details",
+      "noDetails": "No details"
+    },
+    "placeholders": {
+      "details": "Describe the issue..."
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "submit": "Submit Report"
+    },
+    "validation": {
+      "reasonRequired": "Please select a reason",
+      "detailsRequired": "Details are required",
+      "detailsMax": "Details must be at most 200 characters"
+    },
+    "statuses": {
+      "opened": "Open",
+      "open": "Open",
+      "resolved": "Resolved",
+      "rejected": "Rejected"
+    },
+    "subjects": {
+      "user": "User",
+      "organization": "Organization",
+      "project": "Project",
+      "event": "Event",
+      "task": "Task",
+      "offer": "Offer",
+      "chatMessage": "Message",
+      "comment": "Comment",
+      "feedback": "Feedback",
+      "other": "Content"
+    },
+    "reasons": {
+      "spam": "Spam",
+      "harassment": "Harassment or Bullying",
+      "hateSpeech": "Hate Speech",
+      "misinformation": "Misinformation",
+      "inappropriateContent": "Inappropriate Content",
+      "violence": "Violence or Threats",
+      "copyright": "Copyright Violation",
+      "fraud": "Fraud or Scam",
+      "privacyViolation": "Privacy Violation",
+      "other": "Other"
+    },
+    "notifications": {
+      "successTitle": "Report submitted",
+      "successDescription": "Thank you for your report. We will review it shortly.",
+      "failedTitle": "Report failed"
+    }
+  },
+  "page": {
+    "stats": {
+      "total": "Reports",
+      "open": "Open",
+      "resolved": "Resolved",
+      "rejected": "Rejected"
+    },
+    "sorting": {
+      "default": "Default",
+      "newest": "Newest",
+      "latest": "Latest"
+    },
+    "empty": {
+      "title": "No reports found",
+      "description": "Try adjusting your filters"
+    }
+  },
+  "hideContent": {
+    "button": "Hide Content",
+    "title": "Hide Content",
+    "labels": {
+      "reason": "Reason"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "submit": "Hide Content"
+    },
+    "validation": {
+      "reasonRequired": "Please select a reason"
+    },
+    "description": "This content will be hidden from other users and will no longer appear in public feeds or search results.",
+    "notifications": {
+      "successTitle": "Content hidden",
+      "successDescription": "The content has been hidden successfully.",
+      "failedTitle": "Action failed"
+    }
+  },
+  "blockUser": {
+    "button": "Block User",
+    "title": "Block User",
+    "labels": {
+      "reason": "Reason"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "submit": "Block User"
+    },
+    "validation": {
+      "reasonRequired": "Please select a reason"
+    },
+    "notifications": {
+      "successTitle": "User blocked",
+      "successDescription": "The user has been blocked successfully.",
+      "failedTitle": "Action failed"
+    },
+    "description": "This will block the user and restrict their access to this activity"
+  },
+  "banUser": {
+    "button": "Ban User",
+    "title": "Ban User",
+    "labels": {
+      "reason": "Reason",
+      "expiresAt": "Ban until"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "submit": "Ban User"
+    },
+    "validation": {
+      "reasonRequired": "Please select a reason",
+      "expiresAtRequired": "Please select an expiration date"
+    },
+    "notifications": {
+      "successTitle": "User banned",
+      "successDescription": "The user has been banned successfully.",
+      "failedTitle": "Action failed"
+    }
+  },
+  "resolveCase": {
+    "button": "Resolve",
+    "title": "Resolve Report",
+    "decisions": {
+      "reject": "Reject",
+      "approve": "Approve"
+    },
+    "labels": {
+      "comment": "Comment"
+    },
+    "placeholders": {
+      "rejectedComment": "Why is this report being rejected?",
+      "approvedComment": "Describe the resolution..."
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "submit": "Confirm"
+    },
+    "validation": {
+      "commentRequired": "Comment is required",
+      "commentMaxLength": "Comment must be at most 150 characters"
+    },
+    "notifications": {
+      "successTitleResolve": "Report resolved",
+      "successDescriptionResolve": "The report has been resolved successfully.",
+      "successTitleReject": "Report rejected",
+      "successDescriptionReject": "The report has been rejected.",
+      "failedTitle": "Action failed"
+    }
+  },
+  "banEntity": {
+    "button": "Ban Entity",
+    "title": "Ban Entity",
+    "description": "This action will permanently ban the entity from the platform. Please select a reason before proceeding.",
+    "labels": {
+      "reason": "Reason"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "submit": "Ban"
+    },
+    "validation": {
+      "reasonRequired": "Please select a reason"
+    },
+    "notifications": {
+      "successTitle": "Entity Banned",
+      "successDescription": "The entity has been successfully banned.",
+      "failedTitle": "Ban Failed",
+      "failedDescription": "Something went wrong. Please try again."
+    }
+  },
+
+  "filters": {
+    "status": {
+      "title": "Report Status",
+      "label": "Status",
+      "options": {
+        "all": "All",
+        "open": "Open",
+        "resolved": "Resolved",
+        "rejected": "Rejected"
+      }
+    },
+    "dateRange": {
+      "title": "Date range"
+    },
+    "reportReason": {
+      "title": "Report Reason"
+    },
+    "subjectType": {
+      "title": "Subject type"
+    },
+    "actions": {
+      "clear": "Clear Filters"
+    }
+  },
+  "reportCase": {
+    "title": "Report Case",
+    "reporter": "Reporter",
+    "contentAuthor": "Content Author",
+    "reportedContent": "Reported content",
+    "details": "Details",
+    "goToActivity": "Go to Activity"
+  }
+}

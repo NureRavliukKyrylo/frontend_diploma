@@ -1,0 +1,207 @@
+{
+  "states": {
+    "pendingLeave": "Your leave request is pending approval",
+    "pendingJoin": "Your join request is pending approval"
+  },
+  "create": {
+    "datesRequired": "Task dates are required.",
+    "created": "Task created",
+    "failed": "Failed to create task",
+    "close": "Close create task drawer",
+    "newTask": "New task",
+    "organization": "Organization",
+    "creatingIn": "Creating in {{name}}",
+    "back": "Back",
+    "creating": "Creating...",
+    "submit": "Create task",
+    "continue": "Continue",
+    "stepsLabel": "Task setup steps",
+    "steps": {
+      "basics": "Basics",
+      "basicsSub": "Title & description",
+      "details": "Details",
+      "detailsSub": "Time & location",
+      "categories": "Categories",
+      "categoriesSub": "Tags & topics",
+      "access": "Access",
+      "accessSub": "Policies"
+    },
+    "headers": {
+      "step1Eyebrow": "STEP 01 OF 04",
+      "step1Title": "What needs to be done?",
+      "step1Subtitle": "Give your task a clear name and description.",
+      "step2Eyebrow": "STEP 02 OF 04",
+      "step2Title": "Time & location",
+      "step2Subtitle": "Set when and where this task takes place.",
+      "step3Eyebrow": "STEP 03 OF 04",
+      "step3Title": "Categories",
+      "step3Subtitle": "Help people find this task. Optional.",
+      "step4Eyebrow": "STEP 04 OF 04",
+      "step4Title": "Access policies",
+      "step4Subtitle": "Control how volunteers join and leave."
+    }
+  },
+  "labels": {
+    "task": "Task",
+    "joinedChip": "Joined Task",
+    "chat": "TASK CHAT",
+    "project": "PROJECT",
+    "event": "EVENT",
+    "votes_one": "({{count}} VOTE)",
+    "votes_other": "({{count}} VOTES)",
+    "skills": "TASK Skills",
+    "activities": "Activities",
+    "locations": "Locations",
+    "subtitle": "Explore all related activities within this task and see where they are located",
+    "relatedEvent": "Related event",
+    "relatedProject": "Related project",
+    "points_one": "{{count}} POINT",
+    "points_other": "{{count}} POINTS",
+    "error": {
+      "hint": "Try reloading the page or come back later."
+    }
+  },
+  "tabs": {
+    "overview": "OVERVIEW",
+    "comments": "COMMENTS",
+    "members": "MEMBERS",
+    "feedback": "FEEDBACK",
+    "roles": "ROLES",
+    "timelog": "WORK LOG"
+  },
+  "fab": {
+    "openActions": "Open task actions",
+    "closeActions": "Close task actions",
+    "members": "Members",
+    "roles": "Roles",
+    "timelog": "Work log",
+    "settings": "Settings"
+  },
+  "roles": {
+    "loading": "Loading task roles...",
+    "error": "We could not load task roles right now.",
+    "empty": "No roles are configured for this task yet."
+  },
+  "timelog": {
+    "loading": "Loading work logs...",
+    "error": "We could not load work logs right now.",
+    "empty": "No time records",
+    "emptyHint": "Submitted work logs will appear here for review.",
+    "table": {
+      "volunteer": "Volunteer",
+      "logged": "Logged",
+      "adjusted": "Adjusted",
+      "approved": "Approved",
+      "status": "Status",
+      "note": "Note",
+      "actions": "Actions",
+      "notProvided": "Not provided"
+    },
+    "controls": {
+      "allStatuses": "All",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "disputed": "Disputed",
+      "export": "Export CSV",
+      "totalRecords": "Total records",
+      "pendingRecords": "Pending",
+      "approvedMinutes": "Approved minutes",
+      "loggedMinutes": "Logged minutes"
+    },
+    "sections": {
+      "pending": "Pending approval",
+      "disputed": "Disputed",
+      "approved": "Approved",
+      "other": "Other"
+    },
+    "badges": {
+      "managerEdited": "Manager edited",
+      "disputeOpen": "Dispute open"
+    },
+    "actions": {
+      "managerEdit": "Edit",
+      "approve": "Approve",
+      "reject": "Reject",
+      "resolve": "Resolve",
+      "resolveAsApprove": "Approve log",
+      "resolveAsReject": "Reject log"
+    },
+    "modal": {
+      "title": "Review work log",
+      "text": "Adjust the record if needed, add an optional audit note, then confirm the decision.",
+      "minutes": "Adjusted minutes",
+      "finalMinutes": "Final approved minutes",
+      "commentPlaceholder": "Decision note",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    },
+    "notifications": {
+      "saved": "Work log updated",
+      "failed": "Work log update failed",
+      "exported": "Work log export started"
+    },
+    "statuses": {
+      "Draft": "Draft",
+      "Submitted": "Pending",
+      "ManagerEditedPendingVolunteerReconfirm": "Edited",
+      "Approved": "Approved",
+      "Rejected": "Rejected",
+      "Disputed": "Disputed",
+      "Resolved": "Resolved",
+      "Cancelled": "Cancelled"
+    }
+  },
+  "statuses": {
+    "Pending": "Pending",
+    "InProgress": "In Progress",
+    "Completed": "Completed",
+    "Cancelled": "Cancelled",
+    "Overdue": "Overdue"
+  },
+  "cards": {
+    "noVolunteers": "No volunteers joined yet",
+    "unknownOrganization": "Unknown Organization",
+    "imgAltOrganization": "image organization",
+    "deadline": "Deadline:",
+    "allTime": "All time",
+    "about": "About this task",
+    "participants": "Participants"
+  },
+  "comments": {
+    "emptyStateTitle": "No comments yet",
+    "emptyStateSubtitle": "Be the first one to leave a comment",
+    "inputPlaceholder": "Ask a question about this activity...",
+    "inputEditPlaceholder": "Edit a question about this activity...",
+    "replyPlaceholder": "Write a reply to {{name}}...",
+    "replyingTo": "Replying to {{name}}",
+    "actions": {
+      "cancel": "Cancel",
+      "deleteComment": "Delete Comment",
+      "editComment": "Edit Comment",
+      "reply": "Reply",
+      "send": "Send comment"
+    },
+    "deletedComment": "This comment has been deleted",
+    "deleteModal": {
+      "title": "Delete Your Comment",
+      "textPattern": "Are you sure you want to delete your comment? with content: {{content}}"
+    },
+    "validation": {
+      "bodyRequired": "Comment is required",
+      "bodyMax": "Comment must be 2000 characters or less"
+    },
+    "notifications": {
+      "createSuccessTitle": "Create Comment Success",
+      "createSuccessDescription": "Your comment has been created successfully",
+      "createFailedTitle": "Comment creation Failed",
+      "replyForbidden": "You do not have permission to reply to task comments.",
+      "editSuccessTitle": "Comment Edit Success",
+      "editSuccessDescription": "Your comment has been edited successfully",
+      "editFailedTitle": "Comment edition Failed",
+      "deleteSuccessTitle": "Delete Comment Success",
+      "deleteSuccessDescription": "You have deleted your comment successfully",
+      "deleteFailedTitle": "Delete Comment Failed"
+    }
+  }
+}

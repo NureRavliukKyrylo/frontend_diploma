@@ -1,0 +1,384 @@
+@use "@shared/assets/styles" as *;
+
+.wrapper {
+  background: #ffffff;
+  border-radius: 40px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.08);
+  width: 90%;
+  @include respond-to(laptop) {
+    padding: 32px;
+    border-radius: 32px;
+    gap: 20px;
+  }
+  @include respond-to(tablet) {
+    padding: 24px;
+    border-radius: 24px;
+    gap: 16px;
+    width: 95%;
+  }
+  @include respond-to(mobile) {
+    padding: 16px;
+    border-radius: 20px;
+    gap: 14px;
+    width: 95%;
+  }
+}
+
+.actionsBlock {
+  display: flex;
+  gap: 10px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding-bottom: 20px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      #8c0000 30%,
+      #8c0000 60%,
+      transparent 100%
+    );
+    opacity: 0.8;
+  }
+
+  @include respond-to(mobile) {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 16px;
+  }
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include respond-to(tablet) {
+    gap: 12px;
+  }
+
+  @include respond-to(mobile) {
+    gap: 10px;
+    width: 100%;
+  }
+
+  .topContent {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .title {
+      @include font-base(30px, 700);
+      background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 110%;
+
+      @include respond-to(laptop) {
+        font-size: 26px;
+      }
+      @include respond-to(tablet) {
+        font-size: 22px;
+      }
+      @include respond-to(mobile) {
+        font-size: 18px;
+      }
+    }
+
+    .unreadBadge {
+      @include font-base(13px, 700);
+      background: #8c0000;
+      color: #ffffff;
+      border-radius: 50px;
+      padding: 2px 10px;
+      white-space: nowrap;
+
+      @include respond-to(mobile) {
+        font-size: 12px;
+        padding: 2px 8px;
+      }
+    }
+  }
+
+  .bottomContent {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+
+    @include respond-to(mobile) {
+      gap: 8px;
+      height: 30px;
+    }
+  }
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  @include respond-to(mobile) {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+.paginationWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+
+  @include respond-to(mobile) {
+    margin-top: 4px;
+  }
+}
+
+.notificationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.selectionActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.selectButton {
+  @include font-base(16px, 800);
+  color: #8c0000;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+
+  @include respond-to(mobile) {
+    font-size: 14px;
+  }
+}
+
+.cancelButton {
+  @include font-base(16px, 800);
+  color: #8c0000;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+
+  @include respond-to(mobile) {
+    font-size: 14px;
+  }
+}
+
+.notificationWrapper {
+  position: relative;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+
+  &.selectMode {
+    cursor: pointer;
+  }
+
+  &.selected {
+    border-color: #8c0000;
+    box-shadow: 0 0 0 3px rgba(140, 0, 0, 0.1);
+  }
+}
+
+.checkmark {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+  background: #fbfbfb;
+  border: 1px solid #d1d5db;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include respond-to(mobile) {
+    width: 18px;
+    height: 18px;
+    top: 8px;
+    right: 8px;
+  }
+}
+
+.checkmarkSelected {
+  background: #8c0000;
+  border-color: #8c0000;
+}
+
+.checkmarkIcon {
+  width: 12px;
+  height: 12px;
+  color: #ffffff;
+
+  @include respond-to(mobile) {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    @include font-base(30px, 900);
+    line-height: 120%;
+    color: #1a1a2e;
+
+    @include respond-to(tablet) {
+      font-size: 25px;
+    }
+    @include respond-to(mobile) {
+      font-size: 20px;
+    }
+  }
+
+  p {
+    @include font-base(20px, 500);
+    color: #6b7280;
+
+    @include respond-to(tablet) {
+      font-size: 18px;
+    }
+    @include respond-to(mobile) {
+      font-size: 16px;
+    }
+  }
+}
+
+.errorState {
+  padding: 40px 0;
+  text-align: center;
+
+  @include respond-to(mobile) {
+    padding: 24px 0;
+  }
+}
+
+.toggleNotification {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 6px;
+  @include respond-to(mobile) {
+    padding: 2px;
+  }
+}
+
+.toggleNotificationButton {
+  color: rgba(0, 0, 0, 0.8);
+  padding: 4px 14px;
+  @include font-base(16px, 500);
+
+  @include respond-to(mobile) {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  &:hover {
+    background: rgba(231, 226, 226, 0.5);
+  }
+}
+
+.toggleNotificationButtonActive {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+
+  &:hover {
+    background: transparent;
+  }
+}
+
+.toggleNotificationPill {
+  background-color: black;
+}
+
+.skeletonTitle {
+  width: 220px;
+  height: 34px;
+  border-radius: 8px;
+
+  @include respond-to(laptop) {
+    width: 190px;
+    height: 30px;
+  }
+  @include respond-to(tablet) {
+    width: 160px;
+    height: 26px;
+  }
+  @include respond-to(mobile) {
+    width: 130px;
+    height: 22px;
+  }
+}
+
+.skeletonBadge {
+  width: 32px;
+  height: 22px;
+  border-radius: 50px;
+
+  @include respond-to(mobile) {
+    width: 26px;
+    height: 18px;
+  }
+}
+
+.skeletonToggle {
+  width: 130px;
+  height: 36px;
+  border-radius: 20px;
+
+  @include respond-to(mobile) {
+    width: 110px;
+    height: 32px;
+  }
+}
+
+.skeletonFilter {
+  width: 80px;
+  height: 36px;
+  border-radius: 20px;
+
+  @include respond-to(mobile) {
+    width: 68px;
+    height: 32px;
+  }
+}
+
+.skeletonAction {
+  width: 110px;
+  height: 32px;
+  border-radius: 50px;
+
+  @include respond-to(mobile) {
+    width: 90px;
+    height: 28px;
+  }
+}

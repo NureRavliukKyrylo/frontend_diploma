@@ -1,0 +1,262 @@
+@use "@shared/assets/styles" as *;
+
+.offersTabWrapper {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+
+  @include respond-to(laptop) {
+    gap: 28px;
+  }
+  @include respond-to(null, 1200px) {
+    flex-direction: column;
+    gap: 24px;
+  }
+  @include respond-to(mobile) {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.sidebar {
+  flex-shrink: 0;
+  width: 500px;
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  @include respond-to(laptop) {
+    width: 380px;
+    gap: 36px;
+  }
+  @include respond-to(null, 1200px) {
+    width: 100%;
+    position: static;
+    gap: 24px;
+  }
+  @include respond-to(mobile) {
+    width: 100%;
+    position: static;
+    gap: 16px;
+  }
+}
+
+.mainContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+
+  @include respond-to(laptop) {
+    gap: 28px;
+  }
+  @include respond-to(tablet) {
+    gap: 20px;
+  }
+  @include respond-to(mobile) {
+    gap: 14px;
+  }
+}
+
+.searchRow {
+  display: grid;
+  align-items: center;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 54px;
+
+  @include respond-to(laptop) {
+    grid-template-rows: 48px;
+    gap: 10px;
+  }
+  @include respond-to(null, 1200px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 8px;
+  }
+  @include respond-to(mobile) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 8px;
+  }
+}
+
+.offersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 16px;
+
+  @include respond-to(laptop) {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 14px;
+  }
+  @include respond-to(tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  @include respond-to(mobile) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.offerCardMotion {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 6;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    @include font-base(50px, 900);
+    line-height: 120%;
+    color: #1a1a2e;
+
+    @include respond-to(laptop) {
+      font-size: 44px;
+    }
+    @include respond-to(tablet) {
+      font-size: 32px;
+    }
+    @include respond-to(mobile) {
+      font-size: 24px;
+    }
+  }
+
+  p {
+    @include font-base(30px, 500);
+    color: #6b7280;
+
+    @include respond-to(laptop) {
+      font-size: 28px;
+    }
+    @include respond-to(tablet) {
+      font-size: 20px;
+    }
+    @include respond-to(mobile) {
+      font-size: 16px;
+    }
+  }
+}
+
+.errorState {
+  padding: 40px 0;
+  text-align: center;
+
+  @include respond-to(mobile) {
+    padding: 24px 0;
+  }
+}
+
+.paginationWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+
+  @include respond-to(mobile) {
+    margin-top: 4px;
+  }
+}
+
+.takeButton {
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 40px;
+  padding: 3px 20px;
+  width: 50%;
+  margin-left: auto;
+
+  @include respond-to(laptop) {
+    padding: 3px 16px;
+    width: 55%;
+  }
+  @include respond-to(tablet) {
+    width: 65%;
+    padding: 3px 14px;
+  }
+  @include respond-to(mobile) {
+    width: 100%;
+    padding: 3px 12px;
+  }
+
+  .buttonContent {
+    @include font-base(20px, 600);
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 10px;
+
+    @include respond-to(laptop) {
+      font-size: 18px;
+    }
+    @include respond-to(tablet) {
+      font-size: 16px;
+    }
+    @include respond-to(mobile) {
+      font-size: 14px;
+      gap: 8px;
+    }
+
+    svg {
+      width: 13px;
+      height: 13px;
+
+      @include respond-to(mobile) {
+        width: 11px;
+        height: 11px;
+      }
+    }
+  }
+}
+
+.skeletonStats {
+  width: 100%;
+  height: 180px;
+  border-radius: 16px;
+
+  @include respond-to(tablet) {
+    height: 150px;
+  }
+  @include respond-to(mobile) {
+    height: 120px;
+  }
+}
+
+.skeletonFilter {
+  width: 100%;
+  height: 500px;
+  border-radius: 16px;
+
+  @include respond-to(tablet) {
+    height: 320px;
+  }
+  @include respond-to(mobile) {
+    height: 260px;
+  }
+}
+
+.skeletonSearch {
+  height: 54px;
+  border-radius: 50px;
+
+  @include respond-to(laptop) {
+    height: 48px;
+  }
+}
+
+.skeletonSort {
+  height: 54px;
+  border-radius: 50px;
+
+  @include respond-to(laptop) {
+    height: 48px;
+  }
+}

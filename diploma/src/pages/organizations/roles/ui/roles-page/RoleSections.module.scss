@@ -1,0 +1,149 @@
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sectionTitle {
+  color: #8f8f8f;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sectionLine {
+  flex: 1;
+  height: 1px;
+  background: #e6e6e6;
+}
+
+.sectionBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  border: 1px solid #ebebeb;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #8b0000;
+  padding: 4px 10px;
+  font-size: 13px;
+  font-weight: 800;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+  justify-items: stretch;
+}
+
+.archivedEmpty {
+  overflow: hidden;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.createCard {
+  width: 100%;
+  min-width: 0;
+  min-height: 160px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1.5px dashed #dddddd;
+  border-radius: 36px 22px 36px 22px;
+  background: #ffffff;
+  padding: 28px 20px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+
+  strong {
+    color: #1a1a1a;
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+  span {
+    color: #999999;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  &:hover {
+    border-color: #8b0000;
+    background: #fff9f9;
+    box-shadow: 0 8px 24px rgba(139, 0, 0, 0.08);
+  }
+}
+
+.createDeco {
+  position: absolute;
+  top: -36px;
+  right: -36px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(132, 0, 0, 0.03);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.createIcon {
+  position: relative;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: #f5f5f5;
+  color: #8b0000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.createCard strong,
+.createCard span:not(.createDeco) {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 1280px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+}

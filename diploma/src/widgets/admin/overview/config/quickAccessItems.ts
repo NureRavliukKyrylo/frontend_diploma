@@ -1,0 +1,63 @@
+import { Ban, ChartBar, ClipboardList, Coins, Tag, Users } from "lucide-react";
+import type { QuickAccessItem } from "../model/types";
+
+export const quickAccessItems: QuickAccessItem[] = [
+  {
+    title: "admin:overview.quickAccess.users.title",
+    description: "admin:overview.quickAccess.users.description",
+    href: "/admin/users",
+    icon: Users,
+    tone: "users",
+    footerSource: "users",
+    footerTone: "neutral",
+    footerAction: "admin:overview.quickAccess.users.action",
+  },
+  {
+    title: "admin:overview.quickAccess.bans.title",
+    description: "admin:overview.quickAccess.bans.description",
+    href: "/admin/bans",
+    icon: Ban,
+    tone: "bans",
+    footerSource: "bans",
+    footerTone: "danger",
+    footerAction: "admin:overview.quickAccess.bans.action",
+  },
+  {
+    title: "admin:overview.quickAccess.timeBank.title",
+    description: "admin:overview.quickAccess.timeBank.description",
+    href: "/admin/time-bank",
+    icon: Coins,
+    tone: "timeBank",
+    footerSource: "timeBank",
+    footerTone: "neutral",
+    footerAction: "admin:overview.quickAccess.timeBank.action",
+  },
+  {
+    title: "admin:overview.quickAccess.skills.title",
+    description: "admin:overview.quickAccess.skills.description",
+    href: "/admin/skills",
+    icon: Tag,
+    tone: "skills",
+    footerSource: "skills",
+    footerTone: "neutral",
+    footerAction: "admin:overview.quickAccess.skills.action",
+  },
+  {
+    title: "admin:overview.quickAccess.requests.title",
+    description: "admin:overview.quickAccess.requests.description",
+    href: "/admin/requests",
+    icon: ClipboardList,
+    tone: "requests",
+    footerSource: "requests",
+    footerTone: "warning",
+    footerAction: "admin:overview.quickAccess.requests.action",
+  },
+  {
+    title: "admin:overview.quickAccess.statistics.title",
+    description: "admin:overview.quickAccess.statistics.description",
+    href: "/admin/statistics",
+    icon: ChartBar,
+    tone: "statistics",
+    footerAction: "admin:overview.quickAccess.statistics.action",
+  },
+];

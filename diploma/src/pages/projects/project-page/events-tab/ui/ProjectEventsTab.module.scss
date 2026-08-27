@@ -1,0 +1,63 @@
+@use "@shared/assets/styles" as *;
+
+.eventsProjectList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(430px, 1fr));
+  justify-content: center;
+  gap: 40px;
+  align-items: stretch;
+  width: 100%;
+
+  @include respond-to(laptop) {
+    gap: 24px;
+  }
+  @include respond-to(tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 16px;
+  }
+  @include respond-to(mobile) {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.eventCardMotion {
+  cursor: pointer;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 4;
+}
+
+.eventsPaginationWrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+
+  @include respond-to(mobile) {
+    gap: 20px;
+  }
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 300px;
+
+  h2 {
+    @include font-base(30px, 800);
+    color: rgba(0, 0, 0, 0.7);
+
+    @include respond-to(tablet) {
+      font-size: 24px;
+    }
+    @include respond-to(mobile) {
+      font-size: 20px;
+    }
+  }
+}

@@ -1,0 +1,106 @@
+@use "@shared/assets/styles" as *;
+
+.wrapperUpdateSkillInfo {
+  padding: 80px 30px 30px 30px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  .skillImageWrapper {
+    width: 135px;
+    height: 135px;
+    border-radius: 50%;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    img {
+      border-radius: 50%;
+    }
+  }
+  .updateSkillForm {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    .topContentWrapper {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      .headerUpdateSkillModal {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        h1 {
+          @include font-base(30px, 800);
+          text-transform: uppercase;
+        }
+        p {
+          @include font-base(22px, 300);
+          text-align: center;
+          color: #373737;
+          max-width: 90%;
+        }
+      }
+      .modalDivider {
+        width: 60%;
+        height: 1px;
+        background: rgb(58 58 58 / 52%);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .skillsLevelsListWrapper {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        gap: 15px;
+        flex-wrap: wrap;
+        align-items: center;
+        flex: 1;
+
+        .levelTab {
+          box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+          border-radius: 20px;
+          padding: 5px 30px;
+          @include font-base(16px, 500);
+          color: #3f3f3f;
+          display: flex;
+          text-transform: uppercase;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          border: 1px solid transparent;
+          transition:
+            box-shadow 0.2s ease,
+            border 0.2s ease,
+            color 0.2s ease;
+          &.active {
+            border: 1px solid rgba(140, 0, 0, 0.25);
+            box-shadow: 0px 2px 10px rgba(140, 0, 0, 0.25);
+            border-radius: 20px;
+            color: #8c0000;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+    .updateSkillButton {
+      background: #1a1a2e;
+      color: #ffffff;
+      border-radius: 30px;
+      letter-spacing: 1.5px;
+      @include font-base(18px, 700);
+      text-transform: uppercase;
+      width: fit-content;
+      .btn {
+        width: 100%;
+        padding: 12px 40px;
+      }
+    }
+  }
+}

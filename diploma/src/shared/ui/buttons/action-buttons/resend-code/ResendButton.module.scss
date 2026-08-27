@@ -1,0 +1,91 @@
+@use "@shared/assets/styles" as *;
+@use "@shared/assets/styles" as breakpoint;
+
+.wrapperResendCode {
+  margin-bottom: 10px;
+}
+.resendButton {
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+
+  &.active {
+    color: #378bec;
+    @include font-base(15px, 500);
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &.disabled {
+    @include font-base(15px, 700);
+    color: rgba(0, 0, 0, 0.7);
+    cursor: default;
+    text-decoration: none;
+    span {
+      color: #9ca3af;
+      @include font-base(15px, 500);
+    }
+  }
+  &.loading {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &.profile {
+    &.active {
+      color: #000000;
+      @include font-base(18px, 500);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    &.disabled {
+      color: #595959;
+      @include font-base(18px, 700);
+    }
+    span {
+      @include font-base(18px, 500);
+    }
+  }
+}
+@include breakpoint.respond-to(tablet) {
+  .wrapperResendCode {
+    margin-bottom: 7px;
+  }
+  .resendButton {
+    &.active {
+      @include font-base(14px, 500);
+    }
+
+    &.disabled {
+      @include font-base(14px, 700);
+
+      span {
+        @include font-base(14px, 500);
+      }
+    }
+  }
+}
+
+@include breakpoint.respond-to(mobile) {
+  .wrapperResendCode {
+    margin-bottom: 5px;
+  }
+  .resendButton {
+    font-size: 0.75rem;
+
+    &.active {
+      @include font-base(12px, 500);
+    }
+
+    &.disabled {
+      @include font-base(12px, 700);
+
+      span {
+        @include font-base(12px, 500);
+      }
+    }
+  }
+}

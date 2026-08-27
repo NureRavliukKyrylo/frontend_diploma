@@ -1,0 +1,103 @@
+@use "@shared/assets/styles" as *;
+@use "@shared/assets/styles" as adaptive;
+
+.toggleContainer {
+  display: flex;
+  background: #d9d9d9;
+  border-radius: 20px;
+  padding: 3px;
+  width: fit-content;
+
+  @include adaptive.respond-to(mobile) {
+    border-radius: 16px;
+    padding: 2px;
+  }
+
+  @include adaptive.respond-to(tablet) {
+    border-radius: 18px;
+    padding: 2.5px;
+  }
+
+  @include adaptive.respond-to(laptop) {
+    border-radius: 20px;
+    padding: 3px;
+  }
+}
+
+.pill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  z-index: 0;
+  pointer-events: none;
+
+  @include adaptive.respond-to(mobile) {
+    top: 2px;
+    bottom: 2px;
+    border-radius: 16px;
+  }
+
+  @include adaptive.respond-to(tablet) {
+    top: 2.5px;
+    bottom: 2.5px;
+    border-radius: 18px;
+  }
+
+  @include adaptive.respond-to(laptop) {
+    top: 3px;
+    bottom: 3px;
+    border-radius: 20px;
+  }
+}
+.innerToggleWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+.toggleButton {
+  position: relative;
+  z-index: 1;
+  border: none;
+  background: transparent;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  @include font-base(18px, 500);
+  color: rgba(0, 0, 0, 0.5);
+  transition: color 0.2s ease;
+
+  @include adaptive.respond-to(mobile) {
+    padding: 6px 14px;
+    @include font-base(14px, 500);
+  }
+
+  @include adaptive.respond-to(tablet) {
+    padding: 7px 16px;
+    @include font-base(16px, 500);
+  }
+
+  @include adaptive.respond-to(laptop) {
+    padding: 8px 20px;
+    @include font-base(18px, 500);
+  }
+}
+
+.active {
+  color: #000;
+  @include font-base(18px, 600);
+
+  @include adaptive.respond-to(mobile) {
+    @include font-base(14px, 600);
+  }
+
+  @include adaptive.respond-to(tablet) {
+    @include font-base(16px, 600);
+  }
+
+  @include adaptive.respond-to(laptop) {
+    @include font-base(18px, 600);
+  }
+}

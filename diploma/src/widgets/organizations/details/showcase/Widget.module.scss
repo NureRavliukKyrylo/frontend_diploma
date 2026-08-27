@@ -1,0 +1,125 @@
+@use "@shared/assets/styles" as *;
+
+.section {
+  position: relative;
+  overflow: hidden;
+  border-radius: 46px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.985) 0%, rgba(248, 245, 245, 0.968) 100%);
+  box-shadow:
+    0 28px 64px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+  padding: 42px 40px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -112px;
+    width: 760px;
+    height: 260px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(140, 0, 0, 0.08) 0%, rgba(140, 0, 0, 0) 72%);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 16% 10%, rgba(255, 255, 255, 0.84) 0%, rgba(255, 255, 255, 0) 28%),
+      radial-gradient(circle at 86% 16%, rgba(140, 0, 0, 0.035) 0%, rgba(140, 0, 0, 0) 26%);
+    pointer-events: none;
+  }
+}
+
+.emptySection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0 6px;
+}
+
+.emptyContent {
+  min-height: 340px;
+}
+
+.sectionTitle {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1600px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 42px;
+  align-items: center;
+  padding: 2px 56px 0;
+
+  h2 {
+    @include font-base(60px, 900);
+    line-height: 0.92;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.015em;
+    color: #090909;
+  }
+}
+
+.line {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.28) 18%, rgba(0, 0, 0, 0.28) 82%, rgba(0, 0, 0, 0.02) 100%);
+}
+
+@include respond-to(custom, 1260px) {
+  .sectionTitle {
+    gap: 28px;
+    padding-left: 0;
+    padding-right: 0;
+
+    h2 {
+      @include font-base(50px, 900);
+    }
+  }
+}
+
+@include respond-to(custom, 980px) {
+  .section {
+    padding: 30px 20px 34px;
+    border-radius: 34px;
+    gap: 28px;
+  }
+
+  .emptyContent {
+    min-height: 280px;
+  }
+
+  .sectionTitle h2 {
+    @include font-base(40px, 900);
+  }
+}
+
+@include respond-to(mobile) {
+  .section {
+    padding: 24px 16px 28px;
+    border-radius: 30px;
+  }
+
+  .emptySection {
+    padding-top: 8px;
+  }
+
+  .emptyContent {
+    min-height: 220px;
+  }
+
+  .sectionTitle {
+    gap: 12px;
+
+    h2 {
+      @include font-base(34px, 900);
+    }
+  }
+}

@@ -1,0 +1,553 @@
+@use "@shared/assets/styles" as *;
+
+.overviewWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include respond-to(tablet) {
+    gap: 16px;
+  }
+  @include respond-to(mobile) {
+    gap: 12px;
+  }
+
+  .topRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    @include respond-to(tablet) {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @include respond-to(mobile) {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+  }
+
+  .balanceCard {
+    background: linear-gradient(145deg, #1a1a1a 0%, #2c0000 60%, #1a1a1a 100%);
+    border-radius: 20px;
+    padding: 30px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(
+        circle,
+        rgba(140, 0, 0, 0.35) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    @include respond-to(laptop) {
+      padding: 24px 28px;
+      gap: 14px;
+    }
+    @include respond-to(tablet) {
+      padding: 20px 22px;
+    }
+    @include respond-to(mobile) {
+      padding: 16px 18px;
+      gap: 12px;
+    }
+
+    .balanceLabel {
+      @include font-base(12px, 600);
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.5);
+      text-transform: uppercase;
+    }
+
+    .balanceAmount {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      line-height: 1;
+
+      h1 {
+        @include font-base(80px, 900);
+        line-height: 1;
+        color: #ffffff;
+
+        @include respond-to(laptop) {
+          font-size: 64px;
+        }
+        @include respond-to(tablet) {
+          font-size: 56px;
+        }
+        @include respond-to(mobile) {
+          font-size: 48px;
+        }
+      }
+
+      .unit {
+        @include font-base(36px, 700);
+        color: rgba(255, 255, 255, 0.7);
+
+        @include respond-to(mobile) {
+          font-size: 28px;
+        }
+      }
+    }
+
+    .balanceMinutes {
+      @include font-base(14px, 400);
+      color: rgba(255, 255, 255, 0.45);
+
+      @include respond-to(mobile) {
+        font-size: 12px;
+      }
+    }
+
+    .balanceStats {
+      display: flex;
+      gap: 30px;
+
+      @include respond-to(laptop) {
+        gap: 20px;
+      }
+      @include respond-to(mobile) {
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .statItem {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        .statValue {
+          @include font-base(22px, 700);
+          color: #ffffff;
+
+          @include respond-to(laptop) {
+            font-size: 18px;
+          }
+          @include respond-to(mobile) {
+            font-size: 16px;
+          }
+        }
+
+        .statLabel {
+          @include font-base(12px, 400);
+          color: rgba(255, 255, 255, 0.4);
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .levelProgressBlock {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      .levelProgressHeader {
+        display: flex;
+        justify-content: space-between;
+        @include font-base(13px, 500);
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .progressBar {
+        :global(.barContainer) {
+          background: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+  }
+
+  .levelCard {
+    background: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.12);
+    border-radius: 20px;
+    padding: 30px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @include respond-to(laptop) {
+      padding: 24px 28px;
+      gap: 20px;
+    }
+    @include respond-to(tablet) {
+      padding: 20px 22px;
+      gap: 16px;
+    }
+    @include respond-to(mobile) {
+      padding: 16px 18px;
+      gap: 14px;
+    }
+
+    .levelCardTop {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      .currentLevelBadge {
+        display: flex;
+        gap: 2px;
+        background: rgba(140, 0, 0, 0.08);
+        border-radius: 12px;
+        padding: 12px 16px;
+        gap: 20px;
+        border: 1px solid #c49292;
+
+        .badgeWrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: #7f0d0d;
+          padding: 10px 15px;
+          border-radius: 15px;
+          svg {
+            width: 20px;
+            height: 20px;
+            color: white;
+          }
+          @include respond-to(mobile) {
+            padding: 10px;
+          }
+        }
+        .levelInfo {
+          display: flex;
+          flex-direction: column;
+          .currentLevelTitle {
+            @include font-base(18px, 800);
+            color: #8c0000;
+
+            @include respond-to(mobile) {
+              font-size: 15px;
+            }
+          }
+
+          .currentLevelSub {
+            @include font-base(12px, 400);
+            color: rgba(0, 0, 0, 0.4);
+          }
+        }
+      }
+
+      .lvlBadge {
+        @include font-base(13px, 700);
+        color: rgba(0, 0, 0, 0.35);
+        letter-spacing: 0.05em;
+      }
+    }
+
+    .progressToNext {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .progressToNextHeader {
+        display: flex;
+        justify-content: space-between;
+        @include font-base(14px, 600);
+        color: rgba(0, 0, 0, 0.6);
+        .nextLevelProgress {
+          color: black;
+          font-weight: 800;
+        }
+
+        @include respond-to(mobile) {
+          font-size: 12px;
+        }
+      }
+
+      .nextLevelHint {
+        @include font-base(13px, 500);
+        color: rgba(0, 0, 0, 0.5);
+
+        strong {
+          color: #8c0000;
+          font-weight: 700;
+        }
+
+        @include respond-to(mobile) {
+          font-size: 12px;
+        }
+      }
+    }
+
+    .monthStats {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 1px solid rgba(0, 0, 0, 0.07);
+      padding-top: 16px;
+
+      @include respond-to(mobile) {
+        gap: 8px;
+        padding-top: 12px;
+      }
+
+      .monthRow {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @include font-base(15px, 500);
+        color: rgba(0, 0, 0, 0.6);
+
+        @include respond-to(mobile) {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  .statsRow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+
+    @include respond-to(laptop) {
+      gap: 12px;
+    }
+    @include respond-to(tablet) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    @include respond-to(mobile) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .statCard {
+      background: #ffffff;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      @include respond-to(laptop) {
+        padding: 16px 18px;
+      }
+      @include respond-to(mobile) {
+        padding: 14px 16px;
+        gap: 4px;
+      }
+
+      .statCardLabel {
+        @include font-base(11px, 600);
+        letter-spacing: 0.08em;
+        color: rgba(0, 0, 0, 0.4);
+        text-transform: uppercase;
+      }
+
+      .statCardValue {
+        display: flex;
+        align-items: flex-end;
+        gap: 3px;
+
+        h2 {
+          @include font-base(36px, 900);
+          color: #1a1a1a;
+          line-height: 1;
+
+          @include respond-to(laptop) {
+            font-size: 30px;
+          }
+          @include respond-to(tablet) {
+            font-size: 28px;
+          }
+          @include respond-to(mobile) {
+            font-size: 24px;
+          }
+        }
+
+        .statCardUnit {
+          @include font-base(18px, 700);
+          color: rgba(0, 0, 0, 0.4);
+        }
+      }
+
+      .statCardDelta {
+        @include font-base(13px, 600);
+
+        @include respond-to(mobile) {
+          font-size: 11px;
+        }
+      }
+    }
+  }
+
+  .transactionsCard {
+    background: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 30px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    @include respond-to(laptop) {
+      padding: 24px 28px;
+    }
+    @include respond-to(tablet) {
+      padding: 20px 22px;
+      gap: 16px;
+    }
+    @include respond-to(mobile) {
+      padding: 16px 18px;
+      gap: 14px;
+    }
+
+    .transactionsHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h2 {
+        @include font-base(20px, 800);
+        color: #1a1a1a;
+
+        @include respond-to(mobile) {
+          font-size: 17px;
+        }
+      }
+
+      .viewAll {
+        @include font-base(18px, 800);
+        color: #8c0000;
+        white-space: nowrap;
+        svg {
+          width: 15px;
+          height: 15px;
+        }
+        @include respond-to(mobile) {
+          font-size: 13px;
+        }
+      }
+    }
+
+    .transactionsList {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+  }
+
+  .positive {
+    color: #16a34a;
+    font-weight: 700;
+  }
+
+  .negative {
+    color: #8c0000;
+    font-weight: 700;
+  }
+
+  .highlight {
+    color: #d97706;
+    font-weight: 700;
+  }
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+
+  h2 {
+    @include font-base(30px, 900);
+    line-height: 120%;
+    color: #1a1a2e;
+    text-align: center;
+
+    @include respond-to(laptop) {
+      font-size: 25x;
+    }
+    @include respond-to(tablet) {
+      font-size: 20px;
+    }
+    @include respond-to(mobile) {
+      font-size: 18px;
+    }
+  }
+
+  p {
+    @include font-base(20px, 500);
+    color: #6b7280;
+    text-align: center;
+
+    @include respond-to(laptop) {
+      font-size: 18px;
+    }
+    @include respond-to(tablet) {
+      font-size: 15px;
+    }
+    @include respond-to(mobile) {
+      font-size: 14px;
+    }
+  }
+}
+
+.skeletonBalanceCard {
+  height: 320px;
+  border-radius: 20px;
+
+  @include respond-to(laptop) {
+    height: 280px;
+  }
+  @include respond-to(tablet) {
+    height: 260px;
+  }
+  @include respond-to(mobile) {
+    height: 220px;
+  }
+}
+
+.skeletonLevelCard {
+  height: 320px;
+  border-radius: 20px;
+
+  @include respond-to(laptop) {
+    height: 280px;
+  }
+  @include respond-to(tablet) {
+    height: 260px;
+  }
+  @include respond-to(mobile) {
+    height: 220px;
+  }
+}
+
+.skeletonStatCard {
+  height: 110px;
+  border-radius: 16px;
+
+  @include respond-to(laptop) {
+    height: 95px;
+  }
+  @include respond-to(mobile) {
+    height: 85px;
+  }
+}
+
+.skeletonTransactionsCard {
+  height: 400px;
+  border-radius: 20px;
+
+  @include respond-to(tablet) {
+    height: 320px;
+  }
+  @include respond-to(mobile) {
+    height: 260px;
+  }
+}

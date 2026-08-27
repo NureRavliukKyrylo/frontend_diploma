@@ -1,0 +1,378 @@
+{
+  "units": {
+    "m": "m",
+    "h": "h"
+  },
+  "tabs": {
+    "overview": "Overview",
+    "offers": "Offers",
+    "bookings": "My Booking",
+    "myOffers": "My Offers",
+    "transactions": "Transactions"
+  },
+  "offers": {
+    "labels": {
+      "online": "Online",
+      "offline": "Offline",
+      "reward": "REWARD",
+      "unknown": "unknown"
+    },
+    "actions": {
+      "take": "Take"
+    },
+    "emptyState": {
+      "title": "No offers found",
+      "description": "Try adjusting your search query"
+    },
+    "detail": {
+      "allTime": "All time",
+      "about": "About this offer"
+    }
+  },
+  "offerPage": {
+    "chips": {
+      "offer": "Offer",
+      "online": "Online",
+      "offline": "Offline",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "blocks": {
+      "pendingText": "You already have a pending request for this offer.",
+      "skillsTitle": "Offer Skills",
+      "locationTitle": "Offer",
+      "locationSubtitle": "Location"
+    },
+    "map": {
+      "popupLabel": "📍 Offer location"
+    }
+  },
+  "myOfferPage": {
+    "chips": {
+      "myOffer": "My Offer",
+      "online": "Online",
+      "offline": "Offline",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "tabs": {
+      "overview": "OVERVIEW",
+      "bookings": "BOOKINGS"
+    },
+    "overview": {
+      "skillsTitle": "Offer Skills",
+      "locationTitle": "Offer",
+      "locationSubtitle": "Location",
+      "popupLabel": "📍 Offer location"
+    },
+    "bookings": {
+      "title": "Bookings",
+      "errorHint": "Try reloading the page or come back later.",
+      "emptyTitle": "No bookings yet",
+      "emptyText": "Wait for the first booking to your offer"
+    }
+  },
+  "bookings": {
+    "title": "MY BOOKINGS",
+    "labels": {
+      "booked": "Booked",
+      "reason": "Reason",
+      "rejectTitle": "Reject booking",
+      "reasonPlaceholder": "Provide a reason for rejection...",
+      "completeTitle": "Complete booking",
+      "completeDescription": "Are you sure you want to mark this booking as complete? This action cannot be undone.",
+      "cancelTitle": "Cancel booking",
+      "comment": "Comment",
+      "cancelPlaceholder": "Provide a reason for cancellation...",
+      "requestTitle": "Request to book — {{offerName}}",
+      "requestPlaceholder": "Leave a comment...",
+      "reject": "Reject",
+      "complete": "Complete",
+      "cancel": "Cancel",
+      "cancelBooking": "Cancel booking",
+      "sendRequest": "Send request",
+      "bookNow": "Book now",
+      "approve": "Approve",
+      "back": "Back",
+      "disputeTitle": "Dispute booking",
+      "disputeBooking": "Dispute booking",
+      "dispute": "Dispute",
+      "disputePlaceholder": "Explain why you're disputing this booking...",
+      "acceptOfferChangeTitle": "Accept offer change",
+      "rejectOfferChangeTitle": "Reject offer change",
+      "acceptOfferChangePlaceholder": "Add an optional note...",
+      "rejectOfferChangePlaceholder": "Explain why you're rejecting this change..."
+    },
+    "status": {
+      "inProgress": "In progress",
+      "pending": "Pending",
+      "completed": "Completed",
+      "reserved": "Reserved",
+      "cancelled": "Cancelled",
+      "disputed": "Disputed",
+      "completionRequested": "Completion Request"
+    },
+    "emptyState": {
+      "title": "No bookings found",
+      "description": "Try adjusting your search query"
+    },
+    "bottomContent": {
+      "pending": "Your booking is awaiting confirmation.",
+      "scheduledAt": "This offer is scheduled at",
+      "onlineFinish": "When you finish, mark the booking as completed.",
+      "completionRequested": "Waiting for the organizer to confirm completion.",
+      "completed": "You've successfully completed this offer.",
+      "cancelled": "This booking has been cancelled.",
+      "disputed": "This booking is under dispute and is being reviewed."
+    },
+    "actions": {
+      "rejectName": "rejecting the booking",
+      "completeName": "completing the booking",
+      "cancelName": "cancelling the booking",
+      "sendName": "sending the booking request",
+      "approveName": "approving the booking",
+      "disputeName": "disputing the booking",
+      "offerChangeAcceptName": "accepting the offer change",
+      "offerChangeRejectName": "rejecting the offer change"
+    },
+    "validation": {
+      "reasonMax": "Reason must be at most 100 characters",
+      "reasonRequired": "Reason is required",
+      "commentMax": "Comment must be at most {{max}} characters",
+      "commentRequired": "Comment is required"
+    },
+    "toasts": {
+      "rejectSuccessTitle": "Booking rejected",
+      "rejectSuccessDesc": "The booking has been rejected",
+      "completeSuccessTitle": "Booking completed",
+      "completeSuccessDesc": "The booking has been marked as complete",
+      "cancelSuccessTitle": "Booking cancelled",
+      "cancelSuccessDesc": "The booking has been cancelled",
+      "sendSuccessTitle": "Booking sent",
+      "sendSuccessDesc": "Your booking request has been sent",
+      "approveSuccessTitle": "Booking approved",
+      "approveSuccessDesc": "The booking has been approved",
+      "disputeSuccessTitle": "Dispute submitted",
+      "disputeSuccessDesc": "Your dispute has been submitted and will be reviewed.",
+      "offerChangeAcceptSuccessTitle": "Offer change accepted",
+      "offerChangeAcceptSuccessDesc": "The updated offer terms have been accepted.",
+      "offerChangeRejectSuccessTitle": "Offer change rejected",
+      "offerChangeRejectSuccessDesc": "The updated offer terms have been rejected."
+    }
+  },
+  "myOffers": {
+    "title": "MY OFFERS",
+    "labels": {
+      "cost": "cost",
+      "bookingsCount": "bookings"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "activeItem": "Active",
+      "inactiveItem": "Inactive",
+      "totalBookings": "Total bookings"
+    },
+    "manageText": "Manage your offer settings and availability.",
+    "inactiveText": "This offer is inactive and not visible to others",
+    "emptyState": {
+      "title": "No offers found",
+      "description": "Try adjusting your search query"
+    }
+  },
+  "overview": {
+    "balance": {
+      "label": "Your balance",
+      "minutes": "{{count}} m",
+      "reserved": "Reserved",
+      "available": "Available",
+      "lifetimeEarned": "Lifetime Earned",
+      "lifetimeSpent": "Lifetime Spent"
+    },
+    "level": {
+      "title": "Current level",
+      "progress": "Progress to {{name}}",
+      "progressGeneric": "Progress to next level",
+      "hint": "Next: {{name}} - {{remaining}}m to go",
+      "badgeLabel": "LVL {{order}}"
+    },
+    "monthly": {
+      "earned": "This month earned",
+      "spent": "This month spent",
+      "reservations": "Active reservations"
+    },
+    "cards": {
+      "lifetimeEarned": "LIFETIME EARNED",
+      "lifetimeSpent": "LIFETIME SPENT",
+      "giftedIn": "GIFTED IN",
+      "giftedOut": "GIFTED OUT",
+      "monthDeltaPositive": "+{{count}}m this month",
+      "monthDeltaNegative": "-{{count}}m this month"
+    },
+    "transactions": {
+      "title": "Recent Transactions",
+      "viewAll": "View all",
+      "empty": "No transactions yet",
+      "emptyDescription": "Your time bank activity will appear here"
+    }
+  },
+  "transactions": {
+    "sidebar": {
+      "title": "MY BALANCE",
+      "stats": {
+        "month": "This month",
+        "reserved": "Reserved",
+        "lifetime": "Lifetime"
+      }
+    },
+    "emptyState": {
+      "title": "No transactions found",
+      "description": "Try adjusting your filters"
+    },
+    "labels": {
+      "balanceAfter": "Balance"
+    },
+    "filter": {
+      "sections": {
+        "dateRange": "Date range",
+        "type": "Transaction type",
+        "source": "Source type"
+      },
+      "labels": {
+        "type": "Type",
+        "source": "Source"
+      },
+      "actions": {
+        "clear": "Clear Filters"
+      },
+      "options": {
+        "type": {
+          "all": "All types"
+        },
+        "source": {
+          "all": "All sources"
+        }
+      }
+    },
+    "types": {
+      "earn": "Earned Time",
+      "spend": "Spent Time",
+      "reservation": "Reserved Time",
+      "reservationRelease": "Reservation Release",
+      "adminAdjustmentPlus": "Admin Bonus",
+      "adminAdjustmentMinus": "Admin Correction",
+      "giftIn": "Gift Received",
+      "giftOut": "Gift Sent"
+    },
+    "sources": {
+      "eventAttendance": "Event attendance",
+      "priorityReservation": "Priority reservation",
+      "adminAdjustment": "Admin adjustment",
+      "gift": "Gift",
+      "timeSpend": "Time spend"
+    }
+  },
+  "errors": {
+    "hint": "Try reloading the page or come back later."
+  },
+  "forms": {
+    "steps": {
+      "overview": "Overview",
+      "location": "Location",
+      "categories": "Categories",
+      "skills": "Skills"
+    },
+    "labels": {
+      "title": "Title",
+      "description": "Description",
+      "reward": "Reward (minutes)",
+      "dateRange": "Date range",
+      "setOnline": "Set online",
+      "mapHint": "Click on the map to set the offer location",
+      "offerLocationPopup": "📍 Offer location"
+    },
+    "actions": {
+      "edit": "Edit",
+      "createNewOffer": "Create new offer",
+      "editOffer": "Edit Offer",
+      "createOffer": "Create Offer",
+      "back": "Back",
+      "next": "Next",
+      "submit": "Submit"
+    },
+    "states": {
+      "failedSkills": "Failed to load skills",
+      "emptySkills": "No skills found",
+      "failedCategories": "Failed to load categories",
+      "emptyCategories": "No categories found"
+    }
+  },
+  "validation": {
+    "titleRequired": "Title is required",
+    "titleMax": "Max 30 characters",
+    "descriptionRequired": "Description is required",
+    "descriptionMax": "Max 150 characters",
+    "priceTypeError": "Must be a number",
+    "priceNegative": "Price can't be negative",
+    "priceRequired": "Price is required",
+    "startDateRequired": "Start date is required",
+    "startDateInPast": "Start date cannot be in the past",
+    "endDateRequired": "End date is required",
+    "minOneSkill": "Select at least one skill",
+    "minOneCategory": "Select at least one category",
+    "locationRequired": "Please pick a location on the map"
+  },
+  "toasts": {
+    "create": {
+      "action": "creating the offer",
+      "successTitle": "Offer Created",
+      "successDescription": "Your offer has been successfully published to the marketplace."
+    },
+    "update": {
+      "action": "updating the offer",
+      "successTitle": "Offer Updated",
+      "successDescription": "All your changes have been successfully saved."
+    }
+  },
+  "gifts": {
+    "labels": {
+      "giftMinutes": "Gift minutes",
+      "amount": "Amount",
+      "minutesPlaceholder": "minutes",
+      "message": "Message",
+      "messagePlaceholder": "Add a personal note..."
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "sendGift": "Send gift",
+      "actionName": "gifting minutes"
+    },
+    "validation": {
+      "amountTypeError": "Amount must be a number",
+      "amountPositive": "Amount must be positive",
+      "amountInteger": "Amount must be a whole number",
+      "amountRequired": "Amount is required",
+      "messageMax": "Message must be at most 70 characters",
+      "messageRequired": "Message is required"
+    },
+    "toasts": {
+      "successTitle": "Gift sent",
+      "successDescription": "Minutes have been gifted successfully"
+    }
+  },
+  "deactivateOffer": {
+    "labels": {
+      "title": "Deactivate offer",
+      "description": "Are you sure you want to deactivate this offer? It will no longer be visible to other users."
+    },
+    "actions": {
+      "confirm": "Deactivate",
+      "cancel": "Cancel",
+      "actionName": "deactivating the offer"
+    },
+    "toasts": {
+      "successTitle": "Offer deactivated",
+      "successDescription": "The offer has been deactivated"
+    }
+  }
+}

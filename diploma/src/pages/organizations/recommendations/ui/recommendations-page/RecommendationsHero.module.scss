@@ -1,0 +1,160 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 24px;
+  border: 1px solid #ebebeb;
+  border-radius: 27px 18px 27px 18px;
+  background: #ffffff;
+  padding: 32px 36px;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+.blobPrimary,
+.blobSecondary {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.blobPrimary {
+  width: 260px;
+  height: 260px;
+  top: -170px;
+  right: 8%;
+  background: rgba(139, 0, 0, 0.04);
+}
+
+.blobSecondary {
+  width: 210px;
+  height: 210px;
+  bottom: -150px;
+  left: 30%;
+  background: rgba(0, 0, 0, 0.025);
+}
+
+.copy {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+
+  h1 {
+    margin: 7px 0 8px;
+    color: #1a1a1a;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.18;
+  }
+
+  p {
+    margin: 0;
+    color: #999999;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #b3b3b3;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eyebrowLine {
+  width: 28px;
+  height: 2px;
+  border-radius: 999px;
+  background: #d8d8d8;
+}
+
+.stats {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #eeeeee;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.86);
+  padding: 10px 12px;
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.statPill {
+  min-width: 68px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 10px;
+  border-left: 1px solid #eeeeee;
+}
+
+.statValue,
+.statValueAccent {
+  color: #1a1a1a;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.statValueAccent {
+  color: #8b0000;
+}
+
+.statLabel {
+  margin-top: 4px;
+  color: #aaaaaa;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.zap {
+  color: #8b0000;
+}
+
+@media (max-width: 1100px) {
+  .hero {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero {
+    padding: 26px 22px;
+  }
+
+  .copy h1 {
+    font-size: 24px;
+  }
+
+  .stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .stats > svg {
+    display: none;
+  }
+
+  .statPill {
+    flex: 1;
+  }
+}

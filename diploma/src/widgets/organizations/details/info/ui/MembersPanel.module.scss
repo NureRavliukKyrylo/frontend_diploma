@@ -1,0 +1,385 @@
+@use "@shared/assets/styles" as *;
+
+.membersPanel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(162, 18, 18, 0.045) 0%, transparent 24%),
+    radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.96) 0%, transparent 22%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.998) 0%, rgba(252, 250, 247, 0.99) 100%);
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.08),
+    0 28px 60px rgba(0, 0, 0, 0.06);
+  padding: 68px 57px 120px;
+}
+
+.membersDirectoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 282px), 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.membersDirectoryCard {
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 282 / 215;
+  min-height: 0;
+  padding: 0;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: linear-gradient(180deg, #ffffff 0%, #fbf9f6 100%);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.12),
+    0 3px 10px rgba(0, 0, 0, 0.04);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+
+  &:hover {
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow:
+      0 16px 30px rgba(0, 0, 0, 0.14),
+      0 5px 12px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.membersDirectoryIntro {
+  min-height: 215px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  justify-self: stretch;
+  position: relative;
+  z-index: 1;
+  padding: 18px 24px;
+  text-align: center;
+}
+
+.membersDirectoryEmpty {
+  grid-column: 1 / -1;
+  min-height: 215px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: linear-gradient(180deg, #ffffff 0%, #fbf9f6 100%);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.12),
+    0 3px 10px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  text-align: center;
+
+  h4 {
+    @include font-base(24px, 800);
+    line-height: 1.1;
+    margin: 0;
+    color: #111111;
+  }
+
+  p {
+    @include font-base(16px, 500);
+    line-height: 1.35;
+    color: rgba(0, 0, 0, 0.58);
+    max-width: 240px;
+    margin: 0;
+    text-wrap: balance;
+  }
+}
+
+.membersDirectoryCardInteractive {
+  cursor: pointer;
+}
+
+.membersDirectoryLink {
+  width: 100%;
+  height: 100%;
+  padding: 20px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+  color: inherit;
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.membersDirectoryCardInteractive:hover .membersDirectoryAvatar,
+.membersDirectoryCardInteractive:focus-within .membersDirectoryAvatar {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.18);
+}
+
+.membersDirectoryCardInteractive:hover .membersDirectoryMenuButton,
+.membersDirectoryCardInteractive:focus-within .membersDirectoryMenuButton {
+  transform: translateX(1px);
+}
+
+.membersDirectoryCardInteractive:focus-within {
+  border-color: rgba(162, 18, 18, 0.18);
+  box-shadow:
+    0 16px 30px rgba(0, 0, 0, 0.14),
+    0 5px 12px rgba(0, 0, 0, 0.05),
+    0 0 0 3px rgba(162, 18, 18, 0.08);
+}
+
+.membersDirectoryIntroCopy {
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #111111;
+  margin: 0 auto;
+
+  h3 {
+    @include font-base(32px, 900);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+    margin: 0;
+    color: #111111;
+  }
+
+  p {
+    @include font-base(17px, 500);
+    line-height: 1.18;
+    color: rgba(0, 0, 0, 0.68);
+    max-width: 320px;
+    text-wrap: balance;
+    margin: 0;
+  }
+}
+
+.membersDirectoryActions {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+}
+
+.membersDirectoryMenuButton {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow:
+    0 10px 18px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.92);
+  opacity: 0.98;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+
+  &:hover {
+    background: #fff7f7;
+    border-color: rgba(162, 18, 18, 0.18);
+    box-shadow:
+      0 12px 20px rgba(0, 0, 0, 0.12),
+      0 4px 8px rgba(162, 18, 18, 0.08);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: rgba(162, 18, 18, 0.22);
+    box-shadow:
+      0 12px 20px rgba(0, 0, 0, 0.12),
+      0 4px 8px rgba(162, 18, 18, 0.08),
+      0 0 0 3px rgba(162, 18, 18, 0.12);
+  }
+}
+
+.membersDirectoryDropdownItem {
+  border-radius: 12px;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+  cursor: pointer;
+
+  &:hover,
+  &[data-hover="true"],
+  &[data-selected="true"] {
+    background: #fff3f3;
+    transform: translateX(2px);
+
+    .membersDirectoryDropdownTitle {
+      color: #a21212;
+    }
+  }
+}
+
+.membersDirectoryDropdownTitle {
+  @include font-base(14px, 700);
+  color: #232323;
+  transition: color 160ms ease;
+}
+
+.membersDirectoryAvatar {
+  width: 126px !important;
+  height: 126px !important;
+  margin-top: 0;
+  border: 2px solid rgba(17, 17, 17, 0.62);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.14);
+  background: #f7f5f2;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.membersDirectoryInitials {
+  @include font-base(28px, 800);
+}
+
+.membersDirectoryMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  max-width: 100%;
+  margin-top: 0;
+
+  h4 {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    @include font-base(22px, 800);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  p {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    @include font-base(16px, 500);
+    line-height: 1.08;
+    color: rgba(0, 0, 0, 0.72);
+    margin: 0;
+  }
+}
+
+@include respond-to(custom, 1380px) {
+  .membersDirectoryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .membersDirectoryIntro {
+    grid-column: 1 / -1;
+    aspect-ratio: auto;
+    min-height: auto;
+    padding: 8px 6px 14px;
+  }
+
+  .membersDirectoryEmpty {
+    grid-column: 1 / -1;
+  }
+}
+
+@include respond-to(custom, 920px) {
+  .membersPanel {
+    padding: 26px 24px 30px;
+  }
+
+  .membersDirectoryGrid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .membersDirectoryCard {
+    min-height: 220px;
+    aspect-ratio: auto;
+  }
+
+  .membersDirectoryEmpty {
+    min-height: 220px;
+  }
+
+  .membersDirectoryLink {
+    padding: 18px 20px 22px;
+  }
+
+  .membersDirectoryIntro {
+    padding: 8px 6px 10px;
+  }
+
+  .membersDirectoryIntroCopy h3 {
+    @include font-base(30px, 900);
+  }
+
+  .membersDirectoryAvatar {
+    width: 114px !important;
+    height: 114px !important;
+  }
+}
+
+@include respond-to(mobile) {
+  .membersPanel {
+    padding: 20px 16px 24px;
+    border-radius: 26px;
+  }
+
+  .membersDirectoryCard {
+    min-height: 204px;
+    border-radius: 22px;
+    aspect-ratio: auto;
+  }
+
+  .membersDirectoryEmpty {
+    min-height: 204px;
+    border-radius: 22px;
+  }
+
+  .membersDirectoryLink {
+    padding: 16px 18px 20px;
+    gap: 16px;
+  }
+
+  .membersDirectoryIntro {
+    padding: 6px 0 8px;
+  }
+
+  .membersDirectoryIntroCopy h3 {
+    @include font-base(28px, 900);
+  }
+
+  .membersDirectoryIntroCopy p {
+    @include font-base(16px, 500);
+  }
+
+  .membersDirectoryAvatar {
+    width: 102px !important;
+    height: 102px !important;
+  }
+
+  .membersDirectoryMeta h4 {
+    @include font-base(20px, 800);
+  }
+
+  .membersDirectoryMeta p {
+    @include font-base(15px, 500);
+  }
+}

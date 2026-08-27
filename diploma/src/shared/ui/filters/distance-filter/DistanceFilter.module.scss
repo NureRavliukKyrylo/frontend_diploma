@@ -1,0 +1,225 @@
+@use "@shared/assets/styles" as *;
+
+.locationSuggestionsWrapper {
+  .locationWrapper {
+    background: #f0f0f0;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 40px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    &.open {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px 10px 0 0;
+    }
+
+    @include respond-to(mobile) {
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .locationInputWrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+
+      @include respond-to(laptop) {
+        gap: 8px;
+      }
+      @include respond-to(tablet) {
+        gap: 6px;
+      }
+      @include respond-to(mobile) {
+        gap: 6px;
+      }
+
+      .mapIcon svg {
+        width: 22px;
+        height: 22px;
+        flex-shrink: 0;
+
+        @include respond-to(laptop) {
+          width: 20px;
+          height: 20px;
+        }
+        @include respond-to(tablet) {
+          width: 18px;
+          height: 18px;
+        }
+        @include respond-to(mobile) {
+          width: 16px;
+          height: 16px;
+        }
+      }
+
+      .locationInput {
+        @include font-base(18px, 500);
+        color: #000;
+        outline: none;
+        width: 100%;
+        min-width: 0;
+        &::placeholder {
+          @include font-base(18px, 500);
+        }
+
+        @include respond-to(laptop) {
+          font-size: 16px;
+          &::placeholder {
+            font-size: 16px;
+          }
+        }
+        @include respond-to(tablet) {
+          font-size: 15px;
+          &::placeholder {
+            font-size: 15px;
+          }
+        }
+        @include respond-to(mobile) {
+          font-size: 14px;
+          &::placeholder {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+    .radiusInputWrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+
+      @include respond-to(tablet) {
+        gap: 8px;
+      }
+      @include respond-to(mobile) {
+        gap: 6px;
+      }
+
+      .dividerLocationInput {
+        border-left: 1px solid rgba(0, 0, 0, 0.2);
+        transform: scaleX(1.5);
+        height: 20px;
+      }
+
+      .kmInfoRadius {
+        display: flex;
+        align-items: center;
+
+        .radiusPrefix,
+        .radiusSuffix {
+          @include font-base(18px, 700);
+          color: #8c0000;
+          pointer-events: none;
+
+          @include respond-to(laptop) {
+            font-size: 16px;
+          }
+          @include respond-to(tablet) {
+            font-size: 15px;
+          }
+          @include respond-to(mobile) {
+            font-size: 14px;
+          }
+        }
+
+        .radiusInput {
+          outline: none;
+          -moz-appearance: textfield;
+          @include font-base(18px, 700);
+          color: #8c0000;
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+
+          @include respond-to(laptop) {
+            font-size: 16px;
+          }
+          @include respond-to(tablet) {
+            font-size: 15px;
+          }
+          @include respond-to(mobile) {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  .locationDropdown {
+    background: #f0f0f0;
+    border-radius: 0 0 10px 10px;
+    overflow-y: auto;
+    max-height: 200px;
+
+    @include respond-to(laptop) {
+      max-height: 180px;
+    }
+    @include respond-to(tablet) {
+      max-height: 160px;
+    }
+    @include respond-to(mobile) {
+      max-height: 140px;
+    }
+
+    .locationDropdownInfo {
+      @include font-base(15px, 700);
+      padding: 10px;
+
+      @include respond-to(tablet) {
+        font-size: 14px;
+      }
+      @include respond-to(mobile) {
+        font-size: 13px;
+      }
+    }
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 4px;
+    }
+
+    li {
+      @include font-base(15px, 700);
+      color: #000;
+      padding: 10px;
+      cursor: pointer;
+      list-style: none;
+
+      @include respond-to(laptop) {
+        font-size: 14px;
+      }
+      @include respond-to(tablet) {
+        font-size: 14px;
+        padding: 8px 10px;
+      }
+      @include respond-to(mobile) {
+        font-size: 13px;
+        padding: 8px;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+}

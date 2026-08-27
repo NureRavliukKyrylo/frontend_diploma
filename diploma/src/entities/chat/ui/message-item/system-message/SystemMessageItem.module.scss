@@ -1,0 +1,22 @@
+@use "@shared/assets/styles" as *;
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0;
+}
+
+.message {
+  @include font-base(12px, 500);
+  color: $chat-text-muted;
+  font-style: normal;
+  background: $chat-bg-subtle;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+.timestamp {
+  @include font-base(11px, 300);
+  color: #b0b0b0;
+  flex-shrink: 0;
+}

@@ -1,0 +1,93 @@
+@use "@shared/assets/styles" as *;
+
+.skillsProfileWrapperList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include respond-to(tablet) {
+    gap: 16px;
+  }
+  @include respond-to(mobile) {
+    gap: 12px;
+  }
+
+  .totalSkills {
+    @include font-base(20px, 600);
+    align-self: flex-end;
+    color: #626262;
+
+    @include respond-to(laptop) {
+      font-size: 17px;
+    }
+    @include respond-to(tablet) {
+      font-size: 15px;
+    }
+    @include respond-to(mobile) {
+      font-size: 14px;
+    }
+  }
+}
+
+.skillsProfileList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+  gap: 30px;
+  align-items: stretch;
+  grid-template-rows: auto;
+
+  @include respond-to(tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  @include respond-to(mobile) {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.skeletonText {
+  width: 100px;
+  height: 30px;
+  border-radius: 8px;
+  align-self: flex-end;
+
+  @include respond-to(mobile) {
+    width: 76px;
+    height: 24px;
+  }
+}
+
+.profileSkillControlBlock {
+  --card-name-size: 18px;
+  --card-img-size: 90px;
+  --card-gap: 5px;
+
+  @include respond-to(laptop) {
+    --card-name-size: 16px;
+    --card-img-size: 74px;
+  }
+  @include respond-to(tablet) {
+    --card-name-size: 14px;
+    --card-img-size: 62px;
+  }
+  @include respond-to(mobile) {
+    --card-name-size: 13px;
+    --card-img-size: 52px;
+  }
+
+  .skillLevel {
+    @include font-base(17px, 500);
+    color: #535353;
+
+    @include respond-to(laptop) {
+      font-size: 15px;
+    }
+    @include respond-to(tablet) {
+      font-size: 13px;
+    }
+    @include respond-to(mobile) {
+      font-size: 12px;
+    }
+  }
+}

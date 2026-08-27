@@ -1,0 +1,97 @@
+@use "@shared/assets/styles" as *;
+
+$label-color: rgba(0, 0, 0, 0.6);
+
+.mapLocationWrapper {
+  container-type: size;
+  background: #ffffff;
+  height: 100%;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 0px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 38px;
+  color: #323232;
+  gap: 5px;
+  &.profile {
+    .leftMapContent h1 {
+      letter-spacing: 0.01em;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+  &.editProfile {
+    border-radius: 15px;
+    .leftMapContent h1 {
+      letter-spacing: 0.01em;
+      font-weight: 500;
+      color: #323232;
+    }
+    .leftMapContent .mapIconBlock .mapIcon {
+      color: rgba(114, 114, 114, 0.8);
+    }
+    border: 1px solid #000000;
+  }
+  &.entity {
+    background: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    .leftMapContent h1 {
+      letter-spacing: 0.01em;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+  .leftMapContent {
+    display: flex;
+    gap: max(8px, 18cqh);
+    min-width: 0;
+    flex: 1;
+    align-items: center;
+    .mapIconBlock {
+      left: 0.625rem;
+      color: rgba(0, 0, 0, 0.3);
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .mapIcon {
+        width: max(18px, 50cqh);
+        height: max(18px, 50cqh);
+      }
+    }
+
+    h1 {
+      @include font-base(max(18px, 35cqh), 700);
+      @include respond-to(tablet) {
+        font-size: max(16px, 35cqh);
+      }
+      @include respond-to(mobile) {
+        font-size: max(14px, 35cqh);
+      }
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .divider {
+      width: max(1px, 2.5cqh);
+      background-color: $label-color;
+      transform: scaleX(0.5);
+      align-self: stretch;
+      transform-origin: center;
+    }
+  }
+  .mapOpenButton {
+    .fullSizeIcon {
+      color: rgba(114, 114, 114, 0.8);
+      width: max(18px, 50cqh);
+      height: max(18px, 50cqh);
+    }
+  }
+}

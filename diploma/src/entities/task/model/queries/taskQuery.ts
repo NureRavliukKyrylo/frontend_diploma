@@ -1,0 +1,78 @@
+import type { MyTasksRequestParams } from "../../libs";
+import {
+  getListTasks,
+  getMyTasks,
+  getTaskComments,
+  getTaskId,
+  getTaskJoinedId,
+} from "../../api";
+import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
+import type { TasksRequestParams } from "@entities/task/libs/search-schema/tasksSearchSchema";
+
+export const taskKeys = {
+  all: () => ["tasks"] as const,
+  list: (params: TasksRequestParams) =>
+    [...taskKeys.all(), "list", params] as const,
+  infinite: (params: TasksRequestParams) =>
+    [...taskKeys.list(params), "infinite"] as const,
+  id: (id: string) => [...taskKeys.all(), "id", id] as const,
+  comments: (id: string, params: { PageSize: number }) =>
+    [...taskKeys.id(id), params, "comments"] as const,
+  joinedId: (id: string) => [...taskKeys.id(id), "joined"] as const,
+  mys: () => [...taskKeys.all(), "my"] as const,
+  my: (params: MyTasksRequestParams) => [...taskKeys.mys(), params] as const,
+  infiniteMy: (params: MyTasksRequestParams) =>
+    [...taskKeys.my(params), "infinite"] as const,
+};
+
+export const taskQuery = {
+  list: (params: TasksRequestParams) =>
+    queryOptions({
+      queryKey: taskKeys.list({ ...params }),
+      queryFn: () => getListTasks({ ...params }),
+      placeholderData: (prev) => prev,
+    }),
+  listInfinite: (params: TasksRequestParams) =>
+    infiniteQueryOptions({
+      queryKey: taskKeys.infinite({ ...params }),
+      queryFn: ({ pageParam }) => getListTasks({ Page: pageParam, ...params }),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage) => lastPage.pagination.nextPage ?? undefined,
+      select: (data) => data.pages.flatMap((page) => page.data),
+    }),
+  id: (id: string) =>
+    queryOptions({
+      queryKey: taskKeys.id(id),
+      queryFn: () => getTaskId(id),
+      select: (res) => res.data,
+    }),
+  comments: (id: string, params: { PageSize: number }) =>
+    infiniteQueryOptions({
+      queryKey: taskKeys.comments(id, { ...params }),
+      queryFn: ({ pageParam }) =>
+        getTaskComments(id, { ...params, Page: pageParam }),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage) => lastPage.pagination.nextPage ?? undefined,
+      select: (data) => data.pages.flatMap((page) => page.data),
+    }),
+  joinedId: (id: string) =>
+    queryOptions({
+      queryKey: taskKeys.joinedId(id),
+      queryFn: () => getTaskJoinedId(id),
+      select: (res) => res.data,
+    }),
+  my: (params: MyTasksRequestParams) =>
+    queryOptions({
+      queryKey: taskKeys.my({ ...params }),
+      queryFn: () => getMyTasks({ ...params }),
+      placeholderData: (prev) => prev,
+    }),
+  infiniteMy: (params: MyTasksRequestParams) =>
+    infiniteQueryOptions({
+      queryKey: taskKeys.infiniteMy({ ...params }),
+      queryFn: ({ pageParam }) => getMyTasks({ Page: pageParam, ...params }),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage) => lastPage.pagination.nextPage ?? undefined,
+      select: (data) => data.pages.flatMap((page) => page.data),
+    }),
+};

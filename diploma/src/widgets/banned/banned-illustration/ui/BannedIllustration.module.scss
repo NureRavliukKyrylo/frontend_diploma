@@ -1,0 +1,68 @@
+.right {
+  flex-shrink: 0;
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+}
+
+.ringOuter {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border: 2px dashed rgba(0, 0, 0, 0.12);
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.ringInner {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.iconWrap {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  z-index: 1;
+
+  svg {
+    color: #000;
+  }
+}
+
+@media (max-width: 520px) {
+  .right {
+    width: 240px;
+    height: 240px;
+    margin-left: 0;
+  }
+
+  .ringOuter {
+    width: 240px;
+    height: 240px;
+  }
+
+  .ringInner {
+    width: 172px;
+    height: 172px;
+  }
+
+  .iconWrap {
+    width: 136px;
+    height: 136px;
+  }
+}

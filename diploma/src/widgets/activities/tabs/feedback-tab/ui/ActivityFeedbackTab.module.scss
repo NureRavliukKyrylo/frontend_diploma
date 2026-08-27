@@ -1,0 +1,424 @@
+@use "@shared/assets/styles" as *;
+
+.feedbackTabWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  @include respond-to(tablet) {
+    gap: 20px;
+  }
+  @include respond-to(mobile) {
+    gap: 16px;
+  }
+
+  .headerWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    @include respond-to(tablet) {
+      gap: 20px;
+    }
+    @include respond-to(mobile) {
+      gap: 14px;
+    }
+
+    .overAllRatingInfo {
+      display: flex;
+      gap: 40px;
+
+      @include respond-to(tablet) {
+        gap: 20px;
+      }
+      @include respond-to(mobile) {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .baseInfo {
+        flex: 0 0 220px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        padding: 40px;
+        background: #ffffff;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 40px 50px;
+
+        @include respond-to(laptop) {
+          flex: 0 0 180px;
+          padding: 28px;
+        }
+        @include respond-to(tablet) {
+          flex: 0 0 150px;
+          padding: 20px;
+          border-radius: 28px 36px;
+        }
+        @include respond-to(mobile) {
+          flex: unset;
+          padding: 20px;
+          border-radius: 24px 30px;
+        }
+
+        .baseRating {
+          color: #8c0000;
+          @include font-base(70px, 900);
+          line-height: 100%;
+
+          @include respond-to(laptop) {
+            font-size: 52px;
+          }
+          @include respond-to(tablet) {
+            font-size: 42px;
+          }
+          @include respond-to(mobile) {
+            font-size: 36px;
+          }
+        }
+
+        .starRating {
+          @include respond-to(laptop) {
+            width: 34px;
+            height: 34px;
+          }
+          @include respond-to(tablet) {
+            width: 28px;
+            height: 28px;
+          }
+          @include respond-to(mobile) {
+            width: 28px;
+            height: 28px;
+          }
+        }
+
+        .totalVotes {
+          color: rgba(0, 0, 0, 0.6);
+          @include font-base(20px, 600);
+
+          @include respond-to(laptop) {
+            font-size: 17px;
+          }
+          @include respond-to(tablet) {
+            font-size: 14px;
+          }
+          @include respond-to(mobile) {
+            font-size: 15px;
+          }
+        }
+      }
+
+      .detailedInfo {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 12px;
+        background: #ffffff;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 50px 40px;
+        padding: 40px 60px 40px 50px;
+
+        @include respond-to(laptop) {
+          padding: 28px 40px 28px 36px;
+          gap: 10px;
+          border-radius: 36px 30px;
+        }
+        @include respond-to(tablet) {
+          padding: 20px 24px;
+          gap: 8px;
+          border-radius: 28px 24px;
+        }
+        @include respond-to(mobile) {
+          padding: 16px;
+          gap: 8px;
+          border-radius: 20px;
+        }
+
+        .ratingLine {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+
+          @include respond-to(tablet) {
+            gap: 10px;
+          }
+          @include respond-to(mobile) {
+            gap: 8px;
+          }
+
+          .ratingValue {
+            flex: 0 0 80px;
+            white-space: nowrap;
+            color: rgba(0, 0, 0, 0.6);
+            @include font-base(17px, 600);
+            text-align: end;
+
+            @include respond-to(laptop) {
+              flex: 0 0 70px;
+              font-size: 15px;
+            }
+            @include respond-to(tablet) {
+              flex: 0 0 60px;
+              font-size: 13px;
+            }
+            @include respond-to(mobile) {
+              flex: 0 0 54px;
+              font-size: 12px;
+            }
+          }
+
+          .progressRating {
+            height: 15px;
+            flex: 1;
+            min-width: 0;
+            @include respond-to(mobile) {
+              height: 11px;
+            }
+          }
+
+          .votesOfValue {
+            flex: 0 0 90px;
+            white-space: nowrap;
+            color: rgba(0, 0, 0, 0.6);
+            @include font-base(17px, 600);
+
+            @include respond-to(laptop) {
+              flex: 0 0 76px;
+              font-size: 15px;
+            }
+            @include respond-to(tablet) {
+              flex: 0 0 64px;
+              font-size: 13px;
+            }
+            @include respond-to(mobile) {
+              flex: 0 0 54px;
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+
+    .actionsFeedback {
+      display: flex;
+      justify-content: flex-end;
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px 20px;
+        width: 100%;
+        max-width: 70%;
+        justify-content: flex-end;
+
+        @include respond-to(tablet) {
+          max-width: 100%;
+        }
+        @include respond-to(mobile) {
+          max-width: 100%;
+          gap: 10px;
+        }
+
+        .submitFeedback {
+          flex: 0 1 250px;
+          max-width: 250px;
+          width: 100%;
+          min-height: 45px;
+          background: #000000;
+          box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+          border-radius: 40px;
+          text-transform: uppercase;
+          color: #ffffff;
+          @include font-base(17px, 800);
+          letter-spacing: 0.05em;
+          padding: 0 20px;
+
+          @include respond-to(tablet) {
+            font-size: 15px;
+            min-height: 40px;
+          }
+          @include respond-to(mobile) {
+            font-size: 13px;
+            min-height: 36px;
+            flex: 1;
+            max-width: unset;
+          }
+        }
+
+        .sortWrapper {
+          flex: 1 1 200px;
+          max-width: 380px;
+          width: 100%;
+          min-height: 45px;
+
+          @include respond-to(mobile) {
+            max-width: unset;
+            min-height: 36px;
+          }
+        }
+      }
+    }
+  }
+
+  .mainContent {
+    background: #ffffff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @include respond-to(laptop) {
+      padding: 40px;
+      gap: 30px;
+    }
+    @include respond-to(tablet) {
+      padding: 28px;
+      gap: 24px;
+      border-radius: 28px;
+    }
+    @include respond-to(mobile) {
+      padding: 16px;
+      gap: 18px;
+      border-radius: 20px;
+    }
+
+    .reviewTitle {
+      display: flex;
+      align-items: center;
+      gap: 45px;
+      @include font-base(30px, 900);
+      background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      white-space: nowrap;
+
+      @include respond-to(laptop) {
+        font-size: 24px;
+        gap: 30px;
+      }
+      @include respond-to(tablet) {
+        font-size: 20px;
+        gap: 20px;
+      }
+      @include respond-to(mobile) {
+        font-size: 18px;
+        gap: 14px;
+      }
+
+      &::before,
+      &::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          #260000 0%,
+          #8c0000 90%,
+          transparent 100%
+        );
+        box-shadow: 0px 1px 3px rgba(140, 0, 0, 0.3);
+        opacity: 0.85;
+        border-radius: 1px;
+      }
+      &::before {
+        transform: scaleX(-1);
+      }
+    }
+
+    .feedbackList {
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-content: center;
+      gap: 40px;
+      align-items: stretch;
+      @include respond-to(tablet) {
+        gap: 24px;
+      }
+      @include respond-to(mobile) {
+        gap: 16px;
+      }
+    }
+
+    .emptyState {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      min-height: 300px;
+
+      h2 {
+        @include font-base(30px, 800);
+        color: rgba(0, 0, 0, 0.7);
+        @include respond-to(tablet) {
+          font-size: 24px;
+        }
+        @include respond-to(mobile) {
+          font-size: 20px;
+        }
+      }
+      p {
+        @include font-base(22px, 400);
+        color: rgba(0, 0, 0, 0.4);
+        @include respond-to(tablet) {
+          font-size: 18px;
+        }
+        @include respond-to(mobile) {
+          font-size: 15px;
+        }
+      }
+    }
+
+    .errorState {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 300px;
+      width: 100%;
+      text-align: center;
+    }
+    .errorHttpMessage {
+      font-size: 30px;
+      @include respond-to(mobile) {
+        font-size: 22px;
+      }
+    }
+  }
+}
+
+.feedbackReportButton {
+  width: 40px;
+  height: 40px;
+
+  @include respond-to(tablet) {
+    width: 34px;
+    height: 34px;
+  }
+  @include respond-to(mobile) {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.feedbackReportIcon {
+  width: 25px;
+  height: 25px;
+
+  @include respond-to(tablet) {
+    width: 22px;
+    height: 22px;
+  }
+  @include respond-to(mobile) {
+    width: 18px;
+    height: 18px;
+  }
+}

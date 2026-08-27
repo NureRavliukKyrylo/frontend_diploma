@@ -1,0 +1,27 @@
+.signals {
+  min-height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin: -4px 0 16px;
+}
+
+.signal {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.reliability {
+  background: #e8f5ed;
+  color: #1a7a45;
+}
+
+.availability {
+  background: #e6f1fb;
+  color: #185fa5;
+}

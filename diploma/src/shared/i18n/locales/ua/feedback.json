@@ -1,0 +1,63 @@
+{
+  "rating": {
+    "votes_one": "{{count}} ГОЛОС",
+    "votes_few": "{{count}} ГОЛОСИ",
+    "votes_many": "{{count}} ГОЛОСІВ",
+    "votes_other": "{{count}} ГОЛОСУ",
+    "stars_one": "{{count}} ЗІРКА",
+    "stars_few": "{{count}} ЗІРКИ",
+    "stars_many": "{{count}} ЗІРОК",
+    "stars_other": "{{count}} ЗІРКИ"
+  },
+  "actions": {
+    "submit": "Надіслати відгук",
+    "update": "Оновити відгук",
+    "cancel": "Скасувати",
+    "delete": "Видалити",
+    "editFeedback": "Редагувати відгук",
+    "deleteFeedback": "Видалити відгук"
+  },
+  "content": {
+    "title": "Відгуки",
+    "yourReview": "Ваш відгук"
+  },
+  "states": {
+    "emptyTitle": "Відгуків ще немає",
+    "emptySubtitle": "Будьте першим, хто залишить відгук",
+    "joinedEmptyTitle": "Немає відгуків",
+    "joinedEmptySubtitle": "Ви приєдналися — тепер поділіться враженнями. Будьте першим, хто залишить відгук."
+  },
+  "entities": {
+    "project": "проєктом",
+    "task": "завданням",
+    "event": "подією"
+  },
+  "form": {
+    "createTitle": "Ваша думка важлива",
+    "createDescription": "Це займе менше хвилини.",
+    "editTitle": "Редагувати відгук",
+    "editDescription": "Оновіть вашу оцінку або коментар нижче.",
+    "question": "Які ваші загальні враження від роботи з {{entity}}?",
+    "improvementQuestion": "Що ми могли б покращити?",
+    "placeholder": "Розкажіть детальніше про свій досвід..."
+  },
+  "deleteModal": {
+    "title": "Видалити відгук?",
+    "text": "Ви впевнені, що хочете видалити цей відгук? Ви зможете написати новий у будь-який час."
+  },
+  "validation": {
+    "ratingRequired": "Оцінка обов'язкова",
+    "commentMax": "Коментар має містити не більше 150 символів"
+  },
+  "notifications": {
+    "createSuccessTitle": "Відгук надіслано",
+    "createSuccessDescription": "Дякуємо за ваш відгук!",
+    "createFailedTitle": "Не вдалося надіслати відгук",
+    "updateSuccessTitle": "Відгук оновлено",
+    "updateSuccessDescription": "Ваш відгук було успішно оновлено.",
+    "updateFailedTitle": "Не вдалося оновити відгук",
+    "deleteSuccessTitle": "Відгук видалено",
+    "deleteSuccessDescription": "Ваш відгук було успішно видалено.",
+    "deleteFailedTitle": "Не вдалося видалити відгук"
+  }
+}

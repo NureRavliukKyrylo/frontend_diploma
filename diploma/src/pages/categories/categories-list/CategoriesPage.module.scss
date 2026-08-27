@@ -1,0 +1,97 @@
+@use "@shared/assets/styles" as *;
+
+.categoriesWrapperList {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 80%;
+  height: 100%;
+  justify-content: space-between;
+
+  @include respond-to(laptop) {
+    width: 88%;
+    gap: 24px;
+  }
+  @include respond-to(tablet) {
+    width: 95%;
+    gap: 20px;
+  }
+  @include respond-to(mobile) {
+    width: 95%;
+    gap: 16px;
+  }
+
+  .paginationWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.skeletonListCategories {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: auto;
+  gap: 60px;
+  row-gap: 40px;
+
+  @include respond-to(laptop) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 40px;
+    row-gap: 28px;
+  }
+  @include respond-to(tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 24px;
+    row-gap: 20px;
+  }
+  @include respond-to(mobile) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    row-gap: 14px;
+  }
+}
+.errorState {
+  padding: 40px 0;
+  text-align: center;
+
+  @include respond-to(mobile) {
+    padding: 24px 0;
+  }
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    @include font-base(60px, 900);
+    line-height: 120%;
+    color: #1a1a2e;
+
+    @include respond-to(laptop) {
+      font-size: 44px;
+    }
+    @include respond-to(tablet) {
+      font-size: 32px;
+    }
+    @include respond-to(mobile) {
+      font-size: 24px;
+    }
+  }
+
+  p {
+    @include font-base(40px, 500);
+    color: #6b7280;
+
+    @include respond-to(laptop) {
+      font-size: 28px;
+    }
+    @include respond-to(tablet) {
+      font-size: 20px;
+    }
+    @include respond-to(mobile) {
+      font-size: 16px;
+    }
+  }
+}

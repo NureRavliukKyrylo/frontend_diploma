@@ -1,0 +1,93 @@
+@use "@shared/assets/styles" as *;
+
+.wrapperAuthContainer {
+  .authContainer {
+    .apiAuth {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .line {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        text-align: center;
+
+        span {
+          color: rgba(0, 0, 0, 0.6);
+          white-space: nowrap;
+          @include font-base(12px, 500);
+        }
+
+        &::before,
+        &::after {
+          content: "";
+          flex: 1;
+          height: 1px;
+          background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        &::before {
+          margin-right: 10px;
+        }
+
+        &::after {
+          margin-left: 10px;
+        }
+      }
+
+      .apiButtons {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+
+        .googleSign,
+        .appleSign {
+          flex: 1;
+          background: #ffffff;
+          box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
+          border-radius: 10px;
+          text-align: center;
+          padding: 5px;
+          display: flex;
+          justify-content: center;
+
+          span {
+            @include font-base(12px, 500);
+          }
+        }
+
+        .googleSign img,
+        .appleSign img {
+          width: 40px;
+          height: 40px;
+          opacity: 0.6;
+        }
+      }
+    }
+
+    .switchFooter {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 18px;
+      font-size: 13px;
+      color: #999;
+
+      button {
+        border: none;
+        padding: 0;
+        background: transparent;
+        color: #840000;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

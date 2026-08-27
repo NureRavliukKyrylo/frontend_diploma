@@ -1,0 +1,49 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import styles from "./LanguageSwitcherButton.module.scss";
+import { GreatBritain, UkraineLogo } from "@shared/assets/icons/flags";
+import { Globe } from "@shared/assets/icons/info";
+
+interface LanguageSwitcherButtonProps {
+  triggerClassName?: string;
+  triggerIcon?: React.ReactNode;
+}
+
+export const LanguageSwitcherButton = ({
+  triggerClassName,
+  triggerIcon,
+}: LanguageSwitcherButtonProps = {}) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className={styles.wrapper}>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className={styles.dropdown}
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            exit={{ scaleX: 0, opacity: 0 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+          >
+            <button className={styles.langButton} aria-label="English">
+              <img src={GreatBritain} alt="britain" />
+            </button>
+            <button className={styles.langButton} aria-label="Ukrainian">
+              <img src={UkraineLogo} alt="ua" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <button
+        className={`${styles.globeButton} ${triggerClassName ?? ""}`.trim()}
+        onClick={() => setOpen((p) => !p)}
+        aria-expanded={open}
+        aria-label="Open language switcher"
+      >
+        {triggerIcon ?? <img src={Globe} alt="" />}
+      </button>
+    </div>
+  );
+};

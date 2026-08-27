@@ -1,0 +1,15 @@
+.wrapperHeaderAvatar {
+  display: block;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+
+  .headerAvatar {
+    width: 100%;
+  }
+}

@@ -1,0 +1,6 @@
+@use "@shared/assets/styles" as *;
+
+.remainingItem {
+  color: #8c0000;
+  @include font-base(20px, 700);
+}

@@ -1,0 +1,138 @@
+
+.recurringToggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.recurrenceFields {
+  overflow: hidden;
+}
+
+.recurrenceFieldsInner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 20px;
+}
+
+.recurrenceRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.skillsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.skillRows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skillRow {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 130px 44px;
+  gap: 12px;
+  align-items: center;
+}
+
+.skillSearchField {
+  position: relative;
+}
+
+.skillSuggestions {
+  position: fixed;
+  z-index: 12000;
+  max-height: 240px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 6px;
+  border: 1px solid #eeeeee;
+  border-radius: 12px;
+  background: #ffffff;
+  list-style: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.skillSuggestionButton {
+  width: 100%;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  padding: 12px 14px;
+  color: #1a1a1a;
+  font-family: "Exo 2", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: #f4f4f4;
+    color: #840000;
+  }
+}
+
+.skillSuggestionsEmpty {
+  padding: 12px 14px;
+  color: #bbbbbb;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.removeSkillButton {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: #f4f4f4;
+  color: #1a1a1a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background: #fff2f2;
+    color: #840000;
+  }
+}
+
+.addSkillButton {
+  align-self: flex-start;
+  border: 1.8px dashed #ededed;
+  border-radius: 999px;
+  background: transparent;
+  color: #1a1a1a;
+  padding: 12px 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Exo 2", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    border-color: #840000;
+    background: #fdf2f2;
+    color: #840000;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+}

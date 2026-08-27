@@ -1,0 +1,56 @@
+.scoreWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scoreRing {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.scoreSvg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  transform: rotate(-90deg);
+}
+
+.scoreTrack,
+.scoreProgress {
+  fill: none;
+}
+
+.scoreTrack {
+  stroke: #eeeeee;
+}
+
+.scoreProgress {
+  stroke-linecap: round;
+}
+
+.avatar {
+  width: 68px;
+  height: 68px;
+  border: 2px solid #ffffff;
+  outline: 1px solid #ebebeb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.avatarInitials {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.scorePill {
+  position: relative;
+  z-index: 1;
+  margin-top: -10px;
+  border: 1px solid #e7e7e7;
+  border-radius: 999px;
+  background: #ffffff;
+  padding: 6px 11px;
+  font-size: 11px;
+  font-weight: 900;
+}

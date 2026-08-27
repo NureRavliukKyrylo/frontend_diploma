@@ -1,0 +1,171 @@
+.authWrapper {
+  position: relative;
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f4f4;
+  overflow: hidden;
+  margin: 0;
+  flex-direction: column;
+}
+
+.cornerTopRight {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 50;
+}
+
+.iconBtn {
+  width: 57px;
+  height: 57px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+  font-size: 24px;
+  color: #666;
+  position: relative;
+  transition: color 0.15s ease;
+  text-decoration: none;
+
+  &:hover {
+    color: #840000;
+  }
+
+  svg {
+    width: 1em;
+    height: 1em;
+    stroke-width: 2;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  top: 67px;
+  right: 0;
+  background: #000;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.iconBtn:hover .tooltip,
+.languageControl:hover .tooltip {
+  opacity: 1;
+}
+
+.languageControl {
+  position: relative;
+
+  .iconBtn {
+    width: 57px;
+    height: 57px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.14);
+    color: #666;
+
+    &:hover {
+      color: #840000;
+    }
+  }
+}
+
+.cornerBottomRight {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 50;
+}
+
+.faqLabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: #666;
+  background: #fff;
+  padding: 6px 12px;
+  border-radius: 50px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  transform: translateX(8px);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.faqBtn {
+  width: 79px;
+  height: 79px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a30000 0%, #840000 50%, #5c0000 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 14px rgba(132, 0, 0, 0.35);
+  cursor: pointer;
+  color: #fff;
+  font-size: 32px;
+  position: relative;
+  flex-shrink: 0;
+  text-decoration: none;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid #840000;
+    animation: faqPulse 2.2s ease-out infinite;
+  }
+
+  svg {
+    width: 1em;
+    height: 1em;
+    stroke-width: 2.5;
+  }
+}
+
+@keyframes faqPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.cornerBottomRight:hover .faqLabel {
+  opacity: 1;
+  transform: translateX(0);
+}

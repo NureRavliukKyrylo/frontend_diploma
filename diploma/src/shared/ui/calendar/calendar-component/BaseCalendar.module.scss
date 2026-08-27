@@ -1,0 +1,943 @@
+@use "@shared/assets/styles" as *;
+
+@mixin timegrid-base {
+  :global(.fc-col-header) {
+    width: 100% !important;
+  }
+
+  :global(.fc-col-header-cell) {
+    border-bottom: 2px solid #c8c8c8 !important;
+    padding: 10px 0 12px 0;
+    text-align: center;
+    background: #ffffff;
+    box-shadow: -1px 0 0 #c8c8c8;
+  }
+
+  :global(.fc-col-header-cell-cushion) {
+    font-size: clamp(11px, 1.6vw, 17px);
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  :global(.fc-day-today) {
+    background: #f9f9f9 !important;
+  }
+
+  :global(.fc-timegrid-body),
+  :global(.fc-timegrid-body table),
+  :global(.fc-scrollgrid-sync-table) {
+    width: 100% !important;
+    table-layout: fixed;
+  }
+
+  :global(.fc-scrollgrid),
+  :global(.fc-scrollgrid td),
+  :global(.fc-scrollgrid th) {
+    border: none !important;
+  }
+
+  :global(.fc-timegrid-slot-lane) {
+    box-shadow: 0 -1px 0 #ebebeb;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(140, 0, 0, 0.03);
+      cursor: pointer;
+    }
+  }
+
+  :global(.fc-timegrid-slot-lane.fc-timegrid-slot-minor) {
+    box-shadow: 0 -1px 0 #f3f3f3;
+  }
+
+  :global(.fc-timegrid-slot) {
+    height: 52px;
+
+    @include respond-to(tablet) {
+      height: 40px;
+    }
+    @include respond-to(mobile) {
+      height: 32px;
+    }
+  }
+
+  :global(.fc-scrollgrid-sync-table) {
+    background: white;
+    border-top: 1px solid #f3f3f3;
+    border-spacing: 0px;
+  }
+
+  :global(.fc-timegrid-slot-label) {
+    font-size: clamp(12px, 1.3vw, 15px);
+    color: #888;
+    font-weight: 600;
+    vertical-align: top;
+    padding: 4px 8px 0 0;
+    text-align: right;
+    box-shadow: 0 -1px 0 #ebebeb;
+  }
+
+  :global(.fc-timegrid-axis) {
+    border-bottom-color: #ebebeb !important;
+  }
+
+  :global(.fc-timegrid-col) {
+    background: #ffffff;
+    box-shadow: -1px 0 0 #c8c8c8;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: #fafafa !important;
+    }
+  }
+
+  :global(.fc-timegrid-col:first-of-type) {
+    box-shadow: none;
+  }
+
+  :global(.fc-timegrid-axis-chunk) {
+    max-height: 72px !important;
+    overflow: hidden !important;
+  }
+
+  :global(.fc-daygrid-body) {
+    max-height: 72px !important;
+    overflow: hidden !important;
+  }
+
+  :global(.fc-daygrid-day-frame) {
+    border-radius: 0 !important;
+    background: transparent !important;
+    padding: 0px;
+    box-shadow: -1px 0 0 #c8c8c8;
+    outline: none !important;
+    transition: none !important;
+
+    &:hover {
+      background: transparent !important;
+      outline: none !important;
+      cursor: default;
+    }
+  }
+
+  :global(.fc-timegrid-now-indicator-line) {
+    border-color: #8c0000;
+    border-width: 1.5px;
+  }
+
+  :global(.fc-timegrid-now-indicator-arrow) {
+    border-color: #8c0000;
+  }
+
+  :global(.fc-timegrid-event) {
+    border-radius: 6px;
+    border: none;
+    border-left: 3px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    font-size: clamp(10px, 1vw, 12px);
+  }
+  :global(.fc-timegrid-axis-cushion) {
+    font-size: clamp(10px, 1.1vw, 14px);
+    font-weight: 600;
+    color: #888;
+
+    @include respond-to(tablet) {
+      font-size: clamp(9px, 1vw, 12px);
+    }
+    @include respond-to(mobile) {
+      font-size: clamp(8px, 0.9vw, 10px);
+    }
+    @include respond-to(null, 480px) {
+      font-size: 8px;
+    }
+  }
+
+  :global(.fc-scrollgrid-shrink-cushion) {
+    font-size: clamp(10px, 1.1vw, 14px);
+    font-weight: 600;
+    color: #888;
+
+    @include respond-to(tablet) {
+      font-size: clamp(9px, 1vw, 12px);
+    }
+    @include respond-to(mobile) {
+      font-size: clamp(8px, 0.9vw, 10px);
+    }
+    @include respond-to(null, 480px) {
+      font-size: 8px;
+    }
+  }
+
+  :global(.fc-scrollgrid-sync-inner) {
+    font-size: clamp(10px, 1.1vw, 14px);
+
+    @include respond-to(tablet) {
+      font-size: clamp(9px, 1vw, 12px);
+    }
+    @include respond-to(mobile) {
+      font-size: clamp(8px, 0.9vw, 10px);
+    }
+    @include respond-to(null, 480px) {
+      font-size: 8px;
+    }
+  }
+}
+
+.calendarWrapper {
+  background: #f4f4f4;
+  border-radius: 16px;
+  padding: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  flex: 1;
+  min-height: 0;
+
+  @include respond-to(tablet) {
+    padding: 12px;
+    gap: 24px;
+    border-radius: 12px;
+  }
+  @include respond-to(mobile) {
+    padding: 8px;
+    gap: 16px;
+    border-radius: 10px;
+  }
+
+  :global(.fc-daygrid-event-harness::before) {
+    content: none !important;
+  }
+
+  :global(.fc-daygrid-event-harness::after) {
+    content: none !important;
+  }
+
+  :global(.fc-daygrid-event:hover),
+  :global(.fc-event:hover) {
+    background: transparent !important;
+    border-color: transparent !important;
+    opacity: 1 !important;
+  }
+
+  :global(.fc) {
+    flex: 1;
+    min-height: 0;
+  }
+
+  :global(.fc-daygrid-event-harness::before),
+  :global(.fc-daygrid-event-harness::after),
+  :global(.fc-daygrid-more-link::before),
+  :global(.fc-daygrid-more-link::after),
+  :global(.fc-more-link::before),
+  :global(.fc-more-link::after),
+  :global(.fc-daygrid-day-bottom::after),
+  :global(.fc-daygrid-day-events::after) {
+    content: none !important;
+    display: none !important;
+  }
+
+  :global(.fc-daygrid-more-link),
+  :global(.fc-daygrid-more-link .fc-more-link) {
+    @include font-base(12px, 800);
+    color: #2a2a2a;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    @include respond-to(laptop) {
+      font-size: 11px;
+    }
+    @include respond-to(tablet) {
+      font-size: 9px;
+    }
+    @include respond-to(mobile) {
+      font-size: 8px;
+      letter-spacing: 0.02em;
+    }
+    @include respond-to(null, 480px) {
+      font-size: 6px;
+      letter-spacing: 0.02em;
+    }
+  }
+
+  :global(.fc-scroller) {
+    overflow: hidden !important;
+    height: auto !important;
+  }
+
+  :global(.fc-scroller-liquid-absolute) {
+    position: relative !important;
+    inset: 0 !important;
+  }
+
+  :global(.fc-scrollgrid-sync-table) {
+    height: auto !important;
+  }
+
+  :global(.fc-daygrid-body) {
+    width: 100% !important;
+  }
+
+  :global(.fc-daygrid-body table),
+  :global(.fc-scrollgrid-sync-table) {
+    width: 100% !important;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 15px;
+
+    @include respond-to(tablet) {
+      border-spacing: 8px;
+    }
+    @include respond-to(mobile) {
+      border-spacing: 4px;
+    }
+    @include respond-to(null, 480px) {
+      border-spacing: 2px;
+    }
+  }
+
+  :global(.fc-scrollgrid),
+  :global(.fc-scrollgrid td),
+  :global(.fc-scrollgrid th) {
+    border: none !important;
+  }
+
+  :global(.fc-col-header-cell) {
+    background: #f4f4f4;
+    border: none !important;
+    padding: 0 0 10px 8px;
+    text-align: left;
+  }
+
+  :global(.fc-col-header-cell-cushion) {
+    @include font-base(clamp(9px, 1.1vw, 22px), 600);
+    text-decoration: none;
+    padding: 0;
+
+    @include respond-to(mobile) {
+      font-size: clamp(9px, 2.5vw, 14px);
+    }
+
+    @include respond-to(null, 480px) {
+      font-size: clamp(9px, 2vw, 14px);
+    }
+  }
+
+  scss:global(.fc-daygrid-day) {
+    background: transparent !important;
+    border: none !important;
+    padding: 0;
+    cursor: pointer;
+
+    &:hover .fc-daygrid-day-frame {
+      outline-color: #8c0000;
+      background: rgba(140, 0, 0, 0.2);
+    }
+  }
+
+  :global(.fc-daygrid-day-frame:hover) {
+    outline-color: #8c0000;
+    background: rgba(140, 0, 0, 0.2);
+  }
+
+  &:not([data-view="timeGridWeek"]):not([data-view="timeGridDay"]) {
+    :global(.fc-day--has-availability .fc-daygrid-day-frame) {
+      box-shadow:
+        2px 2px 10px rgba(0, 0, 0, 0.25),
+        inset 2px 0 0 #16a34a;
+      &:hover {
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    :global(.fc-day-today.fc-day--has-availability .fc-daygrid-day-frame) {
+      box-shadow:
+        0px 2px 10px rgba(0, 0, 0, 0.25),
+        inset 2px 0 0 #16a34a;
+      &:hover {
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+
+  :global(.fc-popover) {
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    border: none !important;
+    overflow: hidden;
+
+    @include respond-to(tablet) {
+      border-radius: 10px !important;
+    }
+    @include respond-to(mobile) {
+      border-radius: 8px !important;
+    }
+    @include respond-to(null, 480px) {
+      border-radius: 6px !important;
+    }
+  }
+
+  :global(.fc-popover-header) {
+    background: #f4f4f4 !important;
+    padding: 8px 12px !important;
+    @include font-base(18px !important, 700 !important);
+    color: #2a2a2a !important;
+
+    @include respond-to(tablet) {
+      padding: 6px 10px !important;
+      font-size: 15px !important;
+    }
+    @include respond-to(mobile) {
+      padding: 5px 8px !important;
+      font-size: 13px !important;
+    }
+    @include respond-to(null, 480px) {
+      padding: 4px 6px !important;
+      font-size: 11px !important;
+    }
+  }
+
+  :global(.fc-popover-body) {
+    background: #ffffff !important;
+    padding: 6px 8px !important;
+
+    @include respond-to(tablet) {
+      padding: 5px 6px !important;
+    }
+    @include respond-to(mobile) {
+      padding: 4px 5px !important;
+    }
+    @include respond-to(null, 480px) {
+      padding: 3px 4px !important;
+    }
+  }
+
+  :global(.fc-daygrid-day-frame) {
+    outline: none;
+    background: #ffffff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    padding: 0 clamp(10px, 2vw, 25px);
+    box-sizing: border-box;
+    outline-offset: -2px;
+    transition:
+      outline-color 2s linear,
+      background 0.3s ease-in-out;
+    -webkit-tap-highlight-color: transparent;
+    min-height: clamp(80px, 10vw, 140px);
+    height: 230px !important;
+
+    @include respond-to(laptop) {
+      height: 210px !important;
+      border-radius: 20px;
+    }
+    @include respond-to(tablet) {
+      height: 150px !important;
+      border-radius: 14px;
+      padding: 0 7px;
+    }
+    @include respond-to(mobile) {
+      height: 110px !important;
+      border-radius: 10px;
+      padding: 0 7px;
+      min-height: unset;
+    }
+
+    @include respond-to(null, 480px) {
+      border-radius: 10px;
+      height: 75px !important;
+      min-height: unset;
+      padding: 0 4px;
+    }
+
+    &:hover {
+      background: rgba(140, 0, 0, 0.2);
+      outline: 2px dashed #8c0000;
+      cursor: pointer;
+    }
+    &:focus,
+    &:focus-visible {
+      outline: none !important;
+    }
+  }
+
+  :global(.fc-day-today) {
+    background: transparent !important;
+  }
+
+  :global(.fc-day-today .fc-daygrid-day-frame) {
+    background: linear-gradient(90deg, #c0c0c0 0%, #ececec 50%, #ffffff 100%);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+
+    &:hover {
+      background: rgba(140, 0, 0, 0.2);
+      outline-color: #8c0000;
+    }
+  }
+
+  :global(.fc-day-today .fc-daygrid-day-number) {
+    color: #8c0000;
+    text-shadow: 0px 0px 10px rgba(140, 0, 0, 0.5);
+    font-weight: 900;
+  }
+
+  :global(.fc-daygrid-day-number) {
+    font-size: clamp(13px, 2.8vw, 35px);
+    font-weight: 500;
+    text-decoration: none;
+    padding: 4px 4px 2px;
+    line-height: 1;
+    text-align: left;
+
+    @include respond-to(mobile) {
+      font-size: 15px;
+      padding: 2px;
+    }
+    @include respond-to(null, 480px) {
+      font-size: 10px;
+      padding: 2px;
+    }
+  }
+
+  :global(.fc-daygrid-day-top) {
+    justify-content: flex-end;
+  }
+
+  :global(.fc-day-other .fc-daygrid-day-frame) {
+    background: #f4f4f4;
+    box-shadow: inset 2px 2px 10px rgba(0, 0, 0, 0.25);
+    pointer-events: none;
+  }
+
+  :global(.fc-day-other .fc-daygrid-day-number) {
+    color: #737373;
+    font-size: clamp(13px, 2.8vw, 35px);
+    font-weight: 500;
+    line-height: 100%;
+
+    @include respond-to(mobile) {
+      font-size: 15px;
+      padding: 2px;
+    }
+    @include respond-to(null, 480px) {
+      font-size: 10px;
+      padding: 0px;
+    }
+  }
+
+  :global(.fc-button-primary) {
+    background: #2a2a2a !important;
+    border: none !important;
+    border-radius: 40px !important;
+    padding: clamp(4px, 0.5vw, 6px) clamp(10px, 1.2vw, 16px) !important;
+    font-size: clamp(10px, 0.9vw, 12px) !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    box-shadow: none !important;
+    transition: opacity 0.15s;
+
+    &:hover {
+      opacity: 0.75 !important;
+    }
+
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+
+  :global(.fc-button-primary:not(:disabled):active),
+  :global(.fc-button-active) {
+    background: #555 !important;
+  }
+  &[data-view="timeGridWeek"] {
+    @include timegrid-base;
+
+    :global(.fc-day-today .fc-col-header-cell-cushion) {
+      background: #f9f9f9 !important;
+      color: #8c0000;
+      text-shadow: 0px 0px 10px rgba(140, 0, 0, 0.5);
+      font-weight: 900;
+
+      @include respond-to(tablet) {
+        font-size: clamp(10px, 1.4vw, 15px);
+      }
+      @include respond-to(mobile) {
+        font-size: clamp(9px, 1.2vw, 13px);
+      }
+      @include respond-to(null, 480px) {
+        font-size: clamp(8px, 1vw, 11px);
+      }
+    }
+
+    :global(.fc-col-header-cell-cushion) {
+      @include respond-to(tablet) {
+        font-size: clamp(10px, 1.4vw, 15px);
+      }
+      @include respond-to(mobile) {
+        font-size: clamp(9px, 1.2vw, 13px);
+      }
+      @include respond-to(null, 480px) {
+        font-size: clamp(8px, 2vw, 11px);
+      }
+    }
+
+    :global(.fc-timegrid-slot-label) {
+      @include respond-to(tablet) {
+        font-size: clamp(10px, 1.1vw, 13px);
+        padding: 3px 6px 0 0;
+      }
+      @include respond-to(mobile) {
+        font-size: clamp(9px, 1vw, 11px);
+        padding: 2px 4px 0 0;
+      }
+      @include respond-to(null, 480px) {
+        font-size: 8px;
+        padding: 2px 3px 0 0;
+      }
+    }
+
+    :global(.fc-timegrid-body .fc-timegrid-col.fc-day--has-availability) {
+      box-shadow:
+        inset 2px 0 0 #16a34a,
+        -1px 0 0 #c8c8c8;
+    }
+
+    :global(.fc-col-header-cell.fc-day--has-availability) {
+      box-shadow:
+        inset 2px 0 0 #16a34a,
+        -1px 0 0 #c8c8c8;
+    }
+  }
+
+  &[data-view="timeGridDay"] {
+    @include timegrid-base;
+
+    :global(.fc-day-today .fc-col-header-cell-cushion) {
+      background: #f9f9f9 !important;
+      color: #8c0000;
+      text-shadow: 0px 0px 10px rgba(140, 0, 0, 0.5);
+      @include font-base(clamp(9px, 1.1vw, 25px), 900);
+
+      @include respond-to(tablet) {
+        font-size: clamp(14px, 2vw, 20px);
+      }
+      @include respond-to(mobile) {
+        font-size: clamp(12px, 1.8vw, 17px);
+      }
+      @include respond-to(null, 480px) {
+        font-size: clamp(10px, 1.5vw, 14px);
+      }
+    }
+
+    :global(.fc-timegrid-slot-label) {
+      @include respond-to(tablet) {
+        font-size: clamp(10px, 1.1vw, 13px);
+        padding: 3px 6px 0 0;
+      }
+      @include respond-to(mobile) {
+        font-size: clamp(9px, 1vw, 11px);
+        padding: 2px 4px 0 0;
+      }
+      @include respond-to(null, 480px) {
+        font-size: 8px;
+        padding: 2px 3px 0 0;
+      }
+    }
+
+    :global(.fc-timegrid-body .fc-timegrid-col.fc-day--has-availability) {
+      box-shadow: inset 2px 0 0 #16a34a;
+    }
+
+    :global(.fc-col-header-cell.fc-day--has-availability) {
+      box-shadow: inset 2px 0 0 #16a34a;
+    }
+  }
+  @media (max-width: 768px) {
+    padding: 8px;
+    border-radius: 10px;
+
+    &:not([data-view="timeGridWeek"]):not([data-view="timeGridDay"]) {
+      :global(.fc-daygrid-day) {
+        padding: 3px;
+      }
+    }
+
+    &[data-view="timeGridWeek"],
+    &[data-view="timeGridDay"] {
+      :global(.fc-daygrid-day) {
+        padding: 0px;
+      }
+    }
+
+    :global(.fc-toolbar) {
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    &[data-view="timeGridWeek"] :global(.fc-timegrid-slot) {
+      height: 36px;
+    }
+
+    &[data-view="timeGridDay"] :global(.fc-timegrid-slot) {
+      height: 52px;
+    }
+  }
+}
+
+.headerCalendar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  @include respond-to(tablet) {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  @include respond-to(mobile) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  @include respond-to(null, 480px) {
+    gap: 8px;
+  }
+
+  .headerStart {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    @include respond-to(mobile) {
+      gap: 12px;
+      justify-content: space-between;
+    }
+    @include respond-to(null, 480px) {
+      gap: 8px;
+    }
+
+    .calendarTitle {
+      @include font-base(30px, 600);
+      color: #8c0000;
+
+      @include respond-to(laptop) {
+        font-size: 24px;
+      }
+      @include respond-to(tablet) {
+        font-size: 20px;
+      }
+      @include respond-to(mobile) {
+        font-size: 17px;
+      }
+      @include respond-to(null, 480px) {
+        font-size: 14px;
+      }
+    }
+
+    .todayButton {
+      background: white;
+      border-radius: 20px;
+      padding: 5px 24px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8c0000;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      @include font-base(16px, 700);
+      transition: opacity 0.15s;
+      white-space: nowrap;
+
+      &:hover {
+        opacity: 0.75;
+      }
+
+      @include respond-to(laptop) {
+        font-size: 14px;
+        padding: 5px 18px;
+      }
+      @include respond-to(tablet) {
+        font-size: 13px;
+        padding: 4px 14px;
+      }
+      @include respond-to(mobile) {
+        font-size: 12px;
+        padding: 4px 12px;
+      }
+      @include respond-to(null, 480px) {
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 14px;
+      }
+    }
+  }
+
+  .actionsCalendar {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    @include respond-to(tablet) {
+      gap: 16px;
+    }
+    @include respond-to(mobile) {
+      gap: 10px;
+      justify-content: space-between;
+    }
+    @include respond-to(null, 480px) {
+      gap: 6px;
+    }
+
+    .navigationsBlock {
+      display: flex;
+      gap: 10px;
+
+      @include respond-to(mobile) {
+        gap: 6px;
+      }
+      @include respond-to(null, 480px) {
+        gap: 4px;
+      }
+
+      .prevButton,
+      .nextButton {
+        background: white;
+        border-radius: 50%;
+        width: 54px;
+        height: 54px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+        transition: opacity 0.15s;
+
+        &:hover {
+          opacity: 0.75;
+        }
+
+        @include respond-to(laptop) {
+          width: 46px;
+          height: 46px;
+        }
+        @include respond-to(tablet) {
+          width: 40px;
+          height: 40px;
+        }
+        @include respond-to(mobile) {
+          width: 34px;
+          height: 34px;
+        }
+        @include respond-to(null, 480px) {
+          width: 28px;
+          height: 28px;
+        }
+
+        svg {
+          width: 25px;
+          height: 25px;
+          color: #8c0000;
+          display: block;
+
+          @include respond-to(laptop) {
+            width: 20px;
+            height: 20px;
+          }
+          @include respond-to(tablet) {
+            width: 17px;
+            height: 17px;
+          }
+          @include respond-to(mobile) {
+            width: 14px;
+            height: 14px;
+          }
+          @include respond-to(null, 480px) {
+            width: 11px;
+            height: 11px;
+          }
+        }
+      }
+
+      .nextButton {
+        transform: rotate(180deg);
+        padding-right: 3px;
+      }
+    }
+
+    .toggleWrapper {
+      align-self: stretch;
+      height: auto;
+
+      @include respond-to(mobile) {
+        flex: 1;
+      }
+
+      .toggleCalendarButton {
+        color: rgba(0, 0, 0, 0.7);
+        letter-spacing: 0.05em;
+        flex-grow: 1;
+        padding: 0 40px;
+        @include font-base(20px, 500);
+        text-transform: uppercase;
+
+        &:hover {
+          background: rgba(231, 226, 226, 0.5);
+        }
+
+        @include respond-to(laptop) {
+          padding: 0 24px;
+          font-size: 17px;
+        }
+        @include respond-to(tablet) {
+          padding: 0 16px;
+          font-size: 14px;
+        }
+        @include respond-to(mobile) {
+          padding: 0 10px;
+          font-size: 12px;
+          letter-spacing: 0.02em;
+        }
+        @include respond-to(null, 480px) {
+          padding: 0 6px;
+          font-size: 10px;
+        }
+      }
+
+      .toggleCalendarButtonActive {
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 700;
+        transition: transform 0.2s ease-in-out;
+        &:hover {
+          background: transparent;
+        }
+      }
+
+      .toggleCalendar {
+        background: rgba(255, 255, 255, 0.6);
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+        height: 100%;
+        border-radius: 20px;
+        padding: 5px;
+        justify-content: space-between;
+        width: 100%;
+
+        @include respond-to(mobile) {
+          padding: 4px;
+          border-radius: 14px;
+        }
+        @include respond-to(null, 480px) {
+          padding: 3px;
+          border-radius: 10px;
+        }
+      }
+
+      .toggleCalendarPill {
+        background-color: black;
+      }
+    }
+  }
+}

@@ -1,0 +1,151 @@
+@use "@shared/assets/styles" as *;
+@use "@shared/assets/styles" as adaptive;
+@use "@shared/assets/styles" as animation;
+
+.headerLogin {
+  .title {
+    all: unset;
+    display: block;
+    @include font-base(26px, 900);
+    color: #000000;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    margin: 0 0 20px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #999;
+  }
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+
+  .inputsLogin {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+  }
+
+  .additional {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+    .rememberMe {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 5px;
+
+      span {
+        @include font-base(15px, 500);
+        color: rgba(0, 0, 0, 0.6);
+      }
+    }
+
+    .forgotLink {
+      @include font-base(13px, 700);
+      color: #840000;
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .buttonBlock {
+    margin-bottom: 15px;
+  }
+  @include adaptive.respond-to(mobile) {
+    gap: 12px;
+
+    .inputsLogin {
+      gap: 12px;
+    }
+
+    .additional {
+      gap: 10px;
+
+      .rememberMe span,
+      .forgotLink {
+        display: flex;
+      }
+    }
+
+    .buttonBlock {
+      margin-bottom: 10px;
+    }
+  }
+
+  @include adaptive.respond-to(tablet) {
+    gap: 14px;
+
+    .inputsLogin {
+      gap: 14px;
+    }
+
+    .additional {
+      .rememberMe span,
+      .forgotLink {
+        display: flex;
+      }
+    }
+  }
+}
+.signInButton {
+  position: relative;
+  overflow: hidden;
+  background: black;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  width: 100%;
+  min-height: 49px;
+  @include font-base(18px, 800);
+  @include animation.button-shine();
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
+  @include adaptive.respond-to(mobile) {
+    min-height: 35px;
+    @include font-base(14px, 700);
+  }
+
+  @include adaptive.respond-to(tablet) {
+    min-height: 40px;
+    @include font-base(15px, 800);
+  }
+
+  @include adaptive.respond-to(laptop) {
+    min-height: 45px;
+    @include font-base(16px, 800);
+  }
+
+  @include adaptive.respond-to(desktop) {
+    min-height: 47px;
+    @include font-base(17px, 900);
+  }
+}

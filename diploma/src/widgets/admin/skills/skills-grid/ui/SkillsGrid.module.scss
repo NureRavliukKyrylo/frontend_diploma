@@ -1,0 +1,50 @@
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.skillCardSkeleton {
+  min-height: 216px;
+  border-radius: 27px 18px 27px 18px;
+}
+
+.stateCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 27px 18px 27px 18px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 42px;
+
+  strong {
+    color: #1a1a1a;
+    font-size: 24px;
+    font-weight: 900;
+  }
+
+  span {
+    color: #999999;
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 1700px) {
+  .skillsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1400px) {
+  .skillsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .skillsGrid {
+    grid-template-columns: 1fr;
+  }
+}

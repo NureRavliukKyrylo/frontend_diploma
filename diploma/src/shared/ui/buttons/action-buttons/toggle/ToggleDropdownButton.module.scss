@@ -1,0 +1,120 @@
+@use "@shared/assets/styles" as *;
+
+.toggleInnerBlock {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  @include respond-to(tablet) {
+    height: auto;
+    flex-direction: column;
+  }
+
+  @include respond-to(mobile) {
+    height: auto;
+    flex-direction: column;
+  }
+
+  .toggleButton {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 6px 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    z-index: 101;
+    transition:
+      border-radius 0.3s ease,
+      clip-path 0.3s ease-in;
+
+    h1 {
+      color: rgba(0, 0, 0, 0.6);
+      @include font-base(20px, 600);
+
+      @include respond-to(laptop) {
+        font-size: 18px;
+      }
+      @include respond-to(tablet) {
+        font-size: 15px;
+      }
+      @include respond-to(mobile) {
+        font-size: 14px;
+      }
+    }
+
+    .arrowImage,
+    .listImage {
+      width: 25px;
+      height: 20px;
+
+      @include respond-to(tablet) {
+        width: 18px;
+        height: 15px;
+      }
+      @include respond-to(mobile) {
+        width: 16px;
+        height: 13px;
+      }
+    }
+
+    @include respond-to(tablet) {
+      padding: 8px 16px;
+      min-height: 40px;
+      flex-shrink: 0;
+    }
+
+    @include respond-to(mobile) {
+      padding: 6px 14px;
+      min-height: 35px;
+      flex-shrink: 0;
+    }
+
+    &.toggleButtonActive {
+      border-radius: 30px 30px 0 0;
+      clip-path: inset(-20px -20px 1px -20px);
+    }
+  }
+
+  .toggleDropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: #fff;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+
+    @include respond-to(tablet) {
+      position: static;
+      overflow: visible;
+      width: 100%;
+      border-radius: 0 0 30px 30px;
+    }
+
+    @include respond-to(mobile) {
+      position: static;
+      overflow: visible;
+      width: 100%;
+      border-radius: 0 0 30px 30px;
+    }
+    &.map,
+    &.list {
+      position: absolute;
+      z-index: 102;
+
+      @include respond-to(tablet) {
+        position: absolute;
+        overflow: hidden;
+      }
+      @include respond-to(mobile) {
+        position: absolute;
+        overflow: hidden;
+      }
+    }
+  }
+}

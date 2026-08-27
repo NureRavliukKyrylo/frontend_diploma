@@ -1,0 +1,20 @@
+@use "@shared/assets/styles" as *;
+
+.organizationsInfinite {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .organizationsListFilter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    .organizationTabWrapper {
+      display: flex;
+    }
+  }
+  .showMoreOrganizationsButton {
+    @include font-base(16px, 600);
+    color: #8c0000;
+    align-self: flex-end;
+  }
+}

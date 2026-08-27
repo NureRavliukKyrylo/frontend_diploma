@@ -1,0 +1,211 @@
+{
+  "states": {
+    "pendingLeave": "Ваш запит на вихід очікує підтвердження",
+    "pendingJoin": "Ваш запит на приєднання очікує підтвердження"
+  },
+  "create": {
+    "datesRequired": "Вкажіть дати завдання.",
+    "created": "Завдання створено",
+    "failed": "Не вдалося створити завдання",
+    "close": "Закрити створення завдання",
+    "newTask": "Нове завдання",
+    "organization": "Організація",
+    "creatingIn": "Створення в «{{name}}»",
+    "back": "Назад",
+    "creating": "Створення...",
+    "submit": "Створити завдання",
+    "continue": "Продовжити",
+    "stepsLabel": "Етапи створення завдання",
+    "steps": {
+      "basics": "Основне",
+      "basicsSub": "Назва й опис",
+      "details": "Деталі",
+      "detailsSub": "Час і місце",
+      "categories": "Категорії",
+      "categoriesSub": "Теги й теми",
+      "access": "Доступ",
+      "accessSub": "Правила"
+    },
+    "headers": {
+      "step1Eyebrow": "КРОК 01 ІЗ 04",
+      "step1Title": "Що потрібно зробити?",
+      "step1Subtitle": "Додайте зрозумілу назву й опис завдання.",
+      "step2Eyebrow": "КРОК 02 ІЗ 04",
+      "step2Title": "Час і місце",
+      "step2Subtitle": "Вкажіть, коли й де виконуватиметься завдання.",
+      "step3Eyebrow": "КРОК 03 ІЗ 04",
+      "step3Title": "Категорії",
+      "step3Subtitle": "Допоможіть знайти завдання. Цей крок необов’язковий.",
+      "step4Eyebrow": "КРОК 04 ІЗ 04",
+      "step4Title": "Правила доступу",
+      "step4Subtitle": "Визначте, як волонтери приєднуються та виходять."
+    }
+  },
+  "labels": {
+    "task": "Завдання",
+    "joinedChip": "Приєднався до завдання",
+    "chat": "ЧАТ ЗАВДАННЯ",
+    "project": "ПРОЄКТ",
+    "event": "ПОДІЯ",
+    "votes_one": "{{count}} ГОЛОС",
+    "votes_few": "{{count}} ГОЛОСИ",
+    "votes_many": "{{count}} ГОЛОСІВ",
+    "votes_other": "{{count}} ГОЛОСУ",
+    "skills": "Навички для завдання",
+    "activities": "Активності",
+    "locations": "Локації",
+    "subtitle": "Досліджуйте всі пов'язані активності в межах цього завдання та дивіться, де вони розташовані",
+    "relatedEvent": "Пов'язана подія",
+    "relatedProject": "Пов'язаний проєкт",
+    "points_one": "{{count}} БАЛ",
+    "points_few": "{{count}} БАЛИ",
+    "points_many": "{{count}} БАЛІВ",
+    "points_other": "{{count}} БАЛА",
+    "error": {
+      "hint": "Спробуйте перезавантажити сторінку або поверніться пізніше."
+    }
+  },
+  "tabs": {
+    "overview": "ОГЛЯД",
+    "comments": "КОМЕНТАРІ",
+    "members": "УЧАСНИКИ",
+    "feedback": "ВІДГУКИ",
+    "roles": "РОЛІ",
+    "timelog": "ЖУРНАЛ РОБОТИ"
+  },
+  "fab": {
+    "openActions": "Відкрити дії завдання",
+    "closeActions": "Закрити дії завдання",
+    "members": "Учасники",
+    "roles": "Ролі",
+    "timelog": "Журнал роботи",
+    "settings": "Налаштування"
+  },
+  "roles": {
+    "loading": "Завантажуємо ролі завдання...",
+    "error": "Не вдалося завантажити ролі завдання.",
+    "empty": "Для цього завдання ще не налаштовано ролі."
+  },
+  "timelog": {
+    "loading": "Завантажуємо журнали роботи...",
+    "error": "Не вдалося завантажити журнали роботи.",
+    "empty": "Немає записів часу",
+    "emptyHint": "Надіслані записи роботи з’являться тут для перевірки.",
+    "table": {
+      "volunteer": "Волонтер",
+      "logged": "Записано",
+      "adjusted": "Скориговано",
+      "approved": "Підтверджено",
+      "status": "Статус",
+      "note": "Нотатка",
+      "actions": "Дії",
+      "notProvided": "Не вказано"
+    },
+    "controls": {
+      "allStatuses": "Усі",
+      "pending": "Очікує",
+      "approved": "Затверджено",
+      "rejected": "Відхилено",
+      "disputed": "Оскаржено",
+      "export": "Експорт CSV",
+      "totalRecords": "Усього записів",
+      "pendingRecords": "Очікують",
+      "approvedMinutes": "Затверджено хвилин",
+      "loggedMinutes": "Записано хвилин"
+    },
+    "sections": {
+      "pending": "Очікує затвердження",
+      "disputed": "Оскаржено",
+      "approved": "Затверджено",
+      "other": "Інше"
+    },
+    "badges": {
+      "managerEdited": "Змінено менеджером",
+      "disputeOpen": "Спір відкрито"
+    },
+    "actions": {
+      "managerEdit": "Змінити",
+      "approve": "Підтвердити",
+      "reject": "Відхилити",
+      "resolve": "Вирішити",
+      "resolveAsApprove": "Підтвердити запис",
+      "resolveAsReject": "Відхилити запис"
+    },
+    "modal": {
+      "title": "Перевірка журналу роботи",
+      "text": "Скоригуйте запис за потреби, додайте необов'язкову нотатку аудиту й підтвердьте рішення.",
+      "minutes": "Скориговані хвилини",
+      "finalMinutes": "Фінальні підтверджені хвилини",
+      "commentPlaceholder": "Нотатка до рішення",
+      "confirm": "Підтвердити",
+      "cancel": "Скасувати"
+    },
+    "notifications": {
+      "saved": "Журнал роботи оновлено",
+      "failed": "Не вдалося оновити журнал роботи",
+      "exported": "Експорт журналу роботи розпочато"
+    },
+    "statuses": {
+      "Draft": "Чернетка",
+      "Submitted": "Очікує",
+      "ManagerEditedPendingVolunteerReconfirm": "Змінено",
+      "Approved": "Затверджено",
+      "Rejected": "Відхилено",
+      "Disputed": "Оскаржено",
+      "Resolved": "Вирішено",
+      "Cancelled": "Скасовано"
+    }
+  },
+  "statuses": {
+    "Pending": "Очікується",
+    "InProgress": "В процесі",
+    "Completed": "Завершено",
+    "Cancelled": "Скасовано",
+    "Overdue": "Протерміновано"
+  },
+  "cards": {
+    "noVolunteers": "Жоден волонтер ще не приєднався",
+    "unknownOrganization": "Невідома організація",
+    "imgAltOrganization": "зображення організації",
+    "deadline": "Дедлайн:",
+    "allTime": "Увесь час",
+    "about": "Про це завдання",
+    "participants": "Учасники"
+  },
+  "comments": {
+    "emptyStateTitle": "Коментарів ще немає",
+    "emptyStateSubtitle": "Будьте першим, хто залишить коментар",
+    "inputPlaceholder": "Задайте питання про цю активність...",
+    "inputEditPlaceholder": "Відредагуйте питання про цю активність...",
+    "replyPlaceholder": "Напишіть відповідь для {{name}}...",
+    "replyingTo": "Відповідь для {{name}}",
+    "actions": {
+      "cancel": "Скасувати",
+      "deleteComment": "Видалити коментар",
+      "editComment": "Редагувати коментар",
+      "reply": "Відповісти",
+      "send": "Надіслати коментар"
+    },
+    "deletedComment": "Цей коментар було видалено",
+    "deleteModal": {
+      "title": "Видалити свій коментар",
+      "textPattern": "Ви впевнені, що хочете видалити свій коментар з текстом: {{content}}"
+    },
+    "validation": {
+      "bodyRequired": "Коментар є обов'язковим",
+      "bodyMax": "Коментар має містити не більше 2000 символів"
+    },
+    "notifications": {
+      "createSuccessTitle": "Коментар успішно створено",
+      "createSuccessDescription": "Ваш коментар було успішно додано",
+      "createFailedTitle": "Помилка створення коментаря",
+      "replyForbidden": "У вас немає дозволу відповідати на коментарі до завдання.",
+      "editSuccessTitle": "Коментар успішно відредаговано",
+      "editSuccessDescription": "Ваш коментар було успішно змінено",
+      "editFailedTitle": "Помилка редагування коментаря",
+      "deleteSuccessTitle": "Коментар успішно видалено",
+      "deleteSuccessDescription": "Ви успішно видалили свій коментар",
+      "deleteFailedTitle": "Помилка видалення коментаря"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+.breakdown {
+  margin-top: auto;
+  border-top: 1px solid #eeeeee;
+}
+
+.breakdownToggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+  background: none;
+  padding: 16px 2px 12px;
+  color: #555555;
+  font-family: "Exo 2", sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.chevron,
+.chevronOpen {
+  transition: transform 0.22s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.breakdownPanel {
+  overflow: hidden;
+}
+
+.breakdownInner {
+  display: grid;
+  gap: 10px;
+  padding: 4px 2px 16px;
+}
+
+.breakdownRow {
+  display: grid;
+  gap: 6px;
+}
+
+.breakdownLabel {
+  display: flex;
+  justify-content: space-between;
+  color: #999999;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.breakdownTrack {
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #eeeeee;
+
+  span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #222222, #777777);
+  }
+}

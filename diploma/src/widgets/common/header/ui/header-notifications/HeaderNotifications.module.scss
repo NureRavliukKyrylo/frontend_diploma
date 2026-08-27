@@ -1,0 +1,93 @@
+@use "@shared/assets/styles" as *;
+
+.iconButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border: none;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #000000;
+  box-sizing: border-box;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+.icon {
+  width: 19px;
+  height: 19px;
+  color: #000000;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before,
+  &::after {
+    position: absolute;
+    left: 50%;
+    z-index: 20;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, 4px);
+    transition:
+      opacity 0.16s ease,
+      transform 0.16s ease;
+  }
+
+  &::before {
+    content: "";
+    top: calc(100% + 5px);
+    border: 6px solid transparent;
+    border-bottom-color: #000000;
+  }
+
+  &::after {
+    @include font-base(12px, 600);
+    content: attr(data-tooltip);
+    top: calc(100% + 16px);
+    min-width: max-content;
+    padding: 7px 10px;
+    border-radius: 8px;
+    background: #000000;
+    color: #ffffff;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  }
+
+  &:hover,
+  &:focus-within {
+    &::before,
+    &::after {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+}
+
+.badge {
+  @include font-base(10px, 700, "Inter");
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 3px;
+  border: 1px solid #ffffff;
+  border-radius: 999px;
+  background: #d12626;
+  color: #ffffff;
+  line-height: 1;
+  box-sizing: border-box;
+}

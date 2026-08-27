@@ -1,0 +1,446 @@
+{
+  "create": {
+    "projectContextLabel": "Project",
+    "projectContextSidebar": "Project context",
+    "loading": "Preparing event setup...",
+    "title": "New event",
+    "back": "Back to organization events",
+    "setup": "Event setup",
+    "submit": "Create event",
+    "failed": "Failed to create event",
+    "locationRequired": "Event location is required",
+    "locationDatesRequired": "Event location and dates are required.",
+    "steps": {
+      "basics": "Basics",
+      "basicsSub": "Name & description",
+      "location": "Location & dates",
+      "locationSub": "Where and when",
+      "recurring": "Recurring",
+      "recurringSub": "Repeat schedule",
+      "categories": "Categories & skills",
+      "categoriesSub": "Tags & requirements",
+      "access": "Access",
+      "accessSub": "Join & leave policies"
+    },
+    "headers": {
+      "step1Eyebrow": "Step 01 of 05",
+      "step1Title": "Tell us about your event",
+      "step1Subtitle": "Give it a clear name and description so volunteers know exactly what to expect.",
+      "step2Eyebrow": "Step 02 of 05",
+      "step2Title": "Where and when?",
+      "step2Subtitle": "Set the location and timeline for your event.",
+      "step3Eyebrow": "Step 03 of 05",
+      "step3Title": "Set a repeat schedule",
+      "step3Subtitle": "Choose whether this event repeats and how often.",
+      "step4Eyebrow": "Step 04 of 05",
+      "step4Title": "Categories & skills",
+      "step4Subtitle": "Help people find your event by selecting relevant categories and required skills. This step is optional.",
+      "step5Eyebrow": "Step 05 of 05",
+      "step5Title": "Access policies",
+      "step5Subtitle": "Control how volunteers join and leave your event."
+    }
+  },
+  "modes": {
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly"
+  },
+  "states": {
+    "pendingLeave": "Your leave request is pending approval",
+    "pendingJoin": "Your join request is pending approval"
+  },
+  "labels": {
+    "event": "Event",
+    "joinedChip": "Joined Event",
+    "chat": "EVENT CHAT",
+    "project": "PROJECT",
+    "votes_one": "{{count}} VOTE",
+    "votes_other": "{{count}} VOTES",
+    "skills": "EVENT Skills",
+    "activities": "Activities",
+    "locations": "Locations",
+    "subtitle": "Explore all tasks within this event and see where they are located",
+    "completed": "COMPLETED",
+    "active": "ACTIVE",
+    "tasks": "TASKS",
+    "markerLocation": "Event location",
+    "relatedProject": "Related project",
+    "failedLoad": "Failed to load events",
+    "noEvents": "No events found"
+  },
+  "tabs": {
+    "overview": "OVERVIEW",
+    "attendance": "ATTENDANCE",
+    "tasks": "TASKS",
+    "members": "MEMBERS",
+    "feedback": "FEEDBACK"
+  },
+  "attendance": {
+    "views": {
+      "month": "Month",
+      "week": "Week",
+      "day": "Day"
+    },
+    "table": {
+      "date": "Date",
+      "description": "Description",
+      "minutes": "Minutes",
+      "status": "Status"
+    },
+    "empty": {
+      "title": "No attendance records",
+      "description": "There are no records for this period."
+    },
+    "error": {
+      "hint": "Try reloading the page or come back later."
+    },
+    "previous": "Previous period",
+    "next": "Next period",
+    "statuses": {
+      "Draft": "Draft",
+      "CheckedOut": "Checked out",
+      "CheckedOutPendingApproval": "Pending approval",
+      "CheckedIn": "Checked in",
+      "Approved": "Approved",
+      "Rejected": "Rejected",
+      "Disputed": "Disputed",
+      "Resolved": "Resolved",
+      "Cancelled": "Cancelled",
+      "CheckedOutPendingApproval": "Pending Approval"
+    }
+  },
+  "cards": {
+    "noVolunteers": "No volunteers joined yet",
+    "about": "About this event",
+    "participants": "Participants",
+    "allTime": "All time"
+  },
+  "statuses": {
+    "active": "Active",
+    "endingSoon": "Ending soon",
+    "completed": "Completed",
+    "archived": "Archived"
+  },
+  "fab": {
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "members": "Members",
+    "roles": "Roles",
+    "newTask": "New task",
+    "attendance": "Attendance",
+    "contextHint": "You're working in",
+    "openActions": "Open event actions",
+    "closeActions": "Close event actions"
+  },
+  "membersPage": {
+    "eyebrow": "Event members",
+    "title": "{{name}} members",
+    "subtitle": "Review the people participating in this event.",
+    "back": "Back to event",
+    "shortTitle": "Members",
+    "loading": "Loading event members...",
+    "eventError": "We could not load this event right now.",
+    "checkingAccess": "Checking your access...",
+    "redirecting": "Redirecting...",
+      "membersError": "We could not load event members right now.",
+      "chatUnavailableTitle": "Chat route unavailable",
+      "messageUnavailable": "Direct messaging is not available from this page yet.",
+      "recommendationsUnavailableTitle": "Event recommendations are coming soon",
+      "recommendationsUnavailable": "Volunteer recommendations are not available for events yet.",
+      "entityLabel": "event"
+  },
+  "rolesPage": {
+    "eyebrow": "Event roles",
+    "title": "{{name}} roles",
+    "subtitle": "Review context roles available inside this event.",
+    "back": "Back to event",
+    "loading": "Loading event roles...",
+    "error": "We could not load event roles right now.",
+    "empty": "No roles are configured for this event yet.",
+    "checkingAccess": "Checking your access...",
+    "redirecting": "Redirecting...",
+    "context": "Event"
+  },
+  "attendancePage": {
+    "eyebrow": "Attendance",
+    "title": "{{name}} attendance",
+    "subtitle": "Review attendance records submitted for this event.",
+    "back": "Back to event",
+    "loading": "Loading attendance records...",
+    "error": "We could not load attendance records right now.",
+    "empty": "No attendance records have been submitted yet.",
+    "export": "Export CSV",
+    "filters": {
+      "allStatuses": "All statuses",
+      "all": "All",
+      "pending": "Pending",
+      "checkedIn": "Checked in",
+      "disputed": "Disputed",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "actions": {
+      "approve": "Approve",
+      "reject": "Reject",
+      "resolve": "Resolve",
+      "resolveAsApprove": "Approve record",
+      "resolveAsReject": "Reject record"
+    },
+    "modal": {
+      "title": "Review attendance",
+      "text": "Add an optional note for the audit trail, then confirm the decision.",
+      "commentPlaceholder": "Decision note",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    },
+    "notifications": {
+      "saved": "Attendance updated",
+      "failed": "Attendance update failed",
+      "exported": "Attendance export started"
+    },
+    "table": {
+      "user": "Volunteer",
+      "checkIn": "Check in",
+      "checkOut": "Check out",
+      "minutes": "Minutes",
+      "status": "Status",
+      "note": "Note",
+      "actions": "Actions",
+      "notProvided": "Not provided"
+    },
+    "hero": {
+      "breadcrumb": "Attendance",
+      "eyebrow": "Event attendance",
+      "total": "Total",
+      "pending": "Pending",
+      "disputed": "Disputed",
+      "approved": "Approved",
+      "days_one": "{{count}} day",
+      "days_other": "{{count}} days",
+      "disabled": "Attendance tracking is disabled for this event. Enable it in Settings > Attendance."
+    },
+    "dayPicker": {
+      "title": "Choose a day",
+      "count_one": "{{count}} event day",
+      "count_other": "{{count}} event days"
+    },
+    "record": {
+      "disputeOpen": "Dispute open",
+      "liveNow": "Live now",
+      "notCheckedOut": "Not checked out",
+      "viaQr": "via QR",
+      "minutes": "min",
+      "minutesSoFar": "min so far"
+    },
+    "sections": {
+      "pending": "Pending approval",
+      "checkedIn": "Currently checked in",
+      "approved": "Approved",
+      "other": "Other"
+    },
+    "emptyPeriod": {
+      "title": "No attendance records for this period.",
+      "hint": "Try another day or status filter."
+    },
+    "showMore": "Show {{count}} more",
+    "records_one": "{{count}} record",
+    "records_other": "{{count}} records"
+  },
+  "settings": {
+    "states": {
+      "loadingTitle": "Loading event settings",
+      "loadingText": "Fetching the latest event details.",
+      "unavailableTitle": "Event unavailable",
+      "unavailableText": "We could not load this event settings page.",
+      "accessTitle": "You do not have access",
+      "accessText": "Event settings require permission to manage event content.",
+      "back": "Back to event"
+    },
+    "topBar": {
+      "back": "Back to event",
+      "title": "Settings",
+      "discard": "Discard",
+      "save": "Save changes",
+      "saving": "Saving"
+    },
+    "tabs": {
+      "general": "General",
+      "access": "Access",
+      "attendance": "Attendance",
+      "danger": "Danger zone"
+    },
+    "sidebar": {
+      "organization": "Organization",
+      "volunteers": "Volunteers",
+      "tasks": "Tasks",
+      "start": "Start",
+      "end": "End",
+      "noDate": "No date",
+      "statuses": {
+        "active": "Active",
+        "endingSoon": "Ending soon",
+        "completed": "Completed",
+        "archived": "Archived",
+        "cancelled": "Cancelled"
+      }
+    },
+    "modals": {
+      "saveTitle": "Save event settings?",
+      "saveText": "Your changes will update the public event profile and access rules.",
+      "policyTitle": "Change access policy?",
+      "policyText": "This policy change will apply after you save the event settings.",
+      "apply": "Apply",
+      "cancelTitle": "Cancel this event?",
+      "cancelText": "The event will be cancelled and can no longer accept participation.",
+      "reason": "Reason (optional)",
+      "reasonPlaceholder": "Briefly explain why this event is being cancelled",
+      "keepEvent": "Keep event",
+      "cancelling": "Cancelling",
+      "cancelEvent": "Cancel event",
+      "deleteTitle": "Delete this event?",
+      "deleteText": "This action permanently removes the event.",
+      "deleteEvent": "Delete event",
+      "cancel": "Cancel"
+    },
+    "access": {
+      "joinTitle": "Join policy",
+      "joinText": "Control how new volunteers join your event.",
+      "leaveTitle": "Leave policy",
+      "leaveText": "Choose whether volunteers can leave freely or need confirmation.",
+      "open": "Open",
+      "joinOpenText": "Anyone can join instantly without waiting for approval.",
+      "joinApproval": "Approval required",
+      "joinApprovalText": "New volunteers must be manually approved by an admin.",
+      "leaveOpen": "Open",
+      "leaveOpenText": "Volunteers can leave at any time without restrictions.",
+      "leaveApproval": "Approval required",
+      "leaveApprovalText": "Leave requests must be confirmed by an admin."
+    },
+    "attendance": {
+      "title": "Attendance",
+      "text": "Enable check-in and attendance tracking for this event.",
+      "enabled": "Enable attendance tracking",
+      "enabledText": "Allow volunteers to check in and out.",
+      "track": "Track attendance",
+      "trackText": "Record who actually showed up to this event.",
+      "approval": "Require approval",
+      "approvalText": "An organizer must approve each attendance record.",
+      "checkout": "Require checkout",
+      "checkoutText": "Volunteers must check out when they leave.",
+      "qrTitle": "QR tokens",
+      "qrText": "Allow volunteers to check in by scanning a QR code.",
+      "geo": "Location check-in",
+      "geoText": "Allow volunteers to check in based on their location.",
+      "generate": "Generate token",
+      "regenerate": "Regenerate token",
+      "checkIn": "Check-in policy",
+      "checkOut": "Check-out policy",
+      "radius": "Check-in radius (meters)",
+      "clearRadius": "Clear radius",
+      "range": "Accepted range is 10 to 10000 meters."
+    },
+    "danger": {
+      "title": "Danger zone",
+      "description": "These actions affect the event and its participants.",
+      "cancel": "Cancel event",
+      "cancelText": "Stop this event and prevent further participation.",
+      "cancelledTitle": "Event cancelled",
+      "cancelledText": "This event has been cancelled and cannot be restored from this page.",
+      "cancelled": "Cancelled",
+      "delete": "Delete event",
+      "deleteText": "Permanently delete this event. This cannot be undone."
+    },
+    "general": {
+      "basicInfo": "Basic info",
+      "basicInfoText": "Keep the public event profile clear and useful.",
+      "title": "Event title",
+      "titlePlaceholder": "Enter event title",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe the event and volunteer impact.",
+      "start": "Start date and time",
+      "end": "End date and time",
+      "type": "Type",
+      "typePlaceholder": "e.g. Workshop, cleanup, meetup",
+      "single": "Single event",
+      "recurring": "Recurring event",
+      "categories": "Categories",
+      "categoriesText": "Choose the topics that best describe this event.",
+      "loadingCategories": "Loading categories...",
+      "location": "Location",
+      "locationText": "Choose where this event takes place.",
+      "eventLocation": "Event location",
+      "locationPlaceholder": "Search city, region, or address",
+      "locationAria": "Pick event location on the map",
+      "skills": "Required skills",
+      "skillsText": "Add skills volunteers should have.",
+      "addSkill": "Add skill",
+      "addSkillRequirement": "Add skill requirement",
+      "removeSkill": "Remove skill",
+      "removeSkillAria": "Remove skill requirement {{number}}",
+      "noSkills": "No matching skills",
+      "skillPlaceholder": "Search for a skill",
+      "hours": "Hours",
+      "level": "Required level",
+      "levels": {
+        "beginner": "Beginner",
+        "intermediate": "Intermediate",
+        "advanced": "Advanced",
+        "expert": "Expert"
+      }
+    }
+  },
+  "images": {
+    "organization": "Organization logo",
+    "activities": "Event activities"
+  },
+  "checkIn": {
+    "button": "Check in",
+    "title": "Check In - {{title}}",
+    "placeholder": "Leave a note... (optional)",
+    "confirmButton": "Confirm Check In",
+    "cancel": "Cancel",
+    "validation": {
+      "noteMax": "Note must be 50 characters or less"
+    },
+    "notifications": {
+      "geoNotSupported": "Geolocation not supported",
+      "geoRequired": "Location access is required to check in",
+      "successTitle": "Event check-in Success",
+      "successDescription": "You have checked in successfully",
+      "failedTitle": "Event check-in Failed"
+    }
+  },
+  "checkOut": {
+    "button": "Check out",
+    "title": "Check Out - {{title}}",
+    "placeholder": "Leave a note... (optional)",
+    "confirmButton": "Confirm Check Out",
+    "cancel": "Cancel",
+    "validation": {
+      "noteMax": "Note must be 50 characters or less"
+    },
+    "notifications": {
+      "geoNotSupported": "Geolocation not supported",
+      "geoRequired": "Location access is required to check out",
+      "successTitle": "Event check-out success",
+      "successDescription": "You have checked out successfully",
+      "failedTitle": "Event check-out failed"
+    }
+  },
+  "dispute": {
+    "button": "Dispute",
+    "title": "Dispute — {{title}}",
+    "placeholder": "Describe the reason for your dispute...",
+    "confirmButton": "Submit Dispute",
+    "cancel": "Cancel",
+    "validation": {
+      "commentRequired": "Comment is required",
+      "commentMax": "Comment must be 50 characters or less"
+    },
+    "notifications": {
+      "successTitle": "Dispute Submitted",
+      "successDescription": "Your dispute has been submitted successfully",
+      "failedTitle": "Dispute Failed"
+    }
+  }
+}

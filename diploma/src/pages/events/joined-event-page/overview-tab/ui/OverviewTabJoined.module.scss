@@ -1,0 +1,362 @@
+@use "@shared/assets/styles" as *;
+
+.overviewJoinedWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  @include respond-to(laptop) {
+    gap: 24px;
+  }
+  @include respond-to(tablet) {
+    gap: 20px;
+  }
+  @include respond-to(mobile) {
+    gap: 16px;
+  }
+
+  .mapLocationBlock {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+
+    > :first-child {
+      flex: 0 0 350px;
+    }
+    > :nth-child(2) {
+      flex: 1 0;
+    }
+
+    @include respond-to(laptop) {
+      gap: 30px;
+      > :first-child {
+        flex: 0 0 280px;
+      }
+    }
+    @include respond-to(null, 1050px) {
+      flex-direction: column;
+      gap: 24px;
+      > :first-child,
+      > :nth-child(2) {
+        flex: unset;
+      }
+    }
+    @include respond-to(mobile) {
+      gap: 16px;
+      > :first-child,
+      > :nth-child(2) {
+        flex: unset;
+      }
+    }
+
+    .projectJoinedEventMainInfo {
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+
+      @include respond-to(laptop) {
+        gap: 40px;
+      }
+      @include respond-to(null, 1050px) {
+        gap: 28px;
+      }
+      @include respond-to(mobile) {
+        gap: 20px;
+      }
+
+      .headerTextInfo {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        @include respond-to(mobile) {
+          gap: 14px;
+        }
+
+        .activityLocation {
+          display: flex;
+          justify-content: flex-start;
+          flex-direction: column;
+          background: linear-gradient(180deg, #8c0000 0%, #260000 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+
+          h2 {
+            @include font-base(30px, 800);
+            text-transform: uppercase;
+            line-height: 100%;
+            font-style: italic;
+
+            @include respond-to(laptop) {
+              font-size: 24px;
+            }
+            @include respond-to(tablet) {
+              font-size: 20px;
+            }
+            @include respond-to(mobile) {
+              font-size: 17px;
+            }
+          }
+
+          span {
+            @include font-base(40px, 800);
+            text-transform: uppercase;
+            line-height: 120%;
+
+            @include respond-to(laptop) {
+              font-size: 32px;
+            }
+            @include respond-to(tablet) {
+              font-size: 26px;
+            }
+            @include respond-to(mobile) {
+              font-size: 22px;
+            }
+          }
+        }
+
+        p {
+          text-align: end;
+          @include font-base(20px, 500);
+          line-height: 140%;
+          max-width: 300px;
+          align-self: flex-end;
+
+          @include respond-to(laptop) {
+            font-size: 17px;
+            max-width: 240px;
+          }
+          @include respond-to(tablet) {
+            font-size: 15px;
+            max-width: 100%;
+            text-align: start;
+            align-self: flex-start;
+          }
+          @include respond-to(mobile) {
+            font-size: 13px;
+          }
+        }
+
+        .wrapperLocation {
+          height: 45px;
+          @include respond-to(mobile) {
+            height: 38px;
+          }
+        }
+      }
+
+      .activitiesBlock {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        @include respond-to(null, 1050px) {
+          gap: 15px;
+        }
+        @include respond-to(mobile) {
+          gap: 10px;
+        }
+
+        .activeActivities {
+          display: flex;
+          align-items: stretch;
+          justify-content: center;
+          gap: 20px;
+
+          @include respond-to(mobile) {
+            gap: 12px;
+          }
+
+          .activeTasks {
+            flex: 1;
+            background: #ffffff;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+            border-radius: 20px;
+            padding: 25px 25px 25px 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+
+            @include respond-to(laptop) {
+              padding: 20px 20px 20px 32px;
+              height: 100px;
+            }
+            @include respond-to(tablet) {
+              padding: 16px 16px 16px 24px;
+              height: 90px;
+              border-radius: 14px;
+            }
+            @include respond-to(mobile) {
+              padding: 12px 12px 12px 18px;
+              height: 80px;
+              border-radius: 12px;
+            }
+
+            .headerTitle {
+              h1 {
+                font-style: italic !important;
+                @include font-base(25px, 500);
+                line-height: 100%;
+
+                @include respond-to(laptop) {
+                  font-size: 20px;
+                }
+                @include respond-to(tablet) {
+                  font-size: 17px;
+                }
+                @include respond-to(mobile) {
+                  font-size: 14px;
+                }
+              }
+
+              h2 {
+                @include font-base(35px, 800);
+                line-height: 100%;
+
+                @include respond-to(laptop) {
+                  font-size: 28px;
+                }
+                @include respond-to(tablet) {
+                  font-size: 24px;
+                }
+                @include respond-to(mobile) {
+                  font-size: 20px;
+                }
+              }
+            }
+          }
+
+          p {
+            right: 25px;
+            bottom: 15px;
+            @include font-base(50px, 700);
+            color: #8c0000;
+            text-align: right;
+            line-height: 100%;
+            word-break: break-all;
+
+            @include respond-to(laptop) {
+              font-size: 40px;
+              right: 20px;
+              bottom: 12px;
+            }
+            @include respond-to(tablet) {
+              font-size: 32px;
+              right: 16px;
+              bottom: 10px;
+            }
+            @include respond-to(mobile) {
+              font-size: 26px;
+              right: 12px;
+              bottom: 8px;
+            }
+          }
+        }
+
+        .totalActivities {
+          @extend .activeActivities;
+
+          .totalTasks {
+            @extend .activeTasks;
+          }
+        }
+
+        .activitiesImageBlock {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            width: 250px;
+
+            @include respond-to(laptop) {
+              width: 200px;
+            }
+          }
+        }
+      }
+    }
+
+    .mapWrapper {
+      @include respond-to(null, 1050px) {
+        height: 500px;
+      }
+      @include respond-to(mobile) {
+        height: 400px;
+      }
+    }
+  }
+}
+
+.popupContent {
+  width: fit-content;
+
+  :global(.leaflet-popup-content-wrapper) {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 2px 10px rgba(99, 99, 99, 0.5);
+    border-radius: 20px;
+    padding: 15px 20px 20px 20px;
+
+    @include respond-to(mobile) {
+      padding: 10px 14px 14px 14px;
+      border-radius: 14px;
+    }
+  }
+
+  :global(.leaflet-popup-content) {
+    margin: 0;
+    p {
+      margin: 0;
+    }
+  }
+  :global(.leaflet-popup-close-button) {
+    display: none;
+  }
+
+  .popupLabel {
+    @include font-base(11px, 400);
+    text-transform: uppercase;
+    color: #999;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  .popupEventTitle {
+    @include font-base(18px, 700);
+    color: #1a1a1a;
+    margin-bottom: 4px;
+    letter-spacing: 0.2px;
+
+    @include respond-to(mobile) {
+      font-size: 15px;
+    }
+  }
+
+  .popupEventLocation {
+    @include font-base(14px, 400);
+    color: #888;
+    letter-spacing: 0.3px;
+
+    @include respond-to(mobile) {
+      font-size: 12px;
+    }
+  }
+}
+
+:global(.eventMarkerIcon) {
+  width: 35px;
+  height: 35px;
+  animation: markerAppear 0.3s ease-in-out forwards;
+}
+@keyframes markerAppear {
+  from {
+    opacity: 0;
+    transform: scale(0) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
